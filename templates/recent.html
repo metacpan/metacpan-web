@@ -1,0 +1,13 @@
+<% 
+FOREACH release IN recent;
+date = release.date.dt;
+day = date.day _ '/' _ date.month _ '/' _ date.year %>
+<% IF day != last %>
+<br><big><strong><% day; last = day %></strong></big>
+<% END %>
+<div>
+  <strong>
+    <a href="/release/<% release.author; '/'; release.name %>"><% release.name %></a>
+  </strong> - <% release.abstract %> (<a href="/author/<% release.author %>"><% release.author %></a>)
+</div>
+<% END %>

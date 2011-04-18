@@ -1,0 +1,26 @@
+<strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><br><br>
+
+<a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)
+<a href="http://cpansearch.perl.org/src/<% release.author %>/<% release.name %>/">Browse</a>
+
+<div style="float: right; text-align: center">
+  <img src="<% author.gravatar_url %>?s=130" width="130" height="130"><br>
+  <strong><a href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
+  <% author.name %>
+</div>
+
+<% IF others %>
+<select name="release" onchange="document.location.href='/release/' + this.value">
+<% FOREACH other IN others %>
+<option value="<% other.author; '/'; other.name %>"<% IF release.name == other.name %> selected="selected"<% END %>><% other.name %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+<% END %>
+</select>
+<% END %>
+
+<% FOREACH module IN modules %>
+<div>
+  <strong><a href="/module/<% IF release.status == 'latest'; release.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract %>
+</div>
+<% END %>
+
+<pre><% DUMP release %></pre>

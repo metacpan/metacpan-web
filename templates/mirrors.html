@@ -1,0 +1,55 @@
+<script>
+function searchForNearest() {
+  document.getElementById('busy').style.visibility = 'visible';
+  navigator.geolocation.getCurrentPosition(function(pos) {
+    document.location.href = '/mirrors?q=loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
+  },
+                                               function(){},
+                                               {maximumAge:600000});
+}
+
+function disableTag(tag) {
+    document.location.href = '/mirrors' + document.location.search + ' ' + tag;
+}
+</script>
+
+<%- query = req.parameters.q %>
+<br>
+<div class="search-bar">
+
+  <strong>Tags</strong>
+  <div class="search-tag">
+    <ul>
+    <li><a href="javascript:disableTag('http')" style="background-color: <% "stable".to_color %>">http<span>x</span></a></li>
+    <li><a href="javascript:disableTag('ftp')" style="background-color: <% "moose".to_color %>">ftp<span>x</span></a></li>
+    <li><a href="javascript:disableTag('rsync')" style="background-color: <% "deprecated".to_color %>">rsync<span>x</span></a></li>
+  </ul>
+  </div>
+  <a href="">more ...</a>
+  <hr>
+  <strong>Index</strong>
+  <ul>
+    <img src="/static/icons/busy.gif" style="float: right; visibility: hidden" id="busy">
+    <a href="javascript:searchForNearest()"><li>Nearest</li></a>
+  </ul>
+</div>
+
+<div class="search-results">
+
+
+<% 
+FOREACH mirror IN mirrors;
+date = mirror.inceptdate.dt;
+day = date.day _ '/' _ date.month _ '/' _ date.year %>
+
+<div>
+  <strong>
+    <% mirror.name %> (<% mirror.org %>)</strong> 
+    <% IF mirror.http %><a href="<% mirror.http %>">http</a><% END %>
+    <% IF mirror.ftp %><a href="<% mirror.ftp %>">ftp</a><% END %>
+    <% IF mirror.rsync %><a href="<% mirror.rsync %>">rsync</a><% END %>
+    <% IF mirror.distance %>(<% mirror.distance | format_number %> km)<% END %>
+</div>
+<% END %>
+
+</div>

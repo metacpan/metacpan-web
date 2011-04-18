@@ -1,0 +1,12 @@
+<strong><big>
+  <a href="/author/<% module.author %>"><% module.author%></a>
+  &nbsp;/&nbsp;
+  <a href="/release/<% module.author %>/<% module.release %>"><% module.release %></a>
+  &nbsp;/&nbsp;
+  <% module.path %> (<a href="http://cpansearch.perl.org/src/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+  </big></strong><br>
+  <% module.sloc %> lines of code, <% module.slop %> lines of pod, <% module.stat.size | format_bytes %>
+<pre class="brush: pl; class-name: 'highlight'; toolbar: false;"><% source %></pre>
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>

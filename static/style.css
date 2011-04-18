@@ -1,0 +1,366 @@
+
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+button::-moz-focus-inner, input[type="text"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner {
+    margin: -1px !important;
+    margin-bottom: -2px !important;
+    padding: 0px;
+    border: 0px none !important;
+}
+
+input[type="text"]::-moz-focus-inner {
+    padding: -5px !important;
+}
+
+input { -moz-box-sizing: content-box; }
+
+hr {
+    border: 0px none;
+    border-top: 1px solid #e9e9e9;
+}
+
+html { 
+	margin:0; 
+	padding:0; 
+	border:0; 
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit; 
+  vertical-align: baseline;
+}
+
+/* This helps to make newer HTML5 elements behave like DIVs in older browers */ 
+article, aside, details, figcaption, figure, dialog, 
+footer, header, hgroup, menu, nav, section {
+    display:block;
+}
+
+/* Line-height should always be unitless! */
+body {
+  line-height: 1.5;
+  background: white; 
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { 
+	border-collapse: separate; 
+	border-spacing: 0; 
+}
+/* float:none prevents the span-x classes from breaking table-cell display */
+caption, th, td { 
+	text-align: left; 
+	font-weight: normal; 
+	float:none !important; 
+}
+table, th, td { 
+	vertical-align: middle; 
+}
+
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+blockquote, q { quotes: "" ""; }
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+
+
+
+
+
+body {
+font-family: Arial,Helvetica,sans-serif;
+margin: 0px;
+padding: 0px;
+font-size: 12px;
+}
+
+a {
+    color: #36C;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #36C;
+    text-decoration: underline;
+}
+
+.ds {
+border-bottom: 1px solid #E7E7E7;
+border-right: 1px solid #E7E7E7;
+display: inline-block;
+}
+.header {
+height: 31px;
+border-bottom: 1px solid #e9e9e9;
+margin-bottom: 20px;
+background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(245,245,245)));
+background: -moz-linear-gradient(rgb(255,255,255),rgb(245,245,245));
+}
+.header .spacer, .header a {
+    font-size: 13px;
+    border-top-color: #BAD3EA;
+    border-top-width: 2px;
+    border-top-style: solid;
+    color: #36C;
+    display: block;
+    float: left;
+    padding: 5px 9px;
+}
+
+.header .spacer {
+    float: none;
+    height: 2px;
+}
+
+.header a:hover {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(#DAF3FF),to(#CAE3FA));
+    background: -moz-linear-gradient(#DAF3FF,#CAE3FA);
+    text-decoration: none;
+}
+
+.header strong a {
+    border-top-color: #36C;
+    color: #000;
+}
+
+.home input[type="text"] {
+    outline: none;
+-moz-border-bottom-colors: none;
+-moz-border-image: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+background: none repeat scroll 0 0 #FFFFFF;
+border-color: #CCCCCC #999999 #999999 #CCCCCC;
+border-style: solid;
+border-width: 1px;
+color: #000000;
+font: 18px arial,sans-serif bold;
+margin: 0;
+padding: 5px 8px 0 6px;
+vertical-align: top;
+}
+
+button.g-button,a.g-button,input[type=submit].g-button {
+padding: 6px 12px;
+margin: 0px;
+border: solid 1px rgb(153,153,153);
+background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(221,221,221)));
+background: -moz-linear-gradient(#fff,rgb(221,221,221));
+color: #333;
+text-decoration: none;
+cursor: pointer;
+display: inline-block;
+text-align: center;
+font-size: 15px;
+text-shadow: 0px 1px 1px #fff;
+line-height: 1;
+}
+
+.ds input[type=submit] {
+    margin: 0px;
+    border-left: 0px;
+    padding-top: 5px;
+}
+
+input.g-button:hover, button.g-button:hover {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(248,248,248)),to(rgb(221,221,221)));
+    background: -moz-linear-gradient(rgb(248,248,248),rgb(221,221,221));
+}
+
+input.g-button:active, button.g-button:active {
+    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(204,204,204)),to(rgb(221,221,221)));
+    background: -moz-linear-gradient(rgb(204,204,204),rgb(221,221,221));
+}
+
+.footer {
+    text-align: center
+}
+
+.search-results, .pod {
+    margin-left: 170px;
+    border-left: 1px solid #e9e9e9;
+    padding-left: 15px
+}
+
+.search-bar {
+    width: 160px;
+    float: left;
+}
+
+.search-bar .search-type {
+    font-size: 15px
+}
+
+.search-bar .search-tag li {
+    margin: 2px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.search-bar .search-tag a {
+    padding: 4px 6px;
+    -webkit-border-radius: 10px 10px;
+    border: solid 1px rgb(153, 153, 153);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(255, 255, 255)), to(rgb(221, 221, 221)));
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    display: inline;
+    text-shadow: 0px 1px 1px rgba(255,255,255,1);
+    line-height: 1;
+}
+
+.search-bar .search-tag a span {
+    float: right;
+    visibility: hidden;
+}
+
+.search-bar .search-tag a:hover span {
+    visibility: visible
+}
+
+.icon {
+    padding-left: 24px;
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+}
+
+.icon-module {
+    background-image: url(/static/icons/package.png);
+}
+
+.icon-dist {
+    background-image: url(/static/icons/box.png);
+}
+
+.icon-user {
+    background-image: url(/static/icons/user.png);
+}
+
+.icon-server {
+    background-image: url(/static/icons/server.png);
+}
+
+.pod html, .pod body, .pod dl, .pod dt, .pod dd, .pod h1, .pod h2, .pod h3, .pod h4, .pod h5, .pod h6, .pod pre, .pod form, .pod fieldset, .pod input, .pod p, .pod blockquote, .pod th, .pod td
+{
+    margin: 5px;
+    padding: 5px;
+}
+
+
+#permalink {
+    margin: 5px;
+    padding: 5px;
+    float: right;
+}
+
+.pod ol {
+    list-style: decimal;
+    margin-left:40px;
+
+}
+
+.pod ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.pod pre {
+    margin-left: 20px;
+}
+
+
+.pod H1      {
+    background: transparent;
+    color: #006699;
+    font-size: large;
+}
+
+.pod H1 A { text-decoration: none; }
+.pod H2 A { text-decoration: none; }
+.pod H3 A { text-decoration: none; }
+.pod H4 A { text-decoration: none; }
+
+.pod H2      {
+    background: transparent;
+    color: #006699;
+    font-size: medium;
+}
+
+.pod H3      {
+    background: transparent;
+    color: #006699;
+    font-size: medium;
+    font-style: italic;
+}
+
+.pod H4      {
+    background: transparent;
+    color: #006699;
+    font-size: medium;
+    font-weight: normal;
+}
+
+.pod IMG     {
+    vertical-align: top;
+}
+
+.pod .toc A  {
+    text-decoration: none;
+}
+
+.pod .toc LI {
+    line-height: 1.2em;
+    list-style-type: none;
+}
+
+.syntaxhighlighter {
+    border-top: 10px solid #f9f9f9;
+    border-bottom: 10px solid #f9f9f9;
+}
+
+.syntaxhighlighter {
+  background-color: #eee !important;
+}
+.syntaxhighlighter .line.alt1 {
+  background-color: #f9f9f9 !important;
+}
+.syntaxhighlighter .line.alt2 {
+  background-color: #f9f9f9 !important;
+}
+
+.author-img {
+    float: right;
+    border-radius: 8px;
+    -webkit-box-shadow: 2px 2px 5px #999;
+}
+
+#content {
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+}

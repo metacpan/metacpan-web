@@ -1,0 +1,38 @@
+<%- query = req.parameters.q %>
+<div class="search-bar">
+  <ul class="search-type">
+    <a href="/search?q="><li class="icon icon-module">Modules</li></a>
+    <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
+    <li class="icon icon-dist">Distributions</li>
+    <li class="icon icon-server">Mirrors</li>
+  </ul>
+  <hr>
+  <strong>Tags</strong>
+  <div class="search-tag">
+    <ul>
+    <li><a style="background-color: <% "stable".to_color %>">8x stable <span>x</span></a></li>
+    <li><a style="background-color: <% "moose".to_color %>">3x moose<span>x</span></a></li>
+    <li><a style="background-color: <% "deprecated".to_color %>">2x deprecated<span>x</span></a></li>
+  </ul>
+  </div>
+  <a href="">more ...</a>
+  <hr>
+  <strong>Index</strong>
+  <ul>
+    <a href=""><li>Latest</li></a>
+    <a href=""><li>CPAN</li></a>
+    <a href=""><li>BackPAN</li></a>
+  </ul>
+</div>
+
+<div class="search-results">
+<% FOREACH item IN results %>
+  <big><strong>
+    <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %>
+  </big></strong><br>
+  <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
+  <br>
+  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% item.author %>/<% item.release %>">/<% item.release %></a> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+<br><br>
+<% END %>
+</div>

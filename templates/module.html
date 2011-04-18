@@ -1,0 +1,48 @@
+<strong><big>
+  <a href="/author/<% module.author %>"><% author.name %></a>
+  &nbsp;/&nbsp;
+  <a href="/release/<% module.author %>/<% module.release %>"><% module.release %></a>
+  &nbsp;/&nbsp;
+  <% module.documentation %>
+  </big></strong><br>
+  Module Version: <% module.module.0.version %> (<a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>)<br><br>
+
+<div style="float: right; text-align: center">
+  <img src="<% author.gravatar_url %>?s=130" width="130" height="130" class="author-img"><br>
+  <strong><a href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
+  <% author.name %>
+</div>
+
+<div class="search-bar">
+  <ul class="search-type">
+    <a href="/search?q="><li class="icon icon-module">Modules</li></a>
+    <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
+    <li class="icon icon-dist">Distributions</li>
+    <li class="icon icon-server">Mirrors</li>
+  </ul>
+  <hr>
+  <strong>Tags</strong>
+  <div class="search-tag">
+    <ul>
+    <li><a style="background-color: <% "stable".to_color %>">8x stable <span>x</span></a></li>
+    <li><a style="background-color: <% "moose".to_color %>">3x moose<span>x</span></a></li>
+    <li><a style="background-color: <% "deprecated".to_color %>">2x deprecated<span>x</span></a></li>
+  </ul>
+  </div>
+  <a href="">more ...</a>
+  <hr>
+  <strong>Index</strong>
+  <ul>
+    <a href=""><li>Latest</li></a>
+    <a href=""><li>CPAN</li></a>
+    <a href=""><li>BackPAN</li></a>
+  </ul>
+</div>
+
+<div class="pod">
+  <% DUMP module %>
+<% pod.replace(/<pre>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false;">') | none %>
+</div>
+<script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
