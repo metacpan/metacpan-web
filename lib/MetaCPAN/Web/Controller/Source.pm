@@ -14,7 +14,6 @@ sub index {
     my $cond = $self->get_source($module) & $self->get_module($module);
     $cond->(sub {
         my ($source, $module) = shift->recv;
-        use Devel::Dwarn; DwarnN($module);
         $cv->send({
             source => $source->{raw}, module => $module
         });

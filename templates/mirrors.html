@@ -9,7 +9,7 @@ function searchForNearest() {
 }
 
 function disableTag(tag) {
-    document.location.href = '/mirrors' + document.location.search + ' ' + tag;
+    document.location.href = '/mirrors' + (document.location.search || '?q=') + ' ' + tag;
 }
 </script>
 
@@ -20,14 +20,13 @@ function disableTag(tag) {
   <strong>Tags</strong>
   <div class="search-tag">
     <ul>
-    <li><a href="javascript:disableTag('http')" style="background-color: <% "stable".to_color %>">http<span>x</span></a></li>
-    <li><a href="javascript:disableTag('ftp')" style="background-color: <% "moose".to_color %>">ftp<span>x</span></a></li>
-    <li><a href="javascript:disableTag('rsync')" style="background-color: <% "deprecated".to_color %>">rsync<span>x</span></a></li>
+    <li><a href="javascript:disableTag('http')" style="background-color: <% "stable".to_color %>">http</a></li>
+    <li><a href="javascript:disableTag('ftp')" style="background-color: <% "moose".to_color %>">ftp</a></li>
+    <li><a href="javascript:disableTag('rsync')" style="background-color: <% "deprecated".to_color %>">rsync</a></li>
   </ul>
   </div>
-  <a href="">more ...</a>
   <hr>
-  <strong>Index</strong>
+  <strong>Sorting</strong>
   <ul>
     <img src="/static/icons/busy.gif" style="float: right; visibility: hidden" id="busy">
     <a href="javascript:searchForNearest()"><li>Nearest</li></a>

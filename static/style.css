@@ -197,7 +197,7 @@ input.g-button:active, button.g-button:active {
     text-align: center
 }
 
-.search-results, .pod {
+.search-results, .pod, .content {
     margin-left: 170px;
     border-left: 1px solid #e9e9e9;
     padding-left: 15px
@@ -206,6 +206,7 @@ input.g-button:active, button.g-button:active {
 .search-bar {
     width: 160px;
     float: left;
+    position: fixed;
 }
 
 .search-bar .search-type {
@@ -292,38 +293,34 @@ input.g-button:active, button.g-button:active {
 }
 
 
-.pod H1      {
+.pod h1, .pod h2, .pod h3, .pod h4 {
     background: transparent;
-    color: #006699;
+    color: #36c;
+    font-weight: bold;
+}
+
+.pod h1 {
     font-size: large;
 }
 
-.pod H1 A { text-decoration: none; }
-.pod H2 A { text-decoration: none; }
-.pod H3 A { text-decoration: none; }
-.pod H4 A { text-decoration: none; }
 
-.pod H2      {
-    background: transparent;
-    color: #006699;
-    font-size: medium;
+.pod h2 {
+    font-size: 16px;
 }
 
-.pod H3      {
-    background: transparent;
-    color: #006699;
-    font-size: medium;
-    font-style: italic;
+.pod h3, .pod h4 {
+    font-size: 14px;
 }
 
-.pod H4      {
-    background: transparent;
-    color: #006699;
-    font-size: medium;
-    font-weight: normal;
+.pod p, .pod dt {
+    font-size: 14px;
 }
 
-.pod IMG     {
+.pod dt {
+    font-weight: bold;
+}
+
+.pod img     {
     vertical-align: top;
 }
 
@@ -334,6 +331,10 @@ input.g-button:active, button.g-button:active {
 .pod .toc LI {
     line-height: 1.2em;
     list-style-type: none;
+}
+
+#index {
+    display: none;
 }
 
 .syntaxhighlighter {
@@ -352,8 +353,8 @@ input.g-button:active, button.g-button:active {
 }
 
 .author-img {
-    float: right;
     border-radius: 8px;
+    margin-bottom: 5px;
     -webkit-box-shadow: 2px 2px 5px #999;
 }
 
@@ -363,4 +364,9 @@ input.g-button:active, button.g-button:active {
 
 ul {
     list-style-type: none;
+}
+
+.comment {
+    color: #999;
+    font-size: 11px;
 }

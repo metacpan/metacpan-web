@@ -7,22 +7,21 @@ sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
     my ( undef, undef, $author, $release ) = split( /\//, $req->uri->path );
-
-    my $out;
-
-    my $cond = $self->model( '/release/_search',
-                             {  query  => { match_all => {} },
-                                filter => {
-                                     and => [
-                                         { term => { 'name.raw' => $release } },
-                                         { term => { author     => $author } } ]
-                                } }
-      )->(
+    my ($out, $cond);
+    if($author && $release) {
+        $cond = $self->get_release($author, $release);
+    } else {
+        $cond = $self->find_release($author);
+    }
+    
+    $cond = $cond->(
         sub {
-            $out = shift->recv->{hits}->{hits}->[0]->{_source};
+            my ($data) = shift->recv;
+            $out = $data->{hits}->{hits}->[0]->{_source};
+            ($author, $release) = ($out->{author}, $out->{name});
             my $modules = $self->get_modules( $author, $release );
             my $others =
-              $self->get_others( $author, $release, $out->{distribution} );
+              $self->get_others( $out->{distribution} );
             my $author = $self->get_author($author);
             return ( $modules & $others & $author );
         } );
@@ -55,12 +54,38 @@ sub get_modules {
                                ]
                      },
                      sort   => ['documentation.raw'],
-                     fields => [qw(documentation abstract module.name.raw path status)],
+                     fields => [qw(documentation abstract cpan.file.module path status)],
                   } );
 }
 
+sub find_release {
+    my ($self, $distribution) = @_;
+    $self->model( '/release/_search',
+                             {  query  => { match_all => {} },
+                                filter => {
+                                     and => [
+                                         { term => { 'release.distribution.raw' => $distribution } },
+                                         { term => { status     => 'latest' } } ]
+                                } },
+                                sort => [{ date => 'desc' }],
+                                size => 1
+      );
+}
+
+sub get_release {
+    my ($self, $author, $release) = @_;
+    $self->model( '/release/_search',
+                             {  query  => { match_all => {} },
+                                filter => {
+                                     and => [
+                                         { term => { 'name.raw' => $release } },
+                                         { term => { author     => $author } } ]
+                                } }
+      );
+}
+
 sub get_others {
-    my ( $self, $author, $release, $dist ) = @_;
+    my ( $self, $dist ) = @_;
     $self->model(
         '/release/_search',
         {  query  => { match_all => {} },
@@ -75,7 +100,7 @@ sub get_others {
 
            },
            sort   => [ { date => 'desc' } ],
-           fields => [qw(name date author)],
+           fields => [qw(name date author version)],
         } );
 }
 

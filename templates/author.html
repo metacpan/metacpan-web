@@ -1,5 +1,17 @@
-<% FOREACH release IN releases %>
-<div>
-  <strong><a href="/release/<% release.author %>/<% release.name %>"><% release.name %></a></strong>
+<div class="search-bar">
+  <% INCLUDE inc/author-pic.html author = author float = 'left' %>
+  <div style="clear: both; text-align: center"></div>
+  <a href="mailto:<% author.email %>"><% author.email %></a>
+  <hr>
+  <strong><% total %> releases</strong>
+  
 </div>
+
+<div class="content">
+<div>
+<% counter = 1; releases.push({}); FOREACH release IN releases; IF last == release.distribution; counter = counter + 1; NEXT; ELSE; UNLESS counter == 1; %>(<% counter %> releases)<% END; last = release.distribution; counter = 1; END; UNLESS release.name; NEXT; END %>
+</div>
+<div>
+  <strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>"><% release.name %></a></strong> - <% release.abstract %>
 <% END %>
+</div>

@@ -1,4 +1,4 @@
-<%- query = req.parameters.q %>
+<%- query = req.parameters.get_all('q').join(' ') %>
 <div class="search-bar">
   <ul class="search-type">
     <a href="/search?q="><li class="icon icon-module">Modules</li></a>
@@ -32,7 +32,7 @@
   </big></strong><br>
   <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
   <br>
-  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% item.author %>/<% item.release %>">/<% item.release %></a> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
 <br><br>
 <% END %>
 </div>

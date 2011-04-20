@@ -27,6 +27,8 @@ sub index {
         $cv->send({
             author => $author,
             releases => [map { $_->{_source} } @{$releases->{hits}->{hits}}],
+            took => $releases->{took}, 
+            total => $releases->{hits}->{total} 
         });
     });
 

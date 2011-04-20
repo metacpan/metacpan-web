@@ -26,7 +26,7 @@ sub index {
     my $cv = AE::cv;
     $self->model(
         '/mirror/_search',
-        {  size   => 100,
+        {  size   => 999,
            query  => { match_all => {} },
            @or ? ( filter => {
                and => \@or

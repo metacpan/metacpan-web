@@ -41,12 +41,12 @@
   </div>
   <% IF req.uri.path != '/' %>
   <div style="text-align: center" class="home">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; 'search'; END %>">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
       <div style="display: inline-block; text-align: left">
         <a href="/" style="float: left"><img src="/static/images/cpan_banner.png" width="168" alt="CPAN Logo"></a>
         <div style="float: left; padding-top: 13px; padding-left: 10px">
       <div class="ds">
-        <input type="text" name="q" size="41" autofocus="autofocus" value="<% req.parameters.q | html %>"><input type="submit" value="Search" class="g-button" />
+        <input type="text" name="q" size="41" autofocus="autofocus" value="<% req.parameters.get_all('q').join(' ') | html %>"><input type="submit" value="Search" class="g-button" />
       </div>
       <br><small><% IF total.defined; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% END %></small></div>
       
@@ -58,9 +58,14 @@
   <br>
   <div id="content"><% content | none %>
   </div>
-  <div class="footer">
+  <div class="footer"><br><br>
+     &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+    <a href="/release/MetaCPAN-API-Documentation">API</a> &nbsp; &nbsp; &nbsp; &nbsp; 
     <a href="/about">About MetaCPAN</a> &nbsp; &nbsp; &nbsp; &nbsp; 
     <a href="https://github.com">Fork Me</a>
+    <div class="comment">
+      Timezone is UTC
+    </div>
   </div>
   </body>
 </html>

@@ -1,26 +1,59 @@
-<strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><br><br>
+<strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
-<a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)
-<a href="http://cpansearch.perl.org/src/<% release.author %>/<% release.name %>/">Browse</a>
-
-<div style="float: right; text-align: center">
-  <img src="<% author.gravatar_url %>?s=130" width="130" height="130"><br>
-  <strong><a href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
-  <% author.name %>
+<div class="search-bar">
+  <strong></strong>
+  <div>
+    <ul>
+      <li><strong><% dt = release.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
+      <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
+      <li><a href="http://cpansearch.perl.org/src/<% release.author %>/<% release.name %>/">Browse</a></li>
+      <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
+      <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
+      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs (0)</a></li>
+      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results (0 / 0 / 0)</a></li>
+      <% IF others.size > 1 %>
+      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <option>Go to version</option>
+      <% FOREACH other IN others; IF release.name == other.name; NEXT; END %>
+      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+      <% END %>
+      </select>
+      <% END %>
+    </ul>
+  </div>
+  <hr>
+  <strong>Tools</strong>
+  <ul>
+    <% IF others.size > 1 %>
+    <li>
+      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <option>Diff with version</option>
+      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
+      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+      <% END %>
+    </select></li>
+    <% END %>
+    <li>Search release:<br>
+      <form action="/search">
+      <input type="hidden" name="q" value="dist:<% release.distribution %>">
+      <input type="text" name="q">
+      <input type="submit" style="display: none"></form></li>
+  </ul>
+  <hr>
+  <strong>Permalinks</strong>
+  <ul>
+    <li><a href="/release/<% release.author %>/<% release.name %>">This version</a></li>
+    <li><a href="/release/<% release.distribution %>">Latest version</a></li>
+  </ul>
 </div>
 
-<% IF others %>
-<select name="release" onchange="document.location.href='/release/' + this.value">
-<% FOREACH other IN others %>
-<option value="<% other.author; '/'; other.name %>"<% IF release.name == other.name %> selected="selected"<% END %>><% other.name %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
-<% END %>
-</select>
-<% END %>
+<div class="content">
+<% INCLUDE inc/author-pic.html author = author %>
 
 <% FOREACH module IN modules %>
-<div>
-  <strong><a href="/module/<% IF release.status == 'latest'; release.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract %>
+<div><% IF !module.documentation; DUMP module; END %> 
+  <strong><a href="/module/<% IF release.status == 'latest'; module.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract %>
 </div>
 <% END %>
 
-<pre><% DUMP release %></pre>
+</div>

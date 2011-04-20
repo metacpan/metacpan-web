@@ -1,0 +1,5 @@
+=head1 GETTING STARTED
+
+ $ plackup -Ilib -r -s Twiggy -p 6000
+ 
+Requires that the MetaCPAN server is runnning on port 5000 on the same host.
