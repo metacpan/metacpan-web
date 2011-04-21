@@ -1,0 +1,14 @@
+<div class="box-right">
+  <br>
+<strong>Dependencies</strong><br>
+<%
+deps = [];
+FOREACH dep IN dependencies;
+IF dep.phase != 'runtime' || dep.module == 'perl'; NEXT; END;
+deps.push(dep.module);
+END;
+FOREACH dep IN deps.sort %>
+<a href="/module/<% dep %>"><% dep %></a><br>
+<% END %>
+<% IF deps.size == 0 %><i>none</i><% END %>
+</div>

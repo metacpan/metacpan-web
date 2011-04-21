@@ -15,7 +15,7 @@ sub index {
         my $module = uri_unescape(shift @module);
         $cond = $self->find_module($module);
     } elsif(@module > 2) {
-        $cond = $self->get_module(join('/', @module));
+        $cond = $self->get_module(uri_unescape(join('/', @module)));
     } else {
         $cv->send({});
         return;
@@ -25,19 +25,21 @@ sub index {
         sub {
             my $cv = shift;
             my ($data) = $cv->recv;
-            $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{fields} : $data;
+            $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
             my $pod = $self->model('/pod/' . join('/', @$out{qw(author release path)}));
+            my $release = $self->get_release($out->{author}, $out->{release});
             my $author = $self->get_author($out->{author});
-            return ($pod & $author);
+            return ($pod & $author & $release);
         } );
 
     $get->(
         sub {
-            my ($pod, $author) = shift->recv;
+            my ($pod, $author, $release) = shift->recv;
             $cv->send(
                        { module => $out,
                          author => $author,
-                         pod    => $pod->{raw}, } );
+                         pod    => $pod->{raw},
+                         release => $release->{hits}->{hits}->[0]->{_source} } );
         } );
     return $cv;
 }
@@ -45,22 +47,22 @@ sub index {
 sub find_module {
     my ($self, $module) = @_;
     $self->model( '/file/_search',
-                             { size   => 100,
+                             { size   => 1,
                                query  => { match_all => {} },
                                filter => {
                                      and => [
                                          { term =>
-                                             { 'documentation.raw' => $module }
+                                             { 'file.module.name.raw' => $module }
                                          },
                                          { term => { status => 'latest', } } ]
                                },
-                               fields => [qw(author release path documentation)],
                                sort => [ { 'date' => { order => "desc" } } ] }
       );
 }
 
 sub get_module {
     my ($self, $module) = @_;
+    warn $module;
     $self->model( '/file/' . $module );
 }
 

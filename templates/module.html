@@ -4,34 +4,56 @@
   <a href="/release/<% module.author %>/<% module.release %>"><% module.release %></a>
   &nbsp;/&nbsp;
   <% module.documentation %>
-  </big></strong><br>
-  Module Version: <% module.module.0.version %> (<a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>)<br><br>
+  </big></strong><br><br>
 
 <% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 
 <div class="search-bar">
-  <ul class="search-type">
-    <a href="/search?q="><li class="icon icon-module">Modules</li></a>
-    <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
-    <li class="icon icon-dist">Distributions</li>
-    <li class="icon icon-server">Mirrors</li>
-  </ul>
-  <hr>
-  <strong>Tags</strong>
-  <div class="search-tag">
+  <strong></strong>
+  <div>
     <ul>
-    <li><a style="background-color: <% "stable".to_color %>">8x stable <span>x</span></a></li>
-    <li><a style="background-color: <% "moose".to_color %>">3x moose<span>x</span></a></li>
-    <li><a style="background-color: <% "deprecated".to_color %>">2x deprecated<span>x</span></a></li>
-  </ul>
+      <li><strong><% dt = module.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
+      <li>Module version: <% module.module.0.version %></li>
+      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a></li>
+      <li><a href="http://cpansearch.perl.org/src/<% module.author %>/<% module.release %>/">Browse</a></li>
+      <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
+      <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
+      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs (0)</a></li>
+      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results (0 / 0 / 0)</a></li>
+      <% IF others.size > 1 %>
+      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <option>Go to version</option>
+      <% FOREACH other IN others; IF release.name == other.name; NEXT; END %>
+      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+      <% END %>
+      </select>
+      <% END %>
+    </ul>
   </div>
-  <a href="">more ...</a>
   <hr>
-  <strong>Index</strong>
+  <strong>Tools</strong>
   <ul>
-    <a href=""><li>Latest</li></a>
-    <a href=""><li>CPAN</li></a>
-    <a href=""><li>BackPAN</li></a>
+    <% IF others.size > 1 %>
+    <li>
+      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <option>Diff with version</option>
+      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
+      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+      <% END %>
+    </select></li>
+    <% END %>
+    <li>Search release:<br>
+      <form action="/search">
+      <input type="hidden" name="q" value="dist:<% release.distribution %>">
+      <input type="text" name="q">
+      <input type="submit" style="display: none"></form></li>
+  </ul>
+  <hr>
+  <strong>Permalinks</strong>
+  <ul>
+    <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
+    <li><a href="/module/<% module.documentation %>">Latest version</a></li>
   </ul>
 </div>
 

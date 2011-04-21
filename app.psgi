@@ -1,3 +1,4 @@
+#!/usr/bin/env plackup -r -s Twiggy -p 5001
 use strict;
 use warnings;
 use FindBin;
@@ -6,6 +7,7 @@ use Plack::App::URLMap;
 use Plack::App::File;
 use MetaCPAN::Web::View;
 use Module::Find qw(findallmod);
+use Plack::Middleware::Runtime;
 
 my @controllers = findallmod 'MetaCPAN::Web::Controller';
 
@@ -16,5 +18,4 @@ foreach my $c (@controllers) {
     eval "require $c" || die $@;
     $app->map($c->endpoint => $c->new( view => $view ));
 }
-
-$app;
+Plack::Middleware::Runtime->wrap($app);

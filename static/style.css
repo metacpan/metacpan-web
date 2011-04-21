@@ -194,7 +194,8 @@ input.g-button:active, button.g-button:active {
 }
 
 .footer {
-    text-align: center
+    text-align: center;
+    clear: both;
 }
 
 .search-results, .pod, .content {
@@ -340,6 +341,7 @@ input.g-button:active, button.g-button:active {
 .syntaxhighlighter {
     border-top: 10px solid #f9f9f9;
     border-bottom: 10px solid #f9f9f9;
+    width: auto !important;
 }
 
 .syntaxhighlighter {
@@ -369,4 +371,12 @@ ul {
 .comment {
     color: #999;
     font-size: 11px;
+}
+
+.box-right {
+    float: right;
+    clear: right;
+    width: 150px;
+    overflow: auto;
+    
 }

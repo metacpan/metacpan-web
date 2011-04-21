@@ -3,10 +3,31 @@
   &nbsp;/&nbsp;
   <a href="/release/<% module.author %>/<% module.release %>"><% module.release %></a>
   &nbsp;/&nbsp;
-  <% module.path %> (<a href="http://cpansearch.perl.org/src/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
-  </big></strong><br>
-  <% module.sloc %> lines of code, <% module.slop %> lines of pod, <% module.stat.size | format_bytes %>
-<pre class="brush: pl; class-name: 'highlight'; toolbar: false;"><% source %></pre>
+  <% module.path %>
+  </big></strong><br><br>
+
+<div class="search-bar">
+  <strong>Tools</strong>
+  <ul>
+    <li><a href="http://cpansearch.perl.org/src/<% module.author %>/<% module.release %>/<% module.path %>">raw code</a></li>
+    <li><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></li>
+  </ul>
+  <hr>
+  <strong>Info</strong>
+  <ul>
+    <li><% module.sloc %> lines of code</li>
+    <li><% module.slop %> lines of pod</li>
+    <li><% module.stat.size | format_bytes %></li>
+  </ul>
+</div>
+
+<div class="content">
+<pre class="brush: pl; class-name: 'highlight'; toolbar: false;" id="source"><% source %></pre>
+</div>
+
 <script type="text/javascript">
-     SyntaxHighlighter.all()
+
+document.getElementById('source').style.visibility = 'hidden';
+SyntaxHighlighter.all();
+togglePod(<% module.pod_lines.json %>);
 </script>

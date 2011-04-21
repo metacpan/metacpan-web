@@ -23,6 +23,10 @@ sub index {
                 term => {
                     status => 'latest'
                 }
+            },{
+                    term => {
+                        indexed => \1
+                    }
             }]
         },
         highlight => {

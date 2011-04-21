@@ -1,5 +1,8 @@
 <strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
+<% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
+
 <div class="search-bar">
   <strong></strong>
   <div>
@@ -48,12 +51,18 @@
 </div>
 
 <div class="content">
-<% INCLUDE inc/author-pic.html author = author %>
 
 <% FOREACH module IN modules %>
-<div><% IF !module.documentation; DUMP module; END %> 
-  <strong><a href="/module/<% IF release.status == 'latest'; module.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract %>
+<div><% IF module.documentation %> 
+  <strong><a href="/module/<% IF release.status == 'latest'; module.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract; ELSE %>
+  <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path %>"><% module.path %></a></strong>
+  <% END %> 
 </div>
+<% END %>
+<br>
+<strong>Other files</strong>
+<% FOREACH file IN root %>
+<div><strong><a href="/source/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
 <% END %>
 
 </div>

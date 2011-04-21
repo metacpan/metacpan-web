@@ -10,6 +10,7 @@ use Encoding;
 Template::Alloy->define_vmethod( 'text',
                             dt => sub { my $date = shift;
                                 $date =~ s/\..*?$//;
+                                return unless($date);
                                 DateTime::Tiny->from_string($date); }, );
 
 Template::Alloy->define_vmethod( 'text',

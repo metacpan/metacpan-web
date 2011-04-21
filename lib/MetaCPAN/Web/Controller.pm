@@ -62,4 +62,16 @@ sub get_author {
 
 }
 
+sub get_release {
+    my ($self, $author, $release) = @_;
+    $self->model( '/release/_search',
+                             {  query  => { match_all => {} },
+                                filter => {
+                                     and => [
+                                         { term => { 'name.raw' => $release } },
+                                         { term => { author     => $author } } ]
+                                } }
+      );
+}
+
 1;
