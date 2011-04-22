@@ -6,7 +6,7 @@ use base 'MetaCPAN::Web::Controller';
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
-    my ( undef, undef, $id ) = split( /\//, $req->uri->path );
+    my ( undef, undef, $id ) = split( /\//, $req->path );
 
     my $out;
 

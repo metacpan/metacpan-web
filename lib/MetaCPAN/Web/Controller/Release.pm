@@ -6,7 +6,9 @@ use base 'MetaCPAN::Web::Controller';
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
-    my ( undef, undef, $author, $release ) = split( /\//, $req->uri->path );
+    warn $req->path;
+    warn $req->path;
+    my ( undef, undef, $author, $release ) = split( /\//, $req->path );
     my ( $out, $cond );
     if ( $author && $release ) {
         $cond = $self->get_release( $author, $release );

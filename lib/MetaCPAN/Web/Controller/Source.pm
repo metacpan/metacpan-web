@@ -7,7 +7,7 @@ use URI::Escape;
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
-    my ( undef, undef, @module ) = split( /\//, $req->uri->path );
+    my ( undef, undef, @module ) = split( /\//, $req->path );
     
     my $out;
     my $module = join('/', @module);

@@ -7,15 +7,15 @@ use URI::Escape;
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
-    my ( undef, undef, @module ) = split( /\//, $req->uri->path );
+    my ( undef, undef, @module ) = split( /\//, $req->path );
     
     my $out;
     my $cond;
     if(@module == 1) {
-        my $module = uri_unescape(shift @module);
+        my $module = shift @module;
         $cond = $self->find_module($module);
     } elsif(@module > 2) {
-        $cond = $self->get_module(uri_unescape(join('/', @module)));
+        $cond = $self->get_module(join('/', @module));
     } else {
         $cv->send({});
         return;

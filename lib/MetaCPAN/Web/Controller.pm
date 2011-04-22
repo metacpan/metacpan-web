@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use base 'Plack::Component';
-use Plack::Request;
+use MetaCPAN::Web::Request;
 use MetaCPAN::Web::View;
 use MetaCPAN::Web::Model;
 use Encode;
@@ -37,7 +37,7 @@ sub index {
 
 sub call {
     my ( $self, $env ) = @_;
-    my $req = Plack::Request->new($env);
+    my $req = MetaCPAN::Web::Request->new($env);
     my $cv  = $self->index($req);
     return sub {
         my $res = shift;
