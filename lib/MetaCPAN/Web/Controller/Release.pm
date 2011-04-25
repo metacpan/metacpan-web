@@ -6,8 +6,6 @@ use base 'MetaCPAN::Web::Controller';
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
-    warn $req->path;
-    warn $req->path;
     my ( undef, undef, $author, $release ) = split( /\//, $req->path );
     my ( $out, $cond );
     if ( $author && $release ) {
@@ -34,11 +32,11 @@ sub index {
             $cv->send(
                  { release => $out,
                    author  => $author,
-                   root => [ map { $_->{fields} } @{ $root->{hits}->{hits} } ],
+                   root => [ sort { $a->{name} cmp $b->{name} } map { $_->{fields} } @{ $root->{hits}->{hits} } ],
                    others =>
                      [ map { $_->{fields} } @{ $others->{hits}->{hits} } ],
-                   modules =>
-                     [ map { $_->{fields} } @{ $modules->{hits}->{hits} } ] } );
+                   files =>
+                     [ map { { %{$_->{fields}}, module => $_->{fields}->{'_source.module'} } } @{ $modules->{hits}->{hits} } ] } );
         } );
 
     return $cv;
@@ -46,20 +44,29 @@ sub index {
 
 sub get_modules {
     my ( $self, $author, $release ) = @_;
-    $self->model('/file/_search',
-                 { query  => { match_all => {} },
-                   filter => {
-                               and => [
-                                   { term => { release => $release } },
-                                   { term => { author  => $author } },
-                                   { exists => { field => 'file.module.name' } }
-                               ]
-                   },
-                   sort => ['documentation.raw'],
-                   fields =>
-                     [qw(documentation abstract cpan.file.module path status)],
-                 } );
+    $self->model(
+         '/file/_search',
+         { query  => { match_all => {} },
+           filter => {
+                and => [
+                    { term => { release => $release } },
+                    { term => { author  => $author } },
+                    {
+                      or => [
+                           {
+                             and => [
+                                  { exists => { field => 'file.module.name' } },
+                                  { term => { 'file.module.indexed' => \1 } } ]
+                           },
+                           { exists => { field => 'documentation' } } ] } ]
+           },
+           size   => 999,
+           sort   => ['documentation'],
+           fields => [qw(documentation abstract _source.module path status)],
+         } );
 }
+
+
 
 sub find_release {
     my ( $self, $distribution ) = @_;
@@ -68,7 +75,7 @@ sub find_release {
          { query  => { match_all => {} },
            filter => {
                 and => [
-                    { term => { 'release.distribution.raw' => $distribution } },
+                    { term => { 'release.distribution' => $distribution } },
                     { term => { status                     => 'latest' } } ] }
          },
          sort => [ { date => 'desc' } ],
@@ -84,7 +91,7 @@ sub get_root_files {
                                         { term => { release => $release } },
                                         { term => { author  => $author } },
                                         { term => { level     => 0 } },
-                                          { term => { directory => \0 } } ]
+                                        { term => { directory => \0 } } ]
                      },
                      fields => [qw(name)],
                      size   => 100,
@@ -98,14 +105,15 @@ sub get_others {
         {  query  => { match_all => {} },
            filter => {
                and => [
-                   { term => { 'release.distribution.raw' => $dist } },
+                   { term => { 'release.distribution' => $dist } },
 
                    # { not => {
-                   #     term => { 'release.name.raw' => $release }
+                   #     term => { 'release.name' => $release }
                    # } }
                ],
 
            },
+           size   => 100,
            sort   => [ { date => 'desc' } ],
            fields => [qw(name date author version)],
         } );

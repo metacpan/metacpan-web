@@ -28,6 +28,7 @@ html {
 	margin:0; 
 	padding:0; 
 	border:0; 
+    overflow-y: scroll;
 }
 
 body, div, span, object, iframe,
@@ -271,6 +272,9 @@ input.g-button:active, button.g-button:active {
     padding: 5px;
 }
 
+.pod code {
+    font-family: monospace
+}
 
 #permalink {
     margin: 5px;
@@ -376,7 +380,8 @@ ul {
 .box-right {
     float: right;
     clear: right;
-    width: 150px;
+    width: 160px;
+    padding-left: 10px;
     overflow: auto;
     
 }

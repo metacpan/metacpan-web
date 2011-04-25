@@ -7,6 +7,7 @@ use MetaCPAN::Web::Request;
 use MetaCPAN::Web::View;
 use MetaCPAN::Web::Model;
 use Encode;
+use Scalar::Util qw(blessed);
 
 __PACKAGE__->mk_accessors(qw(view));
 
@@ -44,6 +45,11 @@ sub call {
         $cv->cb(
             sub {
                 my $data = shift->recv;
+                warn $data;
+                if(blessed $data && $data->isa('Plack::Response')) {
+                    $res->( $data->finalize );
+                    return;
+                }
                 my $out  = '';
                 $self->view->process( $self->template,
                                       { req => $req, %$data }, \$out )
@@ -68,7 +74,7 @@ sub get_release {
                              {  query  => { match_all => {} },
                                 filter => {
                                      and => [
-                                         { term => { 'name.raw' => $release } },
+                                         { term => { 'name' => $release } },
                                          { term => { author     => $author } } ]
                                 } }
       );

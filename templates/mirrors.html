@@ -14,23 +14,30 @@ function disableTag(tag) {
 </script>
 
 <%- query = req.parameters.q %>
-<br>
-<div class="search-bar">
 
-  <strong>Tags</strong>
-  <div class="search-tag">
-    <ul>
-    <li><a href="javascript:disableTag('http')" style="background-color: <% "stable".to_color %>">http</a></li>
-    <li><a href="javascript:disableTag('ftp')" style="background-color: <% "moose".to_color %>">ftp</a></li>
-    <li><a href="javascript:disableTag('rsync')" style="background-color: <% "deprecated".to_color %>">rsync</a></li>
-  </ul>
-  </div>
-  <hr>
+<div class="search-bar" style="position: static">
   <strong>Sorting</strong>
   <ul>
     <img src="/static/icons/busy.gif" style="float: right; visibility: hidden" id="busy">
     <a href="javascript:searchForNearest()"><li>Nearest</li></a>
   </ul>
+  <hr>
+  <strong>Continents</strong>
+  <%- continents = []; FOREACH mirror IN mirrors; continents.push(mirror.continent); END %>
+  <ul>
+  <% FOREACH continent IN continents.unique.sort %>
+  <li><a href="/mirrors?continent=<% continent %>"><% continent %></a></li>
+  <% END %>
+  </ul>
+  <hr>
+  <strong>Countries</strong>
+  <%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
+  <ul>
+  <% FOREACH country IN countries.unique.sort %>
+  <li><a href="/mirrors?country=<% country %>"><% country %></a></li>
+  <% END %>
+  </ul>
+
 </div>
 
 <div class="search-results">

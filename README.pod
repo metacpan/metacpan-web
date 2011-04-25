@@ -1,5 +1,7 @@
 =head1 GETTING STARTED
 
- $ plackup -Ilib -r -s Twiggy -p 6000
+Start server on port 5001
+
+ $ ./app.psgi
  
 Requires that the MetaCPAN server is runnning on port 5000 on the same host.

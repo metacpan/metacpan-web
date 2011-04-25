@@ -52,13 +52,51 @@
 
 <div class="content">
 
+<%
+documentation = [];
+provides      = [];
+modules       = [];
+FOREACH file IN files;
+  IF file.documentation && file.module;
+    modules.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+    FOREACH module IN file.module;
+      IF module.name != file.documentation;
+        provides.push({ status = file.status, title = module.name, path = file.path });
+      END;
+    END;
+  ELSIF file.documentation;
+    documentation.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+  ELSIF file.module;
+    FOREACH module IN file.module;
+      provides.push({ status = file.status, title = module.name, path = file.path });
+    END;
+  END;
+END;
+%>
+<strong>Modules</strong>
 <% FOREACH module IN modules %>
-<div><% IF module.documentation %> 
-  <strong><a href="/module/<% IF release.status == 'latest'; module.documentation; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.documentation %></a></strong> - <% module.abstract; ELSE %>
-  <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path %>"><% module.path %></a></strong>
-  <% END %> 
-</div>
+  <div>
+    <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+  </div>
 <% END %>
+
+<br>
+<strong>Documentation</strong>
+<% FOREACH module IN documentation %>
+  <div>
+    <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+  </div>
+<% END %>
+
+<br>
+<strong>Provides</strong>
+<% FOREACH module IN provides %>
+  <div>
+    <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path %>"><% module.title %></a></strong>
+ 
+  </div>
+<% END %>
+
 <br>
 <strong>Other files</strong>
 <% FOREACH file IN root %>

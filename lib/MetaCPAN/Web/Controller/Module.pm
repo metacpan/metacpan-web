@@ -26,6 +26,7 @@ sub index {
             my $cv = shift;
             my ($data) = $cv->recv;
             $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
+            $cv->send({}) && return unless($out->{author});
             my $pod = $self->model('/pod/' . join('/', @$out{qw(author release path)}));
             my $release = $self->get_release($out->{author}, $out->{release});
             my $author = $self->get_author($out->{author});
@@ -52,7 +53,7 @@ sub find_module {
                                filter => {
                                      and => [
                                          { term =>
-                                             { 'file.module.name.raw' => $module }
+                                             { 'documentation' => $module }
                                          },
                                          { term => { status => 'latest', } } ]
                                },

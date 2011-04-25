@@ -1,4 +1,4 @@
-#!/usr/bin/env plackup -r -s Twiggy -p 5001
+#!/usr/bin/env plackup -s Twiggy -p 5001
 use strict;
 use warnings;
 use FindBin;
