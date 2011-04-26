@@ -25,7 +25,9 @@ sub new {
         TAG_STYLE    => 'asp',
 
         #STRICT => 1,
-        CACHE_SIZE  => 0,
+        COMPILE_DIR => 'var/tmp/templates',
+        COMPILE_PERL => 1,
+        STAT_TTL     => 1,
         WRAPPER     => [qw(wrapper.html)],
         ENCODING    => 'utf8',
         AUTO_FILTER => 'html',
