@@ -5,7 +5,6 @@ use base 'Template::Alloy';
 use mro;
 use DateTime::Tiny;
 use Digest::MD5 qw(md5_hex);
-use Encoding;
 
 Template::Alloy->define_vmethod( 'text',
                             dt => sub { my $date = shift;
