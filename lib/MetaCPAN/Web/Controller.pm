@@ -45,7 +45,6 @@ sub call {
         $cv->cb(
             sub {
                 my $data = shift->recv;
-                warn $data;
                 if(blessed $data && $data->isa('Plack::Response')) {
                     $res->( $data->finalize );
                     return;

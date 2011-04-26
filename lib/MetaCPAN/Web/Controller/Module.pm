@@ -63,7 +63,6 @@ sub find_module {
 
 sub get_module {
     my ($self, $module) = @_;
-    warn $module;
     $self->model( '/file/' . $module );
 }
 

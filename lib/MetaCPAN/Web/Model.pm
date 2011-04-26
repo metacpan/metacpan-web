@@ -84,7 +84,6 @@ use strict;
 use warnings;
 use Test::More;
 use JSON;
-use AnyEvent::Impl::Perl;
 use AnyEvent::HTTP qw(http_request);
 
 sub metacpan {
