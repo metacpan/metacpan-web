@@ -1,17 +1,3 @@
-<script>
-function searchForNearest() {
-  document.getElementById('busy').style.visibility = 'visible';
-  navigator.geolocation.getCurrentPosition(function(pos) {
-    document.location.href = '/mirrors?q=loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
-  },
-                                               function(){},
-                                               {maximumAge:600000});
-}
-
-function disableTag(tag) {
-    document.location.href = '/mirrors' + (document.location.search || '?q=') + ' ' + tag;
-}
-</script>
 
 <%- query = req.parameters.q %>
 

@@ -8,6 +8,7 @@ use Plack::App::File;
 use MetaCPAN::Web::View;
 use Module::Find qw(findallmod);
 use Plack::Middleware::Runtime;
+use Plack::Middleware::ReverseProxy;
 
 my @controllers = findallmod 'MetaCPAN::Web::Controller';
 
@@ -18,4 +19,6 @@ foreach my $c (@controllers) {
     eval "require $c" || die $@;
     $app->map($c->endpoint => $c->new( view => $view ));
 }
-Plack::Middleware::Runtime->wrap($app);
+$app = Plack::Middleware::Runtime->wrap($app);
+
+Plack::Middleware::ReverseProxy->wrap($app);

@@ -30,13 +30,21 @@ sub index {
         sub {
             my ( $modules, $others, $author, $root ) = shift->recv;
             $cv->send(
-                 { release => $out,
+                {  release => $out,
                    author  => $author,
-                   root => [ sort { $a->{name} cmp $b->{name} } map { $_->{fields} } @{ $root->{hits}->{hits} } ],
+                   root    => [
+                             sort { $a->{name} cmp $b->{name} }
+                             map  { $_->{fields} } @{ $root->{hits}->{hits} }
+                   ],
                    others =>
                      [ map { $_->{fields} } @{ $others->{hits}->{hits} } ],
-                   files =>
-                     [ map { { %{$_->{fields}}, module => $_->{fields}->{'_source.module'} } } @{ $modules->{hits}->{hits} } ] } );
+                   files => [
+                       map {
+                           {
+                               %{ $_->{fields} },
+                                 module => $_->{fields}->{'_source.module'}
+                           }
+                         } @{ $modules->{hits}->{hits} } ] } );
         } );
 
     return $cv;
@@ -66,20 +74,19 @@ sub get_modules {
          } );
 }
 
-
-
 sub find_release {
     my ( $self, $distribution ) = @_;
     $self->model(
-         '/release/_search',
-         { query  => { match_all => {} },
-           filter => {
-                and => [
-                    { term => { 'release.distribution' => $distribution } },
-                    { term => { status                     => 'latest' } } ] }
-         },
-         sort => [ { date => 'desc' } ],
-         size => 1 );
+             '/release/_search',
+             { query  => { match_all => {} },
+               filter => {
+                    and => [
+                        { term => { 'release.distribution' => $distribution } },
+                        { term => { status                 => 'latest' } } ]
+               },
+               sort => [ { date => 'desc' } ],
+               size => 1
+             } );
 }
 
 sub get_root_files {
@@ -87,11 +94,10 @@ sub get_root_files {
     $self->model( '/file/_search',
                   {  query  => { match_all => {} },
                      filter => {
-                                 and => [ 
-                                        { term => { release => $release } },
-                                        { term => { author  => $author } },
-                                        { term => { level     => 0 } },
-                                        { term => { directory => \0 } } ]
+                                 and => [ { term => { release   => $release } },
+                                          { term => { author    => $author } },
+                                          { term => { level     => 0 } },
+                                          { term => { directory => \0 } } ]
                      },
                      fields => [qw(name)],
                      size   => 100,

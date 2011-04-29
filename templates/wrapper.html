@@ -26,7 +26,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-  <title>MetaCPAN</title>
+  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - beta.metacpan.org</title>
   <link href="/static/css/shCore.css" rel="stylesheet" type="text/css">
   <link href="/static/css/shThemeDefault.css" rel="stylesheet" type="text/css">
   <link href="/static/style.css" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
         <a href="/" style="float: left"><img src="/static/images/cpan_banner.png" width="168" alt="CPAN Logo"></a>
         <div style="float: left; padding-top: 13px; padding-left: 10px">
       <div class="ds">
-        <input type="text" name="q" size="41" autofocus="autofocus" id="search-input" value="<% req.parameters.get_all('q').join(' ') | html %>"><input type="submit" value="Search" class="g-button" />
+        <input type="text" name="q" size="41" id="search-input" value="<% req.parameters.get_all('q').join(' ') | html %>"><input type="submit" value="Search" class="g-button" />
       </div>
       <br><small><% IF total.defined; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% END %></small></div>
       
@@ -69,14 +69,5 @@
       Timezone is UTC
     </div>
   </div>
-  <script>
-  $('#search-input').keydown(function(event) {
-    if (event.keyCode == '13' && event.shiftKey) {
-       event.preventDefault();
-       document.forms[0].q.name = 'lucky';
-       document.forms[0].submit();
-     }
-  });
-  </script>
   </body>
 </html>
