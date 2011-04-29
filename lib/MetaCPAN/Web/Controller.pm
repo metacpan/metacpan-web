@@ -29,6 +29,12 @@ sub template {
     return $tmpl;
 }
 
+sub content_type {
+    'text/html; charset=utf-8'
+}
+
+sub raw { 0 }
+
 sub index {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
@@ -50,12 +56,13 @@ sub call {
                     return;
                 }
                 my $out  = '';
-                $self->view->process( $self->template,
+                my $method = $self->raw ? 'process_simple' : 'process';
+                $self->view->$method( $self->template,
                                       { req => $req, %$data }, \$out )
                   || warn $self->view->error;
                 $out = Encode::encode_utf8($out);
                 $res->(
-                        [ 200, [ 'Content-Type', 'text/html; charset=utf-8' ],
+                        [ 200, [ 'Content-Type', $self->content_type ],
                           [$out] ] );
             } );
     };
@@ -86,7 +93,7 @@ sub not_found {
                           { req => $req }, \$out )
       || warn $self->view->error;
     $out = Encode::encode_utf8($out);
-    return Plack::Response->new( 404, [ 'Content-Type', 'text/html; charset=utf-8' ],
+    return Plack::Response->new( 404, [ 'Content-Type', $self->content_type ],
               [$out] );
 }
 

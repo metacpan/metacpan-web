@@ -51,6 +51,8 @@
       <input type="submit" style="display: none"></form></li>
   </ul>
   <hr>
+  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+  <hr>
   <strong>Permalinks</strong>
   <ul>
     <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>

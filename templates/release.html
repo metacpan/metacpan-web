@@ -5,7 +5,6 @@
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 
 <div class="search-bar">
-  <strong></strong>
   <div>
     <ul>
       <li><strong><% dt = release.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
@@ -43,6 +42,8 @@
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
   </ul>
+  <hr>
+  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
   <hr>
   <strong>Permalinks</strong>
   <ul>

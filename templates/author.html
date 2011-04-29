@@ -4,6 +4,9 @@
   <div style="clear: both; text-align: center"></div>
   <a href="mailto:<% author.email %>"><% author.email %></a>
   <hr>
+  
+  <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
+  <hr>
   <strong><% total %> release<% IF total != 1 %>s<% END %></strong>
   
 </div>
