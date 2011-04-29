@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::Release;
 use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
+use Scalar::Util qw(blessed);
 
 sub index {
     my ( $self, $req ) = @_;
@@ -18,6 +19,7 @@ sub index {
         sub {
             my ($data) = shift->recv;
             $out = $data->{hits}->{hits}->[0]->{_source};
+            return $self->not_found($req) unless($out);
             ( $author, $release ) = ( $out->{author}, $out->{name} );
             my $modules = $self->get_modules( $author, $release );
             my $root   = $self->get_root_files( $author, $release );
@@ -29,6 +31,10 @@ sub index {
     $cond->(
         sub {
             my ( $modules, $others, $author, $root ) = shift->recv;
+            if(blessed $modules && $modules->isa('Plack::Response')) {
+                $cv->send($modules);
+                return;  
+            }
             $cv->send(
                 {  release => $out,
                    author  => $author,

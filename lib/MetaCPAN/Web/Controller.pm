@@ -79,4 +79,15 @@ sub get_release {
       );
 }
 
+sub not_found {
+    my ($self, $req) = @_;
+    my $out  = '';
+    $self->view->process( 'not_found.html',
+                          { req => $req }, \$out )
+      || warn $self->view->error;
+    $out = Encode::encode_utf8($out);
+    return Plack::Response->new( 404, [ 'Content-Type', 'text/html; charset=utf-8' ],
+              [$out] );
+}
+
 1;

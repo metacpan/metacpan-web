@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 use URI::Escape;
+use Scalar::Util qw(blessed);
 
 sub index {
     my ( $self, $req ) = @_;
@@ -26,7 +27,7 @@ sub index {
             my $cv = shift;
             my ($data) = $cv->recv;
             $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
-            $cv->send({}) && return unless($out->{author});
+            return $self->not_found($req) unless($out);
             my $pod = $self->model('/pod/' . join('/', @$out{qw(author release path)}));
             my $release = $self->get_release($out->{author}, $out->{release});
             my $author = $self->get_author($out->{author});
@@ -36,6 +37,10 @@ sub index {
     $get->(
         sub {
             my ($pod, $author, $release) = shift->recv;
+            if(blessed $pod && $pod->isa('Plack::Response')) {
+                $cv->send($pod);
+                return;  
+            } 
             $cv->send(
                        { module => $out,
                          author => $author,
