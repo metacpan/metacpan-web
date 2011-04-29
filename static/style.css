@@ -348,6 +348,10 @@ input.g-button:active, button.g-button:active {
     width: auto !important;
 }
 
+.nogutter {
+    border-left: 10px solid #f9f9f9;
+}
+
 .syntaxhighlighter {
   background-color: #eee !important;
 }
