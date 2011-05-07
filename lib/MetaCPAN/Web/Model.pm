@@ -6,6 +6,7 @@ use AnyEvent;
 use base 'AnyEvent::CondVar';
 
 $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
+$AnyEvent::HTTP::USERAGENT = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
 
 use overload
   '&{}'    => \&build,
