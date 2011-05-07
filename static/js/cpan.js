@@ -1,3 +1,12 @@
+$.fn.textWidth = function(){
+  var html_org = $(this).html();
+  var html_calc = '<span>' + html_org + '</span>'
+  $(this).html(html_calc);
+  var width = $(this).find('span:first').width();
+  $(this).html(html_org);
+  return width;
+};
+
 var podVisible = true;
 
 function togglePod(lines) {
@@ -46,6 +55,26 @@ $(document).ready(function() {
             });
         }
     });
+
+    var items = $('.ellipsis');
+      for(var i = 0; i < items.length; i++) {
+        var element = $(items[i]);
+        var boxWidth = element.width();
+        var textWidth = element.textWidth();
+        var text = element.text();
+        var textLength = text.length;
+        if(textWidth <= boxWidth) continue;
+        var parts = [text.substr(0, Math.floor(textLength/2)), text.substr(Math.floor(textLength/2), textLength)];
+        while(element.textWidth() > boxWidth) {
+          if(textLength % 2) {
+            parts[0] = parts[0].substr(0, parts[0].length-1);
+          } else {
+            parts[1] = parts[1].substr(1, parts[1].length);
+          }
+          textLength--;
+          element.html(parts.join('…'));
+        }
+      }
 });
 
 function searchForNearest() {

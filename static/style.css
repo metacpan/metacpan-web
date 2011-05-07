@@ -389,3 +389,9 @@ ul {
     overflow: auto;
     
 }
+
+.box-right a.ellipsis {
+    width: 160px;
+    white-space: nowrap;
+    display: block;
+}

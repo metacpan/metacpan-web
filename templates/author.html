@@ -3,6 +3,7 @@
   <% INCLUDE inc/author-pic.html author = author float = 'left' %>
   <div style="clear: both; text-align: center"></div>
   <a href="mailto:<% author.email %>"><% author.email %></a>
+  <% IF author.website %><br><a href="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><% END %>
   <hr>
   
   <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
