@@ -18,7 +18,7 @@ sub index {
     
     my $q = [];
     if(my $author = $req->parameters->{author}) {
-        push(@$q, { term => { author => $author }});
+        push(@$q, { term => { author => uc($author) }});
     }
     if(my $distribution = $req->parameters->{distribution}) {
         push(@$q, { term => { distribution => $distribution }});
