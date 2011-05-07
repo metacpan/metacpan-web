@@ -5,6 +5,7 @@ use base 'Template::Alloy';
 use mro;
 use DateTime::Tiny;
 use Digest::MD5 qw(md5_hex);
+use URI;
 
 Template::Alloy->define_vmethod( 'text',
                             dt => sub { my $date = shift;
@@ -16,14 +17,17 @@ Template::Alloy->define_vmethod( 'text',
                                to_color => sub { my $md5 = md5_hex(md5_hex(shift)); my $color = substr($md5, 0, 6);
                                    return "#$color"; }, );
 
+Template::Alloy->define_vmethod( 'text',
+                               decode_punycode => sub {
+                                    URI->new(shift)->ihost
+                                   } );
+
 sub new {
     my $class = shift;
     return $class->next::method(
         @_,
         INCLUDE_PATH => ['templates'],
         TAG_STYLE    => 'asp',
-
-        #STRICT => 1,
         COMPILE_DIR => 'var/tmp/templates',
         COMPILE_PERL => 1,
         STAT_TTL     => 1,
