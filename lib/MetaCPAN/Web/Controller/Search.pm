@@ -20,16 +20,26 @@ sub index {
             }
         },
         filter => {
-            and => [{
-                term => {
-                    status => 'latest'
-                }
-            },{
-                    term => {
-                        'file.module.indexed' => \1
-                    }
-            }]
-        },
+            and => [ { term => { status => 'latest' } },
+                     {
+                        or => [
+                               {
+                                   and => [
+                                            { exists =>
+                                                { field => 'file.module.name' }
+                                            },
+                                            { term =>
+                                                { 'file.module.indexed' => \1 }
+                                            } ]
+                               },
+                               {
+                                   and => [
+                                       {  exists => { field => 'documentation' }
+                                       },
+                                       { term => { 'file.indexed' => \1 } } ] }
+                        ] } ]
+          },
+
         highlight => {
                 fields => {
                     'pod.analyzed' => {
