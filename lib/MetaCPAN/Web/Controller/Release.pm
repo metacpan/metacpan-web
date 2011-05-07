@@ -48,7 +48,8 @@ sub index {
                        map {
                            {
                                %{ $_->{fields} },
-                                 module => $_->{fields}->{'_source.module'}
+                                 module => $_->{fields}->{'_source.module'},
+                                 abstract => $_->{fields}->{'_source.abstract'}
                            }
                          } @{ $modules->{hits}->{hits} } ] } );
         } );
@@ -72,11 +73,15 @@ sub get_modules {
                                   { exists => { field => 'file.module.name' } },
                                   { term => { 'file.module.indexed' => \1 } } ]
                            },
-                           { exists => { field => 'documentation' } } ] } ]
+                           { and => [
+                               { exists => { field => 'documentation' } },
+                               { term => { 'file.indexed' => \1 } }
+                              ] } ]
+                    } ]
            },
            size   => 999,
            sort   => ['documentation'],
-           fields => [qw(documentation abstract _source.module path status)],
+           fields => [qw(documentation _source.abstract _source.module path status)],
          } );
 }
 
@@ -118,10 +123,6 @@ sub get_others {
            filter => {
                and => [
                    { term => { 'release.distribution' => $dist } },
-
-                   # { not => {
-                   #     term => { 'release.name' => $release }
-                   # } }
                ],
 
            },
