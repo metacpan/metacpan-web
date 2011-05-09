@@ -16,8 +16,11 @@
     <ul>
       <li><strong><% dt = module.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
       <li>Module version: <% module.module.0.version %></li>
-      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a></li>
-      <li><a href="http://cpansearch.perl.org/src/<% module.author %>/<% module.release %>/">Browse</a></li>
+      <li>
+        <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
+        (<a href="http://api.beta.metacpan.org/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+      </li>
+      <li><a href="http://api.beta.metacpan.org/source/<% module.author %>/<% module.release %>/">Browse</a></li>
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
       <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs (0)</a></li>
