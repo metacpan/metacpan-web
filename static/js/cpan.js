@@ -28,7 +28,7 @@ function togglePod(lines) {
 }
 
 $(document).ready(function() {
-
+    SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.highlight();
 
     $('#search-input').keydown(function(event) {

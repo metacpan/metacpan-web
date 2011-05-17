@@ -331,6 +331,7 @@ input.g-button:active, button.g-button:active {
     border-top: 10px solid #f9f9f9;
     border-bottom: 10px solid #f9f9f9;
     width: auto !important;
+    overflow-y: hidden !important;
 }
 
 .nogutter {
