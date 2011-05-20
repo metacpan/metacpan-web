@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 use Scalar::Util qw(blessed);
+use List::Util qw();
 
 sub index {
     my ( $self, $req ) = @_;
@@ -38,6 +39,8 @@ sub index {
             $cv->send(
                 {  release => $out,
                    author  => $author,
+                   total   => $modules->{hits}->{total},
+                   took    => List::Util::max($modules->{took}, $root->{took}, $author->{took}, $others->{took}),
                    root    => [
                              sort { $a->{name} cmp $b->{name} }
                              map  { $_->{fields} } @{ $root->{hits}->{hits} }
