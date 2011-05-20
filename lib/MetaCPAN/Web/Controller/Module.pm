@@ -60,6 +60,7 @@ sub find_module {
                                          { term =>
                                              { 'documentation' => $module }
                                          },
+                                         { term => { 'file.indexed' => \1, } },
                                          { term => { status => 'latest', } } ]
                                },
                                sort => [ { 'date' => { order => "desc" } } ] }
