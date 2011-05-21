@@ -10,8 +10,8 @@ sub index {
 
     my $out;
 
-    my $author = $self->model( '/author/'. $id);
-    my $releases = $self->model( '/release/_search', {
+    my $author = $self->model->get( '/author/'. $id);
+    my $releases = $self->model->get( '/release/_search', {
         query => { match_all => { } },
         filter => { term => { author => $id } },
         sort => ['distribution', {

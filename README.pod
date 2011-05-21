@@ -1,7 +1,11 @@
 =head1 GETTING STARTED
 
-Start server on port 5001
+Start server on port 5000
 
- $ ./app.psgi
- 
-Requires that the MetaCPAN server is runnning on port 5000 on the same host.
+ $ plackup -Ilib lib/MetaCPAN/Web.pm
+
+The backend defaults to C<api.beta.metacpan.org>. Running a local API server is optional and not required to hack on the front-end.
+
+You can set the API url explicitly:
+
+ $ METACPAN_API=localhost:5000 plackup -Ilib -p 5001 lib/MetaCPAN/Web.pm

@@ -62,7 +62,7 @@ sub index {
 
 sub get_modules {
     my ( $self, $author, $release ) = @_;
-    $self->model(
+    $self->model->get(
          '/file/_search',
          { query  => { match_all => {} },
            filter => {
@@ -90,7 +90,7 @@ sub get_modules {
 
 sub find_release {
     my ( $self, $distribution ) = @_;
-    $self->model(
+    $self->model->get(
              '/release/_search',
              { query  => { match_all => {} },
                filter => {
@@ -105,7 +105,7 @@ sub find_release {
 
 sub get_root_files {
     my ( $self, $author, $release ) = @_;
-    $self->model( '/file/_search',
+    $self->model->get( '/file/_search',
                   {  query  => { match_all => {} },
                      filter => {
                                  and => [ { term => { release   => $release } },
@@ -120,7 +120,7 @@ sub get_root_files {
 
 sub get_others {
     my ( $self, $dist ) = @_;
-    $self->model(
+    $self->model->get(
         '/release/_search',
         {  query  => { match_all => {} },
            filter => {

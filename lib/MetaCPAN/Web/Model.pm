@@ -87,10 +87,15 @@ use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
 
-sub metacpan {
-    my ($path, $search) = @_;
+sub new {
+    my $class = shift;
+    return bless {@_}, $class;
+}
+
+sub get {
+    my ($self, $path, $search) = @_;
     my $req  = MyCondVar->new;
-    http_request $search ? 'post' : 'get' => "http://localhost:5000$path",
+    http_request $search ? 'post' : 'get' => $self->{url} . $path,
         body => $search ? encode_json($search) : '',
         sub {
             my $data = shift;

@@ -6,7 +6,7 @@ use base 'MetaCPAN::Web::Controller';
 sub index {
     my ($self, $req) = @_;
     my $cv = AE::cv;
-    $self->model('/release/_search', {
+    $self->model->get('/release/_search', {
         size => 100,
         query => { match_all => {} },
         sort => [{ 'date' => { order => "desc" } }]

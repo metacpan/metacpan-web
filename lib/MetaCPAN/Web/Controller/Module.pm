@@ -28,7 +28,7 @@ sub index {
             my ($data) = $cv->recv;
             $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
             return $self->not_found($req) unless($out);
-            my $pod = $self->model('/pod/' . join('/', @$out{qw(author release path)}));
+            my $pod = $self->model->get('/pod/' . join('/', @$out{qw(author release path)}));
             my $release = $self->get_release($out->{author}, $out->{release});
             my $author = $self->get_author($out->{author});
             return ($pod & $author & $release);
@@ -52,7 +52,7 @@ sub index {
 
 sub find_module {
     my ($self, $module) = @_;
-    $self->model( '/file/_search',
+    $self->model->get( '/file/_search',
                              { size   => 1,
                                query  => { match_all => {} },
                                filter => {
@@ -69,7 +69,7 @@ sub find_module {
 
 sub get_module {
     my ($self, $module) = @_;
-    $self->model( '/file/' . $module );
+    $self->model->get( '/file/' . $module );
 }
 
 1;

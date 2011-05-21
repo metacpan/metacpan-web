@@ -9,12 +9,7 @@ use MetaCPAN::Web::Model;
 use Encode;
 use Scalar::Util qw(blessed);
 
-__PACKAGE__->mk_accessors(qw(view));
-
-sub model {
-    my $self = shift;
-    return MetaCPAN::Web::Model::metacpan(@_);
-}
+__PACKAGE__->mk_accessors(qw(view model));
 
 sub endpoint {
     my $self = shift;
@@ -70,13 +65,13 @@ sub call {
 
 sub get_author {
     my ( $self, $author ) = @_;
-    $self->model("/author/$author");
+    $self->model->get("/author/$author");
 
 }
 
 sub get_release {
     my ($self, $author, $release) = @_;
-    $self->model( '/release/_search',
+    $self->model->get( '/release/_search',
                              {  query  => { match_all => {} },
                                 filter => {
                                      and => [

@@ -24,7 +24,7 @@ sub index {
 
 sub get_source {
     my ($self, $module) = @_;
-    $self->model( '/source/' . $module );
+    $self->model->get( '/source/' . $module );
 }
 
 1;

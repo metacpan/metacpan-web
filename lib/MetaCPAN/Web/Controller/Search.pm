@@ -9,7 +9,7 @@ sub index {
     my $cv = AE::cv;
     my $query = $req->parameters->{q} || $req->parameters->{lucky};
     $query =~ s/::/ /g;
-    $self->model('/file/_search', {
+    $self->model->get('/file/_search', {
         size => $req->parameters->{lucky} ? 1 : 50,
         query => {
             query_string=> {
