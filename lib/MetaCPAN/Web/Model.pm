@@ -97,6 +97,7 @@ sub get {
     my $req  = MyCondVar->new;
     http_request $search ? 'post' : 'get' => $self->{url} . $path,
         body => $search ? encode_json($search) : '',
+        persistent => 1,
         sub {
             my $data = shift;
             my $json = eval { decode_json($data) };
