@@ -58,7 +58,7 @@
   <div style="text-align: center" class="home">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
       <div style="display: inline-block; text-align: left">
-        <a href="/" style="float: left"><img src="/static/images/cpan_banner.png" width="168" alt="CPAN Logo"></a>
+        <a href="/" style="float: left"><img src="/static/images/cpan_banner.png" width="168" height="49" alt="CPAN Logo"></a>
         <div style="float: left; padding-top: 13px; padding-left: 10px">
       <div class="ds">
         <input type="text" name="q" size="41" id="search-input" value="<% req.parameters.get_all('q').join(' ') | html %>"><input type="submit" value="Search" class="g-button" />
