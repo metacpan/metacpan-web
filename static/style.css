@@ -381,3 +381,5 @@ ul {
     white-space: nowrap;
     display: block;
 }
+
+code { font-family: monospace; }

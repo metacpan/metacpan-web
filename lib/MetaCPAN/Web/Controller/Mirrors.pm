@@ -40,11 +40,11 @@ sub index {
                                   => "asc",
                                  unit => "km"
                          } }
-             ) : () }
+             ) : ( sort => ['continent', 'country'] ) }
       )->(
         sub {
             my ($data) = shift->recv;
-            my $latest = [ map { { %{$_->{_source}}, distance => $_->{sort}->[0] } } @{ $data->{hits}->{hits} } ];
+            my $latest = [ map { { %{$_->{_source}}, distance => $location ? $_->{sort}->[0] : undef } } @{ $data->{hits}->{hits} } ];
             $cv->send(
                        { mirrors => $latest,
                          took    => $data->{took},

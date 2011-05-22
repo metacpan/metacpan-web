@@ -6,6 +6,7 @@ use mro;
 use DateTime::Tiny;
 use Digest::MD5 qw(md5_hex);
 use URI;
+use JSON;
 
 Template::Alloy->define_vmethod( 'text',
                             dt => sub { my $date = shift;
@@ -21,6 +22,12 @@ Template::Alloy->define_vmethod( 'text',
                                decode_punycode => sub {
                                     URI->new(shift)->ihost
                                    } );
+
+Template::Alloy->define_vmethod( 'array',
+                               json => sub {
+                                    JSON::encode_json(shift);
+                                   } );
+
 
 sub new {
     my $class = shift;

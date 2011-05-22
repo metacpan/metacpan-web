@@ -1,6 +1,6 @@
 
 <%- query = req.parameters.q %>
-
+<script src="http://openlayers.org/api/OpenLayers.js"></script>
 <div class="search-bar" style="position: static">
   <strong>Sorting</strong>
   <ul>
@@ -8,40 +8,89 @@
     <a href="javascript:searchForNearest()"><li>Nearest</li></a>
   </ul>
   <hr>
+  <strong>Protocols</strong>
+    <div>
+      <ul>
+      <li><a href="javascript:disableTag('http')">http</a></li>
+      <li><a href="javascript:disableTag('ftp')">ftp</a></li>
+      <li><a href="javascript:disableTag('rsync')">rsync</a></li>
+    </ul>
+    </div>
+    <hr>
   <strong>Continents</strong>
   <%- continents = []; FOREACH mirror IN mirrors; continents.push(mirror.continent); END %>
   <ul>
   <% FOREACH continent IN continents.unique.sort %>
-  <li><a href="/mirrors?continent=<% continent %>"><% continent %></a></li>
+  <li><a href="#<% continent %>"><% continent %></a></li>
   <% END %>
   </ul>
-  <hr>
-  <strong>Countries</strong>
-  <%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
-  <ul>
-  <% FOREACH country IN countries.unique.sort %>
-  <li><a href="/mirrors?country=<% country %>"><% country %></a></li>
-  <% END %>
-  </ul>
+</div>
 
+<div class="box-right">
+<strong>Countries</strong><br>
+<%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
+<ul>
+<% FOREACH country IN countries.unique.sort %>
+<li><a href="#<% country %>"><% country %></a></li>
+<% END %>
+</ul>
 </div>
 
 <div class="search-results">
-
-
-<% 
-FOREACH mirror IN mirrors;
-date = mirror.inceptdate.dt;
-day = date.day _ '/' _ date.month _ '/' _ date.year %>
-
+<div id="map" style="width: 600px; height: 200px"></div>
+<br>
 <div>
-  <strong>
-    <% mirror.name %> (<% mirror.org %>)</strong> 
-    <% IF mirror.http %><a href="<% mirror.http %>">http</a><% END %>
-    <% IF mirror.ftp %><a href="<% mirror.ftp %>">ftp</a><% END %>
-    <% IF mirror.rsync %><a href="<% mirror.rsync %>">rsync</a><% END %>
-    <% IF mirror.distance %>(<% mirror.distance | format_number %> km)<% END %>
-</div>
+<% 
+dots = [];
+FOREACH mirror IN mirrors;
+dots.push(mirror.location);
+date = mirror.inceptdate.dt;
+day = date.day _ '/' _ date.month _ '/' _ date.year;
+IF continent != mirror.continent; continent = mirror.continent %>
+<% IF !loop.first %><br><% END %>
+<div><big><strong><a name="<% continent %>"><% continent %></a></strong></big></div>
+<%
+END;
+IF country != mirror.country; country = mirror.country %>
+<br>
+<div style="padding-left: 20px"><strong><a name="<% country %>"><% country %></a></strong></div>
 <% END %>
 
+<div style="padding-left: 40px">
+  <% IF mirror.http %><a href="<% mirror.http %>" title="<% mirror.http %>"><code>http</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
+  <% IF mirror.ftp %><a href="<% mirror.ftp %>" title="<% mirror.ftp %>"><code>ftp</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
+  <% IF mirror.rsync %><a href="<% mirror.rsync %>" title="<% mirror.rsync %>"><code>rsync</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
+  <span title="<% mirror.org %>" style="padding-left: 5px"><% mirror.name %></span>
+  <% IF mirror.distance %>(<% mirror.distance | format_number %> km)<% END %>
 </div>
+<% END %>
+</div>
+<script type="text/javascript">
+(function(){
+  $('#map').width($('.search-results').width()-175);
+  map = new OpenLayers.Map( 'map' );
+  map.addLayer(new OpenLayers.Layer.OSM());
+  var dots = <% dots.json %>;
+  var styleMap = new OpenLayers.StyleMap(OpenLayers.Util.applyDefaults(
+          {fillColor: "#BAD3EA", fillOpacity: 1, strokeColor: "#36C", pointRadius: 4},
+          OpenLayers.Feature.Vector.style["default"]));
+  var markers = new OpenLayers.Layer.Vector("name", {styleMap: styleMap});
+  map.addLayer(markers);
+  
+  for(var i = 0; i < dots.length; i++) {
+    var lonLat = new OpenLayers.LonLat( dots[i][0], dots[i][1] )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+
+    markers.addFeatures([
+      new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))]);
+  }
+  map.setCenter (new OpenLayers.LonLat( 14,35 ).transform(
+    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+    map.getProjectionObject() // to Spherical Mercator Projection
+  ), 2);
+
+})();
+    </script>
