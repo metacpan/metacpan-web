@@ -47,14 +47,19 @@
 		var keywords =  
 			'bless caller continue dbmclose dbmopen die do dump else elsif eval exit ' +
 			'for foreach goto if import last local my next no our package redo ref ' + 
-			'require return sub tie tied unless untie until use wantarray while';
+			'require return sub tie tied unless untie until use wantarray while ' +
+			// Try::Tiny
+			'try catch finally ' + 
+			// Moose
+			'has extends with before after around override augment';
     
 		this.regexList = [
 			{ regex: new RegExp('#[^!].*$', 'gm'),					css: 'comments' },
 			{ regex: new RegExp('^\\s*#!.*$', 'gm'),				css: 'preprocessor' }, // shebang
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,	css: 'string' },
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,	css: 'string' },
-			{ regex: new RegExp('(\\$|@|%)\\w+', 'g'),				css: 'variable' },
+			{ regex: new RegExp('\\$|@|%|\\$#)\\w+', 'g'),				css: 'variable' },
+			{ regex: new RegExp('__END__(.|\\n|\\r)*', 'gi'), css: 'comments' },
 			{ regex: new RegExp(this.getKeywords(funcs), 'gm'),	css: 'functions' },
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),	css: 'keyword' }
 		    ];
