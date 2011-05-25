@@ -27,7 +27,9 @@
 
 <script type="text/javascript">
 
-document.getElementById('source').style.visibility = 'hidden';
-SyntaxHighlighter.all();
+//document.getElementById('source').style.visibility = 'hidden';
+//SyntaxHighlighter.all();
+$(document).ready(function() {
 togglePod(<% module.pod_lines.json %>);
+});
 </script>
