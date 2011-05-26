@@ -1,4 +1,5 @@
 package MetaCPAN::Web;
+# ABSTRACT: Modern front-end for MetaCPAN
 use strict;
 use warnings;
 use FindBin;
