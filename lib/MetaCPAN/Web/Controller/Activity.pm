@@ -26,7 +26,7 @@ sub index {
     
     my $cv = AE::cv;
     my $start = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
-    my $activity = $self->model->get('/release/_search',
+    my $activity = $self->model->request('/release/_search',
     {
         query => { match_all => {} },
         facets => { histo => { date_histogram => { field => 'date', interval => $res },

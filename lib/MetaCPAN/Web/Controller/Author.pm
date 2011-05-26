@@ -10,8 +10,8 @@ sub index {
 
     my $out;
 
-    my $author = $self->model->get( '/author/'. $id);
-    my $releases = $self->model->get( '/release/_search', {
+    my $author = $self->model('Author')->get( $id );
+    my $releases = $self->model->request( '/release/_search', {
         query => { match_all => { } },
         filter => { term => { author => $id } },
         sort => ['distribution', {
@@ -19,7 +19,7 @@ sub index {
                 reverse => \1
             }
         }],
-        size => 100,
+        size => 200,
     });
     
     ($author & $releases)->(sub {

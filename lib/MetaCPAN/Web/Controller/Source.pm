@@ -10,8 +10,7 @@ sub index {
     my ( undef, undef, @module ) = split( /\//, $req->path );
     
     my $out;
-    my $module = join('/', @module);
-    my $cond = $self->get_source($module) & $self->get_module($module);
+    my $cond = $self->model('Module')->source(@module) & $self->model('Module')->get(@module);
     $cond->(sub {
         my ($source, $module) = shift->recv;
         $cv->send({
@@ -19,12 +18,6 @@ sub index {
         });
     });
     return $cv;
-}
-
-
-sub get_source {
-    my ($self, $module) = @_;
-    $self->model->get( '/source/' . $module );
 }
 
 1;

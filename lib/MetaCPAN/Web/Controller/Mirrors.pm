@@ -24,7 +24,7 @@ sub index {
         for(@protocols);
 
     my $cv = AE::cv;
-    $self->model->get(
+    $self->model->request(
         '/mirror/_search',
         {  size   => 999,
            query  => { match_all => {} },

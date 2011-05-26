@@ -14,9 +14,9 @@ sub index {
     my $cond;
     if(@module == 1) {
         my $module = shift @module;
-        $cond = $self->find_module($module);
+        $cond = $self->model('Module')->find($module);
     } elsif(@module > 2) {
-        $cond = $self->get_module(join('/', @module));
+        $cond = $self->model('Module')->get(@module);
     } else {
         $cv->send({});
         return;
@@ -28,9 +28,9 @@ sub index {
             my ($data) = $cv->recv;
             $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
             return $self->not_found($req) unless($out);
-            my $pod = $self->model->get('/pod/' . join('/', @$out{qw(author release path)}));
-            my $release = $self->get_release($out->{author}, $out->{release});
-            my $author = $self->get_author($out->{author});
+            my $pod = $self->model->request('/pod/' . join('/', @$out{qw(author release path)}));
+            my $release = $self->model('Release')->get($out->{author}, $out->{release});
+            my $author = $self->model('Author')->get($out->{author});
             return ($pod & $author & $release);
         } );
 
@@ -48,28 +48,6 @@ sub index {
                          release => $release->{hits}->{hits}->[0]->{_source} } );
         } );
     return $cv;
-}
-
-sub find_module {
-    my ($self, $module) = @_;
-    $self->model->get( '/file/_search',
-                             { size   => 1,
-                               query  => { match_all => {} },
-                               filter => {
-                                     and => [
-                                         { term =>
-                                             { 'documentation' => $module }
-                                         },
-                                         { term => { 'file.indexed' => \1, } },
-                                         { term => { status => 'latest', } } ]
-                               },
-                               sort => [ { 'date' => { order => "desc" } } ] }
-      );
-}
-
-sub get_module {
-    my ($self, $module) = @_;
-    $self->model->get( '/file/' . $module );
 }
 
 1;

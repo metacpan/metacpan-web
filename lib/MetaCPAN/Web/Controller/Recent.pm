@@ -6,11 +6,7 @@ use base 'MetaCPAN::Web::Controller';
 sub index {
     my ($self, $req) = @_;
     my $cv = AE::cv;
-    $self->model->get('/release/_search', {
-        size => 100,
-        query => { match_all => {} },
-        sort => [{ 'date' => { order => "desc" } }]
-    })->(sub {
+    $self->model('Release')->recent->(sub {
         my ($data) = shift->recv;
         my $latest = [map { $_->{_source} } @{$data->{hits}->{hits}}];
         $cv->send({ recent => $latest, took =>$data->{took}, total => $data->{hits}->{total} });

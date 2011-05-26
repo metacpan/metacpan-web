@@ -92,7 +92,7 @@ sub new {
     return bless {@_}, $class;
 }
 
-sub get {
+sub request {
     my ($self, $path, $search) = @_;
     my $req  = MyCondVar->new;
     http_request $search ? 'post' : 'get' => $self->{url} . $path,
