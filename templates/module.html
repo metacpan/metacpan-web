@@ -5,10 +5,7 @@
   <a href="/release/<% module.author %>/<% module.release %>"><% module.release %></a>
   &nbsp;/&nbsp;
   <% module.documentation %>
-  </big></strong><br><br>
-
-<% INCLUDE inc/author-pic.html author = author %>
-<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
+  </big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
 <div class="search-bar">
   <strong></strong>
@@ -23,8 +20,8 @@
       <li><a href="http://api.beta.metacpan.org/source/<% module.author %>/<% module.release %>/">Browse</a></li>
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
-      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs (0)</a></li>
-      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results (0 / 0 / 0)</a></li>
+      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
+      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results</a></li>
       <% IF others.size > 1 %>
       <select name="release" onchange="document.location.href='/release/' + this.value">
       <option>Go to version</option>
@@ -38,7 +35,7 @@
   <hr>
   <strong>Tools</strong>
   <ul>
-    <% IF others.size > 1 %>
+    <!--<% IF others.size > 1 %>
     <li>
       <select name="release" onchange="document.location.href='/release/' + this.value">
       <option>Diff with version</option>
@@ -46,10 +43,10 @@
       <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
       <% END %>
     </select></li>
-    <% END %>
-    <li>Search release:<br>
+    <% END %>-->
+    <li>Search distribution:<br>
       <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
+      <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
   </ul>
@@ -62,6 +59,9 @@
     <li><a href="/module/<% module.documentation %>">Latest version</a></li>
   </ul>
 </div>
+
+<% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 
 <div class="pod">
 <% pod.replace(/<pre>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false">').replace(/href="(.*?)" class="moduleLink"/, 'href="/module/$1"') | none %>

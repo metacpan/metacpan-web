@@ -1,9 +1,6 @@
 <% title = release.name %>
 <strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
-<% INCLUDE inc/author-pic.html author = author %>
-<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
-
 <div class="search-bar">
   <div>
     <ul>
@@ -12,8 +9,8 @@
       <li><a href="http://api.beta.metacpan.org/source/<% release.author %>/<% release.name %>/">Browse</a></li>
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
-      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs (0)</a></li>
-      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results (0 / 0 / 0)</a></li>
+      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
+      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results</a></li>
       <% IF others.size > 1 %>
       <select name="release" onchange="document.location.href='/release/' + this.value">
       <option>Go to version</option>
@@ -26,7 +23,7 @@
   </div>
   <hr>
   <strong>Tools</strong>
-  <ul>
+  <ul><!--
     <% IF others.size > 1 %>
     <li>
       <select name="release" onchange="document.location.href='/release/' + this.value">
@@ -35,10 +32,10 @@
       <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
       <% END %>
     </select></li>
-    <% END %>
-    <li>Search release:<br>
+    <% END %>-->
+    <li>Search distribution:<br>
       <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
+      <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
   </ul>
@@ -51,6 +48,9 @@
     <li><a href="/release/<% release.distribution %>">Latest version</a></li>
   </ul>
 </div>
+
+<% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 
 <div class="content">
 
