@@ -1,5 +1,7 @@
 <div style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 20px<% END %>">
-  <a href="/author/<% author.pauseid %>"><img src="<% author.gravatar_url %>?s=130&d=identicon" width="130" height="130" class="author-img"></a><br>
+  <div class="author-img">
+    <a href="/author/<% author.pauseid %>"><img src="<% author.gravatar_url %>?s=130&d=identicon" width="130" height="130"></a>
+  </div><br>
   <strong><a href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
   <% author.name %>
 </div>

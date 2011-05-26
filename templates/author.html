@@ -2,13 +2,86 @@
 <div class="search-bar">
   <% INCLUDE inc/author-pic.html author = author float = 'left' %>
   <div style="clear: both; text-align: center"></div>
-  <a href="mailto:<% author.email %>"><% author.email %></a>
-  <% IF author.website %><br><a href="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><% END %>
   <hr>
-  
+  <strong>Email</strong><br>
+  <a href="mailto:<% author.email.0 %>"><% author.email.0 %></a>
+  <% IF author.website.size %><br>
+  <strong>Website</strong><br>
+  <a href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
+  <%
+profiles = {
+  delicious = 'http://www.delicious.com/%s',
+  digg = 'http://digg.com/%s',
+  facebook = 'https://facebook.com/%s',
+  flickr = 'http://www.flickr.com/people/%s/',
+  friendfeed = 'http://friendfeed.com/%s',
+  lastfm = 'http://www.lastfm.de/user/%s',
+  linkedin = 'http://www.linkedin.com/profile/view?id=%s',
+  myspace = 'http://www.myspace.com/%s',
+  posterous = 'http://%s.posterous.com/',
+  reddit = 'http://www.reddit.com/user/%s',
+  stumbleupon = 'http://www.stumbleupon.com/stumbler/%s/',
+  tumblr = 'http://%s.tumblr.com/',
+  twitter = 'http://twitter.com/%s',
+  vimeo = 'http://vimeo.com/%s',
+  youtube = 'http://www.youtube.com/user/%s',
+  github = 'https://github.com/%s',
+  stackoverflow = 'http://stackoverflow.com/users/%s/',
+  perlmonks = 'http://www.perlmonks.org/?node=%s' };
+IF author.profile.size -%>
+<strong>Profiles</strong><br>
+<%-
+FOREACH profile IN author.profile;
+IF profiles.${profile.name} %>
+<a href="<% profiles.${profile.name}.replace('%s', profile.id) %>" target="_blank">
+  <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16>
+</a>
+<% END; END %><br><% END %>
+<% IF author.country %>
+<strong>Location</strong><br>
+<img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" width=16 height=11> &nbsp;
+<%- IF [author.city, author.region].join(', ') %><br>
+<% END %>
+<% IF author.blog.size %>
+<strong>Blog</strong><br>
+<% FOREACH blog IN author.blog -%>
+<% IF blog.feed %><a href="<% blog.feed %>" target="_blank"><img src="/static/images/profile/feed.png" width=16 height=16 style="float: right"></a><% END %>
+<a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px"><% blog.url.replace('^https?://', '') %></a>
+<% END; END %>
+<% IF author.donation.size; FOREACH donate IN author.donation; IF donate.name == 'paypal' %>
+<br>
+<center><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="<% donate.id %>">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="MetaCPAN">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form></center>
+<% END; END; END %>
+  <hr>
   <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
   <hr>
-  <strong><% total %> release<% IF total != 1 %>s<% END %></strong>
+  <strong>Tools</strong>
+  <ul><!--
+    <% IF others.size > 1 %>
+    <li>
+      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <option>Diff with version</option>
+      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
+      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+      <% END %>
+    </select></li>
+    <% END %>-->
+    <li>Search distributions:<br>
+      <form action="/search">
+      <input type="hidden" name="q" value="author:<% author.pauseid %>">
+      <input type="text" name="q">
+      <input type="submit" style="display: none"></form></li>
+  </ul>
   
 </div>
 

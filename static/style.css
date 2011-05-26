@@ -193,7 +193,6 @@ input.g-button:active, button.g-button:active {
 .search-bar {
     width: 165px;
     float: left;
-    position: fixed;
 }
 
 .search-bar .search-type {
@@ -349,9 +348,13 @@ input.g-button:active, button.g-button:active {
 }
 
 .author-img {
+    overflow:hidden;
+    width: 130px;
+    height: 130px;
     border-radius: 8px;
     margin-bottom: 5px;
     -webkit-box-shadow: 2px 2px 5px #999;
+    text-align: left;
 }
 
 #content {
@@ -376,10 +379,11 @@ ul {
     
 }
 
-.box-right a.ellipsis {
+a.ellipsis {
     width: 160px;
     white-space: nowrap;
     display: block;
+    overflow: hidden;
 }
 
 code { font-family: monospace; }
