@@ -2,7 +2,7 @@ package MetaCPAN::Web;
 use strict;
 use warnings;
 use FindBin;
-use lib "$FindBin::RealBin/lib";
+use lib "$FindBin::RealBin/../";
 use Plack::App::URLMap;
 use Plack::App::File;
 use MetaCPAN::Web::View;
