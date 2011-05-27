@@ -24,3 +24,5 @@ foreach my $c (@controllers) {
 $app = Plack::Middleware::Runtime->wrap($app);
 
 Plack::Middleware::ReverseProxy->wrap($app);
+
+# ABSTRACT: A Front End for MetaCPAN 
