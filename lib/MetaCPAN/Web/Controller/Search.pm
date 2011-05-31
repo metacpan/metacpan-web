@@ -9,50 +9,50 @@ sub index {
     my $cv = AE::cv;
     my $query = $req->parameters->{q} || $req->parameters->{lucky};
     $query =~ s/::/ /g;
-    $self->model->request('/file/_search', {
-        size => $req->parameters->{lucky} ? 1 : 50,
+    $self->model->request(
+      '/file/_search',
+      { size => $req->parameters->{lucky} ? 1 : 20,
         query => {
-            query_string=> {
-                fields=> ['documentation.analyzed^99', 'documentation.camelcase^99', 'abstract.analyzed^5', 'pod.analyzed'],
-                query=> $query,
-                allow_leading_wildcard=> \0,
-                default_operator => 'AND'
-            }
+          custom_score => {
+            query => {
+              query_string => {
+                fields => [
+                  'documentation.analyzed^99', 'documentation.camelcase^99',
+                  'abstract.analyzed^5',       'pod.analyzed'
+                ],
+                query                  => $query,
+                allow_leading_wildcard => \0,
+                default_operator       => 'AND'
+              }
+            },
+            # prefer shorter module names slightly
+            script => "_score - doc['documentation'].stringValue.length()/10000"
+          }
         },
         filter => {
-            and => [ { term => { status => 'latest' } },
-                     {
-                        or => [
-                               {
-                                   and => [
-                                            { exists =>
-                                                { field => 'file.module.name' }
-                                            },
-                                            { term =>
-                                                { 'file.module.indexed' => \1 }
-                                            } ]
-                               },
-                               {
-                                   and => [
-                                       {  exists => { field => 'documentation' }
-                                       },
-                                       { term => { 'file.indexed' => \1 } } ] }
-                        ] } ]
-          },
-
-        highlight => {
-                fields => {
-                    'pod.analyzed' => {
-                        "number_of_fragments"=> 5,
-                    }
+          and => [
+            { term => { status => 'latest' } },
+            {
+              or => [
+                {
+                  and => [
+                    { exists => { field => 'file.module.name' } },
+                    { term => { 'file.module.indexed' => \1 } } ]
                 },
-                order=> 'score',
-                pre_tags => ["[% b %]"],
-                post_tags => ["[% /b %]"],
+                {
+                  and => [
+                    { exists => { field          => 'documentation' } },
+                    { term   => { 'file.indexed' => \1 } } ] } ] } ]
         },
-    })->(sub {
+        fields    => [qw(documentation author abstract.analyzed release)],
+        highlight => {
+          fields    => { 'pod.analyzed' => { "number_of_fragments" => 3, } },
+          order     => 'score',
+          pre_tags  => ["[% b %]"],
+          post_tags => ["[% /b %]"],
+      } } )->(sub {
         my $data = shift->recv;
-        my $latest = [map { { %{$_->{_source}}, preview => $_->{highlight}->{'pod.analyzed'}} } @{$data->{hits}->{hits}}];
+        my $latest = [map { { %{$_->{fields}}, abstract => $_->{fields}->{'abstract.analyzed'}, score => $_->{_score}, preview => $_->{highlight}->{'pod.analyzed'}} } @{$data->{hits}->{hits}}];
         if($req->parameters->{lucky} && $data->{hits}->{total}) {
             my $res = Plack::Response->new;
             $res->redirect('/module/' . $latest->[0]->{documentation});
