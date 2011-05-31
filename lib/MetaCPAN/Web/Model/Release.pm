@@ -11,7 +11,7 @@ sub get {
       filter => {
         and => [
           { term => { 'name' => $release } },
-          { term => { author => $author } } ] } } );
+          { term => { author => uc($author) } } ] } } );
 }
 
 sub recent {

@@ -13,7 +13,7 @@ sub index {
     my $author = $self->model('Author')->get( $id );
     my $releases = $self->model->request( '/release/_search', {
         query => { match_all => { } },
-        filter => { term => { author => $id } },
+        filter => { term => { author => uc($id) } },
         sort => ['distribution', {
             'version_numified' => {
                 reverse => \1

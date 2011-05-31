@@ -5,7 +5,7 @@ use base 'MetaCPAN::Web::Model';
 
 sub get {
   my ( $self, $author ) = @_;
-  $self->request("/author/$author");
+  $self->request("/author/" . uc($author));
 
 }
 
