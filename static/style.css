@@ -387,3 +387,7 @@ a.ellipsis {
 }
 
 code { font-family: monospace; }
+
+.olControlAttribution {
+    bottom: 0em !important;
+}
