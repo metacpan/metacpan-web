@@ -60,6 +60,7 @@
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,	css: 'string' },
 			{ regex: new RegExp('(\\$|@|%|\\$#)\\w+', 'g'),				css: 'variable' },
 			{ regex: new RegExp('__END__(.|\\n|\\r)*', 'gi'), css: 'comments' },
+			{ regex: new RegExp('^=\\w+(.|\\n|\\r)*?^=cut\\s*$', 'msg'), css: 'comments' },
 			{ regex: new RegExp(this.getKeywords(funcs), 'gm'),	css: 'functions' },
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),	css: 'keyword' }
 		    ];
