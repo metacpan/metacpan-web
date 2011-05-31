@@ -35,6 +35,7 @@
   <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
   <br>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  <!-- <% item.score %> -->
 <br><br>
 <% END %>
 </div>
