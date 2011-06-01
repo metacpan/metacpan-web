@@ -40,7 +40,7 @@ IF profiles.${profile.name} %>
 <% IF author.country %>
 <strong>Location</strong><br>
 <img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" width=16 height=11> &nbsp;
-<%- IF [author.city, author.region].join(', ') %><br>
+<%- [author.city, author.region].join(', ') %><br>
 <% END %>
 <% IF author.blog.size %>
 <strong>Blog</strong><br>
@@ -92,4 +92,5 @@ IF profiles.${profile.name} %>
 <div>
   <strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>"><% release.name %></a></strong><% IF release.abstract %> - <% release.abstract %><% END %>
 <% END %>
+</div>
 </div>
