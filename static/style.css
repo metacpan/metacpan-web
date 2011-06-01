@@ -322,9 +322,7 @@ input.g-button:active, button.g-button:active {
     list-style-type: none;
 }
 
-#index {
-    display: none;
-}
+ul#index, #index ul { list-style-type: none; }
 
 .syntaxhighlighter {
     border-top: 10px solid #f9f9f9;

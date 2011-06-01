@@ -27,6 +27,15 @@ function togglePod(lines) {
     }
 }
 
+function toggleTOC() {
+    var index = $('#index');
+    if(!index) return false;
+    var visible = index.is(':visible');
+    visible ? index.hide() : index.show();
+    visible ? $.cookie("hideTOC", 1, { expires: 999, path: '/' }) : $.cookie("hideTOC", 0, { expires: 999, path: '/' });
+    return false;
+}
+
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.highlight();
