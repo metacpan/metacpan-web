@@ -44,7 +44,7 @@ sub index {
                     { exists => { field          => 'documentation' } },
                     { term   => { 'file.indexed' => \1 } } ] } ] } ]
         },
-        fields    => [qw(documentation author abstract.analyzed release path status distribution)],
+        fields    => [qw(documentation author abstract.analyzed release path status distribution date)],
         highlight => {
           fields    => { 'pod.analyzed' => { "number_of_fragments" => 3, } },
           order     => 'score',
