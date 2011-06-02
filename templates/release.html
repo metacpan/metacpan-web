@@ -4,7 +4,7 @@
 <div class="search-bar">
   <div>
     <ul>
-      <li><strong><% dt = release.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
+      <li><strong class="relatize"><% release.date.dt_http %></strong></li>
       <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li><a href="http://api.beta.metacpan.org/source/<% release.author %>/<% release.name %>/">Browse</a></li>
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>

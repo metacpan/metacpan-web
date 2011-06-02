@@ -11,7 +11,7 @@
   <strong></strong>
   <div>
     <ul>
-      <li><strong><% dt = module.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/"); ' '; dt.hour.format("%02d"); ':'; dt.minute.format("%02d") %></strong></li>
+      <li><strong class="relatize"><% module.date.dt_http %></strong></li>
       <li>Module version: <% module.module.0.version %></li>
       <li>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>

@@ -40,6 +40,8 @@ $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.highlight();
 
+    $('.relatize').relatizeDate();
+
     $('#search-input').keydown(function(event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();

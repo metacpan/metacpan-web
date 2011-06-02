@@ -3,16 +3,30 @@ use strict;
 use warnings;
 use base 'Template::Alloy';
 use mro;
-use DateTime::Tiny;
+use DateTime;
 use Digest::MD5 qw(md5_hex);
+use DateTime::Format::HTTP;
+use DateTime::Format::ISO8601;
 use URI;
 use JSON;
 
-Template::Alloy->define_vmethod( 'text',
-                            dt => sub { my $date = shift;
-                                $date =~ s/\..*?$//;
-                                return unless($date);
-                                DateTime::Tiny->from_string($date); }, );
+sub parse_datetime {
+    my $date = shift;
+    $date =~ s/\..*?$//;
+    return unless ($date);
+    DateTime::Format::ISO8601->parse_datetime($date);
+}
+
+sub format_datetime {
+    my $date = shift;
+    my $dt   = parse_datetime($date);
+    return unless $dt;
+    DateTime::Format::HTTP->format_datetime($dt);
+}
+
+Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
+
+Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
 Template::Alloy->define_vmethod( 'text',
                                to_color => sub { my $md5 = md5_hex(md5_hex(shift)); my $color = substr($md5, 0, 6);
