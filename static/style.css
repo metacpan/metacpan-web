@@ -399,3 +399,7 @@ code { font-family: monospace; }
 .pager a, .pager strong {
     padding-left: 6px;
 }
+
+.search-bar input[type="text"], .search-bar select  {
+    width: 160px;
+}
