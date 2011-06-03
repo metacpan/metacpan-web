@@ -75,23 +75,23 @@ FOREACH file IN files;
   END;
 END;
 %>
-<strong>Modules</strong>
+<% IF modules.size %><strong>Modules</strong>
 <% FOREACH module IN modules %>
   <div>
     <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
-<br>
-<strong>Documentation</strong>
+<br><% END %>
+<% IF documentation.size %><strong>Documentation</strong>
 <% FOREACH module IN documentation %>
   <div>
     <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
-<br>
-<strong>Provides</strong>
+<br><% END %>
+<% IF provides.size %><strong>Provides</strong>
 <% FOREACH module IN provides %>
   <div>
     <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path %>"><% module.title %></a></strong>
@@ -99,10 +99,10 @@ END;
   </div>
 <% END %>
 
-<br>
-<strong>Other files</strong>
+<br><% END %>
+<% IF root.size %><strong>Other files</strong>
 <% FOREACH file IN root %>
 <div><strong><a href="/source/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
-<% END %>
+<% END; END %>
 
 </div>
