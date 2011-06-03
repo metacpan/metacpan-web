@@ -85,12 +85,16 @@ IF profiles.${profile.name} %>
   
 </div>
 
+<% 
+i = 0;
+counter = 1;
+aggregated = [];
+FOREACH release IN releases;
+IF last == release.distribution; counter = counter + 1; NEXT;
+ELSE; last = release.distribution; counter = 1; END;
+UNLESS release.name; NEXT; END;
+aggregated.push(release);
+END %>
 <div class="content">
-<div>
-<% counter = 1; releases.push({}); FOREACH release IN releases; IF last == release.distribution; counter = counter + 1; NEXT; ELSE; UNLESS counter == 1; %>(<% counter %> releases)<% END; last = release.distribution; counter = 1; END; UNLESS release.name; NEXT; END %>
-</div>
-<div>
-  <strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>"><% release.name %></a></strong><% IF release.abstract %> - <% release.abstract %><% END %>
-<% END %>
-</div>
+<% INCLUDE inc/release-table.html releases = aggregated %>
 </div>

@@ -10,18 +10,20 @@
 </div>
 
 <div class="content">
-<% 
+<%-
+releases = [];
 FOREACH release IN recent;
 date = release.date.dt;
-day = date.day _ '/' _ date.month _ '/' _ date.year %>
-<% IF day != last %>
-<% IF !loop.first %><br><% END %><big><strong><% day; last = day %></strong></big>
+day = date.strftime("%B %d, %Y");
+IF day != last;
+INCLUDE inc/release-table.html releases = releases;
+releases = [];
+IF !loop.first %><br><% END %><big><strong class="recent-date"><% day; last = day %></strong></big>
+<%
+END;
+releases.push(release);
+-%>
 <% END %>
-<div>
-  <strong>
-    <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>"><% release.name %></a>
-  </strong><% IF release.abstract %> - <% release.abstract %><% END %> (<a href="/author/<% release.author %>"><% release.author %></a>)
-</div>
-<% END %>
+<% INCLUDE inc/release-table.html releases = releases %>
 <% INCLUDE inc/pager.html size = 100 %>
 </div>

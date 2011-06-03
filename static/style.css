@@ -282,7 +282,7 @@ input.g-button:active, button.g-button:active {
 }
 
 
-.pod h1, .pod h2, .pod h3, .pod h4 {
+.pod h1, .pod h2, .pod h3, .pod h4, .recent-date {
     background: transparent;
     color: #36c;
     font-weight: bold;
@@ -292,6 +292,11 @@ input.g-button:active, button.g-button:active {
     font-size: 1.5em;
 }
 
+.recent-date {
+    display: block;
+    text-align: right;
+    font-size: 1.1em;
+}
 
 .pod h2 {
     font-size: 1.3em;
@@ -379,6 +384,9 @@ ul {
 
 a.ellipsis {
     width: 160px;
+}
+
+.ellipsis {
     white-space: nowrap;
     display: block;
     overflow: hidden;
@@ -400,6 +408,39 @@ code { font-family: monospace; }
     padding-left: 6px;
 }
 
+.pager a strong {
+    padding-left: 0px;
+}
+
 .search-bar input[type="text"], .search-bar select  {
     width: 160px;
+}
+
+.release-table {
+    table-layout:fixed;
+    width: 100%;
+}
+
+.release-table td {
+    padding: 2px;
+}
+
+.release-table .name {
+    width: 266px;
+}
+
+.release-table .date {
+    text-align: right;
+    width: 90px;
+    font-size: 1em;
+}
+
+.release-table .abstract {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.release-table .odd {
+    background-color: #f9f9f9;
 }
