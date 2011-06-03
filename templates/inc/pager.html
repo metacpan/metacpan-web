@@ -1,0 +1,13 @@
+<div class="pager">
+<%- USE pager = Page(size, page); pager.total_entries(total) %>
+<%- IF pager.previous_page %>
+ <a href="?<% req.query_string_with( p = pager.previous_page ) %>"><strong>Previous</strong></a>&nbsp;&nbsp;&nbsp;
+<% END %>
+<% FOREACH p IN [page - 10 .. page + 10];
+IF p < 1; NEXT; END;
+IF p == page %><strong><% p %></strong><% ELSE %>
+<a href="?<% req.query_string_with( p = p ) %>"><% p %></a> <% END; END %>
+<% IF pager.next_page %>&nbsp;&nbsp;&nbsp;
+  <a href="?<% req.query_string_with( p = pager.next_page ) %>"><strong>Next</strong></a>
+<% END %>
+</div>

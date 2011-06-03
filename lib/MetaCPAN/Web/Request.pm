@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base 'Plack::Request';
 
+use URI::Query;
 use Encode;
 use URI::Escape;
 
@@ -34,6 +35,27 @@ sub body_parameters {
 sub _decode {
     my $enc = shift->headers->content_type_charset || 'UTF-8';
     map { decode $enc, $_, $CHECK } @_;
+}
+
+=head query_string_with
+
+ # QUERY_STRING is page=1&keyword=perl
+ $request->query_string_with( page => 2, pretty => 1 );
+ # return page=2&keyword=perl&pretty=1
+
+=cut
+
+sub query_string_with {
+    my $self = shift;
+    my $params = shift;
+    my $qq = URI::Query->new($self->parameters->flatten);
+    $qq->replace(%$params);
+    return $qq->stringify;
+}
+
+sub page {
+    my $page = shift->parameters->{p};
+    return $page && $page =~ /^\d+$/ ? $page : 1;
 }
 
 1;

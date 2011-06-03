@@ -23,4 +23,5 @@ day = date.day _ '/' _ date.month _ '/' _ date.year %>
   </strong><% IF release.abstract %> - <% release.abstract %><% END %> (<a href="/author/<% release.author %>"><% release.author %></a>)
 </div>
 <% END %>
+<% INCLUDE inc/pager.html size = 100 %>
 </div>

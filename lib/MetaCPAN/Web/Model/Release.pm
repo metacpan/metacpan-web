@@ -15,10 +15,11 @@ sub get {
 }
 
 sub recent {
-  my $self = shift;
+  my ( $self, $page ) = @_;
   $self->request(
     '/release/_search',
     { size  => 100,
+      from => ($page - 1) * 100,
       query => { match_all => {} },
       sort  => [ { 'date' => { order => "desc" } } ] } );
 }

@@ -389,3 +389,13 @@ code { font-family: monospace; }
 .olControlAttribution {
     bottom: 0em !important;
 }
+
+.pager {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.pager a, .pager strong {
+    padding-left: 6px;
+}

@@ -19,7 +19,7 @@ sub index {
                 reverse => \1
             }
         }],
-        size => 200,
+        size => 1000,
     });
     
     ($author & $releases)->(sub {

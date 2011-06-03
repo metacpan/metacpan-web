@@ -12,6 +12,7 @@ sub index {
     $self->model->request(
       '/file/_search',
       { size => $req->parameters->{lucky} ? 1 : 20,
+        from => ( $req->page - 1 ) * 20,
         query => {
           custom_score => {
             query => {
