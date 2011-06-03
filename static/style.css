@@ -83,7 +83,7 @@ body {
 font-family: Arial,Helvetica,sans-serif;
 margin: 0px;
 padding: 0px;
-font-size: 12px;
+font-size: 0.8em;
 }
 
 a {
@@ -109,7 +109,7 @@ background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(
 background: -moz-linear-gradient(rgb(255,255,255),rgb(245,245,245));
 }
 .header .spacer, .header a {
-    font-size: 13px;
+    font-size: 1em;
     border-top-color: #BAD3EA;
     border-top-width: 2px;
     border-top-style: solid;
@@ -160,7 +160,7 @@ cursor: pointer;
 display: inline-block;
 text-align: center;
 vertical-align: middle;
-font-size: 15px;
+font-size: 1.2em;
 text-shadow: 0px 1px 1px #fff;
 height: 30px;
 }
@@ -196,7 +196,7 @@ input.g-button:active, button.g-button:active {
 }
 
 .search-bar .search-type {
-    font-size: 15px
+    font-size: 1.1em
 }
 
 .search-bar .search-tag li {
@@ -289,20 +289,20 @@ input.g-button:active, button.g-button:active {
 }
 
 .pod h1 {
-    font-size: large;
+    font-size: 1.5em;
 }
 
 
 .pod h2 {
-    font-size: 16px;
+    font-size: 1.3em;
 }
 
 .pod h3, .pod h4 {
-    font-size: 14px;
+    font-size: 1.1em;
 }
 
 .pod p, .pod dt {
-    font-size: 14px;
+    font-size: 1.1em;
 }
 
 .pod dt {
@@ -365,7 +365,7 @@ ul {
 
 .comment {
     color: #999;
-    font-size: 11px;
+    font-size: 0.8em;
 }
 
 .box-right {

@@ -62,7 +62,7 @@
       <div class="ds">
         <input type="text" name="q" size="41" id="search-input" value="<% req.parameters.get_all('q').join(' ') | html %>"><input type="submit" value="Search" class="g-button" />
       </div>
-      <br><small><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% END %></small></div>
+      <br><small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% END %></small></div>
       
       <div style="float: left; width: 168px"></div>
       </div>
