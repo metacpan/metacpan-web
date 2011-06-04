@@ -184,6 +184,10 @@ input.g-button:active, button.g-button:active {
     clear: both;
 }
 
+.footer td {
+    padding: 10px;
+}
+
 .search-results, .pod, .content {
     margin-left: 175px;
     border-left: 1px solid #e9e9e9;
