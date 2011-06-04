@@ -47,7 +47,7 @@ sub index {
         },
         fields    => [qw(documentation author abstract.analyzed release path status distribution date)],
         highlight => {
-          fields    => { 'pod.analyzed' => { "number_of_fragments" => 3, } },
+          fields    => { 'pod.analyzed' => { "fragment_size" => 250, "number_of_fragments" => 2, } },
           order     => 'score',
           pre_tags  => ["[% b %]"],
           post_tags => ["[% /b %]"],
