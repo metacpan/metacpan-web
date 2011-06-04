@@ -27,7 +27,7 @@ sub index {
               }
             },
             # prefer shorter module names slightly
-            script => "_score - doc['documentation'].stringValue.length()/10000"
+            script => "_score - doc['documentation'].stringValue.length()/10000 + doc[\"date\"].date.getMillis() / 1000000000000"
           }
         },
         filter => {
