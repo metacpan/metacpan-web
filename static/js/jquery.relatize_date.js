@@ -80,7 +80,7 @@
       } else {
         var days = (parseInt(delta / 86400)).toString();
         if (days > 5) {
-          var fmt  = '%B %d, %Y'
+          var fmt  = '%b %d, %Y'
           if (includeTime) fmt += ' %I:%M %p'
           return $r.strftime(fromTime, fmt);
         } else {
