@@ -4,7 +4,7 @@ Start server on port 5000
 
  $ twiggy lib/MetaCPAN/Web.pm
 
-The backend defaults to C<api.beta.metacpan.org>. Running a local API server is optional and not required to hack on the front-end.
+The backend defaults to C<api.metacpan.org>. Running a local API server is optional and not required to hack on the front-end.
 
 For developing you should run the front-end as follows:
 

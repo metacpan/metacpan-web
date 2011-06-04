@@ -14,7 +14,7 @@ use Plack::Middleware::ReverseProxy;
 
 my @controllers = findallmod 'MetaCPAN::Web::Controller';
 
-my $api = 'http://' . ($ENV{METACPAN_API} || 'api.beta.metacpan.org');
+my $api = 'http://' . ($ENV{METACPAN_API} || 'api.metacpan.org');
 my %models =
   map { eval "require $_" or die $@; $_ => $_->new( url => $api ) }
   'MetaCPAN::Web::Model', findallmod 'MetaCPAN::Web::Model';
