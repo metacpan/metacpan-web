@@ -431,7 +431,7 @@ code { font-family: monospace; }
 
 .release-table .date {
     text-align: right;
-    width: 90px;
+    width: 100px;
     font-size: 1em;
 }
 
