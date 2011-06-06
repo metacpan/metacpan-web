@@ -9,6 +9,7 @@ use DateTime::Format::HTTP;
 use DateTime::Format::ISO8601;
 use URI;
 use JSON;
+use Gravatar::URL;
 
 sub parse_datetime {
     my $date = shift;
@@ -42,6 +43,21 @@ Template::Alloy->define_vmethod( 'array',
                                     JSON::encode_json(shift);
                                    } );
 
+Template::Alloy->define_vmethod( 'hash', gravatar_image =>
+    sub {
+        my ($author, $size, $default) = @_;
+        Gravatar::URL::gravatar_url(
+            email   => $author->{email},
+            size    => $size,
+            default => Gravatar::URL::gravatar_url(
+                # Fallback to the CPAN address, as used by s.c.o, which will in
+                # turn fallback to a generated image.
+                email   => $author->{pauseid} . '@cpan.org',
+                size    => $size,
+                default => $default,
+            )
+        );
+    } );
 
 sub new {
     my $class = shift;
