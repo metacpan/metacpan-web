@@ -21,7 +21,7 @@
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %><li><a href="<% release.resources.repository.web || release.resources.repository.url %>">Repository</a><% IF release.resources.repository.type %> (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %></a>)<% END %></li><% END %>
       <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
-      <li><a href="http://cpantesters.org" title="(pass / fail / na)">Test results</a></li>
+      <li><a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html#<% release.name %>" title="(pass / fail / na)">Test results</a></li>
       <% IF others.size > 1 %>
       <select name="release" onchange="document.location.href='/release/' + this.value">
       <option>Go to version</option>
