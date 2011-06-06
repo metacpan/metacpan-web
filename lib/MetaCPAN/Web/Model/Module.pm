@@ -8,13 +8,13 @@ sub find {
   $self->request(
     '/file/_search',
     { size   => 1,
-      query  => { match_all => {} },
+      query => { filtered => { query  => { match_all => {} },
       filter => {
         and => [
           { term => { 'documentation' => $module } },
           { term => { 'file.indexed'  => \1, } },
           { term => { status          => 'latest', } } ]
-      },
+      } } },
       sort => [ { 'date' => { order => "desc" } } ] } );
 }
 
