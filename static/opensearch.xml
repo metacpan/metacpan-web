@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- See http://www.opensearch.org/Specifications/OpenSearch/1.1 -->
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>MetaCPAN</ShortName>
+  <Description>Search CPAN with MetaCPAN</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+  <SyndicationRight>open</SyndicationRight>
+  <Url type="text/html" template="http://beta.metacpan.org/search?q={searchTerms}" />
+  <Tags>CPAN MetaCPAN Perl</Tags>
+</OpenSearchDescription>
