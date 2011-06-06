@@ -13,7 +13,7 @@ sub index {
       '/file/_search',
       { size => $req->parameters->{lucky} ? 1 : 20,
         from => ( $req->page - 1 ) * 20,
-        query => {
+        query => { filtered => { query => {
           custom_score => {
             query => {
               query_string => {
@@ -44,7 +44,7 @@ sub index {
                   and => [
                     { exists => { field          => 'documentation' } },
                     { term   => { 'file.indexed' => \1 } } ] } ] } ]
-        },
+        } } },
         fields    => [qw(documentation author abstract.analyzed release path status distribution date)],
         highlight => {
           fields    => { 'pod.analyzed' => { "fragment_size" => 250, "number_of_fragments" => 2, } },
