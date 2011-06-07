@@ -23,7 +23,9 @@
 .syntaxhighlighter table tbody,
 .syntaxhighlighter table thead,
 .syntaxhighlighter table caption,
-.syntaxhighlighter textarea {
+.syntaxhighlighter textarea,
+.pod code,
+.pod pre {
   -moz-border-radius: 0 0 0 0 !important;
   -webkit-border-radius: 0 0 0 0 !important;
   background: none !important;
