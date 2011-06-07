@@ -24,6 +24,10 @@ sub index {
     
     ($author & $releases)->(sub {
         my ($author, $releases) = shift->recv;
+        unless($author->{pauseid}) {
+            $cv->send($self->not_found($req));
+            return;
+        }
         $cv->send({
             author => $author,
             releases => [map { $_->{_source} } @{$releases->{hits}->{hits}}],
