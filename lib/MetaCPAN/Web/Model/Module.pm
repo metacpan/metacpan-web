@@ -25,7 +25,7 @@ sub get {
 
 sub source {
   my ( $self, @module ) = @_;
-  $self->request( '/source/' . join( '/', @module) );
+  $self->request( '/source/' . join( '/', @module), undef, { raw => 1 } );
 }
 
 1;
