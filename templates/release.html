@@ -92,7 +92,7 @@ END;
 
 <br><% END %>
 <% IF provides.size %><strong>Provides</strong>
-<% FOREACH module IN provides %>
+<% FOREACH module IN provides.sort('title') %>
   <div>
     <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path %>"><% module.title %></a></strong>
  
