@@ -99,9 +99,17 @@ sub request {
         body => $search ? encode_json($search) : '',
         persistent => 1,
         sub {
-            my $data = shift;
-            my $json = eval { decode_json($data) };
-            $req->send( $@ ? { raw => $data } : $json );
+            my ($data, $headers) = @_;
+            my $content_type = $headers->{'content-type'} || '';
+
+            if ($content_type eq 'application/json') {
+                my $json = eval { decode_json($data) };
+                $req->send( $@ ? { raw => $data } : $json );
+            }
+            else {
+                # Response is raw data, e.g. text/plain
+                $req->send( { raw => $data } );
+            }
     };
     return $req;
 }
