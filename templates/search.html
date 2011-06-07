@@ -31,12 +31,13 @@
 <% FOREACH item IN results %>
   <big><strong>
     <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><br>
-  <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
-  <br>
-  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a> - <span class="relatize"><% item.date.dt_http %></span> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  </strong></big>
+  <div class="search-results-preview-block"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></div>
+  <div class="search-results-links-block">
+    <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a> - <span class="relatize"><% item.date.dt_http %></span> - <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  </div>
   <!-- <% item.score %> -->
-<br><br>
+<br>
 <% END %>
 <% INCLUDE inc/pager.html size = 20 %>
 </div>
