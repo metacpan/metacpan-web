@@ -10,6 +10,7 @@ sub index {
     my @query = ($req->parameters->get_all('q'), $req->parameters->get_all('lucky'));
     my $query = join(' ', @query);
     $query =~ s/::/ /g if($query);
+    my ($data, $results);
     $self->model->request(
       '/file/_search',
       { size => $req->parameters->{lucky} ? 1 : 20,
@@ -53,15 +54,34 @@ sub index {
           pre_tags  => ["[% b %]"],
           post_tags => ["[% /b %]"],
       } } )->(sub {
-        my $data = shift->recv;
-        my $latest = [map { { %{$_->{fields}}, abstract => $_->{fields}->{'abstract.analyzed'}, score => $_->{_score}, preview => $_->{highlight}->{'pod.analyzed'}} } @{$data->{hits}->{hits}}];
+        $data = shift->recv;
+        $results = [
+            map {
+                {
+                    %{ $_->{fields} },
+                      abstract => $_->{fields}->{'abstract.analyzed'},
+                      score    => $_->{_score},
+                      preview  => $_->{highlight}->{'pod.analyzed'}
+                }
+              } @{ $data->{hits}->{hits} } ];
         if($req->parameters->{lucky} && $data->{hits}->{total}) {
             my $res = Plack::Response->new;
-            $res->redirect('/module/' . $latest->[0]->{documentation});
+            $res->redirect('/module/' . $results->[0]->{documentation});
             $cv->send($res);
+            return $cv;
         } else {
-            $cv->send({ results => $latest, total => $data->{hits}->{total}, took => $data->{took} });
+            return $self->model('Rating')->get(map { $_->{distribution} } @$results);
         }
+    })->(sub {
+        my ($ratings) = shift->recv;
+        $results = [
+            map {
+                { %$_, rating => $ratings->{ratings}->{ $_->{distribution} } }
+              } @$results ];
+        $cv->send(
+            {   results => $results,
+                total   => $data->{hits}->{total},
+                took    => $data->{took} + $ratings->{took} } );
     });
     return $cv;
 }

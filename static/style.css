@@ -452,3 +452,43 @@ code { font-family: monospace; }
 .release-table .odd {
     background-color: #f9f9f9;
 }
+
+.rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
+    width: 67px;
+    height: 12px;
+    display: inline-block;
+    background: url(/static/images/stars-sprite-white.png);
+    vertical-align: bottom;
+    margin-bottom: 4px;
+}
+
+.rating-05 {
+    background-position: 0px -19px;
+}
+.rating-10 {
+    background-position: 0px -38px;
+}
+.rating-15 {
+    background-position: 0px -57px;
+}
+.rating-20 {
+    background-position: 0px -76px;
+}
+.rating-25 {
+    background-position: 0px -95px;
+}
+.rating-30 {
+    background-position: 0px -114px;
+}
+.rating-35 {
+    background-position: 0px -133px;
+}
+.rating-40 {
+    background-position: 0px -152px;
+}
+.rating-45 {
+    background-position: 0px -171px;
+}
+.rating-50 {
+    background-position: 0px -190px;
+}

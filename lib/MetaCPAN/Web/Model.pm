@@ -94,7 +94,7 @@ sub new {
 
 sub request {
     my ($self, $path, $search, $params) = @_;
-    my $req  = MyCondVar->new;
+    my $req  = $self->cv;
     http_request $search ? 'post' : 'get' => $self->{url} . $path,
         body => $search ? encode_json($search) : '',
         persistent => 1,
@@ -112,6 +112,10 @@ sub request {
             }
     };
     return $req;
+}
+
+sub cv {
+    MyCondVar->new;
 }
 
 1; 

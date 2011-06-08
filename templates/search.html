@@ -34,7 +34,13 @@
   </strong></big><br>
   <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
   <br>
-  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a> - <span class="relatize"><% item.date.dt_http %></span> - <a href="/search?q=distribution:<% item.distribution %>+<% query %>">Search in distribution</a>
+  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
+  <%- IF item.rating.count > 0 %>
+    &nbsp;<div class="rating-<% (item.rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></div>
+    (<a href="http://cpanratings.perl.org/dist/<% item.distribution %>"><% item.rating.count %> review<% IF item.rating.count > 1; 's'; END %></a>)
+  <%- END %> -
+  <span class="relatize"><% item.date.dt_http %></span> -
+  <a href="/search?q=distribution:<% item.distribution %>+<% query %>">Search in distribution</a>
   <!-- <% item.score %> -->
 <br><br>
 <% END %>
