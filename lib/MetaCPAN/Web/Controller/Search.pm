@@ -7,7 +7,7 @@ use Plack::Response;
 sub index {
     my ($self, $req) = @_;
     my $cv = AE::cv;
-    my @query = $req->parameters->get_all('q'), $req->parameters->get_all('lucky');
+    my @query = ($req->parameters->get_all('q'), $req->parameters->get_all('lucky'));
     my $query = join(' ', @query);
     $query =~ s/::/ /g if($query);
     $self->model->request(
