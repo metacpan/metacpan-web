@@ -10,11 +10,10 @@ sub index {
     my $cv = AE::cv;
     my ( undef, undef, @module ) = split( /\//, $req->path );
     
-    my $out;
+    my $data;
     my $cond;
     if(@module == 1) {
-        my $module = shift @module;
-        $cond = $self->model('Module')->find($module);
+        $cond = $self->model('Module')->find($module[0]);
     } elsif(@module > 2) {
         $cond = $self->model('Module')->get(@module);
     } else {
@@ -24,13 +23,11 @@ sub index {
     
     my $get = $cond->(
         sub {
-            my $cv = shift;
-            my ($data) = $cv->recv;
-            $out = $data->{hits} ? $data->{hits}->{hits}->[0]->{_source} : $data;
-            return $self->not_found($req) unless($out);
-            my $pod = $self->model->request('/pod/' . join('/', @$out{qw(author release path)}));
-            my $release = $self->model('Release')->get($out->{author}, $out->{release});
-            my $author = $self->model('Author')->get($out->{author});
+            $data = shift->recv;
+            return $self->not_found($req) unless($data->{name});
+            my $pod = $self->model->request('/pod/' . join('/', @module));
+            my $release = $self->model('Release')->get($data->{author}, $data->{release});
+            my $author = $self->model('Author')->get($data->{author});
             return ($pod & $author & $release);
         } );
 
@@ -40,9 +37,9 @@ sub index {
             if(blessed $pod && $pod->isa('Plack::Response')) {
                 $cv->send($pod);
                 return;  
-            } 
+            }
             $cv->send(
-                       { module => $out,
+                       { module => $data,
                          author => $author,
                          pod    => $pod->{raw},
                          release => $release->{hits}->{hits}->[0]->{_source} } );
