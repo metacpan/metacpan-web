@@ -76,7 +76,10 @@ sub root_files {
           { term => { release   => $release } },
           { term => { author    => $author } },
           { term => { level     => 0 } },
-          { term => { directory => \0 } } ]
+          { term => { directory => \0 } },
+          { or => [
+              map { { term => { 'file.name' => $_ } } } qw(MANIFEST README INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog META.yml META.json dist.ini)
+            ] } ]
       } } },
       fields => [qw(name)],
       size   => 100,
