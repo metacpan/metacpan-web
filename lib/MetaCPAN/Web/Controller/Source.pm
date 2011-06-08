@@ -13,9 +13,13 @@ sub index {
     my $cond = $self->model('Module')->source(@module) & $self->model('Module')->get(@module);
     $cond->(sub {
         my ($source, $module) = shift->recv;
-        $cv->send({
-            source => $source->{raw}, module => $module
-        });
+        if($source->{raw}) {
+            $cv->send({
+                source => $source->{raw}, module => $module
+            });
+        } else {
+            $cv->send($self->not_found($req));
+        }
     });
     return $cv;
 }
