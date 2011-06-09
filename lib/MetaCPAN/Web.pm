@@ -11,6 +11,7 @@ use MetaCPAN::Web::Model;
 use Module::Find qw(findallmod);
 use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
+use Plack::Middleware::StackTrace;
 
 my @controllers = findallmod 'MetaCPAN::Web::Controller';
 
@@ -27,6 +28,7 @@ foreach my $c (@controllers) {
     $app->map($c->endpoint => $c->new( view => $view, models => \%models ));
 }
 $app = Plack::Middleware::Runtime->wrap($app);
+Plack::Middleware::StackTrace->wrap($app);
 
 Plack::Middleware::ReverseProxy->wrap($app);
 
