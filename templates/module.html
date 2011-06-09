@@ -15,9 +15,9 @@
       <li>Module version: <% module.module.0.version %></li>
       <li>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-        (<a href="http://api.metacpan.org/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+        (<a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
       </li>
-      <li><a href="http://api.metacpan.org/source/<% module.author %>/<% module.release %>/">Browse</a></li>
+      <li><a href="/source/<% module.author %>/<% module.release %>/">Browse</a></li>
       <% INCLUDE inc/release-info.html %>
       <% IF others.size > 1 %>
       <select name="release" onchange="document.location.href='/release/' + this.value">
