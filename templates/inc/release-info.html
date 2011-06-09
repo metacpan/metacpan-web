@@ -1,0 +1,18 @@
+      <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
+      <li><% release.resources %></li>
+      <% IF release.resources.repository %>
+      <li>
+        Repo:
+        <% IF release.resources.repository.web %>
+        <a href="<% release.resources.repository.web %>">web</a>
+        <% END %>
+        <% IF release.resources.repository.web && release.resources.repository.url %>
+        -
+        <% END %>
+        <% IF release.resources.repository.url %>
+        <a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>
+        <% END %>
+      </li>
+      <% END %>
+      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
+      <li><a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html#<% release.name %>" title="(pass / fail / na)">Test results</a></li>

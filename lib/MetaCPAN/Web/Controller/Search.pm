@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::Search;
 use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
+use List::Util qw( sum );
 use Plack::Response;
 
 sub index {
@@ -81,7 +82,7 @@ sub index {
         $cv->send(
             {   results => $results,
                 total   => $data->{hits}->{total},
-                took    => $data->{took} + $ratings->{took} } );
+                took    => sum( grep { defined } $data->{took}, $ratings->{took} ) } );
     });
     return $cv;
 }
