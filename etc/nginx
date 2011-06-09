@@ -1,6 +1,6 @@
 server {
         listen 80;
-        server_name .beta.metacpan.org .metacpan.org;
+        server_name .beta.metacpan.org;
         access_log /home/metacpan/metacpan.org/var/log/access.log;
         error_log /home/metacpan/metacpan.org/var/log/error.log error;
 
@@ -12,4 +12,10 @@ server {
             proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
         }
 
+}
+
+server {
+	listen 80;
+	server_name .metacpan.org www.metacpan.org;
+	rewrite /(.*)$ http://beta.metacpan.org/$1 permanent;
 }

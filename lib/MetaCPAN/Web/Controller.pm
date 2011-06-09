@@ -58,12 +58,22 @@ sub call {
                 my $out  = '';
                 my $method = $self->raw ? 'process_simple' : 'process';
                 $self->view->$method( $self->template,
-                                      { req => $req, %$data }, \$out )
-                  || warn $self->view->error;
-                $out = Encode::encode_utf8($out);
-                $res->(
-                        [ 200, [ 'Content-Type', $self->content_type ],
-                          [$out] ] );
+                                      { req => $req, %$data }, \$out );
+                if ($self->view->error) {
+                    my $out
+                        = ( $ENV{PLACK_ENV} || '' ) eq 'development'
+                        ? [ $self->_wrap_template_error($self->view->error) ]
+                        : [];
+                    $res->(
+                             [ 500, [ 'Content-Type', 'text/html' ],
+                               $out ] );
+                }
+                else {
+                    $out = Encode::encode_utf8($out);
+                    $res->(
+                            [ 200, [ 'Content-Type', $self->content_type ],
+                              [$out] ] );
+                }
             } );
     };
 }
@@ -78,5 +88,22 @@ sub not_found {
     return Plack::Response->new( 404, [ 'Content-Type', $self->content_type ],
               [$out] );
 }
+
+sub _wrap_template_error {
+    my ($self, $error) = @_;
+
+    return <<"EOF";
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>template error</title>
+</head>
+<body>
+<pre>$error</pre>
+</body>
+</html>
+EOF
+}
+
 
 1;
