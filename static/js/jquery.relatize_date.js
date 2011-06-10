@@ -2,6 +2,7 @@
 (function($) {
   $.fn.relatizeDate = function() {
     return $(this).each(function() {
+      $(this).attr( "title", $(this).text() );
       $(this).text( $.relatizeDate(this) )
     })
   }
