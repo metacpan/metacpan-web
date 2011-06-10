@@ -12,7 +12,7 @@
   <div>
     <ul>
       <li><strong class="relatize"><% module.date.dt_http %></strong></li>
-      <li>Module version: <% module.module.0.version %></li>
+      <% IF module.module.0.version %><li>Module version: <% module.module.0.version %></li><% END %>
       <li>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
