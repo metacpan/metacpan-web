@@ -29,27 +29,38 @@ Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
-Template::Alloy->define_vmethod( 'text',
-                               to_color => sub { my $md5 = md5_hex(md5_hex(shift)); my $color = substr($md5, 0, 6);
-                                   return "#$color"; }, );
+Template::Alloy->define_vmethod(
+    'text',
+    to_color => sub {
+        my $md5 = md5_hex( md5_hex(shift) );
+        my $color = substr( $md5, 0, 6 );
+        return "#$color";
+    },
+);
 
-Template::Alloy->define_vmethod( 'text',
-                               decode_punycode => sub {
-                                    URI->new(shift)->ihost
-                                   } );
+Template::Alloy->define_vmethod(
+    'text',
+    decode_punycode => sub {
+        URI->new(shift)->ihost;
+    }
+);
 
-Template::Alloy->define_vmethod( 'array',
-                               json => sub {
-                                    JSON::encode_json(shift);
-                                   } );
+Template::Alloy->define_vmethod(
+    'array',
+    json => sub {
+        JSON::encode_json(shift);
+    }
+);
 
-Template::Alloy->define_vmethod( 'hash', gravatar_image =>
-    sub {
-        my ($author, $size, $default) = @_;
+Template::Alloy->define_vmethod(
+    'hash',
+    gravatar_image => sub {
+        my ( $author, $size, $default ) = @_;
         Gravatar::URL::gravatar_url(
             email   => $author->{email},
             size    => $size,
             default => Gravatar::URL::gravatar_url(
+
                 # Fallback to the CPAN address, as used by s.c.o, which will in
                 # turn fallback to a generated image.
                 email   => $author->{pauseid} . '@cpan.org',
@@ -57,7 +68,8 @@ Template::Alloy->define_vmethod( 'hash', gravatar_image =>
                 default => $default,
             )
         );
-    } );
+    }
+);
 
 sub new {
     my $class = shift;
@@ -65,13 +77,14 @@ sub new {
         @_,
         INCLUDE_PATH => ['templates'],
         TAG_STYLE    => 'asp',
-        COMPILE_DIR => 'var/tmp/templates',
+        COMPILE_DIR  => 'var/tmp/templates',
         COMPILE_PERL => 1,
         STAT_TTL     => 1,
-        WRAPPER     => [qw(wrapper.html)],
-        ENCODING    => 'utf8',
-        AUTO_FILTER => 'html',
-        PRE_PROCESS => ['preprocess.html'], );
+        WRAPPER      => [qw(wrapper.html)],
+        ENCODING     => 'utf8',
+        AUTO_FILTER  => 'html',
+        PRE_PROCESS  => ['preprocess.html'],
+    );
 }
 
 1;

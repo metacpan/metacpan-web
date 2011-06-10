@@ -11,25 +11,23 @@ my $CHECK = Encode::FB_CROAK | Encode::LEAVE_SRC;
 
 sub path {
     my $self = shift;
-    ($self->{decoded_path}) =
-        $self->_decode(URI::Escape::uri_unescape($self->uri->path))
-        unless($self->{decoded_path});
+    ( $self->{decoded_path} )
+        = $self->_decode( URI::Escape::uri_unescape( $self->uri->path ) )
+        unless ( $self->{decoded_path} );
     return $self->{decoded_path};
 }
 
 sub query_parameters {
     my $self = shift;
-    $self->{decoded_query_params} ||= Hash::MultiValue->new(
-        $self->_decode($self->uri->query_form)
-    );
+    $self->{decoded_query_params}
+        ||= Hash::MultiValue->new( $self->_decode( $self->uri->query_form ) );
 }
 
 # XXX Consider replacing using env->{'plack.request.body'}?
 sub body_parameters {
     my $self = shift;
     $self->{decoded_body_params} ||= Hash::MultiValue->new(
-        $self->_decode($self->SUPER::body_parameters->flatten)
-    );
+        $self->_decode( $self->SUPER::body_parameters->flatten ) );
 }
 
 sub _decode {
@@ -46,9 +44,9 @@ sub _decode {
 =cut
 
 sub query_string_with {
-    my $self = shift;
+    my $self   = shift;
     my $params = shift;
-    my $qq = URI::Query->new($self->parameters->flatten);
+    my $qq     = URI::Query->new( $self->parameters->flatten );
     $qq->replace(%$params);
     return $qq->stringify;
 }

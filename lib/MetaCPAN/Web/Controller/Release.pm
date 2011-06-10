@@ -12,7 +12,8 @@ sub index {
     my ( $out, $cond );
     if ( $author && $release ) {
         $cond = $self->model('Release')->get( $author, $release );
-    } else {
+    }
+    else {
         $cond = $self->model('Release')->find($author);
     }
 
@@ -20,43 +21,52 @@ sub index {
         sub {
             my ($data) = shift->recv;
             $out = $data->{hits}->{hits}->[0]->{_source};
-            return $self->not_found($req) unless($out);
+            return $self->not_found($req) unless ($out);
             ( $author, $release ) = ( $out->{author}, $out->{name} );
-            my $model = $self->model('Release');
+            my $model   = $self->model('Release');
             my $modules = $model->modules( $author, $release );
-            my $root   = $model->root_files( $author, $release );
-            my $others = $model->versions( $out->{distribution} );
-            my $author = $self->model('Author')->get($author);
+            my $root    = $model->root_files( $author, $release );
+            my $others  = $model->versions( $out->{distribution} );
+            my $author  = $self->model('Author')->get($author);
             return ( $modules & $others & $author & $root );
-        } );
+        }
+    );
 
     $cond->(
         sub {
             my ( $modules, $others, $author, $root ) = shift->recv;
-            if(blessed $modules && $modules->isa('Plack::Response')) {
+            if ( blessed $modules && $modules->isa('Plack::Response') ) {
                 $cv->send($modules);
-                return;  
+                return;
             }
             $cv->send(
-                {  release => $out,
-                   author  => $author,
-                   total   => $modules->{hits}->{total},
-                   took    => List::Util::max($modules->{took}, $root->{took}, $others->{took}),
-                   root    => [
-                             sort { $a->{name} cmp $b->{name} }
-                             map  { $_->{fields} } @{ $root->{hits}->{hits} }
-                   ],
-                   others =>
-                     [ map { $_->{fields} } @{ $others->{hits}->{hits} } ],
-                   files => [
-                       map {
-                           {
-                               %{ $_->{fields} },
-                                 module => $_->{fields}->{'_source.module'},
-                                 abstract => $_->{fields}->{'_source.abstract'}
-                           }
-                         } @{ $modules->{hits}->{hits} } ] } );
-        } );
+                {   release => $out,
+                    author  => $author,
+                    total   => $modules->{hits}->{total},
+                    took    => List::Util::max(
+                        $modules->{took}, $root->{took}, $others->{took}
+                    ),
+                    root => [
+                        sort { $a->{name} cmp $b->{name} }
+                        map  { $_->{fields} } @{ $root->{hits}->{hits} }
+                    ],
+                    others =>
+                        [ map { $_->{fields} } @{ $others->{hits}->{hits} } ],
+                    files => [
+                        map {
+                            {
+                                %{ $_->{fields} },
+                                    module =>
+                                    $_->{fields}->{'_source.module'},
+                                    abstract =>
+                                    $_->{fields}->{'_source.abstract'}
+                            }
+                            } @{ $modules->{hits}->{hits} }
+                    ]
+                }
+            );
+        }
+    );
 
     return $cv;
 }

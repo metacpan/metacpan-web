@@ -6,13 +6,14 @@ use AnyEvent;
 use base 'AnyEvent::CondVar';
 
 $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
-$AnyEvent::HTTP::USERAGENT = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
+$AnyEvent::HTTP::USERAGENT
+    = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
 
 use overload
-  '&{}'    => \&build,
-  '|'      => \&any,
-  '&'      => \&all,
-  fallback => 1;
+    '&{}'    => \&build,
+    '|'      => \&any,
+    '&'      => \&all,
+    fallback => 1;
 
 sub build {
     my $self = shift;
@@ -25,13 +26,15 @@ sub build {
             return $res;
         }
         my $ae_cb = $void ? $cb : sub {
-            my $data = $cb->( shift );
+            my $data = $cb->(shift);
             if ( blessed $data && $data->isa('MyCondVar') ) {
                 $data->chain_cb(
                     sub {
                         $res->send( shift->recv );
-                    } );
-            } else {
+                    }
+                );
+            }
+            else {
                 $res->send($data);
             }
         };
@@ -44,11 +47,11 @@ sub chain_cb {
     my ( $self, $cb ) = @_;
     my $self_cb = $self->{_ae_cb};
     $self->{_ae_cb} = $self_cb
-      ? sub {
+        ? sub {
         $self_cb->(@_);
         $cb->(@_);
-      }
-      : $cb;
+        }
+        : $cb;
 }
 
 sub any {
@@ -71,12 +74,14 @@ sub all {
         sub {
             my @data = shift->recv;
             @done ? $res->send( @data, @done ) : ( @done = @data );
-        } );
+        }
+    );
     $and->chain_cb(
         sub {
             my @data = shift->recv;
             @done ? $res->send( @done, @data ) : ( @done = @data );
-        } );
+        }
+    );
     return $res;
 }
 
@@ -93,24 +98,23 @@ sub new {
 }
 
 sub request {
-    my ($self, $path, $search, $params) = @_;
-    my $req  = $self->cv;
+    my ( $self, $path, $search, $params ) = @_;
+    my $req = $self->cv;
     http_request $search ? 'post' : 'get' => $self->{url} . $path,
-        body => $search ? encode_json($search) : '',
-        persistent => 1,
-        sub {
-            my ($data, $headers) = @_;
-            my $content_type = $headers->{'content-type'} || '';
+        body => $search ? encode_json($search) : '', persistent => 1, sub {
+        my ( $data, $headers ) = @_;
+        my $content_type = $headers->{'content-type'} || '';
 
-            if ($content_type eq 'application/json') {
-                my $json = eval { decode_json($data) };
-                $req->send( $@ ? { raw => $data } : $json );
-            }
-            else {
-                # Response is raw data, e.g. text/plain
-                $req->send( { raw => $data } );
-            }
-    };
+        if ( $content_type eq 'application/json' ) {
+            my $json = eval { decode_json($data) };
+            $req->send( $@ ? { raw => $data } : $json );
+        }
+        else {
+
+            # Response is raw data, e.g. text/plain
+            $req->send( { raw => $data } );
+        }
+        };
     return $req;
 }
 
@@ -118,7 +122,7 @@ sub cv {
     MyCondVar->new;
 }
 
-1; 
+1;
 
 __END__
 
