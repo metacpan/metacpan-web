@@ -45,7 +45,7 @@
 <body>
   <div class="header">
     <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
-    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
+    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %><a class="settings" href="#" onclick="return false"><img src="/static/icons/settings.png" width=16></a>
     <div class="spacer" style="text-align: right"><strong>BETA</strong></div>
   </div>
 <div style="float: right; text-align: right; padding-right: 5px; margin-top: -15px"><a href="https://github.com/CPAN-API/metacpan-web/issues/new"><small>Problem?<br>Open an issue!</small></a></div>
