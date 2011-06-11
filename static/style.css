@@ -112,6 +112,16 @@ margin-bottom: 20px;
 background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(245,245,245)));
 background: -moz-linear-gradient(rgb(255,255,255),rgb(245,245,245));
 }
+
+.header .settings {
+    float: right;
+    height: 20px;
+    margin-left: 8px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    border-left: 1px solid #e7e7e7;
+}
+
 .header .spacer, .header a {
     font-size: 1em;
     border-top-color: #BAD3EA;
