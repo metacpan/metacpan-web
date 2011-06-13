@@ -1,3 +1,4 @@
 <big><strong>Not Found</strong></big><br><br>
 The resource you were requesting could not be found.<br>
-Search the CPAN for <a href="/search?q=<% q = req.path.split('/').splice(2, 99).join(" "); q %>"><% q %></a>
+<% q = req.path.split('/').splice(2, 99).join(" "); IF q %>
+Search the CPAN for <a href="/search?q=<% q %>"><% q %></a><% END %>

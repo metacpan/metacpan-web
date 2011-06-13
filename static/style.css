@@ -198,6 +198,11 @@ input.g-button:active, button.g-button:active {
     padding-left: 15px
 }
 
+.search-group {
+    padding: 5px;
+    padding-left: 10px;
+}
+
 .search-bar {
     width: 165px;
     float: left;

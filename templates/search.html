@@ -28,12 +28,12 @@
 </div>
 
 <div class="search-results">
-<% FOREACH item IN results %>
+<% FOREACH group IN results; item = group.0 %>
   <big><strong>
     <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><br>
-  <span style="color: #999"><% preview = item.preview.join(" ... ") | html; preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
-  <br>
+  </strong></big><br><% preview = item.preview.join(" ... ") | html %>
+  <% IF preview %><span style="color: #999"><% preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
+  <br><% END %>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
     &nbsp;<div class="rating-<% (item.rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></div>
@@ -42,7 +42,15 @@
   <span class="relatize"><% item.date.dt_http %></span> -
   <a href="/search?q=distribution:<% item.distribution %>+<% query %>">Search in distribution</a>
   <!-- <% item.score %> -->
-<br><br>
+<br>
+<% IF group.size > 1 %>
+<ul class="search-group">
+    <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li><a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %></li><% END %>
+    <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
+</ul>
+<% END %>
+<br>
 <% END %>
 <% INCLUDE inc/pager.html size = 20 %>
 </div>
+<pre>

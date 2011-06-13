@@ -6,14 +6,14 @@ use AnyEvent;
 use base 'AnyEvent::CondVar';
 
 $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
-$AnyEvent::HTTP::USERAGENT
-    = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
+$AnyEvent::HTTP::USERAGENT =
+'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
 
 use overload
-    '&{}'    => \&build,
-    '|'      => \&any,
-    '&'      => \&all,
-    fallback => 1;
+  '&{}'    => \&build,
+  '|'      => \&any,
+  '&'      => \&all,
+  fallback => 1;
 
 sub build {
     my $self = shift;
@@ -47,11 +47,11 @@ sub chain_cb {
     my ( $self, $cb ) = @_;
     my $self_cb = $self->{_ae_cb};
     $self->{_ae_cb} = $self_cb
-        ? sub {
+      ? sub {
         $self_cb->(@_);
         $cb->(@_);
-        }
-        : $cb;
+      }
+      : $cb;
 }
 
 sub any {
@@ -91,17 +91,37 @@ use warnings;
 use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
+use Module::Find qw(findallmod);
 
 sub new {
     my $class = shift;
     return bless {@_}, $class;
 }
 
+sub model {
+    my ( $self, $model ) = @_;
+    return $self unless($model);
+    unless ( $self->{models} ) {
+        $self->{models} = {
+            map {
+                eval "require $_" or die $@;
+                $_ => $_->new( url => $self->{url} )
+              }
+            findallmod 'MetaCPAN::Web::Model'
+        }
+    };  
+    return $self->{models}->{
+         "MetaCPAN::Web::Model::$model"
+      };
+}
+
 sub request {
     my ( $self, $path, $search, $params ) = @_;
     my $req = $self->cv;
     http_request $search ? 'post' : 'get' => $self->{url} . $path,
-        body => $search ? encode_json($search) : '', persistent => 1, sub {
+      body => $search ? encode_json($search) : '',
+      persistent => 1,
+      sub {
         my ( $data, $headers ) = @_;
         my $content_type = $headers->{'content-type'} || '';
 
@@ -114,7 +134,7 @@ sub request {
             # Response is raw data, e.g. text/plain
             $req->send( { raw => $data } );
         }
-        };
+      };
     return $req;
 }
 

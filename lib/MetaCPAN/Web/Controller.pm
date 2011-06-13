@@ -9,15 +9,18 @@ use MetaCPAN::Web::Model;
 use Encode;
 use Scalar::Util qw(blessed);
 
-__PACKAGE__->mk_accessors(qw(view models));
+__PACKAGE__->mk_accessors(qw(view));
 
 sub model {
     my ( $self, $model ) = @_;
-    return $self->models->{
-        $model
-        ? "MetaCPAN::Web::Model::$model"
-        : "MetaCPAN::Web::Model"
-        };
+    if( ref $model) {
+        $self->{model} = $model;
+        return $model;
+    } elsif($model) {
+        return $self->{model}->model($model);
+    } else {
+        return $self->{model};
+    }
 }
 
 sub endpoint {
