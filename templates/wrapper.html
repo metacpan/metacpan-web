@@ -27,6 +27,7 @@
 <html>
 <head>
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - beta.metacpan.org</title>
+  <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link href="/static/css/shCore.css?1" rel="stylesheet" type="text/css">
   <link href="/static/css/shThemeDefault.css?1" rel="stylesheet" type="text/css">
   <link href="/static/style.css?3" rel="stylesheet" type="text/css">
