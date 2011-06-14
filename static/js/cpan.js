@@ -88,6 +88,12 @@ $(document).ready(function() {
           element.html(parts.join('…'));
         }
       }
+
+    $('.pod h1,h2,h3,h4,h5,h6').each(function() {
+      $(this).wrap(function() {
+        return '<a href="#___pod"></a>';
+      });
+    });
 });
 
 function searchForNearest() {
