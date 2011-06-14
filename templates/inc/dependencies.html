@@ -1,6 +1,10 @@
 <div class="box-right">
   <br>
-<strong>Dependencies</strong><br>
+<strong>
+  <a
+     href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"
+     title="Our dependencies according to CPAN Testers, and their test results.">Dependencies</a>
+</strong><br>
 <%
 deps = [];
 FOREACH dep IN dependencies;

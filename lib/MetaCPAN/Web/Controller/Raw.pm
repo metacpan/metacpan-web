@@ -18,9 +18,13 @@ sub index {
             my ( $source, $module ) = shift->recv;
             if ( $source->{raw} ) {
                 if ( $req->params->{download} ) {
+                    my $content_disposition = 'attachment';
+                    if (my $filename = $module->{name}) {
+                        $content_disposition .= "; filename=$filename";
+                    }
                     my $response = Plack::Response->new(
                         200,
-                        [   'Content-Disposition' => 'attachment',
+                        [   'Content-Disposition' => $content_disposition,
                             'Content-Type'        => 'text/plain',
                         ],
                         [ $source->{raw} ],

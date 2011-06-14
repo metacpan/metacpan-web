@@ -56,4 +56,9 @@ sub page {
     return $page && $page =~ /^\d+$/ ? $page : 1;
 }
 
+sub clone {
+  my ($self, %extra) = @_;
+  return (ref $self)->new({ %{$self->env}, %extra });
+}
+
 1;

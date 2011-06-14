@@ -1,4 +1,4 @@
-<% title = release.name %>
+<% title = release.name; rss = 'distribution/' _ release.distribution %>
 <strong><big><a href="/author/<% release.author %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
 <div class="search-bar">
