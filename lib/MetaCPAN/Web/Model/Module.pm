@@ -83,7 +83,7 @@ sub search_collapsed {
     $process_or_repeat = sub {
         my $data = shift->recv;
         $took += $data->{took};
-        $total = @{$data->{facets}->{count}->{terms}} if($run == 1);
+        $total = @{ $data->{facets}->{count}->{terms} } if ( $run == 1 );
         my $hits = @{ $data->{hits}->{hits} };
         @distributions =
           uniq( @distributions,
@@ -218,8 +218,13 @@ sub search {
                             },
 
                             # prefer shorter module names slightly
-                            script =>
-"_score - doc['documentation'].stringValue.length()/10000 + doc[\"date\"].date.getMillis() / 1000000000000"
+                            script => qq{
+    documentation = doc['documentation'].stringValue;
+    if(documentation == empty) {
+        documentation = ''
+    }
+    return _score - documentation.length()/10000 + doc[\"date\"].date.getMillis() / 1000000000000
+}
                         }
                     },
                     filter => {
