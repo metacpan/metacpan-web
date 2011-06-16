@@ -12,17 +12,23 @@ sub index {
 
     my $author   = $self->model('Author')->get($id);
     my $releases = $self->model->request(
-        '/release/_search', {
+        '/release/_search',
+        {
             query => {
                 filtered => {
                     query  => { match_all => {} },
-                    filter => { term      => { author => uc($id) } }
+                    filter => {
+                        and => [
+                            { term => { author => uc($id) } },
+                            { term => { status => 'latest' } }
+                        ]
+                    },
                 }
             },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
-            ],
-            size => 1000,
+            sort =>
+              [ 'distribution', { 'version_numified' => { reverse => \1 } } ],
+            fields => [qw(author distribution name status abstract date)],
+            size   => 1000,
         }
     );
 
@@ -34,10 +40,10 @@ sub index {
                 return;
             }
             $cv->send(
-                {   author   => $author,
-                    releases => [
-                        map { $_->{_source} } @{ $releases->{hits}->{hits} }
-                    ],
+                {
+                    author => $author,
+                    releases =>
+                      [ map { $_->{fields} } @{ $releases->{hits}->{hits} } ],
                     took  => $releases->{took},
                     total => $releases->{hits}->{total}
                 }
