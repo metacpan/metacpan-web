@@ -14,3 +14,24 @@
       <% END %>
       <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
       <li><a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html#<% release.name %>" title="(pass / fail / na)">Test results</a></li>
+    <% IF versions.size > 1 %>
+    <select name="release" onchange="document.location.href='/<% IF module.path; 'module'; ELSE; 'release'; END %>/' + this.value">
+    <option>Go to version</option>
+    <%
+    backpan = [];
+    FOREACH version IN versions;
+        IF release.name == version.name;
+            NEXT;
+        END;
+        IF version.status == 'backpan';
+            backpan.push(version);
+            NEXT;
+        END %>
+    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version %> (<% dt = version.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
+    <% END; IF backpan.size > 1 %>
+    <optgroup label="BackPAN"></optgroup>
+    <% FOREACH version IN backpan %>
+    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version %> (<% dt = version.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option><% END %>
+    <% END %>
+    </select>
+    <% END %>

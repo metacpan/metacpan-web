@@ -19,14 +19,6 @@
       </li>
       <li><a href="http://api.metacpan.org/source/<% module.author %>/<% module.release %>/">Browse</a></li>
       <% INCLUDE inc/release-info.html %>
-      <% IF others.size > 1 %>
-      <select name="release" onchange="document.location.href='/release/' + this.value">
-      <option>Go to version</option>
-      <% FOREACH other IN others; IF release.name == other.name; NEXT; END %>
-      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
-      <% END %>
-      </select>
-      <% END %>
     </ul>
   </div>
   <hr>

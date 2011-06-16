@@ -150,7 +150,7 @@ sub versions {
             },
             size   => 100,
             sort   => [ { date => 'desc' } ],
-            fields => [qw(name date author version)],
+            fields => [qw(name date author version status)],
         }
     );
 }

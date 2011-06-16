@@ -23,45 +23,44 @@ sub index {
             $out = $data->{hits}->{hits}->[0]->{_source};
             return $self->not_found($req) unless ($out);
             ( $author, $release ) = ( $out->{author}, $out->{name} );
-            my $model   = $self->model('Release');
-            my $modules = $model->modules( $author, $release );
-            my $root    = $model->root_files( $author, $release );
-            my $others  = $model->versions( $out->{distribution} );
-            my $author  = $self->model('Author')->get($author);
-            return ( $modules & $others & $author & $root );
+            my $model    = $self->model('Release');
+            my $modules  = $model->modules( $author, $release );
+            my $root     = $model->root_files( $author, $release );
+            my $versions = $model->versions( $out->{distribution} );
+            my $author   = $self->model('Author')->get($author);
+            return ( $modules & $versions & $author & $root );
         }
     );
 
     $cond->(
         sub {
-            my ( $modules, $others, $author, $root ) = shift->recv;
+            my ( $modules, $versions, $author, $root ) = shift->recv;
             if ( blessed $modules && $modules->isa('Plack::Response') ) {
                 $cv->send($modules);
                 return;
             }
             $cv->send(
-                {   release => $out,
+                {
+                    release => $out,
                     author  => $author,
                     total   => $modules->{hits}->{total},
                     took    => List::Util::max(
-                        $modules->{took}, $root->{took}, $others->{took}
+                        $modules->{took}, $root->{took}, $versions->{took}
                     ),
                     root => [
                         sort { $a->{name} cmp $b->{name} }
                         map  { $_->{fields} } @{ $root->{hits}->{hits} }
                     ],
-                    others =>
-                        [ map { $_->{fields} } @{ $others->{hits}->{hits} } ],
+                    versions =>
+                      [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
                     files => [
                         map {
                             {
                                 %{ $_->{fields} },
-                                    module =>
-                                    $_->{fields}->{'_source.module'},
-                                    abstract =>
-                                    $_->{fields}->{'_source.abstract'}
+                                  module   => $_->{fields}->{'_source.module'},
+                                  abstract => $_->{fields}->{'_source.abstract'}
                             }
-                            } @{ $modules->{hits}->{hits} }
+                          } @{ $modules->{hits}->{hits} }
                     ]
                 }
             );

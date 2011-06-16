@@ -28,25 +28,29 @@ sub index {
             $data = shift->recv;
             return $self->not_found($req) unless ( $data->{name} );
             my $pod = $self->model->request( '/pod/' . join( '/', @module ) );
-            my $release = $self->model('Release')
-                ->get( $data->{author}, $data->{release} );
-            my $author = $self->model('Author')->get( $data->{author} );
-            return ( $pod & $author & $release );
+            my $release =
+              $self->model('Release')->get( $data->{author}, $data->{release} );
+            my $author   = $self->model('Author')->get( $data->{author} );
+            my $versions = $self->model('Release')->versions( $data->{distribution} );
+            return ( $pod & $author & $release & $versions );
         }
     );
 
     $get->(
         sub {
-            my ( $pod, $author, $release ) = shift->recv;
+            my ( $pod, $author, $release, $versions ) = shift->recv;
             if ( blessed $pod && $pod->isa('Plack::Response') ) {
                 $cv->send($pod);
                 return;
             }
             $cv->send(
-                {   module  => $data,
+                {
+                    module  => $data,
                     author  => $author,
                     pod     => $pod->{raw},
-                    release => $release->{hits}->{hits}->[0]->{_source}
+                    release => $release->{hits}->{hits}->[0]->{_source},
+                    versions =>
+                      [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
                 }
             );
         }
