@@ -38,10 +38,12 @@ IF profiles.${profile.name} %>
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16>
 </a>
 <% END; END %><br><% END %>
-<% IF author.country %>
+<% IF author.country || author.city || author.region %>
 <strong>Location</strong><br>
+<% IF author.country %>
 <img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" width=16 height=11> &nbsp;
-<%- [author.city, author.region].join(', ') %><br>
+<%- END %>
+<%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %><br>
 <% END %>
 <% IF author.blog.size %>
 <strong>Blog</strong><br>
