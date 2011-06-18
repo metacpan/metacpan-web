@@ -1,6 +1,6 @@
 .ac_results {
   padding: 0px;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   background-color: white;
   overflow: hidden;
   z-index: 99999;
@@ -24,13 +24,13 @@
   when scroll mode will be used
   */
   /*width: 100%;*/
-  font: menu;
-  font-size: 12px;
+  font-size: 18px;
   /*
   it is very important, if line-height not setted or setted
   in relative units scroll will be broken in firefox
   */
-  line-height: 16px;
+  line-height: 20px;
+  font-family: arial, 'sans-serif bold';
   overflow: hidden;
 }
 
@@ -39,10 +39,9 @@
 }
 
 .ac_odd {
-  background-color: #eee;
+  background-color: #f9f9f9;
 }
 
 .ac_over {
-  background-color: #0A246A;
-  color: white;
+  background-color: #BAD3EA;
 }
