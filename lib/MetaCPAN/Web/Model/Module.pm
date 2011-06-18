@@ -232,6 +232,15 @@ sub search {
                             { term => { status => 'latest' } },
                             {
                                 or => [
+                                # we are looking for files that have no authorized
+                                # property (e.g. .pod files) and files that are
+                                # authorized
+                                    { missing => { field => 'file.authorized' } },
+                                    { term => { 'file.authorized' => \1 } },
+                                ]
+                            },
+                            {
+                                or => [
                                     {
                                         and => [
                                             {
