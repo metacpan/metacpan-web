@@ -55,6 +55,7 @@ $(document).ready(function() {
         delay: 100,
         max: 20,
         selectFirst: false,
+        width: $("#search-input").width() + 5,
         parse: function(data) {
             return $.map(data, function(row) {
                 return {
