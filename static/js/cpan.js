@@ -68,7 +68,7 @@ $(document).ready(function() {
             return item.documentation;
         }
     }).result(function(e, item) {
-        document.location.href = '/module/'+ item.module;
+        document.location.href = '/module/'+ item.documentation;
     });
 
     var el = $('.search-bar');
