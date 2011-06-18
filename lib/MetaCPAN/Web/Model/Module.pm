@@ -26,22 +26,25 @@ sub source {
 
 sub autocomplete {
     my ( $self, $query ) = @_;
-    my $cv = $self->cv;
+    my $cv     = $self->cv;
+    my @query  = split( /\s+/, $query );
+    my $should = [
+        map {
+            { field   => { 'documentation.analyzed'  => "$_*" } },
+              { field => { 'documentation.camelcase' => "$_*" } }
+          } grep { $_ } @query
+    ];
     $self->request(
         '/file/_search',
         {
             query => {
                 filtered => {
                     query => {
-                        query_string => {
-                            fields => [
-                                'documentation.analyzed',
-                                'documentation.camelcase',
-                            ],
-                            query                  => $query,
-                            allow_leading_wildcard => \0,
-                            default_operator       => 'AND',
-                        }
+                        custom_score => {
+                            query => { bool => { should => $should } },
+                            script =>
+"_score - doc['documentation'].stringValue.length()/100"
+                        },
                     },
                     filter => {
                         and => [

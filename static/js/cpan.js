@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     $("#search-input").autocomplete('/search/autocomplete', {
         dataType: 'json',
-        delay: 500,
+        delay: 100,
         max: 20,
         selectFirst: false,
         parse: function(data) {
