@@ -11,6 +11,7 @@ use MetaCPAN::Web::View;
 use MetaCPAN::Web::Model;
 use MetaCPAN::Web::Controller;
 use Module::Find qw(findallmod);
+use Plack::Middleware::Assets;
 use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::StackTrace;
@@ -25,6 +26,14 @@ my $app = Plack::App::URLMap->new;
 $app->map( '/static/' => Plack::App::File->new( root => 'static' ) );
 $app->map( '/' => $controller->dispatch );
 $app = Plack::Middleware::Runtime->wrap($app);
+$app = Plack::Middleware::Assets->wrap(
+    $app,
+    files => [
+        map { "static/js/$_.js" }
+          qw(jquery.min jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack shCore shBrushPerl cpan)
+    ]
+);
+$app = Plack::Middleware::Assets->wrap( $app, files => [<static/css/*.css>] );
 Plack::Middleware::StackTrace->wrap($app);
 
 Plack::Middleware::ReverseProxy->wrap($app);
