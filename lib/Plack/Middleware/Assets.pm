@@ -16,6 +16,12 @@ sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
 
+    $self->_build_content;
+    return $self;
+}
+
+sub _build_content {
+    my $self = shift;
     local $/;
     $self->content(
         join(
@@ -26,16 +32,14 @@ sub new {
               } @{ $self->files }
         )
     );
-    $self->type( (grep { /\.css$/ } @{ $self->files }) ? 'css' : 'js' )
+    $self->type( ( grep { /\.css$/ } @{ $self->files } ) ? 'css' : 'js' )
       unless ( $self->type );
-    $self->minify(1) unless(defined $self->minify);
-    $self->content($self->_minify) if $self->minify;
+    $self->minify(1) unless ( defined $self->minify );
+    $self->content( $self->_minify ) if $self->minify;
 
     $self->key( md5_hex( $self->content ) );
     my @mtime = map { ( stat($_) )[9] } @{ $self->files };
     $self->mtime( ( reverse( sort(@mtime) ) )[0] );
-
-      return $self;
 }
 
 sub _minify {
@@ -66,11 +70,17 @@ sub serve {
 sub call {
     my $self = shift;
     my $env  = shift;
+
+    if ( $ENV{PLACK_ENV} eq 'development' ) {
+        my @mtime = map { ( stat($_) )[9] } @{ $self->files };
+        $self->_build_content
+          if ( $self->mtime < ( reverse( sort(@mtime) ) )[0] );
+    }
+
     $env->{'psgix.assets'} ||= [];
     my $url = '/_asset/' . $self->key;
     unshift( @{ $env->{'psgix.assets'} }, $url );
     return $self->serve if $env->{PATH_INFO} eq $url;
-
     return $self->app->($env);
 }
 
@@ -101,6 +111,10 @@ and minifies them. A C<md5> digest is generated and used as
 unique url to the asset. The C<Last-Modified> header is set to
 the C<mtime> of the most recently changed file.
 The concatented content is held in memory.
+
+In development mode the minification is disabled and and the
+concatenated content is regenerated if there were any changes
+to the files.
 
 =head1 CONFIGURATIONS
 
