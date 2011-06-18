@@ -67,8 +67,8 @@ $(document).ready(function() {
         formatItem: function(item) {
             return item.module;
         }
-    }).result(function() {
-        document.forms[0].submit();
+    }).result(function(e, item) {
+        document.location.href = '/module/'+ item.module;
     });
 
     var el = $('.search-bar');
