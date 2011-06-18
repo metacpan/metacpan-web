@@ -54,6 +54,7 @@ $(document).ready(function() {
         dataType: 'json',
         delay: 500,
         max: 20,
+        selectFirst: false,
         parse: function(data) {
             return $.map(data, function(row) {
                 return {
