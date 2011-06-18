@@ -50,6 +50,26 @@ $(document).ready(function() {
         }
     });
 
+    $("#search-input").autocomplete('/search/autocomplete', {
+        dataType: 'json',
+        delay: 500,
+        max: 20,
+        parse: function(data) {
+            return $.map(data, function(row) {
+                return {
+                    data: row,
+                    value: row.module,
+                    result: row.module
+                }
+            });
+        },
+        formatItem: function(item) {
+            return item.module;
+        }
+    }).result(function() {
+        document.forms[0].submit();
+    });
+
     var el = $('.search-bar');
     if (!el.length) return;
     var originalTop = el.offset().top; // store original top position
