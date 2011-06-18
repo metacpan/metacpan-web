@@ -35,7 +35,9 @@
 }
 
 .ac_loading {
-  background: white url('../icons/busy.gif') right center no-repeat;
+  background-image: url('../icons/busy.gif');
+  background-repeat: no-repeat;
+  background-position: 99%;
 }
 
 .ac_odd {
