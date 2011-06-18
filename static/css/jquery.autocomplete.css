@@ -34,12 +34,6 @@
   overflow: hidden;
 }
 
-.ac_loading {
-  background-image: url('../icons/busy.gif');
-  background-repeat: no-repeat;
-  background-position: 99%;
-}
-
 .ac_odd {
   background-color: #f9f9f9;
 }
