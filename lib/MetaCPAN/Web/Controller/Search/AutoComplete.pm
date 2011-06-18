@@ -14,20 +14,16 @@ sub index {
     my $query = join( ' ', $req->parameters->get_all('q') );
     $query =~ s/::/ /g if ($query);
 
-    my $cond = $model->search_collapsed( $query, 0 );
+    my $cond = $model->autocomplete($query);
 
     $cond->cb(
         sub {
             my ($data) = shift->recv;
 
-            my $result
-                = [ map { { module => $_->[0]->{documentation} } }
-                    @{ $data->{results} || [] } ];
-
             my $response = Plack::Response->new(
                 200,
                 [ 'Content-Type' => 'application/json', ],
-                [ JSON::encode_json($result) ]
+                [ JSON::encode_json( $data->{results} ) ]
             );
 
             $cv->send($response);

@@ -24,6 +24,51 @@ sub source {
     $self->request( '/source/' . join( '/', @module ), undef, { raw => 1 } );
 }
 
+sub autocomplete {
+    my ( $self, $query ) = @_;
+    my $cv = $self->cv;
+    $self->request(
+        '/file/_search',
+        {
+            query => {
+                filtered => {
+                    query => {
+                        query_string => {
+                            fields => [
+                                'documentation.analyzed',
+                                'documentation.camelcase',
+                            ],
+                            query                  => $query,
+                            allow_leading_wildcard => \0,
+                            default_operator       => 'AND',
+                        }
+                    },
+                    filter => {
+                        and => [
+                            { exists => { field          => 'documentation' } },
+                            { term   => { 'file.indexed' => \1 } },
+                            { term   => { 'file.status'  => 'latest' } },
+                        ]
+                    }
+                }
+            },
+            fields => [qw(documentation release author distribution)],
+            size   => 20,
+        }
+      )->(
+        sub {
+            my $data = shift->recv;
+            $cv->send(
+                {
+                    results =>
+                      [ map { $_->{fields} } @{ $data->{hits}->{hits} || [] } ]
+                }
+            );
+        }
+      );
+    return $cv;
+}
+
 sub search_distribution {
     my ( $self, $query, $from ) = @_;
 

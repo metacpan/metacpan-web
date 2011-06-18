@@ -59,13 +59,13 @@ $(document).ready(function() {
             return $.map(data, function(row) {
                 return {
                     data: row,
-                    value: row.module,
-                    result: row.module
+                    value: row.documentation,
+                    result: row.documentation
                 }
             });
         },
         formatItem: function(item) {
-            return item.module;
+            return item.documentation;
         }
     }).result(function(e, item) {
         document.location.href = '/module/'+ item.module;
