@@ -51,6 +51,12 @@ sub autocomplete {
                             { exists => { field          => 'documentation' } },
                             { term   => { 'file.indexed' => \1 } },
                             { term   => { 'file.status'  => 'latest' } },
+                            {
+                                not => {
+                                    filter =>
+                                      { term => { 'file.authorized' => \0 } }
+                                }
+                            }
                         ]
                     }
                 }
