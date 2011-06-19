@@ -30,7 +30,7 @@ $app = Plack::Middleware::Assets->wrap(
     $app,
     files => [
         map { "static/js/$_.js" }
-          qw(jquery.min jquery.cookie jquery.relatize_date shCore shBrushPerl cpan)
+          qw(jquery.min jquery.cookie jquery.relatize_date jquery.autocomplete.pack shCore shBrushPerl cpan)
     ]
 );
 $app = Plack::Middleware::Assets->wrap( $app, files => [<static/css/*.css>] );
