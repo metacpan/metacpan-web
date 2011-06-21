@@ -1,3 +1,6 @@
 <strong>Activity</strong><br>
 <object data="/activity?res=month<% IF query; '&'; query; END %>" width="170" height="22" type="image/svg+xml"></object>
 <div align="right"><small class="comment">24 month</small></div>
+<strong>Latest Release</strong><br>
+<strong><a href="/release/<% IF latest.status == 'latest'; latest.distribution; ELSE; latest.author; '/'; latest.name; END %>" class="ellipsis" title="<% latest.name %>"><% latest.name %></a></strong>
+<span class="relatize"><% latest.date.dt_http %></span>
