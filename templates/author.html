@@ -65,6 +65,18 @@ IF profiles.${profile.name} %>
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form></center>
 <% END; END; END %>
+<%
+i = 0;
+counter = 1;
+aggregated = [];
+latest = {date => '1970-01-01'};
+FOREACH release IN releases;
+IF release.date.dt > latest.date.dt; latest = release; END;
+IF last == release.distribution; counter = counter + 1; NEXT;
+ELSE; last = release.distribution; counter = 1; END;
+UNLESS release.name; NEXT; END;
+aggregated.push(release);
+END %>
   <hr>
   <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
   <hr>
@@ -88,16 +100,6 @@ IF profiles.${profile.name} %>
   
 </div>
 
-<% 
-i = 0;
-counter = 1;
-aggregated = [];
-FOREACH release IN releases;
-IF last == release.distribution; counter = counter + 1; NEXT;
-ELSE; last = release.distribution; counter = 1; END;
-UNLESS release.name; NEXT; END;
-aggregated.push(release);
-END %>
 <div class="content">
 <% INCLUDE inc/release-table.html releases = aggregated %>
 </div>
