@@ -30,7 +30,7 @@
   in relative units scroll will be broken in firefox
   */
   line-height: 20px;
-  font-family: arial, 'sans-serif bold';
+  font-family: arial, sans-serif;
   overflow: hidden;
 }
 
