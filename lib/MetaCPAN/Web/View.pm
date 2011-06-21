@@ -61,8 +61,8 @@ Template::Alloy->define_vmethod(
             size    => $size,
             default => Gravatar::URL::gravatar_url(
 
-                # Fallback to the CPAN address, as used by s.c.o, which will in
-                # turn fallback to a generated image.
+               # Fallback to the CPAN address, as used by s.c.o, which will in
+               # turn fallback to a generated image.
                 email   => $author->{pauseid} . '@cpan.org',
                 size    => $size,
                 default => $default,
@@ -80,10 +80,12 @@ sub new {
         COMPILE_DIR  => 'var/tmp/templates',
         COMPILE_PERL => 1,
         STAT_TTL     => 1,
-        WRAPPER      => [qw(wrapper.html)],
-        ENCODING     => 'utf8',
-        AUTO_FILTER  => 'html',
-        PRE_PROCESS  => ['preprocess.html'],
+        CACHE_SIZE   => $ENV{PLACK_ENV}
+            && $ENV{PLACK_ENV} eq 'development' ? 0 : undef,
+        WRAPPER     => [qw(wrapper.html)],
+        ENCODING    => 'utf8',
+        AUTO_FILTER => 'html',
+        PRE_PROCESS => ['preprocess.html'],
     );
 }
 
