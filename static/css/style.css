@@ -448,6 +448,10 @@ code { font-family: monospace; }
     font-size: 1em;
 }
 
+.release-table td.date {
+    text-align: right;
+}
+
 .release-table .abstract, .release-table .date {
     text-overflow: ellipsis;
     overflow: hidden;
