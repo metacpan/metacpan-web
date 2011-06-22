@@ -17,7 +17,7 @@ sub index {
         sub {
             my ( $source, $module ) = shift->recv;
             if ( $source->{raw} ) {
-                if ( $req->params->{download} ) {
+                if ( $req->parameters->{download} ) {
                     my $content_disposition = 'attachment';
                     if (my $filename = $module->{name}) {
                         $content_disposition .= "; filename=$filename";
