@@ -31,8 +31,9 @@ $app = Plack::Middleware::Assets->wrap(
     $app,
     files => [
         map { "static/js/$_.js" }
-          qw(jquery.min jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack shCore shBrushPerl cpan)
-    ]
+          qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack shCore shBrushPerl cpan)
+    ],
+    minify => 0,
 );
 Plack::Middleware::StackTrace->wrap($app);
 
