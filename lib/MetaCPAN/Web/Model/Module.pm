@@ -165,6 +165,7 @@ sub search_collapsed {
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
             my ( $ratings, $results ) = shift->recv;
+            $took = sum( grep { defined } $took, $ratings->{took}, $results->{took} );
             $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collpase_results($results);
 
@@ -172,7 +173,7 @@ sub search_collapsed {
                 {
                     results => $results,
                     total   => $total,
-                    took    => sum( grep { defined } $took, $ratings->{took}, $results->{took} )
+                    took    => $took,
                 }
             );
         }
