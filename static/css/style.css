@@ -435,7 +435,7 @@ code { font-family: monospace; }
     width: 100%;
 }
 
-.release-table td {
+.release-table td, .release-table th {
     padding: 2px;
 }
 
@@ -444,7 +444,6 @@ code { font-family: monospace; }
 }
 
 .release-table .date {
-    text-align: right;
     width: 100px;
     font-size: 1em;
 }

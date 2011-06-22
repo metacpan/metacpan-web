@@ -39,6 +39,14 @@ function toggleTOC() {
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.highlight();
+    
+    $('.author-table').tablesorter({widgets: ['zebra'],textExtraction: function(node){
+        if(node.getAttribute('class') == 'date') {
+            return node.firstChild.getAttribute('sort');
+        } else {
+            return node.innerHTML;
+        }
+    }} );
 
     $('.relatize').relatizeDate();
 
