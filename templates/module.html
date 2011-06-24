@@ -1,6 +1,6 @@
 <% title = module.documentation; rss = 'distribution/' _ module.distribution %>
 <strong><big>
-  <a href="/author/<% module.author %>"><% author.name %></a>
+  <a href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
   &nbsp;/&nbsp;
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
   &nbsp;/&nbsp;
