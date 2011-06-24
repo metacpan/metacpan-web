@@ -143,7 +143,7 @@ sub search_collapsed {
           uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         if (   @distributions < 20 + $from
-            && $total > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
+            && $data->{hits}->{total} > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
         {
 
             # need to get more results to satisfy at least 20 results
