@@ -24,6 +24,7 @@ my $controller =
   MetaCPAN::Web::Controller->new( view => $view, model => $model );
 my $app = Plack::App::URLMap->new;
 $app->map( '/static/' => Plack::App::File->new( root => 'static' ) );
+$app->map( '/favicon.ico' => Plack::App::File->new( file => 'static/icons/favicon.ico' ) );
 $app->map( '/' => $controller->dispatch );
 $app = Plack::Middleware::Runtime->wrap($app);
 $app = Plack::Middleware::Assets->wrap( $app, files => [<static/css/*.css>] );
