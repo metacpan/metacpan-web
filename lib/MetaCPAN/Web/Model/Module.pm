@@ -8,6 +8,8 @@ use List::Util qw( max sum );
 use List::MoreUtils qw(uniq);
 
 my $RESULTS_PER_RUN = 200;
+my @ROGUE_DISTRIBUTIONS
+    = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
 
 sub find {
     my ( $self, $module ) = @_;
@@ -30,31 +32,44 @@ sub autocomplete {
     my @query  = split( /\s+/, $query );
     my $should = [
         map {
-            { field   => { 'documentation.analyzed'  => "$_*" } },
-              { field => { 'documentation.camelcase' => "$_*" } }
-          } grep { $_ } @query
+            { field     => { 'documentation.analyzed'  => "$_*" } },
+                { field => { 'documentation.camelcase' => "$_*" } }
+            } grep {$_} @query
     ];
     $self->request(
         '/file/_search',
-        {
-            query => {
+        {   query => {
                 filtered => {
                     query => {
                         custom_score => {
                             query => { bool => { should => $should } },
                             script =>
-"_score - doc['documentation'].stringValue.length()/100"
+                                "_score - doc['documentation'].stringValue.length()/100"
                         },
                     },
                     filter => {
                         and => [
-                            { exists => { field          => 'documentation' } },
-                            { term   => { 'file.indexed' => \1 } },
-                            { term   => { 'file.status'  => 'latest' } },
-                            {
-                                not => {
-                                    filter =>
-                                      { term => { 'file.authorized' => \0 } }
+                            {   not => {
+                                    filter => {
+                                        or => [
+                                            map {
+                                                {   term => {
+                                                        'file.distribution' =>
+                                                            $_
+                                                    }
+                                                }
+                                                } @ROGUE_DISTRIBUTIONS
+                                        ]
+                                    }
+                                }
+                            },
+                            { exists => { field => 'documentation' } },
+                            { term => { 'file.indexed' => \1 } },
+                            { term => { 'file.status'  => 'latest' } },
+                            {   not => {
+                                    filter => {
+                                        term => { 'file.authorized' => \0 }
+                                    }
                                 }
                             }
                         ]
@@ -64,17 +79,17 @@ sub autocomplete {
             fields => [qw(documentation release author distribution)],
             size   => 20,
         }
-      )->(
+        )->(
         sub {
             my $data = shift->recv;
             $cv->send(
-                {
-                    results =>
-                      [ map { $_->{fields} } @{ $data->{hits}->{hits} || [] } ]
+                {   results => [
+                        map { $_->{fields} } @{ $data->{hits}->{hits} || [] }
+                    ]
                 }
             );
         }
-      );
+        );
     return $cv;
 }
 
@@ -86,8 +101,7 @@ sub search_distribution {
     my ( $data, $total );
     my $results = $self->search(
         $query,
-        {
-            size      => 20,
+        {   size      => 20,
             from      => $from,
             highlight => {
                 fields => {
@@ -101,27 +115,27 @@ sub search_distribution {
                 post_tags => ["[% /b %]"],
             },
         }
-      )->(
+        )->(
         sub {
             $data = shift->recv;
             my @distributions = uniq
-              map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} };
+                map { $_->{fields}->{distribution} }
+                @{ $data->{hits}->{hits} };
             return $self->model('Rating')->get(@distributions);
         }
-      )->(
+        )->(
         sub {
             my $ratings = shift->recv;
             my $results = $self->_extract_results( $data, $ratings );
             $cv->send(
-                {
-                    results => [ map { [$_] } @$results ],
+                {   results => [ map { [$_] } @$results ],
                     total   => $data->{hits}->{total},
                     took =>
-                      sum( grep { defined } $data->{took}, $ratings->{took} )
+                        sum( grep {defined} $data->{took}, $ratings->{took} )
                 }
             );
         }
-      );
+        );
 
     return $cv;
 }
@@ -137,41 +151,42 @@ sub search_collapsed {
     $process_or_repeat = sub {
         my $data = shift->recv;
         $took += $data->{took} || 0;
-        $total = @{ $data->{facets}->{count}->{terms} || [] } if ( $run == 1 );
+        $total = @{ $data->{facets}->{count}->{terms} || [] }
+            if ( $run == 1 );
         my $hits = @{ $data->{hits}->{hits} || [] };
-        @distributions =
-          uniq( @distributions,
+        @distributions = uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         if (   @distributions < 20 + $from
-            && $data->{hits}->{total} > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
+            && $data->{hits}->{total}
+            > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
         {
 
             # need to get more results to satisfy at least 20 results
             $run++;
             my $cv = $self->cv;    # intermediate CV that allows for recursion
             $self->_search( $query, $run )->($process_or_repeat)
-              ->( sub { $cv->send( shift->recv ) } );
+                ->( sub { $cv->send( shift->recv ) } );
             return $cv;
         }
 
         @distributions = splice( @distributions, $from, 20 );
         my $ratings = $self->model('Rating')->get(@distributions);
-        my $results =
-          $self->model('Module')
-          ->search( $query, $self->_search_in_distributions(@distributions) );
+        my $results
+            = $self->model('Module')
+            ->search( $query,
+            $self->_search_in_distributions(@distributions) );
         return ( $ratings & $results );
     };
 
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
             my ( $ratings, $results ) = shift->recv;
-            $took += max( grep { defined } $ratings->{took}, $results->{took} );
+            $took += max( grep {defined} $ratings->{took}, $results->{took} );
             $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collpase_results($results);
 
             $cv->send(
-                {
-                    results => $results,
+                {   results => $results,
                     total   => $total,
                     took    => $took,
                 }
@@ -187,13 +202,13 @@ sub _extract_results {
         map {
             {
                 %{ $_->{fields} },
-                  abstract => $_->{fields}->{'abstract.analyzed'},
-                  score    => $_->{_score},
-                  preview  => $_->{highlight}->{'pod.analyzed'},
-                  rating =>
-                  $ratings->{ratings}->{ $_->{fields}->{distribution} }
+                    abstract => $_->{fields}->{'abstract.analyzed'},
+                    score    => $_->{_score},
+                    preview  => $_->{highlight}->{'pod.analyzed'},
+                    rating =>
+                    $ratings->{ratings}->{ $_->{fields}->{distribution} }
             }
-          } @{ $results->{hits}->{hits} }
+            } @{ $results->{hits}->{hits} }
     ];
 }
 
@@ -202,15 +217,15 @@ sub _collpase_results {
     my %collapsed;
     foreach my $result (@$results) {
         my $distribution = $result->{distribution};
-        $collapsed{$distribution} =
-          { position => scalar keys %collapsed, results => [] }
-          unless ( $collapsed{$distribution} );
+        $collapsed{$distribution}
+            = { position => scalar keys %collapsed, results => [] }
+            unless ( $collapsed{$distribution} );
         push( @{ $collapsed{$distribution}->{results} }, $result );
     }
     return [
-        map    { $collapsed{$_}->{results} }
-          sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
-          keys %collapsed
+        map      { $collapsed{$_}->{results} }
+            sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
+            keys %collapsed
     ];
 }
 
@@ -218,17 +233,15 @@ sub _search {
     my ( $self, $query, $run ) = @_;
     return $self->search(
         $query,
-        {
-            size   => $run * $RESULTS_PER_RUN,
+        {   size   => $run * $RESULTS_PER_RUN,
             from   => ( $run - 1 ) * $RESULTS_PER_RUN,
             fields => [qw(distribution)],
             $run == 1
-            ? (
-                facets => {
+            ? ( facets => {
                     count =>
-                      { terms => { size => 999, field => 'distribution' } }
+                        { terms => { size => 999, field => 'distribution' } }
                 }
-              )
+                )
             : (),
         }
     );
@@ -252,8 +265,7 @@ sub search {
     my ( $self, $query, $params ) = @_;
     my $search = merge(
         $params,
-        {
-            query => {
+        {   query => {
                 filtered => {
                     query => {
                         custom_score => {
@@ -283,40 +295,53 @@ sub search {
                     },
                     filter => {
                         and => [
+                            {   not => {
+                                    filter => {
+                                        or => [
+                                            map {
+                                                {   term => {
+                                                        'file.distribution' =>
+                                                            $_
+                                                    }
+                                                }
+                                                } @ROGUE_DISTRIBUTIONS
+                                        ]
+                                    }
+                                }
+                            },
                             { term => { status => 'latest' } },
-                            {
-                                or => [
-                                # we are looking for files that have no authorized
-                                # property (e.g. .pod files) and files that are
-                                # authorized
-                                    { missing => { field => 'file.authorized' } },
+                            {   or => [
+
+                            # we are looking for files that have no authorized
+                            # property (e.g. .pod files) and files that are
+                            # authorized
+                                    {   missing =>
+                                            { field => 'file.authorized' }
+                                    },
                                     { term => { 'file.authorized' => \1 } },
                                 ]
                             },
-                            {
-                                or => [
-                                    {
-                                        and => [
-                                            {
-                                                exists => {
-                                                    field => 'file.module.name'
+                            {   or => [
+                                    {   and => [
+                                            {   exists => {
+                                                    field =>
+                                                        'file.module.name'
                                                 }
                                             },
-                                            {
-                                                term => {
-                                                    'file.module.indexed' => \1
+                                            {   term => {
+                                                    'file.module.indexed' =>
+                                                        \1
                                                 }
                                             }
                                         ]
                                     },
-                                    {
-                                        and => [
-                                            {
-                                                exists =>
-                                                  { field => 'documentation' }
+                                    {   and => [
+                                            {   exists => {
+                                                    field => 'documentation'
+                                                }
                                             },
-                                            {
-                                                term => { 'file.indexed' => \1 }
+                                            {   term =>
+                                                    { 'file.indexed' => \1 }
                                             }
                                         ]
                                     }
@@ -355,11 +380,10 @@ sub _search_in_distributions {
             filtered => {
                 filter => {
                     and => [
-                        {
-                            or => [
+                        {   or => [
                                 map {
                                     { term => { 'file.distribution' => $_ } }
-                                  } @distributions
+                                    } @distributions
                             ]
                         }
                     ]
