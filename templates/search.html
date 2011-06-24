@@ -32,8 +32,8 @@
   <big><strong>
     <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %>
   </strong></big><br>
-  <% IF item.description %><span style="color: #999"><% item.description.chunk(200).0 _ '...' %></span>
-  <br><% END %>
+  <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
+  <% END %>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
     &nbsp;<div class="rating-<% (item.rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></div>

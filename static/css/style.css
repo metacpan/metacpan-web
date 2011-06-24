@@ -462,6 +462,12 @@ code { font-family: monospace; }
     background-color: #f9f9f9;
 }
 
+.search-results .description {
+    color: #999;
+    max-height:3em;
+    overflow:hidden;
+}
+
 .rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
     width: 67px;
     height: 12px;
