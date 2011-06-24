@@ -14,7 +14,7 @@ my %res = ( week => '1w', month => 'month' );
 
 sub index {
     my ( $self, $req ) = @_;
-    my $res = $res{ $req->parameters->{res} } || '1w';
+    my $res = $res{ $req->parameters->{res} || 'week' } || '1w';
 
     my $q = [];
     if ( my $author = $req->parameters->{author} ) {

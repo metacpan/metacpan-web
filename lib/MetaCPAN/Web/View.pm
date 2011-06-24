@@ -56,8 +56,10 @@ Template::Alloy->define_vmethod(
     'hash',
     gravatar_image => sub {
         my ( $author, $size, $default ) = @_;
+        my ($email)
+            = ref $author->{email} ? @{ $author->{email} } : $author->{email};
         Gravatar::URL::gravatar_url(
-            email   => $author->{email},
+            email   => $email,
             size    => $size,
             default => Gravatar::URL::gravatar_url(
 

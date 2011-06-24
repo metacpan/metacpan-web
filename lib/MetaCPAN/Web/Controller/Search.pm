@@ -8,6 +8,15 @@ sub index {
     my ( $self, $req ) = @_;
     my @query =
       ( $req->parameters->get_all('q'), $req->parameters->get_all('lucky') );
+
+     unless(@query) {
+      my $res = $req->new_response;
+      my $cv = AE::cv;
+      $res->redirect( '/' );
+      $cv->send($res);
+      return $cv;
+    }
+
     my $query = join( ' ', @query );
     $query =~ s/::/ /g if ($query);
 

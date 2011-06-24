@@ -136,9 +136,9 @@ sub search_collapsed {
     my $process_or_repeat;
     $process_or_repeat = sub {
         my $data = shift->recv;
-        $took += $data->{took};
-        $total = @{ $data->{facets}->{count}->{terms} } if ( $run == 1 );
-        my $hits = @{ $data->{hits}->{hits} };
+        $took += $data->{took} || 0;
+        $total = @{ $data->{facets}->{count}->{terms} || [] } if ( $run == 1 );
+        my $hits = @{ $data->{hits}->{hits} || [] };
         @distributions =
           uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
