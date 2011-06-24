@@ -158,6 +158,7 @@ sub search_collapsed {
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         if (   @distributions < 20 + $from
             && $data->{hits}->{total}
+            && $data->{hits}->{total}
             > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
         {
 
@@ -181,7 +182,8 @@ sub search_collapsed {
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
             my ( $ratings, $results ) = shift->recv;
-            $took += max( grep {defined} $ratings->{took}, $results->{took} );
+            $took += max( grep {defined} $ratings->{took}, $results->{took} )
+                || 0;
             $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collpase_results($results);
 
