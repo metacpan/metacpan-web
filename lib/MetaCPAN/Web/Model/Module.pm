@@ -102,18 +102,7 @@ sub search_distribution {
     my $results = $self->search(
         $query,
         {   size      => 20,
-            from      => $from,
-            highlight => {
-                fields => {
-                    'pod.analyzed' => {
-                        "fragment_size"       => 250,
-                        "number_of_fragments" => 1,
-                    }
-                },
-                order     => 'score',
-                pre_tags  => ["[% b %]"],
-                post_tags => ["[% /b %]"],
-            },
+            from      => $from
         }
         )->(
         sub {
@@ -121,12 +110,21 @@ sub search_distribution {
             my @distributions = uniq
                 map { $_->{fields}->{distribution} }
                 @{ $data->{hits}->{hits} };
-            return $self->model('Rating')->get(@distributions);
+
+            my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
+            my $descriptions = $self->search_descriptions(@ids);
+
+            return $self->model('Rating')->get(@distributions) & $descriptions;
         }
         )->(
         sub {
-            my $ratings = shift->recv;
+            my ($ratings, $descriptions) = shift->recv;
             my $results = $self->_extract_results( $data, $ratings );
+
+            map {
+                $_->{description}
+                    = $descriptions->{results}->{ $_->{id} }
+            } @{ $results };
             $cv->send(
                 {   results => [ map { [$_] } @$results ],
                     total   => $data->{hits}->{total},
