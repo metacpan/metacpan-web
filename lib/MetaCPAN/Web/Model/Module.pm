@@ -179,6 +179,7 @@ sub search_collapsed {
         return ( $ratings & $results );
     };
 
+    my $data;
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
             my ( $ratings, $results ) = shift->recv;
@@ -186,15 +187,64 @@ sub search_collapsed {
                 || 0;
             $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collpase_results($results);
+            my @ids = map { $_->[0]->{id} } @$results;
+            $data = {
+                results => $results,
+                total   => $total,
+                took    => $took,
+            };
+            return $self->search_descriptions(@ids);
+        }
+        )->(
+        sub {
+            my ($descriptions) = shift->recv;
+            $data->{took} += $descriptions->{took} || 0;
+            map {
+                $_->[0]->{description}
+                    = $descriptions->{results}->{ $_->[0]->{id} }
+            } @{ $data->{results} };
+            $cv->send($data);
+        }
+        );
+    return $cv;
+}
 
+sub search_descriptions {
+    my ( $self, @ids ) = @_;
+    my $cv = $self->cv;
+    $self->request(
+        '/file/_search',
+        {   query => {
+                filtered => {
+                    query  => { match_all => {} },
+                    filter => {
+                        or => [ map { { term => { 'file.id' => $_ } } } @ids ]
+                    }
+                }
+            },
+            fields => [qw(_source.pod id)],
+            size   => scalar @ids,
+        }
+        )->(
+        sub {
+            my ($data) = shift->recv;
+            my $extract = sub {
+                my $pod = shift;
+                $pod =~ /DESCRIPTION (.*)$/;
+                return $1 || undef;
+            };
             $cv->send(
-                {   results => $results,
-                    total   => $total,
-                    took    => $took,
+                {   results => {
+                        map {
+                            $_->{fields}->{id} =>
+                                $extract->( $_->{fields}->{'_source.pod'} )
+                            } @{ $data->{hits}->{hits} }
+                    },
+                    took => $data->{took}
                 }
             );
         }
-    );
+        );
     return $cv;
 }
 
@@ -206,7 +256,6 @@ sub _extract_results {
                 %{ $_->{fields} },
                     abstract => $_->{fields}->{'abstract.analyzed'},
                     score    => $_->{_score},
-                    preview  => $_->{highlight}->{'pod.analyzed'},
                     rating =>
                     $ratings->{ratings}->{ $_->{fields}->{distribution} }
             }
@@ -354,7 +403,7 @@ sub search {
                 }
             },
             fields => [
-                qw(documentation author abstract.analyzed release path status distribution date)
+                qw(documentation author abstract.analyzed release path status distribution date id)
             ],
         }
     );
@@ -366,18 +415,7 @@ sub _search_in_distributions {
     {
 
 # we will probably never hit that limit, since we are searching in 20 distributions max
-        size      => 9999,
-        highlight => {
-            fields => {
-                'pod.analyzed' => {
-                    "fragment_size"       => 250,
-                    "number_of_fragments" => 1,
-                }
-            },
-            order     => 'score',
-            pre_tags  => ["[% b %]"],
-            post_tags => ["[% /b %]"],
-        },
+        size  => 9999,
         query => {
             filtered => {
                 filter => {

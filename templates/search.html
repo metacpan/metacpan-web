@@ -31,8 +31,8 @@
 <% FOREACH group IN results; item = group.0 %>
   <big><strong>
     <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a> <% IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><br><% preview = item.preview.join(" ... ") | html %>
-  <% IF preview %><span style="color: #999"><% preview.replace('\[% ', '<').replace(' %\]', '>') | none %></span>
+  </strong></big><br>
+  <% IF item.description %><span style="color: #999"><% item.description.chunk(200).0 _ '...' %></span>
   <br><% END %>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
