@@ -4,7 +4,7 @@ use warnings;
 use base 'MetaCPAN::Web::Model';
 use Hash::Merge qw( merge );
 
-use List::Util qw( sum );
+use List::Util qw( max sum );
 use List::MoreUtils qw(uniq);
 
 my $RESULTS_PER_RUN = 200;
@@ -165,7 +165,7 @@ sub search_collapsed {
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
             my ( $ratings, $results ) = shift->recv;
-            $took = sum( grep { defined } $took, $ratings->{took}, $results->{took} );
+            $took += max( grep { defined } $ratings->{took}, $results->{took} );
             $results = $self->_extract_results( $results, $ratings );
             $results = $self->_collpase_results($results);
 
