@@ -1442,7 +1442,7 @@ sh.Highlighter.prototype = {
 			var lineNumber = lineNumbers ? lineNumbers[i] : firstLine + i,
 				code = lineNumber == 0 ? sh.config.space : padNumber(lineNumber, pad)
 				;
-				
+			code = '<a href="#L'+lineNumber+'" id="L'+lineNumber+'">' + code + '</a>';
 			html += this.getLineHtml(i, lineNumber, code);
 		}
 		

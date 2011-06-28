@@ -33,5 +33,7 @@
 //SyntaxHighlighter.all();
 $(document).ready(function() {
 togglePod(<% module.pod_lines.json %>);
+if(document.location.hash)
+    document.location.href = document.location.href;
 });
 </script>
