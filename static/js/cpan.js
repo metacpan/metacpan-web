@@ -38,6 +38,12 @@ function toggleTOC() {
 
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
+    if(document.location.hash) {
+        var match = document.location.hash.match(/^#L(\d+)$/);
+        console.log(match);
+        SyntaxHighlighter.defaults['highlight'] = [match[1]];
+    }
+
     SyntaxHighlighter.highlight();
     
     $('.author-table').tablesorter({widgets: ['zebra'],textExtraction: function(node){
