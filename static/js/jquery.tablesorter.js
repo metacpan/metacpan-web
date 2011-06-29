@@ -694,6 +694,9 @@
                     // new blank config object
                     this.config = {};
                     // merge and extend.
+
+                    var match = RegExp('[?&]sort=([^&]*)').exec(window.location.search);
+                    if(JSON && match) settings.sortList = JSON.parse(match[1]);
                     config = $.extend(this.config, $.tablesorter.defaults, settings);
                     // store common expression for speed
                     $this = $(this);
@@ -766,6 +769,8 @@
                             };
                             setTimeout(function () {
                                 // set css for headers
+                                if(JSON && typeof history.replaceState === 'function')
+                                    history.replaceState({}, null, "?sort=" + JSON.stringify(config.sortList));
                                 setHeadersCss($this[0], $headers, config.sortList, sortCSS);
                                 appendToTable(
 	                                $this[0], multisort(
