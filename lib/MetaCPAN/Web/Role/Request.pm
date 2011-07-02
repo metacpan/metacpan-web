@@ -5,7 +5,7 @@ use URI::Query;
 sub query_string_with {
     my $self   = shift;
     my $params = shift;
-    my $qq     = URI::Query->new( $self->parameters->flatten );
+    my $qq     = URI::Query->new( $self->parameters );
     $qq->replace(%$params);
     return $qq->stringify;
 }
