@@ -2,11 +2,6 @@ package MetaCPAN::Web::Test;
 
 # ABSTRACT: Test class for MetaCPAN::Web
 
-BEGIN {
-    $ENV{PLACK_TEST_IMPL} = "Server";
-    $ENV{PLACK_SERVER} = "Twiggy";
-}
-
 use strict;
 use warnings;
 use Plack::Test;
@@ -17,7 +12,7 @@ use Encode;
 use base 'Exporter';
 our @EXPORT = qw(GET test_psgi app tx);
 
-sub app { require MetaCPAN::Web; }
+sub app { require 'app.psgi'; }
 
 sub tx {
     my $tree = HTML::TreeBuilder->new_from_content( shift->content );
