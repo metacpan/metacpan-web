@@ -3,10 +3,10 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 
-sub index {
-    my ( $self, $req ) = @_;
+sub index : Path {
+    my ( $self, $c ) = @_;
     my $cv = AE::cv;
-    $self->model('Release')->recent( $req->page )->(
+    $c->model('API::Release')->recent( $c->req->page )->(
         sub {
             my ($data) = shift->recv;
             my $latest = [ map { $_->{_source} } @{ $data->{hits}->{hits} } ];
@@ -17,7 +17,7 @@ sub index {
             );
         }
     );
-    return $cv;
+    $c->stash({%{$cv->recv}, template => 'recent.html'});
 }
 
 1;
