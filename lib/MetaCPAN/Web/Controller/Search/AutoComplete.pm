@@ -1,36 +1,20 @@
 package MetaCPAN::Web::Controller::Search::AutoComplete;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
-use JSON;
-use Plack::Response;
 
-sub index {
-    my ( $self, $req ) = @_;
+use Moose;
+use namespace::autoclean;
 
-    my $cv = AE::cv;
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-    my $model = $self->model('Module');
-    my $query = join( ' ', $req->parameters->get_all('q') );
+sub index : Path {
+    my ( $self, $c ) = @_;
+    my $req   = $c->req;
+    my $model = $c->model('API::Module');
+    my $query = join( ' ', $req->param('q') );
     $query =~ s/::/ /g if ($query);
 
-    my $cond = $model->autocomplete($query);
-
-    $cond->cb(
-        sub {
-            my ($data) = shift->recv;
-
-            my $response = Plack::Response->new(
-                200,
-                [ 'Content-Type' => 'application/json', ],
-                [ JSON::encode_json( $data->{results} ) ]
-            );
-
-            $cv->send($response);
-        }
-    );
-
-    return $cv;
+    my $data = $model->autocomplete($query)->recv;
+    $c->res->content_type('application/json');
+    $c->res->body( JSON::encode_json( $data->{results} ) );
 }
 
 1;
