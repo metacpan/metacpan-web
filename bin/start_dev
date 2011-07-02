@@ -1,3 +1,0 @@
-#!/bin/sh
-twiggy lib/MetaCPAN/Web.pm -p 5001 -R lib -E development
-
