@@ -16,9 +16,17 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 =head1 DESCRIPTION
 
-[enter your description here]
-
 =head1 METHODS
+
+=head2 auto
+
+=cut
+
+sub auto : Private {
+    my ($self, $c) = @_;
+    $c->stash->{req} = $c->req;
+    return 1;
+}
 
 =head2 index
 
@@ -28,9 +36,7 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    $c->stash->{template} = 'home.html';
 }
 
 =head2 default
