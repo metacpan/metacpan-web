@@ -1,0 +1,2 @@
+#!/bin/sh
+plackup -s Twiggy -R script/ -R lib/ -E development -Ilib -p 5001 script/metacpan.psgi
