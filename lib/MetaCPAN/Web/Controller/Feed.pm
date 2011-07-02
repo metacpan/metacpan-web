@@ -1,87 +1,42 @@
 package MetaCPAN::Web::Controller::Feed;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 use XML::Feed;
 use DateTime::Format::ISO8601;
 
-sub index {
-    my ( $self, $req ) = @_;
-    if ( $req->path eq '/feed/recent' ) {
-        return $self->recent($req);
-    }
-    elsif ( $req->path =~ /\/feed\/author\/([^\/]+)\/?$/ ) {
-        return $self->author( $req, $1 );
-    }
-    elsif ( $req->path =~ /\/feed\/distribution\/([^\/]+)\/?$/ ) {
-        return $self->distribution( $req, $1 );
-    }
-    my $cv = AE::cv;
-    $cv->send( $self->not_found($req) );
-    return $cv;
+sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
 
-sub recent {
-    my ( $self, $req ) = @_;
-    my $cv = AE::cv;
-    $self->controller('Recent')->index($req)->cb(
-        sub {
-            my $data = shift->recv;
-            my $feed = $self->build_feed(
-                request => $req,
-                title   => 'Recent CPAN uploads - MetaCPAN',
-                entries => $data->{recent}
-            );
-            $cv->send($feed);
-
-        }
+sub recent : Chained('index') : Path : Args(0) {
+    my ( $self, $c ) = @_;
+    $c->forward('/recent/index');
+    my $data = $c->stash;
+    $c->stash->{feed} = $self->build_feed(
+        title   => 'Recent CPAN uploads - MetaCPAN',
+        entries => $data->{recent}
     );
-    return $cv;
 }
 
-sub author {
-    my ( $self, $req, $author ) = @_;
-    my $cv = AE::cv;
-    $self->controller('Author')->index( $req->clone( PATH_INFO => "/$author" ) )
-      ->cb(
-        sub {
-            my $data = shift->recv;
-            unless ( $data->{author} ) {
-                $cv->send( $self->not_found($req) );
-                return;
-            }
-            my $feed = $self->build_feed(
-                request => $req,
-                title =>
-                  "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
-                entries => $data->{releases}
-            );
-            $cv->send($feed);
-
-        }
-      );
-    return $cv;
-}
-
-sub distribution {
-    my ( $self, $req, $distribution ) = @_;
-    my $cv = AE::cv;
-    $self->model('Release')->versions($distribution)->(
-        sub {
-            my $data = shift->recv;
-            unless ( $data->{hits}->{total} ) {
-                $cv->send( $self->not_found($req) );
-                return;
-            }
-            my $feed = $self->build_feed(
-                request => $req,
-                title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-                entries => [ map { $_->{fields} } @{ $data->{hits}->{hits} } ]
-            );
-            $cv->send($feed);
-        }
+sub author : Chained('index') : Path : Args(1) {
+    my ( $self, $c, $author ) = @_;
+    $c->forward( '/author/index', [$author] );
+    my $data = $c->stash;
+    $c->stash->{feed} = $self->build_feed(
+        title => "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
+        entries => $data->{releases}
     );
-    return $cv;
+}
+
+sub distribution : Chained('index') : Path : Args(1) {
+    my ( $self, $c, $distribution ) = @_;
+    my $data = $c->model('API::Release')->versions($distribution)->recv;
+    $c->stash->{feed} = $self->build_feed(
+        title   => "Recent CPAN uploads of $distribution - MetaCPAN",
+        entries => [ map { $_->{fields} } @{ $data->{hits}->{hits} } ]
+    );
 }
 
 sub build_entry {
@@ -109,11 +64,13 @@ sub build_feed {
 
         $feed->add_entry( $self->build_entry($entry) );
     }
-    return $params{request}->new_response(
-        200,
-        [ 'Content-type' => 'application/rss+xml' ],
-        [ $feed->as_xml ]
-    );
+    return $feed->as_xml;
+}
+
+sub end : Private {
+    my ( $self, $c ) = @_;
+    $c->res->content_type('application/rss+xml');
+    $c->res->body( $c->stash->{feed} );
 }
 
 1;
