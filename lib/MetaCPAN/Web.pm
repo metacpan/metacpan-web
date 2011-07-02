@@ -18,7 +18,6 @@ use CatalystX::RoleApplicator;
 #                 directory
 
 use Catalyst qw/
-    -Debug
     ConfigLoader
     Static::Simple
     Unicode::Encoding
