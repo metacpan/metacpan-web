@@ -10,13 +10,13 @@ Install the project dependencies:
 
 Start server on port 5000
 
- $ twiggy lib/MetaCPAN/Web.pm
+ $ plackup
 
 The backend defaults to C<api.metacpan.org>. Running a local API server is optional and not required to hack on the front-end.
 
 Change METACPAN_API if you are running your own local API:
 
- $ METACPAN_API=localhost:5000 twiggy lib/MetaCPAN/Web.pm -p 5001 -R lib -E development
+ $ METACPAN_API=localhost:5000 plackup -p 5001 -r -E development
  
 This will use the API server at C<localhost:5000> and sets the port of the front-end to 5001.
 The process will watch changes in the current directory and start with the
