@@ -1,7 +1,9 @@
-package MetaCPAN::Web::View;
+package MetaCPAN::Web::View::HTML;
+
 use strict;
 use warnings;
-use base 'Template::Alloy';
+use base 'Catalyst::View::TT::Alloy';
+
 use mro;
 use DateTime;
 use Digest::MD5 qw(md5_hex);
@@ -73,22 +75,3 @@ Template::Alloy->define_vmethod(
     }
 );
 
-sub new {
-    my $class = shift;
-    return $class->next::method(
-        @_,
-        INCLUDE_PATH => ['templates'],
-        TAG_STYLE    => 'asp',
-        COMPILE_DIR  => 'var/tmp/templates',
-        COMPILE_PERL => 1,
-        STAT_TTL     => 1,
-        CACHE_SIZE   => $ENV{PLACK_ENV}
-            && $ENV{PLACK_ENV} eq 'development' ? 0 : undef,
-        WRAPPER     => [qw(wrapper.html)],
-        ENCODING    => 'utf8',
-        AUTO_FILTER => 'html',
-        PRE_PROCESS => ['preprocess.html'],
-    );
-}
-
-1;
