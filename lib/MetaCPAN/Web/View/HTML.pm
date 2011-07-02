@@ -57,6 +57,19 @@ Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_canonical => \&canonical_datetime );
 
+{
+    my @chars = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9, qw(- _) );
+    Template::Alloy->define_vmethod(
+        'text',
+        random => sub {
+            my $length = shift;
+            my $rand   = "";
+            $rand .= $chars[ int( rand() * @chars ) ] for ( 1 .. $length );
+            return $rand;
+        }
+    );
+}
+
 Template::Alloy->define_vmethod(
     'text',
     to_color => sub {
