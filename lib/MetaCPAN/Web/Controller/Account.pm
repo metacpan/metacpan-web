@@ -1,8 +1,9 @@
 package MetaCPAN::Web::Controller::Account;
 
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index {
     my ( $self, $req ) = @_;
