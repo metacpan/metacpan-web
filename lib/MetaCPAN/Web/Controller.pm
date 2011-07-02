@@ -4,27 +4,12 @@ use namespace::autoclean;
 
 BEGIN {extends 'Catalyst::Controller'; }
 
-use MetaCPAN::Web::Request;
-use MetaCPAN::Web::View;
-use MetaCPAN::Web::Model;
 use Encode;
 use Scalar::Util qw(blessed);
 use Module::Find qw(findallmod);
 use Plack::App::URLMap;
 
 __PACKAGE__->mk_accessors(qw(view controllers));
-
-sub model {
-    my ( $self, $model ) = @_;
-    if( ref $model) {
-        $self->{model} = $model;
-        return $model;
-    } elsif($model) {
-        return $self->{model}->model($model);
-    } else {
-        return $self->{model};
-    }
-}
 
 sub controller {
     my ( $self, $controller ) = @_;

@@ -5,15 +5,15 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index :Path :Args(0) {
-    my ( $self, $req ) = @_;
+sub index :Path :Args(1) {
+    my ( $self, $c, $id ) = @_;
     my $cv = AE::cv;
-    my ( undef, undef, $id ) = split( /\//, $req->path );
 
     my $out;
 
-    my $author   = $self->model('Author')->get($id);
-    my $releases = $self->model->request(
+    my $author   = $c->model('Author')->get($id);
+    # this should probably be refactored into the model?? why is it here
+    my $releases = $c->model('Release')->request(
         '/release/_search',
         {
             query => {
@@ -38,7 +38,7 @@ sub index :Path :Args(0) {
         sub {
             my ( $author, $releases ) = shift->recv;
             unless ( $author->{pauseid} ) {
-                $cv->send( $self->not_found($req) );
+                $cv->send( $self->not_found($c->req) );
                 return;
             }
             $cv->send(

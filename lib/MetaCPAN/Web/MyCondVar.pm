@@ -1,6 +1,8 @@
-package MyCondVar;
+package MetaCPAN::Web::MyCondVar;
+
 use strict;
 use warnings;
+
 use Scalar::Util qw(blessed);
 use AnyEvent;
 use base 'AnyEvent::CondVar';
@@ -20,14 +22,14 @@ sub build {
     return sub {
         my $cb   = shift;
         my $void = !defined wantarray;
-        my $res  = MyCondVar->new unless ($void);
+        my $res  = __PACKAGE__->new unless ($void);
         if ( my $data = $self->ready ) {
             $cb->($data);
             return $res;
         }
         my $ae_cb = $void ? $cb : sub {
             my $data = $cb->(shift);
-            if ( blessed $data && $data->isa('MyCondVar') ) {
+            if ( blessed $data && $data->isa(__PACKAGE__) ) {
                 $data->chain_cb(
                     sub {
                         $res->send( shift->recv );
@@ -57,7 +59,7 @@ sub chain_cb {
 sub any {
     my ( $self, $or ) = @_;
     my $done = 0;
-    my $res  = MyCondVar->new;
+    my $res  = __PACKAGE__->new;
     my $cb   = sub {
         $res->send( shift->recv ) unless ( $done++ );
     };
@@ -69,7 +71,7 @@ sub any {
 sub all {
     my ( $self, $and ) = @_;
     my @done;
-    my $res = MyCondVar->new;
+    my $res = __PACKAGE__->new;
     $self->chain_cb(
         sub {
             my @data = shift->recv;
@@ -84,65 +86,6 @@ sub all {
     );
     return $res;
 }
-
-package MetaCPAN::Web::Model;
-use strict;
-use warnings;
-use Test::More;
-use JSON;
-use AnyEvent::HTTP qw(http_request);
-use Module::Find qw(findallmod);
-
-sub new {
-    my $class = shift;
-    return bless {@_}, $class;
-}
-
-sub model {
-    my ( $self, $model ) = @_;
-    return $self unless($model);
-    unless ( $self->{models} ) {
-        $self->{models} = {
-            map {
-                eval "require $_" or die $@;
-                $_ => $_->new( url => $self->{url} )
-              }
-            findallmod 'MetaCPAN::Web::Model'
-        }
-    };  
-    return $self->{models}->{
-         "MetaCPAN::Web::Model::$model"
-      };
-}
-
-sub request {
-    my ( $self, $path, $search, $params ) = @_;
-    my $req = $self->cv;
-    http_request $search ? 'post' : 'get' => $self->{url} . $path,
-      body => $search ? encode_json($search) : '',
-      persistent => 1,
-      sub {
-        my ( $data, $headers ) = @_;
-        my $content_type = $headers->{'content-type'} || '';
-
-        if ( $content_type eq 'application/json' ) {
-            my $json = eval { decode_json($data) };
-            $req->send( $@ ? { raw => $data } : $json );
-        }
-        else {
-
-            # Response is raw data, e.g. text/plain
-            $req->send( { raw => $data } );
-        }
-      };
-    return $req;
-}
-
-sub cv {
-    MyCondVar->new;
-}
-
-1;
 
 __END__
 

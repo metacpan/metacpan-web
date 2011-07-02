@@ -1,7 +1,29 @@
 package MetaCPAN::Web::Model::Module;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Model';
+use Moose;
+use namespace::autoclean;
+
+extends 'Catalyst::Model';
+with 'MetaCPAN::Web::Roles::ES';
+
+=head1 NAME
+
+MetaCPAN::Web::Model::Module - Catalyst Model
+
+=head1 DESCRIPTION
+
+Catalyst Model.
+
+=head1 AUTHOR
+
+Moritz Onken, Matthew Phillips
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
 use Hash::Merge qw( merge );
 
 use List::Util qw( max sum );
@@ -429,5 +451,6 @@ sub _search_in_distributions {
             }
         } };
 }
+__PACKAGE__->meta->make_immutable;
 
 1;
