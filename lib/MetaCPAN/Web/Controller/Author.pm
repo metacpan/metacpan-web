@@ -53,7 +53,7 @@ sub index :Path :Args(1) {
         }
     );
 
-    return $cv;
+    return $c->stash($cv->recv);
 }
 
 __PACKAGE__->meta->make_immutable;
