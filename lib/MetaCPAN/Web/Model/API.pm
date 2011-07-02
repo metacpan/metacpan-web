@@ -22,13 +22,14 @@ Merge config of this model with the config of Model::API.
 
 sub COMPONENT {
     my $self = shift;
-    my ($app, $config) = @_;
-    $config = $self->merge_config_hashes($app->config->{'Model::API'}, $config);
-    return $self->SUPER::COMPONENT($app, $config);
+    my ( $app, $config ) = @_;
+    $config = $self->merge_config_hashes( { api => $app->config->{api} },
+        $config );
+    return $self->SUPER::COMPONENT( $app, $config );
 }
 
 sub model {
-    my ($self, $model) = @_;
+    my ( $self, $model ) = @_;
     return MetaCPAN::Web->model('API') unless $model;
     return MetaCPAN::Web->model("API::$model");
 }
@@ -36,10 +37,10 @@ sub model {
 sub request {
     my ( $self, $path, $search, $params ) = @_;
     my $req = $self->cv;
-    http_request $search ? 'post' : 'get' => $self->api . $path,
-      body => $search ? encode_json($search) : '',
-      persistent => 1,
-      sub {
+    http_request $search ? 'post' : 'get' => 'http://' . $self->api . $path,
+        body => $search ? encode_json($search) : '',
+        persistent => 1,
+        sub {
         my ( $data, $headers ) = @_;
         my $content_type = $headers->{'content-type'} || '';
 
@@ -52,7 +53,7 @@ sub request {
             # Response is raw data, e.g. text/plain
             $req->send( { raw => $data } );
         }
-      };
+        };
     return $req;
 }
 
