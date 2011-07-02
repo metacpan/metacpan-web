@@ -6,7 +6,7 @@ use warnings;
 use FindBin qw/$Bin/;
 use lib "$Bin/../lib";
 
-use MetaCPAN;
+use MetaCPAN::Web;
 
 use Plack::Builder;
 use Plack::App::File;
@@ -16,7 +16,7 @@ use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::StackTrace;
 
-MetaCPAN->setup_engine('PSGI');
+MetaCPAN::Web->setup_engine('PSGI');
 
 builder {
     enable 'Runtime';
@@ -31,5 +31,5 @@ builder {
 
     mount '/favicon.ico' => Plack::App::File->new(file => '/static/icons/favicon.ico');
 
-    mount '/' => sub { MetaCPAN->run(@_) };
+    mount '/' => sub { MetaCPAN::Web->run(@_) };
 };
