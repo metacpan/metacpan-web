@@ -46,6 +46,7 @@ __PACKAGE__->config(
     name => 'MetaCPAN::Web',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
+
 );
 
 # Start the application
@@ -78,5 +79,3 @@ This library is free software. You can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
-
-1;

@@ -11,6 +11,7 @@ use Plack::App::URLMap;
 use Plack::Middleware::Assets;
 use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
+use Plack::Middleware::Session::Cookie;
 
 my $api = 'http://' . ( $ENV{METACPAN_API} || 'api.metacpan.org' );
 
@@ -31,6 +32,8 @@ $app = Plack::Middleware::Assets->wrap(
     minify => 0,
 );
 
-Plack::Middleware::ReverseProxy->wrap($app);
+$app = Plack::Middleware::ReverseProxy->wrap($app);
+
+Plack::Middleware::Session::Cookie->wrap($app, session_key => 'metacpan');
 
 # ABSTRACT: A Front End for MetaCPAN
