@@ -1,48 +1,30 @@
 package MetaCPAN::Web::Controller::Raw;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller::Module';
-use Plack::Response;
-use URI::Escape;
 
-sub index {
-    my ( $self, $req ) = @_;
-    my $cv = AE::cv;
-    my ( undef, undef, @module ) = split( /\//, $req->path );
+use Moose;
+use namespace::autoclean;
 
-    my $out;
-    my $cond = $self->model('Module')->source(@module)
-        & $self->model('Module')->get(@module);
-    $cond->(
-        sub {
-            my ( $source, $module ) = shift->recv;
-            if ( $source->{raw} ) {
-                if ( $req->parameters->{download} ) {
-                    my $content_disposition = 'attachment';
-                    if (my $filename = $module->{name}) {
-                        $content_disposition .= "; filename=$filename";
-                    }
-                    my $response = Plack::Response->new(
-                        200,
-                        [   'Content-Disposition' => $content_disposition,
-                            'Content-Type'        => 'text/plain',
-                        ],
-                        [ $source->{raw} ],
-                    );
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-                    $cv->send($response);
-                }
-                else {
-                    $cv->send(
-                        { source => $source->{raw}, module => $module } );
-                }
-            }
-            else {
-                $cv->send( $self->not_found($req) );
-            }
+sub index : PathPart('raw') : Chained('/') : Args {
+    my ( $self, $c, @module ) = @_;
+    my $req = $c->req;
+    my ( $source, $module )
+        = ( $c->model('API::Module')->source(@module)
+            & $c->model('API::Module')->get(@module) )->recv;
+    $c->detach('/not_found') unless ( $source->{raw} );
+    if ( $req->parameters->{download} ) {
+        my $content_disposition = 'attachment';
+        if ( my $filename = $module->{name} ) {
+            $content_disposition .= "; filename=$filename";
         }
-    );
-    return $cv;
+        $c->res->body($source->{raw});
+        $c->res->content_type('text/plain');
+        $c->res->header('Content-Disposition' => $content_disposition);
+    }
+    else {
+        $c->stash(
+            { source => $source->{raw}, module => $module, template => 'raw.html' } );
+    }
 }
 
 1;

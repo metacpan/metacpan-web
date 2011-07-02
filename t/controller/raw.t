@@ -23,7 +23,7 @@ test_psgi app, sub {
         'attachment; filename=Moose.pm',
         'content-disposition attachment with filename set'
     );
-    is( $res->header('Content-Type'), 'text/plain',
+    is( $res->header('Content-Type'), 'text/plain; charset=UTF-8',
         'cotent-type text/plain' );
 
 };
