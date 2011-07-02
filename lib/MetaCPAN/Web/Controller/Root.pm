@@ -2,7 +2,7 @@ package MetaCPAN::Web::Controller::Root;
 use Moose;
 use namespace::autoclean;
 
-BEGIN { extends 'Catalyst::Controller' }
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -55,7 +55,7 @@ sub end : ActionClass('RenderView') {}
 
 =head1 AUTHOR
 
-Matthew,,,
+Matthew Phillips
 
 =head1 LICENSE
 

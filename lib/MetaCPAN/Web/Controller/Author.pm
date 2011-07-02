@@ -1,9 +1,11 @@
 package MetaCPAN::Web::Controller::Author;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
 
-sub index {
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
+
+sub index :Path :Args(0) {
     my ( $self, $req ) = @_;
     my $cv = AE::cv;
     my ( undef, undef, $id ) = split( /\//, $req->path );
@@ -53,5 +55,7 @@ sub index {
 
     return $cv;
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

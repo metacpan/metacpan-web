@@ -1,8 +1,9 @@
 package MetaCPAN::Web::Controller;
-use strict;
-use warnings;
+use Moose;
+use namespace::autoclean;
 
-use base 'Plack::Component';
+BEGIN {extends 'Catalyst::Controller'; }
+
 use MetaCPAN::Web::Request;
 use MetaCPAN::Web::View;
 use MetaCPAN::Web::Model;
@@ -79,43 +80,6 @@ sub index {
     return $cv;
 }
 
-sub call {
-    my ( $self, $env ) = @_;
-    my $req = MetaCPAN::Web::Request->new($env);
-    my $cv  = $self->index($req);
-    return sub {
-        my $res = shift;
-        $cv->cb(
-            sub {
-                my $data = shift->recv;
-                if ( blessed $data && $data->isa('Plack::Response') ) {
-                    $res->( $data->finalize );
-                    return;
-                }
-                my $out = '';
-                my $method = $self->raw ? 'process_simple' : 'process';
-                $self->view->$method( $self->template, { req => $req, %$data },
-                    \$out );
-                if ( $self->view->error ) {
-                    my $out =
-                        ( $ENV{PLACK_ENV} || '' ) eq 'development'
-                      ? [ $self->_wrap_template_error( $self->view->error ) ]
-                      : [];
-                    $res->( [ 500, [ 'Content-Type', 'text/html' ], $out ] );
-                }
-                else {
-                    $out = Encode::encode_utf8($out);
-                    $res->(
-                        [
-                            200, [ 'Content-Type', $self->content_type ], [$out]
-                        ]
-                    );
-                }
-            }
-        );
-    };
-}
-
 sub not_found {
     my ( $self, $req ) = @_;
     my $out = '';
@@ -141,5 +105,7 @@ sub _wrap_template_error {
 </html>
 EOF
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
