@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
+use CatalystX::RoleApplicator;
 
 # Set flags and add plugins for the application.
 #
@@ -20,9 +21,16 @@ use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
+    Unicode::Encoding
 /;
 
 extends 'Catalyst';
+
+__PACKAGE__->apply_request_class_roles(
+  qw/MetaCPAN::Web::Role::Request/
+);
+
+__PACKAGE__->config( encoding => 'UTF-8' );
 
 our $VERSION = '0.01';
 
