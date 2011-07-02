@@ -4,16 +4,11 @@ use warnings;
 use base 'MetaCPAN::Web::Controller';
 use DateTime;
 
-sub content_type {'image/svg+xml'}
-
-sub template {'activity.xml'}
-
-sub raw {1}
-
 my %res = ( week => '1w', month => 'month' );
 
-sub index {
-    my ( $self, $req ) = @_;
+sub index : Path {
+    my ( $self, $c ) = @_;
+    my $req = $c->req;
     my $res = $res{ $req->parameters->{res} || 'week' } || '1w';
 
     my $q = [];
@@ -27,7 +22,7 @@ sub index {
     my $cv = AE::cv;
     my $start
         = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
-    my $activity = $self->model->request(
+    my $activity = $c->model('API')->request(
         '/release/_search', {
             query  => { match_all => {} },
             facets => {
@@ -61,8 +56,9 @@ sub index {
             $cv->send( { data => $line } );
         }
     );
-
-    return $cv;
+    $c->res->content_type('image/svg+xml');
+    $c->stash({%{$cv->recv}, template => 'activity.xml'});
+    $c->detach('View::Raw');
 
 }
 
