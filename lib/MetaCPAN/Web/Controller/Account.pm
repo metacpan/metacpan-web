@@ -5,12 +5,10 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index {
-    my ( $self, $req ) = @_;
-
-    my $cv = AE::cv;
-    $cv->send({});
-    return $cv;
+sub logout : Local {
+    my ($self, $c) = @_;
+    $c->req->session->expire;
+    $c->res->redirect('/');
 }
 
 1;
