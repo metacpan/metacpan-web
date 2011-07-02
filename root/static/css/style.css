@@ -214,7 +214,7 @@ input.g-button:active, button.g-button:active {
     padding-left: 10px;
 }
 
-.search-bar {
+.search-bar, .account-bar {
     width: 165px;
     float: left;
 }
@@ -250,6 +250,28 @@ input.g-button:active, button.g-button:active {
 
 .search-bar .search-tag a:hover span {
     visibility: visible
+}
+
+.account-bar {
+    border-top: 1px solid #e9e9e9;
+}
+
+.account-bar a {
+    display: block;
+    border: 1px solid #e9e9e9;
+    border-top: 0px solid #fff;
+    padding: 6px;
+    font-size: 1.2em;
+}
+
+.account-bar a:hover {
+    text-decoration: none;
+    
+}
+
+.account-bar a:active, .account-bar a.active {
+    background-color: #36C;
+    color: #fff;
 }
 
 .icon {

@@ -46,7 +46,11 @@
   <div class="header">
     <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
     IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
-    <div class="spacer" style="text-align: right"><% IF req.user_exists %><strong><% req.user.id %></strong><% ELSE %><strong id="signin-button">Sign in</strong><% END %></div>
+    <%- IF req.user_exists %>
+    <a class="settings" href="/account/settings"><img src="/static/icons/settings.png" width=16></a>
+    <div class="spacer" style="text-align: right"><strong><% req.user.id %></strong></div>
+    <%- ELSE %>
+    <div class="spacer" style="text-align: right"><strong id="signin-button">Sign in</strong></div>
   </div>
   <div id="signin" style="display: block; position: absolute; right: 2px; top: 0px">
       <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>

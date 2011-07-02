@@ -46,6 +46,9 @@ $(document).ready(function() {
 
     SyntaxHighlighter.highlight();
     
+    $('#signin-button').mouseenter(function(){$('#signin').show()});
+    $('#signin').mouseleave(function(){$('#signin').hide()});
+    
     $('.author-table').tablesorter({widgets: ['zebra'],textExtraction: function(node){
         if(node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
@@ -146,4 +149,10 @@ function searchForNearest() {
 
 function disableTag(tag) {
     document.location.href = '/mirrors' + (document.location.search || '?q=') + ' ' + tag;
+}
+
+function logInPAUSE(a) {
+    var id = prompt('Please enter your PAUSE ID:');
+    if(id) document.location.href= a.href + '&id=' +  id;
+    return false;
 }
