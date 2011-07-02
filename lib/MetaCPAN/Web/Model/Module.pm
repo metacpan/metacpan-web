@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 extends 'Catalyst::Model';
-with 'MetaCPAN::Web::Roles::ES';
+with 'MetaCPAN::Web::Role::ES';
 
 =head1 NAME
 

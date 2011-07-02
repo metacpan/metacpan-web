@@ -1,4 +1,4 @@
-package MetaCPAN::Web::Roles::ES;
+package MetaCPAN::Web::Role::ES;
 
 use Moose::Role;
 
