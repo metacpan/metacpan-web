@@ -1,73 +1,54 @@
 package MetaCPAN::Web::Controller::Release;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
-use Scalar::Util qw(blessed);
+
+use Moose;
+use namespace::autoclean;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 use List::Util ();
 
-sub index {
-    my ( $self, $req ) = @_;
-    my $cv = AE::cv;
-    my ( undef, undef, $author, $release ) = split( /\//, $req->path );
-    my ( $out, $cond );
-    if ( $author && $release ) {
-        $cond = $self->model('Release')->get( $author, $release );
-    }
-    else {
-        $cond = $self->model('Release')->find($author);
-    }
+sub index : PathPart('release') : Chained('/') : Args {
+    my ( $self, $c, $author, $release ) = @_;
+    my $model = $c->model('API::Release');
 
-    $cond = $cond->(
-        sub {
-            my ($data) = shift->recv;
-            $out = $data->{hits}->{hits}->[0]->{_source};
-            return $self->not_found($req) unless ($out);
-            ( $author, $release ) = ( $out->{author}, $out->{name} );
-            my $model    = $self->model('Release');
-            my $modules  = $model->modules( $author, $release );
-            my $root     = $model->root_files( $author, $release );
-            my $versions = $model->versions( $out->{distribution} );
-            my $author   = $self->model('Author')->get($author);
-            return ( $modules & $versions & $author & $root );
+    my $data
+        = $author && $release
+        ? $model->get( $author, $release )
+        : $model->find($author);
+    my $out = $data->recv->{hits}->{hits}->[0]->{_source};
+    $c->detach('/not_found') unless ($out);
+    ( $author, $release ) = ( $out->{author}, $out->{name} );
+    my $modules = $model->modules( $author, $release );
+    my $root = $model->root_files( $author, $release );
+    my $versions = $model->versions( $out->{distribution} );
+    $author = $c->model('API::Author')->get($author);
+    ( $modules, $versions, $author, $root )
+        = ( $modules & $versions & $author & $root )->recv;
+
+    $c->stash(
+        {   template => 'release.html',
+            release  => $out,
+            author   => $author,
+            total    => $modules->{hits}->{total},
+            took     => List::Util::max(
+                $modules->{took}, $root->{took}, $versions->{took}
+            ),
+            root => [
+                sort { $a->{name} cmp $b->{name} }
+                map  { $_->{fields} } @{ $root->{hits}->{hits} }
+            ],
+            versions =>
+                [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
+            files => [
+                map {
+                    {
+                        %{ $_->{fields} },
+                            module   => $_->{fields}->{'_source.module'},
+                            abstract => $_->{fields}->{'_source.abstract'}
+                    }
+                    } @{ $modules->{hits}->{hits} }
+            ]
         }
     );
-
-    $cond->(
-        sub {
-            my ( $modules, $versions, $author, $root ) = shift->recv;
-            if ( blessed $modules && $modules->isa('Plack::Response') ) {
-                $cv->send($modules);
-                return;
-            }
-            $cv->send(
-                {
-                    release => $out,
-                    author  => $author,
-                    total   => $modules->{hits}->{total},
-                    took    => List::Util::max(
-                        $modules->{took}, $root->{took}, $versions->{took}
-                    ),
-                    root => [
-                        sort { $a->{name} cmp $b->{name} }
-                        map  { $_->{fields} } @{ $root->{hits}->{hits} }
-                    ],
-                    versions =>
-                      [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
-                    files => [
-                        map {
-                            {
-                                %{ $_->{fields} },
-                                  module   => $_->{fields}->{'_source.module'},
-                                  abstract => $_->{fields}->{'_source.abstract'}
-                            }
-                          } @{ $modules->{hits}->{hits} }
-                    ]
-                }
-            );
-        }
-    );
-
-    return $cv;
 }
 
 1;
