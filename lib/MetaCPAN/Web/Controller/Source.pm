@@ -1,29 +1,26 @@
 package MetaCPAN::Web::Controller::Source;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller::Module';
-use URI::Escape;
 
-sub index {
-    my ( $self, $req ) = @_;
-    my $cv = AE::cv;
-    my ( undef, undef, @module ) = split( /\//, $req->path );
+use Moose;
+use namespace::autoclean;
 
-    my $out;
-    my $cond = $self->model('Module')->source(@module)
-        & $self->model('Module')->get(@module);
-    $cond->(
-        sub {
-            my ( $source, $module ) = shift->recv;
-            if ( $source->{raw} ) {
-                $cv->send( { source => $source->{raw}, module => $module } );
+BEGIN { extends 'MetaCPAN::Web::Controller' }
+
+sub index : PathPart('source') : Chained('/') : Args {
+    my ( $self, $c, @module ) = @_;
+    my ( $source, $module )
+        = ( $c->model('API::Module')->source(@module)
+            & $c->model('API::Module')->get(@module) )->recv;
+    if ( $source->{raw} ) {
+        $c->stash(
+            {   template => 'source.html',
+                source   => $source->{raw},
+                module   => $module,
             }
-            else {
-                $cv->send( $self->not_found($req) );
-            }
-        }
-    );
-    return $cv;
+        );
+    }
+    else {
+        $c->detach('/not_found');
+    }
 }
 
 1;
