@@ -4,7 +4,6 @@ use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
-use URI::Escape;
 
 sub index : PathPart('module') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
