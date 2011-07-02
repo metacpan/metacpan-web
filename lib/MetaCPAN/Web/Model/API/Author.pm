@@ -1,9 +1,8 @@
-package MetaCPAN::Web::Model::Author;
+package MetaCPAN::Web::Model::API::Author;
 use Moose;
 use namespace::autoclean;
 
-extends 'Catalyst::Model';
-with 'MetaCPAN::Web::Role::ES';
+extends 'MetaCPAN::Web::Model::API';
 
 =head1 NAME
 
