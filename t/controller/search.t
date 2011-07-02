@@ -7,7 +7,7 @@ test_psgi app, sub {
     my $cb = shift;
     ok( my $res = $cb->( GET "/search" ),
         'GET /search' );
-    is( $res->code, 200, 'code 200' );
+    is( $res->code, 302, 'code 302' );
     diag('invalid search term');
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );

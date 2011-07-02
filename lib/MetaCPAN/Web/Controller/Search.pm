@@ -4,36 +4,34 @@ use warnings;
 use base 'MetaCPAN::Web::Controller';
 use Plack::Response;
 
-sub index {
-    my ( $self, $req ) = @_;
-    my @query =
-      ( $req->parameters->get_all('q'), $req->parameters->get_all('lucky') );
+sub index : Path {
+    my ( $self, $c ) = @_;
+    my $req = $c->req;
+    my @query = ( $req->param('q'), $req->param('lucky') );
 
-     unless(@query) {
-      my $res = $req->new_response;
-      my $cv = AE::cv;
-      $res->redirect( '/' );
-      $cv->send($res);
-      return $cv;
+    unless (@query) {
+        $c->res->redirect('/');
+        $c->detach;
     }
 
     my $query = join( ' ', @query );
     $query =~ s/::/ /g if ($query);
 
-    my $model = $self->model('Module');
+    my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
-    return $req->parameters->{lucky}
-      ? $model->first($query)->(
-        sub {
-            my $module = shift->recv;
-            return $self->not_found unless ($module);
-            my $res = Plack::Response->new;
-            $res->redirect( '/module/' . $module );
-            return $res;
-        }
-      )
-      : $query =~ /distribution:/ ? $model->search_distribution( $query, $from )
-      :                             $model->search_collapsed( $query, $from );
+    if ( $req->parameters->{lucky} ) {
+        my $module = $model->first($query)->recv;
+        $c->detach('/not_found') unless ($module);
+        $c->res->redirect("/module/$module");
+        $c->detach;
+    }
+    else {
+        my $results
+            = $query =~ /distribution:/
+            ? $model->search_distribution( $query, $from )->recv
+            : $model->search_collapsed( $query, $from )->recv;
+        $c->stash({%$results, template => 'search.html'});
+    }
 }
 
 1;
