@@ -7,6 +7,7 @@ use FindBin;
 use lib "$FindBin::RealBin/lib";
 use MetaCPAN::Web;
 use Plack::App::File;
+use Plack::App::URLMap;
 use Plack::Middleware::Assets;
 use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
@@ -29,7 +30,6 @@ $app = Plack::Middleware::Assets->wrap(
     ],
     minify => 0,
 );
-Plack::Middleware::StackTrace->wrap($app);
 
 Plack::Middleware::ReverseProxy->wrap($app);
 
