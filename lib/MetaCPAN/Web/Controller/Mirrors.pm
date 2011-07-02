@@ -1,11 +1,13 @@
 package MetaCPAN::Web::Controller::Mirrors;
 
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+use Moose;
+use namespace::autoclean;
 
-sub index {
-    my ( $self, $req ) = @_;
+BEGIN { extends 'MetaCPAN::Web::Controller' }
+
+sub index : Path {
+    my ( $self, $c ) = @_;
+    my $req = $c->req;
     my $location;
     my @protocols;
     if ( my $q = $req->parameters->{q} ) {
@@ -20,15 +22,13 @@ sub index {
     }
 
     my @or;
-    push(
-        @or,
-        { not => { filter => { missing => { field => $_ } } } }
-    ) for (@protocols);
+    push( @or, { not => { filter => { missing => { field => $_ } } } } )
+        for (@protocols);
 
-    my $cv = AE::cv;
-    $self->model->request(
-        '/mirror/_search', {
-            size  => 999,
+    my $cv   = AE::cv;
+    my $data = $c->model('API')->request(
+        '/mirror/_search',
+        {   size  => 999,
             query => { match_all => {} },
             @or ? ( filter => { and => \@or } ) : (),
             $location
@@ -42,28 +42,23 @@ sub index {
                 )
             : ( sort => [ 'continent', 'country' ] )
         }
-        )->(
-        sub {
-            my ($data) = shift->recv;
-            my $latest = [
-                map {
-                    {
-                        %{ $_->{_source} },
-                            distance => $location
-                            ? $_->{sort}->[0]
-                            : undef
-                    }
-                    } @{ $data->{hits}->{hits} }
-            ];
-            $cv->send(
-                {   mirrors => $latest,
-                    took    => $data->{took},
-                    total   => $data->{hits}->{total}
-                }
-            );
+    )->recv;
+    my $latest = [
+        map {
+            {
+                %{ $_->{_source} }, distance => $location
+                    ? $_->{sort}->[0]
+                    : undef
+            }
+            } @{ $data->{hits}->{hits} }
+    ];
+    $c->stash(
+        {   mirrors  => $latest,
+            took     => $data->{took},
+            total    => $data->{hits}->{total},
+            template => 'mirrors.html',
         }
-        );
-    return $cv;
+    );
 }
 
 1;
