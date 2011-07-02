@@ -45,8 +45,19 @@
 <body>
   <div class="header">
     <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
-    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %><a class="settings" href="#" onclick="return false"><img src="/static/icons/settings.png" width=16></a>
-    <div class="spacer" style="text-align: right"><strong>BETA</strong></div>
+    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
+    <div class="spacer" style="text-align: right"><% IF req.user_exists %><strong><% req.user.id %></strong><% ELSE %><strong id="signin-button">Sign in</strong><% END %></div>
+  </div>
+  <div id="signin" style="display: block; position: absolute; right: 2px; top: 0px">
+      <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>
+         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;">
+             <a href="<% api %>/login/comicvine?token=<% 12.random %>">ComicVine</a>
+             <a href="<% api %>/login/github?token=<% 12.random %>">GitHub</a>
+             <a href="<% api %>/login/pause?token=<% 12.random %>" onclick="return logInPAUSE(this)">PAUSE</a>
+             <a href="<% api %>/login/twitter?token=<% 12.random %>">Twitter</a>
+             <a href="<% api %>/login/facebook?token=<% 12.random %>">Facebook</a>
+             <a href="<% api %>/login/google?token=<% 12.random %>">Google</a>
+          </div></div>
   </div>
 <div style="float: right; text-align: right; padding-right: 5px; margin-top: -15px"><a href="https://github.com/CPAN-API/metacpan-web/issues/new"><small>Problem?<br>Open an issue!</small></a></div>
   <% IF req.uri.path != '/' %>
