@@ -11,9 +11,9 @@ sub index :Path :Args(1) {
 
     my $out;
 
-    my $author   = $c->model('Author')->get($id);
+    my $author   = $c->model('API::Author')->get($id);
     # this should probably be refactored into the model?? why is it here
-    my $releases = $c->model('Release')->request(
+    my $releases = $c->model('API::Release')->request(
         '/release/_search',
         {
             query => {
@@ -52,8 +52,8 @@ sub index :Path :Args(1) {
             );
         }
     );
-
-    return $c->stash($cv->recv);
+    
+    $c->stash({%{$cv->recv}, template => 'author.html'});
 }
 
 __PACKAGE__->meta->make_immutable;

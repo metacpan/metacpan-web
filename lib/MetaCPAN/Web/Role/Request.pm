@@ -1,4 +1,5 @@
 package MetaCPAN::Web::Role::Request;
+
 use Moose::Role;
 use URI::Query;
 
