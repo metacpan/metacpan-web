@@ -75,3 +75,4 @@ Template::Alloy->define_vmethod(
     }
 );
 
+1;
