@@ -52,7 +52,7 @@
 
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
-<% IF req.cookies.hideTOC %><style>#index { display:none}</style><% END %>
+<% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>
 <a name="___pod"></a>
 <div class="pod">
 <% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false">').replace(/<\/code><\/pre>/, '</pre>') | none %>
