@@ -8,7 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 # Sets the actions in this controller to be registered with no prefix
 # so they function identically to actions created in MyApp.pm
 #
-__PACKAGE__->config(namespace => '');
+__PACKAGE__->config( namespace => '' );
 
 =head1 NAME
 
@@ -23,8 +23,11 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 =cut
 
 sub auto : Private {
-    my ($self, $c) = @_;
-    $c->stash->{req} = $c->req;
+    my ( $self, $c ) = @_;
+    if ( my $sid = $c->req->session->get('msid') ) {
+        my $user = $c->model('API::User')->get($sid)->recv;
+        $c->req->user( $user->{data}->{_source} );
+    }
     return 1;
 }
 
@@ -34,7 +37,7 @@ The root page (/)
 
 =cut
 
-sub index :Path :Args(0) {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash->{template} = 'home.html';
 }
@@ -45,7 +48,7 @@ Standard 404 error page
 
 =cut
 
-sub default :Path {
+sub default : Path {
     my ( $self, $c ) = @_;
     $c->forward('/not_found');
 }
@@ -62,7 +65,11 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {}
+sub end : ActionClass('RenderView') {
+    my ( $self, $c ) = @_;
+    $c->stash->{req} = $c->req;
+    $c->stash->{api} = $c->config->{api};
+}
 
 =head1 AUTHOR
 

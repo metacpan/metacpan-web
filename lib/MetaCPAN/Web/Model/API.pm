@@ -40,7 +40,10 @@ sub request {
     http_request $search ? 'post' : 'get' => 'http://' . $self->api . $path,
         body => $search ? encode_json($search) : '',
         persistent => 1,
-        sub {
+        $params->{msid}
+        ? (
+        cookie_jar => $self->_build_cookie( $self->api, $params->{msid} ) )
+        : (), sub {
         my ( $data, $headers ) = @_;
         my $content_type = $headers->{'content-type'} || '';
 
@@ -55,6 +58,19 @@ sub request {
         }
         };
     return $req;
+}
+
+sub _build_cookie {
+    my ( $self, $api, $value ) = @_;
+    $api =~ s/:\d+$//;
+    return {
+        version => 1,
+        $api    => {
+            '/' => {
+                metacpan_api => { _expires => 2383111257, value => $value }
+            }
+        }
+    };
 }
 
 1;
