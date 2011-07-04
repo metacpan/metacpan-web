@@ -48,7 +48,8 @@ $(document).ready(function() {
     
     $('.author-table').tablesorter({widgets: ['zebra'],textExtraction: function(node){
         if(node.getAttribute('class') == 'date') {
-            return node.firstChild.getAttribute('sort');
+            var date = new Date(node.firstChild.getAttribute('sort'));
+            return date.getTime();
         } else {
             return node.innerHTML;
         }

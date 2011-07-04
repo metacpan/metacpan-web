@@ -5,31 +5,57 @@ use warnings;
 use base 'Catalyst::View::TT::Alloy';
 
 use mro;
-use DateTime;
 use Digest::MD5 qw(md5_hex);
-use DateTime::Format::HTTP;
-use DateTime::Format::ISO8601;
 use URI;
 use JSON;
 use Gravatar::URL;
+use Regexp::Common qw(time);
 
 sub parse_datetime {
     my $date = shift;
-    $date =~ s/\..*?$//;
-    return unless ($date);
-    DateTime::Format::ISO8601->parse_datetime($date);
+    if ( $date =~ /$RE{time}{iso}{-keep}/ ) {
+        return {
+            year   => $2,
+            month  => $3,
+            day    => $4,
+            hour   => $5,
+            minute => $6,
+            second => $7,
+        };
+    }
+    else {
+        return;
+    }
 }
+
+my @MoY = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
+my @DoW = qw(Mon Tue Wed Thu Fri Sat Sun);
 
 sub format_datetime {
     my $date = shift;
     my $dt   = parse_datetime($date);
-    return unless $dt;
-    DateTime::Format::HTTP->format_datetime($dt);
+    return sprintf(
+        '%02d %s %04d %02d:%02d:%02d GMT',
+        $dt->{day},
+        $MoY[ $dt->{month} - 1],
+        @$dt{qw(year hour minute second)}
+    );
+}
+
+sub canonical_datetime {
+    my $date = shift;
+    my $dt   = parse_datetime($date);
+    return int(sprintf(
+        '%04d%02d%02d%02d%02d%02d',
+        @$dt{qw(year month day hour minute second)}
+    ));
 }
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
+
+Template::Alloy->define_vmethod( 'text', dt_canonical => \&canonical_datetime );
 
 Template::Alloy->define_vmethod(
     'text',

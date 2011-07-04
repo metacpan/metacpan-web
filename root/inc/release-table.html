@@ -13,7 +13,7 @@
 <tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
   <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" style="width: 260px" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
   <td class="abstract"><% IF release.abstract; release.abstract; END %></td>
-  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% release.date.dt.epoch %>"><% release.date.dt_http %></span></td>
+  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% release.date.dt_http %>"><% release.date.dt_http %></span></td>
 </tr>
 <% END %>
 </tbody>

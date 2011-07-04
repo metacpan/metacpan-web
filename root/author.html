@@ -69,9 +69,9 @@ IF profiles.${profile.name} %>
 i = 0;
 counter = 1;
 aggregated = [];
-latest = {date => '1970-01-01'};
+latest = releases[0];
 FOREACH release IN releases;
-IF release.date.dt > latest.date.dt; latest = release; END;
+IF release.date.dt_canonical > latest.date.dt_canonical; latest = release; END;
 IF last == release.distribution; counter = counter + 1; NEXT;
 ELSE; last = release.distribution; counter = 1; END;
 UNLESS release.name; NEXT; END;
@@ -82,16 +82,7 @@ END %>
   <% INCLUDE inc/release-latest.html %>
   <hr>
   <strong>Tools</strong>
-  <ul><!--
-    <% IF others.size > 1 %>
-    <li>
-      <select name="release" onchange="document.location.href='/release/' + this.value">
-      <option>Diff with version</option>
-      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
-      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
-      <% END %>
-    </select></li>
-    <% END %>-->
+  <ul>
     <li>Search distributions:<br>
       <form action="/search">
       <input type="hidden" name="q" value="author:<% author.pauseid %>">
