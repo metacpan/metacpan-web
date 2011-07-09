@@ -12,10 +12,11 @@
 
 <div class="content">
 <%-
+MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 releases = [];
 FOREACH release IN recent;
 date = release.date.dt;
-day = date.strftime("%B %d, %Y");
+day = "%d %s, %s".sprintf(date.day, MoY.item(date.month), date.year);
 IF day != last;
 INCLUDE inc/release-table.html releases = releases;
 releases = [];
