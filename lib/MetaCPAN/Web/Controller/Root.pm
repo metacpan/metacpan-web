@@ -24,9 +24,8 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    if ( my $sid = $c->req->session->get('msid') ) {
-        my $user = $c->model('API::User')->get($sid)->recv;
-        $c->req->user( $user->{data}->{_source} );
+    if ( my $token = $c->req->session->get('token') ) {
+        $c->authenticate({ token => $token });
     }
     return 1;
 }
