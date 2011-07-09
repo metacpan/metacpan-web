@@ -27,14 +27,4 @@ sub session {
     return Plack::Session->new( $self->env );
 }
 
-sub user {
-    my $self = shift;
-    $self->{user} = shift if (@_);
-    return $self->{user};
-}
-
-sub user_exists {
-    return shift->{user};
-}
-
 1;
