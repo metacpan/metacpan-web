@@ -5,8 +5,8 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 
 sub get {
-    my ( $self, $msid ) = @_;
-    $self->request( "/user", undef, { msid => $msid } );
+    my ( $self, $token ) = @_;
+    $self->request( "/user", undef, { token => $token } );
 
 }
 
