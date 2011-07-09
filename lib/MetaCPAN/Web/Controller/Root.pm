@@ -52,7 +52,7 @@ sub default :Path {
 
 sub not_found : Private {
 my ( $self, $c ) = @_;
-    $c->response->body( 'Page not found' );
+    $c->stash({ template => 'not_found.html' });
     $c->response->status(404);
 }
 
