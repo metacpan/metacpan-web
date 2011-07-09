@@ -11,4 +11,12 @@ sub logout : Local {
     $c->res->redirect('/');
 }
 
+sub settings : Local {
+    my ($self, $c) = @_;
+}
+
+sub identities : Local {
+    my ($self, $c) = @_;
+}
+
 1;

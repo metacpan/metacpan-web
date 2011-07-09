@@ -46,9 +46,9 @@
   <div class="header">
     <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
     IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
-    <%- IF req.user_exists %>
+    <%- IF user_exists %>
     <a class="settings" href="/account/settings"><img src="/static/icons/settings.png" width=16></a>
-    <div class="spacer" style="text-align: right"><strong><% req.user.id %></strong></div>
+    <div class="spacer" style="text-align: right"><strong>Welcome</strong></div>
     <%- ELSE %>
     <div class="spacer" style="text-align: right"><strong id="signin-button">Sign in</strong></div>
   </div>
@@ -59,7 +59,7 @@
              <a href="http://<% api %>/login/github?token=<% 12.random %>">GitHub</a>
              <a href="http://<% api %>/login/pause?token=<% 12.random %>" onclick="return logInPAUSE(this)">PAUSE</a>
              <a href="http://<% api %>/login/twitter?token=<% 12.random %>">Twitter</a>
-             <a href="http://<% api %>/login/facebook?token=<% 12.random %>">Facebook</a>
+             <a href="http://<% api %>/oauth2/authorize?choice=facebook&amp;client_id=metacpan">Facebook</a>
              <a href="http://<% api %>/login/google?token=<% 12.random %>">Google</a>
           </div></div><% END %>
   </div>

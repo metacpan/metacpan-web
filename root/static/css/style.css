@@ -180,16 +180,21 @@ text-shadow: 0px 1px 1px #fff;
 height: 30px;
 }
 
+a.g-button {
+    padding: 2px 6px 3px;
+    height: 23px;
+}
+
 .ds input[type=submit] {
     border-left: 0px;
 }
 
-input.g-button:hover, button.g-button:hover {
+input.g-button:hover, button.g-button:hover, a.g-button:hover {
     background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(248,248,248)),to(rgb(221,221,221)));
     background: -moz-linear-gradient(rgb(248,248,248),rgb(221,221,221));
 }
 
-input.g-button:active, button.g-button:active {
+input.g-button:active, button.g-button:active, a.g-button:active {
     background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(204,204,204)),to(rgb(221,221,221)));
     background: -moz-linear-gradient(rgb(204,204,204),rgb(221,221,221));
 }
@@ -252,26 +257,36 @@ input.g-button:active, button.g-button:active {
     visibility: visible
 }
 
-.account-bar {
-    border-top: 1px solid #e9e9e9;
-}
-
 .account-bar a {
     display: block;
-    border: 1px solid #e9e9e9;
-    border-top: 0px solid #fff;
     padding: 6px;
     font-size: 1.2em;
 }
 
 .account-bar a:hover {
     text-decoration: none;
+    background-color: #f9f9f9;
     
 }
 
-.account-bar a:active, .account-bar a.active {
-    background-color: #36C;
-    color: #fff;
+.account-bar a.active {
+    background-color: #f9f9f9;
+    color: #000;
+    font-weight: bold;
+}
+
+.account-settings label {
+    display: block;
+    padding-bottom: 10px;
+    font-size: 1.1em
+}
+
+.account-settings a.g-button {
+    width: 80px
+}
+
+.account-settings td {
+    padding: 5px;
 }
 
 .icon {
