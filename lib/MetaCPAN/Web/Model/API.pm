@@ -36,11 +36,15 @@ sub model {
 
 sub request {
     my ( $self, $path, $search, $params ) = @_;
-    $path .= "?access_token=$params->{token}" if($params->{token});
-    my $req = $self->cv;
-    http_request $search ? 'post' : 'get' => 'http://' . $self->api . $path,
+    $path .= "?access_token=$params->{token}" if ( $params->{token} );
+    my $method = $params->{method};
+    my $req    = $self->cv;
+    http_request $method ? $method
+        : $search        ? 'post'
+        : 'get' => 'http://' . $self->api . $path,
         body => $search ? encode_json($search) : '',
-        persistent => 1, sub {
+        persistent => 1,
+        sub {
         my ( $data, $headers ) = @_;
         my $content_type = $headers->{'content-type'} || '';
 
