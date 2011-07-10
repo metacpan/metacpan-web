@@ -14,8 +14,6 @@ sub index : Path {
         ->request(
         "/oauth2/access_token?client_id=metacpan&client_secret=ClearAirTurbulence&code=$code"
         )->recv;
-    use Data::Printer;
-    p($data);
     $c->req->session->set( token => $data->{access_token} );
     $c->authenticate( { token => $data->{access_token} } );
     $c->res->redirect('/');
