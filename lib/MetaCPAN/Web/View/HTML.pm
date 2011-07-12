@@ -57,6 +57,10 @@ Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_canonical => \&canonical_datetime );
 
+Template::Alloy->define_vmethod( 'hash', pretty_json => sub {
+    JSON->new->utf8->pretty->encode(shift)
+} );
+
 {
     my @chars = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9, qw(- _) );
     Template::Alloy->define_vmethod(
