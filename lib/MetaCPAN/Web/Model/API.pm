@@ -44,7 +44,7 @@ sub request {
         my ( $data, $headers ) = @_;
         my $content_type = $headers->{'content-type'} || '';
 
-        if ( $content_type eq 'application/json' ) {
+        if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
             $req->send( $@ ? { raw => $data } : $json );
         }

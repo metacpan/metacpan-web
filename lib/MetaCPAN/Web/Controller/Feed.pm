@@ -69,7 +69,7 @@ sub build_feed {
 
 sub end : Private {
     my ( $self, $c ) = @_;
-    $c->res->content_type('application/rss+xml');
+    $c->res->content_type('application/rss+xml; charset=UTF-8');
     $c->res->body( $c->stash->{feed} );
 }
 
