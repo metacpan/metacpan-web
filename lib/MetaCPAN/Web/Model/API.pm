@@ -42,7 +42,8 @@ sub request {
     http_request $method ? $method
         : $search        ? 'post'
         : 'get' => 'http://' . $self->api . $path,
-        body => $search ? encode_json($search) : '',
+        body    => $search ? encode_json($search) : undef,
+        headers    => { 'Content-type' => 'application/json' },
         persistent => 1,
         sub {
         my ( $data, $headers ) = @_;
