@@ -8,33 +8,13 @@
   <% IF author.website.size %><br>
   <strong>Website</strong><br>
   <a href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
-  <%
-profiles = {
-  couchsurfing = 'http://www.couchsurfing.org/people/%s/',
-  delicious = 'http://www.delicious.com/%s',
-  digg = 'http://digg.com/%s',
-  facebook = 'https://facebook.com/%s',
-  flickr = 'http://www.flickr.com/people/%s/',
-  friendfeed = 'http://friendfeed.com/%s',
-  lastfm = 'http://www.last.fm/user/%s',
-  linkedin = 'http://www.linkedin.com/profile/view?id=%s',
-  myspace = 'http://www.myspace.com/%s',
-  posterous = 'http://%s.posterous.com/',
-  reddit = 'http://www.reddit.com/user/%s',
-  stumbleupon = 'http://www.stumbleupon.com/stumbler/%s/',
-  tumblr = 'http://%s.tumblr.com/',
-  twitter = 'http://twitter.com/%s',
-  vimeo = 'http://vimeo.com/%s',
-  youtube = 'http://www.youtube.com/user/%s',
-  github = 'https://github.com/%s',
-  stackoverflow = 'http://stackoverflow.com/users/%s/',
-  perlmonks = 'http://www.perlmonks.org/?node=%s' };
+<%
 IF author.profile.size -%>
 <strong>Profiles</strong><br>
 <%-
 FOREACH profile IN author.profile;
 IF profiles.${profile.name} %>
-<a href="<% profiles.${profile.name}.replace('%s', profile.id) %>" target="_blank">
+<a href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank">
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16>
 </a>
 <% END; END %><br><% END %>
