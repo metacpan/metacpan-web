@@ -1,0 +1,173 @@
+<% INCLUDE inc/account-bar.html %>
+<div class="content account-settings">
+    <form method="POST" action="">
+        <% IF errors -%>
+        <fieldset><legend style="color: #600">Errors</legend>
+            <ul>
+            <% FOREACH error IN errors -%>
+                <li><% error.field %>: <% error.message %></li>
+            <% END -%>
+            </ul>
+        </fieldset>
+        <% ELSIF success -%>
+        <fieldset><legend style="color: #060">Success</legend>
+            <p>The profile has been updated.</p>
+        </fieldset>
+        <% END %>
+        <fieldset><legend>General</legend>
+        <%- INCLUDE inc/author-pic.html author = author %>
+        <label><span>PAUSE ID</span><input type="text" value="<% author.pauseid %>" disabled="disabled" /></label>
+        <label><span>Name</span><input type="text" name="name" value="<% author.name %>" /></label>
+        <label><span>ASCII Name</span><input type="text" name="asciiname" value="<% author.asciiname %>" /></label>
+        <div>
+            <label><span>Email</span><input type="text" name="email" value="<% author.email.shift %>" /> <a href="" onclick="return addField('email')">add</a></label>
+            <% FOREACH email IN author.email -%>
+            <label><span></span><input type="text" name="email" value="<% email %>" />
+                <a href="" onclick="return removeLabel(this)">remove</a></label>
+            <% END -%>
+        </div>
+        <div>
+            <label><span>Website</span><input type="text" name="website" value="<% author.website.shift %>" /> <a href="" onclick="return addField('website')">add</a></label>
+            <% FOREACH website IN author.website -%>
+            <label><span></span><input type="text" name="website" value="<% website %>" />
+                <a href="" onclick="return removeLabel(this)">remove</a></label>
+            <% END -%>
+        </div>
+        <label><span>Blog</span><input type="text" name="blog.url" value="<% author.blog.0.url %>" /></label>
+        <label><span>Feed</span><input type="text" name="blog.feed" value="<% author.blog.0.feed %>" /></label>
+        <label><span>Avatar</span><input type="text" name="gravatar_url" value="<% author.gravatar_url %>" /></label>
+        <%- donation = author.donation.0.id %>
+        <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('.paypal').slideToggle()" /> Accept donations</label>
+        <label class="paypal"<% UNLESS donation %> style="display: none"<% END %>>
+            <span>PayPal</span>
+            <input type="hidden" name="donation.name" value="paypal" />
+            <input type="text" name="donation.id" value="<% donation %>" />
+        </label>
+        <label><span>Last update</span><strong class="relatize"><% author.updated.dt_http %></strong></label>
+    </fieldset>
+    
+    <fieldset><legend>Location</legend>
+        <label><span>Coutry</span><input type="text" name="country" value="<% author.country %>" /></label>
+        <label><span>Region</span><input type="text" name="region" value="<% author.region %>" /></label>
+        <label><span>City</span><input type="text" name="city" value="<% author.city %>" /></label>
+        <label><span>Latitude</span><input type="text" name="latitude" value="<% author.location.0 %>" /> <a href="" onclick="return fillLocation()">locate me</a><img src="/static/icons/busy.gif" style="display: none; float: right" id="busy" /></label>
+        <label><span>Longitude</span><input type="text" name="longitude" value="<% author.location.1 %>" /></label>
+    </fieldset>
+    
+    <fieldset><legend>Profiles</legend>
+        <label><span></span><select onchange="return addProfile(this)">
+            <option>Add Profile</option>
+        <% FOREACH profile IN profiles; profile.value.id = profile.key -%>
+        <option value="<% profile.value.json %>"><% profile.value.name %></option>
+        <% END -%>
+        <option value="">Custom...</option>
+        </select></label>
+        <div id="profiles">
+            <% FOREACH profile IN author.profile; known = profiles.${profile.name} -%>
+            <div class="profile">
+            <label><span>
+            <% IF known -%>
+            <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16><% known.name %></span>
+            <input type="hidden" name="profile.name" value="<% profile.name %>" />
+            <input type="text" name="profile.id" value="<% profile.id %>" />
+            <% ELSE %>
+            <input type="text" name="profile.name" value="<% profile.name %>" /></span>
+                <input type="text" name="profile.id" value="<% profile.id %>" />
+                <% END -%>
+            <a href="" onclick="return removeDiv(this)">remove</a>
+            <% IF known %>
+            <a href="" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank">check</a>
+            <% END %></label></div>
+            <% END -%>
+        </div>
+    </fieldset>
+    
+    <fieldset><legend>Extra</legend>
+        <p>Any additional data you want to add to your profiles goes in here (JSON format).</p><br />
+        <textarea name="extra" cols="60" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
+    </fieldset>
+    <br /> 
+    <div class="ds"><input type="submit" value="Save Profile" class="g-button" /></div>
+    </form>
+</div>
+
+<script>
+
+function addProfile(select) {
+    var value = select.value;
+    var profile = value ? JSON.parse(value) : null;
+    select.selectedIndex = 0;
+    var container = $('#profiles');
+    var html = '<div style="display: none" class="profile">'
+    + '<label><span>';
+    if(value) {
+        html += '<img src="/static/images/profile/' + profile.id + '.png" width=16 height=16>'
+    + profile.name + '</span>'
+    + '<input type="hidden" name="profile.name" value="' + profile.id  + '" /> '
+    + '<input type="text" name="profile.id" /> '
+    + '<a href="" class="check" onclick="return removeDiv(this)">remove</a> '
+    + '<a href="" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank">check</a>';
+    } else {
+        html += '<input type="text" name="profile.name" /></span> '
+        + '<input type="text" name="profile.id" /> '
+        + '<a href="" class="check" onclick="return removeDiv(this)">remove</a> ';
+    }
+    html += '</label></div>';
+    
+      container.append(html);
+      var add = container.children().last();
+      add.slideDown();
+}
+
+function rewriteURL(link) {
+    link = $(link);
+    var url = link.attr('tmpl');
+    var input = link.prev().prev();
+    link.attr('href', url.replace('%s', input.val()));
+    return true;
+}
+
+function removeDiv(link) {
+    $(link).parents('div').first().slideUp("normal", function(){$(this).remove()});
+    return false;
+}
+
+function removeLabel(link) {
+    $(link).parents('label').first().slideUp("normal", function(){$(this).remove()});
+    return false;
+}
+
+function validateJSON(text) {
+    var valid = $('.valid');
+    try {
+        text.value && JSON.parse(text.value);
+        valid.removeClass('invalid');
+    } catch(err) {
+        valid.addClass('invalid');
+    }
+}
+
+function addField(id) {
+    var input = $('input[name="' + id + '"]').last();
+    var container = input.parent().parent();
+    container.append('<label style="display: none"><span></span><input type="text" name="' + id + '" />'
+    + ' <a href="" onclick="return removeLabel(this)">remove</a></label>');
+    
+    var add = container.children().last();
+    add.slideDown();
+    return false;
+}
+
+function fillLocation() {
+    $('#busy').show();
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        $('#busy').hide();
+        $('input[name="latitude"]').val(pos.coords.latitude);
+        $('input[name="longitude"]').val(pos.coords.longitude);
+    }, function(){
+        $('#busy').hide();
+    });
+    return false;
+}
+
+</script>

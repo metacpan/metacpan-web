@@ -25,8 +25,7 @@ html {
 body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, code,
-del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, dialog, figure, footer, header,
 hgroup, nav, section {
@@ -88,6 +87,27 @@ font-family: Arial,Helvetica,sans-serif;
 margin: 0px;
 padding: 0px;
 font-size: 0.8em;
+}
+
+legend { padding: 5px; font-size: 1.1em; font-weight: bold }
+
+fieldset { border: 1px solid #E9E9E9; }
+
+label span {
+    display: inline-block;
+    width: 125px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+label span img {
+    padding: 2px;
+    padding-right: 5px;
+    float: left;
+}
+
+label input[type="text"], label select {
+    width: 160px;
 }
 
 a {
@@ -185,7 +205,7 @@ a.g-button {
     height: 23px;
 }
 
-.ds input[type=submit] {
+.home .ds input[type=submit] {
     border-left: 0px;
 }
 
@@ -277,7 +297,7 @@ input.g-button:active, button.g-button:active, a.g-button:active {
 
 .account-settings label {
     display: block;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
     font-size: 1.1em
 }
 
@@ -287,6 +307,20 @@ input.g-button:active, button.g-button:active, a.g-button:active {
 
 .account-settings td {
     padding: 5px;
+}
+
+.account-settings .valid {
+    background-color: #900;
+    padding: 5px;
+    float: right;
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: bold;
+    display: none;
+}
+
+.account-settings .invalid {
+    display: inline-block;
 }
 
 .icon {
