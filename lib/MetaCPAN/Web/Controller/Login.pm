@@ -11,9 +11,11 @@ sub index : Path {
     return $c->detach('/not_found') unless ($code);
     my $data
         = $c->model('API')
-        ->request(
-        "/oauth2/access_token?client_id=metacpan&client_secret=ClearAirTurbulence&code=$code"
-        )->recv;
+        ->request( "/oauth2/access_token?client_id="
+            . $c->config->{consumer_id}
+            . "&client_secret="
+            . $c->config->{consumer_secret}
+            . "&code=$code" )->recv;
     $c->req->session->set( token => $data->{access_token} );
     $c->authenticate( { token => $data->{access_token} } );
     $c->res->redirect('/');
