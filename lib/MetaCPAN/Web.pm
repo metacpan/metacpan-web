@@ -31,7 +31,9 @@ __PACKAGE__->config(
     }
 );
 
-our $VERSION = '0.01';
+sub token {
+    shift->request->session->get('token');
+}
 
 __PACKAGE__->setup();
 
