@@ -24,7 +24,7 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 sub auto : Private {
     my ( $self, $c ) = @_;
-    if ( my $token = $c->req->session->get('token') ) {
+    if ( my $token = $c->token ) {
         $c->authenticate({ token => $token });
     }
     return 1;
