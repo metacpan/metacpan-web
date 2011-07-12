@@ -29,7 +29,6 @@ sub find_user {
     my ( $self, $auth, $c ) = @_;
     my $obj = Hash::AsObject->new(
         $c->model('API::User')->get( $auth->{token} )->recv );
-    warn $obj->id;
     $self->obj( $obj );
     return $self;
 }
