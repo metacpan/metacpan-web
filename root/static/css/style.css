@@ -107,7 +107,7 @@ label span img {
 }
 
 label input[type="text"], label select {
-    width: 160px;
+    width: 200px;
 }
 
 a {
