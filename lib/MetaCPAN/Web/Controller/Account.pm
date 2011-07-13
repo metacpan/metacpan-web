@@ -29,7 +29,7 @@ sub identities : Local {
 sub profile : Local {
     my ( $self, $c ) = @_;
     my $author = $c->model('API::User')->get_profile( $c->token )->recv;
-    $c->stash( { author => $author } );
+    $c->stash( $author->{error} ? { no_profile => 1 } : { author => $author } );
     my $req = $c->req;
     return unless ( $req->method eq 'POST' );
 
