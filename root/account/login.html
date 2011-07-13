@@ -1,0 +1,10 @@
+<% INCLUDE inc/account-bar.html %>
+<div class="content account-settings">
+    <% IF req.params.success == "mail_sent" %>
+    <p>An email has been sent to the email address associated with the PAUSE account. Please check your inbox and verify your account by visiting the link in the mail.</p>
+    <% ELSIF req.params.error %>
+    <p>There has been an error with your request: <% req.params.error %></p>
+    <% END %>
+    
+</table>
+</div>

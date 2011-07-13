@@ -152,6 +152,8 @@ function disableTag(tag) {
 }
 
 function logInPAUSE(a) {
+    if(!a.href.match(/pause/))
+        return true;
     var id = prompt('Please enter your PAUSE ID:');
     if(id) document.location.href= a.href + '&id=' +  id;
     return false;
