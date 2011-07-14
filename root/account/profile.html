@@ -156,9 +156,12 @@ function validateJSON(text) {
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
-    container.append('<label style="display: none"><span></span><input type="text" name="' + id + '" />'
-    + ' <a href="" onclick="return removeLabel(this)">remove</a></label>');
-    
+
+    var new_input = input.parent().clone().hide();;
+    new_input.children('span').html('');
+    new_input.children('input').attr('value', '');
+    container.append(new_input);
+
     var add = container.children().last();
     add.slideDown();
     return false;
