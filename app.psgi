@@ -41,18 +41,19 @@ $app = Plack::Middleware::Assets->wrap(
     minify => 0,
 );
 
-$app = Plack::Middleware::ReverseProxy->wrap($app);
+Plack::Middleware::ReverseProxy->wrap(
+    sub {
+        my $env = shift;
+        my $secure = $env->{'HTTP_X_FORWARDED_PORT'} eq '443';
+        Plack::Middleware::Session::Cookie->wrap(
+            $app,
+            session_key => $secure
+            ? 'metacpan_secure'
+            : 'metacpan',
+            expires => 2**30,
+            $secure ? ( secure => 1 ) : (),
+            httponly => 1,
+        )->($env);
+    }
+);
 
-sub {
-    my $env = shift;
-    my $secure = $env->{'psgi.url_scheme'} eq 'https';
-    Plack::Middleware::Session::Cookie->wrap(
-        $app,
-        session_key => $secure
-        ? 'metacpan_secure'
-        : 'metacpan',
-        expires => 2**30,
-        $secure ? ( secure => 1 ) : ( ),
-        httponly => 1,
-    )->($env);
-};
