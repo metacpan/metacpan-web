@@ -1,8 +1,17 @@
 package MetaCPAN::Web;
 
 # ABSTRACT: Modern front-end for MetaCPAN
+
 use strict;
 use warnings;
+
+BEGIN {
+    if ( $ENV{PLACK_ENV} eq 'development' ) {
+        $ENV{PLACK_SERVER}       = 'Standalone';
+        $ENV{METACPAN_WEB_DEBUG} = 1;
+    }
+}
+
 use FindBin;
 use lib "$FindBin::RealBin/lib";
 use MetaCPAN::Web;
@@ -17,21 +26,23 @@ MetaCPAN::Web->setup_engine('PSGI');
 
 my $app = Plack::App::URLMap->new;
 $app->map( '/static/' => Plack::App::File->new( root => 'root/static' ) );
-$app->map( '/favicon.ico' => Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
+$app->map( '/favicon.ico' =>
+        Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
 $app->map( '/' => sub { MetaCPAN::Web->run(@_) } );
 $app = Plack::Middleware::Runtime->wrap($app);
-$app = Plack::Middleware::Assets->wrap( $app, files => [<root/static/css/*.css>] );
+$app = Plack::Middleware::Assets->wrap( $app,
+    files => [<root/static/css/*.css>] );
 $app = Plack::Middleware::Assets->wrap(
     $app,
     files => [
-        map { "root/static/js/$_.js" }
-          qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack shCore shBrushPerl cpan)
+        map {"root/static/js/$_.js"}
+            qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack shCore shBrushPerl cpan)
     ],
     minify => 0,
 );
 
 $app = Plack::Middleware::ReverseProxy->wrap($app);
 
-Plack::Middleware::Session::Cookie->wrap($app, session_key => 'metacpan');
+Plack::Middleware::Session::Cookie->wrap( $app, session_key => 'metacpan' );
 
 # ABSTRACT: A Front End for MetaCPAN
