@@ -43,12 +43,16 @@ $app = Plack::Middleware::Assets->wrap(
 
 $app = Plack::Middleware::ReverseProxy->wrap($app);
 
-Plack::Middleware::Session::Cookie->wrap(
-    $app,
-    session_key => 'metacpan',
-    expires     => 2**30,
-    MetaCPAN::Web->debug ? ( ) : ( secure => 1 ),
-    httponly => 1,
-);
-
-# ABSTRACT: A Front End for MetaCPAN
+sub {
+    my $env = shift;
+    my $secure = $env->{'psgi.url_scheme'} eq 'https';
+    Plack::Middleware::Session::Cookie->wrap(
+        $app,
+        session_key => $secure
+        ? 'metacpan_secure'
+        : 'metacpan',
+        expires => 2**30,
+        $secure ? ( secure => 1 ) : ( ),
+        httponly => 1,
+    )->($env);
+};
