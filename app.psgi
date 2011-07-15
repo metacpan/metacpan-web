@@ -13,8 +13,6 @@ use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 
-my $api = 'http://' . ( $ENV{METACPAN_API} || 'api.metacpan.org' );
-
 MetaCPAN::Web->setup_engine('PSGI');
 
 my $app = Plack::App::URLMap->new;
