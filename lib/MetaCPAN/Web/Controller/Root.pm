@@ -25,7 +25,7 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 sub auto : Private {
     my ( $self, $c ) = @_;
     if ( my $token = $c->token ) {
-        $c->authenticate({ token => $token });
+        $c->authenticate( { token => $token } );
     }
     return 1;
 }
@@ -53,8 +53,8 @@ sub default : Path {
 }
 
 sub not_found : Private {
-my ( $self, $c ) = @_;
-    $c->stash({ template => 'not_found.html' });
+    my ( $self, $c ) = @_;
+    $c->stash( { template => 'not_found.html' } );
     $c->response->status(404);
 }
 
@@ -66,8 +66,9 @@ Attempt to render a view, if needed.
 
 sub end : ActionClass('RenderView') {
     my ( $self, $c ) = @_;
-    $c->stash->{req} = $c->req;
-    $c->stash->{api} = $c->config->{api};
+    $c->stash->{req}        = $c->req;
+    $c->stash->{api}        = $c->config->{api};
+    $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
 }
 
 =head1 AUTHOR
