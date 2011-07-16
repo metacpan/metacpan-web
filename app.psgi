@@ -43,8 +43,9 @@ $app = Plack::Middleware::Assets->wrap(
 
 Plack::Middleware::ReverseProxy->wrap(
     sub {
-        my $env = shift;
-        my $secure = $env->{'HTTP_X_FORWARDED_PORT'} eq '443';
+        my $env    = shift;
+        my $secure = $env->{'HTTP_X_FORWARDED_PORT'}
+            && $env->{'HTTP_X_FORWARDED_PORT'} eq '443';
         Plack::Middleware::Session::Cookie->wrap(
             $app,
             session_key => $secure
