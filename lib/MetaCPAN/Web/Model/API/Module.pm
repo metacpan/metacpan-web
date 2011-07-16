@@ -115,15 +115,15 @@ sub autocomplete {
 }
 
 sub search_distribution {
-    my ( $self, $query, $from ) = @_;
+    my ( $self, $query, $from, $user ) = @_;
 
     # the distribution is included in the query and ES does the right thing
     my $cv = $self->cv;
     my ( $data, $total );
     my $results = $self->search(
         $query,
-        {   size      => 20,
-            from      => $from
+        {   size => 20,
+            from => $from
         }
         )->(
         sub {
@@ -134,18 +134,18 @@ sub search_distribution {
 
             my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
             my $descriptions = $self->search_descriptions(@ids);
-
-            return $self->model('Rating')->get(@distributions) & $descriptions;
+            my $ratings      = $self->model('Rating')->get(@distributions);
+            my $favorites    = $self->model('Favorite')->get(@distributions);
+            return $ratings & $favorites & $descriptions;
         }
         )->(
         sub {
-            my ($ratings, $descriptions) = shift->recv;
-            my $results = $self->_extract_results( $data, $ratings );
+            my ( $ratings, $favorites, $descriptions ) = shift->recv;
+            my $results
+                = $self->_extract_results( $data, $ratings, $favorites );
 
-            map {
-                $_->{description}
-                    = $descriptions->{results}->{ $_->{id} }
-            } @{ $results };
+            map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
+                @{$results};
             $cv->send(
                 {   results => [ map { [$_] } @$results ],
                     total   => $data->{hits}->{total},
@@ -160,7 +160,7 @@ sub search_distribution {
 }
 
 sub search_collapsed {
-    my ( $self, $query, $from ) = @_;
+    my ( $self, $query, $from, $user ) = @_;
     my $cv   = AE::cv;
     my $took = 0;
     my $total;
@@ -190,21 +190,24 @@ sub search_collapsed {
         }
 
         @distributions = splice( @distributions, $from, 20 );
-        my $ratings = $self->model('Rating')->get(@distributions);
+        my $ratings   = $self->model('Rating')->get(@distributions);
+        my $favorites = $self->model('Favorite')->get(@distributions);
         my $results
             = $self->model('Module')
             ->search( $query,
             $self->_search_in_distributions(@distributions) );
-        return ( $ratings & $results );
+        return ( $ratings & $favorites & $results );
     };
 
     my $data;
     $self->_search( $query, $run )->($process_or_repeat)->(
         sub {
-            my ( $ratings, $results ) = shift->recv;
-            $took += max( grep {defined} $ratings->{took}, $results->{took} )
+            my ( $ratings, $favorites, $results ) = shift->recv;
+            $took += max( grep {defined} $ratings->{took},
+                $results->{took}, $favorites->{took} )
                 || 0;
-            $results = $self->_extract_results( $results, $ratings );
+            $results
+                = $self->_extract_results( $results, $ratings, $favorites );
             $results = $self->_collpase_results($results);
             my @ids = map { $_->[0]->{id} } @$results;
             $data = {
@@ -268,7 +271,7 @@ sub search_descriptions {
 }
 
 sub _extract_results {
-    my ( $self, $results, $ratings ) = @_;
+    my ( $self, $results, $ratings, $favorites ) = @_;
     return [
         map {
             {
@@ -276,7 +279,11 @@ sub _extract_results {
                     abstract => $_->{fields}->{'abstract.analyzed'},
                     score    => $_->{_score},
                     rating =>
-                    $ratings->{ratings}->{ $_->{fields}->{distribution} }
+                    $ratings->{ratings}->{ $_->{fields}->{distribution} },
+                    favorites =>
+                    $favorites->{favorites}->{ $_->{fields}->{distribution} },
+                    myfavorite => $favorites->{myfavorites}
+                    ->{ $_->{fields}->{distribution} },
             }
             } @{ $results->{hits}->{hits} }
     ];

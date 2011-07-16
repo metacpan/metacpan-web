@@ -7,6 +7,14 @@ use Hash::AsObject;
 
 has obj => ( is => 'rw', isa => 'Hash::AsObject' );
 
+has pause_id => ( is => 'ro', lazy => 1, builder => '_build_pause_id');
+
+sub _build_pause_id {
+    my $self = shift;
+    my ($pause) = $self->obj->get_identities('pause');
+    return $pause ? $pause->key : undef;
+}
+
 sub get_object { shift->obj }
 
 sub store {'Catalyst::Authentication::Plugin::Store::Proxy'}

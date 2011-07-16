@@ -36,7 +36,8 @@
     <a href="/source/<% [item.author, item.release, item.path].join("/") %>"><% item.path %></a>
     <% END -%>
      <% IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><br>
+  </strong></big>
+  <a href="" class="favorite<% IF item.myfavorite %> active<% END %>"><% item.favorites %> +1</a><br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>

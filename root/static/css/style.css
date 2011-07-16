@@ -267,6 +267,29 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     line-height: 1;
 }
 
+a.favorite {
+    padding: 1px 3px;
+    margin-left: 10px;
+    font-size: 0.9em;
+    opacity: 0.5;
+    -webkit-border-radius: 4px 4px;
+    border: solid 1px #666;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
+    text-align: right;
+    min-width: 25px;
+}
+
+a.favorite.active, a.favorite:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#69F), to(#36C));
+    color: #fff;
+    text-shadow: 0px 1px 1px #333;
+    border-color: #36C;
+    opacity: 1
+}
+
 .search-bar .search-tag a span {
     float: right;
     visibility: hidden;
