@@ -39,9 +39,29 @@ function toggleTOC() {
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
     if(document.location.hash) {
-        var match = document.location.hash.match(/^#L(\d+)$/);
-        console.log(match);
-        SyntaxHighlighter.defaults['highlight'] = [match[1]];
+        var lineMatch = document.location.hash.match(/^#L(\d+)$/);
+        if( lineMatch ) {
+            console.log(lineMatch);
+            SyntaxHighlighter.defaults['highlight'] = [lineMatch[1]];
+        }
+        else {
+            var packageMatch = document.location.hash.match(/^#P(\S+)$/);
+            if( packageMatch ) {
+                var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
+                console.log(decodedPackageMatch);
+                var re = new RegExp("package " + decodedPackageMatch + ";");
+                var source = $("#source").html();
+                var leadingSource = source.split(re);
+                if( leadingSource.length > 1 ) {
+                    var lineCount = leadingSource[0].split("\n").length;
+                    SyntaxHighlighter.defaults['highlight'] = [lineCount];
+                    document.location.hash = "#L" + lineCount;
+                }
+                else {
+                    document.location.hash = '';
+                }
+            }
+        }
     }
 
     SyntaxHighlighter.highlight();
