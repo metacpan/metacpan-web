@@ -39,12 +39,18 @@ function toggleTOC() {
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
     if(document.location.hash) {
+        // check for 'L{number}' anchor in URL and highlight and jump
+        // to that line.
         var lineMatch = document.location.hash.match(/^#L(\d+)$/);
         if( lineMatch ) {
             console.log(lineMatch);
             SyntaxHighlighter.defaults['highlight'] = [lineMatch[1]];
         }
         else {
+            // check for 'P{encoded_package_name}' anchor, convert to
+            // line number (if possible), and then highlight and jump
+            // as long as the matching line is not the first line in
+            // the code.
             var packageMatch = document.location.hash.match(/^#P(\S+)$/);
             if( packageMatch ) {
                 var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
@@ -52,12 +58,13 @@ $(document).ready(function() {
                 var re = new RegExp("package " + decodedPackageMatch + ";");
                 var source = $("#source").html();
                 var leadingSource = source.split(re);
-                if( leadingSource.length > 1 ) {
-                    var lineCount = leadingSource[0].split("\n").length;
+                var lineCount = leadingSource[0].split("\n").length;
+                if( leadingSource.length > 1 && lineCount > 1 ) {
                     SyntaxHighlighter.defaults['highlight'] = [lineCount];
                     document.location.hash = "#L" + lineCount;
                 }
                 else {
+                    // reset the anchor portion of the URL (it just looks neater).
                     document.location.hash = '';
                 }
             }
