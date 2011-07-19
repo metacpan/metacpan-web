@@ -7,12 +7,12 @@ use Hash::AsObject;
 
 has obj => ( is => 'rw', isa => 'Hash::AsObject' );
 
-has pause_id => ( is => 'ro', lazy => 1, builder => '_build_pause_id');
+has pause_id => ( is => 'ro', lazy => 1, builder => '_build_pause_id' );
 
 sub _build_pause_id {
     my $self = shift;
-    my ($pause) = $self->obj->get_identities('pause');
-    return $pause ? $pause->key : undef;
+    my ($pause) = grep { $_->{name} eq 'pause' } @{ $self->identity || [] };
+    return $pause ? $pause->{key} : undef;
 }
 
 sub get_object { shift->obj }
@@ -37,7 +37,7 @@ sub find_user {
     my ( $self, $auth, $c ) = @_;
     my $obj = Hash::AsObject->new(
         $c->model('API::User')->get( $auth->{token} )->recv );
-    $self->obj( $obj );
+    $self->obj($obj);
     return $self;
 }
 

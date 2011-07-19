@@ -7,7 +7,7 @@ extends 'MetaCPAN::Web::Model::API';
 use List::MoreUtils qw(uniq);
 
 sub get {
-    my ( $self, @distributions ) = @_;
+    my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
     $self->request(
@@ -32,27 +32,30 @@ sub get {
                         size  => scalar @distributions,
                     },
                 },
-                myfavorites => {
-                    terms        => { field => 'favorite.distribution', },
-                    facet_filter => { term  => { 'favorite.user' => 'MO' } }
-                }
+                $user
+                ? ( myfavorites => {
+                        terms => { field => 'favorite.distribution', },
+                        facet_filter =>
+                            { term => { 'favorite.user' => $user } }
+                    }
+                    )
+                : (),
             }
         }
         )->(
         sub {
             my $data = shift->recv;
-            use Data::Printer;
-            warn p($data);
             $cv->send(
                 {   took      => $data->{took},
                     favorites => {
                         map { $_->{term} => $_->{count} }
                             @{ $data->{facets}->{favorites}->{terms} }
                     },
-                    myfavorites => {
-                        map { $_->{term} => $_->{count} }
+                    myfavorites => $user
+                    ? { map { $_->{term} => $_->{count} }
                             @{ $data->{facets}->{myfavorites}->{terms} }
-                    }
+                        }
+                    : {},
                 }
             );
         }

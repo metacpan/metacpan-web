@@ -185,3 +185,7 @@ function logInPAUSE(a) {
     if(id) document.location.href= a.href + '&id=' +  id;
     return false;
 }
+
+function tagDistribution(distribution) {
+    return false;
+}

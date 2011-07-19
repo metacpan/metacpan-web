@@ -135,7 +135,7 @@ sub search_distribution {
             my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
             my $descriptions = $self->search_descriptions(@ids);
             my $ratings      = $self->model('Rating')->get(@distributions);
-            my $favorites    = $self->model('Favorite')->get(@distributions);
+            my $favorites    = $self->model('Favorite')->get($user, @distributions);
             return $ratings & $favorites & $descriptions;
         }
         )->(
@@ -191,7 +191,7 @@ sub search_collapsed {
 
         @distributions = splice( @distributions, $from, 20 );
         my $ratings   = $self->model('Rating')->get(@distributions);
-        my $favorites = $self->model('Favorite')->get(@distributions);
+        my $favorites = $self->model('Favorite')->get($user, @distributions);
         my $results
             = $self->model('Module')
             ->search( $query,
@@ -356,7 +356,7 @@ sub search {
                                         'distribution.analyzed^10',
                                         'distribution.camelcase^5',
                                         'abstract.analyzed^2',
-                                        'pod.analyzed'
+                                        'pod.analyzed',
                                     ],
                                     query                  => $query,
                                     allow_leading_wildcard => \0,
