@@ -342,9 +342,13 @@ sub search {
                             query => {
                                 query_string => {
                                     fields => [
-                                        'documentation.analyzed^99',
-                                        'documentation.camelcase^99',
-                                        'abstract.analyzed^5',
+                                        'documentation.analyzed^7',
+                                        'documentation.camelcase^3',
+                                        'file.module.name.analyzed^3',
+                                        'file.module.name.camelcase^3',
+                                        'distribution.analyzed^10',
+                                        'distribution.camelcase^5',
+                                        'abstract.analyzed^2',
                                         'pod.analyzed'
                                     ],
                                     query                  => $query,
@@ -357,9 +361,9 @@ sub search {
                             script => qq{
     documentation = doc['documentation'].stringValue;
     if(documentation == empty) {
-        documentation = ''
+        documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
     }
-    return _score - documentation.length()/10000 + doc[\"date\"].date.getMillis() / 1000000000000
+    return _score - documentation.length()/10000000 + doc[\"date\"].date.getMillis() / 1000000000000
 }
                         }
                     },
