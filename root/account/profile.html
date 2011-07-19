@@ -68,7 +68,7 @@
         <option value="">Custom...</option>
         </select></label>
         <div id="profiles">
-            <% FOREACH profile IN author.profile; known = profiles.${profile.name} -%>
+            <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
             <div class="profile">
             <label><span>
             <% IF known -%>

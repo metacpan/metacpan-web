@@ -12,7 +12,7 @@
 IF author.profile.size -%>
 <strong>Profiles</strong><br>
 <%-
-FOREACH profile IN author.profile;
+FOREACH profile IN author.profile.sort('name');
 IF profiles.${profile.name} %>
 <a href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank">
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16 alt="<% profile.name %>" title="<% profile.name %> - <% profile.id%>">
