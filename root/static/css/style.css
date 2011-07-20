@@ -78,12 +78,11 @@ a img { border: none; }
 /* Remember to define your own focus styles! */
 :focus { outline: 0; }
 
-
-
-
+button, body {
+font-family: Arial,Helvetica,sans-serif;
+}
 
 body {
-font-family: Arial,Helvetica,sans-serif;
 margin: 0px;
 padding: 0px;
 font-size: 0.8em;
@@ -267,12 +266,14 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     line-height: 1;
 }
 
-a.favorite {
+button.favorite, a.favorite {
     padding: 1px 3px;
     margin-left: 10px;
     font-size: 0.9em;
+    background-color: #fff;
     opacity: 0.5;
-    -webkit-border-radius: 4px 4px;
+    -webkit-border-radius: 3px 3px;
+    -moz-border-radius: 3px 3px;
     border: solid 1px #666;
     color: #333;
     text-decoration: none;
@@ -280,10 +281,29 @@ a.favorite {
     line-height: 1;
     text-align: right;
     min-width: 25px;
+    position: relative;
+    top: -1px;
 }
 
-a.favorite.active, a.favorite:hover {
+button.favorite {
+    min-width: 35px;
+    cursor: pointer;
+}
+
+button.favorite.highlight, a.favorite.highlight {
+    background-color: #fca216;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffc874), to(#fca216));
+    background: -moz-linear-gradient(#ffc874,#fca216);
+    color: #fff;
+    text-shadow: 0px 1px 1px #333;
+    border-color: #d39534;
+    opacity: 1
+}
+
+button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hover {
+    background-color: #36C;
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#69F), to(#36C));
+    background: -moz-linear-gradient(#69F,#36C);
     color: #fff;
     text-shadow: 0px 1px 1px #333;
     border-color: #36C;

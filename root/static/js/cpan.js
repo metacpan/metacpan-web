@@ -43,7 +43,6 @@ $(document).ready(function() {
         // to that line.
         var lineMatch = document.location.hash.match(/^#L(\d+)$/);
         if( lineMatch ) {
-            console.log(lineMatch);
             SyntaxHighlighter.defaults['highlight'] = [lineMatch[1]];
         }
         else {
@@ -54,7 +53,6 @@ $(document).ready(function() {
             var packageMatch = document.location.hash.match(/^#P(\S+)$/);
             if( packageMatch ) {
                 var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
-                console.log(decodedPackageMatch);
                 var re = new RegExp("package " + decodedPackageMatch + ";");
                 var source = $("#source").html();
                 var leadingSource = source.split(re);
@@ -186,6 +184,34 @@ function logInPAUSE(a) {
     return false;
 }
 
-function tagDistribution(distribution) {
+function favDistribution(form) {
+    form = $(form);
+    var data = form.serialize();
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: data,
+        success: function(){
+            var button = form.find('button');
+            button.toggleClass('active');
+            var counter = button.find('span');
+            var count = counter.text();
+            if(button.hasClass('active')) {
+                counter.text(count ? parseInt(count) + 1 : 1);
+                form.append('<input type="hidden" name="remove" value="1">');
+                if(!count)
+                    button.toggleClass('highlight');
+            } else {
+                counter.text(parseInt(count) - 1);
+                form.find('input[name="remove"]').remove();
+                if(counter.text() == 0) {
+                    counter.text("");
+                    button.toggleClass('highlight');
+                }
+            }
+        },
+        error: function(){
+        }
+    });
     return false;
 }

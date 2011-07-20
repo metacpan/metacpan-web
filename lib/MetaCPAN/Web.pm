@@ -14,7 +14,10 @@ use Catalyst qw/
 
 extends 'Catalyst';
 
-__PACKAGE__->apply_request_class_roles(qw/MetaCPAN::Web::Role::Request/);
+__PACKAGE__->apply_request_class_roles(qw(
+    MetaCPAN::Web::Role::Request
+    Catalyst::TraitFor::Request::REST::ForBrowsers
+));
 
 __PACKAGE__->config(
     name                                        => 'MetaCPAN::Web',
