@@ -277,6 +277,10 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     visibility: visible
 }
 
+.user-profiles > a {
+    text-decoration: none;
+}
+
 .account-bar a {
     display: block;
     padding: 6px;
