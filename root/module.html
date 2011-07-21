@@ -5,7 +5,9 @@
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
   &nbsp;/&nbsp;
   <% module.documentation %>
-  </big></strong><% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+  </big></strong>
+  <% INCLUDE inc/favorite.html module = module %>
+  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
 <div class="search-bar">
   <strong></strong>
@@ -55,5 +57,5 @@
 <% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>
 <a name="___pod"></a>
 <div class="pod">
-<% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false">').replace(/<\/code><\/pre>/, '</pre>') | none %>
+<% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false">').replace(/<\/code><\/pre>/, '</pre>').replace('http://metacpan.org', '') | none %>
 </div>

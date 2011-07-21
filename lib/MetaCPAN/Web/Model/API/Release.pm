@@ -174,6 +174,12 @@ sub versions {
         }
     );
 }
+
+sub favorites {
+    my ($self, $dist) = @_;
+    $self->request('/favorite/_search', {});
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

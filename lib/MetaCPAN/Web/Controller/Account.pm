@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Account;
 
 use Moose;
-use namespace::autoclean;
 use List::MoreUtils qw(pairwise);
 use DateTime ();
 use JSON::XS ();

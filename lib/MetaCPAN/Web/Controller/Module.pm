@@ -19,8 +19,14 @@ sub index : PathPart('module') : Chained('/') : Args {
     my $author = $c->model('API::Author')->get( $data->{author} );
     my $versions
         = $c->model('API::Release')->versions( $data->{distribution} );
-    ( $pod, $author, $release, $versions )
-        = ( $pod & $author & $release & $versions )->recv;
+    my $favorites
+        = $c->model('API::Favorite')
+        ->get( $c->user_exists ? $c->user->pause_id : undef,
+        $data->{distribution} );
+    ( $pod, $author, $release, $versions, $favorites )
+        = ( $pod & $author & $release & $versions & $favorites )->recv;
+    $data->{myfavorite} = $favorites->{myfavorites}->{ $data->{distribution} };
+    $data->{favorites}  = $favorites->{favorites}->{ $data->{distribution} };
 
     $c->stash(
         {   module  => $data,

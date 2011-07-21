@@ -21,8 +21,14 @@ sub index : PathPart('release') : Chained('/') : Args {
     my $root = $model->root_files( $author, $release );
     my $versions = $model->versions( $out->{distribution} );
     $author = $c->model('API::Author')->get($author);
-    ( $modules, $versions, $author, $root )
-        = ( $modules & $versions & $author & $root )->recv;
+    my $favorites
+        = $c->model('API::Favorite')
+        ->get( $c->user_exists ? $c->user->pause_id : undef,
+        $out->{distribution} );
+    ( $modules, $versions, $author, $root, $favorites )
+        = ( $modules & $versions & $author & $root & $favorites )->recv;
+    $out->{myfavorite} = $favorites->{myfavorites}->{ $out->{distribution} };
+    $out->{favorites}  = $favorites->{favorites}->{ $out->{distribution} };
 
     $c->stash(
         {   template => 'release.html',

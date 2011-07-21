@@ -26,10 +26,11 @@ sub index : Path {
         $c->detach;
     }
     else {
+        my $pause_id = $c->user ? $c->user->pause_id : undef;
         my $results
             = $query =~ /distribution:/
-            ? $model->search_distribution( $query, $from )->recv
-            : $model->search_collapsed( $query, $from )->recv;
+            ? $model->search_distribution( $query, $from, $pause_id )->recv
+            : $model->search_collapsed( $query, $from, $pause_id )->recv;
         $c->stash({%$results, template => 'search.html'});
     }
 }

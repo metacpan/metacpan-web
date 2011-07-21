@@ -58,6 +58,11 @@ sub not_found : Private {
     $c->response->status(404);
 }
 
+sub forbidden : Private {
+    my ( $self, $c ) = @_;
+    $c->response->status(403);
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
