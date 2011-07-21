@@ -319,6 +319,10 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     visibility: visible
 }
 
+.user-profiles > a {
+    text-decoration: none;
+}
+
 .account-bar a {
     display: block;
     padding: 6px;
