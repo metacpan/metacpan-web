@@ -12,10 +12,10 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
-    ok( $tx->_findv('//a[@href="/module/Moose"]'),
+    ok( $tx->find_value('//a[@href="/module/Moose"]'),
         'contains permalink to resource'
     );
-    ok( my $this = $tx->_findv('//a[text()="This version"]/@href'),
+    ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
         'contains link to "this" version' );
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
