@@ -60,6 +60,7 @@ sub not_found : Private {
 
 sub forbidden : Private {
     my ( $self, $c ) = @_;
+    $c->stash( { template => 'forbidden.html' } );
     $c->response->status(403);
 }
 

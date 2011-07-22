@@ -7,6 +7,14 @@ use JSON::XS ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+sub auto : Private {
+    my ($self, $c) = @_;
+    unless($c->user_exists) {
+        $c->forward('/forbidden');
+    }
+    return $c->user_exists;
+}
+
 sub logout : Local {
     my ( $self, $c ) = @_;
     $c->req->session->expire;
