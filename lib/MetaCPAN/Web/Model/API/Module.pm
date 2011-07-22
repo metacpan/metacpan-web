@@ -370,7 +370,7 @@ sub search {
     if(documentation == empty) {
         documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
     }
-    return _score - documentation.length()/10000000 + doc[\"date\"].date.getMillis() / 1000000000000
+    return _score - documentation.length()/30 + doc[\"date\"].date.getMillis() / 1000000000000
 }
                         }
                     },
