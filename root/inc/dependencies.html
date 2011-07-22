@@ -8,7 +8,7 @@
 <%
 deps = [];
 FOREACH dep IN dependencies;
-IF dep.phase != 'runtime' || dep.module == 'perl'; NEXT; END;
+IF dep.phase != 'runtime' || dep.relationship != 'requires' || dep.module == 'perl'; NEXT; END;
 deps.push(dep.module);
 END;
 FOREACH dep IN deps.sort %>
