@@ -4,8 +4,8 @@
   <div style="clear: both; text-align: center"></div>
   <hr>
   <strong>Email</strong><br>
-  <a href="mailto:<% author.email.0 %>"><% author.email.0 %></a>
-  <% IF author.website.size %><br>
+  <a href="mailto:<% author.email.0 %>"><% author.email.0 %></a><br>
+  <% IF author.website.size %>
   <strong>Website</strong><br>
   <a href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
 <%
