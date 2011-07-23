@@ -12,7 +12,7 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/PERLER/, 'title includes author name' );
-    my $release = $tx->_findv(
+    my $release = $tx->find_value(
         '//table//tbody/tr[1]/td[1]//a/@href');
     ok( $release, 'found a release' );
 

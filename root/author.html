@@ -4,10 +4,10 @@
   <div style="clear: both; text-align: center"></div>
   <hr>
   <strong>Email</strong><br>
-  <a href="mailto:<% author.email.0 %>"><% author.email.0 %></a>
-  <% IF author.website.size %><br>
+  <a href="mailto:<% author.email.0 %>"><% author.email.0 %></a><br>
+  <% IF author.website.size %>
   <strong>Website</strong><br>
-  <a href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
+  <a rel="me" href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
 <%
 IF author.profile.size -%>
 <strong>Profiles</strong>
@@ -15,7 +15,7 @@ IF author.profile.size -%>
 <%-
 FOREACH profile IN author.profile.sort('name');
 IF profiles.${profile.name} %>
-<a href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank">
+<a rel="me" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank">
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16 alt="<% profile.name %>" title="<% profile.name %> - <% profile.id%>">
 </a>
 <% END; END %></div><% END %>

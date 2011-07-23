@@ -8,7 +8,7 @@ test_psgi app, sub {
     ok( my $res = $cb->( GET "/module/Moose" ), 'GET /module/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
-    ok( my $source = $tx->_findv('//a[text()="Source"]/@href'),
+    ok( my $source = $tx->find_value('//a[text()="Source"]/@href'),
         'contains link to Source' );
     $source =~ s/^\/source/\/raw/;
     ok( $res = $cb->( GET $source ), "GET $source" );

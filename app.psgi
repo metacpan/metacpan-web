@@ -6,7 +6,7 @@ use strict;
 use warnings;
 
 BEGIN {
-    if ( $ENV{PLACK_ENV} eq 'development' ) {
+    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
         $ENV{PLACK_SERVER}       = 'Standalone';
         $ENV{METACPAN_WEB_DEBUG} = 1;
     }

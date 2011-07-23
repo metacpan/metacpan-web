@@ -18,7 +18,7 @@ test_psgi app, sub {
     
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
-    my $release = $tx->_findv(
+    my $release = $tx->find_value(
         '//div[@class="search-results"]//big[1]/strong/a/@href');
     ok( $release, "found release $release" );
 
