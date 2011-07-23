@@ -1,16 +1,7 @@
 package MetaCPAN::Web::Role::Request;
 
 use Moose::Role;
-use URI::Query;
 use Plack::Session;
-
-sub query_string_with {
-    my $self   = shift;
-    my $params = shift;
-    my $qq     = URI::Query->new( $self->parameters );
-    $qq->replace(%$params);
-    return $qq->stringify;
-}
 
 sub page {
     my $page = shift->parameters->{p};
