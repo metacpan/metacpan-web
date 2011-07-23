@@ -23,7 +23,8 @@ sub index : Path : Args(1) {
                 }
             },
             sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
+                { date => "desc" },
+                { 'version_numified' => { reverse => \1 } },
             ],
             fields => [qw(author distribution name status abstract date)],
             size   => 1000,
