@@ -140,7 +140,7 @@ sub root_files {
                             { term => { directory => \0 } },
                             {   or => [
                                     map { { term => { 'file.name' => $_ } } }
-                                        qw(MANIFEST README INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog META.yml META.json dist.ini)
+                                        qw(MANIFEST README INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog CHANGELOG META.yml META.json dist.ini)
                                 ]
                             }
                         ]
