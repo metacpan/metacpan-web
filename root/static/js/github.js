@@ -18,6 +18,15 @@ function Github() {
 
             var url = this.githubApiUrl +'/repos/'+ this.user +'/'+ this.repo +'?callback=?';
 
+            this.item.CreateBubblePopup({
+                align: 'middle',
+                innerHtml: '<img src="/static/icons/busy.gif" />',
+                position: 'right',
+                selectable: true,
+                themeName: 'grey',
+                themePath: '/static/images/jquerybubblepopup-theme'
+            });
+
             this.item.mouseover(function() {
                 if (me.result) {
                     me.showPopup();
@@ -33,10 +42,8 @@ function Github() {
         },
 
         showPopup: function() {
-            var content = '<img src="/static/icons/busy.gif" />';
-
             if (this.result) {
-                content = '<table class="release-info-github">'
+                var content = '<table class="release-info-github">'
 
                          + ( this.result.data.description
                          ? '  <tr><th>Description:</th><td>'+ this.result.data.description +'</td></tr>'
@@ -55,22 +62,9 @@ function Github() {
                          +'  <tr><th>SSH URL:</th><td><a href="ssh://'+ this.result.data.ssh_url +'">'+ this.result.data.ssh_url +'</a></td></tr>'
                          +'  <tr><th>Last Commit:</th><td><span class="relatize">'+ this.result.data.pushed_at +'</span></td></tr>'
                          +'</table>';
+                 this.item.SetBubblePopupInnerHtml(content, true);
             }
 
-            if (this.item.IsBubblePopupOpen()) {
-                this.item.SetBubblePopupInnerHtml(content, false);
-            }
-            else {
-                this.item.CreateBubblePopup({
-                    align: 'middle',
-                    innerHtml: content,
-                    innerHtmlStyle: { 'text-align':'center' },
-                    position: 'right',
-                    selectable: true,
-                    themeName: 'grey',
-                    themePath: '/static/images/jquerybubblepopup-theme'
-                });
-            }
             $('.jquerybubblepopup .relatize').relatizeDate();
         },
 
