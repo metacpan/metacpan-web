@@ -53,12 +53,13 @@ function Github() {
                          +'  <tr><th>Git URL:</th><td><a href="'+ this.result.data.git_url +'">'+ this.result.data.git_url +'</a></td></tr>'
                          +'  <tr><th>Github URL:</th><td><a href="'+ this.result.data.html_url +'">'+ this.result.data.html_url +'</a></td></tr>'
                          +'  <tr><th>SSH URL:</th><td><a href="ssh://'+ this.result.data.ssh_url +'">'+ this.result.data.ssh_url +'</a></td></tr>'
-                         +'  <tr><th>Last Commit:</th><td>'+ this.result.data.pushed_at +'</td></tr>'
+                         +'  <tr><th>Last Commit:</th><td><span class="relatize">'+ this.result.data.pushed_at +'</span></td></tr>'
                          +'</table>';
             }
 
             if (this.item.IsBubblePopupOpen()) {
                 this.item.SetBubblePopupInnerHtml(content, false);
+                console.log(this.item.find('.relatize'));
             }
             else {
                 this.item.CreateBubblePopup({
@@ -71,6 +72,7 @@ function Github() {
                     themePath: '/static/images/jquerybubblepopup-theme'
                 });
             }
+            $('.jquerybubblepopup .relatize').relatizeDate();
         },
 
         parseUrl: function() {
