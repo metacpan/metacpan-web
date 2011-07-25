@@ -1,7 +1,7 @@
       <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <li><% release.resources %></li>
       <% IF release.resources.repository %>
-      <li>
+      <li id="release-info-repository">
         <% IF release.resources.repository.web %>
         <a href="<% release.resources.repository.web %>">Repository</a>
         <% END %>

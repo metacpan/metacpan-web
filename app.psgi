@@ -36,7 +36,7 @@ $app = Plack::Middleware::Assets->wrap(
     $app,
     files => [
         map {"root/static/js/$_.js"}
-            qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack jquery.bubblepopup.min shCore shBrushPerl cpan)
+            qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack jquery.bubblepopup.min shCore shBrushPerl cpan github)
     ],
     minify => 0,
 );

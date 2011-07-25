@@ -557,6 +557,10 @@ code { font-family: monospace; }
     width: 160px;
 }
 
+table .release-info-github th {
+    padding-right: 8px;
+}
+
 .release-table {
     table-layout:fixed;
     width: 100%;
