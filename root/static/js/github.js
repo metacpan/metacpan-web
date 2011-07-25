@@ -59,7 +59,6 @@ function Github() {
 
             if (this.item.IsBubblePopupOpen()) {
                 this.item.SetBubblePopupInnerHtml(content, false);
-                console.log(this.item.find('.relatize'));
             }
             else {
                 this.item.CreateBubblePopup({
