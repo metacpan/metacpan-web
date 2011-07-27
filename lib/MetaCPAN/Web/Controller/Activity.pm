@@ -57,6 +57,7 @@ sub index : Path {
         }
     );
     $c->res->content_type('image/svg+xml');
+    $c->res->headers->expires(time + 86400);
     $c->stash({%{$cv->recv}, template => 'activity.xml'});
     $c->detach('View::Raw');
 
