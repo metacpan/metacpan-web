@@ -1,5 +1,5 @@
 <div style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
-    <a href="/author/<% author.pauseid %>"><img src="<% author.gravatar_image(130, 'identicon') %>" width="130" height="130" class="author-img"></a><br>
+    <% IF author.gravatar_url %><a href="/author/<% author.pauseid %>"><img src="<% author.gravatar_url %>" width="130" height="130" class="author-img"></a><br><% END %>
   <strong><a href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
   <span title="<% author.asciiname %>"><% author.name %></span>
 </div>
