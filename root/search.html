@@ -34,12 +34,12 @@
             <% FOREACH author IN authors.results %>
                 <li>
                     <a href  = "/author/<% author.id %>"
-                       title = "Author page for <% author.name %>"
+                       title = "Author page for <% author.name | html %>"
                         >
                         <% IF author.gravatar_url %>
                             <img src="<% author.gravatar_url %>" class="author-img">
                         <% END %>
-                        <% author.name  %> (<% author.pauseid %>)
+                        <% author.name | html %> (<% author.pauseid %>)
                     </a>
                 </li>
             <% END %>
