@@ -28,6 +28,25 @@
 </div>
 
 <div class="search-results">
+<% IF authors.total %>
+    <div id="author-results">
+        <ul class="authors">
+            <% FOREACH author IN authors.results %>
+                <li>
+                    <a href  = "/author/<% author.id %>"
+                       title = "Author page for <% author.name %>"
+                        >
+                        <% IF author.gravatar_url %>
+                            <img src="<% author.gravatar_url %>" class="author-img">
+                        <% END %>
+                        <% author.name  %> (<% author.pauseid %>)
+                    </a>
+                </li>
+            <% END %>
+        </ul>
+    </div>
+<% END %>
+
 <% FOREACH group IN results; item = group.0 %>
   <big><strong>
     <% IF item.documentation -%>

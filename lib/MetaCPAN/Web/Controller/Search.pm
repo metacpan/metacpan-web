@@ -33,6 +33,10 @@ sub index : Path {
             : $model->search_collapsed( $query, $from, $pause_id )->recv;
         $c->stash({%$results, template => 'search.html'});
     }
+
+    my $author_model = $c->model('API::Author');
+    my $results = $author_model->search($query,$from)->recv;
+    $c->stash({authors=>$results});
 }
 
 1;
