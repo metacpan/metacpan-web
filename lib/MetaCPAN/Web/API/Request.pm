@@ -6,6 +6,7 @@ use namespace::autoclean;
 use AnyEvent::HTTP qw(http_request);
 use JSON;
 use MetaCPAN::Web::MyCondVar;
+use MetaCPAN::Web::API::Result;
 
 sub cv {
     MetaCPAN::Web::MyCondVar->new;
@@ -40,7 +41,8 @@ sub request {
 
         if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
-            $req->send( $@ ? { raw => $data } : $json );
+            my $result = $@ ? { raw => $data } : $json;
+            $req->send( bless $result, 'MetaCPAN::Web::API::Result' );
         }
         else {
 

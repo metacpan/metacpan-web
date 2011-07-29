@@ -14,7 +14,7 @@ sub index : PathPart('release') : Chained('/') : Args {
         = $author && $release
         ? $model->get( $author, $release )
         : $model->find($author);
-    my $out = $data->recv->{hits}->{hits}->[0]->{_source};
+    my $out = $data->recv->hits->[0]->{_source};
     $c->detach('/not_found') unless ($out);
     ( $author, $release ) = ( $out->{author}, $out->{name} );
     my $modules = $model->modules( $author, $release );
@@ -22,8 +22,8 @@ sub index : PathPart('release') : Chained('/') : Args {
     my $versions = $model->versions( $out->{distribution} );
     $author = $c->model('API')->author->get($author);
     my $favorites
-        = $c->model('API')->favorite
-        ->get( $c->user_exists ? $c->user->pause_id : undef,
+        = $c->model('API')
+        ->favorite->get( $c->user_exists ? $c->user->pause_id : undef,
         $out->{distribution} );
     ( $modules, $versions, $author, $root, $favorites )
         = ( $modules & $versions & $author & $root & $favorites )->recv;
@@ -34,24 +34,20 @@ sub index : PathPart('release') : Chained('/') : Args {
         {   template => 'release.html',
             release  => $out,
             author   => $author,
-            total    => $modules->{hits}->{total},
+            total    => $modules->total,
             took     => List::Util::max(
-                $modules->{took}, $root->{took}, $versions->{took}
+                $modules->took, $root->took, $versions->took
             ),
-            root => [
-                sort { $a->{name} cmp $b->{name} }
-                map  { $_->{fields} } @{ $root->{hits}->{hits} }
-            ],
-            versions =>
-                [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
-            files => [
+            root => [ sort { $a->{name} cmp $b->{name} } @{ $root->fields } ],
+            versions => $versions->fields,
+            files    => [
                 map {
                     {
-                        %{ $_->{fields} },
-                            module   => $_->{fields}->{'_source.module'},
-                            abstract => $_->{fields}->{'_source.abstract'}
+                        %$_,
+                            module   => $_->{'_source.module'},
+                            abstract => $_->{'_source.abstract'}
                     }
-                    } @{ $modules->{hits}->{hits} }
+                    } @{ $modules->fields }
             ]
         }
     );

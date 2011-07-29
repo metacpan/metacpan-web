@@ -29,12 +29,11 @@ sub index : PathPart('module') : Chained('/') : Args {
     $data->{favorites}  = $favorites->{favorites}->{ $data->{distribution} };
 
     $c->stash(
-        {   module  => $data,
-            author  => $author,
-            pod     => $pod->{raw},
-            release => $release->{hits}->{hits}->[0]->{_source},
-            versions =>
-                [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
+        {   module   => $data,
+            author   => $author,
+            pod      => $pod->{raw},
+            release  => $release->hits->[0]->{_source},
+            versions => $versions->fields,
             template => 'module.html',
         }
     );

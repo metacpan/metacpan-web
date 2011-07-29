@@ -50,12 +50,12 @@ sub index : Path {
                     ? $_->{sort}->[0]
                     : undef
             }
-            } @{ $data->{hits}->{hits} }
+            } @{ $data->hits }
     ];
     $c->stash(
         {   mirrors  => $latest,
-            took     => $data->{took},
-            total    => $data->{hits}->{total},
+            took     => $data->took,
+            total    => $data->total,
             template => 'mirrors.html',
         }
     );

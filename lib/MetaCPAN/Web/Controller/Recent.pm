@@ -9,10 +9,10 @@ sub index : Path {
     $c->model('API')->release->recent( $c->req->page )->(
         sub {
             my ($data) = shift->recv;
-            my $latest = [ map { $_->{_source} } @{ $data->{hits}->{hits} } ];
             $cv->send(
-                {   recent => $latest, took => $data->{took},
-                    total  => $data->{hits}->{total}
+                {   recent => $data->source,
+                    took   => $data->took,
+                    total  => $data->total
                 }
             );
         }

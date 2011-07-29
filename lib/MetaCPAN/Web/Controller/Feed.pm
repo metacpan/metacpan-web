@@ -33,10 +33,10 @@ sub author : Chained('index') : Path : Args(1) {
 
 sub distribution : Chained('index') : Path : Args(1) {
     my ( $self, $c, $distribution ) = @_;
-    my $data = $c->model('API')->release->versions($distribution)->recv;
+    my $versions = $c->model('API')->release->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => [ map { $_->{fields} } @{ $data->{hits}->{hits} } ]
+        entries => $versions->fields,
     );
 }
 

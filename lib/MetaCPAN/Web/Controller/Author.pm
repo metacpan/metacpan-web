@@ -14,11 +14,10 @@ sub index : Path : Args(1) {
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     $c->stash(
-        {   author => $author,
-            releases =>
-                [ map { $_->{fields} } @{ $releases->{hits}->{hits} } ],
-            took     => $releases->{took},
-            total    => $releases->{hits}->{total},
+        {   author   => $author,
+            releases => $releases->fields,
+            took     => $releases->took,
+            total    => $releases->total,
             template => 'author.html'
         }
     );
