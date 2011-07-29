@@ -8,27 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub index : Path : Args(1) {
     my ( $self, $c, $id ) = @_;
     my $author_cv = $c->model('API')->author->get($id);
-    # this should probably be refactored into the model?? why is it here
-    my $releases_cv = $c->model('API')->release->request(
-        '/release/_search',
-        {   query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { author => uc($id) } },
-                            { term => { status => 'latest' } }
-                        ]
-                    },
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
-            ],
-            fields => [qw(author distribution name status abstract date)],
-            size   => 1000,
-        }
-    );
+    my $releases_cv = $c->model('API')->release->latest_by_author($id);
 
     my ( $author, $releases ) = ( $author_cv & $releases_cv )->recv;
     $c->detach('/not_found') unless ( $author->{pauseid} );
