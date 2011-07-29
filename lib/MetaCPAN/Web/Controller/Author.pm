@@ -7,9 +7,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(1) {
     my ( $self, $c, $id ) = @_;
-    my $author_cv = $c->model('API::Author')->get($id);
+    my $author_cv = $c->model('API')->author->get($id);
     # this should probably be refactored into the model?? why is it here
-    my $releases_cv = $c->model('API::Release')->request(
+    my $releases_cv = $c->model('API')->release->request(
         '/release/_search',
         {   query => {
                 filtered => {

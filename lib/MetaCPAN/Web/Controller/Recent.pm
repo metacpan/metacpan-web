@@ -6,7 +6,7 @@ use base 'MetaCPAN::Web::Controller';
 sub index : Path {
     my ( $self, $c ) = @_;
     my $cv = AE::cv;
-    $c->model('API::Release')->recent( $c->req->page )->(
+    $c->model('API')->release->recent( $c->req->page )->(
         sub {
             my ($data) = shift->recv;
             my $latest = [ map { $_->{_source} } @{ $data->{hits}->{hits} } ];

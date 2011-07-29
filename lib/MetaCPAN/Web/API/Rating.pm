@@ -1,29 +1,9 @@
-package MetaCPAN::Web::Model::API::Rating;
+package MetaCPAN::Web::API::Rating;
+
 use Moose;
-use namespace::autoclean;
-
-extends 'MetaCPAN::Web::Model::API';
-
-=head1 NAME
-
-MetaCPAN::Web::Model::Rating - Catalyst Model
-
-=head1 DESCRIPTION
-
-Catalyst Model.
-
-=head1 AUTHOR
-
-Moritz Onken, Matthew Phillips
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
-
 use List::MoreUtils qw(uniq);
+use namespace::autoclean;
+with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
 
 sub get {
     my ( $self, @distributions ) = @_;
@@ -68,6 +48,7 @@ sub get {
         );
     return $cv;
 }
+
 __PACKAGE__->meta->make_immutable;
 
 1;

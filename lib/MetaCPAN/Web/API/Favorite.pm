@@ -1,10 +1,9 @@
-package MetaCPAN::Web::Model::API::Favorite;
+package MetaCPAN::Web::API::Favorite;
+
 use Moose;
-use namespace::autoclean;
-
-extends 'MetaCPAN::Web::Model::API';
-
 use List::MoreUtils qw(uniq);
+use namespace::autoclean;
+with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
 
 sub get {
     my ( $self, $user, @distributions ) = @_;
@@ -64,3 +63,5 @@ sub get {
 }
 
 __PACKAGE__->meta->make_immutable;
+
+1;

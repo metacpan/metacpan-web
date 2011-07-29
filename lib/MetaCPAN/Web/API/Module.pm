@@ -1,32 +1,11 @@
-package MetaCPAN::Web::Model::API::Module;
+package MetaCPAN::Web::API::Module;
+
 use Moose;
-use namespace::autoclean;
-
-extends 'MetaCPAN::Web::Model::API';
-
-=head1 NAME
-
-MetaCPAN::Web::Model::Module - Catalyst Model
-
-=head1 DESCRIPTION
-
-Catalyst Model.
-
-=head1 AUTHOR
-
-Moritz Onken, Matthew Phillips
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
-
 use Hash::Merge qw( merge );
-
-use List::Util qw( max sum );
 use List::MoreUtils qw(uniq);
+use List::Util qw( max sum );
+use namespace::autoclean;
+with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
 
 my $RESULTS_PER_RUN = 200;
 my @ROGUE_DISTRIBUTIONS
@@ -134,8 +113,8 @@ sub search_distribution {
 
             my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
             my $descriptions = $self->search_descriptions(@ids);
-            my $ratings      = $self->model('Rating')->get(@distributions);
-            my $favorites    = $self->model('Favorite')->get($user, @distributions);
+            my $ratings      = $self->ctx->rating->get(@distributions);
+            my $favorites    = $self->ctx->favorite->get($user, @distributions);
             return $ratings & $favorites & $descriptions;
         }
         )->(
@@ -190,11 +169,9 @@ sub search_collapsed {
         }
 
         @distributions = splice( @distributions, $from, 20 );
-        my $ratings   = $self->model('Rating')->get(@distributions);
-        my $favorites = $self->model('Favorite')->get($user, @distributions);
-        my $results
-            = $self->model('Module')
-            ->search( $query,
+        my $ratings   = $self->ctx->rating->get(@distributions);
+        my $favorites = $self->ctx->favorite->get($user, @distributions);
+        my $results = $self->ctx->module->search( $query,
             $self->_search_in_distributions(@distributions) );
         return ( $ratings & $favorites & $results );
     };
@@ -461,6 +438,7 @@ sub _search_in_distributions {
             }
         } };
 }
+
 __PACKAGE__->meta->make_immutable;
 
 1;

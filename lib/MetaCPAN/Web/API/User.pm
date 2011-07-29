@@ -1,8 +1,8 @@
-package MetaCPAN::Web::Model::API::User;
+package MetaCPAN::Web::API::User;
+
 use Moose;
 use namespace::autoclean;
-
-extends 'MetaCPAN::Web::Model::API';
+with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
 
 sub get {
     my ( $self, $token ) = @_;
@@ -36,5 +36,7 @@ sub remove_favorite {
     $self->request( "/user/favorite/" . $data->{distribution},
         undef, { method => 'DELETE', token => $token } );
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

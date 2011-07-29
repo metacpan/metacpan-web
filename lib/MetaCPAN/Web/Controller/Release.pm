@@ -8,7 +8,7 @@ use List::Util ();
 
 sub index : PathPart('release') : Chained('/') : Args {
     my ( $self, $c, $author, $release ) = @_;
-    my $model = $c->model('API::Release');
+    my $model = $c->model('API')->release;
 
     my $data
         = $author && $release
@@ -20,9 +20,9 @@ sub index : PathPart('release') : Chained('/') : Args {
     my $modules = $model->modules( $author, $release );
     my $root = $model->root_files( $author, $release );
     my $versions = $model->versions( $out->{distribution} );
-    $author = $c->model('API::Author')->get($author);
+    $author = $c->model('API')->author->get($author);
     my $favorites
-        = $c->model('API::Favorite')
+        = $c->model('API')->favorite
         ->get( $c->user_exists ? $c->user->pause_id : undef,
         $out->{distribution} );
     ( $modules, $versions, $author, $root, $favorites )

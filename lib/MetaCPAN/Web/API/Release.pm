@@ -1,27 +1,8 @@
-package MetaCPAN::Web::Model::API::Release;
+package MetaCPAN::Web::API::Release;
+
 use Moose;
 use namespace::autoclean;
-
-extends 'MetaCPAN::Web::Model::API';
-
-=head1 NAME
-
-MetaCPAN::Web::Model::Release - Catalyst Model
-
-=head1 DESCRIPTION
-
-Catalyst Model.
-
-=head1 AUTHOR
-
-Moritz Onken, Matthew Phillips
-
-=head1 LICENSE
-
-This library is free software. You can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut
+with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
 
 sub get {
     my ( $self, $author, $release ) = @_;

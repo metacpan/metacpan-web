@@ -9,8 +9,8 @@ sub index : PathPart('raw') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
     my $req = $c->req;
     my ( $source, $module )
-        = ( $c->model('API::Module')->source(@module)
-            & $c->model('API::Module')->get(@module) )->recv;
+        = ( $c->model('API')->module->source(@module)
+            & $c->model('API')->module->get(@module) )->recv;
     $c->detach('/not_found') unless ( $source->{raw} );
     if ( $req->parameters->{download} ) {
         my $content_disposition = 'attachment';

@@ -6,7 +6,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub add : Local {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
-    my $model = $c->model('API::User');
+    my $model = $c->model('API')->user;
     my $data  = $c->req->params;
     if ( $data->{remove} ) {
         $model->remove_favorite( $data, $c->token )->recv;

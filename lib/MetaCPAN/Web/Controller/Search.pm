@@ -17,7 +17,7 @@ sub index : Path {
     my $query = join( ' ', @query );
     $query =~ s/::/ /g if ($query);
 
-    my $model = $c->model('API::Module');
+    my $model = $c->model('API')->module;
     my $from  = ( $req->page - 1 ) * 20;
     if ( $req->parameters->{lucky} ) {
         my $module = $model->first($query)->recv;

@@ -8,7 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub index : Path {
     my ( $self, $c ) = @_;
     my $req   = $c->req;
-    my $model = $c->model('API::Module');
+    my $model = $c->model('API')->module;
     my $query = join( ' ', $req->param('q') );
     $query =~ s/::/ /g if ($query);
 
