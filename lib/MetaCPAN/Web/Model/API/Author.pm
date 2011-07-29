@@ -38,7 +38,8 @@ sub search {
             bool => {
                 should => [
                     { text => { 'author.name.analyzed' => $query } },
-                    { text => { 'author.pauseid'       => uc($query) } }
+                    { text => { 'author.pauseid'       => uc($query) } },
+                    { text => { 'author.profile.id'    => lc($query) } },
                 ]
             }
         },
@@ -50,8 +51,8 @@ sub search {
         sub {
             my $results = shift->recv
                 || { hits => { total => 0, hits => [] } };
-            $cv->send( {
-                    results => [
+            $cv->send(
+                {   results => [
                         map { +{ %{ $_->{_source} }, id => $_->{_id} } }
                             @{ $results->{hits}{hits} }
                     ],
