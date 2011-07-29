@@ -17,6 +17,12 @@ has favorite => (
     isa     => 'MetaCPAN::Web::API::Favorite',
 );
 
+has mirror => (
+    builder => '_build_mirror',
+    is      => 'ro',
+    isa     => 'MetaCPAN::Web::API::Mirror',
+);
+
 has module => (
     builder => '_build_module',
     is      => 'ro',
@@ -57,6 +63,10 @@ sub _build_instance_of {
         api_secure => $self->api_secure,
         ctx        => $self,
     );
+}
+
+sub _build_mirror {
+    shift->_build_instance_of('MetaCPAN::Web::API::Mirror');
 }
 
 sub _build_module {

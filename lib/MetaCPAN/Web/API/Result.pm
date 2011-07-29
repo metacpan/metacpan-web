@@ -10,7 +10,7 @@ sub fields {
 
 sub hits {
     my ($self) = @_;
-    return $self->{hits}{hits};
+    return $self->{hits}{hits} || [];
 }
 
 sub source {

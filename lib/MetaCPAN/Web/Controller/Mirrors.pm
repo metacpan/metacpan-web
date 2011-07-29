@@ -21,28 +21,8 @@ sub index : Path {
         }
     }
 
-    my @or;
-    push( @or, { not => { filter => { missing => { field => $_ } } } } )
-        for (@protocols);
-
     my $cv   = AE::cv;
-    my $data = $c->model('API')->request(
-        '/mirror/_search',
-        {   size  => 999,
-            query => { match_all => {} },
-            @or ? ( filter => { and => \@or } ) : (),
-            $location
-            ? ( sort => {
-                    _geo_distance => {
-                        location => [ $location->[1], $location->[0] ],
-                        order    => "asc",
-                        unit     => "km"
-                    }
-                }
-                )
-            : ( sort => [ 'continent', 'country' ] )
-        }
-    )->recv;
+    my $data = $c->model('API')->mirror->list($location, \@protocols)->recv;
     my $latest = [
         map {
             {
