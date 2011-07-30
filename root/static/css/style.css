@@ -15,10 +15,10 @@ hr {
     border-top: 1px solid #e9e9e9;
 }
 
-html { 
-	margin:0; 
-	padding:0; 
-	border:0; 
+html {
+    margin:0;
+    padding:0;
+    border:0;
     overflow-y: scroll;
 }
 
@@ -33,12 +33,12 @@ hgroup, nav, section {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit; 
+  font: inherit;
   vertical-align: baseline;
 }
 
-/* This helps to make newer HTML5 elements behave like DIVs in older browers */ 
-article, aside, details, figcaption, figure, dialog, 
+/* This helps to make newer HTML5 elements behave like DIVs in older browers */
+article, aside, details, figcaption, figure, dialog,
 footer, header, hgroup, menu, nav, section {
     display:block;
 }
@@ -50,22 +50,22 @@ pre {
 /* Line-height should always be unitless! */
 body {
   line-height: 1.5;
-  background: white; 
+  background: white;
 }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
-table { 
-	border-collapse: separate; 
-	border-spacing: 0; 
+table {
+    border-collapse: separate;
+    border-spacing: 0;
 }
 /* float:none prevents the span-x classes from breaking table-cell display */
-caption, th, td { 
-	text-align: left; 
-	font-weight: normal; 
-	float:none !important; 
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+    float:none !important;
 }
-table, th, td { 
-	vertical-align: middle; 
+table, th, td {
+    vertical-align: middle;
 }
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
@@ -266,6 +266,47 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     line-height: 1;
 }
 
+#author-results ul  {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+#author-results li {
+    float: left;
+    width: 100px;
+    padding: 5px 5px 5px 45px;
+    margin-right: 10px;
+    border: 1px solid white;
+    overflow: hidden;
+    height: 50px;
+}
+
+#author-results li:hover {
+    border: 1px solid #eee;
+    -webkit-border-radius: 3px 3px;
+    -moz-border-radius: 3px 3px;
+    -moz-box-shadow: 3px 3px 5px #eee;
+    -webkit-box-shadow: 3px 3px 5px #eee;
+    box-shadow: 3px 3px 5px #eee;
+}
+
+#author-results a {
+    display:    block;
+}
+
+#author-results a:hover {
+    text-decoration: none;
+}
+
+#author-results img {
+    width: 30px;
+    height: 30px;
+    margin-left: -40px;
+    float: left;
+}
+
+
+
 button.favorite, a.favorite {
     padding: 1px 3px;
     margin-left: 10px;
@@ -332,7 +373,7 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 .account-bar a:hover {
     text-decoration: none;
     background-color: #f9f9f9;
-    
+
 }
 
 .account-bar a.active {
@@ -491,6 +532,7 @@ ul#index, #index ul { list-style-type: none; }
   background-color: #f9f9f9 !important;
 }
 
+.search-results img,
 .author-img {
     overflow:hidden;
     width: 130px;
@@ -520,7 +562,7 @@ ul {
     width: 160px;
     padding-left: 10px;
     overflow: auto;
-    
+
 }
 
 a.ellipsis {
