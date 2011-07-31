@@ -115,7 +115,7 @@ $(document).ready(function() {
         document.location.href = '/module/'+ item.documentation;
     });
 
-    $('#search-input').focus();
+    $('#search-input.autofocus').focus();
 
     var el = $('.search-bar');
     if (!el.length) return;
