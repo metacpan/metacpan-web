@@ -6,45 +6,52 @@ use namespace::autoclean;
 with 'MetaCPAN::Web::API::Request';
 
 has author => (
-    builder => '_build_author',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Author',
+    builder    => '_build_author',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Author',
+    lazy_build => 1,
 );
 
 has favorite => (
-    builder => '_build_favorite',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Favorite',
+    builder    => '_build_favorite',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Favorite',
+    lazy_build => 1,
 );
 
 has mirror => (
-    builder => '_build_mirror',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Mirror',
+    builder    => '_build_mirror',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Mirror',
+    lazy_build => 1,
 );
 
 has module => (
-    builder => '_build_module',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Module',
+    builder    => '_build_module',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Module',
+    lazy_build => 1,
 );
 
 has rating => (
-    builder => '_build_rating',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Rating',
+    builder    => '_build_rating',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Rating',
+    lazy_build => 1,
 );
 
 has release => (
-    builder => '_build_release',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::Release',
+    builder    => '_build_release',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Release',
+    lazy_build => 1,
 );
 
 has user => (
-    builder => '_build_user',
-    is      => 'ro',
-    isa     => 'MetaCPAN::Web::API::User',
+    builder    => '_build_user',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::User',
+    lazy_build => 1,
 );
 
 sub _build_author {
@@ -59,9 +66,9 @@ sub _build_instance_of {
     my ( $self, $class ) = @_;
     Class::MOP::load_class($class);
     return $class->new(
-        api        => $self->api,
-        api_secure => $self->api_secure,
-        ctx        => $self,
+        url        => $self->url,
+        url_secure => $self->url_secure,
+        api        => $self,
     );
 }
 

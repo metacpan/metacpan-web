@@ -12,13 +12,13 @@ sub cv {
     MetaCPAN::Web::MyCondVar->new;
 }
 
-has api => (
+has url => (
     default => 'http://api.metacpan.org',
     is      => 'ro',
     isa     => 'Str',
 );
 
-has api_secure => (
+has url_secure => (
     default => 'https://api.metacpan.org',
     is      => 'ro',
     isa     => 'Str',
@@ -31,7 +31,7 @@ sub request {
     my $req = $self->cv;
     http_request $method ? $method
         : $search        ? 'post'
-        : 'get' => ( $token ? $self->api_secure : $self->api ) . $path,
+        : 'get' => ( $token ? $self->url_secure : $self->url ) . $path,
         body => $search ? encode_json($search) : undef,
         headers    => { 'Content-type' => 'application/json' },
         persistent => 1,
