@@ -3,7 +3,13 @@ package MetaCPAN::Web::API::Rating;
 use Moose;
 use List::MoreUtils qw(uniq);
 use namespace::autoclean;
-with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
+with qw(MetaCPAN::Web::API::Request);
+
+has api => (
+    is       => 'ro',
+    isa      => 'MetaCPAN::Web::API',
+    weak_ref => 1,
+);
 
 sub get {
     my ( $self, @distributions ) = @_;

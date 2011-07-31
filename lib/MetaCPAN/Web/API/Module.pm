@@ -5,7 +5,13 @@ use Hash::Merge qw( merge );
 use List::MoreUtils qw(uniq);
 use List::Util qw( max sum );
 use namespace::autoclean;
-with qw(MetaCPAN::Web::API::Request MetaCPAN::Web::API::Ctx);
+with qw(MetaCPAN::Web::API::Request);
+
+has api => (
+    is       => 'ro',
+    isa      => 'MetaCPAN::Web::API',
+    weak_ref => 1,
+);
 
 my $RESULTS_PER_RUN = 200;
 my @ROGUE_DISTRIBUTIONS
@@ -113,8 +119,8 @@ sub search_distribution {
 
             my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
             my $descriptions = $self->search_descriptions(@ids);
-            my $ratings      = $self->ctx->rating->get(@distributions);
-            my $favorites    = $self->ctx->favorite->get($user, @distributions);
+            my $ratings      = $self->api->rating->get(@distributions);
+            my $favorites    = $self->api->favorite->get($user, @distributions);
             return $ratings & $favorites & $descriptions;
         }
         )->(
@@ -169,9 +175,9 @@ sub search_collapsed {
         }
 
         @distributions = splice( @distributions, $from, 20 );
-        my $ratings   = $self->ctx->rating->get(@distributions);
-        my $favorites = $self->ctx->favorite->get($user, @distributions);
-        my $results = $self->ctx->module->search( $query,
+        my $ratings   = $self->api->rating->get(@distributions);
+        my $favorites = $self->api->favorite->get($user, @distributions);
+        my $results = $self->api->module->search( $query,
             $self->_search_in_distributions(@distributions) );
         return ( $ratings & $favorites & $results );
     };
