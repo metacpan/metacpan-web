@@ -73,8 +73,9 @@ Attempt to render a view, if needed.
 sub end : ActionClass('RenderView') {
     my ( $self, $c ) = @_;
     $c->stash->{req}        = $c->req;
-    $c->stash->{api}        = $c->config->{'Model::API'}{url};
-    $c->stash->{api_secure} = $c->config->{'Model::API'}{url_secure} || $c->config->{'Model::API'}{url};
+    $c->stash->{api}        = $c->config->{'Model::API'}{args}{url};
+    $c->stash->{api_secure} = $c->config->{'Model::API'}{args}{url_secure}
+        || $c->config->{'Model::API'}{args}{url};
 }
 
 =head1 AUTHOR
