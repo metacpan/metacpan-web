@@ -10,7 +10,7 @@ sub index : Path : Args(1) {
     
     # force consistent casing in URLs
     if ( $id ne uc( $id ) ) {
-        $c->res->redirect( '/author/' . uc( $id ) );
+        $c->res->redirect( '/author/' . uc( $id ), 301 );
         $c->detach;
     }
     
