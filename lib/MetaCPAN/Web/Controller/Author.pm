@@ -7,6 +7,13 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(1) {
     my ( $self, $c, $id ) = @_;
+
+    # force consistent casing in URLs
+    if ( $id ne uc( $id ) ) {
+        $c->res->redirect( '/author/' . uc( $id ), 301 );
+        $c->detach;
+    }
+
     my $author_cv = $c->model('API')->author->get($id);
     my $releases_cv = $c->model('API')->release->latest_by_author($id);
 
