@@ -29,6 +29,7 @@
       <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
+    <li><a href="http://explorer.metacpan.org/?url=%2Frelease%2F<% release.distribution %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>
   <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
