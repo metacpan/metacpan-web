@@ -32,7 +32,8 @@ IF profiles.${profile.name} %>
 <% IF blog.feed %><a href="<% blog.feed %>" target="_blank"><img src="/static/images/profile/feed.png" width=16 height=16 style="float: right"></a><% END %>
 <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px"><% blog.url.replace('^https?://', '') %></a>
 <% END; END %>
-<% IF author.donation.size; FOREACH donate IN author.donation; IF donate.name == 'paypal' %>
+<% IF author.donation.size; FOREACH donate IN author.donation %>
+<% IF donate.name == 'paypal' %>
 <br>
 <center><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_donations">
@@ -45,6 +46,8 @@ IF profiles.${profile.name} %>
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form></center>
+<% ELSIF donate.name == 'wishlist' %>
+<a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a><br>
 <% END; END; END %>
 <%
 i = 0;
