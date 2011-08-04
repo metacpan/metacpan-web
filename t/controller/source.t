@@ -18,7 +18,7 @@ test_psgi app, sub {
     );
     ok( $res->content =~ /package Moose/, 'includes Moose package' );
 
-    # should we upload a dist with one of each file just for testing?
+    # TODO: add a reliable dist with files of each type to a FAKEpan like the api
     {
         my $prefix = '/source/RJBS/Dist-Zilla-4.200012';
         my @tests = (
