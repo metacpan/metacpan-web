@@ -43,7 +43,7 @@ footer, header, hgroup, menu, nav, section {
     display:block;
 }
 
-pre {
+pre, .diff-header, .diff-ul li {
     font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
 }
 
