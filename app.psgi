@@ -34,9 +34,10 @@ $app = Plack::Middleware::Assets->wrap( $app,
     files => [<root/static/css/*.css>] );
 $app = Plack::Middleware::Assets->wrap(
     $app,
+    # should we autoload the syntax brushes or otherwise specify which ones are needed (instead of "all")?
     files => [
         map {"root/static/js/$_.js"}
-            qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack jquery.bubblepopup.min shCore shBrushPerl cpan github)
+            qw(jquery.min jquery.tablesorter jquery.cookie jquery.relatize_date jquery.ajaxQueue jquery.autocomplete.pack jquery.bubblepopup.min shCore shBrushPerl shBrushPlain shBrushYaml shBrushJScript cpan github)
     ],
     minify => 0,
 );
