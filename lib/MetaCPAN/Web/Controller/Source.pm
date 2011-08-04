@@ -11,10 +11,23 @@ sub index : PathPart('source') : Chained('/') : Args {
         = ( $c->model('API::Module')->source(@module)
             & $c->model('API::Module')->get(@module) )->recv;
     if ( $source->{raw} ) {
+        # could this be a method/function somewhere else?
+        my $filetype = do {
+            local $_ = $module->{path};
+            # what other file types can we check for?
+            m!\.p[ml]$!i  ? 'pl'   :
+            m!\.pod$!     ? 'pl'   :   # no separate pod brush as of 2011-08-04
+            m!\.ya?ml$!   ? 'yaml' :
+            m!\.js(on)?$! ? 'js'   :
+            $module->{mime} =~ /perl/ ? 'pl' :
+                # default to plain text
+                'plain';
+        };
         $c->stash(
             {   template => 'source.html',
                 source   => $source->{raw},
                 module   => $module,
+                filetype => $filetype,
             }
         );
     }
