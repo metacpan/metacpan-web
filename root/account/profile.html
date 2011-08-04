@@ -44,11 +44,11 @@
         <%- donation = author.donation.0.id %>
         <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('#donations').slideToggle()" /> Accept donations</label>
         <div id="donations"<% UNLESS donation %> style="display: none"<% END %>>
-            <% FOREACH system IN ['PayPal', 'Wishlist']; found = author.donation.grep(->(a){ a.id == system.lower }) %>
+            <% FOREACH system IN ['PayPal', 'Wishlist']; found = author.donation.grep(->(a){ a.name == system.lower }) %>
             <label class="<% system.lower %>">
-                <span><% lower %></span>
+                <span><% system %></span>
                 <input type="hidden" name="donation.name" value="<% system.lower %>" />
-                <input type="text" name="donation.id"<% IF found.size %> value="<% found.0.name %>"<% END %> />
+                <input type="text" name="donation.id"<% IF found.size %> value="<% found.0.id %>"<% END %> />
             </label>
             <% END %>
         </div>
