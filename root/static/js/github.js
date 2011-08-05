@@ -33,7 +33,7 @@ function Github() {
                 }
             },
             repo: {
-                pattern: new RegExp(/github\.com\/([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/),
+                pattern: new RegExp(/github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/),
                 render: function(self, data) {
                     return   '<table>'
 
