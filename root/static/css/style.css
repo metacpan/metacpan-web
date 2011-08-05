@@ -599,8 +599,35 @@ code { font-family: monospace; }
     width: 160px;
 }
 
-table .release-info-github th {
+body div.qtip div.content {
+    padding: 0;
+    margin: 0;
+    height: auto; min-height: auto;
+    width: auto; min-width: auto;
+}
+
+.ui-tooltip, .qtip {
+    font-size: 12px;
+    max-width: 800px;
+}
+
+.ui-tooltip-content {
+    padding: 0;
+}
+
+div.qtip-github table {
+    width: 100%;
+}
+
+div.qtip-github table td, div.qtip-github table th {
+    padding: 3px;
+    border: 1px solid #F1F1F1;
+}
+
+div.qtip-github table th {
     padding-right: 8px;
+    white-space: nowrap;
+    background-color: #F9F9F9;
 }
 
 .release-table {
