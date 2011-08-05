@@ -27,6 +27,9 @@ sub index : Path {
     }
     else {
         my $pause_id = $c->user ? $c->user->pause_id : undef;
+        
+        $query =~ s{author:([a-zA-Z]*)}{author:uc($1)}e;
+        
         my $results
             = $query =~ /distribution:/
             ? $model->search_distribution( $query, $from, $pause_id )
