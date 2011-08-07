@@ -12,6 +12,9 @@ FOREACH file IN diff.statistics;
 insertions += file.insertions;
 deletions += file.deletions;
 parts = file.target.split("/");
+IF file.target == '/dev/null';
+    parts = file.source.split("/");
+END;
 FOREACH i IN [1,2,3]; foo = parts.shift; END;
 file.path = parts.join("/"); END -%>
 
