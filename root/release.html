@@ -9,27 +9,23 @@
       <li><strong class="relatize"><% release.date.dt_http %></strong></li>
       <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li><a href="<% api %>/source/<% release.author %>/<% release.name %>/">Browse</a></li>
-      <% INCLUDE inc/release-info.html %>
+      <% PROCESS inc/release-info.html %>
     </ul>
   </div>
   <hr>
   <strong>Tools</strong>
-  <ul><!--
-    <% IF others.size > 1 %>
+  <ul>
     <li>
-      <select name="release" onchange="document.location.href='/release/' + this.value">
+      <select name="release" onchange="document.location.href='/diff/release/' + this.value + '<% release.author %>/<% release.name %>'">
       <option>Diff with version</option>
-      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
-      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
-      <% END %>
+      <% PROCESS version_options %>
     </select></li>
-    <% END %>-->
     <li>Search distribution:<br>
       <form action="/search">
       <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
-    <li><a href="http://explorer.metacpan.org/?url=%2Frelease%2F<% release.distribution %>">MetaCPAN Explorer</a></li>
+    <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>
   <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>

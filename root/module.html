@@ -20,28 +20,24 @@
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
       </li>
       <li><a href="<% api %>/source/<% module.author %>/<% module.release %>/">Browse</a></li>
-      <% INCLUDE inc/release-info.html %>
+      <% PROCESS inc/release-info.html %>
     </ul>
   </div>
   <hr>
   <strong>Tools</strong>
   <ul>
-    <% IF 1 == 0 && others.size > 1 %>
-    <li>
-      <select name="release" onchange="document.location.href='/release/' + this.value">
-      <option>Diff with version</option>
-      <% FOREACH other IN others; IF release.name == other.name; NEXT; END  %>
-      <option value="<% other.author; '/'; other.name %>"><% other.version %> (<% dt = other.date.dt; [dt.day.format("%02d"), dt.month.format("%02d"), dt.year].join("/") %>)</option>
-      <% END %>
-    </select></li>
-    <% END %>
+      <li>
+        <select name="release" onchange="document.location.href='/diff/file/?target=<% [module.author, module.release, module.path].join("/") %>&amp;source=' + this.value">
+        <option>Diff with version</option>
+        <% PROCESS version_options %>
+      </select></li>
     <li>Search distribution:<br>
       <form action="/search">
       <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
     <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=%2Fmodule%2F<% module.documentation %>">MetaCPAN Explorer</a></li>
+    <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>
   <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>

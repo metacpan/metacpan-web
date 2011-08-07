@@ -54,7 +54,7 @@
   min-height: auto !important;
 }
 
-.syntaxhighlighter {
+.syntaxhighlighter, .pod pre {
   width: 100% !important;
   margin: 1em 0 1em 0 !important;
   position: relative !important;

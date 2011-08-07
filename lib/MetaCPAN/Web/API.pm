@@ -12,6 +12,13 @@ has author => (
     lazy_build => 1,
 );
 
+has diff => (
+    builder    => '_build_diff',
+    is         => 'ro',
+    isa        => 'MetaCPAN::Web::API::Diff',
+    lazy_build => 1,
+);
+
 has favorite => (
     builder    => '_build_favorite',
     is         => 'ro',
@@ -56,6 +63,10 @@ has user => (
 
 sub _build_author {
     shift->_build_instance_of('MetaCPAN::Web::API::Author');
+}
+
+sub _build_diff {
+    shift->_build_instance_of('MetaCPAN::Web::API::Diff');
 }
 
 sub _build_favorite {
