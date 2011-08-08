@@ -42,12 +42,16 @@
         <label><span>Feed</span><input type="text" name="blog.feed" value="<% author.blog.0.feed %>" /></label>
         <label><span>Avatar</span><input type="text" name="gravatar_url" value="<% author.gravatar_url %>" /></label>
         <%- donation = author.donation.0.id %>
-        <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('.paypal').slideToggle()" /> Accept donations</label>
-        <label class="paypal"<% UNLESS donation %> style="display: none"<% END %>>
-            <span>PayPal</span>
-            <input type="hidden" name="donation.name" value="paypal" />
-            <input type="text" name="donation.id" value="<% donation %>" />
-        </label>
+        <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('#donations').slideToggle()" /> Accept donations</label>
+        <div id="donations"<% UNLESS donation %> style="display: none"<% END %>>
+            <% FOREACH system IN ['PayPal', 'Wishlist']; found = author.donation.grep(->(a){ a.name == system.lower }) %>
+            <label class="<% system.lower %>">
+                <span><% system %></span>
+                <input type="hidden" name="donation.name" value="<% system.lower %>" />
+                <input type="text" name="donation.id"<% IF found.size %> value="<% found.0.id %>"<% END %> />
+            </label>
+            <% END %>
+        </div>
         <label><span>Last update</span><strong class="relatize"><% author.updated.dt_http %></strong></label>
     </fieldset>
     
