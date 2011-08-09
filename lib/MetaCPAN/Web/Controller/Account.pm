@@ -49,6 +49,11 @@ sub profile : Local {
         @{ [ $req->param('profile.name') ] },
         @{ [ $req->param('profile.id') ] }
     ] : undef;
+    $data->{perlmongers} = $req->param('perlmongers.name') ? [
+        pairwise { { name => $a, url => $b } }
+        @{ [ $req->param('perlmongers.name') ] },
+        @{ [ $req->param('perlmongers.url') ] }
+    ] : undef;
 
     $data->{location}
         = $req->params->{latitude}
@@ -60,6 +65,8 @@ sub profile : Local {
     $data->{extra}
         = eval { JSON->new->relaxed->utf8->decode( $req->params->{extra} ) };
     $data->{donation} = undef unless ( $req->params->{donations} );
+
+    $c->log->_dump($data);
 
     my $res
         = $c->model('API::User')->update_profile( $data, $c->token )->recv;

@@ -42,6 +42,27 @@
         <label><span>Feed</span><input type="text" name="blog.feed" value="<% author.blog.0.feed %>" /></label>
         <label><span>Avatar</span><input type="text" name="gravatar_url" value="<% author.gravatar_url %>" /></label>
         <%- donation = author.donation.0.id %>
+
+        <div>
+            <% SET first_mongers = author.perlmongers.shift %>
+            <span class="perlmongers">
+              <label><span>PerlMonger Groups</span>
+                <input type="text" name="perlmongers.name" value="<% first_mongers.name %>" />
+                <input type="text" name="perlmongers.url" value="<% first_mongers.url %>" />
+                <a href="" onclick="return addField($('.perlmongers'))">add</a>
+              </label>
+            </span>
+            <% FOREACH perlmongers IN author.perlmongers -%>
+            <span class="perlmongers">
+              <label><span></span>
+                <input type="text" name="perlmongers" value="<% perlmongers.name %>" />
+                <input type="text" name="perlmongers" value="<% perlmongers.url %>" />
+                <a href="" onclick="return removeDiv(this)">remove</a>
+              </label>
+            </span>
+            <% END -%>
+        </div>
+
         <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('.paypal').slideToggle()" /> Accept donations</label>
         <label class="paypal"<% UNLESS donation %> style="display: none"<% END %>>
             <span>PayPal</span>
@@ -134,7 +155,7 @@ function rewriteURL(link) {
 }
 
 function removeDiv(link) {
-    $(link).parents('div').first().slideUp("normal", function(){$(this).remove()});
+    $(link).parents('label').first().parent().slideUp("normal", function(){$(this).remove()});
     return false;
 }
 
@@ -154,12 +175,29 @@ function validateJSON(text) {
 }
 
 function addField(id) {
-    var input = $('input[name="' + id + '"]').last();
-    var container = input.parent().parent();
+    var container;
+    var new_input;
 
-    var new_input = input.parent().clone().hide();;
-    new_input.children('span').html('');
-    new_input.children('input').attr('value', '');
+    if (id instanceof jQuery) {
+        container = id.parent();
+        new_input = id.clone();
+    }
+    else {
+        input = $('input[name="' + id + '"]').last();
+        container = input.parent().parent();
+        new_input = input.parent().clone();
+    }
+
+    new_input.hide();
+    new_input.find('span').html('');
+    new_input.find('input').attr('value', '');
+//new_input.find('a').removeAttr('onclick');
+    new_input.find('a').click(
+        container.children().first().is('label')
+            ? function () { removeLabel(this) }
+            : function () { removeDiv(this); }
+    );
+    new_input.find('a').html('remove');
     container.append(new_input);
 
     var add = container.children().last();
