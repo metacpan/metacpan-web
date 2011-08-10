@@ -46,7 +46,7 @@ IF profiles.${profile.name} %>
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form></center>
-<% ELSIF donate.name == 'wishlist' %>
+<% ELSIF donate.name == 'wishlist' && donate.id %>
 <div style="text-align: center"><a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a></div>
 <% END; END; END %>
 <%
