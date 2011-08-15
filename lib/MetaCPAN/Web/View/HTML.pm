@@ -51,11 +51,23 @@ sub canonical_datetime {
     ));
 }
 
+# format just the date consistent with W3CDTF / ISO 8601 / RFC 3339
+sub common_date_format {
+    my $date = shift;
+    my $dt   = parse_datetime($date);
+    return sprintf(
+        '%04d-%02d-%02d',
+        @$dt{qw(year month day)}
+    );
+}
+
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_canonical => \&canonical_datetime );
+
+Template::Alloy->define_vmethod( 'text', dt_date_common => \&common_date_format );
 
 Template::Alloy->define_vmethod( 'hash', pretty_json => sub {
     JSON->new->utf8->pretty->encode(shift)
