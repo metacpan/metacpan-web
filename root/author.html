@@ -72,6 +72,7 @@ END %>
       <input type="hidden" name="q" value="author:<% author.pauseid %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
+    <li><a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a></li>
     <li><a href="http://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a></li>
   </ul>
 </div>
