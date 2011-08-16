@@ -86,7 +86,12 @@ Template::Alloy->define_vmethod(
 Template::Alloy->define_vmethod(
     'text',
     decode_punycode => sub {
-        URI->new(shift)->ihost;
+        my $url_string = shift;
+        my $uri = URI->new($url_string);
+        if(!$uri->scheme){
+            $uri = URI->new("http://$url_string"); # default to http:// if no scheme in original...
+        }
+        return $uri->ihost;
     }
 );
 
