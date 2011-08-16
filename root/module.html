@@ -15,6 +15,7 @@
     <ul>
       <li><strong class="relatize"><% module.date.dt_http %></strong></li>
       <% IF module.module.0.version %><li>Module version: <% module.module.0.version %></li><% END %>
+      <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
