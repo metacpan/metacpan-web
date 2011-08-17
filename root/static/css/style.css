@@ -410,6 +410,10 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     display: inline-block;
 }
 
+.account-author-profiles {
+    width: 155px;
+}
+
 .icon {
     padding-left: 24px;
     background-repeat: no-repeat;

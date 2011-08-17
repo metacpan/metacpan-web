@@ -64,7 +64,7 @@
     </fieldset>
     
     <fieldset><legend>Profiles</legend>
-        <label><span></span><select onchange="return addProfile(this)">
+        <label><span class="account-author-profiles"></span><select onchange="return addProfile(this)">
             <option>Add Profile</option>
         <% FOREACH profile IN profiles; profile.value.id = profile.key -%>
         <option value="<% profile.value.json %>"><% profile.value.name %></option>
@@ -74,7 +74,7 @@
         <div id="profiles">
             <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
             <div class="profile">
-            <label><span>
+            <label><span class="account-author-profiles">
             <% IF known -%>
             <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16><% known.name %></span>
             <input type="hidden" name="profile.name" value="<% profile.name %>" />
@@ -109,7 +109,7 @@ function addProfile(select) {
     select.selectedIndex = 0;
     var container = $('#profiles');
     var html = '<div style="display: none" class="profile">'
-    + '<label><span>';
+    + '<label><span class="account-author-profiles">';
     if(value) {
         html += '<img src="/static/images/profile/' + profile.id + '.png" width=16 height=16>'
     + profile.name + '</span>'
