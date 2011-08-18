@@ -30,18 +30,29 @@ sub index : PathPart('release') : Chained('/') : Args {
     $out->{myfavorite} = $favorites->{myfavorites}->{ $out->{distribution} };
     $out->{favorites}  = $favorites->{favorites}->{ $out->{distribution} };
 
+    my @root_files = (
+        sort
+        map { $_->{fields}->{name} } @{ $root->{hits}->{hits} }
+    );
+
+    my $changes = undef;
+    foreach my $filename ( @root_files ) {
+        if ( $filename =~ m{\AChange}i ) {
+            $changes = $filename;
+            last;
+        }
+    }
+
     $c->stash(
         {   template => 'release.html',
             release  => $out,
             author   => $author,
+            changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
                 $modules->{took}, $root->{took}, $versions->{took}
             ),
-            root => [
-                sort { $a->{name} cmp $b->{name} }
-                map  { $_->{fields} } @{ $root->{hits}->{hits} }
-            ],
+            root => \@root_files,
             versions =>
                 [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
             files => [
