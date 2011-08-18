@@ -21,7 +21,7 @@ sub index : PathPart('module') : Chained('/') : Args {
         = $c->model('API::Release')->versions( $data->{distribution} );
     my $favorites
         = $c->model('API::Favorite')
-        ->get( $c->user_exists ? $c->user->pause_id : undef,
+        ->get( $c->user_exists ? $c->user->id : undef,
         $data->{distribution} );
     ( $pod, $author, $release, $versions, $favorites )
         = ( $pod & $author & $release & $versions & $favorites )->recv;

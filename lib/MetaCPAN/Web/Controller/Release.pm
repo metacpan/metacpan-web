@@ -23,7 +23,7 @@ sub index : PathPart('release') : Chained('/') : Args {
     $author = $c->model('API::Author')->get($author);
     my $favorites
         = $c->model('API::Favorite')
-        ->get( $c->user_exists ? $c->user->pause_id : undef,
+        ->get( $c->user_exists ? $c->user->id : undef,
         $out->{distribution} );
     ( $modules, $versions, $author, $root, $favorites )
         = ( $modules & $versions & $author & $root & $favorites )->recv;
