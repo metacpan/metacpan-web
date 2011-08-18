@@ -1,4 +1,4 @@
-<% IF user_exists && user.pause_id -%>
+<% IF user_exists -%>
 <form action="/account/favorite/add" style="display: inline" onsubmit="return favDistribution(this)">
     <% IF module.myfavorite %><input type="hidden" name="remove" value="1"><% END -%>
     <input type="hidden" name="release" value="<% module.release || module.name %>">
