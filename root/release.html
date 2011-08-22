@@ -80,14 +80,17 @@
 <%- IF modules.size %>
 <div class="file-group release-modules">
   <h2 id="modules">Modules</h2>
-  <ul>
   <%- FOREACH module IN modules %>
-  <li>
-    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-file.html" file = module %>
+    </div>
+    <div class="right">
+    <% IF module.abstract; module.abstract; END %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </li>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 
