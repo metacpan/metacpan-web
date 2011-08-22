@@ -157,7 +157,7 @@ $(document).ready(function() {
       }
 
     $('.pod h1,h2,h3,h4,h5,h6').each(function() {
-      $(this).wrap(function() {
+      $(this).wrapInner(function() {
         return '<a href="#___pod"></a>';
       });
     });
