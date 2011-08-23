@@ -1,0 +1,20 @@
+<%- title = "Distributions depending on " _ module %>
+<div class="search-bar">
+  <% INCLUDE inc/activity.html query = "requires=" _ module %>
+  <hr>
+  <strong>Index</strong>
+  <ul>
+    <a href=""><li>Latest</li></a>
+    <a href=""><li>CPAN</li></a>
+    <a href=""><li>BackPAN</li></a>
+  </ul>
+</div>
+
+<div class="content">
+<% IF data.size > 0 %>
+<% INCLUDE inc/release-table.html releases = data, header = 1 %>
+<% INCLUDE inc/pager.html size = 50 %>
+<% ELSE %>
+<big><strong>No depedants for <% module %> could be found</strong></big>
+<% END %>
+</div>

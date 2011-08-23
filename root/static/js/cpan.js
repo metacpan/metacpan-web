@@ -74,7 +74,7 @@ $(document).ready(function() {
     $('#signin-button').mouseenter(function(){$('#signin').show()});
     $('#signin').mouseleave(function(){$('#signin').hide()});
     
-    $('.author-table').tablesorter({widgets: ['zebra'],textExtraction: function(node){
+    $('.tablesorter').tablesorter({widgets: ['zebra'],textExtraction: function(node){
         if(node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
             return date.getTime();

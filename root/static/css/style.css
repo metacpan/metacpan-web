@@ -643,6 +643,11 @@ div.qtip-github table th {
     padding: 2px;
 }
 
+.release-table th {
+    text-align: left;
+    font-weight: bold;
+}
+
 .release-table .name {
     width: 266px;
 }

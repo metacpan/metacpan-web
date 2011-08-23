@@ -135,7 +135,8 @@ sub search_distribution {
             my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
             my $descriptions = $self->search_descriptions(@ids);
             my $ratings      = $self->model('Rating')->get(@distributions);
-            my $favorites    = $self->model('Favorite')->get($user, @distributions);
+            my $favorites
+                = $self->model('Favorite')->get( $user, @distributions );
             return $ratings & $favorites & $descriptions;
         }
         )->(
@@ -190,8 +191,9 @@ sub search_collapsed {
         }
 
         @distributions = splice( @distributions, $from, 20 );
-        my $ratings   = $self->model('Rating')->get(@distributions);
-        my $favorites = $self->model('Favorite')->get($user, @distributions);
+        my $ratings = $self->model('Rating')->get(@distributions);
+        my $favorites
+            = $self->model('Favorite')->get( $user, @distributions );
         my $results
             = $self->model('Module')
             ->search( $query,
@@ -461,6 +463,43 @@ sub _search_in_distributions {
             }
         } };
 }
-__PACKAGE__->meta->make_immutable;
 
-1;
+sub requires {
+    my ( $self, $module, $page ) = @_;
+    my $cv = $self->cv;
+    $self->request(
+        '/release/_search',
+        {   query => {
+                filtered => {
+                    query  => { "match_all" => {} },
+                    filter => {
+                        and => [
+                            { term => { 'release.status'     => 'latest' } },
+                            { term => { 'release.authorized' => \1 } },
+                            {   term => {
+                                    "release.dependency.module" => $module
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            size => 50,
+            from => $page * 50 - 50,
+            sort => [{date => 'desc'}],
+        }
+        )->(
+        sub {
+            my $data = shift->recv;
+            $cv->send(
+                {   data  => [map { $_->{_source} } @{$data->{hits}->{hits}}],
+                    total => $data->{hits}->{total},
+                    took  => $data->{took}
+                }
+            );
+        }
+        );
+    return $cv;
+}
+
+__PACKAGE__->meta->make_immutable;

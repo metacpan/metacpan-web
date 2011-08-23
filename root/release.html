@@ -28,6 +28,7 @@
       <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
+    <li><a href="/requires/module/<% release.distribution.replace('-', '::') %>">Dependants</a></li>
     <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>
