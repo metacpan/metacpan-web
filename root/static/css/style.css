@@ -516,24 +516,16 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 ul#index, #index ul { list-style-type: none; }
 
 .syntaxhighlighter, .pod pre {
-    border-top: 10px solid #f9f9f9 !important;
-    border-bottom: 10px solid #f9f9f9 !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid black;
     width: auto !important;
     overflow-y: hidden !important;
+    background-color: #f9f9f9;
 }
 
 .nogutter, .pod pre {
-    border-left: 10px solid #f9f9f9 !important;
-}
-
-.syntaxhighlighter, .pod pre {
-  background-color: #f9f9f9 !important;
-}
-.syntaxhighlighter .line.alt1 {
-  background-color: #f9f9f9 !important;
-}
-.syntaxhighlighter .line.alt2 {
-  background-color: #f9f9f9 !important;
+    padding-left: 10px;
 }
 
 .search-results img,
