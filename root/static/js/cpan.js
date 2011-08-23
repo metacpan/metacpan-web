@@ -100,13 +100,19 @@ $(document).ready(function() {
         selectFirst: false,
         width: $("#search-input").width() + 5,
         parse: function(data) {
-            return $.map(data, function(row) {
+            var result = $.map(data, function(row) {
                 return {
                     data: row,
                     value: row.documentation,
                     result: row.documentation
                 }
             });
+            var uniq = {};
+            result = $.grep(result, function(row) {
+                uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
+                return uniq[row.result]++ < 1;
+            });
+            return result;
         },
         formatItem: function(item) {
             return item.documentation;
