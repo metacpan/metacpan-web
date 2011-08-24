@@ -521,7 +521,7 @@ ul#index, #index ul { list-style-type: none; }
     border: 1px solid #888888;
     width: auto !important;
     overflow-y: hidden !important;
-    background-color: #f9f9f9;
+    background-color: #f3f3f3;
 }
 
 .nogutter, .pod pre {
