@@ -1,4 +1,4 @@
-<%- title = "Distributions depending on " _ module %>
+<%- title = "Distributions which depend on " _ module %>
 <div class="search-bar">
   <% INCLUDE inc/activity.html query = "requires=" _ module %>
   <hr>
@@ -11,6 +11,7 @@
 </div>
 
 <div class="content">
+<center><h1><strong>Distributions Which Depend on <%- module %> (Reverse Dependencies)</strong></h1></center>
 <% IF data.size > 0 %>
 <% INCLUDE inc/release-table.html releases = data, header = 1 %>
 <% INCLUDE inc/pager.html size = 50 %>
