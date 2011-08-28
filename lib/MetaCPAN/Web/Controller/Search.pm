@@ -7,15 +7,19 @@ use Plack::Response;
 sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
-    my @query = ( $req->param('q'), $req->param('lucky') );
 
-    unless (@query) {
+    unless ($req->param('q') or
+            $req->param('lucky')) {
         $c->res->redirect('/');
         $c->detach;
     }
 
-    my $query = join( ' ', @query );
-    $query =~ s/::/ /g if ($query);
+    my $query;
+    if ($query = $req->param('q')) {
+        # Searching for e.g. "DBIx::Class" is just like searching for
+        # "DBIx Class"
+        $query =~ s/::/ /g;
+    }
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
