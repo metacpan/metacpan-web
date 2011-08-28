@@ -88,7 +88,16 @@ $(document).ready(function() {
     $('#search-input').keydown(function(event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
-            document.forms[0].q.name = 'lucky';
+
+            /* To make this a lucky search we have to create a new
+             * <input> element to pass along lucky=1.
+             */
+            var luckyField = document.createElement("input");
+            luckyField.type = 'hidden';
+            luckyField.name = 'lucky';
+            luckyField.value = '1';
+            document.forms[0].appendChild(luckyField);
+
             document.forms[0].submit();
         }
     });
