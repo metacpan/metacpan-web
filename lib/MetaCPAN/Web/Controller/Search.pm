@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 use Plack::Response;
+use URI;
+use URI::QueryParam;
 
 sub index : Path {
     my ( $self, $c ) = @_;
@@ -19,7 +21,14 @@ sub index : Path {
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
-    if ( $req->parameters->{lucky} ) {
+    if ( $query =~ m/^!/ ) {
+        $query =~ s/^! //;
+        my $ddg_uri = URI->new("http://duckduckgo.com/");
+        $ddg_uri->query_param( q => $query );
+        $c->res->redirect($ddg_uri->as_string);
+        $c->detach;
+    }
+    elsif ( $req->parameters->{lucky} ) {
         my $module = $model->first($query)->recv;
         $c->detach('/not_found') unless ($module);
         $c->res->redirect("/module/$module");
