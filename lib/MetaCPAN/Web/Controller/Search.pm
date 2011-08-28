@@ -23,7 +23,10 @@ sub index : Path {
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
-    if ( $req->parameters->{lucky} ) {
+    if ( $req->parameters->{lucky} or
+         # DuckDuckGo-like syntax for bangs that redirect to the first
+         # result.
+         $query =~ s[^ (?: \\ | ! ) ][]x) {
         my $module = $model->first($query)->recv;
         $c->detach('/not_found') unless ($module);
         $c->res->redirect("/module/$module");
