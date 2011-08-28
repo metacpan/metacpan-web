@@ -26,14 +26,14 @@ sub index : Path {
         $c->detach;
     }
     else {
-        my $pause_id = $c->user ? $c->user->pause_id : undef;
+        my $user = $c->user_exists ? $c->user->id : undef;
         
         $query =~ s{author:([a-zA-Z]*)}{author:uc($1)}e;
         
         my $results
             = $query =~ /distribution:/
-            ? $model->search_distribution( $query, $from, $pause_id )
-            : $model->search_collapsed( $query, $from, $pause_id );
+            ? $model->search_distribution( $query, $from, $user )
+            : $model->search_collapsed( $query, $from, $user );
 
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );

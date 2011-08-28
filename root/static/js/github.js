@@ -121,7 +121,12 @@ function Github() {
                             var data = self.prepareData(res.data, function(data) {
                                 var html = self.render(data);
                                 qtip.set('content.text', html);
-                                $('.qtip-github .relatize').relatizeDate();
+                                $('.qtip-github .relatize').each(function() {
+                                    if ( !$(this).hasClass('relatized') ) {
+                                        $(this).relatizeDate();
+                                        $(this).addClass('relatized');
+                                    }
+                                });
                             });
                         }
                     },

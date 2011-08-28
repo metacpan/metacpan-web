@@ -8,6 +8,9 @@
     <ul>
       <li><strong class="relatize"><% release.date.dt_http %></strong></li>
       <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
+      <% IF changes %> 
+          <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>"><% changes %></a></li>
+      <% END %>
       <li><a href="<% api %>/source/<% release.author %>/<% release.name %>/">Browse</a></li>
       <% PROCESS inc/release-info.html %>
     </ul>
@@ -25,6 +28,7 @@
       <input type="hidden" name="q" value="distribution:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
+    <li><a href="/requires/module/<% release.distribution.replace('-', '::') %>">Reverse dependencies</a></li>
     <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>
@@ -88,8 +92,8 @@ END;
 
 <br><% END %>
 <% IF root.size %><strong>Other files</strong>
-<% FOREACH file IN root %>
-<div><strong><a href="/source/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
+<% FOREACH filename IN root %>
+<div><strong><a href="/source/<% release.author; '/'; release.name; '/'; filename %>"><% filename %></a></strong></div>
 <% END; END %>
 
 </div>

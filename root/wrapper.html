@@ -54,7 +54,7 @@
   </div>
   <div id="signin" style="display: none; position: absolute; right: 2px; top: 0px">
       <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>
-         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;"><% FOREACH identity IN ['Facebook', 'GitHub', 'PAUSE', 'Twitter'] %>
+         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;"><% FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
              <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a><% END %>
           </div></div><% END %>
   </div>

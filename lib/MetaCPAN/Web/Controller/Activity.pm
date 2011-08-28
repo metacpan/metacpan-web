@@ -18,6 +18,9 @@ sub index : Path {
     if ( my $distribution = $req->parameters->{distribution} ) {
         push( @$q, { term => { distribution => $distribution } } );
     }
+    if ( my $requires = $req->parameters->{requires} ) {
+        push( @$q, { term => { "release.dependency.module" => $requires } } );
+    }
 
     my $cv = AE::cv;
     my $start
