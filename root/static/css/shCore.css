@@ -24,8 +24,8 @@
 .syntaxhighlighter table thead,
 .syntaxhighlighter table caption,
 .syntaxhighlighter textarea,
-.pod code,
-.pod pre {
+.pod code *,
+.pod pre * {
   -moz-border-radius: 0 0 0 0 !important;
   -webkit-border-radius: 0 0 0 0 !important;
   background: none !important;
@@ -94,7 +94,6 @@
   width: 100% !important;
   height: 100% !important;
   border: none !important;
-  background: white !important;
   padding-left: 1em !important;
   overflow: hidden !important;
   white-space: pre !important;
