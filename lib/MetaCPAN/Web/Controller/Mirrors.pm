@@ -25,7 +25,7 @@ sub index : Path {
     push( @or, { not => { filter => { missing => { field => $_ } } } } )
         for (@protocols);
 
-    my $cv   = AE::cv;
+    my $cv   = AE::cv();
     my $data = $c->model('API')->request(
         '/mirror/_search',
         {   size  => 999,

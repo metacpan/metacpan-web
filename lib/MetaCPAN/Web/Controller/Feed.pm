@@ -56,7 +56,7 @@ sub build_entry {
 
 sub build_feed {
     my ( $self, %params ) = @_;
-    my $cv = AE::cv;
+    my $cv = AE::cv();
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
     $feed->link('http://metapcan.org/');

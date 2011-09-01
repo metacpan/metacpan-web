@@ -22,7 +22,7 @@ sub index : Path {
         push( @$q, { term => { "release.dependency.module" => $requires } } );
     }
 
-    my $cv = AE::cv;
+    my $cv = AE::cv();
     my $start
         = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
     my $activity = $c->model('API')->request(

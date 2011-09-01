@@ -162,7 +162,7 @@ sub search_distribution {
 
 sub search_collapsed {
     my ( $self, $query, $from, $user ) = @_;
-    my $cv   = AE::cv;
+    my $cv   = AE::cv();
     my $took = 0;
     my $total;
     my $run           = 1;

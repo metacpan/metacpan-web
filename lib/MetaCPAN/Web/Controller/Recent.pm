@@ -5,7 +5,7 @@ use base 'MetaCPAN::Web::Controller';
 
 sub index : Path {
     my ( $self, $c ) = @_;
-    my $cv = AE::cv;
+    my $cv = AE::cv();
     $c->model('API::Release')->recent( $c->req->page )->(
         sub {
             my ($data) = shift->recv;

@@ -7,15 +7,19 @@ use Scalar::Util qw(blessed);
 use AnyEvent;
 use base 'AnyEvent::CondVar';
 
-$AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
-$AnyEvent::HTTP::USERAGENT =
-'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; +https://github.com/CPAN-API/metacpan-web)';
+{
+    no warnings 'once';
+    $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
+    $AnyEvent::HTTP::USERAGENT
+        = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; '
+        . '+https://github.com/CPAN-API/metacpan-web)';
+}
 
 use overload
-  '&{}'    => \&build,
-  '|'      => \&any,
-  '&'      => \&all,
-  fallback => 1;
+    '&{}'    => \&build,
+    '|'      => \&any,
+    '&'      => \&all,
+    fallback => 1;
 
 sub build {
     my $self = shift;
@@ -48,12 +52,10 @@ sub build {
 sub chain_cb {
     my ( $self, $cb ) = @_;
     my $self_cb = $self->{_ae_cb};
-    $self->{_ae_cb} = $self_cb
-      ? sub {
-        $self_cb->(@_);
-        $cb->(@_);
-      }
-      : $cb;
+    $self->{_ae_cb}
+        = $self_cb
+        ? sub { $self_cb->(@_); $cb->(@_); }
+        : $cb;
 }
 
 sub any {
@@ -128,7 +130,7 @@ $rating->(sub {
     print "Rating for $res->{dist} is $res->{rating} ($res->{review_count} reviews)", $/;
 });
 
-($rating & $dists)->(sub { 
+($rating & $dists)->(sub {
     $cv->send;
 });
 
