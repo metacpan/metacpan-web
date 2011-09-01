@@ -1,0 +1,92 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+    var repos = ['CPAN-API/metacpan-web', 'CPAN-API/cpan-api'];
+    var baseUrl = 'https://api.github.com/repos';
+    var path = 'contributors';
+
+    var cv = function() {
+      var result = {};
+      var requests = repos.length;
+      var done = 0;
+      return {
+        render: function() {
+          $('#author-result-loading').hide();
+          $('#author-results').html('<ul class="authors">');
+          var el = $('ul.authors');
+          var rows = [];
+          $.each(result, function(idx, row) {
+            rows.push(row);
+          });
+          rows.sort(function(a,b) {
+            // First sort by contributions, desc
+            var result = (a.contributions < b.contributions) ? 1 : (a.contributions > b.contributions) ? -1 : 0;
+            // Second by login name, asc
+            if (result === 0) {
+              result = (a.login.toUpperCase() > b.login.toUpperCase()) ? 1 : (a.login.toUpperCase() < b.login.toUpperCase()) ? -1 : 0;
+            }
+            return result;
+          });
+          $.each(rows, function(idx, row) {
+            el.append(
+               '<li><a href="https://github.com/'+ row.login +'" title="Github profile of '+ row.login +'"><img src="'+ row.avatar_url +'" class="author-img" />'
+              +'<strong>'+ row.login +'</strong></a>'
+              +'('+ row.contributions +' '+ (row.contributions === 1 ? 'commit' : 'commits') +')</li>'
+            );
+          })
+        },
+
+        fetch: function(url) {
+          url = url.replace(/callback=jsonp[^&]+/, 'callback=?');
+          $.getJSON(url, function(res) {
+            cv.requestFinished(res);
+          });
+        },
+
+        paginate: function(meta) {
+          var self = this;
+          if (typeof meta.Link == 'undefined') {
+            return;
+          }
+          $.each(meta.Link, function(idx, row) {
+            var url = row[0];
+            var type = row[1];
+            if (type.rel !== 'next') {
+              return;
+            }
+            requests++;
+            self.fetch(url);
+          });
+        },
+
+        requestFinished: function(res) {
+          this.paginate(res.meta);
+          $.each(res.data, function(idx, row) {
+            if (typeof result[row.login] == 'undefined') {
+              result[row.login] = row;
+            }
+            else {
+              result[row.login].contributions += row.contributions;
+            }
+          });
+          if (++done === requests) {
+            this.render();
+          }
+        }
+      }
+    }();
+
+    $.each(repos, function(idx, repo) {
+      var url = [baseUrl, repo, path].join('/') +'?per_page=100&callback=?';
+      cv.fetch(url);
+    });
+
+  });
+</script>
+<div class="search-bar" style="position: static">
+  <strong>Contributors</strong>
+</div>
+
+<div class="content">
+  <img src="/static/icons/busy.gif" id="author-result-loading" />
+  <div id="author-results"></div>
+</div>
