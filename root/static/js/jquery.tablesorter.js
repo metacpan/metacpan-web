@@ -696,7 +696,8 @@
                     // merge and extend.
 
                     var match = RegExp('[?&]sort=([^&]*)').exec(window.location.search);
-                    if(JSON && match) settings.sortList = JSON.parse(match[1]);
+                    // We need to get the decodeURIComponent() fix upstream, be careful when updating this!
+                    if(JSON && match) settings.sortList = JSON.parse(decodeURIComponent(match[1]));
                     config = $.extend(this.config, $.tablesorter.defaults, settings);
                     // store common expression for speed
                     $this = $(this);

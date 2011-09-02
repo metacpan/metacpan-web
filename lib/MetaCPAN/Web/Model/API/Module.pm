@@ -465,7 +465,8 @@ sub _search_in_distributions {
 }
 
 sub requires {
-    my ( $self, $module, $page ) = @_;
+    my ( $self, $module, $page, $sort ) = @_;
+    $sort ||= { date => 'desc' };
     my $cv = $self->cv;
     $self->request(
         '/release/_search',
@@ -486,7 +487,7 @@ sub requires {
             },
             size => 50,
             from => $page * 50 - 50,
-            sort => [{date => 'desc'}],
+            sort => [$sort],
         }
         )->(
         sub {

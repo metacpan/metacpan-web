@@ -7,6 +7,21 @@ $.fn.textWidth = function(){
   return width;
 };
 
+$.extend({
+  getUrlVars: function(){
+    var vars = {}, hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    $.each(hashes, function(idx, hash) {
+      var kv = hash.split('=');
+      vars[kv[0]] = kv[1];
+    });
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
+
 var podVisible = true;
 
 function togglePod(lines) {
@@ -73,7 +88,7 @@ $(document).ready(function() {
     
     $('#signin-button').mouseenter(function(){$('#signin').show()});
     $('#signin').mouseleave(function(){$('#signin').hide()});
-    
+
     $('.tablesorter').tablesorter({sortList: [[0,0]], widgets: ['zebra'],textExtraction: function(node){
         if(node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
@@ -82,6 +97,18 @@ $(document).ready(function() {
             return node.innerHTML;
         }
     }} );
+
+    $('.tablesorter.remote th.header').each(function() {
+        $(this).unbind('click');
+        $(this).click(function(event) {
+            var $cell = $(this);
+            var params = $.getUrlVars();
+            params.sort = '[['+ this.column +','+ this.count++ % 2 +']]';
+            var query = $.param(params);
+            var url = window.location.href.replace(window.location.search, '');
+            window.location.href = url +'?'+ query;
+        });
+    });
 
     $('.relatize').relatizeDate();
 
