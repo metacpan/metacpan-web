@@ -103,7 +103,13 @@ Template::Alloy->define_vmethod(
         if(!$uri->scheme){
             $uri = URI->new("http://$url_string"); # default to http:// if no scheme in original...
         }
-        return $uri->ihost;
+
+        # This might fail if somebody adds xmpp:foo@bar.com for example.
+        my $host = eval { $uri->ihost };
+        if ($@) {
+            $host = $url_string;
+        }
+        return $host;
     }
 );
 
