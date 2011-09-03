@@ -90,8 +90,8 @@ $(document).ready(function() {
     
     $('#signin-button').mouseenter(function(){$('#signin').show()});
     $('#signin').mouseleave(function(){$('#signin').hide()});
-
-    $('.tablesorter').tablesorter({sortList: [[0,0]], widgets: ['zebra'],textExtraction: function(node){
+    if(typeof defaultSort == "undefined") defaultSort = [[0,0]];
+    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'],textExtraction: function(node){
         if(node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
             return date.getTime();
