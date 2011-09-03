@@ -237,7 +237,7 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     padding-left: 10px;
 }
 
-.search-bar, .account-bar {
+.search-bar, .account-bar, .about-bar {
     width: 165px;
     float: left;
 }
@@ -364,19 +364,19 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     text-decoration: none;
 }
 
-.account-bar a {
+.about-bar a, .account-bar a {
     display: block;
     padding: 6px;
     font-size: 1.2em;
 }
 
-.account-bar a:hover {
+.about-bar a:hover, .account-bar a:hover {
     text-decoration: none;
     background-color: #f9f9f9;
 
 }
 
-.account-bar a.active {
+.about-bar a.active, .account-bar a.active {
     background-color: #f9f9f9;
     color: #000;
     font-weight: bold;

@@ -1,0 +1,6 @@
+<% UNLESS title; title = 'MetaCPAN Account'; END %>
+<div class="account-bar">
+    <a href="/about/resources"<% IF req.action == 'about/resources' %> class="active"<% END %>>Resources</a>
+    <a href="/about/contributors"<% IF req.action == 'about/contributors' %> class="active"<% END %>>Contributors</a>
+    <a href="/about/sponsors"<% IF req.action == 'about/sponsors' %> class="active"<% END %>>Sponsors</a>
+</div>
