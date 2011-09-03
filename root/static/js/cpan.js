@@ -10,7 +10,9 @@ $.fn.textWidth = function(){
 $.extend({
   getUrlVars: function(){
     var vars = {}, hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    var indexOfQ = window.location.href.indexOf('?');
+    if(indexOfQ == -1) return vars;
+    var hashes = window.location.href.slice(indexOfQ + 1).split('&');
     $.each(hashes, function(idx, hash) {
       var kv = hash.split('=');
       vars[kv[0]] = kv[1];
