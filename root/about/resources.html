@@ -1,34 +1,33 @@
 <% PROCESS inc/about-bar.html %>
 <div class="content about-resources">
-    <ul>
-        <li>
-            <span>Contact</span>
-            <ul>
-                <li>
-                    <span>Twitter</span>
-                    <p>Follow our Twitter account for latest updates around MetaCPAN: <a href="http://twitter.com/metacpan">@metacpan</a></p>
-                </li>
-                <li>
-                    <span>IRC</span>
-                    <p>This is the best place to discuss new ideas and get involved. Join us on <a href="irc://irc.perl.org/metacpan">#metacpan on irc.perl.org</a>.</p>
-                </li>
-                <li>
-                    <span>E-Mail</span>
-                    <p>The MetaCPAN team is also available via E-Mail at <a href="mailto:noc@metacpan.org">noc@metacpan.org</a></p>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <span>Source Code</span>
-            <p>MetaCPAN consists of two projects:</p>
-            <ul>
-                <li>
-                    <span>The Front-End</span>
-                    <p>This is what you are looking at right now. The source code is on <a href="https://github.com/CPAN-API/metacpan-web">github</a>.</p>
-                </li>
-                <li>
-                    <span>The Back-End</span>
-                    <p>Front-End is a slim wrapper around the Back-End. It provides a REST API to data around CPAN and its eco system. The code is also on <a href="https://github.com/CPAN-API/cpan-api">github</a>.
-                </li>
-    </ul>
+<% USE Markdown -%>
+<% FILTER markdown %>
+# Contact
+
+## Twitter
+
+Follow our Twitter account for latest updates around MetaCPAN: [@metacpan](http://twitter.com/metacpan)
+
+## IRC
+
+This is the best place to discuss new ideas and get involved. Join us on [#metacpan on irc.perl.org](irc://irc.perl.org/metacpan).
+
+## E-Mail
+
+The MetaCPAN team is also available via E-Mail at [noc@metacpan.org](mailto:noc@metacpan.org).
+
+# Source Code
+
+MetaCPAN consists of two projects:
+
+## Front-End
+
+This is what you are looking at right now. The source code is on [github](https://github.com/CPAN-API/metacpan-web).
+
+## Back-End
+
+Front-End is a slim wrapper around the Back-End. It provides a REST API to data around CPAN and its eco system. The code is also on [github](https://github.com/CPAN-API/cpan-api).
+
+<% END %>
+
 </div>

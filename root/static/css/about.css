@@ -3,22 +3,20 @@
     margin-bottom: 10px;
 }
 
-.about-resources li span {
+.about-resources h1, .about-resources h2 {
     font-weight: bold;
 }
 
-.about-resources>ul>li>ul {
+.about-resources h2 {
     margin-top: 10px;
-}
-
-.about-resources>ul>li>ul>li span {
+    font-size: 0.9em;
     margin-left: 20px;
     font-size: 0.9em;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.about-resources li p {
+.about-resources p {
     font-weight: normal;
     font-size: 0.8em;
     margin-left: 20px;
