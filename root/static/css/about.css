@@ -1,0 +1,35 @@
+.about-resources {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.about-resources li span {
+    font-weight: bold;
+}
+
+.about-resources>ul>li>ul {
+    margin-top: 10px;
+}
+
+.about-resources>ul>li>ul>li span {
+    margin-left: 20px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.about-resources li p {
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.about-sponsor table {
+    width: 100%;
+}
+
+.about-sponsor td {
+    padding: 8px;
+    vertical-align: top;
+}

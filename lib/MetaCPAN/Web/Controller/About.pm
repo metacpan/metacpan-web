@@ -4,9 +4,19 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub contributors : Path('contributors') {
+sub contributors : Local {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/contributors.html' );
+}
+
+sub resources : Local {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about/resources.html' );
+}
+
+sub sponsors : Local {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about/sponsors.html' );
 }
 
 1;
