@@ -7,9 +7,19 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : PathPart('source') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
-    my ( $source, $module )
-        = ( $c->model('API::Module')->source(@module)
-            & $c->model('API::Module')->get(@module) )->recv;
+
+    my( $source , $module );
+    if ( @module == 1 ) {
+        $module = $c->model('API::Module')->find(@module)->recv;
+        $module[0] = join '/' , $module->{author} , $module->{release} , $module->{path};
+        $source = $c->model('API::Module')->source(@module)->recv;
+    }
+    else {
+        ( $source, $module )
+            = ( $c->model('API::Module')->source(@module)
+                & $c->model('API::Module')->get(@module) )->recv;
+    }
+
     if ( $source->{raw} ) {
         # could this be a method/function somewhere else?
         my $filetype = do {
