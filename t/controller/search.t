@@ -22,6 +22,13 @@ test_psgi app, sub {
         '//div[@class="search-results"]//big[1]/strong/a/@href');
     ok( $release, "found release $release" );
 
+    # Moose has ratings (other things on this search page likely do as well)
+    $tx->like(
+      '//div[@class="search-results"]//div[starts-with(@class, "rating-")]/following-sibling::a',
+      qr/\d+ reviews?/i,
+      'current rating and number of reviews listed'
+    );
+
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
 };
