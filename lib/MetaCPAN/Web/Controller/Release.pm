@@ -25,10 +25,12 @@ sub index : PathPart('release') : Chained('/') : Args {
         = $c->model('API::Favorite')
         ->get( $c->user_exists ? $c->user->id : undef,
         $out->{distribution} );
-    ( $modules, $versions, $author, $root, $favorites )
-        = ( $modules & $versions & $author & $root & $favorites )->recv;
+    my $rating = $c->model('API::Rating')->get( $out->{distribution} );
+    ( $modules, $versions, $author, $root, $rating, $favorites )
+        = ( $modules & $versions & $author & $root & $rating & $favorites )->recv;
     $out->{myfavorite} = $favorites->{myfavorites}->{ $out->{distribution} };
     $out->{favorites}  = $favorites->{favorites}->{ $out->{distribution} };
+
 
     my @root_files = (
         sort
@@ -52,6 +54,7 @@ sub index : PathPart('release') : Chained('/') : Args {
             took     => List::Util::max(
                 $modules->{took}, $root->{took}, $versions->{took}
             ),
+            rating  => $rating->{ratings}->{ $out->{distribution} },
             root => \@root_files,
             versions =>
                 [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
