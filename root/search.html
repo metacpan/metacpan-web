@@ -44,8 +44,7 @@
   <% END %>
   <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
-    &nbsp;<div class="rating-<% (item.rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></div>
-    (<a href="http://cpanratings.perl.org/dist/<% item.distribution %>"><% item.rating.count %> review<% IF item.rating.count > 1; 's'; END %></a>)
+    &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
   <%- END %> -
   <span class="relatize"><% item.date.dt_http %></span> -
   <a href="/search?q=distribution:<% item.distribution %>+<% query %>">Search in distribution</a>
