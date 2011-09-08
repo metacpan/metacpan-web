@@ -23,8 +23,9 @@ sub index : PathPart('module') : Chained('/') : Args {
         = $c->model('API::Favorite')
         ->get( $c->user_exists ? $c->user->id : undef,
         $data->{distribution} );
-    ( $pod, $author, $release, $versions, $favorites )
-        = ( $pod & $author & $release & $versions & $favorites )->recv;
+    my $rating = $c->model('API::Rating')->get( $data->{distribution} );
+    ( $pod, $author, $release, $versions, $rating, $favorites )
+        = ( $pod & $author & $release & $versions & $rating & $favorites )->recv;
     $data->{myfavorite} = $favorites->{myfavorites}->{ $data->{distribution} };
     $data->{favorites}  = $favorites->{favorites}->{ $data->{distribution} };
 
@@ -33,6 +34,7 @@ sub index : PathPart('module') : Chained('/') : Args {
             author  => $author,
             pod     => $pod->{raw},
             release => $release->{hits}->{hits}->[0]->{_source},
+            rating  => $rating->{ratings}->{ $data->{distribution} },
             versions =>
                 [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
             template => 'module.html',
