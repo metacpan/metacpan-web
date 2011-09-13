@@ -1,5 +1,5 @@
 <% title = release.name; rss = 'distribution/' _ release.distribution %>
-<strong><big><a href="/author/<% release.author %>" title="<% author.asciiname %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong>
+<strong><big><a rel="author" href="/author/<% release.author %>" title="<% author.asciiname %>"><% author.name %></a> &nbsp;/&nbsp; <% release.name %></big></strong>
 <% INCLUDE inc/favorite.html module = release %>
 <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
