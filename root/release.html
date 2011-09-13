@@ -7,7 +7,7 @@
   <div>
     <ul>
       <li><strong class="relatize"><% release.date.dt_http %></strong></li>
-      <li><a href="<% release.download_url %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
+      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <% IF changes %> 
           <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>"><% changes %></a></li>
       <% END %>
