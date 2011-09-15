@@ -48,6 +48,29 @@ IF profiles.${profile.name} %>
 </form></center>
 <% ELSIF donate.name == 'wishlist' && donate.id %>
 <div style="text-align: center"><a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a></div>
+<% ELSIF donate.name == 'flattr' %>
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+<div style="text-align: center">
+<a class="FlattrButton" style="display:none;"
+    title="<% author.name %> (<% author.pauseid %>) on metacpan"
+    rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
+    href="https://metacpan.org/author/<% author.pauseid %>"
+    language="en_GB" >
+    <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
+</a>
+</div>
 <% END; END; END %>
 <%
 i = 0;
