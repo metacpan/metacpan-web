@@ -18,7 +18,8 @@ test_psgi app, sub {
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);
 
-        # these first tests are similar between the controllers only because of consistecy or coincidence and are not specifically related to release-info
+        # these first tests are similar between the controllers only because of
+        # consistecy or coincidence and are not specifically related to release-info
         $tx->like( '/html/head/title', qr/$dist/, qq["title includes name "$dist"] );
 
         ok( $tx->find_value(qq<//a[\@href="/$controller/$dist"]>),
@@ -31,10 +32,6 @@ test_psgi app, sub {
         # A fragile and unsure way to get the version, but at least an 80% solution.
         # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
         my $version = ($this =~ m!/$controller/[^/]+/$dist-([^/"]+)!)[0];
-
-        my $latest = $res->content;
-        ok( $res = $cb->( GET $this ), "GET $this" );
-        is($latest, $res->content, 'content of both urls is exactly the same');
 
         # TODO: latest version (should be where we already are)
 
