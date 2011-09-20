@@ -34,12 +34,6 @@ test_psgi app, sub {
         'content of both urls is exactly the same'
     );
 
-    $tx->like(
-        '//select[@name="release"]/option[@value][1]',
-        qr/\(\d{4}-\d{2}-\d{2}\)$/,
-        'version ends with date in common format'
-    );
-
 };
 
 done_testing;
