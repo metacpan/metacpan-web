@@ -31,7 +31,7 @@ test_psgi app, sub {
 
         # A fragile and unsure way to get the version, but at least an 80% solution.
         # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
-        my $version = ($this =~ m!/$controller/[^/]+/$dist-([^/"]+)!)[0];
+        ok( my $version = ($this =~ m!/$controller/[^/]+/$dist-([^/"]+)!)[0], 'got version from "this" link' );
 
         # TODO: latest version (should be where we already are)
 
