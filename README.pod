@@ -6,7 +6,7 @@ Install Dist::Zilla using your preferred CPAN client:
 
 Install the project dependencies:
 
- $ dzil listdeps | cpanm
+ $ dzil listdeps --missing | cpanm
 
 Start server on port 5001 (which you want to make authentication work)
 
