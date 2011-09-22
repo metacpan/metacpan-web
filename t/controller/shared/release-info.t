@@ -9,13 +9,30 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
+
+    # Not all tests apply to all releases.
+    my @optional = qw( home_page repository reviews );
+
+    # Use a counter to make sure we at least do each optional test once.
+    my %tested = map { ($_ => 0) } @optional;
+
+    # Tests default to true unless explicitly set to false.
+    # Setting to false does not test for failure, it simply skips the test.
+
     my @tests = (
-        { module => 'Moose' },
+        { module => 'Moose', home_page => 0 },
+        { module => 'Dist::Zilla' },
+        { module => 'LWP::UserAgent', release => 'libwww-perl', repository => 0, home_page => 0 },
+        { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0 },
     );
 
 foreach my $test ( @tests ) {
     ($test->{release} = $test->{module}) =~ s/::/-/g
         if !$test->{release};
+
+    # turn tests on by default
+    exists($test->{$_}) or $test->{$_} = 1
+        for @optional;
 
     # short cuts
     my ($module, $release) = @{$test}{qw(module release)};
@@ -51,32 +68,44 @@ foreach my $test ( @tests ) {
         # TODO: Download
         # TODO: Changes
 
-        # TODO: Moose doesn't have a homepage, we need to test a dist that does (better yet test against a fake cpan)
+        if( $test->{home_page} ) {
+            ok(  $tx->find_value('//a[text()="Homepage"]/@href'),
+                'link for resources.homepage' );
+
+            ++$tested{home_page};
+        }
         # TODO: what is <li>release.resources</li> supposed to be?
 
-        ok(  $tx->find_value('//a[text()="Repository"]/@href'),
-            'link for resources.repository.web' );
+        # test separate links for both web and url keys (if specified)
+        if( $test->{repository} ) {
+            ok(  $tx->find_value('//a[text()="Repository"]/@href'),
+                'link for resources.repository.web' );
 
-        # both web and url keys
-        ok(  $tx->find_value('//a[text()="git clone"]/@href'),
-            'link for resources.repository.url' );
+            ok(  $tx->find_value('//a[text()="git clone"]/@href'),
+                'link for resources.repository.url' );
+
+            ++$tested{repository};
+        }
 
         # we could test the rt.cpan.org link... i think others are verbatim from the META file
         ok(  $tx->find_value('//a[text()="Bugs"]/@href'),
             'link for bug tracker' );
 
-        # Moose has ratings, but not all dists do (so be careful what we're testing with)
+        # not all dists have reviews
         my $reviews = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
-        $tx->is(
-            "$reviews/\@href",
-            "http://cpanratings.perl.org/dist/$release",
-            'link to current reviews'
-        );
-        $tx->like(
-            $reviews,
-            qr/\d+ reviews?/i,
-            'current rating and number of reviews listed'
-        );
+        if( $test->{reviews} ) {
+            $tx->is(
+                "$reviews/\@href",
+                "http://cpanratings.perl.org/dist/$release",
+                'link to current reviews'
+            );
+            $tx->like(
+                $reviews,
+                qr/\d+ reviews?/i,
+                'current rating and number of reviews listed'
+            );
+            ++$tested{reviews};
+        }
 
         # all dists should get a link to rate it; test built url
         $tx->is(
@@ -120,8 +149,9 @@ foreach my $test ( @tests ) {
     }
 }
 
-};
+ok( $tested{$_} > 0, "at least one module tested $_" )
+    for sort keys %tested;
 
-# TODO ok( $found_ratings, "at least one module had ratings" );
+};
 
 done_testing;
