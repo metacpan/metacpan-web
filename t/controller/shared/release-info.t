@@ -9,20 +9,31 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    my $dist = 'Moose';
-    my $first_letter = uc(substr($dist, 0, 1));
+    my @tests = (
+        { module => 'Moose' },
+    );
+
+foreach my $test ( @tests ) {
+    ($test->{release} = $test->{module}) =~ s/::/-/g
+        if !$test->{release};
+
+    # short cuts
+    my ($module, $release) = @{$test}{qw(module release)};
+    my $first_letter = uc(substr($release, 0, 1));
 
     foreach my $controller ( qw(module release) ) {
-        my $req_uri = "/$controller/$dist";
+        my $name = $test->{ $controller };
+
+        my $req_uri = "/$controller/$name";
         ok( my $res = $cb->( GET $req_uri ), "GET $req_uri" );
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);
 
         # these first tests are similar between the controllers only because of
         # consistecy or coincidence and are not specifically related to release-info
-        $tx->like( '/html/head/title', qr/$dist/, qq["title includes name "$dist"] );
+        $tx->like( '/html/head/title', qr/$name/, qq["title includes name "$name"] );
 
-        ok( $tx->find_value(qq<//a[\@href="/$controller/$dist"]>),
+        ok( $tx->find_value(qq<//a[\@href="/$controller/$name"]>),
             'contains permalink to resource'
         );
 
@@ -31,7 +42,7 @@ test_psgi app, sub {
 
         # A fragile and unsure way to get the version, but at least an 80% solution.
         # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
-        ok( my $version = ($this =~ m!/$controller/[^/]+/$dist-([^/"]+)!)[0], 'got version from "this" link' );
+        ok( my $version = ($this =~ m!/$controller/[^/]+/$release-([^/"]+)!)[0], 'got version from "this" link' );
 
         # TODO: latest version (should be where we already are)
 
@@ -58,7 +69,7 @@ test_psgi app, sub {
         my $reviews = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
         $tx->is(
             "$reviews/\@href",
-            "http://cpanratings.perl.org/dist/$dist",
+            "http://cpanratings.perl.org/dist/$release",
             'link to current reviews'
         );
         $tx->like(
@@ -70,14 +81,14 @@ test_psgi app, sub {
         # all dists should get a link to rate it; test built url
         $tx->is(
             '//div[@class="search-bar"]//a[text()="Rate this distribution"]/@href',
-            "http://cpanratings.perl.org/rate/?distribution=$dist",
+            "http://cpanratings.perl.org/rate/?distribution=$release",
             'cpanratings link to rate this dist'
         );
 
         # test format of cpantesters link
         $tx->is(
             '//a[text()="Test results"]/@href',
-            "http://www.cpantesters.org/distro/$first_letter/$dist.html#$dist-$version",
+            "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version",
             'link to test results'
         );
 
@@ -85,7 +96,7 @@ test_psgi app, sub {
 
         $tx->is(
             '//a[@title="Matrix"]/@href',
-            "http://matrix.cpantesters.org/?dist=$dist-$version",
+            "http://matrix.cpantesters.org/?dist=$release-$version",
             'link to test matrix'
         );
 
@@ -107,6 +118,10 @@ test_psgi app, sub {
         # TODO: explorer
         # TODO: activity
     }
+}
+
 };
+
+# TODO ok( $found_ratings, "at least one module had ratings" );
 
 done_testing;
