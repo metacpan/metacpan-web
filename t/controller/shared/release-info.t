@@ -5,7 +5,7 @@ use MetaCPAN::Web::Test;
 
 # Test various aspects that should be similar
 # among controllers that show release info (in the side bar).
-# Currently this includes module and release controllers
+# Currently this includes module and release controllers.
 
 test_psgi app, sub {
     my $cb = shift;
@@ -48,7 +48,7 @@ foreach my $test ( @tests ) {
 
         # these first tests are similar between the controllers only because of
         # consistecy or coincidence and are not specifically related to release-info
-        $tx->like( '/html/head/title', qr/$name/, qq["title includes name "$name"] );
+        $tx->like( '/html/head/title', qr/$name/, qq[title includes name "$name"] );
 
         ok( $tx->find_value(qq<//a[\@href="/$controller/$name"]>),
             'contains permalink to resource'
