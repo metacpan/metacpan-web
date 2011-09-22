@@ -1,20 +1,25 @@
 use strict;
 use warnings;
-use Test::More;
+use Test::More 0.96;
 use MetaCPAN::Web::Test;
 
 # Test various aspects that should be similar
 # among controllers that show release info (in the side bar).
 # Currently this includes module and release controllers.
 
+# Not all tests apply to all releases.
+my @optional = qw( home_page repository reviews );
+
+# Use a counter to make sure we at least do each optional test once.
+my %tested = map { ($_ => 0) } @optional;
+
+# global var (eww) used for test names
+my $current;
+
+sub optional_test ($$);
+
 test_psgi app, sub {
     my $cb = shift;
-
-    # Not all tests apply to all releases.
-    my @optional = qw( home_page repository reviews );
-
-    # Use a counter to make sure we at least do each optional test once.
-    my %tested = map { ($_ => 0) } @optional;
 
     # Tests default to true unless explicitly set to false.
     # Setting to false does not test for failure, it simply skips the test.
@@ -40,8 +45,10 @@ foreach my $test ( @tests ) {
 
     foreach my $controller ( qw(module release) ) {
         my $name = $test->{ $controller };
+        $current = {desc => "$controller $name", test => $test};
 
         my $req_uri = "/$controller/$name";
+
         ok( my $res = $cb->( GET $req_uri ), "GET $req_uri" );
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);
@@ -68,24 +75,21 @@ foreach my $test ( @tests ) {
         # TODO: Download
         # TODO: Changes
 
-        if( $test->{home_page} ) {
+        optional_test home_page => sub {
             ok(  $tx->find_value('//a[text()="Homepage"]/@href'),
                 'link for resources.homepage' );
+        };
 
-            ++$tested{home_page};
-        }
         # TODO: what is <li>release.resources</li> supposed to be?
 
         # test separate links for both web and url keys (if specified)
-        if( $test->{repository} ) {
+        optional_test repository => sub {
             ok(  $tx->find_value('//a[text()="Repository"]/@href'),
                 'link for resources.repository.web' );
 
             ok(  $tx->find_value('//a[text()="git clone"]/@href'),
                 'link for resources.repository.url' );
-
-            ++$tested{repository};
-        }
+        };
 
         # we could test the rt.cpan.org link... i think others are verbatim from the META file
         ok(  $tx->find_value('//a[text()="Bugs"]/@href'),
@@ -93,7 +97,7 @@ foreach my $test ( @tests ) {
 
         # not all dists have reviews
         my $reviews = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
-        if( $test->{reviews} ) {
+        optional_test reviews => sub {
             $tx->is(
                 "$reviews/\@href",
                 "http://cpanratings.perl.org/dist/$release",
@@ -104,8 +108,7 @@ foreach my $test ( @tests ) {
                 qr/\d+ reviews?/i,
                 'current rating and number of reviews listed'
             );
-            ++$tested{reviews};
-        }
+        };
 
         # all dists should get a link to rate it; test built url
         $tx->is(
@@ -155,3 +158,13 @@ ok( $tested{$_} > 0, "at least one module tested $_" )
 };
 
 done_testing;
+
+sub optional_test ($$) {
+    my ($name, $sub) = @_;
+    subtest $name => sub {
+        plan skip_all => "$name test for $current->{desc}"
+            unless $current->{test}->{ $name };
+        $sub->();
+        ++$tested{ $name };
+    };
+}
