@@ -710,7 +710,8 @@ function eachLine(str, callback)
 	for (var i = 0; i < lines.length; i++)
 		lines[i] = callback(lines[i], i);
 		
-	return lines.join('\n');
+	// include \r to enable copy/paste on windows (IE8)
+	return lines.join('\r\n');
 };
 
 /**
