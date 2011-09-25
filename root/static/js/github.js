@@ -143,7 +143,7 @@ function Github() {
                 },
                 style: {
                     classes: 'ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-light'
-                },
+                }
             });
         },
 
