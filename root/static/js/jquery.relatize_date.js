@@ -8,8 +8,19 @@
   }
 
   $.relatizeDate = function(element) {
-    return $.relatizeDate.timeAgoInWords( new Date($(element).text()) )
-  }
+    var str = $(element).text(),
+        d = new Date(str), m;
+    if(!d || isNaN(d)){
+      // match w3cdtf/iso 8601/rfc 3339 (not all browsers will via new Date())
+      if( (m = str.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(GMT|UTC|Z)?$/)) ){
+        d = m[7] ? // UTC
+          new Date(Date.UTC(m[1], m[2]-1, m[3], m[4], m[5], m[6])) :
+          new Date(         m[1], m[2]-1, m[3], m[4], m[5], m[6] );
+      }
+    }
+    // if Date is not parseable just return the original string
+    return( (!d || isNaN(d)) ? str : $.relatizeDate.timeAgoInWords( d ) );
+  };
 
   // shortcut
   $r = $.relatizeDate
@@ -34,8 +45,8 @@
         return new Array((2 - string.length) + 1).join('0') + string
       };
 
-      return format.replace(/\%([aAbBcdHImMpSwyY])/g, function(part) {
-        switch(part[1]) {
+      return format.replace(/\%([aAbBcdHImMpSwyY])/g, function(match, letter) {
+        switch(letter) {
           case 'a': return $r.shortDays[day]; break;
           case 'A': return $r.days[day]; break;
           case 'b': return $r.shortMonths[month]; break;
