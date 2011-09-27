@@ -22,12 +22,12 @@
 	function Brush()
 	{
 		this.regexList = [
-			{ regex: /^\+\+\+.*$/gm,        css: 'color2' },
-			{ regex: /^---.*$/gm,           css: 'color2' },
-			{ regex: /^(?=\s).*$/gm,        css: 'color1' },
-			{ regex: /^@@.*@@.*/gm,         css: 'variable' },
-			{ regex: /^\+(?!\+).*$/gm,      css: 'comments' },
-			{ regex: /^-(?!-).*$/gm,        css: 'color3' }
+			{ regex: /^\+\+\+ .*$/gm,       css: 'color2' },   // new file
+			{ regex: /^\-\-\- .*$/gm,          css: 'color2' },   // old file
+			{ regex: /^\s.*$/gm,        css: 'color1' },   // unchanged
+			{ regex: /^@@.*@@.*$/gm,         css: 'variable' }, // location
+			{ regex: /^\+.*$/gm,            css: 'comments' }, // additions
+			{ regex: /^\-.*$/gm,             css: 'color3' }    // deletions
 			];
 	};
 
