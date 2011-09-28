@@ -26,8 +26,8 @@ it under the same terms as Perl itself.
 sub get {
     my ( $self, $author, $release ) = @_;
     $self->request(
-        '/release/_search', {
-            query => {
+        '/release/_search',
+        {   query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -45,8 +45,8 @@ sub get {
 sub recent {
     my ( $self, $page ) = @_;
     $self->request(
-        '/release/_search', {
-            size  => 100,
+        '/release/_search',
+        {   size  => 100,
             from  => ( $page - 1 ) * 100,
             query => { match_all => {} },
             sort  => [ { 'date' => { order => "desc" } } ]
@@ -57,8 +57,8 @@ sub recent {
 sub modules {
     my ( $self, $author, $release ) = @_;
     $self->request(
-        '/file/_search', {
-            query => {
+        '/file/_search',
+        {   query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -71,19 +71,21 @@ sub modules {
                                                     field =>
                                                         'file.module.name'
                                                 }
-                                            }, {term => {
+                                            },
+                                            {   term => {
                                                     'file.module.indexed' =>
                                                         \1
                                                 }
                                             }
                                         ]
-                                    }, {and => [
-                                            {   exists => {
-                                                    field => 'documentation'
-                                                }
-                                            }, {term =>
+                                    },
+                                    {   and => [
+                                            {   exists =>
+                                                    { field => 'file.pod.analyzed' }
+                                            },
+                                            {   term =>
                                                     { 'file.indexed' => \1 }
-                                            }
+                                            },
                                         ]
                                     }
                                 ]
@@ -104,8 +106,8 @@ sub modules {
 sub find {
     my ( $self, $distribution ) = @_;
     $self->request(
-        '/release/_search', {
-            query => {
+        '/release/_search',
+        {   query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -128,8 +130,8 @@ sub find {
 sub root_files {
     my ( $self, $author, $release ) = @_;
     $self->request(
-        '/file/_search', {
-            query => {
+        '/file/_search',
+        {   query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -156,8 +158,8 @@ sub root_files {
 sub versions {
     my ( $self, $dist ) = @_;
     $self->request(
-        '/release/_search', {
-            query => {
+        '/release/_search',
+        {   query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -176,8 +178,8 @@ sub versions {
 }
 
 sub favorites {
-    my ($self, $dist) = @_;
-    $self->request('/favorite/_search', {});
+    my ( $self, $dist ) = @_;
+    $self->request( '/favorite/_search', {} );
 }
 
 __PACKAGE__->meta->make_immutable;

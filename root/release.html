@@ -48,6 +48,7 @@
 
 <%
 documentation = [];
+documentation_raw = [];
 provides      = [];
 modules       = [];
 FOREACH file IN files;
@@ -58,14 +59,17 @@ FOREACH file IN files;
         provides.push({ status = file.status, title = module.name, path = file.path });
       END;
     END;
-  ELSIF file.documentation;
-    documentation.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
   ELSIF file.module;
     FOREACH module IN file.module;
       provides.push({ status = file.status, title = module.name, path = file.path });
     END;
+  ELSIF file.documentation;
+        documentation.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+  ELSE;
+        documentation_raw.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
   END;
 END;
+documentation = documentation.merge(documentation_raw);
 %>
 <% IF modules.size %><strong>Modules</strong>
 <% FOREACH module IN modules %>
@@ -78,7 +82,7 @@ END;
 <% IF documentation.size %><strong>Documentation</strong>
 <% FOREACH module IN documentation %>
   <div>
-    <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+    <strong><a href="/module/<% IF release.status == 'latest' && module.title; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title ? module.title : module.path %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
@@ -86,7 +90,7 @@ END;
 <% IF provides.size %><strong>Provides</strong>
 <% FOREACH module IN provides.sort('title') %>
   <div>
-    <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path ; '#P'; module.title | uri %>"><% module.title %></a></strong>
+    <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path ; '#P'; module.title | uri %>"><% module.title %></a></strong> in <% module.path %>
   </div>
 <% END %>
 
