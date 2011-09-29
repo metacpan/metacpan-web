@@ -8,7 +8,7 @@
         <% IF release.resources.repository.web && release.resources.repository.url %>
         (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
         <% ELSIF release.resources.repository.url %>
-        <a href="<% release.resources.repository.url %>"><% release.resources.repository.type %>Clone repository</a>
+        <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
         <% END %>
       </li>
       <% END %>
