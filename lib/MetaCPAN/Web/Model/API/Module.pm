@@ -2,7 +2,7 @@ package MetaCPAN::Web::Model::API::Module;
 use Moose;
 use namespace::autoclean;
 
-extends 'MetaCPAN::Web::Model::API';
+extends 'MetaCPAN::Web::Model::API::File';
 
 =head1 NAME
 
@@ -35,16 +35,6 @@ my @ROGUE_DISTRIBUTIONS
 sub find {
     my ( $self, $module ) = @_;
     $self->request("/module/$module");
-}
-
-sub get {
-    my ( $self, @path ) = @_;
-    $self->request( '/file/' . join( '/', @path ) );
-}
-
-sub source {
-    my ( $self, @module ) = @_;
-    $self->request( '/source/' . join( '/', @module ), undef, { raw => 1 } );
 }
 
 sub autocomplete {

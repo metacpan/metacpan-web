@@ -1,0 +1,23 @@
+.silk-folder {
+    padding-left: 20px;
+    background-repeat: no-repeat !important;
+    background: url(/static/icons/folder.png);
+}
+
+.silk-page-white-code {
+    padding-left: 20px;
+    background-repeat: no-repeat !important;;
+    background: url(/static/icons/page_white_code.png);
+}
+
+.silk-page-white {
+    padding-left: 20px;
+    background-repeat: no-repeat !important;
+    background: url(/static/icons/page_white.png);
+}
+
+.silk-page-white-c {
+    padding-left: 20px;
+    background-repeat: no-repeat !important;
+    background: url(/static/icons/page_white_c.png);
+}

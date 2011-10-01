@@ -625,16 +625,16 @@ div.qtip-github table th {
     background-color: #F9F9F9;
 }
 
-.release-table {
+.tablesorter, .release-table {
     table-layout:fixed;
     width: 100%;
 }
 
-.release-table td, .release-table th {
+.tablesorter td, .tablesorter th, .release-table td, .release-table th {
     padding: 2px;
 }
 
-.release-table th {
+.tablesorter th, .release-table th {
     text-align: left;
     font-weight: bold;
 }
@@ -643,22 +643,32 @@ div.qtip-github table th {
     width: 266px;
 }
 
-.release-table .date {
+.tablesorter .date, .release-table .date {
     width: 100px;
     font-size: 1em;
 }
 
-.release-table td.date {
+.file-table .mtime, .file-table .size {
+    width: 110px;
+    font-size: 1em;
+}
+
+.file-table .documentation {
+    width: 250px;
+    font-size: 1em;
+}
+
+.file-table td.mtime, .release-table td.date {
     text-align: right;
 }
 
-.release-table .abstract, .release-table .date {
+.file-table .name, .release-table .abstract, .release-table .date {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
-.release-table .odd {
+.tablesorter .odd, .release-table .odd {
     background-color: #f9f9f9;
 }
 

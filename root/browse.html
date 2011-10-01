@@ -1,0 +1,52 @@
+<%- title = "Browse " _ [author, release, undef].join('/') _ directory.join("/") %>
+<strong><big>
+  <a href="/source/<% base = [author, release].join("/"); base %>"><% [author, release].join(" / ") %></a>
+  <% FOREACH part IN directory; base = base _ "/" _ part -%>
+  / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
+  <% END %>
+  </big></strong><br><br>
+
+<div class="search-bar">
+  <strong>Tools</strong>
+  <ul>
+    <li><a href="/release/<% author %>/<% release %>/">To release page</a></li>
+    <li><a href="/author/<% author %>/">To author page</a></li>
+    <li>&nbsp;</li>
+    <li><a href="<% api %>/source/<% base %>">Raw browser</a></li>
+  </ul>
+  <hr>
+  <strong>Info</strong>
+  <ul>
+    <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
+    <li><% count = files.grep(->{this.directory == 'false'}).size; count %> file<% count != 1 ? "s" : "" %></li>
+    
+  </ul>
+</div>
+
+<div class="content">
+<table class="file-table tablesorter">
+<thead>
+    <tr>
+    <th class="name">Name</th>
+    <th class="documentation">Documentation</th>
+    <th class="size">Size</th>
+    <th class="mtime">Last Modified</th>
+    </tr>
+</thead>
+<tbody>
+<% i = 0; FOREACH file IN files %>
+<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
+  <td class="name"><strong sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
+    file.directory == 'true' ? 'silk-folder' 
+  : file.mime.match("perl") ? 'silk-page-white-code'
+  : file.mime.match("x-c") ? 'silk-page-white-c'
+  : 'silk-page-white'
+  -%>" title="<% file.path %>"><% file.name %></a></strong></td>
+  <td class="documentation" class="ellipsis"><strong><a href="/module/<% [author, release, file.path].join("/") %>" title="<% file.path %>"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
+  <td class="size"><span sort="<% file.directory == "false" ? file.${"stat.size"} : 0 %>"><% file.directory == "false" ? file.${"stat.size"} | format_bytes : "" %></td>
+  <td class="mtime" nowrap="nowrap"><span class="relatize" sort="<% date = file.${"stat.mtime"}.dt_http; date %>"><% date %></span></td>
+</tr>
+<% END %>
+</tbody>
+</table>
+</div>

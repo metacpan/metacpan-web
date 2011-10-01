@@ -11,7 +11,7 @@
       <% IF changes %> 
           <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>"><% changes %></a></li>
       <% END %>
-      <li><a href="<% api %>/source/<% release.author %>/<% release.name %>/">Browse</a></li>
+      <li><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
       <% PROCESS inc/release-info.html %>
     </ul>
   </div>
