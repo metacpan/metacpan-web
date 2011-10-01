@@ -654,12 +654,16 @@ div.qtip-github table th {
 }
 
 .file-table .documentation {
-    width: 250px;
+    width: 300px;
     font-size: 1em;
 }
 
 .file-table td.mtime, .release-table td.date {
     text-align: right;
+}
+
+.file-table .name a {
+     display: inline-block;
 }
 
 .file-table .name, .release-table .abstract, .release-table .date {
