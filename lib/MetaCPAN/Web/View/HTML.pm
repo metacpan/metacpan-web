@@ -13,7 +13,18 @@ use Regexp::Common qw(time);
 
 sub parse_datetime {
     my $date = shift;
-    if ( $date =~ /$RE{time}{iso}{-keep}/ ) {
+    if ( $date =~ /^\d+$/ ) {
+        my ( $sec, $min, $hour, $mday, $mon, $year ) = localtime($date);
+        return {
+            year   => $year+1900,
+            month  => $mon+1,
+            day    => $mday,
+            hour   => $hour,
+            minute => $min,
+            second => $sec,
+        };
+    }
+    elsif ( $date =~ /$RE{time}{iso}{-keep}/ ) {
         return {
             year   => $2,
             month  => $3,
@@ -37,7 +48,7 @@ sub format_datetime {
     return sprintf(
         '%02d %s %04d %02d:%02d:%02d GMT',
         $dt->{day},
-        $MoY[ $dt->{month} - 1],
+        $MoY[ $dt->{month} - 1 ],
         @$dt{qw(year hour minute second)}
     );
 }
@@ -45,33 +56,35 @@ sub format_datetime {
 sub canonical_datetime {
     my $date = shift;
     my $dt   = parse_datetime($date);
-    return int(sprintf(
-        '%04d%02d%02d%02d%02d%02d',
-        @$dt{qw(year month day hour minute second)}
-    ));
+    return int(
+        sprintf( '%04d%02d%02d%02d%02d%02d',
+            @$dt{qw(year month day hour minute second)} )
+    );
 }
 
 # format just the date consistent with W3CDTF / ISO 8601 / RFC 3339
 sub common_date_format {
     my $date = shift;
     my $dt   = parse_datetime($date);
-    return sprintf(
-        '%04d-%02d-%02d',
-        @$dt{qw(year month day)}
-    );
+    return sprintf( '%04d-%02d-%02d', @$dt{qw(year month day)} );
 }
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
 Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
 
-Template::Alloy->define_vmethod( 'text', dt_canonical => \&canonical_datetime );
+Template::Alloy->define_vmethod( 'text',
+    dt_canonical => \&canonical_datetime );
 
-Template::Alloy->define_vmethod( 'text', dt_date_common => \&common_date_format );
+Template::Alloy->define_vmethod( 'text',
+    dt_date_common => \&common_date_format );
 
-Template::Alloy->define_vmethod( 'hash', pretty_json => sub {
-    JSON->new->utf8->pretty->encode(shift)
-} );
+Template::Alloy->define_vmethod(
+    'hash',
+    pretty_json => sub {
+        JSON->new->utf8->pretty->encode(shift);
+    }
+);
 
 {
     my @chars = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9, qw(- _) );
@@ -99,9 +112,10 @@ Template::Alloy->define_vmethod(
     'text',
     decode_punycode => sub {
         my $url_string = shift;
-        my $uri = URI->new($url_string);
-        if(!$uri->scheme){
-            $uri = URI->new("http://$url_string"); # default to http:// if no scheme in original...
+        my $uri        = URI->new($url_string);
+        if ( !$uri->scheme ) {
+            $uri = URI->new("http://$url_string")
+                ;    # default to http:// if no scheme in original...
         }
 
         # This might fail if somebody adds xmpp:foo@bar.com for example.
