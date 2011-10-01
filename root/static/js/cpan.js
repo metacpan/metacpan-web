@@ -92,10 +92,14 @@ $(document).ready(function() {
     $('#signin').mouseleave(function(){$('#signin').hide()});
     if(typeof defaultSort == "undefined") defaultSort = [[0,0]];
     $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'],textExtraction: function(node){
-        if(node.getAttribute('class') == 'date') {
+        var sortBy = node.firstChild.getAttribute('sort');
+        if(sortBy && node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
             return date.getTime();
-        } else {
+        } else if (sortBy) {
+            return node.firstChild.getAttribute('sort');
+        }
+        else {
             return node.innerHTML;
         }
     }} );
