@@ -74,6 +74,7 @@ foreach my $test ( @tests ) {
         ok( my $version = ($this =~ m!/$controller/[^/]+/$release-([^/"]+)!)[0], 'got version from "this" link' );
 
         # TODO: latest version (should be where we already are)
+        # TODO: author
 
         # not in release-info.html but should be shown on both:
 

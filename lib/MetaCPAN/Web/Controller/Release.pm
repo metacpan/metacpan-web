@@ -42,6 +42,8 @@ sub index : PathPart('release') : Chained('/') : Args {
         map { $_->{fields}->{name} } @{ $root->{hits}->{hits} }
     );
 
+    # TODO: add action for /changes/$release/$version ? that does this
+
     my $changes = undef;
     foreach my $filename ( @root_files ) {
         if ( $filename =~ m{\AChange}i ) {
