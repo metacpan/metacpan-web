@@ -8,7 +8,12 @@ use MetaCPAN::Web::Test;
 # Currently this includes module and release controllers.
 
 # Not all tests apply to all releases.
-my @optional = qw( home_page repository reviews );
+my @optional = qw(
+    favorited
+    home_page
+    repository
+    reviews
+);
 
 # Use a counter to make sure we at least do each optional test once.
 my %tested = map { ($_ => 0) } @optional;
@@ -28,7 +33,7 @@ test_psgi app, sub {
         { module => 'Moose', home_page => 0 },
         { module => 'Dist::Zilla' },
         { module => 'LWP::UserAgent', release => 'libwww-perl', repository => 0, home_page => 0 },
-        { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0 },
+        { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0, favorited => 0 },
     );
 
 foreach my $test ( @tests ) {
@@ -70,6 +75,16 @@ foreach my $test ( @tests ) {
 
         # TODO: latest version (should be where we already are)
 
+        # not in release-info.html but should be shown on both:
+
+        my $favs = '//*[contains(@class, "favorite")]';
+        $tx->like( $favs, qr/\+\+$/, 'tag for favorites (++)' );
+
+        optional_test favorited => sub {
+            ok(  $tx->find_value("$favs/span") > 0,
+                'dist has been marked as favorite' );
+        };
+
         # Info about a release (either the one we're looking at or the one the module belongs to)
 
         # TODO: Download
@@ -79,8 +94,6 @@ foreach my $test ( @tests ) {
             ok(  $tx->find_value('//a[text()="Homepage"]/@href'),
                 'link for resources.homepage' );
         };
-
-        # TODO: what is <li>release.resources</li> supposed to be?
 
         # test separate links for both web and url keys (if specified)
         optional_test repository => sub {
