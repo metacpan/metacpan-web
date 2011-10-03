@@ -6,6 +6,10 @@ use namespace::autoclean;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 use List::Util ();
 
+with qw(
+    MetaCPAN::Web::Role::ReleaseInfo
+);
+
 sub index : PathPart('release') : Chained('/') : Args {
     my ( $self, $c, $author, $release ) = @_;
     my $model = $c->model('API::Release');
@@ -15,22 +19,23 @@ sub index : PathPart('release') : Chained('/') : Args {
         ? $model->get( $author, $release )
         : $model->find($author);
     my $out = $data->recv->{hits}->{hits}->[0]->{_source};
-    $c->detach('/not_found') unless ($out);
-    ( $author, $release ) = ( $out->{author}, $out->{name} );
-    my $modules = $model->modules( $author, $release );
-    my $root = $model->root_files( $author, $release );
-    my $versions = $model->versions( $out->{distribution} );
-    $author = $c->model('API::Author')->get($author);
-    my $favorites
-        = $c->model('API::Favorite')
-        ->get( $c->user_exists ? $c->user->id : undef,
-        $out->{distribution} );
-    my $rating = $c->model('API::Rating')->get( $out->{distribution} );
-    ( $modules, $versions, $author, $root, $rating, $favorites )
-        = ( $modules & $versions & $author & $root & $rating & $favorites )->recv;
-    $out->{myfavorite} = $favorites->{myfavorites}->{ $out->{distribution} };
-    $out->{favorites}  = $favorites->{favorites}->{ $out->{distribution} };
 
+    $c->detach('/not_found') unless ($out);
+
+    ( $author, $release ) = ( $out->{author}, $out->{name} );
+
+    my $reqs = $self->api_requests($c, {
+            root    => $model->root_files( $author, $release ),
+            modules => $model->modules(    $author, $release ),
+        },
+        $out,
+    );
+    $reqs = $self->recv_all($reqs);
+    $self->stash_api_results($c, $reqs, $out);
+    $self->add_favorites_data($out, $reqs->{favorites}, $out);
+
+    # shortcuts
+    my ($root, $modules) = @{$reqs}{qw(root modules)};
 
     my @root_files = (
         sort
@@ -45,19 +50,16 @@ sub index : PathPart('release') : Chained('/') : Args {
         }
     }
 
+    # TODO: make took more automatic (to include all)
     $c->stash(
         {   template => 'release.html',
             release  => $out,
-            author   => $author,
             changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
-                $modules->{took}, $root->{took}, $versions->{took}
+                $modules->{took}, $root->{took}, $reqs->{versions}->{took}
             ),
-            rating  => $rating->{ratings}->{ $out->{distribution} },
             root => \@root_files,
-            versions =>
-                [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
             files => [
                 map {
                     {
