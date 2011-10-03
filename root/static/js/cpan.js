@@ -92,7 +92,9 @@ $(document).ready(function() {
     $('#signin').mouseleave(function(){$('#signin').hide()});
     if(typeof defaultSort == "undefined") defaultSort = [[0,0]];
     $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'],textExtraction: function(node){
-        var sortBy = node.firstChild.getAttribute('sort');
+        try {
+            var sortBy = node.firstChild.getAttribute('sort');
+        } catch(err) {}
         if(sortBy && node.getAttribute('class') == 'date') {
             var date = new Date(node.firstChild.getAttribute('sort'));
             return date.getTime();
