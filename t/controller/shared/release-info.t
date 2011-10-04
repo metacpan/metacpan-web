@@ -21,7 +21,7 @@ my %tested = map { ($_ => 0) } @optional;
 # global var (eww) used for test names
 my $current;
 
-sub optional_test ($$);
+sub optional_test; # predeclare for non-parenthetical usage below
 
 test_psgi app, sub {
     my $cb = shift;
@@ -173,7 +173,7 @@ ok( $tested{$_} > 0, "at least one module tested $_" )
 
 done_testing;
 
-sub optional_test ($$) {
+sub optional_test {
     my ($name, $sub) = @_;
     subtest $name => sub {
         plan skip_all => "$name test for $current->{desc}"
