@@ -30,9 +30,11 @@ test_psgi app, sub {
     # Setting to false does not test for failure, it simply skips the test.
 
     my @tests = (
-        { module => 'Moose', home_page => 0 },
+        # has all optional tests
         { module => 'Dist::Zilla' },
+        # release name different than just s/::/-/g
         { module => 'LWP::UserAgent', release => 'libwww-perl', repository => 0, home_page => 0 },
+        # no optional tests
         { module => 'CGI::Bus', home_page => 0, reviews => 0, repository => 0, favorited => 0 },
     );
 
