@@ -34,25 +34,6 @@ test_psgi app, sub {
         'content of both urls is exactly the same'
     );
 
-    $tx->like(
-        '//select[@name="release"]/option[@value][1]',
-        qr/\(\d{4}-\d{2}-\d{2}\)$/,
-        'version ends with date in common format'
-    );
-
-    # Moose has ratings, but not all dists do (so be careful what we're testing with)
-    $tx->like(
-      '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a',
-      qr/\d+ reviews?/i,
-      'current rating and number of reviews listed'
-    );
-    # all dists should get a link to rate
-    $tx->like(
-      '//div[@class="search-bar"]//a[contains(@href, "cpanratings")]',
-      qr/Rate this/i,
-      'cpanratings link to rate this dist'
-    );
-
 };
 
 done_testing;

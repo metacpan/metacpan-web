@@ -5,6 +5,10 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+with qw(
+    MetaCPAN::Web::Role::ReleaseInfo
+);
+
 sub index : PathPart('module') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
     my $data
@@ -13,30 +17,21 @@ sub index : PathPart('module') : Chained('/') : Args {
         : $c->model('API::Module')->get(@module)->recv;
 
     $c->detach('/not_found') unless ( $data->{name} );
-    my $pod = $c->model('API')->request( '/pod/' . join( '/', @module ) );
-    my $release
-        = $c->model('API::Release')->get( $data->{author}, $data->{release} );
-    my $author = $c->model('API::Author')->get( $data->{author} );
-    my $versions
-        = $c->model('API::Release')->versions( $data->{distribution} );
-    my $favorites
-        = $c->model('API::Favorite')
-        ->get( $c->user_exists ? $c->user->id : undef,
-        $data->{distribution} );
-    my $rating = $c->model('API::Rating')->get( $data->{distribution} );
-    ( $pod, $author, $release, $versions, $rating, $favorites )
-        = ( $pod & $author & $release & $versions & $rating & $favorites )->recv;
-    $data->{myfavorite} = $favorites->{myfavorites}->{ $data->{distribution} };
-    $data->{favorites}  = $favorites->{favorites}->{ $data->{distribution} };
+
+    my $reqs = $self->api_requests($c, {
+            pod     => $c->model('API')->request( '/pod/' . join( '/', @module ) ),
+            release => $c->model('API::Release')->get( @{$data}{qw(author release)} ),
+        },
+        $data,
+    );
+    $reqs = $self->recv_all($reqs);
+    $self->stash_api_results($c, $reqs, $data);
+    $self->add_favorites_data($data, $reqs->{favorites}, $data);
 
     $c->stash(
         {   module  => $data,
-            author  => $author,
-            pod     => $pod->{raw},
-            release => $release->{hits}->{hits}->[0]->{_source},
-            rating  => $rating->{ratings}->{ $data->{distribution} },
-            versions =>
-                [ map { $_->{fields} } @{ $versions->{hits}->{hits} } ],
+            pod     => $reqs->{pod}->{raw},
+            release => $reqs->{release}->{hits}->{hits}->[0]->{_source},
             template => 'module.html',
         }
     );
