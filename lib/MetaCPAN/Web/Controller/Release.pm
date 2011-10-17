@@ -46,7 +46,7 @@ sub index : PathPart('release') : Chained('/') : Args {
 
     my $changes = undef;
     foreach my $filename ( @root_files ) {
-        if ( $filename =~ m{\AChange}i ) {
+        if ( $filename =~ m{\AChange}i || $filename eq 'NEWS' ) {
             $changes = $filename;
             last;
         }
