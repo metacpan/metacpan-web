@@ -20,4 +20,10 @@ sub index : Path {
     $c->stash({%{$cv->recv}, template => 'recent.html'});
 }
 
+sub faves : Path('/recent/favorites') {
+    my ( $self, $c ) = @_;
+    $c->res->redirect('/favorite/recent', 301);
+    $c->detach;
+}
+
 1;

@@ -3,7 +3,8 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 
-sub index : Path('/recent/favorites') {
+
+sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
     my $cv = AE::cv();
     $c->model('API::Favorite')->recent( $c->req->page )->(
@@ -17,7 +18,24 @@ sub index : Path('/recent/favorites') {
             );
         }
     );
-    $c->stash({%{$cv->recv}, template => 'recent/favorite.html'});
+    $c->stash({%{$cv->recv}, template => 'favorite/recent.html'});
 }
 
-1
+sub index : Path('/favorite/leaderboard') {
+    my ( $self, $c ) = @_;
+    my $cv = AE::cv();
+    $c->model( 'API::Favorite' )->leaderboard( $c->req->page )->(
+        sub {
+            my ( $data ) = shift->recv;
+            $cv->send(
+                {   leaders => $data->{facets}->{leaderboard}->{terms},
+                    took    => $data->{took},
+                    total   => $data->{hits}->{total}
+                }
+            );
+        }
+    );
+    $c->stash( { %{ $cv->recv }, template => 'favorite/leaderboard.html' } );
+}
+
+1;

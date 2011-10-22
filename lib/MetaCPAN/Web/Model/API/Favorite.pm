@@ -75,6 +75,18 @@ sub recent {
     );
 }
 
-
+sub leaderboard {
+    my ( $self, $page ) = @_;
+    $self->request(
+        '/favorite/_search',
+        {   size   => 0,
+            query  => { match_all => {} },
+            facets => {
+                leaderboard =>
+                    { terms => { field => 'distribution', size => 100 }, },
+            },
+        }
+    );
+}
 
 __PACKAGE__->meta->make_immutable;

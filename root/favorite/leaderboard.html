@@ -1,0 +1,22 @@
+<div class="content">
+
+<table class="release-table author-table<% IF tablesorter %> tablesorter remote<% END %>">
+    <thead>
+    <tr>
+    <th class="name">Release</th>
+    <th class="abstract">++ Count</th>
+    </tr>
+</thead>
+<tbody>
+<% i = 0; FOREACH leader IN leaders %>
+<% header = 1 %>
+<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
+  <td class="name"><strong><a href="/release/<% leader.term %>" class="ellipsis" style="width: 260px" title="<% leader.term %>"><% leader.term %></a></strong></td>
+  <td class="abstract"><% leader.count %></td>
+</tr>
+<% END %>
+</tbody>
+</table>
+
+<% INCLUDE inc/pager.html size = 100 %>
+</div>
