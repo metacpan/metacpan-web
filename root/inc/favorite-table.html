@@ -1,0 +1,20 @@
+<table class="release-table author-table<% IF tablesorter %> tablesorter remote<% END %>">
+<%- IF header %>
+    <thead>
+    <tr>
+    <th class="release">Release</th>
+    <th class="abstract">Author</th>
+    <th class="date">Date</th>
+    </tr>
+</thead>
+<%- END %>
+<tbody>
+<% i = 0; FOREACH favorite IN favorites %>
+<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
+  <td class="release"><strong><a href="/release/<% favorite.author; '/'; favorite.distribution; %>" class="ellipsis" style="width: 260px" title="<% favorite.author; '/'; favorite.release %>"><% favorite.release %></a></strong></td>
+  <td class="abstract"><% favorite.author %></td>
+  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></span></td>
+</tr>
+<% END %>
+</tbody>
+</table>

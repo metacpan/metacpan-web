@@ -10,6 +10,7 @@
 <%- END %>
 <tbody>
 <% i = 0; FOREACH release IN releases %>
+<% header = 1 %>
 <tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
   <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" style="width: 260px" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
   <td class="abstract"><% IF release.abstract; release.abstract; END %></td>

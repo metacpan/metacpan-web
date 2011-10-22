@@ -63,4 +63,18 @@ sub get {
     return $cv;
 }
 
+sub recent {
+    my ( $self, $page ) = @_;
+    $self->request(
+        '/favorite/_search',
+        {   size  => 100,
+            from  => ( $page - 1 ) * 100,
+            query => { match_all => {} },
+            sort  => [ { 'date' => { order => "desc" } } ]
+        }
+    );
+}
+
+
+
 __PACKAGE__->meta->make_immutable;
