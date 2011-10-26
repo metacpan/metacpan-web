@@ -18,7 +18,7 @@ sub index : Path {
     if ($query = $req->param('q')) {
         # Searching for e.g. "DBIx::Class" is just like searching for
         # "DBIx Class"
-        $query =~ s/::/ /g;
+        #$query =~ s/::/ /g;
     }
 
     my $model = $c->model('API::Module');

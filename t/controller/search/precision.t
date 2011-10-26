@@ -4,14 +4,17 @@ use Test::More;
 use MetaCPAN::Web::Test;
 
 my %tests = (
-    'net dns'       => 'Net::DNS',
-    'DBIx::Class'   => 'DBIx::Class',
-    'anyevent'      => 'AnyEvent',
-    'AnyEvent'      => 'AnyEvent',
-    'anyevent http' => 'AnyEvent::HTTP',
-    'dist zilla'    => 'Dist::Zilla',
-    'dbi'           => 'DBI',
-    'Perl::Critic'  => 'Perl::Critic',
+    'net dns'          => 'Net::DNS',
+    'DBIx::Class'      => 'DBIx::Class',
+    'anyevent'         => 'AnyEvent',
+    'AnyEvent'         => 'AnyEvent',
+    'anyevent http'    => 'AnyEvent::HTTP',
+    'dist zilla'       => 'Dist::Zilla',
+    'dbi'              => 'DBI',
+    'Perl::Critic'     => 'Perl::Critic',
+    'HTML::TokeParser' => 'HTML::TokeParser',
+    'HTML::Element' => 'HTML::Element',
+    'net::amazon::s3' => 'Net::Amazon::S3',
 );
 
 test_psgi app, sub {

@@ -332,95 +332,140 @@ sub first {
 
 sub search {
     my ( $self, $query, $params ) = @_;
+    ( my $clean = $query ) =~ s/::/ /g;
     my $search = merge(
         $params,
         {   query => {
-                filtered => {
+                custom_score => {
+                    script => qq{
+                            documentation = doc['documentation'].stringValue;
+                            if(documentation == empty) {
+                                documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+                            }
+                            return _score - documentation.length()/1000
+                        },
                     query => {
-                        custom_score => {
+                        filtered => {
                             query => {
-                                query_string => {
-                                    fields => [
-                                        'documentation.analyzed^7',
-                                        'documentation.camelcase^3',
-                                        'file.module.name.analyzed^3',
-                                        'file.module.name.camelcase^3',
-                                        'distribution.analyzed^10',
-                                        'distribution.camelcase^5',
-                                        'abstract.analyzed^2',
-                                        'pod.analyzed',
-                                    ],
-                                    query                  => $query,
-                                    allow_leading_wildcard => \0,
-                                    default_operator       => 'AND'
-                                }
-                            },
-
-                            # prefer shorter module names slightly
-                            script => qq{
-    documentation = doc['documentation'].stringValue;
-    if(documentation == empty) {
-        documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
-    }
-    return _score - documentation.length()/30 + doc[\"date\"].date.getMillis() / 1000000000000
-}
-                        }
-                    },
-                    filter => {
-                        and => [
-                            {   not => {
-                                    filter => {
-                                        or => [
-                                            map {
-                                                {   term => {
-                                                        'file.distribution' =>
-                                                            $_
-                                                    }
+                                bool => {
+                                    should => [
+                                        {   term => {
+                                                'file.documentation' => {
+                                                    value => $query,
+                                                    boost => 20
                                                 }
-                                                } @ROGUE_DISTRIBUTIONS
-                                        ]
-                                    }
+                                            }
+                                        },
+                                        {   term => {
+                                                'file.module.name' => {
+                                                    value => $query,
+                                                    boost => 20
+                                                }
+                                            }
+                                        },
+                                        {   dis_max => {
+                                                queries => [
+                                                    {   query_string => {
+                                                            fields => [
+                                                                qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
+                                                                qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
+                                                            ],
+                                                            query => $clean,
+                                                            boost => 3,
+                                                            default_operator =>
+                                                                'AND',
+                                                            allow_leading_wildcard =>
+                                                                \0,
+
+                                                            use_dis_max => \1,
+
+                                                        }
+                                                    },
+                                                    {   query_string => {
+                                                            fields => [
+                                                                qw(abstract.analyzed pod.analyzed)
+                                                            ],
+                                                            query => $clean,
+                                                            boost => 0.1,
+                                                            default_operator =>
+                                                                'AND',
+                                                            allow_leading_wildcard =>
+                                                                \0,
+                                                            use_dis_max => \1,
+
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+
+                                    ]
                                 }
                             },
-                            { term => { status => 'latest' } },
-                            {   or => [
+                            filter => {
+                                and => [
+                                    {   not => {
+                                            filter => {
+                                                or => [
+                                                    map {
+                                                        {   term => {
+                                                                'file.distribution'
+                                                                    => $_
+                                                            }
+                                                        }
+                                                        } @ROGUE_DISTRIBUTIONS
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    { term => { status => 'latest' } },
+                                    {   or => [
 
                             # we are looking for files that have no authorized
                             # property (e.g. .pod files) and files that are
                             # authorized
-                                    {   missing =>
-                                            { field => 'file.authorized' }
-                                    },
-                                    { term => { 'file.authorized' => \1 } },
-                                ]
-                            },
-                            {   or => [
-                                    {   and => [
-                                            {   exists => {
-                                                    field =>
-                                                        'file.module.name'
+                                            {   missing => {
+                                                    field => 'file.authorized'
                                                 }
                                             },
                                             {   term => {
-                                                    'file.module.indexed' =>
-                                                        \1
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    {   and => [
-                                            {   exists => {
-                                                    field => 'documentation'
+                                                    'file.authorized' => \1
                                                 }
                                             },
-                                            {   term =>
-                                                    { 'file.indexed' => \1 }
+                                        ]
+                                    },
+                                    {   or => [
+                                            {   and => [
+                                                    {   exists => {
+                                                            field =>
+                                                                'file.module.name'
+                                                        }
+                                                    },
+                                                    {   term => {
+                                                            'file.module.indexed'
+                                                                => \1
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {   and => [
+                                                    {   exists => {
+                                                            field =>
+                                                                'documentation'
+                                                        }
+                                                    },
+                                                    {   term => {
+                                                            'file.indexed' =>
+                                                                \1
+                                                        }
+                                                    }
+                                                ]
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        }
                     }
                 }
             },
@@ -483,7 +528,8 @@ sub requires {
         sub {
             my $data = shift->recv;
             $cv->send(
-                {   data  => [map { $_->{_source} } @{$data->{hits}->{hits}}],
+                {   data =>
+                        [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
                     total => $data->{hits}->{total},
                     took  => $data->{took}
                 }
