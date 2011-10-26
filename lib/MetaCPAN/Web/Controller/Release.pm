@@ -14,6 +14,12 @@ sub index : PathPart('release') : Chained('/') : Args {
     my ( $self, $c, $author, $release ) = @_;
     my $model = $c->model('API::Release');
 
+    # force consistent casing in URLs
+    if ( $author && $release && $author ne uc($author) ) {
+        $c->res->redirect("/release/" . uc($author) . "/$release", 301);
+        $c->detach();
+    }
+
     my $data
         = $author && $release
         ? $model->get( $author, $release )
