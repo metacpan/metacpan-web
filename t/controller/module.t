@@ -21,6 +21,10 @@ test_psgi app, sub {
     ok( $res = $cb->( GET $this ), "GET $this" );
     is($latest, $res->content, 'content of both urls is exactly the same');
 
+    # get module with lc author
+    $this =~ s{(/module/.*?/)}{lc($1)}e; # lc author name
+    ok( $res = $cb->( GET $this ), "GET $this" );
+    is( $res->code, 301, 'code 301' );
 };
 
 done_testing;

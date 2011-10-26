@@ -11,7 +11,15 @@ with qw(
 );
 
 sub index : PathPart('module') : Chained('/') : Args {
-    my ( $self, $c, @module ) = @_;
+    my ( $self, $c, $id, @module ) = @_;
+
+    # force consistent casing in URLs
+    if ( @module != 0 and $id ne uc($id) ) {
+        $c->res->redirect('/module/' . join('/', uc($id), @module), 301);
+        $c->detach();
+    }
+
+    @module = ($id, @module);
     my $data
         = @module == 1
         ? $c->model('API::Module')->find(@module)->recv
