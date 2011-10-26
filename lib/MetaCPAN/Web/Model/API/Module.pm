@@ -336,19 +336,23 @@ sub search {
     my $search = merge(
         $params,
         {   query => {
-                custom_score => {
-                    script => qq{
+                filtered => {
+                    query => {
+                        custom_score => {
+
+                            # prefer shorter module names
+                            script => qq{
                             documentation = doc['documentation'].stringValue;
                             if(documentation == empty) {
                                 documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
                             }
                             return _score - documentation.length()/1000
-                        },
-                    query => {
-                        filtered => {
+                            },
                             query => {
                                 bool => {
                                     should => [
+
+                                        # exact matches result in a huge boost
                                         {   term => {
                                                 'file.documentation' => {
                                                     value => $query,
@@ -363,6 +367,8 @@ sub search {
                                                 }
                                             }
                                         },
+
+            # take the maximum score from the module name and the abstract/pod
                                         {   dis_max => {
                                                 queries => [
                                                     {   query_string => {
@@ -376,7 +382,6 @@ sub search {
                                                                 'AND',
                                                             allow_leading_wildcard =>
                                                                 \0,
-
                                                             use_dis_max => \1,
 
                                                         }
@@ -401,71 +406,64 @@ sub search {
 
                                     ]
                                 }
+                            }
+                        }
+                    },
+                    filter => {
+                        and => [
+                            {   not => {
+                                    filter => {
+                                        or => [
+                                            map {
+                                                {   term => {
+                                                        'file.distribution' =>
+                                                            $_
+                                                    }
+                                                }
+                                                } @ROGUE_DISTRIBUTIONS
+                                        ]
+                                    }
+                                }
                             },
-                            filter => {
-                                and => [
-                                    {   not => {
-                                            filter => {
-                                                or => [
-                                                    map {
-                                                        {   term => {
-                                                                'file.distribution'
-                                                                    => $_
-                                                            }
-                                                        }
-                                                        } @ROGUE_DISTRIBUTIONS
-                                                ]
-                                            }
-                                        }
-                                    },
-                                    { term => { status => 'latest' } },
-                                    {   or => [
+                            { term => { status => 'latest' } },
+                            {   or => [
 
                             # we are looking for files that have no authorized
                             # property (e.g. .pod files) and files that are
                             # authorized
-                                            {   missing => {
-                                                    field => 'file.authorized'
+                                    {   missing =>
+                                            { field => 'file.authorized' }
+                                    },
+                                    { term => { 'file.authorized' => \1 } },
+                                ]
+                            },
+                            {   or => [
+                                    {   and => [
+                                            {   exists => {
+                                                    field =>
+                                                        'file.module.name'
                                                 }
                                             },
                                             {   term => {
-                                                    'file.authorized' => \1
+                                                    'file.module.indexed' =>
+                                                        \1
                                                 }
-                                            },
+                                            }
                                         ]
                                     },
-                                    {   or => [
-                                            {   and => [
-                                                    {   exists => {
-                                                            field =>
-                                                                'file.module.name'
-                                                        }
-                                                    },
-                                                    {   term => {
-                                                            'file.module.indexed'
-                                                                => \1
-                                                        }
-                                                    }
-                                                ]
+                                    {   and => [
+                                            {   exists => {
+                                                    field => 'documentation'
+                                                }
                                             },
-                                            {   and => [
-                                                    {   exists => {
-                                                            field =>
-                                                                'documentation'
-                                                        }
-                                                    },
-                                                    {   term => {
-                                                            'file.indexed' =>
-                                                                \1
-                                                        }
-                                                    }
-                                                ]
+                                            {   term =>
+                                                    { 'file.indexed' => \1 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        }
+                        ]
                     }
                 }
             },
