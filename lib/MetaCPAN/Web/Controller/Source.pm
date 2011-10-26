@@ -48,6 +48,7 @@ sub index : PathPart('source') : Chained('/') : Args {
                 :    # no separate pod brush as of 2011-08-04
                   m!\.ya?ml$!   ? 'yaml'
                 : m!\.js(on)?$! ? 'js'
+                : m!\.(c|h|xs)$! ? 'c'
                 : $module->{mime} =~ /perl/ ? 'pl'
                 :
 
