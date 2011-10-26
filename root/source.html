@@ -1,4 +1,5 @@
 <%- rss = 'distribution/' _ module.distribution %>
+<%- title = module.path %>
 <strong><big>
     <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
