@@ -333,6 +333,65 @@ sub first {
 sub search {
     my ( $self, $query, $params ) = @_;
     ( my $clean = $query ) =~ s/::/ /g;
+
+    my $negative
+        = { term => { 'file.mime' => { value => "text/x-script.perl" } } };
+
+    my $positive = {
+        bool => {
+            should => [
+
+                # exact matches result in a huge boost
+                {   term => {
+                        'file.documentation' => {
+                            value => $query,
+                            boost => 20
+                        }
+                    }
+                },
+                {   term => {
+                        'file.module.name' => {
+                            value => $query,
+                            boost => 20
+                        }
+                    }
+                },
+
+            # take the maximum score from the module name and the abstract/pod
+                {   dis_max => {
+                        queries => [
+                            {   query_string => {
+                                    fields => [
+                                        qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
+                                        qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
+                                    ],
+                                    query                  => $clean,
+                                    boost                  => 3,
+                                    default_operator       => 'AND',
+                                    allow_leading_wildcard => \0,
+                                    use_dis_max            => \1,
+
+                                }
+                            },
+                            {   query_string => {
+                                    fields => [
+                                        qw(abstract.analyzed pod.analyzed)
+                                    ],
+                                    query                  => $clean,
+                                    default_operator       => 'AND',
+                                    allow_leading_wildcard => \0,
+                                    use_dis_max            => \1,
+
+                                }
+                            }
+                        ]
+                    }
+                }
+
+            ]
+        }
+    };
+
     my $search = merge(
         $params,
         {   query => {
@@ -346,65 +405,13 @@ sub search {
                             if(documentation == empty) {
                                 documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
                             }
-                            return _score - documentation.length()/1000
+                            return _score - documentation.length()/10000
                             },
                             query => {
-                                bool => {
-                                    should => [
-
-                                        # exact matches result in a huge boost
-                                        {   term => {
-                                                'file.documentation' => {
-                                                    value => $query,
-                                                    boost => 20
-                                                }
-                                            }
-                                        },
-                                        {   term => {
-                                                'file.module.name' => {
-                                                    value => $query,
-                                                    boost => 20
-                                                }
-                                            }
-                                        },
-
-            # take the maximum score from the module name and the abstract/pod
-                                        {   dis_max => {
-                                                queries => [
-                                                    {   query_string => {
-                                                            fields => [
-                                                                qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
-                                                                qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
-                                                            ],
-                                                            query => $clean,
-                                                            boost => 3,
-                                                            default_operator =>
-                                                                'AND',
-                                                            allow_leading_wildcard =>
-                                                                \0,
-                                                            use_dis_max => \1,
-
-                                                        }
-                                                    },
-                                                    {   query_string => {
-                                                            fields => [
-                                                                qw(abstract.analyzed pod.analyzed)
-                                                            ],
-                                                            query => $clean,
-                                                            boost => 0.1,
-                                                            default_operator =>
-                                                                'AND',
-                                                            allow_leading_wildcard =>
-                                                                \0,
-                                                            use_dis_max => \1,
-
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        }
-
-                                    ]
+                                boosting => {
+                                    negative_boost => 0.5,
+                                    negative       => $negative,
+                                    positive       => $positive
                                 }
                             }
                         }
