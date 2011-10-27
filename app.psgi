@@ -53,6 +53,7 @@ $app = Plack::Middleware::Assets->wrap(
             shBrushJScript
             shBrushDiff
             shBrushCpp
+            shBrushCPANChanges
             cpan
             github
             )

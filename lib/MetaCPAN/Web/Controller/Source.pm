@@ -49,6 +49,8 @@ sub index : PathPart('source') : Chained('/') : Args {
                   m!\.ya?ml$!   ? 'yaml'
                 : m!\.js(on)?$! ? 'js'
                 : m!\.(c|h|xs)$! ? 'c'
+                    # are other changelog files likely to be in CPAN::Changes format?
+                : m!^Changes$!i ? 'cpanchanges'
                 : $module->{mime} =~ /perl/ ? 'pl'
                 :
 
