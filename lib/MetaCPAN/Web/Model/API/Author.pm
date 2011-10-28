@@ -37,9 +37,13 @@ sub search {
         query => {
             bool => {
                 should => [
-                    { text => { 'author.name.analyzed' => $query } },
-                    { text => { 'author.pauseid'       => uc($query) } },
-                    { text => { 'author.profile.id'    => lc($query) } },
+                    {   text => {
+                            'author.name.analyzed' =>
+                                { query => $query, operator => 'and' }
+                        }
+                    },
+                    { text => { 'author.pauseid'    => uc($query) } },
+                    { text => { 'author.profile.id' => lc($query) } },
                 ]
             }
         },
