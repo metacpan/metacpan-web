@@ -42,12 +42,16 @@
 			'shmwrite shutdown sin sleep socket socketpair sort splice split sprintf ' +
 			'sqrt srand stat study substr symlink syscall sysopen sysread sysseek ' +
 			'system syswrite tell telldir time times tr truncate uc ucfirst umask ' +
-			'undef unlink unpack unshift utime values vec wait waitpid warn write';
+			'undef unlink unpack unshift utime values vec wait waitpid warn write ' +
+			// feature
+			'say';
 
 		var keywords =
 			'bless caller continue dbmclose dbmopen die do dump else elsif eval exit ' +
 			'for foreach goto if import last local my next no our package redo ref ' +
 			'require return sub tie tied unless untie until use wantarray while ' +
+			// feature
+			'given when default ' +
 			// Try::Tiny
 			'try catch finally ' +
 			// Moose
@@ -62,7 +66,7 @@
       // currently ignoring single quote package separator and utf8 names
 			{ regex: /(?:[$@%*]|\$#)[a-zA-Z_](\w+|::)*/g, css: 'variable' },
 			{ regex: /\b__(?:END|DATA)__\b[\s\S]*$/g, css: 'comments' },
-			{ regex: /^=\w[\s\S]*?\n=cut\s*$/gm, css: 'comments' },
+			{ regex: /^=\w[\s\S]*?\n=cut\s*$/gm, css: 'comments' }, // pod
 			{ regex: new RegExp(this.getKeywords(funcs), 'gm'), css: 'functions' },
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'), css: 'keyword' }
 		    ];
