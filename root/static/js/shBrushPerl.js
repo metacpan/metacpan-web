@@ -61,10 +61,19 @@
 			{ regex: /(<<|&lt;&lt;)((\w+)|(['"])(.+?)\4)[\s\S]+?\n\3\5\n/g, css: 'string' }, // here doc (maybe html encoded)
 			{ regex: /#.*$/gm, css: 'comments' },
 			{ regex: /^#!.*\n/g, css: 'preprocessor' }, // shebang
+			{ regex: /-?\w+(?=\s*=(>|&gt;))/g,      css: 'string' }, // fat comma
+
+			// is this too much?
+			{ regex: /\bq[qwxr]?\([\s\S]+?\)/g,     css: 'string' }, // quote-like operators ()
+			{ regex: /\bq[qwxr]?\{[\s\S]+?\}/g,     css: 'string' }, // quote-like operators {}
+			{ regex: /\bq[qwxr]?\[[\s\S]+?\]/g,     css: 'string' }, // quote-like operators []
+			{ regex: /\bq[qwxr]?(<|&lt;)[\s\S]+?(>|&gt;)/g, css: 'string' }, // quote-like operators <>
+			{ regex: /\bq[qwxr]?([^\w({<[])[\s\S]+?\1/g,    css: 'string' }, // quote-like operators non-paired
+
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' },
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString, css: 'string' },
       // currently ignoring single quote package separator and utf8 names
-			{ regex: /(?:[$@%*]|\$#)[a-zA-Z_](\w+|::)*/g, css: 'variable' },
+			{ regex: /(?:&amp;|[$@%*]|\$#)[a-zA-Z_](\w+|::)*/g, css: 'variable' },
 			{ regex: /\b__(?:END|DATA)__\b[\s\S]*$/g, css: 'comments' },
 			{ regex: /^=\w[\s\S]*?\n=cut\s*$/gm, css: 'comments' }, // pod
 			{ regex: new RegExp(this.getKeywords(funcs), 'gm'), css: 'functions' },
