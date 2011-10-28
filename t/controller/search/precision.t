@@ -15,6 +15,7 @@ my %tests = (
     'HTML::TokeParser' => 'HTML::TokeParser',
     'HTML::Element' => 'HTML::Element',
     'net::amazon::s3' => 'Net::Amazon::S3',
+    'dbix class resultset' => 'DBIx::Class::ResultSet',
 );
 
 test_psgi app, sub {
