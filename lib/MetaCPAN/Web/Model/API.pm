@@ -5,6 +5,7 @@ extends 'Catalyst::Model';
 
 has [qw(api api_secure)] => ( is => 'ro' );
 
+use Encode ();
 use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
@@ -65,6 +66,12 @@ sub request {
             $req->send( $@ ? { raw => $data } : $json );
         }
         else {
+
+            # should we limit this to if /=encoding utf8/ or /use utf8/ or yaml or...
+            local $@;
+            eval {
+              $data = Encode::decode_utf8($data, Encode::FB_CROAK);
+            };
 
             # Response is raw data, e.g. text/plain
             $req->send( { raw => $data } );
