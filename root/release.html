@@ -18,11 +18,13 @@
   <hr>
   <strong>Tools</strong>
   <ul>
+    <% IF versions.size > 1 %>
     <li>
       <select name="release" onchange="document.location.href='/diff/release/' + this.value + '<% release.author %>/<% release.name %>'">
       <option>Diff with version</option>
       <% PROCESS version_options %>
     </select></li>
+    <% END %>
     <li>Search distribution:<br>
       <form action="/search">
       <input type="hidden" name="q" value="dist:<% release.distribution %>">
