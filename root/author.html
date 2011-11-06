@@ -48,7 +48,7 @@ IF profiles.${profile.name} %>
 </form></center>
 <% ELSIF donate.name == 'wishlist' && donate.id %>
 <div style="text-align: center"><a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a></div>
-<% ELSIF donate.name == 'flattr' %>
+<% ELSIF donate.name == 'flattr' && donate.id %>
 <script type="text/javascript">
 /* <![CDATA[ */
     (function() {
