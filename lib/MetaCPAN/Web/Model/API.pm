@@ -67,9 +67,11 @@ sub request {
         }
         else {
 
-            # should we limit this to if /=encoding utf8/ or /use utf8/ or yaml or...
+            # we have to assume an encoding; doing nothing is like assuming latin1
+            # we'll probably have the least number of issues if we assume utf8
             local $@;
             eval {
+              # decode so the template doesn't double-encode and return mojibake
               $data = Encode::decode_utf8($data, Encode::FB_CROAK);
             };
 
