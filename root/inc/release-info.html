@@ -21,7 +21,9 @@
           <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
           <a href="http://matrix.cpantesters.org/?dist=<% release.name %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a>
       </li>
-      <% IF meta.prepan %><li><a href="<% meta.prepan %>">PrePAN</a></li><% END %>
+      <% IF meta.resources && meta.resources.prepan %>
+      <li><a href="<% meta.resources.prepan %>">PrePAN</a></li>
+      <% END %>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
     <% IF versions.size > 1 %>
     <select name="release" onchange="document.location.href='/<% IF module.path; 'module'; ELSE; 'release'; END %>/' + this.value">
