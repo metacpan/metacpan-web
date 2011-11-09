@@ -67,10 +67,10 @@ sub index : PathPart('release') : Chained('/') : Args {
         my $raw    = $source->{raw};
 
         if ($filename =~ /\.ya?ml$/) {
-            $meta = eval { YAML::Tiny::Load($raw) };
+            $meta = eval { YAML::Tiny::Load($raw) } || {};
         }
         elsif ($filename =~ /\.json$/) {
-            $meta = eval { JSON::XS->new->utf8->decode($raw) };
+            $meta = eval { JSON::XS->new->utf8->decode($raw) } || {};
         }
     }
 
