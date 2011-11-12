@@ -63,23 +63,30 @@ sub request {
 
         if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
-            $req->send( $@ ? { raw => $data } : $json );
+            $req->send( $@ ? $self->raw_api_response($data) : $json );
         }
         else {
 
-            # we have to assume an encoding; doing nothing is like assuming latin1
-            # we'll probably have the least number of issues if we assume utf8
-            local $@;
-            eval {
-              # decode so the template doesn't double-encode and return mojibake
-              $data = Encode::decode_utf8($data, Encode::FB_CROAK);
-            };
-
             # Response is raw data, e.g. text/plain
-            $req->send( { raw => $data } );
+            $req->send( $self->raw_api_response($data) );
         }
         };
     return $req;
+}
+
+sub raw_api_response {
+    my ($self, $data) = @_;
+
+    # we have to assume an encoding; doing nothing is like assuming latin1
+    # we'll probably have the least number of issues if we assume utf8
+    local $@;
+    eval {
+      # decode so the template doesn't double-encode and return mojibake
+      $data = Encode::decode('UTF-8', $data, Encode::FB_CROAK);
+    };
+    warn $@ if $@;
+
+    return +{ raw => $data };
 }
 
 1;
