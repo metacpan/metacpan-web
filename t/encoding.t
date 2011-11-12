@@ -20,7 +20,7 @@ my $model = MetaCPAN::Web::Model::API::Module->new(api => 'http://example.com');
 # $body
 # $body, $type
 sub get_raw {
-  $res_body = shift.'';
+  $res_body = shift;
   $content_type = shift if @_;
   my $res = $model->source(qw( who cares ))->recv->{raw};
   return $res;
@@ -58,9 +58,26 @@ foreach my $ctype ( 'text/plain', 'application/json' ){
   # HEAVY BLACK HEART
   is get_raw($filedata), "i \x{2764} metacpan", 'correct message';
   ok !@warnings, 'no warnings after valid UTF-8' or diag shift @warnings;
+
+  # not sure if we'll ever actually get undef
+  is get_raw(undef), '', 'undef becomes blank';
+  ok !@warnings, 'no warnings for undef' or diag shift @warnings;
+
+  # not sure if we'll ever actually get blessed object
+  my $b = Blessed_String->new('holy');
+  ok ref $b, 'blessed ref';
+  is "$b", 'holy', 'stringifies correctly';
+  is get_raw($b), 'holy', 'blessed string';
+  ok !@warnings, 'no warnings for blessed obj' or diag shift @warnings;
 }
 
 done_testing;
+
+{ package # no_index
+    Blessed_String;
+  sub new { bless [ $_[1] ], $_[0]; }
+  use overload '""' => sub { shift->[0] };
+}
 
 __DATA__
 i ❤ metacpan
