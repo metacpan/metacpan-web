@@ -74,15 +74,23 @@ sub request {
     return $req;
 }
 
+my $encoding = Encode::find_encoding('utf-8-strict')
+  or warn 'UTF-8 Encoding object not found';
+my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
+
 sub raw_api_response {
     my ($self, $data) = @_;
+
+    # will http_response ever return undef or a blessed object?
+    $data  = '' if ! defined $data; # define
+    $data .= '' if       ref $data; # stringify
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     local $@;
     eval {
       # decode so the template doesn't double-encode and return mojibake
-      $data = Encode::decode('UTF-8', $data, Encode::FB_CROAK);
+      $data &&= $encoding->decode( $data, $encode_check );
     };
     warn $@ if $@;
 
