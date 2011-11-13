@@ -31,6 +31,19 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
+
+    # test search operators
+    my $author = 'rjbs';
+    $res = $cb->( GET "/search?q=author%3Arjbs+app" );
+    is( $res->code, 200, 'search restricted by author OK' )
+      or diag explain $res;
+
+    $tx = tx($res);
+    $tx->ok('//div[@class="search-results"]//div[@class="module-result"]/a[@class="author"]', sub {
+      my $node = shift;
+      $node->is('.', uc($author), 'dist owned by queried author')
+        or diag explain $node;
+    }, 'all dists owned by queried author');
 };
 
 done_testing;
