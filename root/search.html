@@ -32,6 +32,7 @@
 <% END %>
 
 <% FOREACH group IN results; item = group.0 %>
+  <div class="module-result">
   <big><strong>
     <% IF item.documentation -%>
     <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a>
@@ -42,7 +43,7 @@
   </strong></big><% INCLUDE inc/favorite.html module = item %><br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
-  <a href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
+  <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
     &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
   <%- END %> -
@@ -59,6 +60,7 @@
     <% END -%> <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
     <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
 </ul>
+  </div>
 <% END %>
 <br>
 <% END %>
