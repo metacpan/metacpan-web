@@ -27,7 +27,7 @@ sub index : Path {
     else {
         my $user = $c->user_exists ? $c->user->id : undef;
         
-        $query =~ s{author:([a-zA-Z]*)}{author:uc($1)}e;
+        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E};
         $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/;
         
         my $results
