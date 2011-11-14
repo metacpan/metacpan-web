@@ -9,6 +9,8 @@ use Encode ();
 use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
+use Try::Tiny 0.09;
+use namespace::autoclean;
 
 {
     no warnings 'once';
@@ -87,12 +89,13 @@ sub raw_api_response {
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
-    local $@;
-    eval {
+    try {
       # decode so the template doesn't double-encode and return mojibake
       $data &&= $encoding->decode( $data, $encode_check );
+    }
+    catch {
+      warn $_[0];
     };
-    warn $@ if $@;
 
     return +{ raw => $data };
 }
