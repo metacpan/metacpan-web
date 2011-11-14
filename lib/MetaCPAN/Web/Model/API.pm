@@ -6,7 +6,6 @@ extends 'Catalyst::Model';
 has [qw(api api_secure)] => ( is => 'ro' );
 
 use Encode ();
-use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
 use Try::Tiny 0.09;
