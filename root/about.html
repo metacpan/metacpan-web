@@ -1,0 +1,15 @@
+<% PROCESS inc/about-bar.html %>
+<div class="content about-resources">
+<% USE Markdown -%>
+<% FILTER markdown %>
+# About MetaCPAN
+
+MetaCPAN is a free, open search engine for [the CPAN](http://www.cpan.org/), which is an ever growing archive of code and documentation for the Perl programming language. MetaCPAN is [a community effort](/about/contributors). On the surface, MetaCPAN enables the CPAN to be searched more easily. However, because MetaCPAN is driven by a free, open API, it encourages the incorporation of this data into many other projects.
+
+Essentially, there are two parts to MetaCPAN. First, there is [metacpan.org](https://metacpan.org), the public-facing search engine. The second part is the API. eg: [http://api.metacpan.org/module/Moose](http://api.metacpan.org/module/Moose)
+
+You can use and abuse the info you get from the API in any way you like.  If you don't like the search engine, you can even use the API to build your own CPAN search.  So, while the search site is the public face of MetaCPAN, its true value lies in an API which provides Perl hackers everywhere with the power to build their own complex search queries for extracting data from and about the CPAN.
+
+<% END %>
+
+</div>
