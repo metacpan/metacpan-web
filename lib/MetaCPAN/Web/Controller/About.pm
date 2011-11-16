@@ -4,6 +4,11 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+sub about : Local : Path('/about') {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about.html' );
+}
+
 sub contributors : Local {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/contributors.html' );
