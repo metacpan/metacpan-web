@@ -121,7 +121,7 @@ $(document).ready(function() {
     $('.relatize').relatizeDate();
 
     $('#search-input').keyup(function(event) {
-        // if up arrow or down arrow is released
+        // if up/down arrow is released
         if (event.keyCode == '38' || event.keyCode == '40') {
             // get the currently hovered query
             var query = $('.ac_over').text();
