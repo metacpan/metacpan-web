@@ -120,6 +120,15 @@ $(document).ready(function() {
 
     $('.relatize').relatizeDate();
 
+    $('#search-input').keyup(function(event) {
+        if (event.keyCode == '38' || event.keyCode == '40') {
+            var query = $('.ac_over').text();
+            if (query) {
+                $('#search-input').val(query);
+            }
+        }
+    });
+
     $('#search-input').keydown(function(event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
