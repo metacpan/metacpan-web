@@ -42,6 +42,13 @@ sub _not_rogue {
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
+sub _indexed_and_documented {
+    return (
+        { exists => { field          => 'documentation' } },
+        { term   => { 'file.indexed' => \1 } },
+    );
+}
+
 sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv     = $self->cv;
@@ -66,8 +73,7 @@ sub autocomplete {
                     filter => {
                         and => [
                             $self->_not_rogue,
-                            { exists => { field => 'documentation' } },
-                            { term => { 'file.indexed' => \1 } },
+                            $self->_indexed_and_documented_file,
                             { term => { 'file.status'  => 'latest' } },
                             {   not => {
                                     filter => {
@@ -402,16 +408,7 @@ sub search {
                                             }
                                         ]
                                     },
-                                    {   and => [
-                                            {   exists => {
-                                                    field => 'documentation'
-                                                }
-                                            },
-                                            {   term =>
-                                                    { 'file.indexed' => \1 }
-                                            }
-                                        ]
-                                    }
+                                    {   and => [ $self->_indexed_and_documented_file ] }
                                 ]
                             }
                         ]
