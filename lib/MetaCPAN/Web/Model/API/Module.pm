@@ -169,7 +169,7 @@ sub search_collapsed {
         $results->{took}, $favorites->{took} )
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
-    $results = $self->_collpase_results($results);
+            $results = $self->_collapse_results($results);
     my @ids = map { $_->[0]->{id} } @$results;
     $data = {
         results => $results,
@@ -244,7 +244,7 @@ sub _extract_results {
     ];
 }
 
-sub _collpase_results {
+sub _collapse_results {
     my ( $self, $results ) = @_;
     my %collapsed;
     foreach my $result (@$results) {
