@@ -30,7 +30,7 @@ use List::MoreUtils qw(uniq);
 
 my $RESULTS_PER_RUN = 200;
 my @ROGUE_DISTRIBUTIONS
-    = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
+    = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx Bundle-Everything);
 
 sub find {
     my ( $self, $module ) = @_;
