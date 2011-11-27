@@ -14,7 +14,7 @@ sub source {
 
 sub dir {
     my ( $self, $author, $release, @path ) = @_;
-    
+
     $self->request(
         '/file',
         {   query => {
