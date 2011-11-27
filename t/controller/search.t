@@ -12,10 +12,10 @@ test_psgi app, sub {
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
     ok( $res->content =~ /0 results/, '0 results' );
-    
+
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
-    
+
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
     my $release = $tx->find_value(
