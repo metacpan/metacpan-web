@@ -54,7 +54,7 @@
         </div>
         <label><span>Last update</span><strong class="relatize"><% author.updated.dt_http %></strong></label>
     </fieldset>
-    
+
     <fieldset><legend>Location</legend>
         <label><span>Country</span><input type="text" name="country" value="<% author.country %>" /> (two letter ISO code)</label>
         <label><span>Region</span><input type="text" name="region" value="<% author.region %>" /></label>
@@ -62,7 +62,7 @@
         <label><span>Latitude</span><input type="text" name="latitude" value="<% author.location.0 %>" /> <a href="" onclick="return fillLocation()">locate me</a><img src="/static/icons/busy.gif" style="display: none; float: right" id="busy" /></label>
         <label><span>Longitude</span><input type="text" name="longitude" value="<% author.location.1 %>" /></label>
     </fieldset>
-    
+
     <fieldset><legend>Profiles</legend>
         <label><span class="account-author-profiles"></span><select onchange="return addProfile(this)">
             <option>Add Profile</option>
@@ -90,12 +90,12 @@
             <% END -%>
         </div>
     </fieldset>
-    
+
     <fieldset><legend>Extra</legend>
         <p>Any additional data you want to add to your profiles goes in here (JSON format).</p><br />
         <textarea name="extra" cols="60" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
     </fieldset>
-    <br /> 
+    <br />
     <div class="ds"><input type="submit" value="Save Profile" class="g-button" /></div>
     </form>
     <% END -%>
@@ -123,7 +123,7 @@ function addProfile(select) {
         + '<a href="" class="check" onclick="return removeDiv(this)">remove</a> ';
     }
     html += '</label></div>';
-    
+
       container.append(html);
       var add = container.children().last();
       add.slideDown();
@@ -162,7 +162,7 @@ function addField(id) {
     var container = input.parent().parent();
     container.append('<label style="display: none"><span></span><input type="text" name="' + id + '" />'
     + ' <a href="" onclick="return removeLabel(this)">remove</a></label>');
-    
+
     var add = container.children().last();
     add.slideDown();
     return false;

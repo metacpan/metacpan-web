@@ -41,7 +41,7 @@
 <div id="map" style="width: 600px; height: 200px"></div>
 <br>
 <div>
-<% 
+<%
 dots = [];
 FOREACH mirror IN mirrors;
 dots.push(mirror.location);
@@ -77,7 +77,7 @@ IF country != mirror.country; country = mirror.country %>
           OpenLayers.Feature.Vector.style["default"]));
   var markers = new OpenLayers.Layer.Vector("name", {styleMap: styleMap});
   map.addLayer(markers);
-  
+
   for(var i = 0; i < dots.length; i++) {
     var lonLat = new OpenLayers.LonLat( dots[i][0], dots[i][1] )
           .transform(

@@ -19,7 +19,7 @@
   <ul>
     <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
     <li><% count = files.grep(->{this.directory == 'false'}).size; count %> file<% count != 1 ? "s" : "" %></li>
-    
+
   </ul>
 </div>
 
@@ -37,7 +37,7 @@
 <% i = 0; FOREACH file IN files %>
 <tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
   <td class="name"><strong sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
-    file.directory == 'true' ? 'silk-folder' 
+    file.directory == 'true' ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
   : file.mime.match("x-c") ? 'silk-page-white-c'
   : 'silk-page-white'
