@@ -21,6 +21,7 @@ use Plack::Middleware::Assets;
 use Plack::Middleware::Runtime;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
+use Plack::Middleware::ServerStatus::Lite;
 
 MetaCPAN::Web->setup_engine('PSGI');
 
@@ -29,6 +30,12 @@ $app->map( '/static/' => Plack::App::File->new( root => 'root/static' ) );
 $app->map( '/favicon.ico' =>
         Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
 $app->map( '/' => sub { MetaCPAN::Web->run(@_) } );
+$app = Plack::Middleware::ServerStatus::Lite->wrap(
+   $app,
+   path       => '/server-status',
+   allow      => ['127.0.0.1'],
+   scoreboard => "$FindBin::RealBin/var/tmp/scoreboard"
+);
 $app = Plack::Middleware::Runtime->wrap($app);
 $app = Plack::Middleware::Assets->wrap( $app,
     files => [<root/static/css/*.css>] );
@@ -76,4 +83,3 @@ Plack::Middleware::ReverseProxy->wrap(
         )->($env);
     }
 );
-
