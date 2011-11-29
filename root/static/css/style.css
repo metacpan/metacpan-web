@@ -246,6 +246,10 @@ input.g-button:active, button.g-button:active, a.g-button:active {
     font-size: 1.1em
 }
 
+.search-bar label {
+    display: block
+}
+
 .search-bar .search-tag li {
     margin: 2px;
     margin-bottom: 10px;

@@ -2,6 +2,15 @@
 <div class="search-bar">
   <% INCLUDE inc/activity.html %>
   <a href ="/favorite/recent">Recent ++</a>
+  <hr/>
+  <strong>Filter</strong>
+  <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
+      <%- filter = { l = 'Latest releases', n = 'New distributions', a = 'All' };
+      FOR item IN ['l', 'n', 'a']; %>
+  <label><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label>
+  <% END %>
+  <input type="submit" style="display: none">
+  </form>
 </div>
 
 <div class="content">
