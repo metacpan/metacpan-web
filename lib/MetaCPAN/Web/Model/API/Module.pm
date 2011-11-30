@@ -37,6 +37,11 @@ sub find {
     $self->request("/module/$module");
 }
 
+sub _not_rogue {
+    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } } @ROGUE_DISTRIBUTIONS;
+    return { not => { filter => { or => \@rogue_dists } } };
+}
+
 sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv     = $self->cv;
@@ -60,20 +65,7 @@ sub autocomplete {
                     },
                     filter => {
                         and => [
-                            {   not => {
-                                    filter => {
-                                        or => [
-                                            map {
-                                                {   term => {
-                                                        'file.distribution' =>
-                                                            $_
-                                                    }
-                                                }
-                                                } @ROGUE_DISTRIBUTIONS
-                                        ]
-                                    }
-                                }
-                            },
+                            $self->_not_rogue,
                             { exists => { field => 'documentation' } },
                             { term => { 'file.indexed' => \1 } },
                             { term => { 'file.status'  => 'latest' } },
@@ -383,20 +375,7 @@ sub search {
                     },
                     filter => {
                         and => [
-                            {   not => {
-                                    filter => {
-                                        or => [
-                                            map {
-                                                {   term => {
-                                                        'file.distribution' =>
-                                                            $_
-                                                    }
-                                                }
-                                                } @ROGUE_DISTRIBUTIONS
-                                        ]
-                                    }
-                                }
-                            },
+                            $self->_not_rogue,
                             { term => { status => 'latest' } },
                             {   or => [
 
