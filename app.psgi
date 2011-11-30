@@ -35,7 +35,7 @@ $app = Plack::Middleware::ServerStatus::Lite->wrap(
    path       => '/server-status',
    allow      => ['127.0.0.1'],
    scoreboard => "$FindBin::RealBin/var/tmp/scoreboard"
-);
+) unless $0 =~ /\.t$/;
 $app = Plack::Middleware::Runtime->wrap($app);
 $app = Plack::Middleware::Assets->wrap( $app,
     files => [<root/static/css/*.css>] );
