@@ -26,7 +26,7 @@ sub dir {
                             { term => { 'file.author' => $author } },
                             { term => { 'file.release' => $release } },
                             {   prefix => {
-                                    'file.path' => join( '/', @path, undef )
+                                    'file.path' => join( '/', @path, '' )
                                 }
                             },
                         ]
