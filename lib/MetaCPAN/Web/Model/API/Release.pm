@@ -43,12 +43,40 @@ sub get {
 }
 
 sub recent {
-    my ( $self, $page ) = @_;
+    my ( $self, $page, $type ) = @_;
+    my $query;
+    if ( $type eq 'n' ) {
+        $query = {
+            constant_score => {
+                filter => {
+                    and => [
+                        { term => { first => \1, } },
+                        {   not => {
+                                filter => { term => { status => 'backpan' } }
+                            }
+                        },
+                    ]
+                }
+            }
+        };
+    }
+    elsif ( $type eq 'a' ) {
+        $query = { match_all => {} };
+    }
+    else {
+        $query = {
+            constant_score => {
+                filter => {
+                    not => { filter => { term => { status => 'backpan' } } }
+                }
+            }
+        };
+    }
     $self->request(
         '/release/_search',
         {   size  => 100,
             from  => ( $page - 1 ) * 100,
-            query => { match_all => {} },
+            query => $query,
             sort  => [ { 'date' => { order => "desc" } } ]
         }
     );
@@ -80,8 +108,10 @@ sub modules {
                                         ]
                                     },
                                     {   and => [
-                                            {   exists =>
-                                                    { field => 'file.pod.analyzed' }
+                                            {   exists => {
+                                                    field =>
+                                                        'file.pod.analyzed'
+                                                }
                                             },
                                             {   term =>
                                                     { 'file.indexed' => \1 }
