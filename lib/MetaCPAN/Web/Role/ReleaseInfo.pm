@@ -54,18 +54,7 @@ sub stash_api_results {
 # call recv() on all values in the provided hashref
 sub recv_all {
     my ( $self, $condvars ) = @_;
-
-    my @keys = keys %$condvars;
-
-    my $recv = $condvars->{ $keys[0] };
-    $recv   &= $condvars->{ $_ }
-        for @keys[ 1 .. $#keys ];
-
-    # don't overwrite \%condars, seems like that should be controller's choice
-    my %results;
-    @results{ @keys } = $recv->recv;
-
-    return \%results;
+    return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
 };
 
 1;

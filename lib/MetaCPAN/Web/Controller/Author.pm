@@ -37,7 +37,7 @@ sub index : Path : Args(1) {
         }
     );
 
-    my ( $author, $releases ) = ( $author_cv & $releases_cv )->recv;
+    my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     $c->stash(
