@@ -21,7 +21,11 @@ file.path = parts.join("/"); END -%>
   <div class="search-bar">
     <strong>Tools</strong>
     <ul>
+      <% IF type == 'source' %>
+      <li><a href="<% api %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">Raw diff</a></li>
+      <% ELSE %>
       <li><a href="<% api %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">Raw diff</a></li>
+      <% END %>
     </ul>
     <% IF diff.statistics.size > 1 -%>
     <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">

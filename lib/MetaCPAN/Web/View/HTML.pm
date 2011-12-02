@@ -6,6 +6,7 @@ use base 'Catalyst::View::TT::Alloy';
 
 use mro;
 use Digest::MD5 qw(md5_hex);
+use Digest::SHA1;
 use URI;
 use JSON;
 use Gravatar::URL;
@@ -152,6 +153,18 @@ Template::Alloy->define_vmethod(
                 default => $default,
             )
         );
+    }
+);
+
+Template::Alloy->define_vmethod(
+    'text',
+    digest => sub {
+        my ( $source ) = @_;
+        my @source = split(/\//, $source);
+        my @target = (shift @source, shift @source, join('/', @source));
+        my $digest = Digest::SHA1::sha1_base64(join("\0", grep { defined } @target));
+        $digest =~ tr/[+\/]/-_/;
+        return $digest;
     }
 );
 
