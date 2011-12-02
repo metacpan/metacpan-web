@@ -42,7 +42,7 @@ sub get {
                 : (),
             }
         }
-        )->(
+        )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(

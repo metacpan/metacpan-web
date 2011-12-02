@@ -51,7 +51,7 @@ sub search {
         from => $from || 0,
     };
 
-    $self->request( '/author/_search', $search )->(
+    $self->request( '/author/_search', $search )->cb(
         sub {
             my $results = shift->recv
                 || { hits => { total => 0, hits => [] } };

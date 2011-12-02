@@ -90,7 +90,7 @@ sub autocomplete {
             fields => [qw(documentation release author distribution)],
             size   => 20,
         }
-        )->(
+        )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
@@ -110,43 +110,30 @@ sub search_distribution {
     # the distribution is included in the query and ES does the right thing
     my $cv = $self->cv;
     my ( $data, $total );
-    my $results = $self->search(
+    $data = $self->search(
         $query,
         {   size => 20,
             from => $from
         }
-        )->(
-        sub {
-            $data = shift->recv;
-            my @distributions = uniq
-                map { $_->{fields}->{distribution} }
-                @{ $data->{hits}->{hits} };
+    )->recv;
+    my @distributions = uniq
+        map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} };
 
-            my @ids = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
-            my $descriptions = $self->search_descriptions(@ids);
-            my $ratings      = $self->model('Rating')->get(@distributions);
-            my $favorites
-                = $self->model('Favorite')->get( $user, @distributions );
-            return $ratings & $favorites & $descriptions;
+    my @ids          = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
+    my $descriptions = $self->search_descriptions(@ids);
+    my $ratings      = $self->model('Rating')->get(@distributions);
+    my $favorites    = $self->model('Favorite')->get( $user, @distributions );
+    $_ = $_->recv for ( $ratings, $favorites, $descriptions );
+    my $results = $self->_extract_results( $data, $ratings, $favorites );
+
+    map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
+        @{$results};
+    $cv->send(
+        {   results => [ map { [$_] } @$results ],
+            total   => $data->{hits}->{total},
+            took => sum( grep {defined} $data->{took}, $ratings->{took} )
         }
-        )->(
-        sub {
-            my ( $ratings, $favorites, $descriptions ) = shift->recv;
-            my $results
-                = $self->_extract_results( $data, $ratings, $favorites );
-
-            map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
-                @{$results};
-            $cv->send(
-                {   results => [ map { [$_] } @$results ],
-                    total   => $data->{hits}->{total},
-                    took =>
-                        sum( grep {defined} $data->{took}, $ratings->{took} )
-                }
-            );
-        }
-        );
-
+    );
     return $cv;
 }
 
@@ -156,70 +143,48 @@ sub search_collapsed {
     my $took = 0;
     my $total;
     my $run           = 1;
+    my $hits          = 0;
     my @distributions = ();
     my $process_or_repeat;
-    $process_or_repeat = sub {
-        my $data = shift->recv;
+    my $data;
+    do {
+        $data = $self->_search( $query, $run )->recv;
         $took += $data->{took} || 0;
         $total = @{ $data->{facets}->{count}->{terms} || [] }
             if ( $run == 1 );
-        my $hits = @{ $data->{hits}->{hits} || [] };
+        $hits = @{ $data->{hits}->{hits} || [] };
         @distributions = uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
-        if (   @distributions < 20 + $from
-            && $data->{hits}->{total}
-            && $data->{hits}->{total}
-            > $hits + ( $run - 1 ) * $RESULTS_PER_RUN )
-        {
+        $run++;
+        } while ( @distributions < 20 + $from
+        && $data->{hits}->{total}
+        && $data->{hits}->{total} > $hits + ( $run - 1 ) * $RESULTS_PER_RUN );
 
-            # need to get more results to satisfy at least 20 results
-            $run++;
-            my $cv = $self->cv;    # intermediate CV that allows for recursion
-            $self->_search( $query, $run )->($process_or_repeat)
-                ->( sub { $cv->send( shift->recv ) } );
-            return $cv;
-        }
+    @distributions = splice( @distributions, $from, 20 );
+    my $ratings   = $self->model('Rating')->get(@distributions);
+    my $favorites = $self->model('Favorite')->get( $user, @distributions );
+    my $results   = $self->model('Module')
+        ->search( $query, $self->_search_in_distributions(@distributions) );
+    $_ = $_->recv for ( $ratings, $favorites, $results );
 
-        @distributions = splice( @distributions, $from, 20 );
-        my $ratings = $self->model('Rating')->get(@distributions);
-        my $favorites
-            = $self->model('Favorite')->get( $user, @distributions );
-        my $results
-            = $self->model('Module')
-            ->search( $query,
-            $self->_search_in_distributions(@distributions) );
-        return ( $ratings & $favorites & $results );
+    $took += max( grep {defined} $ratings->{took},
+        $results->{took}, $favorites->{took} )
+        || 0;
+    $results = $self->_extract_results( $results, $ratings, $favorites );
+    $results = $self->_collpase_results($results);
+    my @ids = map { $_->[0]->{id} } @$results;
+    $data = {
+        results => $results,
+        total   => $total,
+        took    => $took,
     };
-
-    my $data;
-    $self->_search( $query, $run )->($process_or_repeat)->(
-        sub {
-            my ( $ratings, $favorites, $results ) = shift->recv;
-            $took += max( grep {defined} $ratings->{took},
-                $results->{took}, $favorites->{took} )
-                || 0;
-            $results
-                = $self->_extract_results( $results, $ratings, $favorites );
-            $results = $self->_collpase_results($results);
-            my @ids = map { $_->[0]->{id} } @$results;
-            $data = {
-                results => $results,
-                total   => $total,
-                took    => $took,
-            };
-            return $self->search_descriptions(@ids);
-        }
-        )->(
-        sub {
-            my ($descriptions) = shift->recv;
-            $data->{took} += $descriptions->{took} || 0;
-            map {
-                $_->[0]->{description}
-                    = $descriptions->{results}->{ $_->[0]->{id} }
-            } @{ $data->{results} };
-            $cv->send($data);
-        }
-        );
+    my ($descriptions) = $self->search_descriptions(@ids)->recv;
+    $data->{took} += $descriptions->{took} || 0;
+    map {
+        $_->[0]->{description}
+            = $descriptions->{results}->{ $_->[0]->{id} }
+    } @{ $data->{results} };
+    $cv->send($data);
     return $cv;
 }
 
@@ -239,7 +204,7 @@ sub search_descriptions {
             fields => [qw(_source.pod id)],
             size   => scalar @ids,
         }
-        )->(
+        )->cb(
         sub {
             my ($data) = shift->recv;
             my $extract = sub {
@@ -319,7 +284,7 @@ sub _search {
 sub first {
     my ( $self, $query ) = @_;
     my $cv = $self->cv;
-    $self->search( $query, { fields => [qw(documentation)] } )->(
+    $self->search( $query, { fields => [qw(documentation)] } )->cb(
         sub {
             my ($result) = shift->recv;
             return $cv->send(undef) unless ( $result->{hits}->{total} );
@@ -529,7 +494,7 @@ sub requires {
             from => $page * 50 - 50,
             sort => [$sort],
         }
-        )->(
+        )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(

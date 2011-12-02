@@ -53,7 +53,7 @@ sub get {
                 }
             }
         }
-        )->(
+        )->cb(
         sub {
             my ($ratings) = shift->recv;
             $cv->send(

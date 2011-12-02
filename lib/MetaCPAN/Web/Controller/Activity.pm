@@ -22,12 +22,11 @@ sub index : Path {
         push( @$q, { term => { "release.dependency.module" => $requires } } );
     }
 
-    my $cv = AE::cv();
     my $start
         = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
-    my $activity = $c->model('API')->request(
-        '/release/_search', {
-            query  => { match_all => {} },
+    my $data = $c->model('API')->request(
+        '/release/_search',
+        {   query  => { match_all => {} },
             facets => {
                 histo => {
                     date_histogram => { field => 'date', interval => $res },
@@ -44,24 +43,18 @@ sub index : Path {
             },
             size => 0,
         }
-    );
-    $activity->(
-        sub {
-            my $entries = shift->recv->{facets}->{histo}->{entries};
-            my $data    = { map { $_->{time} => $_->{count} } @$entries };
-            my $line    = [
-                map {
-                    $data->{ $start->clone->add( months => $_ )->epoch
-                            . '000' }
-                        || 0
-                    } ( 0 .. 23 )
-            ];
-            $cv->send( { data => $line } );
-        }
-    );
+    )->recv;
+    my $entries = $data->{facets}->{histo}->{entries};
+    $data    = { map { $_->{time} => $_->{count} } @$entries };
+    my $line    = [
+        map {
+            $data->{ $start->clone->add( months => $_ )->epoch . '000' }
+                || 0
+            } ( 0 .. 23 )
+    ];
     $c->res->content_type('image/svg+xml');
-    $c->res->headers->expires(time + 86400);
-    $c->stash({%{$cv->recv}, template => 'activity.xml'});
+    $c->res->headers->expires( time + 86400 );
+    $c->stash( { data => $line, template => 'activity.xml' } );
     $c->detach('View::Raw');
 
 }

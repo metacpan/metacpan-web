@@ -5,13 +5,20 @@ extends 'Catalyst::Model';
 
 has [qw(api api_secure)] => ( is => 'ro' );
 
-use MetaCPAN::Web::MyCondVar;
 use Test::More;
 use JSON;
 use AnyEvent::HTTP qw(http_request);
 
+{
+    no warnings 'once';
+    $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
+    $AnyEvent::HTTP::USERAGENT
+        = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; '
+        . '+https://github.com/CPAN-API/metacpan-web)';
+}
+
 sub cv {
-    MetaCPAN::Web::MyCondVar->new;
+    AE::cv;
 }
 
 =head2 COMPONENT
