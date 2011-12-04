@@ -25,7 +25,7 @@ sub index : Path('/favorite/leaderboard') {
     $c->stash({
         leaders  => $data->{facets}->{leaderboard}->{terms},
         took     => $data->{took},
-        total    => $data->{hits}->{totaL},
+        total    => $data->{hits}->{total},
         template => 'favorite/leaderboard.html',
     });
 }
