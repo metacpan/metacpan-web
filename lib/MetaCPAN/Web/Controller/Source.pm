@@ -35,7 +35,7 @@ sub index : PathPart('source') : Chained('/') : Args {
             }
         );
     }
-    elsif ( $source->{raw} ) {
+    elsif ( exists $source->{raw} ) {
 
         # could this be a method/function somewhere else?
         my $filetype = do {
