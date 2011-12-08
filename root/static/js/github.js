@@ -47,7 +47,11 @@ function Github() {
 
                             +'  <tr><th><a href="'+ data.html_url +'/watchers">Watchers</a>:</th><td>'+ data.watchers +'</td></tr>'
                             +'  <tr><th><a href="'+ data.html_url +'/network">Forks</a>:</th><td>'+ data.forks +'</td></tr>'
-                            +'  <tr><th>Open <a href="'+ data.html_url +'/issues">Issues</a>:</th><td>'+ data.open_issues +'</td></tr>'
+
+                            +( data.has_issues
+                            ?'  <tr><th>Open <a href="'+ data.html_url +'/issues">Issues</a>:</th><td>'+ data.open_issues +'</td></tr>'
+                            :'' )
+
                             +'  <tr><th>Clone URL:</th><td><a href="'+ data.clone_url +'">'+ data.clone_url +'</a></td></tr>'
                             +'  <tr><th>Git URL:</th><td><a href="'+ data.git_url +'">'+ data.git_url +'</a></td></tr>'
                             +'  <tr><th>Github URL:</th><td><a href="'+ data.html_url +'">'+ data.html_url +'</a></td></tr>'
