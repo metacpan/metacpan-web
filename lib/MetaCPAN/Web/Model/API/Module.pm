@@ -30,11 +30,23 @@ use List::MoreUtils qw(uniq);
 
 my $RESULTS_PER_RUN = 200;
 my @ROGUE_DISTRIBUTIONS
-    = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
+    = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx Bundle-Everything);
 
 sub find {
     my ( $self, $module ) = @_;
     $self->request("/module/$module");
+}
+
+sub _not_rogue {
+    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } } @ROGUE_DISTRIBUTIONS;
+    return { not => { filter => { or => \@rogue_dists } } };
+}
+
+sub _indexed_and_documented {
+    return (
+        { exists => { field          => 'documentation' } },
+        { term   => { 'file.indexed' => \1 } },
+    );
 }
 
 sub autocomplete {
@@ -60,22 +72,8 @@ sub autocomplete {
                     },
                     filter => {
                         and => [
-                            {   not => {
-                                    filter => {
-                                        or => [
-                                            map {
-                                                {   term => {
-                                                        'file.distribution' =>
-                                                            $_
-                                                    }
-                                                }
-                                                } @ROGUE_DISTRIBUTIONS
-                                        ]
-                                    }
-                                }
-                            },
-                            { exists => { field => 'documentation' } },
-                            { term => { 'file.indexed' => \1 } },
+                            $self->_not_rogue,
+                            $self->_indexed_and_documented_file,
                             { term => { 'file.status'  => 'latest' } },
                             {   not => {
                                     filter => {
@@ -171,7 +169,7 @@ sub search_collapsed {
         $results->{took}, $favorites->{took} )
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
-    $results = $self->_collpase_results($results);
+            $results = $self->_collapse_results($results);
     my @ids = map { $_->[0]->{id} } @$results;
     $data = {
         results => $results,
@@ -246,7 +244,7 @@ sub _extract_results {
     ];
 }
 
-sub _collpase_results {
+sub _collapse_results {
     my ( $self, $results ) = @_;
     my %collapsed;
     foreach my $result (@$results) {
@@ -383,20 +381,7 @@ sub search {
                     },
                     filter => {
                         and => [
-                            {   not => {
-                                    filter => {
-                                        or => [
-                                            map {
-                                                {   term => {
-                                                        'file.distribution' =>
-                                                            $_
-                                                    }
-                                                }
-                                                } @ROGUE_DISTRIBUTIONS
-                                        ]
-                                    }
-                                }
-                            },
+                            $self->_not_rogue,
                             { term => { status => 'latest' } },
                             {   or => [
 
@@ -423,16 +408,7 @@ sub search {
                                             }
                                         ]
                                     },
-                                    {   and => [
-                                            {   exists => {
-                                                    field => 'documentation'
-                                                }
-                                            },
-                                            {   term =>
-                                                    { 'file.indexed' => \1 }
-                                            }
-                                        ]
-                                    }
+                                    {   and => [ $self->_indexed_and_documented_file ] }
                                 ]
                             }
                         ]
