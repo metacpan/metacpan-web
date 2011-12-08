@@ -10,7 +10,35 @@ use HTML::Tree;
 use Test::XPath;
 use Encode;
 use base 'Exporter';
-our @EXPORT = qw(GET test_psgi app tx);
+our @EXPORT = qw(
+  GET
+  test_psgi
+  api_response
+  app
+  tx
+);
+
+sub api_response {
+    require MetaCPAN::Web::Model::API;
+
+    my $responder = pop;
+    my $matches = {@_};
+
+    no warnings 'redefine';
+    *MetaCPAN::Web::Model::API::http_request = sub ($$@) {
+        my $cb = pop;
+        my ($method, $url, %arg) = @_;
+        my @res;
+        if( ($matches->{if} ? $matches->{if}->(@_) : 1) and @res = $responder->(@_) ) {
+            $cb->(@res);
+        }
+        else {
+            @_ = (@_, $cb);
+            goto &AnyEvent::HTTP::http_request;
+        }
+    };
+    return;
+}
 
 sub app { require 'app.psgi'; }
 
@@ -36,6 +64,19 @@ L<HTTP::Request::Common/GET>
 =head2 test_psgi
 
 L<Plack::Test/test_psgi>
+
+=head2 api_response
+
+Define a sub to intercept api requests and return your own response.
+
+    api_response(sub { return ("body", {"content-type": "text/plain"}) });
+
+Conditionally with another sub:
+
+    api_response(
+      if => sub { return $_[1] =~ /foo/ },
+      sub { return ("body", {"content-type": "text/plain"}) }
+    );
 
 =head2 app
 

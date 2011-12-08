@@ -5,9 +5,11 @@ extends 'Catalyst::Model';
 
 has [qw(api api_secure)] => ( is => 'ro' );
 
-use Test::More;
+use Encode ();
 use JSON;
 use AnyEvent::HTTP qw(http_request);
+use Try::Tiny 0.09;
+use namespace::autoclean;
 
 {
     no warnings 'once';
@@ -62,15 +64,39 @@ sub request {
 
         if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
-            $req->send( $@ ? { raw => $data } : $json );
+            $req->send( $@ ? $self->raw_api_response($data) : $json );
         }
         else {
 
             # Response is raw data, e.g. text/plain
-            $req->send( { raw => $data } );
+            $req->send( $self->raw_api_response($data) );
         }
         };
     return $req;
+}
+
+my $encoding = Encode::find_encoding('utf-8-strict')
+  or warn 'UTF-8 Encoding object not found';
+my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
+
+sub raw_api_response {
+    my ($self, $data) = @_;
+
+    # will http_response ever return undef or a blessed object?
+    $data  = '' if ! defined $data; # define
+    $data .= '' if       ref $data; # stringify
+
+    # we have to assume an encoding; doing nothing is like assuming latin1
+    # we'll probably have the least number of issues if we assume utf8
+    try {
+      # decode so the template doesn't double-encode and return mojibake
+      $data &&= $encoding->decode( $data, $encode_check );
+    }
+    catch {
+      warn $_[0];
+    };
+
+    return +{ raw => $data };
 }
 
 1;
