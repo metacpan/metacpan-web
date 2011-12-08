@@ -42,7 +42,7 @@ sub _not_rogue {
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
-sub _indexed_and_documented {
+sub _indexed_and_documented_file {
     return (
         { exists => { field          => 'documentation' } },
         { term   => { 'file.indexed' => \1 } },
