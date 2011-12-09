@@ -66,10 +66,10 @@ sub index : PathPart('module') : Chained('/') : Args {
             strong  => [],
             sub     => [],
             sup     => [],
-            table   => [qw( style border cellspacing cellpadding align )],
+            table   => [qw( style class border cellspacing cellpadding align )],
             tbody   => [],
-            td      => [],
-            tr      => [],
+            td      => [ qw(style class) ],
+            tr      => [ qw(style class) ],
             u       => [],
             ul      => ['id'],
         }
