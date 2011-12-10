@@ -40,7 +40,11 @@
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
     <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
-    <li><a href="/requires/module/<% module.documentation %>?sort=[[2,1]]">Reverse dependencies</a></li>
+    <li>Reverse dependencies:</li>
+        <ul class="rev-deps">
+            <li><a href="/requires/module/<% module.documentation %>?sort=[[2,1]]"><% module.documentation %></a></li>
+            <li><a href="/requires/module/<% release.main_module %>"><% release.main_module %></a></li>
+        </ul>
     <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>

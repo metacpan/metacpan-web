@@ -75,10 +75,12 @@ sub index : PathPart('module') : Chained('/') : Args {
         }
     );
 
+    my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
+    $release->{main_module} ||= do { (my $d = $release->{distribution}) =~ s/-/::/g; $d }; # '/r' where are you?
     $c->stash(
         {   module  => $data,
             pod     => $hr->process( $reqs->{pod}->{raw} ),
-            release => $reqs->{release}->{hits}->{hits}->[0]->{_source},
+            release => $release,
             template => 'module.html',
         }
     );
