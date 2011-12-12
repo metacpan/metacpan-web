@@ -32,7 +32,7 @@ test_psgi app, sub {
     # check reverse deps link for a module that isn't the dist's main_module
     ok( $res = $cb->( GET "/module/Moose::Role" ), 'GET /module/Moose::Role' );
     is( $res->code, 200, 'code 200' );
-    my $tx = tx($res);
+    $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose::Role/, 'title includes Moose::Role' );
 
     check_rev_deps($tx, qw(Moose::Role Moose));
