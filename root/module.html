@@ -42,8 +42,10 @@
     <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
     <li>Reverse dependencies:</li>
         <ul class="rev-deps">
+        <% IF module.documentation %>
             <li><a class="ellipsis" title="<% module.documentation %>" href="/requires/module/<% module.documentation %>?sort=[[2,1]]"><% module.documentation %></a></li>
-        <% IF module.documentation != release.main_module %>
+        <% END %>
+        <% IF release.main_module && module.documentation != release.main_module %>
             <li><a class="ellipsis" title="<% release.main_module %>" href="/requires/module/<% release.main_module %>?sort=[[2,1]]"><% release.main_module %></a></li>
         <% END %>
         </ul>
