@@ -14,9 +14,8 @@ sub source {
 
 sub dir {
     my ( $self, $author, $release, @path ) = @_;
-
     $self->request(
-        '/file',
+        '/file/_search',
         {   query => {
                 filtered => {
                     query  => { match_all => {}, },

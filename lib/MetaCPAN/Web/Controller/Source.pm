@@ -18,7 +18,7 @@ sub index : PathPart('source') : Chained('/') : Args {
     else {
         ( $source, $module ) = (
             $c->model('API::Module')->source(@module)->recv,
-            $c->model('API::Module')->get(@module)->recv
+            $c->model('API::Module')->get(@module)->recv,
         );
     }
 
