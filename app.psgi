@@ -14,6 +14,7 @@ BEGIN {
 
 use FindBin;
 use lib "$FindBin::RealBin/lib";
+use File::Path ();
 use MetaCPAN::Web;
 use Plack::App::File;
 use Plack::App::URLMap;
@@ -30,11 +31,15 @@ $app->map( '/static/' => Plack::App::File->new( root => 'root/static' ) );
 $app->map( '/favicon.ico' =>
         Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
 $app->map( '/' => sub { MetaCPAN::Web->run(@_) } );
+my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
+unless (-d $scoreboard) {
+    File::Path::make_path($scoreboard) or die "Can't make_path $scoreboard: $!";
+}
 $app = Plack::Middleware::ServerStatus::Lite->wrap(
    $app,
    path       => '/server-status',
    allow      => ['127.0.0.1'],
-   scoreboard => "$FindBin::RealBin/var/tmp/scoreboard"
+   scoreboard => $scoreboard,
 ) unless $0 =~ /\.t$/;
 $app = Plack::Middleware::Runtime->wrap($app);
 $app = Plack::Middleware::Assets->wrap( $app,
