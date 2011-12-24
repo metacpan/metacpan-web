@@ -1,4 +1,4 @@
-<% title = module.documentation _ ' - ' _ module.abstract; rss = 'distribution/' _ module.distribution %>
+<% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
 <strong><big>
   <a rel="author" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
   &nbsp;/&nbsp;
