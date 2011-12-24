@@ -36,11 +36,11 @@
             backpan.push(version);
             NEXT;
         END %>
-    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version %> (<% version.date.dt_date_common %>)</option>
+    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</option>
     <% END; IF backpan.size > 1 %>
     <optgroup label="BackPAN"></optgroup>
     <% FOREACH version IN backpan %>
-    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version %> (<% version.date.dt_date_common %>)</option><% END %>
+    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</option><% END %>
     <% END; END; PROCESS version_options %>
     </select>
     <% END %>

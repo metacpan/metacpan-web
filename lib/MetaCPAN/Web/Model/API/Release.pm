@@ -172,7 +172,7 @@ sub versions {
             },
             size   => 100,
             sort   => [ { date => 'desc' } ],
-            fields => [qw(name date author version status)],
+            fields => [qw(name date author version status maturity)],
         }
     );
 }
