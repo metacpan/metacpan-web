@@ -57,7 +57,7 @@ FOREACH file IN files;
   IF file.documentation && file.module;
     modules.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
     FOREACH module IN file.module;
-      IF module.name != file.documentation;
+      IF module.name != file.documentation && module.indexed;
         provides.push({ status = file.status, title = module.name, path = file.path });
       END;
     END;
