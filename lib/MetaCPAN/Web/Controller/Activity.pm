@@ -21,6 +21,15 @@ sub index : Path {
     if ( my $requires = $req->parameters->{requires} ) {
         push( @$q, { term => { "release.dependency.module" => $requires } } );
     }
+    if ( $req->parameters->{f} eq 'n' ) {
+        push(
+            @$q,
+            @{  $c->model('API::Release')
+                    ->_new_distributions_query->{constant_score}->{filter}
+                    ->{and}
+                }
+        );
+    }
 
     my $start
         = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
@@ -45,8 +54,8 @@ sub index : Path {
         }
     )->recv;
     my $entries = $data->{facets}->{histo}->{entries};
-    $data    = { map { $_->{time} => $_->{count} } @$entries };
-    my $line    = [
+    $data = { map { $_->{time} => $_->{count} } @$entries };
+    my $line = [
         map {
             $data->{ $start->clone->add( months => $_ )->epoch . '000' }
                 || 0

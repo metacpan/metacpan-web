@@ -42,23 +42,27 @@ sub get {
     );
 }
 
+sub _new_distributions_query {
+    return {
+        constant_score => {
+            filter => {
+                and => [
+                    { term => { first => \1, } },
+                    {   not => {
+                            filter => { term => { status => 'backpan' } }
+                        }
+                    },
+                ]
+            }
+        }
+    };
+}
+
 sub recent {
     my ( $self, $page, $type ) = @_;
     my $query;
     if ( $type eq 'n' ) {
-        $query = {
-            constant_score => {
-                filter => {
-                    and => [
-                        { term => { first => \1, } },
-                        {   not => {
-                                filter => { term => { status => 'backpan' } }
-                            }
-                        },
-                    ]
-                }
-            }
-        };
+        $query = $self->_new_distributions_query;
     }
     elsif ( $type eq 'a' ) {
         $query = { match_all => {} };
