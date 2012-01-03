@@ -37,4 +37,13 @@ sub remove_favorite {
         undef, { method => 'DELETE', token => $token } );
 }
 
+sub turing {
+    my ( $self, $challenge, $answer, $token ) = @_;
+    $self->request(
+        "/user/turing",
+        { challenge => $challenge, answer => $answer },
+        { token     => $token }
+    );
+}
+
 1;

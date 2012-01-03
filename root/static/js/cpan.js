@@ -274,6 +274,9 @@ function favDistribution(form) {
             }
         },
         error: function(){
+            if(confirm("You have to complete a Captcha in order to ++.")) {
+                document.location.href = "/account/turing";
+            }
         }
     });
     return false;

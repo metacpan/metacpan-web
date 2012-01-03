@@ -1,0 +1,25 @@
+<% PROCESS inc/account-bar.html %>
+<div class="content account-settings">
+    <% IF error -%>
+    <fieldset><legend style="color: #600">Error</legend>
+        <ul>
+        The answer was not correct. Please try again.
+        </ul>
+    </fieldset>
+    <% END; IF success -%>
+    <fieldset><legend style="color: #060">Success</legend>
+        <p>Thank you.</p><br /><p><a href="<% referer %>">Continue browsing</a></p>
+    </fieldset>
+    <% ELSE %>
+    <fieldset><legend>Verify Account</legend>
+        <p>Please solve the Captcha. This will allow you to ++ modules. You'll have to complete this test only once.</p><br />
+        <script>
+        var RecaptchaOptions = { theme : 'white' };
+        </script>
+        <form action="<% c.req.uri %>" method="POST">
+        <% captcha | none %>
+        <input type="hidden" name="r" value="<% referer || c.req.referer || c.uri_for('/') %>" />
+        </form>
+    </fieldset>
+    <% END %>
+</div>
