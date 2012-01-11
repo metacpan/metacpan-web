@@ -4,7 +4,7 @@
     <br /><br />
     <table width="300">
     <% FOREACH identity IN ['Facebook', 'GitHub', 'PAUSE', 'Twitter']; found = user.identity.grep(->(a){ a.name == identity.lower }) %>
-    <tr><td><big><% identity %></big></td><td><div class="ds"><% IF found.size %><a class="g-button" href="/account/identities?delete=<% identity.lower %>">Disconnect</a><% ELSE %><a class="g-button" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">Connect</a><% END %></ds></td></tr>
+    <tr><td><big><% identity %></big></td><td><div class="ds"><% IF found.size %><a class="g-button" href="/account/identities?delete=<% identity.lower %>">Disconnect</a><% ELSE %><a class="g-button" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">Connect</a><% END %></div></td></tr>
     <% END %>
 </table>
 </div>
