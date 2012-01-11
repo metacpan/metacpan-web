@@ -8,8 +8,8 @@ use JSON::XS ();
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub auto : Private {
-    my ($self, $c) = @_;
-    unless($c->user_exists) {
+    my ( $self, $c ) = @_;
+    unless ( $c->user_exists ) {
         $c->forward('/forbidden');
     }
     return $c->user_exists;
@@ -17,6 +17,7 @@ sub auto : Private {
 
 sub logout : Local {
     my ( $self, $c ) = @_;
+    $c->detach('/forbidden') unless( $c->req->method eq 'POST' );
     $c->req->session->expire;
     $c->res->redirect('/');
 }
@@ -27,7 +28,9 @@ sub settings : Local {
 
 sub identities : Local {
     my ( $self, $c ) = @_;
-    if ( my $delete = $c->req->params->{delete} ) {
+    if ( $c->req->method eq 'POST'
+        && ( my $delete = $c->req->params->{delete} ) )
+    {
         $c->model('API::User')->delete_identity( $delete, $c->token )->recv;
         $c->res->redirect('/account/identities');
     }
@@ -36,26 +39,33 @@ sub identities : Local {
 sub profile : Local {
     my ( $self, $c ) = @_;
     my $author = $c->model('API::User')->get_profile( $c->token )->recv;
-    $c->stash( $author->{error} ? { no_profile => 1 } : { author => $author } );
+    $c->stash(
+        $author->{error} ? { no_profile => 1 } : { author => $author } );
     my $req = $c->req;
     return unless ( $req->method eq 'POST' );
 
     my $data = $author;
-    $data->{blog} = $req->param('blog.url') ? [
+    $data->{blog} = $req->param('blog.url')
+        ? [
         pairwise { { url => $a, feed => $b } }
         @{ [ $req->param('blog.url') ] },
         @{ [ $req->param('blog.feed') ] }
-    ] : undef;
-    $data->{donation} = $req->param('donation.name') ? [
+        ]
+        : undef;
+    $data->{donation} = $req->param('donation.name')
+        ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('donation.name') ] },
         @{ [ $req->param('donation.id') ] }
-    ] : undef;
-    $data->{profile} = $req->param('profile.name') ? [
+        ]
+        : undef;
+    $data->{profile} = $req->param('profile.name')
+        ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('profile.name') ] },
         @{ [ $req->param('profile.id') ] }
-    ] : undef;
+        ]
+        : undef;
 
     $data->{location}
         = $req->params->{latitude}

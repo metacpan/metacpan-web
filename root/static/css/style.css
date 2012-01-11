@@ -396,6 +396,10 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     width: 80px
 }
 
+.account-settings button.g-button {
+    width: 94px;
+}
+
 .account-settings td {
     padding: 5px;
 }
