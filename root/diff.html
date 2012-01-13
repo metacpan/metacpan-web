@@ -8,7 +8,9 @@
 <%-
 insertions = 0;
 deletions = 0;
+files = 0;
 FOREACH file IN diff.statistics;
+files += 1;
 insertions += file.insertions;
 deletions += file.deletions;
 parts = file.target.split("/");
@@ -50,6 +52,7 @@ file.path = parts.join("/"); END -%>
 <% FOREACH file IN diff.statistics %>
 <li><a href="#<% file.path %>"><% file.path %></a><span class="minus"><% file.deletions %></span><span class="plus"><% file.insertions %></span></li>
 <% END %>
+<li> <% files %> file<% IF files > 1 %>s<% END %> changed <span class="minus"><% deletions %></span><span class="plus"><% insertions %></span>
 </ul>
 
 <% FOREACH file IN diff.statistics %>
