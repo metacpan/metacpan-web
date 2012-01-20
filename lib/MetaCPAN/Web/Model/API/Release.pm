@@ -161,6 +161,45 @@ sub find {
     );
 }
 
+# stolen from Module/requires
+sub reverse_dependencies {
+    my ( $self, $distribution, $page, $sort ) = @_;
+    $sort ||= { date => 'desc' };
+    my $cv = $self->cv;
+    # TODO: do we need to do a taint-check on $distribution before inserting it into the url?
+    # maybe the fact that it came through as a Catalyst Arg is enough?
+    $self->request(
+        "/search/reverse_dependencies/$distribution",
+        {   query => {
+                filtered => {
+                    query  => { "match_all" => {} },
+                    filter => {
+                        and => [
+                            { term => { 'release.status'     => 'latest' } },
+                            { term => { 'release.authorized' => \1 } },
+                        ]
+                    }
+                }
+            },
+            size => 50,
+            from => $page * 50 - 50,
+            sort => [$sort],
+        }
+        )->cb(
+        sub {
+            my $data = shift->recv;
+            $cv->send(
+                {   data =>
+                        [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
+                    total => $data->{hits}->{total},
+                    took  => $data->{took}
+                }
+            );
+        }
+        );
+    return $cv;
+}
+
 sub root_files {
     my ( $self, $author, $release ) = @_;
     $self->request(
