@@ -25,7 +25,7 @@ sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Module')->requires( $module, $c->req->page, $sort )
         ->recv;
-    $c->stash( { %{$data}, module => $module, template => 'requires.html' } );
+    $c->stash( { %{$data}, type_of_required => 'module', required => $module, template => 'requires.html' } );
 }
 
 1;
