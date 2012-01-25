@@ -24,8 +24,19 @@ it under the same terms as Perl itself.
 =cut
 
 sub get {
-    my ( $self, $author ) = @_;
-    $self->request( "/author/" . uc($author) );
+    my ( $self, @author ) = @_;
+    return $self->request( "/author/" . uc( $author[0] ) )
+        if ( @author == 1 );
+    return $self->request(
+        "/author/_search",
+        {   query => {
+                constant_score => {
+                    filter => { ids => { values => [ map {uc} @author ] } }
+                }
+            },
+            size => scalar @author,
+        }
+    );
 
 }
 

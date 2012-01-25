@@ -48,9 +48,8 @@ sub _new_distributions_query {
             filter => {
                 and => [
                     { term => { first => \1, } },
-                    {   not => {
-                            filter => { term => { status => 'backpan' } }
-                        }
+                    {   not =>
+                            { filter => { term => { status => 'backpan' } } }
                     },
                 ]
             }
@@ -214,6 +213,34 @@ sub versions {
 sub favorites {
     my ( $self, $dist ) = @_;
     $self->request( '/favorite/_search', {} );
+}
+
+sub topuploaders {
+    my ( $self, $range ) = @_;
+    my $range_filter = {
+        range => {
+            date => {
+                from => $range eq 'all' ? 0 : DateTime->now->subtract(
+                      $range eq 'weekly'  ? 'weeks'
+                    : $range eq 'monthly' ? 'months'
+                    : $range eq 'yearly'  ? 'years'
+                    : 'weeks' => 1
+                    )->truncate( to => 'day' )->iso8601
+            },
+        }
+    };
+    $self->request(
+        '/release/_search',
+        {   query  => { match_all => {} },
+            facets => {
+                author => {
+                    terms        => { field => "author", size => 50 },
+                    facet_filter => $range_filter,
+                },
+            },
+            size => 0,
+        }
+    );
 }
 
 __PACKAGE__->meta->make_immutable;

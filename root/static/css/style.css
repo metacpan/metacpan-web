@@ -119,6 +119,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.strong {
+    font-weight: bold;
+}
+
 .ds {
 border-bottom: 1px solid #E7E7E7;
 border-right: 1px solid #E7E7E7;

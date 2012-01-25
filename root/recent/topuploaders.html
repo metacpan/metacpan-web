@@ -1,0 +1,34 @@
+<%- title = "CPAN Top Uploaders" %>
+<div class="search-bar">
+  <big><strong>Top Uploaders</strong></big>
+  <hr>
+  <strong>Date Range</strong>
+  <ul style="padding-left: 12px">
+  <li><a href="<% c.uri_for('/recent/topuploaders/weekly') %>"<% IF range == 'weekly' %> class="strong"<% END %>>Weekly</a></li>
+  <li><a href="<% c.uri_for('/recent/topuploaders/monthly') %>"<% IF range == 'monthly' %> class="strong"<% END %>>Monthly</a></li>
+  <li><a href="<% c.uri_for('/recent/topuploaders/yearly') %>"<% IF range == 'yearly' %> class="strong"<% END %>>Yearly</a></li>
+  <li><a href="<% c.uri_for('/recent/topuploaders/all') %>"<% IF range == 'all' %> class="strong"<% END %>>All time</a></li>
+  </ul>
+</div>
+<div class="content">
+<% FOREACH author IN authors %>
+<div style="float:left; width: 300px; overflow: hidden">
+    <%- IF author.gravatar_url; author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/") %>
+    <div style="float: left; text-align: center; padding: 10px;">
+        <a href="/author/<% author.pauseid %>">
+            <img src="<% author.gravatar_url %>" class="author-img" style="width: 75px; height: 75px">
+        </a>
+    </div>
+    <%- END %>
+    <div style="padding: 10px; white-space: nowrap">
+        <strong>
+            <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
+        </strong><br>
+        <span title="<% author.asciiname %>"><% author.name %></span>
+        <br><br>
+        <strong><% author.releases %> release<% IF author.releases > 1 %>s<% END %></strong>
+    </div>
+</div>
+<% END %>
+<div style="clear: both"></div>
+</div>
