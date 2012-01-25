@@ -14,7 +14,7 @@ sub index : Path {
         $c->detach;
     }
 
-    my $query = $req->param('q');
+    my $query = join(" ", $req->param('q'));
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
