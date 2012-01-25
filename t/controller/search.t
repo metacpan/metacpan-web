@@ -19,7 +19,7 @@ test_psgi app, sub {
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
     my $release = $tx->find_value(
-        '//div[@class="search-results"]//big[1]/strong/a/@href');
+        '//div[@class="search-results"]//div[1]/big[1]/strong/a/@href');
     ok( $release, "found release $release" );
 
     # Moose has ratings (other things on this search page likely do as well)
