@@ -12,7 +12,7 @@
 </div>
 <div class="content">
 <% FOREACH author IN authors %>
-<div style="float:left; width: 300px; overflow: hidden">
+<div style="float:left; width: 300px; height: 100px; overflow: hidden">
     <%- IF author.gravatar_url; author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/") %>
     <div style="float: left; text-align: center; padding: 10px;">
         <a href="/author/<% author.pauseid %>">
