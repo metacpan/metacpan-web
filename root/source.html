@@ -11,6 +11,9 @@
   <strong>Tools</strong>
   <ul>
     <li><a href="/release/<% module.author %>/<% module.release %>/">To release page</a></li>
+    <% IF module.documentation %>
+      <li><a href="/module/<% module.documentation %>">To module page</a></li>
+    <% END %>
     <li><a href="/author/<% module.author %>/">To author page</a></li>
     <li>&nbsp;</li>
     <li><a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">Raw code</a></li>
