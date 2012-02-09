@@ -1,22 +1,22 @@
 server {
-  listen 80;
-  server_name search.cpan.org sco.metacpan.org cpansearch.perl.org .mcpan.org;
-  if ($args ~ "query=([^&]+)" ) {
+    listen 80;
+    server_name search.cpan.org sco.metacpan.org cpansearch.perl.org .mcpan.org;
+    if ($args ~ "query=([^&]+)" ) {
         set $query $1;
         rewrite ^/search$ https://metacpan.org/search?q=$query?;
-  }
+    }
 
-  rewrite ^/perldoc$ https://metacpan.org/module/$args?;
-  rewrite ^/\~([^/]+)/([^/]+)/?$ https://metacpan.org/release/$1/$2;
-  rewrite ^/\~([^/]+)/([^/]+)/(.+)$ https://metacpan.org/module/$1/$2/$3;
-  rewrite ^/src\/([^/]+)/([^/]+)/(.+)$ https://metacpan.org/source/$1/$2/$3;
-  rewrite ^/dist/([^/]+)/?$ https://metacpan.org/release/$1;
-  rewrite ^/dist/([^/]+)/(.+)$ https://metacpan.org/release/$1;
-  rewrite ^/\~([^/]+)/?$ https://metacpan.org/author/$1;
-  rewrite ^/CPAN/(.+)$ https://cpan.metacpan.org/$1;
+    rewrite ^/perldoc$ https://metacpan.org/module/$args?;
+    rewrite ^/\~([^/]+)/([^/]+)/?$ https://metacpan.org/release/$1/$2;
+    rewrite ^/\~([^/]+)/([^/]+)/(.+)$ https://metacpan.org/module/$1/$2/$3;
+    rewrite ^/src\/([^/]+)/([^/]+)/(.+)$ https://metacpan.org/source/$1/$2/$3;
+    rewrite ^/dist/([^/]+)/?$ https://metacpan.org/release/$1;
+    rewrite ^/dist/([^/]+)/(.+)$ https://metacpan.org/release/$1;
+    rewrite ^/\~([^/]+)/?$ https://metacpan.org/author/$1;
+    rewrite ^/CPAN/(.+)$ https://cpan.metacpan.org/$1;
 
-  rewrite ^/recent https://metacpan.org/recent break;
-  rewrite ^/mirror https://metacpan.org/mirrors break;
-  rewrite ^/(.+) https://metacpan.org/$1 break;
-  rewrite ^ https://metacpan.org break;
+    rewrite ^/recent https://metacpan.org/recent break;
+    rewrite ^/mirror https://metacpan.org/mirrors break;
+    rewrite ^/(.+) https://metacpan.org/$1 break;
+    rewrite ^ https://metacpan.org break;
 }
