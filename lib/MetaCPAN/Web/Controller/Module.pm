@@ -25,10 +25,14 @@ sub index : PathPart('module') : Chained('/') : Args {
         ? $c->model('API::Module')->find(@module)->recv
         : $c->model('API::Module')->get(@module)->recv;
 
-    $c->detach('/not_found') unless ( $data->{name} );
+    ( $data->{documentation}, my $pod )
+        = map { $_->{name}, $_->{associated_pod} }
+        grep  { $_->{associated_pod} } @{ $data->{module} }
+        unless ( $data->{documentation} );
 
+    $c->detach('/not_found') unless ( $data->{name} );
     my $reqs = $self->api_requests($c, {
-            pod     => $c->model('API')->request( '/pod/' . join( '/', @module ) ),
+            pod     => $c->model('API')->request( '/pod/' . ( $pod || join( '/', @module ) ) ),
             release => $c->model('API::Release')->get( @{$data}{qw(author release)} ),
         },
         $data,
