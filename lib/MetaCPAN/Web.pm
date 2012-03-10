@@ -19,6 +19,10 @@ __PACKAGE__->apply_request_class_roles(qw(
     Catalyst::TraitFor::Request::REST::ForBrowsers
 ));
 
+__PACKAGE__->apply_response_class_roles(qw(
+    MetaCPAN::Web::Role::Response
+));
+
 __PACKAGE__->config(
     name                                        => 'MetaCPAN::Web',
     disable_component_resolution_regex_fallback => 1,

@@ -24,6 +24,7 @@ sub index : PathPart('source') : Chained('/') : Args {
 
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->recv;
+        $c->res->last_modified($module->{date});
         $c->stash(
             {   template => 'browse.html',
                 files => [ map { $_->{fields} } @{ $files->{hits}->{hits} } ],
@@ -57,6 +58,7 @@ sub index : PathPart('source') : Chained('/') : Args {
                 # default to plain text
                 'plain';
         };
+        $c->res->last_modified($module->{date});
         $c->stash(
             {   template => 'source.html',
                 source   => $source->{raw},

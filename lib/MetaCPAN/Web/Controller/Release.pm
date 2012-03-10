@@ -57,6 +57,8 @@ sub index : PathPart('release') : Chained('/') : Args {
             last;
         }
     }
+    
+    $c->res->last_modified($out->{date});
 
     # TODO: make took more automatic (to include all)
     $c->stash(

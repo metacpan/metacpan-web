@@ -79,6 +79,7 @@ sub index : PathPart('module') : Chained('/') : Args {
         }
     );
 
+    $c->res->last_modified($data->{date});
     $c->stash(
         {   module  => $data,
             pod     => $hr->process( $reqs->{pod}->{raw} ),
