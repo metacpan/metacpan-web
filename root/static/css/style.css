@@ -861,6 +861,10 @@ div.qtip-github table th {
     filter: dropshadow(color=#000000, offx=0, offy=1);
 }
 
+.leader_board_top_5 .leader_board_name a, .leader_board_top_10 .leader_board_name a {
+    color: #FFFFFF !important;
+}
+
 .leader_board_top_5 .leader_board_count {
     float: right;
     line-height: 38px;
