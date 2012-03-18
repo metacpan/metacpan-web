@@ -4,23 +4,26 @@
 </div>
 
 <div class="content">
-<center><big><strong>++ Leaderboard (Top 100)</strong></big></center>
-<table class="release-table author-table<% IF tablesorter %> tablesorter remote<% END %>">
-    <thead>
-    <tr>
-    <th class="name">Release</th>
-    <th class="abstract">++ Count</th>
-    </tr>
-</thead>
-<tbody>
-<% i = 0; FOREACH leader IN leaders %>
-<% header = 1 %>
-<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
-  <td class="name"><strong><a href="/release/<% leader.term %>" class="ellipsis" style="width: 260px" title="<% leader.term %>"><% leader.term %></a></strong></td>
-  <td class="abstract"><% leader.count %></td>
-</tr>
-<% END %>
-</tbody>
-</table>
-
+    <div class="leader_board">
+        <div class="leader_board_header">
+            Top 100 ++ Leaderboard
+        </div>
+        <div class="leader_board_content">
+            <% FOREACH leader IN leaders %>
+            <div class="leader_board_row">
+                <div class="leader_board_top_all <% IF loop.count < 6 %>leader_board_top_5<% ELSIF loop.count < 11 %>leader_board_top_10<% ELSE %>leader_board_top_rest<% END %>">
+                    <div class="leader_board_rank">
+                        <% loop.count %>
+                    </div>
+                    <div class="leader_board_name">
+                        <% leader.term %>
+                    </div>
+                    <div class="leader_board_count">
+                        <% leader.count %> ++
+                    </div>
+                </div>
+            </div>
+            <% END %>
+        </div>
+    </div>
 </div>
