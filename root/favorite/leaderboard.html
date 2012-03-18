@@ -16,7 +16,9 @@
                         <% loop.count %>
                     </div>
                     <div class="leader_board_name">
-                        <% leader.term %>
+                        <a href="/release/<% leader.term %>" title="<% leader.term %>">
+                            <% leader.term %>
+                        </a>
                     </div>
                     <div class="leader_board_count">
                         <% leader.count %> ++
