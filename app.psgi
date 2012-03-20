@@ -24,13 +24,11 @@ use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
 
-MetaCPAN::Web->setup_engine('PSGI');
-
 my $app = Plack::App::URLMap->new;
 $app->map( '/static/' => Plack::App::File->new( root => 'root/static' ) );
 $app->map( '/favicon.ico' =>
         Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
-$app->map( '/' => sub { MetaCPAN::Web->run(@_) } );
+$app->map( '/' => MetaCPAN::Web->psgi_app );
 my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
 unless (-d $scoreboard) {
     File::Path::make_path($scoreboard) or die "Can't make_path $scoreboard: $!";
