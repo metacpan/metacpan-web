@@ -368,7 +368,7 @@ sub search {
                             if(documentation == empty) {
                                 documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
                             }
-                            return _score - documentation.length()/10000
+                            return _score - documentation.length()/4000
                             },
                             query => {
                                 boosting => {
