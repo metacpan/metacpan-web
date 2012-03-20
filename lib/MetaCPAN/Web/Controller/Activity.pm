@@ -21,7 +21,7 @@ sub index : Path {
     if ( my $requires = $req->parameters->{requires} ) {
         push( @$q, { term => { "release.dependency.module" => $requires } } );
     }
-    if ( $req->parameters->{f} eq 'n' ) {
+    if ( $req->parameters->{f} && $req->parameters->{f} eq 'n' ) {
         push(
             @$q,
             @{  $c->model('API::Release')
