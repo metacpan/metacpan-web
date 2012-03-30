@@ -2,7 +2,7 @@
 <%- title = module.path %>
 <strong><big>
     <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
-    <% file_url = [base,module.path].join("/") %>
+    <% raw_url = [api,'source',base,module.path].join("/") %>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
     <% END %>
@@ -17,7 +17,7 @@
     <% END %>
     <li><a href="/author/<% module.author %>/">To author page</a></li>
     <li>&nbsp;</li>
-    <li><a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">Raw code</a></li>
+    <li><a href="<% raw_url %>">Raw code</a></li>
     <li><a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1">Download</a></li>
     <% IF module.sloc > 0 %>
     <li><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></li>
@@ -36,7 +36,7 @@
 <% IF !module.binary %>
 <pre class="brush: <% filetype %>; class-name: 'highlight'; toolbar: false;" id="source"><% source %></pre>
 <% ELSE %>
-This file cannot be displayed inline.  Try the <a href="<% api %>/source/<% file_url %>">raw file</a>.
+This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
 </div>
 
