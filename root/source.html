@@ -2,6 +2,7 @@
 <%- title = module.path %>
 <strong><big>
     <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
+    <% file_url = [base,module.path].join("/") %>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
     <% END %>
@@ -32,7 +33,11 @@
 </div>
 
 <div class="content">
+<% IF !module.binary %>
 <pre class="brush: <% filetype %>; class-name: 'highlight'; toolbar: false;" id="source"><% source %></pre>
+<% ELSE %>
+This file cannot be displayed inline.  Try the <a href="<% api %>/source/<% file_url %>">raw file</a>.
+<% END %>
 </div>
 
 <script type="text/javascript">

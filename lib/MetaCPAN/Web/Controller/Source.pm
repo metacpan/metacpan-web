@@ -39,31 +39,32 @@ sub index : PathPart('source') : Chained('/') : Args {
     elsif ( exists $source->{raw} ) {
 
         # could this be a method/function somewhere else?
-        my $filetype = do {
-            local $_ = $module->{path};
+        if ( !$module->{binary} ) {
+            my $filetype = do {
+                local $_ = $module->{path};
 
-            # what other file types can we check for?
-                  m!\.p[ml]$!i ? 'pl'
-                : m!\.psgi$!   ? 'pl'
-                : m!\.pod$!    ? 'pl'
-                :    # no separate pod brush as of 2011-08-04
-                  m!\.ya?ml$!   ? 'yaml'
-                : m!\.js(on)?$! ? 'js'
-                : m!\.(c|h|xs)$! ? 'c'
-                    # are other changelog files likely to be in CPAN::Changes format?
-                : m!^Changes$!i ? 'cpanchanges'
-                : $module->{mime} =~ /perl/ ? 'pl'
-                :
+                # what other file types can we check for?
+                      m!\.p[ml]$!i ? 'pl'
+                    : m!\.psgi$!   ? 'pl'
+                    : m!\.pod$!    ? 'pl'
+                    :    # no separate pod brush as of 2011-08-04
+                      m!\.ya?ml$!   ? 'yaml'
+                    : m!\.js(on)?$! ? 'js'
+                    : m!\.(c|h|xs)$! ? 'c'
+                        # are other changelog files likely to be in CPAN::Changes format?
+                    : m!^Changes$!i ? 'cpanchanges'
+                    : $module->{mime} =~ /perl/ ? 'pl'
+                    :
 
-                # default to plain text
-                'plain';
-        };
+                    # default to plain text
+                    'plain';
+            };
+            $c->stash( { source => $source->{raw}, filetype => $filetype } );
+        }
         $c->res->last_modified($module->{date});
         $c->stash(
             {   template => 'source.html',
-                source   => $source->{raw},
                 module   => $module,
-                filetype => $filetype,
             }
         );
     }
