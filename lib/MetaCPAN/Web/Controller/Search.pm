@@ -17,7 +17,7 @@ sub index : Path {
     my $query = join(" ", $req->param('q'));
 
     # translate Foo/Bar.pm to Foo::Bar
-    if( $query =~ {.pm\b} ) {
+    if( $query =~ m{.pm\b} ) {
         $query =~ s{/}{::}g;
         $query =~ s{\.pm\b}{};
     }
