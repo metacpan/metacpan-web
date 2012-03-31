@@ -3,12 +3,13 @@ package MetaCPAN::Web::Model::API;
 use Moose;
 extends 'Catalyst::Model';
 
-has [qw(api api_secure)] => ( is => 'ro' );
+has [qw(api api_secure gzip)] => ( is => 'ro' );
 
 use Encode ();
 use JSON;
 use AnyEvent::HTTP qw(http_request);
 use Try::Tiny 0.09;
+use IO::Uncompress::Gunzip ();
 use namespace::autoclean;
 
 {
@@ -34,7 +35,8 @@ sub COMPONENT {
     my ( $app, $config ) = @_;
     $config = $self->merge_config_hashes(
         {   api        => $app->config->{api},
-            api_secure => $app->config->{api_secure} || $app->config->{api}
+            api_secure => $app->config->{api_secure} || $app->config->{api},
+            gzip       => $app->config->{'Model::API'}->{gzip},
         },
         $config
     );
@@ -56,10 +58,17 @@ sub request {
         : $search        ? 'post'
         : 'get' => ( $token ? $self->api_secure : $self->api ) . $path,
         body => $search ? encode_json($search) : undef,
-        headers    => { 'Content-type' => 'application/json' },
+        headers => {
+        'Content-type' => 'application/json',
+        $self->gzip ? ( 'Accept-Encoding' => 'gzip' ) : (),
+        },
         persistent => 1,
         sub {
         my ( $data, $headers ) = @_;
+        eval {
+            IO::Uncompress::Gunzip::gunzip \$data, \(my $out);
+            $data = $out;
+        } if($headers->{'content-encoding'} && $headers->{'content-encoding'} eq 'gzip');
         my $content_type = $headers->{'content-type'} || '';
 
         if ( $content_type =~ /^application\/json/ ) {
@@ -76,24 +85,25 @@ sub request {
 }
 
 my $encoding = Encode::find_encoding('utf-8-strict')
-  or warn 'UTF-8 Encoding object not found';
+    or warn 'UTF-8 Encoding object not found';
 my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 
 sub raw_api_response {
-    my ($self, $data) = @_;
+    my ( $self, $data ) = @_;
 
     # will http_response ever return undef or a blessed object?
-    $data  = '' if ! defined $data; # define
-    $data .= '' if       ref $data; # stringify
+    $data = '' if !defined $data;    # define
+    $data .= '' if ref $data;        # stringify
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     try {
-      # decode so the template doesn't double-encode and return mojibake
-      $data &&= $encoding->decode( $data, $encode_check );
+
+        # decode so the template doesn't double-encode and return mojibake
+        $data &&= $encoding->decode( $data, $encode_check );
     }
     catch {
-      warn $_[0];
+        warn $_[0];
     };
 
     return +{ raw => $data };
