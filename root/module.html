@@ -49,7 +49,9 @@
   <strong>Permalinks</strong>
   <ul>
     <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
+    <% IF module.documentation %>
     <li><a href="/module/<% module.documentation %>">Latest version</a></li>
+    <% END %>
   </ul>
 </div>
 
