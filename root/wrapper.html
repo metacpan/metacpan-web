@@ -64,7 +64,7 @@
   <div style="text-align: center" class="home">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
       <div style="display: inline-block; text-align: left">
-        <a href="/" style="float: left"><img src="/static/images/small_logo.png" width="153" height="30" style="position: relative; top: 14px; left: 2px;" alt="MetaCPAN Logo"></a>
+        <a href="/" style="float: left"><img src="/static/images/small_logo.png" width="154" height="30" style="position: relative; top: 14px; left: 2px;" alt="MetaCPAN Logo"></a>
         <div style="float: left; padding-top: 13px; padding-left: 10px">
       <div class="ds">
         <input type="text" name="q" size="41" id="search-input" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><input type="submit" value="Search" class="g-button" />
