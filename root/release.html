@@ -30,7 +30,7 @@
       <input type="hidden" name="q" value="dist:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
-    <li><a href="/requires/module/<% release.distribution.replace('-', '::') %>">Reverse dependencies</a></li>
+    <li><a href="/requires/distribution/<% release.distribution %>">Reverse dependencies</a></li>
     <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
   </ul>
   <hr>

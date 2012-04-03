@@ -162,7 +162,13 @@ foreach my $test ( @tests ) {
         # TODO: diff with version
         # TODO: search
 # TODO: toggle table of contents (module only)
-        # TODO: reverse deps
+
+        $tx->like(
+            '//a[text()="Reverse dependencies"]/@href',
+            qr{^/requires/distribution/$release(\?|$)},
+            'reverse deps link uses dist name'
+        );
+
         # TODO: explorer
         # TODO: activity
     }
