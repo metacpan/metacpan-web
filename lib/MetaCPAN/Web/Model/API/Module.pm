@@ -428,7 +428,7 @@ sub _search_in_distributions {
     {
 
 # we will probably never hit that limit, since we are searching in 20 distributions max
-        size  => 9999,
+        size  => 5000,
         query => {
             filtered => {
                 filter => {
