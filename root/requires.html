@@ -1,6 +1,6 @@
-<%- title = "Distributions which depend on " _ module %>
+<%- title = "Distributions which depend on " _ required %>
 <div class="search-bar">
-  <% INCLUDE inc/activity.html query = "requires=" _ module %>
+  <% INCLUDE inc/activity.html query = type_of_required _ "=" _ required %>
   <hr>
   <strong>Index</strong>
   <ul>
@@ -11,12 +11,12 @@
 </div>
 
 <div class="content">
-<center><h1><strong>Distributions Which Depend on <%- module %> (Reverse Dependencies)</strong></h1></center>
+<center><h1><strong>Distributions Which Depend on <%- required %> (Reverse Dependencies)</strong></h1></center>
 <% IF data.size > 0 %>
 <% INCLUDE inc/release-table.html releases = data, header = 1, tablesorter = 1 %>
 <% INCLUDE inc/pager.html size = 50 %>
 <% ELSE %>
-<big><strong>No modules depending on <% module %> could be found</strong></big>
+<big><strong>No distributions depending on <% required %> could be found</strong></big>
 <% END %>
 </div>
 <script>defaultSort = [[2,1]];</script>
