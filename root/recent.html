@@ -1,18 +1,19 @@
 <%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
 <%- title = 'Recent' %>
-<div class="search-bar">
-  <% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %>
-  <a href ="/favorite/recent">Recent ++</a>
-  <hr/>
-  <strong>Filter</strong>
-  <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
-      <%- filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' }; c.req.params.f ||= 'l';
-      FOR item IN ['l', 'n']; %>
-  <label><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label>
-  <% END %>
-  <input type="submit" style="display: none">
+<ul class="nav nav-list phone-hidden">
+    <li class="nav-header">Activity</li>
+    <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
+    <li><a href="/favorite/recent">Recent ++</a></li>
+    <li class="divider"></li>
+    <li class="nav-header">Filter</li>
+    <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
+          <%- filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' }; c.req.params.f ||= 'l';
+          FOR item IN ['l', 'n']; %>
+      <li><label class="radio"><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label></li>
+      <% END %>
+      <input type="submit" class="hidden">
   </form>
-</div>
+</ul>
 
 <div class="content">
 <%-
