@@ -66,6 +66,9 @@ $app = Plack::Middleware::Assets->wrap(
             shBrushCPANChanges
             cpan
             github
+            bootstrap/bootstrap-dropdown
+            bootstrap/bootstrap-collapse
+            less.min
             )
     ],
 );
