@@ -9,10 +9,12 @@
 {
   title = "FAQ",
   path = ["/about/faq"]
+  class = 'hidden-phone',
 },
 {
-  title = "Feedback",
-  path = ["https://github.com/CPAN-API/metacpan-web/issues"]
+  title = "Bugs",
+  path = ["https://github.com/CPAN-API/metacpan-web/issues"],
+  class = 'hidden-phone',
 },
 {
   title = "Lab",
@@ -22,9 +24,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<<<<<<< HEAD
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org - Perl programming language</title>
   <%- IF rss %>
   <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
+  <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
+>>>>>>> restyle using less and boostrap
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
 <%- IF canonical %>
@@ -34,6 +42,7 @@
   <meta name="description" content="<% meta_description %>" />
 <%- END %>
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
+  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
   <script type="text/javascript">
 
@@ -57,6 +66,7 @@
 
 </head>
 <body>
+<<<<<<< HEAD
   <div class="header">
     <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
     IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
@@ -85,15 +95,80 @@
           </div><br>
           <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
         </div>
+=======
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <%-  FOREACH item IN menu;
+                        active = item.path.grep(->{ this == req.uri.path} ).size;
+                        IF active; %>
+                    <li class="active">
+                    <%- ELSE %>
+                    <li class="<% item.class %>">
+                    <%- END %>
+                        <a href="<% item.path.0 %>"><% item.title %></a>
+                    </li>
+                    <%- END %>
+                </ul>
+                <ul class="nav pull-right">
+                    <%- IF user_exists %>
+                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+                    <li class="dropdown pull-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Account
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="/account/identities">Identities</a></li>
+                            <li><a href="/account/profile">Profile</a></li>
+                            <li>
+                                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <%- ELSE %>
+                    <li class="dropdown pull-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Sign in
+                                  <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
+                                <li>
+                                    <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
+                                </li>
+                                <%- END %>
+                            </ul>
+                    </li>
+                    <% END %>
+                </ul>
+            </div>
+        </div>
+    </div>
+>>>>>>> restyle using less and boostrap
 
-      <div style="float: left; width: 168px"></div>
-      </div>
+    <div class="container-fluid">
+  <% IF req.uri.path != '/' %>
+      <div class="row">
+          <div class="span3">
+              <a href="/"><img src="/static/images/small_logo.png" width="154" height="30" alt="MetaCPAN Logo"></a>
+          </div>
+          <div class="span9 search-top">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
+        <div class="input-append ds"><input size="16" type="text" name="q" size="41" id="search-input" class="input-xlarge" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><button class="btn" type="button">Search</button></div><br>
+      <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
     </form>
   </div>
+    </div>
   <% END %>
-  <br>
-  <div id="content"><% content | none %>
+  <div class="row-fluid">
+      <div class="span12">
+  <% content | none %>
+    </div>
   </div>
+<<<<<<< HEAD
   <br><br><br>
   <table class="footer" width="100%">
     <tr>
@@ -116,5 +191,19 @@
   </tr>
 </table>
 <center><i><a href="/">MetaCPAN.org</a> is a non-profit, <a href="https://github.com/CPAN-API">open source</a> search service for the <a href="http://www.cpan.org/" title="Comprehensive Perl Archive Network">CPAN</a>, which is a repository of modules for the <a href="http://www.perl.org/" title="perl.org -- Perl programming language">Perl programming language</a>.</i></center>
+=======
+  <div class="row-fluid hidden-phone">
+      <br><br><br>
+      <div class="span2">&nbsp;</div>
+      <div class="span8" style="text-align: center">
+    <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a> &nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="/about/resources">About MetaCPAN</a> &nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
+        </div>
+        <div class="span2" style="text-align: right; font-size: 0.7em; color: #999">
+      Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=150 height=32></a>
+  </div>
+  </div>
+>>>>>>> restyle using less and boostrap
   </body>
 </html>

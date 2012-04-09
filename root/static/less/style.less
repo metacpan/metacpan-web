@@ -1,0 +1,126 @@
+
+
+@import "bootstrap/bootstrap.less";
+@import "account.less";
+
+@iconSpritePath:          "../../icons/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../../icons/glyphicons-halflings-white.png";
+
+@linkColor: #3366cc;
+@textColor: @black;
+
+@navbarBackground: rgb(245,245,245);
+@navbarBackgroundHighlight: rgb(255,255,255);
+@navbarText: @linkColor;
+@navbarLinkColor: @linkColor;
+
+.dropdown.open {
+  .dropdown-toggle {
+      border-top: 2px solid lighten(@linkColor, 20%);
+      position: relative;
+      top: -2px;
+      margin-bottom: -2px;
+      color: @linkColor;
+  }
+}
+
+.navbar {
+    border-top: 2px solid lighten(@linkColor, 40%);
+}
+
+.navbar .nav > li > a:hover {
+  border-top: 2px solid lighten(@linkColor, 20%);
+  position: relative;
+  top: -2px;
+  margin-bottom: -2px;
+  color: @linkColor;
+}
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  color: @black;
+  font-weight: bold;
+  border-top: 2px solid @linkColor;
+  margin-bottom: -2px;
+  background-color: #fff;
+  @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
+  .box-shadow(@shadow);
+  position: relative;
+  top: -2px;
+}
+
+.navbar-inner {
+  @shadow: inset 0 -1px 0 #e9e9e9;
+  .box-shadow(@shadow);
+}
+
+.navbar .nav > li > a {
+  text-shadow: none;
+  padding: 5px 10px 5px;
+}
+
+.navbar .nav .dropdown-toggle .caret,
+.navbar .nav .open.dropdown .caret {
+  border-top-color: @black;
+}
+
+
+// reset border-radius
+input,
+select,
+.uneditable-input {
+    .border-radius(0px);
+}
+
+.add-on, .btn {
+    .border-radius(0px);
+}
+
+.input-prepend,
+.input-append {
+    input,
+    select,
+    .uneditable-input {
+        .border-radius(0px);
+    }
+    .add-on, .btn {
+        .border-radius(0px);
+    }
+}
+
+.search-top input[type=text] {
+    width: 377px;
+    font-size: 1.2em;
+    height: 22px;
+}
+
+.search-top button {
+    font-size: 1.2em;
+    padding: 6px;
+}
+
+.home {
+    padding-top: 40px;
+}
+
+.home .btn {
+    font-size: 1.2em;
+}
+
+.home input {
+    width: 377px;
+    margin: 0px;
+    height: auto;
+    font-size: 1.4em;
+}
+
+form#logout {
+    display: none;
+}
+
+body {
+    font-size: 0.8em;
+}
+
+
+@import "responsive.less";
