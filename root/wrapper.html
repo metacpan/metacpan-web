@@ -12,21 +12,25 @@
 },
 {
   title = "FAQ",
-  path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"]
+  path = ["https://github.com/CPAN-API/cpan-api/wiki/FAQ"],
+  class = 'hidden-phone',
 },
 {
-  title = "Feedback",
-  path = ["https://github.com/CPAN-API/metacpan-web/issues"]
+  title = "Bugs",
+  path = ["https://github.com/CPAN-API/metacpan-web/issues"],
+  class = 'hidden-phone',
 },
 ] %>
 <!DOCTYPE HTML>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
   <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
+  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
   <script type="text/javascript">
 
@@ -44,53 +48,88 @@
   </script>
 </head>
 <body>
-  <div class="header">
-    <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
-    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
-    <%- IF user_exists %>
-    <a class="settings" href="/account/profile"><img src="/static/icons/settings.png" width=16></a>
-    <div class="spacer" style="text-align: right"><strong>Welcome</strong></div>
-    <%- ELSE %>
-    <div class="spacer" style="text-align: right"><strong id="signin-button">Sign in</strong></div>
-  </div>
-  <div id="signin" style="display: none; position: absolute; right: 2px; top: 0px">
-      <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>
-         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;"><% FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
-             <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a><% END %>
-          </div></div><% END %>
-  </div>
-<div style="float: right; text-align: right; padding-right: 5px; margin-top: -15px"><a href="https://github.com/CPAN-API/metacpan-web/issues/new"><small>Problem?<br>Open an issue!</small></a></div>
-  <% IF req.uri.path != '/' %>
-  <div style="text-align: center" class="home">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-      <div style="display: inline-block; text-align: left">
-        <a href="/" style="float: left"><img src="/static/images/small_logo.png" width="154" height="30" style="position: relative; top: 14px; left: 2px;" alt="MetaCPAN Logo"></a>
-        <div style="float: left; padding-top: 13px; padding-left: 10px">
-      <div class="ds">
-        <input type="text" name="q" size="41" id="search-input" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><input type="submit" value="Search" class="g-button" />
-      </div>
-      <br><small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small></div>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav">
+                    <%-  FOREACH item IN menu;
+                        active = item.path.grep(->{ this == req.uri.path} ).size;
+                        IF active; %>
+                    <li class="active">
+                    <%- ELSE %>
+                    <li class="<% item.class %>">
+                    <%- END %>
+                        <a href="<% item.path.0 %>"><% item.title %></a>
+                    </li>
+                    <%- END %>
+                </ul>
+                <ul class="nav pull-right">
+                    <%- IF user_exists %>
+                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+                    <li class="dropdown pull-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Account
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="/account/identities">Identities</a></li>
+                            <li><a href="/account/profile">Profile</a></li>
+                            <li>
+                                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <%- ELSE %>
+                    <li class="dropdown pull-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Sign in
+                                  <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
+                                <li>
+                                    <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
+                                </li>
+                                <%- END %>
+                            </ul>
+                    </li>
+                    <% END %>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-      <div style="float: left; width: 168px"></div>
-      </div>
+    <div class="container-fluid">
+  <% IF req.uri.path != '/' %>
+      <div class="row">
+          <div class="span3">
+              <a href="/"><img src="/static/images/small_logo.png" width="154" height="30" alt="MetaCPAN Logo"></a>
+          </div>
+          <div class="span9 search-top">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
+        <div class="input-append ds"><input size="16" type="text" name="q" size="41" id="search-input" class="input-xlarge" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><button class="btn" type="button">Search</button></div><br>
+      <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
     </form>
   </div>
+    </div>
   <% END %>
-  <br>
-  <div id="content"><% content | none %>
+  <div class="row-fluid">
+      <div class="span12">
+  <% content | none %>
+    </div>
   </div>
-  <br><br><br>
-  <table class="footer" width="100%">
-    <tr>
-      <td style="width: 200px; float: left"></td>
-     <td style="text-align: center">
+  <div class="row-fluid hidden-phone">
+      <br><br><br>
+      <div class="span2">&nbsp;</div>
+      <div class="span8" style="text-align: center">
     <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a> &nbsp; &nbsp; &nbsp; &nbsp;
     <a href="/about/resources">About MetaCPAN</a> &nbsp; &nbsp; &nbsp; &nbsp;
     <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
-    </td>
-    <td style="width: 200px; float: right; text-align: right; font-size: 0.7em; color: #999; position: relative">
-      Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=150 height=32></a></td>
-  </tr>
-</table>
+        </div>
+        <div class="span2" style="text-align: right; font-size: 0.7em; color: #999">
+      Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=150 height=32></a>
+  </div>
+  </div>
   </body>
 </html>

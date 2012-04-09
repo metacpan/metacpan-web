@@ -1,56 +1,5 @@
-
-/* --------------------------------------------------------------
-
-   reset.css
-   * Resets default browser CSS.
-
--------------------------------------------------------------- */
-
-button::-moz-focus-inner, input[type="text"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="reset"]::-moz-focus-inner {
-    margin-top: -1px !important;
-}
-
-hr {
-    border: 0px none;
-    border-top: 1px solid #e9e9e9;
-}
-
-html {
-    margin:0;
-    padding:0;
-    border:0;
-    overflow-y: scroll;
-}
-
-body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, code,
-del, dfn, em, img, q, dl, dt, dd, ol, ul, li, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, dialog, figure, footer, header,
-hgroup, nav, section {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-/* This helps to make newer HTML5 elements behave like DIVs in older browers */
-article, aside, details, figcaption, figure, dialog,
-footer, header, hgroup, menu, nav, section {
-    display:block;
-}
-
 pre, .diff-header, .diff-ul li {
     font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
-}
-
-/* Line-height should always be unitless! */
-body {
-  line-height: 1.5;
-  background: white;
 }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
@@ -82,12 +31,6 @@ button, body {
 font-family: Arial,Helvetica,sans-serif;
 }
 
-body {
-margin: 0px;
-padding: 0px;
-font-size: 0.8em;
-}
-
 legend { padding: 5px; font-size: 1.1em; font-weight: bold }
 
 fieldset { border: 1px solid #E9E9E9; }
@@ -109,16 +52,6 @@ label input[type="text"], label select {
     width: 200px;
 }
 
-a {
-    color: #36C;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #36C;
-    text-decoration: underline;
-}
-
 .strong {
     font-weight: bold;
 }
@@ -127,107 +60,6 @@ a:hover {
 border-bottom: 1px solid #E7E7E7;
 border-right: 1px solid #E7E7E7;
 display: inline-block;
-}
-.header {
-height: 31px;
-border-bottom: 1px solid #e9e9e9;
-margin-bottom: 20px;
-background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(245,245,245)));
-background: -moz-linear-gradient(rgb(255,255,255),rgb(245,245,245));
-}
-
-.header .settings {
-    float: right;
-    height: 20px;
-    margin-left: 8px;
-    padding-top: 6px;
-    padding-bottom: 4px;
-    border-left: 1px solid #e7e7e7;
-}
-
-.header .spacer, .header a {
-    font-size: 1em;
-    border-top-color: #BAD3EA;
-    border-top-width: 2px;
-    border-top-style: solid;
-    color: #36C;
-    display: block;
-    float: left;
-    padding: 5px 9px;
-}
-
-.header .spacer {
-    float: none;
-    height: 2px;
-}
-
-.header a:hover {
-    background: -webkit-gradient(linear,0% 0%,0% 100%,from(#DAF3FF),to(#CAE3FA));
-    background: -moz-linear-gradient(#DAF3FF,#CAE3FA);
-    text-decoration: none;
-}
-
-.header strong a {
-    border-top-color: #36C;
-    color: #000;
-}
-
-.home input[type="text"] {
-    outline: none;
-border-color: #CCCCCC #999999 #999999 #CCCCCC;
-border-style: solid;
-border-width: 1px;
-font-size: 18px;
-font-family: arial, sans-serif;
-margin: 0px;
-height: 28px;
-padding: 0px;
-padding-left: 5px;
-vertical-align: top;
-}
-
-button.g-button,a.g-button,input[type=submit].g-button {
-margin: 0px;
-border: solid 1px rgb(153,153,153);
-background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(255,255,255)),to(rgb(221,221,221)));
-background: -moz-linear-gradient(#fff,rgb(221,221,221));
-color: #333;
-text-decoration: none;
-cursor: pointer;
-display: inline-block;
-text-align: center;
-vertical-align: middle;
-font-size: 1.2em;
-text-shadow: 0px 1px 1px #fff;
-height: 30px;
-}
-
-a.g-button {
-    padding: 2px 6px 3px;
-    height: 23px;
-}
-
-.home .ds input[type=submit] {
-    border-left: 0px;
-}
-
-input.g-button:hover, button.g-button:hover, a.g-button:hover {
-    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(248,248,248)),to(rgb(221,221,221)));
-    background: -moz-linear-gradient(rgb(248,248,248),rgb(221,221,221));
-}
-
-input.g-button:active, button.g-button:active, a.g-button:active {
-    background: -webkit-gradient(linear,0% 0%,0% 100%,from(rgb(204,204,204)),to(rgb(221,221,221)));
-    background: -moz-linear-gradient(rgb(204,204,204),rgb(221,221,221));
-}
-
-.footer {
-    text-align: center;
-    clear: both;
-}
-
-.footer td {
-    padding: 10px;
 }
 
 .search-results, .pod, .content {
@@ -398,14 +230,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     display: block;
     margin-bottom: 10px;
     font-size: 1.1em
-}
-
-.account-settings a.g-button {
-    width: 80px
-}
-
-.account-settings button.g-button {
-    width: 94px;
 }
 
 .account-settings td {
