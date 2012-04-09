@@ -6,6 +6,9 @@ use namespace::autoclean;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 use List::Util ();
 
+use JSON::XS   ();
+use YAML::Tiny ();
+
 with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
@@ -60,11 +63,25 @@ sub index : PathPart('release') : Chained('/') : Args {
     
     $c->res->last_modified($out->{date});
 
+    my $meta = {};
+    if (my ($filename) = grep { /^META/io } @root_files) {
+        my $source = $c->model('API::Module')->source($author, $release, $filename)->recv;
+        my $raw    = $source->{raw};
+
+        if ($filename =~ /\.ya?ml$/) {
+            $meta = eval { YAML::Tiny::Load($raw) } || {};
+        }
+        elsif ($filename =~ /\.json$/) {
+            $meta = eval { JSON::XS->new->utf8->decode($raw) } || {};
+        }
+    }
+
     # TODO: make took more automatic (to include all)
     $c->stash(
         {   template => 'release.html',
             release  => $out,
             changes  => $changes,
+            meta     => $meta,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
                 $modules->{took}, $root->{took}, $reqs->{versions}->{took}
