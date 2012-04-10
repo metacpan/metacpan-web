@@ -49,21 +49,6 @@
       <input type="hidden" name="q" value="dist:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
-<<<<<<< HEAD:root/pod.html
-    <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
-    <li><a href="/requires/distribution/<% module.distribution %>?sort=[[2,1]]">Reverse dependencies</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>">MetaCPAN Explorer</a></li>
-  </ul>
-  <hr>
-  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
-  <hr>
-  <strong>Permalinks</strong>
-  <ul>
-    <li><a href="/pod/release/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
-    <% IF module.documentation %>
-    <li><a href="/pod/<% module.documentation %>" itemprop="url">Latest version</a></li>
-    <% END %>
-=======
       <li class="dropdown">
             <a class="dropdown-toggle"
                data-toggle="dropdown"
@@ -81,11 +66,10 @@
                 <li class="nav-header" style="margin-left: 0px">Permalinks</li>
                 <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
                 <%- IF module.documentation %>
-                <li><a href="/module/<% module.documentation %>">Latest version</a></li>
+                <li><a href="/module/<% module.documentation %>" itemprop="url">Latest version</a></li>
                 <%- END %>
             </ul>
           </li>
->>>>>>> migrate /module sidebar:root/module.html
   </ul>
 
 <% INCLUDE inc/author-pic.html author = author %>

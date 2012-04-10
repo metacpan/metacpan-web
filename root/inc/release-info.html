@@ -1,6 +1,6 @@
       <% IF is_url(release.resources.homepage) %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %>
-      <li>
+      <li><div>
         <% IF is_url(release.resources.repository.web) %>
         <a href="<% release.resources.repository.web %>">Repository</a>
         <% END %>
@@ -8,7 +8,7 @@
         (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
         <% ELSIF is_url(release.resources.repository.url) %>
         <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
-        <% END %>
+        <% END %></div>
       </li>
       <% END %>
       <li><a href="<%
@@ -20,14 +20,24 @@
           'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
         END;
       %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></li>
+=======
+      <li><div><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></div></li>
+>>>>>>> migrate release-info
       <% IF rating.count > 0 %>
-      <li><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></li>
+      <li><div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div></li>
       <% END %>
+<<<<<<< HEAD
       <li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">Rate this distribution</a></li>
       <li>
           <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc     %>/<% release.distribution %>.html#<% release.name %>?oncpan=1&amp;distmat=1" title="(pass / fail / na)">Test results</a>
           <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
           <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% release.version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a>
+=======
+      <li><div>
+          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc     %>/<% release.distribution %>.html#<% release.name %>" title="(pass / fail / na)">Test results</a>
+          <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
+          <a href="http://matrix.cpantesters.org/?dist=<% release.name %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
+>>>>>>> migrate release-info
       </li>
       <li><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
