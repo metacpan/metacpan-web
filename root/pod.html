@@ -20,27 +20,23 @@
   </big></strong>
   <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="<% canonical %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
-<div class="search-bar">
-  <strong></strong>
-  <div>
-    <ul>
-      <li><strong class="relatize"><% module.date.dt_http %></strong></li>
-      <% IF module.module.0.version %><li>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></li><% END %>
-      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</li>
-      <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', module.author, module.release].join('/'); END %>">Changes</a></li>
-      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>/">raw</a>)
-        </li>
-      <li>
-        <a id="source-link" href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+
+<ul class="nav nav-list">
+  <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
+      <% IF module.module.0.version %><li><div>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></div></li><% END %>
+      <li><div><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</div></li>
+      <li><div><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', module.author, module.release].join('/'); END %>">Changes</a></div></li>
+      <li><div>
+        <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
+        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)</div>
       </li>
+      <li><div><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a> (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)</div></li>
       <% PROCESS inc/release-info.html %>
-    </ul>
-  </div>
-  <hr>
-  <strong>Tools</strong>
-  <ul>
+      <li class="divider"></li>
+      <li class="nav-header">Activity</li>
+      <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+      <li class="divider"></li>
+      <li class="nav-header">Tools</li>
       <% IF versions.size > 1 %>
       <li>
         <select name="release" onchange="document.location.href='/diff/file/?target=<% [module.author, module.release, module.path].join("/") %>&amp;source=' + this.value">
@@ -53,6 +49,7 @@
       <input type="hidden" name="q" value="dist:<% release.distribution %>">
       <input type="text" name="q">
       <input type="submit" style="display: none"></form></li>
+<<<<<<< HEAD:root/pod.html
     <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
     <li><a href="/requires/distribution/<% module.distribution %>?sort=[[2,1]]">Reverse dependencies</a></li>
     <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>">MetaCPAN Explorer</a></li>
@@ -66,8 +63,30 @@
     <% IF module.documentation %>
     <li><a href="/pod/<% module.documentation %>" itemprop="url">Latest version</a></li>
     <% END %>
+=======
+      <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                More
+                <b class="caret"></b>
+              </a>
+            <ul class="dropdown-menu">
+                <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>"><i class="icon-download-alt"></i> Download (<% release.stat.size | format_bytes %>b)</a></li>
+                <li><a href="#" onclick="return toggleTOC()"><i class="icon-list"></i> Toggle Table of Contents</a></li>
+                <li><a href="/requires/module/<% module.distribution.replace('-', '::') %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
+                <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>"><i class="icon-list-alt"></i> MetaCPAN Explorer</a></li>
+                <li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>"><i class="icon-star"></i> Rate this distribution</a></li>
+                <li class="divider"></li>
+                <li class="nav-header" style="margin-left: 0px">Permalinks</li>
+                <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
+                <%- IF module.documentation %>
+                <li><a href="/module/<% module.documentation %>">Latest version</a></li>
+                <%- END %>
+            </ul>
+          </li>
+>>>>>>> migrate /module sidebar:root/module.html
   </ul>
-</div>
 
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
