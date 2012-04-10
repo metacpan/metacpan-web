@@ -1,0 +1,95 @@
+// RESPONSIVE CLASSES
+// ------------------
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// Visibility utilities
+
+// For desktops
+.visible-phone     { display: none; }
+.visible-tablet    { display: none; }
+.visible-desktop   { display: block; }
+.hidden-phone      { display: block; }
+.hidden-tablet     { display: block; }
+.hidden-desktop    { display: none; }
+
+// Phones only
+@media (max-width: 480px) {
+  // Show
+  .visible-phone     { display: block; }
+  // Hide
+  .hidden-phone      { display: none; }
+  .navbar .nav > li.hidden-phone      { display: none; }
+  // Hide everything else
+  .hidden-desktop    { display: block; }
+  .visible-desktop   { display: none; }
+}
+
+// Tablets & small desktops only
+@media (min-width: 481px) and (max-width: 979px) {
+  // Show
+  .visible-tablet    { display: block; }
+  // Hide
+  .hidden-tablet     { display: none; }
+  // Hide everything else
+  .hidden-desktop    { display: block; }
+  .visible-desktop   { display: none; }
+}
+
+@media (max-width: 480px) {
+    .navbar-inner, .container-fluid {
+        padding: 0px;
+    }
+    .home {
+        padding-top: 0px;
+    }
+
+    .home input {
+        width: 240px;
+        margin: 0px;
+        height: auto;
+        font-size: 1.4em;
+    }
+    
+    .home img {
+        width:137px;
+        height: 27px;
+    }
+    
+    .search-results, .pod, .content {
+        margin-left: 0px;
+        border-left: none;
+        padding-left: 0px
+    }
+    
+    .releases,
+    .releases thead,
+    .releases tbody,
+    .releases tr,
+    .releases {
+        width:              100%;
+        display:            block;
+    }
+    .releases tr.odd {
+        background:         transparent;
+    }
+
+    .releases td.name,
+    .releases td.abstract,
+    .releases td.date {
+        display:            block;
+        margin:             0;
+        white-space:        normal;
+        width:              auto;
+    }
+
+    .releases td.name {
+        font-weight:        bold;
+        background:         #F9F9F9;
+    }
+}
