@@ -6,4 +6,3 @@
     <a href="/account/profile"<% IF req.action == 'account/profile' %> class="active"<% END %>>Profile</a>
     <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
 </div>
-<form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
