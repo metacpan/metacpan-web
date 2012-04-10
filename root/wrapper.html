@@ -24,15 +24,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<<<<<<< HEAD
-  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org - Perl programming language</title>
-  <%- IF rss %>
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
-=======
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
   <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
->>>>>>> restyle using less and boostrap
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
 <%- IF canonical %>
@@ -169,6 +163,7 @@
     </div>
   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <br><br><br>
   <table class="footer" width="100%">
     <tr>
@@ -193,17 +188,36 @@
 <center><i><a href="/">MetaCPAN.org</a> is a non-profit, <a href="https://github.com/CPAN-API">open source</a> search service for the <a href="http://www.cpan.org/" title="Comprehensive Perl Archive Network">CPAN</a>, which is a repository of modules for the <a href="http://www.perl.org/" title="perl.org -- Perl programming language">Perl programming language</a>.</i></center>
 =======
   <div class="row-fluid hidden-phone">
+=======
+  <div class="hidden-phone">
+>>>>>>> experiment with phone version
       <br><br><br>
-      <div class="span2">&nbsp;</div>
-      <div class="span8" style="text-align: center">
-    <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a> &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="/about/resources">About MetaCPAN</a> &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
-        </div>
-        <div class="span2" style="text-align: right; font-size: 0.7em; color: #999">
+  <div class="row-fluid">
+      <div class="span4 hidden-phone">&nbsp;</div>
+      <div class="span1" style="text-align: center">
+    <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
+    </div>
+    <div class="span2" style="text-align: center">
+        <a href="/about/resources">About MetaCPAN</a>
+    </div>
+    <div class="span1" style="text-align: center">
+    <a href="https://github.com/CPAN-API/metacpan-web">Fork me</a>
+    </div>
+    <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
       Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=150 height=32></a>
   </div>
   </div>
+<<<<<<< HEAD
 >>>>>>> restyle using less and boostrap
+=======
+  </div>
+  <div class="visible-phone row-fluid">
+      <div class="span4"><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a></div>
+      <div class="span4 center"><a href="/about/resources">About</a></div>
+      <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+        Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=75 height=16></a>
+    </div>
+  </div>
+>>>>>>> experiment with phone version
   </body>
 </html>
