@@ -5,7 +5,7 @@
         <p>In order to change your profile you have to <a href="<% api_secure %>/oauth2/authorize?choice=pause&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.</p>
     </fieldset>
     <% ELSE -%>
-    <form method="POST" action="">
+    <form method="POST" action="" class="form-horizontal">
         <% IF errors -%>
         <fieldset><legend style="color: #600">Errors</legend>
             <ul>
@@ -96,7 +96,7 @@
         <textarea name="extra" cols="60" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
     </fieldset>
     <br />
-    <div class="ds"><input type="submit" value="Save Profile" class="g-button" /></div>
+    <input type="submit" value="Save Profile" class="btn btn-large" />
     </form>
     <% END -%>
 </div>
