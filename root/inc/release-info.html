@@ -11,7 +11,15 @@
         <% END %>
       </li>
       <% END %>
-      <li><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></li>
+      <li><a href="<%
+        IF release.resources.bugtracker.web;
+          release.resources.bugtracker.web;
+        ELSIF release.resources.bugtracker.mailto;
+          'mailto:' _ release.resources.bugtracker.mailto;
+        ELSE;
+          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution;
+        END;
+      %>">Bugs</a></li>
       <% IF rating.count > 0 %>
       <li><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></li>
       <% END %>
