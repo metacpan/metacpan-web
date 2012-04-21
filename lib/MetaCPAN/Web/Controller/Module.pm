@@ -27,7 +27,8 @@ sub index : PathPart('module') : Chained('/') : Args {
 
     ( $data->{documentation}, my $pod )
         = map { $_->{name}, $_->{associated_pod} }
-        grep  { $_->{associated_pod} } @{ $data->{module} }
+        grep  { @module > 1 || $module[0] eq $_->{name} }
+        grep  { $_->{associated_pod}  } @{ $data->{module} }
         unless ( $data->{documentation} );
 
     $c->detach('/not_found') unless ( $data->{name} );
