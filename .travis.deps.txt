@@ -1,4 +1,3 @@
-Dist::Zilla::Plugin::Prereqs
 AnyEvent::HTTP
 Captcha::reCAPTCHA
 Catalyst
