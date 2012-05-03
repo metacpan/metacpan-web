@@ -4,7 +4,7 @@ perl:
   - "5.12"
   - "5.10"
 install:
-  - cat .travis.deps.txt | xargs cpanm -v
+  - cat .travis.deps.txt | xargs cpanm
 script:
   - "prove -lr t"
 notifications:
