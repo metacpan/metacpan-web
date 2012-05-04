@@ -83,7 +83,11 @@ sub index : PathPart('module') : Chained('/') : Args {
         }
     );
 
-    $c->res->last_modified( $data->{date} );
+    # ensure page is not cached when latest release is a trial
+    $c->res->last_modified(
+               $reqs->{versions}->{hits}->{hits}->[0]->{fields}->{date}
+            || $data->{date} );
+
     $c->stash(
         {   module   => $data,
             pod      => $hr->process( $reqs->{pod}->{raw} ),
