@@ -33,7 +33,7 @@ IF profiles.${profile.name} %>
 <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px"><% blog.url.replace('^https?://', '') %></a>
 <% END; END %>
 <% IF author.donation.size; FOREACH donate IN author.donation %>
-<% IF donate.name == 'paypal' %>
+<% IF donate.name == 'paypal' && donate.id %>
 <br>
 <center><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_donations">
