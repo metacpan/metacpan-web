@@ -41,7 +41,7 @@
         <label><span>Blog</span><input type="text" name="blog.url" value="<% author.blog.0.url %>" /></label>
         <label><span>Feed</span><input type="text" name="blog.feed" value="<% author.blog.0.feed %>" /></label>
         <label><span>Avatar</span><input type="text" name="gravatar_url" value="<% author.gravatar_url %>" /></label>
-        <%- donation = author.donation.0.id %>
+        <%- donation = author.donation.0.id || author.donation.1.id || author.donation.2.id %>
         <label><input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('#donations').slideToggle()" /> Accept donations</label>
         <div id="donations"<% UNLESS donation %> style="display: none"<% END %>>
             <% FOREACH system IN ['PayPal', 'Wishlist', 'Flattr']; found = author.donation.grep(->(a){ a.name == system.lower }) %>
