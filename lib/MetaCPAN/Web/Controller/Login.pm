@@ -17,7 +17,8 @@ sub index : Path {
                 . "&code=$code" )->recv;
         $c->req->session->set( token => $data->{access_token} );
         $c->authenticate( { token => $data->{access_token} } );
-        $c->res->redirect('/account/profile');
+        my $state = $c->req->params->{state} || "";
+        $c->res->redirect($c->uri_for("/$state"));
     }
     else {
         $c->stash( { template => 'account/login.html' } );
