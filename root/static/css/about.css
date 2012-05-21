@@ -23,6 +23,15 @@
     margin-bottom: 10px;
 }
 
+.about-resources ul {
+    font-weight: normal;
+    font-size: 0.8em;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    list-style-type: disc;
+    padding-left: 10px;
+}
+
 .about-sponsor table {
     width: 100%;
 }
