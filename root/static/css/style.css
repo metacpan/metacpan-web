@@ -172,6 +172,31 @@ background: -moz-linear-gradient(rgb(255,255,255),rgb(245,245,245));
     color: #000;
 }
 
+
+.big-logo {
+  margin: 0 auto 32px auto;
+  width: 322px;
+  height: 58px;
+  background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
+}
+
+.small-logo {
+  position: relative;
+  margin: 0 12px 0 0;
+  float:left;
+  width: 180px;
+  height: 34px;
+  background: transparent url('/static/images/logo.png') no-repeat -1px -68px;
+}
+
+.beta-info {
+  position: relative;
+  float: right;
+  margin: -12px 0 0 0;
+  font: bold 14px Helvetica, Arial, sans-serif;
+  color: rgb(204,204,204);
+}
+
 .home input[type="text"] {
     outline: none;
 border-color: #CCCCCC #999999 #999999 #CCCCCC;
