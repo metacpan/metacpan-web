@@ -42,6 +42,12 @@ sub get {
     );
 }
 
+sub distribution {
+    my ( $self, $dist ) = @_;
+    $self->request( "/distribution/$dist" );
+}
+
+
 sub _new_distributions_query {
     return {
         constant_score => {

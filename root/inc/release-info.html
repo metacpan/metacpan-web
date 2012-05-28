@@ -19,7 +19,7 @@
         ELSE;
           'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution;
         END;
-      %>">Bugs</a></li>
+      %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></li>
       <% IF rating.count > 0 %>
       <li><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></li>
       <% END %>

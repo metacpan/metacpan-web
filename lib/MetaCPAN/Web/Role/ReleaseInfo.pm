@@ -33,7 +33,7 @@ sub api_requests {
         rating     => $c->model('API::Rating')->get( $data->{distribution} ),
 
         versions   => $c->model('API::Release')->versions( $data->{distribution} ),
-
+        distribution => $c->model('API::Release')->distribution( $data->{distribution} ),
         %$reqs,
     };
 }
@@ -46,6 +46,7 @@ sub stash_api_results {
         author     => $reqs->{author},
         #release    => $release->{hits}->{hits}->[0]->{_source},
         rating     => $reqs->{rating}->{ratings}->{ $data->{distribution} },
+        distribution => $reqs->{distribution},
         versions   =>
             [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
     });
