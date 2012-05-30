@@ -83,7 +83,7 @@ sub leaderboard {
             query  => { match_all => {} },
             facets => {
                 leaderboard =>
-                    { terms => { field => 'distribution', size => 100 }, },
+                    { terms => { field => 'distribution', size => 600 }, },
             },
         }
     );
