@@ -35,6 +35,15 @@
   </ul>
   <hr>
   <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+<% IF release.metadata.x_help_wanted %>
+   <hr>
+   <strong>Help Wanted</strong> 
+   <ul>
+<% FOREACH position IN release.metadata.x_help_wanted %>
+    <li><% position %></li>
+<% END %>    
+   </ul>
+<% END %>
   <hr>
   <strong>Permalinks</strong>
   <ul>
