@@ -24,7 +24,7 @@ $.extend({
   }
 });
 
-var podVisible = true;
+var podVisible = false;
 
 function togglePod(lines) {
     var toggle = podVisible ? 'none' : 'block';
