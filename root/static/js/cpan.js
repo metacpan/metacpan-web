@@ -222,6 +222,21 @@ $(document).ready(function() {
         return '<a href="#___pod"></a>';
       });
     });
+
+    var module_source_href = $('#source-link').attr('href');
+    if(module_source_href) {
+        $('#pod-error-detail dt').each(function() {
+            var $dt = $(this);
+            var link_text = $dt.text();
+            var capture = link_text.match(/Around line (\d+)/);
+            $dt.html(
+                $('<a />').attr('href', module_source_href + '#L' + capture[1])
+                    .text(link_text)
+            );
+        });
+    }
+    $('#pod-errors').addClass('collapsed');
+    $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
 });
 
 function searchForNearest() {
