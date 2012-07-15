@@ -35,7 +35,7 @@ sub index : PathPart('module') : Chained('/') : Args {
     my $reqs = $self->api_requests(
         $c,
         {   pod => $c->model('API')
-                ->request( '/pod/' . ( $pod || join( '/', @module ) ) ),
+                ->request( '/pod/' . ( $pod || join( '/', @module ) ) . '?show_errors=1' ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
