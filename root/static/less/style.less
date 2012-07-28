@@ -13,6 +13,7 @@
 @navbarBackgroundHighlight: rgb(255,255,255);
 @navbarText: @linkColor;
 @navbarLinkColor: @linkColor;
+@navbarHeight: 29px;
 
 .dropdown.open {
   .dropdown-toggle {
@@ -128,8 +129,7 @@ body {
     float: left;
 }
 
-.nav-list select {
-    height: 14px;
+.nav-list select, .nav-list input {
     width: 165px;
     line-height: auto;
 }
@@ -143,6 +143,14 @@ margin-right: -15px;
 .dropdown.open .dropdown-toggle {
     border-top: 1px solid #fff;
     background-color: transparent;
+}
+
+.dropdown-menu form {
+    margin: 0;
+}
+
+.dropdown-menu input {
+    margin: 0 0 0 10px;
 }
 
 .center {
