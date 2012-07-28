@@ -1,18 +1,16 @@
-<div class="box-right">
-  <br>
-<strong>
-  <a
-     href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"
-     title="Our dependencies according to CPAN Testers, and their test results.">Dependencies</a>
-</strong><br>
-<%
+<ul class="nav nav-list box-right">
+    <li class="nav-header">Dependencies</li>
+<%-
 deps = [];
 FOREACH dep IN dependencies;
 IF dep.phase != 'runtime' || dep.relationship != 'requires' || dep.module == 'perl'; NEXT; END;
 deps.push(dep.module);
 END;
 FOREACH dep IN deps.sort %>
-<a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a>
-<% END %>
-<% IF deps.size == 0 %><i>none</i><% END %>
-</div>
+    <li><a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a></li>
+<%- END %>
+<%- IF deps.size == 0 %><li>none</li><% END %>
+    <li class="divider"></li>
+    <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i> CPAN Testers List</a></li>
+    <li><a href="/requires/module/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
+</ul>
