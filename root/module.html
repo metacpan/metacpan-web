@@ -1,17 +1,38 @@
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
-<strong><big>
-  <a rel="author" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
-  &nbsp;/&nbsp;
-  <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
-  &nbsp;/&nbsp;
-  <% module.documentation %>
-  </big></strong>
-  <% INCLUDE inc/favorite.html module = module %>
-  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+<% INCLUDE inc/breadcrumbs.html %>
 
 <ul class="nav nav-list">
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
-      <% IF module.module.0.version %><li><div>Module version: <% module.module.0.version %></div></li><% END %>
+  <%- IF versions.size > 1; %>
+  <li><span class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Jump to version <b class="caret pull-right"></b>
+          </a>
+        <ul class="dropdown-menu">
+  <%-
+  backpan = [];
+  FOREACH version IN versions;
+      IF release.name == version.name;
+          NEXT;
+      END;
+      IF version.status == 'backpan';
+          backpan.push(version);
+          NEXT;
+      END %>
+            <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+      <%-
+      END;
+      IF backpan.size > 1 %>
+          <li class="nav-header">BackPAN</li>
+      <%-
+          FOREACH version IN backpan %>
+          <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+      <%
+          END;
+      END;
+  END %>
+        </ul>
+      </span></li>
       <li><div>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)</div>

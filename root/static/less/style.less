@@ -2,6 +2,7 @@
 
 @import "bootstrap/bootstrap.less";
 @import "account.less";
+@import "breadcrumbs.less";
 
 @iconSpritePath:          "../../icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../../icons/glyphicons-halflings-white.png";
@@ -15,7 +16,13 @@
 @navbarLinkColor: @linkColor;
 @navbarHeight: 29px;
 
-.dropdown.open {
+.border-radius(@radius) {
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+.navbar .dropdown.open {
   .dropdown-toggle {
       border-top: 2px solid lighten(@linkColor, 20%);
       position: relative;
@@ -27,6 +34,15 @@
 
 .navbar {
     border-top: 2px solid lighten(@linkColor, 40%);
+}
+
+.navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
+    border-top-color: black;
+}
+
+.navbar .dropdown:hover .caret,
+.navbar .open .caret {
+  .opacity(100);
 }
 
 .navbar .nav > li > a:hover {
@@ -60,33 +76,18 @@
   padding: 5px 10px 5px;
 }
 
+.nav li.dropdown.open .caret,
+.nav li.dropdown.open.active .caret,
+.nav li.dropdown.open a:hover .caret,
 .navbar .nav .dropdown-toggle .caret,
 .navbar .nav .open.dropdown .caret {
   border-top-color: @black;
 }
 
-
-// reset border-radius
-input,
-select,
-.uneditable-input {
-    .border-radius(0px);
-}
-
-.add-on, .btn {
-    .border-radius(0px);
-}
-
-.input-prepend,
-.input-append {
-    input,
-    select,
-    .uneditable-input {
-        .border-radius(0px);
-    }
-    .add-on, .btn {
-        .border-radius(0px);
-    }
+.dropdown-menu {
+    overflow-y: auto;
+    max-height: 250px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .search-top input[type=text] {
@@ -125,11 +126,12 @@ body {
 
 .nav-list {
     padding: 0px;
-    width: 165px;
+    width: 170px;
     float: left;
+    margin-left: -5px;
 }
 
-.nav-list select, .nav-list input {
+.nav-list select, .nav-list input[type=text] {
     width: 165px;
     line-height: auto;
 }
@@ -140,10 +142,7 @@ margin-left: -15px;
 margin-right: -15px;
 }
 
-.dropdown.open .dropdown-toggle {
-    border-top: 1px solid #fff;
-    background-color: transparent;
-}
+
 
 .dropdown-menu form {
     margin: 0;
@@ -155,6 +154,10 @@ margin-right: -15px;
 
 .center {
     text-align: center;
+}
+
+.inline {
+    display: inline;
 }
 
 @import "responsive.less";

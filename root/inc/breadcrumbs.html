@@ -1,0 +1,49 @@
+<% BLOCK version_dropdown %>
+<%- IF versions.size > 1; %>
+<span class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <b class="caret"></b>
+        </a>
+      <ul class="dropdown-menu">
+<%-
+backpan = [];
+FOREACH version IN versions;
+    IF release.name == version.name;
+        NEXT;
+    END;
+    IF version.status == 'backpan';
+        backpan.push(version);
+        NEXT;
+    END %>
+          <li><a href="<% version.author; '/'; version.name; '/'; module.name %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+    <%-
+    END;
+    IF backpan.size > 1 %>
+        <li class="nav-header">BackPAN</li>
+    <%
+        FOREACH version IN backpan %>
+        <li><a href="<% version.author; '/'; version.name; '/'; module.name %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+    <%
+        END;
+    END;
+END %>
+      </ul>
+  </span>
+<% END %>
+<div class="breadcrumbs">
+  <a rel="author" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
+  <span>&nbsp;/&nbsp;</span>
+  <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+  <% PROCESS version_dropdown %>
+  <%- IF module %>
+  <span>&nbsp;/&nbsp;
+  <% module.documentation %></span>
+  <%- END %>
+  <div class="inline"><%- INCLUDE inc/favorite.html module = module %></div>
+  <%- IF release.status != 'latest' %>
+  <div class="pull-right">
+  <%- IF release.maturity == 'developer'; 'dev release, '; END %>
+    <a href="/module/<% module.documentation %>">go to latest</a>
+  </div>
+  <%- END %>
+</div>
