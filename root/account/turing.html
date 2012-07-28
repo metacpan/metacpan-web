@@ -1,15 +1,16 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
     <% IF error -%>
-    <fieldset><legend style="color: #600">Error</legend>
-        <ul>
-        The answer was not correct. Please try again.
-        </ul>
-    </fieldset>
+    <div class="alert alert-error">
+      <h4 class="alert-heading">Error</h4>
+      The answer was not correct. Please try again..
+    </div>
     <% END; IF success -%>
-    <fieldset><legend style="color: #060">Success</legend>
-        <p>Thank you.</p><br /><p><a href="<% referer %>">Continue browsing</a></p>
-    </fieldset>
+    <div class="alert alert-success">
+      <h4 class="alert-heading">Success</h4>
+      Thank you.
+    </div>
+    <a href="<% referer %>">Continue browsing</a>
     <% ELSE %>
     <fieldset><legend>Verify Account</legend>
         <p>Please solve the Captcha. This will allow you to ++ modules. You'll have to complete this test only once.</p><br />

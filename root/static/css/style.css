@@ -89,11 +89,6 @@ display: inline-block;
     padding-left: 10px;
 }
 
-.search-bar, .account-bar, .about-bar {
-    width: 165px;
-    float: left;
-}
-
 .search-bar .search-type {
     font-size: 1.1em
 }
@@ -224,22 +219,8 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     text-decoration: none;
 }
 
-.about-bar a, .account-bar a {
-    display: block;
-    padding: 6px;
-    font-size: 1.2em;
-}
-
-.about-bar a:hover, .account-bar a:hover {
-    text-decoration: none;
-    background-color: #f9f9f9;
-
-}
-
-.about-bar a.active, .account-bar a.active {
-    background-color: #f9f9f9;
-    color: #000;
-    font-weight: bold;
+.account-settings, .about {
+    border-left: none;
 }
 
 .account-settings label {

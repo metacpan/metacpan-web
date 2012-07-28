@@ -1,7 +1,16 @@
 <% UNLESS title; title = 'MetaCPAN About'; END %>
-<div class="account-bar">
-    <a href="/about"<% IF req.action == 'about' %> class="active"<% END %>>About MetaCPAN</a>
-    <a href="/about/resources"<% IF req.action == 'about/resources' %> class="active"<% END %>>Resources</a>
-    <a href="/about/contributors"<% IF req.action == 'about/contributors' %> class="active"<% END %>>Contributors</a>
-    <a href="/about/sponsors"<% IF req.action == 'about/sponsors' %> class="active"<% END %>>Sponsors</a>
+<div class="tabbable tabs-left about-bar">
+    <ul class="nav nav-tabs">
+    <li<% IF req.action == 'about' %> class="active"<% END %>>
+        <a href="/about">About MetaCPAN</a>
+    </li>
+    <li<% IF req.action == 'about/resources' %> class="active"<% END %>>
+        <a href="/about/resources">Resources</a>
+    </li>
+    <li<% IF req.action == 'about/contributors' %> class="active"<% END %>>
+        <a href="/about/contributors">Contributors</a>
+    </li>
+    <li<% IF req.action == 'about/sponsors' %> class="active"<% END %>>
+        <a href="/about/sponsors">Sponsors</a>
+    </li>
 </div>
