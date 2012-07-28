@@ -3,29 +3,40 @@
 <% canonical = "/pod/" _ module.documentation %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
-<div itemscope itemtype="http://schema.org/SoftwareApplication">
-<strong>
-  <big>
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>"
-       itemprop="url">
-      <span itemprop="name"><% author.name || release.author %></span>
-    </a>
-    </span>
-    &nbsp;/&nbsp;
-  <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
-  </big></strong><% INCLUDE inc/favorite.html module = module %><strong><big>
-  &nbsp;/&nbsp;
-  <span class="select-text" itemprop="name"><% module.documentation %></span>
-  </big></strong>
-  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="<% canonical %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+<% INCLUDE inc/breadcrumbs.html %>
 
-
-<ul class="nav nav-list">
+<ul class="nav nav-list" itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
-      <% IF module.module.0.version %><li><div>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></div></li><% END %>
-      <li><div><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</div></li>
-      <li><div><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', module.author, module.release].join('/'); END %>">Changes</a></div></li>
+  <%- IF versions.size > 1; %>
+  <li><span class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Jump to version <b class="caret pull-right"></b>
+          </a>
+        <ul class="dropdown-menu">
+  <%-
+  backpan = [];
+  FOREACH version IN versions;
+      IF release.name == version.name;
+          NEXT;
+      END;
+      IF version.status == 'backpan';
+          backpan.push(version);
+          NEXT;
+      END %>
+            <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+      <%-
+      END;
+      IF backpan.size > 1 %>
+          <li class="nav-header">BackPAN</li>
+      <%-
+          FOREACH version IN backpan %>
+          <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+      <%
+          END;
+      END;
+  END %>
+        </ul>
+      </span></li>
       <li><div>
         <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)</div>

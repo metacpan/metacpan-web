@@ -11,7 +11,7 @@
         <% END %></div>
       </li>
       <% END %>
-      <li><a href="<%
+      <li><div><a href="<%
         IF is_url(release.resources.bugtracker.web);
           release.resources.bugtracker.web;
         ELSIF release.resources.bugtracker.mailto;
@@ -19,31 +19,18 @@
         ELSE;
           'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
         END;
-      %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></li>
-=======
-      <li><div><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></div></li>
->>>>>>> migrate release-info
+      %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div></li>
       <% IF rating.count > 0 %>
       <li><div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div></li>
       <% END %>
-<<<<<<< HEAD
-      <li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">Rate this distribution</a></li>
-      <li>
-          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc     %>/<% release.distribution %>.html#<% release.name %>?oncpan=1&amp;distmat=1" title="(pass / fail / na)">Test results</a>
-          <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
-          <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% release.version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a>
-=======
       <li><div>
-          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc     %>/<% release.distribution %>.html#<% release.name %>" title="(pass / fail / na)">Test results</a>
+          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html##<% release.name %>?oncpan=1&amp;distmat=1" title="(pass / fail / na)">Testers</a>
           <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
           <a href="http://matrix.cpantesters.org/?dist=<% release.name %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
->>>>>>> migrate release-info
       </li>
       <li><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
-    <% IF versions.size > 1 %>
-    <select name="release" onchange="document.location.href='/<% IF module.path; 'module'; ELSE; 'release'; END %>/' + this.value">
-    <option>Go to version</option>
+    
     <%
     BLOCK version_options;
     backpan = [];
@@ -60,6 +47,4 @@
     <optgroup label="BackPAN"></optgroup>
     <% FOREACH version IN backpan %>
     <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)</option><% END %>
-    <% END; END; PROCESS version_options %>
-    </select>
-    <% END %>
+    <% END; END %>

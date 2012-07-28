@@ -2,14 +2,7 @@
 <% canonical = '/release/' _ release.distribution %>
 <% meta_description = release.abstract %>
 <% twitter_card_inc = 'inc/twitter/release.html' %>
-<strong>
-  <big>
-    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>">
-      <% author.name || release.author %>
-    </a>
-    &nbsp;/&nbsp; <% release.name %></big></strong>
-<% INCLUDE inc/favorite.html module = release %>
-<% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+<% INCLUDE inc/breadcrumbs.html %>
 
 <div class="search-bar">
   <div>
