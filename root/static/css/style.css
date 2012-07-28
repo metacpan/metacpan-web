@@ -63,7 +63,7 @@ display: inline-block;
 }
 
 .big-logo {
-  margin: 0 auto 32px auto;
+  margin: 42px auto 44px auto;
   width: 322px;
   height: 58px;
   background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
