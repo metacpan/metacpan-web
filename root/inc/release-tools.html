@@ -1,0 +1,25 @@
+<li class="nav-header">Tools</li>
+<li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>"><i class="icon-download-alt"></i> Download (<% release.stat.size | format_bytes %>b)</a></li>
+<li><a href="#" onclick="return toggleTOC()"><i class="icon-list"></i> Toggle Table of Contents</a></li>
+<li><a href="http://explorer.metacpan.org/?url=/module/<% release.author %>/<% release.name %>/<% module.path %>"><i class="icon-list-alt"></i> MetaCPAN Explorer</a></li>
+<li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>"><i class="icon-star"></i> Rate this distribution</a></li>
+<li>
+    <form action="/search">
+        <input type="hidden" name="q" value="dist:<% release.distribution %>">
+        <input type="search" name="q" placeholder="Search distribution" style="width: 160px">
+        <input type="submit" style="display: none">
+    </form>
+</li>
+<%- IF versions.size > 1 %>
+<li>
+    <select name="release" onchange="document.location.href='/diff/file/?target=<% [module.author, module.release, module.path].join("/") %>&amp;source=' + this.value">
+        <option>Diff with version</option>
+    <%- PROCESS version_options %>
+    </select>
+</li>
+<%- END %>
+<li class="nav-header">Permalinks</li>
+<li><a href="/<% module ? "module" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a></li>
+<%- IF !module || module.documentation %>
+<li><a href="/<% module ? "module" : "release" %>/<% release.distribution || module.documentation %>">Latest version</a></li>
+<%- END %>

@@ -483,15 +483,6 @@ ul {
     user-select: all;
 }
 
-.box-right {
-    float: right;
-    clear: right;
-    width: 160px;
-    padding-left: 10px;
-    overflow: auto;
-
-}
-
 a.ellipsis {
     width: 160px;
 }

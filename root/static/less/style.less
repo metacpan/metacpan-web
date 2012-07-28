@@ -86,6 +86,7 @@
 
 .dropdown-menu {
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 250px;
     -webkit-overflow-scrolling: touch;
 }
@@ -142,14 +143,12 @@ margin-left: -15px;
 margin-right: -15px;
 }
 
-
-
-.dropdown-menu form {
+.nav-list form {
     margin: 0;
 }
 
-.dropdown-menu input {
-    margin: 0 0 0 10px;
+.dropdown-menu form {
+    margin: 0;
 }
 
 .center {
@@ -158,6 +157,14 @@ margin-right: -15px;
 
 .inline {
     display: inline;
+}
+
+.box-right {
+    float: right;
+    clear: right;
+    width: 180px;
+    padding: 10px 0 0 10px;
+    overflow: hidden;
 }
 
 @import "responsive.less";
