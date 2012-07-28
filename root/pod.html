@@ -44,15 +44,8 @@
         <% PROCESS version_options %>
       </select></li>
       <% END %>
-    <li>Search distribution:<br>
-      <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
-      <input type="text" name="q">
-      <input type="submit" style="display: none"></form></li>
       <li class="dropdown">
-            <a class="dropdown-toggle"
-               data-toggle="dropdown"
-               href="#">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 More
                 <b class="caret"></b>
               </a>
@@ -62,6 +55,13 @@
                 <li><a href="/requires/module/<% module.distribution.replace('-', '::') %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
                 <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>"><i class="icon-list-alt"></i> MetaCPAN Explorer</a></li>
                 <li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>"><i class="icon-star"></i> Rate this distribution</a></li>
+                <li>
+                    <form action="/search">
+                        <input type="hidden" name="q" value="dist:<% release.distribution %>">
+                        <input type="search" name="q" placeholder="Search distribution">
+                        <input type="submit" style="display: none">
+                    </form>
+                </li>
                 <li class="divider"></li>
                 <li class="nav-header" style="margin-left: 0px">Permalinks</li>
                 <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
