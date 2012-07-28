@@ -1,45 +1,17 @@
 <% title = release.name _ ' - ' _ release.abstract; rss = 'distribution/' _ release.distribution %>
 <% INCLUDE inc/breadcrumbs.html %>
 
-<div class="search-bar">
-  <div>
-    <ul>
-      <li><strong class="relatize"><% release.date.dt_http %></strong></li>
-      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
-      <% IF changes %>
-          <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>"><% changes %></a></li>
-      <% END %>
-      <li><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
-      <% PROCESS inc/release-info.html %>
-    </ul>
-  </div>
-  <hr>
-  <strong>Tools</strong>
-  <ul>
-    <% IF versions.size > 1 %>
-    <li>
-      <select name="release" onchange="document.location.href='/diff/release/' + this.value + '<% release.author %>/<% release.name %>'">
-      <option>Diff with version</option>
-      <% PROCESS version_options %>
-    </select></li>
+<ul class="nav nav-list">
+    <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
+    <% IF changes %>
+    <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>">Changes</a></li>
     <% END %>
-    <li>Search distribution:<br>
-      <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
-      <input type="text" name="q">
-      <input type="submit" style="display: none"></form></li>
-    <li><a href="/requires/distribution/<% release.distribution %>">Reverse dependencies</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
-  </ul>
-  <hr>
-  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
-  <hr>
-  <strong>Permalinks</strong>
-  <ul>
-    <li><a href="/release/<% release.author %>/<% release.name %>">This version</a></li>
-    <li><a href="/release/<% release.distribution %>">Latest version</a></li>
-  </ul>
-</div>
+    <li><span><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</span></li>
+    <% PROCESS inc/release-info.html %>
+    <li class="nav-header">Activity</li>
+    <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+    <%- INCLUDE inc/release-tools.html %>
+</ul>
 
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>

@@ -409,15 +409,6 @@ ul {
     font-size: 0.8em;
 }
 
-.box-right {
-    float: right;
-    clear: right;
-    width: 160px;
-    padding-left: 10px;
-    overflow: auto;
-
-}
-
 a.ellipsis {
     width: 160px;
 }

@@ -43,7 +43,7 @@ END %>
   <%- IF release.status != 'latest' %>
   <div class="pull-right">
   <%- IF release.maturity == 'developer'; 'dev release, '; END %>
-    <a href="/module/<% module.documentation %>">go to latest</a>
+    <a href="<% IF module %>/module/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>">go to latest</a>
   </div>
   <%- END %>
 </div>
