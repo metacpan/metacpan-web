@@ -1,24 +1,22 @@
-<div class="box-right">
-  <br>
-<strong>
-  <a
-     href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"
-     title="Our dependencies according to CPAN Testers, and their test results.">Dependencies</a>
-</strong><br>
-<%
+<ul class="nav nav-list box-right">
+    <li class="nav-header">Dependencies</li>
+<%-
 deps = [];
 FOREACH dep IN dependencies;
 IF dep.phase != 'runtime' || dep.relationship != 'requires' || dep.module == 'perl'; NEXT; END;
 deps.push(dep.module);
 END;
 FOREACH dep IN deps.sort %>
-<a href="/pod/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a>
-<% END %>
-<%- IF deps.size == 0 && !release.metadata  %>
-<i title="no META file provided">unknown</i>
-<%- ELSIF release.metadata.dynamic_config %>
-<i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i>
-<%- ELSIF deps.size == 0 %>
-<i>none</i>
+    <li><a href="/pod/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a></li>
 <%- END %>
-</div>
+<%- IF deps.size == 0 && !release.metadata  %>
+<li title="no META file provided">unknown</li>
+<%- ELSIF release.metadata.dynamic_config %>
+<li title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></li>
+<%- ELSIF deps.size == 0 %>
+<li>none</li>
+<%- END %>
+    <li class="divider"></li>
+    <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i> CPAN Testers List</a></li>
+    <li><a href="/requires/module/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
+</ul>
