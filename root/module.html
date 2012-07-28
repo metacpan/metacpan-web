@@ -45,7 +45,7 @@
             <ul class="dropdown-menu">
                 <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>"><i class="icon-download-alt"></i> Download (<% release.stat.size | format_bytes %>b)</a></li>
                 <li><a href="#" onclick="return toggleTOC()"><i class="icon-list"></i> Toggle Table of Contents</a></li>
-                <li><a href="/requires/module/<% module.distribution.replace('-', '::') %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
+                <li><a href="/requires/module/<% module.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
                 <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>"><i class="icon-list-alt"></i> MetaCPAN Explorer</a></li>
                 <li><a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>"><i class="icon-star"></i> Rate this distribution</a></li>
                 <li class="divider"></li>

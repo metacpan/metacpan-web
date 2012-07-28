@@ -1,0 +1,4 @@
+@media print {
+    .pod { margin: 0px; border: 0px solid #000; padding: 0px}
+    .home, .header, .search-bar, .box-right, .footer, a.favorite {display:none}
+}

@@ -1,4 +1,4 @@
-      <% IF release.resources.homepage %><li><a href="<% release.resources.homepage %>">Homepage</a></li><% END %>
+      <% IF release.resources.homepage %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %>
       <li><div>
         <% IF release.resources.repository.web %>
@@ -11,7 +11,15 @@
         <% END %></div>
       </li>
       <% END %>
-      <li><div><a href="<% release.resources.bugtracker.web || 'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution %>">Bugs</a></div></li>
+      <li><div><a href="<%
+        IF release.resources.bugtracker.web;
+          release.resources.bugtracker.web;
+        ELSIF release.resources.bugtracker.mailto;
+          'mailto:' _ release.resources.bugtracker.mailto;
+        ELSE;
+          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution;
+        END;
+      %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div></li>
       <% IF rating.count > 0 %>
       <li><div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div></li>
       <% END %>
@@ -20,6 +28,7 @@
           <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
           <a href="http://matrix.cpantesters.org/?dist=<% release.name %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
       </li>
+      <li><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
     <% IF versions.size > 1 %>
     <select name="release" onchange="document.location.href='/<% IF module.path; 'module'; ELSE; 'release'; END %>/' + this.value">

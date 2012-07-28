@@ -24,7 +24,7 @@ sub index : Path('') {
     }
     $c->stash(
         {   template => 'account/turing.html',
-            captcha  => Captcha::reCAPTCHA->new->get_html( $self->public_key ),
+            captcha  => Captcha::reCAPTCHA->new->get_html( $self->public_key, undef, 1 ),
         }
     );
 

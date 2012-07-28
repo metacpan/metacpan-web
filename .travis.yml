@@ -1,0 +1,15 @@
+language: perl
+perl:
+  - "5.14"
+  - "5.12"
+  - "5.10"
+install:
+  - cat .travis.deps.txt | xargs cpanm
+script:
+  - "prove -lr t"
+notifications:
+  email:
+    recipients:
+      - olaf@wundersolutions.com
+    on_success: always
+    on_failure: always

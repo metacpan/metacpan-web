@@ -15,11 +15,11 @@ sub index : PathPart('module') : Chained('/') : Args {
 
     # force consistent casing in URLs
     if ( @module != 0 and $id ne uc($id) ) {
-        $c->res->redirect('/module/' . join('/', uc($id), @module), 301);
+        $c->res->redirect( '/module/' . join( '/', uc($id), @module ), 301 );
         $c->detach();
     }
 
-    @module = ($id, @module);
+    @module = ( $id, @module );
     my $data
         = @module == 1
         ? $c->model('API::Module')->find(@module)->recv
@@ -27,19 +27,23 @@ sub index : PathPart('module') : Chained('/') : Args {
 
     ( $data->{documentation}, my $pod )
         = map { $_->{name}, $_->{associated_pod} }
-        grep  { $_->{associated_pod} } @{ $data->{module} }
+        grep { @module > 1 || $module[0] eq $_->{name} }
+        grep { $_->{associated_pod} } @{ $data->{module} }
         unless ( $data->{documentation} );
 
     $c->detach('/not_found') unless ( $data->{name} );
-    my $reqs = $self->api_requests($c, {
-            pod     => $c->model('API')->request( '/pod/' . ( $pod || join( '/', @module ) ) ),
-            release => $c->model('API::Release')->get( @{$data}{qw(author release)} ),
+    my $reqs = $self->api_requests(
+        $c,
+        {   pod => $c->model('API')
+                ->request( '/pod/' . ( $pod || join( '/', @module ) ) ),
+            release => $c->model('API::Release')
+                ->get( @{$data}{qw(author release)} ),
         },
         $data,
     );
     $reqs = $self->recv_all($reqs);
-    $self->stash_api_results($c, $reqs, $data);
-    $self->add_favorites_data($data, $reqs->{favorites}, $data);
+    $self->stash_api_results( $c, $reqs, $data );
+    $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 
     my $hr = HTML::Restrict->new;
     $hr->set_rules(
@@ -70,20 +74,24 @@ sub index : PathPart('module') : Chained('/') : Args {
             strong  => [],
             sub     => [],
             sup     => [],
-            table   => [qw( style class border cellspacing cellpadding align )],
-            tbody   => [],
-            td      => [ qw(style class) ],
-            tr      => [ qw(style class) ],
-            u       => [],
-            ul      => ['id'],
+            table => [qw( style class border cellspacing cellpadding align )],
+            tbody => [],
+            td    => [qw(style class)],
+            tr    => [qw(style class)],
+            u     => [],
+            ul    => ['id'],
         }
     );
 
-    $c->res->last_modified($data->{date});
+    # ensure page is not cached when latest release is a trial
+    $c->res->last_modified(
+               $reqs->{versions}->{hits}->{hits}->[0]->{fields}->{date}
+            || $data->{date} );
+
     $c->stash(
-        {   module  => $data,
-            pod     => $hr->process( $reqs->{pod}->{raw} ),
-            release => $reqs->{release}->{hits}->{hits}->[0]->{_source},
+        {   module   => $data,
+            pod      => $hr->process( $reqs->{pod}->{raw} ),
+            release  => $reqs->{release}->{hits}->{hits}->[0]->{_source},
             template => 'module.html',
         }
     );

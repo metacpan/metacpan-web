@@ -1,0 +1,60 @@
+<strong><big>
+  Diff <a href="/<% type %>/<% diff.source %>"><% diff.source.split("/").first(2).join(" / ") %></a>
+  &nbsp;/&nbsp;
+  <a href="/<% type %>/<% diff.target %>"><% diff.target.split("/").first(2).join(" / ") %></a>
+  </big></strong><br><br>
+
+
+<%-
+insertions = 0;
+deletions = 0;
+FOREACH file IN diff.statistics;
+insertions += file.insertions;
+deletions += file.deletions;
+parts = file.target.split("/");
+IF file.target == '/dev/null';
+    parts = file.source.split("/");
+END;
+FOREACH i IN [1,2,3]; foo = parts.shift; END;
+file.path = parts.join("/"); END -%>
+
+  <div class="search-bar">
+    <strong>Tools</strong>
+    <ul>
+      <li><a href="<% api %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">Raw diff</a></li>
+    </ul>
+    <% IF diff.statistics.size > 1 -%>
+    <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">
+        <option>Jump to file</option>
+        <% FOREACH file IN diff.statistics -%>
+        <option value="<% file.path %>"><% file.path %></option>
+        <% END -%>
+    </select>
+    <% END -%>
+    <hr>
+    <strong>Info</strong>
+    <ul>
+      <li><% insertions %> insertion<% IF insertions > 1 %>s<% END %></li>
+      <li><% deletions %> deletion<% IF deletions > 1 %>s<% END %></li>
+    </ul>
+    <br><br>
+    <a href="#">Top</a>
+  </div>
+
+<div class="content">
+<ul class="diff-ul">
+<% FOREACH file IN diff.statistics %>
+<li><a href="#<% file.path %>"><% file.path %></a><span class="minus"><% file.deletions %></span><span class="plus"><% file.insertions %></span></li>
+<% END %>
+</ul>
+
+<% FOREACH file IN diff.statistics %>
+    <a name="<% file.path %>"></a>
+    <div class="diff-container">
+        <div class="diff-header">
+            <a href="/source/<% diff.target %>/<% file.path %>"><% file.path %></a>
+        </div>
+        <pre class="brush: diff; class-name: 'highlight'; toolbar: false; gutter: false" id="source"><% parts = file.diff.split("\n"); WHILE parts; line = parts.shift; LAST IF line.match( '^\+' ); END; parts.join("\n") %></pre>
+    </div>
+<% END %>
+</div>

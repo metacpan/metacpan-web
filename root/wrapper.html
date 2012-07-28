@@ -37,6 +37,7 @@
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-27829474-1']);
   _gaq.push(['_setDomainName', 'metacpan.org']);
+  _gaq.push(['_setSiteSpeedSampleRate', 100]);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -48,6 +49,7 @@
   </script>
 </head>
 <body>
+<<<<<<< HEAD
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container-fluid">
@@ -104,7 +106,7 @@
   <% IF req.uri.path != '/' %>
       <div class="row">
           <div class="span3">
-              <a href="/"><img src="/static/images/small_logo.png" width="154" height="30" alt="MetaCPAN Logo"></a>
+              <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
           </div>
           <div class="span9 search-top">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">

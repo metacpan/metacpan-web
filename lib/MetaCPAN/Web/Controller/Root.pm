@@ -75,6 +75,7 @@ sub end : ActionClass('RenderView') {
     $c->stash->{req}        = $c->req;
     $c->stash->{api}        = $c->config->{api};
     $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
+    $c->res->header( Vary => 'Cookie' );
 }
 
 =head1 AUTHOR
