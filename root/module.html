@@ -17,7 +17,7 @@
       <% IF module.module.0.version %><li>Module version: <% module.module.0.version %></li><% END %>
       <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li>
-        <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
+        <a id="source-link" href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
       </li>
       <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a> (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)</li>
