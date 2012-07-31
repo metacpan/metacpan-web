@@ -560,6 +560,52 @@ ul#index, #index ul { list-style-type: none; }
     padding-left: 10px;
 }
 
+#pod-errors {
+  margin: 3em 0 0 0 ;
+  padding: 10px;
+  background-color: #ffffee;
+  width: 36em;
+  border: 1px solid #cccccc;
+}
+
+#pod-errors.collapsed {
+  border: none;
+  background-color: transparent;
+}
+
+#pod-errors p.title {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #CC3300;
+  cursor: pointer;
+}
+
+#pod-errors.collapsed #pod-error-detail {
+  display: none;
+}
+
+#pod-error-detail dl {
+  margin: 0;
+  padding: 0;
+}
+
+#pod-error-detail dl dt {
+  padding: 0;
+  margin: 0.8em 0 0 0;
+}
+
+#pod-error-detail dl dd {
+  margin: 0;
+  padding: 0 0 0 3em;
+}
+
+#pod-error-detail p {
+  margin: 0 0 0.4em 0;
+  padding: 0;
+}
+
 .search-results img,
 .author-img {
     overflow:hidden;

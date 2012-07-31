@@ -35,7 +35,7 @@ sub index : PathPart('module') : Chained('/') : Args {
     my $reqs = $self->api_requests(
         $c,
         {   pod => $c->model('API')
-                ->request( '/pod/' . ( $pod || join( '/', @module ) ) ),
+                ->request( '/pod/' . ( $pod || join( '/', @module ) ) . '?show_errors=1' ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
@@ -54,7 +54,7 @@ sub index : PathPart('module') : Chained('/') : Args {
             center  => [],
             code    => [],
             dd      => ['id'],
-            div     => [qw(style)],
+            div     => [qw(id style)],
             dl      => ['id'],
             dt      => ['id'],
             em      => [],
@@ -68,7 +68,7 @@ sub index : PathPart('module') : Chained('/') : Args {
             img     => [qw( alt border height width src style / )],
             li      => ['id'],
             ol      => [],
-            p       => [qw(style)],
+            p       => [qw(class style)],
             pre     => [qw(id class)],
             span    => [qw(style)],
             strong  => [],
