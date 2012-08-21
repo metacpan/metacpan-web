@@ -43,6 +43,21 @@ sub index : Path : Args(1) {
     my ( $author, $data ) = ( $author_cv->recv, $releases_cv->recv );
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
+    my $faves_cv = $c->model('API::Favorite')->request(
+        '/favorite/_search',
+        {
+            query => { match_all =>{} },
+            filter => { term => { user => $author->{user} }, },
+#            sort => [
+#                'date', { 'order' => 'asc' },
+#                ],
+            fields => [qw(date author distribution)],
+        }
+        );
+
+    my $faves_data = $faves_cv->recv;
+    my $faves = [ sort { $b->{date} cmp $a->{date} }  map { $_->{fields} }  @{ $faves_data->{hits}{hits} } ];
+    
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
@@ -52,7 +67,8 @@ sub index : Path : Args(1) {
     $c->stash(
         {   author   => $author,
             releases => $releases,
-            took     => $data->{took},
+            faves    => $faves,
+            took     => $data->{took} + $faves_data->{took},
             total    => $data->{hits}->{total},
             template => 'author.html'
         }
