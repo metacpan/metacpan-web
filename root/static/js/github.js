@@ -19,7 +19,7 @@ function Github() {
                     }
 
                     var result = '<table>'
-                                +'  <tr><th>Open <a href="'+ data.html_url +'/issues">Issues</a>:</th><td>'+ data.repo.open_issues +'</td></tr>'
+                                +'  <tr><th>Open <a href="'+ data.repo.html_url +'/issues">Issues</a>:</th><td>'+ data.repo.open_issues +'</td></tr>'
                                 +'  <tr><th>Last 15 Issues:</th><td><table>';
 
                     $.each(data.issues, function(idx, row) {
