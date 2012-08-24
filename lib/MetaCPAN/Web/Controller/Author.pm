@@ -52,6 +52,7 @@ sub index : Path : Args(1) {
             #                'date', { 'order' => 'asc' },
             #                ],
             fields => [qw(date author distribution)],
+            size   => 250,
         }
     );
 
