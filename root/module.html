@@ -4,7 +4,7 @@
   &nbsp;/&nbsp;
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
   &nbsp;/&nbsp;
-  <% module.documentation %>
+  <span class="select-text"><% module.documentation %></span>
   </big></strong>
   <% INCLUDE inc/favorite.html module = module %>
   <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
