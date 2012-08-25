@@ -63,6 +63,30 @@ sub _new_distributions_query {
     };
 }
 
+sub latest_by_author {
+    my ($self, $author) = @_;
+    return $self->request(
+        '/release/_search',
+        {   query => {
+                filtered => {
+                    query  => { match_all => {} },
+                    filter => {
+                        and => [
+                            { term => { author => uc( $author ) } },
+                            { term => { status => 'latest' } }
+                        ]
+                    },
+                }
+            },
+            sort => [
+                'distribution', { 'version_numified' => { reverse => \1 } }
+            ],
+            fields => [qw(author distribution name status abstract date)],
+            size   => 1000,
+        }
+    );
+}
+
 sub recent {
     my ( $self, $page, $type ) = @_;
     my $query;

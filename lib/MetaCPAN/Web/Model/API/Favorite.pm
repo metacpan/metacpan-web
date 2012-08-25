@@ -63,6 +63,19 @@ sub get {
     return $cv;
 }
 
+sub by_user {
+    my ($self, $user) = @_;
+    return $self->request(
+        '/favorite/_search',
+        {   query  => { match_all => {} },
+            filter => { term      => { user => $user }, },
+            sort   => ['distribution'],
+            fields => [qw(date author distribution)],
+            size   => 250,
+        }
+    );
+}
+
 sub recent {
     my ( $self, $page ) = @_;
     $self->request(

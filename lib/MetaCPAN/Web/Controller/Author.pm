@@ -18,43 +18,12 @@ sub index : Path : Args(1) {
 
     my $author_cv = $c->model( 'API::Author' )->get( $id );
 
-    # this should probably be refactored into the model?? why is it here
-    my $releases_cv = $c->model( 'API::Release' )->request(
-        '/release/_search',
-        {   query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { author => uc( $id ) } },
-                            { term => { status => 'latest' } }
-                        ]
-                    },
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
-            ],
-            fields => [qw(author distribution name status abstract date)],
-            size   => 1000,
-        }
-    );
+    my $releases_cv = $c->model( 'API::Release' )->latest_by_author($id);
 
     my ( $author, $data ) = ( $author_cv->recv, $releases_cv->recv );
     $c->detach( '/not_found' ) unless ( $author->{pauseid} );
 
-    my $faves_cv = $c->model( 'API::Favorite' )->request(
-        '/favorite/_search',
-        {   query  => { match_all => {} },
-            filter => { term      => { user => $author->{user} }, },
-
-            #            sort => [
-            #                'date', { 'order' => 'asc' },
-            #                ],
-            fields => [qw(date author distribution)],
-            size   => 250,
-        }
-    );
+    my $faves_cv = $c->model( 'API::Favorite' )->by_user($author->{user});
 
     my $faves_data = $faves_cv->recv;
     my $faves = [ sort { $b->{date} cmp $a->{date} }
