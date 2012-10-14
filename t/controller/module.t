@@ -19,7 +19,12 @@ test_psgi app, sub {
         'contains link to "this" version' );
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
-    is($latest, $res->content, 'content of both urls is exactly the same');
+    my $tx2 = tx($res);
+    is(
+        $tx2->find_value( '//div[@id="content"]'),
+        $tx->find_value('//div[@id="content"]'),
+        'content of both urls is exactly the same'
+    );
 
     # get module with lc author
     $this =~ s{(/module/.*?/)}{lc($1)}e; # lc author name
