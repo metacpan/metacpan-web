@@ -14,5 +14,12 @@ END;
 FOREACH dep IN deps.sort %>
 <a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a>
 <% END %>
-<% IF deps.size == 0 %><i>none</i><% END %>
+<%- IF deps.size == 0 && !release.metadata  %>
+<i title="no META file provided">unknown</i>
+<%- ELSIF deps.size == 0 %>
+<i>none</i>
+<%- END %>
+<%- IF release.metadata.dynamic_config %>
+<i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i>
+<%- END %>
 </div>
