@@ -88,7 +88,6 @@ my %WriteMakefileArgs = (
     "Template::Plugin::Markdown" => 0,
     "Template::Plugin::Number::Format" => 0,
     "Template::Plugin::Page" => 0,
-    "Test::XPath" => 0,
     "Try::Tiny" => "0.09",
     "URI" => 0,
     "XML::Feed" => 0,
@@ -106,11 +105,6 @@ my %WriteMakefileArgs = (
   SKIP => [qw( all test install )],
 
   VERSION => "0.0.1",
-
-#  test => {
-#    # we overwrite the 'test' target below anyway
-#    "TESTS" => "t/*.t"
-#  }
 );
 
 
@@ -142,7 +136,7 @@ sub MY::postamble {
 install:
 
 test :
-\t prove -lvr t/
+\t prove -lr t/
 
 POST
 }
