@@ -73,7 +73,7 @@
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' },
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString, css: 'string' },
       // currently ignoring single quote package separator and utf8 names
-			{ regex: /(?:&amp;|[$@%*]|\$#)[a-zA-Z_](\w+|::)*/g, css: 'variable' },
+			{ regex: /(?:&amp;|[$@%*]|\$#)\$?[a-zA-Z_](\w+|::)*/g, css: 'variable' },
 			{ regex: /(^|\n)\s*__(?:END|DATA)__\b[\s\S]*$/g, css: 'comments' },
 
 			// don't capture the newline after =cut so that =cut\n\n=head1 will start a new pod section
