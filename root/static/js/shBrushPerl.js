@@ -77,7 +77,7 @@
 			{ regex: /(^|\n)\s*__(?:END|DATA)__\b[\s\S]*$/g, css: 'comments' },
 
 			// don't capture the newline after =cut so that =cut\n\n=head1 will start a new pod section
-			{ regex: /(^|\n)=\w[\s\S]*?(\n=cut\s*(?=\n|$))/g, css: 'comments' }, // pod
+			{ regex: /(^|\n)=\w[\s\S]*?(\n=cut\s*(?=\n)|$)/g, css: 'comments' }, // pod
 
 			{ regex: new RegExp(this.getKeywords(funcs), 'gm'), css: 'functions' },
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'), css: 'keyword' }
