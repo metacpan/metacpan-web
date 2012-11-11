@@ -1,7 +1,10 @@
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
-<strong><big>
-  <a rel="author" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
-  &nbsp;/&nbsp;
+<strong>
+  <big>
+    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>">
+      <% author.name || release.author %>
+    </a>
+    &nbsp;/&nbsp;
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
   &nbsp;/&nbsp;
   <span class="select-text"><% module.documentation %></span>
