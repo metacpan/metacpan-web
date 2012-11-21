@@ -3,7 +3,7 @@ function Github() {
     return {
         config: {
             issues: {
-                pattern: new RegExp(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/),
+                pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/,
                 prepareData: function(self, data, cb) {
                     // we need additionally the repo info
                     var url = self.url.replace('/issues', '');
@@ -34,7 +34,7 @@ function Github() {
                 }
             },
             repo: {
-                pattern: new RegExp(/^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/),
+                pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/,
                 render: function(self, data) {
                     return   '<table>'
 
@@ -65,7 +65,7 @@ function Github() {
                 }
             },
             user: {
-                pattern: new RegExp(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/?$/),
+                pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/?$/,
                 render: function(self, data) {
                     return   '<table>'
                             +( data.name
