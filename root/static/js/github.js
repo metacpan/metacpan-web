@@ -1,8 +1,9 @@
 function Github() {
+    // anchor patterns and check for www. or no subdomain to avoid user wikis, blogs, etc
     return {
         config: {
             issues: {
-                pattern: new RegExp(/github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/),
+                pattern: new RegExp(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/),
                 prepareData: function(self, data, cb) {
                     // we need additionally the repo info
                     var url = self.url.replace('/issues', '');
@@ -33,7 +34,7 @@ function Github() {
                 }
             },
             repo: {
-                pattern: new RegExp(/github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/),
+                pattern: new RegExp(/^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/),
                 render: function(self, data) {
                     return   '<table>'
 
@@ -64,7 +65,7 @@ function Github() {
                 }
             },
             user: {
-                pattern: new RegExp(/github\.com\/([^\/]+)\/?$/),
+                pattern: new RegExp(/^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/?$/),
                 render: function(self, data) {
                     return   '<table>'
                             +( data.name
