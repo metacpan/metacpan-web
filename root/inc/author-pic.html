@@ -2,4 +2,13 @@
     <% IF author.gravatar_url %><% author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/") %><a href="/author/<% author.pauseid %>"><img src="<% author.gravatar_url %>" width="130" height="130" class="author-img"></a><br><% END %>
   <strong><a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a></strong><br>
   <span title="<% author.asciiname %>"><% author.name %></span>
+<% FOREACH p IN author.profile %>
+<% IF p.name == 'coderwall' %>
+  <div id="coderwall_endorse">
+    <a href="https://coderwall.com/<% p.id %>">
+        <img alt="Endorse <% author.asciiname %> on Coderwall" 
+             width="110" height="20"
+             src="http://api.coderwall.com/<% p.id %>/endorsecount.png" /></a></div>
+<% END %>
+<% END %>
 </div>

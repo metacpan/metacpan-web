@@ -9,7 +9,14 @@ END;
 FOREACH dep IN deps.sort %>
     <li><a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a></li>
 <%- END %>
-<%- IF deps.size == 0 %><li>none</li><% END %>
+<%- IF deps.size == 0 && !release.metadata  %>
+	<li><i title="no META file provided">unknown</i></li>
+<%- ELSIF deps.size == 0 %>
+	<li><i>none</i></li>
+<%- END %>
+<%- IF release.metadata.dynamic_config %>
+	<li><i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
+<%- END %>
     <li class="divider"></li>
     <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i> CPAN Testers List</a></li>
     <li><a href="/requires/module/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>

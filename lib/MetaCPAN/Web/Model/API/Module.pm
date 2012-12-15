@@ -33,8 +33,8 @@ my @ROGUE_DISTRIBUTIONS
     = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx Bundle-Everything);
 
 sub find {
-    my ( $self, $module ) = @_;
-    $self->request("/module/$module");
+    my ( $self, @path ) = @_;
+    $self->request("/module/" . join("/", @path));
 }
 
 sub _not_rogue {
@@ -368,7 +368,7 @@ sub search {
                             if(documentation == empty) {
                                 documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
                             }
-                            return _score - documentation.length()/4000
+                            return _score - documentation.length()/400
                             },
                             query => {
                                 boosting => {
@@ -416,7 +416,7 @@ sub search {
                 }
             },
             fields => [
-                qw(documentation author abstract.analyzed release path status distribution date id)
+                qw(documentation author abstract.analyzed release path status module distribution date id)
             ],
         }
     );

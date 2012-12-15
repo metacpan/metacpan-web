@@ -65,6 +65,7 @@ $app = Plack::Middleware::Assets->wrap(
             shBrushCpp
             shBrushCPANChanges
             cpan
+            toolbar
             github
             bootstrap/bootstrap-dropdown
             bootstrap/bootstrap-collapse

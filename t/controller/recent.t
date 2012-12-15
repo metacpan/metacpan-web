@@ -10,7 +10,7 @@ test_psgi app, sub {
 
     my $tx = tx($res);
     ok( my $release = $tx->find_value(
-            '//div[@class="content"]/table[2]/tbody/tr[2]//a[1]/@href'),
+            '//table[2]/tbody/tr[1]//a[1]/@href'),
         'contains a release'
     );
     ok( $res = $cb->( GET $release ), "GET $release" );

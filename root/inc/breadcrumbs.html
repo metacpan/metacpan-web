@@ -31,7 +31,9 @@ END %>
   </span>
 <% END %>
 <div class="breadcrumbs">
-  <a rel="author" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
+  <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>">
+      <% author.name || release.author %>
+  </a>
   <span>&nbsp;/&nbsp;</span>
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
   <% PROCESS version_dropdown %>

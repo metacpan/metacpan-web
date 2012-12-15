@@ -34,12 +34,8 @@
 <% FOREACH group IN results; item = group.0 %>
   <div class="module-result">
   <big><strong>
-    <% IF item.documentation -%>
-    <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a>
-    <% ELSE -%>
-    <a href="/source/<% [item.author, item.release, item.path].join("/") %>"><% item.path %></a>
-    <% END -%>
-     <% IF item.abstract; ' - '; item.abstract; END %>
+     <% link_to_file(item) | none %>
+     <%- IF item.abstract; ' - '; item.abstract; END %>
   </strong></big><% INCLUDE inc/favorite.html module = item %><br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
@@ -53,11 +49,9 @@
 <br>
 <% IF group.size > 1 %>
 <ul class="search-group">
-    <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li><% IF item.documentation -%>
-    <a href="/module/<% IF item.status == 'latest'; item.documentation; ELSE; [item.author, item.release, item.path].join("/"); END %>"><% item.documentation %></a>
-    <% ELSE -%>
-    <a href="/source/<% [item.author, item.release, item.path].join("/") %>"><% item.path %></a>
-    <% END -%> <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
+    <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
+    <% link_to_file(item) | none %>
+    <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
     <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
 </ul>
 <% END %>
