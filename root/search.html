@@ -51,7 +51,7 @@
   <!-- <% item.score %> -->
 <br>
 <% IF group.size > 1 %>
-<ul class="search-group">
+<ul>
     <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
     <% link_to_file(item) | none %>
     <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
