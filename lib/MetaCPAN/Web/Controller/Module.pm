@@ -10,24 +10,21 @@ with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
 
-sub index : PathPart('module') : Chained('/') : Args {
-    my ( $self, $c, $id, @module ) = @_;
+sub path : PathPart('module') : Chained('/') : Args {
+    my ( $self, $c, @path ) = @_;
 
     # force consistent casing in URLs
-    if ( @module != 0 and $id ne uc($id) ) {
-        $c->res->redirect( '/module/' . join( '/', uc($id), @module ), 301 );
+    if ( @path > 2 && $path[0] ne uc($path[0]) ) {
+        $c->res->redirect( '/module/' . join( '/', uc(shift @path), @path ), 301 );
         $c->detach();
     }
 
-    @module = ( $id, @module );
-    my $data
-        = @module == 1
-        ? $c->model('API::Module')->find(@module)->recv
-        : $c->model('API::Module')->get(@module)->recv;
+    my $model = $c->model('API::Module');
+    my $data = @path > 2 ? $model->get(@path)->recv : $model->find(@path)->recv;
 
     ( $data->{documentation}, my $pod )
         = map { $_->{name}, $_->{associated_pod} }
-        grep { @module > 1 || $module[0] eq $_->{name} }
+        grep { @path > 1 || $path[0] eq $_->{name} }
         grep { $_->{associated_pod} } @{ $data->{module} }
         unless ( $data->{documentation} );
 
@@ -35,7 +32,7 @@ sub index : PathPart('module') : Chained('/') : Args {
     my $reqs = $self->api_requests(
         $c,
         {   pod => $c->model('API')
-                ->request( '/pod/' . ( $pod || join( '/', @module ) ) . '?show_errors=1' ),
+                ->request( '/pod/' . ( $pod || join( '/', @path ) ) . '?show_errors=1' ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },

@@ -160,7 +160,7 @@ sub modules {
             size   => 999,
             sort   => ['documentation'],
             fields => [
-                qw(documentation _source.abstract _source.module path status)
+                qw(documentation _source.abstract _source.module path status author release)
             ],
         }
     );

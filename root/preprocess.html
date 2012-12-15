@@ -45,5 +45,17 @@ profiles = {
   vimeo = { name = 'Vimeo', url = 'http://vimeo.com/%s' },
   youtube = { name = 'Youtube', url = 'http://www.youtube.com/user/%s' },
   };
-
 -%>
+<%-
+  MACRO link_to_file(file) BLOCK;
+  title = file.documentation || file.path;
+  IF file.status == "latest"
+    && file.documentation
+    && file.module.grep(->(module){ module.authorized && module.indexed });
+    path = file.documentation;
+  ELSE;
+    path = [file.author, file.release, file.path].join("/");
+  END;
+%>
+<a href="/module/<% path %>"><%- title %></a>
+<%- END -%>

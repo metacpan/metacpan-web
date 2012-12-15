@@ -69,20 +69,20 @@ provides      = [];
 modules       = [];
 FOREACH file IN files;
   IF file.documentation && file.module;
-    modules.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+    modules.push(file);
     FOREACH module IN file.module;
-      IF module.name != file.documentation && module.indexed;
+      IF module.name != file.documentation && module.indexed && module.authorized;
         provides.push({ status = file.status, title = module.name, path = file.path });
       END;
     END;
   ELSIF file.module;
     FOREACH module IN file.module;
-      provides.push({ status = file.status, title = module.name, path = file.path });
+      provides.push({ path = file.path, title = module.name });
     END;
   ELSIF file.documentation;
-        documentation.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+        documentation.push(file);
   ELSE;
-        documentation_raw.push({ status = file.status, title = file.documentation, path = file.path, abstract = file.abstract });
+        documentation_raw.push(file);
   END;
 END;
 documentation = documentation.merge(documentation_raw);
@@ -90,7 +90,7 @@ documentation = documentation.merge(documentation_raw);
 <% IF modules.size %><strong>Modules</strong>
 <% FOREACH module IN modules %>
   <div>
-    <strong><a href="/module/<% IF release.status == 'latest'; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+    <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
@@ -98,7 +98,7 @@ documentation = documentation.merge(documentation_raw);
 <% IF documentation.size %><strong>Documentation</strong>
 <% FOREACH module IN documentation %>
   <div>
-    <strong><a href="/module/<% IF release.status == 'latest' && module.title; module.title; ELSE; [release.author, release.name, module.path].join("/"); END %>"><% module.title ? module.title : module.path %></a></strong><% IF module.abstract %> - <% module.abstract; END %>
+    <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
