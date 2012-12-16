@@ -72,19 +72,13 @@ sub view : Private {
     my ( $root, $modules ) = @{$reqs}{qw(root modules)};
 
     my @root_files = (
-        sort
-        map { $_->{fields}->{name} } @{ $root->{hits}->{hits} }
+        sort { $a->{name} cmp $b->{name} }
+        map { $_->{fields} } @{ $root->{hits}->{hits} }
     );
 
     # TODO: add action for /changes/$release/$version ? that does this
 
-    my $changes = undef;
-    foreach my $filename (@root_files) {
-        if ( $filename =~ m{\AChange}i || $filename eq 'NEWS' ) {
-            $changes = $filename;
-            last;
-        }
-    }
+    my ($changes) = grep { $_->{name} =~ m/\A(Change|NEWS)/i } @root_files;
 
     $c->res->last_modified( $out->{date} );
 

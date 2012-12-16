@@ -251,7 +251,7 @@ sub root_files {
                     }
                 }
             },
-            fields => [qw(name)],
+            fields => [qw(name documentation)],
             size   => 100,
         }
     );

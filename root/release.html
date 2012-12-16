@@ -14,7 +14,7 @@
       <li><strong class="relatize"><% release.date.dt_http %></strong></li>
       <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <% IF changes %>
-          <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>"><% changes %></a></li>
+          <li><a href="/<% changes.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; changes.name %>">Changes</a></li>
       <% END %>
       <li><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
       <% PROCESS inc/release-info.html %>
@@ -112,8 +112,8 @@ documentation = documentation.merge(documentation_raw);
 
 <br><% END %>
 <% IF root.size %><strong>Other files</strong>
-<% FOREACH filename IN root %>
-<div><strong><a href="/source/<% release.author; '/'; release.name; '/'; filename %>"><% filename %></a></strong></div>
+<% FOREACH file IN root %>
+<div><strong><a href="/<% file.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
 <% END; END %>
 
 </div>
