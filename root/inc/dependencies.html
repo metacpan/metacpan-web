@@ -16,10 +16,9 @@ FOREACH dep IN deps.sort %>
 <% END %>
 <%- IF deps.size == 0 && !release.metadata  %>
 <i title="no META file provided">unknown</i>
+<%- ELSIF release.metadata.dynamic_config %>
+<i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i>
 <%- ELSIF deps.size == 0 %>
 <i>none</i>
-<%- END %>
-<%- IF release.metadata.dynamic_config %>
-<i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i>
 <%- END %>
 </div>
