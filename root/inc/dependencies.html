@@ -11,11 +11,10 @@ FOREACH dep IN deps.sort %>
 <%- END %>
 <%- IF deps.size == 0 && !release.metadata  %>
 	<li><i title="no META file provided">unknown</i></li>
+<%- ELSIF release.metadata.dynamic_config %>
+	<li><i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
 <%- ELSIF deps.size == 0 %>
 	<li><i>none</i></li>
-<%- END %>
-<%- IF release.metadata.dynamic_config %>
-	<li><i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
 <%- END %>
     <li class="divider"></li>
     <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i> CPAN Testers List</a></li>
