@@ -1,18 +1,18 @@
-      <% IF release.resources.homepage %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
+      <% IF is_url(release.resources.homepage) %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %>
       <li>
-        <% IF release.resources.repository.web %>
+        <% IF is_url(release.resources.repository.web) %>
         <a href="<% release.resources.repository.web %>">Repository</a>
         <% END %>
-        <% IF release.resources.repository.web && release.resources.repository.url %>
+        <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
         (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
-        <% ELSIF release.resources.repository.url %>
+        <% ELSIF is_url(release.resources.repository.url) %>
         <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
         <% END %>
       </li>
       <% END %>
       <li><a href="<%
-        IF release.resources.bugtracker.web;
+        IF is_url(release.resources.bugtracker.web);
           release.resources.bugtracker.web;
         ELSIF release.resources.bugtracker.mailto;
           'mailto:' _ release.resources.bugtracker.mailto;
