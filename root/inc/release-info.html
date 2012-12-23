@@ -46,7 +46,7 @@
             NEXT;
         END %>
     <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</option>
-    <% END; IF backpan.size > 1 %>
+    <% END; IF backpan.size %>
     <optgroup label="BackPAN"></optgroup>
     <% FOREACH version IN backpan %>
     <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</option><% END %>
