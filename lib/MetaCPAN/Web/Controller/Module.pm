@@ -71,7 +71,7 @@ sub path : PathPart('module') : Chained('/') : Args {
             li      => ['id'],
             ol      => [],
             p       => [qw(class style)],
-            pre     => [qw(id class)],
+            pre     => [qw(id class style)],
             span    => [qw(style)],
             strong  => [],
             sub     => [],
