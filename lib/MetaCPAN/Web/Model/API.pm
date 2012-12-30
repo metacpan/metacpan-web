@@ -7,9 +7,17 @@ has [qw(api api_secure)] => ( is => 'ro' );
 
 use Encode ();
 use JSON;
-use AnyEvent::HTTP qw(http_request);
+use HTTP::Request ();
+use AnyEvent::Curl::Multi;
 use Try::Tiny 0.09;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
+
+class_has client => ( is => 'ro', lazy_build => 1 );
+
+sub _build_client {
+    return AnyEvent::Curl::Multi->new( max_concurrency => 5 );
+}
 
 {
     no warnings 'once';
@@ -52,15 +60,18 @@ sub request {
     my ( $token, $method ) = @$params{qw(token method)};
     $path .= "?access_token=$token" if ($token);
     my $req = $self->cv;
-    http_request $method ? $method
-        : $search        ? 'post'
-        : 'get' => ( $token ? $self->api_secure : $self->api ) . $path,
-        body => $search ? encode_json($search) : undef,
-        headers    => { 'Content-type' => 'application/json' },
-        persistent => 1,
+    my $request = HTTP::Request->new(
+        $method ? $method : $search ? 'POST' : 'GET',
+        ( $token ? $self->api_secure : $self->api ) . $path,
+        ['Content-type' => 'application/json'],
+    );
+    $request->add_content_utf8(encode_json($search)) if $search;
+
+    $self->client->request($request)->cv->cb(
         sub {
-        my ( $data, $headers ) = @_;
-        my $content_type = $headers->{'content-type'} || '';
+        my ($response, $stats) = shift->recv;
+        my $content_type = $response->header('content-type') || '';
+        my $data = $response->content;
 
         if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
@@ -71,7 +82,7 @@ sub request {
             # Response is raw data, e.g. text/plain
             $req->send( $self->raw_api_response($data) );
         }
-        };
+    });
     return $req;
 }
 

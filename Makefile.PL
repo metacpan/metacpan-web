@@ -27,7 +27,7 @@ my %WriteMakefileArgs = (
 
   # runtime dependencies
   PREREQ_PM => {
-    "AnyEvent::HTTP" => 0,
+    "AnyEvent::Curl::Multi" => 0,
     "CPAN::Meta::Requirements" => 0,
     "Captcha::reCAPTCHA" => "0.94",
     "Catalyst" => "5.90011",
@@ -70,6 +70,7 @@ my %WriteMakefileArgs = (
     "Module::Find" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
+    "MooseX::ClassAttribute" => 0,
     "Perl::PrereqScanner" => "1.014",
     "Plack::Middleware::Assets" => 0,
     "Plack::Middleware::ReverseProxy" => 0,
