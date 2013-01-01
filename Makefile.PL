@@ -68,7 +68,6 @@ my %WriteMakefileArgs = (
     "JSON::XS" => 0,
     "List::MoreUtils" => 0,
     "List::Util" => 0,
-    "Module::Find" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
     "MooseX::ClassAttribute" => 0,
