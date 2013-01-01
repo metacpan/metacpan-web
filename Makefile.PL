@@ -60,6 +60,7 @@ my %WriteMakefileArgs = (
     "Gravatar::URL" => 0,
     "HTML::Restrict" => 0,
     "HTML::Tree" => 0,
+    "HTTP::Message::PSGI" => 0,
     "HTTP::Request::Common" => 0,
     "Hash::AsObject" => 0,
     "Hash::Merge" => 0,

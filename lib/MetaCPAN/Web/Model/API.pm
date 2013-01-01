@@ -78,7 +78,6 @@ sub request {
             $req->send( $@ ? $self->raw_api_response($data) : $json );
         }
         else {
-
             # Response is raw data, e.g. text/plain
             $req->send( $self->raw_api_response($data) );
         }
@@ -86,9 +85,13 @@ sub request {
     return $req;
 }
 
+# cache these
 my $encoding = Encode::find_encoding('utf-8-strict')
   or warn 'UTF-8 Encoding object not found';
 my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
+
+# TODO: Check if it's possible for the API to return any other charset.
+# Do raw files, git diffs, etc get converted? Any text that goes into ES?
 
 sub raw_api_response {
     my ($self, $data) = @_;

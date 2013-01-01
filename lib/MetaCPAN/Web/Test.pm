@@ -6,6 +6,7 @@ use strict;
 use warnings;
 use Plack::Test;
 use HTTP::Request::Common;
+use HTTP::Message::PSGI;
 use HTML::Tree;
 use Test::XPath;
 use Encode;
@@ -13,28 +14,32 @@ use base 'Exporter';
 our @EXPORT = qw(
   GET
   test_psgi
-  api_response
+  override_api_response
   app
   tx
 );
 
-sub api_response {
+# TODO: use Sub:Override?
+# save a copy in case we override
+my $orig_request = \&AnyEvent::Curl::Multi::request;
+
+sub override_api_response {
     require MetaCPAN::Web::Model::API;
 
     my $responder = pop;
     my $matches = {@_};
 
     no warnings 'redefine';
-    *MetaCPAN::Web::Model::API::http_request = sub ($$@) {
-        my $cb = pop;
-        my ($method, $url, %arg) = @_;
-        my @res;
-        if( ($matches->{if} ? $matches->{if}->(@_) : 1) and @res = $responder->(@_) ) {
-            $cb->(@res);
+    *AnyEvent::Curl::Multi::request = sub {
+        if( ($matches->{if} ? $matches->{if}->(@_) : 1) and my $res = $responder->(@_) ) {
+            $res = HTTP::Response->from_psgi($res) if ref $res eq 'ARRAY';
+            # return an object with a ->cv that's ready so that the cb will fire
+            my $ret = bless { cv => AE::cv() }, 'AnyEvent::Curl::Multi::Handle';
+            $ret->cv->send($res, {});
+            return $ret;
         }
         else {
-            @_ = (@_, $cb);
-            goto &AnyEvent::HTTP::http_request;
+            goto &$orig_request;
         }
     };
     return;
@@ -65,17 +70,18 @@ L<HTTP::Request::Common/GET>
 
 L<Plack::Test/test_psgi>
 
-=head2 api_response
+=head2 override_api_response
 
 Define a sub to intercept api requests and return your own response.
+Response can be L<HTTP::Response> or a PSGI array ref.
 
-    api_response(sub { return ("body", {"content-type": "text/plain"}) });
+    override_api_response(sub { return [ 200, ["Content-Type" => "text/plain"], ["body"] ]; });
 
 Conditionally with another sub:
 
-    api_response(
+    override_api_response(
       if => sub { return $_[1] =~ /foo/ },
-      sub { return ("body", {"content-type": "text/plain"}) }
+      sub { return HTTP::Response->new(200, "OK", ["Content-type" => "text/plain"], "body"); }
     );
 
 =head2 app
