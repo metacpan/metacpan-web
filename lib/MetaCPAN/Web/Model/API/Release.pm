@@ -257,6 +257,35 @@ sub root_files {
     );
 }
 
+sub example_files {
+    my ( $self, $author, $release ) = @_;
+    $self->request(
+        '/file/_search',
+        {   query => {
+                filtered => {
+                    query  => { match_all => {} },
+                    filter => {
+                        and => [
+                            { term => { release   => $release } },
+                            { term => { author    => $author } },
+                            { term => { directory => \0 } },
+                            {   or => [
+                                    map {
+                                        { prefix => { 'name' => $_ } },
+                                        { prefix => { 'path' => $_ } },
+                                    } qw{ ex eg example Example }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            fields => [qw( path pod_lines )],
+            size   => 100,
+        }
+    );
+}
+
 sub versions {
     my ( $self, $dist ) = @_;
     $self->request(

@@ -59,8 +59,9 @@ sub view : Private {
 
     my $reqs = $self->api_requests(
         $c,
-        {   root    => $model->root_files( $author, $release ),
-            modules => $model->modules( $author,    $release ),
+        {   root     => $model->root_files( $author, $release ),
+            modules  => $model->modules( $author, $release ),
+            examples => $model->example_files( $author, $release ),
         },
         $out,
     );
@@ -69,11 +70,16 @@ sub view : Private {
     $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
     # shortcuts
-    my ( $root, $modules ) = @{$reqs}{qw(root modules)};
+    my ( $root, $modules, $examples ) = @{$reqs}{qw(root modules examples)};
 
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
         map { $_->{fields} } @{ $root->{hits}->{hits} }
+    );
+
+    my @examples = (
+        sort { $a->{path} cmp $b->{path} }
+        map { $_->{fields} } @{ $examples->{hits}->{hits} }
     );
 
     # TODO: add action for /changes/$release/$version ? that does this
@@ -89,10 +95,11 @@ sub view : Private {
             changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
-                $modules->{took}, $root->{took},
+                $modules->{took}, $root->{took}, $examples->{took},
                 $reqs->{versions}->{took}
             ),
-            root  => \@root_files,
+            root     => \@root_files,
+            examples => \@examples,
             files => [
                 map {
                     {
