@@ -59,9 +59,8 @@ sub view : Private {
 
     my $reqs = $self->api_requests(
         $c,
-        {   root     => $model->root_files( $author, $release ),
+        {   files    => $model->interesting_files( $author, $release ),
             modules  => $model->modules( $author, $release ),
-            examples => $model->example_files( $author, $release ),
         },
         $out,
     );
@@ -70,16 +69,21 @@ sub view : Private {
     $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
     # shortcuts
-    my ( $root, $modules, $examples ) = @{$reqs}{qw(root modules examples)};
+    my ( $files, $modules ) = @{$reqs}{qw(files modules)};
 
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
-        map { $_->{fields} } @{ $root->{hits}->{hits} }
+        grep { $_->{path} !~ m{/} }
+        map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
+
+    use Data::Dumper;
+    print Dumper[ map { $_->{fields} } @{ $files->{hits}->{hits} } ];
 
     my @examples = (
         sort { $a->{path} cmp $b->{path} }
-        map { $_->{fields} } @{ $examples->{hits}->{hits} }
+        grep { $_->{path} =~ m{\b(?:eg|ex|examples?)\b}i }
+        map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
     # TODO: add action for /changes/$release/$version ? that does this
@@ -95,7 +99,7 @@ sub view : Private {
             changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
-                $modules->{took}, $root->{took}, $examples->{took},
+                $modules->{took}, $files->{took},
                 $reqs->{versions}->{took}
             ),
             root     => \@root_files,

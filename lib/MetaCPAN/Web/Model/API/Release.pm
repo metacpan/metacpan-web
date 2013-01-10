@@ -229,35 +229,7 @@ sub reverse_dependencies {
     return $cv;
 }
 
-sub root_files {
-    my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/file/_search',
-        {   query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { release   => $release } },
-                            { term => { author    => $author } },
-                            { term => { level     => 0 } },
-                            { term => { directory => \0 } },
-                            {   or => [
-                                    map { { term => { 'file.name' => $_ } } }
-                                        qw(MANIFEST README README.md README.pod INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog CHANGELOG META.yml META.json dist.ini NEWS)
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            fields => [qw(name documentation)],
-            size   => 100,
-        }
-    );
-}
-
-sub example_files {
+sub interesting_files {
     my ( $self, $author, $release ) = @_;
     $self->request(
         '/file/_search',
@@ -270,6 +242,15 @@ sub example_files {
                             { term => { author    => $author } },
                             { term => { directory => \0 } },
                             {   or => [
+                                    { and => [
+                                            { term => { level     => 0 } },
+                                            {   or => [
+                                                    map { { term => { 'file.name' => $_ } } }
+                                                        qw(MANIFEST README README.md README.pod INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog CHANGELOG META.yml META.json dist.ini NEWS)
+                                                ]
+                                            }
+                                        ]
+                                    },
                                     map {
                                         { prefix => { 'name' => $_ } },
                                         { prefix => { 'path' => $_ } },
@@ -280,8 +261,8 @@ sub example_files {
                     }
                 }
             },
-            fields => [qw( path pod_lines )],
-            size   => 100,
+            fields => [qw( name documentation path pod_lines )],
+            size   => 200,
         }
     );
 }
