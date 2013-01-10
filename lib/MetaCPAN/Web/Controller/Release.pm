@@ -79,7 +79,7 @@ sub view : Private {
 
     my @examples = (
         sort { $a->{path} cmp $b->{path} }
-        grep { $_->{path} =~ m{\b(?:eg|ex|examples?)\b}i }
+        grep { $_->{path} =~ m{\b(?:eg|ex|examples?)\b}i and not $_->{path} =~ m{^x?t/} }
         map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
