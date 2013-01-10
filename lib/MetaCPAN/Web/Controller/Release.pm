@@ -77,9 +77,6 @@ sub view : Private {
         map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
-    use Data::Dumper;
-    print Dumper[ map { $_->{fields} } @{ $files->{hits}->{hits} } ];
-
     my @examples = (
         sort { $a->{path} cmp $b->{path} }
         grep { $_->{path} =~ m{\b(?:eg|ex|examples?)\b}i }
