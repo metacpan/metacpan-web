@@ -15,7 +15,7 @@ test_psgi app, sub {
     my $tx = tx($res);
 
     is( $tx->find_value('//ul[@class="diff-ul"]//li/a'),
-        'Moose.pm', 'Module diff file list' );
+        'lib/Moose.pm', 'Module diff file list' );
 
     ok( $res = $cb->( GET $rel_diff ), 'GET release diff' );
     is( $res->code, 200, 'code 200' );
