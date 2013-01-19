@@ -96,10 +96,6 @@ my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 sub raw_api_response {
     my ($self, $data) = @_;
 
-    # will http_response ever return undef or a blessed object?
-    $data  = '' if ! defined $data; # define
-    $data .= '' if       ref $data; # stringify
-
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     try {
