@@ -10,7 +10,9 @@ use Encode qw( is_utf8 decode encode );
 my ($res_body, $content_type) = ('', 'text/plain');
 
 # hijack all requests
+my $api_req;
 override_api_response sub {
+  $api_req = $_[1];
   return [200, [ Content_Type => $content_type ], [$res_body] ];
 };
 
@@ -125,10 +127,57 @@ foreach my $ctype ( 'text/plain', 'application/json' ){
   };
 }
 
+subtest 'check requests sent to the api' => sub {
+  check_request(
+    'simple GET',
+    [ '/oogie/boogie/song', undef, {} ],
+    {
+      content => '',
+      method  => 'GET',
+      uri     => $model->api . '/oogie/boogie/song',
+    },
+  );
+
+  check_request(
+    'utf8 search',
+    [ '/sandy/claws' => { "\x{1f36a}" => 'cookies', } ],
+    {
+      content => qq<{"\360\237\215\252":"cookies"}>,
+      method  => 'POST',
+      uri     => $model->api . '/sandy/claws',
+    },
+  );
+
+  check_request(
+    'PUT json with character string',
+    [
+      '/whats/this' =>
+      { mistletoe => "1F384 🎄 CHRISTMAS TREE" },
+      { method => 'PUT', token => 'nightmare' },
+    ],
+    {
+      content => qq<{"mistletoe":"1F384 \xf0\x9f\x8e\x84 CHRISTMAS TREE"}>,
+      method  => 'PUT',
+      uri     => $model->api_secure . "/whats/this?access_token=nightmare",
+    },
+  );
+};
+
 done_testing;
 
 { package # no_index
     Blessed_String;
   sub new { bless [ $_[1] ], $_[0]; }
   use overload '""' => sub { shift->[0] };
+}
+
+sub check_request {
+  my ($desc, $args, $exp) = @_;
+  $model->request(@$args);
+
+  local $Test::Builder::Level = $Test::Builder::Level + 1;
+  # check attributes that were specified
+  foreach my $k ( sort keys %$exp ){
+    is $api_req->$k, $exp->{$k}, "$desc (matched $k)";
+  }
 }
