@@ -65,7 +65,8 @@ sub request {
         ( $token ? $self->api_secure : $self->api ) . $path,
         ['Content-type' => 'application/json'],
     );
-    $request->add_content_utf8(encode_json($search)) if $search;
+    # encode_json returns an octet string
+    $request->add_content(encode_json($search)) if $search;
 
     $self->client->request($request)->cv->cb(
         sub {
