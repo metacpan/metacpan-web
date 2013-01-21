@@ -59,7 +59,7 @@ sub build_feed {
     my $cv = AE::cv();
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
-    $feed->link('http://metapcan.org/');
+    $feed->link('http://metacpan.org/');
     foreach my $entry ( @{ $params{entries} } ) {
 
         $feed->add_entry( $self->build_entry($entry) );
