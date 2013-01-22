@@ -1,0 +1,5 @@
+# http://www.robotstxt.org/wc/norobots.html
+
+User-agent: *
+Disallow: /login/
+Disallow: /diff/

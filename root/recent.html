@@ -1,4 +1,5 @@
 <%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
+<%- title = 'Recent' %>
 <div class="search-bar">
   <% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %>
   <a href ="/favorite/recent">Recent ++</a>

@@ -64,6 +64,11 @@ sub forbidden : Private {
     $c->response->status(403);
 }
 
+sub robots : Path("robots.txt") {
+    my ( $self, $c ) = @_;
+    $c->stash( { template => 'robots.txt' } );
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
