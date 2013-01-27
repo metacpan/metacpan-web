@@ -7,46 +7,23 @@
 
 <ul class="nav nav-list" itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
-  <%- IF versions.size > 1; %>
-  <li><span class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            Jump to version <b class="caret pull-right"></b>
-          </a>
-        <ul class="dropdown-menu">
-  <%-
-  backpan = [];
-  FOREACH version IN versions;
-      IF release.name == version.name;
-          NEXT;
-      END;
-      IF version.status == 'backpan';
-          backpan.push(version);
-          NEXT;
-      END %>
-            <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
-      <%-
-      END;
-      IF backpan.size > 1 %>
-          <li class="nav-header">BackPAN</li>
-      <%-
-          FOREACH version IN backpan %>
-          <li><a href="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
-      <%
-          END;
-      END;
-  END %>
-        </ul>
-      </span></li>
-      <li><div>
-        <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)</div>
-      </li>
-      <li><div><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a> (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)</div></li>
-      <% PROCESS inc/release-info.html %>
-      <li class="nav-header">Activity</li>
-      <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
-      <% INCLUDE inc/release-tools.html %>
-  </ul>
+  <li>
+    <div>
+      <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
+      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
+      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+    </div>
+  </li>
+  <% PROCESS inc/release-info.html %>
+  <li class="nav-header">Activity</li>
+  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+  <% INCLUDE inc/release-tools.html %>
+</ul>
 
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
@@ -54,12 +31,9 @@
 <a name="___pod"></a>
 <div class="pod">
 <% IF pod %>
-<%  # Add 'metacpan-verbatim' to class (SyntaxHighlighter will ignore) so we can apply CSS for users without javascript.
-    pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
-<% ELSIF pod_error %>
-<p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
+<% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
 <% ELSE %>
-No pod could be found for <% module.name %>
+<p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
 <% END %>
 </div>
 </div>
