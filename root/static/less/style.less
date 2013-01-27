@@ -4,6 +4,7 @@
 @import "account.less";
 @import "breadcrumbs.less";
 @import "search.less";
+@import "leaderboard.less";
 
 @iconSpritePath:          "../../icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../../icons/glyphicons-halflings-white.png";
@@ -16,6 +17,7 @@
 @navbarText: @linkColor;
 @navbarLinkColor: @linkColor;
 @navbarHeight: 29px;
+@gridGutterWidth: 10px;
 
 .border-radius(@radius) {
   -webkit-border-radius: 0;
@@ -151,7 +153,6 @@ body {
     padding: 0px;
     width: 170px;
     float: left;
-    margin-left: -5px;
 }
 
 .nav-list select, .nav-list input[type=text] {
@@ -160,9 +161,7 @@ body {
 }
 
 .nav-list > li > div {
-padding: 3px 15px;
-margin-left: -15px;
-margin-right: -15px;
+  padding: 3px 0 3px 0;
 }
 
 .nav-list form {
