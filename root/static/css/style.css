@@ -431,10 +431,6 @@ code { font-family: monospace; }
     padding-left: 0px;
 }
 
-.search-bar input[type="text"], .search-bar select  {
-    width: 160px;
-}
-
 body div.qtip div.content {
     padding: 0;
     margin: 0;

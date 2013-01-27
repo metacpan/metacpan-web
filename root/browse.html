@@ -6,22 +6,15 @@
   <% END %>
   </big></strong><br><br>
 
-<div class="search-bar">
-  <strong>Tools</strong>
-  <ul>
-    <li><a href="/release/<% author %>/<% release %>/">Release Info</a></li>
-    <li><a href="/author/<% author %>/">Author</a></li>
-    <li>&nbsp;</li>
-    <li><a href="<% api %>/source/<% base %>">Raw browser</a></li>
-  </ul>
-  <hr>
-  <strong>Info</strong>
-  <ul>
-    <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
-    <li><% count = files.grep(->{this.directory == 'false'}).size; count %> file<% count != 1 ? "s" : "" %></li>
-
-  </ul>
-</div>
+<ul class="nav nav-list">
+  <li class="nav-header">Tools</li>
+  <li><div><a href="/release/<% author %>/<% release %>/">Release Info</a></div></li>
+  <li><div><a href="/author/<% author %>/">Author</a></div></li>
+  <li><div><a href="<% api %>/source/<% base %>">Raw browser</a></div></li>
+  <li class="nav-header">Info</li>
+  <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
+  <li><% count = files.grep(->{this.directory == 'false'}).size; count %> file<% count != 1 ? "s" : "" %></li>
+</ul>
 
 <div class="content">
 <table class="file-table tablesorter">

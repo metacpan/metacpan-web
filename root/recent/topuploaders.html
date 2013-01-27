@@ -1,15 +1,28 @@
 <%- title = "CPAN Top Uploaders" %>
-<div class="search-bar">
-  <big><strong>Top Uploaders</strong></big>
-  <hr>
-  <strong>Date Range</strong>
-  <ul style="padding-left: 12px">
-  <li><a href="<% c.uri_for('/recent/topuploaders/weekly') %>"<% IF range == 'weekly' %> class="strong"<% END %>>Weekly</a></li>
-  <li><a href="<% c.uri_for('/recent/topuploaders/monthly') %>"<% IF range == 'monthly' %> class="strong"<% END %>>Monthly</a></li>
-  <li><a href="<% c.uri_for('/recent/topuploaders/yearly') %>"<% IF range == 'yearly' %> class="strong"<% END %>>Yearly</a></li>
-  <li><a href="<% c.uri_for('/recent/topuploaders/all') %>"<% IF range == 'all' %> class="strong"<% END %>>All time</a></li>
-  </ul>
-</div>
+<ul class="nav nav-list">
+  <li class="nav-header">Date Range</li>
+  <li>
+    <div>
+      <a href="<% c.uri_for('/recent/topuploaders/weekly') %>"<% IF range == 'weekly' %> class="strong"<% END %>>Weekly</a>
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="<% c.uri_for('/recent/topuploaders/monthly') %>"<% IF range == 'monthly' %> class="strong"<% END %>>Monthly</a>
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="<% c.uri_for('/recent/topuploaders/yearly') %>"<% IF range == 'yearly' %> class="strong"<% END %>>Yearly</a>
+    </div>
+  </li>  
+  <li>
+    <div>
+      <a href="<% c.uri_for('/recent/topuploaders/all') %>"<% IF range == 'all' %> class="strong"<% END %>>All time</a>
+    </div>
+  </li>
+</ul>
+
 <div class="content">
 <% FOREACH author IN authors %>
 <div style="float:left; width: 300px; height: 100px; overflow: hidden">

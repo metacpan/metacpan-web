@@ -34,7 +34,7 @@
 </li>
 <%- IF versions.size > 1 %>
 <li>
-    <select name="release" onchange="document.location.href='/diff/file/?target=<% [module.author, module.release, module.path].join("/") %>&amp;source=' + this.value">
+    <select name="release" onchange="document.location.href='/diff/file/?target=<% [release.author, release.name, module.path].join("/") %>&amp;source=' + this.value">
         <option>Diff with version</option>
     <%- PROCESS version_options %>
     </select>

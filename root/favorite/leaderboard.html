@@ -1,31 +1,31 @@
 <% title = '++ Leaderboard' %>
-<div class="search-bar">
-    <a href ="/favorite/recent">Recent ++</a>
-</div>
+<ul class="nav nav-list">
+  <li><div><a href ="/favorite/recent">Recent ++</a></div></li>
+</ul>
 
 <div class="content">
-    <div class="leader_board">
-        <div class="leader_board_header">
-            Top 100 ++ Leaderboard
-        </div>
-        <div class="leader_board_content">
-            <% FOREACH leader IN leaders %>
-            <div class="leader_board_row">
-                <div class="leader_board_top_all <% IF loop.count < 6 %>leader_board_top_5<% ELSIF loop.count < 11 %>leader_board_top_10<% ELSE %>leader_board_top_rest<% END %>">
-                    <div class="leader_board_rank">
-                        <% loop.count %>
-                    </div>
-                    <div class="leader_board_name">
-                        <a href="/release/<% leader.term %>" title="<% leader.term %>">
-                            <% leader.term %>
-                        </a>
-                    </div>
-                    <div class="leader_board_count">
-                        <% leader.count %> ++
-                    </div>
-                </div>
-            </div>
-            <% END %>
-        </div>
+  <div class="leader_board">
+    <div class="leader_board_header">
+      Top 100 ++ Leaderboard
     </div>
+    <div class="leader_board_content">
+      <% FOREACH leader IN leaders %>
+      <div class="leader_board_row">
+        <div class="leader_board_top_all <% IF loop.count < 6 %>leader_board_top_5<% ELSIF loop.count < 11 %>leader_board_top_10<% ELSE %>leader_board_top_rest<% END %>">
+          <div class="leader_board_rank">
+            <% loop.count %>
+          </div>
+          <div class="leader_board_name">
+            <a href="/release/<% leader.term %>" title="<% leader.term %>">
+              <% leader.term %>
+            </a>
+          </div>
+          <div class="leader_board_count">
+            <% leader.count %> ++
+          </div>
+        </div>
+      </div>
+      <% END %>
+    </div>
+  </div>
 </div>
