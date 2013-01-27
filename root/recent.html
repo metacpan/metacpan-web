@@ -1,4 +1,5 @@
 <%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
+<%- title = "Recent" %>
 <ul class="nav nav-list phone-hidden">
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>

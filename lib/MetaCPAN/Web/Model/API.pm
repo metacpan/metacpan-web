@@ -7,9 +7,17 @@ has [qw(api api_secure)] => ( is => 'ro' );
 
 use Encode ();
 use JSON;
-use AnyEvent::HTTP qw(http_request);
+use HTTP::Request ();
+use AnyEvent::Curl::Multi;
 use Try::Tiny 0.09;
+use MooseX::ClassAttribute;
 use namespace::autoclean;
+
+class_has client => ( is => 'ro', lazy_build => 1 );
+
+sub _build_client {
+    return AnyEvent::Curl::Multi->new( max_concurrency => 5 );
+}
 
 {
     no warnings 'once';
@@ -52,39 +60,42 @@ sub request {
     my ( $token, $method ) = @$params{qw(token method)};
     $path .= "?access_token=$token" if ($token);
     my $req = $self->cv;
-    http_request $method ? $method
-        : $search        ? 'post'
-        : 'get' => ( $token ? $self->api_secure : $self->api ) . $path,
-        body => $search ? encode_json($search) : undef,
-        headers    => { 'Content-type' => 'application/json' },
-        persistent => 1,
+    my $request = HTTP::Request->new(
+        $method ? $method : $search ? 'POST' : 'GET',
+        ( $token ? $self->api_secure : $self->api ) . $path,
+        ['Content-type' => 'application/json'],
+    );
+    # encode_json returns an octet string
+    $request->add_content(encode_json($search)) if $search;
+
+    $self->client->request($request)->cv->cb(
         sub {
-        my ( $data, $headers ) = @_;
-        my $content_type = $headers->{'content-type'} || '';
+        my ($response, $stats) = shift->recv;
+        my $content_type = $response->header('content-type') || '';
+        my $data = $response->content;
 
         if ( $content_type =~ /^application\/json/ ) {
             my $json = eval { decode_json($data) };
             $req->send( $@ ? $self->raw_api_response($data) : $json );
         }
         else {
-
             # Response is raw data, e.g. text/plain
             $req->send( $self->raw_api_response($data) );
         }
-        };
+    });
     return $req;
 }
 
+# cache these
 my $encoding = Encode::find_encoding('utf-8-strict')
   or warn 'UTF-8 Encoding object not found';
 my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 
+# TODO: Check if it's possible for the API to return any other charset.
+# Do raw files, git diffs, etc get converted? Any text that goes into ES?
+
 sub raw_api_response {
     my ($self, $data) = @_;
-
-    # will http_response ever return undef or a blessed object?
-    $data  = '' if ! defined $data; # define
-    $data .= '' if       ref $data; # stringify
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8

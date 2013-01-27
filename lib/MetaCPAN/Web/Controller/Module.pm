@@ -22,6 +22,11 @@ sub path : PathPart('module') : Chained('/') : Args {
     my $model = $c->model('API::Module');
     my $data = @path > 2 ? $model->get(@path)->recv : $model->find(@path)->recv;
 
+    if($data->{directory}) {
+        $c->res->redirect( '/source/' . join( '/', @path ), 301 );
+        $c->detach;
+    }
+
     ( $data->{documentation}, my $pod )
         = map { $_->{name}, $_->{associated_pod} }
         grep { @path > 1 || $path[0] eq $_->{name} }
@@ -66,7 +71,7 @@ sub path : PathPart('module') : Chained('/') : Args {
             li      => ['id'],
             ol      => [],
             p       => [qw(class style)],
-            pre     => [qw(id class)],
+            pre     => [qw(id class style)],
             span    => [qw(style)],
             strong  => [],
             sub     => [],

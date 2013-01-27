@@ -27,7 +27,7 @@ my %WriteMakefileArgs = (
 
   # runtime dependencies
   PREREQ_PM => {
-    "AnyEvent::HTTP" => 0,
+    "AnyEvent::Curl::Multi" => 0,
     "CPAN::Meta::Requirements" => 0,
     "Captcha::reCAPTCHA" => "0.94",
     "Catalyst" => "5.90011",
@@ -60,6 +60,7 @@ my %WriteMakefileArgs = (
     "Gravatar::URL" => 0,
     "HTML::Restrict" => 0,
     "HTML::Tree" => 0,
+    "HTTP::Message::PSGI" => 0,
     "HTTP::Request::Common" => 0,
     "Hash::AsObject" => 0,
     "Hash::Merge" => 0,
@@ -67,9 +68,9 @@ my %WriteMakefileArgs = (
     "JSON::XS" => 0,
     "List::MoreUtils" => 0,
     "List::Util" => 0,
-    "Module::Find" => 0,
     "Moose" => 0,
     "Moose::Role" => 0,
+    "MooseX::ClassAttribute" => 0,
     "Perl::PrereqScanner" => "1.014",
     "Plack::Middleware::Assets" => 0,
     "Plack::Middleware::ReverseProxy" => 0,

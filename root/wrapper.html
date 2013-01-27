@@ -88,7 +88,7 @@
                                   <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter'] %>
+                                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
                                 <li>
                                     <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
                                 </li>
@@ -142,7 +142,11 @@
       <div class="span4"><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a></div>
       <div class="span4 center"><a href="/about/resources">About</a></div>
       <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
-        Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=75 height=16></a>
+        Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+      <br><br>
+      <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
+        <img src="/static/images/bytemark_logo.png" width=75>
+      </a>
     </div>
   </div>
   </body>
