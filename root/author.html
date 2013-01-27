@@ -1,19 +1,26 @@
 <% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
 <% twitter_card_inc = 'inc/twitter/author.html' %>
-<div class="search-bar">
-  <% INCLUDE inc/author-pic.html author = author float = 'left' %>
+<ul class="nav nav-list">
+  <li><% INCLUDE inc/author-pic.html author = author float = 'left' %></li>
   <div style="clear: both; text-align: center"></div>
-  <hr>
-  <strong>Email</strong><br>
-  <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a><br>
-  <% IF author.website.size %>
-  <strong>Website</strong><br>
+  <li class="nav-header">Email</li>
+  <li>
+  <div>
+    <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a>
+  </div>
+  </li>
+  <%- IF author.website.size %>
+  <li class="nav-header">Website</li>
   <% FOREACH website IN author.website %>
-  <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a><br><% END %>
-  <% END %>
+  <li>
+  <div>
+    <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
+  </div>
+  </li>
+  <%- END; END %>
 <%
 IF author.profile.size -%>
-<strong>Profiles</strong>
+<li class="nav-header">Profiles</li>
 <div class='user-profiles'>
 <%-
 FOREACH profile IN author.profile.sort('name');
@@ -22,18 +29,32 @@ IF profiles.${profile.name} %>
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16 alt="<% profile.name %>">
 </a>
 <% END; END %></div><% END %>
-<% IF author.country || author.city || author.region %>
-<strong>Location</strong><br>
-<% IF author.country %>
-<img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" title="<% author.country %>" width=16 height=11> &nbsp;
-<%- END %>
-<%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %><br>
+<%- IF author.country || author.city || author.region %>
+<li class="nav-header">Location</li>
+<li>
+  <div>
+    <%- IF author.country %>
+    <img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" title="<% author.country %>" width=16 height=11> &nbsp;
+    <%- END %>
+    <%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %>
+  </div>
+</li>
 <% END %>
 <% IF author.blog.size %>
-<strong>Blog</strong><br>
+<li class="nav-header">Blog</li>
 <% FOREACH blog IN author.blog -%>
-<% IF blog.feed %><a href="<% blog.feed %>" target="_blank"><img src="/static/images/profile/feed.png" width=16 height=16 style="float: right"></a><% END %>
-<a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px"><% blog.url.replace('^https?://', '') %></a>
+<li>
+  <div>
+    <%- IF blog.feed %>
+    <a href="<% blog.feed %>" target="_blank">
+      <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
+    </a>
+    <%- END %>
+    <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
+      <% blog.url.replace('^https?://', '') %>
+    </a>
+  </div>
+</li>
 <% END; END %>
 <% IF author.donation.size; FOREACH donate IN author.donation %>
 <% IF donate.name == 'paypal' && donate.id %>
@@ -46,7 +67,7 @@ IF profiles.${profile.name} %>
 <input type="hidden" name="no_note" value="0">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form></center>
 <% ELSIF donate.name == 'wishlist' && donate.id %>
@@ -54,24 +75,24 @@ IF profiles.${profile.name} %>
 <% ELSIF donate.name == 'flattr' && donate.id %>
 <script type="text/javascript">
 /* <![CDATA[ */
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+  (function() {
+    var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
 
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
 
-        t.parentNode.insertBefore(s, t);
-    })();
+    t.parentNode.insertBefore(s, t);
+  })();
 /* ]]> */
 </script>
 <div style="text-align: center">
 <a class="FlattrButton" style="display:none;"
-    title="<% author.name %> (<% author.pauseid %>) on metacpan"
-    rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
-    href="https://metacpan.org/author/<% author.pauseid %>"
-    language="en_GB" >
-    <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
+  title="<% author.name %> (<% author.pauseid %>) on MetaCPAN"
+  rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
+  href="https://metacpan.org/author/<% author.pauseid %>"
+  language="en_GB" >
+  <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
 </a>
 </div>
 <% END; END; END %>
@@ -87,22 +108,33 @@ ELSE; last = release.distribution; counter = 1; END;
 UNLESS release.name; NEXT; END;
 aggregated.push(release);
 END %>
-  <hr>
+  <li class="nav-header">Activity</li>
   <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
   <% INCLUDE inc/release-latest.html %>
-  <hr>
-  <strong>Tools</strong>
-  <ul>
-    <li>Search distributions:<br>
-      <form action="/search">
+  <li class="nav-header">Tools</li>
+  <li>Search distributions:<br>
+    <form action="/search">
       <input type="hidden" name="q" value="author:<% author.pauseid %>">
-      <input type="text" name="q">
-      <input type="submit" style="display: none"></form></li>
-    <li><a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a></li>
-    <li><a href="http://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>">Browse CPAN directory</a></li>
-  </ul>
-</div>
+      <input type="text" name="q" style="width: 160px">
+      <input type="submit" style="display: none">
+    </form>
+  </li>
+  <li>
+  <div>
+    <a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a>
+  </div>
+  </li>
+  <li>
+  <div>
+    <a href="http://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a>
+  </div>
+  </li>
+  <li>
+  <div>
+    <a href="http://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>">Browse CPAN directory</a>
+  </div>
+  </li>
+</ul>
 
 <div class="content">
 <strong>Owned distributions</strong>

@@ -9,6 +9,7 @@
     <% END %>
   </big></strong><br><br>
 
+<<<<<<< HEAD
 <div class="search-bar">
   <strong>Tools</strong>
   <ul>
@@ -35,6 +36,48 @@
     <li><% module.stat.size | format_bytes %> bytes</li>
   </ul>
 </div>
+=======
+<ul class="nav nav-list">
+  <li class="nav-header">Tools</li>
+  <li>
+    <div>
+      <a href="/release/<% module.author %>/<% module.release %>/">Release Info</a>
+    </div>
+  </li>
+  <% IF module.documentation %>
+    <li>
+      <div>
+        <a href="/module/<% module.documentation %>">Module Documentation</a>
+      </div>
+    </li>
+  <% ELSIF module.slop %>
+    <li>
+      <div>
+        <a href="/pod/release/<% doc_view_url %>">Documentation View</a>
+      </div>
+    </li>
+  <% END %>
+  <li>
+    <div>
+      <a href="/author/<% module.author %>/">Author</a>
+    </div>
+  </li>
+  <li>&nbsp;</li>
+  <li><div><a href="<% raw_url %>">Raw code</a></div></li>
+  <li>
+    <div>
+      <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1">Download</a>
+    </div>
+  </li>
+  <% IF module.sloc > 0 %>
+  <li><div><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></div></li>
+  <% END %>
+  <li class="nav-header">Info</li>
+  <li><% module.sloc %> lines of code</li>
+  <li><% module.slop %> lines of pod</li>
+  <li><% module.stat.size | format_bytes %> bytes</li>
+</ul>
+>>>>>>> refactor div.search-bar to ul.nav-list
 
 <div class="content">
 <% IF !module.binary %>

@@ -1,5 +1,11 @@
-<% IF latest.date %>
-<strong>Latest Release</strong><br>
-<strong><a href="/release/<% IF latest.status == 'latest'; latest.distribution; ELSE; latest.author; '/'; latest.name; END %>" class="ellipsis" title="<% latest.name %>"><% latest.name %></a></strong>
-<span class="relatize"><% latest.date.dt_http %></span>
-<% END %>
+<%- IF latest.date %>
+<li class="nav-header">Latest Release</li>
+<li>
+  <div>
+    <a href="/release/<% IF latest.status == 'latest'; latest.distribution; ELSE; latest.author; '/'; latest.name; END %>" class="ellipsis" title="<% latest.name %>">
+      <% latest.name %>
+    </a>
+    <span class="relatize"><% latest.date.dt_http %></span>
+  </div>
+</li>
+<%- END %>

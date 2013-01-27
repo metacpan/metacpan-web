@@ -113,7 +113,7 @@ foreach my $test ( @tests ) {
             'link for bug tracker' );
 
         # not all dists have reviews
-        my $reviews = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
+        my $reviews = '//div[@class="nav-list"]//div[starts-with(@class, "rating-")]/following-sibling::a';
         optional_test reviews => sub {
             $tx->is(
                 "$reviews/\@href",
@@ -129,7 +129,7 @@ foreach my $test ( @tests ) {
 
         # all dists should get a link to rate it; test built url
         $tx->is(
-            '//div[@class="search-bar"]//a[text()="Rate this distribution"]/@href',
+            '//div[@class="nav-list"]//a[text()="Rate this distribution"]/@href',
             "http://cpanratings.perl.org/rate/?distribution=$release",
             'cpanratings link to rate this dist'
         );
