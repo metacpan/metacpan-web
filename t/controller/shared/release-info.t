@@ -144,7 +144,7 @@ foreach my $test ( @tests ) {
 
         $tx->is(
             '//a[@title="Matrix"]/@href',
-            "http://matrix.cpantesters.org/?dist=$release-$version",
+            "http://matrix.cpantesters.org/?dist=$release+$version",
             'link to test matrix'
         );
 
