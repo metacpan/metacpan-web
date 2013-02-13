@@ -66,8 +66,7 @@ sub autocomplete {
                     query => {
                         custom_score => {
                             query => { bool => { should => $should } },
-                            script =>
-                                "_score - doc['documentation'].stringValue.length()/100"
+                            metacpan_script => 'prefer_shorter_module_names_100',
                         },
                     },
                     filter => {
@@ -363,13 +362,7 @@ sub search {
                         custom_score => {
 
                             # prefer shorter module names
-                            script => qq{
-                            documentation = doc['documentation'].stringValue;
-                            if(documentation == empty) {
-                                documentation = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
-                            }
-                            return _score - documentation.length()/400
-                            },
+                            metacpan_script => 'prefer_shorter_module_names_400',
                             query => {
                                 boosting => {
                                     negative_boost => 0.5,
