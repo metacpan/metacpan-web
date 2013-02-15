@@ -198,7 +198,7 @@ function Github() {
 };
 
 $(document).ready(function() {
-    $('.search-bar a:not(.nopopup)').each(function() {
+    $('.nav-list a:not(.nopopup)').each(function() {
           var github = new Github();
           github.createPopup(this);
     });
