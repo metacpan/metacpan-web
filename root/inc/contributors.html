@@ -1,0 +1,55 @@
+<% IF contributors %>
+
+<div id="contributors">
+    <strong>and <% contributors.size %> contributors</strong>
+    <div align="right">
+        <a name="authors" href="#authors"
+            onclick="$(this).hide(); $('#contributors ul').slideDown()"
+        >show them</a>
+    </div>
+    <ul style="display: none">
+    <% FOREACH contributor IN contributors %>
+        <li style="text-align: left">
+        <% IF contributor.id %>
+        <a href="<% contributor.url %>" 
+           class="cpan_author" 
+           data-cpan-author="<% contributor.id %>"><% contributor.id %></a>
+        <% ELSE %>
+        <% contributor %>
+        <% END %>
+        </li>
+    <% END %>
+    </ul>
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('a.cpan_author').each(function(){
+        var $anchor = $(this);
+        var author = $anchor.attr('data-cpan-author');
+        if( typeof author == 'undefined' ) {
+            return;
+        }
+
+        $.getJSON( "https://api.metacpan.org/author/" + author, function( data ){
+            if ( typeof data.name != 'undefined' ) {
+                // TODO make this an :after pseudo-class
+                var gravatar = data.gravatar_url;
+                gravatar = gravatar.replace( 
+                    "^http://(www\.)?gravatar.com/",
+                    "https://secure.gravatar.com/"
+                ).replace(
+                    /s=\d+/,
+                    's=20'
+                );
+                var $img = $('<img />').attr( 'src', gravatar )
+                    .attr( 'width', 20 )
+                    .attr( 'height', 20 );
+                $anchor.text( data.name + ' ' ).append( $img );
+            }
+        });
+    });
+});
+</script>
+
+<% END %>

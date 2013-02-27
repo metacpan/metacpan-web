@@ -57,7 +57,12 @@
   </ul>
 </div>
 
+<div id="authors"
+    style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
 <% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/contributors.html
+    contributors = release.metadata.x_contributors %>
+</div>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 
 <div class="content">

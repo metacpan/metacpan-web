@@ -82,6 +82,21 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
+    if ( my $contributors = $out->{metadata}{x_contributors} ) {
+        for my $contributor ( @$contributors  ) {
+                # don't put email addresses on a web page
+            next if $contributor =~ s/<.+?>//g;
+
+            # looks like a cpan account?
+            next unless $contributor =~ /^[A-Z]+$/;
+
+            $contributor = {
+                id  => $contributor,
+                url => $c->uri_for_action( '/author/index', [ $contributor ] ),
+            };
+        }
+    }
+
     # TODO: make took more automatic (to include all)
     $c->stash(
         {   template => 'release.html',
