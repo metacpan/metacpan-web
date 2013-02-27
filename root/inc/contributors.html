@@ -10,10 +10,10 @@
     <ul style="display: none">
     <% FOREACH contributor IN contributors %>
         <li style="text-align: left">
-        <% IF contributor.id %>
+        <% IF contributor.cpan_id %>
         <a href="<% contributor.url %>" 
            class="cpan_author" 
-           data-cpan-author="<% contributor.id %>"><% contributor.id %></a>
+           data-cpan-author="<% contributor.cpan_id %>"><% contributor.name %></a>
         <% ELSE %>
         <% contributor %>
         <% END %>
@@ -32,21 +32,22 @@ $(function(){
         }
 
         $.getJSON( "https://api.metacpan.org/author/" + author, function( data ){
-            if ( typeof data.name != 'undefined' ) {
-                // TODO make this an :after pseudo-class
-                var gravatar = data.gravatar_url;
-                gravatar = gravatar.replace( 
-                    "^http://(www\.)?gravatar.com/",
-                    "https://secure.gravatar.com/"
-                ).replace(
-                    /s=\d+/,
-                    's=20'
-                );
-                var $img = $('<img />').attr( 'src', gravatar )
-                    .attr( 'width', 20 )
-                    .attr( 'height', 20 );
-                $anchor.text( data.name + ' ' ).append( $img );
+            if ( typeof data.name == 'undefined' ) {
+                return;
             }
+            // TODO make this an :after pseudo-class
+            var gravatar = data.gravatar_url;
+            gravatar = gravatar.replace( 
+                "^http://(www\.)?gravatar.com/",
+                "https://secure.gravatar.com/"
+            ).replace(
+                /s=\d+/,
+                's=20'
+            );
+            var $img = $('<img />').attr( 'src', gravatar )
+                .attr( 'width', 20 )
+                .attr( 'height', 20 );
+            $anchor.text( data.name + ' ' ).append( $img );
         });
     });
 });

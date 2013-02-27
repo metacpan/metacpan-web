@@ -84,15 +84,28 @@ sub view : Private {
 
     if ( my $contributors = $out->{metadata}{x_contributors} ) {
         for my $contributor ( @$contributors  ) {
+
+            my $cpan_id;
+
                 # don't put email addresses on a web page
-            next if $contributor =~ s/<.+?>//g;
+                # TODO can there be more than one <..> ?
+            if ( $contributor =~ s/<(.+?)>// ) {
+                my $email = $1;
+
+                if ( $email =~ /^(.+)\@cpan.org/ ) {
+                    $cpan_id = uc $1;
+                }
+            };
 
             # looks like a cpan account?
-            next unless $contributor =~ /^[A-Z]+$/;
+            $cpan_id ||= $contributor if $contributor =~ /^[A-Z]+$/;
+
+            next unless $cpan_id;
 
             $contributor = {
-                id  => $contributor,
-                url => $c->uri_for_action( '/author/index', [ $contributor ] ),
+                cpan_id => $cpan_id,
+                name    => $contributor,
+                url     => $c->uri_for_action( '/author/index', [ $cpan_id ] ),
             };
         }
     }
