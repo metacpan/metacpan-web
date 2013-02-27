@@ -9,7 +9,7 @@
     </div>
     <ul style="display: none">
     <% FOREACH contributor IN contributors %>
-        <li style="text-align: left">
+        <li style="text-align: left; padding-left: 22px;">
         <% IF contributor.cpan_id %>
         <a href="<% contributor.url %>" 
            class="cpan_author" 
@@ -35,7 +35,7 @@ $(function(){
             if ( typeof data.name == 'undefined' ) {
                 return;
             }
-            // TODO make this an :after pseudo-class
+            // TODO make this an :before pseudo-class
             var gravatar = data.gravatar_url;
             gravatar = gravatar.replace( 
                 "^http://(www\.)?gravatar.com/",
@@ -47,7 +47,10 @@ $(function(){
             var $img = $('<img />').attr( 'src', gravatar )
                 .attr( 'width', 20 )
                 .attr( 'height', 20 );
-            $anchor.text( data.name + ' ' ).append( $img );
+            $anchor.css( 'margin-left', '1px' );
+            $anchor.parent().css( 'padding-left', '1px' );
+            $anchor.text( data.name );
+            $anchor.before( $img );
         });
     });
 });
