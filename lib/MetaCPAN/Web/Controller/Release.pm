@@ -104,6 +104,22 @@ sub view : Private {
             ]
         }
     );
+
+    $self->twitter_card($c);
+}
+
+sub twitter_card :Private {
+    my( $self, $c ) = @_;
+
+    my %twitter = (
+        card        => 'summary',
+        url         => $c->req->uri,
+        title       => $c->stash->{release}{metadata}{name},
+        description => $c->stash->{release}{abstract},
+        site        => 'metacpan',
+    );
+
+    $c->stash( twitter_card => \%twitter );
 }
 
 1;

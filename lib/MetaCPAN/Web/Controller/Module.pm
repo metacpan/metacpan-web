@@ -97,6 +97,21 @@ sub path : PathPart('module') : Chained('/') : Args {
             template => 'module.html',
         }
     );
+
+    $self->twitter_card($c);
 }
 
+sub twitter_card :Private {
+    my( $self, $c ) = @_;
+
+    my %twitter = (
+        card        => 'summary',
+        url         => $c->req->uri,
+        title       => $c->stash->{module}{name},
+        description => $c->stash->{module}{abstract},
+        site        => 'metacpan',
+    );
+
+    $c->stash( twitter_card => \%twitter );
+}
 1;

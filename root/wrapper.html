@@ -44,8 +44,10 @@
 
   </script>
 
-<% IF twitter_card_inc %>
-<% INCLUDE $twitter_card_inc %>
+<% IF twitter_card %>
+<% FOREACH item IN twitter_card %>
+<meta name="twitter:<% item.key %>" value="<% item.value %>" />
+<% END %>
 <% END %>
 
 </head>
