@@ -10,12 +10,12 @@
     <ul style="display: none">
     <% FOREACH contributor IN contributors %>
         <li style="text-align: left; padding-left: 22px;">
-        <% IF contributor.cpan_id %>
+        <% IF contributor.pauseid %>
         <a href="<% contributor.url %>" 
            class="cpan_author" 
-           data-cpan-author="<% contributor.cpan_id %>"><% contributor.name %></a>
+           data-cpan-author="<% contributor.pauseid %>"><% contributor.name %></a>
         <% ELSE %>
-        <% contributor %>
+        <% contributor.name %>
         <% END %>
         </li>
     <% END %>

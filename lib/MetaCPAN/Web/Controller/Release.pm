@@ -82,33 +82,8 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
-    if ( my $contributors = $out->{metadata}{x_contributors} ) {
-        for my $contributor ( @$contributors  ) {
+    $self->groom_contributors( $c, $out );
 
-            my $cpan_id;
-
-                # don't put email addresses on a web page
-                # TODO can there be more than one <..> ?
-            if ( $contributor =~ s/<(.+?)>// ) {
-                my $email = $1;
-
-                if ( $email =~ /^(.+)\@cpan.org/ ) {
-                    $cpan_id = uc $1;
-                }
-            };
-
-            # looks like a cpan account?
-            $cpan_id ||= $contributor if $contributor =~ /^[A-Z]+$/;
-
-            next unless $cpan_id;
-
-            $contributor = {
-                cpan_id => $cpan_id,
-                name    => $contributor,
-                url     => $c->uri_for_action( '/author/index', [ $cpan_id ] ),
-            };
-        }
-    }
 
     # TODO: make took more automatic (to include all)
     $c->stash(
@@ -132,6 +107,38 @@ sub view : Private {
             ]
         }
     );
+}
+
+# massage the x_contributors field into what we want
+sub groom_contributors {
+    my( $self, $c, $out ) = @_;
+    
+    return unless $out->{metadata}{x_contributors};
+
+    # just in case a lonely contributor makes it as a scalar
+    $out->{metadata}{x_contributors} = [ 
+        $out->{metadata}{x_contributors}
+    ] unless ref $out->{metadata}{x_contributors};
+
+    my @contributors = map {
+        s/<(.*)>//;
+        { name => $_, email => $1 }
+    } @{$out->{metadata}{x_contributors}};
+
+    $out->{metadata}{x_contributors} = \@contributors;
+
+    for my $contributor ( @{ $out->{metadata}{x_contributors} } ) {
+
+        # heuristic to autofill pause accounts
+        $contributor->{pauseid} = uc $1
+            if !$contributor->{pauseid} 
+            and $contributor->{email} =~ /^(.*)\@cpan.org/;
+
+        next unless $contributor->{pauseid};
+
+        $contributor->{url} = 
+            $c->uri_for_action( '/author/index', [ $contributor->{pauseid} ] );
+    }
 }
 
 1;
