@@ -120,13 +120,6 @@ sub groom_contributors {
         $out->{metadata}{x_contributors}
     ] unless ref $out->{metadata}{x_contributors};
 
-    my @contributors = map {
-        s/<(.*)>//;
-        { name => $_, email => $1 }
-    } @{$out->{metadata}{x_contributors}};
-
-    $out->{metadata}{x_contributors} = \@contributors;
-
     for my $contributor ( @{ $out->{metadata}{x_contributors} } ) {
 
         # heuristic to autofill pause accounts
