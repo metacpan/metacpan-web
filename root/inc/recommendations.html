@@ -1,0 +1,49 @@
+<% IF recommendations.size %>
+<div class="box-right">
+  <br />
+<strong>
+    <a href="#" name="recommendations" id="recommendations">Recommendations</a>
+    <script>
+    $(function(){ $('#recommendations').qtip({
+        position: { at: "bottom left", my: "top right" },
+        content: { text: $('#recommendations-tooltip').clone() },
+        style: { width: "20em" }
+    });
+    });
+    </script>
+</strong><br />
+<ul>
+<% FOREACH rec IN recommendations %>
+    <li><a href="/module/<% rec.module %>"><% rec.module %></a> 
+    <div class="recommendation_score" style="float: right; font-style: italic">
+        <% IF rec.plus %>+<% rec.plus %> <% END %>
+        <% IF rec.plus * rec.minus %> / <% END %>
+        <% IF rec.minus %>-<% rec.minus %> <% END %>
+    </div>
+    </li>
+<% END %>
+</ul>
+
+<div style="display: none" id="recommendations-tooltip">
+<i>Foo::Bar +3 / -4</i> <br/> means Foo::Bar has been
+recommended 3 times over this module, 
+and this module has been recommended 4
+times over this module.
+</div>
+
+</div>
+
+<!--
+
+recommendations = {
+    recommended_over => {
+        Bar => [ qw/ YANICK FOO BAR / ],
+    },
+    rather_use => {
+        Foo => [ qw/ YANICK FOO BAR / ],
+    },
+
+};
+
+-->
+<% END %>
