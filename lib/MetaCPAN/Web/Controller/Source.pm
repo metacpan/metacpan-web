@@ -46,6 +46,7 @@ sub index : PathPart('source') : Chained('/') : Args {
                 # what other file types can we check for?
                       m!\.p[ml]$!i ? 'pl'
                     : m!\.psgi$!   ? 'pl'
+                    : m!^cpanfile$! ? 'pl'
                     : m!\.pod$!    ? 'pl'
                     :    # no separate pod brush as of 2011-08-04
                       m!\.ya?ml$!   ? 'yaml'
