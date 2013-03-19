@@ -55,7 +55,10 @@ function toggleTOC() {
 
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
-    if(document.location.hash) {
+
+    var source = $("#source");
+    // if this is a source-code view with destination anchor
+    if(source[0] && document.location.hash) {
         // check for 'L{number}' anchor in URL and highlight and jump
         // to that line.
         var lineMatch = document.location.hash.match(/^#L(\d+)$/);
@@ -70,9 +73,7 @@ $(document).ready(function() {
             var packageMatch = document.location.hash.match(/^#P(\S+)$/);
             if( packageMatch ) {
                 var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
-                var re = new RegExp("package " + decodedPackageMatch + ";");
-                var source = $("#source").html();
-                var leadingSource = source.split(re);
+                var leadingSource = source.html().split("package " + decodedPackageMatch + ";");
                 var lineCount = leadingSource[0].split("\n").length;
                 if( leadingSource.length > 1 && lineCount > 1 ) {
                     SyntaxHighlighter.defaults['highlight'] = [lineCount];

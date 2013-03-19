@@ -245,8 +245,20 @@ sub interesting_files {
                                     { and => [
                                             { term => { level     => 0 } },
                                             {   or => [
-                                                    map { { term => { 'file.name' => $_ } } }
-                                                        qw(MANIFEST README README.md README.pod INSTALL Makefile.PL Build.PL NEWS LICENSE TODO ToDo Todo THANKS FAQ COPYRIGHT CREDITS AUTHORS Copying CHANGES Changes ChangeLog Changelog CHANGELOG META.yml META.json dist.ini NEWS)
+                                                    map { { term => { 'file.name' => $_ } } } qw(
+                                                        MANIFEST
+                                                        README README.md README.pod
+                                                        INSTALL FAQ
+                                                        Makefile.PL Build.PL
+                                                        LICENSE Copying COPYRIGHT
+                                                        TODO ToDo Todo
+                                                        CONTRIBUTING
+                                                        CREDITS AUTHORS THANKS
+                                                        CHANGES Changes ChangeLog Changelog CHANGELOG NEWS
+                                                        META.yml META.json
+                                                        cpanfile
+                                                        dist.ini
+                                                    )
                                                 ]
                                             }
                                         ]
