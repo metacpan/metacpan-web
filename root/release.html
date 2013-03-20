@@ -111,6 +111,18 @@ documentation = documentation.merge(documentation_raw);
 <% END %>
 
 <br><% END %>
+<% IF examples.size %><strong>Examples</strong>
+<% FOREACH file IN examples.sort('path') %>
+  <div>
+    <% IF file.pod_lines %>
+      <strong><a href="/module/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a></strong>
+    <% ELSE %>
+      <strong><a href="/source/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a></strong>
+    <% END %>
+  </div>
+<% END %>
+
+<br><% END %>
 <% IF root.size %><strong>Other files</strong>
 <% FOREACH file IN root %>
 <div><strong><a href="/<% file.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
