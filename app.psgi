@@ -67,6 +67,7 @@ $app = Plack::Middleware::Assets->wrap(
             cpan
             toolbar
             github
+            contributors
             )
     ],
 );
