@@ -27,11 +27,12 @@ sub path : PathPart('module') : Chained('/') : Args {
         $c->detach;
     }
 
-    ( $data->{documentation}, my $pod )
+    my ( $documentation, $pod )
         = map { $_->{name}, $_->{associated_pod} }
         grep { @path > 1 || $path[0] eq $_->{name} }
         grep { !$data->{documentation} || $data->{documentation} eq $_->{name} }
         grep { $_->{associated_pod} } @{ $data->{module} || [] };
+    $data->{documentation} = $documentation if $documentation;
 
     $c->detach('/not_found') unless ( $data->{name} );
     my $reqs = $self->api_requests(
