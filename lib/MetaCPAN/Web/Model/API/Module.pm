@@ -52,42 +52,7 @@ sub _indexed_and_documented_file {
 sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv     = $self->cv;
-    my @query  = split( /\s+/, $query );
-    my $should = [
-        map {
-            { field     => { 'documentation.analyzed'  => "$_*" } },
-                { field => { 'documentation.camelcase' => "$_*" } }
-            } grep {$_} @query
-    ];
-    $self->request(
-        '/file/_search',
-        {   query => {
-                filtered => {
-                    query => {
-                        custom_score => {
-                            query => { bool => { should => $should } },
-                            metacpan_script => 'prefer_shorter_module_names_100',
-                        },
-                    },
-                    filter => {
-                        and => [
-                            $self->_not_rogue,
-                            $self->_indexed_and_documented_file,
-                            { term => { 'file.status'  => 'latest' } },
-                            {   not => {
-                                    filter => {
-                                        term => { 'file.authorized' => \0 }
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }
-            },
-            fields => [qw(documentation release author distribution)],
-            size   => 20,
-        }
-        )->cb(
+    $self->request("/search/autocomplete?q=$query&size=20")->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
