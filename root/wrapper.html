@@ -115,8 +115,8 @@
   <div class="container-fluid">
     <% IF req.uri.path != '/' %>
     <div class="row">
-      <div class="span3 small-logo">
-        <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
+      <div class="span3">
+        <a href="/" class="small-logo"></a>
       </div>
       <div class="span6">
         <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
