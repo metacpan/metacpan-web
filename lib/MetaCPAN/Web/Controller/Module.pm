@@ -27,17 +27,20 @@ sub path : PathPart('module') : Chained('/') : Args {
         $c->detach;
     }
 
-    ( $data->{documentation}, my $pod )
+    my $pod_path = join '/', @path;
+
+    ( $data->{documentation}, $pod_path )
         = map { $_->{name}, $_->{associated_pod} }
-        grep { @path > 1 || $path[0] eq $_->{name} }
-        grep { !$data->{documentation} || $data->{documentation} eq $_->{name} }
-        grep { $_->{associated_pod} } @{ $data->{module} || [] };
+          grep { @path > 1 || $path[0] eq $_->{name} }
+          grep { !$data->{documentation} || $data->{documentation} eq $_->{name} }
+          grep { $_->{associated_pod} } @{ $data->{module} || [] }
+            unless $data->{mime} eq "text/x-pod";
 
     $c->detach('/not_found') unless ( $data->{name} );
     my $reqs = $self->api_requests(
         $c,
         {   pod => $c->model('API')
-                ->request( '/pod/' . ( $pod || join( '/', @path ) ) . '?show_errors=1' ),
+                ->request( '/pod/' . $pod_path . '?show_errors=1' ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
