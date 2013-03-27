@@ -31,6 +31,95 @@
           <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
           <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
           <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
+     <li>
+<!-- IF user_exists -->
+        <a href="#" onclick="$('#recommendation-box').toggle(); return false">Recommend alternative</a>
+<!-- ELSE %>
+        <a href="#" onclick="alert('Please sign in to make recommendation'); return false">Recommend alternative</a>
+< END %>-->
+
+        <div id="recommendation-box" style="display: none">
+            <input type="text" id="recommendation-input" />
+            <script>
+            $(function(){
+    var recommendations;
+    $('#recommendation-input').keyup(function(event) {
+        // if up/down arrow is released
+        if (event.keyCode == '38' || event.keyCode == '40') {
+            // get the currently hovered query
+            var query = $('.ac_over').text();
+            if (query) {
+                $('#recommendation-input').val(query);
+            }
+        }
+    });
+
+    $("#recommendation-input").autocomplete('/search/autocomplete', {
+        dataType: 'json',
+        delay: 100,
+        max: 20,
+        selectFirst: false,
+        width: $("#recommendation-input").width() + 5,
+        parse: function(data) {
+            var result = $.map(data, function(row) {
+                return {
+                    data: row,
+                    value: row.documentation,
+                    result: row.documentation
+                }
+            });
+            var uniq = {};
+            result = $.grep(result, function(row) {
+                uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
+                return uniq[row.result]++ < 1;
+            });
+            return recommendations = result;
+        },
+        formatItem: function(item) {
+            return item.documentation;
+        }
+    }).result(function(e, item) {
+        alert(item);
+    });
+
+    $('#recommendation-input.autofocus').focus();
+
+    $('#recommendation-input').keydown(function(event) {
+        if (event.keyCode == '13') {
+            event.preventDefault();
+
+            var module = $('#recommendation-input').val();
+
+            // WARNING: that matches potentially both autocomplete
+            // results. But since both are module names, should be okay-ish
+            // for now... But please, let's fix that later
+            var $ac = $('.ac_results');
+
+            var matched = 0;
+            $ac.find('li').each(function(){
+                if( $(this).text() == module ) {
+                    matched++;
+                }
+            });
+
+            if(!matched) {
+                return;
+            }
+
+             $('#recommendation-input').attr('disabled',true)
+
+            $.post(
+                '/account/recommend/<% module.documentation %>/' + module,
+                function(){
+                    $('#recommendation-box').hide();
+                    $('#recommendation-input').attr('disabled',false)
+                }
+            );
+        }
+    });
+    });
+    </script>
+        </div>
       </li>
       <li><div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
