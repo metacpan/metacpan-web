@@ -56,12 +56,6 @@ label input[type="text"], label select {
     font-weight: bold;
 }
 
-.ds {
-border-bottom: 1px solid #E7E7E7;
-border-right: 1px solid #E7E7E7;
-display: inline-block;
-}
-
 .big-logo {
   margin: 42px auto 44px auto;
   width: 322px;
