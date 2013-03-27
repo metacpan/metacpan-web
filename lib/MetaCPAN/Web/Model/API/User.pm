@@ -37,6 +37,14 @@ sub remove_favorite {
         undef, { method => 'DELETE', token => $token } );
 }
 
+sub recommend_alternative {
+    my( $self, $module, $alternative, $token ) = @_;
+
+    $self->request( join( '/', '/user/recommend', $module, $alternative ),
+        { token => $token } 
+    );
+}
+
 sub turing {
     my ( $self, $challenge, $answer, $token ) = @_;
     $self->request(
