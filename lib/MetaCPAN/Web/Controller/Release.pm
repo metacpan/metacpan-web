@@ -59,8 +59,8 @@ sub view : Private {
 
     my $reqs = $self->api_requests(
         $c,
-        {   root    => $model->root_files( $author, $release ),
-            modules => $model->modules( $author,    $release ),
+        {   files    => $model->interesting_files( $author, $release ),
+            modules  => $model->modules( $author, $release ),
         },
         $out,
     );
@@ -69,11 +69,18 @@ sub view : Private {
     $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
     # shortcuts
-    my ( $root, $modules ) = @{$reqs}{qw(root modules)};
+    my ( $files, $modules ) = @{$reqs}{qw(files modules)};
 
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
-        map { $_->{fields} } @{ $root->{hits}->{hits} }
+        grep { $_->{path} !~ m{/} }
+        map { $_->{fields} } @{ $files->{hits}->{hits} }
+    );
+
+    my @examples = (
+        sort { $a->{path} cmp $b->{path} }
+        grep { $_->{path} =~ m{\b(?:eg|ex|examples?)\b}i and not $_->{path} =~ m{^x?t/} }
+        map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
     # TODO: add action for /changes/$release/$version ? that does this
@@ -82,6 +89,9 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
+    $self->groom_contributors( $c, $out );
+
+
     # TODO: make took more automatic (to include all)
     $c->stash(
         {   template => 'release.html',
@@ -89,10 +99,11 @@ sub view : Private {
             changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
-                $modules->{took}, $root->{took},
+                $modules->{took}, $files->{took},
                 $reqs->{versions}->{took}
             ),
-            root  => \@root_files,
+            root     => \@root_files,
+            examples => \@examples,
             files => [
                 map {
                     {
@@ -104,6 +115,38 @@ sub view : Private {
             ]
         }
     );
+}
+
+# massage the x_contributors field into what we want
+sub groom_contributors {
+    my( $self, $c, $out ) = @_;
+    
+    return unless $out->{metadata}{x_contributors};
+
+    # just in case a lonely contributor makes it as a scalar
+    $out->{metadata}{x_contributors} = [ 
+        $out->{metadata}{x_contributors}
+    ] unless ref $out->{metadata}{x_contributors};
+
+    my @contributors = map {
+        s/<(.*)>//;
+        { name => $_, email => $1 }
+    } @{$out->{metadata}{x_contributors}};
+
+    $out->{metadata}{x_contributors} = \@contributors;
+
+    for my $contributor ( @{ $out->{metadata}{x_contributors} } ) {
+
+        # heuristic to autofill pause accounts
+        $contributor->{pauseid} = uc $1
+            if !$contributor->{pauseid} 
+            and $contributor->{email} =~ /^(.*)\@cpan.org/;
+
+        next unless $contributor->{pauseid};
+
+        $contributor->{url} = 
+            $c->uri_for_action( '/author/index', [ $contributor->{pauseid} ] );
+    }
 }
 
 1;

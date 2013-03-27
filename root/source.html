@@ -2,6 +2,7 @@
 <%- title = module.path %>
 <strong><big>
     <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
+    <% doc_view_url = [base,module.path].join("/") %>
     <% raw_url = [api,'source',base,module.path].join("/") %>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
@@ -16,11 +17,17 @@
     </div>
   </li>
   <% IF module.documentation %>
-    <li>
-      <div>
-        <a href="/module/<% module.documentation %>">Module Documentation</a>
-      </div>
-    </li>
+  <li>
+    <div>
+      <a href="/module/<% module.documentation %>">Module Documentation</a>
+    </div>
+  </li>
+  <% ELSIF module.slop %>
+  <li>
+    <div>
+      <a href="/module/<% doc_view_url %>">Documentation View</a>
+    </div>
+  </li>
   <% END %>
   <li>
     <div>

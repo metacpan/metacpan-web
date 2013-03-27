@@ -1,0 +1,25 @@
+<% IF contributors %>
+
+<div id="contributors">
+    <strong>and <% contributors.size %> contributors</strong>
+    <div align="right">
+        <a name="authors" href="#authors"
+            onclick="$(this).hide(); $('#contributors ul').slideDown()"
+        >show them</a>
+    </div>
+    <ul style="display: none">
+    <% FOREACH contributor IN contributors %>
+        <li style="text-align: left; padding-left: 22px;">
+        <% IF contributor.pauseid %>
+        <a href="<% contributor.url %>" 
+           class="cpan_author" 
+           data-cpan-author="<% contributor.pauseid %>"><% contributor.name %></a>
+        <% ELSE %>
+        <% contributor.name %>
+        <% END %>
+        </li>
+    <% END %>
+    </ul>
+</div>
+
+<% END %>
