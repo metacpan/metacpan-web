@@ -60,105 +60,116 @@
 
 </head>
 <body>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <ul class="nav">
-                    <%-  FOREACH item IN menu;
-                        active = item.path.grep(->{ this == req.uri.path} ).size;
-                        IF active; %>
-                    <li class="active">
-                    <%- ELSE %>
-                    <li class="<% item.class %>">
-                    <%- END %>
-                        <a href="<% item.path.0 %>"><% item.title %></a>
-                    </li>
-                    <%- END %>
-                </ul>
-                <ul class="nav pull-right">
-                    <%- IF user_exists %>
-                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
-                    <li class="dropdown pull-left">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Account
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            
-                            <li><a href="/account/identities">Identities</a></li>
-                            <li><a href="/account/profile">Profile</a></li>
-                            <li>
-                                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <%- ELSE %>
-                    <li class="dropdown pull-left">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  Sign in
-                                  <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
-                                <li>
-                                    <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
-                                </li>
-                                <%- END %>
-                            </ul>
-                    </li>
-                    <% END %>
-                </ul>
-            </div>
-        </div>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <ul class="nav">
+          <%-  FOREACH item IN menu;
+            active = item.path.grep(->{ this == req.uri.path} ).size;
+            IF active; %>
+          <li class="active">
+          <%- ELSE %>
+          <li class="<% item.class %>">
+          <%- END %>
+            <a href="<% item.path.0 %>"><% item.title %></a>
+          </li>
+          <%- END %>
+        </ul>
+        <ul class="nav pull-right">
+          <%- IF user_exists %>
+          <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+          <li class="dropdown pull-left">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              
+              <li><a href="/account/identities">Identities</a></li>
+              <li><a href="/account/profile">Profile</a></li>
+              <li>
+                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <%- ELSE %>
+          <li class="dropdown pull-left">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Sign in
+                  <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
+                <li>
+                  <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
+                </li>
+                <%- END %>
+              </ul>
+          </li>
+          <% END %>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <div class="container-fluid">
-  <% IF req.uri.path != '/' %>
-      <div class="row">
-          <div class="span3 small-logo">
-              <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
+  <div class="container-fluid">
+    <% IF req.uri.path != '/' %>
+    <div class="row">
+      <div class="span3 small-logo">
+        <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
+      </div>
+      <div class="span6 search-top">
+        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
+          <div class="input-append">
+            <input size="16" type="text" name="q" size="41" id="search-input" class="input-xlarge" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
+            <button class="btn" type="button">Search</button>
           </div>
-          <div class="span6 search-top">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
-        <div class="input-append ds"><input size="16" type="text" name="q" size="41" id="search-input" class="input-xlarge" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><button class="btn" type="button">Search</button></div><br>
-      <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
-    </form>
-  </div>
+          <small class="smaller">
+            <% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %>
+            result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %>
+          </small>
+        </form>
+      </div>
     </div>
-  <% END %>
-  <div class="row-fluid">
+    <% END %>
+    <div class="row-fluid">
       <div class="span12">
-  <% content | none %>
+      <% content | none %>
+      </div>
     </div>
-  </div>
-  <div class="hidden-phone">
+    <div class="hidden-phone">
       <br><br><br>
-  <div class="row-fluid">
-      <div class="span4 hidden-phone">&nbsp;</div>
-      <div class="span1" style="text-align: center">
-    <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
+      <div class="row-fluid">
+        <div class="span4 hidden-phone">&nbsp;</div>
+        <div class="span1" style="text-align: center">
+          <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
+        </div>
+        <div class="span2" style="text-align: center">
+          <a href="/about/resources">About MetaCPAN</a>
+        </div>
+        <div class="span1" style="text-align: center">
+          <a href="https://github.com/CPAN-API/metacpan-web">Fork me</a>
+        </div>
+        <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+          Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+          <br><br>
+          <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
+            <img src="/static/images/bytemark_logo.png" width=179 height=14>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="span2" style="text-align: center">
-        <a href="/about/resources">About MetaCPAN</a>
-    </div>
-    <div class="span1" style="text-align: center">
-    <a href="https://github.com/CPAN-API/metacpan-web">Fork me</a>
-    </div>
-    <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
-      Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
-      <br><br>
-      <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
-        <img src="/static/images/bytemark_logo.png" width=179 height=14>
-      </a>
-  </div>
-  </div>
-  </div>
-  <div class="visible-phone row-fluid">
+    <div class="visible-phone row-fluid">
       <div class="span4"><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a></div>
       <div class="span4 center"><a href="/about/resources">About</a></div>
       <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
-        Hosting generously<br>sponsored by <a href="http://speedchilli.com">speedchilli</a><br><a href="http://speedchilli.com"><img src="/static/images/speedchilli.png" width=75 height=16></a>
+        Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+        <br><br>
+        <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
+          <img src="/static/images/bytemark_logo.png" width=75>
+        </a>
+      </div>
     </div>
   </div>
-  </body>
+</body>
 </html>
