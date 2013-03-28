@@ -1,4 +1,4 @@
-<ul class="nav nav-list box-right">
+<ul class="nav nav-list box-right hidden-phone">
     <li class="nav-header">Dependencies</li>
 <%-
 deps = [];
@@ -10,9 +10,9 @@ FOREACH dep IN deps.sort %>
     <li><a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a></li>
 <%- END %>
 <%- IF deps.size == 0 && !release.metadata  %>
-	<li><i title="no META file provided">unknown</i></li>
+	<li><i class="ttip" title="no META file provided">unknown</i></li>
 <%- ELSIF release.metadata.dynamic_config %>
-	<li><i title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
+	<li><i class="ttip" title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
 <%- ELSIF deps.size == 0 %>
 	<li><i>none</i></li>
 <%- END %>

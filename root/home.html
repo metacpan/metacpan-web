@@ -1,15 +1,12 @@
 <%- rss = "recent" %>
 <div align="center" class="home">
-  <div class="big-logo">
-    <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
-  </div>
+  <a href="/" class="big-logo"></a>
   <form action="/search">
     <input type="text" name="q" size="41" autofocus="autofocus" id="search-input" class="autofocus">
     <br><br>
     <button type="submit" class="btn">Search the CPAN</button>
     <button type="submit" class="btn" name="lucky" value="1">I'm Feeling Lucky</button>
   </form>
-  <br><br><br>
   <%- hints = ['Press shift and enter if you are feeling lucky'] %>
   <span style="color: #999" class="hidden-phone">Hint: <% hints.pick %></span>
   <br><br>

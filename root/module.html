@@ -1,7 +1,12 @@
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
 <% INCLUDE inc/breadcrumbs.html %>
 
-<ul class="nav nav-list">
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
   <li>
     <div>

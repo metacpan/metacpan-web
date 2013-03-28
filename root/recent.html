@@ -1,6 +1,11 @@
 <%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
 <%- title = "Recent" %>
-<ul class="nav nav-list phone-hidden">
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
     <li><a href="/favorite/recent">Recent ++</a></li>
