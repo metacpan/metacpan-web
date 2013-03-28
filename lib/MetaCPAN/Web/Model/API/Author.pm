@@ -80,6 +80,21 @@ sub search {
     return $cv;
 }
 
+sub by_user {
+    my ( $self, $users ) = @_;
+
+    my $query = return $self->request(
+        '/author/_search',
+        {   query => { match_all => {} },
+            filter =>
+                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            fields => [qw(user pauseid)],
+            size   => 100
+        }
+    );
+}
+
+
 __PACKAGE__->meta->make_immutable;
 
 1;
