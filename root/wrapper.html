@@ -24,7 +24,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
   <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
@@ -38,6 +38,7 @@
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
   <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
+  <script src="/static/js/less.min.js" type="text/javascript"></script>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -63,6 +64,11 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
+        <a class="btn btn-navbar btn-slidepanel" data-toggle="slidepanel" data-target=".slidepanel">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
         <ul class="nav">
           <%-  FOREACH item IN menu;
             active = item.path.grep(->{ this == req.uri.path} ).size;
@@ -114,15 +120,15 @@
 
   <div class="container-fluid">
     <% IF req.uri.path != '/' %>
-    <div class="row">
+    <div class="row hidden-phone">
       <div class="span3">
         <a href="/" class="small-logo"></a>
       </div>
       <div class="span6">
-        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline">
+        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
           <div class="input-append">
             <input size="16" type="text" name="q" size="41" id="search-input" class="input-xlarge" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
-            <button class="btn" type="button">Search</button>
+            <button class="btn hidden-phone" type="button">Search</button>
           </div><br>
           <small class="smaller">
             <% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %>

@@ -41,31 +41,85 @@
   .visible-desktop   { display: none; }
 }
 
-/*
+
 @media (max-width: 480px) {
-    .navbar-inner, .container-fluid {
+    .navbar {
+      position: fixed;
+      right: 0;
+      left: 0;
+      top: 0;
+      z-index: 1030;
+      margin-bottom: 0;
+    }
+
+    body {
+      padding-top: 40px;
+    }
+
+    .container-fluid {
+      padding: 5px;
+    }
+
+    .navbar-inner, .navbar-inner .container-fluid {
         padding: 0px;
     }
     .home {
         padding-top: 0px;
     }
 
-    .home input {
-        width: 240px;
-        margin: 0px;
-        height: auto;
+    .home input#search-input {
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        width: auto;
         font-size: 1.4em;
+    }
+
+    .big-logo {
+      margin: 20px 0 30px 0;
+      width: 161px;
+      height: 28px;
+      background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
+      background-size: 151px 51px;
+      background-repeat: no-repeat;
     }
     
     .home img {
         width:137px;
         height: 27px;
     }
+
+    .search-form .input-append, .search-form input#search-input {
+      left: 5px;
+      right: 5px;
+      width: auto;
+      display: block;
+      position: absolute;
+    }
+    
+    @import "bootstrap-slidepanel.less";
+    .slidepanel {
+      background-color: #fff;
+      padding: 10px;
+      border-right: 1px solid #e5e5e5;
+    }
+
+    .slidepanel .search input[type=search] {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: 5px;
+      width: auto;
+    }
+
+    .slidepanel .search {
+      height: 15px;
+    }
     
     .search-results, .pod, .content {
-        margin-left: 0px;
-        border-left: none;
-        padding-left: 0px
+      margin-left: 0px;
+      border-left-width: 0px;
+      padding: 0px;
     }
     
     .releases,
@@ -94,4 +148,3 @@
         background:         #F9F9F9;
     }
 }
-*/

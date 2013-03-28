@@ -1,6 +1,11 @@
 <%- title = "Distributions which depend on " _ required %>
-<ul class="nav nav-list">
-  <li class="nav-header">Activity</li>
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+    <li class="nav-header">Activity</li>
   <% INCLUDE inc/activity.html query = type_of_required _ "=" _ required %>
 </ul>
 

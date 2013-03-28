@@ -1,5 +1,10 @@
 <%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
-<ul class="nav nav-list">
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
   <!--<ul class="search-type">
   <a href="/search?q="><li class="icon icon-module">Modules</li></a>
   <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>

@@ -54,6 +54,8 @@ function toggleTOC() {
 }
 
 $(document).ready(function() {
+    $(".ttip").tooltip();
+
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.defaults['tab-size'] = 8;
 

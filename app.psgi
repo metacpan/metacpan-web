@@ -77,7 +77,8 @@ $app = Plack::Middleware::Assets->wrap(
             contributors
             bootstrap/bootstrap-dropdown
             bootstrap/bootstrap-collapse
-            less.min
+            bootstrap/bootstrap-tooltip
+            bootstrap-slidepanel
             )
     ],
 );

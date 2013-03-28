@@ -1,8 +1,13 @@
 
 <%- query = req.parameters.q %>
 <% title = 'CPAN Mirrors' %>
-<script src="http://openlayers.org/api/OpenLayers.js"></script>
-<ul class="nav nav-list">
+<script src="/static/openlayers/OpenLayers.js"></script>
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
     <li class="nav-header">Sorting</li>
     <img src="/static/icons/busy.gif" style="float: right; visibility: hidden" id="busy">
     <li><a href="javascript:searchForNearest()">Nearest</a></li>
@@ -17,8 +22,8 @@
     <% END %>
 </ul>
 
-<ul class="nav nav-list box-right">
-    <li class="nav-header">Countries</li>
+<ul class="nav nav-list box-right hidden-phone">
+  <li class="nav-header">Countries</li>
     <%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
     <%- FOREACH country IN countries.unique.sort %>
     <li><a href="#<% country %>"><% country %></a></li>

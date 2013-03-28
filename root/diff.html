@@ -20,8 +20,13 @@ END;
 FOREACH i IN [1,2,3]; foo = parts.shift; END;
 file.path = parts.join("/"); END -%>
 
-  <ul class="nav nav-list">
-    <li class="nav-header">Tools</li>
+  <ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+  <li class="nav-header">Tools</li>
     <li>
       <div>
         <%- IF type == 'source' %>

@@ -4,8 +4,12 @@
 <% twitter_card_inc = 'inc/twitter/release.html' %>
 <% INCLUDE inc/breadcrumbs.html %>
 
-
-<ul class="nav nav-list">
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
     <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
     <% IF changes %>
     <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>">Changes</a></li>
@@ -24,7 +28,7 @@
     <%- INCLUDE inc/release-tools.html %>
 </ul>
 
-<div id="authors"
+<div id="authors" class="hidden-phone"
     style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html
