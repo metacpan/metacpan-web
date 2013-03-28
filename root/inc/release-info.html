@@ -38,7 +38,7 @@
     BLOCK version_options;
     backpan = [];
     FOREACH version IN versions;
-        IF release.name == version.name;
+        IF release.name == version.name && release.author == version.author;
             NEXT;
         END;
         IF version.status == 'backpan';
