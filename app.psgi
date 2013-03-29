@@ -24,15 +24,18 @@ use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
 
+# explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
-$app->map( '/static/' => Plack::App::File->new( root => 'root/static' ) );
+$app->map( '/static/' => Plack::App::File->new( root => 'root/static' )->to_app );
 $app->map( '/favicon.ico' =>
-        Plack::App::File->new( file => 'root/static/icons/favicon.ico' ) );
+        Plack::App::File->new( file => 'root/static/icons/favicon.ico' )->to_app );
 $app->map( '/' => MetaCPAN::Web->psgi_app );
 my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
 unless (-d $scoreboard) {
     File::Path::make_path($scoreboard) or die "Can't make_path $scoreboard: $!";
 }
+
+$app = $app->to_app;
 $app = Plack::Middleware::ServerStatus::Lite->wrap(
    $app,
    path       => '/server-status',
