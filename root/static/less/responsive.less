@@ -23,7 +23,7 @@
   // Show
   .visible-phone     { display: block; }
   // Hide
-  .hidden-phone      { display: none; }
+  .hidden-phone      { display: none !important; }
   .navbar .nav > li.hidden-phone      { display: none; }
   // Hide everything else
   .hidden-desktop    { display: block; }
@@ -121,26 +121,20 @@
       border-left-width: 0px;
       padding: 0px;
     }
-    
-    .releases,
-    .releases thead,
-    .releases tbody,
-    .releases tr,
-    .releases {
-        width:              100%;
-        display:            block;
-    }
-    .releases tr.odd {
-        background:         transparent;
-    }
 
-    .releases td.name,
-    .releases td.abstract,
-    .releases td.date {
+    .table td, .table th {
         display:            block;
         margin:             0;
         white-space:        normal;
-        width:              auto;
+        width:              auto !important;
+    }
+
+    .pull-left-phone {
+      float: left !important;
+    }
+
+    #map {
+      margin-right: 0px !important;
     }
 
     .releases td.name {
