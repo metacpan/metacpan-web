@@ -44,32 +44,7 @@ sub index : Path : Args(1) {
             template => 'author.html'
         }
     );
-
-    $self->twitter_card($c);
 }
-
-sub twitter_card :Private {
-    my( $self, $c ) = @_;
-
-    my %twitter = (
-        card        => 'summary',
-        url         => $c->req->uri,
-        title       => $c->stash->{author}{name},
-        description => 'CPAN Author',
-        site        => 'metacpan',
-    );
-
-    $twitter{image} = $c->stash->{author}{gravatar_url}
-        if $c->stash->{author}{gravatar_url};
-
-    my ( $profile ) = grep { $_->{name} eq 'twitter' } 
-        @{ $c->stash->{author}{profile} || [] };
-
-    $twitter{creator} = $profile->{id} if $profile;
-
-    $c->stash( twitter_card => \%twitter );
-}
-
 
 __PACKAGE__->meta->make_immutable;
 
