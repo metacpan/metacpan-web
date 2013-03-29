@@ -3,11 +3,11 @@
 <meta name="twitter:title"          value="<% author.name %>" />
 <meta name="twitter:description"    value="CPAN Author" />
 <meta name="twitter:site"           value="metacpan" />
-<% FOREACH profile in author.profile %>
-    <% IF profile.name == "twitter" %>
+<% FOREACH profile in author.profile -%>
+    <%- IF profile.name == "twitter" -%>
         <meta name="twitter:creator" value="<% profile.id %>" />
-    <% END %>
-<% END %>
-<% IF author.gravatar_url %>
+    <%- END -%>
+<%- END %>
+<% IF author.gravatar_url -%>
 <meta name="twitter:image" value="<% author.gravatar_url %>" />
-<% END %>
+<%- END %>
