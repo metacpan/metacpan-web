@@ -26,23 +26,18 @@ MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 DoW = [undef, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 releases = [];
 FOREACH release IN recent;
-date = release.date.dt;
-day = "%d %s %s".sprintf(date.day, MoY.item(date.month), date.year);
-IF day != last;
-INCLUDE inc/release-table.html releases = releases;
-releases = [];
-IF !loop.first %><br><% END %>
-<big>
-    <strong class="recent-date">
-        <%- USE dt = DateTime( year = date.year, month = date.month, day = date.day ); %>
-        <% DoW.item(dt.day_of_week); ", "; day; last = day %>
-    </strong>
-</big>
-<%
-END;
-releases.push(release);
--%>
-<% END %>
+  date = release.date.dt;
+  USE dt = DateTime( year = date.year, month = date.month, day = date.day );
+  day = "%s, %d %s %s".sprintf(DoW.item(dt.day_of_week), date.day, MoY.item(date.month), date.year);
+  IF day != last;
+    IF releases.size;
+      INCLUDE inc/release-table.html releases = releases day = last;
+    END;
+    releases = [];
+    last = day;
+  END;
+  releases.push(release);
+END %>
 <% INCLUDE inc/release-table.html releases = releases %>
 <% INCLUDE inc/pager.html size = 100 %>
 </div>

@@ -140,10 +140,7 @@ END %>
 </ul>
 
 <div class="content">
-<strong>Owned distributions</strong>
 <% INCLUDE inc/release-table.html releases = aggregated, header = 1, tablesorter = 1 %>
-<hr>
-<strong>Author's favorite distributions</strong>
-<% INCLUDE inc/favorite-table.html favorites = faves, header = 1 %>
+<% INCLUDE inc/favorite-table.html favorites = faves, author = 1 tablesorter = 1 %>
 
 </div>

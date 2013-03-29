@@ -1,27 +1,37 @@
 <%- rss = 'recent' %>
 <% title = 'Recent ++ Activity' %>
 
-<ul class="nav nav-list">
-    <li><div><a href ="/favorite/leaderboard">++ Leaderboard</a></div></li>
+<div class="breadcrumbs">
+  <a href="/recent">Recent</a>
+  <span>&nbsp;/&nbsp; ++ Activity</span>
+</div>
+
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+  <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+    <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+  </form>
+  </li>
+  <li class="nav-header">Other</li>
+  <li><a href ="/favorite/leaderboard">++ Leaderboard</a></li>
 </ul>
 
 <div class="content">
-<center><big><strong>Recent ++ Activity</strong></big></center>
 <%-
 MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 favorites = [];
 FOREACH favorite IN recent;
-date = favorite.date.dt;
-day = "%d %s, %s".sprintf(date.day, MoY.item(date.month), date.year);
-IF day != last;
-INCLUDE inc/favorite-table.html favorites = favorites;
-favorites = [];
-IF !loop.first %><br><% END %><big><strong class="recent-date"><% day; last = day %></strong></big>
-<%
-END;
-favorites.push(favorite);
--%>
-<% END %>
+  date = favorite.date.dt;
+  day = "%d %s, %s".sprintf(date.day, MoY.item(date.month), date.year);
+  IF day != last;
+    IF favorites.size;
+      INCLUDE inc/favorite-table.html favorites = favorites day = last;
+    END;
+    favorites = [];
+    last = day;
+  END;
+  favorites.push(favorite);
+END; %>
 <% INCLUDE inc/favorite-table.html favorites = favorites %>
 <% INCLUDE inc/pager.html size = 100 %>
 </div>
