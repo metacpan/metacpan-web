@@ -61,8 +61,7 @@ IF country != mirror.country; country = mirror.country %>
 </div>
 <script type="text/javascript">
 $(function(){
-    console.log($('#content').width()-175);
-  $('#map').width($('.content').width()-200);
+  $('#map').width("auto");
   map = new OpenLayers.Map( 'map' );
   map.addLayer(new OpenLayers.Layer.OSM());
   var dots = <% dots.json %>;
