@@ -90,6 +90,7 @@ foreach my $ctype ( 'text/plain', 'application/json' ){
     # test that a raw, non-utf8 response is unchanged
     foreach my $bad (
       [ encode(utf8 => "foo\x{FFFF_FFFF}bar"), 'encoded lax perl utf8 chars' ],
+      [ encode(utf8 => "=encoding  utf8\n\nfoo\x{FFFF_FFFF}bar"), '=encoding utf8 with bad chars' ],
       [ "\225 cp1252 bullet", 'invalid utf-8 bytes' ],
     ){
       test_raw_response($bad->[0], $bad->[0], $bad->[1] . " come back as is",
@@ -111,6 +112,21 @@ foreach my $ctype ( 'text/plain', 'application/json' ){
       "i \342\235\244 metacpan",
       "i \x{2764} metacpan",
       'utf-8 bytes decode to perl string'
+    );
+
+    # EURO SIGN
+    test_raw_response(
+      "=pod\n\n=encoding latin9\n\nsome pod \xa4\n\n=cut\n",
+      "=pod\n\n=encoding latin9\n\nsome pod \x{20ac}\n\n=cut\n",
+      'pod in other encoding converted to utf-8',
+    );
+
+    # bad encoding
+    test_raw_response(
+      ("=pod\n\n=encoding foo-bar-baz\n\nsome char \xfe") x 2,
+      'pod with unknown encoding left as is',
+      warnings => [qr/Unknown encoding/, 'unknown encoding'],
+      not_utf8 => 1,
     );
 
     # not sure if we'll ever actually get undef

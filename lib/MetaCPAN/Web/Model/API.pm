@@ -100,8 +100,19 @@ sub raw_api_response {
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     try {
-      # decode so the template doesn't double-encode and return mojibake
-      $data &&= $encoding->decode( $data, $encode_check );
+      if( $data ){
+        my $enc;
+        # honor encoding if specified (as something other than utf-8)
+        if( ($enc) = ($data =~ /^=encoding\s+(\S+)\s*$/m) and $enc !~ /^utf-?8$/i ){
+          $data = Encode::decode( $enc, $data, $encode_check );
+        }
+        # theoretically we could check for a BOM here
+        # else try UTF-8
+        else {
+          # decode so the template doesn't double-encode and return mojibake
+          $data = $encoding->decode( $data, $encode_check );
+        }
+      }
     }
     catch {
       warn $_[0];
