@@ -23,13 +23,15 @@ sub recent : Path('/favorite/recent') {
         }
     }
 
-    $c->stash({
-        header   => 1,
-        recent   => \@faves,
-        took     => $data->{took},
-        total    => $data->{hits}->{total},
-        template => 'favorite/recent.html',
-    });
+    $c->stash(
+        {   header          => 1,
+            recent          => \@faves,
+            show_clicked_by => 1,
+            took            => $data->{took},
+            total           => $data->{hits}->{total},
+            template        => 'favorite/recent.html',
+        }
+    );
 }
 
 sub index : Path('/favorite/leaderboard') {

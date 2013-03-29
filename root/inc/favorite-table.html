@@ -3,20 +3,38 @@
     <thead>
     <tr>
     <th class="release">Release</th>
-    <th class="abstract">Author</th>
-    <th class="abstract">Clicked By</th>
+    <% IF show_author %>
+        <th class="abstract">Author</th>
+    <% END %>
+    <% IF show_clicked_by %>
+        <th class="abstract">Clicked By</th>
+    <% END %>
     <th class="date">Date</th>
     </tr>
 </thead>
 <%- END %>
 <tbody>
-<% i = 0; FOREACH favorite IN favorites %>
-<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
-  <td class="release"><strong><a href="/release/<% favorite.distribution; %>" class="ellipsis" style="width: 260px" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a></strong></td>
-  <td class="abstract"><a href="/author/<% favorite.author %>"><% favorite.author %></a></td>
-  <td class="abstract"><a href="/author/<% favorite.clicked_by_author %>"><% favorite.clicked_by_author %></a></td>
-  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></span></td>
-</tr>
+    <% i = 0; FOREACH favorite IN favorites %>
+        <tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
+            <td class="release">
+                <strong>
+                    <a href="/release/<% favorite.distribution; %>" class="ellipsis" style="width: 260px" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a>
+                </strong>
+            </td>
+        <% IF show_author %>
+            <td class="abstract">
+                <a href="/author/<% favorite.author %>"><% favorite.author %></a>
+            </td>
+        <% END %>
+        <% IF show_clicked_by %>
+            <td class="abstract">
+                <a href="/author/<% favorite.clicked_by_author %>"><% favorite.clicked_by_author %></a>
+            </td>
+        <% END %>
+        <td class="date" nowrap="nowrap">
+            <span class="relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></span>
+        </td>
+    </tr>
 <% END %>
 </tbody>
 </table>

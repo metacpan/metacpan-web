@@ -36,12 +36,13 @@ sub index : Path : Args(1) {
     $c->res->last_modified( $date );
 
     $c->stash(
-        {   author   => $author,
-            releases => $releases,
-            faves    => $faves,
-            took     => $data->{took} + $faves_data->{took},
-            total    => $data->{hits}->{total},
-            template => 'author.html'
+        {   author      => $author,
+            releases    => $releases,
+            faves       => $faves,
+            show_author => 1,
+            took        => $data->{took} + $faves_data->{took},
+            total       => $data->{hits}->{total},
+            template    => 'author.html'
         }
     );
 }
