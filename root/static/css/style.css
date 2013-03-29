@@ -413,20 +413,6 @@ code { font-family: monospace; }
     bottom: 0em !important;
 }
 
-.pager {
-    padding-top: 20px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.pager a, .pager strong {
-    padding-left: 6px;
-}
-
-.pager a strong {
-    padding-left: 0px;
-}
-
 body div.qtip div.content {
     padding: 0;
     margin: 0;
