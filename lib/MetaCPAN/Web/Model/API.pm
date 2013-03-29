@@ -101,17 +101,13 @@ sub raw_api_response {
     # we'll probably have the least number of issues if we assume utf8
     try {
       if( $data ){
-        my $enc;
-        # honor encoding if specified (as something other than utf-8)
-        if( ($enc) = ($data =~ /^=encoding\s+(\S+)\s*$/m) and $enc !~ /^utf-?8$/i ){
-          $data = Encode::decode( $enc, $data, $encode_check );
-        }
-        # theoretically we could check for a BOM here
-        # else try UTF-8
-        else {
+        # We could detect a pod =encoding line but any perl code in that file
+        # is likely ascii or UTF-8.  We could potentially check for a BOM
+        # but those aren't used often and aren't likely to appear here.
+        # For now just attempt to decode it as UTF-8 since that's probably
+        # what people should be using. (See also #378).
           # decode so the template doesn't double-encode and return mojibake
           $data = $encoding->decode( $data, $encode_check );
-        }
       }
     }
     catch {
