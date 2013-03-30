@@ -7,6 +7,9 @@
       <ul class="dropdown-menu">
 <%-
 backpan = [];
+MACRO breadcrumb_link(version) BLOCK %>
+          <li><a href="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+<%- END;
 FOREACH version IN versions;
     IF release.name == version.name;
         NEXT;
@@ -14,16 +17,14 @@ FOREACH version IN versions;
     IF version.status == 'backpan';
         backpan.push(version);
         NEXT;
-    END %>
-          <li><a href="<% version.author; '/'; version.name; '/'; module.name %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
-    <%-
     END;
+        breadcrumb_link(version) | none;
+END;
     IF backpan.size > 1 %>
         <li class="nav-header">BackPAN</li>
     <%
-        FOREACH version IN backpan %>
-        <li><a href="<% version.author; '/'; version.name; '/'; module.name %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
-    <%
+        FOREACH version IN backpan;
+            breadcrumb_link(version) | none;
         END;
     END;
 END %>
