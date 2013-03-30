@@ -34,7 +34,11 @@ END %>
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
   <a rel="author"  itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
   <span>&nbsp;/&nbsp;</span>
+  <%- IF module %>
   <a itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+  <%- ELSE %>
+    <span><% release.name %></span>
+  <%- END %>
   <% PROCESS version_dropdown %>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
