@@ -49,7 +49,7 @@
 <%- IF !module || module.documentation %>
 <li>
   <div>
-    <a href="/<% module ? "module" : "release" %>/<% release.distribution || module.documentation %>">Latest version</a>
+    <a href="/<% module ? "module" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
   </div>
 </li>
 <%- END %>
