@@ -36,7 +36,11 @@ END %>
       <% author.name || release.author %>
   </a>
   <span>&nbsp;/&nbsp;</span>
+  <%- IF module %>
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+  <%- ELSE %>
+    <span><% release.name %></span>
+  <%- END %>
   <% PROCESS version_dropdown %>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
