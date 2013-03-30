@@ -40,12 +40,21 @@ sub path : PathPart('module') : Chained('/') : Args {
                 ->request( '/pod/' . ( $pod || join( '/', @path ) ) . '?show_errors=1' ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
+            recommendations_instead_of => $c->model('API::Recommendation')
+                ->get( undef, map { $_->{name} } @{$data->{module}} ),
+            recommendations_supplanted_by => $c->model('API::Recommendation')
+                ->get_supplanted( undef, map { $_->{name} } @{$data->{module}} ),
         },
         $data,
     );
     $reqs = $self->recv_all($reqs);
     $self->stash_api_results( $c, $reqs, $data );
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
+
+    $data->{recommendation} = {
+        instead_of    => $reqs->{recommendations_instead_of}{instead_of},
+        supplanted_by => $reqs->{recommendations_supplanted_by}{supplanted_by},
+    };
 
     my $hr = HTML::Restrict->new;
     $hr->set_rules(
