@@ -16,7 +16,7 @@ sub get {
                     filter => {
                         or => [
                             map {
-                                { term => { 'recommendation.module' => $_ } }
+                                { term => { 'recommendation.alternative' => $_ } }
                                 } $module
                         ]
                     }
@@ -25,7 +25,7 @@ sub get {
             facets => {
                 instead_of => {
                     terms => {
-                        field => 'recommendation.instead_of',
+                        field => 'recommendation.module',
                     },
                 },
             }
@@ -58,7 +58,7 @@ sub get_supplanted {
                     filter => {
                         or => [
                             map {
-                                { term => { 'recommendation.instead_of' => $_ } }
+                                { term => { 'recommendation.module' => $_ } }
                                 } $module
                         ]
                     }
@@ -67,7 +67,7 @@ sub get_supplanted {
             facets => {
                 supplanted_by => {
                     terms => {
-                        field => 'recommendation.module',
+                        field => 'recommendation.alternative',
                     },
                 },
             }

@@ -72,7 +72,6 @@
             return item.documentation;
         }
     }).result(function(e, item) {
-        alert(item);
     });
 
     $('#recommendation-input.autofocus').focus();
@@ -102,9 +101,9 @@
              $('#recommendation-input').attr('disabled',true)
 
             $.post(
-                '/account/recommend/<% module.documentation %>/' + module,
+                '/account/recommend/'+'<% module.documentation %>'+'/alternative/'+module,
                 function(){
-                    $('#recommendation-box').hide();
+                    $('#recommendation-box').hide(400);
                     $('#recommendation-input').attr('disabled',false)
                 }
             );

@@ -40,8 +40,10 @@ sub remove_favorite {
 sub recommend_alternative {
     my( $self, $module, $alternative, $token ) = @_;
 
-    $self->request( join( '/', '/user/recommend', $module, $alternative ),
-        { token => $token } 
+    $self->request( join( '/', '/user/recommendation', $module,
+            'alternative', $alternative ),
+        undef,
+        { token => 'testing', method => 'PUT' } 
     );
 }
 

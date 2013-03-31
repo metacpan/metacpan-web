@@ -3,8 +3,9 @@ package MetaCPAN::Web::Controller::Account::Recommend;
 use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub recommend : Path('/account/recommend') :Args(2) {
-    my ( $self, $c, $module, $alternative ) = @_;
+sub recommend : Path('/account/recommend') :Args(3) {
+    # FIXME clean up the relation
+    my ( $self, $c, $module, undef, $alternative ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     my $model = $c->model('API::User');
     my $res = $model->recommend_alternative( $module => $alternative, $c->token )->recv;
