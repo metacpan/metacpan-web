@@ -37,56 +37,43 @@ I'm also assuming that we have the modules recommended over this one, and
 those under it. And that the whole this has the format:
 
     $data->{recommendations} = {
-        recommended_over => {
-            'Foo'       => [ 'AUTHOR1', 'AUTHOR2' ],
-            'Bar::Baz'  => [ 'AUTHOR3' ],
+        supplanted_by => {
+            'Foo'       => 3,
+            'Bar::Baz'  => 2,
         },
-        rather_use => {
-            'Frob::Uscate' => [ 'AUTHOR4' ],
+        instead_use => {
+            'Frob::Uscate' => 4,
         },
     };
-
-Yes, 'rather_use' is a crappy key, but for now it'll do. We'll s/// it to
-something decent down the line.
 
 =cut
 
 sub groom_recommendations {
     my( $self, $c, $data ) = @_;
 
-    # sample data
-    $data->{recommendations} = {
-        recommended_over => {
-            'Foo'       => [ 'AUTHOR1', 'AUTHOR2' ],
-            'Bar::Baz'  => [ 'AUTHOR3' ],
-            'Frob::Uscate' => [ 'AUTHOR5', 'AUTHOR6' ],
-        },
-        rather_use => {
-            'Frob::Uscate' => [ 'AUTHOR4' ],
-        },
-    };
-
+    $DB::single = 1;
+    
     my $r = $data->{recommendations} or return [];
 
     my %rec;
 
-    if ( my $plus = $r->{recommended_over} ) {
+    if ( my $plus = $r->{instead_of} ) {
         while( my ($module,$votes) = each %$plus ) {
             $rec{$module}{module} = $module;
-            $rec{$module}{sum} = $rec{$module}{plus} = scalar @$votes;
+            $rec{$module}{score} = $rec{$module}{plus} = $votes;
         }
     }
 
-    if ( my $minus = $r->{rather_use} ) {
+    if ( my $minus = $r->{supplanted_by} ) {
         while( my ($module,$votes) = each %$minus ) {
             $rec{$module}{module} = $module;
-            $rec{$module}{minus} = scalar @$votes;
-            $rec{$module}{sum}  += scalar @$votes;
+            $rec{$module}{minus} = $votes;
+            $rec{$module}{score} -= $votes;
         }
     }
 
     return [
-        reverse sort { $a->{sum} <=> $b->{sum} } values %rec
+        sort { $a->{score} <=> $b->{score} } values %rec
     ];
 
 }

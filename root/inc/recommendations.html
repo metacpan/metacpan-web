@@ -16,9 +16,9 @@
 <% FOREACH rec IN recommendations %>
     <li><a href="/module/<% rec.module %>"><% rec.module %></a> 
     <div class="recommendation_score" style="float: right; font-style: italic">
-        <% IF rec.plus %>+<% rec.plus %> <% END %>
+        <% IF rec.plus %>-<% rec.plus %> <% END %>
         <% IF rec.plus * rec.minus %> / <% END %>
-        <% IF rec.minus %>-<% rec.minus %> <% END %>
+        <% IF rec.minus %>+<% rec.minus %> <% END %>
     </div>
     </li>
 <% END %>
