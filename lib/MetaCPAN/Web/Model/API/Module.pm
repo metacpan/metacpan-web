@@ -120,7 +120,8 @@ sub search_collapsed {
         $run++;
         } while ( @distributions < 20 + $from
         && $data->{hits}->{total}
-        && $data->{hits}->{total} > $hits + ( $run - 1 ) * $RESULTS_PER_RUN );
+        && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN
+    );
 
     @distributions = splice( @distributions, $from, 20 );
     my $ratings   = $self->model('Rating')->get(@distributions);
