@@ -726,7 +726,7 @@ div.qtip-github table th {
     font-weight: bold;
 }
 
-.release-table .name {
+.file-table .name, .release-table .name {
     width: 266px;
 }
 
