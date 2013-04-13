@@ -43,8 +43,11 @@
   <%- IF item.rating.count > 0 %>
     &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
   <%- END %> -
-  <span class="relatize"><% item.date.dt_http %></span> -
-  <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  <span class="relatize"><% item.date.dt_http %></span>
+  <%- IF !single_dist %>
+    -
+    <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+  <%- END %>
   <!-- <% item.score %> -->
 <br>
 <% IF group.size > 1 %>

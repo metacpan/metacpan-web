@@ -41,10 +41,15 @@ sub index : Path {
             ? $model->search_distribution( $query, $from, $user )
             : $model->search_collapsed( $query, $from, $user );
 
+        my @dists = $query =~ /distribution:(\S+)/g;
+
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
         $c->stash(
-            { %$results, authors => $authors, template => 'search.html' } );
+            { %$results,
+              single_dist => @dists == 1,
+              authors => $authors,
+              template => 'search.html' } );
     }
 }
 
