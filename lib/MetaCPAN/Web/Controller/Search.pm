@@ -33,18 +33,23 @@ sub index : Path {
     else {
         my $user = $c->user_exists ? $c->user->id : undef;
 
-        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E};
-        $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/;
+        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E}g;
+        $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/g;
 
         my $results
             = $query =~ /distribution:/
             ? $model->search_distribution( $query, $from, $user )
             : $model->search_collapsed( $query, $from, $user );
 
+        my @dists = $query =~ /distribution:(\S+)/g;
+
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
         $c->stash(
-            { %$results, authors => $authors, template => 'search.html' } );
+            { %$results,
+              single_dist => @dists == 1,
+              authors => $authors,
+              template => 'search.html' } );
     }
 }
 
