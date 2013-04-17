@@ -9,7 +9,7 @@
     </div>
     <ul style="display: none">
     <% FOREACH contributor IN contributors %>
-        <li style="text-align: left; padding-left: 22px;">
+        <li class="contributor<% ' cpan' IF contributor.pauseid %>">
         <% IF contributor.pauseid %>
         <a href="<% contributor.url %>" 
            class="cpan_author" 

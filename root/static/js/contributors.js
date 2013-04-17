@@ -22,9 +22,8 @@ $(function(){
             var $img = $('<img />').attr( 'src', gravatar )
                 .attr( 'width', 20 )
                 .attr( 'height', 20 );
-            $anchor.css( 'margin-left', '1px' );
-            $anchor.parent().css( 'padding-left', '1px' );
             $anchor.text( data.name );
+            $anchor.parent().addClass('gravatar');
             $anchor.before( $img );
         });
     });
