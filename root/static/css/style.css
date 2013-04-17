@@ -1021,3 +1021,21 @@ div.qtip-github table th {
 .leader_board_top_rest .leader_board_count {
     float: right;
 }
+
+
+/* Contributors list on release pages
+ * see /release/Plack for example
+ */
+
+#contributors .contributor {
+    position: relative;
+    text-align: left;
+    padding-left: 22px;
+}
+#contributors .contributor.gravatar img {
+    left: 0;
+    position: absolute;
+}
+#contributors .contributor * {
+    vertical-align: top;
+}
