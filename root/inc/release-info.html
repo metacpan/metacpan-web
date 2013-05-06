@@ -17,7 +17,7 @@
         ELSIF release.resources.bugtracker.mailto;
           'mailto:' _ release.resources.bugtracker.mailto;
         ELSE;
-          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution;
+          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
         END;
       %>">Bugs</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></li>
       <% IF rating.count > 0 %>
