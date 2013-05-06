@@ -93,16 +93,17 @@ FOREACH file IN files;
 END;
 documentation = documentation.merge(documentation_raw);
 %>
-<% IF modules.size %><strong>Modules</strong>
-<% FOREACH module IN modules %>
+
+<% IF documentation.size %><strong>Documentation</strong>
+<% FOREACH module IN documentation %>
   <div>
     <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
 <br><% END %>
-<% IF documentation.size %><strong>Documentation</strong>
-<% FOREACH module IN documentation %>
+<% IF modules.size %><strong>Modules</strong>
+<% FOREACH module IN modules %>
   <div>
     <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
