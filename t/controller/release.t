@@ -23,6 +23,16 @@ test_psgi app, sub {
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
     ok( $tx->find_value('//a[@href="/release/Moose"]'),
         'contains permalink to resource' );
+
+    # Confirm that the headings in the content div are in the expected order.
+    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
+    my $heading  = 0;
+
+    $tx->ok( '//div[@class="content"]/strong', sub {
+        $_->is( '.', $headings[$heading], "heading $headings[$heading] in expected location");
+        $heading++;
+    } , 'headings in correct order');
+
     ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
         'contains link to "this" version' );
     my $latest = $tx->find_value('//div[@class="content"]');
