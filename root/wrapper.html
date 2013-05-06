@@ -75,7 +75,7 @@
             <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
           </div>
           <div class="ds">
-            <input type="text" name="q" size="41" id="search-input" value="<% req.param('q').join(' ') or req.parameters.lucky %>"><input type="submit" value="Search" class="g-button" />
+            <input type="text" name="q" size="41" id="search-input" value="<% req.param('q').join(' ') %>"><input type="submit" value="Search" class="g-button" />
           </div><br>
           <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
         </div>
