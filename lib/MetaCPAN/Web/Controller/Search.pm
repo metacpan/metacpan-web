@@ -8,8 +8,9 @@ sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    unless ($req->param('q') or
-            $req->param('lucky')) {
+    # Redirect back to main page if search query is empty irrespective of
+    # whether we're feeling lucky or not.
+    unless ($req->param('q')) {
         $c->res->redirect('/');
         $c->detach;
     }
