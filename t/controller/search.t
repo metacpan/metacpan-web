@@ -11,6 +11,13 @@ test_psgi app, sub {
         'GET /search' );
     is( $res->code, 302, 'code 302' );
 
+    # Empty search query results in redirect.
+    ok( $res = $cb->( GET "/search?q=" ), 'GET /search?q=' );
+    is( $res->code, 302, 'code 302' );
+    # Empty search query for lucky searches also redirects.
+    ok( $res = $cb->( GET "/search?q=&lucky=1" ), 'GET /search?q=&lucky=1' );
+    is( $res->code, 302, 'code 302' );
+
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
     ok( $res->content =~ /0 results/, '0 results for an invalid search term' );
