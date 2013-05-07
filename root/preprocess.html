@@ -53,6 +53,8 @@ profiles = {
   title = file.documentation || file.path;
   IF file.status == "latest"
     && file.documentation
+    && file.authorized
+    && file.indexed
     && file.module.grep(->(module){ module.authorized && module.indexed });
     path = file.documentation;
   ELSE;
