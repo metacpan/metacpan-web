@@ -51,7 +51,17 @@ sub tx {
     my $tree = HTML::TreeBuilder->new_from_content( shift->content );
     my $xml  = $tree->as_XML;
     $xml = decode_utf8($xml);
-    return Test::XPath->new( xml => $xml );
+    my $tx = Test::XPath->new( xml => $xml );
+    # https://metacpan.org/module/DWHEELER/Test-XPath-0.16/lib/Test/XPath.pm#xpc
+    $tx->xpc->registerFunction( grep => sub {
+        my ($nodelist, $regex) =  @_;
+        my $result = XML::LibXML::NodeList->new;
+        for my $node ($nodelist->get_nodelist) {
+            $result->push($node) if $node->textContent =~ $regex;
+        }
+        return $result;
+    } );
+    return $tx;
 }
 
 1;
