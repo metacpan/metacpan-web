@@ -57,6 +57,10 @@ foreach my $phase ( keys %$files ){
   $reqs->{ $phase } = $pr->as_string_hash;
 }
 
+# prereqs in MetaCPAN::Server::Test got categorized incorrectly
+$reqs->{build}{$_} = delete $reqs->{runtime}{$_}
+  for qw( Test::XPath );
+
 # don't duplicate runtime deps into build deps
 foreach my $dep ( keys %{ $reqs->{runtime} } ){
   # TODO: check version
