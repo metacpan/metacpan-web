@@ -18,7 +18,7 @@
         <tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
             <td class="release">
                 <strong>
-                    <a href="/release/<% favorite.distribution; %>" class="ellipsis" style="width: 260px" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a>
+                    <a href="/release/<% favorite.distribution; %>" class="ellipsis" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a>
                 </strong>
             </td>
         <% IF show_author %>
