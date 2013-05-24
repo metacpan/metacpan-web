@@ -727,8 +727,12 @@ div.qtip-github table th {
 }
 
 .file-table .name, .release-table .name {
-    width: 266px;
+    width: 326px;
 }
+
+.file-table .name a, .release-table .name a, .release-table .release a {
+    width: 320px;
+}  
 
 .tablesorter .date, .release-table .date {
     width: 100px;
