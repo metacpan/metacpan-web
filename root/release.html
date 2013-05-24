@@ -27,7 +27,7 @@
     <% IF versions.size > 1 %>
     <li>
       <select name="release" onchange="document.location.href='/diff/release/' + this.value + '<% release.author %>/<% release.name %>'">
-      <option>Diff with version</option>
+      <option>Diff dist with version</option>
       <% PROCESS version_options %>
     </select></li>
     <% END %>
