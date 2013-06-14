@@ -30,6 +30,7 @@
           <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% release.version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a>
       </li>
       <li><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></li>
+      <li><a href="http://cpancover.com/latest/<% release.name %>/index.html">CPANcover</a></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
     <% IF versions.size > 1 %>
     <select name="release" onchange="document.location.href='/<% IF module.path; 'module'; ELSE; 'release'; END %>/' + this.value">
