@@ -30,6 +30,9 @@
 <%- IF canonical %>
   <link rel="canonical" href="https://metacpan.org<% canonical %>" />
 <%- END %>
+<%- IF meta_description %>
+  <meta name="description" content="<% meta_description %>" />
+<%- END %>
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
   <script type="text/javascript">
