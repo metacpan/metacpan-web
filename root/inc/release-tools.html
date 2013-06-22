@@ -1,36 +1,30 @@
 <li class="nav-header">Tools</li>
 <li>
-  <div>
-    <a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">
-      <i class="icon-download-alt"></i> Download (<% release.stat.size | format_bytes %>b)
-    </a>
-  </div>
+  <a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">
+    <i class="icon-download-alt"></i> Download (<% release.stat.size | format_bytes %>b)
+  </a>
+</li>
+<%- IF module %>
+<li>
+  <a href="#" onclick="return toggleTOC()"><i class="icon-list"></i> Toggle Table of Contents</a>
+</li>
+<%- END %>
+<li>
+  <a href="http://explorer.metacpan.org/?url=/module/<% release.author %>/<% release.name %>/<% module.path %>">
+    <i class="icon-list-alt"></i> MetaCPAN Explorer
+  </a>
 </li>
 <li>
-  <div>
-    <a href="#" onclick="return toggleTOC()"><i class="icon-list"></i> Toggle Table of Contents</a>
-  </div>
+  <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">
+    <i class="icon-star"></i> Rate this distribution
+  </a>
 </li>
 <li>
-  <div>
-    <a href="http://explorer.metacpan.org/?url=/module/<% release.author %>/<% release.name %>/<% module.path %>">
-      <i class="icon-list-alt"></i> MetaCPAN Explorer
-    </a>
-  </div>
-</li>
-<li>
-  <div>
-    <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">
-      <i class="icon-star"></i> Rate this distribution
-    </a>
-  </div>
-</li>
-<li>
-    <form action="/search">
-        <input type="hidden" name="q" value="dist:<% release.distribution %>">
-        <input type="search" name="q" placeholder="Search distribution" style="width: 160px">
-        <input type="submit" style="display: none">
-    </form>
+  <form action="/search">
+    <input type="hidden" name="q" value="dist:<% release.distribution %>">
+    <input type="search" name="q" placeholder="Search distribution" style="width: 153px">
+    <input type="submit" style="display: none">
+  </form>
 </li>
 <%- IF versions.size > 1 %>
 <li>
@@ -42,14 +36,10 @@
 <%- END %>
 <li class="nav-header">Permalinks</li>
 <li>
-  <div>
-    <a href="/<% module ? "module" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
-  </div>
+  <a href="/<% module ? "module" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
 <%- IF !module || module.documentation %>
 <li>
-  <div>
-    <a href="/<% module ? "module" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
-  </div>
+  <a href="/<% module ? "module" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
 </li>
 <%- END %>
