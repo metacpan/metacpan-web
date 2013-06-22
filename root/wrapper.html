@@ -16,7 +16,7 @@
   class = 'hidden-phone',
 },
 {
-  title = "Bugs",
+  title = "Feedback",
   path = ["https://github.com/CPAN-API/metacpan-web/issues"],
   class = 'hidden-phone',
 },
@@ -53,11 +53,13 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container-fluid">
+        <%- UNLESS req.uri.path == "/" %>
         <a class="btn btn-navbar btn-slidepanel" data-toggle="slidepanel" data-target=".slidepanel">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
+        <%- END %>
         <ul class="nav">
           <%-  FOREACH item IN menu;
             active = item.path.grep(->{ this == req.uri.path} ).size;
@@ -140,10 +142,10 @@
           <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
         </div>
         <div class="span2" style="text-align: center">
-          <a href="/about/resources">About MetaCPAN</a>
+          <a href="/about/resources">About</a>
         </div>
         <div class="span1" style="text-align: center">
-          <a href="https://github.com/CPAN-API/metacpan-web">Fork me</a>
+          <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
         </div>
         <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
           Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
@@ -161,7 +163,7 @@
         Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
         <br><br>
         <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
-          <img src="/static/images/bytemark_logo.png" width=75>
+          <img src="/static/images/bytemark_logo.png" width=100>
         </a>
       </div>
     </div>
