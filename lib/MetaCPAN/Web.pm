@@ -2,7 +2,7 @@ package MetaCPAN::Web;
 use Moose;
 use namespace::autoclean;
 
-use Catalyst::Runtime 5.90011;
+use Catalyst::Runtime 5.90042;
 use CatalystX::RoleApplicator;
 
 use Catalyst qw/
