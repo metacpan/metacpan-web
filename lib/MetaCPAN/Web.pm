@@ -8,7 +8,6 @@ use CatalystX::RoleApplicator;
 use Catalyst qw/
     ConfigLoader
     Static::Simple
-    Unicode::Encoding
     Authentication
     /;
 
