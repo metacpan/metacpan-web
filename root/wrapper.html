@@ -26,9 +26,16 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
-  <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
+  <%- IF rss %>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
+<%- IF canonical %>
+  <link rel="canonical" href="https://metacpan.org<% canonical %>" />
+<%- END %>
+<%- IF meta_description %>
+  <meta name="description" content="<% meta_description %>" />
+<%- END %>
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
   <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
@@ -48,6 +55,11 @@
   })();
 
   </script>
+
+<% IF twitter_card_inc %>
+<% INCLUDE $twitter_card_inc %>
+<% END %>
+
 </head>
 <body>
   <div class="navbar">
@@ -118,7 +130,7 @@
       <div class="span6">
         <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
           <div class="input-append">
-            <input type="text" name="q" size="41" id="search-input" class="input-xlarge span5" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
+            <input type="text" name="q" size="41" id="search-input" class="input-xlarge span5" value="<% req.param('q').join(' ') %>">
             <button class="btn" type="button">Search</button>
           </div><br>
           <small class="smaller">
@@ -137,17 +149,20 @@
     <div class="hidden-phone">
       <br><br><br>
       <div class="row-fluid">
-        <div class="span4 hidden-phone">&nbsp;</div>
+        <div class="span3">&nbsp;</div>
         <div class="span1" style="text-align: center">
           <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
         </div>
         <div class="span2" style="text-align: center">
           <a href="/about/resources">About</a>
         </div>
-        <div class="span1" style="text-align: center">
+        <div class="span2" style="text-align: center">
           <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
         </div>
-        <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+        <div class="span1" style="text-align: center">
+          <a href="http://Perl.org/">Perl.org</a>
+        </div>
+        <div class="span3" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
           Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
           <br><br>
           <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">

@@ -10,12 +10,16 @@
 </ul>
 
 <div class="content">
-<strong>Distributions Which Depend on <%- required %> (Reverse Dependencies)</strong>
+<strong>Distributions Which Depend on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a></strong>
 <% IF data.size > 0 %>
 <% INCLUDE inc/release-table.html releases = data, header = 1, tablesorter = 1 %>
 <% INCLUDE inc/pager.html size = 50 %>
 <% ELSE %>
-<p>No distributions depending on <% required %> could be found</p>
+<big>
+	<strong>
+		No distributions depending on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a> could be found
+	</strong>
+</big>
 <% END %>
 </div>
 <script>defaultSort = [[2,1]];</script>

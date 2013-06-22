@@ -100,8 +100,15 @@ sub raw_api_response {
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     try {
-      # decode so the template doesn't double-encode and return mojibake
-      $data &&= $encoding->decode( $data, $encode_check );
+      if( $data ){
+        # We could detect a pod =encoding line but any perl code in that file
+        # is likely ascii or UTF-8.  We could potentially check for a BOM
+        # but those aren't used often and aren't likely to appear here.
+        # For now just attempt to decode it as UTF-8 since that's probably
+        # what people should be using. (See also #378).
+          # decode so the template doesn't double-encode and return mojibake
+          $data = $encoding->decode( $data, $encode_check );
+      }
     }
     catch {
       warn $_[0];

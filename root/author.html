@@ -1,4 +1,5 @@
 <% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
+<% twitter_card_inc = 'inc/twitter/author.html' %>
 <ul class="nav nav-list slidepanel">
   <li class="visible-phone search">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">

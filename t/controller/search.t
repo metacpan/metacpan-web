@@ -11,6 +11,13 @@ test_psgi app, sub {
         'GET /search' );
     is( $res->code, 302, 'code 302' );
 
+    # Empty search query results in redirect.
+    ok( $res = $cb->( GET "/search?q=" ), 'GET /search?q=' );
+    is( $res->code, 302, 'code 302' );
+    # Empty search query for lucky searches also redirects.
+    ok( $res = $cb->( GET "/search?q=&lucky=1" ), 'GET /search?q=&lucky=1' );
+    is( $res->code, 302, 'code 302' );
+
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
     ok( $res->content =~ /0 results/, '0 results for an invalid search term' );
@@ -69,9 +76,9 @@ sub search_and_find_module {
     $query = encode("UTF-8" => $query) if is_utf8($query);
     my $res = req_200_ok( $cb, GET("/search?q=$query"), $desc);
     my $tx = tx($res);
-    $tx->is(
-        qq!//div[\@class="search-results"]//div[\@class="module-result"]//a[\@href="/module/$exp_mod"]!,
-        $exp_mod,
+    # make sure there is a link tag whose content is the module name
+    $tx->ok(
+        qq!grep(//div[\@class="search-results"]//div[\@class="module-result"]//a[1], "^\Q$exp_mod\E\$")!,
         "$desc: found expected module",
     );
 }

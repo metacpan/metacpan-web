@@ -155,8 +155,8 @@ foreach my $test ( @tests ) {
         $tx->like(
             # "go to" option has no value attr
             '//select[@name="release"]/option[@value][1]',
-            qr/\(\d{4}-\d{2}-\d{2}\)$/,
-            'version ends with date in common format'
+            qr/\([A-Z]{3,9} on \d{4}-\d{2}-\d{2}\)$/,
+            'version ends with pause id and date  in common format'
         );
 
         # TODO: diff with version

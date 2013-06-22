@@ -1,3 +1,6 @@
+<% twitter_card_inc = 'inc/twitter/module.html' %>
+<% canonical = "/module/" _ module.documentation %>
+<% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
 <% INCLUDE inc/breadcrumbs.html %>
 

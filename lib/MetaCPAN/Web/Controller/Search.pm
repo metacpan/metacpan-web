@@ -8,8 +8,9 @@ sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    unless ($req->param('q') or
-            $req->param('lucky')) {
+    # Redirect back to main page if search query is empty irrespective of
+    # whether we're feeling lucky or not.
+    unless ($req->param('q')) {
         $c->res->redirect('/');
         $c->detach;
     }
@@ -24,7 +25,10 @@ sub index : Path {
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
-    if ( $req->parameters->{lucky} ) {
+    if ( $req->parameters->{lucky} or
+         # DuckDuckGo-like syntax for bangs that redirect to the first
+         # result.
+         $query =~ s[^ (?: \\ | ! ) ][]x) {
         my $module = $model->first($query)->recv;
         $c->detach('/not_found') unless ($module);
         $c->res->redirect("/module/$module");
@@ -33,18 +37,23 @@ sub index : Path {
     else {
         my $user = $c->user_exists ? $c->user->id : undef;
 
-        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E};
-        $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/;
+        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E}g;
+        $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/g;
 
         my $results
             = $query =~ /distribution:/
             ? $model->search_distribution( $query, $from, $user )
             : $model->search_collapsed( $query, $from, $user );
 
+        my @dists = $query =~ /distribution:(\S+)/g;
+
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
         $c->stash(
-            { %$results, authors => $authors, template => 'search.html' } );
+            { %$results,
+              single_dist => @dists == 1,
+              authors => $authors,
+              template => 'search.html' } );
     }
 }
 

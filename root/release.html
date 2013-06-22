@@ -1,6 +1,8 @@
 <% title = release.name _ ' - ' _ release.abstract; rss = 'distribution/' _ release.distribution %>
+<% canonical = '/release/' _ release.distribution %>
+<% meta_description = release.abstract %>
+<% twitter_card_inc = 'inc/twitter/release.html' %>
 <% INCLUDE inc/breadcrumbs.html %>
-
 <ul class="nav nav-list slidepanel">
     <li class="visible-phone search">
       <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
@@ -53,16 +55,17 @@ FOREACH file IN files;
 END;
 documentation = documentation.merge(documentation_raw);
 %>
-<% IF modules.size %><strong>Modules</strong>
-<% FOREACH module IN modules %>
+
+<% IF documentation.size %><strong>Documentation</strong>
+<% FOREACH module IN documentation %>
   <div>
     <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>
 <% END %>
 
 <br><% END %>
-<% IF documentation.size %><strong>Documentation</strong>
-<% FOREACH module IN documentation %>
+<% IF modules.size %><strong>Modules</strong>
+<% FOREACH module IN modules %>
   <div>
     <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
   </div>

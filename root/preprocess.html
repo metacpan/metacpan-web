@@ -29,6 +29,7 @@ profiles = {
   lastfm = { name = 'LastFM', url = 'http://www.last.fm/user/%s' },
   linkedin = { name = 'LinkedIn', url = 'http://www.linkedin.com/in/%s' },
   myspace = { name = 'MySpace', url = 'http://www.myspace.com/%s' },
+  nerdability = { name = 'NerdAbility', url = 'https://nerdability.com/user/%s' },
   ohloh = { name = 'Ohloh', url = 'https://www.ohloh.net/accounts/%s' },
   perlmonks = { name = 'PerlMonks', url = 'http://www.perlmonks.org/?node=%s' },
   pinboard = { name = 'Pinboard', url = 'http://pinboard.in/u:%s' },
@@ -53,6 +54,8 @@ profiles = {
   title = file.documentation || file.path;
   IF file.status == "latest"
     && file.documentation
+    && file.authorized
+    && file.indexed
     && file.module.grep(->(module){ module.authorized && module.indexed });
     path = file.documentation;
   ELSE;

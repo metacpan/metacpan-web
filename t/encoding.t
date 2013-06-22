@@ -90,7 +90,11 @@ foreach my $ctype ( 'text/plain', 'application/json' ){
     # test that a raw, non-utf8 response is unchanged
     foreach my $bad (
       [ encode(utf8 => "foo\x{FFFF_FFFF}bar"), 'encoded lax perl utf8 chars' ],
+      [ encode(utf8 => "=encoding  utf8\n\nfoo\x{FFFF_FFFF}bar"), '=encoding utf8 with bad chars' ],
       [ "\225 cp1252 bullet", 'invalid utf-8 bytes' ],
+      # we ignore =encoding in raw responses
+      [ "=pod\n\n=encoding latin9\n\nsome pod \xa4\n\n=cut\n", 'non-utf8 chars' ],
+      [ "=pod\n\n=encoding foo-bar-baz\n\nsome char \xfe", 'unknown =encoding ignored' ],
     ){
       test_raw_response($bad->[0], $bad->[0], $bad->[1] . " come back as is",
         warnings => [qr/does not map to Unicode/, 'encode croaked'],
