@@ -1,7 +1,7 @@
 <table class="table table-condensed table-striped table-favorites<% IF tablesorter %> tablesorter<% END %>">
   <thead>
     <tr>
-      <th class="release hidden-phone"><% author ? "Favorites" : "Distribution" %></th>
+      <th class="release pull-left-phone"><% author ? "Favorites" : "Distribution" %></th>
       <% UNLESS author %><th class="abstract pull-left-phone">Favorited By</th><% END %>
       <th class="date"><% day || "Date" %></th>
     </tr>
