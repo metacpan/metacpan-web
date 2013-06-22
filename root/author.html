@@ -26,7 +26,7 @@
 <%
 IF author.profile.size -%>
 <li class="nav-header">Profiles</li>
-<div class='user-profiles'>
+<div class="user-profiles">
 <%-
 FOREACH profile IN author.profile.sort('name');
 IF profiles.${profile.name} %>
