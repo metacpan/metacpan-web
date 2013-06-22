@@ -5,6 +5,7 @@
 @import "breadcrumbs.less";
 @import "search.less";
 @import "leaderboard.less";
+@import "dropdown.less";
 
 @iconSpritePath:          "../icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../icons/glyphicons-halflings-white.png";
@@ -111,6 +112,11 @@
 
 .nav-list.nav > li > a {
   display: inline;
+}
+
+.nav-list > li > a, .nav-list .nav-header {
+  margin: 0;
+  padding: 0;
 }
 
 .nav-list.nav > li > a:hover {

@@ -75,6 +75,7 @@ $app = Plack::Middleware::Assets->wrap(
             toolbar
             github
             contributors
+            dropdown
             bootstrap/bootstrap-dropdown
             bootstrap/bootstrap-collapse
             bootstrap/bootstrap-tooltip

@@ -1,19 +1,12 @@
 <% BLOCK version_dropdown %>
 <%- IF versions.size > 1; %>
-<span class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <b class="caret"></b>
-        </a>
-      <ul class="dropdown-menu">
 <%-
 backpan = [];
-MACRO breadcrumb_link(version) BLOCK %>
-          <li><a href="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.date.dt_date_common %>)</a></li>
+MACRO breadcrumb_link(version) BLOCK;
+  selected = release.author == version.author && release.name == version.name ? "selected" : ""; %>
+  <option <% selected %> value="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)</option>
 <%- END;
 FOREACH version IN versions;
-    IF release.name == version.name;
-        NEXT;
-    END;
     IF version.status == 'backpan';
         backpan.push(version);
         NEXT;
@@ -21,15 +14,12 @@ FOREACH version IN versions;
         breadcrumb_link(version) | none;
 END;
     IF backpan.size > 1 %>
-        <li class="nav-header">BackPAN</li>
+        <optgroup label="BackPAN">
+          <% FOREACH version IN backpan; breadcrumb_link(version) | none; END %>
+        </optgroup>
     <%
-        FOREACH version IN backpan;
-            breadcrumb_link(version) | none;
-        END;
     END;
 END %>
-      </ul>
-  </span>
 <% END %>
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
   <a rel="author"  itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
@@ -39,7 +29,7 @@ END %>
   <%- ELSE %>
     <span><% release.name %></span>
   <%- END %>
-  <% PROCESS version_dropdown %>
+  <span class="dropdown"><% module ? "" : release.name %> <b class="caret"></b><select><% PROCESS version_dropdown %></select></span>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
   <% module.documentation %></span>
