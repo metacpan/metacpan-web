@@ -24,13 +24,6 @@ use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
 
-# hack to get the app running under Carton without throwing "Can't locate
-# object method "load" via package "Template::Plugin" exceptions
-use Template::Plugin::Number::Format;
-use Template::Plugin::JSON;
-use Template::Plugin::Page;
-use Template::Plugin::DateTime;
-
 # explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
 $app->map( '/static/' => Plack::App::File->new( root => 'root/static' )->to_app );

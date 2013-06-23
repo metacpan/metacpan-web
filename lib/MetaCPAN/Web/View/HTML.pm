@@ -11,6 +11,11 @@ use URI;
 use JSON;
 use Gravatar::URL;
 use Regexp::Common qw(time);
+use Template::Plugin::DateTime;
+use Template::Plugin::JSON;
+use Template::Plugin::Markdown;
+use Template::Plugin::Number::Format;
+use Template::Plugin::Page;
 
 sub parse_datetime {
     my $date = shift;
