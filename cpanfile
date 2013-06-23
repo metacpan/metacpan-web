@@ -2,7 +2,7 @@ requires 'AnyEvent::Curl::Multi';
 requires 'App::Prove';
 requires 'CPAN::Meta::Requirements';
 requires 'Captcha::reCAPTCHA', '0.94';
-requires 'Catalyst', '5.90040';
+requires 'Catalyst', '5.90042';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Authentication::Store::Proxy', '0.0.1';
 requires 'Catalyst::Authentication::User';
