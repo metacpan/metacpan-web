@@ -22,6 +22,7 @@ sub index : PathPart('source') : Chained('/') : Args {
         );
     }
 
+
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->recv;
         $c->res->last_modified($module->{date});
@@ -37,6 +38,22 @@ sub index : PathPart('source') : Chained('/') : Args {
         );
     }
     elsif ( exists $source->{raw} ) {
+        $module->{content} = $source->{raw};
+        $c->stash({
+            file => $module,
+        });
+        $c->forward('content');
+    }
+    else {
+        $c->detach('/not_found');
+    }
+}
+
+sub content : Private {
+    my ($self, $c) = @_;
+
+    # FIXME: $module should really just be $file
+    my $module = $c->stash->{file};
 
         # could this be a method/function somewhere else?
         if ( !$module->{binary} ) {
@@ -60,7 +77,7 @@ sub index : PathPart('source') : Chained('/') : Args {
                     # default to plain text
                     'plain';
             };
-            $c->stash( { source => $source->{raw}, filetype => $filetype } );
+            $c->stash( { source => $module->{content}, filetype => $filetype } );
         }
         $c->res->last_modified($module->{date});
         $c->stash(
@@ -68,10 +85,6 @@ sub index : PathPart('source') : Chained('/') : Args {
                 module   => $module,
             }
         );
-    }
-    else {
-        $c->detach('/not_found');
-    }
 }
 
 1;
