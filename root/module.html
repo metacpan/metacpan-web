@@ -2,15 +2,19 @@
 <% canonical = "/module/" _ module.documentation %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
 <strong>
   <big>
-    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>">
-      <% author.name || release.author %>
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>"
+       itemprop="url">
+      <span itemprop="name"><% author.name || release.author %></span>
     </a>
+    </span>
     &nbsp;/&nbsp;
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
   &nbsp;/&nbsp;
-  <span class="select-text"><% module.documentation %></span>
+  <span class="select-text" itemprop="name"><% module.documentation %></span>
   </big></strong>
   <% INCLUDE inc/favorite.html module = module %>
   <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
@@ -20,8 +24,8 @@
   <div>
     <ul>
       <li><strong class="relatize"><% module.date.dt_http %></strong></li>
-      <% IF module.module.0.version %><li>Module version: <% module.module.0.version %></li><% END %>
-      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
+      <% IF module.module.0.version %><li>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></li><% END %>
+      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li>
         <a id="source-link" href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
@@ -58,7 +62,7 @@
   <ul>
     <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
     <% IF module.documentation %>
-    <li><a href="/module/<% module.documentation %>">Latest version</a></li>
+    <li><a href="/module/<% module.documentation %>" itemprop="url">Latest version</a></li>
     <% END %>
   </ul>
 </div>
@@ -73,4 +77,5 @@
 <% ELSE %>
 No pod could be found for <% module.name %>
 <% END %>
+</div>
 </div>
