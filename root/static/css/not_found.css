@@ -1,0 +1,10 @@
+#content #not-found h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#content #not-found h1,
+#content #not-found p {
+    margin: 5px;
+    padding: 5px;
+}

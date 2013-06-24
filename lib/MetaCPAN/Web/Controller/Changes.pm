@@ -31,9 +31,29 @@ sub get : Private {
 
     my $file = $c->model('API::Changes')->get(@args)->recv;
 
+    # NOTE: There is currently no differentiation (from the API)
+    # of whether the release doesn't exist or we couldn't find a change log.
+    # We don't care about the difference here either.
+    if( !exists $file->{content} ){
+
+        my $release = join('/', @args);
+        my $suggest = {
+            description => 'Try the release info page',
+            # Is there a more Catalyst way to do this?
+            url         => $c->uri_for('/release/' . $release),
+            link_text   => $release,
+        };
+
+        $c->stash({
+            message => 'Change log not found for release.',
+            suggest => $suggest,
+        });
+        $c->detach('/not_found');
+    }
+    else {
         $c->stash({ file => $file });
         $c->forward('/source/content');
-
+    }
 }
 
 1;

@@ -1,4 +1,31 @@
-<big><strong>Not Found</strong></big><br><br>
-The resource you were requesting could not be found.<br>
-<% q = req.path.split('/'); IF q.size > 2; q = q.splice(2, 99).join(" ") %>
-Search the CPAN for <a href="/search?q=<% q %>"><% q %></a><% END %>
+<div id="not-found">
+    <h1>Not Found</h1>
+
+    <p>
+    <% IF message %>
+        <% message %>
+    <% ELSE %>
+        The resource you requested could not be found.
+    <% END %>
+    </p>
+
+    <% IF suggest %>
+        <p>
+            <% suggest.description %>:
+            <a href="<% suggest.url %>"><% suggest.link_text %></a>
+        </p>
+    <% END %>
+
+    <%
+        # FIXME: this drops the first two url components and suggests a search
+        # for the rest (which makes fragile assumptions).
+        q = req.path.split('/');
+        IF q.size > 2;
+            q = q.splice(2, 99).join(" ");
+    %>
+        <p>
+            Search the CPAN for <a href="/search?q=<% q %>"><% q %></a>
+        </p>
+    <% END %>
+    </p>
+</div>
