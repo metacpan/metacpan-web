@@ -16,9 +16,7 @@
     <ul>
       <li><strong class="relatize"><% release.date.dt_http %></strong></li>
       <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
-      <% IF changes %>
-          <li><a href="/<% changes.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; changes.name %>">Changes</a></li>
-      <% END %>
+      <li><a href="/changes/release/<% release.author; '/'; release.name; %>">Changes</a></li>
       <li><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
       <% PROCESS inc/release-info.html %>
     </ul>

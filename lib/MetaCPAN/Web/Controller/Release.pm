@@ -83,10 +83,6 @@ sub view : Private {
         map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
-    # TODO: add action for /changes/$release/$version ? that does this
-
-    my ($changes) = grep { $_->{name} =~ m/\A(Change|NEWS)/i } @root_files;
-
     $c->res->last_modified( $out->{date} );
 
     $self->groom_contributors( $c, $out );
@@ -96,7 +92,6 @@ sub view : Private {
     $c->stash(
         {   template => 'release.html',
             release  => $out,
-            changes  => $changes,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
                 $modules->{took}, $files->{took},
