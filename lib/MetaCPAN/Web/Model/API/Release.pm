@@ -274,7 +274,7 @@ sub interesting_files {
                 }
             },
             fields => [qw( name documentation path pod_lines )],
-            size   => 200,
+            size   => 250,
         }
     );
 }
