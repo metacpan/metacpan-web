@@ -28,6 +28,23 @@ test_psgi app, sub {
     );
 }
 
+{
+    my $missing = 'test-dist-name-that-does-not-exist-i-hope';
+    ok( my $res = $cb->( GET "/changes/distribution/$missing" ), "GET /changes/$missing" );
+    is( $res->code, 404, 'code 404' );
+    my $tx = tx($res);
+    $tx->like(
+        '//div[@id="content"]//div[@id="not-found"]',
+        qr/Change log not found for release.+Try the release info page:/,
+        'Suggest release info page for not-found dist.'
+    );
+    $tx->like(
+        qq{//div[\@id="content"]//div[\@id="not-found"]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
+        qr{/$missing$},
+        'link to suggested release',
+    );
+}
+
 };
 
 done_testing;
