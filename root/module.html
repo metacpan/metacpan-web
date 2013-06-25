@@ -27,13 +27,13 @@
       <% IF module.module.0.version %><li>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></li><% END %>
       <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</li>
       <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', module.author, module.release].join('/'); END %>">Changes</a></li>
+      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
+        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>/">raw</a>)
+        </li>
       <li>
         <a id="source-link" href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
         (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
       </li>
-      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>/">raw</a>)
-        </li>
       <% PROCESS inc/release-info.html %>
     </ul>
   </div>
