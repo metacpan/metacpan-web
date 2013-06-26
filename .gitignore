@@ -14,3 +14,6 @@ metacpan_web_local.conf
 /MYMETA.*
 /pm_to_blib
 /blib
+
+.tidyall.d/
+perltidy.LOG
