@@ -1,19 +1,21 @@
+[![Build Status](https://travis-ci.org/CPAN-API/metacpan-web.png?branch=master)](https://travis-ci.org/CPAN-API/metacpan-web)
+
 ## GETTING STARTED
 
 Install the project dependencies:
 
- $ cpanm --installdeps .
+    $ cpanm --installdeps .
 
 Start server on port 5001 (which you want to make authentication work)
 
- $ plackup -p 5001 -r
+    $ plackup -p 5001 -r
 
 The backend defaults to C<api.metacpan.org>. Running a local API server is optional and not required to hack on the front-end.
 The address to the API user can be changed in the metacpan_web.conf file.
 Ideally you would create a new file called C<metacpan_web_local.conf> that contains
 
- api        http://127.0.0.1:5000
- api_secure http://127.0.0.1:5000
+    api        http://127.0.0.1:5000
+    api_secure http://127.0.0.1:5000
 
 which will be loaded on top of the existing config file.
 
