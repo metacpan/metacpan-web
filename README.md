@@ -1,4 +1,4 @@
-=head1 GETTING STARTED
+## GETTING STARTED
 
 Install the project dependencies:
 
@@ -18,6 +18,6 @@ Ideally you would create a new file called C<metacpan_web_local.conf> that conta
 which will be loaded on top of the existing config file.
 
 
-=head1 COMPATIBILITY NOTES
+## COMPATIBILITY NOTES
 
 On Win32 (and possibly also on other platforms) when using Perl < 5.12, the server started with plackup will generate warnings relating to date parsing. These are caused by Plack due to a bug in the gmtime implementation and can be removed by upgrading to Perl 5.12.
