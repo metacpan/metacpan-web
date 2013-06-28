@@ -42,13 +42,6 @@ sub _not_rogue {
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
-sub _indexed_and_documented_file {
-    return (
-        { exists => { field          => 'documentation' } },
-        { term   => { 'file.indexed' => \1 } },
-    );
-}
-
 sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv     = $self->cv;
@@ -342,17 +335,8 @@ sub search {
                         and => [
                             $self->_not_rogue,
                             { term => { status => 'latest' } },
-                            {   or => [
-
-                            # we are looking for files that have no authorized
-                            # property (e.g. .pod files) and files that are
-                            # authorized
-                                    {   missing =>
-                                            { field => 'file.authorized' }
-                                    },
-                                    { term => { 'file.authorized' => \1 } },
-                                ]
-                            },
+                            { term => { 'file.authorized' => \1 } },
+                            { term => { 'file.indexed' => \1 } },
                             {   or => [
                                     {   and => [
                                             {   exists => {
@@ -367,16 +351,27 @@ sub search {
                                             }
                                         ]
                                     },
-                                    {   and => [ $self->_indexed_and_documented_file ] }
+                                    { exists => { field => 'documentation' } },
                                 ]
                             }
                         ]
                     }
                 }
             },
-            fields => [
-                qw(documentation author abstract.analyzed release path status module distribution date id)
-            ],
+            fields => [qw(
+                documentation
+                author
+                abstract.analyzed
+                release
+                path
+                status
+                indexed
+                authorized
+                module
+                distribution
+                date
+                id
+            )],
         }
     );
     return $self->request( '/file/_search', $search );
