@@ -128,10 +128,12 @@ documentation = documentation.merge(documentation_raw);
     <% ELSE %>
       <strong>
         <a href="/source/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a>
-        <% IF file.pod_lines %>
-          [<a href="/module/<% release.author; '/'; release.name; '/'; file.path %>">pod</a>]
-        <% END %>
       </strong>
+        <% IF file.pod_lines %>
+          [<strong>
+            <a href="/module/<% release.author; '/'; release.name; '/'; file.path %>">pod</a>
+          </strong>]
+        <% END %>
     <% END %>
   </div>
 <% END %>
