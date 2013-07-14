@@ -527,6 +527,7 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 
 .pod p, .pod dt {
     font-size: 1.1em;
+    max-width: 42em;
 }
 
 .pod dt {
@@ -767,6 +768,7 @@ div.qtip-github table th {
     color: #999;
     max-height:3em;
     overflow:hidden;
+    max-width: 42em;
 }
 
 .rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
