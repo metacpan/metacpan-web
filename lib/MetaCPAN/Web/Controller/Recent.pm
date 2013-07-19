@@ -6,7 +6,7 @@ use base 'MetaCPAN::Web::Controller';
 sub index : Path {
     my ( $self, $c ) = @_;
     my ($data) = $c->model('API::Release')->recent( $c->req->page, $c->req->params->{f} || 'l' )->recv;
-    my $latest = [ map { $_->{_source} } @{ $data->{hits}->{hits} } ];
+    my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     $c->res->last_modified($latest->[0]->{date}) if(@$latest);
     $c->stash(
         {   recent   => $latest,

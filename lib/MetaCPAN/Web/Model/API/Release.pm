@@ -110,6 +110,7 @@ sub recent {
         {   size  => 100,
             from  => ( $page - 1 ) * 100,
             query => $query,
+            fields => [qw(name author status abstract date distribution)],
             sort  => [ { 'date' => { order => "desc" } } ]
         }
     );
