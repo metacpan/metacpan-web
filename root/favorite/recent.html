@@ -1,20 +1,7 @@
-<%- rss = 'recent' %>
-<% title = 'Recent ++ Activity' %>
-
-<div class="breadcrumbs">
-  <a href="/recent">Recent</a>
-  <span>&nbsp;/&nbsp; ++ Activity</span>
-</div>
-
-<ul class="nav nav-list slidepanel">
-  <li class="visible-phone search">
-  <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-    <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-  </form>
-  </li>
-  <li class="nav-header">Other</li>
-  <li><a href ="/favorite/leaderboard">++ Leaderboard</a></li>
-</ul>
+<%
+  title = "Recent Favorites";
+  INCLUDE inc/recent-bar.html;
+%>
 
 <div class="content">
 <%-

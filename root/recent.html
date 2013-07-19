@@ -1,24 +1,8 @@
-<%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
-<%- title = "Recent" %>
-<ul class="nav nav-list slidepanel">
-    <li class="visible-phone search">
-      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-      </form>
-    </li>
-    <li class="nav-header">Activity</li>
-    <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
-    <li><a href="/favorite/recent">Recent ++</a></li>
-    <li class="divider"></li>
-    <li class="nav-header">Filter</li>
-    <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
-          <%- filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' }; c.req.params.f ||= 'l';
-          FOR item IN ['l', 'n']; %>
-      <li><label class="radio"><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label></li>
-      <% END %>
-      <input type="submit" class="hidden">
-  </form>
-</ul>
+<%
+  rss = 'recent?f=' _ c.req.params.f || 'l';
+  title = "Recent";
+  INCLUDE inc/recent-bar.html;
+%>
 
 <div class="content">
 <%-
