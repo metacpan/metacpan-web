@@ -118,15 +118,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     opacity: 1
 }
 
-.search-bar .search-tag a span {
-    float: right;
-    visibility: hidden;
-}
-
-.search-bar .search-tag a:hover span {
-    visibility: visible
-}
-
 .user-profiles > a {
     text-decoration: none;
 }
@@ -161,28 +152,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 
 .account-author-profiles {
     width: 155px;
-}
-
-.icon {
-    padding-left: 24px;
-    background-repeat: no-repeat;
-    background-position: 0px 3px;
-}
-
-.icon-module {
-    background-image: url(/static/icons/package.png);
-}
-
-.icon-dist {
-    background-image: url(/static/icons/box.png);
-}
-
-.icon-user {
-    background-image: url(/static/icons/user.png);
-}
-
-.icon-server {
-    background-image: url(/static/icons/server.png);
 }
 
 .pod html, .pod body, .pod dl, .pod dt, .pod dd, .pod h1, .pod h2, .pod h3, .pod h4, .pod h5, .pod h6, .pod pre, .pod form, .pod fieldset, .pod input, .pod p, .pod blockquote, .pod th, .pod td
@@ -225,13 +194,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 
 .pod h1 {
     font-size: 1.5em;
-}
-
-.recent-date {
-    display: block;
-    text-align: right;
-    padding: 2px;
-    font-size: 13px;
 }
 
 .pod h2 {
@@ -475,222 +437,6 @@ div.qtip-github table th {
 .rating-50 {
     background-position: 0px -190px;
 }
-<<<<<<< HEAD
-=======
-
-.leader_board {
-    display: block;
-    width: 450px;
-    margin-left: 35px;
-    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
-
-.leader_board * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
-
-.leader_board_header {
-    -webkit-border-top-left-radius: 10px;
-    -webkit-border-top-right-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    -moz-border-radius-topright: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-top: 1px solid #3366CC;
-    border-left: 1px solid #3366CC;
-    border-right: 1px solid #3366CC;
-    background: #b8e1fc;
-    background: -moz-linear-gradient(top,  #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b8e1fc), color-stop(10%,#a9d2f3), color-stop(25%,#90bae4), color-stop(37%,#90bcea), color-stop(50%,#90bff0), color-stop(51%,#6ba8e5), color-stop(83%,#a2daf5), color-stop(100%,#bdf3fd));
-    background: -webkit-linear-gradient(top,  #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
-    background: -o-linear-gradient(top,  #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
-    background: -ms-linear-gradient(top,  #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
-    background: linear-gradient(top,  #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 );
-    text-shadow: 0px 1px 1px #ffffff;
-    filter: dropshadow(color=#ffffff, offx=0, offy=1); 
-    color: #142854;
-    text-align: center;
-    padding: 5px 5px 0;
-    font-weight: bold;
-    font-size: 28px;
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-}
-
-.leader_board_content {
-    float: left;
-    -webkit-border-bottom-left-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    -moz-border-radius-bottomright: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom: 1px solid #3366CC;
-    border-left: 1px solid #3366CC;
-    border-right: 1px solid #3366CC;
-    padding: 0 5px 5px;
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    padding-top: 10px;
-}
-
-.leader_board_row {
-    float: left;
-    width: 100%;
-}
-
-.leader_board_top_all {
-    float: left;
-}
-
-.leader_board_top_all div {
-    float: left;
-}
-
-.leader_board_top_5 {
-    width: 100%;
-    font-size: 22px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid #F67F40;
-    color: #FFFFFF;
-    padding: 5px;
-    margin-bottom: 10px;
-    background: #feccb1;
-    background: -moz-linear-gradient(top,  #feccb1 0%, #f17432 50%, #ea5507 51%, #fb955e 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#feccb1), color-stop(50%,#f17432), color-stop(51%,#ea5507), color-stop(100%,#fb955e));
-    background: -webkit-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
-    background: -o-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
-    background: -ms-linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
-    background: linear-gradient(top,  #feccb1 0%,#f17432 50%,#ea5507 51%,#fb955e 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#fb955e',GradientType=0 );
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-}
-
-.leader_board_top_5 .leader_board_rank {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    border: 1px solid #68C7F2;
-    background: #2ab0ed;
-    background: -moz-linear-gradient(top,  #2ab0ed 1%, #bfe8f9 50%, #9fd8ef 51%, #e4f5fc 99%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#2ab0ed), color-stop(50%,#bfe8f9), color-stop(51%,#9fd8ef), color-stop(99%,#e4f5fc));
-    background: -webkit-linear-gradient(top,  #2ab0ed 1%,#bfe8f9 50%,#9fd8ef 51%,#e4f5fc 99%);
-    background: -o-linear-gradient(top,  #2ab0ed 1%,#bfe8f9 50%,#9fd8ef 51%,#e4f5fc 99%);
-    background: -ms-linear-gradient(top,  #2ab0ed 1%,#bfe8f9 50%,#9fd8ef 51%,#e4f5fc 99%);
-    background: linear-gradient(top,  #2ab0ed 1%,#bfe8f9 50%,#9fd8ef 51%,#e4f5fc 99%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ab0ed', endColorstr='#e4f5fc',GradientType=0 );
-    padding: 3px 12px;
-    margin-right: 10px;
-    text-align: center;
-    color: #142854;
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-}
-
-.leader_board_top_5 .leader_board_name {
-    line-height: 40px;
-    text-shadow: 0px 1px 1px #000000;
-    filter: dropshadow(color=#000000, offx=0, offy=1);
-}
-
-.leader_board_top_5 .leader_board_name a, .leader_board_top_10 .leader_board_name a {
-    color: #FFFFFF !important;
-}
-
-.leader_board_top_5 .leader_board_count {
-    float: right;
-    line-height: 38px;
-    text-shadow: 0px 1px 1px #000000;
-    filter: dropshadow(color=#000000, offx=0, offy=1);
-    margin: 0 15px;
-}
-
-.leader_board_top_10 {
-    width: 100%;
-    font-size: 16px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid #8CBE1A;
-    color: #FFFFFF;
-    padding: 5px;
-    margin-bottom: 10px;
-    background: #bfd255;
-    background: -moz-linear-gradient(top,  #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfd255), color-stop(50%,#8eb92a), color-stop(51%,#72aa00), color-stop(100%,#9ecb2d));
-    background: -webkit-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%);
-    background: -o-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%);
-    background: -ms-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%);
-    background: linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 );
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-}
-
-.leader_board_top_10 .leader_board_rank {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    border: 1px solid #959595;
-    background: #e2e2e2;
-    background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe));
-    background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
-    background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
-    background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
-    background: linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 );
-    padding: 2px 8px;
-    margin-right: 10px;
-    text-align: center;
-    color: #142854;
-    -webkit-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    -moz-box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-    box-shadow: 0px 1px 1px 0px rgba(50, 50, 50, .75);
-}
-
-.leader_board_top_10 .leader_board_name {
-    line-height: 32px;
-    text-shadow: 0px 1px 1px #000000;
-    filter: dropshadow(color=#000000, offx=0, offy=1);
-}
-
-.leader_board_top_10 .leader_board_count {
-    float: right;
-    line-height: 32px;
-    text-shadow: 0px 1px 1px #000000;
-    filter: dropshadow(color=#000000, offx=0, offy=1);
-    margin: 0 15px;
-}
-
-.leader_board_top_rest {
-    width: 100%;
-    font-size: 12px;
-    border-bottom: 1px dotted #142854;
-    color: #000000;
-    padding-bottom: 9px;
-    margin-bottom: 10px;
-}
-
-.leader_board_top_rest .leader_board_rank {
-    margin-right: 10px;
-}
-
-.leader_board_top_rest .leader_board_name {
-    
-}
-
-.leader_board_top_rest .leader_board_count {
-    float: right;
-}
-
 
 /* Contributors list on release pages
  * see /release/Plack for example
@@ -708,4 +454,3 @@ div.qtip-github table th {
 #contributors .contributor * {
     vertical-align: top;
 }
->>>>>>> master
