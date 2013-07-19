@@ -73,48 +73,6 @@ label input[type="text"], label select {
   background: transparent url('/static/images/logo.png') no-repeat -1px -68px;
 }
 
-#author-results ul  {
-    display: inline-block;
-    margin: 10px 0;
-}
-
-#author-results li {
-    float: left;
-    width: 100px;
-    padding: 5px 5px 5px 45px;
-    margin-right: 10px;
-    border: 1px solid white;
-    overflow: hidden;
-    height: 50px;
-}
-
-#author-results li:hover {
-    border: 1px solid #eee;
-    -webkit-border-radius: 3px 3px;
-    -moz-border-radius: 3px 3px;
-    border-radius: 3px 3px;
-    -moz-box-shadow: 3px 3px 5px #eee;
-    -webkit-box-shadow: 3px 3px 5px #eee;
-    box-shadow: 3px 3px 5px #eee;
-}
-
-#author-results a {
-    display:    block;
-}
-
-#author-results a:hover {
-    text-decoration: none;
-}
-
-#author-results img {
-    width: 30px;
-    height: 30px;
-    margin-left: -40px;
-    float: left;
-}
-
-
-
 button.favorite, a.favorite {
     padding: 1px 3px;
     margin-left: 10px;
@@ -363,19 +321,6 @@ ul#index, #index ul { list-style-type: none; }
 #pod-error-detail p {
   margin: 0 0 0.4em 0;
   padding: 0;
-}
-
-.search-results img,
-.author-img {
-    overflow:hidden;
-    width: 130px;
-    height: 130px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    -webkit-box-shadow: 2px 2px 5px #999;
-    text-align: left;
 }
 
 #content {
