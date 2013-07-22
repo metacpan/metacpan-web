@@ -33,32 +33,47 @@
 <div class="content">
 <div id="map" style="width: 600px; height: 200px"></div>
 <br>
-<div>
-<%
+<ul>
+<%-
 dots = [];
+continents = [];
 FOREACH mirror IN mirrors;
-dots.push(mirror.location);
-date = mirror.inceptdate.dt;
-day = date.day _ '/' _ date.month _ '/' _ date.year;
-IF continent != mirror.continent; continent = mirror.continent %>
-<% IF !loop.first %><br><% END %>
-<div><big><strong><a name="<% continent %>"><% continent %></a></strong></big></div>
-<%
+  dots.push(mirror.location);
+  UNLESS continents.last().name == mirror.continent;
+    continents.push({ name = mirror.continent, countries = [] });
+  END;
+  continent = continents.last();
+  UNLESS continent.countries.last().name == mirror.country;
+    continent.countries.push({ name = mirror.country, mirrors = [] });
+  END;
+  continent.countries.last().mirrors.push(mirror);
 END;
-IF country != mirror.country; country = mirror.country %>
-<br>
-<div style="padding-left: 20px"><strong><a name="<% country %>"><% country %></a></strong></div>
-<% END %>
-
-<div style="padding-left: 40px">
-  <% IF mirror.http %><a href="<% mirror.http %>" title="<% mirror.http %>"><code>http</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
-  <% IF mirror.ftp %><a href="<% mirror.ftp %>" title="<% mirror.ftp %>"><code>ftp</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
-  <% IF mirror.rsync %><a href="<% mirror.rsync %>" title="<% mirror.rsync %>"><code>rsync</code></a><% ELSE %><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><% END %>&nbsp;
-  <span title="<% mirror.org %>" style="padding-left: 5px"><% mirror.name %></span>
-  <% IF mirror.distance %>(<% mirror.distance | format_number %> km)<% END %>
-</div>
-<% END %>
-</div>
+FOREACH continent IN continents;
+%>
+  <li id="<% continent.name %>"><big><strong><% continent.name %></strong></big>
+    <ul>
+<%-
+  FOREACH country IN continent.countries %>
+      <li id="<% country.name %>"><strong><% country.name %></strong>
+        <ul>
+  <%-
+    FOREACH mirror IN country.mirrors;
+      date = mirror.inceptdate.dt;
+      day = date.day _ '/' _ date.month _ '/' _ date.year;
+    %>
+          <li>
+            <a class="label<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
+            <a class="label label-warning<% mirror.http ? "" : " invisible" %>" href="<% mirror.http %>">http</a>
+            <a class="label label-success<% mirror.rsync ? "" : " invisible" %>" href="<% mirror.rsync %>">rsync</a>
+            <span title="active since <% day %>"><% mirror.org %>, <% mirror.city %><span>
+            <%- IF mirror.distance %> (<% mirror.distance | format_number %> km)<% END %>
+          </li>
+    <%- END %>
+    </ul></li>
+  <%- END %>
+  </ul></li>
+<%- END %>
+</ul>
 <script type="text/javascript">
 $(function(){
   $('#map').width("auto");
