@@ -20,9 +20,7 @@
     <%- INCLUDE inc/release-tools.html %>
 </ul>
 
-<div id="authors" class="hidden-phone"
-    style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
-<% INCLUDE inc/author-pic.html author = author %>
+<div class="pull-right hidden-phone"><% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html
     contributors = release.metadata.x_contributors %>
 </div>

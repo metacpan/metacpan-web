@@ -21,7 +21,7 @@
         </fieldset>
         <% END %>
         <fieldset><legend>General</legend>
-        <%- INCLUDE inc/author-pic.html author = author %>
+        <div class="pull-right"><%- INCLUDE inc/author-pic.html author = author %></div>
         <label><span>PAUSE ID</span><input type="text" value="<% author.pauseid %>" disabled="disabled" /></label>
         <label><span>Name</span><input type="text" name="name" value="<% author.name %>" /></label>
         <label><span>ASCII Name</span><input type="text" name="asciiname" value="<% author.asciiname %>" /></label>
