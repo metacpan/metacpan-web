@@ -87,6 +87,19 @@ sub view : Private {
 
     $self->groom_contributors( $c, $out );
 
+    # Simplify the file data we pass to the template.
+    my @view_files;
+    foreach my $hit ( @{ $modules->{hits}->{hits} } ){
+        my $f = $hit->{fields};
+        my $h = {};
+        while( my ($k, $v) = each %$f ){
+            # Strip '_source.' prefix from keys.
+            $k =~ s/^_source\.//;
+            $h->{ $k } = $v;
+        }
+        push @view_files, $h;
+    }
+
 
     # TODO: make took more automatic (to include all)
     $c->stash(
@@ -99,15 +112,7 @@ sub view : Private {
             ),
             root     => \@root_files,
             examples => \@examples,
-            files => [
-                map {
-                    {
-                        %{ $_->{fields} },
-                            module   => $_->{fields}->{'_source.module'},
-                            abstract => $_->{fields}->{'_source.abstract'}
-                    }
-                } @{ $modules->{hits}->{hits} }
-            ]
+            files    => \@view_files,
         }
     );
 }

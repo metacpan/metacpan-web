@@ -160,8 +160,15 @@ sub modules {
             },
             size   => 999,
             sort   => ['documentation'],
+            # Get indexed and authorized from _source to work around ES bug:
+            # https://github.com/CPAN-API/metacpan-web/issues/881
+            # https://github.com/elasticsearch/elasticsearch/issues/2551
             fields => [
-                qw(documentation _source.abstract _source.module path status author release indexed authorized)
+                qw(
+                    documentation path status author release
+                    _source.abstract  _source.module
+                    _source.indexed   _source.authorized
+                )
             ],
         }
     );
