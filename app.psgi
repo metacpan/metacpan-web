@@ -30,18 +30,22 @@ $app->map( '/static/' => Plack::App::File->new( root => 'root/static' )->to_app 
 $app->map( '/favicon.ico' =>
         Plack::App::File->new( file => 'root/static/icons/favicon.ico' )->to_app );
 $app->map( '/' => MetaCPAN::Web->psgi_app );
-my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
-unless (-d $scoreboard) {
-    File::Path::make_path($scoreboard) or die "Can't make_path $scoreboard: $!";
+$app = $app->to_app;
+
+unless ( $ENV{HARNESS_ACTIVE} ) {
+    my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
+    unless ( -d $scoreboard ) {
+        File::Path::make_path($scoreboard)
+            or die "Can't make_path $scoreboard: $!";
+    }
+    $app = Plack::Middleware::ServerStatus::Lite->wrap(
+        $app,
+        path       => '/server-status',
+        allow      => ['127.0.0.1'],
+        scoreboard => $scoreboard,
+    ) unless $0 =~ /\.t$/;
 }
 
-$app = $app->to_app;
-$app = Plack::Middleware::ServerStatus::Lite->wrap(
-   $app,
-   path       => '/server-status',
-   allow      => ['127.0.0.1'],
-   scoreboard => $scoreboard,
-) unless $0 =~ /\.t$/;
 $app = Plack::Middleware::Runtime->wrap($app);
 $app = Plack::Middleware::Assets->wrap( $app,
     files => [<root/static/css/*.css>] );
