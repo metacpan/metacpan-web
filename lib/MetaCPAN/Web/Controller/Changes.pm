@@ -5,13 +5,13 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub distribution : Chained('/') Local Args(1) {
+sub distribution : Local Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
     $c->forward('get', [$distribution]);
 }
 
-sub release : Chained('/') Local Args(2) {
+sub release : Local Args(2) {
     my ( $self, $c, $author, $release ) = @_;
 
     # force consistent casing in URLs
