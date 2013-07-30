@@ -17,6 +17,7 @@ requires 'Catalyst::View::JSON';
 requires 'Catalyst::View::TT::Alloy';
 requires 'CatalystX::RoleApplicator';
 requires 'Config::General';
+requires 'CPAN::Changes', '0.21';
 requires 'Data::Dumper';
 requires 'DateTime';
 requires 'DateTime::Format::HTTP';
