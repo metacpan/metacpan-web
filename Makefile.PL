@@ -46,6 +46,7 @@ my %WriteMakefileArgs = (
     "Catalyst::View::TT::Alloy" => 0,
     "CatalystX::RoleApplicator" => 0,
     "Config::General" => 0,
+    "CPAN::Changes" => 0.21,
     "Data::Dumper" => 0,
     "DateTime" => 0,
     "DateTime::Format::HTTP" => 0,
