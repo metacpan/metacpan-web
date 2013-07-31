@@ -34,6 +34,7 @@ sub api_requests {
 
         versions   => $c->model('API::Release')->versions( $data->{distribution} ),
         distribution => $c->model('API::Release')->distribution( $data->{distribution} ),
+        changes    => $c->model('API::Changes')->get( $data->{author}, $data->{name} ),
         %$reqs,
     };
 }
@@ -42,6 +43,8 @@ sub api_requests {
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
 
+    my $changes = $c->model('API::Changes')->last_version( $reqs->{changes} );
+
     $c->stash({
         author     => $reqs->{author},
         #release    => $release->{hits}->{hits}->[0]->{_source},
@@ -49,6 +52,7 @@ sub stash_api_results {
         distribution => $reqs->{distribution},
         versions   =>
             [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
+        ( $changes ? (last_version_changes => $changes) : () ),
     });
 }
 

@@ -142,6 +142,24 @@ documentation = documentation.merge(documentation_raw);
 <% IF root.size %><strong>Other files</strong>
 <% FOREACH file IN root %>
 <div><strong><a href="/<% file.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
-<% END; END %>
+<% END %><br><% END %>
 
+<% IF last_version_changes; SET v = last_version_changes; %>
+<strong>Changes for version <% v.version %></strong>
+<div class="last-changes">
+    <% IF v.note %><div class="note"><% v.note %></div><% END %>
+    <ul>
+    <% FOREACH group IN v.groups; SET changes = v.changes(group) %>
+    <li><span class="group-header"><% group %></span>
+            <ul class="changes">
+                <% FOREACH change IN changes %>
+                <li><% change %></li>
+                <% END %>
+            </ul>
+        </li>
+
+    <% END %>
+</ul>
+</div>
+<% END %>
 </div>
