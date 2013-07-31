@@ -20,7 +20,7 @@ sub last_version {
             $changes = CPAN::Changes->load_string($response->{content});
         } catch {
             # we don't really care?
-            warn "Error parsing changes: $_";
+            warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
         };
     }
     return unless $changes;
