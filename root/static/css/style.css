@@ -1039,3 +1039,16 @@ div.qtip-github table th {
 #contributors .contributor * {
     vertical-align: top;
 }
+
+
+/* Changes in release page
+ * See /release/CPAN-Changes for example
+ */
+.last-changes .group-header {
+    font-weight: bold;
+}
+.last-changes .changes {
+    margin-left: 1em;
+    padding-left: 1em;
+    list-style: square;
+}
