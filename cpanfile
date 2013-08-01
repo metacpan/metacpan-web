@@ -24,7 +24,7 @@ requires 'DateTime::Format::HTTP';
 requires 'DateTime::Format::ISO8601';
 requires 'Digest::MD5';
 requires 'Digest::SHA1';
-requires 'Encode', '2.10';
+requires 'Encode', '2.51';
 requires 'Exporter';
 requires 'File::Find::Rule::Perl';
 requires 'File::Path';
