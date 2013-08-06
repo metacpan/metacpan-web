@@ -31,6 +31,7 @@ test_psgi app, sub {
 
     # Confirm that the headings in the content div are in the expected order.
     my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
+    my @anchors = qw(docs modules provides examples other whatsnew);
     push @headings, 'Changes for version ' . $version ;
     my $heading  = 0;
 
@@ -38,6 +39,13 @@ test_psgi app, sub {
         $_->is( '.', $headings[$heading], "heading $headings[$heading] in expected location");
         $heading++;
     } , 'headings in correct order');
+
+    my $anchor = 0;
+    $tx->ok( '//div[@class="content"]/a[following-sibling::strong[1]]', sub {
+            $_->is('./@name', $anchors[$anchor], "Anchor $anchors[$anchor] in expected location");
+            $anchor++;
+        }, "anchors are correct..");
+
 
     ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
         'contains link to "this" version' );
