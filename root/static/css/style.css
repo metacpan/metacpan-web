@@ -1052,3 +1052,6 @@ div.qtip-github table th {
     padding-left: 1em;
     list-style: square;
 }
+.last-changes .changes .nested {
+    margin-left: 1em;
+}
