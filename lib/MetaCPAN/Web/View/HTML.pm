@@ -173,4 +173,16 @@ Template::Alloy->define_vmethod(
     }
 );
 
+Template::Alloy->define_vmethod(
+    'text',
+    link_issues => sub {
+        my $text = shift;
+
+        $text =~ s{(RT[#:-])(\d+)}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}g;
+
+        return $text;
+    }
+);
+
+
 1;
