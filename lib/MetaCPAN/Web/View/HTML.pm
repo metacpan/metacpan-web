@@ -178,7 +178,7 @@ Template::Alloy->define_vmethod(
     link_issues => sub {
         my $text = shift;
 
-        $text =~ s{(RT[#:-])(\d+)}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}g;
+        $text =~ s{(RT(?:\s)?[#:-])(\d*)}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}gx;
 
         return $text;
     }
