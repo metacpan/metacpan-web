@@ -73,6 +73,14 @@ test_psgi app, sub {
         "Link to rt is there"
     );
 
+    ok( $res = $cb->( GET '/release/ANDREMAR/WWW-Curl-Simple-0.100187' ) );
+    my $tx_cc = tx( $res );
+    is (
+        $tx_cc->find_value('//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
+        '#8',
+        "link to github issues is there"
+    );
+
 };
 
 done_testing;

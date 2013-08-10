@@ -35,14 +35,18 @@ sub filter_release_changes {
     my ($self, $changelog, $release) = @_;
 
     use Data::Dump;
-    my $bt;
+    my ($bt, $bt_url);
     if ($release->{resources}->{bugtracker}) {
         $bt = $release->{resources}->{bugtracker};
 
         # should check for perldelta and github at least
         if ($bt->{web} and $bt->{web} =~ m|^https?://rt.cpan.org/|) {
             $bt = '_rt_cpan';
+        } elsif ($bt->{web} and $bt->{web} =~ m|^https?://github.com/|) {
+            $bt_url = $bt->{web};
+            $bt = '_gh';
         } else {
+            warn "unknown bt: " . dd $bt if $ENV{CATALYST_DEBUG};
             undef $bt;
         }
     } else {
@@ -60,7 +64,7 @@ sub filter_release_changes {
             # Template::Alloy
             $change = do { local $_ = $change; s/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g; s/\"/&quot;/g; $_ };
 
-            $change = $self->$bt($change) if $bt;
+            $change = $self->$bt($change, $bt_url) if $bt;
             push(@new, $change);
         }
         $changelog->set_changes( { group => $g }, @new);
@@ -73,6 +77,13 @@ sub _rt_cpan {
 
     $line =~ s{\b(RT(?:\s)?[#:-])(\d+)\b}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}gx;
 
+    return $line;
+}
+
+sub _gh {
+    my ($self, $line, $bt) = @_;
+    $bt =~ s|/^||;
+    $line =~ s{((?:GH|)[#:-])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gx;
     return $line;
 }
 1;
