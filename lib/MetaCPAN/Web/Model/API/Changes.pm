@@ -34,7 +34,6 @@ sub last_version {
 sub filter_release_changes {
     my ($self, $changelog, $release) = @_;
 
-    use Data::Dump;
     my ($bt, $bt_url);
     if ($release->{resources}->{bugtracker}) {
         $bt = $release->{resources}->{bugtracker};
