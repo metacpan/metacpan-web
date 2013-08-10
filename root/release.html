@@ -154,7 +154,7 @@ documentation = documentation.merge(documentation_raw);
     <li><span class="group-header"><% group %></span>
             <ul class="changes">
                 <% FOREACH change IN changes %>
-                <li><% change %></li>
+                <li><% change | none %></li>
                 <% END %>
             </ul>
         </li>
