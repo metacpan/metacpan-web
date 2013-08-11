@@ -43,7 +43,10 @@ sub api_requests {
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
 
-    my $changes = $c->model('API::Changes')->last_version( $reqs->{changes} );
+    my $changes = $c->model('API::Changes')->last_version(
+        $reqs->{changes},
+        $data,
+    );
 
     $c->stash({
         author     => $reqs->{author},
