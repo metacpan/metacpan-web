@@ -74,14 +74,14 @@ sub filter_release_changes {
 sub _rt_cpan {
     my ($self, $line) = @_;
 
-    $line =~ s{\b(RT(?:\s)?[#:-])(\d+)\b}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}gx;
+    $line =~ s{\b((?:RT)?(?:\s)?[#:-])(\d+)\b}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}gx;
 
     return $line;
 }
 
 sub _gh {
     my ($self, $line, $bt) = @_;
-    $bt =~ s|/^||;
+    $bt =~ s|/$||;
     $line =~ s{((?:GH|)[#:-])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gx;
     return $line;
 }
