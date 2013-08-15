@@ -12,8 +12,12 @@ subtest "RT ticket linking" => sub {
         'Fixed RT#1013'  => 'id=1013">RT#1013',
         'Fixed RT #1013' => 'id=1013">RT #1013',
         'Fixed RT-1013'  => 'id=1013">RT-1013',
-        'Fixed #1013'    => 'id=1013"> #1013',
+        # This one is too broad for now?, see ticker #914
+        # 'Fixed #1013'    => 'id=1013"> #1013',
         'Fixed RT:1013'  => 'id=1013">RT:1013',
+        # We don't want to link the time in this one..
+        # See ticket #914
+        'Revision 2.15 2001/01/30 11:46:48 rbowen' => 'Revision 2.15 2001/01/30 11:46:48 rbowen',
     );
 
     while (my ($in, $out) = each %rt_tests) {
