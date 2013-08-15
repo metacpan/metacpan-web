@@ -74,13 +74,19 @@ test_psgi app, sub {
     );
 
     ok( $res = $cb->( GET '/release/ANDREMAR/WWW-Curl-Simple-0.100187' ) );
-    my $tx_cc = tx( $res );
+    $tx_cc = tx( $res );
     is (
         $tx_cc->find_value('//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
         '#8',
         "link to github issues is there"
     );
 
+
+    # Test that we don't show changes for unrelated version, check issue #914
+    # for original bug report.
+    ok( $res = $cb->( GET '/release/SHLOMIF/Config-IniFiles-2.81/' ) );
+    $tx_cc = tx( $res );
+    $tx_cc->not_ok( '//div[@class="content"]/strong[following-sibling::div[@class="last-changes"]]');
 };
 
 done_testing;

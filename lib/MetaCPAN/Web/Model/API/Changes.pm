@@ -27,9 +27,20 @@ sub last_version {
     my @releases = $changes->releases;
     return unless scalar @releases;
 
-    return $self->filter_release_changes($releases[-1], $release);
+    # Ok, lets make sure we get the right release..
+    my $changelog = $self->find_changelog($release->{version}, \@releases);
+
+    return unless $changelog;
+    return $self->filter_release_changes($changelog, $release);
 }
 
+sub find_changelog {
+    my ($self, $version, $releases) = @_;;
+
+    foreach my $rel (@$releases) {
+        return $rel if ($rel->version eq $version);
+    }
+}
 
 sub filter_release_changes {
     my ($self, $changelog, $release) = @_;
