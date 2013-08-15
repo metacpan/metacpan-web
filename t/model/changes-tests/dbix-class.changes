@@ -1,0 +1,77 @@
+Revision history for DBIx::Class
+ 
+0.08250 2013-04-29 22:00 (UTC)
+    * New Features / Changes
+        - Rewrite from scratch the result constructor codepath - many bugfixes
+          and performance improvements (the current codebase is now capable of
+          outperforming both DBIx::DataModel and Rose::DB::Object on some
+          workloads). Some notable benefits:
+          - Multiple has_many prefetch
+          - Partial prefetch - you now can select only columns you are
+            interested in, while preserving the collapse functionality
+            (collapse is now exposed as a first-class API attribute)
+          - Prefetch of resultsets with arbitrary order
+            (RT#54949, RT#74024, RT#74584)
+          - Prefetch no longer inserts right-side table order_by clauses
+            (massively helps the deficient MySQL optimizer)
+          - Prefetch with limit on right-side ordered resultsets now works
+            correctly (via aggregated grouping)
+          - No longer order the insides of a complex prefetch subquery,
+            unless required to satisfy a limit
+          - Stop erroneously considering order_by criteria from a join under
+            distinct => 1 (the distinct should apply to the main source only)
+        - Massively optimize codepath around ->cursor(), over 10x speedup
+          on some iterating workloads.
+        - Support standalone \[ $sql, $value ] in literal SQL with bind
+          specifications: \[ '? + ?', 42, 69 ] is now equivalent to
+          \[ '? + ?', [ {} => 42 ], [ {} => 69 ] ]
+        - Changing the result_class of a ResultSet in progress is now
+          explicitly forbidden. The behavior was undefined before, and
+          would result in wildly differing outcomes depending on $rs
+          attributes.
+        - Deprecate returning of prefetched 'filter' rels as part of
+          get_columns() and get_inflated_columns() data
+        - Invoking get_inflated_columns() no longer fires get_columns() but
+          instead retrieves data from individual non-inflatable columns via
+          get_column()
+        - Emit a warning on incorrect use of nullable columns within a
+          primary key
+        - Limited checks are performed on whether columns without declared
+          is_nullable => 1 metadata do in fact sometimes fetch NULLs from
+          the database (the check is currently very limited and is performed
+          only on resultset collapse when the alternative is rather worse)
+ 
+    * Fixes
+        - Fix _dbi_attrs_for_bind() being called befor DBI has been loaded
+          (regression in 0.08210)
+        - Fix update/delete operations on resultsets *joining* the updated
+          table failing on MySQL. Resolves oversights in the fixes for
+          RT#81378 and RT#81897
+        - Fix open cursors silently resetting when inherited across a fork
+          or a thread
+        - Properly support "MySQL-style" left-side group_by with prefetch
+        - Fix $grouped_rs->get_column($col)->func($func) producing incorrect
+          SQL (RT#81127)
+        - Stop Sybase ASE storage from generating invalid SQL in subselects
+          when a limit without offset is encountered
+        - Even more robust behavior of GenericSubQuery limit dialect
+        - Make sure deployment_statements() and cursor_class() are called on
+          a resolved storage subclass
+ 
+    * Misc
+        - Fix tests failing due to unspecified resultset retrieval order
+          (test suite now will pass with newest SQLite libs)
+ 
+0.08210 2013-04-04 15:30 (UTC)
+    * New Features / Changes
+        - Officially deprecate the 'cols' and 'include_columns' resultset
+          attributes
+        - Remove ::Storage::DBI::sth() deprecated in 0.08191
+ 
+    * Fixes
+        - Work around a *critical* bug with potential for data loss in
+          DBD::SQLite - RT#79576
+        - Audit and correct potential bugs associated with braindead reuse
+          of $1 on unsuccessful matches
+        - Fix incorrect warning/exception originator reported by carp*() and
+          throw_exception()

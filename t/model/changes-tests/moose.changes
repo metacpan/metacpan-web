@@ -1,0 +1,26 @@
+Also see Moose::Manual::Delta for more details of, and workarounds
+for, noteworthy changes.
+
+2.1005 Tue, Aug 06, 2013
+
+  [ENHANCEMENTS]
+
+  * add_method now accepts blessed subs (Graham Knop, PR#28)
+
+  [BUG FIXES]
+
+  * If a role consumed another role, we resolve method conflicts just like a
+    class consuming a role, but when metaclass compat tried to fix up
+    metaclass roles, we were putting all methods into one composite role and
+    allowing methods in the metaclass roles to conflict. Now we resolve them
+    as we should. (Jesse Luehrs, PR#27)
+
+  * Some edge cases in tests with base.pm and non-existent module files are
+    handled more strictly (see also perl RT#118561) (Graham Knop, PR#25)
+
+2.1004 Fri, Jul 26, 2013
+
+  [BUG FIXES]
+
+  * 2.1003 was released with some bad metadata, which caused the prereq test
+    to fail.
