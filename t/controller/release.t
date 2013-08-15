@@ -62,6 +62,25 @@ test_psgi app, sub {
     $this =~ s{(/release/.*?/)}{lc($1)}e; # lc author name
     ok( $res = $cb->( GET $this ), "GET $this" );
     is( $res->code, 301, 'code 301' );
+
+
+    ok( $res = $cb->( GET '/release/BRICAS/CPAN-Changes-0.21' ), "GET /release/BRICAS/CPAN-Changes-0.21" );
+    is( $res->code, 200, "code 200" );
+    my $tx_cc = tx($res);
+    is(
+        $tx_cc->find_value('//a[@href="https://rt.cpan.org/Ticket/Display.html?id=84994"]'),
+        'RT #84994',
+        "Link to rt is there"
+    );
+
+    ok( $res = $cb->( GET '/release/ANDREMAR/WWW-Curl-Simple-0.100187' ) );
+    my $tx_cc = tx( $res );
+    is (
+        $tx_cc->find_value('//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
+        '#8',
+        "link to github issues is there"
+    );
+
 };
 
 done_testing;
