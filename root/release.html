@@ -148,13 +148,12 @@ documentation = documentation.merge(documentation_raw);
 <a name="whatsnew"></a>
 <strong>Changes for version <% v.version %></strong>
 <div class="last-changes">
-    <% IF v.note %><div class="note"><% v.note %></div><% END %>
     <ul>
     <% FOREACH group IN v.groups; SET changes = v.changes(group) %>
     <li><span class="group-header"><% group %></span>
             <ul class="changes">
                 <% FOREACH change IN changes %>
-                <li><% change | none %></li>
+                <li<% IF change.search('^\-'); change = change.remove('^\-') %> class="nested"<% END %>><% change | none %></li>
                 <% END %>
             </ul>
         </li>

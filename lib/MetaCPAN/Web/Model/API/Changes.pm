@@ -2,7 +2,7 @@ package MetaCPAN::Web::Model::API::Changes;
 use Moose;
 extends 'MetaCPAN::Web::Model::API';
 
-use CPAN::Changes;
+use MetaCPAN::Web::Model::API::Changes::Parser;
 use Try::Tiny;
 
 sub get {
@@ -17,7 +17,9 @@ sub last_version {
     } else {
         # I guess we have a propper changes file? :P
         try {
-            $changes = CPAN::Changes->load_string($response->{content});
+            $changes = MetaCPAN::Web::Model::API::Changes::Parser->load_string(
+                $response->{content}
+            );
         } catch {
             # we don't really care?
             warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
