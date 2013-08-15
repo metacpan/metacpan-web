@@ -74,7 +74,11 @@ sub filter_release_changes {
 sub _rt_cpan {
     my ($self, $line) = @_;
 
-    $line =~ s{\b((?:RT)?(?:\s)?[#:-])(\d+)\b}{<a href="https://rt.cpan.org/Ticket/Display.html?id=$2">$1$2</a>}gx;
+    my $u = '<a href="https://rt.cpan.org/Ticket/Display.html?id=';
+    # Stricter regex for -:
+    $line =~ s{\b(RT[-:])(\d+)\b}{$u$2">$1$2</a>}gx;
+    # A bit more relaxed here?
+    $line =~ s{\b((?:RT)(?:\s*)[#])(\d+)\b}{$u$2">$1$2</a>}gx;
 
     return $line;
 }
