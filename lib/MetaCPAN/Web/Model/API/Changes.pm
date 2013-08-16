@@ -89,9 +89,12 @@ sub _rt_cpan {
 
     my $u = '<a href="https://rt.cpan.org/Ticket/Display.html?id=';
     # Stricter regex for -:
-    $line =~ s{\b(RT[-:])(\d+)\b}{$u$2">$1$2</a>}gx;
+    $line =~ s{\b(RT[-:]?)(\d+)\b}{$u$2">$1$2</a>}gix;
     # A bit more relaxed here?
     $line =~ s{\b((?:RT)(?:\s*)[#])(\d+)\b}{$u$2">$1$2</a>}gx;
+
+    # Some other cases
+    $line =~ s{\b(bug\s+\#)(\d+)\b}{$u$2">$1$2</a>}gxi;
 
     return $line;
 }
@@ -99,7 +102,7 @@ sub _rt_cpan {
 sub _gh {
     my ($self, $line, $bt) = @_;
     $bt =~ s|/$||;
-    $line =~ s{((?:GH|)[#:-])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gx;
+    $line =~ s{((?:GH|)[#:-])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
     return $line;
 }
 1;
