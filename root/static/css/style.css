@@ -1053,5 +1053,15 @@ div.qtip-github table th {
     list-style: disc;
 }
 .last-changes .changes .nested {
-    margin-left: 1em;
+    margin-left: 2em;
+}
+/* I think it looks better with no extra space on top, but left here as example 
+ * for others who might feel differently :P
+ *
+.last-changes .changes > li:not(.nested) + li.nested {
+    margin-top: 0.1em;
+}
+*/
+.last-changes .changes > li.nested + li:not(.nested) {
+    margin-top: 0.5em; // This is top, because we select the first element without nested
 }
