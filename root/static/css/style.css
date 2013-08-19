@@ -1050,7 +1050,7 @@ div.qtip-github table th {
 .last-changes .changes {
     margin-left: 1em;
     padding-left: 1em;
-    list-style: square;
+    list-style: disc;
 }
 .last-changes .changes .nested {
     margin-left: 1em;
