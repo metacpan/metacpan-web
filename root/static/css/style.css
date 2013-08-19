@@ -1046,6 +1046,11 @@ div.qtip-github table th {
  */
 .last-changes .group-header {
     font-weight: bold;
+    margin-top: 1.0em;
+    display: block;
+}
+.last-changes li:first-child .group-header {
+    margin-top: 0;
 }
 .last-changes .changes {
     margin-left: 1em;
