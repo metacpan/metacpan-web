@@ -70,6 +70,7 @@ requires 'Test::XPath', '0.15';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';
+requires 'XML::Simple';
 requires 'mro';
 requires 'namespace::autoclean';
 requires 'overload';
