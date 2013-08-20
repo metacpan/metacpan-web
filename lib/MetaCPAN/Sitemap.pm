@@ -19,6 +19,8 @@ use XML::Simple qw(:strict);
 #  [] output cpanDirectory (author, module, and doesn't exist)
 #  [] testSearch (search count - if non-zero, limits search to that number of
 #  items for testing)
+#  [] filter - contains filter for a field that also needs to be included in
+#  the list of form fields.
 
 sub process {
 
@@ -26,7 +28,7 @@ sub process {
     my (%argKeys) = map { $_ => 1 } keys %{$args};
 
     my @required = qw/objectType fieldName xmlFile/;
-    my @optional = qw/cpanDirectory testSearch/;
+    my @optional = qw/cpanDirectory testSearch filter/;
 
     #  Make sure none of the mandatory arguments are missing.
 
@@ -76,13 +78,28 @@ sub process {
 
     my $searchSize
         = ( exists $args->{'testSearch'} ? $args->{'testSearch'} : 5000 );
-    my $scrolledSearch = $es->scrolled_search(
+
+    #  Start off with standard search parameters ..
+
+    my %searchParameters = (
         index  => 'v0',
         size   => $searchSize,
-        query  => { match_all => {}, },
         type   => $args->{'objectType'},
-        fields => $args->{'fieldName'},
+        fields => [ $args->{'fieldName'} ],
     );
+
+    #  ..and augment them if necesary.
+
+    if ( exists $args->{'filter'} ) {
+
+	#  Copy the filter over wholesale into the search parameters, and add
+	#  the filter fields to the field list.
+
+        $searchParameters{'queryb'} = $args->{'filter'};
+        push( @{ $searchParameters{'fields'} }, keys %{ $args->{'filter'} } );
+    }
+
+    my $scrolledSearch = $es->scrolled_search(%searchParameters);
 
     #  Open the output file, get ready to pump out the XML.
 

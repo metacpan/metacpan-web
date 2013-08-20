@@ -28,6 +28,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
    #  along.
 
     my @tests = (
+
         {   inputs => {
                 objectType    => 'author',
                 fieldName     => 'pauseid',
@@ -36,6 +37,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             },
             pattern => qr{https:.+/author/[A-Z-]+},
         },
+
         {   inputs => {
                 objectType    => 'distribution',
                 fieldName     => 'name',
@@ -44,10 +46,12 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             },
             pattern => qr{https:.+/module/\w+},
         },
+
         {   inputs => {
                 objectType => 'release',
                 fieldName  => 'download_url',
                 xmlFile    => '',
+		filter     => { status => 'latest' },
             },
             pattern =>
                 qr{https?:.+authors/id/[A-Z]/[A-Z][A-Z]/[A-Z0-9-]+/.+\.(tar\.gz|tgz|zip|bz2)},
@@ -129,6 +133,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
         my $xml = XMLin( $args->{'xmlFile'} );
         ok( defined $xml, "XML for $args->{'objectType'} checks out" );
 
+        ok( @{ $xml->{'url'} }, "We have some URLs to look at" );
         is( $searchSize,
             scalar @{ $xml->{'url'} },
             "Number of URLs is correct"
