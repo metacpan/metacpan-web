@@ -232,8 +232,18 @@ function searchForNearest() {
     });
 }
 
-function disableTag(tag) {
-    document.location.href = '/mirrors' + (document.location.search || '?q=') + ' ' + tag;
+function toggleProtocol(tag) {
+    var l = window.location;
+    var s = l.search ? l.search : '?q=';
+    if (! s.match(tag) ) {
+        s += " " + tag
+    } else {
+        // Toggle that protocol filter off again
+        s = s.replace(tag, "");
+    }
+    s = s.replace(/=(%20|\s)+/, '='); // cleanup lingering space if any :P
+    s = s.replace(/(%20|\s)+$/, "");
+    l.href = '/mirrors' + s;
 }
 
 function logInPAUSE(a) {
