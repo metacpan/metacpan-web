@@ -45,6 +45,7 @@ requires 'Moose';
 requires 'Moose::Role';
 requires 'MooseX::ClassAttribute';
 requires 'Perl::PrereqScanner','1.014';
+requires 'PerlIO::gzip';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
