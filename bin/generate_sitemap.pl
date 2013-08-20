@@ -5,7 +5,8 @@
 use strict;
 use warnings;
 
-use lib './lib';
+use FindBin qw ($Bin);
+use lib "$Bin/../lib";
 
 use MetaCPAN::Sitemap;
 
