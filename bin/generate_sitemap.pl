@@ -18,7 +18,7 @@ use MetaCPAN::Sitemap;
 
         {   objectType    => 'author',
             fieldName     => 'pauseid',
-            xmlFile       => '/tmp/authors.xml',
+            xmlFile       => '/tmp/authors.xml.gz',
             cpanDirectory => 'author',
         },
 
@@ -27,7 +27,7 @@ use MetaCPAN::Sitemap;
 
         {   objectType    => 'distribution',
             fieldName     => 'name',
-            xmlFile       => '/tmp/modules.xml',
+            xmlFile       => '/tmp/modules.xml.gz',
             cpanDirectory => 'module',
         },
 
@@ -37,7 +37,7 @@ use MetaCPAN::Sitemap;
 
         {   objectType => 'release',
             fieldName  => 'download_url',
-            xmlFile    => '/tmp/releases.xml',
+            xmlFile    => '/tmp/releases.xml.gz',
 	    filter     => { status => 'latest' },
         }
     );
