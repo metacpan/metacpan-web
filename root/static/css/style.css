@@ -554,6 +554,7 @@ ul#index, #index ul { list-style-type: none; }
     overflow-y: hidden !important;
     background-color: #fafafa;
     padding: 10px;
+    -webkit-text-size-adjust: 100%; /* for iPhone <code>, issue #107 */
 }
 
 .nogutter, .pod pre {
