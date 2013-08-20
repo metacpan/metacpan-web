@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 use Try::Tiny;
-use File::Temp qw/ tempfile /;
+use File::Temp qw/ tempdir /;
 use XML::Simple;
 
 use lib './lib';
@@ -59,6 +59,8 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
     );
 
     my $searchSize = 250;
+    my $tempDir = tempdir( CLEANUP => 1 );
+
     foreach my $test (@tests) {
 
         #  Before doing the real tests, try removing each one of the required
@@ -119,18 +121,23 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             };
         }
 
-        #  Generate the XML file into a temporary file, then check that the
-        #  file exists, is valid XML, and has the right number of URLs.
+	#  Generate the XML file into a file in a temporary directory, then
+	#  check that the file exists, is valid XML, and has the right number
+	#  of URLs.
 
         my $args = $test->{'inputs'};
         $args->{'testSearch'} = $searchSize;
-        ( undef, $args->{'xmlFile'} ) = tempfile();
+        $args->{'xmlFile'} = File::Spec->catfile( $tempDir,
+            "$test->{'inputs'}{'objectType'}.xml.gz" );
 
         MetaCPAN::Sitemap::process($args);
         ok( -e $args->{'xmlFile'},
             "XML output file for $args->{'objectType'} exists" );
 
-        my $xml = XMLin( $args->{'xmlFile'} );
+        open( my $xmlFH, '<:gzip', $args->{'xmlFile'} )
+          or BAIL_OUT( "Unable to open $args->{'xmlFile'}: $!" );
+	
+        my $xml = XMLin( $xmlFH );
         ok( defined $xml, "XML for $args->{'objectType'} checks out" );
 
         ok( @{ $xml->{'url'} }, "We have some URLs to look at" );

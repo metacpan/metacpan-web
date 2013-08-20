@@ -9,6 +9,7 @@ use Carp;
 
 use File::Spec;
 use ElasticSearch;
+use PerlIO::gzip;
 use XML::Simple qw(:strict);
 
 #  Mandatory arguments to this function are
@@ -103,7 +104,7 @@ sub process {
 
     #  Open the output file, get ready to pump out the XML.
 
-    open( my $xmlFH, '>', $args->{'xmlFile'} )
+    open( my $xmlFH, '>:gzip', $args->{'xmlFile'} )
         or croak "Unable to open $args->{'xmlFile'}: $!";
 
     my @urls;
