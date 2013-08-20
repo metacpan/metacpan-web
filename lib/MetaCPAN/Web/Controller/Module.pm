@@ -68,7 +68,7 @@ sub path : PathPart('module') : Chained('/') : Args {
             h5      => ['id'],
             h6      => ['id'],
             i       => [],
-            img     => [qw( alt border height width src style / )],
+            img     => [qw( alt border height width src style title / )],
             li      => ['id'],
             ol      => [],
             p       => [qw(class style)],
