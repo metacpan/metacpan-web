@@ -493,7 +493,21 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 
 .pod ul {
     list-style: disc;
-    padding-left: 20px;
+    margin-left: 20px;
+    padding-left: 2em;
+}
+.pod ul#index {
+    padding-left: 0;
+}
+.pod ul li {
+    margin-bottom: 0.5em;
+}
+.pod ul#index li {
+    margin-bottom: 0;
+}
+.pod ul li p {
+    margin: 0;
+    padding: 0;
 }
 
 .pod pre {
