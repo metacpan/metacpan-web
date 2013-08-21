@@ -1047,12 +1047,27 @@ div.qtip-github table th {
  */
 .last-changes .group-header {
     font-weight: bold;
+    margin-top: 1.0em;
+    display: block;
+}
+.last-changes li:first-child .group-header {
+    margin-top: 0;
 }
 .last-changes .changes {
     margin-left: 1em;
     padding-left: 1em;
-    list-style: square;
+    list-style: disc;
 }
 .last-changes .changes .nested {
-    margin-left: 1em;
+    margin-left: 2em;
+}
+/* I think it looks better with no extra space on top, but left here as example 
+ * for others who might feel differently :P
+ *
+.last-changes .changes > li:not(.nested) + li.nested {
+    margin-top: 0.1em;
+}
+*/
+.last-changes .changes > li.nested + li:not(.nested) {
+    margin-top: 0.5em; // This is top, because we select the first element without nested
 }
