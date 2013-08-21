@@ -98,6 +98,11 @@ sub path : PathPart('module') : Chained('/') : Args {
             template => 'module.html',
         }
     );
+    unless ($c->stash->{pod}) {
+        $c->stash(
+            pod_error => $reqs->{pod}->{message},
+        );
+    }
 }
 
 1;

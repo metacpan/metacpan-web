@@ -560,6 +560,11 @@ ul#index, #index ul { list-style-type: none; }
 .nogutter, .pod pre {
     padding-left: 10px;
 }
+.pod p.pod-error {
+    border-left: 1px solid #f32;
+    margin-left: -16px;
+    padding-left: 16px;
+}
 
 #pod-errors {
   margin: 3em 0 0 0 ;
