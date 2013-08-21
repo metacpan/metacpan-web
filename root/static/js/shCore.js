@@ -1461,7 +1461,7 @@ sh.Highlighter.prototype = {
 	 */
 	getCodeLinesHtml: function(html, lineNumbers)
 	{
-		html = trim(html);
+		//html = trim(html);
 		
 		var lines = splitLines(html),
 			padLength = this.getParam('pad-line-numbers'),
