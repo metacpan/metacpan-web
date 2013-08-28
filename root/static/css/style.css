@@ -496,7 +496,7 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     margin-left: 20px;
     padding-left: 2em;
 }
-.pod ul#index {
+.pod ul#index, .pod ul#index ul {
     padding-left: 0;
 }
 .pod ul li {
