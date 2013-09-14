@@ -34,13 +34,12 @@ my @parts = (
     #  building a URL, the cpan_directory is missing, but we also want to
     #  filter on only the 'latest' entries.
 
-    {   object_type => 'release',
-        field_name  => 'download_url',
-        xml_file    => '/tmp/releases.xml.gz',
-        filter      => { status => 'latest' },
+    {   object_type    => 'release',
+        field_name     => 'distribution',
+        xml_file       => '/tmp/releases.xml.gz',
+        cpan_directory => 'release',
+        filter         => { status => 'latest' },
     }
 );
 
-foreach my $part (@parts) {
-    MetaCPAN::Sitemap::process($part);
-}
+MetaCPAN::Sitemap->new($_)->process for @parts;
