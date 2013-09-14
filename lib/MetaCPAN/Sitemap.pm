@@ -10,63 +10,40 @@ use Carp;
 
 use File::Spec;
 use ElasticSearch;
+use Moose;
 use PerlIO::gzip;
 use XML::Simple qw(:strict);
 
+has [ 'cpan_directory', 'object_type', 'field_name', 'xml_file', ] => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+
+has 'filter' => (
+    is  => 'ro',
+    isa => 'HashRef',
+);
+
 #  Mandatory arguments to this function are
-#  [] search objectType (author, distribution, and release)
-#  [] result fieldName (pauseid, name, and download_url)
-#  [] name of output xmlFile (path to the output XML file)
+#  [] search object_type (author, distribution, and release)
+#  [] result field_name (pauseid, name, and download_url)
+#  [] name of output xml_file (path to the output XML file)
 #  Optional arguments to this function are
-#  [] output cpanDirectory (author, module, and doesn't exist)
-#  [] testSearch (search count - if non-zero, limits search to that number of
+#  [] output cpan_directory (author, module, and doesn't exist)
+#  [] test_search (search count - if non-zero, limits search to that number of
 #  items for testing)
 #  [] filter - contains filter for a field that also needs to be included in
 #  the list of form fields.
 
 sub process {
 
-    my ($args) = @_;
-    my (%argKeys) = map { $_ => 1 } keys %{$args};
-
-    my @required = qw/objectType fieldName xmlFile/;
-    my @optional = qw/cpanDirectory testSearch filter/;
-
-    #  Make sure none of the mandatory arguments are missing.
-
-    my @missing;
-    foreach my $field (@required) {
-        if ( exists $args->{$field} ) {
-            delete $argKeys{$field};
-        }
-        else {
-            push( @missing, $field );
-        }
-    }
-    if (@missing) {
-        croak "Missing the following arguments: " . join( ', ', @missing );
-    }
-
-    #  Look for optional arguments, and see if there are any other arguments
-    #  that were submitted that we weren't expecting.
-
-    my @unexpected;
-    foreach my $field (@optional) {
-        if ( exists $args->{$field} ) {
-            delete $argKeys{$field};
-        }
-        else {
-            push( @unexpected, $field );
-        }
-    }
-    if ( keys %argKeys ) {
-        croak "Unexpected arguments: " . join( ', ', keys %argKeys );
-    }
+    my $self = shift;
 
     #  Check that a) the directory where the output file wants to be does
     #  actually exist and b) the directory itself is writeable.
 
-    my ( undef, $dir, $file ) = File::Spec->splitpath( $args->{'xmlFile'} );
+    my ( undef, $dir, $file ) = File::Spec->splitpath( $self->xml_file );
     -d $dir or croak "$dir is not a directory";
     -w $dir or croak "$dir is not writeable";
 
@@ -78,47 +55,44 @@ sub process {
     );
     defined $es or croak "Unable to create ElasticSearch: $!";
 
-    my $searchSize
-        = ( exists $args->{'testSearch'} ? $args->{'testSearch'} : 5000 );
-
     #  Start off with standard search parameters ..
 
-    my %searchParameters = (
+    my %search_parameters = (
         index  => 'v0',
-        size   => $searchSize,
-        type   => $args->{'objectType'},
-        fields => [ $args->{'fieldName'} ],
+        size   => 5000,
+        type   => $self->object_type,
+        fields => [ $self->field_name ],
     );
 
     #  ..and augment them if necesary.
 
-    if ( exists $args->{'filter'} ) {
+    if ( $self->filter ) {
 
         #  Copy the filter over wholesale into the search parameters, and add
         #  the filter fields to the field list.
 
-        $searchParameters{'queryb'} = $args->{'filter'};
-        push( @{ $searchParameters{'fields'} }, keys %{ $args->{'filter'} } );
+        $search_parameters{'queryb'} = $self->filter;
+        push( @{ $search_parameters{'fields'} }, keys %{ $self->filter } );
     }
 
-    my $scrolledSearch = $es->scrolled_search(%searchParameters);
+    my $scrolled_search = $es->scrolled_search(%search_parameters);
 
     #  Open the output file, get ready to pump out the XML.
 
-    open( my $xmlFH, '>:gzip', $args->{'xmlFile'} );
+    open( my $fh, '>:gzip', $self->xml_file );
 
     my @urls;
-    my $metaCPANurl = '';
-    if ( exists $args->{'cpanDirectory'} ) {
-        $metaCPANurl = "https://metacpan.org/$args->{'cpanDirectory'}/";
+    my $metacpan_url = '';
+    if ( $self->cpan_directory ) {
+        $metacpan_url = 'https://metacpan.org/' . $self->cpan_directory . '/';
     }
 
     do {
-        my @hits = $scrolledSearch->drain_buffer;
+        my @hits = $scrolled_search->drain_buffer;
         push( @urls,
-            map {"$metaCPANurl$_->{'fields'}{ $args->{'fieldName'} }"}
+            map { $metacpan_url . $_->{'fields'}->{ $self->field_name } }
                 @hits );
-    } while ( !exists $args->{'testSearch'} && $scrolledSearch->next() );
+    } while ( $scrolled_search->next() );
 
     my $xml = XMLout(
         {   'xmlns'     => "http://www.sitemaps.org/schemas/sitemap/0.9",
@@ -130,10 +104,10 @@ sub process {
         'KeyAttr'    => [],
         'RootName'   => 'urlset',
         'XMLDecl'    => q/<?xml version='1.0' encoding='UTF-8'?>/,
-        'OutputFile' => $xmlFH,
+        'OutputFile' => $fh,
     );
 
-    close($xmlFH);
+    close($fh);
 }
 
 1;
