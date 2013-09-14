@@ -59,7 +59,7 @@ var sh = {
 		'smart-tabs' : true,
 		
 		/** Gets or sets tab size. */
-		'tab-size' : 4,
+		'tab-size' : 8,
 		
 		/** Enables or disables gutter. */
 		'gutter' : true,
