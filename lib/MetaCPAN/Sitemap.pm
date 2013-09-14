@@ -125,7 +125,7 @@ sub process {
             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
             'xsi:schemaLocation' =>
                 "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd",
-            'url' => \@urls,
+            'url' => [ sort @urls ],
         },
         'KeyAttr'    => [],
         'RootName'   => 'urlset',
