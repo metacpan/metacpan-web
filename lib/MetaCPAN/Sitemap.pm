@@ -5,6 +5,7 @@ package MetaCPAN::Sitemap;
 
 use strict;
 use warnings;
+use autodie;
 use Carp;
 
 use File::Spec;
@@ -104,8 +105,7 @@ sub process {
 
     #  Open the output file, get ready to pump out the XML.
 
-    open( my $xmlFH, '>:gzip', $args->{'xmlFile'} )
-        or croak "Unable to open $args->{'xmlFile'}: $!";
+    open( my $xmlFH, '>:gzip', $args->{'xmlFile'} );
 
     my @urls;
     my $metaCPANurl = '';
