@@ -93,8 +93,8 @@ sub process {
 
     if ( exists $args->{'filter'} ) {
 
-	#  Copy the filter over wholesale into the search parameters, and add
-	#  the filter fields to the field list.
+        #  Copy the filter over wholesale into the search parameters, and add
+        #  the filter fields to the field list.
 
         $searchParameters{'queryb'} = $args->{'filter'};
         push( @{ $searchParameters{'fields'} }, keys %{ $args->{'filter'} } );
