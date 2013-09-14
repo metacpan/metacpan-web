@@ -10,40 +10,37 @@ use lib "$Bin/../lib";
 
 use MetaCPAN::Sitemap;
 
-{
-    my @parts = (
+my @parts = (
 
-        #  For authors, we're looking for the pauseid, and want to build a URL
-        #  with 'author' in the path.
+    #  For authors, we're looking for the pauseid, and want to build a URL
+    #  with 'author' in the path.
 
-        {   objectType    => 'author',
-            fieldName     => 'pauseid',
-            xmlFile       => '/tmp/authors.xml.gz',
-            cpanDirectory => 'author',
-        },
+    {   object_type    => 'author',
+        field_name     => 'pauseid',
+        xml_file       => '/tmp/authors.xml.gz',
+        cpan_directory => 'author',
+    },
 
-        #  For distributions, we're looking for the distribution name, and we
-        #  want to build a URL with 'module' in the path.
+    #  For distributions, we're looking for the distribution name, and we
+    #  want to build a URL with 'module' in the path.
 
-        {   objectType    => 'distribution',
-            fieldName     => 'name',
-            xmlFile       => '/tmp/modules.xml.gz',
-            cpanDirectory => 'module',
-        },
+    {   object_type    => 'distribution',
+        field_name     => 'name',
+        xml_file       => '/tmp/modules.xml.gz',
+        cpan_directory => 'module',
+    },
 
-        #  For releases, we're looking for a download URL; since we're not
-        #  building a URL, the cpanDirectory is missing, but we also want to
-        #  filter on only the 'latest' entries.
+    #  For releases, we're looking for a download URL; since we're not
+    #  building a URL, the cpan_directory is missing, but we also want to
+    #  filter on only the 'latest' entries.
 
-        {   objectType => 'release',
-            fieldName  => 'download_url',
-            xmlFile    => '/tmp/releases.xml.gz',
-            filter     => { status => 'latest' },
-        }
-    );
-
-    foreach my $part (@parts) {
-
-        MetaCPAN::Sitemap::process($part);
+    {   object_type => 'release',
+        field_name  => 'download_url',
+        xml_file    => '/tmp/releases.xml.gz',
+        filter      => { status => 'latest' },
     }
+);
+
+foreach my $part (@parts) {
+    MetaCPAN::Sitemap::process($part);
 }
