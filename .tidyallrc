@@ -1,5 +1,5 @@
 [PerlTidy]
-select = {lib,t}/**/*.{pl,pm,t,psgi}
+select = {bin,lib,t}/**/*.{pl,pm,t,psgi}
 select = app.psgi
 argv = --profile=$ROOT/.perltidyrc
 
