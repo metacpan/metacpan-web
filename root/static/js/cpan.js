@@ -55,6 +55,7 @@ function toggleTOC() {
 
 $(document).ready(function() {
     SyntaxHighlighter.defaults['quick-code'] = false;
+    SyntaxHighlighter.defaults['tab-size'] = 8;
 
     var source = $("#source");
     // if this is a source-code view with destination anchor
