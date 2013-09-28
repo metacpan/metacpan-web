@@ -274,7 +274,12 @@ sub interesting_files {
                                     map {
                                         { prefix => { 'name' => $_ } },
                                         { prefix => { 'path' => $_ } },
-                                    } qw{ ex eg example Example }
+                                        # With "prefix" we don't need the plural "s".
+                                    } qw(
+                                        ex eg
+                                        example Example
+                                        sample
+                                    )
                                 ]
                             }
                         ]
