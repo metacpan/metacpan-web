@@ -71,6 +71,18 @@ test_psgi app, sub {
             $filetype,
             "detected filetype '$filetype' for: " . join ' ', %$file;
     }
+
+    {
+        my @warnings;
+        local $SIG{__WARN__} = sub { push @warnings, $_[0] };
+
+        # Test no 'path' and no 'mime'.
+        is MetaCPAN::Web::Controller::Source->detect_filetype({}),
+            'plain', 'default to plain text';
+
+        is scalar(@warnings), 0, 'no warnings when path and mime are undef'
+            or diag explain \@warnings;
+    }
 }
 
 done_testing;
