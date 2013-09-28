@@ -159,7 +159,10 @@ sub modules {
                 }
             },
             size   => 999,
-            sort   => ['documentation'],
+
+            # Sort by documentation name; if there isn't one, sort by path.
+            sort   => ['documentation', 'path'],
+
             # Get indexed and authorized from _source to work around ES bug:
             # https://github.com/CPAN-API/metacpan-web/issues/881
             # https://github.com/elasticsearch/elasticsearch/issues/2551
