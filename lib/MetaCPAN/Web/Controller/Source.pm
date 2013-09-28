@@ -57,26 +57,7 @@ sub content : Private {
 
         # could this be a method/function somewhere else?
         if ( !$module->{binary} ) {
-            my $filetype = do {
-                local $_ = $module->{path};
-
-                # what other file types can we check for?
-                      m!\.p[ml]$!i ? 'pl'
-                    : m!\.psgi$!   ? 'pl'
-                    : m!^cpanfile$! ? 'pl'
-                    : m!\.pod$!    ? 'pl'
-                    :    # no separate pod brush as of 2011-08-04
-                      m!\.ya?ml$!   ? 'yaml'
-                    : m!\.js(on)?$! ? 'js'
-                    : m!\.(c|h|xs)$! ? 'c'
-                        # are other changelog files likely to be in CPAN::Changes format?
-                    : m!^Changes$!i ? 'cpanchanges'
-                    : $module->{mime} =~ /perl/ ? 'pl'
-                    :
-
-                    # default to plain text
-                    'plain';
-            };
+            my $filetype = $self->detect_filetype($module);
             $c->stash( { source => $module->{content}, filetype => $filetype } );
         }
         $c->res->last_modified($module->{date});
@@ -85,6 +66,34 @@ sub content : Private {
                 module   => $module,
             }
         );
+}
+
+# Class method to ease testing.
+sub detect_filetype {
+    my ($self, $file) = @_;
+
+    if( defined($file->{path}) ){
+        local $_ = $file->{path};
+
+        # No separate pod brush as of 2011-08-04.
+        return 'pl'   if /\. ( p[ml] | psgi | pod ) $/ix;
+
+        return 'pl'   if /^ cpanfile $/ix;
+
+        return 'yaml' if /\. ya?ml $/ix;
+
+        return 'js'   if /\. js(on)? $/ix;
+
+        return 'c'    if /\. ( c | h | xs ) $/ix;
+
+        # Are other changelog files likely to be in CPAN::Changes format?
+        return 'cpanchanges' if /^ Changes $/ix;
+
+        return 'pl'   if $file->{mime} =~ /perl/;
+    }
+
+    # Default to plain text.
+    return 'plain';
 }
 
 1;

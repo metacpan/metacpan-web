@@ -18,17 +18,11 @@ test_psgi app, sub {
     );
     ok( $res->content =~ /package Moose/, 'includes Moose package' );
 
-    # TODO: add a reliable dist with files of each type to a FAKEpan like the api
     {
+        # Test the html produced once; test different filetypes below.
         my $prefix = '/source/RJBS/Dist-Zilla-4.200012';
         my @tests = (
-            [ pl    => '/source/ABW/Template-Toolkit-2.22/lib/Template/Manual.pod' ], # pod
-            [ pl    => "$prefix/lib/Dist/Zilla.pm" ],
             [ pl    => "$prefix/bin/dzil" ],
-            [ pl    => "$prefix/Makefile.PL" ],
-            [ js    => "$prefix/META.json" ],
-            [ yaml  => "$prefix/META.yml" ],
-            [ plain => "$prefix/README" ],
         );
 
         foreach my $test ( @tests ) {
@@ -42,5 +36,41 @@ test_psgi app, sub {
         }
     }
 };
+
+{
+    # Test filetype detection.  This is based on file attributes so we don't
+    # need to do the API hits to test each type.
+    my @tests = (
+        [ pl    => 'lib/Template/Manual.pod' ], # pod
+        [ pl    => "lib/Dist/Zilla.pm" ],
+        [ pl    => "Makefile.PL" ],
+
+        [ js    => "META.json" ],
+        [ js    => "script.js" ],
+
+        [ yaml  => "META.yml" ],
+        [ yaml  => "config.yaml" ],
+
+        [ c     => "foo.c" ],
+        [ c     => "bar.h" ],
+        [ c     => "baz.xs" ],
+
+        [ cpanchanges => 'Changes' ],
+
+        [ pl    => { path => "bin/dzil", mime => "text/x-script.perl" }],
+
+        [ plain => "README" ],
+    );
+
+    foreach my $ft_test ( @tests ){
+        my ($filetype, $file) = @$ft_test;
+        ref $file or $file = { path => $file };
+
+        is
+            MetaCPAN::Web::Controller::Source->detect_filetype($file),
+            $filetype,
+            "detected filetype '$filetype' for: " . join ' ', %$file;
+    }
+}
 
 done_testing;
