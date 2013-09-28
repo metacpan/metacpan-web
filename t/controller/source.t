@@ -59,6 +59,10 @@ test_psgi app, sub {
 
         [ pl    => { path => "bin/dzil", mime => "text/x-script.perl" }],
 
+        # There wouldn't normally be a file with no path
+        # but that doesn't mean this shouldn't work.
+        [ pl    => { mime => "text/x-script.perl" }],
+
         [ plain => "README" ],
     );
 

@@ -88,8 +88,13 @@ sub detect_filetype {
 
         # Are other changelog files likely to be in CPAN::Changes format?
         return 'cpanchanges' if /^ Changes $/ix;
+    }
 
-        return 'pl'   if $file->{mime} =~ /perl/;
+    # If no paths matched try mime type (which likely comes from the content).
+    if( defined($file->{mime}) ){
+        local $_ = $file->{mime};
+
+        return 'pl'   if /perl/;
     }
 
     # Default to plain text.
