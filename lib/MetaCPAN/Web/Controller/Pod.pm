@@ -1,4 +1,4 @@
-package MetaCPAN::Web::Controller::Module;
+package MetaCPAN::Web::Controller::Pod;
 
 use Moose;
 use namespace::autoclean;
@@ -10,12 +10,12 @@ with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
 
-sub path : PathPart('module') : Chained('/') : Args {
+sub path : PathPart('pod') : Chained('/') : Args {
     my ( $self, $c, @path ) = @_;
 
     # force consistent casing in URLs
     if ( @path > 2 && $path[0] ne uc($path[0]) ) {
-        $c->res->redirect( '/module/' . join( '/', uc(shift @path), @path ), 301 );
+        $c->res->redirect( '/pod/' . join( '/', uc(shift @path), @path ), 301 );
         $c->detach();
     }
 
@@ -95,7 +95,7 @@ sub path : PathPart('module') : Chained('/') : Args {
         {   module   => $data,
             pod      => $hr->process( $reqs->{pod}->{raw} ),
             release  => $reqs->{release}->{hits}->{hits}->[0]->{_source},
-            template => 'module.html',
+            template => 'pod.html',
         }
     );
     unless ($c->stash->{pod}) {
