@@ -1,5 +1,5 @@
 <% twitter_card_inc = 'inc/twitter/module.html' %>
-<% canonical = "/module/" _ module.documentation %>
+<% canonical = "/pod/" _ module.documentation %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
 <div itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -17,7 +17,7 @@
   <span class="select-text" itemprop="name"><% module.documentation %></span>
   </big></strong>
   <% INCLUDE inc/favorite.html module = module %>
-  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/module/<% module.documentation %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="<% canonical %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
 <div class="search-bar">
   <strong></strong>
@@ -63,7 +63,7 @@
   <ul>
     <li><a href="/module/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
     <% IF module.documentation %>
-    <li><a href="/module/<% module.documentation %>" itemprop="url">Latest version</a></li>
+    <li><a href="/pod/<% module.documentation %>" itemprop="url">Latest version</a></li>
     <% END %>
   </ul>
 </div>

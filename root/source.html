@@ -14,7 +14,7 @@
   <ul>
     <li><a href="/release/<% module.author %>/<% module.release %>/">Release Info</a></li>
     <% IF module.documentation %>
-      <li><a href="/module/<% module.documentation %>">Module Documentation</a></li>
+      <li><a href="/pod/<% module.documentation %>">Module Documentation</a></li>
     <% ELSIF module.slop %>
       <li><a href="/module/<% doc_view_url %>">Documentation View</a></li>
     <% END %>
