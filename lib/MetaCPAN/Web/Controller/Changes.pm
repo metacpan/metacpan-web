@@ -52,8 +52,8 @@ sub get : Private {
     }
     # display as pod if it is a pod file (perldelta.pod and some other dists)
     elsif( $file->{documentation} ){
-        # FIXME: the 'pod' view needs to be reusable (new pod controller #176)
-        $c->forward('/module/path', [@$file{qw( author release path )}]);
+        # Is there a better way to reuse the pod view?
+        $c->forward('/pod/release', [@$file{qw( author release path )}]);
     }
     else {
         $c->stash({ file => $file });
