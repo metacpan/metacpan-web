@@ -1,4 +1,5 @@
 <% twitter_card_inc = 'inc/twitter/module.html' %>
+<%# FIXME: Check if this is PAUSE indexed, otherwise use /pod/distribution/ url? %>
 <% canonical = "/pod/" _ module.documentation %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>

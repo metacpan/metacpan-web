@@ -14,6 +14,7 @@
   <ul>
     <li><a href="/release/<% module.author %>/<% module.release %>/">Release Info</a></li>
     <% IF module.documentation %>
+      <%# FIXME: Can we tell if this is PAUSE indexed? %>
       <li><a href="/pod/<% module.documentation %>">Module Documentation</a></li>
     <% ELSIF module.slop %>
       <li><a href="/pod/release/<% doc_view_url %>">Documentation View</a></li>
