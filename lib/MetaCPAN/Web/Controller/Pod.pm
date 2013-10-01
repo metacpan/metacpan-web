@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::Pod;
 
 use Moose;
 use namespace::autoclean;
+use Try::Tiny;
 use HTML::Restrict;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -10,17 +11,39 @@ with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
 
-sub path : PathPart('pod') : Chained('/') : Args {
+sub root : Chained('/') PathPart('pod') CaptureArgs(0) {
+}
+
+# /pod/$name
+sub find : Chained('root') PathPart('') Args(1) {
+    my ( $self, $c, @path ) = @_;
+
+    # TODO: Pass size param so we can disambiguate?
+    $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->recv;
+
+    # TODO: Disambiguate if there's more than once match. #176
+
+    $c->forward('view', [@path]);
+}
+
+# /pod/release/$AUTHOR/$release/@path
+sub release : Chained('root') Local Args {
     my ( $self, $c, @path ) = @_;
 
     # force consistent casing in URLs
     if ( @path > 2 && $path[0] ne uc($path[0]) ) {
-        $c->res->redirect( '/pod/' . join( '/', uc(shift @path), @path ), 301 );
+        $c->res->redirect( '/pod/release/' . join( '/', uc(shift @path), @path ), 301 );
         $c->detach();
     }
 
-    my $model = $c->model('API::Module');
-    my $data = @path > 2 ? $model->get(@path)->recv : $model->find(@path)->recv;
+    $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->recv;
+    $c->forward('view', [@path]);
+}
+
+sub view : Private {
+    my ( $self, $c, @path ) = @_;
+
+    my $data = $c->stash->{pod_file};
 
     if($data->{directory}) {
         $c->res->redirect( '/source/' . join( '/', @path ), 301 );
