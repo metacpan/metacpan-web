@@ -40,6 +40,28 @@ sub release : Chained('root') Local Args {
     $c->forward('view', [@path]);
 }
 
+# /pod/distribution/$name/@path
+sub distribution : Chained('root') Local Args {
+    my ( $self, $c, $dist, @path ) = @_;
+
+    # TODO: Could we do this with one query?
+    # filter => { path => join('/', @path), distribution => $dist, status => latest }
+
+    # Get latest "author/release" of dist so we can use it to find the file.
+    # TODO: Pass size param so we can disambiguate?
+    my $release = try {
+        $c->model('API::Release')->find($dist)->recv->{hits}{hits}->[0]->{_source}
+    } or $c->detach('/not_found');
+
+    # TODO: Disambiguate if there's more than once match. #176
+
+    unshift @path, @$release{qw( author name )};
+
+    $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->recv;
+
+    $c->forward('view', [@path]);
+}
+
 sub view : Private {
     my ( $self, $c, @path ) = @_;
 
