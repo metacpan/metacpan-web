@@ -42,7 +42,7 @@
   : file.mime.match("x-c") ? 'silk-page-white-c'
   : 'silk-page-white'
   -%>" title="<% file.path %>"><% file.name %></a></strong></td>
-  <td class="documentation" class="ellipsis"><strong><a href="/module/<% [author, release, file.path].join("/") %>" title="<% file.path %>"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
+  <td class="documentation" class="ellipsis"><strong><a href="/pod/release/<% [author, release, file.path].join("/") %>" title="<% file.path %>"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
   <td class="size"><span sort="<% file.directory == "false" ? file.${"stat.size"} : 0 %>"><% file.directory == "false" ? file.${"stat.size"} | format_bytes : "" %></td>
   <td class="mtime" nowrap="nowrap"><span class="relatize" sort="<% date = file.${"stat.mtime"}.dt_http; date %>"><% date %></span></td>
 </tr>

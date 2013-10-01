@@ -123,7 +123,7 @@ documentation = documentation.merge(documentation_raw);
   <div>
     <% IF file.path.match('\.pod$') %>
       <strong>
-        <a href="/module/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a>
+        <a href="/pod/release/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a>
       </strong>
     <% ELSE %>
       <strong>
@@ -131,7 +131,7 @@ documentation = documentation.merge(documentation_raw);
       </strong>
         <% IF file.pod_lines %>
           [<strong>
-            <a href="/module/<% release.author; '/'; release.name; '/'; file.path %>">pod</a>
+            <a href="/pod/release/<% release.author; '/'; release.name; '/'; file.path %>">pod</a>
           </strong>]
         <% END %>
     <% END %>
