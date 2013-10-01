@@ -5,14 +5,14 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/module/DOESNTEXIST" ),
-        'GET /module/DOESNTEXIST' );
+    ok( my $res = $cb->( GET "/pod/DOESNTEXIST" ),
+        'GET /pod/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
-    ok( $res = $cb->( GET "/module/Moose" ), 'GET /module/Moose' );
+    ok( $res = $cb->( GET "/pod/Moose" ), 'GET /pod/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
-    ok( $tx->find_value('//a[@href="/module/Moose"]'),
+    ok( $tx->find_value('//a[@href="/pod/Moose"]'),
         'contains permalink to resource'
     );
     ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
@@ -26,8 +26,8 @@ test_psgi app, sub {
         'content of both urls is exactly the same'
     );
 
-    # get module with lc author
-    $this =~ s{(/module/.*?/)}{lc($1)}e; # lc author name
+    # Request with lowercase author redirects to uppercase author.
+    $this =~ s{(/pod/release/)([^/]+)}{$1\L$2}; # lc author name
     ok( $res = $cb->( GET $this ), "GET $this" );
     is( $res->code, 301, 'code 301' );
 };

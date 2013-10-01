@@ -5,7 +5,7 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/module/Moose" ), 'GET /module/Moose' );
+    ok( my $res = $cb->( GET "/pod/Moose" ), 'GET /pod/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     ok( my $source = $tx->find_value('//a[text()="Source"]/@href'),
