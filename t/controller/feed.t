@@ -28,7 +28,8 @@ sub valid_xml {
     catch { $err = $_[0] };
 
     ok( $tx, 'valid xml' );
-    is($err, undef, 'no errors');
+    is($err, undef, 'no errors')
+        or diag Test::More::explain $res;
 
     return $tx;
 }
