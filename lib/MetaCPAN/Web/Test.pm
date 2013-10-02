@@ -9,6 +9,7 @@ use HTTP::Request::Common;
 use HTTP::Message::PSGI;
 use HTML::Tree;
 use Test::XPath;
+use Try::Tiny;
 use Encode;
 use base 'Exporter';
 our @EXPORT = qw(
@@ -50,7 +51,12 @@ sub app { require 'app.psgi'; }
 sub tx {
     my $tree = HTML::TreeBuilder->new_from_content( shift->content );
     my $xml  = $tree->as_XML;
-    $xml = decode_utf8($xml);
+
+    # Upgrading some library (not sure which) in Sep/Oct 2013 started
+    # returning $xml with wide characters (which cases decode to croak).
+    try { $xml = decode_utf8($xml) if !Encode::is_utf8($xml); }
+    catch { warn $_[0] };
+
     my $tx = Test::XPath->new( xml => $xml );
     # https://metacpan.org/module/DWHEELER/Test-XPath-0.16/lib/Test/XPath.pm#xpc
     $tx->xpc->registerFunction( grep => sub {
