@@ -60,10 +60,10 @@ profiles = {
     && file.module.grep(->(module){ module.authorized && module.indexed });
     path = file.documentation;
   ELSE;
-    path = [file.author, file.release, file.path].join("/");
+    path = ['release', file.author, file.release, file.path].join("/");
   END;
 %>
-<a href="/module/<% path %>"><%- title %></a>
+<a href="/pod/<% path %>"><%- title %></a>
 <%- END
   # protocols = {
   #   "bzr" = 10,

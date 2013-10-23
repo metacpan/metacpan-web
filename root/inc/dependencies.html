@@ -12,7 +12,7 @@ IF dep.phase != 'runtime' || dep.relationship != 'requires' || dep.module == 'pe
 deps.push(dep.module);
 END;
 FOREACH dep IN deps.sort %>
-<a href="/module/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a>
+<a href="/pod/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a>
 <% END %>
 <%- IF deps.size == 0 && !release.metadata  %>
 <i title="no META file provided">unknown</i>

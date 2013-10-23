@@ -50,11 +50,11 @@ foreach my $test ( @tests ) {
     my ($module, $release) = @{$test}{qw(module release)};
     my $first_letter = uc(substr($release, 0, 1));
 
-    foreach my $controller ( qw(module release) ) {
-        my $name = $test->{ $controller };
-        $current = {desc => "$controller $name", test => $test};
+    foreach my $type ( qw(module release) ) {
+        my $name = $test->{ $type };
+        $current = {desc => "$type $name", test => $test};
 
-        my $req_uri = "/$controller/$name";
+        my $req_uri = $type eq 'module' ? "/pod/$name" : "/release/$name";
 
         ok( my $res = $cb->( GET $req_uri ), "GET $req_uri" );
         is( $res->code, 200, 'code 200' );
@@ -64,7 +64,7 @@ foreach my $test ( @tests ) {
         # consistecy or coincidence and are not specifically related to release-info
         $tx->like( '/html/head/title', qr/$name/, qq[title includes name "$name"] );
 
-        ok( $tx->find_value(qq<//a[\@href="/$controller/$name"]>),
+        ok( $tx->find_value(qq<//a[\@href="$req_uri"]>),
             'contains permalink to resource'
         );
 
@@ -73,7 +73,8 @@ foreach my $test ( @tests ) {
 
         # A fragile and unsure way to get the version, but at least an 80% solution.
         # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
-        ok( my $version = ($this =~ m!/$controller/[^/]+/$release-([^/"]+)!)[0], 'got version from "this" link' );
+        ok( my $version = ($this =~ m!(?:/pod)?/release/[^/]+/$release-([^/"]+)!)[0],
+            'got version from "this" link' );
 
         # TODO: latest version (should be where we already are)
         # TODO: author

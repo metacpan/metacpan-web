@@ -43,7 +43,7 @@ test_psgi app, sub {
         # if it's not exact, is it a prefix match?
         like $doc, qr/^\Q$test\E/i, 'first result is a prefix match';
 
-        ok( $res = $cb->( GET "/module/$doc" ), "GET $doc" );
+        ok( $res = $cb->( GET "/pod/$doc" ), "GET $doc" );
             is( $res->code, 200, 'code 200' );
 
         TODO: {
@@ -51,7 +51,7 @@ test_psgi app, sub {
                 if $exp =~ /[^[:ascii:]]/;
 
             # use ok() rather than like() b/c the diag output is huge if it fails
-            ok($res->content =~ /$doc/, "/module/$doc content includes module name '$exp'");
+            ok($res->content =~ /$doc/, "/pod/$doc content includes module name '$exp'");
         }
     }
 };

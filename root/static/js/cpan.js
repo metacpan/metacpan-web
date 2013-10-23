@@ -174,7 +174,7 @@ $(document).ready(function() {
             return item.documentation;
         }
     }).result(function(e, item) {
-        document.location.href = '/module/'+ item.documentation;
+        document.location.href = '/pod/'+ item.documentation;
     });
 
     $('#search-input.autofocus').focus();

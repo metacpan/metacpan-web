@@ -31,7 +31,7 @@ sub index : Path {
          $query =~ s[^ (?: \\ | ! ) ][]x) {
         my $module = $model->first($query)->recv;
         $c->detach('/not_found') unless ($module);
-        $c->res->redirect("/module/$module");
+        $c->res->redirect("/pod/$module");
         $c->detach;
     }
     else {
