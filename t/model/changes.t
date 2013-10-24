@@ -44,6 +44,12 @@ subtest "GH issue linking" => sub {
     while (my ($in, $out) = each %gh_tests) {
         like(Changes->_gh($in, $u), qr/$out/, "$in found");
     }
+    my @no_links_tests = (
+        'I wash my hands of this library forever -- rjbs, 2013-10-15'
+    );
+    foreach my $in (@no_links_tests) {
+        is(Changes->_gh($in, $u), $in, "Didn't change '$in'");
+    }
 };
 
 subtest 'find changelog' => sub {

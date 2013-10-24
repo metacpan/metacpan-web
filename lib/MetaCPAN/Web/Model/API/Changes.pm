@@ -102,7 +102,8 @@ sub _rt_cpan {
 sub _gh {
     my ($self, $line, $bt) = @_;
     $bt =~ s|/$||;
-    $line =~ s{((?:GH|)[#:-])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
+    $line =~ s{(GH[-:]?)(\d+)\b}{<a href=$bt/$2">$1$2</a>}gxi;
+    $line =~ s{((?:GH|)[#])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
     return $line;
 }
 1;
