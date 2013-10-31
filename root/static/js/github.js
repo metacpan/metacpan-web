@@ -46,7 +46,9 @@ function Github() {
                             ?'  <tr><th>Homepage:</th><td><a href="'+ data.homepage +'">'+ data.homepage +'</a></td></tr>'
                             :'' )
 
-                            +'  <tr><th><a href="'+ data.html_url +'/watchers">Watchers</a>:</th><td>'+ data.watchers +'</td></tr>'
+                            // with v3 api the number under 'watchers' is actually the number of stargazers
+                            // in the v4 api this will be corrected. see https://github.com/CPAN-API/metacpan-web/issues/975
+                            +'  <tr><th><a href="'+ data.html_url +'/stargazers">Stars</a>:</th><td>'+ data.watchers +'</td></tr>'
                             +'  <tr><th><a href="'+ data.html_url +'/network">Forks</a>:</th><td>'+ data.forks +'</td></tr>'
 
                             +( data.has_issues
