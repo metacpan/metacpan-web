@@ -1,0 +1,117 @@
+<% PROCESS inc/about-bar.html %>
+<div class="content about-resources">
+<% USE Markdown -%>
+<% FILTER markdown %>
+# Development
+
+
+# MetaCPAN Needs You!
+
+Our code base is based on current best practices and modern web technologies.
+Our stack includes Catalyst, Plack, ElasticSearch, jQuery, Bootstrap and nginx.
+We also use Puppet for deployment and Vagrant + VirtualBox for development VMs.
+We have integration with Twitter, Github, PAUSE, Facebook and Google.  All code
+is managed on Github and we have an active channel (#metacpan) on irc.perl.org.
+
+There are many available projects within MetaCPAN which you could take on or
+contribute to and there is also room for you to suggest improvements which you
+would like to make.  The project list is ever growing and subject to change as
+volunteers take items on, but here's a sampling of what we'd love for you to
+consider working on.
+
+# Module tagging.
+
+This is one of the most important things which MetaCPAN potentially can offer
+to the Perl community at large.  A way for users to contribute to the
+categorizing and organization of the many, many available modules on CPAN.
+"There's more than one way to do it" is a good thing, but it can also get in
+the way of solving a problem when you are faced with too many choices.  [Some
+thoughts on
+tagging](http://blogs.perl.org/users/olaf_alders/2013/03/sifting-through-the-cpan.html)
+make for a good starting point.
+
+# Web of Trust.
+
+Dave Rolsky, back in 2010, posted an idea he had about how to mark modules as
+trustworthy (ie used by people he trusts).  He said:
+
+"I've long wanted some sort of "web of trust" system for CPAN. A CPAN user
+would mark authors and/or distributions as trusted. We’d take the graph of
+trust relationships and try to figure out which authors and modules are most
+trusted. Trust here would be some combination of good code, good docs,
+responsive author, whatever. The idea is to organically highlight the best of
+CPAN, and in particular help people discover the best modules in their class. I
+think this would be really useful for new users, and a lot more useful than the
+current CPAN rating system."
+
+Using ++ data (which we already have) and possibly module tagging, we can
+provide "web of trust" data.  This does not, however, require the module
+tagging implementation to be useful and this would be of great value to many in
+the Perl community.
+
+# Bug Fixes
+
+There are hundreds of outstanding issues waiting to be resolved.  The large
+number of tickets is not indicative of a lack of response on the part of
+MetaCPAN developers (we try to stay on top of them), but it indicates the
+enthusiasm with which people are helping us track ways to improve.  Starting
+with some open issues would be a good way to familiarize yourself with our
+codebase.
+
+
+# API Documentation
+
+Because things traditionally have changed so rapidly, our documentation has
+either not kept up or not been written to completion.  You can help us (and
+many Perl developers) by documenting the API and posting example code for both
+new and experienced MetaCPAN users.  For example, most people do not know that
+MetaCPAN can function as an OAuth provider and could, therefore, be used for
+authenticating users across a range of Perl services.  You could post example
+code for this use case and help facilitate MetaCPAN OAuth integrations.
+
+MetaCPAN is used by web, command line, Android and iOS apps, so there are many
+kinds of examples which could be documented.
+
+# What Can We Offer you?
+
+It's already clear from the materials above that there are many ways for you to
+make your mark on MetaCPAN, but what can we offer you?  You will have the
+chance to be mentored by experienced (and employed) Perl developers.  We will
+carefully review all of your code and give you constructive (and kind)
+feedback.  We will help you improve your code and your coding practices.
+MetaCPAN is a positive place.   We will help you get from A to B with your
+code, but your work won't be trashed and you won't be insulted. We value all
+contributions and we want every contributor to know that she or he is
+appreciated.  There are some harsh places on the Internet and in Open Source.
+This is not one of them.
+
+You'll have the chance to learn about the technologies as listed in our "stack"
+above.  You will have help and guidance in working with these technologies from
+people who are quite familiar with them.  Your code will deploy on robust
+hardware (think 30+ GB of RAM).  Your code will often deploy within hours or
+even minutes of being submitted.  Your work will immediately be put to the test
+by our many users on our very busy services.  You'll gain experience in NoSQL
+(ElasticSearch), git, and also in participating in an Open Source project which
+functions as a highly available web service.  You will gain experience not just
+in writing code, but in participating in the full cycle of code deployment,
+skills which are quite valuable in the real world.
+
+If any of this sounds remotely interesting to you, please don't hesitate to get
+in touch.  You can contact me directly via the information listed below.  If
+you just want to see how you like the project, feel free to get involved via
+github, IRC or both.  We'll guide you through the process and you can decide
+for yourself if it's a good fit for you.  We look forward to hearing from you.
+
+  Main repositories:
+
+  Front end: [https://github.com/CPAN-API/metacpan-web](https://github.com/CPAN-API/metacpan-web)
+
+  API: [https://github.com/CPAN-API/cpan-api](https://github.com/CPAN-API/cpan-api)
+
+  Example scripts: [https://github.com/CPAN-API/metacpan-examples](https://github.com/CPAN-API/metacpan-examples)
+
+
+
+<% END %>
+
+</div>

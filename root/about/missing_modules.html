@@ -1,0 +1,36 @@
+<% PROCESS inc/about-bar.html %>
+<div class="content about-resources">
+<% USE Markdown -%>
+<% FILTER markdown %>
+# Missing module ? - why can I not find a specific module?
+
+## Is it in the index?
+
+MetaCPAN uses the [PAUSE](http://pause.perl.org/) generated [02packages.details.txt](http://cpan.metacpan.org/modules/02packages.details.txt) file. If it's not
+in there then the module author will need to fix this (authors are usually
+emailed about this when they upload a distribution).
+
+## Is the distribution POD only with no package?
+
+A distribution must contain a package, even if it is 100% POD, a
+good example of this done correctly is [Catalyst::Manual](/release/Catalyst-Manual).
+
+## I can see XXX on search.cpan.org but not on MetaCPAN
+
+The code for how MetaCPAN checks for author/module/distribution information
+is [on github](https://github.com/CPAN-API/cpan-api/blob/master/lib/MetaCPAN/Script/Check.pm),
+search.cpan.org has evolved to support edge cases or have exceptions but
+as the code is not public we are unable to tell you what they are doing.
+
+## I still think this is a bug
+
+We do have bugs, so this is possible, please help by...
+
+ * Please check existing [issues](https://github.com/CPAN-API/metacpan-web/issues/)
+ * Create an [issue](https://github.com/CPAN-API/metacpan-web/issues/new)
+ * Become a [developer](/about/development)
+
+<% END %>
+
+</div>
+
