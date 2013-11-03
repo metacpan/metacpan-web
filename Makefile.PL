@@ -66,8 +66,9 @@ my %WriteMakefileArgs = (
     "HTTP::Request::Common" => 0,
     "Hash::AsObject" => 0,
     "Hash::Merge" => 0,
-    "JSON" => 0,
-    "JSON::XS" => 0,
+    # If we have JSON::XS v3 we need JSON.pm 2.90+ or we get bizarre errors.
+    "JSON" => "2.90",
+    "JSON::XS" => "3.01",
     "List::MoreUtils" => 0,
     "List::Util" => 0,
     "Moose" => 0,
