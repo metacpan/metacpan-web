@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/CPAN-API/metacpan-web.png?branch=master)](https://travis-ci.org/CPAN-API/metacpan-web)
+[![Coverage Status](https://coveralls.io/repos/CPAN-API/metacpan-web/badge.png)](https://coveralls.io/r/CPAN-API/metacpan-web)
 
 ## GETTING STARTED
 
