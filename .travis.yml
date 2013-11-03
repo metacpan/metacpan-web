@@ -5,8 +5,12 @@ perl:
   - "5.14"
   - "5.12"
   - "5.10"
+
 before_install:
   - cpanm http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
+  # As of 2013-11-02 travis doesn't seem to find this one yet.
+  - cpanm http://cpan.metacpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.90.tar.gz
+
 notifications:
   email:
     recipients:
