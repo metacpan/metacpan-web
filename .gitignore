@@ -17,3 +17,5 @@ metacpan_web_local.conf
 
 .tidyall.d/
 perltidy.LOG
+
+cover_db/
