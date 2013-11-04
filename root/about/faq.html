@@ -21,7 +21,8 @@ API requests need to be sent to api.metacpan.org.
 
 ## How can I try the API?
 
-[http://explorer.metacpan.org/](http://explorer.metacpan.org/) is an easy way to try sending queries to the back-end.
+[http://explorer.metacpan.org/](http://explorer.metacpan.org/) is an easy way
+to try sending queries to the back-end.
 
 ## Why can't I link my PAUSE account?
 
@@ -45,35 +46,45 @@ To fix this
 
 ## Oops! I made a mistake.  Can you delete my module?
 
-Requests to have modules removed from the CPAN should be directed at the PAUSE admins.  Keep in mind that, if a module contains sensitive information, just deleting it from your CPAN directory is not enough, as it will still reside in the BackPAN.
+Requests to have modules removed from the CPAN should be directed at the PAUSE
+admins.  Keep in mind that, if a module contains sensitive information, just
+deleting it from your CPAN directory is not enough, as it will still reside in
+the BackPAN.
 
-If the PAUSE admins approve your request, have them CC noc@metacpan.org so that we can push the right buttons to have your work removed from MetaCPAN as well.
+If the PAUSE admins approve your request, have them CC noc@metacpan.org so that
+we can push the right buttons to have your work removed from MetaCPAN as well.
 
 ## Can I **automatically** redirect links pointing at search.cpan.org to metacpan.org?
 
-For Chrome users, the [MetaCPAN Helper](https://chrome.google.com/webstore/detail/metacpan-helper/aoioenbjpmccpkincghhjfmeceknpcnb) extension will automatically rewrite search.cpan.org links to MetaCPAN.
+For Chrome users, the [MetaCPAN
+Helper](https://chrome.google.com/webstore/detail/metacpan-helper/aoioenbjpmccpkincghhjfmeceknpcnb)
+extension will automatically rewrite search.cpan.org links to MetaCPAN.
 
-You can accomplish the same thing by modifying your <code>hosts</code> file. Add the following lines and all links to search.cpan.org (and links to source code) will be redirected to MetaCPAN:
+You can accomplish the same thing by modifying your <code>hosts</code> file.
+Add the following lines and all links to search.cpan.org (and links to source
+code) will be redirected to MetaCPAN:
 
-		46.43.35.68 search.cpan.org
-    	46.43.35.68 cpansearch.perl.org
+    46.43.35.68 search.cpan.org
+    46.43.35.68 cpansearch.perl.org
 
-If you do this, be sure to point cpanm to another mirror, as it defaults to search.cpan.org. Here's how:
+If you do this, be sure to point cpanm to another mirror, as it defaults to
+search.cpan.org. Here's how:
 
-		export PERL_CPANM_OPT="--mirror http://www.cpan.no/" # Insert your closest mirror here.
+    export PERL_CPANM_OPT="--mirror http://www.cpan.no/" # Insert your closest mirror here.
 
 ## Can I **manually** redirect links pointing at search.cpan.org to metacpan.org?
 
-If you find yourself to be on search.cpan.org and you want to get redirected to corresponding metacpan page, just change the domain name with search.**m**cpan.org. For example:
+If you find yourself to be on search.cpan.org and you want to get redirected to
+corresponding metacpan page, just change the domain name with
+search.**m**cpan.org. For example:
 
-    	http://search.cpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
+    http://search.cpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
 
 has to be changed to:
 
-    	http://search.mcpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
-                      ^
+    http://search.mcpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
+                  ^
 
 <% END %>
 
 </div>
-
