@@ -337,7 +337,7 @@ input.g-button:active, button.g-button:active, a.g-button:active {
 
 button.favorite, a.favorite {
     padding: 1px 3px;
-    margin-left: 10px;
+    margin-left: 5px;
     font-size: 0.9em;
     background-color: #fff;
     opacity: 0.5;

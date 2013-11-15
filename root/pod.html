@@ -14,10 +14,10 @@
     </span>
     &nbsp;/&nbsp;
   <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
+  </big></strong><% INCLUDE inc/favorite.html module = module %><strong><big>
   &nbsp;/&nbsp;
   <span class="select-text" itemprop="name"><% module.documentation %></span>
   </big></strong>
-  <% INCLUDE inc/favorite.html module = module %>
   <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="<% canonical %>"><big>go to latest</big></a></strong></div><% END %><br><br>
 
 <div class="search-bar">
