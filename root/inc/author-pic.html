@@ -11,5 +11,10 @@
              width="110" height="20"
              src="https://api.coderwall.com/<% p.id %>/endorsecount.png" /></a></div>
 <% END %>
+<% IF p.name == "googleplus" %>
+  <a rel="author" href="<% profiles.${p.name}.url.replace('%s', p.id) %>?rel=author" target="_blank" title="<% p.name %> - <% p.id%>">
+    <img src="/static/images/profile/<% p.name %>.png" width=16 height=16 alt="<% p.name %>">
+  </a>
+<% END %>
 <% END %>
 </div>
