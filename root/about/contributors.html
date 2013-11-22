@@ -41,6 +41,7 @@
               +'('+ row.contributions +' '+ (row.contributions === 1 ? 'commit' : 'commits') +')</li>'
             );
           })
+          $('#author-count').html('Number of contributors: ' + rows.length);
         },
 
         fetch: function(url) {
@@ -94,5 +95,6 @@
 
 <div class="content">
   <img src="/static/icons/busy.gif" id="author-result-loading" />
+  <div id="author-count"></div>
   <div id="author-results"></div>
 </div>
