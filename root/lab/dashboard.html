@@ -1,0 +1,38 @@
+<h2>Dashboard</h2>
+
+<% IF pauseid %>
+
+  <% IF report.missing_repos.size %>
+    <h3>Missing repository</h3>
+    <ul>
+    <% FOR distro IN report.missing_repos %>
+      <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
+    <% END %>
+    </ul>
+  <% ELSE %>
+    Congratulations. All of your distributions have repositories.
+  <% END %>
+
+  <% IF report.missing_licenses.size %>
+    <h3>Missing licenses</h3>
+    <ul>
+    <% FOR distro IN report.missing_licenses %>
+      <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
+    <% END %>
+    </ul>
+  <% ELSE %>
+    Congratulations. All of your distributions have license.
+  <% END %>
+
+<% ELSE %>
+Dashboard only available to people who have logged in to MetaCPAN and
+connected their account to their PAUSEID.
+<% END %>
+
+<!--
+<% USE Dumper %>
+<pre>
+<% Dumper.dump(report) %>
+</pre>
+-->
+
