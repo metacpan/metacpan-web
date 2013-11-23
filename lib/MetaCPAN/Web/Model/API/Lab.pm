@@ -171,6 +171,28 @@ sub fetch_latest_distros {
 	};
 }
 
+sub get_favorites {
+    my ($self, $size, $user_id) = @_;
+
+    my $cv = $self->cv;
+   	my $r = $self->request(
+		'/favorite/_search',
+		{
+	    	query => {
+                filtered => {
+                    query  => { term => { 'user' => $user_id } },
+				},
+            },
+	    	fields => [qw(distribution date)],
+            sort => [ { date => 'desc' } ],
+	        size   => $size,
+		},
+	)->recv;
+
+	my @results = map { $_->{fields} } @{ $r->{hits}{hits} };
+	return \@results;
+}
+
 
 
 __PACKAGE__->meta->make_immutable;

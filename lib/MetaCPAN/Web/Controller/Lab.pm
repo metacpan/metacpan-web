@@ -37,20 +37,29 @@ sub dependencies : Chained('index') : PathPart : Does('Sortable') {
 
 sub dashboard : Chained('index') : PathPart {
     my ( $self, $c ) = @_;
-    my $author = $c->model('API::User')->get_profile( $c->token )->recv;
 
-    my $pauseid = $author->{pauseid};
-    my $data;
-    if ($pauseid) {
-        $data = $c->model('API::Lab')->fetch_latest_distros(1000, $pauseid);
-    }
+    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+
+    my $report;
+	my $pauseid;
+
+	if ($user) {
+    	$pauseid = $user->{pauseid};
+    	if ($pauseid) {
+        	$report = $c->model('API::Lab')->fetch_latest_distros(1000, $pauseid);
+    	}
+
+		$report->{favorites} = $c->model('API::Lab')->get_favorites(1000, $user->{user});
+	}
+
+	$report->{user} = $user;
 
     $c->stash( {
         template => 'lab/dashboard.html',
-        author   => $author,
-        pauseid  => $pauseid,
-        report   => $data,
+		pauseid  => $pauseid,
+        report   => $report,
     } );
 }
+
 1;
 
