@@ -1,0 +1,51 @@
+<h2>Dashboard</h2>
+
+
+<%- IF user_exists %>
+  <% IF pauseid %>
+  
+    <% IF report.missing_repos.size %>
+      <h1>Missing repository</h1>
+      <ul>
+      <% FOR distro IN report.missing_repos %>
+        <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
+      <% END %>
+      </ul>
+    <% ELSE %>
+      Congratulations. All of your distributions have repositories.
+    <% END %>
+  
+    <% IF report.missing_licenses.size %>
+      <h1>Missing licenses</h1>
+      <ul>
+      <% FOR distro IN report.missing_licenses %>
+        <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
+      <% END %>
+      </ul>
+    <% ELSE %>
+      Congratulations. All of your distributions have license.
+    <% END %>
+  <% END %>
+
+  <h1>Your favorite distributions</h1>
+  <% IF report.favorites.size %>
+     <ul>
+     <% FOR f IN report.favorites %>
+       <li><a href="/release/<% f.distribution %>"><% f.distribution %></a></li>
+     <% END %>
+     </ul>
+  <% ELSE %>
+    It seems you have not favorited any distribution yet.
+  <% END %>
+ 
+<% ELSE %>
+The dashboard is only available to people who have logged in to MetaCPAN.
+<% END %>
+
+<!--
+<% USE Dumper %>
+<pre>
+<% Dumper.dump(report) %>
+</pre>
+-->
+
