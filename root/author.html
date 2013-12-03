@@ -8,7 +8,9 @@
   <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a><br>
   <% IF author.website.size %>
   <strong>Website</strong><br>
-  <a rel="me" href="<% author.website.0 %>" title="<% author.website.0 %>" target="_blank"><% author.website.0.decode_punycode %></a><br><% END %>
+  <% FOREACH website IN author.website %>
+  <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a><br><% END %>
+  <% END %>
 <%
 IF author.profile.size -%>
 <strong>Profiles</strong>
