@@ -14,6 +14,10 @@
  * @license
  * Dual licensed under the MIT and GPL licenses.
  */
+
+/* Use the same style on verbatim pre's for users without javascript */
+.pod code *,
+.pod pre.metacpan-verbatim *,
 .syntaxhighlighter a,
 .syntaxhighlighter div,
 .syntaxhighlighter code,
@@ -23,9 +27,7 @@
 .syntaxhighlighter table tbody,
 .syntaxhighlighter table thead,
 .syntaxhighlighter table caption,
-.syntaxhighlighter textarea,
-.pod code *,
-.pod pre * {
+.syntaxhighlighter textarea {
   -moz-border-radius: 0 0 0 0 !important;
   -webkit-border-radius: 0 0 0 0 !important;
   background: none !important;
@@ -54,7 +56,8 @@
   min-height: auto !important;
 }
 
-.syntaxhighlighter, .pod pre {
+.pod pre.metacpan-verbatim, /* Ditto. */
+.syntaxhighlighter {
   width: 100% !important;
   margin: 1em 0 1em 0 !important;
   position: relative !important;

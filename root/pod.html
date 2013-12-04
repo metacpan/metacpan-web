@@ -75,7 +75,8 @@
 <a name="___pod"></a>
 <div class="pod">
 <% IF pod %>
-<% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false">').replace(/<\/code><\/pre>/, '</pre>') | none %>
+<%  # Add 'metacpan-verbatim' to class (SyntaxHighlighter will ignore) so we can apply CSS for users without javascript.
+    pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
 <% ELSIF pod_error %>
 <p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
 <% ELSE %>
