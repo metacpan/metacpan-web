@@ -26,6 +26,10 @@ test_psgi app, sub {
         'content of both urls is exactly the same'
     );
 
+    like $tx->find_value('//div[@class="pod"]//pre/@class'),
+        qr/^brush: pl; .+; metacpan-verbatim$/,
+        'verbatim pre tag has syn-hi class';
+
     # Request with lowercase author redirects to uppercase author.
     $this =~ s{(/pod/release/)([^/]+)}{$1\L$2}; # lc author name
     ok( $res = $cb->( GET $this ), "GET $this" );
