@@ -58,7 +58,7 @@ function Github() {
                             +'  <tr><th>Clone URL:</th><td><a href="'+ data.clone_url +'">'+ data.clone_url +'</a></td></tr>'
                             +'  <tr><th>Git URL:</th><td><a href="'+ data.git_url +'">'+ data.git_url +'</a></td></tr>'
                             +'  <tr><th>Github URL:</th><td><a href="'+ data.html_url +'">'+ data.html_url +'</a></td></tr>'
-                            +'  <tr><th>SSH URL:</th><td><a href="'+ data.ssh_url +'">'+ data.ssh_url +'</a></td></tr>'
+                            +'  <tr><th>SSH URL:</th><td><a href="'+ data.ssh_url.replace(/^(\w+\@)?([^:\/]+):/,'ssh://$1$2/') +'">'+ data.ssh_url +'</a></td></tr>'
                             +'  <tr><th>Last Commit:</th><td><span class="relatize">'+ data.pushed_at +'</span></td></tr>'
                             +'</table>';
                 },
