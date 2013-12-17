@@ -89,7 +89,7 @@ sub end : ActionClass('RenderView') {
         $c->res->header('Last-Modified')
         ) {
             # Make sure fastly doesn't cache anything by accident
-            $c->res->header('Surrogate-Control' => 0);
+            $c->res->header('Surrogate-Control' => 'no-store');
     }
 }
 
