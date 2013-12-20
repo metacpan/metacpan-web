@@ -23,7 +23,9 @@ FOREACH release IN recent;
 date = release.date.dt;
 day = "%d %s %s".sprintf(date.day, MoY.item(date.month), date.year);
 IF day != last;
-INCLUDE inc/release-table.html releases = releases;
+
+IF releases.size; INCLUDE inc/release-table.html releases = releases, header = 1, include_author = 1; END;
+
 releases = [];
 IF !loop.first %><br><% END %>
 <big>
@@ -37,6 +39,7 @@ END;
 releases.push(release);
 -%>
 <% END %>
-<% INCLUDE inc/release-table.html releases = releases %>
+
+<% INCLUDE inc/release-table.html releases = releases, header = 1, include_author = 1 %>
 <% INCLUDE inc/pager.html size = 100 %>
 </div>
