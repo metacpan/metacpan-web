@@ -137,7 +137,7 @@ foreach my $test ( @tests ) {
         # test format of cpantesters link
         $tx->is(
             '//a[text()="Test results"]/@href',
-            "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version",
+            "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version?oncpan=1&distmat=1",
             'link to test results'
         );
 
