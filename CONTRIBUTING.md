@@ -20,10 +20,29 @@ We are always after more contributors and suggestions..
 
 ## Contributing code
 
-  * [Useing our developer VM](https://github.com/CPAN-API/metacpan-developer) to get you going in minutes (depending on bandwidth)
-  * [Wishlist](https://github.com/CPAN-API/cpan-api/wiki/Wishlist) - things that need doing
+Come talk to us on IRC (see below), or send a pull request and we'll respond there. These links will get you going quickly:
 
+  * [Useing our developer VM](https://github.com/CPAN-API/metacpan-developer) to get you going in minutes (depending on bandwidth)
+  * [Front end bug list](/CPAN-API/metacpan-web/issues)
+  * [API (back end) bug list](/CPAN-API/cpan-api/issues)
+  * [Wishlist](https://github.com/CPAN-API/cpan-api/wiki/Wishlist) - things that probably need doing
 
 # Additional Resources
 
   * [\#metacpan](http://widget01.mibbit.com/?autoConnect=true&server=irc.perl.org&channel=%23metacpan&nick=) IRC channel on irc.perl.org
+
+# Current Policies
+
+### What is indexed?
+
+ * Perl distributions which contain Perl packages.
+
+### When are issues closed?
+
+We want to keep the issue list manageable (so we can focus on what actually needs fixing), if you feel an issue needs opening again, please add a comment with why it needs re-opening and we'll look at it again.
+
+ * Issues will be closed and moved to 'wishlist' if they are not actual bugs
+ * Issues we think we have addressed will be closed
+ * Issues we are not going to take any further action on without more information
+
+
