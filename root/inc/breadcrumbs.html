@@ -24,12 +24,11 @@ END %>
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
   <a rel="author"  itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% module.author %>" title="<% author.asciiname %>"><% author.name %></a>
   <span>&nbsp;/&nbsp;</span>
-  <%- IF module %>
-  <a itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
-  <%- ELSE %>
-    <span><% release.name %></span>
-  <%- END %>
-  <span class="dropdown"><% module ? "" : release.name %> <b class="caret"></b><select><% PROCESS version_dropdown %></select></span>
+  <div class="release">
+    <a itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+    <span class="dropdown"><b class="caret"></b></span>
+    <select onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
+  </div>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
   <% module.documentation %></span>

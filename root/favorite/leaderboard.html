@@ -1,31 +1,23 @@
-<% title = '++ Leaderboard' %>
-<ul class="nav nav-list">
-  <li><div><a href ="/favorite/recent">Recent ++</a></div></li>
-</ul>
+<% title = 'Popular Distributions' %>
+<%- INCLUDE inc/recent-bar.html %>
 
 <div class="content">
-  <div class="leader_board">
-    <div class="leader_board_header">
-      Top 100 ++ Leaderboard
-    </div>
-    <div class="leader_board_content">
-      <% FOREACH leader IN leaders %>
-      <div class="leader_board_row">
-        <div class="leader_board_top_all <% IF loop.count < 6 %>leader_board_top_5<% ELSIF loop.count < 11 %>leader_board_top_10<% ELSE %>leader_board_top_rest<% END %>">
-          <div class="leader_board_rank">
-            <% loop.count %>
-          </div>
-          <div class="leader_board_name">
-            <a href="/release/<% leader.term %>" title="<% leader.term %>">
-              <% leader.term %>
-            </a>
-          </div>
-          <div class="leader_board_count">
-            <% leader.count %> ++
-          </div>
-        </div>
-      </div>
-      <% END %>
-    </div>
-  </div>
+<table class="table table-condensed table-striped table-releases">
+  <thead>
+    <tr>
+      <th class="position"></th>
+      <th class="name pull-left-phone">Distribution</th>
+      <th class="date"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% FOREACH leader IN leaders %>
+    <tr>
+      <td class="number<% IF loop.index() < 5; " strong"; END %>"><% loop.index() + 1 %></td>
+      <td class="name"><strong><a href="/release/<% IF leader.term END %>"><% leader.term %></a></strong></td>
+      <td class="number"><% leader.count %> ++</td>
+    </tr>
+  <% END %>
+  </tbody>
+</table>
 </div>

@@ -2,16 +2,28 @@
   <thead>
     <tr>
       <th class="release pull-left-phone"><% author ? "Favorites" : "Distribution" %></th>
-      <% UNLESS author %><th class="abstract pull-left-phone">Favorited By</th><% END %>
+      <th class="abstract hidden-phone"><% author ? "Author" : "Favorited By" %></th>
       <th class="date"><% day || "Date" %></th>
     </tr>
 </thead>
 <tbody>
 <% FOREACH favorite IN favorites %>
 <tr>
-  <td><strong><a href="/release/<% favorite.distribution; %>" class="ellipsis" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a></strong></td>
-  <% UNLESS author %><td class="pull-left-phone"><a href="/author/<% favorite.clicked_by_author %>"><% favorite.clicked_by_author %></a></td><% END %>
-  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></span></td>
+  <td>
+    <strong>
+        <a href="/release/<% favorite.distribution; %>" class="ellipsis" title="<% favorite.author; '/'; favorite.distribution %>"><% favorite.distribution %></a>
+    </strong>
+  </td>
+  <% IF author %>
+  <td class="pull-left-phone">
+    <a href="/author/<% favorite.author %>"><% favorite.author %></a>
+  </td>
+  <% ELSE %>
+  <td class="pull-left-phone">
+    <a href="/author/<% favorite.clicked_by_author %>"><% favorite.clicked_by_author %></a>
+  </td>
+  <% END %>
+  <td class="date relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></td>
 </tr>
 <% END %>
 </tbody>

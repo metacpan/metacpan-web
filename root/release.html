@@ -11,9 +11,9 @@
       </form>
     </li>
     <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
-    <% IF changes %>
-    <li><a href="/source/<% release.author; '/'; release.name; '/'; changes %>">Changes</a></li>
-    <% END %>
+    <%- IF changes %>
+    <li><a href="/<% changes.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; changes.name %>">Changes</a></li>
+    <%- END %>
     <li><span><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</span></li>
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
@@ -28,9 +28,7 @@
     <%- INCLUDE inc/release-tools.html %>
 </ul>
 
-<div id="authors" class="hidden-phone"
-    style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
-<% INCLUDE inc/author-pic.html author = author %>
+<div class="pull-right hidden-phone"><% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html
     contributors = release.metadata.x_contributors %>
 </div>

@@ -1,0 +1,31 @@
+.table {
+  table-layout: fixed;
+
+  td {
+    border-top-width: 0px;
+  }
+
+  td.abstract {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  th.date, th.number, td.date, td.number {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  th.date, th.number {
+    width: 90px;
+    direction: rtl; // overflow left, not right
+  }
+
+  td.name a, th.name {
+    width: 266px;
+  }
+
+  th.position {
+    width: 10px;
+  }
+}

@@ -24,9 +24,9 @@
       <li><div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div></li>
       <% END %>
       <li><div>
-          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html##<% release.name %>?oncpan=1&amp;distmat=1" title="(pass / fail / na)">Testers</a>
+          <a href="http://www.cpantesters.org/distro/<% release.distribution.chunk(1).0.uc %>/<% release.distribution %>.html#<% release.name %>?oncpan=1&amp;distmat=1" title="(pass / fail / na)">Testers</a>
           <% IF release.tests.size %>(<span style="color: #090"><% release.tests.pass %></span> / <span style="color: #900"><% release.tests.fail %></span> / <% release.tests.na %>)<% END %>
-          <a href="http://matrix.cpantesters.org/?dist=<% release.name %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
+          <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% release.version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
       </li>
       <li><div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></div></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>

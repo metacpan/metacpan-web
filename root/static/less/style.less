@@ -4,8 +4,8 @@
 @import "account.less";
 @import "breadcrumbs.less";
 @import "search.less";
-@import "leaderboard.less";
-@import "dropdown.less";
+@import "table.less";
+@import "author.less";
 
 @iconSpritePath:          "../icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "../icons/glyphicons-halflings-white.png";
@@ -114,11 +114,6 @@
   display: inline;
 }
 
-.nav-list > li > a, .nav-list .nav-header {
-  margin: 0;
-  padding: 0;
-}
-
 .nav-list.nav > li > a:hover {
   background: transparent;
   text-decoration: underline;
@@ -213,26 +208,8 @@ body {
   margin-top: 3px;
 }
 
-.table .date, .table .number {
-  text-align: right;
-  width: 100px;
-  white-space: nowrap;
-}
-
 .table.tablesorter th {
   padding-right: 20px;
-}
-
-.table td {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  border-top-width: 0px;
-}
-
-.table-favorites th:first-child, .table-favorites td:first-child a,
-.table-releases th:first-child, .table-releases td:first-child a {
-  width: 266px;
 }
 
 @import "responsive.less";

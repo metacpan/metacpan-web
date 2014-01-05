@@ -22,16 +22,14 @@
 
 <div class="search-results">
 <% IF authors.total %>
-  <div id="author-results">
+  <div class="author-results">
     <ul class="authors">
-      <% FOREACH author IN authors.results %>
+      <%- FOREACH author IN authors.results %>
         <li>
-          <a href  = "/author/<% author.id %>"
-             title = "Author page for <% author.name | html %>"
-            >
-            <% IF author.gravatar_url %>
-              <img src="<% author.gravatar_url %>" class="author-img">
-            <% END %>
+          <a href="/author/<% author.id %>" title="Author page for <% author.name | html %>">
+            <%- IF author.gravatar_url %>
+              <img src="<% author.gravatar_url %>">
+            <%- END %>
             <% author.name | html %> (<% author.pauseid %>)
           </a>
         </li>

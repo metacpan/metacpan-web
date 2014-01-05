@@ -1,10 +1,8 @@
-<%- rss = 'recent' %>
-<% title = 'Recent ++ Activity' %>
-
-<div class="breadcrumbs">
-  <a href="/recent">Recent</a>
-  <span>&nbsp;/&nbsp; ++ Activity</span>
-</div>
+<%
+  rss = 'recent';
+  title = "Recent Favorites";
+  INCLUDE inc/recent-bar.html;
+%>
 
 <ul class="nav nav-list slidepanel">
   <li class="visible-phone search">

@@ -31,7 +31,7 @@
   <% INCLUDE inc/release-tools.html %>
 </ul>
 
-<% INCLUDE inc/author-pic.html author = author %>
+<div class="pull-right"><% INCLUDE inc/author-pic.html author = author %></div>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 <% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>
 <a name="___pod"></a>

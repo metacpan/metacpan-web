@@ -98,17 +98,13 @@ $(document).ready(function () {
     $('#signin').mouseleave(function () { $('#signin').hide() });
     if (typeof defaultSort == "undefined") defaultSort = [[0, 0]];
     $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'], textExtraction: function (node) {
-        try {
-            var sortBy = node.firstChild.getAttribute('sort');
-        } catch (err) {}
-        if (sortBy && node.getAttribute('class') == 'date') {
-            var date = new Date(node.firstChild.getAttribute('sort'));
-            return date.getTime();
-        } else if (sortBy) {
-            return node.firstChild.getAttribute('sort');
-        }
-        else {
-            return node.innerHTML;
+        var $node = $(node);
+        var sort = $node.attr("sort");
+        if(!sort) return node.innerHTML;
+        if ($node.hasClass("date")) {
+            return (new Date(sort)).getTime();
+        } else {
+            return sort;
         }
     }} );
 

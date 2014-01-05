@@ -1,27 +1,5 @@
 <%- title = "CPAN Top Uploaders" %>
-<ul class="nav nav-list">
-  <li class="nav-header">Date Range</li>
-  <li>
-    <div>
-      <a href="<% c.uri_for('/recent/topuploaders/weekly') %>"<% IF range == 'weekly' %> class="strong"<% END %>>Weekly</a>
-    </div>
-  </li>
-  <li>
-    <div>
-      <a href="<% c.uri_for('/recent/topuploaders/monthly') %>"<% IF range == 'monthly' %> class="strong"<% END %>>Monthly</a>
-    </div>
-  </li>
-  <li>
-    <div>
-      <a href="<% c.uri_for('/recent/topuploaders/yearly') %>"<% IF range == 'yearly' %> class="strong"<% END %>>Yearly</a>
-    </div>
-  </li>  
-  <li>
-    <div>
-      <a href="<% c.uri_for('/recent/topuploaders/all') %>"<% IF range == 'all' %> class="strong"<% END %>>All time</a>
-    </div>
-  </li>
-</ul>
+<%- INCLUDE inc/recent-bar.html %>
 
 <div class="content">
 <% FOREACH author IN authors %>
@@ -43,5 +21,4 @@
     </div>
 </div>
 <% END %>
-<div style="clear: both"></div>
 </div>

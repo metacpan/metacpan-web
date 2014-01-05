@@ -22,17 +22,17 @@
     </div>
   </li>
   <% IF module.documentation %>
-    <li>
-      <div>
-        <a href="/module/<% module.documentation %>">Module Documentation</a>
-      </div>
-    </li>
+  <li>
+    <div>
+      <a href="/pod/<% module.documentation %>">Module Documentation</a>
+    </div>
+  </li>
   <% ELSIF module.slop %>
-    <li>
-      <div>
-        <a href="/pod/release/<% doc_view_url %>">Documentation View</a>
-      </div>
-    </li>
+  <li>
+    <div>
+      <a href="/pod/<% doc_view_url %>">Documentation View</a>
+    </div>
+  </li>
   <% END %>
   <li>
     <div>
