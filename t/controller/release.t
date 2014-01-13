@@ -24,27 +24,10 @@ test_psgi app, sub {
     ok( $tx->find_value('//a[@href="/release/Moose"]'),
         'contains permalink to resource' );
 
-    # Figure out version for Changes test
-    my ($author, $module) = split m|/|, $tx->find_value('//strong/big');
-    $module =~ s/[^\d\w_.-]//g;
-    my ($version) = (reverse split /-/, $module);
 
-    # Confirm that the headings in the content div are in the expected order.
-    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
-    my @anchors = qw(docs modules provides examples other whatsnew);
-    push @headings, 'Changes for version ' . $version ;
-    my $heading  = 0;
-
-    $tx->ok( '//div[@class="content"]/strong', sub {
-        $_->is( '.', $headings[$heading], "heading $headings[$heading] in expected location");
-        $heading++;
-    } , 'headings in correct order');
-
-    my $anchor = 0;
-    $tx->ok( '//div[@class="content"]/a[following-sibling::strong[1]]', sub {
-            $_->is('./@name', $anchors[$anchor], "Anchor $anchors[$anchor] in expected location");
-            $anchor++;
-        }, "anchors are correct..");
+    # Moose 2.1201 has no more Examples and breaks this test,
+    # so pin to an older version for now.
+    test_heading_order($cb->( GET "/release/ETHER/Moose-2.1005" ));
 
 
     ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
@@ -90,3 +73,31 @@ test_psgi app, sub {
 };
 
 done_testing;
+
+sub test_heading_order {
+    my ($res, $desc) = @_;
+    ok( $res, $desc || 'found' );
+    my $tx = tx($res);
+
+    # Figure out version for Changes test
+    my ($author, $module) = split m|/|, $tx->find_value('//strong/big');
+    $module =~ s/[^\d\w_.-]//g;
+    my ($version) = (reverse split /-/, $module);
+
+    # Confirm that the headings in the content div are in the expected order.
+    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
+    my @anchors = qw(docs modules provides examples other whatsnew);
+    push @headings, 'Changes for version ' . $version ;
+    my $heading  = 0;
+
+    $tx->ok( '//div[@class="content"]/strong', sub {
+        $_->is( '.', $headings[$heading], "heading $headings[$heading] in expected location");
+        $heading++;
+    } , 'headings in correct order');
+
+    my $anchor = 0;
+    $tx->ok( '//div[@class="content"]/a[following-sibling::strong[1]]', sub {
+            $_->is('./@name', $anchors[$anchor], "Anchor $anchors[$anchor] in expected location");
+            $anchor++;
+        }, "anchors are correct.");
+}
