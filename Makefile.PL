@@ -30,11 +30,10 @@ my %WriteMakefileArgs = (
     "AnyEvent::Curl::Multi" => 0,
     "CPAN::Meta::Requirements" => 0,
     "Captcha::reCAPTCHA" => "0.94",
-    "Catalyst" => "5.90011",
+    # "Catalyst" # See Catalyst::Runtime
     "Catalyst::Action::RenderView" => 0,
     "Catalyst::Authentication::Store::Proxy" => "0.0.1",
     "Catalyst::Authentication::User" => 0,
-    "Catalyst::Controller::ActionRole" => 0,
     "Catalyst::Model" => 0,
     "Catalyst::Plugin::Authentication" => 0,
     "Catalyst::Plugin::ConfigLoader" => 0,
