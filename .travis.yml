@@ -21,3 +21,4 @@ notifications:
       - olaf@wundersolutions.com
     on_success: change
     on_failure: always
+  irc: "irc.perl.org#metacpan-travis"
