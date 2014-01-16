@@ -1,35 +1,63 @@
 use strict;
+
 use Plack::App::File;
 use Plack::Middleware::MCLess;
+
 use Test::More;
 use Plack::Test;
+use Plack::Builder;
 use HTTP::Request::Common;
 
-use Data::Dumper;
+my $app = builder {
 
-my $app = Plack::App::File->new(root => "t/plack/css");
-$app = Plack::Middleware::MCLess->wrap($app, root => "t/plack/css");
+    enable "Plack::Middleware::MCLess",
+        root => "t/plack/css",
+        files => ['t/plack/css/style.less'];
+
+    return sub {
+        my $env = shift;
+        [   200,
+            [ 'Content-type', 'text/plain' ],
+            [ map { $_ . $/ } @{ $env->{'psgix.assets_less'} } ]
+        ];
+    }
+};
+
+
+my $assets;
+my $total = 1;
 
 test_psgi $app, sub {
     my $cb = shift;
 
-    my $res = $cb->(GET "/foo.less");
-    is $res->code, 200;
-    is $res->content_type, 'text/css';
-    like $res->content, qr/color: #4D926F;/i, "Content match for foo.less";
+    {
+        my $res = $cb->( GET 'http://localhost/' );
+        is( $res->code, 200 );
+        $assets = [ split( $/, $res->content ) ];
+        is @$assets, $total, "Number of assets matches";
+    }
 
-    # Something that uses includes
-    $res = $cb->(GET "/style.less");
-    is $res->code, 200;
-    is $res->content_type, 'text/css';
-    like $res->content, qr/\scolor: #4D926F;/i;
+    {
+        like( $assets->[0], qr/\.css$/, '.css file extension' );
+        my $res = $cb->( GET 'http://localhost' . $assets->[0] );
+        is $res->code, 200;
+        is $res->content_type, 'text/css';
+        is $res->content, "#header{color:#4d926f}h2{color:#4d926f}", "Content matches";
+    }
 
-    $res = $cb->(GET "/missing.less");
-    is $res->code, 404, '404 for a missing less file';
-
-    $res = $cb->(GET "/broken.less");
-    is $res->code, 500, '500 for a broken less file';
 
 };
+
+eval {
+    builder {
+
+        enable "Plack::Middleware::MCLess",
+            root => "t/plack/css",
+            files => ['t/plack/css/broken.less'];
+
+    };
+};
+my $error = $@;
+ok $error =~ /ParseError/, 'Error ok';
 
 done_testing;
