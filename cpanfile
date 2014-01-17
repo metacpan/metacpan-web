@@ -40,6 +40,7 @@ requires 'JSON';
 requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'List::Util';
+requires 'Locale::Country','3.28';
 requires 'Moose';
 requires 'Moose::Role';
 requires 'MooseX::ClassAttribute';
