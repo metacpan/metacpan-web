@@ -4,6 +4,7 @@ use Moose;
 use List::MoreUtils qw(pairwise);
 use DateTime ();
 use JSON::XS ();
+use Locale::Country ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -73,6 +74,7 @@ sub profile : Local {
         : undef;
     $data->{$_} = $req->params->{$_} eq "" ? undef : $req->params->{$_}
         for (qw(name asciiname gravatar_url city region country));
+    $data->{countryName} = Locale::Country::code2country($req->params->{country}) if $req->params->{country} ne '';
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
     $data->{extra}
         = eval { JSON->new->relaxed->utf8->decode( $req->params->{extra} ) };
