@@ -1,16 +1,30 @@
 use strict;
 
 use Plack::App::File;
-use Plack::Middleware::MCLess;
 
 use Test::More;
 use Plack::Test;
 use Plack::Builder;
 use HTTP::Request::Common;
 
+
+BEGIN {
+    $ENV{PLACK_ENV} = 'development';
+}
+
+use Plack::Middleware::MCLess;
+
+use CHI;
+my $cache = CHI->new(
+    driver     => 'FastMmap',
+    root_dir   => '/tmp/',
+    cache_size => '100k'
+);
+
 my $app = builder {
 
     enable "Plack::Middleware::MCLess",
+        cache => $cache,
         root => "t/plack/css",
         files => ['t/plack/css/style.less'];
 
@@ -44,7 +58,6 @@ test_psgi $app, sub {
         is $res->content_type, 'text/css';
         is $res->content, "#header{color:#4d926f}h2{color:#4d926f}", "Content matches";
     }
-
 
 };
 

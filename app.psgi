@@ -92,16 +92,16 @@ my $cache = CHI->new(
     cache_size => '100k'
 );
 
-# Wrap up static to serve lessc parsed files
+# Wrap up to serve lessc parsed files
 $app = Plack::Middleware::MCLess->wrap($app,
-    cache => $cache,
-    cache_ttl => '1 second',
-    root => "root/static",
-    files => [
-                map {"root/static/less/$_.less"}
-            qw(
+    cache       => $cache,
+    cache_ttl   => '30 minutes',
+    root        => "root/static",
+    files       => [
+        map {"root/static/less/$_.less"}
+        qw(
             style
-            )
+        )
     ],
 );
 
