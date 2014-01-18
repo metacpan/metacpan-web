@@ -30,7 +30,13 @@ sub new {
 
     if( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
         # No caching, always build fresh
-        $self->cache_ttl('0');  # Auto change if running tests or something?
+
+        # Could have an extra ENV, say 'CSS_DEV' or something
+        # so default cache to 10 mins but 0 if CSS_DEV but that
+        # seems like more work for someone to help patch so for now
+        # take the processing hit - see once this is merged if
+        # this is a problem, even a few seconds would help
+        $self->cache_ttl('0');
         $self->expires('0');
     } else {
         $self->cache_ttl('30 minutes') unless $self->cache_ttl;
@@ -69,6 +75,9 @@ sub serve {
 
 sub _build_content {
     my $self = shift;
+
+    # We can't use the mtime of the files to work out if we need
+    # to rebuild because a file can include other files!
 
     my $content = join( "\n",
         map { $self->_run_less($_) } @{ $self->files }
