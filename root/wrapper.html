@@ -37,9 +37,14 @@
   <meta name="description" content="<% meta_description %>" />
 <%- END %>
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
-  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
+
+  <% IF PLACK_ENV == 'development' %>
+  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
   <script src="/static/js/less.min.js" type="text/javascript"></script>
+  <% ELSE %>
+  <link href="<% req.env.item('psgix.assets_less').0 %>" rel="stylesheet" type="text/css">
+  <% END %>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -93,7 +98,7 @@
               <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              
+
               <li><a href="/account/identities">Identities</a></li>
               <li><a href="/account/profile">Profile</a></li>
               <li>

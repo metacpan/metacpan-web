@@ -77,6 +77,11 @@ Attempt to render a view, if needed.
 
 sub end : ActionClass('RenderView') {
     my ( $self, $c ) = @_;
+
+    # Pass through to the front end
+    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
+        $c->stash->{PLACK_ENV} = 'development';
+    }
     $c->stash->{req}        = $c->req;
     $c->stash->{api}        = $c->config->{api};
     $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};

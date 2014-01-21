@@ -86,24 +86,27 @@ $app = Plack::Middleware::Assets->wrap(
 );
 
 use CHI;
-my $cache = CHI->new(
-    driver     => 'FastMmap',
-    root_dir   => '/tmp/',
-    cache_size => '100k'
-);
 
-# Wrap up to serve lessc parsed files
-$app = Plack::Middleware::MCLess->wrap($app,
-    cache       => $cache,
-    cache_ttl   => '30 minutes',
-    root        => "root/static",
-    files       => [
-        map {"root/static/less/$_.less"}
-        qw(
-            style
-        )
-    ],
-);
+if( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
+
+    # Only need for live
+    my $cache = CHI->new( driver => 'File',
+        root_dir => '/tmp/less.cache'
+    );
+
+    # Wrap up to serve lessc parsed files
+    $app = Plack::Middleware::MCLess->wrap($app,
+        cache       => $cache,
+        cache_ttl   => "60 minutes",
+        root        => "root/static",
+        files       => [
+            map {"root/static/less/$_.less"}
+            qw(
+                style
+            )
+        ],
+    );
+}
 
 Plack::Middleware::ReverseProxy->wrap(
     sub {

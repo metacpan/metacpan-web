@@ -25,22 +25,15 @@ sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
 
+    if( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
+        warn "Use less.min.js - better for development";
+        return $self;
+    }
+
     my $less = `lessc -v`;
     croak("Can't find lessc command") unless $less;
 
-    if( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
-        # No caching, always build fresh
-
-        # Could have an extra ENV, say 'CSS_DEV' or something
-        # so default cache to 10 mins but 0 if CSS_DEV but that
-        # seems like more work for someone to help patch so for now
-        # take the processing hit - see once this is merged if
-        # this is a problem, even a few seconds would help
-        $self->cache_ttl('0');
-        $self->expires('0');
-    } else {
-        $self->cache_ttl('30 minutes') unless $self->cache_ttl;
-    }
+    $self->cache_ttl('30 minutes') unless $self->cache_ttl;
 
     $self->_build_content;
 
@@ -93,7 +86,8 @@ sub _get_content {
     my $self = shift;
 
     my $content = $self->cache->get($self->key);
-    return $content if $content;
+    return $content if defined $content;
+
     return $self->_build_content;
 }
 

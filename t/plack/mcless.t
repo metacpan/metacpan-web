@@ -6,19 +6,18 @@ use Test::More;
 use Plack::Test;
 use Plack::Builder;
 use HTTP::Request::Common;
-
-
-BEGIN {
-    $ENV{PLACK_ENV} = 'development';
-}
-
+use Path::Class;
 use Plack::Middleware::MCLess;
 
 use CHI;
+
+use File::Temp qw/ tempdir /;
+
+my $cache_dir = tempdir( CLEANUP => 1 );
+
 my $cache = CHI->new(
-    driver     => 'FastMmap',
-    root_dir   => '/tmp/',
-    cache_size => '100k'
+    driver     => 'File',
+    root_dir   => $cache_dir,
 );
 
 my $app = builder {
