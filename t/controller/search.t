@@ -20,7 +20,7 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
-    ok( $res->content =~ /0 results/, '0 results for an invalid search term' );
+    ok( $res->content =~ /0\s+results/, '0 results for an invalid search term' );
 
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
