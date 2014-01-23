@@ -70,6 +70,7 @@ my %WriteMakefileArgs = (
     "JSON::XS" => "3.01",
     "List::MoreUtils" => 0,
     "List::Util" => 0,
+    "Locale::Country" => "3.28",
     "Moose" => 0,
     "Moose::Role" => 0,
     "MooseX::ClassAttribute" => 0,
