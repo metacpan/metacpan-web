@@ -96,6 +96,9 @@ sub _rt_cpan {
     # Some other cases
     $line =~ s{\b(bug\s+\#)(\d+)\b}{$u$2">$1$2</a>}gxi;
 
+    # Subject tag style
+    $line =~ s{(\[?rt\.cpan\.org\s+\#(\d+)\]?)}{$u$2">$1</a>}gxi;
+
     return $line;
 }
 
