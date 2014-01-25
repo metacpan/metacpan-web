@@ -32,6 +32,7 @@ test_psgi app, sub {
 
     # Request with lowercase author redirects to uppercase author.
     $this =~ s{(/pod/release/)([^/]+)}{$1\L$2}; # lc author name
+    warn $this;
     ok( $res = $cb->( GET $this ), "GET $this" );
     is( $res->code, 301, 'code 301' );
 };

@@ -43,10 +43,10 @@
 <%- END %>
 <li class="nav-header">Permalinks</li>
 <li>
-  <a href="/<% module ? "module" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
+  <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
 <%- IF !module || module.documentation %>
 <li>
-  <a href="/<% module ? "module" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
+  <a href="/<% module ? "pod" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
 </li>
 <%- END %>
