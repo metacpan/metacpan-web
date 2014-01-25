@@ -25,13 +25,13 @@ test_psgi app, sub {
         'contains permalink to resource' );
 
     # Figure out version for Changes test
-    my ($author, $module) = split m|/|, $tx->find_value('//strong/big');
+    my (undef, undef, $author, $module) = split m|/|, $tx->find_value('//a[text()="This version"]/@href');
     $module =~ s/[^\d\w_.-]//g;
     my ($version) = (reverse split /-/, $module);
 
     # Confirm that the headings in the content div are in the expected order.
-    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
-    my @anchors = qw(docs modules provides examples other whatsnew);
+    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Other files' ); # Examples are gone in Moose
+    my @anchors = qw(docs modules provides other whatsnew);
     push @headings, 'Changes for version ' . $version ;
     my $heading  = 0;
 
