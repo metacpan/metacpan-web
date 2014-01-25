@@ -12,6 +12,10 @@ Install the project dependencies:
 
     $ cpanm --installdeps .
 
+Run test suite:
+
+    $ prove -lr t/
+
 Start server on port 5001 (which you want to make authentication work)
 
     $ plackup -p 5001 -r
