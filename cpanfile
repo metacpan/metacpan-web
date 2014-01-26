@@ -37,7 +37,6 @@ requires 'List::Util';
 requires 'Moose';
 requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
-requires 'Perl::PrereqScanner','1.014';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
@@ -61,7 +60,3 @@ test_requires 'Test::XPath', '0.15';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';
-
-# bin/unlisted_prereqs.pl
-author_requires 'CPAN::Meta::Requirements';
-author_requires 'File::Find::Rule::Perl';
