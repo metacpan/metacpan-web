@@ -3,9 +3,18 @@
 
 ## GETTING STARTED
 
+We strongly recommend using [metacpan-developer](https://github.com/CPAN-API/metacpan-developer),
+this will give you a virtal machine already configured and ready to start developing on.
+
+## Installing manually
+
 Install the project dependencies:
 
     $ cpanm --installdeps .
+
+Run test suite:
+
+    $ prove -lr t/
 
 Start server on port 5001 (which you want to make authentication work)
 
