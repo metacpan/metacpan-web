@@ -4,20 +4,21 @@ DISTRIBUTIONS
     pathname: T/TY/TYEMQ/Algorithm-Diff-1.1902.tar.gz
     provides:
       Algorithm::Diff 1.1902
+      Algorithm::Diff::_impl 1.1902
       Algorithm::DiffOld 1.1
     requirements:
       ExtUtils::MakeMaker 0
-  AnyEvent-7.05
-    pathname: M/ML/MLEHMANN/AnyEvent-7.05.tar.gz
+  AnyEvent-7.07
+    pathname: M/ML/MLEHMANN/AnyEvent-7.07.tar.gz
     provides:
       AE undef
       AE::Log::COLLECT undef
       AE::Log::FILTER undef
       AE::Log::LOG undef
-      AnyEvent 7.05
-      AnyEvent::Base undef
-      AnyEvent::CondVar undef
-      AnyEvent::CondVar::Base undef
+      AnyEvent 7.07
+      AnyEvent::Base 7.07
+      AnyEvent::CondVar 7.07
+      AnyEvent::CondVar::Base 7.07
       AnyEvent::DNS undef
       AnyEvent::Debug undef
       AnyEvent::Debug::Backtrace undef
@@ -58,7 +59,7 @@ DISTRIBUTIONS
     pathname: O/OT/OTTERLEY/AnyEvent-Curl-Multi-1.1.tar.gz
     provides:
       AnyEvent::Curl::Multi 1.1
-      AnyEvent::Curl::Multi::Handle undef
+      AnyEvent::Curl::Multi::Handle 1.1
     requirements:
       AnyEvent 5
       ExtUtils::MakeMaker 0
@@ -67,17 +68,18 @@ DISTRIBUTIONS
       Object::Event 1
       Test::More 0
       WWW::Curl 4.14
-  Apache-LogFormat-Compiler-0.13
-    pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.13.tar.gz
+  Apache-LogFormat-Compiler-0.23
+    pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.23.tar.gz
     provides:
-      Apache::LogFormat::Compiler 0.13
+      Apache::LogFormat::Compiler 0.23
     requirements:
       CPAN::Meta 0
       CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
       Module::Build 0.38
       POSIX 0
       Time::Local 0
-      perl 5.008005
+      perl 5.008004
   AppConfig-1.66
     pathname: A/AB/ABW/AppConfig-1.66.tar.gz
     provides:
@@ -91,20 +93,30 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  B-Hooks-EndOfScope-0.12
-    pathname: B/BO/BOBTFISH/B-Hooks-EndOfScope-0.12.tar.gz
+  B-Hooks-EndOfScope-0.13
+    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.13.tar.gz
     provides:
-      B::Hooks::EndOfScope 0.12
-      B::Hooks::EndOfScope::PP 0.12
-      B::Hooks::EndOfScope::XS 0.12
+      B::Hooks::EndOfScope 0.13
+      B::Hooks::EndOfScope::PP 0.13
+      B::Hooks::EndOfScope::XS 0.13
     requirements:
       ExtUtils::CBuilder 0.26
       ExtUtils::MakeMaker 6.30
       Module::Implementation 0.05
       Module::Runtime 0.012
       Sub::Exporter::Progressive 0.001006
-      Test::More 0.88
       Variable::Magic 0.48
+  B-Hooks-OP-Check-0.19
+    pathname: Z/ZE/ZEFRAM/B-Hooks-OP-Check-0.19.tar.gz
+    provides:
+      B::Hooks::OP::Check 0.19
+      B::Hooks::OP::Check::Install::Files undef
+    requirements:
+      ExtUtils::Depends 0.302
+      ExtUtils::MakeMaker 6.42
+      Test::More 0
+      parent 0
+      perl 5.008001
   CGI-Simple-1.113
     pathname: A/AN/ANDYA/CGI-Simple-1.113.tar.gz
     provides:
@@ -114,93 +126,90 @@ DISTRIBUTIONS
       CGI::Simple::Util 1.113
     requirements:
       IO::Scalar 0
-      Module::Build 0.36
       Test::More 0
-  CPAN-Changes-0.23
-    pathname: B/BR/BRICAS/CPAN-Changes-0.23.tar.gz
+  CGI-Struct-1.21
+    pathname: F/FU/FULLERMD/CGI-Struct-1.21.tar.gz
     provides:
-      CPAN::Changes 0.23
+      CGI::Struct 1.21
+    requirements:
+      ExtUtils::MakeMaker 0
+      Storable 0
+      Test::Deep 0
+      Test::More 0
+  CPAN-Changes-0.27
+    pathname: B/BR/BRICAS/CPAN-Changes-0.27.tar.gz
+    provides:
+      CPAN::Changes 0.27
       CPAN::Changes::Release undef
-      Test::CPAN::Changes 0.23
+      Test::CPAN::Changes 0.27
     requirements:
       ExtUtils::MakeMaker 6.59
       Test::More 0.96
       Text::Wrap 0
       perl 5.010
       version 0.79
-  CPAN-Meta-2.132140
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.132140.tar.gz
+  CPAN-Meta-2.133380
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.133380.tar.gz
     provides:
-      CPAN::Meta 2.132140
-      CPAN::Meta::Converter 2.132140
-      CPAN::Meta::Feature 2.132140
-      CPAN::Meta::History 2.132140
-      CPAN::Meta::Prereqs 2.132140
-      CPAN::Meta::Spec 2.132140
-      CPAN::Meta::Validator 2.132140
+      CPAN::Meta 2.133380
+      CPAN::Meta::Converter 2.133380
+      CPAN::Meta::Feature 2.133380
+      CPAN::Meta::History 2.133380
+      CPAN::Meta::Prereqs 2.133380
+      CPAN::Meta::Spec 2.133380
+      CPAN::Meta::Validator 2.133380
     requirements:
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::YAML 0.008
       Carp 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 6.17
       JSON::PP 2.27200
+      List::Util 1.33
       Parse::CPAN::Meta 1.4403
       Scalar::Util 0
       strict 0
       version 0.88
       warnings 0
-  CPAN-Meta-Check-0.007
-    pathname: L/LE/LEONT/CPAN-Meta-Check-0.007.tar.gz
+  CPAN-Meta-Check-0.008
+    pathname: L/LE/LEONT/CPAN-Meta-Check-0.008.tar.gz
     provides:
-      CPAN::Meta::Check 0.007
+      CPAN::Meta::Check 0.008
     requirements:
-      CPAN::Meta 2.120920
-      CPAN::Meta::Requirements 2.120920
+      CPAN::Meta::Prereqs 2.132830
+      CPAN::Meta::Requirements 2.121
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
       Module::Metadata 0
       strict 0
       warnings 0
-  CPAN-Meta-Requirements-2.122
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.122.tar.gz
+  CPAN-Meta-Requirements-2.125
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
     provides:
-      CPAN::Meta::Requirements 2.122
+      CPAN::Meta::Requirements 2.125
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
-      File::Find 0
-      File::Temp 0
       Scalar::Util 0
-      Test::More 0.88
       strict 0
       version 0.77
       warnings 0
-  CPAN-Meta-YAML-0.008
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.008.tar.gz
+  CPAN-Meta-YAML-0.010
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.010.tar.gz
     provides:
-      CPAN::Meta::YAML 0.008
+      CPAN::Meta::YAML 0.010
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 6.17
-      File::Find 0
-      File::Spec 0
-      File::Spec::Functions 0
-      File::Temp 0
       Scalar::Util 0
-      Test::More 0
-      strict 0
-      vars 0
       warnings 0
-  CSS-Minifier-XS-0.08
-    pathname: G/GT/GTERMARS/CSS-Minifier-XS-0.08.tar.gz
+  CSS-Minifier-XS-0.09
+    pathname: G/GT/GTERMARS/CSS-Minifier-XS-0.09.tar.gz
     provides:
-      CSS::Minifier::XS 0.08
+      CSS::Minifier::XS 0.09
     requirements:
       ExtUtils::CBuilder 0
-      Module::Build 0.35
       Test::More 0
-      perl v5.8.8
   Captcha-reCAPTCHA-0.97
     pathname: P/PH/PHRED/Captcha-reCAPTCHA-0.97.tar.gz
     provides:
@@ -210,26 +219,6 @@ DISTRIBUTIONS
       HTML::Tiny 0.904
       LWP::UserAgent 0
       Test::More 0
-  Capture-Tiny-0.22
-    pathname: D/DA/DAGOLDEN/Capture-Tiny-0.22.tar.gz
-    provides:
-      Capture::Tiny 0.22
-    requirements:
-      Carp 0
-      Config 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Find 0
-      File::Spec 0
-      File::Spec::Functions 0
-      File::Temp 0
-      IO::File 0
-      IO::Handle 0
-      List::Util 0
-      Scalar::Util 0
-      Test::More 0.62
-      strict 0
-      warnings 0
   Carp-Assert-0.20
     pathname: M/MS/MSCHWERN/Carp-Assert-0.20.tar.gz
     provides:
@@ -256,53 +245,64 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::Exception 0
-  Catalyst-Action-REST-1.11
-    pathname: I/IL/ILMARI/Catalyst-Action-REST-1.11.tar.gz
+  Catalyst-Action-REST-1.14
+    pathname: F/FR/FREW/Catalyst-Action-REST-1.14.tar.gz
     provides:
-      Catalyst::Action::Deserialize 1.11
-      Catalyst::Action::Deserialize::Callback 1.11
-      Catalyst::Action::Deserialize::JSON 1.11
-      Catalyst::Action::Deserialize::JSON::XS 1.11
-      Catalyst::Action::Deserialize::View 1.11
-      Catalyst::Action::Deserialize::XML::Simple 1.11
-      Catalyst::Action::Deserialize::YAML 1.11
-      Catalyst::Action::DeserializeMultiPart 1.11
-      Catalyst::Action::REST 1.11
-      Catalyst::Action::REST::ForBrowsers 1.11
-      Catalyst::Action::Serialize 1.11
-      Catalyst::Action::Serialize::Callback 1.11
-      Catalyst::Action::Serialize::JSON 1.11
-      Catalyst::Action::Serialize::JSON::XS 1.11
-      Catalyst::Action::Serialize::JSONP 1.11
-      Catalyst::Action::Serialize::View 1.11
-      Catalyst::Action::Serialize::XML::Simple 1.11
-      Catalyst::Action::Serialize::YAML 1.11
-      Catalyst::Action::Serialize::YAML::HTML 1.11
-      Catalyst::Action::SerializeBase 1.11
-      Catalyst::Controller::REST 1.11
-      Catalyst::Request::REST 1.11
-      Catalyst::Request::REST::ForBrowsers 1.11
-      Catalyst::TraitFor::Request::REST 1.11
-      Catalyst::TraitFor::Request::REST::ForBrowsers 1.11
+      Catalyst::Action::Deserialize 1.14
+      Catalyst::Action::Deserialize::Callback 1.14
+      Catalyst::Action::Deserialize::JSON 1.14
+      Catalyst::Action::Deserialize::JSON::XS 1.14
+      Catalyst::Action::Deserialize::View 1.14
+      Catalyst::Action::Deserialize::XML::Simple 1.14
+      Catalyst::Action::Deserialize::YAML 1.14
+      Catalyst::Action::DeserializeMultiPart 1.14
+      Catalyst::Action::REST 1.14
+      Catalyst::Action::REST::ForBrowsers 1.14
+      Catalyst::Action::Serialize 1.14
+      Catalyst::Action::Serialize::Callback 1.14
+      Catalyst::Action::Serialize::JSON 1.14
+      Catalyst::Action::Serialize::JSON::XS 1.14
+      Catalyst::Action::Serialize::JSONP 1.14
+      Catalyst::Action::Serialize::View 1.14
+      Catalyst::Action::Serialize::XML::Simple 1.14
+      Catalyst::Action::Serialize::YAML 1.14
+      Catalyst::Action::Serialize::YAML::HTML 1.14
+      Catalyst::Action::SerializeBase 1.14
+      Catalyst::Action::Serializer::Broken undef
+      Catalyst::Controller::REST 1.14
+      Catalyst::Request::REST 1.14
+      Catalyst::Request::REST::ForBrowsers 1.14
+      Catalyst::TraitFor::Request::REST 1.14
+      Catalyst::TraitFor::Request::REST::ForBrowsers 1.14
+      Test::Action::Class undef
+      Test::Action::Class::Sub undef
+      Test::Catalyst::Action::REST undef
+      Test::Catalyst::Action::REST::Controller::Actions undef
+      Test::Catalyst::Action::REST::Controller::ActionsForBrowsers undef
+      Test::Catalyst::Action::REST::Controller::Deserialize undef
+      Test::Catalyst::Action::REST::Controller::DeserializeMultiPart undef
+      Test::Catalyst::Action::REST::Controller::Override undef
+      Test::Catalyst::Action::REST::Controller::REST undef
+      Test::Catalyst::Action::REST::Controller::Root undef
+      Test::Catalyst::Action::REST::Controller::Serialize undef
+      Test::Catalyst::Log undef
+      Test::Rest undef
+      Test::Serialize undef
+      Test::Serialize::Controller::JSON undef
+      Test::Serialize::Controller::REST undef
+      Test::Serialize::View::Awful undef
+      Test::Serialize::View::Simple undef
     requirements:
       Catalyst::Runtime 5.80030
       Class::Inspector 1.13
-      Config::General 0
-      ExtUtils::MakeMaker 6.59
-      HTML::Parser 0
-      JSON 2.12
-      JSON::XS 2.2222
+      ExtUtils::MakeMaker 6.30
       LWP::UserAgent 2.033
       MRO::Compat 0.10
       Module::Pluggable::Object 0
       Moose 1.03
       Params::Validate 0.76
-      Test::More 0.88
       URI::Find 0
-      XML::Simple 0
-      YAML::Syck 0.67
       namespace::autoclean 0
-      perl 5.008001
   Catalyst-Action-RenderView-0.16
     pathname: B/BO/BOBTFISH/Catalyst-Action-RenderView-0.16.tar.gz
     provides:
@@ -317,7 +317,7 @@ DISTRIBUTIONS
   Catalyst-Authentication-Store-Proxy-0.0.1
     pathname: P/PE/PERLER/Catalyst-Authentication-Store-Proxy-0.0.1.tar.gz
     provides:
-      Catalyst::Authentication::Store::Proxy v0.0.1
+      Catalyst::Authentication::Store::Proxy 0.000001
     requirements:
       Catalyst::Utils 0
       File::Find 0
@@ -327,30 +327,6 @@ DISTRIBUTIONS
       Test::More 0.88
       strict 0
       warnings 0
-  Catalyst-Controller-ActionRole-0.15
-    pathname: F/FL/FLORA/Catalyst-Controller-ActionRole-0.15.tar.gz
-    provides:
-      Catalyst::Controller::ActionRole 0.15
-    requirements:
-      Catalyst 0
-      Catalyst::Action 0
-      Catalyst::Action::REST 0
-      Catalyst::Controller 0
-      Catalyst::Runtime 5.80025
-      Catalyst::Test 0
-      Catalyst::Utils 0
-      Class::MOP 0
-      ExtUtils::MakeMaker 6.31
-      FindBin 0
-      List::Util 0
-      Moose 0
-      Moose::Meta::Class 0
-      Moose::Role 0
-      MooseX::Types::Moose 0
-      String::RewritePrefix 0.004
-      Test::More 0
-      namespace::clean 0
-      parent 0
   Catalyst-DispatchType-Regex-5.90033
     pathname: M/MG/MGRIMES/Catalyst-DispatchType-Regex-5.90033.tar.gz
     provides:
@@ -396,22 +372,23 @@ DISTRIBUTIONS
       Try::Tiny 0
       namespace::autoclean 0
       perl 5.008001
-  Catalyst-Plugin-ConfigLoader-0.32
-    pathname: B/BO/BOBTFISH/Catalyst-Plugin-ConfigLoader-0.32.tar.gz
+  Catalyst-Plugin-ConfigLoader-0.33
+    pathname: B/BO/BOBTFISH/Catalyst-Plugin-ConfigLoader-0.33.tar.gz
     provides:
-      Catalyst::Plugin::ConfigLoader 0.32
+      Catalyst::Plugin::ConfigLoader 0.33
     requirements:
       Catalyst::Runtime 5.7008
       Config::Any 0.20
       Data::Visitor 0.24
       ExtUtils::MakeMaker 6.59
       MRO::Compat 0.09
+      Path::Class 0
       Test::More 0
       perl 5.008
-  Catalyst-Plugin-Session-0.37
-    pathname: B/BO/BOBTFISH/Catalyst-Plugin-Session-0.37.tar.gz
+  Catalyst-Plugin-Session-0.39
+    pathname: J/JJ/JJNAPIORK/Catalyst-Plugin-Session-0.39.tar.gz
     provides:
-      Catalyst::Plugin::Session 0.37
+      Catalyst::Plugin::Session 0.39
       Catalyst::Plugin::Session::State undef
       Catalyst::Plugin::Session::Store undef
       Catalyst::Plugin::Session::Store::Dummy undef
@@ -422,6 +399,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       File::Spec 0
       File::Temp 0
+      List::Util 0
       MRO::Compat 0
       Moose 0.76
       MooseX::Emulate::Class::Accessor::Fast 0.00801
@@ -433,25 +411,26 @@ DISTRIBUTIONS
       Tie::RefHash 1.34
       namespace::clean 0.10
       perl 5.008
-  Catalyst-Plugin-Static-Simple-0.30
-    pathname: A/AB/ABRAXXA/Catalyst-Plugin-Static-Simple-0.30.tar.gz
+  Catalyst-Plugin-Static-Simple-0.31
+    pathname: A/AB/ABRAXXA/Catalyst-Plugin-Static-Simple-0.31.tar.gz
     provides:
-      Catalyst::Plugin::Static::Simple 0.30
+      Catalyst::Plugin::Static::Simple 0.31
     requirements:
       Catalyst::Runtime 5.80008
       ExtUtils::MakeMaker 6.36
-      MIME::Types 1.25
+      MIME::Types 2.03
       Moose 0
       MooseX::Types 0
       Test::More 0
       namespace::autoclean 0
-  Catalyst-Runtime-5.90042
-    pathname: J/JJ/JJNAPIORK/Catalyst-Runtime-5.90042.tar.gz
+  Catalyst-Runtime-5.90053
+    pathname: J/JJ/JJNAPIORK/Catalyst-Runtime-5.90053.tar.gz
     provides:
-      Catalyst 5.90042
+      Catalyst 5.90053
       Catalyst::Action undef
       Catalyst::ActionChain undef
       Catalyst::ActionContainer undef
+      Catalyst::ActionRole::ConsumesContent undef
       Catalyst::ActionRole::HTTPMethods undef
       Catalyst::Base undef
       Catalyst::ClassData undef
@@ -479,7 +458,7 @@ DISTRIBUTIONS
       Catalyst::Request undef
       Catalyst::Request::Upload undef
       Catalyst::Response undef
-      Catalyst::Runtime 5.90042
+      Catalyst::Runtime 5.90053
       Catalyst::Script::CGI undef
       Catalyst::Script::Create undef
       Catalyst::Script::FastCGI undef
@@ -488,17 +467,17 @@ DISTRIBUTIONS
       Catalyst::ScriptRole undef
       Catalyst::ScriptRunner undef
       Catalyst::Stats undef
-      Catalyst::Test undef
+      Catalyst::Test 3.4
       Catalyst::Utils undef
       Catalyst::View undef
     requirements:
       CGI::Simple::Cookie 1.109
+      CGI::Struct 0
       Carp 0
       Catalyst::DispatchType::Regex 5.90021
       Class::C3::Adopt::NEXT 0.07
       Class::Data::Inheritable 0
       Class::Load 0.12
-      Class::MOP 0.95
       Data::Dump 0
       Data::OptList 0
       Devel::InnerPackage 0
@@ -513,33 +492,37 @@ DISTRIBUTIONS
       HTTP::Request::Common 0
       HTTP::Response 5.813
       HTTP::Status 0
+      Hash::MultiValue 0
       IO::Scalar 0
+      JSON::MaybeXS 1.000000
       LWP 5.837
       List::MoreUtils 0
       MRO::Compat 0
-      Module::Pluggable 3.9
+      Module::Pluggable 4.7
       Moose 1.03
       MooseX::Emulate::Class::Accessor::Fast 0.00903
       MooseX::Getopt 0.48
-      MooseX::MethodAttributes::Inheritable 0.24
+      MooseX::MethodAttributes::Role::AttrContainer::Inheritable 0.24
       MooseX::Role::WithOverloading 0.09
       Path::Class 0.09
       Plack 0.9991
       Plack::Middleware::ReverseProxy 0.04
+      Plack::Request::Upload 0
       Plack::Test::ExternalServer 0
       Safe::Isa 0
       Scalar::Util 0
+      Stream::Buffered 0
       String::RewritePrefix 0.004
       Sub::Exporter 0
       Task::Weaken 0
-      Test::Exception 0
+      Test::Fatal 0
       Test::More 0.88
       Text::Balanced 0
       Text::SimpleTable 0.03
       Time::HiRes 0
       Tree::Simple 1.15
       Tree::Simple::Visitor::FindByPath 0
-      Try::Tiny 0
+      Try::Tiny 0.17
       URI 1.36
       namespace::autoclean 0.09
       namespace::clean 0.23
@@ -606,6 +589,13 @@ DISTRIBUTIONS
   Class-C3-Adopt-NEXT-0.13
     pathname: F/FL/FLORA/Class-C3-Adopt-NEXT-0.13.tar.gz
     provides:
+      C3NT undef
+      C3NT::Bar undef
+      C3NT::Baz undef
+      C3NT::Child undef
+      C3NT::Foo undef
+      C3NT::Quux undef
+      C3NT_nowarn undef
       Class::C3::Adopt::NEXT 0.13
     requirements:
       ExtUtils::MakeMaker 6.31
@@ -652,7 +642,16 @@ DISTRIBUTIONS
     pathname: D/DR/DROLSKY/Class-Load-0.20.tar.gz
     provides:
       Class::Load 0.20
+      Class::Load::Error::DieAfterBeginIsa undef
+      Class::Load::Error::DieAfterIsa undef
+      Class::Load::Error::SyntaxErrorAfterIsa undef
+      Class::Load::OK undef
       Class::Load::PP 0.20
+      Class::Load::Stash undef
+      Class::Load::Stash::Sub undef
+      Class::Load::SyntaxError undef
+      Class::Load::VersionCheck 42
+      Class::Load::VersionCheck2 42
     requirements:
       Carp 0
       Data::OptList 0
@@ -674,6 +673,15 @@ DISTRIBUTIONS
   Class-Load-XS-0.06
     pathname: D/DR/DROLSKY/Class-Load-XS-0.06.tar.gz
     provides:
+      Class::Load::Error::DieAfterBeginIsa undef
+      Class::Load::Error::DieAfterIsa undef
+      Class::Load::Error::SyntaxErrorAfterIsa undef
+      Class::Load::OK undef
+      Class::Load::Stash undef
+      Class::Load::Stash::Sub undef
+      Class::Load::SyntaxError undef
+      Class::Load::VersionCheck 42
+      Class::Load::VersionCheck2 42
       Class::Load::XS 0.06
     requirements:
       Class::Load 0.20
@@ -688,32 +696,37 @@ DISTRIBUTIONS
       strict 0
       version 0
       warnings 0
-  Class-Method-Modifiers-2.04
-    pathname: E/ET/ETHER/Class-Method-Modifiers-2.04.tar.gz
+  Class-Method-Modifiers-2.09
+    pathname: E/ET/ETHER/Class-Method-Modifiers-2.09.tar.gz
     provides:
-      Class::Method::Modifiers 2.04
+      Class::Method::Modifiers 2.09
     requirements:
-      ExtUtils::MakeMaker 6.59
-      Test::Fatal 0
-      Test::More 0
+      B 0
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
+      base 0
       perl 5.006
+      strict 0
+      warnings 0
   Class-Singleton-1.4
     pathname: A/AB/ABW/Class-Singleton-1.4.tar.gz
     provides:
       Class::Singleton 1.4
     requirements:
       ExtUtils::MakeMaker 0
-  Clone-0.34
-    pathname: G/GA/GARU/Clone-0.34.tar.gz
+  Clone-0.36
+    pathname: G/GA/GARU/Clone-0.36.tar.gz
     provides:
-      Clone 0.34
+      Clone 0.36
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Config-Any-0.23
-    pathname: B/BR/BRICAS/Config-Any-0.23.tar.gz
+  Config-Any-0.24
+    pathname: B/BR/BRICAS/Config-Any-0.24.tar.gz
     provides:
-      Config::Any 0.23
+      Config::Any 0.24
       Config::Any::Base undef
       Config::Any::General undef
       Config::Any::INI undef
@@ -722,7 +735,7 @@ DISTRIBUTIONS
       Config::Any::XML undef
       Config::Any::YAML undef
     requirements:
-      ExtUtils::MakeMaker 6.42
+      ExtUtils::MakeMaker 6.59
       Module::Pluggable 3.01
       Test::More 0
       perl 5.006
@@ -738,6 +751,27 @@ DISTRIBUTIONS
       File::Spec::Functions 0
       FileHandle 0
       IO::File 0
+  Cookie-Baker-0.02
+    pathname: K/KA/KAZEBURO/Cookie-Baker-0.02.tar.gz
+    provides:
+      Cookie::Baker 0.02
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Exporter 0
+      ExtUtils::CBuilder 0
+      Module::Build 0.38
+      URI::Escape 0
+      perl 5.008005
+  Cpanel-JSON-XS-2.3403
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-2.3403.tar.gz
+    provides:
+      Cpanel::JSON::XS 2.3403
+      Cpanel::JSON::XS::Boolean 2.3403
+    requirements:
+      ExtUtils::MakeMaker 0
+      Pod::Text 2.08
+      Pod::Usage 1.33
   Data-Dump-1.22
     pathname: G/GA/GAAS/Data-Dump-1.22.tar.gz
     provides:
@@ -745,17 +779,17 @@ DISTRIBUTIONS
       Data::Dump::FilterContext undef
       Data::Dump::Filtered undef
       Data::Dump::Trace 0.02
-      Data::Dump::Trace::Call undef
-      Data::Dump::Trace::Wrapper undef
+      Data::Dump::Trace::Call 0.02
+      Data::Dump::Trace::Wrapper 0.02
     requirements:
       ExtUtils::MakeMaker 0
       Symbol 0
       Test 0
       perl 5.006
-  Data-OptList-0.108
-    pathname: R/RJ/RJBS/Data-OptList-0.108.tar.gz
+  Data-OptList-0.109
+    pathname: R/RJ/RJBS/Data-OptList-0.109.tar.gz
     provides:
-      Data::OptList 0.108
+      Data::OptList 0.109
     requirements:
       ExtUtils::MakeMaker 6.30
       List::Util 0
@@ -769,7 +803,6 @@ DISTRIBUTIONS
       Data::Page 2.02
     requirements:
       Class::Accessor::Chained::Fast 0
-      Module::Build 0.35
       Test::Exception 0
       Test::More 0
   Data-Visitor-0.30
@@ -784,16 +817,17 @@ DISTRIBUTIONS
       Task::Weaken 0
       Tie::ToObject 0.01
       namespace::clean 0.19
-  DateTime-1.03
-    pathname: D/DR/DROLSKY/DateTime-1.03.tar.gz
+  DateTime-1.06
+    pathname: D/DR/DROLSKY/DateTime-1.06.tar.gz
     provides:
-      DateTime 1.03
-      DateTime::Duration 1.03
-      DateTime::Helpers 1.03
-      DateTime::Infinite 1.03
-      DateTime::Infinite::Future 1.03
-      DateTime::Infinite::Past 1.03
-      DateTime::LeapSecond 1.03
+      DateTime 1.06
+      DateTime::Duration 1.06
+      DateTime::Helpers 1.06
+      DateTime::Infinite 1.06
+      DateTime::Infinite::Future 1.06
+      DateTime::Infinite::Past 1.06
+      DateTime::LeapSecond 1.06
+      inc::MyModuleBuild undef
     requirements:
       Carp 0
       DateTime::Locale 0.41
@@ -823,6 +857,8 @@ DISTRIBUTIONS
       DateTime::Format::Builder::Parser::Regex 0.81
       DateTime::Format::Builder::Parser::Strptime 0.81
       DateTime::Format::Builder::Parser::generic 0.81
+      DateTime::Format::Fall undef
+      DateTime::Format::Simple undef
     requirements:
       Carp 0
       Class::Factory::Util 1.6
@@ -842,7 +878,6 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.17
       HTTP::Date 1.44
-      Module::Build 0.36
       Test::More 0.47
   DateTime-Format-ISO8601-0.08
     pathname: J/JH/JHOBLITT/DateTime-Format-ISO8601-0.08.tar.gz
@@ -851,7 +886,6 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.18
       DateTime::Format::Builder 0.77
-      Module::Build 0.38
   DateTime-Format-Mail-0.3001
     pathname: D/DR/DROLSKY/DateTime-Format-Mail-0.3001.tar.gz
     provides:
@@ -1357,435 +1391,420 @@ DISTRIBUTIONS
       DateTime::Locale::zu_ZA undef
     requirements:
       List::MoreUtils 0
-      Module::Build 0.36
+      Module::Build 0
       Params::Validate 0.91
       perl 5.006
-  DateTime-TimeZone-1.60
-    pathname: D/DR/DROLSKY/DateTime-TimeZone-1.60.tar.gz
+  DateTime-TimeZone-1.63
+    pathname: D/DR/DROLSKY/DateTime-TimeZone-1.63.tar.gz
     provides:
-      DateTime::TimeZone 1.60
-      DateTime::TimeZone::Africa::Abidjan 1.60
-      DateTime::TimeZone::Africa::Accra 1.60
-      DateTime::TimeZone::Africa::Addis_Ababa 1.60
-      DateTime::TimeZone::Africa::Algiers 1.60
-      DateTime::TimeZone::Africa::Asmara 1.60
-      DateTime::TimeZone::Africa::Bamako 1.60
-      DateTime::TimeZone::Africa::Bangui 1.60
-      DateTime::TimeZone::Africa::Banjul 1.60
-      DateTime::TimeZone::Africa::Bissau 1.60
-      DateTime::TimeZone::Africa::Blantyre 1.60
-      DateTime::TimeZone::Africa::Brazzaville 1.60
-      DateTime::TimeZone::Africa::Bujumbura 1.60
-      DateTime::TimeZone::Africa::Cairo 1.60
-      DateTime::TimeZone::Africa::Casablanca 1.60
-      DateTime::TimeZone::Africa::Ceuta 1.60
-      DateTime::TimeZone::Africa::Conakry 1.60
-      DateTime::TimeZone::Africa::Dakar 1.60
-      DateTime::TimeZone::Africa::Dar_es_Salaam 1.60
-      DateTime::TimeZone::Africa::Djibouti 1.60
-      DateTime::TimeZone::Africa::Douala 1.60
-      DateTime::TimeZone::Africa::El_Aaiun 1.60
-      DateTime::TimeZone::Africa::Freetown 1.60
-      DateTime::TimeZone::Africa::Gaborone 1.60
-      DateTime::TimeZone::Africa::Harare 1.60
-      DateTime::TimeZone::Africa::Johannesburg 1.60
-      DateTime::TimeZone::Africa::Juba 1.60
-      DateTime::TimeZone::Africa::Kampala 1.60
-      DateTime::TimeZone::Africa::Khartoum 1.60
-      DateTime::TimeZone::Africa::Kigali 1.60
-      DateTime::TimeZone::Africa::Kinshasa 1.60
-      DateTime::TimeZone::Africa::Lagos 1.60
-      DateTime::TimeZone::Africa::Libreville 1.60
-      DateTime::TimeZone::Africa::Lome 1.60
-      DateTime::TimeZone::Africa::Luanda 1.60
-      DateTime::TimeZone::Africa::Lubumbashi 1.60
-      DateTime::TimeZone::Africa::Lusaka 1.60
-      DateTime::TimeZone::Africa::Malabo 1.60
-      DateTime::TimeZone::Africa::Maputo 1.60
-      DateTime::TimeZone::Africa::Maseru 1.60
-      DateTime::TimeZone::Africa::Mbabane 1.60
-      DateTime::TimeZone::Africa::Mogadishu 1.60
-      DateTime::TimeZone::Africa::Monrovia 1.60
-      DateTime::TimeZone::Africa::Nairobi 1.60
-      DateTime::TimeZone::Africa::Ndjamena 1.60
-      DateTime::TimeZone::Africa::Niamey 1.60
-      DateTime::TimeZone::Africa::Nouakchott 1.60
-      DateTime::TimeZone::Africa::Ouagadougou 1.60
-      DateTime::TimeZone::Africa::Porto_Novo 1.60
-      DateTime::TimeZone::Africa::Sao_Tome 1.60
-      DateTime::TimeZone::Africa::Tripoli 1.60
-      DateTime::TimeZone::Africa::Tunis 1.60
-      DateTime::TimeZone::Africa::Windhoek 1.60
-      DateTime::TimeZone::America::Adak 1.60
-      DateTime::TimeZone::America::Anchorage 1.60
-      DateTime::TimeZone::America::Anguilla 1.60
-      DateTime::TimeZone::America::Antigua 1.60
-      DateTime::TimeZone::America::Araguaina 1.60
-      DateTime::TimeZone::America::Argentina::Buenos_Aires 1.60
-      DateTime::TimeZone::America::Argentina::Catamarca 1.60
-      DateTime::TimeZone::America::Argentina::Cordoba 1.60
-      DateTime::TimeZone::America::Argentina::Jujuy 1.60
-      DateTime::TimeZone::America::Argentina::La_Rioja 1.60
-      DateTime::TimeZone::America::Argentina::Mendoza 1.60
-      DateTime::TimeZone::America::Argentina::Rio_Gallegos 1.60
-      DateTime::TimeZone::America::Argentina::Salta 1.60
-      DateTime::TimeZone::America::Argentina::San_Juan 1.60
-      DateTime::TimeZone::America::Argentina::San_Luis 1.60
-      DateTime::TimeZone::America::Argentina::Tucuman 1.60
-      DateTime::TimeZone::America::Argentina::Ushuaia 1.60
-      DateTime::TimeZone::America::Aruba 1.60
-      DateTime::TimeZone::America::Asuncion 1.60
-      DateTime::TimeZone::America::Atikokan 1.60
-      DateTime::TimeZone::America::Bahia 1.60
-      DateTime::TimeZone::America::Bahia_Banderas 1.60
-      DateTime::TimeZone::America::Barbados 1.60
-      DateTime::TimeZone::America::Belem 1.60
-      DateTime::TimeZone::America::Belize 1.60
-      DateTime::TimeZone::America::Blanc_Sablon 1.60
-      DateTime::TimeZone::America::Boa_Vista 1.60
-      DateTime::TimeZone::America::Bogota 1.60
-      DateTime::TimeZone::America::Boise 1.60
-      DateTime::TimeZone::America::Cambridge_Bay 1.60
-      DateTime::TimeZone::America::Campo_Grande 1.60
-      DateTime::TimeZone::America::Cancun 1.60
-      DateTime::TimeZone::America::Caracas 1.60
-      DateTime::TimeZone::America::Cayenne 1.60
-      DateTime::TimeZone::America::Cayman 1.60
-      DateTime::TimeZone::America::Chicago 1.60
-      DateTime::TimeZone::America::Chihuahua 1.60
-      DateTime::TimeZone::America::Costa_Rica 1.60
-      DateTime::TimeZone::America::Creston 1.60
-      DateTime::TimeZone::America::Cuiaba 1.60
-      DateTime::TimeZone::America::Curacao 1.60
-      DateTime::TimeZone::America::Danmarkshavn 1.60
-      DateTime::TimeZone::America::Dawson 1.60
-      DateTime::TimeZone::America::Dawson_Creek 1.60
-      DateTime::TimeZone::America::Denver 1.60
-      DateTime::TimeZone::America::Detroit 1.60
-      DateTime::TimeZone::America::Dominica 1.60
-      DateTime::TimeZone::America::Edmonton 1.60
-      DateTime::TimeZone::America::Eirunepe 1.60
-      DateTime::TimeZone::America::El_Salvador 1.60
-      DateTime::TimeZone::America::Fortaleza 1.60
-      DateTime::TimeZone::America::Glace_Bay 1.60
-      DateTime::TimeZone::America::Godthab 1.60
-      DateTime::TimeZone::America::Goose_Bay 1.60
-      DateTime::TimeZone::America::Grand_Turk 1.60
-      DateTime::TimeZone::America::Grenada 1.60
-      DateTime::TimeZone::America::Guadeloupe 1.60
-      DateTime::TimeZone::America::Guatemala 1.60
-      DateTime::TimeZone::America::Guayaquil 1.60
-      DateTime::TimeZone::America::Guyana 1.60
-      DateTime::TimeZone::America::Halifax 1.60
-      DateTime::TimeZone::America::Havana 1.60
-      DateTime::TimeZone::America::Hermosillo 1.60
-      DateTime::TimeZone::America::Indiana::Indianapolis 1.60
-      DateTime::TimeZone::America::Indiana::Knox 1.60
-      DateTime::TimeZone::America::Indiana::Marengo 1.60
-      DateTime::TimeZone::America::Indiana::Petersburg 1.60
-      DateTime::TimeZone::America::Indiana::Tell_City 1.60
-      DateTime::TimeZone::America::Indiana::Vevay 1.60
-      DateTime::TimeZone::America::Indiana::Vincennes 1.60
-      DateTime::TimeZone::America::Indiana::Winamac 1.60
-      DateTime::TimeZone::America::Inuvik 1.60
-      DateTime::TimeZone::America::Iqaluit 1.60
-      DateTime::TimeZone::America::Jamaica 1.60
-      DateTime::TimeZone::America::Juneau 1.60
-      DateTime::TimeZone::America::Kentucky::Louisville 1.60
-      DateTime::TimeZone::America::Kentucky::Monticello 1.60
-      DateTime::TimeZone::America::La_Paz 1.60
-      DateTime::TimeZone::America::Lima 1.60
-      DateTime::TimeZone::America::Los_Angeles 1.60
-      DateTime::TimeZone::America::Maceio 1.60
-      DateTime::TimeZone::America::Managua 1.60
-      DateTime::TimeZone::America::Manaus 1.60
-      DateTime::TimeZone::America::Martinique 1.60
-      DateTime::TimeZone::America::Matamoros 1.60
-      DateTime::TimeZone::America::Mazatlan 1.60
-      DateTime::TimeZone::America::Menominee 1.60
-      DateTime::TimeZone::America::Merida 1.60
-      DateTime::TimeZone::America::Metlakatla 1.60
-      DateTime::TimeZone::America::Mexico_City 1.60
-      DateTime::TimeZone::America::Miquelon 1.60
-      DateTime::TimeZone::America::Moncton 1.60
-      DateTime::TimeZone::America::Monterrey 1.60
-      DateTime::TimeZone::America::Montevideo 1.60
-      DateTime::TimeZone::America::Montreal 1.60
-      DateTime::TimeZone::America::Montserrat 1.60
-      DateTime::TimeZone::America::Nassau 1.60
-      DateTime::TimeZone::America::New_York 1.60
-      DateTime::TimeZone::America::Nipigon 1.60
-      DateTime::TimeZone::America::Nome 1.60
-      DateTime::TimeZone::America::Noronha 1.60
-      DateTime::TimeZone::America::North_Dakota::Beulah 1.60
-      DateTime::TimeZone::America::North_Dakota::Center 1.60
-      DateTime::TimeZone::America::North_Dakota::New_Salem 1.60
-      DateTime::TimeZone::America::Ojinaga 1.60
-      DateTime::TimeZone::America::Panama 1.60
-      DateTime::TimeZone::America::Pangnirtung 1.60
-      DateTime::TimeZone::America::Paramaribo 1.60
-      DateTime::TimeZone::America::Phoenix 1.60
-      DateTime::TimeZone::America::Port_au_Prince 1.60
-      DateTime::TimeZone::America::Port_of_Spain 1.60
-      DateTime::TimeZone::America::Porto_Velho 1.60
-      DateTime::TimeZone::America::Puerto_Rico 1.60
-      DateTime::TimeZone::America::Rainy_River 1.60
-      DateTime::TimeZone::America::Rankin_Inlet 1.60
-      DateTime::TimeZone::America::Recife 1.60
-      DateTime::TimeZone::America::Regina 1.60
-      DateTime::TimeZone::America::Resolute 1.60
-      DateTime::TimeZone::America::Rio_Branco 1.60
-      DateTime::TimeZone::America::Santa_Isabel 1.60
-      DateTime::TimeZone::America::Santarem 1.60
-      DateTime::TimeZone::America::Santiago 1.60
-      DateTime::TimeZone::America::Santo_Domingo 1.60
-      DateTime::TimeZone::America::Sao_Paulo 1.60
-      DateTime::TimeZone::America::Scoresbysund 1.60
-      DateTime::TimeZone::America::Sitka 1.60
-      DateTime::TimeZone::America::St_Johns 1.60
-      DateTime::TimeZone::America::St_Kitts 1.60
-      DateTime::TimeZone::America::St_Lucia 1.60
-      DateTime::TimeZone::America::St_Thomas 1.60
-      DateTime::TimeZone::America::St_Vincent 1.60
-      DateTime::TimeZone::America::Swift_Current 1.60
-      DateTime::TimeZone::America::Tegucigalpa 1.60
-      DateTime::TimeZone::America::Thule 1.60
-      DateTime::TimeZone::America::Thunder_Bay 1.60
-      DateTime::TimeZone::America::Tijuana 1.60
-      DateTime::TimeZone::America::Toronto 1.60
-      DateTime::TimeZone::America::Tortola 1.60
-      DateTime::TimeZone::America::Vancouver 1.60
-      DateTime::TimeZone::America::Whitehorse 1.60
-      DateTime::TimeZone::America::Winnipeg 1.60
-      DateTime::TimeZone::America::Yakutat 1.60
-      DateTime::TimeZone::America::Yellowknife 1.60
-      DateTime::TimeZone::Antarctica::Casey 1.60
-      DateTime::TimeZone::Antarctica::Davis 1.60
-      DateTime::TimeZone::Antarctica::DumontDUrville 1.60
-      DateTime::TimeZone::Antarctica::Macquarie 1.60
-      DateTime::TimeZone::Antarctica::Mawson 1.60
-      DateTime::TimeZone::Antarctica::McMurdo 1.60
-      DateTime::TimeZone::Antarctica::Palmer 1.60
-      DateTime::TimeZone::Antarctica::Rothera 1.60
-      DateTime::TimeZone::Antarctica::Syowa 1.60
-      DateTime::TimeZone::Antarctica::Vostok 1.60
-      DateTime::TimeZone::Asia::Aden 1.60
-      DateTime::TimeZone::Asia::Almaty 1.60
-      DateTime::TimeZone::Asia::Amman 1.60
-      DateTime::TimeZone::Asia::Anadyr 1.60
-      DateTime::TimeZone::Asia::Aqtau 1.60
-      DateTime::TimeZone::Asia::Aqtobe 1.60
-      DateTime::TimeZone::Asia::Ashgabat 1.60
-      DateTime::TimeZone::Asia::Baghdad 1.60
-      DateTime::TimeZone::Asia::Bahrain 1.60
-      DateTime::TimeZone::Asia::Baku 1.60
-      DateTime::TimeZone::Asia::Bangkok 1.60
-      DateTime::TimeZone::Asia::Beirut 1.60
-      DateTime::TimeZone::Asia::Bishkek 1.60
-      DateTime::TimeZone::Asia::Brunei 1.60
-      DateTime::TimeZone::Asia::Choibalsan 1.60
-      DateTime::TimeZone::Asia::Chongqing 1.60
-      DateTime::TimeZone::Asia::Colombo 1.60
-      DateTime::TimeZone::Asia::Damascus 1.60
-      DateTime::TimeZone::Asia::Dhaka 1.60
-      DateTime::TimeZone::Asia::Dili 1.60
-      DateTime::TimeZone::Asia::Dubai 1.60
-      DateTime::TimeZone::Asia::Dushanbe 1.60
-      DateTime::TimeZone::Asia::Gaza 1.60
-      DateTime::TimeZone::Asia::Harbin 1.60
-      DateTime::TimeZone::Asia::Hebron 1.60
-      DateTime::TimeZone::Asia::Ho_Chi_Minh 1.60
-      DateTime::TimeZone::Asia::Hong_Kong 1.60
-      DateTime::TimeZone::Asia::Hovd 1.60
-      DateTime::TimeZone::Asia::Irkutsk 1.60
-      DateTime::TimeZone::Asia::Jakarta 1.60
-      DateTime::TimeZone::Asia::Jayapura 1.60
-      DateTime::TimeZone::Asia::Jerusalem 1.60
-      DateTime::TimeZone::Asia::Kabul 1.60
-      DateTime::TimeZone::Asia::Kamchatka 1.60
-      DateTime::TimeZone::Asia::Karachi 1.60
-      DateTime::TimeZone::Asia::Kashgar 1.60
-      DateTime::TimeZone::Asia::Kathmandu 1.60
-      DateTime::TimeZone::Asia::Khandyga 1.60
-      DateTime::TimeZone::Asia::Kolkata 1.60
-      DateTime::TimeZone::Asia::Krasnoyarsk 1.60
-      DateTime::TimeZone::Asia::Kuala_Lumpur 1.60
-      DateTime::TimeZone::Asia::Kuching 1.60
-      DateTime::TimeZone::Asia::Kuwait 1.60
-      DateTime::TimeZone::Asia::Macau 1.60
-      DateTime::TimeZone::Asia::Magadan 1.60
-      DateTime::TimeZone::Asia::Makassar 1.60
-      DateTime::TimeZone::Asia::Manila 1.60
-      DateTime::TimeZone::Asia::Muscat 1.60
-      DateTime::TimeZone::Asia::Nicosia 1.60
-      DateTime::TimeZone::Asia::Novokuznetsk 1.60
-      DateTime::TimeZone::Asia::Novosibirsk 1.60
-      DateTime::TimeZone::Asia::Omsk 1.60
-      DateTime::TimeZone::Asia::Oral 1.60
-      DateTime::TimeZone::Asia::Phnom_Penh 1.60
-      DateTime::TimeZone::Asia::Pontianak 1.60
-      DateTime::TimeZone::Asia::Pyongyang 1.60
-      DateTime::TimeZone::Asia::Qatar 1.60
-      DateTime::TimeZone::Asia::Qyzylorda 1.60
-      DateTime::TimeZone::Asia::Rangoon 1.60
-      DateTime::TimeZone::Asia::Riyadh 1.60
-      DateTime::TimeZone::Asia::Sakhalin 1.60
-      DateTime::TimeZone::Asia::Samarkand 1.60
-      DateTime::TimeZone::Asia::Seoul 1.60
-      DateTime::TimeZone::Asia::Shanghai 1.60
-      DateTime::TimeZone::Asia::Singapore 1.60
-      DateTime::TimeZone::Asia::Taipei 1.60
-      DateTime::TimeZone::Asia::Tashkent 1.60
-      DateTime::TimeZone::Asia::Tbilisi 1.60
-      DateTime::TimeZone::Asia::Tehran 1.60
-      DateTime::TimeZone::Asia::Thimphu 1.60
-      DateTime::TimeZone::Asia::Tokyo 1.60
-      DateTime::TimeZone::Asia::Ulaanbaatar 1.60
-      DateTime::TimeZone::Asia::Urumqi 1.60
-      DateTime::TimeZone::Asia::Ust_Nera 1.60
-      DateTime::TimeZone::Asia::Vientiane 1.60
-      DateTime::TimeZone::Asia::Vladivostok 1.60
-      DateTime::TimeZone::Asia::Yakutsk 1.60
-      DateTime::TimeZone::Asia::Yekaterinburg 1.60
-      DateTime::TimeZone::Asia::Yerevan 1.60
-      DateTime::TimeZone::Atlantic::Azores 1.60
-      DateTime::TimeZone::Atlantic::Bermuda 1.60
-      DateTime::TimeZone::Atlantic::Canary 1.60
-      DateTime::TimeZone::Atlantic::Cape_Verde 1.60
-      DateTime::TimeZone::Atlantic::Faroe 1.60
-      DateTime::TimeZone::Atlantic::Madeira 1.60
-      DateTime::TimeZone::Atlantic::Reykjavik 1.60
-      DateTime::TimeZone::Atlantic::South_Georgia 1.60
-      DateTime::TimeZone::Atlantic::St_Helena 1.60
-      DateTime::TimeZone::Atlantic::Stanley 1.60
-      DateTime::TimeZone::Australia::Adelaide 1.60
-      DateTime::TimeZone::Australia::Brisbane 1.60
-      DateTime::TimeZone::Australia::Broken_Hill 1.60
-      DateTime::TimeZone::Australia::Currie 1.60
-      DateTime::TimeZone::Australia::Darwin 1.60
-      DateTime::TimeZone::Australia::Eucla 1.60
-      DateTime::TimeZone::Australia::Hobart 1.60
-      DateTime::TimeZone::Australia::Lindeman 1.60
-      DateTime::TimeZone::Australia::Lord_Howe 1.60
-      DateTime::TimeZone::Australia::Melbourne 1.60
-      DateTime::TimeZone::Australia::Perth 1.60
-      DateTime::TimeZone::Australia::Sydney 1.60
-      DateTime::TimeZone::CET 1.60
-      DateTime::TimeZone::CST6CDT 1.60
-      DateTime::TimeZone::Catalog 1.60
-      DateTime::TimeZone::EET 1.60
-      DateTime::TimeZone::EST 1.60
-      DateTime::TimeZone::EST5EDT 1.60
-      DateTime::TimeZone::Europe::Amsterdam 1.60
-      DateTime::TimeZone::Europe::Andorra 1.60
-      DateTime::TimeZone::Europe::Athens 1.60
-      DateTime::TimeZone::Europe::Belgrade 1.60
-      DateTime::TimeZone::Europe::Berlin 1.60
-      DateTime::TimeZone::Europe::Brussels 1.60
-      DateTime::TimeZone::Europe::Bucharest 1.60
-      DateTime::TimeZone::Europe::Budapest 1.60
-      DateTime::TimeZone::Europe::Chisinau 1.60
-      DateTime::TimeZone::Europe::Copenhagen 1.60
-      DateTime::TimeZone::Europe::Dublin 1.60
-      DateTime::TimeZone::Europe::Gibraltar 1.60
-      DateTime::TimeZone::Europe::Helsinki 1.60
-      DateTime::TimeZone::Europe::Istanbul 1.60
-      DateTime::TimeZone::Europe::Kaliningrad 1.60
-      DateTime::TimeZone::Europe::Kiev 1.60
-      DateTime::TimeZone::Europe::Lisbon 1.60
-      DateTime::TimeZone::Europe::London 1.60
-      DateTime::TimeZone::Europe::Luxembourg 1.60
-      DateTime::TimeZone::Europe::Madrid 1.60
-      DateTime::TimeZone::Europe::Malta 1.60
-      DateTime::TimeZone::Europe::Minsk 1.60
-      DateTime::TimeZone::Europe::Monaco 1.60
-      DateTime::TimeZone::Europe::Moscow 1.60
-      DateTime::TimeZone::Europe::Oslo 1.60
-      DateTime::TimeZone::Europe::Paris 1.60
-      DateTime::TimeZone::Europe::Prague 1.60
-      DateTime::TimeZone::Europe::Riga 1.60
-      DateTime::TimeZone::Europe::Rome 1.60
-      DateTime::TimeZone::Europe::Samara 1.60
-      DateTime::TimeZone::Europe::Simferopol 1.60
-      DateTime::TimeZone::Europe::Sofia 1.60
-      DateTime::TimeZone::Europe::Stockholm 1.60
-      DateTime::TimeZone::Europe::Tallinn 1.60
-      DateTime::TimeZone::Europe::Tirane 1.60
-      DateTime::TimeZone::Europe::Uzhgorod 1.60
-      DateTime::TimeZone::Europe::Vaduz 1.60
-      DateTime::TimeZone::Europe::Vienna 1.60
-      DateTime::TimeZone::Europe::Vilnius 1.60
-      DateTime::TimeZone::Europe::Volgograd 1.60
-      DateTime::TimeZone::Europe::Warsaw 1.60
-      DateTime::TimeZone::Europe::Zaporozhye 1.60
-      DateTime::TimeZone::Europe::Zurich 1.60
-      DateTime::TimeZone::Floating 1.60
-      DateTime::TimeZone::HST 1.60
-      DateTime::TimeZone::Indian::Antananarivo 1.60
-      DateTime::TimeZone::Indian::Chagos 1.60
-      DateTime::TimeZone::Indian::Christmas 1.60
-      DateTime::TimeZone::Indian::Cocos 1.60
-      DateTime::TimeZone::Indian::Comoro 1.60
-      DateTime::TimeZone::Indian::Kerguelen 1.60
-      DateTime::TimeZone::Indian::Mahe 1.60
-      DateTime::TimeZone::Indian::Maldives 1.60
-      DateTime::TimeZone::Indian::Mauritius 1.60
-      DateTime::TimeZone::Indian::Mayotte 1.60
-      DateTime::TimeZone::Indian::Reunion 1.60
-      DateTime::TimeZone::Local 1.60
-      DateTime::TimeZone::Local::Unix 1.60
-      DateTime::TimeZone::Local::VMS 1.60
-      DateTime::TimeZone::Local::Win32 1.60
-      DateTime::TimeZone::MET 1.60
-      DateTime::TimeZone::MST 1.60
-      DateTime::TimeZone::MST7MDT 1.60
-      DateTime::TimeZone::OffsetOnly 1.60
-      DateTime::TimeZone::OlsonDB 1.60
-      DateTime::TimeZone::OlsonDB::Change 1.60
-      DateTime::TimeZone::OlsonDB::Observance 1.60
-      DateTime::TimeZone::OlsonDB::Rule 1.60
-      DateTime::TimeZone::OlsonDB::Zone 1.60
-      DateTime::TimeZone::PST8PDT 1.60
-      DateTime::TimeZone::Pacific::Apia 1.60
-      DateTime::TimeZone::Pacific::Auckland 1.60
-      DateTime::TimeZone::Pacific::Chatham 1.60
-      DateTime::TimeZone::Pacific::Chuuk 1.60
-      DateTime::TimeZone::Pacific::Easter 1.60
-      DateTime::TimeZone::Pacific::Efate 1.60
-      DateTime::TimeZone::Pacific::Enderbury 1.60
-      DateTime::TimeZone::Pacific::Fakaofo 1.60
-      DateTime::TimeZone::Pacific::Fiji 1.60
-      DateTime::TimeZone::Pacific::Funafuti 1.60
-      DateTime::TimeZone::Pacific::Galapagos 1.60
-      DateTime::TimeZone::Pacific::Gambier 1.60
-      DateTime::TimeZone::Pacific::Guadalcanal 1.60
-      DateTime::TimeZone::Pacific::Guam 1.60
-      DateTime::TimeZone::Pacific::Honolulu 1.60
-      DateTime::TimeZone::Pacific::Johnston 1.60
-      DateTime::TimeZone::Pacific::Kiritimati 1.60
-      DateTime::TimeZone::Pacific::Kosrae 1.60
-      DateTime::TimeZone::Pacific::Kwajalein 1.60
-      DateTime::TimeZone::Pacific::Majuro 1.60
-      DateTime::TimeZone::Pacific::Marquesas 1.60
-      DateTime::TimeZone::Pacific::Midway 1.60
-      DateTime::TimeZone::Pacific::Nauru 1.60
-      DateTime::TimeZone::Pacific::Niue 1.60
-      DateTime::TimeZone::Pacific::Norfolk 1.60
-      DateTime::TimeZone::Pacific::Noumea 1.60
-      DateTime::TimeZone::Pacific::Pago_Pago 1.60
-      DateTime::TimeZone::Pacific::Palau 1.60
-      DateTime::TimeZone::Pacific::Pitcairn 1.60
-      DateTime::TimeZone::Pacific::Pohnpei 1.60
-      DateTime::TimeZone::Pacific::Port_Moresby 1.60
-      DateTime::TimeZone::Pacific::Rarotonga 1.60
-      DateTime::TimeZone::Pacific::Saipan 1.60
-      DateTime::TimeZone::Pacific::Tahiti 1.60
-      DateTime::TimeZone::Pacific::Tarawa 1.60
-      DateTime::TimeZone::Pacific::Tongatapu 1.60
-      DateTime::TimeZone::Pacific::Wake 1.60
-      DateTime::TimeZone::Pacific::Wallis 1.60
-      DateTime::TimeZone::UTC 1.60
-      DateTime::TimeZone::WET 1.60
+      DateTime::TimeZone 1.63
+      DateTime::TimeZone::Africa::Abidjan 1.63
+      DateTime::TimeZone::Africa::Accra 1.63
+      DateTime::TimeZone::Africa::Addis_Ababa 1.63
+      DateTime::TimeZone::Africa::Algiers 1.63
+      DateTime::TimeZone::Africa::Asmara 1.63
+      DateTime::TimeZone::Africa::Bamako 1.63
+      DateTime::TimeZone::Africa::Bangui 1.63
+      DateTime::TimeZone::Africa::Banjul 1.63
+      DateTime::TimeZone::Africa::Bissau 1.63
+      DateTime::TimeZone::Africa::Blantyre 1.63
+      DateTime::TimeZone::Africa::Brazzaville 1.63
+      DateTime::TimeZone::Africa::Bujumbura 1.63
+      DateTime::TimeZone::Africa::Cairo 1.63
+      DateTime::TimeZone::Africa::Casablanca 1.63
+      DateTime::TimeZone::Africa::Ceuta 1.63
+      DateTime::TimeZone::Africa::Conakry 1.63
+      DateTime::TimeZone::Africa::Dakar 1.63
+      DateTime::TimeZone::Africa::Dar_es_Salaam 1.63
+      DateTime::TimeZone::Africa::Djibouti 1.63
+      DateTime::TimeZone::Africa::Douala 1.63
+      DateTime::TimeZone::Africa::El_Aaiun 1.63
+      DateTime::TimeZone::Africa::Freetown 1.63
+      DateTime::TimeZone::Africa::Gaborone 1.63
+      DateTime::TimeZone::Africa::Harare 1.63
+      DateTime::TimeZone::Africa::Johannesburg 1.63
+      DateTime::TimeZone::Africa::Kampala 1.63
+      DateTime::TimeZone::Africa::Khartoum 1.63
+      DateTime::TimeZone::Africa::Kigali 1.63
+      DateTime::TimeZone::Africa::Kinshasa 1.63
+      DateTime::TimeZone::Africa::Lagos 1.63
+      DateTime::TimeZone::Africa::Libreville 1.63
+      DateTime::TimeZone::Africa::Lome 1.63
+      DateTime::TimeZone::Africa::Luanda 1.63
+      DateTime::TimeZone::Africa::Lubumbashi 1.63
+      DateTime::TimeZone::Africa::Lusaka 1.63
+      DateTime::TimeZone::Africa::Malabo 1.63
+      DateTime::TimeZone::Africa::Maputo 1.63
+      DateTime::TimeZone::Africa::Maseru 1.63
+      DateTime::TimeZone::Africa::Mbabane 1.63
+      DateTime::TimeZone::Africa::Mogadishu 1.63
+      DateTime::TimeZone::Africa::Monrovia 1.63
+      DateTime::TimeZone::Africa::Nairobi 1.63
+      DateTime::TimeZone::Africa::Ndjamena 1.63
+      DateTime::TimeZone::Africa::Niamey 1.63
+      DateTime::TimeZone::Africa::Nouakchott 1.63
+      DateTime::TimeZone::Africa::Ouagadougou 1.63
+      DateTime::TimeZone::Africa::Porto_Novo 1.63
+      DateTime::TimeZone::Africa::Sao_Tome 1.63
+      DateTime::TimeZone::Africa::Tripoli 1.63
+      DateTime::TimeZone::Africa::Tunis 1.63
+      DateTime::TimeZone::Africa::Windhoek 1.63
+      DateTime::TimeZone::America::Adak 1.63
+      DateTime::TimeZone::America::Anchorage 1.63
+      DateTime::TimeZone::America::Antigua 1.63
+      DateTime::TimeZone::America::Araguaina 1.63
+      DateTime::TimeZone::America::Argentina::Buenos_Aires 1.63
+      DateTime::TimeZone::America::Argentina::Catamarca 1.63
+      DateTime::TimeZone::America::Argentina::Cordoba 1.63
+      DateTime::TimeZone::America::Argentina::Jujuy 1.63
+      DateTime::TimeZone::America::Argentina::La_Rioja 1.63
+      DateTime::TimeZone::America::Argentina::Mendoza 1.63
+      DateTime::TimeZone::America::Argentina::Rio_Gallegos 1.63
+      DateTime::TimeZone::America::Argentina::Salta 1.63
+      DateTime::TimeZone::America::Argentina::San_Juan 1.63
+      DateTime::TimeZone::America::Argentina::San_Luis 1.63
+      DateTime::TimeZone::America::Argentina::Tucuman 1.63
+      DateTime::TimeZone::America::Argentina::Ushuaia 1.63
+      DateTime::TimeZone::America::Asuncion 1.63
+      DateTime::TimeZone::America::Atikokan 1.63
+      DateTime::TimeZone::America::Bahia 1.63
+      DateTime::TimeZone::America::Bahia_Banderas 1.63
+      DateTime::TimeZone::America::Barbados 1.63
+      DateTime::TimeZone::America::Belem 1.63
+      DateTime::TimeZone::America::Belize 1.63
+      DateTime::TimeZone::America::Blanc_Sablon 1.63
+      DateTime::TimeZone::America::Boa_Vista 1.63
+      DateTime::TimeZone::America::Bogota 1.63
+      DateTime::TimeZone::America::Boise 1.63
+      DateTime::TimeZone::America::Cambridge_Bay 1.63
+      DateTime::TimeZone::America::Campo_Grande 1.63
+      DateTime::TimeZone::America::Cancun 1.63
+      DateTime::TimeZone::America::Caracas 1.63
+      DateTime::TimeZone::America::Cayenne 1.63
+      DateTime::TimeZone::America::Cayman 1.63
+      DateTime::TimeZone::America::Chicago 1.63
+      DateTime::TimeZone::America::Chihuahua 1.63
+      DateTime::TimeZone::America::Costa_Rica 1.63
+      DateTime::TimeZone::America::Creston 1.63
+      DateTime::TimeZone::America::Cuiaba 1.63
+      DateTime::TimeZone::America::Curacao 1.63
+      DateTime::TimeZone::America::Danmarkshavn 1.63
+      DateTime::TimeZone::America::Dawson 1.63
+      DateTime::TimeZone::America::Dawson_Creek 1.63
+      DateTime::TimeZone::America::Denver 1.63
+      DateTime::TimeZone::America::Detroit 1.63
+      DateTime::TimeZone::America::Edmonton 1.63
+      DateTime::TimeZone::America::Eirunepe 1.63
+      DateTime::TimeZone::America::El_Salvador 1.63
+      DateTime::TimeZone::America::Fortaleza 1.63
+      DateTime::TimeZone::America::Glace_Bay 1.63
+      DateTime::TimeZone::America::Godthab 1.63
+      DateTime::TimeZone::America::Goose_Bay 1.63
+      DateTime::TimeZone::America::Grand_Turk 1.63
+      DateTime::TimeZone::America::Guatemala 1.63
+      DateTime::TimeZone::America::Guayaquil 1.63
+      DateTime::TimeZone::America::Guyana 1.63
+      DateTime::TimeZone::America::Halifax 1.63
+      DateTime::TimeZone::America::Havana 1.63
+      DateTime::TimeZone::America::Hermosillo 1.63
+      DateTime::TimeZone::America::Indiana::Indianapolis 1.63
+      DateTime::TimeZone::America::Indiana::Knox 1.63
+      DateTime::TimeZone::America::Indiana::Marengo 1.63
+      DateTime::TimeZone::America::Indiana::Petersburg 1.63
+      DateTime::TimeZone::America::Indiana::Tell_City 1.63
+      DateTime::TimeZone::America::Indiana::Vevay 1.63
+      DateTime::TimeZone::America::Indiana::Vincennes 1.63
+      DateTime::TimeZone::America::Indiana::Winamac 1.63
+      DateTime::TimeZone::America::Inuvik 1.63
+      DateTime::TimeZone::America::Iqaluit 1.63
+      DateTime::TimeZone::America::Jamaica 1.63
+      DateTime::TimeZone::America::Juneau 1.63
+      DateTime::TimeZone::America::Kentucky::Louisville 1.63
+      DateTime::TimeZone::America::Kentucky::Monticello 1.63
+      DateTime::TimeZone::America::La_Paz 1.63
+      DateTime::TimeZone::America::Lima 1.63
+      DateTime::TimeZone::America::Los_Angeles 1.63
+      DateTime::TimeZone::America::Maceio 1.63
+      DateTime::TimeZone::America::Managua 1.63
+      DateTime::TimeZone::America::Manaus 1.63
+      DateTime::TimeZone::America::Martinique 1.63
+      DateTime::TimeZone::America::Matamoros 1.63
+      DateTime::TimeZone::America::Mazatlan 1.63
+      DateTime::TimeZone::America::Menominee 1.63
+      DateTime::TimeZone::America::Merida 1.63
+      DateTime::TimeZone::America::Metlakatla 1.63
+      DateTime::TimeZone::America::Mexico_City 1.63
+      DateTime::TimeZone::America::Miquelon 1.63
+      DateTime::TimeZone::America::Moncton 1.63
+      DateTime::TimeZone::America::Monterrey 1.63
+      DateTime::TimeZone::America::Montevideo 1.63
+      DateTime::TimeZone::America::Montreal 1.63
+      DateTime::TimeZone::America::Nassau 1.63
+      DateTime::TimeZone::America::New_York 1.63
+      DateTime::TimeZone::America::Nipigon 1.63
+      DateTime::TimeZone::America::Nome 1.63
+      DateTime::TimeZone::America::Noronha 1.63
+      DateTime::TimeZone::America::North_Dakota::Beulah 1.63
+      DateTime::TimeZone::America::North_Dakota::Center 1.63
+      DateTime::TimeZone::America::North_Dakota::New_Salem 1.63
+      DateTime::TimeZone::America::Ojinaga 1.63
+      DateTime::TimeZone::America::Panama 1.63
+      DateTime::TimeZone::America::Pangnirtung 1.63
+      DateTime::TimeZone::America::Paramaribo 1.63
+      DateTime::TimeZone::America::Phoenix 1.63
+      DateTime::TimeZone::America::Port_au_Prince 1.63
+      DateTime::TimeZone::America::Port_of_Spain 1.63
+      DateTime::TimeZone::America::Porto_Velho 1.63
+      DateTime::TimeZone::America::Puerto_Rico 1.63
+      DateTime::TimeZone::America::Rainy_River 1.63
+      DateTime::TimeZone::America::Rankin_Inlet 1.63
+      DateTime::TimeZone::America::Recife 1.63
+      DateTime::TimeZone::America::Regina 1.63
+      DateTime::TimeZone::America::Resolute 1.63
+      DateTime::TimeZone::America::Rio_Branco 1.63
+      DateTime::TimeZone::America::Santa_Isabel 1.63
+      DateTime::TimeZone::America::Santarem 1.63
+      DateTime::TimeZone::America::Santiago 1.63
+      DateTime::TimeZone::America::Santo_Domingo 1.63
+      DateTime::TimeZone::America::Sao_Paulo 1.63
+      DateTime::TimeZone::America::Scoresbysund 1.63
+      DateTime::TimeZone::America::Sitka 1.63
+      DateTime::TimeZone::America::St_Johns 1.63
+      DateTime::TimeZone::America::Swift_Current 1.63
+      DateTime::TimeZone::America::Tegucigalpa 1.63
+      DateTime::TimeZone::America::Thule 1.63
+      DateTime::TimeZone::America::Thunder_Bay 1.63
+      DateTime::TimeZone::America::Tijuana 1.63
+      DateTime::TimeZone::America::Toronto 1.63
+      DateTime::TimeZone::America::Vancouver 1.63
+      DateTime::TimeZone::America::Whitehorse 1.63
+      DateTime::TimeZone::America::Winnipeg 1.63
+      DateTime::TimeZone::America::Yakutat 1.63
+      DateTime::TimeZone::America::Yellowknife 1.63
+      DateTime::TimeZone::Antarctica::Casey 1.63
+      DateTime::TimeZone::Antarctica::Davis 1.63
+      DateTime::TimeZone::Antarctica::DumontDUrville 1.63
+      DateTime::TimeZone::Antarctica::Macquarie 1.63
+      DateTime::TimeZone::Antarctica::Mawson 1.63
+      DateTime::TimeZone::Antarctica::Palmer 1.63
+      DateTime::TimeZone::Antarctica::Rothera 1.63
+      DateTime::TimeZone::Antarctica::Syowa 1.63
+      DateTime::TimeZone::Antarctica::Vostok 1.63
+      DateTime::TimeZone::Asia::Aden 1.63
+      DateTime::TimeZone::Asia::Almaty 1.63
+      DateTime::TimeZone::Asia::Amman 1.63
+      DateTime::TimeZone::Asia::Anadyr 1.63
+      DateTime::TimeZone::Asia::Aqtau 1.63
+      DateTime::TimeZone::Asia::Aqtobe 1.63
+      DateTime::TimeZone::Asia::Ashgabat 1.63
+      DateTime::TimeZone::Asia::Baghdad 1.63
+      DateTime::TimeZone::Asia::Bahrain 1.63
+      DateTime::TimeZone::Asia::Baku 1.63
+      DateTime::TimeZone::Asia::Bangkok 1.63
+      DateTime::TimeZone::Asia::Beirut 1.63
+      DateTime::TimeZone::Asia::Bishkek 1.63
+      DateTime::TimeZone::Asia::Brunei 1.63
+      DateTime::TimeZone::Asia::Choibalsan 1.63
+      DateTime::TimeZone::Asia::Chongqing 1.63
+      DateTime::TimeZone::Asia::Colombo 1.63
+      DateTime::TimeZone::Asia::Damascus 1.63
+      DateTime::TimeZone::Asia::Dhaka 1.63
+      DateTime::TimeZone::Asia::Dili 1.63
+      DateTime::TimeZone::Asia::Dubai 1.63
+      DateTime::TimeZone::Asia::Dushanbe 1.63
+      DateTime::TimeZone::Asia::Gaza 1.63
+      DateTime::TimeZone::Asia::Harbin 1.63
+      DateTime::TimeZone::Asia::Hebron 1.63
+      DateTime::TimeZone::Asia::Ho_Chi_Minh 1.63
+      DateTime::TimeZone::Asia::Hong_Kong 1.63
+      DateTime::TimeZone::Asia::Hovd 1.63
+      DateTime::TimeZone::Asia::Irkutsk 1.63
+      DateTime::TimeZone::Asia::Jakarta 1.63
+      DateTime::TimeZone::Asia::Jayapura 1.63
+      DateTime::TimeZone::Asia::Jerusalem 1.63
+      DateTime::TimeZone::Asia::Kabul 1.63
+      DateTime::TimeZone::Asia::Kamchatka 1.63
+      DateTime::TimeZone::Asia::Karachi 1.63
+      DateTime::TimeZone::Asia::Kashgar 1.63
+      DateTime::TimeZone::Asia::Kathmandu 1.63
+      DateTime::TimeZone::Asia::Khandyga 1.63
+      DateTime::TimeZone::Asia::Kolkata 1.63
+      DateTime::TimeZone::Asia::Krasnoyarsk 1.63
+      DateTime::TimeZone::Asia::Kuala_Lumpur 1.63
+      DateTime::TimeZone::Asia::Kuching 1.63
+      DateTime::TimeZone::Asia::Kuwait 1.63
+      DateTime::TimeZone::Asia::Macau 1.63
+      DateTime::TimeZone::Asia::Magadan 1.63
+      DateTime::TimeZone::Asia::Makassar 1.63
+      DateTime::TimeZone::Asia::Manila 1.63
+      DateTime::TimeZone::Asia::Muscat 1.63
+      DateTime::TimeZone::Asia::Nicosia 1.63
+      DateTime::TimeZone::Asia::Novokuznetsk 1.63
+      DateTime::TimeZone::Asia::Novosibirsk 1.63
+      DateTime::TimeZone::Asia::Omsk 1.63
+      DateTime::TimeZone::Asia::Oral 1.63
+      DateTime::TimeZone::Asia::Phnom_Penh 1.63
+      DateTime::TimeZone::Asia::Pontianak 1.63
+      DateTime::TimeZone::Asia::Pyongyang 1.63
+      DateTime::TimeZone::Asia::Qatar 1.63
+      DateTime::TimeZone::Asia::Qyzylorda 1.63
+      DateTime::TimeZone::Asia::Rangoon 1.63
+      DateTime::TimeZone::Asia::Riyadh 1.63
+      DateTime::TimeZone::Asia::Sakhalin 1.63
+      DateTime::TimeZone::Asia::Samarkand 1.63
+      DateTime::TimeZone::Asia::Seoul 1.63
+      DateTime::TimeZone::Asia::Shanghai 1.63
+      DateTime::TimeZone::Asia::Singapore 1.63
+      DateTime::TimeZone::Asia::Taipei 1.63
+      DateTime::TimeZone::Asia::Tashkent 1.63
+      DateTime::TimeZone::Asia::Tbilisi 1.63
+      DateTime::TimeZone::Asia::Tehran 1.63
+      DateTime::TimeZone::Asia::Thimphu 1.63
+      DateTime::TimeZone::Asia::Tokyo 1.63
+      DateTime::TimeZone::Asia::Ulaanbaatar 1.63
+      DateTime::TimeZone::Asia::Urumqi 1.63
+      DateTime::TimeZone::Asia::Ust_Nera 1.63
+      DateTime::TimeZone::Asia::Vientiane 1.63
+      DateTime::TimeZone::Asia::Vladivostok 1.63
+      DateTime::TimeZone::Asia::Yakutsk 1.63
+      DateTime::TimeZone::Asia::Yekaterinburg 1.63
+      DateTime::TimeZone::Asia::Yerevan 1.63
+      DateTime::TimeZone::Atlantic::Azores 1.63
+      DateTime::TimeZone::Atlantic::Bermuda 1.63
+      DateTime::TimeZone::Atlantic::Canary 1.63
+      DateTime::TimeZone::Atlantic::Cape_Verde 1.63
+      DateTime::TimeZone::Atlantic::Faroe 1.63
+      DateTime::TimeZone::Atlantic::Madeira 1.63
+      DateTime::TimeZone::Atlantic::Reykjavik 1.63
+      DateTime::TimeZone::Atlantic::South_Georgia 1.63
+      DateTime::TimeZone::Atlantic::St_Helena 1.63
+      DateTime::TimeZone::Atlantic::Stanley 1.63
+      DateTime::TimeZone::Australia::Adelaide 1.63
+      DateTime::TimeZone::Australia::Brisbane 1.63
+      DateTime::TimeZone::Australia::Broken_Hill 1.63
+      DateTime::TimeZone::Australia::Currie 1.63
+      DateTime::TimeZone::Australia::Darwin 1.63
+      DateTime::TimeZone::Australia::Eucla 1.63
+      DateTime::TimeZone::Australia::Hobart 1.63
+      DateTime::TimeZone::Australia::Lindeman 1.63
+      DateTime::TimeZone::Australia::Lord_Howe 1.63
+      DateTime::TimeZone::Australia::Melbourne 1.63
+      DateTime::TimeZone::Australia::Perth 1.63
+      DateTime::TimeZone::Australia::Sydney 1.63
+      DateTime::TimeZone::CET 1.63
+      DateTime::TimeZone::CST6CDT 1.63
+      DateTime::TimeZone::Catalog 1.63
+      DateTime::TimeZone::EET 1.63
+      DateTime::TimeZone::EST 1.63
+      DateTime::TimeZone::EST5EDT 1.63
+      DateTime::TimeZone::Europe::Amsterdam 1.63
+      DateTime::TimeZone::Europe::Andorra 1.63
+      DateTime::TimeZone::Europe::Athens 1.63
+      DateTime::TimeZone::Europe::Belgrade 1.63
+      DateTime::TimeZone::Europe::Berlin 1.63
+      DateTime::TimeZone::Europe::Brussels 1.63
+      DateTime::TimeZone::Europe::Bucharest 1.63
+      DateTime::TimeZone::Europe::Budapest 1.63
+      DateTime::TimeZone::Europe::Chisinau 1.63
+      DateTime::TimeZone::Europe::Copenhagen 1.63
+      DateTime::TimeZone::Europe::Dublin 1.63
+      DateTime::TimeZone::Europe::Gibraltar 1.63
+      DateTime::TimeZone::Europe::Helsinki 1.63
+      DateTime::TimeZone::Europe::Istanbul 1.63
+      DateTime::TimeZone::Europe::Kaliningrad 1.63
+      DateTime::TimeZone::Europe::Kiev 1.63
+      DateTime::TimeZone::Europe::Lisbon 1.63
+      DateTime::TimeZone::Europe::London 1.63
+      DateTime::TimeZone::Europe::Luxembourg 1.63
+      DateTime::TimeZone::Europe::Madrid 1.63
+      DateTime::TimeZone::Europe::Malta 1.63
+      DateTime::TimeZone::Europe::Minsk 1.63
+      DateTime::TimeZone::Europe::Monaco 1.63
+      DateTime::TimeZone::Europe::Moscow 1.63
+      DateTime::TimeZone::Europe::Oslo 1.63
+      DateTime::TimeZone::Europe::Paris 1.63
+      DateTime::TimeZone::Europe::Prague 1.63
+      DateTime::TimeZone::Europe::Riga 1.63
+      DateTime::TimeZone::Europe::Rome 1.63
+      DateTime::TimeZone::Europe::Samara 1.63
+      DateTime::TimeZone::Europe::Simferopol 1.63
+      DateTime::TimeZone::Europe::Sofia 1.63
+      DateTime::TimeZone::Europe::Stockholm 1.63
+      DateTime::TimeZone::Europe::Tallinn 1.63
+      DateTime::TimeZone::Europe::Tirane 1.63
+      DateTime::TimeZone::Europe::Uzhgorod 1.63
+      DateTime::TimeZone::Europe::Vienna 1.63
+      DateTime::TimeZone::Europe::Vilnius 1.63
+      DateTime::TimeZone::Europe::Volgograd 1.63
+      DateTime::TimeZone::Europe::Warsaw 1.63
+      DateTime::TimeZone::Europe::Zaporozhye 1.63
+      DateTime::TimeZone::Europe::Zurich 1.63
+      DateTime::TimeZone::Floating 1.63
+      DateTime::TimeZone::HST 1.63
+      DateTime::TimeZone::Indian::Antananarivo 1.63
+      DateTime::TimeZone::Indian::Chagos 1.63
+      DateTime::TimeZone::Indian::Christmas 1.63
+      DateTime::TimeZone::Indian::Cocos 1.63
+      DateTime::TimeZone::Indian::Comoro 1.63
+      DateTime::TimeZone::Indian::Kerguelen 1.63
+      DateTime::TimeZone::Indian::Mahe 1.63
+      DateTime::TimeZone::Indian::Maldives 1.63
+      DateTime::TimeZone::Indian::Mauritius 1.63
+      DateTime::TimeZone::Indian::Mayotte 1.63
+      DateTime::TimeZone::Indian::Reunion 1.63
+      DateTime::TimeZone::Local 1.63
+      DateTime::TimeZone::Local::Unix 1.63
+      DateTime::TimeZone::Local::VMS 1.63
+      DateTime::TimeZone::Local::Win32 1.63
+      DateTime::TimeZone::MET 1.63
+      DateTime::TimeZone::MST 1.63
+      DateTime::TimeZone::MST7MDT 1.63
+      DateTime::TimeZone::OffsetOnly 1.63
+      DateTime::TimeZone::OlsonDB 1.63
+      DateTime::TimeZone::OlsonDB::Change 1.63
+      DateTime::TimeZone::OlsonDB::Observance 1.63
+      DateTime::TimeZone::OlsonDB::Rule 1.63
+      DateTime::TimeZone::OlsonDB::Zone 1.63
+      DateTime::TimeZone::PST8PDT 1.63
+      DateTime::TimeZone::Pacific::Apia 1.63
+      DateTime::TimeZone::Pacific::Auckland 1.63
+      DateTime::TimeZone::Pacific::Chatham 1.63
+      DateTime::TimeZone::Pacific::Chuuk 1.63
+      DateTime::TimeZone::Pacific::Easter 1.63
+      DateTime::TimeZone::Pacific::Efate 1.63
+      DateTime::TimeZone::Pacific::Enderbury 1.63
+      DateTime::TimeZone::Pacific::Fakaofo 1.63
+      DateTime::TimeZone::Pacific::Fiji 1.63
+      DateTime::TimeZone::Pacific::Funafuti 1.63
+      DateTime::TimeZone::Pacific::Galapagos 1.63
+      DateTime::TimeZone::Pacific::Gambier 1.63
+      DateTime::TimeZone::Pacific::Guadalcanal 1.63
+      DateTime::TimeZone::Pacific::Guam 1.63
+      DateTime::TimeZone::Pacific::Honolulu 1.63
+      DateTime::TimeZone::Pacific::Kiritimati 1.63
+      DateTime::TimeZone::Pacific::Kosrae 1.63
+      DateTime::TimeZone::Pacific::Kwajalein 1.63
+      DateTime::TimeZone::Pacific::Majuro 1.63
+      DateTime::TimeZone::Pacific::Marquesas 1.63
+      DateTime::TimeZone::Pacific::Midway 1.63
+      DateTime::TimeZone::Pacific::Nauru 1.63
+      DateTime::TimeZone::Pacific::Niue 1.63
+      DateTime::TimeZone::Pacific::Norfolk 1.63
+      DateTime::TimeZone::Pacific::Noumea 1.63
+      DateTime::TimeZone::Pacific::Pago_Pago 1.63
+      DateTime::TimeZone::Pacific::Palau 1.63
+      DateTime::TimeZone::Pacific::Pitcairn 1.63
+      DateTime::TimeZone::Pacific::Pohnpei 1.63
+      DateTime::TimeZone::Pacific::Port_Moresby 1.63
+      DateTime::TimeZone::Pacific::Rarotonga 1.63
+      DateTime::TimeZone::Pacific::Saipan 1.63
+      DateTime::TimeZone::Pacific::Tahiti 1.63
+      DateTime::TimeZone::Pacific::Tarawa 1.63
+      DateTime::TimeZone::Pacific::Tongatapu 1.63
+      DateTime::TimeZone::Pacific::Wake 1.63
+      DateTime::TimeZone::Pacific::Wallis 1.63
+      DateTime::TimeZone::UTC 1.63
+      DateTime::TimeZone::WET 1.63
     requirements:
       Class::Load 0
       Class::Singleton 1.03
@@ -1802,47 +1821,24 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Devel-FindPerl-0.006
-    pathname: L/LE/LEONT/Devel-FindPerl-0.006.tar.gz
+  Devel-GlobalDestruction-0.12
+    pathname: H/HA/HAARG/Devel-GlobalDestruction-0.12.tar.gz
     provides:
-      Devel::FindPerl 0.006
-    requirements:
-      Capture::Tiny 0
-      Carp 0
-      Config 0
-      Cwd 0
-      Exporter 5.57
-      ExtUtils::Config 0.007
-      ExtUtils::MakeMaker 6.30
-      File::Basename 0
-      File::Find 0
-      File::Spec::Functions 0
-      File::Temp 0
-      IPC::Open2 0
-      Test::More 0
-      strict 0
-      warnings 0
-  Devel-GlobalDestruction-0.11
-    pathname: H/HA/HAARG/Devel-GlobalDestruction-0.11.tar.gz
-    provides:
-      Devel::GlobalDestruction 0.11
+      Devel::GlobalDestruction 0.12
     requirements:
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 0
-      Sub::Exporter::Progressive 0.001006
+      Sub::Exporter::Progressive 0.001011
       perl 5.006
-  Devel-StackTrace-1.30
-    pathname: D/DR/DROLSKY/Devel-StackTrace-1.30.tar.gz
+  Devel-StackTrace-1.31
+    pathname: D/DR/DROLSKY/Devel-StackTrace-1.31.tar.gz
     provides:
-      Devel::StackTrace 1.30
-      Devel::StackTrace::Frame 1.30
+      Devel::StackTrace 1.31
+      Devel::StackTrace::Frame 1.31
     requirements:
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       Scalar::Util 0
-      Test::More 0.88
-      base 0
-      bytes 0
       overload 0
       strict 0
       warnings 0
@@ -1875,52 +1871,54 @@ DISTRIBUTIONS
       Digest::base 1.00
       ExtUtils::MakeMaker 0
       perl 5.004
-  Dist-CheckConflicts-0.09
-    pathname: D/DO/DOY/Dist-CheckConflicts-0.09.tar.gz
+  Dist-CheckConflicts-0.10
+    pathname: D/DO/DOY/Dist-CheckConflicts-0.10.tar.gz
     provides:
-      Dist::CheckConflicts 0.09
+      Dist::CheckConflicts 0.10
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
       List::MoreUtils 0.12
-      Module::Runtime 0
+      Module::Runtime 0.009
       base 0
       strict 0
       warnings 0
-  Encode-2.52
-    pathname: D/DA/DANKOGAI/Encode-2.52.tar.gz
+  Encode-2.57
+    pathname: D/DA/DANKOGAI/Encode-2.57.tar.gz
     provides:
-      Encode 2.52
-      Encode::Alias 2.17
+      Encode 2.57
+      Encode::Alias 2.18
       Encode::Byte 2.04
       Encode::CJKConstants 2.02
       Encode::CN 2.03
-      Encode::CN::HZ 2.06
+      Encode::CN::HZ 2.07
       Encode::Config 2.05
       Encode::EBCDIC 2.02
-      Encode::Encoder 2.02
-      Encode::Encoding 2.06
-      Encode::GSM0338 2.04
-      Encode::Guess 2.05
-      Encode::Internal undef
+      Encode::Encoder 2.03
+      Encode::Encoding 2.07
+      Encode::GSM0338 2.05
+      Encode::Guess 2.06
+      Encode::Internal 2.57
       Encode::JP 2.04
       Encode::JP::H2Z 2.02
-      Encode::JP::JIS7 2.04
+      Encode::JP::JIS7 2.05
       Encode::KR 2.03
-      Encode::KR::2022_KR 2.02
-      Encode::MIME::Header 2.14
-      Encode::MIME::Header::ISO_2022_JP 1.03
+      Encode::KR::2022_KR 2.03
+      Encode::MIME::Header 2.15
+      Encode::MIME::Header::ISO_2022_JP 1.04
       Encode::MIME::Name 1.01
       Encode::Symbol 2.02
       Encode::TW 2.03
-      Encode::UTF_EBCDIC undef
-      Encode::Unicode 2.08
-      Encode::Unicode::UTF7 2.07
-      Encode::utf8 undef
+      Encode::UTF_EBCDIC 2.57
+      Encode::Unicode 2.09
+      Encode::Unicode::UTF7 2.08
+      Encode::utf8 2.57
       encoding 2.12
     requirements:
+      Exporter 5.57
       ExtUtils::MakeMaker 0
+      parent 0.221
   Encode-Locale-1.03
     pathname: G/GA/GAAS/Encode-Locale-1.03.tar.gz
     provides:
@@ -1958,6 +1956,16 @@ DISTRIBUTIONS
       Test::More 0.88
       strict 0
       warnings 0
+  ExtUtils-Depends-0.306
+    pathname: X/XA/XAOC/ExtUtils-Depends-0.306.tar.gz
+    provides:
+      ExtUtils::Depends 0.306
+    requirements:
+      Data::Dumper 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      IO::File 0
+      perl 5.006
   ExtUtils-Helpers-0.021
     pathname: L/LE/LEONT/ExtUtils-Helpers-0.021.tar.gz
     provides:
@@ -1977,20 +1985,15 @@ DISTRIBUTIONS
       Text::ParseWords 3.24
       strict 0
       warnings 0
-  ExtUtils-InstallPaths-0.009
-    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.009.tar.gz
+  ExtUtils-InstallPaths-0.010
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.010.tar.gz
     provides:
-      ExtUtils::InstallPaths 0.009
+      ExtUtils::InstallPaths 0.010
     requirements:
       Carp 0
-      Config 0
       ExtUtils::Config 0.002
       ExtUtils::MakeMaker 6.30
-      File::Find 0
       File::Spec 0
-      File::Spec::Functions 0
-      File::Temp 0
-      Test::More 0
       strict 0
       warnings 0
   Feed-Find-0.07
@@ -2010,6 +2013,7 @@ DISTRIBUTIONS
     pathname: R/RC/RCLAMP/File-Find-Rule-0.33.tar.gz
     provides:
       File::Find::Rule 0.33
+      File::Find::Rule::Test::ATeam undef
     requirements:
       ExtUtils::MakeMaker 0
       File::Find 0
@@ -2033,25 +2037,15 @@ DISTRIBUTIONS
     pathname: G/GA/GAAS/File-Listing-6.04.tar.gz
     provides:
       File::Listing 6.04
-      File::Listing::apache undef
-      File::Listing::dosftp undef
-      File::Listing::netware undef
-      File::Listing::unix undef
-      File::Listing::vms undef
+      File::Listing::apache 6.04
+      File::Listing::dosftp 6.04
+      File::Listing::netware 6.04
+      File::Listing::unix 6.04
+      File::Listing::vms 6.04
     requirements:
       ExtUtils::MakeMaker 0
       HTTP::Date 6
       perl 5.006002
-  File-Remove-1.52
-    pathname: A/AD/ADAMK/File-Remove-1.52.tar.gz
-    provides:
-      File::Remove 1.52
-    requirements:
-      Cwd 3.29
-      ExtUtils::MakeMaker 6.36
-      File::Spec 3.29
-      Test::More 0.42
-      perl 5.00503
   File-ShareDir-1.03
     pathname: A/AD/ADAMK/File-ShareDir-1.03.tar.gz
     provides:
@@ -2063,39 +2057,70 @@ DISTRIBUTIONS
       File::Spec 0.80
       Test::More 0.47
       perl 5.005
-  File-ShareDir-Install-0.04
-    pathname: G/GW/GWYN/File-ShareDir-Install-0.04.tar.gz
+  File-ShareDir-Install-0.07
+    pathname: G/GW/GWYN/File-ShareDir-Install-0.07.tar.gz
     provides:
-      File::ShareDir::Install 0.04
+      File::ShareDir::Install 0.07
     requirements:
       ExtUtils::MakeMaker 6.11
       File::Spec 0
       IO::Dir 0
+  File-Slurp-9999.19
+    pathname: U/UR/URI/File-Slurp-9999.19.tar.gz
+    provides:
+      File::Slurp 9999.19
+      FileSlurp_12 9999.13
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      POSIX 0
+  File-Temp-0.2304
+    pathname: D/DA/DAGOLDEN/File-Temp-0.2304.tar.gz
+    provides:
+      File::Temp 0.2304
+    requirements:
+      Carp 0
+      Carp::Heavy 0
+      Cwd 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.17
+      Fcntl 1.03
+      File::Path 2.06
+      File::Spec 0.8
+      IO::Handle 0
+      IO::Seekable 0
+      POSIX 0
+      Scalar::Util 0
+      Symbol 0
+      constant 0
+      overload 0
+      parent 0.221
+      strict 0
+      vars 0
   Filesys-Notify-Simple-0.12
     pathname: M/MI/MIYAGAWA/Filesys-Notify-Simple-0.12.tar.gz
     provides:
       Filesys::Notify::Simple 0.12
     requirements:
       ExtUtils::MakeMaker 6.30
-  Getopt-Long-Descriptive-0.093
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.093.tar.gz
+  Getopt-Long-Descriptive-0.096
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.096.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.093
-      Getopt::Long::Descriptive::Opts 0.093
-      Getopt::Long::Descriptive::Usage 0.093
+      Getopt::Long::Descriptive 0.096
+      Getopt::Long::Descriptive::Opts 0.096
+      Getopt::Long::Descriptive::Usage 0.096
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
       File::Basename 0
-      File::Find 0
-      File::Temp 0
       Getopt::Long 2.33
       List::Util 0
       Params::Validate 0.97
       Scalar::Util 0
       Sub::Exporter 0.972
       Sub::Exporter::Util 0
-      Test::More 0.96
       overload 0
       strict 0
       warnings 0
@@ -2109,7 +2134,6 @@ DISTRIBUTIONS
       Carp 0
       Digest::MD5 0
       Digest::SHA 0
-      Module::Build 0.2808
       Net::DNS::Resolver 0
       Test::More 0.4
       Test::Warn 0.11
@@ -2120,14 +2144,14 @@ DISTRIBUTIONS
     pathname: G/GA/GAAS/HTML-Form-6.03.tar.gz
     provides:
       HTML::Form 6.03
-      HTML::Form::FileInput undef
-      HTML::Form::IgnoreInput undef
-      HTML::Form::ImageInput undef
-      HTML::Form::Input undef
-      HTML::Form::KeygenInput undef
-      HTML::Form::ListInput undef
-      HTML::Form::SubmitInput undef
-      HTML::Form::TextInput undef
+      HTML::Form::FileInput 6.03
+      HTML::Form::IgnoreInput 6.03
+      HTML::Form::ImageInput 6.03
+      HTML::Form::Input 6.03
+      HTML::Form::KeygenInput 6.03
+      HTML::Form::ListInput 6.03
+      HTML::Form::SubmitInput 6.03
+      HTML::Form::TextInput 6.03
     requirements:
       Encode 2
       ExtUtils::MakeMaker 0
@@ -2151,10 +2175,10 @@ DISTRIBUTIONS
       HTML::Tagset 3
       XSLoader 0
       perl 5.008
-  HTML-Restrict-2.1.8
-    pathname: O/OA/OALDERS/HTML-Restrict-2.1.8.tar.gz
+  HTML-Restrict-2.1.9
+    pathname: O/OA/OALDERS/HTML-Restrict-2.1.9.tar.gz
     provides:
-      HTML::Restrict v2.1.8
+      HTML::Restrict 2.001009
     requirements:
       Carp 0
       Data::Dump 0
@@ -2167,7 +2191,7 @@ DISTRIBUTIONS
       Scalar::Util 0
       Sub::Quote 0
       URI 0
-      namespace::autoclean 0
+      namespace::clean 0
       strict 0
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
@@ -2205,15 +2229,16 @@ DISTRIBUTIONS
       base 0
       integer 0
       perl 5.008
-  HTTP-Body-1.17
-    pathname: G/GE/GETTY/HTTP-Body-1.17.tar.gz
+  HTTP-Body-1.19
+    pathname: G/GE/GETTY/HTTP-Body-1.19.tar.gz
     provides:
-      HTTP::Body 1.17
-      HTTP::Body::MultiPart 1.17
-      HTTP::Body::OctetStream 1.17
-      HTTP::Body::UrlEncoded 1.17
-      HTTP::Body::XForms 1.17
-      HTTP::Body::XFormsMultipart 1.17
+      HTTP::Body 1.19
+      HTTP::Body::MultiPart 1.19
+      HTTP::Body::OctetStream 1.19
+      HTTP::Body::UrlEncoded 1.19
+      HTTP::Body::XForms 1.19
+      HTTP::Body::XFormsMultipart 1.19
+      PAML undef
     requirements:
       Carp 0
       Digest::MD5 0
@@ -2221,8 +2246,6 @@ DISTRIBUTIONS
       File::Temp 0.14
       HTTP::Headers 0
       IO::File 1.14
-      Test::Deep 0
-      Test::More 0.86
   HTTP-Cookies-6.01
     pathname: G/GA/GAAS/HTTP-Cookies-6.01.tar.gz
     provides:
@@ -2239,7 +2262,7 @@ DISTRIBUTIONS
     pathname: G/GA/GAAS/HTTP-Daemon-6.01.tar.gz
     provides:
       HTTP::Daemon 6.01
-      HTTP::Daemon::ClientConn undef
+      HTTP::Daemon::ClientConn 6.01
     requirements:
       ExtUtils::MakeMaker 0
       HTTP::Date 6
@@ -2322,13 +2345,14 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.42
       Socket 0
       Test::More 0
-  HTTP-Tiny-0.034
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.034.tar.gz
+  HTTP-Tiny-0.039
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.039.tar.gz
     provides:
-      HTTP::Tiny 0.034
+      HTTP::Tiny 0.039
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 6.17
+      Fcntl 0
       IO::Socket 0
       MIME::Base64 0
       Time::Local 0
@@ -2341,28 +2365,20 @@ DISTRIBUTIONS
       Hash::AsObject 0.13
     requirements:
       ExtUtils::MakeMaker 0
-  Hash-Merge-0.12
-    pathname: D/DM/DMUEY/Hash-Merge-0.12.tar.gz
+  Hash-Merge-0.200
+    pathname: R/RE/REHSACK/Hash-Merge-0.200.tar.gz
     provides:
-      Hash::Merge 0.12
+      Hash::Merge 0.200
     requirements:
       Clone 0
       ExtUtils::MakeMaker 0
-      Test::More 0.33
+      perl 5.008001
   Hash-MultiValue-0.15
     pathname: M/MI/MIYAGAWA/Hash-MultiValue-0.15.tar.gz
     provides:
       Hash::MultiValue 0.15
     requirements:
       ExtUtils::MakeMaker 6.30
-  Hook-LexWrap-0.24
-    pathname: C/CH/CHORNY/Hook-LexWrap-0.24.tar.gz
-    provides:
-      Hook::LexWrap 0.24
-      Hook::LexWrap::Cleanup undef
-    requirements:
-      Test::More 0
-      perl 5.006
   IO-HTML-1.00
     pathname: C/CJ/CJM/IO-HTML-1.00.tar.gz
     provides:
@@ -2375,16 +2391,13 @@ DISTRIBUTIONS
       File::Temp 0
       Scalar::Util 0
       Test::More 0.88
-  IO-String-1.08
-    pathname: G/GA/GAAS/IO-String-1.08.tar.gz
-    provides:
-      IO::String 1.08
-    requirements:
-      ExtUtils::MakeMaker 0
   IO-stringy-2.110
     pathname: D/DS/DSKOLL/IO-stringy-2.110.tar.gz
     provides:
+      Common undef
+      ExtUtils::TBone 1.1
       IO::AtomicFile 2.110
+      IO::Clever 1.01
       IO::InnerFile 2.110
       IO::Lines 2.110
       IO::Scalar 2.110
@@ -2392,36 +2405,58 @@ DISTRIBUTIONS
       IO::Stringy 2.110
       IO::Wrap 2.110
       IO::WrapTie 2.110
-      IO::WrapTie::Master undef
-      IO::WrapTie::Slave undef
+      IO::WrapTie::Master 2.110
+      IO::WrapTie::Slave 2.110
     requirements:
       ExtUtils::MakeMaker 0
-  JSON-2.59
-    pathname: M/MA/MAKAMAKA/JSON-2.59.tar.gz
+  Import-Into-1.002000
+    pathname: H/HA/HAARG/Import-Into-1.002000.tar.gz
     provides:
-      JSON 2.59
-      JSON::Backend::PP undef
-      JSON::Boolean undef
-      JSON::PP5005 1.10
-      JSON::PP56 1.08
-      JSON::backportPP::Boolean 1.01
+      Import::Into 1.002000
+    requirements:
+      ExtUtils::MakeMaker 0
+  JSON-2.90
+    pathname: M/MA/MAKAMAKA/JSON-2.90.tar.gz
+    provides:
+      JSON 2.90
+      JSON::Backend::PP 2.90
+      JSON::Boolean 2.90
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  JSON-Any-1.30
-    pathname: P/PE/PERIGRIN/JSON-Any-1.30.tar.gz
+  JSON-Any-1.32
+    pathname: P/PE/PERIGRIN/JSON-Any-1.32.tar.gz
     provides:
-      JSON::Any 1.30
+      JSON::Any 1.32
+      inc::MakeMaker undef
     requirements:
       ExtUtils::MakeMaker 6.30
-      perl 5.008
-  JSON-XS-2.34
-    pathname: M/ML/MLEHMANN/JSON-XS-2.34.tar.gz
+  JSON-MaybeXS-1.001000
+    pathname: M/MS/MSTROUT/JSON-MaybeXS-1.001000.tar.gz
     provides:
-      JSON::XS 2.34
-      JSON::XS::Boolean undef
+      JSON::MaybeXS 1.001000
+    requirements:
+      Cpanel::JSON::XS 2.3310
+      ExtUtils::MakeMaker 0
+      JSON::PP 2.27202
+      Test::More 0.88
+      Test::Without::Module 0.17
+  JSON-PP-2.27203
+    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
+    provides:
+      JSON::PP 2.27203
+      JSON::PP::Boolean 2.27203
+      JSON::PP::IncrParser 2.27203
     requirements:
       ExtUtils::MakeMaker 0
+      Test::More 0
+  JSON-XS-3.01
+    pathname: M/ML/MLEHMANN/JSON-XS-3.01.tar.gz
+    provides:
+      JSON::XS 3.01
+    requirements:
+      ExtUtils::MakeMaker 0
+      Types::Serialiser 0
       common::sense 0
   JavaScript-Minifier-XS-0.09
     pathname: G/GT/GTERMARS/JavaScript-Minifier-XS-0.09.tar.gz
@@ -2429,7 +2464,6 @@ DISTRIBUTIONS
       JavaScript::Minifier::XS 0.09
     requirements:
       ExtUtils::CBuilder 0
-      Module::Build 0.35
       Test::More 0
       perl v5.8.8
   LWP-MediaTypes-6.02
@@ -2439,6 +2473,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006002
+  Lexical-SealRequireHints-0.007
+    pathname: Z/ZE/ZEFRAM/Lexical-SealRequireHints-0.007.tar.gz
+    provides:
+      Lexical::SealRequireHints 0.007
+    requirements:
+      Module::Build 0
+      Test::More 0
+      perl 5.006
+      strict 0
+      warnings 0
   List-MoreUtils-0.33
     pathname: A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
     provides:
@@ -2448,11 +2492,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.52
       Test::More 0.82
       perl 5.00503
-  MIME-Types-2.02
-    pathname: M/MA/MARKOV/MIME-Types-2.02.tar.gz
+  MIME-Types-2.04
+    pathname: M/MA/MARKOV/MIME-Types-2.04.tar.gz
     provides:
-      MIME::Type 2.02
-      MIME::Types 2.02
+      MIME::Type 2.04
+      MIME::Types 2.04
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -2466,34 +2510,33 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
-  Module-Build-0.4007
-    pathname: L/LE/LEONT/Module-Build-0.4007.tar.gz
+  Module-Build-0.4204
+    pathname: L/LE/LEONT/Module-Build-0.4204.tar.gz
     provides:
-      Module::Build 0.4007
-      Module::Build::Base 0.4007
-      Module::Build::Compat 0.4007
-      Module::Build::Config 0.4007
-      Module::Build::ConfigData undef
-      Module::Build::Cookbook 0.4007
-      Module::Build::Dumper 0.4007
-      Module::Build::ModuleInfo 0.4007
-      Module::Build::Notes 0.4007
-      Module::Build::PPMMaker 0.4007
-      Module::Build::Platform::Default 0.4007
-      Module::Build::Platform::MacOS 0.4007
-      Module::Build::Platform::Unix 0.4007
-      Module::Build::Platform::VMS 0.4007
-      Module::Build::Platform::VOS 0.4007
-      Module::Build::Platform::Windows 0.4007
-      Module::Build::Platform::aix 0.4007
-      Module::Build::Platform::cygwin 0.4007
-      Module::Build::Platform::darwin 0.4007
-      Module::Build::Platform::os2 0.4007
-      Module::Build::PodParser 0.4007
+      Module::Build 0.4204
+      Module::Build::Base 0.4204
+      Module::Build::Compat 0.4204
+      Module::Build::Config 0.4204
+      Module::Build::Cookbook 0.4204
+      Module::Build::Dumper 0.4204
+      Module::Build::ModuleInfo 0.4204
+      Module::Build::Notes 0.4204
+      Module::Build::PPMMaker 0.4204
+      Module::Build::Platform::Default 0.4204
+      Module::Build::Platform::MacOS 0.4204
+      Module::Build::Platform::Unix 0.4204
+      Module::Build::Platform::VMS 0.4204
+      Module::Build::Platform::VOS 0.4204
+      Module::Build::Platform::Windows 0.4204
+      Module::Build::Platform::aix 0.4204
+      Module::Build::Platform::cygwin 0.4204
+      Module::Build::Platform::darwin 0.4204
+      Module::Build::Platform::os2 0.4204
+      Module::Build::PodParser 0.4204
       Module::Build::Version 0.87
       Module::Build::YAML 1.41
-      inc::latest 0.4007
-      inc::latest::private 0.4007
+      inc::latest 0.4204
+      inc::latest::private 0.4204
     requirements:
       CPAN::Meta 2.110420
       CPAN::Meta::YAML 0.003
@@ -2522,12 +2565,13 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
-  Module-Build-Tiny-0.026
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.026.tar.gz
+  Module-Build-Tiny-0.034
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.034.tar.gz
     provides:
-      Module::Build::Tiny 0.026
+      Module::Build::Tiny 0.034
     requirements:
       CPAN::Meta 0
+      DynaLoader 0
       Exporter 5.57
       ExtUtils::CBuilder 0
       ExtUtils::Config 0.003
@@ -2539,10 +2583,10 @@ DISTRIBUTIONS
       File::Find 0
       File::Path 0
       File::Spec::Functions 0
-      Getopt::Long 0
+      Getopt::Long 2.36
       JSON::PP 2
       Pod::Man 0
-      TAP::Harness 0
+      TAP::Harness::Env 0
       perl 5.006
       strict 0
       warnings 0
@@ -2550,6 +2594,10 @@ DISTRIBUTIONS
     pathname: D/DR/DROLSKY/Module-Implementation-0.07.tar.gz
     provides:
       Module::Implementation 0.07
+      T::Impl1 undef
+      T::Impl2 undef
+      T::ImplFails1 undef
+      T::ImplFails2 undef
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -2557,19 +2605,18 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
-  Module-Path-0.09
-    pathname: N/NE/NEILB/Module-Path-0.09.tar.gz
+  Module-Pluggable-5.1
+    pathname: S/SI/SIMONW/Module-Pluggable-5.1.tar.gz
     provides:
-      Module::Path 0.09
+      Devel::InnerPackage 0.4
+      Module::Pluggable 5.1
+      Module::Pluggable::Object 5.1
     requirements:
-      Devel::FindPerl 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Spec::Functions 0
-      FindBin 0.05
-      Test::More 0.88
-      strict 0
-      warnings 0
+      File::Basename 0
+      File::Spec 3.00
+      Module::Build 0.38
+      Test::More 0.62
+      if 0
   Module-Runtime-0.013
     pathname: Z/ZE/ZEFRAM/Module-Runtime-0.013.tar.gz
     provides:
@@ -2580,31 +2627,36 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Moo-1.003000
-    pathname: H/HA/HAARG/Moo-1.003000.tar.gz
+  Moo-1.004002
+    pathname: H/HA/HAARG/Moo-1.004002.tar.gz
     provides:
       Method::Generate::Accessor undef
       Method::Generate::BuildAll undef
       Method::Generate::Constructor undef
       Method::Generate::DemolishAll undef
       Method::Inliner undef
-      Moo 1.003000
+      Moo 1.004002
       Moo::HandleMoose undef
       Moo::HandleMoose::FakeConstructor undef
       Moo::HandleMoose::FakeMetaClass undef
+      Moo::HandleMoose::_TypeMap undef
       Moo::Object undef
-      Moo::Role undef
+      Moo::Role 1.004002
+      Moo::_Utils undef
+      Moo::_mro undef
       Moo::sification undef
-      Sub::Defer undef
-      Sub::Quote undef
+      Sub::Defer 1.004002
+      Sub::Quote 1.004002
       oo undef
     requirements:
       Class::Method::Modifiers 1.1
       Devel::GlobalDestruction 0.11
       Dist::CheckConflicts 0.02
       ExtUtils::MakeMaker 0
+      Import::Into 1.002
       Module::Runtime 0.012
-      Role::Tiny 1.003
+      Role::Tiny 1.003002
+      perl 5.008001
       strictures 1.004003
   MooX-Types-MooseLike-0.25
     pathname: M/MA/MATEU/MooX-Types-MooseLike-0.25.tar.gz
@@ -2617,179 +2669,400 @@ DISTRIBUTIONS
       Moo 0.09101
       Test::Fatal 0.003
       Test::More 0.96
-  Moose-2.1005
-    pathname: E/ET/ETHER/Moose-2.1005.tar.gz
+  Moose-2.1202
+    pathname: E/ET/ETHER/Moose-2.1202.tar.gz
     provides:
-      Class::MOP 2.1005
-      Class::MOP::Attribute 2.1005
-      Class::MOP::Class 2.1005
-      Class::MOP::Class::Immutable::Trait 2.1005
-      Class::MOP::Deprecated 2.1005
-      Class::MOP::Instance 2.1005
-      Class::MOP::Method 2.1005
-      Class::MOP::Method::Accessor 2.1005
-      Class::MOP::Method::Constructor 2.1005
-      Class::MOP::Method::Generated 2.1005
-      Class::MOP::Method::Inlined 2.1005
-      Class::MOP::Method::Meta 2.1005
-      Class::MOP::Method::Overload 2.1005
-      Class::MOP::Method::Wrapped 2.1005
-      Class::MOP::MiniTrait 2.1005
-      Class::MOP::Mixin 2.1005
-      Class::MOP::Mixin::AttributeCore 2.1005
-      Class::MOP::Mixin::HasAttributes 2.1005
-      Class::MOP::Mixin::HasMethods 2.1005
-      Class::MOP::Module 2.1005
-      Class::MOP::Object 2.1005
-      Class::MOP::Package 2.1005
-      Moose 2.1005
-      Moose::Deprecated 2.1005
-      Moose::Error::Confess 2.1005
-      Moose::Error::Croak 2.1005
-      Moose::Error::Default 2.1005
-      Moose::Exporter 2.1005
-      Moose::Meta::Attribute 2.1005
-      Moose::Meta::Attribute::Custom::Moose 2.1005
-      Moose::Meta::Attribute::Native 2.1005
-      Moose::Meta::Attribute::Native::Trait 2.1005
-      Moose::Meta::Attribute::Native::Trait::Array 2.1005
-      Moose::Meta::Attribute::Native::Trait::Bool 2.1005
-      Moose::Meta::Attribute::Native::Trait::Code 2.1005
-      Moose::Meta::Attribute::Native::Trait::Counter 2.1005
-      Moose::Meta::Attribute::Native::Trait::Hash 2.1005
-      Moose::Meta::Attribute::Native::Trait::Number 2.1005
-      Moose::Meta::Attribute::Native::Trait::String 2.1005
-      Moose::Meta::Class 2.1005
-      Moose::Meta::Class::Immutable::Trait 2.1005
-      Moose::Meta::Instance 2.1005
-      Moose::Meta::Method 2.1005
-      Moose::Meta::Method::Accessor 2.1005
-      Moose::Meta::Method::Accessor::Native 2.1005
-      Moose::Meta::Method::Accessor::Native::Array 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::Writer 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::accessor 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::clear 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::count 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::delete 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::elements 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::first 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::first_index 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::get 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::grep 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::insert 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::is_empty 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::join 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::map 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::natatime 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::pop 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::push 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::reduce 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::set 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::shallow_clone 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::shift 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::shuffle 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::sort 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::sort_in_place 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::splice 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::uniq 2.1005
-      Moose::Meta::Method::Accessor::Native::Array::unshift 2.1005
-      Moose::Meta::Method::Accessor::Native::Bool::not 2.1005
-      Moose::Meta::Method::Accessor::Native::Bool::set 2.1005
-      Moose::Meta::Method::Accessor::Native::Bool::toggle 2.1005
-      Moose::Meta::Method::Accessor::Native::Bool::unset 2.1005
-      Moose::Meta::Method::Accessor::Native::Code::execute 2.1005
-      Moose::Meta::Method::Accessor::Native::Code::execute_method 2.1005
-      Moose::Meta::Method::Accessor::Native::Collection 2.1005
-      Moose::Meta::Method::Accessor::Native::Counter::Writer 2.1005
-      Moose::Meta::Method::Accessor::Native::Counter::dec 2.1005
-      Moose::Meta::Method::Accessor::Native::Counter::inc 2.1005
-      Moose::Meta::Method::Accessor::Native::Counter::reset 2.1005
-      Moose::Meta::Method::Accessor::Native::Counter::set 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::Writer 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::accessor 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::clear 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::count 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::defined 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::delete 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::elements 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::exists 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::get 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::is_empty 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::keys 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::kv 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::set 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone 2.1005
-      Moose::Meta::Method::Accessor::Native::Hash::values 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::abs 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::add 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::div 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::mod 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::mul 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::set 2.1005
-      Moose::Meta::Method::Accessor::Native::Number::sub 2.1005
-      Moose::Meta::Method::Accessor::Native::Reader 2.1005
-      Moose::Meta::Method::Accessor::Native::String::append 2.1005
-      Moose::Meta::Method::Accessor::Native::String::chomp 2.1005
-      Moose::Meta::Method::Accessor::Native::String::chop 2.1005
-      Moose::Meta::Method::Accessor::Native::String::clear 2.1005
-      Moose::Meta::Method::Accessor::Native::String::inc 2.1005
-      Moose::Meta::Method::Accessor::Native::String::length 2.1005
-      Moose::Meta::Method::Accessor::Native::String::match 2.1005
-      Moose::Meta::Method::Accessor::Native::String::prepend 2.1005
-      Moose::Meta::Method::Accessor::Native::String::replace 2.1005
-      Moose::Meta::Method::Accessor::Native::String::substr 2.1005
-      Moose::Meta::Method::Accessor::Native::Writer 2.1005
-      Moose::Meta::Method::Augmented 2.1005
-      Moose::Meta::Method::Constructor 2.1005
-      Moose::Meta::Method::Delegation 2.1005
-      Moose::Meta::Method::Destructor 2.1005
-      Moose::Meta::Method::Meta 2.1005
-      Moose::Meta::Method::Overridden 2.1005
-      Moose::Meta::Mixin::AttributeCore 2.1005
-      Moose::Meta::Object::Trait 2.1005
-      Moose::Meta::Role 2.1005
-      Moose::Meta::Role::Application 2.1005
-      Moose::Meta::Role::Application::RoleSummation 2.1005
-      Moose::Meta::Role::Application::ToClass 2.1005
-      Moose::Meta::Role::Application::ToInstance 2.1005
-      Moose::Meta::Role::Application::ToRole 2.1005
-      Moose::Meta::Role::Attribute 2.1005
-      Moose::Meta::Role::Composite 2.1005
-      Moose::Meta::Role::Method 2.1005
-      Moose::Meta::Role::Method::Conflicting 2.1005
-      Moose::Meta::Role::Method::Required 2.1005
-      Moose::Meta::TypeCoercion 2.1005
-      Moose::Meta::TypeCoercion::Union 2.1005
-      Moose::Meta::TypeConstraint 2.1005
-      Moose::Meta::TypeConstraint::Class 2.1005
-      Moose::Meta::TypeConstraint::DuckType 2.1005
-      Moose::Meta::TypeConstraint::Enum 2.1005
-      Moose::Meta::TypeConstraint::Parameterizable 2.1005
-      Moose::Meta::TypeConstraint::Parameterized 2.1005
-      Moose::Meta::TypeConstraint::Registry 2.1005
-      Moose::Meta::TypeConstraint::Role 2.1005
-      Moose::Meta::TypeConstraint::Union 2.1005
-      Moose::Object 2.1005
-      Moose::Role 2.1005
-      Moose::Util 2.1005
-      Moose::Util::MetaRole 2.1005
-      Moose::Util::TypeConstraints 2.1005
-      Moose::Util::TypeConstraints::Builtins 2.1005
-      Test::Moose 2.1005
-      metaclass 2.1005
-      oose 2.1005
+      Class::MOP 2.1202
+      Class::MOP::Attribute 2.1202
+      Class::MOP::Class 2.1202
+      Class::MOP::Class::Immutable::Trait undef
+      Class::MOP::Deprecated undef
+      Class::MOP::Instance 2.1202
+      Class::MOP::Method 2.1202
+      Class::MOP::Method::Accessor 2.1202
+      Class::MOP::Method::Constructor 2.1202
+      Class::MOP::Method::Generated 2.1202
+      Class::MOP::Method::Inlined 2.1202
+      Class::MOP::Method::Meta 2.1202
+      Class::MOP::Method::Overload 2.1202
+      Class::MOP::Method::Wrapped 2.1202
+      Class::MOP::MiniTrait undef
+      Class::MOP::Mixin undef
+      Class::MOP::Mixin::AttributeCore undef
+      Class::MOP::Mixin::HasAttributes undef
+      Class::MOP::Mixin::HasMethods undef
+      Class::MOP::Module 2.1202
+      Class::MOP::Object 2.1202
+      Class::MOP::Package 2.1202
+      Moose 2.1202
+      Moose::Deprecated undef
+      Moose::Exception 2.1202
+      Moose::Exception::AccessorMustReadWrite 2.1202
+      Moose::Exception::AddParameterizableTypeTakesParameterizableType 2.1202
+      Moose::Exception::AddRoleTakesAMooseMetaRoleInstance 2.1202
+      Moose::Exception::AddRoleToARoleTakesAMooseMetaRole 2.1202
+      Moose::Exception::ApplyTakesABlessedInstance 2.1202
+      Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass 2.1202
+      Moose::Exception::AttributeConflictInRoles 2.1202
+      Moose::Exception::AttributeConflictInSummation 2.1202
+      Moose::Exception::AttributeExtensionIsNotSupportedInRoles 2.1202
+      Moose::Exception::AttributeIsRequired 2.1202
+      Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass 2.1202
+      Moose::Exception::AttributeNamesDoNotMatch 2.1202
+      Moose::Exception::AttributeValueIsNotAnObject 2.1202
+      Moose::Exception::AttributeValueIsNotDefined 2.1202
+      Moose::Exception::AutoDeRefNeedsArrayRefOrHashRef 2.1202
+      Moose::Exception::BadOptionFormat 2.1202
+      Moose::Exception::BothBuilderAndDefaultAreNotAllowed 2.1202
+      Moose::Exception::BuilderDoesNotExist 2.1202
+      Moose::Exception::BuilderMethodNotSupportedForAttribute 2.1202
+      Moose::Exception::BuilderMethodNotSupportedForInlineAttribute 2.1202
+      Moose::Exception::BuilderMustBeAMethodName 2.1202
+      Moose::Exception::CallingMethodOnAnImmutableInstance 2.1202
+      Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance 2.1202
+      Moose::Exception::CanExtendOnlyClasses 2.1202
+      Moose::Exception::CanOnlyConsumeRole 2.1202
+      Moose::Exception::CanOnlyWrapBlessedCode 2.1202
+      Moose::Exception::CanReblessOnlyIntoASubclass 2.1202
+      Moose::Exception::CanReblessOnlyIntoASuperclass 2.1202
+      Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion 2.1202
+      Moose::Exception::CannotAddAsAnAttributeToARole 2.1202
+      Moose::Exception::CannotApplyBaseClassRolesToRole 2.1202
+      Moose::Exception::CannotAssignValueToReadOnlyAccessor 2.1202
+      Moose::Exception::CannotAugmentIfLocalMethodPresent 2.1202
+      Moose::Exception::CannotAugmentNoSuperMethod 2.1202
+      Moose::Exception::CannotAutoDerefWithoutIsa 2.1202
+      Moose::Exception::CannotAutoDereferenceTypeConstraint 2.1202
+      Moose::Exception::CannotCalculateNativeType 2.1202
+      Moose::Exception::CannotCallAnAbstractBaseMethod 2.1202
+      Moose::Exception::CannotCallAnAbstractMethod 2.1202
+      Moose::Exception::CannotCoerceAWeakRef 2.1202
+      Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion 2.1202
+      Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter 2.1202
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent 2.1202
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass 2.1202
+      Moose::Exception::CannotDelegateLocalMethodIsPresent 2.1202
+      Moose::Exception::CannotDelegateWithoutIsa 2.1202
+      Moose::Exception::CannotFindDelegateMetaclass 2.1202
+      Moose::Exception::CannotFindType 2.1202
+      Moose::Exception::CannotFindTypeGivenToMatchOnType 2.1202
+      Moose::Exception::CannotFixMetaclassCompatibility 2.1202
+      Moose::Exception::CannotGenerateInlineConstraint 2.1202
+      Moose::Exception::CannotInitializeMooseMetaRoleComposite 2.1202
+      Moose::Exception::CannotInlineTypeConstraintCheck 2.1202
+      Moose::Exception::CannotLocatePackageInINC 2.1202
+      Moose::Exception::CannotMakeMetaclassCompatible 2.1202
+      Moose::Exception::CannotOverrideALocalMethod 2.1202
+      Moose::Exception::CannotOverrideBodyOfMetaMethods 2.1202
+      Moose::Exception::CannotOverrideLocalMethodIsPresent 2.1202
+      Moose::Exception::CannotOverrideNoSuperMethod 2.1202
+      Moose::Exception::CannotRegisterUnnamedTypeConstraint 2.1202
+      Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously 2.1202
+      Moose::Exception::CircularReferenceInAlso 2.1202
+      Moose::Exception::ClassDoesNotHaveInitMeta 2.1202
+      Moose::Exception::ClassDoesTheExcludedRole 2.1202
+      Moose::Exception::ClassNamesDoNotMatch 2.1202
+      Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass 2.1202
+      Moose::Exception::CodeBlockMustBeACodeRef 2.1202
+      Moose::Exception::CoercingWithoutCoercions 2.1202
+      Moose::Exception::CoercionAlreadyExists 2.1202
+      Moose::Exception::CoercionNeedsTypeConstraint 2.1202
+      Moose::Exception::ConflictDetectedInCheckRoleExclusions 2.1202
+      Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass 2.1202
+      Moose::Exception::ConstructClassInstanceTakesPackageName 2.1202
+      Moose::Exception::CouldNotCreateMethod 2.1202
+      Moose::Exception::CouldNotCreateWriter 2.1202
+      Moose::Exception::CouldNotEvalConstructor 2.1202
+      Moose::Exception::CouldNotEvalDestructor 2.1202
+      Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom 2.1202
+      Moose::Exception::CouldNotGenerateInlineAttributeMethod 2.1202
+      Moose::Exception::CouldNotLocateTypeConstraintForUnion 2.1202
+      Moose::Exception::CouldNotParseType 2.1202
+      Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes 2.1202
+      Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses 2.1202
+      Moose::Exception::CreateMOPClassTakesHashRefOfMethods 2.1202
+      Moose::Exception::CreateTakesArrayRefOfRoles 2.1202
+      Moose::Exception::CreateTakesHashRefOfAttributes 2.1202
+      Moose::Exception::CreateTakesHashRefOfMethods 2.1202
+      Moose::Exception::DefaultToMatchOnTypeMustBeCodeRef 2.1202
+      Moose::Exception::DelegationToAClassWhichIsNotLoaded 2.1202
+      Moose::Exception::DelegationToARoleWhichIsNotLoaded 2.1202
+      Moose::Exception::DelegationToATypeWhichIsNotAClass 2.1202
+      Moose::Exception::DoesRequiresRoleName 2.1202
+      Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs 2.1202
+      Moose::Exception::EnumValuesMustBeString 2.1202
+      Moose::Exception::ExtendsMissingArgs 2.1202
+      Moose::Exception::HandlesMustBeAHashRef 2.1202
+      Moose::Exception::IllegalInheritedOptions 2.1202
+      Moose::Exception::IllegalMethodTypeToAddMethodModifier 2.1202
+      Moose::Exception::IncompatibleMetaclassOfSuperclass 2.1202
+      Moose::Exception::InitMetaRequiresClass 2.1202
+      Moose::Exception::InitializeTakesUnBlessedPackageName 2.1202
+      Moose::Exception::InstanceBlessedIntoWrongClass 2.1202
+      Moose::Exception::InstanceMustBeABlessedReference 2.1202
+      Moose::Exception::InvalidArgPassedToMooseUtilMetaRole 2.1202
+      Moose::Exception::InvalidArgumentToMethod 2.1202
+      Moose::Exception::InvalidArgumentsToTraitAliases 2.1202
+      Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint 2.1202
+      Moose::Exception::InvalidHandleValue 2.1202
+      Moose::Exception::InvalidHasProvidedInARole 2.1202
+      Moose::Exception::InvalidNameForType 2.1202
+      Moose::Exception::InvalidRoleApplication 2.1202
+      Moose::Exception::InvalidTypeConstraint 2.1202
+      Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint 2.1202
+      Moose::Exception::InvalidValueForIs 2.1202
+      Moose::Exception::IsaDoesNotDoTheRole 2.1202
+      Moose::Exception::IsaLacksDoesMethod 2.1202
+      Moose::Exception::LazyAttributeNeedsADefault 2.1202
+      Moose::Exception::Legacy 2.1202
+      Moose::Exception::MOPAttributeNewNeedsAttributeName 2.1202
+      Moose::Exception::MatchActionMustBeACodeRef 2.1202
+      Moose::Exception::MessageParameterMustBeCodeRef 2.1202
+      Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass 2.1202
+      Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass 2.1202
+      Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass 2.1202
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass 2.1202
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole 2.1202
+      Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass 2.1202
+      Moose::Exception::MetaclassNotLoaded 2.1202
+      Moose::Exception::MetaclassTypeIncompatible 2.1202
+      Moose::Exception::MethodExpectedAMetaclassObject 2.1202
+      Moose::Exception::MethodExpectsFewerArgs 2.1202
+      Moose::Exception::MethodExpectsMoreArgs 2.1202
+      Moose::Exception::MethodModifierNeedsMethodName 2.1202
+      Moose::Exception::MethodNameConflictInRoles 2.1202
+      Moose::Exception::MethodNameNotFoundInInheritanceHierarchy 2.1202
+      Moose::Exception::MethodNameNotGiven 2.1202
+      Moose::Exception::MustDefineAMethodName 2.1202
+      Moose::Exception::MustDefineAnAttributeName 2.1202
+      Moose::Exception::MustHaveAtLeastOneValueToEnumerate 2.1202
+      Moose::Exception::MustPassAHashOfOptions 2.1202
+      Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass 2.1202
+      Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance 2.1202
+      Moose::Exception::MustPassEvenNumberOfArguments 2.1202
+      Moose::Exception::MustPassEvenNumberOfAttributeOptions 2.1202
+      Moose::Exception::MustProvideANameForTheAttribute 2.1202
+      Moose::Exception::MustSpecifyAtleastOneMethod 2.1202
+      Moose::Exception::MustSpecifyAtleastOneRole 2.1202
+      Moose::Exception::MustSpecifyAtleastOneRoleToApplicant 2.1202
+      Moose::Exception::MustSupplyAClassMOPAttributeInstance 2.1202
+      Moose::Exception::MustSupplyADelegateToMethod 2.1202
+      Moose::Exception::MustSupplyAMetaclass 2.1202
+      Moose::Exception::MustSupplyAMooseMetaAttributeInstance 2.1202
+      Moose::Exception::MustSupplyAnAccessorTypeToConstructWith 2.1202
+      Moose::Exception::MustSupplyAnAttributeToConstructWith 2.1202
+      Moose::Exception::MustSupplyArrayRefAsCurriedArguments 2.1202
+      Moose::Exception::MustSupplyPackageNameAndName 2.1202
+      Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion 2.1202
+      Moose::Exception::NeitherAttributeNorAttributeNameIsGiven 2.1202
+      Moose::Exception::NeitherClassNorClassNameIsGiven 2.1202
+      Moose::Exception::NeitherRoleNorRoleNameIsGiven 2.1202
+      Moose::Exception::NeitherTypeNorTypeNameIsGiven 2.1202
+      Moose::Exception::NoAttributeFoundInSuperClass 2.1202
+      Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass 2.1202
+      Moose::Exception::NoCasesMatched 2.1202
+      Moose::Exception::NoConstraintCheckForTypeConstraint 2.1202
+      Moose::Exception::NoDestructorClassSpecified 2.1202
+      Moose::Exception::NoImmutableTraitSpecifiedForClass 2.1202
+      Moose::Exception::NoParentGivenToSubtype 2.1202
+      Moose::Exception::OnlyInstancesCanBeCloned 2.1202
+      Moose::Exception::OperatorIsRequired 2.1202
+      Moose::Exception::OverrideConflictInComposition 2.1202
+      Moose::Exception::OverrideConflictInSummation 2.1202
+      Moose::Exception::PackageDoesNotUseMooseExporter 2.1202
+      Moose::Exception::PackageNameAndNameParamsNotGivenToWrap 2.1202
+      Moose::Exception::PackagesAndModulesAreNotCachable 2.1202
+      Moose::Exception::ParameterIsNotSubtypeOfParent 2.1202
+      Moose::Exception::ReferencesAreNotAllowedAsDefault 2.1202
+      Moose::Exception::RequiredAttributeLacksInitialization 2.1202
+      Moose::Exception::RequiredAttributeNeedsADefault 2.1202
+      Moose::Exception::RequiredMethodsImportedByClass 2.1202
+      Moose::Exception::RequiredMethodsNotImplementedByClass 2.1202
+      Moose::Exception::Role::Attribute 2.1202
+      Moose::Exception::Role::AttributeName 2.1202
+      Moose::Exception::Role::Class 2.1202
+      Moose::Exception::Role::EitherAttributeOrAttributeName 2.1202
+      Moose::Exception::Role::Instance 2.1202
+      Moose::Exception::Role::InvalidAttributeOptions 2.1202
+      Moose::Exception::Role::Method 2.1202
+      Moose::Exception::Role::ParamsHash 2.1202
+      Moose::Exception::Role::Role 2.1202
+      Moose::Exception::Role::RoleForCreate 2.1202
+      Moose::Exception::Role::RoleForCreateMOPClass 2.1202
+      Moose::Exception::Role::TypeConstraint 2.1202
+      Moose::Exception::RoleDoesTheExcludedRole 2.1202
+      Moose::Exception::RoleExclusionConflict 2.1202
+      Moose::Exception::RoleNameRequired 2.1202
+      Moose::Exception::RoleNameRequiredForMooseMetaRole 2.1202
+      Moose::Exception::RoleNamesDoNotMatch 2.1202
+      Moose::Exception::RolesDoNotSupportAugment 2.1202
+      Moose::Exception::RolesDoNotSupportExtends 2.1202
+      Moose::Exception::RolesDoNotSupportInner 2.1202
+      Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers 2.1202
+      Moose::Exception::RolesInCreateTakesAnArrayRef 2.1202
+      Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole 2.1202
+      Moose::Exception::SingleParamsToNewMustBeHashRef 2.1202
+      Moose::Exception::TriggerMustBeACodeRef 2.1202
+      Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType 2.1202
+      Moose::Exception::TypeConstraintIsAlreadyCreated 2.1202
+      Moose::Exception::TypeNamesDoNotMatch 2.1202
+      Moose::Exception::TypeParameterMustBeMooseMetaType 2.1202
+      Moose::Exception::UnableToCanonicalizeHandles 2.1202
+      Moose::Exception::UnableToCanonicalizeNonRolePackage 2.1202
+      Moose::Exception::UnableToRecognizeDelegateMetaclass 2.1202
+      Moose::Exception::UndefinedHashKeysPassedToMethod 2.1202
+      Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs 2.1202
+      Moose::Exception::UnionTakesAtleastTwoTypeNames 2.1202
+      Moose::Exception::ValidationFailedForInlineTypeConstraint 2.1202
+      Moose::Exception::ValidationFailedForTypeConstraint 2.1202
+      Moose::Exception::WrapTakesACodeRefToBless 2.1202
+      Moose::Exception::WrongTypeConstraintGiven 2.1202
+      Moose::Exporter 2.1202
+      Moose::Meta::Attribute 2.1202
+      Moose::Meta::Attribute::Native 2.1202
+      Moose::Meta::Attribute::Native::Trait undef
+      Moose::Meta::Attribute::Native::Trait::Array 2.1202
+      Moose::Meta::Attribute::Native::Trait::Bool 2.1202
+      Moose::Meta::Attribute::Native::Trait::Code 2.1202
+      Moose::Meta::Attribute::Native::Trait::Counter 2.1202
+      Moose::Meta::Attribute::Native::Trait::Hash 2.1202
+      Moose::Meta::Attribute::Native::Trait::Number 2.1202
+      Moose::Meta::Attribute::Native::Trait::String 2.1202
+      Moose::Meta::Class 2.1202
+      Moose::Meta::Class::Immutable::Trait undef
+      Moose::Meta::Instance 2.1202
+      Moose::Meta::Method 2.1202
+      Moose::Meta::Method::Accessor 2.1202
+      Moose::Meta::Method::Accessor::Native undef
+      Moose::Meta::Method::Accessor::Native::Array undef
+      Moose::Meta::Method::Accessor::Native::Array::Writer undef
+      Moose::Meta::Method::Accessor::Native::Array::accessor undef
+      Moose::Meta::Method::Accessor::Native::Array::clear undef
+      Moose::Meta::Method::Accessor::Native::Array::count undef
+      Moose::Meta::Method::Accessor::Native::Array::delete undef
+      Moose::Meta::Method::Accessor::Native::Array::elements undef
+      Moose::Meta::Method::Accessor::Native::Array::first undef
+      Moose::Meta::Method::Accessor::Native::Array::first_index undef
+      Moose::Meta::Method::Accessor::Native::Array::get undef
+      Moose::Meta::Method::Accessor::Native::Array::grep undef
+      Moose::Meta::Method::Accessor::Native::Array::insert undef
+      Moose::Meta::Method::Accessor::Native::Array::is_empty undef
+      Moose::Meta::Method::Accessor::Native::Array::join undef
+      Moose::Meta::Method::Accessor::Native::Array::map undef
+      Moose::Meta::Method::Accessor::Native::Array::natatime undef
+      Moose::Meta::Method::Accessor::Native::Array::pop undef
+      Moose::Meta::Method::Accessor::Native::Array::push undef
+      Moose::Meta::Method::Accessor::Native::Array::reduce undef
+      Moose::Meta::Method::Accessor::Native::Array::set undef
+      Moose::Meta::Method::Accessor::Native::Array::shallow_clone undef
+      Moose::Meta::Method::Accessor::Native::Array::shift undef
+      Moose::Meta::Method::Accessor::Native::Array::shuffle undef
+      Moose::Meta::Method::Accessor::Native::Array::sort undef
+      Moose::Meta::Method::Accessor::Native::Array::sort_in_place undef
+      Moose::Meta::Method::Accessor::Native::Array::splice undef
+      Moose::Meta::Method::Accessor::Native::Array::uniq undef
+      Moose::Meta::Method::Accessor::Native::Array::unshift undef
+      Moose::Meta::Method::Accessor::Native::Bool::not undef
+      Moose::Meta::Method::Accessor::Native::Bool::set undef
+      Moose::Meta::Method::Accessor::Native::Bool::toggle undef
+      Moose::Meta::Method::Accessor::Native::Bool::unset undef
+      Moose::Meta::Method::Accessor::Native::Code::execute undef
+      Moose::Meta::Method::Accessor::Native::Code::execute_method undef
+      Moose::Meta::Method::Accessor::Native::Collection undef
+      Moose::Meta::Method::Accessor::Native::Counter::Writer undef
+      Moose::Meta::Method::Accessor::Native::Counter::dec undef
+      Moose::Meta::Method::Accessor::Native::Counter::inc undef
+      Moose::Meta::Method::Accessor::Native::Counter::reset undef
+      Moose::Meta::Method::Accessor::Native::Counter::set undef
+      Moose::Meta::Method::Accessor::Native::Hash undef
+      Moose::Meta::Method::Accessor::Native::Hash::Writer undef
+      Moose::Meta::Method::Accessor::Native::Hash::accessor undef
+      Moose::Meta::Method::Accessor::Native::Hash::clear undef
+      Moose::Meta::Method::Accessor::Native::Hash::count undef
+      Moose::Meta::Method::Accessor::Native::Hash::defined undef
+      Moose::Meta::Method::Accessor::Native::Hash::delete undef
+      Moose::Meta::Method::Accessor::Native::Hash::elements undef
+      Moose::Meta::Method::Accessor::Native::Hash::exists undef
+      Moose::Meta::Method::Accessor::Native::Hash::get undef
+      Moose::Meta::Method::Accessor::Native::Hash::is_empty undef
+      Moose::Meta::Method::Accessor::Native::Hash::keys undef
+      Moose::Meta::Method::Accessor::Native::Hash::kv undef
+      Moose::Meta::Method::Accessor::Native::Hash::set undef
+      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone undef
+      Moose::Meta::Method::Accessor::Native::Hash::values undef
+      Moose::Meta::Method::Accessor::Native::Number::abs undef
+      Moose::Meta::Method::Accessor::Native::Number::add undef
+      Moose::Meta::Method::Accessor::Native::Number::div undef
+      Moose::Meta::Method::Accessor::Native::Number::mod undef
+      Moose::Meta::Method::Accessor::Native::Number::mul undef
+      Moose::Meta::Method::Accessor::Native::Number::set undef
+      Moose::Meta::Method::Accessor::Native::Number::sub undef
+      Moose::Meta::Method::Accessor::Native::Reader undef
+      Moose::Meta::Method::Accessor::Native::String::append undef
+      Moose::Meta::Method::Accessor::Native::String::chomp undef
+      Moose::Meta::Method::Accessor::Native::String::chop undef
+      Moose::Meta::Method::Accessor::Native::String::clear undef
+      Moose::Meta::Method::Accessor::Native::String::inc undef
+      Moose::Meta::Method::Accessor::Native::String::length undef
+      Moose::Meta::Method::Accessor::Native::String::match undef
+      Moose::Meta::Method::Accessor::Native::String::prepend undef
+      Moose::Meta::Method::Accessor::Native::String::replace undef
+      Moose::Meta::Method::Accessor::Native::String::substr undef
+      Moose::Meta::Method::Accessor::Native::Writer undef
+      Moose::Meta::Method::Augmented 2.1202
+      Moose::Meta::Method::Constructor 2.1202
+      Moose::Meta::Method::Delegation 2.1202
+      Moose::Meta::Method::Destructor 2.1202
+      Moose::Meta::Method::Meta 2.1202
+      Moose::Meta::Method::Overridden 2.1202
+      Moose::Meta::Mixin::AttributeCore undef
+      Moose::Meta::Object::Trait undef
+      Moose::Meta::Role 2.1202
+      Moose::Meta::Role::Application 2.1202
+      Moose::Meta::Role::Application::RoleSummation 2.1202
+      Moose::Meta::Role::Application::ToClass 2.1202
+      Moose::Meta::Role::Application::ToInstance 2.1202
+      Moose::Meta::Role::Application::ToRole 2.1202
+      Moose::Meta::Role::Attribute 2.1202
+      Moose::Meta::Role::Composite 2.1202
+      Moose::Meta::Role::Method 2.1202
+      Moose::Meta::Role::Method::Conflicting 2.1202
+      Moose::Meta::Role::Method::Required 2.1202
+      Moose::Meta::TypeCoercion 2.1202
+      Moose::Meta::TypeCoercion::Union 2.1202
+      Moose::Meta::TypeConstraint 2.1202
+      Moose::Meta::TypeConstraint::Class 2.1202
+      Moose::Meta::TypeConstraint::DuckType 2.1202
+      Moose::Meta::TypeConstraint::Enum 2.1202
+      Moose::Meta::TypeConstraint::Parameterizable 2.1202
+      Moose::Meta::TypeConstraint::Parameterized 2.1202
+      Moose::Meta::TypeConstraint::Registry 2.1202
+      Moose::Meta::TypeConstraint::Role 2.1202
+      Moose::Meta::TypeConstraint::Union 2.1202
+      Moose::Object 2.1202
+      Moose::Role 2.1202
+      Moose::Util 2.1202
+      Moose::Util::MetaRole 2.1202
+      Moose::Util::TypeConstraints 2.1202
+      Moose::Util::TypeConstraints::Builtins undef
+      Test::Moose 2.1202
+      metaclass 2.1202
+      oose 2.1202
     requirements:
       Carp 1.22
       Class::Load 0.09
       Class::Load::XS 0.01
       Data::OptList 0.107
       Devel::GlobalDestruction 0
+      Devel::StackTrace 1.30
       Dist::CheckConflicts 0.02
       Eval::Closure 0.04
+      ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 6.30
+      File::Spec 0
       List::MoreUtils 0.28
       MRO::Compat 0.05
+      Module::Runtime 0.012
       Package::DeprecationManager 0.11
       Package::Stash 0.32
       Package::Stash::XS 0.24
@@ -2799,10 +3072,13 @@ DISTRIBUTIONS
       Sub::Name 0.05
       Task::Weaken 0
       Try::Tiny 0.02
-      perl 5.008003
+      parent 0.223
   MooseX-ClassAttribute-0.27
     pathname: D/DR/DROLSKY/MooseX-ClassAttribute-0.27.tar.gz
     provides:
+      Child undef
+      Delegatee undef
+      HasClassAttribute undef
       MooseX::ClassAttribute 0.27
       MooseX::ClassAttribute::Meta::Role::Attribute 0.27
       MooseX::ClassAttribute::Trait::Application 0.27
@@ -2813,6 +3089,7 @@ DISTRIBUTIONS
       MooseX::ClassAttribute::Trait::Mixin::HasClassAttributes 0.27
       MooseX::ClassAttribute::Trait::Role 0.27
       MooseX::ClassAttribute::Trait::Role::Composite 0.27
+      SharedTests undef
     requirements:
       ExtUtils::MakeMaker 6.30
       List::MoreUtils 0
@@ -2844,73 +3121,59 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0
       namespace::clean 0
-  MooseX-Getopt-0.56
-    pathname: E/ET/ETHER/MooseX-Getopt-0.56.tar.gz
+  MooseX-Getopt-0.59
+    pathname: E/ET/ETHER/MooseX-Getopt-0.59.tar.gz
     provides:
-      MooseX::Getopt 0.56
-      MooseX::Getopt::Basic 0.56
-      MooseX::Getopt::Dashes 0.56
-      MooseX::Getopt::GLD 0.56
-      MooseX::Getopt::Meta::Attribute 0.56
-      MooseX::Getopt::Meta::Attribute::NoGetopt 0.56
-      MooseX::Getopt::Meta::Attribute::Trait 0.56
-      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.56
-      MooseX::Getopt::OptionTypeMap 0.56
-      MooseX::Getopt::ProcessedArgv 0.56
-      MooseX::Getopt::Strict 0.56
+      MooseX::Getopt 0.59
+      MooseX::Getopt::Basic 0.59
+      MooseX::Getopt::Dashes 0.59
+      MooseX::Getopt::GLD 0.59
+      MooseX::Getopt::Meta::Attribute 0.59
+      MooseX::Getopt::Meta::Attribute::NoGetopt 0.59
+      MooseX::Getopt::Meta::Attribute::Trait 0.59
+      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.59
+      MooseX::Getopt::OptionTypeMap 0.59
+      MooseX::Getopt::ProcessedArgv 0.59
+      MooseX::Getopt::Strict 0.59
     requirements:
       Carp 0
-      Config::Any::YAML 0
       ExtUtils::MakeMaker 6.30
-      File::Find 0
-      File::Temp 0
       Getopt::Long 2.37
       Getopt::Long::Descriptive 0.081
+      Module::Build::Tiny 0.030
       Moose 0
       Moose::Meta::Attribute 0
-      Moose::Meta::Class 0
       Moose::Role 0.56
       Moose::Util::TypeConstraints 0
       MooseX::Role::Parameterized 0
-      Path::Tiny 0.009
-      Scalar::Util 0
-      Test::CheckDeps 0.002
-      Test::Deep 0
-      Test::Fatal 0.003
-      Test::Moose 0
-      Test::More 0.88
-      Test::NoWarnings 1.04
-      Test::Requires 0
-      Test::Trap 0
-      Test::Warn 0.21
       Try::Tiny 0
+      perl 5.006
       strict 0
       warnings 0
-  MooseX-MethodAttributes-0.28
-    pathname: E/ET/ETHER/MooseX-MethodAttributes-0.28.tar.gz
+  MooseX-MethodAttributes-0.29
+    pathname: E/ET/ETHER/MooseX-MethodAttributes-0.29.tar.gz
     provides:
-      MooseX::MethodAttributes 0.28
-      MooseX::MethodAttributes::Inheritable 0.28
-      MooseX::MethodAttributes::Role 0.28
-      MooseX::MethodAttributes::Role::AttrContainer 0.28
-      MooseX::MethodAttributes::Role::AttrContainer::Inheritable 0.28
-      MooseX::MethodAttributes::Role::Meta::Class 0.28
-      MooseX::MethodAttributes::Role::Meta::Map 0.28
-      MooseX::MethodAttributes::Role::Meta::Method 0.28
-      MooseX::MethodAttributes::Role::Meta::Method::MaybeWrapped 0.28
-      MooseX::MethodAttributes::Role::Meta::Method::Wrapped 0.28
-      MooseX::MethodAttributes::Role::Meta::Role 0.28
-      MooseX::MethodAttributes::Role::Meta::Role::Application 0.28
-      MooseX::MethodAttributes::Role::Meta::Role::Application::Summation 0.28
+      MooseX::MethodAttributes 0.29
+      MooseX::MethodAttributes::Inheritable 0.29
+      MooseX::MethodAttributes::Role 0.29
+      MooseX::MethodAttributes::Role::AttrContainer 0.29
+      MooseX::MethodAttributes::Role::AttrContainer::Inheritable 0.29
+      MooseX::MethodAttributes::Role::Meta::Class 0.29
+      MooseX::MethodAttributes::Role::Meta::Map 0.29
+      MooseX::MethodAttributes::Role::Meta::Method 0.29
+      MooseX::MethodAttributes::Role::Meta::Method::MaybeWrapped 0.29
+      MooseX::MethodAttributes::Role::Meta::Method::Wrapped 0.29
+      MooseX::MethodAttributes::Role::Meta::Role 0.29
+      MooseX::MethodAttributes::Role::Meta::Role::Application 0.29
+      MooseX::MethodAttributes::Role::Meta::Role::Application::Summation 0.29
     requirements:
+      Carp 0
       ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
       Moose 0.98
       MooseX::Types::Moose 0.21
-      Test::CheckDeps 0.002
-      Test::Exception 0
-      Test::More 0.88
-      namespace::autoclean 0
-      namespace::clean 0.10
+      namespace::autoclean 0.08
+      perl 5.006
   MooseX-RelatedClassRoles-0.004
     pathname: H/HD/HDP/MooseX-RelatedClassRoles-0.004.tar.gz
     provides:
@@ -2920,16 +3183,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Moose 0.73
       MooseX::Role::Parameterized 0.04
-  MooseX-Role-Parameterized-1.00
-    pathname: S/SA/SARTAK/MooseX-Role-Parameterized-1.00.tar.gz
+  MooseX-Role-Parameterized-1.02
+    pathname: S/SA/SARTAK/MooseX-Role-Parameterized-1.02.tar.gz
     provides:
-      MooseX::Role::Parameterized 1.00
-      MooseX::Role::Parameterized::Meta::Role::Parameterizable 0.27
-      MooseX::Role::Parameterized::Meta::Role::Parameterized 0.27
-      MooseX::Role::Parameterized::Meta::Trait::Parameterized 0.27
-      MooseX::Role::Parameterized::Parameters 0.27
+      MooseX::Role::Parameterized 1.02
+      MooseX::Role::Parameterized::Meta::Role::Parameterizable 1.02
+      MooseX::Role::Parameterized::Meta::Role::Parameterized 1.02
+      MooseX::Role::Parameterized::Meta::Trait::Parameterized 1.02
+      MooseX::Role::Parameterized::Parameters 1.02
     requirements:
-      ExtUtils::MakeMaker 6.42
+      ExtUtils::MakeMaker 6.59
+      Module::Runtime 0
       Moose 2.0300
       Test::Fatal 0
       Test::Moose 0
@@ -2960,71 +3224,76 @@ DISTRIBUTIONS
       aliased 0
       namespace::autoclean 0.12
       namespace::clean 0
-  MooseX-Types-0.36
-    pathname: E/ET/ETHER/MooseX-Types-0.36.tar.gz
+  MooseX-Types-0.41
+    pathname: E/ET/ETHER/MooseX-Types-0.41.tar.gz
     provides:
-      MooseX::Types 0.36
-      MooseX::Types::Base 0.36
-      MooseX::Types::CheckedUtilExports 0.36
-      MooseX::Types::Combine 0.36
-      MooseX::Types::Moose 0.36
-      MooseX::Types::TypeDecorator 0.36
-      MooseX::Types::UndefinedType 0.36
-      MooseX::Types::Util 0.36
-      MooseX::Types::Wrapper 0.36
+      MooseX::Types 0.41
+      MooseX::Types::Base 0.41
+      MooseX::Types::CheckedUtilExports 0.41
+      MooseX::Types::Combine 0.41
+      MooseX::Types::Moose 0.41
+      MooseX::Types::TypeDecorator 0.41
+      MooseX::Types::UndefinedType 0.41
+      MooseX::Types::Util 0.41
+      MooseX::Types::Wrapper 0.41
     requirements:
       Carp 0
       Carp::Clan 6.00
-      Class::MOP 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
+      Module::Runtime 0
       Moose 1.06
       Moose::Exporter 0
       Moose::Meta::TypeConstraint::Union 0
       Moose::Util::TypeConstraints 0
       Scalar::Util 1.19
       Sub::Exporter 0
-      Sub::Install 0.924
       Sub::Name 0
       base 0
-      namespace::clean 0.19
+      namespace::autoclean 0.08
       overload 0
+      perl 5.008
       strict 0
       warnings 0
   Net-CIDR-Lite-0.21
     pathname: D/DO/DOUGW/Net-CIDR-Lite-0.21.tar.gz
     provides:
       Net::CIDR::Lite 0.21
-      Net::CIDR::Lite::Span undef
+      Net::CIDR::Lite::Span 0.21
     requirements:
       ExtUtils::MakeMaker 0
-  Net-DNS-0.72
-    pathname: N/NL/NLNETLABS/Net-DNS-0.72.tar.gz
+  Net-DNS-0.74
+    pathname: N/NL/NLNETLABS/Net-DNS-0.74.tar.gz
     provides:
-      Net::DNS 0.72
-      Net::DNS::Domain 1096
-      Net::DNS::DomainName 1096
-      Net::DNS::DomainName1035 undef
-      Net::DNS::DomainName2535 undef
-      Net::DNS::Header 1086
-      Net::DNS::Mailbox 1096
-      Net::DNS::Mailbox1035 undef
-      Net::DNS::Mailbox2535 undef
-      Net::DNS::Nameserver 1096
-      Net::DNS::Packet 1086
-      Net::DNS::Parameters 1074
-      Net::DNS::Question 1074
-      Net::DNS::RR 1094
+      Net::DNS 0.74
+      Net::DNS::Domain 1161
+      Net::DNS::DomainName 1150
+      Net::DNS::DomainName1035 1150
+      Net::DNS::DomainName2535 1150
+      Net::DNS::Header 1101
+      Net::DNS::Mailbox 1155
+      Net::DNS::Mailbox1035 1155
+      Net::DNS::Mailbox2535 1155
+      Net::DNS::Nameserver 1145
+      Net::DNS::Packet 1158
+      Net::DNS::Parameters 1155
+      Net::DNS::Question 1098
+      Net::DNS::RR 1158
       Net::DNS::RR::A 1096
-      Net::DNS::RR::AAAA 1096
+      Net::DNS::RR::AAAA 1098
       Net::DNS::RR::AFSDB 1096
-      Net::DNS::RR::APL 1096
-      Net::DNS::RR::APL::Item undef
-      Net::DNS::RR::CERT 1073
+      Net::DNS::RR::APL 1098
+      Net::DNS::RR::APL::Item 1098
+      Net::DNS::RR::CAA 1139
+      Net::DNS::RR::CERT 1140
       Net::DNS::RR::CNAME 1096
       Net::DNS::RR::DHCID 1096
       Net::DNS::RR::DNAME 1096
       Net::DNS::RR::EID 1096
+      Net::DNS::RR::EUI48 1139
+      Net::DNS::RR::EUI64 1139
+      Net::DNS::RR::GPOS 1139
       Net::DNS::RR::HINFO 1096
       Net::DNS::RR::HIP 1096
       Net::DNS::RR::IPSECKEY 1096
@@ -3044,41 +3313,41 @@ DISTRIBUTIONS
       Net::DNS::RR::NIMLOC 1096
       Net::DNS::RR::NS 1096
       Net::DNS::RR::NSAP 1096
-      Net::DNS::RR::NULL 1096
-      Net::DNS::RR::OPT 1096
+      Net::DNS::RR::NULL 1144
+      Net::DNS::RR::OPT 1158
       Net::DNS::RR::PTR 1096
       Net::DNS::RR::PX 1096
       Net::DNS::RR::RP 1096
       Net::DNS::RR::RT 1096
-      Net::DNS::RR::SOA 1096
-      Net::DNS::RR::SPF 1096
+      Net::DNS::RR::SOA 1151
+      Net::DNS::RR::SPF 1145
       Net::DNS::RR::SRV 1096
-      Net::DNS::RR::SSHFP 1096
+      Net::DNS::RR::SSHFP 1098
       Net::DNS::RR::TKEY 1096
-      Net::DNS::RR::TLSA 1096
-      Net::DNS::RR::TSIG 1090
-      Net::DNS::RR::TXT 1079
+      Net::DNS::RR::TLSA 1140
+      Net::DNS::RR::TSIG 1136
+      Net::DNS::RR::TXT 1147
       Net::DNS::RR::X25 1096
-      Net::DNS::Resolver 1088
-      Net::DNS::Resolver::Base 1094
+      Net::DNS::Resolver 1115
+      Net::DNS::Resolver::Base 1158
       Net::DNS::Resolver::MSWin32 1096
       Net::DNS::Resolver::Recurse 1096
       Net::DNS::Resolver::UNIX 1096
       Net::DNS::Resolver::cygwin 1096
       Net::DNS::Resolver::os2 1096
-      Net::DNS::Text 1070
-      Net::DNS::Update 1096
-      Net::DNS::ZoneFile 1094
-      Net::DNS::ZoneFile::Generator undef
-      Net::DNS::ZoneFile::Text undef
+      Net::DNS::Text 1147
+      Net::DNS::Update 1145
+      Net::DNS::ZoneFile 1158
+      Net::DNS::ZoneFile::Generator 1158
+      Net::DNS::ZoneFile::Text 1158
     requirements:
-      Digest::HMAC_MD5 1
-      Digest::MD5 2.12
+      Digest::HMAC 1.01
+      Digest::MD5 2.13
       Digest::SHA 5.23
       ExtUtils::MakeMaker 0
-      IO::Socket 0
+      IO::Socket 1.24
       MIME::Base64 2.11
-      Test::More 0.18
+      Test::More 0.52
   Net-HTTP-6.06
     pathname: G/GA/GAAS/Net-HTTP-6.06.tar.gz
     provides:
@@ -3129,118 +3398,6 @@ DISTRIBUTIONS
       Storable 2.11
       Test::More 0.47
       perl 5.005
-  PPI-1.215
-    pathname: A/AD/ADAMK/PPI-1.215.tar.gz
-    provides:
-      PPI 1.215
-      PPI::Cache 1.215
-      PPI::Document 1.215
-      PPI::Document::File 1.215
-      PPI::Document::Fragment 1.215
-      PPI::Document::Normalized 1.215
-      PPI::Dumper 1.215
-      PPI::Element 1.215
-      PPI::Exception 1.215
-      PPI::Exception::ParserRejection 1.215
-      PPI::Exception::ParserTimeout 1.215
-      PPI::Find 1.215
-      PPI::Lexer 1.215
-      PPI::Node 1.215
-      PPI::Normal 1.215
-      PPI::Normal::Standard 1.215
-      PPI::Statement 1.215
-      PPI::Statement::Break 1.215
-      PPI::Statement::Compound 1.215
-      PPI::Statement::Data 1.215
-      PPI::Statement::End 1.215
-      PPI::Statement::Expression 1.215
-      PPI::Statement::Given 1.215
-      PPI::Statement::Include 1.215
-      PPI::Statement::Include::Perl6 1.215
-      PPI::Statement::Null 1.215
-      PPI::Statement::Package 1.215
-      PPI::Statement::Scheduled 1.215
-      PPI::Statement::Sub 1.215
-      PPI::Statement::Unknown 1.215
-      PPI::Statement::UnmatchedBrace 1.215
-      PPI::Statement::Variable 1.215
-      PPI::Statement::When 1.215
-      PPI::Structure 1.215
-      PPI::Structure::Block 1.215
-      PPI::Structure::Condition 1.215
-      PPI::Structure::Constructor 1.215
-      PPI::Structure::For 1.215
-      PPI::Structure::Given 1.215
-      PPI::Structure::List 1.215
-      PPI::Structure::Subscript 1.215
-      PPI::Structure::Unknown 1.215
-      PPI::Structure::When 1.215
-      PPI::Token 1.215
-      PPI::Token::ArrayIndex 1.215
-      PPI::Token::Attribute 1.215
-      PPI::Token::BOM 1.215
-      PPI::Token::Cast 1.215
-      PPI::Token::Comment 1.215
-      PPI::Token::DashedWord 1.215
-      PPI::Token::Data 1.215
-      PPI::Token::End 1.215
-      PPI::Token::HereDoc 1.215
-      PPI::Token::Label 1.215
-      PPI::Token::Magic 1.215
-      PPI::Token::Number 1.215
-      PPI::Token::Number::Binary 1.215
-      PPI::Token::Number::Exp 1.215
-      PPI::Token::Number::Float 1.215
-      PPI::Token::Number::Hex 1.215
-      PPI::Token::Number::Octal 1.215
-      PPI::Token::Number::Version 1.215
-      PPI::Token::Operator 1.215
-      PPI::Token::Pod 1.215
-      PPI::Token::Prototype 1.215
-      PPI::Token::Quote 1.215
-      PPI::Token::Quote::Double 1.215
-      PPI::Token::Quote::Interpolate 1.215
-      PPI::Token::Quote::Literal 1.215
-      PPI::Token::Quote::Single 1.215
-      PPI::Token::QuoteLike 1.215
-      PPI::Token::QuoteLike::Backtick 1.215
-      PPI::Token::QuoteLike::Command 1.215
-      PPI::Token::QuoteLike::Readline 1.215
-      PPI::Token::QuoteLike::Regexp 1.215
-      PPI::Token::QuoteLike::Words 1.215
-      PPI::Token::Regexp 1.215
-      PPI::Token::Regexp::Match 1.215
-      PPI::Token::Regexp::Substitute 1.215
-      PPI::Token::Regexp::Transliterate 1.215
-      PPI::Token::Separator 1.215
-      PPI::Token::Structure 1.215
-      PPI::Token::Symbol 1.215
-      PPI::Token::Unknown 1.215
-      PPI::Token::Whitespace 1.215
-      PPI::Token::Word 1.215
-      PPI::Tokenizer 1.215
-      PPI::Transform 1.215
-      PPI::Transform::UpdateCopyright 1.215
-      PPI::Util 1.215
-      PPI::XSAccessor 1.215
-    requirements:
-      Class::Inspector 1.22
-      Clone 0.30
-      Digest::MD5 2.35
-      ExtUtils::MakeMaker 6.42
-      File::Remove 1.42
-      File::Spec 0.84
-      IO::String 1.07
-      List::MoreUtils 0.16
-      List::Util 1.20
-      Params::Util 1.00
-      Storable 2.17
-      Task::Weaken 0
-      Test::More 0.86
-      Test::NoWarnings 0.084
-      Test::Object 0.07
-      Test::SubCalls 1.07
-      perl 5.006
   Package-DeprecationManager-0.13
     pathname: D/DR/DROLSKY/Package-DeprecationManager-0.13.tar.gz
     provides:
@@ -3256,17 +3413,19 @@ DISTRIBUTIONS
       Test::Requires 0
       strict 0
       warnings 0
-  Package-Stash-0.35
-    pathname: D/DO/DOY/Package-Stash-0.35.tar.gz
+  Package-Stash-0.36
+    pathname: D/DO/DOY/Package-Stash-0.36.tar.gz
     provides:
-      Package::Stash 0.35
-      Package::Stash::PP 0.35
+      Package::Stash 0.36
+      Package::Stash::PP 0.36
     requirements:
       B 0
       Carp 0
+      Config 0
       Dist::CheckConflicts 0.02
       ExtUtils::MakeMaker 6.30
       File::Find 0
+      File::Spec 0
       File::Temp 0
       Getopt::Long 0
       Module::Implementation 0.06
@@ -3276,13 +3435,16 @@ DISTRIBUTIONS
       Test::Fatal 0
       Test::More 0.88
       Test::Requires 0
+      Text::ParseWords 0
       base 0
       constant 0
+      lib 0
       strict 0
       warnings 0
   Package-Stash-XS-0.28
     pathname: D/DO/DOY/Package-Stash-XS-0.28.tar.gz
     provides:
+      CompileTime undef
       Package::Stash::XS 0.28
     requirements:
       ExtUtils::MakeMaker 6.30
@@ -3318,10 +3480,23 @@ DISTRIBUTIONS
     pathname: D/DR/DROLSKY/Params-Validate-1.08.tar.gz
     provides:
       Attribute::Params::Validate 1.08
+      Bar undef
+      Baz undef
+      Foo undef
+      PVTests undef
+      PVTests::Callbacks undef
+      PVTests::Defaults undef
+      PVTests::Regex undef
+      PVTests::Standard undef
+      PVTests::With undef
       Params::Validate 1.08
       Params::Validate::Constants 1.08
       Params::Validate::PP 1.08
       Params::Validate::XS 1.08
+      Quux undef
+      Testing::X undef
+      Yadda undef
+      inc::MyModuleBuild undef
     requirements:
       Attribute::Handlers 0.79
       Carp 0
@@ -3336,10 +3511,10 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Parse-CPAN-Meta-1.4405
-    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4405.tar.gz
+  Parse-CPAN-Meta-1.4409
+    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4409.tar.gz
     provides:
-      Parse::CPAN::Meta 1.4405
+      Parse::CPAN::Meta 1.4409
     requirements:
       CPAN::Meta::YAML 0.008
       Carp 0
@@ -3347,20 +3522,20 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0.80
       JSON::PP 2.27200
-      Test::More 0.47
       strict 0
-  Path-Class-0.32
-    pathname: K/KW/KWILLIAMS/Path-Class-0.32.tar.gz
+  Path-Class-0.33
+    pathname: K/KW/KWILLIAMS/Path-Class-0.33.tar.gz
     provides:
-      Path::Class 0.32
-      Path::Class::Dir 0.32
-      Path::Class::Entity 0.32
-      Path::Class::File 0.32
+      Path::Class 0.33
+      Path::Class::Dir 0.33
+      Path::Class::Entity 0.33
+      Path::Class::File 0.33
     requirements:
       Carp 0
       Cwd 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
+      File::Copy 0
       File::Path 0
       File::Spec 3.26
       File::Temp 0
@@ -3368,36 +3543,11 @@ DISTRIBUTIONS
       IO::Dir 0
       IO::File 0
       Module::Build 0.3601
+      Perl::OSType 0
       Scalar::Util 0
-      Test 0
-      Test::More 0
-      base 0
       overload 0
+      parent 0
       strict 0
-      warnings 0
-  Path-Tiny-0.030
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.030.tar.gz
-    provides:
-      Path::Tiny 0.030
-    requirements:
-      Carp 0
-      Cwd 0
-      Digest 1.03
-      Digest::SHA 5.45
-      Exporter 5.57
-      ExtUtils::MakeMaker 6.30
-      Fcntl 0
-      File::Copy 0
-      File::Path 2.07
-      File::Spec 3.40
-      File::Temp 0.18
-      File::stat 0
-      autodie::exception 2.14
-      constant 0
-      overload 0
-      strict 0
-      threads 0
-      warnings 0
   PathTools-3.40
     pathname: S/SM/SMUELLER/PathTools-3.40.tar.gz
     provides:
@@ -3417,44 +3567,12 @@ DISTRIBUTIONS
       File::Basename 0
       Scalar::Util 0
       Test 0
-  Perl-PrereqScanner-1.016
-    pathname: R/RJ/RJBS/Perl-PrereqScanner-1.016.tar.gz
-    provides:
-      Perl::PrereqScanner 1.016
-      Perl::PrereqScanner::Scanner 1.016
-      Perl::PrereqScanner::Scanner::Aliased 1.016
-      Perl::PrereqScanner::Scanner::Moose 1.016
-      Perl::PrereqScanner::Scanner::POE 1.016
-      Perl::PrereqScanner::Scanner::Perl5 1.016
-      Perl::PrereqScanner::Scanner::Superclass 1.016
-      Perl::PrereqScanner::Scanner::TestMore 1.016
-    requirements:
-      CPAN::Meta::Requirements 2.120630
-      ExtUtils::MakeMaker 6.30
-      File::Find 0
-      File::Spec::Functions 0
-      FindBin 0
-      Getopt::Long 0
-      Getopt::Long::Descriptive 0
-      List::MoreUtils 0
-      List::Util 0
-      Module::Path 0
-      Moose 0
-      Moose::Role 0
-      PPI 1.215
-      Params::Util 0
-      Scalar::Util 0
-      String::RewritePrefix 0.005
-      lib 0
-      namespace::autoclean 0
-      strict 0
-      warnings 0
-  Plack-1.0028
-    pathname: M/MI/MIYAGAWA/Plack-1.0028.tar.gz
+  Plack-1.0030
+    pathname: M/MI/MIYAGAWA/Plack-1.0030.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0028
+      Plack 1.0030
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -3474,8 +3592,6 @@ DISTRIBUTIONS
       Plack::Handler::CGI::Writer undef
       Plack::Handler::FCGI undef
       Plack::Handler::HTTP::Server::PSGI undef
-      Plack::Handler::HTTP::Server::Simple undef
-      Plack::Handler::HTTP::Server::Simple::PSGIServer undef
       Plack::Handler::Standalone undef
       Plack::LWPish undef
       Plack::Loader undef
@@ -3515,9 +3631,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0028
+      Plack::Request 1.0030
       Plack::Request::Upload undef
-      Plack::Response 1.0028
+      Plack::Response 1.0030
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -3538,31 +3654,25 @@ DISTRIBUTIONS
       Filesys::Notify::Simple 0
       HTTP::Body 1.06
       HTTP::Message 5.814
-      HTTP::Tiny 0.024
+      HTTP::Tiny 0.034
       Hash::MultiValue 0.05
       Pod::Usage 1.36
       Stream::Buffered 0.02
-      Test::TCP 1.02
+      Test::TCP 2.00
       Try::Tiny 0
       URI 1.59
       parent 0
-  Plack-Middleware-Assets-0.0.2
-    pathname: P/PE/PERLER/Plack-Middleware-Assets-0.0.2.tar.gz
+  Plack-Middleware-Assets-1.0.0
+    pathname: P/PE/PERLER/Plack-Middleware-Assets-1.0.0.tar.gz
     provides:
-      Plack::Middleware::Assets v0.0.2
+      Plack::Middleware::Assets 1.000000
     requirements:
       CSS::Minifier::XS 0
       Digest::MD5 0
-      File::Find 0
-      File::Temp 0
       HTTP::Date 0
-      HTTP::Request::Common 0
       JavaScript::Minifier::XS 0
       Module::Build 0.3601
-      Plack::Builder 0
       Plack::Middleware 0
-      Plack::Test 0
-      Test::More 0.88
   Plack-Middleware-ReverseProxy-0.15
     pathname: M/MI/MIYAGAWA/Plack-Middleware-ReverseProxy-0.15.tar.gz
     provides:
@@ -3575,38 +3685,41 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  Plack-Middleware-ServerStatus-Lite-0.18
-    pathname: K/KA/KAZEBURO/Plack-Middleware-ServerStatus-Lite-0.18.tar.gz
+  Plack-Middleware-ServerStatus-Lite-0.33
+    pathname: K/KA/KAZEBURO/Plack-Middleware-ServerStatus-Lite-0.33.tar.gz
     provides:
-      Plack::Middleware::ServerStatus::Lite 0.18
+      Plack::Middleware::ServerStatus::Lite 0.33
     requirements:
       CPAN::Meta 0
       CPAN::Meta::Prereqs 0
       ExtUtils::CBuilder 0
+      Getopt::Long 2.38
       JSON 2.53
       Module::Build 0.38
       Net::CIDR::Lite 0
       Parallel::Scoreboard 0.03
       Plack::Middleware 0
+      Pod::Usage 0
       Try::Tiny 0.09
       parent 0
-  Plack-Middleware-Session-0.20
-    pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.20.tar.gz
+  Plack-Middleware-Session-0.21
+    pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.21.tar.gz
     provides:
-      Plack::Middleware::Session 0.20
+      Plack::Middleware::Session 0.21
       Plack::Middleware::Session::Cookie undef
-      Plack::Session 0.20
-      Plack::Session::State 0.20
-      Plack::Session::State::Cookie 0.20
-      Plack::Session::Store 0.20
-      Plack::Session::Store::Cache 0.20
+      Plack::Session 0.21
+      Plack::Session::State 0.21
+      Plack::Session::State::Cookie 0.21
+      Plack::Session::Store 0.21
+      Plack::Session::Store::Cache 0.21
       Plack::Session::Store::DBI 0.10
-      Plack::Session::Store::File 0.20
-      Plack::Session::Store::Null 0.20
+      Plack::Session::Store::File 0.21
+      Plack::Session::Store::Null 0.21
     requirements:
+      Cookie::Baker 0
       Digest::HMAC_SHA1 1.03
       Digest::SHA1 0
-      Module::Build::Tiny 0.023
+      Module::Build::Tiny 0.030
       Plack 0.9910
   Plack-Test-ExternalServer-0.01
     pathname: F/FL/FLORA/Plack-Test-ExternalServer-0.01.tar.gz
@@ -3626,7 +3739,7 @@ DISTRIBUTIONS
     provides:
       Regexp::Common 2013031301
       Regexp::Common::CC 2010010201
-      Regexp::Common::Entry undef
+      Regexp::Common::Entry 2013031301
       Regexp::Common::SEN 2010010201
       Regexp::Common::URI 2010010201
       Regexp::Common::URI::RFC1035 2010010201
@@ -3647,6 +3760,7 @@ DISTRIBUTIONS
       Regexp::Common::URI::telnet 2010010201
       Regexp::Common::URI::tv 2010010201
       Regexp::Common::URI::wais 2010010201
+      Regexp::Common::_support 2010010201
       Regexp::Common::balanced 2013030901
       Regexp::Common::comment 2010010201
       Regexp::Common::delimited 2010010201
@@ -3662,29 +3776,41 @@ DISTRIBUTIONS
       perl 5.00473
       strict 0
       vars 0
-  Regexp-Common-time-0.04
-    pathname: R/RO/ROODE/Regexp-Common-time-0.04.tar.gz
+  Regexp-Common-time-0.05
+    pathname: S/SZ/SZABGAB/Regexp-Common-time-0.05.tar.gz
     provides:
-      Regexp::Common::time 0.04
+      Regexp::Common::time 0.05
     requirements:
       POSIX 0
       Regexp::Common 0
       Test::More 0.40
-  Role-Tiny-1.003001
-    pathname: H/HA/HAARG/Role-Tiny-1.003001.tar.gz
+  Role-Tiny-1.003002
+    pathname: H/HA/HAARG/Role-Tiny-1.003002.tar.gz
     provides:
-      Role::Tiny 1.003001
+      Role::Tiny 1.003002
       Role::Tiny::With undef
     requirements:
+      Exporter 5.57
       ExtUtils::MakeMaker 0
       Test::Fatal 0.003
       Test::More 0.96
-  Safe-Isa-1.000003
-    pathname: E/ET/ETHER/Safe-Isa-1.000003.tar.gz
+  Safe-Isa-1.000004
+    pathname: E/ET/ETHER/Safe-Isa-1.000004.tar.gz
     provides:
-      Safe::Isa 1.000003
+      Safe::Isa 1.000004
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      Scalar::Util 0
+  Scalar-List-Utils-1.38
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.38.tar.gz
+    provides:
+      List::Util 1.38
+      List::Util::XS 1.38
+      Scalar::Util 1.38
     requirements:
       ExtUtils::MakeMaker 0
+      Test::More 0
   Stream-Buffered-0.02
     pathname: D/DO/DOY/Stream-Buffered-0.02.tar.gz
     provides:
@@ -3694,20 +3820,28 @@ DISTRIBUTIONS
       Stream::Buffered::PerlIO undef
     requirements:
       ExtUtils::MakeMaker 6.36
-  String-RewritePrefix-0.006
-    pathname: R/RJ/RJBS/String-RewritePrefix-0.006.tar.gz
+  String-RewritePrefix-0.007
+    pathname: R/RJ/RJBS/String-RewritePrefix-0.007.tar.gz
     provides:
-      String::RewritePrefix 0.006
+      String::RewritePrefix 0.007
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 6.31
+      ExtUtils::MakeMaker 6.30
       Sub::Exporter 0.972
-      Test::More 0.96
-  Sub-Exporter-0.986
-    pathname: R/RJ/RJBS/Sub-Exporter-0.986.tar.gz
+      strict 0
+      warnings 0
+  Sub-Exporter-0.987
+    pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
     provides:
-      Sub::Exporter 0.986
-      Sub::Exporter::Util 0.986
+      Sub::Exporter 0.987
+      Sub::Exporter::Util 0.987
+      Test::SubExporter::DashSetup undef
+      Test::SubExporter::Faux undef
+      Test::SubExporter::GroupGen undef
+      Test::SubExporter::GroupGenSubclass undef
+      Test::SubExporter::ObjGen undef
+      Test::SubExporter::ObjGen::Obj undef
+      Test::SubExporter::s_e undef
     requirements:
       Carp 0
       Data::OptList 0.100
@@ -3716,21 +3850,24 @@ DISTRIBUTIONS
       Sub::Install 0.92
       strict 0
       warnings 0
-  Sub-Exporter-Progressive-0.001010
-    pathname: F/FR/FREW/Sub-Exporter-Progressive-0.001010.tar.gz
+  Sub-Exporter-Progressive-0.001011
+    pathname: F/FR/FREW/Sub-Exporter-Progressive-0.001011.tar.gz
     provides:
-      Sub::Exporter::Progressive 0.001010
+      Sub::Exporter::Progressive 0.001011
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0.88
-  Sub-Install-0.926
-    pathname: R/RJ/RJBS/Sub-Install-0.926.tar.gz
+  Sub-Install-0.927
+    pathname: R/RJ/RJBS/Sub-Install-0.927.tar.gz
     provides:
-      Sub::Install 0.926
+      Sub::Install 0.927
     requirements:
-      ExtUtils::MakeMaker 0
+      B 0
+      Carp 0
+      ExtUtils::MakeMaker 6.30
       Scalar::Util 0
-      Test::More 0
+      strict 0
+      warnings 0
   Sub-Name-0.05
     pathname: F/FL/FLORA/Sub-Name-0.05.tar.gz
     provides:
@@ -3761,10 +3898,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       Test::More 0.42
       perl 5.005
-  Template-Alloy-1.016
-    pathname: R/RH/RHANDOM/Template-Alloy-1.016.tar.gz
+  Template-Alloy-1.020
+    pathname: R/RH/RHANDOM/Template-Alloy-1.020.tar.gz
     provides:
-      Template::Alloy 1.016
+      Template::Alloy 1.020
       Template::Alloy::Compile undef
       Template::Alloy::Context undef
       Template::Alloy::EvalPerlHandle undef
@@ -3780,6 +3917,7 @@ DISTRIBUTIONS
       Template::Alloy::Tmpl undef
       Template::Alloy::VMethod undef
       Template::Alloy::Velocity undef
+      Template::Alloy::_ContextStash undef
     requirements:
       Digest::MD5 1
       ExtUtils::MakeMaker 0
@@ -3840,18 +3978,18 @@ DISTRIBUTIONS
       Template::Filters 2.87
       Template::Grammar 2.25
       Template::Iterator 2.68
-      Template::Monad::Assert undef
-      Template::Monad::Scalar undef
+      Template::Monad::Assert 1
+      Template::Monad::Scalar 1
       Template::Namespace::Constants 1.27
       Template::Parser 2.89
-      Template::Perl undef
+      Template::Perl 2.2
       Template::Plugin 2.7
       Template::Plugin::Assert 1
       Template::Plugin::CGI 2.7
       Template::Plugin::Datafile 2.72
       Template::Plugin::Date 2.78
-      Template::Plugin::Date::Calc undef
-      Template::Plugin::Date::Manip undef
+      Template::Plugin::Date::Calc 2.78
+      Template::Plugin::Date::Manip 2.78
       Template::Plugin::Directory 2.7
       Template::Plugin::Dumper 2.7
       Template::Plugin::File 2.71
@@ -3876,34 +4014,33 @@ DISTRIBUTIONS
       Template::Stash::Context 1.63
       Template::Stash::XS undef
       Template::Test 2.75
-      Template::TieString undef
+      Template::TieString 2.75
       Template::VMethods 2.16
       Template::View 2.91
-      bytes undef
+      bytes 2.94
     requirements:
       AppConfig 1.56
       ExtUtils::MakeMaker 0
       File::Spec 0.8
       File::Temp 0.12
       Scalar::Util 0
-  Test-CheckDeps-0.006
-    pathname: L/LE/LEONT/Test-CheckDeps-0.006.tar.gz
+  Test-CheckDeps-0.010
+    pathname: L/LE/LEONT/Test-CheckDeps-0.010.tar.gz
     provides:
-      Test::CheckDeps 0.006
+      Test::CheckDeps 0.010
     requirements:
       CPAN::Meta 2.120920
-      CPAN::Meta::Check 0.004
+      CPAN::Meta::Check 0.007
       Exporter 5.57
+      ExtUtils::MakeMaker 6.30
       List::Util 0
-      Module::Build::Tiny 0.021
       Test::Builder 0
-      perl 5.006
       strict 0
       warnings 0
-  Test-Deep-0.110
-    pathname: R/RJ/RJBS/Test-Deep-0.110.tar.gz
+  Test-Deep-0.112
+    pathname: R/RJ/RJBS/Test-Deep-0.112.tar.gz
     provides:
-      Test::Deep 0.110
+      Test::Deep 0.112
       Test::Deep::All undef
       Test::Deep::Any undef
       Test::Deep::Array undef
@@ -3930,6 +4067,7 @@ DISTRIBUTIONS
       Test::Deep::Methods undef
       Test::Deep::NoTest undef
       Test::Deep::Number undef
+      Test::Deep::Obj undef
       Test::Deep::Ref undef
       Test::Deep::RefType undef
       Test::Deep::Regexp undef
@@ -3964,7 +4102,6 @@ DISTRIBUTIONS
       Test::Differences 0.61
     requirements:
       Data::Dumper 2.126
-      Module::Build 0.36
       Test::More 0
       Text::Diff 0.35
   Test-Exception-0.32
@@ -3972,28 +4109,77 @@ DISTRIBUTIONS
     provides:
       Test::Exception 0.32
     requirements:
-      Module::Build 0.38
       Sub::Uplevel 0.18
       Test::Builder 0.7
       Test::Builder::Tester 1.07
       Test::Harness 2.03
       Test::More 0.7
       Test::Simple 0.7
-  Test-Fatal-0.010
-    pathname: R/RJ/RJBS/Test-Fatal-0.010.tar.gz
+  Test-Fatal-0.013
+    pathname: R/RJ/RJBS/Test-Fatal-0.013.tar.gz
     provides:
-      Test::Fatal 0.010
+      Test::Fatal 0.013
     requirements:
       Carp 0
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
       Test::Builder 0
-      Test::Builder::Tester 0
-      Test::More 0.47
       Try::Tiny 0.07
-      overload 0
       strict 0
       warnings 0
+  Test-Harness-3.30
+    pathname: L/LE/LEONT/Test-Harness-3.30.tar.gz
+    provides:
+      App::Prove 3.30
+      App::Prove::State 3.30
+      App::Prove::State::Result 3.30
+      App::Prove::State::Result::Test 3.30
+      TAP::Base 3.30
+      TAP::Formatter::Base 3.30
+      TAP::Formatter::Color 3.30
+      TAP::Formatter::Console 3.30
+      TAP::Formatter::Console::ParallelSession 3.30
+      TAP::Formatter::Console::Session 3.30
+      TAP::Formatter::File 3.30
+      TAP::Formatter::File::Session 3.30
+      TAP::Formatter::Session 3.30
+      TAP::Harness 3.30
+      TAP::Harness::Env 3.30
+      TAP::Object 3.30
+      TAP::Parser 3.30
+      TAP::Parser::Aggregator 3.30
+      TAP::Parser::Grammar 3.30
+      TAP::Parser::Iterator 3.30
+      TAP::Parser::Iterator::Array 3.30
+      TAP::Parser::Iterator::Process 3.30
+      TAP::Parser::Iterator::Stream 3.30
+      TAP::Parser::IteratorFactory 3.30
+      TAP::Parser::Multiplexer 3.30
+      TAP::Parser::Result 3.30
+      TAP::Parser::Result::Bailout 3.30
+      TAP::Parser::Result::Comment 3.30
+      TAP::Parser::Result::Plan 3.30
+      TAP::Parser::Result::Pragma 3.30
+      TAP::Parser::Result::Test 3.30
+      TAP::Parser::Result::Unknown 3.30
+      TAP::Parser::Result::Version 3.30
+      TAP::Parser::Result::YAML 3.30
+      TAP::Parser::ResultFactory 3.30
+      TAP::Parser::Scheduler 3.30
+      TAP::Parser::Scheduler::Job 3.30
+      TAP::Parser::Scheduler::Spinner 3.30
+      TAP::Parser::Source 3.30
+      TAP::Parser::SourceHandler 3.30
+      TAP::Parser::SourceHandler::Executable 3.30
+      TAP::Parser::SourceHandler::File 3.30
+      TAP::Parser::SourceHandler::Handle 3.30
+      TAP::Parser::SourceHandler::Perl 3.30
+      TAP::Parser::SourceHandler::RawTAP 3.30
+      TAP::Parser::YAMLish::Reader 3.30
+      TAP::Parser::YAMLish::Writer 3.30
+      Test::Harness 3.30
+    requirements:
+      ExtUtils::MakeMaker 0
   Test-LongString-0.15
     pathname: R/RG/RGARCIA/Test-LongString-0.15.tar.gz
     provides:
@@ -4042,21 +4228,6 @@ DISTRIBUTIONS
       Test::More 0.47
       Test::Tester 0.107
       perl 5.006
-  Test-Object-0.07
-    pathname: A/AD/ADAMK/Test-Object-0.07.tar.gz
-    provides:
-      Test::Object 0.07
-      Test::Object::Test 0.07
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      File::Spec 0.80
-      Scalar::Util 1.16
-      Test::Builder 0.33
-      Test::Builder::Tester 1.02
-      Test::More 0.42
-      overload 0
   Test-Requires-0.07
     pathname: T/TO/TOKUHIROM/Test-Requires-0.07.tar.gz
     provides:
@@ -4083,25 +4254,16 @@ DISTRIBUTIONS
       Test::Requires 0
       Time::HiRes 0
       perl 5.008
-  Test-SubCalls-1.09
-    pathname: A/AD/ADAMK/Test-SubCalls-1.09.tar.gz
-    provides:
-      Test::SubCalls 1.09
-    requirements:
-      ExtUtils::MakeMaker 6.42
-      File::Spec 0.80
-      Hook::LexWrap 0.20
-      Test::Builder::Tester 1.02
-      Test::More 0.42
-  Test-TCP-2.00
-    pathname: T/TO/TOKUHIROM/Test-TCP-2.00.tar.gz
+  Test-TCP-2.02
+    pathname: T/TO/TOKUHIROM/Test-TCP-2.02.tar.gz
     provides:
       Net::EmptyPort undef
-      Test::TCP 2.00
+      Test::TCP 2.02
       Test::TCP::CheckPort undef
     requirements:
       CPAN::Meta 0
       CPAN::Meta::Prereqs 0
+      ExtUtils::CBuilder 0
       IO::Socket::INET 0
       Module::Build 0.38
       Test::More 0
@@ -4118,30 +4280,21 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::Builder 0
-  Test-Trap-v0.2.2
-    pathname: E/EB/EBHANSSEN/Test-Trap-v0.2.2.tar.gz
+  Test-Version-1.002004
+    pathname: X/XE/XENO/Test-Version-1.002004.tar.gz
     provides:
-      Test::Trap v0.2.2
-      Test::Trap::Builder v0.2.2
-      Test::Trap::Builder::PerlIO v0.2.2
-      Test::Trap::Builder::SystemSafe v0.2.2
-      Test::Trap::Builder::TempFile v0.2.2
+      Test::Version 1.002004
     requirements:
       Carp 0
-      Data::Dump 0
       Exporter 0
-      File::Temp 0
-      IO::Handle 0
-      Module::Build 0.36
+      ExtUtils::MakeMaker 6.30
+      File::Find::Rule::Perl 0
+      Module::Metadata 0
       Test::Builder 0
-      Test::More 0
-      Test::Tester 0.107
-      base 0
-      constant 0
-      lib 0
-      perl v5.6.2
+      Test::More 0.88
+      parent 0
       strict 0
-      version 0
+      version 0.86
       warnings 0
   Test-WWW-Mechanize-1.44
     pathname: P/PE/PETDANCE/Test-WWW-Mechanize-1.44.tar.gz
@@ -4174,8 +4327,8 @@ DISTRIBUTIONS
     pathname: C/CH/CHORNY/Test-Warn-0.24.tar.gz
     provides:
       Test::Warn 0.24
-      Test::Warn::Categorization undef
-      Test::Warn::DAG_Node_Tree undef
+      Test::Warn::Categorization 0.24
+      Test::Warn::DAG_Node_Tree 0.24
     requirements:
       Carp 1.22
       ExtUtils::MakeMaker 0
@@ -4186,6 +4339,12 @@ DISTRIBUTIONS
       Test::More 0
       Tree::DAG_Node 1.02
       perl 5.006
+  Test-Without-Module-0.17
+    pathname: C/CO/CORION/Test-Without-Module-0.17.tar.gz
+    provides:
+      Test::Without::Module 0.17
+    requirements:
+      ExtUtils::MakeMaker 0
   Test-XPath-0.16
     pathname: D/DW/DWHEELER/Test-XPath-0.16.tar.gz
     provides:
@@ -4208,7 +4367,7 @@ DISTRIBUTIONS
     pathname: O/OV/OVID/Text-Diff-1.41.tar.gz
     provides:
       Text::Diff 1.41
-      Text::Diff::Base undef
+      Text::Diff::Base 1.41
       Text::Diff::Config 1.41
       Text::Diff::Table 1.41
     requirements:
@@ -4220,7 +4379,6 @@ DISTRIBUTIONS
     provides:
       Text::Glob 0.09
     requirements:
-      Module::Build 0.36
       Test::More 0
   Text-Markdown-1.000031
     pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
@@ -4253,74 +4411,94 @@ DISTRIBUTIONS
       Test::More 0
       Test::use::ok 0
       Tie::RefHash 0
-  Tree-DAG_Node-1.13
-    pathname: R/RS/RSAVAGE/Tree-DAG_Node-1.13.tgz
+  Tree-DAG_Node-1.18
+    pathname: R/RS/RSAVAGE/Tree-DAG_Node-1.18.tgz
     provides:
-      Tree::DAG_Node 1.13
+      Tree::DAG_Node 1.18
     requirements:
+      File::Slurp 9999.19
+      File::Spec 3.4
+      File::Temp 0.2301
       Module::Build 0.38
       Test::More 0.98
+      perl 5.008001
       strict 0
       warnings 0
-  Tree-Simple-1.18
-    pathname: S/ST/STEVAN/Tree-Simple-1.18.tar.gz
+  Tree-Simple-1.23
+    pathname: R/RS/RSAVAGE/Tree-Simple-1.23.tgz
     provides:
-      Tree::Simple 1.18
-      Tree::Simple::Visitor 1.11
+      Tree::Simple 1.23
+      Tree::Simple::Visitor 1.23
     requirements:
+      Module::Build 0.4
       Scalar::Util 1.18
       Test::Exception 0.15
       Test::More 0.47
-      perl v5.6.0
-  Tree-Simple-VisitorFactory-0.10
-    pathname: S/ST/STEVAN/Tree-Simple-VisitorFactory-0.10.tar.gz
+      Test::Version 1.002003
+      constant 0
+      strict 0
+      warnings 0
+  Tree-Simple-VisitorFactory-0.12
+    pathname: R/RS/RSAVAGE/Tree-Simple-VisitorFactory-0.12.tgz
     provides:
-      Tree::Simple::Visitor::BreadthFirstTraversal 0.02
-      Tree::Simple::Visitor::CreateDirectoryTree 0.02
-      Tree::Simple::Visitor::FindByNodeValue 0.02
-      Tree::Simple::Visitor::FindByPath 0.03
-      Tree::Simple::Visitor::FindByUID 0.02
-      Tree::Simple::Visitor::FromNestedArray 0.02
-      Tree::Simple::Visitor::FromNestedHash 0.03
-      Tree::Simple::Visitor::GetAllDescendents 0.02
-      Tree::Simple::Visitor::LoadClassHierarchy 0.02
-      Tree::Simple::Visitor::LoadDirectoryTree 0.02
-      Tree::Simple::Visitor::PathToRoot 0.02
-      Tree::Simple::Visitor::PostOrderTraversal 0.02
-      Tree::Simple::Visitor::PreOrderTraversal 0.01
-      Tree::Simple::Visitor::Sort 0.03
-      Tree::Simple::Visitor::ToNestedArray 0.02
-      Tree::Simple::Visitor::ToNestedHash 0.02
-      Tree::Simple::Visitor::VariableDepthClone 0.03
-      Tree::Simple::VisitorFactory 0.10
+      Tree::Simple::Visitor::BreadthFirstTraversal 0.12
+      Tree::Simple::Visitor::CreateDirectoryTree 0.12
+      Tree::Simple::Visitor::FindByNodeValue 0.12
+      Tree::Simple::Visitor::FindByPath 0.12
+      Tree::Simple::Visitor::FindByUID 0.12
+      Tree::Simple::Visitor::FromNestedArray 0.12
+      Tree::Simple::Visitor::FromNestedHash 0.12
+      Tree::Simple::Visitor::GetAllDescendents 0.12
+      Tree::Simple::Visitor::LoadClassHierarchy 0.12
+      Tree::Simple::Visitor::LoadDirectoryTree 0.12
+      Tree::Simple::Visitor::PathToRoot 0.12
+      Tree::Simple::Visitor::PostOrderTraversal 0.12
+      Tree::Simple::Visitor::PreOrderTraversal 0.12
+      Tree::Simple::Visitor::Sort 0.12
+      Tree::Simple::Visitor::ToNestedArray 0.12
+      Tree::Simple::Visitor::ToNestedHash 0.12
+      Tree::Simple::Visitor::VariableDepthClone 0.12
+      Tree::Simple::VisitorFactory 0.12
     requirements:
-      ExtUtils::MakeMaker 0
       File::Spec 0.6
+      Module::Build 0.38
       Scalar::Util 1.1
       Test::Exception 0.15
       Test::More 0.47
       Tree::Simple 1.12
-  Try-Tiny-0.18
-    pathname: D/DO/DOY/Try-Tiny-0.18.tar.gz
+      Tree::Simple::Visitor 1.22
+      base 2.16
+      strict 0
+      warnings 0
+  Try-Tiny-0.19
+    pathname: D/DO/DOY/Try-Tiny-0.19.tar.gz
     provides:
-      Try::Tiny 0.18
+      Try::Tiny 0.19
     requirements:
       Carp 0
-      Exporter 0
+      Exporter 5.57
       ExtUtils::MakeMaker 6.30
-      base 0
       constant 0
       strict 0
       warnings 0
-  UNIVERSAL-can-1.20120726
-    pathname: C/CH/CHROMATIC/UNIVERSAL-can-1.20120726.tar.gz
+  Types-Serialiser-1.0
+    pathname: M/ML/MLEHMANN/Types-Serialiser-1.0.tar.gz
     provides:
-      UNIVERSAL::can 1.20120726
+      JSON::PP::Boolean 1.0
+      Types::Serialiser 1.0
+      Types::Serialiser::BooleanBase 1.0
+      Types::Serialiser::Error 1.0
+    requirements:
+      ExtUtils::MakeMaker 0
+      common::sense 0
+  UNIVERSAL-can-1.20140124
+    pathname: C/CH/CHROMATIC/UNIVERSAL-can-1.20140124.tar.gz
+    provides:
+      Test::SmallWarn undef
+      UNIVERSAL::can 1.20140124
     requirements:
       ExtUtils::MakeMaker 6.30
       Scalar::Util 0
-      Test::More 0
-      overload 0
       strict 0
       vars 0
       warnings 0
@@ -4351,6 +4529,16 @@ DISTRIBUTIONS
       URI::Split undef
       URI::URL 5.04
       URI::WithBase 2.20
+      URI::_foreign undef
+      URI::_generic undef
+      URI::_idna undef
+      URI::_ldap 1.12
+      URI::_login undef
+      URI::_punycode 0.04
+      URI::_query undef
+      URI::_segment undef
+      URI::_server undef
+      URI::_userpass undef
       URI::data undef
       URI::file 4.21
       URI::file::Base undef
@@ -4417,10 +4605,10 @@ DISTRIBUTIONS
       URI 1.00
       URI::URL 5.00
       perl v5.6.0
-  Variable-Magic-0.52
-    pathname: V/VP/VPIT/Variable-Magic-0.52.tar.gz
+  Variable-Magic-0.53
+    pathname: V/VP/VPIT/Variable-Magic-0.53.tar.gz
     provides:
-      Variable::Magic 0.52
+      Variable::Magic 0.53
     requirements:
       Carp 0
       Config 0
@@ -4440,10 +4628,10 @@ DISTRIBUTIONS
       WWW::Curl::Share undef
     requirements:
       ExtUtils::MakeMaker 6.42
-  WWW-Mechanize-1.72
-    pathname: J/JE/JESSE/WWW-Mechanize-1.72.tar.gz
+  WWW-Mechanize-1.73
+    pathname: E/ET/ETHER/WWW-Mechanize-1.73.tar.gz
     provides:
-      WWW::Mechanize 1.72
+      WWW::Mechanize 1.73
       WWW::Mechanize::Image undef
       WWW::Mechanize::Link undef
     requirements:
@@ -4476,7 +4664,7 @@ DISTRIBUTIONS
     provides:
       WWW::RobotRules 6.02
       WWW::RobotRules::AnyDBM_File 6.00
-      WWW::RobotRules::InCore undef
+      WWW::RobotRules::InCore 6.02
     requirements:
       AnyDBM_File 0
       ExtUtils::MakeMaker 0
@@ -4496,7 +4684,7 @@ DISTRIBUTIONS
       XML::Atom::ErrorHandler undef
       XML::Atom::Feed undef
       XML::Atom::Link undef
-      XML::Atom::Namespace undef
+      XML::Atom::Namespace 0.41
       XML::Atom::Person undef
       XML::Atom::Server undef
       XML::Atom::Thing undef
@@ -4534,57 +4722,58 @@ DISTRIBUTIONS
       HTML::TokeParser 0
       LWP::UserAgent 0
       List::Util 0
-      Module::Build 0.40
       Module::Pluggable 0
       Test::More 0
       URI::Fetch 0
       XML::Atom 0.38
       XML::LibXML 1.66
       XML::RSS 1.47
-  XML-LibXML-2.0103
-    pathname: S/SH/SHLOMIF/XML-LibXML-2.0103.tar.gz
+  XML-LibXML-2.0108
+    pathname: S/SH/SHLOMIF/XML-LibXML-2.0108.tar.gz
     provides:
-      XML::LibXML 2.0103
-      XML::LibXML::Attr undef
-      XML::LibXML::AttributeHash 2.0103
-      XML::LibXML::Boolean 2.0103
-      XML::LibXML::CDATASection undef
-      XML::LibXML::Comment undef
-      XML::LibXML::Common 2.0103
-      XML::LibXML::Devel 2.0103
-      XML::LibXML::Document undef
-      XML::LibXML::DocumentFragment undef
-      XML::LibXML::Dtd undef
-      XML::LibXML::Element undef
-      XML::LibXML::ErrNo 2.0103
-      XML::LibXML::Error 2.0103
-      XML::LibXML::InputCallback undef
-      XML::LibXML::Literal 2.0103
-      XML::LibXML::NamedNodeMap undef
-      XML::LibXML::Namespace undef
-      XML::LibXML::Node undef
-      XML::LibXML::NodeList 2.0103
-      XML::LibXML::Number 2.0103
-      XML::LibXML::PI undef
-      XML::LibXML::Pattern undef
-      XML::LibXML::Reader 2.0103
-      XML::LibXML::RegExp undef
-      XML::LibXML::RelaxNG undef
-      XML::LibXML::SAX 2.0103
-      XML::LibXML::SAX::AttributeNode undef
-      XML::LibXML::SAX::Builder 2.0103
-      XML::LibXML::SAX::Generator 2.0103
-      XML::LibXML::SAX::Parser 2.0103
-      XML::LibXML::Schema undef
-      XML::LibXML::Text undef
-      XML::LibXML::XPathContext 2.0103
-      XML::LibXML::XPathExpression undef
+      XML::LibXML 2.0108
+      XML::LibXML::Attr 2.0108
+      XML::LibXML::AttributeHash 2.0108
+      XML::LibXML::Boolean 2.0108
+      XML::LibXML::CDATASection 2.0108
+      XML::LibXML::Comment 2.0108
+      XML::LibXML::Common 2.0108
+      XML::LibXML::Devel 2.0108
+      XML::LibXML::Document 2.0108
+      XML::LibXML::DocumentFragment 2.0108
+      XML::LibXML::Dtd 2.0108
+      XML::LibXML::Element 2.0108
+      XML::LibXML::ErrNo 2.0108
+      XML::LibXML::Error 2.0108
+      XML::LibXML::InputCallback 2.0108
+      XML::LibXML::Literal 2.0108
+      XML::LibXML::NamedNodeMap 2.0108
+      XML::LibXML::Namespace 2.0108
+      XML::LibXML::Node 2.0108
+      XML::LibXML::NodeList 2.0108
+      XML::LibXML::Number 2.0108
+      XML::LibXML::PI 2.0108
+      XML::LibXML::Pattern 2.0108
+      XML::LibXML::Reader 2.0108
+      XML::LibXML::RegExp 2.0108
+      XML::LibXML::RelaxNG 2.0108
+      XML::LibXML::SAX 2.0108
+      XML::LibXML::SAX::AttributeNode 2.0108
+      XML::LibXML::SAX::Builder 2.0108
+      XML::LibXML::SAX::Generator 2.0108
+      XML::LibXML::SAX::Parser 2.0108
+      XML::LibXML::Schema 2.0108
+      XML::LibXML::Text 2.0108
+      XML::LibXML::XPathContext 2.0108
+      XML::LibXML::XPathExpression 2.0108
+      XML::LibXML::_SAXParser 2.0108
     requirements:
       ExtUtils::MakeMaker 6.56
       Test::More 0
       XML::NamespaceSupport 1.07
       XML::SAX 0.11
       base 0
+      parent 0
       strict 0
       vars 0
       warnings 0
@@ -4658,26 +4847,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.31
       Test::More 0.88
-  XML-SAX-Expat-0.50
-    pathname: B/BJ/BJOERN/XML-SAX-Expat-0.50.tar.gz
-    provides:
-      XML::SAX::Expat 0.50
-    requirements:
-      ExtUtils::MakeMaker 0
-      XML::NamespaceSupport 0.03
-      XML::Parser 2.27
-      XML::SAX 0.03
-      XML::SAX::Base 1.00
-  XML-Simple-2.20
-    pathname: G/GR/GRANTM/XML-Simple-2.20.tar.gz
-    provides:
-      XML::Simple 2.20
-    requirements:
-      ExtUtils::MakeMaker 6.31
-      Test::More 0.88
-      XML::NamespaceSupport 1.04
-      XML::SAX 0.15
-      XML::SAX::Expat 0
   XML-XPath-1.13
     pathname: M/MS/MSERGEANT/XML-XPath-1.13.tar.gz
     provides:
@@ -4713,85 +4882,71 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       XML::Parser 2.23
-  YAML-0.84
-    pathname: M/MS/MSTROUT/YAML-0.84.tar.gz
+  YAML-0.88
+    pathname: I/IN/INGY/YAML-0.88.tar.gz
     provides:
-      Test::YAML 0.84
-      Test::YAML::Filter undef
-      YAML 0.84
-      YAML::Any 0.84
-      YAML::Dumper 0.84
-      YAML::Dumper::Base 0.84
-      YAML::Error 0.84
-      YAML::Loader 0.84
-      YAML::Loader::Base 0.84
-      YAML::Marshall 0.84
-      YAML::Mo undef
-      YAML::Node 0.84
-      YAML::Tag 0.84
-      YAML::Type::blessed undef
-      YAML::Type::code undef
-      YAML::Type::glob undef
-      YAML::Type::ref undef
-      YAML::Type::regexp undef
-      YAML::Type::undef undef
-      YAML::Types 0.84
-      YAML::Warning undef
-      yaml_mapping undef
-      yaml_scalar undef
-      yaml_sequence undef
+      Test::YAML 0.88
+      Test::YAML::Filter 0.88
+      YAML 0.88
+      YAML::Any 0.88
+      YAML::Dumper 0.88
+      YAML::Dumper::Base 0.88
+      YAML::Error 0.88
+      YAML::Loader 0.88
+      YAML::Loader::Base 0.88
+      YAML::Marshall 0.88
+      YAML::Mo 0.88
+      YAML::Node 0.88
+      YAML::Tag 0.88
+      YAML::Type::blessed 0.88
+      YAML::Type::code 0.88
+      YAML::Type::glob 0.88
+      YAML::Type::ref 0.88
+      YAML::Type::regexp 0.88
+      YAML::Type::undef 0.88
+      YAML::Types 0.88
+      YAML::Warning 0.88
+      yaml_mapping 0.88
+      yaml_scalar 0.88
+      yaml_sequence 0.88
     requirements:
       ExtUtils::MakeMaker 6.59
       perl 5.008001
-  YAML-Syck-1.27
-    pathname: T/TO/TODDR/YAML-Syck-1.27.tar.gz
-    provides:
-      JSON::Syck 1.27
-      YAML::Dumper::Syck undef
-      YAML::Loader::Syck undef
-      YAML::Syck 1.27
-    requirements:
-      ExtUtils::MakeMaker 6.59
-      perl 5.006
   aliased-0.31
     pathname: O/OV/OVID/aliased-0.31.tar.gz
     provides:
       aliased 0.31
     requirements:
-      Module::Build 0.40
       Test::More 0
-  autodie-2.20
-    pathname: P/PJ/PJF/autodie-2.20.tar.gz
+  bareword-filehandles-0.003
+    pathname: I/IL/ILMARI/bareword-filehandles-0.003.tar.gz
     provides:
-      Fatal 2.20
-      autodie 2.20
-      autodie::Scope::Guard undef
-      autodie::exception 2.20
-      autodie::exception::system 2.20
-      autodie::hints 2.20
-      autodie::skip 2.20
+      bareword::filehandles 0.003
+      inc::BarewordFilehandlesMakeMaker undef
     requirements:
-      B 0
-      Carp 0
-      Config 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      Fcntl 0
-      POSIX 0
-      Scalar::Util 0
-      Tie::RefHash 0
-      base 0
-      constant 0
-      if 0
-      overload 0
-      strict 0
-      warnings 0
-  common-sense-3.6
-    pathname: M/ML/MLEHMANN/common-sense-3.6.tar.gz
+      B::Hooks::OP::Check 0
+      ExtUtils::Depends 0
+      ExtUtils::MakeMaker 6.31
+      Lexical::SealRequireHints 0
+      Test::More 0.88
+      XSLoader 0
+  common-sense-3.72
+    pathname: M/ML/MLEHMANN/common-sense-3.72.tar.gz
     provides:
-      common::sense 3.6
+      common::sense 3.72
     requirements:
       ExtUtils::MakeMaker 0
+  indirect-0.31
+    pathname: V/VP/VPIT/indirect-0.31.tar.gz
+    provides:
+      indirect 0.31
+    requirements:
+      Carp 0
+      Config 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      XSLoader 0
+      perl 5.008001
   libwww-perl-6.05
     pathname: G/GA/GAAS/libwww-perl-6.05.tar.gz
     provides:
@@ -4847,19 +5002,34 @@ DISTRIBUTIONS
       URI::Escape 0
       WWW::RobotRules 6
       perl 5.008001
-  namespace-autoclean-0.13
-    pathname: B/BO/BOBTFISH/namespace-autoclean-0.13.tar.gz
+  multidimensional-0.011
+    pathname: I/IL/ILMARI/multidimensional-0.011.tar.gz
     provides:
-      namespace::autoclean 0.13
+      MyTest undef
+      inc::MultidimensionalMakeMaker undef
+      multidimensional 0.011
     requirements:
-      B::Hooks::EndOfScope 0
+      B::Hooks::OP::Check 0.19
+      CPAN::Meta 2.112580
+      ExtUtils::Depends 0
+      ExtUtils::MakeMaker 6.30
+      Lexical::SealRequireHints 0.005
+      Test::More 0.88
+      XSLoader 0
+      strict 0
+      warnings 0
+  namespace-autoclean-0.15
+    pathname: E/ET/ETHER/namespace-autoclean-0.15.tar.gz
+    provides:
+      namespace::autoclean 0.15
+    requirements:
+      B::Hooks::EndOfScope 0.12
       Class::MOP 0.80
       ExtUtils::MakeMaker 6.30
       List::Util 0
-      Moose::Role 0
-      Sub::Name 0
-      Test::More 0
+      Module::Build::Tiny 0.030
       namespace::clean 0.20
+      perl 5.006
       strict 0
       warnings 0
   namespace-clean-0.24
@@ -4871,9 +5041,13 @@ DISTRIBUTIONS
       ExtUtils::CBuilder 0.27
       Package::Stash 0.23
       Test::More 0.88
-  strictures-1.004004
-    pathname: E/ET/ETHER/strictures-1.004004.tar.gz
+  strictures-1.005002
+    pathname: H/HA/HAARG/strictures-1.005002.tar.gz
     provides:
-      strictures 1.004004
+      strictures 1.005002
     requirements:
       ExtUtils::MakeMaker 0
+      bareword::filehandles 0
+      indirect 0
+      multidimensional 0
+      perl 5.006
