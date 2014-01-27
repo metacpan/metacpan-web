@@ -14,7 +14,7 @@ before_install:
   - cpanm -n Devel::Cover::Report::Coveralls
 
 script:
-  - perl Makefile.PL && cover -test -report coveralls
+  - cover -test -report coveralls
 
 notifications:
   email:
