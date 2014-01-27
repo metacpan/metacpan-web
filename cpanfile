@@ -1,5 +1,6 @@
 requires 'AnyEvent::Curl::Multi';
 requires 'Captcha::reCAPTCHA', '0.94';
+requires 'Capture::Tiny';
 requires 'Catalyst', '5.90053';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Authentication::Store::Proxy', '0.0.1';
@@ -12,6 +13,7 @@ requires 'Catalyst::TraitFor::Request::REST::ForBrowsers';
 requires 'Catalyst::View::JSON';
 requires 'Catalyst::View::TT::Alloy';
 requires 'CatalystX::RoleApplicator';
+requires 'CHI';
 requires 'Config::General';
 requires 'CPAN::Changes', '0.21';
 requires 'Data::Dumper';
@@ -24,13 +26,13 @@ requires 'Encode', '2.51';
 requires 'Exporter';
 requires 'File::Path';
 requires 'Gravatar::URL';
+requires 'Hash::AsObject';
+requires 'Hash::Merge';
 requires 'HTML::Restrict', '2.1.8';
 requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
-requires 'Hash::AsObject';
-requires 'Hash::Merge';
 requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'List::Util';
@@ -55,12 +57,13 @@ requires 'Template::Plugin::JSON';
 requires 'Template::Plugin::Markdown';
 requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
-test_requires 'Test::MockObject','1.09';
-test_requires 'Test::More', '0.96';
-test_requires 'Test::XPath', '0.15';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';
+
+test_requires 'Test::MockObject','1.09';
+test_requires 'Test::More', '0.96';
+test_requires 'Test::XPath', '0.15';
 
 # bin/unlisted_prereqs.pl
 author_requires 'CPAN::Meta::Requirements';
