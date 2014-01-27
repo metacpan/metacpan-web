@@ -33,7 +33,7 @@ test_psgi app, sub {
 
     # Moose has ratings (other things on this search page likely do as well)
     $tx->like(
-      '//div[@class="search-results"]//div[starts-with(@class, "rating-")]/following-sibling::a',
+      '//div[@class="search-results"]//a[starts-with(@class, "rating-")]/following-sibling::a',
       qr/\d+ reviews?/i,
       'current rating and number of reviews listed'
     );

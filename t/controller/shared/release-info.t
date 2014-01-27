@@ -103,7 +103,7 @@ test_psgi app, sub {
 
             optional_test favorited => sub {
                 ok( $tx->find_value("$favs/span") > 0,
-                    'dist has been marked as favorite'
+                    "$req_uri has been marked as favorite"
                 );
             };
 
@@ -132,7 +132,7 @@ test_psgi app, sub {
 
             # not all dists have reviews
             my $reviews
-                = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
+                = '//a[starts-with(@class, "rating-")]/following-sibling::a';
             optional_test reviews => sub {
                 $tx->is(
                     "$reviews/\@href",
@@ -147,15 +147,14 @@ test_psgi app, sub {
             };
 
             # all dists should get a link to rate it; test built url
-            $tx->is(
-                '//div[@class="search-bar"]//a[text()="Rate this distribution"]/@href',
-                "http://cpanratings.perl.org/rate/?distribution=$release",
+            ok( $tx->find_value(
+                '//a[@href="http://cpanratings.perl.org/rate/?distribution=' . $release . '"]'),
                 'cpanratings link to rate this dist'
             );
 
             # test format of cpantesters link
             $tx->is(
-                '//a[text()="Test results"]/@href',
+                '//a[text()="Testers"]/@href',
                 "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version?oncpan=1&distmat=1",
                 'link to test results'
             );
@@ -170,7 +169,7 @@ test_psgi app, sub {
 
             # version select box
             ok( $tx->find_value(
-                    '//select[@name="release"]/option[text()="Go to version"]'
+                    '//div[@class="breadcrumbs"]//select'
                 ),
                 'version select box'
             );
@@ -187,67 +186,14 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
-        # not all dists have reviews
-        my $reviews = '//div[@class="nav-list"]//div[starts-with(@class, "rating-")]/following-sibling::a';
-        optional_test reviews => sub {
-            $tx->is(
-                "$reviews/\@href",
-                "http://cpanratings.perl.org/dist/$release",
-                'link to current reviews'
-            );
-            $tx->like(
-                '//a[text()="Reverse dependencies"]/@href',
-                qr{^/requires/distribution/$release(\?|$)},
+            ok( $tx->find_value(
+                '//a[starts-with(@href, "/requires/distribution/")]'),
                 'reverse deps link uses dist name'
             );
-        };
 
-        # all dists should get a link to rate it; test built url
-        $tx->is(
-            '//div[@class="nav-list"]//a[text()="Rate this distribution"]/@href',
-            "http://cpanratings.perl.org/rate/?distribution=$release",
-            'cpanratings link to rate this dist'
-        );
-
-        # test format of cpantesters link
-        $tx->is(
-            '//a[text()="Test results"]/@href',
-            "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version?oncpan=1&distmat=1",
-            'link to test results'
-        );
-
-        # TODO: release.tests.size
-
-        $tx->is(
-            '//a[@title="Matrix"]/@href',
-            "http://matrix.cpantesters.org/?dist=$release+$version",
-            'link to test matrix'
-        );
-
-        # version select box
-        ok( $tx->find_value('//select[@name="release"]/option[text()="Go to version"]'),
-          'version select box' );
-
-        $tx->like(
-            # "go to" option has no value attr
-            '//select[@name="release"]/option[@value][1]',
-            qr/\([A-Z]{3,9} on \d{4}-\d{2}-\d{2}\)$/,
-            'version ends with pause id and date  in common format'
-        );
-
-        # TODO: diff with version
-        # TODO: search
-# TODO: toggle table of contents (module only)
-
-        $tx->like(
-            '//a[text()="Reverse dependencies"]/@href',
-            qr{^/requires/distribution/$release(\?|$)},
-            'reverse deps link uses dist name'
-        );
-
-        # TODO: explorer
-        # TODO: activity
-
+            # TODO: explorer
+            # TODO: activity
+        }
     }
 
     ok( $tested{$_} > 0, "at least one module tested $_" )

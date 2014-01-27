@@ -18,5 +18,5 @@ FOREACH dep IN deps.sort %>
 <%- END %>
     <li class="divider"></li>
     <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i> CPAN Testers List</a></li>
-    <li><a href="/requires/module/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
+    <li><a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i> Reverse dependencies</a></li>
 </ul>

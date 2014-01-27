@@ -4,8 +4,8 @@
     <input type="hidden" name="release" value="<% module.release || module.name %>">
     <input type="hidden" name="author" value="<% module.author %>">
     <input type="hidden" name="distribution" value="<% module.distribution %>">
-<button type="submit" class="favorite<% IF module.favorites %> highlight<% END %><% IF module.myfavorite %> active<% END %>"><span><% module.favorites %></span> ++</button>
+<button type="submit" class="favorite<% IF module.favorites || release.favorites %> highlight<% END %><% IF module.myfavorite %> active<% END %>"><span><% module.favorites || release.favorites %></span> ++</button>
 </form>
 <% ELSE -%>
-<a href="" onclick="alert('Please sign in to add favorites'); return false" class="favorite<% IF module.favorites %> highlight<% END %>"><span>
-<% module.favorites %></span> ++</a><% END -%>
+<a href="" onclick="alert('Please sign in to add favorites'); return false" class="favorite<% IF module.favorites || release.favorites %> highlight<% END %>"><span>
+<% module.favorites || release.favorites %></span> ++</a><% END -%>
