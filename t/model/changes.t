@@ -27,7 +27,7 @@ subtest "RT ticket linking" => sub {
     );
 
     while (my ($in, $out) = each %rt_tests) {
-        like(Changes->_rt_cpan($in), qr/$out/, "$in found");
+        like(Changes->_rt_cpan($in), qr/\Q$out\E/, "$in found");
     }
 };
 
@@ -42,7 +42,7 @@ subtest "GH issue linking" => sub {
         'Add HTTP logger (gh-16; thanks djzort!)' => 'issues/16">gh-16',
     );
     while (my ($in, $out) = each %gh_tests) {
-        like(Changes->_gh($in, $u), qr/$out/, "$in found");
+        like(Changes->_gh($in, $u), qr/\Q$out\E/, "$in found");
     }
     my @no_links_tests = (
         'I wash my hands of this library forever -- rjbs, 2013-10-15'
