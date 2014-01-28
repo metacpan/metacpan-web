@@ -96,14 +96,17 @@ sub _rt_cpan {
     # Some other cases
     $line =~ s{\b(bug\s+\#)(\d+)\b}{$u$2">$1$2</a>}gxi;
 
+    # Subject tag style
+    $line =~ s{(\[?rt\.cpan\.org\s+\#(\d+)\]?)}{$u$2">$1</a>}gxi;
+
     return $line;
 }
 
 sub _gh {
     my ($self, $line, $bt) = @_;
     $bt =~ s|/$||;
-    $line =~ s{(GH[-:]?)(\d+)\b}{<a href=$bt/$2">$1$2</a>}gxi;
-    $line =~ s{((?:GH|)[#])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
+    $line =~ s{((?:GH|PR)[-:]?)(\d+)\b}{<a href=$bt/$2">$1$2</a>}gxi;
+    $line =~ s{((?:GH|PR|)[#])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
     return $line;
 }
 1;
