@@ -24,6 +24,8 @@ subtest "RT ticket linking" => sub {
         'id=87550">rt87550',
         'Fix bug #87801 where excluded tags were ANDed instead of ORed. Stefan Corneliu Petrea.' =>
         'id=87801">bug #87801',
+        'Blah blah [rt.cpan.org #231] fixed' => 'id=231">[rt.cpan.org #231]</a>',
+        'Blah blah rt.cpan.org #231 fixed'   => 'id=231">rt.cpan.org #231</a>',
     );
 
     while (my ($in, $out) = each %rt_tests) {
@@ -40,6 +42,9 @@ subtest "GH issue linking" => sub {
         'Fixed GH:1013'  => 'issues/1013">GH:1013',
         'Fixed GH #1013' => 'issues/1013">#1013',
         'Add HTTP logger (gh-16; thanks djzort!)' => 'issues/16">gh-16',
+        'Merged PR#1013 -- thanks' => 'issues/1013">PR#1013</a>',
+        'Merged PR:1013 -- thanks' => 'issues/1013">PR:1013</a>',
+        'Merged PR-1013 -- thanks' => 'issues/1013">PR-1013</a>',
     );
     while (my ($in, $out) = each %gh_tests) {
         like(Changes->_gh($in, $u), qr/\Q$out\E/, "$in found");
