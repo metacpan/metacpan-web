@@ -75,9 +75,6 @@ blockquote, q { quotes: "" ""; }
 /* Remove annoying border on linked images. */
 a img { border: none; }
 
-/* Remember to define your own focus styles! */
-:focus { outline: 0; }
-
 button, body {
 font-family: Arial,Helvetica,sans-serif;
 }
