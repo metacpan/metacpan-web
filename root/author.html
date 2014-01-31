@@ -25,7 +25,7 @@ IF profiles.${profile.name} %>
 <% IF author.country || author.city || author.region %>
 <strong>Location</strong><br>
 <% IF author.country %>
-<img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.countryName %>" title="<% author.countryName %>" width=16 height=11> &nbsp;
+<img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author_country_name %>" title="<% author_country_name %>" width=16 height=11> &nbsp;
 <%- END %>
 <%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %><br>
 <% END %>

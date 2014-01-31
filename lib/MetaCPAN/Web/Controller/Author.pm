@@ -4,6 +4,7 @@ use Moose;
 use List::Util                ();
 use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
+use Locale::Country ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -47,6 +48,11 @@ sub index : Path : Args(1) {
             template    => 'author.html'
         }
     );
+
+    if ( $author->{country} ne '' ) {
+        $c->stash( author_country_name =>
+                Locale::Country::code2country( $author->{country} ) );
+    }
 }
 
 __PACKAGE__->meta->make_immutable;
