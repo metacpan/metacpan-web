@@ -5,6 +5,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 use XML::Feed;
+use HTML::Escape qw/escape_html/;
 use DateTime::Format::ISO8601;
 
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
@@ -50,7 +51,7 @@ sub build_entry {
     );
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
-    $e->summary( $entry->{abstract} );
+    $e->summary( escape_html($entry->{abstract}) );
     return $e;
 }
 

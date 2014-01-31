@@ -31,6 +31,7 @@ requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'Hash::AsObject';
 requires 'Hash::Merge';
+requires 'HTML::Escape';
 requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'List::Util';
