@@ -13,7 +13,7 @@ our $VERSION = '0.02';
 use parent qw(Plack::Middleware);
 use Digest::MD5 qw(md5_hex);
 use Plack::Util;
-use Plack::Util::Accessor qw(root files key expires cache cache_ttl);
+use Plack::Util::Accessor qw(files key expires cache cache_ttl);
 use Capture::Tiny ':all';
 use HTTP::Date  ();
 
