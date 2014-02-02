@@ -29,11 +29,11 @@ END %>
     <span class="dropdown"><b class="caret"></b></span>
     <select onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
   </div>
+  <div class="inline"><%- INCLUDE inc/favorite.html module = module %></div>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
   <% module.documentation %></span>
   <%- END %>
-  <div class="inline"><%- INCLUDE inc/favorite.html module = module %></div>
   <%- IF release.status != 'latest' %>
   <div class="pull-right">
   <%- IF release.maturity == 'developer'; 'dev release, '; END %>
