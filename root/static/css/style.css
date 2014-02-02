@@ -93,6 +93,12 @@ button.favorite, a.favorite {
     top: -1px;
 }
 
+/* Counter-act .breadcrumbs a */
+.breadcrumbs a.favorite {
+    font-size: 0.85em;
+    font-weight: normal;
+}
+
 button.favorite {
     min-width: 35px;
     cursor: pointer;
@@ -115,7 +121,8 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     color: #fff;
     text-shadow: 0px 1px 1px #333;
     border-color: #36C;
-    opacity: 1
+    opacity: 1;
+    text-decoration: none;
 }
 
 .user-profiles > a {
