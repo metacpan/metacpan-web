@@ -1,3 +1,5 @@
+
+      <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>">Changes</a></li>
       <% IF is_url(release.resources.homepage) %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
       <% IF release.resources.repository %>
       <li><div>
@@ -30,7 +32,7 @@
       </li>
       <li><div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">CPANTS</a></div></li>
       <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
-    
+
     <%
     BLOCK version_options;
     backpan = [];
