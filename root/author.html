@@ -33,16 +33,12 @@ IF profiles.${profile.name} %>
   <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16 alt="<% profile.name %>">
 </a>
 <% END; END %></div><% END %>
-<%- IF author.country || author.city || author.region %>
-<li class="nav-header">Location</li>
-<li>
-  <div>
-    <%- IF author.country %>
-    <img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author.country %>" title="<% author.country %>" width=16 height=11> &nbsp;
-    <%- END %>
-    <%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %>
-  </div>
-</li>
+<% IF author.country || author.city || author.region %>
+<strong>Location</strong><br>
+<% IF author.country %>
+<img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author_country_name %>" title="<% author_country_name %>" width=16 height=11> &nbsp;
+<%- END %>
+<%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %><br>
 <% END %>
 <% IF author.blog.size %>
 <li class="nav-header">Blog</li>

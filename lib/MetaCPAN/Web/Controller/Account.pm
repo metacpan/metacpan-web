@@ -17,7 +17,7 @@ sub auto : Private {
 
 sub logout : Local {
     my ( $self, $c ) = @_;
-    $c->detach('/forbidden') unless( $c->req->method eq 'POST' );
+    $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     $c->req->session->expire;
     $c->res->redirect('/');
 }
@@ -45,21 +45,24 @@ sub profile : Local {
     return unless ( $req->method eq 'POST' );
 
     my $data = $author;
-    $data->{blog} = $req->param('blog.url')
+    $data->{blog}
+        = $req->param('blog.url')
         ? [
         pairwise { { url => $a, feed => $b } }
         @{ [ $req->param('blog.url') ] },
         @{ [ $req->param('blog.feed') ] }
         ]
         : undef;
-    $data->{donation} = $req->param('donation.name')
+    $data->{donation}
+        = $req->param('donation.name')
         ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('donation.name') ] },
         @{ [ $req->param('donation.id') ] }
         ]
         : undef;
-    $data->{profile} = $req->param('profile.name')
+    $data->{profile}
+        = $req->param('profile.name')
         ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('profile.name') ] },
