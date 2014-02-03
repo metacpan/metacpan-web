@@ -96,6 +96,10 @@ button.favorite, a.favorite {
     font-weight: normal;
 }
 
+.breadcrumbs .favorite span {
+    font-weight: normal;
+}
+
 button.favorite {
     min-width: 35px;
     cursor: pointer;
