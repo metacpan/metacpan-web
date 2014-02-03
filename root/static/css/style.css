@@ -91,7 +91,7 @@ button.favorite, a.favorite {
 }
 
 /* Counter-act .breadcrumbs a */
-.breadcrumbs a.favorite {
+.breadcrumbs a.favorite, .breadcrumbs button.favorite {
     font-size: 0.85em;
     font-weight: normal;
 }
