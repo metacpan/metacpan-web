@@ -1,11 +1,12 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
     <% IF no_profile -%>
-    <fieldset><legend style="color: #600">Error</legend>
-        <p>In order to change your profile you have to <a href="<% api_secure %>/oauth2/authorize?choice=pause&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.</p>
-    </fieldset>
+    <div class="alert alert-error">
+      <h4 class="alert-heading">Error</h4>
+      In order to change your profile you have to <a href="<% api_secure %>/oauth2/authorize?choice=pause&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
+    </div>
     <% ELSE -%>
-    <form method="POST" action="">
+    <form method="POST" action="" class="form-horizontal">
         <% IF errors -%>
         <fieldset><legend style="color: #600">Errors</legend>
             <ul>
@@ -20,7 +21,7 @@
         </fieldset>
         <% END %>
         <fieldset><legend>General</legend>
-        <%- INCLUDE inc/author-pic.html author = author %>
+        <div class="pull-right"><%- INCLUDE inc/author-pic.html author = author %></div>
         <label><span>PAUSE ID</span><input type="text" value="<% author.pauseid %>" disabled="disabled" /></label>
         <label><span>Name</span><input type="text" name="name" value="<% author.name %>" /></label>
         <label><span>ASCII Name</span><input type="text" name="asciiname" value="<% author.asciiname %>" /></label>
@@ -96,7 +97,7 @@
         <textarea name="extra" cols="60" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
     </fieldset>
     <br />
-    <div class="ds"><input type="submit" value="Save Profile" class="g-button" /></div>
+    <input type="submit" value="Save Profile" class="btn btn-large" />
     </form>
     <% END -%>
 </div>

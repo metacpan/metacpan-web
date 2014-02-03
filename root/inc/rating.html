@@ -1,2 +1,2 @@
-<div class="rating-<% (rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></div>
+<a href="http://cpanratings.perl.org/rate/?distribution=<% distribution %>" class="rating-<% (rating.mean * 2).fmt('%.0f') / 2 * 10 %>"></a>
 (<a href="http://cpanratings.perl.org/dist/<% distribution %>"><% rating.count %> review<% IF rating.count > 1; 's'; END %></a>)

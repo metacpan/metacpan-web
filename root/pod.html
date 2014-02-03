@@ -3,84 +3,43 @@
 <% canonical = "/pod/" _ module.documentation %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
-<div itemscope itemtype="http://schema.org/SoftwareApplication">
-<strong>
-  <big>
-    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>"
-       itemprop="url">
-      <span itemprop="name"><% author.name || release.author %></span>
-    </a>
-    </span>
-    &nbsp;/&nbsp;
-  <a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% module.release %></a>
-  </big></strong><% INCLUDE inc/favorite.html module = module %><strong><big>
-  &nbsp;/&nbsp;
-  <span class="select-text" itemprop="name"><% module.documentation %></span>
-  </big></strong>
-  <% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="<% canonical %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+<% INCLUDE inc/breadcrumbs.html %>
 
-<div class="search-bar">
-  <strong></strong>
-  <div>
-    <ul>
-      <li><strong class="relatize"><% module.date.dt_http %></strong></li>
-      <% IF module.module.0.version %><li>Module version: <span itemprop="softwareVersion"><% module.module.0.version %></span></li><% END %>
-      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>" itemprop="downloadUrl">Download</a> (<% release.stat.size | format_bytes %>)</li>
-      <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', module.author, module.release].join('/'); END %>">Changes</a></li>
-      <li><a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>/">raw</a>)
-        </li>
-      <li>
-        <a id="source-link" href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-        (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
-      </li>
-      <% PROCESS inc/release-info.html %>
-    </ul>
-  </div>
-  <hr>
-  <strong>Tools</strong>
-  <ul>
-      <% IF versions.size > 1 %>
-      <li>
-        <select name="release" onchange="document.location.href='/diff/file/?target=<% [module.author, module.release, module.path].join("/") %>&amp;source=' + this.value">
-        <option>Diff with version</option>
-        <% PROCESS version_options %>
-      </select></li>
-      <% END %>
-    <li>Search distribution:<br>
-      <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
-      <input type="text" name="q">
-      <input type="submit" style="display: none"></form></li>
-    <li><a href="#" onclick="return toggleTOC()">Toggle Table of Contents</a></li>
-    <li><a href="/requires/distribution/<% module.distribution %>?sort=[[2,1]]">Reverse dependencies</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=/module/<% module.author %>/<% module.release %>/<% module.path %>">MetaCPAN Explorer</a></li>
-  </ul>
-  <hr>
+
+<ul class="nav nav-list slidepanel"  itemscope itemtype="http://schema.org/SoftwareApplication">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
+  <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
+  <li>
+    <div>
+      <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
+      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+    </div>
+  </li>
+  <li>
+    <div>
+      <a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
+      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+    </div>
+  </li>
+  <% PROCESS inc/release-info.html %>
+  <li class="nav-header">Activity</li>
   <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
-  <hr>
-  <strong>Permalinks</strong>
-  <ul>
-    <li><a href="/pod/release/<% module.author %>/<% module.release %>/<% module.path %>">This version</a></li>
-    <% IF module.documentation %>
-    <li><a href="/pod/<% module.documentation %>" itemprop="url">Latest version</a></li>
-    <% END %>
-  </ul>
-</div>
+  <% INCLUDE inc/release-tools.html %>
+</ul>
 
-<% INCLUDE inc/author-pic.html author = author %>
+<div class="pull-right"><% INCLUDE inc/author-pic.html author = author %></div>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 <% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>
 <a name="___pod"></a>
-<div class="pod">
+<div class="pod content">
 <% IF pod %>
-<%  # Add 'metacpan-verbatim' to class (SyntaxHighlighter will ignore) so we can apply CSS for users without javascript.
-    pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
-<% ELSIF pod_error %>
-<p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
+<% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
 <% ELSE %>
-No pod could be found for <% module.name %>
+<p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
 <% END %>
 </div>
 </div>

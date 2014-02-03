@@ -1,27 +1,18 @@
-<table class="release-table author-table<% IF tablesorter %> tablesorter remote<% END %>">
-<%- IF header %>
-    <thead>
+<table class="table table-condensed table-striped table-releases<% IF tablesorter %> tablesorter<% END %>">
+	<thead>
+  	<tr>
+    	<th class="name pull-left-phone">Release</th>
+      <th class="hidden-phone invisible"></th>
+    	<th class="date"><% day || "Uploaded" %></th>
+  	</tr>
+  </thead>
+  <tbody>
+  <%- FOREACH release IN releases %>
     <tr>
-    <th class="name">Release</th>
-    <th class="abstract">Abstract</th>
-<%- IF include_author %>
-    <th class="author">Author</th>
-<%- END %>
-    <th class="date">Date</th>
+      <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
+      <td class="abstract"><% IF release.abstract; release.abstract; END %></td>
+      <td class="date relatize" sort="<% release.date.dt_http %>"><% release.date.dt_http %></td>
     </tr>
-</thead>
-<%- END %>
-<tbody>
-<% i = 0; FOREACH release IN releases %>
-<% header = 1 %>
-<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
-  <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" style="width: 260px" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
-  <td class="abstract"><% IF release.abstract; release.abstract; END %></td>
-<%- IF include_author %>
-  <td class="author"><a href="/author/<% release.author %>"><% release.author %></a></td>
-<%- END %>
-  <td class="date" nowrap="nowrap"><span class="relatize" sort="<% release.date.dt_http %>"><% release.date.dt_http %></span></td>
-</tr>
-<% END %>
-</tbody>
+  <% END %>
+  </tbody>
 </table>

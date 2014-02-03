@@ -8,23 +8,26 @@
 },
 {
   title = "FAQ",
-  path = ["/about/faq"]
+  path = ["/about/faq"],
+  class = 'hidden-phone',
 },
 {
   title = "Feedback",
-  path = ["https://github.com/CPAN-API/metacpan-web/issues"]
+  path = ["https://github.com/CPAN-API/metacpan-web/issues"],
+  class = 'hidden-phone',
 },
 {
   title = "Lab",
-  path = ["/lab"]
+  path = ["/lab"],
+  class = 'hidden-phone',
 },
 ] %>
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org - Perl programming language</title>
-  <%- IF rss %>
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
+  <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
   <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
   <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
 <%- IF canonical %>
@@ -35,6 +38,13 @@
 <%- END %>
   <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
+
+  <% IF PLACK_ENV == 'development' %>
+  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
+  <script src="/static/js/less.min.js" type="text/javascript"></script>
+  <% ELSE %>
+  <link href="<% req.env.item('psgix.assets_less').0 %>" rel="stylesheet" type="text/css">
+  <% END %>
   <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -57,64 +67,126 @@
 
 </head>
 <body>
-  <div class="header">
-    <% FOREACH item IN menu; bold = item.path.grep(->{ this == req.uri.path} ).size;
-    IF bold; '<strong>' | none; END %><a href="<% item.path.0 %>"><% item.title %></a><% IF bold; '</strong>' | none; END; END %>
-    <%- IF user_exists %>
-    <a class="settings" href="/account/profile"><img src="/static/icons/settings.png" width=16></a>
-    <div class="spacer" style="text-align: right"><strong>Welcome</strong></div>
-    <%- ELSE %>
-    <div class="spacer" style="text-align: right"><strong id="signin-button">Sign in</strong></div>
-  </div>
-  <div id="signin" style="display: none; position: absolute; right: 2px; top: 0px">
-      <div style="border-color: #CCC #999 #fff #CCC; border-width: 1px; border-style: solid; position: relative; top: 1px; background-color: #fff; width: 50px; left: 30px; padding: 5px; text-align: right"><strong>Sign in</strong></div>
-         <div class="ds"><div style="border-color: #CCC #999 #999 #CCC; border-width: 1px; border-style: solid; background-color: #fff; width: 80px;  padding: 5px;"><% FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
-             <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>&amp;state=<% c.req.path | uri %>" onclick="return logInPAUSE(this)"><% identity %></a><% END %>
-          </div></div><% END %>
-  </div>
-  <% IF req.uri.path != '/' %>
-  <div style="text-align: center" class="home">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-      <div style="display: inline-block; text-align: left">
-        <div style="float: left; padding-top: 13px; padding-left: 10px;">
-          <div class="small-logo">
-            <a href="/"><img src="/static/images/t.gif" width="180" height="34" alt="MetaCPAN Logo" /></a>
-          </div>
-          <div class="ds">
-            <input type="text" name="q" size="41" id="search-input" value="<% req.param('q').join(' ') %>"><input type="submit" value="Search" class="g-button" />
-          </div><br>
-          <small style="font-size: 0.8em"><% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %> result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %></small>
-        </div>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%- UNLESS req.uri.path == "/" %>
+        <a class="btn btn-navbar btn-slidepanel" data-toggle="slidepanel" data-target=".slidepanel">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <%- END %>
+        <ul class="nav">
+          <%-  FOREACH item IN menu;
+            active = item.path.grep(->{ this == req.uri.path} ).size;
+            IF active; %>
+          <li class="active">
+          <%- ELSE %>
+          <li class="<% item.class %>">
+          <%- END %>
+            <a href="<% item.path.0 %>"><% item.title %></a>
+          </li>
+          <%- END %>
+        </ul>
+        <ul class="nav pull-right">
+          <%- IF user_exists %>
+          <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+          <li class="dropdown pull-left">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
 
-      <div style="float: left; width: 168px"></div>
+              <li><a href="/account/identities">Identities</a></li>
+              <li><a href="/account/profile">Profile</a></li>
+              <li>
+                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <%- ELSE %>
+          <li class="dropdown pull-left">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Sign in
+                  <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
+                <li>
+                  <a href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><% identity %></a>
+                </li>
+                <%- END %>
+              </ul>
+          </li>
+          <% END %>
+        </ul>
       </div>
-    </form>
+    </div>
   </div>
-  <% END %>
-  <br>
-  <div id="content"><% content | none %>
-  </div>
-  <br><br><br>
-  <table class="footer" width="100%">
-    <tr>
-      <td style="width: 200px; float: left"></td>
-     <td style="text-align: center">
-    <a href="https://github.com/CPAN-API/cpan-api/wiki/API-docs">API</a> &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="/about">About MetaCPAN</a> &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="/mirrors">CPAN Mirrors</a> &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>  &nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="http://Perl.org/">Perl.org</a>
 
-    </td>
-    <td style="width: 200px; float: right; text-align: right; font-size: 0.7em; color: #999; position: relative">
-      Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
-      <br><br>
-      <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
-        <img src="/static/images/bytemark_logo.png" width=179 height=14>
-      </a>
-    </td>
-  </tr>
-</table>
-<center><i><a href="/">MetaCPAN.org</a> is a non-profit, <a href="https://github.com/CPAN-API">open source</a> search service for the <a href="http://www.cpan.org/" title="Comprehensive Perl Archive Network">CPAN</a>, which is a repository of modules for the <a href="http://www.perl.org/" title="perl.org -- Perl programming language">Perl programming language</a>.</i></center>
-  </body>
+  <div class="container-fluid">
+    <% IF req.uri.path != '/' %>
+    <div class="row hidden-phone">
+      <div class="span3">
+        <a href="/" class="small-logo"></a>
+      </div>
+      <div class="span6">
+        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
+          <div class="input-append">
+            <input type="text" name="q" size="41" id="search-input" class="input-xlarge span5" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
+            <button class="btn" type="button">Search</button>
+          </div><br>
+          <small class="smaller">
+            <% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %>
+            result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %>
+          </small>
+        </form>
+      </div>
+    </div>
+    <% END %>
+    <div class="row-fluid">
+      <div class="span12">
+      <% content | none %>
+      </div>
+    </div>
+    <div class="hidden-phone">
+      <br><br><br>
+      <div class="row-fluid">
+        <div class="span3">&nbsp;</div>
+        <div class="span1" style="text-align: center">
+          <a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a>
+        </div>
+        <div class="span2" style="text-align: center">
+          <a href="/about">About</a>
+        </div>
+        <div class="span2" style="text-align: center">
+          <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
+        </div>
+        <div class="span1" style="text-align: center">
+          <a href="http://Perl.org/">Perl.org</a>
+        </div>
+        <div class="span3" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+          Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+          <br><br>
+          <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
+            <img src="/static/images/bytemark_logo.png" width=179 height=14>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="visible-phone row-fluid">
+      <div class="span4"><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a></div>
+      <div class="span4 center"><a href="/about/resources">About</a></div>
+      <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+        Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+        <br><br>
+        <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
+          <img src="/static/images/bytemark_logo.png" width=100>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

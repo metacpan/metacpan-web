@@ -1,4 +1,4 @@
-use strict;
+	use strict;
 use warnings;
 use Test::More;
 use MetaCPAN::Web::Test;
@@ -11,7 +11,7 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like(
-        '//div[@id="content"]//pre[@id="source"]',
+        '//div[@class="content"]//pre[@id="source"]',
         qr/^Revision history for File-Spec-Native/,
         'source view for plain text change log'
     );
@@ -22,7 +22,7 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like(
-        '//div[@id="content"]//div[@class="pod"]//h1[@id="NAME"]//following-sibling::p[position()=1]',
+        '//title',
         qr/^perldelta - /,
         'got perldelta for perl release'
     );
@@ -34,12 +34,12 @@ test_psgi app, sub {
     is( $res->code, 404, 'code 404' );
     my $tx = tx($res);
     $tx->like(
-        '//div[@id="content"]//div[@id="not-found"]',
+        '//div[@id="not-found"]',
         qr/Change log not found for release.+Try the release info page:/,
         'Suggest release info page for not-found dist.'
     );
     $tx->like(
-        qq{//div[\@id="content"]//div[\@id="not-found"]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
+        qq{//div[\@id="not-found"]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
         qr{/$missing$},
         'link to suggested release',
     );

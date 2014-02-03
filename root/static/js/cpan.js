@@ -1,27 +1,29 @@
-$.fn.textWidth = function(){
-  var html_org = $(this).html();
-  var html_calc = '<span>' + html_org + '</span>'
-  $(this).html(html_calc);
-  var width = $(this).find('span:first').width();
-  $(this).html(html_org);
-  return width;
+/* jshint white: true, lastsemic: true */
+
+$.fn.textWidth = function () {
+    var html_org = $(this).html();
+    var html_calc = '<span>' + html_org + '</span>';
+    $(this).html(html_calc);
+    var width = $(this).find('span:first').width();
+    $(this).html(html_org);
+    return width;
 };
 
 $.extend({
-  getUrlVars: function(){
-    var vars = {}, hash;
-    var indexOfQ = window.location.href.indexOf('?');
-    if(indexOfQ == -1) return vars;
-    var hashes = window.location.href.slice(indexOfQ + 1).split('&');
-    $.each(hashes, function(idx, hash) {
-      var kv = hash.split('=');
-      vars[kv[0]] = kv[1];
-    });
-    return vars;
-  },
-  getUrlVar: function(name){
-    return $.getUrlVars()[name];
-  }
+    getUrlVars: function () {
+        var vars = {}, hash;
+        var indexOfQ = window.location.href.indexOf('?');
+        if (indexOfQ == -1) return vars;
+        var hashes = window.location.href.slice(indexOfQ + 1).split('&');
+        $.each(hashes, function (idx, hash) {
+            var kv = hash.split('=');
+            vars[kv[0]] = kv[1];
+        });
+        return vars;
+    },
+    getUrlVar: function (name) {
+        return $.getUrlVars()[name];
+    }
 });
 
 var podVisible = false;
@@ -46,24 +48,26 @@ function togglePod(lines) {
 
 function toggleTOC() {
     var index = $('#index');
-    if(!index) return false;
+    if (!index) return false;
     var visible = index.is(':visible');
     visible ? index.hide() : index.show();
     visible ? $.cookie("hideTOC", 1, { expires: 999, path: '/' }) : $.cookie("hideTOC", 0, { expires: 999, path: '/' });
     return false;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
+    $(".ttip").tooltip();
+
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.defaults['tab-size'] = 8;
 
     var source = $("#source");
     // if this is a source-code view with destination anchor
-    if(source[0] && document.location.hash) {
+    if (source[0] && document.location.hash) {
         // check for 'L{number}' anchor in URL and highlight and jump
         // to that line.
         var lineMatch = document.location.hash.match(/^#L(\d+)$/);
-        if( lineMatch ) {
+        if (lineMatch) {
             SyntaxHighlighter.defaults['highlight'] = [lineMatch[1]];
         }
         else {
@@ -72,11 +76,11 @@ $(document).ready(function() {
             // as long as the matching line is not the first line in
             // the code.
             var packageMatch = document.location.hash.match(/^#P(\S+)$/);
-            if( packageMatch ) {
+            if (packageMatch) {
                 var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
                 var leadingSource = source.html().split("package " + decodedPackageMatch + ";");
                 var lineCount = leadingSource[0].split("\n").length;
-                if( leadingSource.length > 1 && lineCount > 1 ) {
+                if (leadingSource.length > 1 && lineCount > 1) {
                     SyntaxHighlighter.defaults['highlight'] = [lineCount];
                     document.location.hash = "#L" + lineCount;
                 }
@@ -90,39 +94,35 @@ $(document).ready(function() {
 
     SyntaxHighlighter.highlight();
     
-    $('#signin-button').mouseenter(function(){$('#signin').show()});
-    $('#signin').mouseleave(function(){$('#signin').hide()});
-    if(typeof defaultSort == "undefined") defaultSort = [[0,0]];
-    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'],textExtraction: function(node){
-        try {
-            var sortBy = node.firstChild.getAttribute('sort');
-        } catch(err) {}
-        if(sortBy && node.getAttribute('class') == 'date') {
-            var date = new Date(node.firstChild.getAttribute('sort'));
-            return date.getTime();
-        } else if (sortBy) {
-            return node.firstChild.getAttribute('sort');
-        }
-        else {
-            return node.innerHTML;
+    $('#signin-button').mouseenter(function () { $('#signin').show() });
+    $('#signin').mouseleave(function () { $('#signin').hide() });
+    if (typeof defaultSort == "undefined") defaultSort = [[0, 0]];
+    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'], textExtraction: function (node) {
+        var $node = $(node);
+        var sort = $node.attr("sort");
+        if(!sort) return node.innerHTML;
+        if ($node.hasClass("date")) {
+            return (new Date(sort)).getTime();
+        } else {
+            return sort;
         }
     }} );
 
-    $('.tablesorter.remote th.header').each(function() {
+    $('.tablesorter.remote th.header').each(function () {
         $(this).unbind('click');
-        $(this).click(function(event) {
+        $(this).click(function (event) {
             var $cell = $(this);
             var params = $.getUrlVars();
-            params.sort = '[['+ this.column +','+ this.count++ % 2 +']]';
+            params.sort = '[[' + this.column + ',' + this.count++ % 2 + ']]';
             var query = $.param(params);
             var url = window.location.href.replace(window.location.search, '');
-            window.location.href = url +'?'+ query;
+            window.location.href = url + '?' + query;
         });
     });
 
     $('.relatize').relatizeDate();
 
-    $('#search-input').keyup(function(event) {
+    $('#search-input').keyup(function (event) {
         // if up/down arrow is released
         if (event.keyCode == '38' || event.keyCode == '40') {
             // get the currently hovered query
@@ -133,7 +133,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#search-input').keydown(function(event) {
+    $('#search-input').keydown(function (event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
 
@@ -156,22 +156,22 @@ $(document).ready(function() {
         max: 20,
         selectFirst: false,
         width: $("#search-input").width() + 5,
-        parse: function(data) {
-            var result = $.map(data, function(row) {
+        parse: function (data) {
+            var result = $.map(data, function (row) {
                 return {
                     data: row,
                     value: row.documentation,
                     result: row.documentation
-                }
+                };
             });
             var uniq = {};
-            result = $.grep(result, function(row) {
+            result = $.grep(result, function (row) {
                 uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
                 return uniq[row.result]++ < 1;
             });
             return result;
         },
-        formatItem: function(item) {
+        formatItem: function (item) {
             return item.documentation;
         }
     }).result(function(e, item) {
@@ -181,26 +181,26 @@ $(document).ready(function() {
     $('#search-input.autofocus').focus();
 
     var items = $('.ellipsis');
-      for(var i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
         var element = $(items[i]);
         var boxWidth = element.width();
         var textWidth = element.textWidth();
         var text = element.text();
         var textLength = text.length;
-        if(textWidth <= boxWidth) continue;
-        var parts = [text.substr(0, Math.floor(textLength/2)), text.substr(Math.floor(textLength/2), textLength)];
-        while(element.textWidth() > boxWidth) {
-          if(textLength % 2) {
-            parts[0] = parts[0].substr(0, parts[0].length-1);
-          } else {
-            parts[1] = parts[1].substr(1, parts[1].length);
-          }
-          textLength--;
-          element.html(parts.join('…'));
+        if (textWidth <= boxWidth) continue;
+        var parts = [text.substr(0, Math.floor(textLength / 2)), text.substr(Math.floor(textLength / 2), textLength)];
+        while (element.textWidth() > boxWidth) {
+            if (textLength % 2) {
+                parts[0] = parts[0].substr(0, parts[0].length - 1);
+            } else {
+                parts[1] = parts[1].substr(1, parts[1].length);
+            }
+            textLength--;
+            element.html(parts.join('…'));
         }
-      }
+    }
 
-    $('.pod h1,h2,h3,h4,h5,h6').each(function() {
+    $('.pod').find('h1,h2,h3,h4,h5,h6').each(function () {
       $(this).wrapInner(function() {
         return '<a href="#___pod"></a>';
       });
@@ -248,10 +248,10 @@ function toggleProtocol(tag) {
 }
 
 function logInPAUSE(a) {
-    if(!a.href.match(/pause/))
+    if (!a.href.match(/pause/))
         return true;
     var id = prompt('Please enter your PAUSE ID:');
-    if(id) document.location.href= a.href + '&id=' +  id;
+    if (id) document.location.href = a.href + '&id=' + id;
     return false;
 }
 
@@ -262,27 +262,27 @@ function favDistribution(form) {
         type: 'POST',
         url: form.attr('action'),
         data: data,
-        success: function(){
+        success: function () {
             var button = form.find('button');
             button.toggleClass('active');
             var counter = button.find('span');
             var count = counter.text();
-            if(button.hasClass('active')) {
-                counter.text(count ? parseInt(count) + 1 : 1);
+            if (button.hasClass('active')) {
+                counter.text(count ? parseInt(count, 10) + 1 : 1);
                 form.append('<input type="hidden" name="remove" value="1">');
-                if(!count)
+                if (!count)
                     button.toggleClass('highlight');
             } else {
-                counter.text(parseInt(count) - 1);
+                counter.text(parseInt(count, 10) - 1);
                 form.find('input[name="remove"]').remove();
-                if(counter.text() == 0) {
+                if (counter.text() === 0) {
                     counter.text("");
                     button.toggleClass('highlight');
                 }
             }
         },
-        error: function(){
-            if(confirm("You have to complete a Captcha in order to ++.")) {
+        error: function () {
+            if (confirm("You have to complete a Captcha in order to ++.")) {
                 document.location.href = "/account/turing";
             }
         }

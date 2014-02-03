@@ -20,13 +20,15 @@ test_psgi app, sub {
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx2 = tx($res);
+    ok($tx->find_value('//div[contains(@class, "content")]'),
+        "page has content");
     is(
-        $tx2->find_value( '//div[@id="content"]'),
-        $tx->find_value('//div[@id="content"]'),
+        $tx2->find_value( '//div[contains(@class, "content")]'),
+        $tx->find_value('//div[contains(@class, "content")]'),
         'content of both urls is exactly the same'
     );
 
-    like $tx->find_value('//div[@class="pod"]//pre/@class'),
+    like $tx->find_value('//div[contains(@class, "pod")]//pre/@class'),
         qr/^brush: pl; .+; metacpan-verbatim$/,
         'verbatim pre tag has syn-hi class';
 

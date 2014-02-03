@@ -2,65 +2,33 @@
 <% canonical = '/release/' _ release.distribution %>
 <% meta_description = release.abstract %>
 <% twitter_card_inc = 'inc/twitter/release.html' %>
-<strong>
-  <big>
-    <a rel="author" href="/author/<% release.author %>" title="<% author.asciiname || release.author %>">
-      <% author.name || release.author %>
-    </a>
-    &nbsp;/&nbsp; <% release.name %></big></strong>
-<% INCLUDE inc/favorite.html module = release %>
-<% IF release.status != 'latest' %><div style="float: right"><strong><big><% IF release.maturity == 'developer'; 'dev release, '; END %></big><a href="/release/<% release.distribution %>"><big>go to latest</big></a></strong></div><% END %><br><br>
+<% INCLUDE inc/breadcrumbs.html %>
 
-<div class="search-bar">
-  <div>
-    <ul>
-      <li><strong class="relatize"><% release.date.dt_http %></strong></li>
-      <li><a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">Download</a> (<% release.stat.size | format_bytes %>)</li>
-      <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>">Changes</a></li>
-      <li><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
-      <% PROCESS inc/release-info.html %>
-    </ul>
-  </div>
-  <hr>
-  <strong>Tools</strong>
-  <ul>
-    <% IF versions.size > 1 %>
-    <li>
-      <select name="release" onchange="document.location.href='/diff/release/' + this.value + '<% release.author %>/<% release.name %>'">
-      <option>Diff with version</option>
-      <% PROCESS version_options %>
-    </select></li>
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+    <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
+    <%- IF changes %>
+    <li><a href="/<% changes.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; changes.name %>">Changes</a></li>
+    <%- END %>
+    <li><span><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api %>/source/<% release.author %>/<% release.name %>/">raw</a>)</span></li>
+    <% PROCESS inc/release-info.html %>
+    <li class="nav-header">Activity</li>
+    <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+    <% IF release.metadata.x_help_wanted %>
+    <li>Help Wanted<ul>
+    <% FOREACH position IN release.metadata.x_help_wanted %>
+      <li><% position %></li>
+    <% END %>    
+    </ul></li>
     <% END %>
-    <li>Search distribution:<br>
-      <form action="/search">
-      <input type="hidden" name="q" value="dist:<% release.distribution %>">
-      <input type="text" name="q">
-      <input type="submit" style="display: none"></form></li>
-    <li><a href="/requires/distribution/<% release.distribution %>">Reverse dependencies</a></li>
-    <li><a href="http://explorer.metacpan.org/?url=/release/<% release.author %>/<% release.name %>">MetaCPAN Explorer</a></li>
-  </ul>
-  <hr>
-  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
-<% IF release.metadata.x_help_wanted %>
-   <hr>
-   <strong>Help Wanted</strong> 
-   <ul>
-<% FOREACH position IN release.metadata.x_help_wanted %>
-    <li><% position %></li>
-<% END %>    
-   </ul>
-<% END %>
-  <hr>
-  <strong>Permalinks</strong>
-  <ul>
-    <li><a href="/release/<% release.author %>/<% release.name %>">This version</a></li>
-    <li><a href="/release/<% release.distribution %>">Latest version</a></li>
-  </ul>
-</div>
+    <%- INCLUDE inc/release-tools.html %>
+</ul>
 
-<div id="authors"
-    style="text-align: center; float: <% IF float == 'left' %>left; padding-left: 20px<% ELSE %>right; width: 160px; padding-left: 80px<% END %>">
-<% INCLUDE inc/author-pic.html author = author %>
+<div class="pull-right hidden-phone"><% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html
     contributors = release.metadata.x_contributors %>
 </div>

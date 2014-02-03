@@ -1,22 +1,22 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
-    <p>Identities you are connected with allow you to log into MetaCPAN. MetaCPAN also drags in some information from them to help you with filling in your <a href="/account/profile">profile</a>. This information is not exposed to anyone unless you explicitly publish it.</p>
-    <br /><br />
+    <div class="alert alert-block">
+      <h4 class="alert-heading">Information</h4>
+      Identities you are connected to allow you to log into MetaCPAN. MetaCPAN also drags in some information from them to help you with filling in your <a href="/account/profile">profile</a>. This information is not exposed to anyone unless you explicitly publish it.
+    </div>
     <table width="300">
     <%- FOREACH identity IN ['Facebook', 'GitHub', 'PAUSE', 'Twitter', 'Google']; found = user.identity.grep(->(a){ a.name == identity.lower }) %>
     <tr>
         <td><big><% identity %></big></td>
         <td>
-            <div class="ds">
             <%- IF found.size %>
             <form action="<% c.uri_for("/account/identities") %>" method="POST">
                 <input type="hidden" name="delete" value="<% identity.lower %>" />
-                <button type="submit" class="g-button">Disconnect</a>
+                <button type="submit" class="btn btn-large btn-danger"><i class="icon-remove icon-white"></i> Disconnect</a>
             </form>
             <%- ELSE %>
-            <a class="g-button" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)">Connect</a>
+            <a class="btn btn-large btn-success" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><i class="icon-share icon-white"></i> Connect</a>
             <%- END %>
-            </div>
         </td>
     </tr>
     <%- END %>

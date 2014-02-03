@@ -9,32 +9,51 @@
     <% END %>
   </big></strong><br><br>
 
-<div class="search-bar">
-  <strong>Tools</strong>
-  <ul>
-    <li><a href="/release/<% module.author %>/<% module.release %>/">Release Info</a></li>
-    <% IF module.documentation %>
-      <%# FIXME: Can we tell if this is PAUSE indexed? %>
-      <li><a href="/pod/<% module.documentation %>">Module Documentation</a></li>
-    <% ELSIF module.slop %>
-      <li><a href="/pod/release/<% doc_view_url %>">Documentation View</a></li>
-    <% END %>
-    <li><a href="/author/<% module.author %>/">Author</a></li>
-    <li>&nbsp;</li>
-    <li><a href="<% raw_url %>">Raw code</a></li>
-    <li><a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1">Download</a></li>
-    <% IF module.sloc > 0 %>
-    <li><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></li>
-    <% END %>
-  </ul>
-  <hr>
-  <strong>Info</strong>
-  <ul>
-    <li><% module.sloc %> lines of code</li>
-    <li><% module.slop %> lines of pod</li>
-    <li><% module.stat.size | format_bytes %> bytes</li>
-  </ul>
-</div>
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
+  <li class="nav-header">Tools</li>
+  <li>
+    <div>
+      <a href="/release/<% module.author %>/<% module.release %>/">Release Info</a>
+    </div>
+  </li>
+  <% IF module.documentation %>
+  <li>
+    <div>
+      <a href="/pod/<% module.documentation %>">Module Documentation</a>
+    </div>
+  </li>
+  <% ELSIF module.slop %>
+  <li>
+    <div>
+      <a href="/pod/<% doc_view_url %>">Documentation View</a>
+    </div>
+  </li>
+  <% END %>
+  <li>
+    <div>
+      <a href="/author/<% module.author %>/">Author</a>
+    </div>
+  </li>
+  <li>&nbsp;</li>
+  <li><div><a href="<% raw_url %>">Raw code</a></div></li>
+  <li>
+    <div>
+      <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1">Download</a>
+    </div>
+  </li>
+  <% IF module.sloc > 0 %>
+  <li><div><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></div></li>
+  <% END %>
+  <li class="nav-header">Info</li>
+  <li><% module.sloc %> lines of code</li>
+  <li><% module.slop %> lines of pod</li>
+  <li><% module.stat.size | format_bytes %> bytes</li>
+</ul>
 
 <div class="content">
 <% IF !module.binary %>

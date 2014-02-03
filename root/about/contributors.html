@@ -19,7 +19,7 @@
       return {
         render: function() {
           $('#author-result-loading').hide();
-          $('#author-results').html('<ul class="authors">');
+          $('.author-results').html('<ul class="authors">');
           var el = $('ul.authors');
           var rows = [];
           $.each(result, function(idx, row) {
@@ -93,8 +93,8 @@
 </script>
 <% PROCESS inc/about-bar.html %>
 
-<div class="content">
+<div class="content about">
   <img src="/static/icons/busy.gif" id="author-result-loading" />
   <div id="author-count"></div>
-  <div id="author-results"></div>
+  <div class="author-results"></div>
 </div>

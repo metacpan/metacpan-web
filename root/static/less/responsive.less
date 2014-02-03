@@ -1,0 +1,144 @@
+// RESPONSIVE CLASSES
+// ------------------
+
+// Hide from screenreaders and browsers
+// Credit: HTML5 Boilerplate
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// Visibility utilities
+
+// For desktops
+.visible-phone     { display: none; }
+.visible-tablet    { display: none; }
+.visible-desktop   { display: block; }
+.hidden-phone      { display: block; }
+.hidden-tablet     { display: block; }
+.hidden-desktop    { display: none; }
+
+// Phones only
+@media (max-width: 480px) {
+  // Show
+  .visible-phone     { display: block; }
+  // Hide
+  .hidden-phone      { display: none !important; }
+  .navbar .nav > li.hidden-phone      { display: none; }
+  // Hide everything else
+  .hidden-desktop    { display: block; }
+  .visible-desktop   { display: none; }
+}
+
+// Tablets & small desktops only
+@media (min-width: 481px) and (max-width: 979px) {
+  // Show
+  .visible-tablet    { display: block; }
+  // Hide
+  .hidden-tablet     { display: none; }
+  // Hide everything else
+  .hidden-desktop    { display: block; }
+  .visible-desktop   { display: none; }
+}
+
+
+@media (max-width: 480px) {
+    .navbar {
+      position: fixed;
+      right: 0;
+      left: 0;
+      top: 0;
+      z-index: 1030;
+      margin-bottom: 0;
+    }
+
+    body {
+      padding-top: 40px;
+    }
+
+    .container-fluid {
+      padding: 5px;
+    }
+
+    .navbar-inner, .navbar-inner .container-fluid {
+        padding: 0px;
+    }
+    .home {
+        padding-top: 0px;
+    }
+
+    .home input#search-input {
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        width: auto;
+        font-size: 1.4em;
+    }
+
+    .big-logo {
+      margin: 20px 0 30px 0;
+      width: 161px;
+      height: 28px;
+      background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
+      background-size: 151px 51px;
+      background-repeat: no-repeat;
+    }
+    
+    .home img {
+        width:137px;
+        height: 27px;
+    }
+
+    .search-form .input-append, .search-form input#search-input {
+      left: 5px;
+      right: 5px;
+      width: auto;
+      display: block;
+      position: absolute;
+    }
+    
+    @import "bootstrap-slidepanel.less";
+    .slidepanel {
+      background-color: #fff;
+      padding: 10px;
+      border-right: 1px solid #e5e5e5;
+    }
+
+    .slidepanel .search input[type=search] {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: 5px;
+      width: auto;
+    }
+
+    .slidepanel .search {
+      height: 15px;
+    }
+    
+    .search-results, .pod, .content {
+      margin-left: 0px;
+      border-left-width: 0px;
+      padding: 0px;
+    }
+
+    .table td, .table th {
+        display:            block;
+        margin:             0;
+        white-space:        normal;
+        width:              auto !important;
+    }
+
+    .pull-left-phone {
+      float: left !important;
+    }
+
+    #map {
+      margin-right: 0px !important;
+    }
+
+    .releases td.name {
+        font-weight:        bold;
+        background:         #F9F9F9;
+    }
+}

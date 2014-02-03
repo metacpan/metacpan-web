@@ -20,32 +20,39 @@ END;
 FOREACH i IN [1,2,3]; foo = parts.shift; END;
 file.path = parts.join("/"); END -%>
 
-  <div class="search-bar">
-    <strong>Tools</strong>
-    <ul>
-      <% IF type == 'source' %>
-      <li><a href="<% api %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">Raw diff</a></li>
-      <% ELSE %>
-      <li><a href="<% api %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">Raw diff</a></li>
-      <% END %>
-    </ul>
-    <% IF diff.statistics.size > 1 -%>
-    <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">
+  <ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+  <li class="nav-header">Tools</li>
+    <li>
+      <div>
+        <%- IF type == 'source' %>
+        <a href="<% api %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
+        <%- ELSE %>
+        <a href="<% api %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
+        <%- END %>
+          Raw diff
+        </a>
+      </div>
+    </li>
+    <%- IF diff.statistics.size > 1 -%>
+    <li>
+      <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">
         <option>Jump to file</option>
         <% FOREACH file IN diff.statistics -%>
         <option value="<% file.path %>"><% file.path %></option>
         <% END -%>
-    </select>
-    <% END -%>
-    <hr>
-    <strong>Info</strong>
-    <ul>
-      <li><% insertions %> insertion<% IF insertions > 1 %>s<% END %></li>
-      <li><% deletions %> deletion<% IF deletions > 1 %>s<% END %></li>
-    </ul>
-    <br><br>
-    <a href="#">Top</a>
-  </div>
+      </select>
+    </li>
+    <%- END -%>
+    <li class="nav-header">Info</li>
+    <li><% insertions %> insertion<% IF insertions > 1 %>s<% END %></li>
+    <li><% deletions %> deletion<% IF deletions > 1 %>s<% END %></li>
+    <li><div><a href="#">Top</a><div></li>
+  </ul>
 
 <div class="content">
 <ul class="diff-ul">

@@ -24,7 +24,6 @@ test_psgi app, sub {
     ok( $tx->find_value('//a[@href="/release/Moose"]'),
         'contains permalink to resource' );
 
-
     # Moose 2.1201 has no more Examples and breaks this test,
     # so pin to an older version for now.
     test_heading_order($cb->( GET "/release/ETHER/Moose-2.1005" ));
@@ -80,7 +79,7 @@ sub test_heading_order {
     my $tx = tx($res);
 
     # Figure out version for Changes test
-    my ($author, $module) = split m|/|, $tx->find_value('//strong/big');
+    my (undef, undef, $author, $module) = split m|/|, $tx->find_value('//a[text()="This version"]/@href');
     $module =~ s/[^\d\w_.-]//g;
     my ($version) = (reverse split /-/, $module);
 

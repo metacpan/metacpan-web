@@ -1,0 +1,37 @@
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+    <li class="nav-header">Activity</li>
+    <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
+    <li class="nav-header">Filter</li>
+    <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
+          <%- 
+          filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' };
+          IF c.req.uri == "/recent"; c.req.params.f ||= 'l'; END;
+          FOR item IN ['l', 'n']; %>
+      <li><label class="radio"><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label></li>
+      <% END %>
+      <input type="submit" class="hidden">
+  </form>
+  <li class="nav-header">Other</li>
+  <li><a href="/favorite/recent">Recent Favorites</a></li>
+  <li><a href="/favorite/leaderboard">Popular Distributions</a></li>
+  <li class="nav-header">Top Uploaders</li>
+  <%-
+  	categories = {
+  		weekly = "Weekly",
+  		yearly = "Yearly",
+  		all = "All Time",
+  	};
+  	FOREACH category IN categories.keys;
+  %>
+  <li>
+      <% IF range == category %><strong><% categories.item(category) %></strong>
+      <% ELSE %><a href="/recent/topuploaders/<% category %>"><% categories.item(category) %></a>
+      <%- END %>
+  </li>
+  <% END %>
+</ul>

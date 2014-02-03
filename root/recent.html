@@ -1,18 +1,8 @@
-<%- rss = 'recent?f=' _ c.req.params.f || 'l' %>
-<%- title = 'Recent' %>
-<div class="search-bar">
-  <% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %>
-  <a href ="/favorite/recent">Recent ++</a>
-  <hr/>
-  <strong>Filter</strong>
-  <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
-      <%- filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' }; c.req.params.f ||= 'l';
-      FOR item IN ['l', 'n']; %>
-  <label><input type="radio" name="f" value="<% item %>"<% IF c.req.params.f == item; ' checked'; END %> onchange="this.form.submit()"> <% filter.${item} %></label>
-  <% END %>
-  <input type="submit" style="display: none">
-  </form>
-</div>
+<%
+  rss = 'recent?f=' _ c.req.params.f || 'l';
+  title = "Recent";
+  INCLUDE inc/recent-bar.html;
+%>
 
 <div class="content">
 <%-
@@ -20,26 +10,18 @@ MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'A
 DoW = [undef, "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 releases = [];
 FOREACH release IN recent;
-date = release.date.dt;
-day = "%d %s %s".sprintf(date.day, MoY.item(date.month), date.year);
-IF day != last;
-
-IF releases.size; INCLUDE inc/release-table.html releases = releases, header = 1, include_author = 1; END;
-
-releases = [];
-IF !loop.first %><br><% END %>
-<big>
-    <strong class="recent-date">
-        <%- USE dt = DateTime( year = date.year, month = date.month, day = date.day ); %>
-        <% DoW.item(dt.day_of_week); ", "; day; last = day %>
-    </strong>
-</big>
-<%
-END;
-releases.push(release);
--%>
-<% END %>
-
-<% INCLUDE inc/release-table.html releases = releases, header = 1, include_author = 1 %>
+  date = release.date.dt;
+  USE dt = DateTime( year = date.year, month = date.month, day = date.day );
+  day = "%s, %d %s %s".sprintf(DoW.item(dt.day_of_week), date.day, MoY.item(date.month), date.year);
+  IF day != last;
+    IF releases.size;
+      INCLUDE inc/release-table.html releases = releases day = last;
+    END;
+    releases = [];
+    last = day;
+  END;
+  releases.push(release);
+END %>
+<% INCLUDE inc/release-table.html releases = releases %>
 <% INCLUDE inc/pager.html size = 100 %>
 </div>

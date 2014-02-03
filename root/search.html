@@ -1,47 +1,54 @@
 <%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
-<div class="search-bar">
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
   <!--<ul class="search-type">
-    <a href="/search?q="><li class="icon icon-module">Modules</li></a>
-    <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
-    <li class="icon icon-dist">Distributions</li>
-    <li class="icon icon-server">Mirrors</li>
+  <a href="/search?q="><li class="icon icon-module">Modules</li></a>
+  <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
+  <li class="icon icon-dist">Distributions</li>
+  <li class="icon icon-server">Mirrors</li>
   </ul>
   <hr>-->
-  <strong>Something missing?</strong>
-  <p><a href="/about/missing_modules">Find out why</a></p>
-</div>
+  <li class="nav-header">Something missing?</li>
+  <li>
+    <div>
+      <a href="/about/missing_modules">Find out why</a>
+    </div>
+  </li>
+</ul>
 
 <div class="search-results">
 <% IF authors.total %>
-    <div id="author-results">
-        <ul class="authors">
-            <% FOREACH author IN authors.results %>
-                <li>
-                    <a href  = "/author/<% author.id %>"
-                       title = "Author page for <% author.name | html %>"
-                        >
-                        <% IF author.gravatar_url %>
-                            <img src="<% author.gravatar_url %>" class="author-img">
-                        <% END %>
-                        <% author.name | html %> (<% author.pauseid %>)
-                    </a>
-                </li>
-            <% END %>
-        </ul>
-    </div>
+  <div class="author-results">
+    <ul class="authors">
+      <%- FOREACH author IN authors.results %>
+        <li>
+          <a href="/author/<% author.id %>" title="Author page for <% author.name | html %>">
+            <%- IF author.gravatar_url %>
+              <img src="<% author.gravatar_url %>">
+            <%- END %>
+            <% author.name | html %> (<% author.pauseid %>)
+          </a>
+        </li>
+      <% END %>
+    </ul>
+  </div>
 <% END %>
 
 <% FOREACH group IN results; item = group.0 %>
   <div class="module-result">
   <big><strong>
-     <% link_to_file(item) | none %>
-     <%- IF item.abstract; ' - '; item.abstract; END %>
+   <% link_to_file(item) | none %>
+   <%- IF item.abstract; ' - '; item.abstract; END %>
   </strong></big><% INCLUDE inc/favorite.html module = item %><br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
   <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   <%- IF item.rating.count > 0 %>
-    &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
+  &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
   <%- END %> -
   <span class="relatize"><% item.date.dt_http %></span>
   <%- IF !single_dist %>
@@ -51,11 +58,11 @@
   <!-- <% item.score %> -->
 <br>
 <% IF group.size > 1 %>
-<ul class="search-group">
-    <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
-    <% link_to_file(item) | none %>
-    <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
-    <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
+<ul>
+  <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
+  <% link_to_file(item) | none %>
+  <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
+  <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
 </ul>
 <% END %>
   </div>
@@ -63,4 +70,3 @@
 <% END %>
 <% INCLUDE inc/pager.html size = 20 %>
 </div>
-<pre>

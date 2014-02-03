@@ -1,15 +1,21 @@
 <%- title = "Distributions which depend on " _ required %>
-<div class="search-bar">
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+    <li class="nav-header">Activity</li>
   <% INCLUDE inc/activity.html query = type_of_required _ "=" _ required %>
-</div>
+</ul>
 
 <div class="content">
-<center><h1><strong>Distributions Which Depend on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a> (Reverse Dependencies)</strong></h1></center>
+<strong>Distributions Which Depend on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a></strong>
 <% IF data.size > 0 %>
 <% INCLUDE inc/release-table.html releases = data, header = 1, tablesorter = 1 %>
 <% INCLUDE inc/pager.html size = 50 %>
 <% ELSE %>
-<big><strong>No distributions depending on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a> could be found</strong></big>
+<p>No distributions depending on <a href="/<% type_of_required == 'distribution' ? 'release' : 'module' %>/<%- required %>"><%- required %></a> could be found</p>
 <% END %>
 </div>
 <script>defaultSort = [[2,1]];</script>

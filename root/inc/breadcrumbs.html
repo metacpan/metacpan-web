@@ -1,0 +1,43 @@
+<% BLOCK version_dropdown %>
+<%- IF versions.size; %>
+<%-
+backpan = [];
+MACRO breadcrumb_link(version) BLOCK;
+  selected = release.author == version.author && release.name == version.name ? "selected" : ""; %>
+  <option <% selected %> value="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)</option>
+<%- END;
+FOREACH version IN versions;
+    IF version.status == 'backpan';
+        backpan.push(version);
+        NEXT;
+    END;
+        breadcrumb_link(version) | none;
+END;
+    IF backpan.size > 1 %>
+        <optgroup label="BackPAN">
+          <% FOREACH version IN backpan; breadcrumb_link(version) | none; END %>
+        </optgroup>
+    <%
+    END;
+END %>
+<% END %>
+<div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
+  <a rel="author"  itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>"><% author.name %></a>
+  <span>&nbsp;/&nbsp;</span>
+  <div class="release">
+    <span class="dropdown"><b class="caret"></b></span>
+    <select onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
+    <a itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+  </div>
+  <div class="inline"><%- INCLUDE inc/favorite.html module = module %></div>
+  <%- IF module %>
+  <span>&nbsp;/&nbsp;
+  <% module.documentation %></span>
+  <%- END %>
+  <%- IF release.status != 'latest' %>
+  <div class="pull-right">
+  <%- IF release.maturity == 'developer'; 'dev release, '; END %>
+    <a href="<% IF module %>/module/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>">go to latest</a>
+  </div>
+  <%- END %>
+</div>

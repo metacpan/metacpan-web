@@ -103,7 +103,7 @@ test_psgi app, sub {
 
             optional_test favorited => sub {
                 ok( $tx->find_value("$favs/span") > 0,
-                    'dist has been marked as favorite'
+                    "$req_uri has been marked as favorite"
                 );
             };
 
@@ -132,7 +132,7 @@ test_psgi app, sub {
 
             # not all dists have reviews
             my $reviews
-                = '//div[@class="search-bar"]//div[starts-with(@class, "rating-")]/following-sibling::a';
+                = '//a[starts-with(@class, "rating-")]/following-sibling::a';
             optional_test reviews => sub {
                 $tx->is(
                     "$reviews/\@href",
@@ -147,15 +147,14 @@ test_psgi app, sub {
             };
 
             # all dists should get a link to rate it; test built url
-            $tx->is(
-                '//div[@class="search-bar"]//a[text()="Rate this distribution"]/@href',
-                "http://cpanratings.perl.org/rate/?distribution=$release",
+            ok( $tx->find_value(
+                '//a[@href="http://cpanratings.perl.org/rate/?distribution=' . $release . '"]'),
                 'cpanratings link to rate this dist'
             );
 
             # test format of cpantesters link
             $tx->is(
-                '//a[text()="Test results"]/@href',
+                '//a[text()="Testers"]/@href',
                 "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version?oncpan=1&distmat=1",
                 'link to test results'
             );
@@ -170,7 +169,7 @@ test_psgi app, sub {
 
             # version select box
             ok( $tx->find_value(
-                    '//select[@name="release"]/option[text()="Go to version"]'
+                    '//div[@class="breadcrumbs"]//select'
                 ),
                 'version select box'
             );
@@ -187,9 +186,8 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
-            $tx->like(
-                '//a[text()="Reverse dependencies"]/@href',
-                qr{^/requires/distribution/$release(\?|$)},
+            ok( $tx->find_value(
+                '//a[starts-with(@href, "/requires/distribution/")]'),
                 'reverse deps link uses dist name'
             );
 
