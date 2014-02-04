@@ -155,7 +155,7 @@ test_psgi app, sub {
             # test format of cpantesters link
             $tx->is(
                 '//a[text()="Testers"]/@href',
-                "http://www.cpantesters.org/distro/$first_letter/$release.html#$release-$version?oncpan=1&distmat=1",
+                "http://www.cpantesters.org/distro/$first_letter/$release.html?oncpan=1&distmat=1&version=$version",
                 'link to test results'
             );
 
