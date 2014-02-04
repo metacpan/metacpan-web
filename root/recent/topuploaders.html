@@ -1,24 +1,21 @@
 <%- title = "CPAN Top Uploaders" %>
 <%- INCLUDE inc/recent-bar.html %>
 
-<div class="content">
+<div class="content toplists">
 <% FOREACH author IN authors %>
-<div style="float:left; width: 300px; height: 100px; overflow: hidden">
+<div class="entry">
     <%- IF author.gravatar_url; author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/") %>
-    <div style="float: left; text-align: center; padding: 10px;">
+    <div class="gravatar">
         <a href="/author/<% author.pauseid %>">
             <img src="<% author.gravatar_url %>" class="author-img" style="width: 75px; height: 75px">
         </a>
     </div>
     <%- END %>
-    <div style="padding: 10px; white-space: nowrap">
-        <strong>
-            <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
-        </strong><br>
-        <span title="<% author.asciiname %>"><% author.name %></span>
-        <br><br>
-        <strong><% author.releases %> release<% IF author.releases > 1 %>s<% END %></strong>
-    </div>
+    <strong class="pauseid">
+        <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
+    </strong>
+    <span class="name" title="<% author.asciiname %>"><% author.name %></span>
+    <strong class="count"><% author.releases %> release<% IF author.releases > 1 %>s<% END %></strong>
 </div>
 <% END %>
 </div>
