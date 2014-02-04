@@ -33,7 +33,7 @@ END %>
       <span><% release.name %></span>
     <% END %>
   </div>
-  <div class="inline"><%- INCLUDE inc/favorite.html module = module %></div>
+  <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
   <% module.documentation %></span>
