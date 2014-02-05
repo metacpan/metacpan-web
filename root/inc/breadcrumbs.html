@@ -22,7 +22,9 @@ END;
 END %>
 <% END %>
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
-  <a class="latest" href="<% IF module %>/module/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><i class="icon icon-step-forward"></i></a>
+<%- IF release.status != 'latest' %>
+  <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><i class="icon icon-step-forward"></i></a>
+<%- END %>
   <a rel="author" itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>"><% author.name %></a>
   <span>&nbsp;/&nbsp;</span>
   <div class="release">
@@ -33,8 +35,6 @@ END %>
     <% ELSE %>
       <span><% release.name %></span>
     <% END %>
-    <%- IF release.status != 'latest' %>
-    <%- END %>
   </div>
   <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
   <%- IF module %>
