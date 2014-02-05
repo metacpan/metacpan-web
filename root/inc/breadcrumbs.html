@@ -27,7 +27,7 @@ END %>
   <span>&nbsp;/&nbsp;</span>
   <div class="release">
     <span class="dropdown"><b class="caret"></b></span>
-    <select onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
+    <select class="<% module ? "" : "extend" %>" onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
     <% IF module %>
     <a itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
     <% ELSE %>
