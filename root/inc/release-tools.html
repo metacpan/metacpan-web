@@ -10,7 +10,7 @@
 </li>
 <%- END %>
 <li>
-  <a href="http://explorer.metacpan.org/?url=/module/<% release.author %>/<% release.name %>/<% module.path %>">
+<a href="http://explorer.metacpan.org/?url=/<% module ? ['module', module.author, module.release, module.path].join("/") : ['release', release.author, release.name].join("/") %>">
     <i class="icon-list-alt"></i> MetaCPAN Explorer
   </a>
 </li>
