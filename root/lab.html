@@ -1,23 +1,14 @@
-<div class="content about-resources">
+<% PROCESS "lab/list.html" %>
+
+<div class="content">
 <% USE Markdown -%>
 <% FILTER markdown %>
-# Experimental features
+## Experimental features
 
 Try them and <a href="https://github.com/CPAN-API/metacpan-web/issues">let us know</a> how to improve them.
 
-# List all dependencies of a distribution.
-
-<form action="/lab/dependencies">
-<input name="module" />
-<input type="submit" value="Show">
-</form
-
-# Dashboard
-<%- IF user_exists %>
-<a href="/lab/dashboard">dashboard</a>
-<%- ELSE %>
-Is only available to logged in users who have associated their MetaCPAN account with their PAUSE account.
-<% END %>
+* Dashboard - a personalised dashboard (for logged in users)
+* Dependencies - list the dependencies of a module
 
 <% END %>
 

@@ -1,11 +1,14 @@
-<h2>Dashboard</h2>
+<% PROCESS "lab/list.html" %>
 
+<div class="content">
+
+<h2>Personal Dashboard</h2>
 
 <%- IF user_exists %>
   <% IF pauseid %>
-  
+
     <% IF report.missing_repos.size %>
-      <h1>Missing repository</h1>
+      <h3>Missing repository</h3>
       <ul>
       <% FOR distro IN report.missing_repos %>
         <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
@@ -14,9 +17,9 @@
     <% ELSE %>
       Congratulations. All of your distributions have repositories.
     <% END %>
-  
+
     <% IF report.missing_licenses.size %>
-      <h1>Missing licenses</h1>
+      <h3>Missing licenses</h3>
       <ul>
       <% FOR distro IN report.missing_licenses %>
         <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
@@ -27,7 +30,7 @@
     <% END %>
   <% END %>
 
-  <h1>Your favorite distributions</h1>
+  <h3>Your favorite distributions</h3>
   <% IF report.favorites.size %>
      <ul>
      <% FOR f IN report.favorites %>
@@ -37,7 +40,7 @@
   <% ELSE %>
     It seems you have not favorited any distribution yet.
   <% END %>
- 
+
 <% ELSE %>
 The dashboard is only available to people who have logged in to MetaCPAN.
 <% END %>
@@ -48,4 +51,4 @@ The dashboard is only available to people who have logged in to MetaCPAN.
 <% Dumper.dump(report) %>
 </pre>
 -->
-
+</div>

@@ -1,0 +1,14 @@
+<div class="tabbable tabs-left about-bar slidepanel">
+    <ul class="nav nav-tabs">
+    <li<% IF req.action == 'lab' %> class="active"<% END %>>
+        <a href="/lab">Lab</a>
+    </li>
+    <li<% IF req.action == '/lab/dashboard' %> class="active"<% END %>>
+        <a href="/lab/dashboard">Dashboard</a>
+    </li>
+    <li<% IF req.action == '/lab/dependencies' %> class="active"<% END %>>
+        <a href="/lab/dependencies">Dependencies</a>
+    </li>
+</div>
+
+<h1>LAB - YOU ARE IN A <span style="color:#FF0000">TESTING ZONE</span></h1>
