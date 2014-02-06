@@ -4,16 +4,6 @@
   INCLUDE inc/recent-bar.html;
 %>
 
-<ul class="nav nav-list slidepanel">
-  <li class="visible-phone search">
-  <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-    <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-  </form>
-  </li>
-  <li class="nav-header">Other</li>
-  <li><a href ="/favorite/leaderboard">++ Leaderboard</a></li>
-</ul>
-
 <div class="content">
 <%-
 MoY = [undef, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
