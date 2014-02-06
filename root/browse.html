@@ -22,7 +22,7 @@
 </ul>
 
 <div class="content">
-<table class="file-table tablesorter">
+<table class="table table-condensed table-striped file-table tablesorter">
 <thead>
     <tr>
     <th class="name">Name</th>
@@ -33,7 +33,7 @@
 </thead>
 <tbody>
 <% i = 0; FOREACH file IN files %>
-<tr<% i = i + 1; IF i % 2 %> class="odd"<% END %>>
+<tr>
   <td class="name"><strong sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
     file.directory == 'true' ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
