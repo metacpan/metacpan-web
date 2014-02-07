@@ -85,16 +85,20 @@ sub end : ActionClass('RenderView') {
     $c->stash->{req}        = $c->req;
     $c->stash->{api}        = $c->config->{api};
     $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
+    $c->stash->{api_external}
+        = $c->config->{api_external} || $c->config->{api};
     $c->res->header( Vary => 'Cookie' );
 
-    unless(
+    unless (
         # Already have something set for fastly
         $c->res->header('Surrogate-Control') ||
+
         # We'll use Last-Modified for now
         $c->res->header('Last-Modified')
-        ) {
-            # Make sure fastly doesn't cache anything by accident
-            $c->res->header('Surrogate-Control' => 'no-store');
+        )
+    {
+        # Make sure fastly doesn't cache anything by accident
+        $c->res->header( 'Surrogate-Control' => 'no-store' );
     }
 }
 

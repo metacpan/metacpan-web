@@ -16,13 +16,13 @@
   <li>
     <div>
       <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+      (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
     </div>
   </li>
   <li>
     <div>
       <a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
-      (<a href="<% api %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+      (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/">raw</a>)
     </div>
   </li>
   <% PROCESS inc/release-info.html %>
