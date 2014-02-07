@@ -260,6 +260,13 @@ ul#index, #index ul { list-style-type: none; }
     -webkit-text-size-adjust: 100%; /* for iPhone <code>, issue #107 */
 }
 
+/* work around incompatibility between bootstrap and syntaxhighlighter
+ * https://github.com/alexgorbatchev/syntaxhighlighter/issues/275 */
+.syntaxhighlighter .container:before,
+.syntaxhighlighter .container:after {
+    content: none !important;
+}
+
 .nogutter, .pod pre {
     padding-left: 10px;
 }
