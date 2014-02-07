@@ -98,7 +98,7 @@ sub end : ActionClass('RenderView') {
         )
     {
         # Make sure fastly doesn't cache anything by accident
-        $c->res->header( 'Surrogate-Control' => 'no-store' );
+        $c->res->header( 'Surrogate-Control' => 'no-cache' );
     }
 }
 
