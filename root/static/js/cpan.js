@@ -200,12 +200,6 @@ $(document).ready(function () {
         }
     }
 
-    $('.pod').find('h1,h2,h3,h4,h5,h6').each(function () {
-      $(this).wrapInner(function() {
-        return '<a href="#___pod"></a>';
-      });
-    });
-
     var module_source_href = $('#source-link').attr('href');
     if(module_source_href) {
         $('#pod-error-detail dt').each(function() {
