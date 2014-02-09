@@ -43,16 +43,15 @@ sub index : Path : Args(1) {
             releases    => $releases,
             faves       => $faves,
             show_author => 1,
-            took        => $data->{took} + $faves_data->{took},
+            took        => $data->{took} + $faves_data->{took} || 0,
             total       => $data->{hits}->{total},
             template    => 'author.html'
         }
     );
 
-    if ( $author->{country} ne '' ) {
-        $c->stash( author_country_name =>
-                Locale::Country::code2country( $author->{country} ) );
-    }
+    $c->stash( author_country_name =>
+        Locale::Country::code2country( $author->{country} ) )
+        if $author->{country};
 }
 
 __PACKAGE__->meta->make_immutable;
