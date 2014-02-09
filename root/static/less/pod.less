@@ -1,0 +1,175 @@
+.pod {
+  a.anchor {
+    padding-left: 8px;
+    padding-right: 4px;
+    margin-left: -26px;
+
+    i {
+    	margin-top: 4px;
+      visibility: hidden;
+    }
+  }
+  *:hover > a.anchor i {
+    visibility: visible;
+  }
+}
+
+.pod html, .pod body, .pod dl, .pod dt, .pod dd, .pod h1, .pod h2, .pod h3, .pod h4, .pod h5, .pod h6, .pod pre, .pod form, .pod fieldset, .pod input, .pod p, .pod blockquote, .pod th, .pod td
+{
+    margin: 5px;
+    padding: 5px;
+}
+
+.pod code {
+    font-family: monospace
+}
+
+#permalink {
+    margin: 5px;
+    padding: 5px;
+    float: right;
+}
+
+.pod ol {
+    list-style: decimal;
+    margin-left:40px;
+
+}
+
+.pod ul {
+    list-style: disc;
+    margin-left: 20px;
+    padding-left: 2em;
+}
+.pod ul#index, .pod ul#index ul {
+    padding-left: 0;
+}
+.pod ul li {
+    margin-bottom: 0.5em;
+}
+.pod ul#index li {
+    margin-bottom: 0;
+}
+.pod ul li p {
+    margin: 0;
+    padding: 0;
+}
+
+.pod pre {
+    margin-left: 20px;
+}
+
+
+.pod h1, .pod h2, .pod h3, .pod h4 {
+    background: transparent;
+    color: #36c;
+    font-weight: bold;
+}
+
+.pod h1 {
+    font-size: 1.5em;
+}
+
+.pod h2 {
+    font-size: 1.3em;
+}
+
+.pod h3, .pod h4 {
+    font-size: 1.1em;
+}
+
+.pod p, .pod dt {
+    font-size: 1.1em;
+}
+
+.pod dt {
+    font-weight: bold;
+}
+
+.pod img     {
+    vertical-align: top;
+}
+
+.pod .toc A  {
+    text-decoration: none;
+}
+
+.pod .toc LI {
+    line-height: 1.2em;
+    list-style-type: none;
+}
+
+ul#index, #index ul { list-style-type: none; }
+
+.pod pre,
+.pod pre.metacpan-verbatim, /* keep the same specificity as shCore.css */
+.syntaxhighlighter {
+    border: 1px solid #e9e9e9;
+    width: auto !important;
+    overflow-y: hidden !important;
+    background-color: #fafafa;
+    padding: 10px;
+    -webkit-text-size-adjust: 100%; /* for iPhone <code>, issue #107 */
+}
+
+/* work around incompatibility between bootstrap and syntaxhighlighter
+ * https://github.com/alexgorbatchev/syntaxhighlighter/issues/275 */
+.syntaxhighlighter .container:before,
+.syntaxhighlighter .container:after {
+    content: none !important;
+}
+
+.nogutter, .pod pre {
+    padding-left: 10px;
+}
+.pod p.pod-error {
+    border-left: 1px solid #f32;
+    margin-left: -16px;
+    padding-left: 16px;
+}
+
+#pod-errors {
+  margin: 3em 0 0 0 ;
+  padding: 10px;
+  background-color: #ffffee;
+  width: 36em;
+  border: 1px solid #cccccc;
+}
+
+#pod-errors.collapsed {
+  border: none;
+  background-color: transparent;
+}
+
+#pod-errors p.title {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #CC3300;
+  cursor: pointer;
+}
+
+#pod-errors.collapsed #pod-error-detail {
+  display: none;
+}
+
+#pod-error-detail dl {
+  margin: 0;
+  padding: 0;
+}
+
+#pod-error-detail dl dt {
+  padding: 0;
+  margin: 0.8em 0 0 0;
+}
+
+#pod-error-detail dl dd {
+  margin: 0;
+  padding: 0 0 0 3em;
+}
+
+#pod-error-detail p {
+  margin: 0 0 0.4em 0;
+  padding: 0;
+}

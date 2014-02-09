@@ -5,6 +5,7 @@
 @import "table.less";
 @import "author.less";
 @import "toplists.less";
+@import "pod.less";
 
 @iconSpritePath:          "/static/icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "/static/icons/glyphicons-halflings-white.png";
@@ -220,26 +221,6 @@ body {
 
 .table.tablesorter th {
   padding-right: 20px;
-}
-
-.pod {
-  a.anchor {
-    padding-left: 8px;
-    padding-right: 4px;
-    margin-left: -26px;
-    cursor: pointer;
-    position: relative;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-
-    i {
-      visibility: hidden;
-    }
-  }
-  *:hover > a.anchor i {
-    visibility: visible;
-  }
 }
 
 @import "responsive.less";
