@@ -72,8 +72,8 @@ sub view : Private {
         $c->detach;
     }
 
-    my ( $documentation, $pod )
-        = map { $_->{name}, $_->{associated_pod} }
+    my ( $documentation, $pod, $documented_module ) =
+        map  { $_->{name}, $_->{associated_pod}, $_ }
         grep { @path > 1 || $path[0] eq $_->{name} }
         grep { !$data->{documentation} || $data->{documentation} eq $_->{name} }
         grep { $_->{associated_pod} } @{ $data->{module} || [] };
@@ -136,11 +136,25 @@ sub view : Private {
                $reqs->{versions}->{hits}->{hits}->[0]->{fields}->{date}
             || $data->{date} );
 
+    my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
+
+    #<<<
+    my $canonical = ( $documented_module
+            && $documented_module->{authorized}
+            && $documented_module->{indexed}
+        ) ? "/pod/$documentation"
+        : join('/', '', qw( pod distribution ), $release->{distribution},
+            # Strip $author/$release from front of path.
+            @path[ 2 .. $#path ]
+        );
+    #>>>
+
     $c->stash(
         {   module   => $data,
             pod      => $hr->process( $reqs->{pod}->{raw} ),
-            release  => $reqs->{release}->{hits}->{hits}->[0]->{_source},
+            release  => $release,
             template => 'pod.html',
+            canonical => $canonical,
         }
     );
     unless ($c->stash->{pod}) {
