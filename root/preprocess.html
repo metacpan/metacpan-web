@@ -56,12 +56,15 @@ profiles = {
 <%-
   MACRO link_to_file(file) BLOCK;
   title = file.documentation || file.path;
-  IF file.status == "latest"
-    && file.documentation
+  IF file.status == "latest";
+    IF file.documentation
     && file.authorized
     && file.indexed
     && file.module.grep(->(module){ module.authorized && module.indexed });
-    path = file.documentation;
+      path = file.documentation;
+    ELSE;
+      path = ['distribution', file.distribution, file.path].join('/');
+    END;
   ELSE;
     path = ['release', file.author, file.release, file.path].join("/");
   END;

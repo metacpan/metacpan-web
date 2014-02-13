@@ -169,6 +169,7 @@ sub modules {
             fields => [
                 qw(
                     documentation path status author release
+                    distribution
                     _source.abstract  _source.module
                     _source.indexed   _source.authorized
                 )
@@ -289,7 +290,7 @@ sub interesting_files {
                     }
                 }
             },
-            fields => [qw( name documentation path pod_lines )],
+            fields => [qw( name distribution documentation path pod_lines )],
             size   => 250,
         }
     );
