@@ -54,23 +54,39 @@ profiles = {
   };
 -%>
 <%-
+
   MACRO link_to_file(file) BLOCK;
-  title = file.documentation || file.path;
-  IF file.status == "latest";
-    IF file.documentation
-    && file.authorized
-    && file.indexed
-    && file.module.grep(->(module){ module.authorized && module.indexed });
-      path = file.documentation;
+    title = file.documentation || file.path;
+    # If there is pod for this file...
+    IF file.documentation || file.module.grep(->(module){ module.associated_pod }).size;
+      IF file.status == "latest";
+        # If it's a PAUSE-indexed module (02packages)...
+        IF file.documentation
+        && file.authorized
+        && file.indexed
+        && file.module.grep(->(module){ module.authorized && module.indexed });
+          # Use /pod/$name.
+          path = file.documentation;
+        ELSE;
+          # Use distribution (version-independent) url.
+            path = ['distribution', file.distribution, file.path].join('/');
+        END;
+      # Else use versioned url.
+      ELSE;
+        path = ['release', file.author, file.release, file.path].join("/");
+      END;
+      %><a href="/pod/<% path %>"><%- title %></a><%
+    # Else show source.
     ELSE;
-      path = ['distribution', file.distribution, file.path].join('/');
+      link_to_source(file) | none;
     END;
-  ELSE;
-    path = ['release', file.author, file.release, file.path].join("/");
   END;
-%>
-<a href="/pod/<% path %>"><%- title %></a>
-<%- END
+
+  MACRO link_to_source(file) BLOCK;
+    path = ['source', file.author, file.release, file.path].join('/');
+    %><a href="/<% path %>"><% file.path %></a><%
+  END;
+
   # protocols = {
   #   "bzr" = 10,
   #   "https" = 11742,
