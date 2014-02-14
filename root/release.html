@@ -46,12 +46,13 @@ FOREACH file IN files;
     modules.push(file);
     FOREACH module IN file.module;
       IF module.name != file.documentation && module.indexed && module.authorized;
-        provides.push({ status = file.status, title = module.name, path = file.path });
+        # There must be a better way...
+        provides.push({ status = file.status, package = module.name, path = file.path, release = release.name, author = release.author });
       END;
     END;
   ELSIF file.module;
     FOREACH module IN file.module;
-      provides.push({ path = file.path, title = module.name });
+      provides.push({ status = file.status, package = module.name, path = file.path, release = release.name, author = release.author });
     END;
   ELSIF file.documentation;
         documentation.push(file);
@@ -79,9 +80,9 @@ documentation = documentation.merge(documentation_raw);
 
 <br><% END %>
 <% IF provides.size %><a name="provides"></a><strong>Provides</strong>
-<% FOREACH module IN provides.sort('title') %>
+<% FOREACH module IN provides.sort('package') %>
   <div>
-    <strong><a href="/source/<% release.author; '/'; release.name; '/'; module.path ; '#P'; module.title | uri %>"><% module.title %></a></strong> in <% module.path %>
+    <strong><% link_to_source(module) | none %></strong> in <% module.path %>
   </div>
 <% END %>
 
@@ -91,15 +92,15 @@ documentation = documentation.merge(documentation_raw);
   <div>
     <% IF file.path.match('\.pod$') %>
       <strong>
-        <a href="/pod/release/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a>
+        <% link_to_file(file, file.path) | none %>
       </strong>
     <% ELSE %>
       <strong>
-        <a href="/source/<% release.author; '/'; release.name; '/'; file.path %>"><% file.path %></a>
+        <% link_to_source(file) | none %>
       </strong>
         <% IF file.pod_lines %>
           [<strong>
-            <a href="/pod/release/<% release.author; '/'; release.name; '/'; file.path %>">pod</a>
+            <% link_to_file(file, "pod") | none %>
           </strong>]
         <% END %>
     <% END %>
@@ -109,7 +110,7 @@ documentation = documentation.merge(documentation_raw);
 <br><% END %>
 <% IF root.size %><a name="other"></a><strong>Other files</strong>
 <% FOREACH file IN root %>
-<div><strong><a href="/<% file.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; file.name %>"><% file.name %></a></strong></div>
+<div><strong><% link_to_file(file, file.name) | none %></strong></div>
 <% END %><br><% END %>
 
 <% IF last_version_changes; SET v = last_version_changes; %>

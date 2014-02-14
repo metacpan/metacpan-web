@@ -55,7 +55,7 @@ profiles = {
 -%>
 <%-
 
-  MACRO link_to_file(file) BLOCK;
+  MACRO link_to_file(file, linktext) BLOCK;
     title = file.documentation || file.path;
     # If there is pod for this file...
     IF file.documentation || file.module.grep(->(module){ module.associated_pod }).size;
@@ -75,16 +75,21 @@ profiles = {
       ELSE;
         path = ['release', file.author, file.release, file.path].join("/");
       END;
-      %><a href="/pod/<% path %>"><%- title %></a><%
+      %><a href="/pod/<% path %>"><%- linktext || title %></a><%
     # Else show source.
     ELSE;
-      link_to_source(file) | none;
+      link_to_source(file, linktext) | none;
     END;
   END;
 
-  MACRO link_to_source(file) BLOCK;
+  MACRO link_to_source(file, linktext) BLOCK;
+    # NOTE: The 'package' attribute is fabricated in the release template.
     path = ['source', file.author, file.release, file.path].join('/');
-    %><a href="/<% path %>"><% file.path %></a><%
+    # Append "#P${package}" if we have a package name.
+    IF file.package;
+      path = path _  '#P' _ file.package;
+    END
+    %><a href="/<% path %>"><% linktext || file.package || file.path %></a><%
   END;
 
   # protocols = {

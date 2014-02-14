@@ -290,7 +290,12 @@ sub interesting_files {
                     }
                 }
             },
-            fields => [qw( name distribution documentation path pod_lines )],
+            # NOTE: We could inject author/release/distribution into each result
+            # in the controller if asking ES for less data would be better.
+            fields => [qw(
+                name documentation path pod_lines
+                author release distribution status
+            )],
             size   => 250,
         }
     );
