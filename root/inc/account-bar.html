@@ -1,5 +1,5 @@
 <% UNLESS title; title = 'MetaCPAN Account'; END %>
-<div class="tabbable tabs-left account-bar slidepanel">
+<div class="nav-list tabbable tabs-left account-bar slidepanel">
     <ul class="nav nav-tabs">
         <li class="visible-phone search">
           <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
@@ -17,10 +17,10 @@
         <li<% IF req.action == 'account/profile' %> class="active"<% END %>>
             <a href="/account/profile">Profile</a>
         </li>
-<!--         <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
+        <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
             <a href="/account/favorite/list">Favorites</a>
         </li>
- -->        <li>
+        <li>
             <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
         </li>
     </ul>
