@@ -30,17 +30,6 @@
     <% END %>
   <% END %>
 
-  <h3>Your favorite distributions</h3>
-  <% IF report.favorites.size %>
-     <ul>
-     <% FOR f IN report.favorites %>
-       <li><a href="/release/<% f.distribution %>"><% f.distribution %></a></li>
-     <% END %>
-     </ul>
-  <% ELSE %>
-    It seems you have not favorited any distribution yet.
-  <% END %>
-
 <% ELSE %>
 The dashboard is only available to people who have logged in to MetaCPAN.
 <% END %>

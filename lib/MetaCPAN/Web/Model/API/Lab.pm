@@ -61,7 +61,7 @@ sub _handle_module {
         dist => $rm->{distribution},
         date => $rm->{date},
     );
-    
+
 
     my $cv2 = $self->cv;
     my $rd = $self->request( "/release/$rm->{distribution}" )->recv;
@@ -113,7 +113,7 @@ sub fetch_latest_distros {
 	    my $distro  = $d->{fields}{distribution};
 	    my $author  = $d->{fields}{author};
 	    my $repo    = $d->{fields}{'resources.repository'};
-	
+
 	    if ($license and $license ne 'unknown' and $license ne 'open_source') {
 	        $license_found++;
 	        $licenses{$license}++;
@@ -123,7 +123,7 @@ sub fetch_latest_distros {
 				pauseid => $author,
 			};
 	    }
-	
+
 	    if ($repo and $repo->{url}) {
 	        $repo_found++;
 	        if ($repo->{url} =~ m{http://code.google.com/}) {
@@ -170,30 +170,6 @@ sub fetch_latest_distros {
 		licenses         => \%licenses,
 	};
 }
-
-sub get_favorites {
-    my ($self, $size, $user_id) = @_;
-
-    my $cv = $self->cv;
-   	my $r = $self->request(
-		'/favorite/_search',
-		{
-	    	query => {
-                filtered => {
-                    query  => { term => { 'user' => $user_id } },
-				},
-            },
-	    	fields => [qw(distribution date)],
-            sort => [ { date => 'desc' } ],
-	        size   => $size,
-		},
-	)->recv;
-
-	my @results = map { $_->{fields} } @{ $r->{hits}{hits} };
-	return \@results;
-}
-
-
 
 __PACKAGE__->meta->make_immutable;
 

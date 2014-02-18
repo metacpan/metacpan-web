@@ -27,4 +27,20 @@ sub add : Local {
     }
 }
 
+sub list : Local {
+    my ( $self, $c ) = @_;
+
+    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+
+    my $faves_cv = $c->model('API::Favorite')->by_user( $user->{user} );
+    my $faves_data = $faves_cv->recv;
+    my $faves      = [
+        sort { $b->{date} cmp $a->{date} }
+        map  { $_->{fields} } @{ $faves_data->{hits}{hits} }
+    ];
+
+    $c->stash( { faves => $faves } );
+
+}
+
 __PACKAGE__->meta->make_immutable;

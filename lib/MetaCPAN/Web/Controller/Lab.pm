@@ -28,7 +28,7 @@ sub index : Chained('/') : PathPart('lab') : CaptureArgs(0) { }
 sub dependencies : Chained('index') : PathPart : Does('Sortable') {
     my ( $self, $c ) = @_;
 	my $module = $c->req->params->{'module'};
-   
+
     my $data
         = $c->model('API::Lab')->dependencies( $module );
 
@@ -48,8 +48,6 @@ sub dashboard : Chained('index') : PathPart {
     	if ($pauseid) {
         	$report = $c->model('API::Lab')->fetch_latest_distros(1000, $pauseid);
     	}
-
-		$report->{favorites} = $c->model('API::Lab')->get_favorites(1000, $user->{user});
 	}
 
 	$report->{user} = $user;
