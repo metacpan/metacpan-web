@@ -55,6 +55,12 @@ sub search {
                                 { query => $query, operator => 'and' }
                         }
                     },
+                    {
+                        text => {
+                            'author.asciiname.analyzed' =>
+                                { query => $query, operator => 'and' }
+                        }
+                    },
                     { text => { 'author.pauseid'    => uc($query) } },
                     { text => { 'author.profile.id' => lc($query) } },
                 ]
