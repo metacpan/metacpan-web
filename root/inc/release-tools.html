@@ -45,8 +45,8 @@
 <li>
   <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
-<%- IF !module || module.documentation %>
+<%- IF canonical %>
 <li>
-  <a href="/<% module ? "pod" : "release" %>/<% module.documentation || release.distribution %>">Latest version</a>
+  <a href="<% canonical %>">Latest version</a>
 </li>
 <%- END %>

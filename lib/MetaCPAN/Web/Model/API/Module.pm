@@ -371,6 +371,7 @@ sub search {
                 distribution
                 date
                 id
+                pod_lines
             )],
         }
     );
