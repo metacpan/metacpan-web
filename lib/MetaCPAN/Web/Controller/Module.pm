@@ -15,9 +15,12 @@ sub redirect_to_pod : PathPart('module') : Chained('/') : Args {
 
     # /module/AUTHOR/Release-0.0/lib/Foo/Bar.pm
     if ( @path > 1 ) {
+
         # Force the author arg to uppercase to avoid another redirect.
-        $c->res->redirect( '/pod/release/' . join( '/', uc(shift @path), @path ), 301 );
+        $c->res->redirect(
+            '/pod/release/' . join( '/', uc( shift @path ), @path ), 301 );
     }
+
     # /module/Foo::Bar
     else {
         $c->res->redirect( '/pod/' . join( '/', @path ), 301 );

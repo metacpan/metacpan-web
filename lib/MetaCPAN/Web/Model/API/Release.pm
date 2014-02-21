@@ -27,7 +27,8 @@ sub get {
     my ( $self, $author, $release ) = @_;
     $self->request(
         '/release/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -44,9 +45,8 @@ sub get {
 
 sub distribution {
     my ( $self, $dist ) = @_;
-    $self->request( "/distribution/$dist" );
+    $self->request("/distribution/$dist");
 }
-
 
 sub _new_distributions_query {
     return {
@@ -54,7 +54,8 @@ sub _new_distributions_query {
             filter => {
                 and => [
                     { term => { first => \1, } },
-                    {   not =>
+                    {
+                        not =>
                             { filter => { term => { status => 'backpan' } } }
                     },
                 ]
@@ -64,15 +65,16 @@ sub _new_distributions_query {
 }
 
 sub latest_by_author {
-    my ($self, $author) = @_;
+    my ( $self, $author ) = @_;
     return $self->request(
         '/release/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
                         and => [
-                            { term => { author => uc( $author ) } },
+                            { term => { author => uc($author) } },
                             { term => { status => 'latest' } }
                         ]
                     },
@@ -107,11 +109,12 @@ sub recent {
     }
     $self->request(
         '/release/_search',
-        {   size  => 100,
-            from  => ( $page - 1 ) * 100,
-            query => $query,
+        {
+            size   => 100,
+            from   => ( $page - 1 ) * 100,
+            query  => $query,
             fields => [qw(name author status abstract date distribution)],
-            sort  => [ { 'date' => { order => "desc" } } ]
+            sort   => [ { 'date' => { order => "desc" } } ]
         }
     );
 }
@@ -120,34 +123,42 @@ sub modules {
     my ( $self, $author, $release ) = @_;
     $self->request(
         '/file/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
                         and => [
                             { term => { release => $release } },
                             { term => { author  => $author } },
-                            {   or => [
-                                    {   and => [
-                                            {   exists => {
+                            {
+                                or => [
+                                    {
+                                        and => [
+                                            {
+                                                exists => {
                                                     field =>
                                                         'file.module.name'
                                                 }
                                             },
-                                            {   term => {
+                                            {
+                                                term => {
                                                     'file.module.indexed' =>
                                                         \1
                                                 }
                                             }
                                         ]
                                     },
-                                    {   and => [
-                                            {   exists => {
+                                    {
+                                        and => [
+                                            {
+                                                exists => {
                                                     field =>
                                                         'file.pod.analyzed'
                                                 }
                                             },
-                                            {   term =>
+                                            {
+                                                term =>
                                                     { 'file.indexed' => \1 }
                                             },
                                         ]
@@ -158,10 +169,10 @@ sub modules {
                     }
                 }
             },
-            size   => 999,
+            size => 999,
 
             # Sort by documentation name; if there isn't one, sort by path.
-            sort   => ['documentation', 'path'],
+            sort => [ 'documentation', 'path' ],
 
             # Get indexed and authorized from _source to work around ES bug:
             # https://github.com/CPAN-API/metacpan-web/issues/881
@@ -172,7 +183,7 @@ sub modules {
                     distribution
                     _source.abstract  _source.module
                     _source.indexed   _source.authorized
-                )
+                    )
             ],
         }
     );
@@ -182,12 +193,14 @@ sub find {
     my ( $self, $distribution ) = @_;
     $self->request(
         '/release/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
                         and => [
-                            {   term => {
+                            {
+                                term => {
                                     'release.distribution' => $distribution
                                 }
                             },
@@ -207,11 +220,13 @@ sub reverse_dependencies {
     my ( $self, $distribution, $page, $sort ) = @_;
     $sort ||= { date => 'desc' };
     my $cv = $self->cv;
-    # TODO: do we need to do a taint-check on $distribution before inserting it into the url?
-    # maybe the fact that it came through as a Catalyst Arg is enough?
+
+# TODO: do we need to do a taint-check on $distribution before inserting it into the url?
+# maybe the fact that it came through as a Catalyst Arg is enough?
     $self->request(
         "/search/reverse_dependencies/$distribution",
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { "match_all" => {} },
                     filter => {
@@ -230,7 +245,8 @@ sub reverse_dependencies {
         sub {
             my $data = shift->recv;
             $cv->send(
-                {   data =>
+                {
+                    data =>
                         [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
                     total => $data->{hits}->{total},
                     took  => $data->{took}
@@ -245,7 +261,8 @@ sub interesting_files {
     my ( $self, $author, $release ) = @_;
     $self->request(
         '/file/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -253,11 +270,21 @@ sub interesting_files {
                             { term => { release   => $release } },
                             { term => { author    => $author } },
                             { term => { directory => \0 } },
-                            {   or => [
-                                    { and => [
-                                            { term => { level     => 0 } },
-                                            {   or => [
-                                                    map { { term => { 'file.name' => $_ } } } qw(
+                            {
+                                or => [
+                                    {
+                                        and => [
+                                            { term => { level => 0 } },
+                                            {
+                                                or => [
+                                                    map {
+                                                        {
+                                                            term => {
+                                                                'file.name'
+                                                                    => $_
+                                                            }
+                                                        }
+                                                        } qw(
                                                         MANIFEST
                                                         README README.md README.pod
                                                         INSTALL FAQ
@@ -270,33 +297,37 @@ sub interesting_files {
                                                         META.yml META.json
                                                         cpanfile
                                                         dist.ini
-                                                    )
+                                                        )
                                                 ]
                                             }
                                         ]
                                     },
                                     map {
-                                        { prefix => { 'name' => $_ } },
-                                        { prefix => { 'path' => $_ } },
-                                        # With "prefix" we don't need the plural "s".
-                                    } qw(
+                                        { prefix     => { 'name' => $_ } },
+                                            { prefix => { 'path' => $_ } },
+
+                                 # With "prefix" we don't need the plural "s".
+                                        } qw(
                                         ex eg
                                         example Example
                                         sample
-                                    )
+                                        )
                                 ]
                             }
                         ]
                     }
                 }
             },
-            # NOTE: We could inject author/release/distribution into each result
-            # in the controller if asking ES for less data would be better.
-            fields => [qw(
-                name documentation path pod_lines
-                author release distribution status
-            )],
-            size   => 250,
+
+          # NOTE: We could inject author/release/distribution into each result
+          # in the controller if asking ES for less data would be better.
+            fields => [
+                qw(
+                    name documentation path pod_lines
+                    author release distribution status
+                    )
+            ],
+            size => 250,
         }
     );
 }
@@ -305,7 +336,8 @@ sub versions {
     my ( $self, $dist ) = @_;
     $self->request(
         '/release/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -337,14 +369,15 @@ sub topuploaders {
                       $range eq 'weekly'  ? 'weeks'
                     : $range eq 'monthly' ? 'months'
                     : $range eq 'yearly'  ? 'years'
-                    : 'weeks' => 1
-                    )->truncate( to => 'day' )->iso8601
+                    :                       'weeks' => 1
+                )->truncate( to => 'day' )->iso8601
             },
         }
     };
     $self->request(
         '/release/_search',
-        {   query  => { match_all => {} },
+        {
+            query  => { match_all => {} },
             facets => {
                 author => {
                     terms        => { field => "author", size => 50 },

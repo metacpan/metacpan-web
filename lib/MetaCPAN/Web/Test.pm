@@ -13,11 +13,11 @@ use Try::Tiny;
 use Encode;
 use base 'Exporter';
 our @EXPORT = qw(
-  GET
-  test_psgi
-  override_api_response
-  app
-  tx
+    GET
+    test_psgi
+    override_api_response
+    app
+    tx
 );
 
 # TODO: use Sub:Override?
@@ -28,15 +28,19 @@ sub override_api_response {
     require MetaCPAN::Web::Model::API;
 
     my $responder = pop;
-    my $matches = {@_};
+    my $matches   = {@_};
 
     no warnings 'redefine';
     *AnyEvent::Curl::Multi::request = sub {
-        if( ($matches->{if} ? $matches->{if}->(@_) : 1) and my $res = $responder->(@_) ) {
+        if ( ( $matches->{if} ? $matches->{if}->(@_) : 1 )
+            and my $res = $responder->(@_) )
+        {
             $res = HTTP::Response->from_psgi($res) if ref $res eq 'ARRAY';
-            # return an object with a ->cv that's ready so that the cb will fire
-            my $ret = bless { cv => AE::cv() }, 'AnyEvent::Curl::Multi::Handle';
-            $ret->cv->send($res, {});
+
+          # return an object with a ->cv that's ready so that the cb will fire
+            my $ret = bless { cv => AE::cv() },
+                'AnyEvent::Curl::Multi::Handle';
+            $ret->cv->send( $res, {} );
             return $ret;
         }
         else {
@@ -58,15 +62,18 @@ sub tx {
     catch { warn $_[0] };
 
     my $tx = Test::XPath->new( xml => $xml );
-    # https://metacpan.org/module/DWHEELER/Test-XPath-0.16/lib/Test/XPath.pm#xpc
-    $tx->xpc->registerFunction( grep => sub {
-        my ($nodelist, $regex) =  @_;
-        my $result = XML::LibXML::NodeList->new;
-        for my $node ($nodelist->get_nodelist) {
-            $result->push($node) if $node->textContent =~ $regex;
+
+  # https://metacpan.org/module/DWHEELER/Test-XPath-0.16/lib/Test/XPath.pm#xpc
+    $tx->xpc->registerFunction(
+        grep => sub {
+            my ( $nodelist, $regex ) = @_;
+            my $result = XML::LibXML::NodeList->new;
+            for my $node ( $nodelist->get_nodelist ) {
+                $result->push($node) if $node->textContent =~ $regex;
+            }
+            return $result;
         }
-        return $result;
-    } );
+    );
     return $tx;
 }
 

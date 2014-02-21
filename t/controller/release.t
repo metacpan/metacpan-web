@@ -26,8 +26,7 @@ test_psgi app, sub {
 
     # Moose 2.1201 has no more Examples and breaks this test,
     # so pin to an older version for now.
-    test_heading_order($cb->( GET "/release/ETHER/Moose-2.1005" ));
-
+    test_heading_order( $cb->( GET "/release/ETHER/Moose-2.1005" ) );
 
     ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
         'contains link to "this" version' );
@@ -41,62 +40,77 @@ test_psgi app, sub {
     );
 
     # get module with lc author
-    $this =~ s{(/release/.*?/)}{lc($1)}e; # lc author name
+    $this =~ s{(/release/.*?/)}{lc($1)}e;    # lc author name
     ok( $res = $cb->( GET $this ), "GET $this" );
     is( $res->code, 301, 'code 301' );
 
-
-    ok( $res = $cb->( GET '/release/BRICAS/CPAN-Changes-0.21' ), "GET /release/BRICAS/CPAN-Changes-0.21" );
+    ok( $res = $cb->( GET '/release/BRICAS/CPAN-Changes-0.21' ),
+        "GET /release/BRICAS/CPAN-Changes-0.21" );
     is( $res->code, 200, "code 200" );
     my $tx_cc = tx($res);
     is(
-        $tx_cc->find_value('//a[@href="https://rt.cpan.org/Ticket/Display.html?id=84994"]'),
+        $tx_cc->find_value(
+            '//a[@href="https://rt.cpan.org/Ticket/Display.html?id=84994"]'),
         'RT #84994',
         "Link to rt is there"
     );
 
     ok( $res = $cb->( GET '/release/ANDREMAR/WWW-Curl-Simple-0.100187' ) );
-    $tx_cc = tx( $res );
-    is (
-        $tx_cc->find_value('//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
+    $tx_cc = tx($res);
+    is(
+        $tx_cc->find_value(
+            '//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
         '#8',
         "link to github issues is there"
     );
 
-
     # Test that we don't show changes for unrelated version, check issue #914
     # for original bug report.
     ok( $res = $cb->( GET '/release/SHLOMIF/Config-IniFiles-2.81/' ) );
-    $tx_cc = tx( $res );
-    $tx_cc->not_ok( '//div[@class="content"]/strong[following-sibling::div[@class="last-changes"]]');
+    $tx_cc = tx($res);
+    $tx_cc->not_ok(
+        '//div[@class="content"]/strong[following-sibling::div[@class="last-changes"]]'
+    );
 };
 
 done_testing;
 
 sub test_heading_order {
-    my ($res, $desc) = @_;
+    my ( $res, $desc ) = @_;
     ok( $res, $desc || 'found' );
     my $tx = tx($res);
 
     # Figure out version for Changes test
-    my (undef, undef, $author, $module) = split m|/|, $tx->find_value('//a[text()="This version"]/@href');
+    my ( undef, undef, $author, $module ) = split m|/|,
+        $tx->find_value('//a[text()="This version"]/@href');
     $module =~ s/[^\d\w_.-]//g;
-    my ($version) = (reverse split /-/, $module);
+    my ($version) = ( reverse split /-/, $module );
 
     # Confirm that the headings in the content div are in the expected order.
-    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples', 'Other files' );
+    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples',
+        'Other files' );
     my @anchors = qw(docs modules provides examples other whatsnew);
-    push @headings, 'Changes for version ' . $version ;
-    my $heading  = 0;
+    push @headings, 'Changes for version ' . $version;
+    my $heading = 0;
 
-    $tx->ok( '//div[@class="content"]/strong', sub {
-        $_->is( '.', $headings[$heading], "heading $headings[$heading] in expected location");
-        $heading++;
-    } , 'headings in correct order');
+    $tx->ok(
+        '//div[@class="content"]/strong',
+        sub {
+            $_->is( '.', $headings[$heading],
+                "heading $headings[$heading] in expected location" );
+            $heading++;
+        },
+        'headings in correct order'
+    );
 
     my $anchor = 0;
-    $tx->ok( '//div[@class="content"]/a[following-sibling::strong[1]]', sub {
-            $_->is('./@name', $anchors[$anchor], "Anchor $anchors[$anchor] in expected location");
+    $tx->ok(
+        '//div[@class="content"]/a[following-sibling::strong[1]]',
+        sub {
+            $_->is( './@name', $anchors[$anchor],
+                "Anchor $anchors[$anchor] in expected location" );
             $anchor++;
-        }, "anchors are correct.");
+        },
+        "anchors are correct."
+    );
 }

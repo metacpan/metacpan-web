@@ -24,10 +24,11 @@ sub index : Path {
     if ( $req->parameters->{f} && $req->parameters->{f} eq 'n' ) {
         push(
             @$q,
-            @{  $c->model('API::Release')
+            @{
+                $c->model('API::Release')
                     ->_new_distributions_query->{constant_score}->{filter}
                     ->{and}
-                }
+            }
         );
     }
 
@@ -35,13 +36,15 @@ sub index : Path {
         = DateTime->now->truncate( to => 'month' )->subtract( months => 23 );
     my $data = $c->model('API')->request(
         '/release/_search',
-        {   query  => { match_all => {} },
+        {
+            query  => { match_all => {} },
             facets => {
                 histo => {
                     date_histogram => { field => 'date', interval => $res },
                     facet_filter   => {
                         and => [
-                            {   range => {
+                            {
+                                range => {
                                     date => { from => $start->epoch . '000' }
                                 }
                             },
@@ -59,7 +62,7 @@ sub index : Path {
         map {
             $data->{ $start->clone->add( months => $_ )->epoch . '000' }
                 || 0
-            } ( 0 .. 23 )
+        } ( 0 .. 23 )
     ];
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );

@@ -22,26 +22,28 @@ sub index : PathPart('source') : Chained('/') : Args {
         );
     }
 
-
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->recv;
-        $c->res->last_modified($module->{date});
+        $c->res->last_modified( $module->{date} );
         $c->stash(
-            {   template => 'browse.html',
+            {
+                template => 'browse.html',
                 files => [ map { $_->{fields} } @{ $files->{hits}->{hits} } ],
                 total => $files->{hits}->{total},
                 took  => $files->{took},
-                author => shift @module,
-                release => shift @module,
+                author    => shift @module,
+                release   => shift @module,
                 directory => \@module,
             }
         );
     }
     elsif ( exists $source->{raw} ) {
         $module->{content} = $source->{raw};
-        $c->stash({
-            file => $module,
-        });
+        $c->stash(
+            {
+                file => $module,
+            }
+        );
         $c->forward('content');
     }
     else {
@@ -50,51 +52,52 @@ sub index : PathPart('source') : Chained('/') : Args {
 }
 
 sub content : Private {
-    my ($self, $c) = @_;
+    my ( $self, $c ) = @_;
 
     # FIXME: $module should really just be $file
     my $module = $c->stash->{file};
 
-        # could this be a method/function somewhere else?
-        if ( !$module->{binary} ) {
-            my $filetype = $self->detect_filetype($module);
-            $c->stash( { source => $module->{content}, filetype => $filetype } );
+    # could this be a method/function somewhere else?
+    if ( !$module->{binary} ) {
+        my $filetype = $self->detect_filetype($module);
+        $c->stash( { source => $module->{content}, filetype => $filetype } );
+    }
+    $c->res->last_modified( $module->{date} );
+    $c->stash(
+        {
+            template => 'source.html',
+            module   => $module,
         }
-        $c->res->last_modified($module->{date});
-        $c->stash(
-            {   template => 'source.html',
-                module   => $module,
-            }
-        );
+    );
 }
 
 # Class method to ease testing.
 sub detect_filetype {
-    my ($self, $file) = @_;
+    my ( $self, $file ) = @_;
 
-    if( defined($file->{path}) ){
+    if ( defined( $file->{path} ) ) {
         local $_ = $file->{path};
 
         # No separate pod brush as of 2011-08-04.
-        return 'pl'   if /\. ( p[ml] | psgi | pod ) $/ix;
+        return 'pl' if /\. ( p[ml] | psgi | pod ) $/ix;
 
-        return 'pl'   if /^ cpanfile $/ix;
+        return 'pl' if /^ cpanfile $/ix;
 
         return 'yaml' if /\. ya?ml $/ix;
 
-        return 'js'   if /\. js(on)? $/ix;
+        return 'js' if /\. js(on)? $/ix;
 
-        return 'c'    if /\. ( c | h | xs ) $/ix;
+        return 'c' if /\. ( c | h | xs ) $/ix;
 
         # Are other changelog files likely to be in CPAN::Changes format?
         return 'cpanchanges' if /^ Changes $/ix;
     }
 
     # If no paths matched try mime type (which likely comes from the content).
-    if( defined($file->{mime}) ){
+    if ( defined( $file->{mime} ) ) {
         local $_ = $file->{mime};
 
-        return 'pl'   if /perl/;
+        return 'pl' if /perl/;
     }
 
     # Default to plain text.

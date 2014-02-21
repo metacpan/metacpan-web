@@ -29,7 +29,8 @@ sub get {
         if ( @author == 1 );
     return $self->request(
         "/author/_search",
-        {   query => {
+        {
+            query => {
                 constant_score => {
                     filter => { ids => { values => [ map {uc} @author ] } }
                 }
@@ -48,7 +49,8 @@ sub search {
         query => {
             bool => {
                 should => [
-                    {   text => {
+                    {
+                        text => {
                             'author.name.analyzed' =>
                                 { query => $query, operator => 'and' }
                         }
@@ -67,7 +69,8 @@ sub search {
             my $results = shift->recv
                 || { hits => { total => 0, hits => [] } };
             $cv->send(
-                {   results => [
+                {
+                    results => [
                         map { +{ %{ $_->{_source} }, id => $_->{_id} } }
                             @{ $results->{hits}{hits} }
                     ],
@@ -85,7 +88,8 @@ sub by_user {
 
     my $query = return $self->request(
         '/author/_search',
-        {   query => { match_all => {} },
+        {
+            query => { match_all => {} },
             filter =>
                 { or => [ map { { term => { user => $_ } } } @{$users} ] },
             fields => [qw(user pauseid)],
@@ -93,7 +97,6 @@ sub by_user {
         }
     );
 }
-
 
 __PACKAGE__->meta->make_immutable;
 

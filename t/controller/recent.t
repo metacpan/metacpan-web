@@ -9,7 +9,8 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
 
     my $tx = tx($res);
-    ok( my $release = $tx->find_value(
+    ok(
+        my $release = $tx->find_value(
             '//table[2]/tbody/tr[1]/td[@class="name"]//a[1]/@href'),
         'contains a release'
     );

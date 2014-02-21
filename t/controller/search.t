@@ -7,20 +7,23 @@ use Encode qw(encode is_utf8);
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/search" ),
-        'GET /search' );
+    ok( my $res = $cb->( GET "/search" ), 'GET /search' );
     is( $res->code, 302, 'code 302' );
 
     # Empty search query results in redirect.
     ok( $res = $cb->( GET "/search?q=" ), 'GET /search?q=' );
     is( $res->code, 302, 'code 302' );
+
     # Empty search query for lucky searches also redirects.
     ok( $res = $cb->( GET "/search?q=&lucky=1" ), 'GET /search?q=&lucky=1' );
     is( $res->code, 302, 'code 302' );
 
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
-    ok( $res->content =~ /0\s+results/, '0 results for an invalid search term' );
+    ok(
+        $res->content =~ /0\s+results/,
+        '0 results for an invalid search term'
+    );
 
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
@@ -33,9 +36,9 @@ test_psgi app, sub {
 
     # Moose has ratings (other things on this search page likely do as well)
     $tx->like(
-      '//div[@class="search-results"]//a[starts-with(@class, "rating-")]/following-sibling::a',
-      qr/\d+ reviews?/i,
-      'current rating and number of reviews listed'
+        '//div[@class="search-results"]//a[starts-with(@class, "rating-")]/following-sibling::a',
+        qr/\d+ reviews?/i,
+        'current rating and number of reviews listed'
     );
 
     ok( $res = $cb->( GET $release), "GET $release" );
@@ -45,18 +48,23 @@ test_psgi app, sub {
     my $author = 'rjbs';
     $res = $cb->( GET "/search?q=author%3Arjbs+app" );
     is( $res->code, 200, 'search restricted by author OK' )
-      or diag explain $res;
+        or diag explain $res;
 
     $tx = tx($res);
-    $tx->ok('//div[@class="search-results"]//div[@class="module-result"]/a[@class="author"]', sub {
-      my $node = shift;
-      $node->is('.', uc($author), 'dist owned by queried author')
-        or diag explain $node;
-    }, 'all dists owned by queried author');
+    $tx->ok(
+        '//div[@class="search-results"]//div[@class="module-result"]/a[@class="author"]',
+        sub {
+            my $node = shift;
+            $node->is( '.', uc($author), 'dist owned by queried author' )
+                or diag explain $node;
+        },
+        'all dists owned by queried author'
+    );
 
     # as of 2013-01-20 there was only one page of results
-    search_and_find_module($cb,
-        "ねんねこ", # no idea what this means - rwstauner 2013-01-20
+    search_and_find_module(
+        $cb,
+        "ねんねこ",    # no idea what this means - rwstauner 2013-01-20
         'Lingua::JA::WordNet',
         'search for UTF-8 characters',
     );
@@ -65,17 +73,18 @@ test_psgi app, sub {
 done_testing;
 
 sub req_200_ok {
-    my ($cb, $req, $desc) = @_;
+    my ( $cb, $req, $desc ) = @_;
     ok( my $res = $cb->($req), $desc );
     is $res->code, 200, "200 OK";
     return $res;
 }
 
 sub search_and_find_module {
-    my ($cb, $query, $exp_mod, $desc) = @_;
-    $query = encode("UTF-8" => $query) if is_utf8($query);
-    my $res = req_200_ok( $cb, GET("/search?q=$query"), $desc);
+    my ( $cb, $query, $exp_mod, $desc ) = @_;
+    $query = encode( "UTF-8" => $query ) if is_utf8($query);
+    my $res = req_200_ok( $cb, GET("/search?q=$query"), $desc );
     my $tx = tx($res);
+
     # make sure there is a link tag whose content is the module name
     $tx->ok(
         qq!grep(//div[\@class="search-results"]//div[\@class="module-result"]//a[1], "^\Q$exp_mod\E\$")!,

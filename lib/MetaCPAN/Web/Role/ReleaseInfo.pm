@@ -12,8 +12,9 @@ use Moose::Role;
 # add favorites and myfavorite data into $main hash
 sub add_favorites_data {
     my ( $self, $main, $favorites, $data ) = @_;
-    $main->{myfavorite} = $favorites->{myfavorites}->{ $data->{distribution} };
-    $main->{favorites}  = $favorites->{favorites}->{   $data->{distribution} };
+    $main->{myfavorite}
+        = $favorites->{myfavorites}->{ $data->{distribution} };
+    $main->{favorites} = $favorites->{favorites}->{ $data->{distribution} };
     return;
 }
 
@@ -25,16 +26,21 @@ sub api_requests {
     my ( $self, $c, $reqs, $data ) = @_;
 
     return {
-        author     => $c->model('API::Author')->get( $data->{author} ),
+        author => $c->model('API::Author')->get( $data->{author} ),
 
-        favorites  => $c->model('API::Favorite')
-            ->get( $c->user_exists ? $c->user->id : undef, $data->{distribution} ),
+        favorites => $c->model('API::Favorite')->get(
+            $c->user_exists ? $c->user->id : undef,
+            $data->{distribution}
+        ),
 
-        rating     => $c->model('API::Rating')->get( $data->{distribution} ),
+        rating => $c->model('API::Rating')->get( $data->{distribution} ),
 
-        versions   => $c->model('API::Release')->versions( $data->{distribution} ),
-        distribution => $c->model('API::Release')->distribution( $data->{distribution} ),
-        changes    => $c->model('API::Changes')->get( $data->{author}, $data->{name} ),
+        versions =>
+            $c->model('API::Release')->versions( $data->{distribution} ),
+        distribution =>
+            $c->model('API::Release')->distribution( $data->{distribution} ),
+        changes =>
+            $c->model('API::Changes')->get( $data->{author}, $data->{name} ),
         %$reqs,
     };
 }
@@ -43,26 +49,28 @@ sub api_requests {
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
 
-    my $changes = $c->model('API::Changes')->last_version(
-        $reqs->{changes},
-        $data,
-    );
+    my $changes
+        = $c->model('API::Changes')->last_version( $reqs->{changes}, $data, );
 
-    $c->stash({
-        author     => $reqs->{author},
-        #release    => $release->{hits}->{hits}->[0]->{_source},
-        rating     => $reqs->{rating}->{ratings}->{ $data->{distribution} },
-        distribution => $reqs->{distribution},
-        versions   =>
-            [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
-        ( $changes ? (last_version_changes => $changes) : () ),
-    });
+    $c->stash(
+        {
+            author => $reqs->{author},
+
+            #release    => $release->{hits}->{hits}->[0]->{_source},
+            rating => $reqs->{rating}->{ratings}->{ $data->{distribution} },
+            distribution => $reqs->{distribution},
+            versions     => [
+                map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} }
+            ],
+            ( $changes ? ( last_version_changes => $changes ) : () ),
+        }
+    );
 }
 
 # call recv() on all values in the provided hashref
 sub recv_all {
     my ( $self, $condvars ) = @_;
     return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
-};
+}
 
 1;

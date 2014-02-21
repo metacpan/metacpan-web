@@ -6,25 +6,26 @@ use base 'MetaCPAN::Web::Controller';
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
 
-    my $data = $c->model( 'API::Favorite' )->recent( $c->req->page )->recv;
-    my @faves = map { $_->{_source} } @{ $data->{hits}->{hits} };
+    my $data     = $c->model('API::Favorite')->recent( $c->req->page )->recv;
+    my @faves    = map { $_->{_source} } @{ $data->{hits}->{hits} };
     my @user_ids = map { $_->{user} } @faves;
 
     my $authors
-        = $c->model( 'API::Author' )->by_user( \@user_ids )->recv->{hits}
+        = $c->model('API::Author')->by_user( \@user_ids )->recv->{hits}
         ->{hits};
 
     my %author_for_user_id
         = map { $_->{fields}->{user} => $_->{fields}->{pauseid} } @{$authors};
 
-    foreach my $fave ( @faves ) {
+    foreach my $fave (@faves) {
         if ( exists $author_for_user_id{ $fave->{user} } ) {
             $fave->{clicked_by_author} = $author_for_user_id{ $fave->{user} };
         }
     }
 
     $c->stash(
-        {   header          => 1,
+        {
+            header          => 1,
             recent          => \@faves,
             show_clicked_by => 1,
             took            => $data->{took},
@@ -37,15 +38,17 @@ sub recent : Path('/favorite/recent') {
 sub index : Path('/favorite/leaderboard') {
     my ( $self, $c ) = @_;
 
-    my $data = $c->model( 'API::Favorite' )->leaderboard( $c->req->page )->recv;
+    my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;
     my @leaders = @{ $data->{facets}->{leaderboard}->{terms} }[ 0 .. 99 ];
 
-    $c->stash({
-        leaders  => \@leaders,
-        took     => $data->{took},
-        total    => $data->{hits}->{total},
-        template => 'favorite/leaderboard.html',
-    });
+    $c->stash(
+        {
+            leaders  => \@leaders,
+            took     => $data->{took},
+            total    => $data->{hits}->{total},
+            template => 'favorite/leaderboard.html',
+        }
+    );
 }
 
 1;

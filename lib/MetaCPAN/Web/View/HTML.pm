@@ -22,8 +22,8 @@ sub parse_datetime {
     if ( $date =~ /^\d+$/ ) {
         my ( $sec, $min, $hour, $mday, $mon, $year ) = localtime($date);
         return {
-            year   => $year+1900,
-            month  => $mon+1,
+            year   => $year + 1900,
+            month  => $mon + 1,
             day    => $mday,
             hour   => $hour,
             minute => $min,
@@ -164,10 +164,11 @@ Template::Alloy->define_vmethod(
 Template::Alloy->define_vmethod(
     'text',
     digest => sub {
-        my ( $source ) = @_;
-        my @source = split(/\//, $source);
-        my @target = (shift @source, shift @source, join('/', @source));
-        my $digest = Digest::SHA1::sha1_base64(join("\0", grep { defined } @target));
+        my ($source) = @_;
+        my @source = split( /\//, $source );
+        my @target = ( shift @source, shift @source, join( '/', @source ) );
+        my $digest = Digest::SHA1::sha1_base64(
+            join( "\0", grep {defined} @target ) );
         $digest =~ tr/[+\/]/-_/;
         return $digest;
     }

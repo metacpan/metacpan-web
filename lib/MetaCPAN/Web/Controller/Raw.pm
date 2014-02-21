@@ -24,7 +24,8 @@ sub index : PathPart('raw') : Chained('/') : Args {
     }
     else {
         $c->stash(
-            {   source   => $source->{raw},
+            {
+                source   => $source->{raw},
                 module   => $module,
                 template => 'raw.html'
             }

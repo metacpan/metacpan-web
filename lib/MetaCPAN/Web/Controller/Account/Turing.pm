@@ -15,7 +15,8 @@ sub index : Path('') {
             $c->token
         )->recv;
         $c->stash(
-            {   success => $res->{looks_human},
+            {
+                success => $res->{looks_human},
                 error   => $res->{error},
                 res     => $res,
                 referer => $params->{r},
@@ -23,8 +24,11 @@ sub index : Path('') {
         );
     }
     $c->stash(
-        {   template => 'account/turing.html',
-            captcha  => Captcha::reCAPTCHA->new->get_html( $self->public_key, undef, 1 ),
+        {
+            template => 'account/turing.html',
+            captcha  => Captcha::reCAPTCHA->new->get_html(
+                $self->public_key, undef, 1
+            ),
         }
     );
 

@@ -51,7 +51,7 @@ sub build_entry {
     );
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
-    $e->summary( escape_html($entry->{abstract}) );
+    $e->summary( escape_html( $entry->{abstract} ) );
     return $e;
 }
 

@@ -34,28 +34,30 @@ my @ROGUE_DISTRIBUTIONS
 
 sub find {
     my ( $self, @path ) = @_;
-    $self->request("/module/" . join("/", @path));
+    $self->request( "/module/" . join( "/", @path ) );
 }
 
 sub _not_rogue {
-    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } } @ROGUE_DISTRIBUTIONS;
+    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } }
+        @ROGUE_DISTRIBUTIONS;
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
 sub autocomplete {
     my ( $self, $query ) = @_;
-    my $cv     = $self->cv;
+    my $cv = $self->cv;
     $self->request("/search/autocomplete?q=$query&size=20")->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
-                {   results => [
+                {
+                    results => [
                         map { $_->{fields} } @{ $data->{hits}->{hits} || [] }
                     ]
                 }
             );
         }
-        );
+    );
     return $cv;
 }
 
@@ -67,7 +69,8 @@ sub search_distribution {
     my ( $data, $total );
     $data = $self->search(
         $query,
-        {   size => 20,
+        {
+            size => 20,
             from => $from
         }
     )->recv;
@@ -84,7 +87,8 @@ sub search_distribution {
     map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
         @{$results};
     $cv->send(
-        {   results => [ map { [$_] } @$results ],
+        {
+            results => [ map { [$_] } @$results ],
             total   => $data->{hits}->{total},
             took => sum( grep {defined} $data->{took}, $ratings->{took} )
         }
@@ -113,8 +117,7 @@ sub search_collapsed {
         $run++;
         } while ( @distributions < 20 + $from
         && $data->{hits}->{total}
-        && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN
-    );
+        && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
     @distributions = splice( @distributions, $from, 20 );
     my $ratings   = $self->model('Rating')->get(@distributions);
@@ -127,7 +130,7 @@ sub search_collapsed {
         $results->{took}, $favorites->{took} )
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
-            $results = $self->_collapse_results($results);
+    $results = $self->_collapse_results($results);
     my @ids = map { $_->[0]->{id} } @$results;
     $data = {
         results => $results,
@@ -149,7 +152,8 @@ sub search_descriptions {
     my $cv = $self->cv;
     $self->request(
         '/file/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
@@ -169,11 +173,12 @@ sub search_descriptions {
                 return $1 || undef;
             };
             $cv->send(
-                {   results => {
+                {
+                    results => {
                         map {
                             $_->{fields}->{id} =>
                                 $extract->( $_->{fields}->{'_source.pod'} )
-                            } @{ $data->{hits}->{hits} }
+                        } @{ $data->{hits}->{hits} }
                     },
                     took => $data->{took}
                 }
@@ -198,7 +203,7 @@ sub _extract_results {
                     myfavorite => $favorites->{myfavorites}
                     ->{ $_->{fields}->{distribution} },
             }
-            } @{ $results->{hits}->{hits} }
+        } @{ $results->{hits}->{hits} }
     ];
 }
 
@@ -223,11 +228,13 @@ sub _search {
     my ( $self, $query, $run ) = @_;
     return $self->search(
         $query,
-        {   size   => $run * $RESULTS_PER_RUN,
+        {
+            size   => $run * $RESULTS_PER_RUN,
             from   => ( $run - 1 ) * $RESULTS_PER_RUN,
             fields => [qw(distribution)],
             $run == 1
-            ? ( facets => {
+            ? (
+                facets => {
                     count =>
                         { terms => { size => 999, field => 'distribution' } }
                 }
@@ -263,14 +270,16 @@ sub search {
             should => [
 
                 # exact matches result in a huge boost
-                {   term => {
+                {
+                    term => {
                         'file.documentation' => {
                             value => $query,
                             boost => 20
                         }
                     }
                 },
-                {   term => {
+                {
+                    term => {
                         'file.module.name' => {
                             value => $query,
                             boost => 20
@@ -279,9 +288,11 @@ sub search {
                 },
 
             # take the maximum score from the module name and the abstract/pod
-                {   dis_max => {
+                {
+                    dis_max => {
                         queries => [
-                            {   query_string => {
+                            {
+                                query_string => {
                                     fields => [
                                         qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
                                         qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
@@ -294,7 +305,8 @@ sub search {
 
                                 }
                             },
-                            {   query_string => {
+                            {
+                                query_string => {
                                     fields => [
                                         qw(abstract.analyzed pod.analyzed)
                                     ],
@@ -315,13 +327,15 @@ sub search {
 
     my $search = merge(
         $params,
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query => {
                         custom_score => {
 
                             # prefer shorter module names
-                            metacpan_script => 'prefer_shorter_module_names_400',
+                            metacpan_script =>
+                                'prefer_shorter_module_names_400',
                             query => {
                                 boosting => {
                                     negative_boost => 0.5,
@@ -334,45 +348,53 @@ sub search {
                     filter => {
                         and => [
                             $self->_not_rogue,
-                            { term => { status => 'latest' } },
+                            { term => { status            => 'latest' } },
                             { term => { 'file.authorized' => \1 } },
-                            { term => { 'file.indexed' => \1 } },
-                            {   or => [
-                                    {   and => [
-                                            {   exists => {
+                            { term => { 'file.indexed'    => \1 } },
+                            {
+                                or => [
+                                    {
+                                        and => [
+                                            {
+                                                exists => {
                                                     field =>
                                                         'file.module.name'
                                                 }
                                             },
-                                            {   term => {
+                                            {
+                                                term => {
                                                     'file.module.indexed' =>
                                                         \1
                                                 }
                                             }
                                         ]
                                     },
-                                    { exists => { field => 'documentation' } },
+                                    {
+                                        exists => { field => 'documentation' }
+                                    },
                                 ]
                             }
                         ]
                     }
                 }
             },
-            fields => [qw(
-                documentation
-                author
-                abstract.analyzed
-                release
-                path
-                status
-                indexed
-                authorized
-                module
-                distribution
-                date
-                id
-                pod_lines
-            )],
+            fields => [
+                qw(
+                    documentation
+                    author
+                    abstract.analyzed
+                    release
+                    path
+                    status
+                    indexed
+                    authorized
+                    module
+                    distribution
+                    date
+                    id
+                    pod_lines
+                    )
+            ],
         }
     );
     return $self->request( '/file/_search', $search );
@@ -388,16 +410,18 @@ sub _search_in_distributions {
             filtered => {
                 filter => {
                     and => [
-                        {   or => [
+                        {
+                            or => [
                                 map {
                                     { term => { 'file.distribution' => $_ } }
-                                    } @distributions
+                                } @distributions
                             ]
                         }
                     ]
                 }
             }
-        } };
+        }
+    };
 }
 
 sub requires {
@@ -406,14 +430,16 @@ sub requires {
     my $cv = $self->cv;
     $self->request(
         '/release/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { "match_all" => {} },
                     filter => {
                         and => [
                             { term => { 'release.status'     => 'latest' } },
                             { term => { 'release.authorized' => \1 } },
-                            {   term => {
+                            {
+                                term => {
                                     "release.dependency.module" => $module
                                 }
                             }
@@ -429,7 +455,8 @@ sub requires {
         sub {
             my $data = shift->recv;
             $cv->send(
-                {   data =>
+                {
+                    data =>
                         [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
                     total => $data->{hits}->{total},
                     took  => $data->{took}

@@ -59,8 +59,9 @@ sub view : Private {
 
     my $reqs = $self->api_requests(
         $c,
-        {   files    => $model->interesting_files( $author, $release ),
-            modules  => $model->modules( $author, $release ),
+        {
+            files   => $model->interesting_files( $author, $release ),
+            modules => $model->modules( $author,           $release ),
         },
         $out,
     );
@@ -74,13 +75,16 @@ sub view : Private {
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
         grep { $_->{path} !~ m{/} }
-        map { $_->{fields} } @{ $files->{hits}->{hits} }
+        map  { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
     my @examples = (
         sort { $a->{path} cmp $b->{path} }
-        grep { $_->{path} =~ m{\b(?:eg|ex|examples?|samples?)\b}i and not $_->{path} =~ m{^x?t/} }
-        map { $_->{fields} } @{ $files->{hits}->{hits} }
+            grep {
+            $_->{path} =~ m{\b(?:eg|ex|examples?|samples?)\b}i
+                and not $_->{path} =~ m{^x?t/}
+            }
+            map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
     $c->res->last_modified( $out->{date} );
@@ -89,21 +93,22 @@ sub view : Private {
 
     # Simplify the file data we pass to the template.
     my @view_files;
-    foreach my $hit ( @{ $modules->{hits}->{hits} } ){
+    foreach my $hit ( @{ $modules->{hits}->{hits} } ) {
         my $f = $hit->{fields};
         my $h = {};
-        while( my ($k, $v) = each %$f ){
+        while ( my ( $k, $v ) = each %$f ) {
+
             # Strip '_source.' prefix from keys.
             $k =~ s/^_source\.//;
-            $h->{ $k } = $v;
+            $h->{$k} = $v;
         }
         push @view_files, $h;
     }
 
-
     # TODO: make took more automatic (to include all)
     $c->stash(
-        {   template => 'release.html',
+        {
+            template => 'release.html',
             release  => $out,
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
@@ -119,19 +124,18 @@ sub view : Private {
 
 # massage the x_contributors field into what we want
 sub groom_contributors {
-    my( $self, $c, $out ) = @_;
-    
+    my ( $self, $c, $out ) = @_;
+
     return unless $out->{metadata}{x_contributors};
 
     # just in case a lonely contributor makes it as a scalar
-    $out->{metadata}{x_contributors} = [ 
-        $out->{metadata}{x_contributors}
-    ] unless ref $out->{metadata}{x_contributors};
+    $out->{metadata}{x_contributors} = [ $out->{metadata}{x_contributors} ]
+        unless ref $out->{metadata}{x_contributors};
 
     my @contributors = map {
         s/<(.*)>//;
         { name => $_, email => $1 }
-    } @{$out->{metadata}{x_contributors}};
+    } @{ $out->{metadata}{x_contributors} };
 
     $out->{metadata}{x_contributors} = \@contributors;
 
@@ -139,13 +143,13 @@ sub groom_contributors {
 
         # heuristic to autofill pause accounts
         $contributor->{pauseid} = uc $1
-            if !$contributor->{pauseid} 
+            if !$contributor->{pauseid}
             and $contributor->{email} =~ /^(.*)\@cpan.org/;
 
         next unless $contributor->{pauseid};
 
-        $contributor->{url} = 
-            $c->uri_for_action( '/author/index', [ $contributor->{pauseid} ] );
+        $contributor->{url} = $c->uri_for_action( '/author/index',
+            [ $contributor->{pauseid} ] );
     }
 }
 

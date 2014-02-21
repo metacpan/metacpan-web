@@ -30,7 +30,8 @@ sub get {
     @distributions = uniq @distributions;
     my $cv = $self->cv;
     $self->request(
-        '/rating/_search', {
+        '/rating/_search',
+        {
             size  => 0,
             query => {
                 filtered => {
@@ -39,7 +40,7 @@ sub get {
                         or => [
                             map {
                                 { term => { 'rating.distribution' => $_ } }
-                                } @distributions
+                            } @distributions
                         ]
                     }
                 }
@@ -57,7 +58,8 @@ sub get {
         sub {
             my ($ratings) = shift->recv;
             $cv->send(
-                {   took    => $ratings->{took},
+                {
+                    took    => $ratings->{took},
                     ratings => {
                         map { $_->{term} => $_ }
                             @{ $ratings->{facets}->{ratings}->{terms} }

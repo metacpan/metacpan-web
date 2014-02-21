@@ -16,13 +16,15 @@ sub add : Local {
         $res = $model->add_favorite( $data, $c->token )->recv;
     }
     if ( $c->req->looks_like_browser ) {
-        $c->res->redirect( $res->{error}
+        $c->res->redirect(
+              $res->{error}
             ? $c->req->referer
-            : $c->uri_for('/account/turing/index') );
+            : $c->uri_for('/account/turing/index')
+        );
     }
     else {
         $c->stash( { success => $res->{error} ? \0 : \1 } );
-        $c->res->code(400) if($res->{error});
+        $c->res->code(400) if ( $res->{error} );
         $c->detach( $c->view('JSON') );
     }
 }
@@ -32,7 +34,7 @@ sub list : Local {
 
     my $user = $c->model('API::User')->get_profile( $c->token )->recv;
 
-    my $faves_cv = $c->model('API::Favorite')->by_user( $user->{user} );
+    my $faves_cv   = $c->model('API::Favorite')->by_user( $user->{user} );
     my $faves_data = $faves_cv->recv;
     my $faves      = [
         sort { $b->{date} cmp $a->{date} }

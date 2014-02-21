@@ -39,6 +39,4 @@ sub faq : Local {
     $c->stash( template => 'about/faq.html' );
 }
 
-
-
 1;

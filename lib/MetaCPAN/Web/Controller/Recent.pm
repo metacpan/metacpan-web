@@ -5,11 +5,14 @@ use base 'MetaCPAN::Web::Controller';
 
 sub index : Path {
     my ( $self, $c ) = @_;
-    my ($data) = $c->model('API::Release')->recent( $c->req->page, $c->req->params->{f} || 'l' )->recv;
+    my ($data)
+        = $c->model('API::Release')
+        ->recent( $c->req->page, $c->req->params->{f} || 'l' )->recv;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    $c->res->last_modified($latest->[0]->{date}) if(@$latest);
+    $c->res->last_modified( $latest->[0]->{date} ) if (@$latest);
     $c->stash(
-        {   recent   => $latest,
+        {
+            recent   => $latest,
             took     => $data->{took},
             total    => $data->{hits}->{total},
             template => 'recent.html'

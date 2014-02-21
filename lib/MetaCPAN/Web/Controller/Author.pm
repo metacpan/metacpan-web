@@ -39,7 +39,8 @@ sub index : Path : Args(1) {
     $c->res->last_modified($date);
 
     $c->stash(
-        {   author      => $author,
+        {
+            author      => $author,
             releases    => $releases,
             faves       => $faves,
             show_author => 1,
@@ -50,7 +51,7 @@ sub index : Path : Args(1) {
     );
 
     $c->stash( author_country_name =>
-        Locale::Country::code2country( $author->{country} ) )
+            Locale::Country::code2country( $author->{country} ) )
         if $author->{country};
 }
 

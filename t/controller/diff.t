@@ -21,7 +21,8 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     $tx = tx($res);
 
-    is( $tx->find_value('//ul[@class="diff-ul"]//li[position() <= 5]/a'),
+    is(
+        $tx->find_value('//ul[@class="diff-ul"]//li[position() <= 5]/a'),
         'ChangesMETA.jsonMETA.ymlMakefile.PLREADME',
         'Release diff file list'
     );

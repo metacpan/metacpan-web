@@ -35,14 +35,16 @@ test_psgi app, sub {
         { module => 'Dist::Zilla' },
 
         # release name different than just s/::/-/g
-        {   module     => 'LWP::UserAgent',
+        {
+            module     => 'LWP::UserAgent',
             release    => 'libwww-perl',
             repository => 0,
             home_page  => 0
         },
 
         # no optional tests
-        {   module     => 'CGI::Bus',
+        {
+            module     => 'CGI::Bus',
             home_page  => 0,
             reviews    => 0,
             repository => 0,
@@ -79,14 +81,16 @@ test_psgi app, sub {
             ok( $tx->find_value(qq<//a[\@href="$req_uri"]>),
                 'contains permalink to resource' );
 
-            ok( my $this
+            ok(
+                my $this
                     = $tx->find_value('//a[text()="This version"]/@href'),
                 'contains link to "this" version'
             );
 
 # A fragile and unsure way to get the version, but at least an 80% solution.
 # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
-            ok( my $version
+            ok(
+                my $version
                     = (
                     $this =~ m!(?:/pod)?/release/[^/]+/$release-([^/"]+)! )
                     [0],
@@ -102,7 +106,8 @@ test_psgi app, sub {
             $tx->like( $favs, qr/\+\+$/, 'tag for favorites (++)' );
 
             optional_test favorited => sub {
-                ok( $tx->find_value("$favs/span") > 0,
+                ok(
+                    $tx->find_value("$favs/span") > 0,
                     "$req_uri has been marked as favorite"
                 );
             };
@@ -147,8 +152,11 @@ test_psgi app, sub {
             };
 
             # all dists should get a link to rate it; test built url
-            ok( $tx->find_value(
-                '//a[@href="http://cpanratings.perl.org/rate/?distribution=' . $release . '"]'),
+            ok(
+                $tx->find_value(
+                    '//a[@href="http://cpanratings.perl.org/rate/?distribution='
+                        . $release . '"]'
+                ),
                 'cpanratings link to rate this dist'
             );
 
@@ -168,11 +176,8 @@ test_psgi app, sub {
             );
 
             # version select box
-            ok( $tx->find_value(
-                    '//div[@class="breadcrumbs"]//select'
-                ),
-                'version select box'
-            );
+            ok( $tx->find_value('//div[@class="breadcrumbs"]//select'),
+                'version select box' );
 
             $tx->like(
 
@@ -186,16 +191,17 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
-            ok( $tx->find_value(
-                '//a[starts-with(@href, "/requires/distribution/")]'),
+            ok(
+                $tx->find_value(
+                    '//a[starts-with(@href, "/requires/distribution/")]'),
                 'reverse deps link uses dist name'
             );
 
             $tx->like(
                 '//a[starts-with(@href, "http://explorer.metacpan.org/?url")]/@href',
-                $type eq 'module' ?
-                       qr!\?url=/module/\w+/${release}-${version}/.+!
-                    : qr!\?url=/release/\w+/${release}-${version}\z!,
+                $type eq 'module'
+                ? qr!\?url=/module/\w+/${release}-${version}/.+!
+                : qr!\?url=/release/\w+/${release}-${version}\z!,
                 'explorer link points to module file or release',
             );
 

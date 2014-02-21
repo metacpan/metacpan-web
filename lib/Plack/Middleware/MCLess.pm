@@ -15,7 +15,7 @@ use Digest::MD5 qw(md5_hex);
 use Plack::Util;
 use Plack::Util::Accessor qw(files key expires cache cache_ttl);
 use Capture::Tiny ':all';
-use HTTP::Date  ();
+use HTTP::Date ();
 
 use CSS::Minifier::XS qw(minify);
 
@@ -25,7 +25,7 @@ sub new {
     my $class = shift;
     my $self  = $class->SUPER::new(@_);
 
-    if( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
+    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
         warn "Use less.min.js - better for development";
         return $self;
     }
@@ -39,7 +39,6 @@ sub new {
 
     return $self;
 }
-
 
 sub call {
     my $self = shift;
@@ -57,7 +56,8 @@ sub serve {
 
     return [
         200,
-        [   'Content-Type'   => 'text/css',
+        [
+            'Content-Type'   => 'text/css',
             'Content-Length' => length( $self->_get_content ),
             'Expires' =>
                 HTTP::Date::time2str( time + ( $self->expires || 2592000 ) ),
@@ -72,9 +72,8 @@ sub _build_content {
     # We can't use the mtime of the files to work out if we need
     # to rebuild because a file can include other files!
 
-    my $content = join( "\n",
-        map { $self->_run_less($_) } @{ $self->files }
-    );
+    my $content
+        = join( "\n", map { $self->_run_less($_) } @{ $self->files } );
 
     $self->key( md5_hex($content) );
     $self->cache->set( $self->key, $content, $self->cache_ttl );
@@ -85,21 +84,20 @@ sub _build_content {
 sub _get_content {
     my $self = shift;
 
-    my $content = $self->cache->get($self->key);
+    my $content = $self->cache->get( $self->key );
     return $content if defined $content;
 
     return $self->_build_content;
 }
 
 sub _run_less {
-    my ($self, $file) = @_;
+    my ( $self, $file ) = @_;
 
-    my ($stdout, $stderr, $exit) = capture {
+    my ( $stdout, $stderr, $exit ) = capture {
         system( 'lessc', $file );
     };
     die $stderr if $stderr;
     return minify($stdout);
 }
-
 
 1;

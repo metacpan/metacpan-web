@@ -10,25 +10,30 @@ sub index : Path {
 
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
-    unless ($req->param('q')) {
+    unless ( $req->param('q') ) {
         $c->res->redirect('/');
         $c->detach;
     }
 
-    my $query = join(" ", $req->param('q'));
+    my $query = join( " ", $req->param('q') );
 
     # translate Foo/Bar.pm to Foo::Bar
-    if( $query =~ m{.pm\b} ) {
+    if ( $query =~ m{.pm\b} ) {
         $query =~ s{/}{::}g;
         $query =~ s{\.pm\b}{};
     }
 
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * 20;
-    if ( $req->parameters->{lucky} or
-         # DuckDuckGo-like syntax for bangs that redirect to the first
-         # result.
-         $query =~ s[^ (?: \\ | ! ) ][]x) {
+    if (
+        $req->parameters->{lucky}
+        or
+
+        # DuckDuckGo-like syntax for bangs that redirect to the first
+        # result.
+        $query =~ s[^ (?: \\ | ! ) ][]x
+        )
+    {
         my $module = $model->first($query)->recv;
         $c->detach('/not_found') unless ($module);
         $c->res->redirect("/pod/$module");
@@ -50,10 +55,13 @@ sub index : Path {
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
         $c->stash(
-            { %$results,
-              single_dist => @dists == 1,
-              authors => $authors,
-              template => 'search.html' } );
+            {
+                %$results,
+                single_dist => @dists == 1,
+                authors     => $authors,
+                template    => 'search.html'
+            }
+        );
     }
 }
 

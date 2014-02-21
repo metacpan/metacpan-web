@@ -18,7 +18,7 @@ sub index : Path {
         $c->req->session->set( token => $data->{access_token} );
         $c->authenticate( { token => $data->{access_token} } );
         my $state = $c->req->params->{state} || "";
-        $c->res->redirect($c->uri_for("/$state"));
+        $c->res->redirect( $c->uri_for("/$state") );
     }
     else {
         $c->stash( { template => 'account/login.html' } );
@@ -26,6 +26,7 @@ sub index : Path {
 }
 
 use Plack::Middleware::Session::Cookie;
+
 package Plack::Middleware::Session::Cookie;
 use strict;
 no warnings 'redefine';
@@ -44,7 +45,7 @@ no warnings 'redefine';
 # anything, there seems to be no ramification.
 
 sub generate_id {
-    'session'
+    'session';
 }
 
 1;

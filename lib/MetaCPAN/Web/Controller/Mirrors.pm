@@ -28,11 +28,13 @@ sub index : Path {
     my $cv   = AE::cv();
     my $data = $c->model('API')->request(
         '/mirror/_search',
-        {   size  => 999,
+        {
+            size  => 999,
             query => { match_all => {} },
             @or ? ( filter => { and => \@or } ) : (),
             $location
-            ? ( sort => {
+            ? (
+                sort => {
                     _geo_distance => {
                         location => [ $location->[1], $location->[0] ],
                         order    => "asc",
@@ -50,10 +52,11 @@ sub index : Path {
                     ? $_->{sort}->[0]
                     : undef
             }
-            } @{ $data->{hits}->{hits} }
+        } @{ $data->{hits}->{hits} }
     ];
     $c->stash(
-        {   mirrors  => $latest,
+        {
+            mirrors  => $latest,
             took     => $data->{took},
             total    => $data->{hits}->{total},
             template => 'mirrors.html',

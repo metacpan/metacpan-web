@@ -12,7 +12,8 @@ sub get {
     my $cv = $self->cv;
     $self->request(
         '/favorite/_search',
-        {   size  => 0,
+        {
+            size  => 0,
             query => {
                 filtered => {
                     query  => { match_all => {} },
@@ -20,7 +21,7 @@ sub get {
                         or => [
                             map {
                                 { term => { 'favorite.distribution' => $_ } }
-                                } @distributions
+                            } @distributions
                         ]
                     }
                 }
@@ -33,7 +34,8 @@ sub get {
                     },
                 },
                 $user
-                ? ( myfavorites => {
+                ? (
+                    myfavorites => {
                         terms => { field => 'favorite.distribution', },
                         facet_filter =>
                             { term => { 'favorite.user' => $user } }
@@ -46,13 +48,15 @@ sub get {
         sub {
             my $data = shift->recv;
             $cv->send(
-                {   took      => $data->{took},
+                {
+                    took      => $data->{took},
                     favorites => {
                         map { $_->{term} => $_->{count} }
                             @{ $data->{facets}->{favorites}->{terms} }
                     },
                     myfavorites => $user
-                    ? { map { $_->{term} => $_->{count} }
+                    ? {
+                        map { $_->{term} => $_->{count} }
                             @{ $data->{facets}->{myfavorites}->{terms} }
                         }
                     : {},
@@ -64,10 +68,11 @@ sub get {
 }
 
 sub by_user {
-    my ($self, $user) = @_;
+    my ( $self, $user ) = @_;
     return $self->request(
         '/favorite/_search',
-        {   query  => { match_all => {} },
+        {
+            query  => { match_all => {} },
             filter => { term      => { user => $user }, },
             sort   => ['distribution'],
             fields => [qw(date author distribution)],
@@ -80,7 +85,8 @@ sub recent {
     my ( $self, $page ) = @_;
     $self->request(
         '/favorite/_search',
-        {   size  => 100,
+        {
+            size  => 100,
             from  => ( $page - 1 ) * 100,
             query => { match_all => {} },
             sort  => [ { 'date' => { order => "desc" } } ]
@@ -92,7 +98,8 @@ sub leaderboard {
     my ( $self, $page ) = @_;
     $self->request(
         '/favorite/_search',
-        {   size   => 0,
+        {
+            size   => 0,
             query  => { match_all => {} },
             facets => {
                 leaderboard =>

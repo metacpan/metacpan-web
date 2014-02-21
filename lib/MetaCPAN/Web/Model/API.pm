@@ -41,7 +41,8 @@ sub COMPONENT {
     my $self = shift;
     my ( $app, $config ) = @_;
     $config = $self->merge_config_hashes(
-        {   api        => $app->config->{api},
+        {
+            api        => $app->config->{api},
             api_secure => $app->config->{api_secure} || $app->config->{api}
         },
         $config
@@ -59,59 +60,62 @@ sub request {
     my ( $self, $path, $search, $params ) = @_;
     my ( $token, $method ) = @$params{qw(token method)};
     $path .= "?access_token=$token" if ($token);
-    my $req = $self->cv;
+    my $req     = $self->cv;
     my $request = HTTP::Request->new(
         $method ? $method : $search ? 'POST' : 'GET',
         ( $token ? $self->api_secure : $self->api ) . $path,
-        ['Content-type' => 'application/json'],
+        [ 'Content-type' => 'application/json' ],
     );
+
     # encode_json returns an octet string
-    $request->add_content(encode_json($search)) if $search;
+    $request->add_content( encode_json($search) ) if $search;
 
     $self->client->request($request)->cv->cb(
         sub {
-        my ($response, $stats) = shift->recv;
-        my $content_type = $response->header('content-type') || '';
-        my $data = $response->content;
+            my ( $response, $stats ) = shift->recv;
+            my $content_type = $response->header('content-type') || '';
+            my $data = $response->content;
 
-        if ( $content_type =~ /^application\/json/ ) {
-            my $json = eval { decode_json($data) };
-            $req->send( $@ ? $self->raw_api_response($data) : $json );
+            if ( $content_type =~ /^application\/json/ ) {
+                my $json = eval { decode_json($data) };
+                $req->send( $@ ? $self->raw_api_response($data) : $json );
+            }
+            else {
+                # Response is raw data, e.g. text/plain
+                $req->send( $self->raw_api_response($data) );
+            }
         }
-        else {
-            # Response is raw data, e.g. text/plain
-            $req->send( $self->raw_api_response($data) );
-        }
-    });
+    );
     return $req;
 }
 
 # cache these
 my $encoding = Encode::find_encoding('utf-8-strict')
-  or warn 'UTF-8 Encoding object not found';
+    or warn 'UTF-8 Encoding object not found';
 my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 
 # TODO: Check if it's possible for the API to return any other charset.
 # Do raw files, git diffs, etc get converted? Any text that goes into ES?
 
 sub raw_api_response {
-    my ($self, $data) = @_;
+    my ( $self, $data ) = @_;
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
     try {
-      if( $data ){
-        # We could detect a pod =encoding line but any perl code in that file
-        # is likely ascii or UTF-8.  We could potentially check for a BOM
-        # but those aren't used often and aren't likely to appear here.
-        # For now just attempt to decode it as UTF-8 since that's probably
-        # what people should be using. (See also #378).
-          # decode so the template doesn't double-encode and return mojibake
-          $data = $encoding->decode( $data, $encode_check );
-      }
+        if ($data) {
+
+         # We could detect a pod =encoding line but any perl code in that file
+         # is likely ascii or UTF-8.  We could potentially check for a BOM
+         # but those aren't used often and aren't likely to appear here.
+         # For now just attempt to decode it as UTF-8 since that's probably
+         # what people should be using. (See also #378).
+         # decode so the template doesn't double-encode and return mojibake
+            $data = $encoding->decode( $data, $encode_check );
+        }
     }
     catch {
-      warn $_[0];
+        warn $_[0];
     };
 
     return +{ raw => $data };

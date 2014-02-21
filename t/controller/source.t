@@ -12,7 +12,8 @@ test_psgi app, sub {
         'contains link to Source' );
     ok( $res = $cb->( GET $source ), "GET $source" );
     ok( $res->code(200), 'code 200' );
-    is( $res->header('Content-Type'),
+    is(
+        $res->header('Content-Type'),
         'text/html; charset=utf-8',
         'Content-type text/html; charset=utf-8'
     );
@@ -21,18 +22,20 @@ test_psgi app, sub {
     {
         # Test the html produced once; test different filetypes below.
         my $prefix = '/source/RJBS/Dist-Zilla-4.200012';
-        my @tests = (
-            [ pl    => "$prefix/bin/dzil" ],
-        );
+        my @tests = ( [ pl => "$prefix/bin/dzil" ], );
 
-        foreach my $test ( @tests ) {
+        foreach my $test (@tests) {
             my ( $type, $uri ) = @$test;
 
             ok( my $res = $cb->( GET $uri ), "GET $uri" );
             is( $res->code, 200, 'code 200' );
             my $tx = tx($res);
-            ok( my $source = $tx->find_value(qq{//div[\@class="content"]/pre[starts-with(\@class, "brush: $type; ")]}),
-                'has pre-block with expected syntax brush' );
+            ok(
+                my $source = $tx->find_value(
+                    qq{//div[\@class="content"]/pre[starts-with(\@class, "brush: $type; ")]}
+                ),
+                'has pre-block with expected syntax brush'
+            );
         }
     }
 };
@@ -41,33 +44,33 @@ test_psgi app, sub {
     # Test filetype detection.  This is based on file attributes so we don't
     # need to do the API hits to test each type.
     my @tests = (
-        [ pl    => 'lib/Template/Manual.pod' ], # pod
-        [ pl    => "lib/Dist/Zilla.pm" ],
-        [ pl    => "Makefile.PL" ],
+        [ pl => 'lib/Template/Manual.pod' ],    # pod
+        [ pl => "lib/Dist/Zilla.pm" ],
+        [ pl => "Makefile.PL" ],
 
-        [ js    => "META.json" ],
-        [ js    => "script.js" ],
+        [ js => "META.json" ],
+        [ js => "script.js" ],
 
-        [ yaml  => "META.yml" ],
-        [ yaml  => "config.yaml" ],
+        [ yaml => "META.yml" ],
+        [ yaml => "config.yaml" ],
 
-        [ c     => "foo.c" ],
-        [ c     => "bar.h" ],
-        [ c     => "baz.xs" ],
+        [ c => "foo.c" ],
+        [ c => "bar.h" ],
+        [ c => "baz.xs" ],
 
         [ cpanchanges => 'Changes' ],
 
-        [ pl    => { path => "bin/dzil", mime => "text/x-script.perl" }],
+        [ pl => { path => "bin/dzil", mime => "text/x-script.perl" } ],
 
         # There wouldn't normally be a file with no path
         # but that doesn't mean this shouldn't work.
-        [ pl    => { mime => "text/x-script.perl" }],
+        [ pl => { mime => "text/x-script.perl" } ],
 
         [ plain => "README" ],
     );
 
-    foreach my $ft_test ( @tests ){
-        my ($filetype, $file) = @$ft_test;
+    foreach my $ft_test (@tests) {
+        my ( $filetype, $file ) = @$ft_test;
         ref $file or $file = { path => $file };
 
         is
@@ -81,7 +84,7 @@ test_psgi app, sub {
         local $SIG{__WARN__} = sub { push @warnings, $_[0] };
 
         # Test no 'path' and no 'mime'.
-        is MetaCPAN::Web::Controller::Source->detect_filetype({}),
+        is MetaCPAN::Web::Controller::Source->detect_filetype( {} ),
             'plain', 'default to plain text';
 
         is scalar(@warnings), 0, 'no warnings when path and mime are undef'

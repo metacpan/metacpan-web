@@ -16,15 +16,17 @@ sub dir {
     my ( $self, $author, $release, @path ) = @_;
     $self->request(
         '/file/_search',
-        {   query => {
+        {
+            query => {
                 filtered => {
                     query  => { match_all => {}, },
                     filter => {
                         and => [
-                            { term => { 'file.level' => scalar @path } },
-                            { term => { 'file.author' => $author } },
+                            { term => { 'file.level'   => scalar @path } },
+                            { term => { 'file.author'  => $author } },
                             { term => { 'file.release' => $release } },
-                            {   prefix => {
+                            {
+                                prefix => {
                                     'file.path' => join( '/', @path, '' )
                                 }
                             },
@@ -32,8 +34,10 @@ sub dir {
                     },
                 }
             },
-            size => 999,
-            fields => [qw(name stat.mtime path file.stat.size file.directory slop documentation mime)],
+            size   => 999,
+            fields => [
+                qw(name stat.mtime path file.stat.size file.directory slop documentation mime)
+            ],
         }
     );
 }

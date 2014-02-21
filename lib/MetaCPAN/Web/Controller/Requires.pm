@@ -27,9 +27,16 @@ sub distribution : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my ( $self, $c, $distribution, $sort ) = @_;
     my $cv = AE::cv();
     my $data
-        = $c->model('API::Release')->reverse_dependencies( $distribution, $c->req->page, $sort )
-        ->recv;
-    $c->stash( { %{$data}, type_of_required => 'distribution', required => $distribution, template => 'requires.html' } );
+        = $c->model('API::Release')
+        ->reverse_dependencies( $distribution, $c->req->page, $sort )->recv;
+    $c->stash(
+        {
+            %{$data},
+            type_of_required => 'distribution',
+            required         => $distribution,
+            template         => 'requires.html'
+        }
+    );
 }
 
 sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
@@ -38,7 +45,14 @@ sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Module')->requires( $module, $c->req->page, $sort )
         ->recv;
-    $c->stash( { %{$data}, type_of_required => 'module', required => $module, template => 'requires.html' } );
+    $c->stash(
+        {
+            %{$data},
+            type_of_required => 'module',
+            required         => $module,
+            template         => 'requires.html'
+        }
+    );
 }
 
 1;

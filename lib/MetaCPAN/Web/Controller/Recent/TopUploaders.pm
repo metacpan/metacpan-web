@@ -31,13 +31,14 @@ sub topuploaders : Private {
             @{ $data->{facets}{author}{terms} } };
     my $authors = $c->model('API::Author')->get( keys %$counts )->recv;
     $c->stash(
-        {   authors => [
+        {
+            authors => [
                 sort { $b->{releases} <=> $a->{releases} } map {
                     {
                         %{ $_->{_source} },
                             releases => $counts->{ $_->{_source}->{pauseid} }
                     }
-                    } @{ $authors->{hits}{hits} }
+                } @{ $authors->{hits}{hits} }
             ],
             took     => $data->{took},
             total    => $data->{facets}{author}{total},
