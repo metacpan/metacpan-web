@@ -61,6 +61,10 @@ requires 'Template::Plugin::Page';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';
+
+test_requires 'App::Prove';
 test_requires 'Test::MockObject','1.09';
 test_requires 'Test::More', '0.96';
 test_requires 'Test::XPath', '0.15';
+
+author_requires 'Code::TidyAll';
