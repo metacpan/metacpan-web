@@ -1,5 +1,3 @@
-author_requires 'CPAN::Meta::Requirements';
-author_requires 'File::Find::Rule::Perl';
 requires 'AnyEvent::Curl::Multi';
 requires 'CHI';
 requires 'CPAN::Changes', '0.21';
