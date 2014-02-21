@@ -11,9 +11,6 @@
       </form>
     </li>
     <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
-    <%- IF changes %>
-    <li><a href="/<% changes.documentation ? "module" : "source" %>/<% release.author; '/'; release.name; '/'; changes.name %>">Changes</a></li>
-    <%- END %>
     <li><span><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api_external %>/source/<% release.author %>/<% release.name %>/">raw</a>)</span></li>
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
