@@ -36,7 +36,7 @@ sub index : Path : Args(1) {
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;
-    $c->res->last_modified($date);
+    $c->res->last_modified($date) if $date;
 
     $c->stash(
         {
@@ -44,7 +44,7 @@ sub index : Path : Args(1) {
             releases    => $releases,
             faves       => $faves,
             show_author => 1,
-            took        => $data->{took} + $faves_data->{took} || 0,
+            took        => $data->{took} + ($faves_data->{took} || 0),
             total       => $data->{hits}->{total},
             template    => 'author.html'
         }
