@@ -26,9 +26,13 @@ sub index : Chained('/') : PathPart('lab') : CaptureArgs(0) { }
 #sub dependencies : Chained('index') : PathPart : Args(1) : Does('Sortable') {
 sub dependencies : Chained('index') : PathPart : Does('Sortable') {
     my ( $self, $c ) = @_;
-    my $module = $c->req->params->{'module'};
 
-    my $data = $c->model('API::Lab')->dependencies($module);
+    my $module;
+    my $data;
+
+    if($module = $c->req->params->{'module'}) {
+        $data = $c->model('API::Lab')->dependencies($module);
+    }
 
     $c->stash(
         {
