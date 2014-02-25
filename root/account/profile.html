@@ -26,17 +26,17 @@
         <label><span>Name</span><input type="text" name="name" value="<% author.name %>" /></label>
         <label><span>ASCII Name</span><input type="text" name="asciiname" value="<% author.asciiname %>" /></label>
         <div>
-            <label><span>Email</span><input type="text" name="email" value="<% author.email.shift %>" /> <a href="" onclick="return addField('email')">add</a></label>
+            <label><span>Email</span><input type="text" name="email" value="<% author.email.shift %>" /> <a class="btn btn-small" href="" onclick="return addField('email')">add</a></label>
             <% FOREACH email IN author.email -%>
             <label><span></span><input type="text" name="email" value="<% email %>" />
-                <a href="" onclick="return removeLabel(this)">remove</a></label>
+                <a class="btn btn-small" href="" onclick="return removeLabel(this)">remove</a></label>
             <% END -%>
         </div>
         <div>
-            <label><span>Website</span><input type="text" name="website" value="<% author.website.shift %>" /> <a href="" onclick="return addField('website')">add</a></label>
+            <label><span>Website</span><input type="text" name="website" value="<% author.website.shift %>" /> <a class="btn btn-small" href="" onclick="return addField('website')">add</a></label>
             <% FOREACH website IN author.website -%>
             <label><span></span><input type="text" name="website" value="<% website %>" />
-                <a href="" onclick="return removeLabel(this)">remove</a></label>
+                <a class="btn btn-small" href="" onclick="return removeLabel(this)">remove</a></label>
             <% END -%>
         </div>
         <label><span>Blog</span><input type="text" name="blog.url" value="<% author.blog.0.url %>" /></label>
@@ -60,7 +60,7 @@
         <label><span>Country</span><input type="text" name="country" value="<% author.country %>" /> (two letter ISO code)</label>
         <label><span>Region</span><input type="text" name="region" value="<% author.region %>" /></label>
         <label><span>City</span><input type="text" name="city" value="<% author.city %>" /></label>
-        <label><span>Latitude</span><input type="text" name="latitude" value="<% author.location.0 %>" /> <a href="" onclick="return fillLocation()">locate me</a><img src="/static/icons/busy.gif" style="display: none; float: right" id="busy" /></label>
+        <label><span>Latitude</span><input type="text" name="latitude" value="<% author.location.0 %>" /> <a href="" onclick="return fillLocation()" class="btn btn-small">locate me</a><img src="/static/icons/busy.gif" style="display: none; float: right" id="busy" /></label>
         <label><span>Longitude</span><input type="text" name="longitude" value="<% author.location.1 %>" /></label>
     </fieldset>
 
@@ -84,9 +84,9 @@
             <input type="text" name="profile.name" value="<% profile.name %>" /></span>
                 <input type="text" name="profile.id" value="<% profile.id %>" />
                 <% END -%>
-            <a href="" onclick="return removeDiv(this)">remove</a>
+            <a class="btn btn-mini btn-danger" href="" onclick="return removeDiv(this)">remove</a>
             <% IF known %>
-            <a href="" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank">check</a>
+            <a class="btn btn-mini" href="" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank">check</a>
             <% END %></label></div>
             <% END -%>
         </div>
@@ -116,8 +116,8 @@ function addProfile(select) {
     + profile.name + '</span>'
     + '<input type="hidden" name="profile.name" value="' + profile.id  + '" /> '
     + '<input type="text" name="profile.id" /> '
-    + '<a href="" class="check" onclick="return removeDiv(this)">remove</a> '
-    + '<a href="" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank">check</a>';
+    + '<a class="btn btn-mini btn-danger" href="" class="check" onclick="return removeDiv(this)">remove</a> '
+    + '<a class="btn btn-mini" href="" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank">check</a>';
     } else {
         html += '<input type="text" name="profile.name" /></span> '
         + '<input type="text" name="profile.id" /> '
@@ -162,7 +162,7 @@ function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
     container.append('<label style="display: none"><span></span><input type="text" name="' + id + '" />'
-    + ' <a href="" onclick="return removeLabel(this)">remove</a></label>');
+    + ' <a class="btn btn-small" href="" onclick="return removeLabel(this)">remove</a></label>');
 
     var add = container.children().last();
     add.slideDown();
