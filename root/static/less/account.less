@@ -4,13 +4,276 @@
 		width: 175px;
 	}
 }
+.account-settings {
+    form {
+        margin: 0px;
+    }
+    td {
+        padding: 5px;
+    }
+    .valid {
+        background-color: #900;
+        padding: 5px;
+        float: right;
+        font-size: 1.2em;
+        color: #fff;
+        font-weight: bold;
+        display: none;
+    }
 
-.account-settings .btn {
-    width: 140px;
-    margin: 0px;
-    padding: 10px 0px 10px 0px;
+    .invalid {
+        display: inline-block;
+    }
+    // To fix the author-pic float-right crap..
+    .form-horizontal {
+        .control-group:after {
+            clear: left;
+        }
+    }
+
+    // to fix repeating fields like email etc
+
+    .repeatable .control-group {
+        .controls:nth-child(n+3) {
+            margin-top: 3px;
+        }
+    }
+
+    // The last-updated text needs better alignment
+    p.checkbox {
+        padding-left: 0;
+    }
+
+
+    // profile logos really should be in css I think..
+
+    .profiles {
+        .control-group {
+            margin-bottom: 5px;
+            .control-label {
+                text-align: left;
+                padding-top: 0;
+                padding-left: 20px;
+                .input-small {
+                    width: 120px;
+                }
+            }
+
+            &.profile {
+                .control-label {
+                    padding-top: 5px;
+                    background: no-repeat left 75%;
+                }
+                &.profile-bitbucket .control-label {
+                    background-image: url(/static/images/profile/bitbucket.png);
+                }
+                &.profile-blinklist .control-label {
+                    background-image: url(/static/images/profile/blinklist.png);
+                }
+                &.profile-brightkite .control-label {
+                    background-image: url(/static/images/profile/brightkite.png);
+                }
+                &.profile-coderwall .control-label {
+                    background-image: url(/static/images/profile/coderwall.png);
+                }
+                &.profile-couchsurfing .control-label {
+                    background-image: url(/static/images/profile/couchsurfing.png);
+                }
+                &.profile-delicious .control-label {
+                    background-image: url(/static/images/profile/delicious.png);
+                }
+                &.profile-design_float .control-label {
+                    background-image: url(/static/images/profile/design_float.png);
+                }
+                &.profile-digg .control-label {
+                    background-image: url(/static/images/profile/digg.png);
+                }
+                &.profile-dopplr .control-label {
+                    background-image: url(/static/images/profile/dopplr.png);
+                }
+                &.profile-dotshare .control-label {
+                    background-image: url(/static/images/profile/dotshare.png);
+                }
+                &.profile-email .control-label {
+                    background-image: url(/static/images/profile/email.png);
+                }
+                &.profile-facebook .control-label {
+                    background-image: url(/static/images/profile/facebook.png);
+                }
+                &.profile-feed .control-label {
+                    background-image: url(/static/images/profile/feed.png);
+                }
+                &.profile-flickr .control-label {
+                    background-image: url(/static/images/profile/flickr.png);
+                }
+                &.profile-friendfeed .control-label {
+                    background-image: url(/static/images/profile/friendfeed.png);
+                }
+                &.profile-furl .control-label {
+                    background-image: url(/static/images/profile/furl.png);
+                }
+                &.profile-gamespot .control-label {
+                    background-image: url(/static/images/profile/gamespot.png);
+                }
+                &.profile-geeklist .control-label {
+                    background-image: url(/static/images/profile/geeklist.png);
+                }
+                &.profile-github-meets-cpan .control-label {
+                    background-image: url(/static/images/profile/github-meets-cpan.png);
+                }
+                &.profile-github .control-label {
+                    background-image: url(/static/images/profile/github.png);
+                }
+                &.profile-gitorious .control-label {
+                    background-image: url(/static/images/profile/gitorious.png);
+                }
+                &.profile-gittip .control-label {
+                    background-image: url(/static/images/profile/gittip.png);
+                }
+                &.profile-googleplus .control-label {
+                    background-image: url(/static/images/profile/googleplus.png);
+                }
+                &.profile-hackernews .control-label {
+                    background-image: url(/static/images/profile/hackernews.png);
+                }
+                &.profile-identica .control-label {
+                    background-image: url(/static/images/profile/identica.png);
+                }
+                &.profile-klout .control-label {
+                    background-image: url(/static/images/profile/klout.png);
+                }
+                &.profile-lanyrd .control-label {
+                    background-image: url(/static/images/profile/lanyrd.png);
+                }
+                &.profile-lastfm .control-label {
+                    background-image: url(/static/images/profile/lastfm.png);
+                }
+                &.profile-linkedin .control-label {
+                    background-image: url(/static/images/profile/linkedin.png);
+                }
+                &.profile-magnolia .control-label {
+                    background-image: url(/static/images/profile/magnolia.png);
+                }
+                &.profile-meetup .control-label {
+                    background-image: url(/static/images/profile/meetup.png);
+                }
+                &.profile-mixx .control-label {
+                    background-image: url(/static/images/profile/mixx.png);
+                }
+                &.profile-myspace .control-label {
+                    background-image: url(/static/images/profile/myspace.png);
+                }
+                &.profile-nerdability .control-label {
+                    background-image: url(/static/images/profile/nerdability.png);
+                }
+                &.profile-newsblur .control-label {
+                    background-image: url(/static/images/profile/newsblur.png);
+                }
+                &.profile-newsvine .control-label {
+                    background-image: url(/static/images/profile/newsvine.png);
+                }
+                &.profile-ohloh .control-label {
+                    background-image: url(/static/images/profile/ohloh.png);
+                }
+                &.profile-perlmonks .control-label {
+                    background-image: url(/static/images/profile/perlmonks.png);
+                }
+                &.profile-pinboard .control-label {
+                    background-image: url(/static/images/profile/pinboard.png);
+                }
+                &.profile-playperl .control-label {
+                    background-image: url(/static/images/profile/playperl.png);
+                }
+                &.profile-posterous .control-label {
+                    background-image: url(/static/images/profile/posterous.png);
+                }
+                &.profile-prepan .control-label {
+                    background-image: url(/static/images/profile/prepan.png);
+                }
+                &.profile-reddit .control-label {
+                    background-image: url(/static/images/profile/reddit.png);
+                }
+                &.profile-slideshare .control-label {
+                    background-image: url(/static/images/profile/slideshare.png);
+                }
+                &.profile-sourceforge .control-label {
+                    background-image: url(/static/images/profile/sourceforge.png);
+                }
+                &.profile-speakerdeck .control-label {
+                    background-image: url(/static/images/profile/speakerdeck.png);
+                }
+                &.profile-sphere .control-label {
+                    background-image: url(/static/images/profile/sphere.png);
+                }
+                &.profile-sphinn .control-label {
+                    background-image: url(/static/images/profile/sphinn.png);
+                }
+                &.profile-stackexchange .control-label {
+                    background-image: url(/static/images/profile/stackexchange.png);
+                }
+                &.profile-stackoverflow .control-label {
+                    background-image: url(/static/images/profile/stackoverflow.png);
+                }
+                &.profile-stackoverflowcareers .control-label {
+                    background-image: url(/static/images/profile/stackoverflowcareers.png);
+                }
+                &.profile-steam .control-label {
+                    background-image: url(/static/images/profile/steam.png);
+                }
+                &.profile-stumbleupon .control-label {
+                    background-image: url(/static/images/profile/stumbleupon.png);
+                }
+                &.profile-technorati .control-label {
+                    background-image: url(/static/images/profile/technorati.png);
+                }
+                &.profile-tripadvisor .control-label {
+                    background-image: url(/static/images/profile/tripadvisor.png);
+                }
+                &.profile-tumblr .control-label {
+                    background-image: url(/static/images/profile/tumblr.png);
+                }
+                &.profile-twitter .control-label {
+                    background-image: url(/static/images/profile/twitter.png);
+                }
+                &.profile-vimeo .control-label {
+                    background-image: url(/static/images/profile/vimeo.png);
+                }
+                &.profile-youtube .control-label {
+                    background-image: url(/static/images/profile/youtube.png);
+                }
+
+            }
+        }
+    }
 }
 
-.account-settings form {
-    margin: 0px;
+@media (max-width: 480px) {
+    .account-settings {
+        form {
+            margin-bottom: 20px;
+        }
+        /* author-pic stuff for account/profile page on mobile */
+        .author-pic-container {
+            float: none;
+        }
+
+        /* We hide the remove text on mobile, to make the button smaller */
+        .profiles {
+            .remove {
+                span { display: none; }
+            }
+
+            .control-group {
+                .control-label {
+                    padding-left: 0;
+                }
+                &.profile {
+                    .control-label {
+                        padding-left: 20px;
+                    }
+                }
+            }
+        }
+    }
 }
+

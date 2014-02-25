@@ -12,10 +12,10 @@
             <%- IF found.size %>
             <form action="<% c.uri_for("/account/identities") %>" method="POST">
                 <input type="hidden" name="delete" value="<% identity.lower %>" />
-                <button type="submit" class="btn btn-large btn-danger"><i class="icon-remove icon-white"></i> Disconnect</a>
+                <button type="submit" class="btn btn-block btn-danger"><i class="icon-remove icon-white"></i> Disconnect</a>
             </form>
             <%- ELSE %>
-            <a class="btn btn-large btn-success" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><i class="icon-share icon-white"></i> Connect</a>
+            <a class="btn btn-block btn-success" href="<% api_secure %>/oauth2/authorize?choice=<% identity.lower %>&amp;client_id=<% c.config.consumer_key %>" onclick="return logInPAUSE(this)"><i class="icon-share icon-white"></i> Connect</a>
             <%- END %>
         </td>
     </tr>
