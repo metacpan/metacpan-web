@@ -45,14 +45,14 @@
                 <label class="control-label">Email</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="email" value="<% author.email.shift %>" />
+                        <input type="email" name="email" value="<% author.email.shift %>" />
                         <a class="btn" href="" onclick="return addField('email')">add</a>
                     </div>
                 </div>
             <% FOREACH email IN author.email -%>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="email" value="<% email %>" />
+                        <input type="email" name="email" value="<% email %>" />
                         <a class="btn" href="" onclick="return removeLabel(this)">remove</a>
                     </div>
                 </div>
@@ -64,14 +64,14 @@
                 <label class="control-label">Website</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="website" value="<% author.website.shift %>" />
+                        <input type="url" name="website" value="<% author.website.shift %>" />
                         <a class="btn" href="" onclick="return addField('website')">add</a>
                     </div>
                 </div>
             <% FOREACH website IN author.website -%>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="website" value="<% website %>" />
+                        <input type="url" name="website" value="<% website %>" />
                         <a class="btn" href="" onclick="return removeLabel(this)">remove</a></label>
                     </div>
                 </div>
@@ -81,19 +81,19 @@
         <div class="control-group">
             <label class="control-label">Blog</label>
             <div class="controls">
-                <input type="text" name="blog.url" value="<% author.blog.0.url %>" />
+                <input type="url" name="blog.url" value="<% author.blog.0.url %>" />
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Feed</label>
             <div class="controls">
-                <input type="text" name="blog.feed" value="<% author.blog.0.feed %>" />
+                <input type="url" name="blog.feed" value="<% author.blog.0.feed %>" />
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Avatar</label>
             <div class="controls">
-                <input type="text" name="gravatar_url" value="<% author.gravatar_url %>" />
+                <input type="url" name="gravatar_url" value="<% author.gravatar_url %>" />
             </div>
         </div>
         <div class="control-group">
