@@ -1,5 +1,5 @@
 <% UNLESS title; title = 'MetaCPAN About'; END %>
-<div class="tabbable tabs-left about-bar slidepanel">
+<div class="nav-list tabbable tabs-left about-bar slidepanel">
     <ul class="nav nav-tabs">
       <li class="visible-phone search">
       <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
