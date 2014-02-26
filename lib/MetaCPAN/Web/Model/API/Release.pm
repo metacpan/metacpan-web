@@ -180,6 +180,7 @@ sub modules {
             fields => [
                 qw(
                     documentation path status author release
+                    pod_lines
                     distribution
                     _source.abstract  _source.module
                     _source.indexed   _source.authorized
