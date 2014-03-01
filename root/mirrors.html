@@ -4,7 +4,7 @@
 <script src="/static/openlayers/OpenLayers.js"></script>
 <ul class="nav nav-list slidepanel">
     <li class="visible-phone search">
-      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <form action="/mirrors" method="GET">
         <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
       </form>
     </li>
