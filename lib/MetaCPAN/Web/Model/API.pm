@@ -73,6 +73,10 @@ sub request {
     $self->client->request($request)->cv->cb(
         sub {
             my ( $response, $stats ) = shift->recv;
+            if ( !$response ) {
+              $req->croak("bad response when requesting " . $request->uri);
+              return;
+            };
             my $content_type = $response->header('content-type') || '';
             my $data = $response->content;
 
