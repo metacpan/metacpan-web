@@ -72,22 +72,27 @@ sub request {
 
     $self->client->request($request)->cv->cb(
         sub {
-            my ( $response, $stats ) = shift->recv;
-            if ( !$response ) {
-              $req->croak("bad response when requesting " . $request->uri);
-              return;
-            };
-            my $content_type = $response->header('content-type') || '';
-            my $data = $response->content;
+            try {
+                my ( $response, $stats ) = shift->recv;
+                if ( !$response ) {
+                  $req->croak("bad response when requesting " . $request->uri);
+                  return;
+                };
+                my $content_type = $response->header('content-type') || '';
+                my $data = $response->content;
 
-            if ( $content_type =~ /^application\/json/ ) {
-                my $json = eval { decode_json($data) };
-                $req->send( $@ ? $self->raw_api_response($data) : $json );
+                if ( $content_type =~ /^application\/json/ ) {
+                    my $json = eval { decode_json($data) };
+                    $req->send( $@ ? $self->raw_api_response($data) : $json );
+                }
+                else {
+                    # Response is raw data, e.g. text/plain
+                    $req->send( $self->raw_api_response($data) );
+                }
             }
-            else {
-                # Response is raw data, e.g. text/plain
-                $req->send( $self->raw_api_response($data) );
-            }
+            catch {
+                $req->croak($_);
+            };
         }
     );
     return $req;
