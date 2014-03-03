@@ -87,6 +87,11 @@ sub end : ActionClass('RenderView') {
     $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
     $c->stash->{api_external}
         = $c->config->{api_external} || $c->config->{api};
+    $c->stash->{api_external_secure}
+        = $c->config->{api_external_secure} || $c->config->{api_external}
+        || $c->stash->{api_secure};
+    $c->stash->{oauth_prefix} = $c->stash->{api_external_secure}
+      . '/oauth2/authorize?client_id=' . $c->config->{consumer_key};
     $c->res->header( Vary => 'Cookie' );
 
     unless (
