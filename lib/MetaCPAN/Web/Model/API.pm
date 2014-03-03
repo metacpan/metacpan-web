@@ -72,8 +72,9 @@ sub request {
 
     $self->client->request($request)->cv->cb(
         sub {
+            my $cv = shift;
             try {
-                my ( $response, $stats ) = shift->recv;
+                my ( $response, $stats ) = $cv->recv;
                 if ( !$response ) {
                   $req->croak("bad response when requesting " . $request->uri);
                   return;
