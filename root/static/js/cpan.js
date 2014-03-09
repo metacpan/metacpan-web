@@ -61,6 +61,9 @@ $(document).ready(function () {
     SyntaxHighlighter.defaults['quick-code'] = false;
     SyntaxHighlighter.defaults['tab-size'] = 8;
 
+    // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
+    SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
+
     var source = $("#source");
     // if this is a source-code view with destination anchor
     if (source[0] && document.location.hash) {
