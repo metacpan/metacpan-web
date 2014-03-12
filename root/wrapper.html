@@ -36,7 +36,8 @@
 <%- IF meta_description %>
   <meta name="description" content="<% meta_description %>" />
 <%- END %>
-  <link rel="icon" type="image/png" href="/static/icons/favicon.png" />
+  <link rel="shortcut icon" href="/static/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
   <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
 
   <% IF PLACK_ENV == 'development' %>
