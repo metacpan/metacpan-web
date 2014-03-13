@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Author;
 
 use Moose;
+use Data::Pageset;
 use List::Util                ();
 use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
@@ -56,16 +57,36 @@ sub index : Path : Args(1) {
 }
 
 sub releases : Path : Args(2) {
-    my ( $self, $c, $id, $page ) = @_;
+    my ( $self, $c, $id, $foo ) = @_;
 
-    my $author_cv   = $c->model('API::Author')->get($id);
-    my $releases_cv = $c->model('API::Release')->all_by_author($id);
+    my $size      = 100;
+    my $page      = $c->req->page > 0 ? $c->req->page : 1;
+    my $author_cv = $c->model('API::Author')->get($id);
+    my $releases_cv
+        = $c->model('API::Release')
+        ->all_by_author( $id, $size, $c->req->page );
 
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
 
     my @releases = map { $_->{fields} } @{ $releases->{hits}->{hits} };
 
-    $c->stash( { releases => \@releases, author => $author, } );
+    my $pageset = Data::Pageset->new(
+        {
+            total_entries    => $releases->{hits}->{total},
+            entries_per_page => $size,
+            current_page     => $page,
+            pages_per_set    => 10,
+            mode             => 'slide'
+        }
+    );
+
+    $c->stash(
+        {
+            releases => \@releases,
+            author   => $author,
+            pageset  => $pageset,
+        }
+    );
 }
 
 __PACKAGE__->meta->make_immutable;
