@@ -1,11 +1,11 @@
 use strict;
 use warnings;
-
+use Data::Dumper;
 use Test::More;
 use Try::Tiny;
 use File::Temp qw/ tempdir /;
 use XML::Simple;
-
+use MetaCPAN::Sitemap;
 use lib './lib';
 
 BEGIN { use_ok('MetaCPAN::Sitemap'); }
@@ -30,36 +30,37 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
     my @tests = (
 
         {   inputs => {
-                objectType    => 'author',
-                fieldName     => 'pauseid',
-                xmlFile       => '',
-                cpanDirectory => 'author',
+                object_type    => 'author',
+                field_name     => 'pauseid',
+                xml_file       => '',
+                cpan_directory => 'author',
             },
-            pattern => qr{https:.+/author/[A-Z-]+},
+            pattern => qr{https:.+/author/[a-z0-9A-Z-]+},
         },
 
         {   inputs => {
-                objectType    => 'distribution',
-                fieldName     => 'name',
-                xmlFile       => '',
-                cpanDirectory => 'module',
+                object_type    => 'distribution',
+                field_name     => 'name',
+                xml_file       => '',
+                cpan_directory => 'pod',
             },
-            pattern => qr{https:.+/module/\w+},
+            pattern => qr{https:.+/pod/[.\a-zA-Z0-9_::|a-z0-9A-Z_::]+},
         },
 
         {   inputs => {
-                objectType => 'release',
-                fieldName  => 'download_url',
-                xmlFile    => '',
+                object_type => 'release',
+                field_name  => 'distribution',
+                xml_file    => '',
+		cpan_directory => 'release',
 		filter     => { status => 'latest' },
             },
             pattern =>
-                qr{https?:.+authors/id/[A-Z]/[A-Z][A-Z]/[A-Z0-9-]+/.+\.(tar\.gz|tgz|zip|bz2)},
+                qr{https?:.+/release/[a-z0-9A-Z-]+},
         }
     );
 
-    my $searchSize = 250;
-    my $tempDir = tempdir( CLEANUP => 1 );
+   my $searchSize = 250;
+   my $tempDir = tempdir( CLEANUP => 1 );
 
     foreach my $test (@tests) {
 
@@ -68,7 +69,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
         #  caught. (This list is the same as the 'required' list in the module
         #  that we're testing.)
 
-        for my $argToDelete (qw/objectType fieldName xmlFile/) {
+        for my $argToDelete (qw/object_type field_name xml_file/) {
 
             my (%bogusArgs) = %{ $test->{'inputs'} };
             delete $bogusArgs{$argToDelete};
@@ -108,7 +109,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
         for my $bogusXMLfile (qw{ /doesntExist123/foo.xml /usr/bin/foo.xml}) {
 
             my (%bogusArgs) = %{ $test->{'inputs'} };
-            $bogusArgs{'xmlFile'} = $bogusXMLfile;
+            $bogusArgs{'xml_file'} = $bogusXMLfile;
 
             try {
                 MetaCPAN::Sitemap::process( \%bogusArgs );
@@ -126,22 +127,21 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 	#  of URLs.
 
         my $args = $test->{'inputs'};
-        $args->{'testSearch'} = $searchSize;
-        $args->{'xmlFile'} = File::Spec->catfile( $tempDir,
-            "$test->{'inputs'}{'objectType'}.xml.gz" );
+        $args->{'size'} = $searchSize;
+        $args->{'xml_file'} = File::Spec->catfile( $tempDir,"$test->{'inputs'}{'object_type'}.xml.gz" );
 
-        MetaCPAN::Sitemap::process($args);
-        ok( -e $args->{'xmlFile'},
-            "XML output file for $args->{'objectType'} exists" );
+        MetaCPAN::Sitemap::process( $args );
+        ok( -e $args->{'xml_file'},
+            "XML output file for $args->{'object_type'} exists" );
 
-        open( my $xmlFH, '<:gzip', $args->{'xmlFile'} )
-          or BAIL_OUT( "Unable to open $args->{'xmlFile'}: $!" );
+        open( my $xmlFH, '<:gzip', $args->{'xml_file'} )
+          or BAIL_OUT( "Unable to open $args->{'xml_file'}: $!" );
 	
         my $xml = XMLin( $xmlFH );
-        ok( defined $xml, "XML for $args->{'objectType'} checks out" );
+        ok( defined $xml, "XML for $args->{'object_type'} checks out" );
 
         ok( @{ $xml->{'url'} }, "We have some URLs to look at" );
-        is( $searchSize,
+        is( $args->{'size'},
             scalar @{ $xml->{'url'} },
             "Number of URLs is correct"
         );
