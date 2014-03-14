@@ -32,6 +32,7 @@
 
 <div class="pull-right">
 <div class="pull-right"><% INCLUDE inc/author-pic.html author = author %></div>
+<% INCLUDE inc/recommendations.html %>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 </div>
 <% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>

@@ -93,6 +93,12 @@ sub view : Private {
             ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
+            recommendations_instead_of => $c->model('API::Recommendation')
+                ->get( undef, map { $_->{name} } @{ $data->{module} } ),
+            recommendations_supplanted_by =>
+                $c->model('API::Recommendation')->get_supplanted(
+                undef, map { $_->{name} } @{ $data->{module} }
+                ),
         },
         $data,
     );
@@ -159,16 +165,61 @@ sub view : Private {
 
     $c->stash(
         {
-            module    => $data,
-            pod       => $hr->process( $reqs->{pod}->{raw} ),
-            release   => $release,
-            template  => 'pod.html',
-            canonical => $canonical,
+            module          => $data,
+            pod             => $hr->process( $reqs->{pod}->{raw} ),
+            release         => $release,
+            template        => 'pod.html',
+            canonical       => $canonical,
+            recommendations => $self->groom_recommendations( $c, $data ),
         }
     );
     unless ( $c->stash->{pod} ) {
         $c->stash( pod_error => $reqs->{pod}->{message}, );
     }
+}
+
+=pod
+
+For giggles and to get the ball running, I'm assuming that recommendations are per-modules.
+
+I'm also assuming that we have the modules recommended over this one, and
+those under it. And that the whole this has the format:
+
+    $data->{recommendations} = {
+        supplanted_by => {
+            'Foo'       => 3,
+            'Bar::Baz'  => 2,
+        },
+        instead_use => {
+            'Frob::Uscate' => 4,
+        },
+    };
+
+=cut
+
+sub groom_recommendations {
+    my ( $self, $c, $data ) = @_;
+
+    my $r = $data->{recommendations} or return [];
+
+    my %rec;
+
+    if ( my $plus = $r->{instead_of} ) {
+        while ( my ( $module, $votes ) = each %$plus ) {
+            $rec{$module}{module} = $module;
+            $rec{$module}{score} = $rec{$module}{plus} = $votes;
+        }
+    }
+
+    if ( my $minus = $r->{supplanted_by} ) {
+        while ( my ( $module, $votes ) = each %$minus ) {
+            $rec{$module}{module} = $module;
+            $rec{$module}{minus}  = $votes;
+            $rec{$module}{score} -= $votes;
+        }
+    }
+
+    return [ sort { $a->{score} <=> $b->{score} } values %rec ];
 }
 
 1;

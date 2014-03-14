@@ -14,7 +14,7 @@
 </strong><br />
 <ul>
 <% FOREACH rec IN recommendations %>
-    <li><a href="/module/<% rec.module %>"><% rec.module %></a> 
+    <li><a href="/module/<% rec.module %>"><% rec.module %></a>
     <div class="recommendation_score" style="float: right; font-style: italic">
         <% IF rec.plus %>-<% rec.plus %> <% END %>
         <% IF rec.plus * rec.minus %> / <% END %>
@@ -26,7 +26,7 @@
 
 <div style="display: none" id="recommendations-tooltip">
 <i>Foo::Bar +3 / -4</i> <br/> means Foo::Bar has been
-recommended 3 times over this module, 
+recommended 3 times over this module,
 and this module has been recommended 4
 times over this module.
 </div>
