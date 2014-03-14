@@ -7,7 +7,7 @@ use strict;
 use warnings;
 use autodie;
 use Carp;
-use Data::Dumper;
+use Data::Dumper; #to use the bless() function.
 use File::Spec;
 use ElasticSearch;
 use Moose;
@@ -40,7 +40,7 @@ sub process {
  
    
 	my $self=shift;
-	bless $self; 
+	bless $self; #to tackle the error of 'unblessed reference'
 	
     #  Check that a) the directory where the output file wants to be does
     #  actually exist and b) the directory itself is writeable.
@@ -94,25 +94,24 @@ sub process {
                 @hits );
     } while ( $scrolled_search->next() );
 	
-  	
-    #Adjust @urls.
     my $slash="/";
+    #to edit the url for /pod/module-name to /pod/module::name
     if($self->cpan_directory eq "pod")
     {
 	 foreach (@urls)
     	 {
-		my @details=split /$slash/,$_;
-		my @splits=split /-/,$details[4];
+		my @details=split /$slash/,$_;   
+		my @splits=split /-/,$details[4];  #replacce '-' by '::'
                 my $len=@splits;
-		$details[4]=join('::',@splits[0..$len-1]);
+		$details[4]=join('::',@splits[0..$len-1]); 
 		$len=@details;
 		$_= join('/',@details[1..$len-1]);
-		$_=$details[0].'/'.$_;
+		$_=$details[0].'/'.$_; #join the url.
    	} 
     }	
-    $_=$_.' ' for @urls;
+    $_=$_.' ' for @urls; #adjust the urls
+    $self->{'size'}=@urls; #update the size for each sitemap.xml file
     
-    $self->{'size'}=@urls;
     my $xml = XMLout(
         {   'xmlns'     => "http://www.sitemaps.org/schemas/sitemap/0.9",
             'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
