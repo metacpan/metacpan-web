@@ -17,6 +17,7 @@ before_install:
 
 install:
   - carton install
+  - cpanm install XML::Simple
 
 
 script:
