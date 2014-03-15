@@ -71,5 +71,14 @@ sub _build_current_reports {
     return $reports;
 }
 
+sub report_url {
+    my $self = shift;
+    my $name = shift;
+
+    my $report = $self->get_report($name);
+    return if !$report;
+    return "http://cpancover.com/latest/$name/index.html";
+}
+
 __PACKAGE__->meta->make_immutable;
 1;

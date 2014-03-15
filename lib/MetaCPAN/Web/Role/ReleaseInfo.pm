@@ -1,6 +1,17 @@
 package MetaCPAN::Web::Role::ReleaseInfo;
 
+use strict;
+use warnings;
+
+use MetaCPAN::CPANCover;
 use Moose::Role;
+
+has _cpancover => (
+    is      => 'ro',
+    isa     => 'MetaCPAN::CPANCover',
+    lazy    => 1,
+    default => sub { MetaCPAN::CPANCover->new },
+);
 
 # TODO: are there other controllers that do (or should) include this?
 

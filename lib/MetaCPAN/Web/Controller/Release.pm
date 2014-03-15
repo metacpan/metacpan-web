@@ -106,18 +106,21 @@ sub view : Private {
     }
 
     # TODO: make took more automatic (to include all)
+    $c->log->info("release $release");
     $c->stash(
         {
-            template => 'release.html',
+            cpancover_report_url => $self->_cpancover->report_url($release)
+                || undef,
+            examples => \@examples,
+            files    => \@view_files,
             release  => $out,
+            root     => \@root_files,
+            template => 'release.html',
             total    => $modules->{hits}->{total},
             took     => List::Util::max(
                 $modules->{took}, $files->{took},
                 $reqs->{versions}->{took}
             ),
-            root     => \@root_files,
-            examples => \@examples,
-            files    => \@view_files,
         }
     );
 }
