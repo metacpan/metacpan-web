@@ -7,14 +7,37 @@ use Path::Class qw( file );
 use Test::Most;
 use WWW::Mechanize;
 
-# don't use cache when testing
-my $cover = MetaCPAN::CPANCover->new(
-    uri => file( '', $FindBin::Bin, 'test-data', 'cpancover.json' ),
-    ua  => WWW::Mechanize->new,
-);
+{
+    # don't use cache
+    my $cover = MetaCPAN::CPANCover->new(
+        uri => file( '', $FindBin::Bin, 'test-data', 'cpancover.json' ),
+        ua => WWW::Mechanize->new,
+    );
 
-my $reports = $cover->current_reports;
+    test_contents( $cover, 'without cache' );
+}
 
-is_deeply( $reports, { 'ACL-Lite-0.0004' => 1 }, 'reports are available' );
+{
+    # assert that cache isn't exploding
+    my $cover = MetaCPAN::CPANCover->new(
+        uri => file( '', $FindBin::Bin, 'test-data', 'cpancover.json' ), );
+
+    test_contents( $cover, 'with cache' );
+}
+
+sub test_contents {
+    my $cover       = shift;
+    my $description = shift;
+
+    is_deeply(
+        $cover->current_reports,
+        { 'ACL-Lite-0.0004' => 1 },
+        'reports are available ' . $description
+    );
+    ok(
+        $cover->get_report('ACL-Lite-0.0004'),
+        'report exists ' . $description
+    );
+}
 
 done_testing();
