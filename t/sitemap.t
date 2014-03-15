@@ -7,7 +7,6 @@ use Test::More;
 use Try::Tiny;
 use XML::Simple;
 
-
 BEGIN { use_ok('MetaCPAN::Sitemap'); }
 {
     require_ok('MetaCPAN::Sitemap');
@@ -16,7 +15,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
     # causes a croak result.
 
     try {
-	my $sitemap= MetaCPAN::Sitemap->new();
+        my $sitemap = MetaCPAN::Sitemap->new();
         $sitemap->process();
         BAIL_OUT('Did not fail with no arguments.');
     }
@@ -30,40 +29,42 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
     my @tests = (
 
-        { inputs => {
-                object_type => 'author',
-                field_name => 'pauseid',
-                xml_file => '',
+        {
+            inputs => {
+                object_type    => 'author',
+                field_name     => 'pauseid',
+                xml_file       => '',
                 cpan_directory => 'author',
             },
             pattern => qr{https:.+/author/[a-z0-9A-Z-]+},
         },
 
-        { inputs => {
-                object_type => 'distribution',
-                field_name => 'name',
-                xml_file => '',
+        {
+            inputs => {
+                object_type    => 'distribution',
+                field_name     => 'name',
+                xml_file       => '',
                 cpan_directory => 'pod',
             },
             pattern => qr{https:.+/pod/[.\a-zA-Z0-9_::|a-z0-9A-Z_::]+},
         },
 
-        { inputs => {
-                object_type => 'release',
-                field_name => 'distribution',
-                xml_file => '',
-		cpan_directory => 'release',
-		filter => { status => 'latest' },
+        {
+            inputs => {
+                object_type    => 'release',
+                field_name     => 'distribution',
+                xml_file       => '',
+                cpan_directory => 'release',
+                filter         => { status => 'latest' },
             },
-            pattern =>
-                qr{https?:.+/release/[a-z0-9A-Z-]+},
+            pattern => qr{https?:.+/release/[a-z0-9A-Z-]+},
         }
     );
 
-   my $search_size = 250;
-   my $temp_dir = tempdir( CLEANUP => 1 );
+    my $search_size = 250;
+    my $temp_dir = tempdir( CLEANUP => 1 );
 
-   foreach my $test (@tests) {
+    foreach my $test (@tests) {
 
         # Before doing the real tests, try removing each one of the required
         # input arguments, and confirm that that this intentional error is
@@ -76,9 +77,9 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             delete $bogusArgs{$argToDelete};
 
             try {
-			my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs ); 
-			$sitemap->process();
-			BAIL_OUT('Did not fail with missing argument.');
+                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
+                $sitemap->process();
+                BAIL_OUT('Did not fail with missing argument.');
             }
             catch {
                 ok( 1, "Called with a missing argument, caught error: $_" );
@@ -94,8 +95,9 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             $bogusArgs{$bogusArgument} = 'foo';
 
             try {
-		my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs ); 
-		$sitemap->process();
+                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
+                $sitemap->process();
+
                 # MetaCPAN::Sitemap::process( \%bogusArgs );
                 BAIL_OUT('Did not fail with bogus argument.');
             }
@@ -106,9 +108,9 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             };
         }
 
-       # Try a bogus directory, and then a directory that exists, but that we
-       # shouldn't be able to write to, to verify that the error-checking is
-       # behaving.
+        # Try a bogus directory, and then a directory that exists, but that we
+        # shouldn't be able to write to, to verify that the error-checking is
+        # behaving.
 
         for my $bogusXMLfile (qw{ /doesntExist123/foo.xml /usr/bin/foo.xml}) {
 
@@ -117,8 +119,9 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
             try {
 
-		my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs ); 
-		$sitemap->process();
+                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
+                $sitemap->process();
+
                 #MetaCPAN::Sitemap::process( \%bogusArgs );
                 BAIL_OUT('Did not fail with bad XML file path.');
             }
@@ -129,27 +132,29 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
             };
         }
 
-	# Generate the XML file into a file in a temporary directory, then
-	# check that the file exists, is valid XML, and has the right number
-	# of URLs.
+        # Generate the XML file into a file in a temporary directory, then
+        # check that the file exists, is valid XML, and has the right number
+        # of URLs.
 
         my $args = $test->{'inputs'};
-        $args->{'size'} = $search_size;
-        $args->{'xml_file'} = File::Spec->catfile( $temp_dir,"$test->{'inputs'}{'object_type'}.xml.gz" );
-	my $sitemap = MetaCPAN::Sitemap->new( $args ); 
-	$sitemap->process();
+        $args->{'size'}     = $search_size;
+        $args->{'xml_file'} = File::Spec->catfile( $temp_dir,
+            "$test->{'inputs'}{'object_type'}.xml.gz" );
+        my $sitemap = MetaCPAN::Sitemap->new($args);
+        $sitemap->process();
 
         ok( -e $args->{'xml_file'},
             "XML output file for $args->{'object_type'} exists" );
 
         open( my $xmlFH, '<:gzip', $args->{'xml_file'} )
-          or BAIL_OUT( "Unable to open $args->{'xml_file'}: $!" );
+            or BAIL_OUT("Unable to open $args->{'xml_file'}: $!");
 
-        my $xml = XMLin( $xmlFH );
+        my $xml = XMLin($xmlFH);
         ok( defined $xml, "XML for $args->{'object_type'} checks out" );
 
         ok( @{ $xml->{'url'} }, "We have some URLs to look at" );
-        is( $sitemap->{'size'},
+        is(
+            $sitemap->{'size'},
             scalar @{ $xml->{'url'} },
             "Number of URLs is correct"
         );
