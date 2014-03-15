@@ -23,8 +23,14 @@ sub recent : Chained('index') : Path : Args(0) {
 
 sub author : Chained('index') : Path : Args(1) {
     my ( $self, $c, $author ) = @_;
-    $c->forward( '/author/index', [$author] );
-    my $data = $c->stash;
+
+    my $author_cv   = $c->model('API::Author')->get($author);
+    my $releases_cv = $c->model('API::Release')->latest_by_author($author);
+    my $data        = {
+        author   => $author_cv->recv,
+        releases => [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
+    };
+
     $c->stash->{feed} = $self->build_feed(
         title => "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
         entries => $data->{releases}
