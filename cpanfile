@@ -46,6 +46,7 @@ requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
 requires 'PerlIO::gzip';
+requires 'MooseX::Types::URI';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
