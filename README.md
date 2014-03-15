@@ -4,7 +4,7 @@
 ## GETTING STARTED
 
 We strongly recommend using [metacpan-developer](https://github.com/CPAN-API/metacpan-developer),
-this will give you a virtal machine already configured and ready to start developing on.
+this will give you a virtual machine already configured and ready to start developing on.
 
 ## Installing manually
 
