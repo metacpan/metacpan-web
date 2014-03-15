@@ -44,7 +44,7 @@ sub index : Path : Args(1) {
             releases    => $releases,
             faves       => $faves,
             show_author => 1,
-            took        => $data->{took} + ($faves_data->{took} || 0),
+            took        => $data->{took} + ( $faves_data->{took} || 0 ),
             total       => $data->{hits}->{total},
             template    => 'author.html'
         }

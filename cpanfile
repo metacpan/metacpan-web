@@ -42,6 +42,7 @@ requires 'Locale::Country','3.28';
 requires 'Moose';
 requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
+requires 'PerlIO::gzip';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
@@ -63,6 +64,7 @@ requires 'Template::Plugin::Page';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';
+requires 'XML::Simple';
 
 test_requires 'App::Prove';
 test_requires 'Test::MockObject','1.09';

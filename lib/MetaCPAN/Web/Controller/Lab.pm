@@ -30,7 +30,7 @@ sub dependencies : Chained('index') : PathPart : Does('Sortable') {
     my $module;
     my $data;
 
-    if($module = $c->req->params->{'module'}) {
+    if ( $module = $c->req->params->{'module'} ) {
         $data = $c->model('API::Lab')->dependencies($module);
     }
 

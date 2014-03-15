@@ -76,9 +76,10 @@ sub request {
             try {
                 my ( $response, $stats ) = $cv->recv;
                 if ( !$response ) {
-                  $req->croak("bad response when requesting " . $request->uri);
-                  return;
-                };
+                    $req->croak(
+                        "bad response when requesting " . $request->uri );
+                    return;
+                }
                 my $content_type = $response->header('content-type') || '';
                 my $data = $response->content;
 
