@@ -159,11 +159,13 @@ sub view : Private {
 
     $c->stash(
         {
-            module    => $data,
-            pod       => $hr->process( $reqs->{pod}->{raw} ),
-            release   => $release,
-            template  => 'pod.html',
             canonical => $canonical,
+            cpancover_report_url =>
+                $self->_cpancover->report_url( $release->{name} ) || undef,
+            module   => $data,
+            pod      => $hr->process( $reqs->{pod}->{raw} ),
+            release  => $release,
+            template => 'pod.html',
         }
     );
     unless ( $c->stash->{pod} ) {
