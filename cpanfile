@@ -65,6 +65,7 @@ requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
+requires 'WWW::Mechanize::Cached';
 requires 'XML::Feed';
 
 test_requires 'App::Prove';
