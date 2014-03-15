@@ -11,7 +11,7 @@ use DateTime::Format::ISO8601;
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
 
-sub recent : Chained('index') : Path : Args(0) {
+sub recent : Chained('index') PathPart Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
     my $data = $c->stash;
@@ -21,8 +21,17 @@ sub recent : Chained('index') : Path : Args(0) {
     );
 }
 
-sub author : Chained('index') : Path : Args(1) {
+sub author : Chained('index') PathPart Args(1) {
     my ( $self, $c, $author ) = @_;
+
+    # Redirect to this same action with uppercase author.
+    if( $author ne uc($author) ){
+        $c->res->redirect(
+            # NOTE: We're using Args here instead of CaptureArgs :-(.
+            $c->uri_for($c->action, $c->req->captures, uc($author), $c->req->params),
+            301, # Permanent
+        );
+    }
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
@@ -37,7 +46,7 @@ sub author : Chained('index') : Path : Args(1) {
     );
 }
 
-sub distribution : Chained('index') : Path : Args(1) {
+sub distribution : Chained('index') PathPart Args(1) {
     my ( $self, $c, $distribution ) = @_;
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
