@@ -1,5 +1,6 @@
 requires 'AnyEvent::Curl::Multi';
 requires 'CHI';
+requires 'Cpanel::JSON::XS';
 requires 'CPAN::Changes', '0.21';
 requires 'Captcha::reCAPTCHA', '0.94';
 requires 'Capture::Tiny';
