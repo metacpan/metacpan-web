@@ -17,6 +17,9 @@ before_install:
 
 install:
   - carton install
+  - cpanm install XML::Simple
+  - cpanm install ElasticSearch
+  - cpanm install PerlIO::gzip
 
 
 script:

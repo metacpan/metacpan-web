@@ -4,3 +4,7 @@ User-agent: *
 Disallow: /login/
 Disallow: /diff/
 Disallow: /source/
+
+Sitemap: https://metacpan.org/sitemaps/authors.xml.gz
+Sitemap: https://metacpan.org/sitemaps/modules.xml.gz
+Sitemap: https://metacpan.org/sitemaps/release.xml.gz
