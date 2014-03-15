@@ -46,29 +46,80 @@ sub find_changelog {
     }
 }
 
+my $rt_cpan_base = "https://rt.cpan.org/Ticket/Display.html?id=";
+my $rt_perl_base = "https://rt.perl.org/Ticket/Display.html?id=";
+my $sep = qr{[-:]|\s*[#]?};
+
+sub _link_issues {
+    my ($self, $change, $gh_base, $rt_base) = @_;
+    $change =~ s{(
+      (?:
+        (
+          \b(?:blead)?perl\s+(?:RT|bug)$sep
+        |
+          (?<=\[)(?:blead)?perl\s+$sep
+        |
+          \brt\.perl\.org\s+\#
+        )
+      |
+        (
+          \bCPAN\s+(?:RT|bug)$sep
+        |
+          (?<=\[)CPAN\s+$sep
+        |
+          \brt\.cpan\.org\s+\#
+        )
+      |
+        (\bRT$sep)
+      |
+        (\b(?:GH|PR)$sep)
+      |
+        ((?:\bbug\s*)?\#)
+      )
+      (\d+)\b
+    )}{
+        my $text = $1;
+        my $issue = $7;
+        my $base
+          = $2 ? $rt_perl_base
+          : $3 ? $rt_cpan_base
+          : $4 ? $rt_base
+          : $5 ? $gh_base
+          # this form is non-specific, so guess based on issue number
+          : ($gh_base && $issue < 10000)
+                ? $gh_base
+                : $rt_base
+        ;
+        $base ? qq{<a href="$base$issue">$text</a>} : $text;
+    }xgei;
+
+    return $change;
+}
+
 sub filter_release_changes {
     my ( $self, $changelog, $release ) = @_;
 
-    my ( $bt, $bt_url );
-    if ( $release->{resources}->{bugtracker} ) {
-        $bt = $release->{resources}->{bugtracker};
-
-        # should check for perldelta and github at least
-        if ( $bt->{web} and $bt->{web} =~ m|^https?://rt.cpan.org/| ) {
-            $bt = '_rt_cpan';
-        }
-        elsif ( $bt->{web} and $bt->{web} =~ m|^https?://github.com/| ) {
-            $bt_url = $bt->{web};
-            $bt     = '_gh';
-        }
-        else {
-            warn "unknown bt: " . dd $bt if $ENV{CATALYST_DEBUG};
-            undef $bt;
-        }
+    my $gh_base;
+    my $rt_base;
+    my $bt = $release->{resources}{bugtracker} && $release->{resources}{bugtracker}{web};
+    my $repo = $release->{resources}{repository};
+    $repo = ref $repo ? $repo->{url} : $repo;
+    if ( $bt && $bt =~ m|^https?://github\.com/| ) {
+        $gh_base = $bt;
+        $gh_base =~ s{/*$}{/};
+    }
+    elsif ($repo && $repo =~ m|\bgithub\.com/([^/]+/[^/]+)| ) {
+        my $name = $1;
+        $name =~ s/\.git$//;
+        $gh_base = "https://github.com/$name/issues/";
+    }
+    if ( $bt && $bt =~ m|\brt\.perl\.org\b| ) {
+        $rt_base = $rt_perl_base;
     }
     else {
-        $bt = '_rt_cpan';
+        $rt_base = $rt_cpan_base;
     }
+
     foreach my $g ( $changelog->groups ) {
         my $changes = $changelog->changes($g);
         my @new;
@@ -80,48 +131,17 @@ sub filter_release_changes {
            # We need to escape some html enteties here, since down the line we
            # disable it to get the links to work.. Copied from html filter in
            # Template::Alloy
-            $change = do {
-                local $_ = $change;
+            for ($change) {
                 s/&/&amp;/g;
                 s/</&lt;/g;
                 s/>/&gt;/g;
-                s/\"/&quot;/g;
-                $_;
-            };
-
-            $change = $self->$bt( $change, $bt_url ) if $bt;
-            push( @new, $change );
+                s/"/&quot;/g;
+            }
+            push( @new, $self->_link_issues($change, $gh_base, $rt_base) );
         }
         $changelog->set_changes( { group => $g }, @new );
     }
     return $changelog;
 }
 
-sub _rt_cpan {
-    my ( $self, $line ) = @_;
-
-    my $u = '<a href="https://rt.cpan.org/Ticket/Display.html?id=';
-
-    # Stricter regex for -:
-    $line =~ s{\b(RT[-:]?)(\d+)\b}{$u$2">$1$2</a>}gix;
-
-    # A bit more relaxed here?
-    $line =~ s{\b((?:RT)(?:\s*)[#])(\d+)\b}{$u$2">$1$2</a>}gx;
-
-    # Some other cases
-    $line =~ s{\b(bug\s+\#)(\d+)\b}{$u$2">$1$2</a>}gxi;
-
-    # Subject tag style
-    $line =~ s{(\[?rt\.cpan\.org\s+\#(\d+)\]?)}{$u$2">$1</a>}gxi;
-
-    return $line;
-}
-
-sub _gh {
-    my ( $self, $line, $bt ) = @_;
-    $bt =~ s|/$||;
-    $line =~ s{((?:GH|PR)[-:]?)(\d+)\b}{<a href=$bt/$2">$1$2</a>}gxi;
-    $line =~ s{((?:GH|PR|)[#])(\d+)\b}{<a href="$bt/$2">$1$2</a>}gxi;
-    return $line;
-}
 1;
