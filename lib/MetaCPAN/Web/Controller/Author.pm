@@ -9,14 +9,39 @@ use Locale::Country ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : Path : Args(1) {
+# Capture the PAUSE id in the root of the chain so we handle the upper-case redirect once.
+# Later actions in the chain can get the pauseid out of the stash.
+sub root : Chained('/') PathPart('author') CaptureArgs(1) {
     my ( $self, $c, $id ) = @_;
 
     # force consistent casing in URLs
     if ( $id ne uc($id) ) {
-        $c->res->redirect( '/author/' . uc($id), 301 );
+
+        # NOTE: This only works as long as we only use CaptureArgs
+        # and end the chain with PathPart('') and Args(0)
+        # (recommended by mst on #catalyst). If we deviate from that
+        # we may have to just do substitution on $req->uri
+        # because $c->req->args won't be what we expect.
+        # Just forget that Args exists (jedi hand wave).
+
+        my $captures = $c->req->captures;
+        $captures->[0] = uc $captures->[0];
+
+        $c->res->redirect(
+            $c->uri_for($c->action, $captures, $c->req->params),
+            301, # Permanent
+        );
         $c->detach;
     }
+
+    $c->stash({ pauseid => $id });
+}
+
+# /author/*
+sub index : Chained('root') PathPart('') Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $id = $c->stash->{pauseid};
 
     my $author_cv = $c->model('API::Author')->get($id);
 
@@ -56,8 +81,11 @@ sub index : Path : Args(1) {
         if $author->{country};
 }
 
-sub releases : Path : Args(2) {
-    my ( $self, $c, $id, $foo ) = @_;
+# /author/*/releases
+sub releases : Chained('root') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $id = $self->stash->{pauseid};
 
     my $size      = 100;
     my $page      = $c->req->page > 0 ? $c->req->page : 1;
