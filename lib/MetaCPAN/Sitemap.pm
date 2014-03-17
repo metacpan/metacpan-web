@@ -11,6 +11,7 @@ use Carp;
 use ElasticSearch;
 use File::Spec;
 use Moose;
+use MooseX::StrictConstructor;
 use PerlIO::gzip;
 use XML::Simple qw(:strict);
 
@@ -25,12 +26,17 @@ has 'filter' => (
     isa => 'HashRef',
 );
 
+has 'size' => (
+    is => 'ro',
+    isa => 'Int',
+);
+
 # Mandatory arguments to this function are
-# [] search object_type (author, distribution, and release)
-# [] result field_name (pauseid, name, and distribution)
+# [] search object_type (author and release)
+# [] result field_name (pauseid and distribution)
 # [] name of output xml_file (path to the output XML file)
 # Optional arguments to this function are
-# [] output cpan_directory (author, module, and release)
+# [] output cpan_directory (author and release)
 # [] test_search (search count - if non-zero, limits search to that number of
 # items for testing)
 # [] filter - contains filter for a field that also needs to be included in
@@ -89,18 +95,6 @@ sub process {
                 @hits );
     } while ( $scrolled_search->next() );
 
-    #Adjust @urls.
-    if ( $self->cpan_directory eq "pod" ) {
-        foreach (@urls) {
-            my @details = split m{/}, $_;
-            my @splits  = split m{-}, $details[4];
-            my $len     = @splits;
-            $details[4] = join( '::', @splits[ 0 .. $len - 1 ] );
-            $len        = @details;
-            $_          = join( '/',  @details[ 1 .. $len - 1 ] );
-            $_          = $details[0] . '/' . $_;
-        }
-    }
     $_ = $_ . ' ' for @urls;
 
     $self->{'size'} = @urls;
