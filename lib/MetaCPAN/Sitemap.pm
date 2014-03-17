@@ -27,7 +27,7 @@ has 'filter' => (
 );
 
 has 'size' => (
-    is => 'ro',
+    is  => 'ro',
     isa => 'Int',
 );
 
