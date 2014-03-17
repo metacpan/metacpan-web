@@ -15,8 +15,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
     # causes a croak result.
 
     try {
-        my $sitemap = MetaCPAN::Sitemap->new();
-        $sitemap->process();
+        my $sitemap = MetaCPAN::Sitemap::process();
         BAIL_OUT('Did not fail with no arguments.');
     }
     catch {
@@ -41,16 +40,6 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
         {
             inputs => {
-                object_type    => 'distribution',
-                field_name     => 'name',
-                xml_file       => '',
-                cpan_directory => 'pod',
-            },
-            pattern => qr{https:.+/pod/[.\a-zA-Z0-9_::|a-z0-9A-Z_::]+},
-        },
-
-        {
-            inputs => {
                 object_type    => 'release',
                 field_name     => 'distribution',
                 xml_file       => '',
@@ -66,72 +55,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
     foreach my $test (@tests) {
 
-        # Before doing the real tests, try removing each one of the required
-        # input arguments, and confirm that that this intentional error is
-        # caught. (This list is the same as the 'required' list in the module
-        # that we're testing.)
-
-        for my $argToDelete (qw/object_type field_name xml_file/) {
-
-            my (%bogusArgs) = %{ $test->{'inputs'} };
-            delete $bogusArgs{$argToDelete};
-
-            try {
-                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
-                $sitemap->process();
-                BAIL_OUT('Did not fail with missing argument.');
-            }
-            catch {
-                ok( 1, "Called with a missing argument, caught error: $_" );
-            };
-        }
-
-        # Add a bogus argument to the call, to make sure that error gets
-        # caught as well.
-
-        for my $bogusArgument (qw/objecttype fieldname xmlfile/) {
-
-            my (%bogusArgs) = %{ $test->{'inputs'} };
-            $bogusArgs{$bogusArgument} = 'foo';
-
-            try {
-                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
-                $sitemap->process();
-
-                # MetaCPAN::Sitemap::process( \%bogusArgs );
-                BAIL_OUT('Did not fail with bogus argument.');
-            }
-            catch {
-                ok( 1,
-                    "Called with an extra, bogus argument, caught error: $_"
-                );
-            };
-        }
-
-        # Try a bogus directory, and then a directory that exists, but that we
-        # shouldn't be able to write to, to verify that the error-checking is
-        # behaving.
-
-        for my $bogusXMLfile (qw{ /doesntExist123/foo.xml /usr/bin/foo.xml}) {
-
-            my (%bogusArgs) = %{ $test->{'inputs'} };
-            $bogusArgs{'xml_file'} = $bogusXMLfile;
-
-            try {
-
-                my $sitemap = MetaCPAN::Sitemap->new( \%bogusArgs );
-                $sitemap->process();
-
-                #MetaCPAN::Sitemap::process( \%bogusArgs );
-                BAIL_OUT('Did not fail with bad XML file path.');
-            }
-            catch {
-                ok( 1,
-                    "Called with a bogus XML filename argument, caught error: $_"
-                );
-            };
-        }
-
+       
         # Generate the XML file into a file in a temporary directory, then
         # check that the file exists, is valid XML, and has the right number
         # of URLs.
