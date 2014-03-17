@@ -55,7 +55,6 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
     foreach my $test (@tests) {
 
-       
         # Generate the XML file into a file in a temporary directory, then
         # check that the file exists, is valid XML, and has the right number
         # of URLs.

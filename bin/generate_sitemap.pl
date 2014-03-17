@@ -15,9 +15,10 @@ my @parts = (
     # with 'author' in the path.
 
     {
-        object_type    => 'author',
-        field_name     => 'pauseid',
-        xml_file       => '/home/metacpan/metacpan.org/root/static/sitemaps/authors.xml.gz',
+        object_type => 'author',
+        field_name  => 'pauseid',
+        xml_file =>
+            '/home/metacpan/metacpan.org/root/static/sitemaps/authors.xml.gz',
         cpan_directory => 'author',
     },
 
@@ -26,9 +27,10 @@ my @parts = (
     # filter on only the 'latest' entries.
 
     {
-        object_type    => 'release',
-        field_name     => 'distribution',
-        xml_file       => '/home/metacpan/metacpan.org/root/static/sitemaps/releases.xml.gz',
+        object_type => 'release',
+        field_name  => 'distribution',
+        xml_file =>
+            '/home/metacpan/metacpan.org/root/static/sitemaps/releases.xml.gz',
         cpan_directory => 'release',
         filter         => { status => 'latest' },
     }
