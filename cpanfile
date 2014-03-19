@@ -17,6 +17,7 @@ requires 'Catalyst::View::TT::Alloy';
 requires 'CatalystX::RoleApplicator';
 requires 'Config::General';
 requires 'Data::Dumper';
+requires 'Data::Pageset';
 requires 'DateTime';
 requires 'DateTime::Format::HTTP';
 requires 'DateTime::Format::ISO8601';

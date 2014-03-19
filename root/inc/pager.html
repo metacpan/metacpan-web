@@ -17,3 +17,21 @@ FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
   </ul>
 </div>
 <% END %>
+
+<% IF pageset %>
+
+<div class="pagination pagination-centered">
+<ul>
+<li class="previous <% UNLESS pageset.previous_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.previous_page ) %>">&laquo; Previous page</a></li>
+
+<% FOREACH page_num IN pageset.pages_in_set %>
+<li <% IF page_num == pageset.current_page %> class="active"<% END %>>
+  <a href="<% c.req.uri_with( p = page_num ) %>"><% page_num %></a>
+</li>
+<% END %>
+
+<li class="next <% UNLESS pageset.next_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.next_page ) %>">Next page &raquo;</a></li>
+
+</ul>
+</div>
+<% END %>

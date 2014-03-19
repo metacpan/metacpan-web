@@ -11,7 +11,7 @@ use DateTime::Format::ISO8601;
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
 
-sub recent : Chained('index') : Path : Args(0) {
+sub recent : Chained('index') PathPart Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
     my $data = $c->stash;
@@ -21,17 +21,32 @@ sub recent : Chained('index') : Path : Args(0) {
     );
 }
 
-sub author : Chained('index') : Path : Args(1) {
+sub author : Chained('index') PathPart Args(1) {
     my ( $self, $c, $author ) = @_;
-    $c->forward( '/author/index', [$author] );
-    my $data = $c->stash;
+
+    # Redirect to this same action with uppercase author.
+    if( $author ne uc($author) ){
+        $c->res->redirect(
+            # NOTE: We're using Args here instead of CaptureArgs :-(.
+            $c->uri_for($c->action, $c->req->captures, uc($author), $c->req->params),
+            301, # Permanent
+        );
+    }
+
+    my $author_cv   = $c->model('API::Author')->get($author);
+    my $releases_cv = $c->model('API::Release')->latest_by_author($author);
+    my $data        = {
+        author   => $author_cv->recv,
+        releases => [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
+    };
+
     $c->stash->{feed} = $self->build_feed(
         title => "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
         entries => $data->{releases}
     );
 }
 
-sub distribution : Chained('index') : Path : Args(1) {
+sub distribution : Chained('index') PathPart Args(1) {
     my ( $self, $c, $distribution ) = @_;
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
@@ -57,7 +72,6 @@ sub build_entry {
 
 sub build_feed {
     my ( $self, %params ) = @_;
-    my $cv = AE::cv();
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
     $feed->link('http://metacpan.org/');
