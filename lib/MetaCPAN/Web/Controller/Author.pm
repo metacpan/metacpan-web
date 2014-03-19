@@ -92,7 +92,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases_cv
         = $c->model('API::Release')
-        ->all_by_author( $id, $size, $c->req->page );
+        ->all_by_author( $id, $size, $page );
 
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
 
