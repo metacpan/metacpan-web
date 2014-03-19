@@ -89,6 +89,30 @@ sub latest_by_author {
     );
 }
 
+sub all_by_author {
+    my ( $self, $author, $size, $page ) = @_;
+
+    $page = $page > 0 ? $page : 1;
+
+    return $self->request(
+        '/release/_search',
+        {
+            query => {
+                filtered => {
+                    query  => { match_all => {} },
+                    filter => {
+                        term => { author => uc($author) }
+                    },
+                }
+            },
+            sort => [ { date => 'desc' } ],
+            fields => [qw(author distribution name status abstract date)],
+            size   => $size,
+            from   => ( $page - 1 ) * $size,
+        }
+    );
+}
+
 sub recent {
     my ( $self, $page, $type ) = @_;
     my $query;
