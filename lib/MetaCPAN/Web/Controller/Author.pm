@@ -85,7 +85,7 @@ sub index : Chained('root') PathPart('') Args(0) {
 sub releases : Chained('root') PathPart Args(0) {
     my ( $self, $c ) = @_;
 
-    my $id = $self->stash->{pauseid};
+    my $id = $c->stash->{pauseid};
 
     my $size      = 100;
     my $page      = $c->req->page > 0 ? $c->req->page : 1;
