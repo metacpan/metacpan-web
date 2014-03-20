@@ -32,9 +32,10 @@ test_psgi app, sub {
         'verbatim pre tag has syn-hi class';
 
     # Request with lowercase author redirects to uppercase author.
-    $this =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
-    ok( $res = $cb->( GET $this ), "GET $this" );
+    (my $lc_this = $this) =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
+    ok( $res = $cb->( GET $lc_this ), "GET $lc_this" );
     is( $res->code, 301, 'code 301' );
+    is( $res->headers->header('location'), $this, 'redirect to original' );
 };
 
 done_testing;
