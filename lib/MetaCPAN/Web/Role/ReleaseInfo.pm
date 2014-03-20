@@ -39,8 +39,6 @@ sub api_requests {
             $c->model('API::Release')->versions( $data->{distribution} ),
         distribution =>
             $c->model('API::Release')->distribution( $data->{distribution} ),
-        changes =>
-            $c->model('API::Changes')->get( $data->{author}, $data->{name} ),
         %$reqs,
     };
 }
@@ -48,9 +46,6 @@ sub api_requests {
 # organize the api results into simple variables for the template
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
-
-    my $changes
-        = $c->model('API::Changes')->last_version( $reqs->{changes}, $data, );
 
     $c->stash(
         {
@@ -62,7 +57,6 @@ sub stash_api_results {
             versions     => [
                 map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} }
             ],
-            ( $changes ? ( last_version_changes => $changes ) : () ),
         }
     );
 }

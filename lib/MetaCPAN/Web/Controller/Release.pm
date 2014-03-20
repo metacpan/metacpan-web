@@ -62,6 +62,7 @@ sub view : Private {
         {
             files   => $model->interesting_files( $author, $release ),
             modules => $model->modules( $author,           $release ),
+            changes => $c->model('API::Changes')->get( $author, $release ),
         },
         $out,
     );
@@ -105,6 +106,9 @@ sub view : Private {
         push @view_files, $h;
     }
 
+    my $changes
+        = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
+
     # TODO: make took more automatic (to include all)
     $c->stash(
         {
@@ -118,6 +122,7 @@ sub view : Private {
             root     => \@root_files,
             examples => \@examples,
             files    => \@view_files,
+            ( $changes ? ( last_version_changes => $changes ) : () ),
         }
     );
 }
