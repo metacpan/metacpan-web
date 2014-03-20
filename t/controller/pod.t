@@ -13,7 +13,8 @@ test_psgi app, sub {
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
     ok( $tx->find_value('//a[@href="/pod/Moose"]'),
         'contains permalink to resource' );
-    ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
+
+    ok( my $this = $tx->find_value('//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'),
         'contains link to "this" version' );
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
