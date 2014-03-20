@@ -81,7 +81,7 @@ test_psgi app, sub {
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles" and @rel="nofollow"]'),
+            '//a[@href="http://search.cpan.org/dist/Config-IniFiles" and @rel="nofollow"]'),
         'Latest version',
         'Link to release search.cpan.org of the latest version is correct'
     );
