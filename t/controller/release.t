@@ -28,7 +28,9 @@ test_psgi app, sub {
     # so pin to an older version for now.
     test_heading_order( $cb->( GET "/release/ETHER/Moose-2.1005" ) );
 
-    ok( my $this = $tx->find_value('//a[text()="This version"]/@href'),
+    # FIXME: This xpath garbage is getting out of hand.  Semantic HTML would help a lot.
+    # '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
+    ok( my $this = $tx->find_value('//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'),
         'contains link to "this" version' );
     my $latest = $tx->find_value('//div[@class="content"]');
     ok( $res = $cb->( GET $this ), "GET $this" );
