@@ -16,7 +16,6 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
 
     try {
         my $sitemap = MetaCPAN::Sitemap::process();
-        BAIL_OUT('Did not fail with no arguments.');
     }
     catch {
         ok( 1, "Called with no arguments, caught error: $_" );
@@ -69,8 +68,7 @@ BEGIN { use_ok('MetaCPAN::Sitemap'); }
         ok( -e $args->{'xml_file'},
             "XML output file for $args->{'object_type'} exists" );
 
-        open( my $xmlFH, '<:gzip', $args->{'xml_file'} )
-            or BAIL_OUT("Unable to open $args->{'xml_file'}: $!");
+        open( my $xmlFH, '<:gzip', $args->{'xml_file'} );
 
         my $xml = XMLin($xmlFH);
         ok( defined $xml, "XML for $args->{'object_type'} checks out" );
