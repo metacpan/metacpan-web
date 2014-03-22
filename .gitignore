@@ -15,4 +15,4 @@ cover_db/
 local
 metacpan_web_local.conf
 perltidy.LOG
-static/sitemaps
+root/static/sitemaps
