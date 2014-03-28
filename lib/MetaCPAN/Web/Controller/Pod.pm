@@ -166,7 +166,7 @@ sub view : Private {
             canonical => $canonical,
         }
     );
-    unless ( $c->stash->{pod} ) {
+    unless ( $reqs->{pod}->{raw} ) {
         $c->stash( pod_error => $reqs->{pod}->{message}, );
     }
 }

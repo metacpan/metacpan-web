@@ -39,7 +39,12 @@
 <div class="pod content">
 <% IF pod %>
 <% pod.replace(/<pre><code>/, '<pre class="brush: pl; class-name: \'highlight\'; toolbar: false; gutter: false; metacpan-verbatim">').replace(/<\/code><\/pre>/, '</pre>') | none %>
-<% ELSE %>
+<% ELSIF pod_error %>
 <p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
+<% ELSE %>
+<p class="pod-error">
+    No POD found for <code><% module.name %></code>.
+    Time to <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">read the source</a>?
+</p>
 <% END %>
 </div>
