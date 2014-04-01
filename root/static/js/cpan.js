@@ -96,20 +96,36 @@ $(document).ready(function () {
     }
 
     SyntaxHighlighter.highlight();
-    
+
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
-    if (typeof defaultSort == "undefined") defaultSort = [[0, 0]];
-    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'], textExtraction: function (node) {
-        var $node = $(node);
-        var sort = $node.attr("sort");
-        if(!sort) return node.innerHTML;
-        if ($node.hasClass("date")) {
-            return (new Date(sort)).getTime();
-        } else {
-            return sort;
-        }
-    }} );
+
+    var userDefaultSort = new Array();
+    var tableReleases   = localStorage.authorLatestReleases;
+    var tableFavorites  = localStorage.authorFavorites;
+    if( tableReleases != null || tableFavorites != null ){
+        if( tableReleases == null ) tableReleases = [[0,0]];
+        var localStore    = JSON.parse("[" + tableReleases + "]");
+        userDefaultSort.push( { tableClass: '.table-releases.tablesorter', sort: [localStore] } );
+
+        if( tableFavorites == null ) tableFavorites = [[0,0]];
+        localStore = JSON.parse("[" + tableFavorites + "]");
+        userDefaultSort.push( { tableClass: '.table-favorites.tablesorter', sort: [localStore] } );
+    } else {
+        userDefaultSort.push( { tableClass: '.tablesorter', sort: [[0,0]] } );
+    }
+    for (var i = userDefaultSort.length - 1; i >= 0; i--) {
+        $(userDefaultSort[i].tableClass).tablesorter({sortList: userDefaultSort[i].sort, widgets: ['zebra'], textExtraction: function (node) {
+            var $node = $(node);
+            var sort = $node.attr("sort");
+            if(!sort) return node.innerHTML;
+            if ($node.hasClass("date")) {
+                return (new Date(sort)).getTime();
+            } else {
+                return sort;
+            }
+        }} );
+    };
 
     $('.tablesorter.remote th.header').each(function () {
         $(this).unbind('click');
@@ -223,6 +239,23 @@ $(document).ready(function () {
     }
     $('#pod-errors').addClass('collapsed');
     $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
+
+    $(".table-favorites.tablesorter th.header").on('click', function() {
+        var sortParam = $.getUrlVar('sort');
+        if( sortParam != null ){
+            sortParam     = sortParam.slice(2,5);
+            localStorage.setItem("authorFavorites", sortParam);
+        }
+    });
+
+    $(".table-releases.tablesorter th.header").on('click', function() {
+        var sortParam = $.getUrlVar('sort');
+        if( sortParam != null ){
+            sortParam     = sortParam.slice(2,5);
+            localStorage.setItem("authorLatestReleases", sortParam);
+        }
+    });
+
 });
 
 function searchForNearest() {
