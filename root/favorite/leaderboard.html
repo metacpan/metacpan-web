@@ -14,7 +14,7 @@
   <% FOREACH leader IN leaders %>
     <tr>
       <td class="number<% IF loop.index() < 5; " strong"; END %>"><% loop.index() + 1 %></td>
-      <td class="name"><strong><a href="/release/<% IF leader.term END %>"><% leader.term %></a></strong></td>
+      <td class="name"><strong><a href="/release/<% leader.term %>"><% leader.term %></a></strong></td>
       <td class="number"><% leader.count %> ++</td>
     </tr>
   <% END %>
