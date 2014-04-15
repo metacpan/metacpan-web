@@ -7,6 +7,8 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 use XML::Feed;
 use HTML::Escape qw/escape_html/;
 use DateTime::Format::ISO8601;
+use Path::Tiny qw/path/;
+use Text::Markdown qw/markdown/;
 
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
@@ -18,6 +20,36 @@ sub recent : Chained('index') PathPart Args(0) {
     $c->stash->{feed} = $self->build_feed(
         title   => 'Recent CPAN uploads - MetaCPAN',
         entries => $data->{recent}
+    );
+}
+
+sub news : Chained('index') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $file = $c->config->{home} . '/News';
+    my $news = path($file)->slurp_utf8;
+    $news =~ s/^\s+|\s+$//g;
+    my @entries;
+    foreach my $str (split /^Title:\s*/m, $news) {
+        next if $str =~ /^\s*$/;
+
+        my %e;
+        $e{name} = $str =~ s/\A(.+)$//m ? $1 : 'No title';
+        $str =~ s/\A\s*-+//g;
+        $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
+        $e{link} = "http://metacpan.org/news#$e{name}";
+        $e{author} = 'METACPAN';
+        $str =~ s/^\s*|\s*$//g;
+        #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
+        $e{abstract} = $str;
+        $e{abstract} = markdown($str);
+
+        push @entries, \%e;
+    }
+
+    $c->stash->{feed} = $self->build_feed(
+        title => "Recent MetaCPAN News",
+        entries => \@entries,
     );
 }
 
@@ -60,6 +92,7 @@ sub build_entry {
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
+        $entry->{link} //
         join( '/',
             'http://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
