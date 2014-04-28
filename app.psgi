@@ -54,8 +54,6 @@ $app = Plack::Middleware::Assets->wrap( $app,
     files => [<root/static/css/*.css>] );
 $app = Plack::Middleware::Assets->wrap(
     $app,
-
-# should we autoload the syntax brushes or otherwise specify which ones are needed (instead of "all")?
     files => [
         map {"root/static/js/$_.js"}
             qw(
