@@ -1069,6 +1069,7 @@ function processUrls(code)
 		return '<a href="' + m + '">' + m + '</a>' + suffix;
 	});
 	
+  // NOTE: Custom metacpan addition.  Does SH have an API to add a hook like this?
 	return processPackages(code);
 };
 
@@ -1079,7 +1080,7 @@ function processUrls(code)
  */
 function processPackages(code)
 {
-	var destination = document.location.href.match(/\/source\//) ? 'source' : 'module',
+	var destination = document.location.href.match(/\/source\//) ? 'source' : 'pod',
 		strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
 		;
 	
