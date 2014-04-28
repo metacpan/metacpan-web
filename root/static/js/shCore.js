@@ -1068,10 +1068,40 @@ function processUrls(code)
 		
 		return '<a href="' + m + '">' + m + '</a>' + suffix;
 	});
+	
+	return processPackages(code);
+};
 
-	var destination = document.location.href.match(/\/source\//) ? 'source' : 'module';
-
-	return code.replace(/(<code class="pl keyword">(use|package|require|extends|with|use base|use parent|use aliased)<\/code> <code class="pl plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
+/**
+ * Turns all package names into metacpan.org links within <a/> tags.
+ * @param {String} code Input code.
+ * @return {String} Returns code with </a> tags.
+ */
+function processPackages(code)
+{
+	var destination = document.location.href.match(/\/source\//) ? 'source' : 'module',
+		strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
+		;
+	
+	code = code.replace(/(<code class="pl keyword">(?:with|extends|use<\/code> <code class="pl plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="pl string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+	{
+		var match = null,
+			mcpan_url
+			;
+		
+		if ( match = strip_delimiters.exec(pkg) )
+		{
+			prefix = prefix + match[1];
+			pkg    = match[2];
+			suffix = match[3] + suffix;
+		}
+		
+		mcpan_url = '<a href="/' + destination + '/' + pkg + '">' + pkg + '</a>';
+		return prefix + mcpan_url + suffix;
+	});
+	
+	// Link our dependencies
+	return code.replace(/(<code class="pl keyword">(use|package|require)<\/code> <code class="pl plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
 };
 
 /**
