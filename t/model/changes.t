@@ -24,17 +24,15 @@ subtest "RT ticket linking" => sub {
         'Revision 2.15 2001/01/30 11:46:48 rbowen' =>
             'Revision 2.15 2001/01/30 11:46:48 rbowen',
         'Fix bad parsing of HH:mm:ss -> 24:00:00, rt87550 (reported by Gonzalo Mateo)'
-            => 'id=87550">rt87550',
+          => 'id=87550">rt87550',
         'Fix bug #87801 where excluded tags were ANDed instead of ORed. Stefan Corneliu Petrea.'
-            => 'id=87801">bug #87801',
-        'Blah blah [rt.cpan.org #231] fixed' =>
-            'id=231">rt.cpan.org #231</a>',
-        'Blah blah rt.cpan.org #231 fixed' => 'id=231">rt.cpan.org #231</a>',
+          => 'id=87801">bug #87801',
+        'Blah blah [rt.cpan.org #231] fixed' => 'id=231">rt.cpan.org #231</a>',
+        'Blah blah rt.cpan.org #231 fixed'   => 'id=231">rt.cpan.org #231</a>',
     );
 
-    while ( my ( $in, $out ) = each %rt_tests ) {
-        like( Changes->_link_issues( $in, $gh, $rt ),
-            qr/\Q$out\E/, "$in found" );
+    while ( my ($in, $out) = each %rt_tests ) {
+        like( Changes->_link_issues($in, $gh, $rt), qr/\Q$out\E/, "$in found" );
     }
 };
 
@@ -50,15 +48,13 @@ subtest "GH issue linking" => sub {
         'Merged PR:1013 -- thanks' => 'issues/1013">PR:1013</a>',
         'Merged PR-1013 -- thanks' => 'issues/1013">PR-1013</a>',
     );
-    while ( my ( $in, $out ) = each %gh_tests ) {
-        like( Changes->_link_issues( $in, $gh, $rt ),
-            qr/\Q$out\E/, "$in found" );
+    while ( my ($in, $out) = each %gh_tests ) {
+        like( Changes->_link_issues($in, $gh, $rt), qr/\Q$out\E/, "$in found" );
     }
     my @no_links_tests
         = ('I wash my hands of this library forever -- rjbs, 2013-10-15');
     foreach my $in (@no_links_tests) {
-        is( Changes->_link_issues( $in, $gh, $rt ),
-            $in, "Didn't change '$in'" );
+        is( Changes->_link_issues($in, $gh, $rt), $in, "Didn't change '$in'" );
     }
 };
 

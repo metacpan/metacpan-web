@@ -48,10 +48,10 @@ sub find_changelog {
 
 my $rt_cpan_base = "https://rt.cpan.org/Ticket/Display.html?id=";
 my $rt_perl_base = "https://rt.perl.org/Ticket/Display.html?id=";
-my $sep          = qr{[-:]|\s*[#]?};
+my $sep = qr{[-:]|\s*[#]?};
 
 sub _link_issues {
-    my ( $self, $change, $gh_base, $rt_base ) = @_;
+    my ($self, $change, $gh_base, $rt_base) = @_;
     $change =~ s{(
       (?:
         (
@@ -101,15 +101,14 @@ sub filter_release_changes {
 
     my $gh_base;
     my $rt_base;
-    my $bt = $release->{resources}{bugtracker}
-        && $release->{resources}{bugtracker}{web};
+    my $bt = $release->{resources}{bugtracker} && $release->{resources}{bugtracker}{web};
     my $repo = $release->{resources}{repository};
     $repo = ref $repo ? $repo->{url} : $repo;
     if ( $bt && $bt =~ m|^https?://github\.com/| ) {
         $gh_base = $bt;
         $gh_base =~ s{/*$}{/};
     }
-    elsif ( $repo && $repo =~ m|\bgithub\.com/([^/]+/[^/]+)| ) {
+    elsif ($repo && $repo =~ m|\bgithub\.com/([^/]+/[^/]+)| ) {
         my $name = $1;
         $name =~ s/\.git$//;
         $gh_base = "https://github.com/$name/issues/";
@@ -138,7 +137,7 @@ sub filter_release_changes {
                 s/>/&gt;/g;
                 s/"/&quot;/g;
             }
-            push( @new, $self->_link_issues( $change, $gh_base, $rt_base ) );
+            push( @new, $self->_link_issues($change, $gh_base, $rt_base) );
         }
         $changelog->set_changes( { group => $g }, @new );
     }
