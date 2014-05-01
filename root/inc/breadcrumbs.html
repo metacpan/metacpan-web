@@ -21,6 +21,8 @@ END;
     END;
 END %>
 <% END %>
+
+
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
 <%- IF release.status != 'latest' %>
   <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><i class="icon icon-step-forward"></i></a>
@@ -41,4 +43,27 @@ END %>
   <span>&nbsp;/&nbsp;
   <% module.documentation %></span>
   <%- END %>
+</div>
+
+<!-- For plussers -->
+<div class ="plussers_div">
+
+<% n = 0 %>
+
+<% FOREACH plusser IN plusser_authors%>
+<!-- display the gravatar url for each pause plusser alongwith their author page as a link.-->
+
+<a href="/author/<% plusser.id %>">
+	<img src="<% plusser.pic %>" width="20" height="20">
+</a>
+
+<% n=n+1 %>
+
+<% IF n==35 %>
+<!--To display 35 plussers in one row. -->
+<p> </p>
+<% n=0 %>
+<% END %>
+
+<% END %>
 </div>
