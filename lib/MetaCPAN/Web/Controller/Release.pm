@@ -51,14 +51,12 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
         $c->detach();
     }
 
-     
- $c->stash->{data} = $model->get( $author, $release );
+    $c->stash->{data} = $model->get( $author, $release );
 
- my $data  = $c->stash->{data};
- my $out   = $data->recv->{hits}->{hits}->[0]->{_source};
- $c->forward('view');
+    my $data = $c->stash->{data};
+    my $out  = $data->recv->{hits}->{hits}->[0]->{_source};
+    $c->forward('view');
 }
-
 
 sub view : Private {
     my ( $self, $c ) = @_;
@@ -69,7 +67,8 @@ sub view : Private {
 
     $c->detach('/not_found') unless ($out);
 
-    my ( $author, $release, $distribution ) = ( $out->{author}, $out->{name}, $out->{distribution} );
+    my ( $author, $release, $distribution )
+        = ( $out->{author}, $out->{name}, $out->{distribution} );
 
     my $reqs = $self->api_requests(
         $c,
@@ -107,7 +106,7 @@ sub view : Private {
     $self->groom_contributors( $c, $out );
 
     #subroutine call to find plussers for the particular distribution.
-    $self->find_plussers($c,$distribution);
+    $self->find_plussers( $c, $distribution );
 
     # Simplify the file data we pass to the template.
     my @view_files;
@@ -126,84 +125,84 @@ sub view : Private {
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
 
-
-# TODO: make took more automatic (to include all)
+    # TODO: make took more automatic (to include all)
     $c->stash(
-            template => 'release.html',
-            release  => $out,
-            total    => $modules->{hits}->{total},
-            took     => List::Util::max(
-                $modules->{took}, $files->{took},
-                $reqs->{versions}->{took}
-            ),
-            root     => \@root_files,
-            examples => \@examples,
-            files    => \@view_files,
-            ( $changes ? ( last_version_changes => $changes ) : () )
-        
+        template => 'release.html',
+        release  => $out,
+        total    => $modules->{hits}->{total},
+        took     => List::Util::max(
+            $modules->{took}, $files->{took}, $reqs->{versions}->{took}
+        ),
+        root     => \@root_files,
+        examples => \@examples,
+        files    => \@view_files,
+        ( $changes ? ( last_version_changes => $changes ) : () )
+
     );
 }
 
-
 sub find_plussers {
 
-my ($self,$c,$distribution)= @_;
+    my ( $self, $c, $distribution ) = @_;
 
-#search for all users, match all according to the distribution.
-my $plusser = es()->search(
-    index => 'v0',
-    type  => 'favorite',
-    size  => 1000,
-    query => {
-        filtered => {
-            query  => { match_all => {} },
-            filter => {
-                term => { 'favorite.distribution' => $distribution}
+    #search for all users, match all according to the distribution.
+    my $plusser = es()->search(
+        index => 'v0',
+        type  => 'favorite',
+        size  => 1000,
+        query => {
+            filtered => {
+                query  => { match_all => {} },
+                filter => {
+                    term => { 'favorite.distribution' => $distribution }
+                },
             },
         },
-    },
-    fields => ['user'],
-);
-
-#store in an array.
-my @plusser_users = map { $_->{fields}->{user} } @{ $plusser->{hits}->{hits} };
-my $total_plussers=@plusser_users;
-
-#search for users in plusser_users with pauseid.
-my $authors = es()->search(
-    index => 'v0',
-    type  => 'author',
-    size  => scalar @plusser_users,
-    query => {
-        filtered => {
-            query  => { match_all => {} },
-            filter => { terms     => { 'author.user' => \@plusser_users } },
-        },
-    },
-    fields => [ 'pauseid', 'name', 'gravatar_url' ],
-    sort   => ['pauseid'],
-);
-
-
-#store them in another array.
-my @plusser_authors = map { $_->{fields}->{pauseid} } @{ $authors->{hits}->{hits} };
-my $total_authors= @plusser_authors;
-
-#find total non pauseid users who have ++ed the dist.
-my $total_nonauthors=($total_plussers-$total_authors);
-
-#store details of plussers with pause ids.
-my @plusser_details = map {
-{ id => $_->{fields}->{pauseid}, pic =>$_->{fields}->{gravatar_url}, name => $_->{fields}->{name} }
-} @{ $authors->{hits}->{hits} };
-
-
-#stash the data. 
-$c->stash(
-	    plusser_authors =>\@plusser_details,
-	    plusser_others => $total_nonauthors
+        fields => ['user'],
     );
 
+    #store in an array.
+    my @plusser_users
+        = map { $_->{fields}->{user} } @{ $plusser->{hits}->{hits} };
+    my $total_plussers = @plusser_users;
+
+    #search for users in plusser_users with pauseid.
+    my $authors = es()->search(
+        index => 'v0',
+        type  => 'author',
+        size  => scalar @plusser_users,
+        query => {
+            filtered => {
+                query => { match_all => {} },
+                filter => { terms => { 'author.user' => \@plusser_users } },
+            },
+        },
+        fields => [ 'pauseid', 'name', 'gravatar_url' ],
+        sort   => ['pauseid'],
+    );
+
+    #store them in another array.
+    my @plusser_authors
+        = map { $_->{fields}->{pauseid} } @{ $authors->{hits}->{hits} };
+    my $total_authors = @plusser_authors;
+
+    #find total non pauseid users who have ++ed the dist.
+    my $total_nonauthors = ( $total_plussers - $total_authors );
+
+    #store details of plussers with pause ids.
+    my @plusser_details = map {
+        {
+            id   => $_->{fields}->{pauseid},
+            pic  => $_->{fields}->{gravatar_url},
+            name => $_->{fields}->{name}
+        }
+    } @{ $authors->{hits}->{hits} };
+
+    #stash the data.
+    $c->stash(
+        plusser_authors => \@plusser_details,
+        plusser_others  => $total_nonauthors
+    );
 
 }
 
