@@ -10,7 +10,7 @@ use Path::Tiny qw/path/;
 sub news : Local : Path('/news') {
     my ( $self, $c ) = @_;
 
-    my $file = $c->config->{home} . '/News';
+    my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
     $news =~ s/^Title:\s*//gm;
 
