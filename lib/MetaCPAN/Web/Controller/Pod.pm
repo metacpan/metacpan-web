@@ -166,14 +166,14 @@ sub view : Private {
         );
     #>>>
 
-    my $dist= $release->{distribution}; 
+    my $dist = $release->{distribution};
 
-    #call subrotuine to find plussers for the particular distribution.    
-    $self->find_plussers($c,$dist);	
+    #call subrotuine to find plussers for the particular distribution.
+    $self->find_plussers( $c, $dist );
 
     $c->stash(
         {
-            module    => $data,	
+            module    => $data,
             pod       => $hr->process( $reqs->{pod}->{raw} ),
             release   => $release,
             template  => 'pod.html',
@@ -187,66 +187,67 @@ sub view : Private {
 
 1;
 
-
-
 sub find_plussers {
 
-my ($self,$c,$distribution)= @_;
+    my ( $self, $c, $distribution ) = @_;
 
-#search for all users, match all according to the distribution.
-my $plusser = es()->search(
-    index => 'v0',
-    type  => 'favorite',
-    size  => 1000,
-    query => {
-        filtered => {
-            query  => { match_all => {} },
-            filter => {
-                term => { 'favorite.distribution' => $distribution}
+    #search for all users, match all according to the distribution.
+    my $plusser = es()->search(
+        index => 'v0',
+        type  => 'favorite',
+        size  => 1000,
+        query => {
+            filtered => {
+                query  => { match_all => {} },
+                filter => {
+                    term => { 'favorite.distribution' => $distribution }
+                },
             },
         },
-    },
-    fields => ['user'],
-);
-
-#store in an array.
-my @plusser_users = map { $_->{fields}->{user} } @{ $plusser->{hits}->{hits} };
-my $total_plussers=@plusser_users;
-
-#search for users in plusser_users with pauseid.
-my $authors = es()->search(
-    index => 'v0',
-    type  => 'author',
-    size  => scalar @plusser_users,
-    query => {
-        filtered => {
-            query  => { match_all => {} },
-            filter => { terms     => { 'author.user' => \@plusser_users } },
-        },
-    },
-    fields => [ 'pauseid', 'name', 'gravatar_url' ],
-    sort   => ['pauseid'],
-);
-
-
-#store them in another array.
-my @plusser_authors = map { $_->{fields}->{pauseid} } @{ $authors->{hits}->{hits} };
-my $total_authors= @plusser_authors;
-
-#find total non pauseid users who have ++ed the dist.
-my $total_nonauthors=($total_plussers-$total_authors);
-
-#store details of plussers with pause ids.
-my @plusser_details = map {
-{ id => $_->{fields}->{pauseid}, pic =>$_->{fields}->{gravatar_url}, name => $_->{fields}->{name} }
-} @{ $authors->{hits}->{hits} };
-
-
-#stash the data. 
-$c->stash(
-	    plusser_authors =>\@plusser_details,
-	    plusser_others => $total_nonauthors
+        fields => ['user'],
     );
 
+    #store in an array.
+    my @plusser_users
+        = map { $_->{fields}->{user} } @{ $plusser->{hits}->{hits} };
+    my $total_plussers = @plusser_users;
+
+    #search for users in plusser_users with pauseid.
+    my $authors = es()->search(
+        index => 'v0',
+        type  => 'author',
+        size  => scalar @plusser_users,
+        query => {
+            filtered => {
+                query => { match_all => {} },
+                filter => { terms => { 'author.user' => \@plusser_users } },
+            },
+        },
+        fields => [ 'pauseid', 'name', 'gravatar_url' ],
+        sort   => ['pauseid'],
+    );
+
+    #store them in another array.
+    my @plusser_authors
+        = map { $_->{fields}->{pauseid} } @{ $authors->{hits}->{hits} };
+    my $total_authors = @plusser_authors;
+
+    #find total non pauseid users who have ++ed the dist.
+    my $total_nonauthors = ( $total_plussers - $total_authors );
+
+    #store details of plussers with pause ids.
+    my @plusser_details = map {
+        {
+            id   => $_->{fields}->{pauseid},
+            pic  => $_->{fields}->{gravatar_url},
+            name => $_->{fields}->{name}
+        }
+    } @{ $authors->{hits}->{hits} };
+
+    #stash the data.
+    $c->stash(
+        plusser_authors => \@plusser_details,
+        plusser_others  => $total_nonauthors
+    );
 
 }
