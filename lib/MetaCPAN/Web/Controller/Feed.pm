@@ -26,7 +26,7 @@ sub recent : Chained('index') PathPart Args(0) {
 sub news : Chained('index') PathPart Args(0) {
     my ( $self, $c ) = @_;
 
-    my $file = $c->config->{home} . '/News';
+    my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
     $news =~ s/^\s+|\s+$//g;
     my @entries;
