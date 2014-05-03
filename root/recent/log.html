@@ -1,0 +1,55 @@
+<%- title = "Indexer Log" %>
+<%- INCLUDE inc/recent-bar.html %>
+<%-
+# we need this library only for this page, in that case it doesn't
+# make much sense to include it in our assets bundle
+%>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+
+<div class="content">
+<table class="table table-condensed table-striped table-log">
+  <thead>
+    <tr>
+      <th class="level">Level</th>
+      <th class="script">Script</th>
+      <th class="message">Message</th>
+      <th class="date">Date</th>
+    </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+
+<script>
+(function() {
+  var $tbody = $("table.table-log > tbody");
+  var levels = {
+    I: "info",
+    D: "debug",
+    F: "fatal",
+    W: "warning",
+  };
+  var labels = {
+    I: "info",
+    D: "default",
+    F: "important",
+    W: "warning",
+  }
+  var template = function(data) {
+    return '<tr><td><span class="label label-' + labels[data.level] + '">' + levels[data.level] + "</span></td>" +
+      '<td><a href="https://github.com/CPAN-API/cpan-api/blob/master/lib/MetaCPAN/Script/' + data.script.charAt(0).toUpperCase() + data.script.slice(1) + '.pm">' + data.script + "</a></td>" +
+      "<td>" + data.message + "</td>" +
+      '<td class="date relatize">' + data.date + "</td></tr>";
+  };
+  var socket = io.connect("//api.metacpan.org");
+  socket.on("log", function (data) {
+    var $tr = $(template(data));
+    $tr.find(".relatize").relatizeDate();
+    $tbody.prepend($tr);
+  });
+  socket.emit("log.stash", { size: 20 });
+  window.setInterval(function() { $tbody.find(".relatize").relatizeDate() }, 30000);
+})();
+</script>

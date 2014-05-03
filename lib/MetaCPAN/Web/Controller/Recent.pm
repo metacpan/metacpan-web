@@ -20,6 +20,11 @@ sub index : Path {
     );
 }
 
+sub log : Local {
+    my ( $self, $c ) = @_;
+    $c->stash( { template => "recent/log.html" } );
+}
+
 sub faves : Path('/recent/favorites') {
     my ( $self, $c ) = @_;
     $c->res->redirect( '/favorite/recent', 301 );
