@@ -4,7 +4,7 @@ use Test::More;
 use MetaCPAN::Web::Test;
 use Try::Tiny;
 
-my @tests = qw(/feed/recent /feed/author/PERLER /feed/distribution/Moose);
+my @tests = qw(/feed/recent /feed/author/PERLER /feed/distribution/Moose /feed/news);
 
 test_psgi app, sub {
     my $cb = shift;
