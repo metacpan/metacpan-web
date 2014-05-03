@@ -2,13 +2,14 @@
 (function($) {
   $.fn.relatizeDate = function() {
     return $(this).each(function() {
-      $(this).attr( "title", $(this).text() );
-      $(this).text( $.relatizeDate(this) )
+      var $this = $(this);
+      if(!$this.attr("title")) $this.attr( "title", $this.text() );
+      $this.text( $.relatizeDate(this) )
     })
   }
 
   $.relatizeDate = function(element) {
-    var str = $(element).text(),
+    var str = $(element).attr("title"),
         d = new Date(str), m;
     if(!d || isNaN(d)){
       // match w3cdtf/iso 8601/rfc 3339 (not all browsers will via new Date())
