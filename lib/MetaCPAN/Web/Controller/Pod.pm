@@ -1,18 +1,10 @@
 package MetaCPAN::Web::Controller::Pod;
 
 use HTML::Restrict;
-use MetaCPAN::API;
 use Moose;
 use Try::Tiny;
 
-use feature qw( say );
-use FindBin qw ($Bin);
-use lib "$Bin/../lib";
 use namespace::autoclean;
-
-use MetaCPAN::Util qw( es );
-
-binmode( STDOUT, ":utf8" );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -167,8 +159,6 @@ sub view : Private {
     #>>>
 
     my $dist = $release->{distribution};
-
-    #call subrotuine to find plussers for the particular distribution.
     $self->find_plussers( $c, $dist );
 
     $c->stash(
@@ -192,61 +182,37 @@ sub find_plussers {
     my ( $self, $c, $distribution ) = @_;
 
     #search for all users, match all according to the distribution.
-    my $plusser = es()->search(
-        index => 'v0',
-        type  => 'favorite',
-        size  => 1000,
-        query => {
-            filtered => {
-                query  => { match_all => {} },
-                filter => {
-                    term => { 'favorite.distribution' => $distribution }
-                },
-            },
-        },
-        fields => ['user'],
-    );
+
+    my $plusser = $c->model('API::Favorite')->by_dist($distribution);
+    my $plusser_data = $plusser->recv;
 
     #store in an array.
     my @plusser_users
-        = map { $_->{fields}->{user} } @{ $plusser->{hits}->{hits} };
+        = map { $_->{fields}->{user} } @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
-    #search for users in plusser_users with pauseid.
-    my $authors = es()->search(
-        index => 'v0',
-        type  => 'author',
-        size  => scalar @plusser_users,
-        query => {
-            filtered => {
-                query => { match_all => {} },
-                filter => { terms => { 'author.user' => \@plusser_users } },
-            },
-        },
-        fields => [ 'pauseid', 'name', 'gravatar_url' ],
-        sort   => ['pauseid'],
-    );
+    #find plussers by pause id.
+    my $authors = $c->model('API::Author')->plusser_by_id(\@plusser_users)->recv->{hits}
+->{hits};
 
-    #store them in another array.
-    my @plusser_authors
-        = map { $_->{fields}->{pauseid} } @{ $authors->{hits}->{hits} };
-    my $total_authors = @plusser_authors;
 
-    #find total non pauseid users who have ++ed the dist.
-    my $total_nonauthors = ( $total_plussers - $total_authors );
-
-    #store details of plussers with pause ids.
     my @plusser_details = map {
         {
             id   => $_->{fields}->{pauseid},
             pic  => $_->{fields}->{gravatar_url},
-            name => $_->{fields}->{name}
         }
-    } @{ $authors->{hits}->{hits} };
+    } @{ $authors };
+
+    my $total_authors = @plusser_details;
+
+    #find total non pauseid users who have ++ed the dist.
+    my $total_nonauthors = ( $total_plussers - $total_authors );
+
 
     #stash the data.
     $c->stash(
         plusser_authors => \@plusser_details,
+        
         plusser_others  => $total_nonauthors
     );
 
