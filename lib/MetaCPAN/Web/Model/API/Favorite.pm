@@ -83,8 +83,8 @@ sub by_user {
 
 #to search for v0/favorite/_search/{user} for the particular $distribution.
 sub by_dist {
-   my ($self, $distribution) = @_;
-   return $self->request(
+    my ( $self, $distribution ) = @_;
+    return $self->request(
         '/favorite/_search',
         {
             query  => { match_all => {} },
