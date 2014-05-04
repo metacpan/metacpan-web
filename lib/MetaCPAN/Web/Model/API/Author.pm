@@ -104,6 +104,23 @@ sub by_user {
     );
 }
 
+
+#finding the authors who have ++ed the distribution.
+sub plusser_by_id {
+   my ($self, $users) = @_;
+   return $self->request(
+        '/author/_search',
+        {
+            query  => { match_all => {} },
+            filter =>
+                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            fields => [qw(pauseid gravatar_url)],
+	    size   => 1000,
+            sort   => ['pauseid']
+        }
+    );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;
