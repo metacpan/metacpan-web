@@ -7,7 +7,12 @@
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
 
 <!-- Display the count of non pauseid plussers-->
-<p><b>and <% plusser_others %> more. </b></p>
+<% IF plusser_others > 1 %>
+<p><b><% plusser_others %> users ++ed this. </b></p>
+
+<% ELSIF plusser_others !=0 %>
+<p><b><% plusser_others %> user ++ed this. </b></p>
+<% END %>
 
 <ul class="nav nav-list slidepanel">
     <li class="visible-phone search">
