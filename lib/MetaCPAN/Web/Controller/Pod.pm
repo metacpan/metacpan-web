@@ -183,7 +183,7 @@ sub find_plussers {
 
     #search for all users, match all according to the distribution.
 
-    my $plusser = $c->model('API::Favorite')->by_dist($distribution);
+    my $plusser      = $c->model('API::Favorite')->by_dist($distribution);
     my $plusser_data = $plusser->recv;
 
     #store in an array.
@@ -192,28 +192,26 @@ sub find_plussers {
     my $total_plussers = @plusser_users;
 
     #find plussers by pause id.
-    my $authors = $c->model('API::Author')->plusser_by_id(\@plusser_users)->recv->{hits}
-->{hits};
-
+    my $authors = $c->model('API::Author')->plusser_by_id( \@plusser_users )
+        ->recv->{hits}->{hits};
 
     my @plusser_details = map {
         {
-            id   => $_->{fields}->{pauseid},
-            pic  => $_->{fields}->{gravatar_url},
+            id  => $_->{fields}->{pauseid},
+            pic => $_->{fields}->{gravatar_url},
         }
-    } @{ $authors };
+    } @{$authors};
 
     my $total_authors = @plusser_details;
 
     #find total non pauseid users who have ++ed the dist.
     my $total_nonauthors = ( $total_plussers - $total_authors );
 
-
     #stash the data.
     $c->stash(
         plusser_authors => \@plusser_details,
-        
-        plusser_others  => $total_nonauthors
+
+        plusser_others => $total_nonauthors
     );
 
 }
