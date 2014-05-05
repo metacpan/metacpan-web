@@ -14,8 +14,12 @@ test_psgi app, sub {
     ok( $tx->find_value('//a[@href="/pod/Moose"]'),
         'contains permalink to resource' );
 
-    ok( my $this = $tx->find_value('//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'),
-        'contains link to "this" version' );
+    ok(
+        my $this = $tx->find_value(
+            '//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'
+        ),
+        'contains link to "this" version'
+    );
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx2 = tx($res);
@@ -32,9 +36,10 @@ test_psgi app, sub {
         'verbatim pre tag has syn-hi class';
 
     # Request with lowercase author redirects to uppercase author.
-    (my $lc_this = $this) =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
+    ( my $lc_this = $this )
+        =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
     ok( $res = $cb->( GET $lc_this ), "GET $lc_this" );
-    is( $res->code, 301, 'code 301' );
+    is( $res->code,                        301,   'code 301' );
     is( $res->headers->header('location'), $this, 'redirect to original' );
 };
 
