@@ -28,13 +28,13 @@ sub root : Chained('/') PathPart('author') CaptureArgs(1) {
         $captures->[0] = uc $captures->[0];
 
         $c->res->redirect(
-            $c->uri_for($c->action, $captures, $c->req->params),
-            301, # Permanent
+            $c->uri_for( $c->action, $captures, $c->req->params ),
+            301,    # Permanent
         );
         $c->detach;
     }
 
-    $c->stash({ pauseid => $id });
+    $c->stash( { pauseid => $id } );
 }
 
 # /author/*
@@ -91,8 +91,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $page      = $c->req->page > 0 ? $c->req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases_cv
-        = $c->model('API::Release')
-        ->all_by_author( $id, $size, $page );
+        = $c->model('API::Release')->all_by_author( $id, $size, $page );
 
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
 

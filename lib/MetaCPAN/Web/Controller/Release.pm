@@ -60,8 +60,8 @@ sub view : Private {
     my $reqs = $self->api_requests(
         $c,
         {
-            files   => $model->interesting_files( $author, $release ),
-            modules => $model->modules( $author,           $release ),
+            files   => $model->interesting_files( $author,      $release ),
+            modules => $model->modules( $author,                $release ),
             changes => $c->model('API::Changes')->get( $author, $release ),
         },
         $out,

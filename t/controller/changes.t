@@ -8,8 +8,7 @@ test_psgi app, sub {
     {
         ok(
             my $res = $cb->(
-                GET
-                    "/changes/release/RWSTAUNER/File-Spec-Native-1.003"
+                GET "/changes/release/RWSTAUNER/File-Spec-Native-1.003"
             ),
             'GET /changes/release/...'
         );

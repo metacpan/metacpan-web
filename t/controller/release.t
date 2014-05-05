@@ -28,10 +28,14 @@ test_psgi app, sub {
     # so pin to an older version for now.
     test_heading_order( $cb->( GET "/release/ETHER/Moose-2.1005" ) );
 
-    # FIXME: This xpath garbage is getting out of hand.  Semantic HTML would help a lot.
-    # '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
-    ok( my $this = $tx->find_value('//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'),
-        'contains link to "this" version' );
+# FIXME: This xpath garbage is getting out of hand.  Semantic HTML would help a lot.
+# '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
+    ok(
+        my $this = $tx->find_value(
+            '//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'
+        ),
+        'contains link to "this" version'
+    );
     my $latest = $tx->find_value('//div[@class="content"]');
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx_latest = tx($res);
@@ -75,28 +79,37 @@ test_psgi app, sub {
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.81/" and @rel="nofollow"]'),
+            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.81/" and @rel="nofollow"]'
+        ),
         'This version',
         'Link to release search.cpan.org of this version is correct'
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/dist/Config-IniFiles" and @rel="nofollow"]'),
+            '//a[@href="http://search.cpan.org/dist/Config-IniFiles" and @rel="nofollow"]'
+        ),
         'Latest version',
         'Link to release search.cpan.org of the latest version is correct'
     );
 
-    ok( $res = $cb->( GET '/pod/release/SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm' ) );
+    ok(
+        $res = $cb->(
+            GET
+                '/pod/release/SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm'
+        )
+    );
     $tx_cc = tx($res);
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm" and @rel="nofollow"]'),
+            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm" and @rel="nofollow"]'
+        ),
         'This version',
         'Link to module search.cpan.org of this version is correct'
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/perldoc?Config::IniFiles" and @rel="nofollow"]'),
+            '//a[@href="http://search.cpan.org/perldoc?Config::IniFiles" and @rel="nofollow"]'
+        ),
         'Latest version',
         'Link to module search.cpan.org of the latest version is correct'
     );
