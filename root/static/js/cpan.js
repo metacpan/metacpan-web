@@ -101,8 +101,8 @@ $(document).ready(function () {
     $('#signin').mouseleave(function () { $('#signin').hide() });
 
     var userDefaultSort = new Array();
-    var tableReleases   = localStorage.authorLatestReleases;
-    var tableFavorites  = localStorage.authorFavorites;
+    var tableReleases   = localStorage.author_releases;
+    var tableFavorites  = localStorage.author_favorites;
     if( tableReleases != null || tableFavorites != null ){
         if( tableReleases == null ) tableReleases = [[0,0]];
         var localStore    = JSON.parse("[" + tableReleases + "]");
@@ -240,20 +240,15 @@ $(document).ready(function () {
     $('#pod-errors').addClass('collapsed');
     $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
 
-    $(".table-favorites.tablesorter th.header").on('click', function() {
-        var sortParam = $.getUrlVar('sort');
-        if( sortParam != null ){
-            sortParam     = sortParam.slice(2,5);
-            localStorage.setItem("authorFavorites", sortParam);
-        }
-    });
-
-    $(".table-releases.tablesorter th.header").on('click', function() {
-        var sortParam = $.getUrlVar('sort');
-        if( sortParam != null ){
-            sortParam     = sortParam.slice(2,5);
-            localStorage.setItem("authorLatestReleases", sortParam);
-        }
+    $('.table.tablesorter th.header').on('click', function() {
+        tableid = $(this).parents().eq(2).attr('id');
+        setTimeout(function(){
+            var sortParam  = $.getUrlVar('sort');
+            if( sortParam != null ){
+                sortParam  = sortParam.slice(2,5);
+                localStorage.setItem(tableid, sortParam);
+            }
+        }, 1000);
     });
 
 });
