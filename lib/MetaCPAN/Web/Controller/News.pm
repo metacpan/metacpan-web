@@ -14,7 +14,7 @@ sub news : Local : Path('/news') {
     my $news = path($file)->slurp_utf8;
     $news =~ s/^Title:\s*//gm;
 
-    $c->stash( template => 'news.html', news => $news  );
+    $c->stash( template => 'news.html', news => $news );
 }
 
 1;

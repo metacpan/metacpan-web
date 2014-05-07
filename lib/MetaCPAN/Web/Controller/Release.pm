@@ -97,7 +97,7 @@ sub view : Private {
 
     $self->groom_contributors( $c, $out );
 
-    $c->stash( $c->model('API::Favorite')->find_plussers($distribution));
+    $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
     # Simplify the file data we pass to the template.
     my @view_files;
@@ -131,7 +131,6 @@ sub view : Private {
 
     );
 }
-
 
 # massage the x_contributors field into what we want
 sub groom_contributors {

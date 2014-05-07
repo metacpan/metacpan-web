@@ -30,16 +30,17 @@ sub news : Chained('index') PathPart Args(0) {
     my $news = path($file)->slurp_utf8;
     $news =~ s/^\s+|\s+$//g;
     my @entries;
-    foreach my $str (split /^Title:\s*/m, $news) {
+    foreach my $str ( split /^Title:\s*/m, $news ) {
         next if $str =~ /^\s*$/;
 
         my %e;
         $e{name} = $str =~ s/\A(.+)$//m ? $1 : 'No title';
         $str =~ s/\A\s*-+//g;
-        $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link} = "http://metacpan.org/news#$e{name}";
+        $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
+        $e{link}   = "http://metacpan.org/news#$e{name}";
         $e{author} = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
+
         #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
         $e{abstract} = $str;
         $e{abstract} = markdown($str);
@@ -48,7 +49,7 @@ sub news : Chained('index') PathPart Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
-        title => "Recent MetaCPAN News",
+        title   => "Recent MetaCPAN News",
         entries => \@entries,
     );
 }
@@ -57,19 +58,24 @@ sub author : Chained('index') PathPart Args(1) {
     my ( $self, $c, $author ) = @_;
 
     # Redirect to this same action with uppercase author.
-    if( $author ne uc($author) ){
+    if ( $author ne uc($author) ) {
         $c->res->redirect(
+
             # NOTE: We're using Args here instead of CaptureArgs :-(.
-            $c->uri_for($c->action, $c->req->captures, uc($author), $c->req->params),
-            301, # Permanent
+            $c->uri_for(
+                $c->action,  $c->req->captures,
+                uc($author), $c->req->params
+            ),
+            301,    # Permanent
         );
     }
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
     my $data        = {
-        author   => $author_cv->recv,
-        releases => [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
+        author => $author_cv->recv,
+        releases =>
+            [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
     };
 
     $c->stash->{feed} = $self->build_feed(
@@ -92,8 +98,7 @@ sub build_entry {
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
-        $entry->{link} //
-        join( '/',
+        $entry->{link} // join( '/',
             'http://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
     );

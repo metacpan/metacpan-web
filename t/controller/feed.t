@@ -23,15 +23,20 @@ test_psgi app, sub {
         };
     }
 
-    test_redirect($cb, 'oalders');
+    test_redirect( $cb, 'oalders' );
 };
 
 sub test_redirect {
-    my ($cb, $author) = @_;
-    ok( my $redir = $cb->( GET "/feed/author/\L$author" ), 'lc author feed');
+    my ( $cb, $author ) = @_;
+    ok( my $redir = $cb->( GET "/feed/author/\L$author" ), 'lc author feed' );
     is( $redir->code, 301, 'permanent redirect' );
+
     # Ignore scheme and host, just check that uri path is what we expect.
-    like( $redir->header('location'), qr{^(\w+://[^/]+)?/feed/author/\U$author}, 'redirect to uc feed' );
+    like(
+        $redir->header('location'),
+        qr{^(\w+://[^/]+)?/feed/author/\U$author},
+        'redirect to uc feed'
+    );
 }
 
 sub valid_xml {
