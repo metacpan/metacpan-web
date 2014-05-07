@@ -159,7 +159,7 @@ sub view : Private {
     #>>>
 
     my $dist = $release->{distribution};
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist));
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     $c->stash(
         {
