@@ -48,8 +48,6 @@ END %>
 <!-- For plussers -->
 <div class ="plussers_div">
 
-<% n = 0 %>
-
 <% FOREACH plusser IN plusser_authors%>
 <!-- display the gravatar url for each pause plusser alongwith their author page as a link.-->
 
@@ -57,13 +55,9 @@ END %>
 	<img src="<% plusser.pic %>" width="20" height="20">
 </a>
 
-<% n=n+1 %>
-
-<% IF n==35 %>
+<% IF loop.count%35 == 0 %>
 <!--To display 35 plussers in one row. -->
 <p> </p>
-<% n=0 %>
 <% END %>
-
 <% END %>
 </div>
