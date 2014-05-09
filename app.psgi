@@ -79,6 +79,7 @@ $app = Plack::Middleware::Assets->wrap(
             dropdown
             bootstrap/bootstrap-dropdown
             bootstrap/bootstrap-collapse
+            bootstrap/bootstrap-modal
             bootstrap/bootstrap-tooltip
             bootstrap-slidepanel
             )
