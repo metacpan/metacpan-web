@@ -19,4 +19,8 @@ FOREACH dep IN deps.sort %>
     <li class="divider"></li>
     <li><a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>"><i class="icon-retweet"></i>CPAN Testers List</a></li>
     <li><a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]"><i class="icon-share-alt"></i>Reverse dependencies</a></li>
+    <%- IF deps.size %>
+        <%- INCLUDE inc/dependencies-graph.html %>
+        <li><a data-toggle="modal" data-target="#dependencies-graph" href=""><i class="icon-asterisk"></i>Dependency graph</a></li>
+    <%- END %>
 </ul>
