@@ -5,10 +5,6 @@
 
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
 
-<% IF plusser_others %>
-<p><b><% plusser_others %> user(s) ++ed this. </b></p>
-<% END %>
-
 <ul class="nav nav-list slidepanel"  itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="visible-phone search">
     <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
