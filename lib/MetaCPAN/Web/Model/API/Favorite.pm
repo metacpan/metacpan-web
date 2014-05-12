@@ -110,20 +110,18 @@ sub leaderboard {
 }
 
 sub find_plussers {
-
     my ( $self, $distribution ) = @_;
 
-    #search for all users, match all according to the distribution.
-    #my $cv = $self->cv;
+    # search for all users, match all according to the distribution.
     my $plusser      = $self->by_dist($distribution);
     my $plusser_data = $plusser->recv;
 
-    #store in an array.
+    # store in an array.
     my @plusser_users
         = map { $_->{fields}->{user} } @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
-    #find plussers by pause ids.
+    # find plussers by pause ids.
     my $authors
         = $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits};
 
@@ -136,10 +134,9 @@ sub find_plussers {
 
     my $total_authors = @plusser_details;
 
-    #find total non pauseid users who have ++ed the dist.
+    # find total non pauseid users who have ++ed the dist.
     my $total_nonauthors = ( $total_plussers - $total_authors );
 
-    #stash the data.
     return (
         {
             plusser_authors => \@plusser_details,
@@ -149,7 +146,7 @@ sub find_plussers {
 
 }
 
-#to search for v0/favorite/_search/{user} for the particular $distribution.
+# to search for v0/favorite/_search/{user} for the particular $distribution.
 sub by_dist {
     my ( $self, $distribution ) = @_;
     return $self->request(
@@ -163,7 +160,7 @@ sub by_dist {
     );
 }
 
-#finding the authors who have ++ed the distribution.
+# finding the authors who have ++ed the distribution.
 sub plusser_by_id {
     my ( $self, $users ) = @_;
     return $self->request(
