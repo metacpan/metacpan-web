@@ -18,8 +18,8 @@ sub root : Chained('/') PathPart('release') CaptureArgs(0) {
 }
 
 sub by_distribution : Chained('root') PathPart('') Args(1) {
-
     my ( $self, $c, $distribution ) = @_;
+
     my $model = $c->stash->{model};
     $c->stash->{data} = $model->find($distribution);
     $c->forward('view');
@@ -44,9 +44,6 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     }
 
     $c->stash->{data} = $model->get( $author, $release );
-
-    my $data = $c->stash->{data};
-    my $out  = $data->recv->{hits}->{hits}->[0]->{_source};
     $c->forward('view');
 }
 
