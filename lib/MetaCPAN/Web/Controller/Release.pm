@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Release;
 
 use Moose;
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -17,12 +18,12 @@ sub root : Chained('/') PathPart('release') CaptureArgs(0) {
 }
 
 sub by_distribution : Chained('root') PathPart('') Args(1) {
+
     my ( $self, $c, $distribution ) = @_;
-
     my $model = $c->stash->{model};
-
     $c->stash->{data} = $model->find($distribution);
     $c->forward('view');
+
 }
 
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {
@@ -43,6 +44,9 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     }
 
     $c->stash->{data} = $model->get( $author, $release );
+
+    my $data = $c->stash->{data};
+    my $out  = $data->recv->{hits}->{hits}->[0]->{_source};
     $c->forward('view');
 }
 
@@ -55,7 +59,8 @@ sub view : Private {
 
     $c->detach('/not_found') unless ($out);
 
-    my ( $author, $release ) = ( $out->{author}, $out->{name} );
+    my ( $author, $release, $distribution )
+        = ( $out->{author}, $out->{name}, $out->{distribution} );
 
     my $reqs = $self->api_requests(
         $c,
@@ -92,6 +97,8 @@ sub view : Private {
 
     $self->groom_contributors( $c, $out );
 
+    $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
+
     # Simplify the file data we pass to the template.
     my @view_files;
     foreach my $hit ( @{ $modules->{hits}->{hits} } ) {
@@ -111,19 +118,17 @@ sub view : Private {
 
     # TODO: make took more automatic (to include all)
     $c->stash(
-        {
-            template => 'release.html',
-            release  => $out,
-            total    => $modules->{hits}->{total},
-            took     => List::Util::max(
-                $modules->{took}, $files->{took},
-                $reqs->{versions}->{took}
-            ),
-            root     => \@root_files,
-            examples => \@examples,
-            files    => \@view_files,
-            ( $changes ? ( last_version_changes => $changes ) : () ),
-        }
+        template => 'release.html',
+        release  => $out,
+        total    => $modules->{hits}->{total},
+        took     => List::Util::max(
+            $modules->{took}, $files->{took}, $reqs->{versions}->{took}
+        ),
+        root     => \@root_files,
+        examples => \@examples,
+        files    => \@view_files,
+        ( $changes ? ( last_version_changes => $changes ) : () )
+
     );
 }
 

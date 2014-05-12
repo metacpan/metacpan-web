@@ -1,9 +1,10 @@
 package MetaCPAN::Web::Controller::Pod;
 
-use Moose;
-use namespace::autoclean;
-use Try::Tiny;
 use HTML::Restrict;
+use Moose;
+use Try::Tiny;
+
+use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -156,6 +157,9 @@ sub view : Private {
             @path[ 2 .. $#path ]
         );
     #>>>
+
+    my $dist = $release->{distribution};
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     $c->stash(
         {

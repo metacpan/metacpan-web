@@ -2,8 +2,12 @@
 <%# NOTE: canonical set in controller %>
 <% meta_description = module.abstract %>
 <% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
-<% INCLUDE inc/breadcrumbs.html %>
 
+<% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
+
+<% IF plusser_others %>
+<p><b><% plusser_others %> user(s) ++ed this. </b></p>
+<% END %>
 
 <ul class="nav nav-list slidepanel"  itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="visible-phone search">

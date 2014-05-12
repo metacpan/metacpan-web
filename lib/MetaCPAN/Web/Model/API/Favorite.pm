@@ -109,4 +109,74 @@ sub leaderboard {
     );
 }
 
+sub find_plussers {
+
+    my ( $self, $distribution ) = @_;
+
+    #search for all users, match all according to the distribution.
+    #my $cv = $self->cv;
+    my $plusser      = $self->by_dist($distribution);
+    my $plusser_data = $plusser->recv;
+
+    #store in an array.
+    my @plusser_users
+        = map { $_->{fields}->{user} } @{ $plusser_data->{hits}->{hits} };
+    my $total_plussers = @plusser_users;
+
+    #find plussers by pause ids.
+    my $authors
+        = $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits};
+
+    my @plusser_details = map {
+        {
+            id  => $_->{fields}->{pauseid},
+            pic => $_->{fields}->{gravatar_url},
+        }
+    } @{$authors};
+
+    my $total_authors = @plusser_details;
+
+    #find total non pauseid users who have ++ed the dist.
+    my $total_nonauthors = ( $total_plussers - $total_authors );
+
+    #stash the data.
+    return (
+        {
+            plusser_authors => \@plusser_details,
+            plusser_others  => $total_nonauthors
+        }
+    );
+
+}
+
+#to search for v0/favorite/_search/{user} for the particular $distribution.
+sub by_dist {
+    my ( $self, $distribution ) = @_;
+    return $self->request(
+        '/favorite/_search',
+        {
+            query  => { match_all => {} },
+            filter => { term      => { distribution => $distribution }, },
+            fields => [qw(user)],
+            size   => 1000,
+        }
+    );
+}
+
+#finding the authors who have ++ed the distribution.
+sub plusser_by_id {
+    my ( $self, $users ) = @_;
+    return $self->request(
+        '/author/_search',
+        {
+            query => { match_all => {} },
+            filter =>
+                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            fields => [qw(pauseid gravatar_url)],
+            size   => 1000,
+            sort   => ['pauseid']
+        }
+    );
+}
+
 __PACKAGE__->meta->make_immutable;
