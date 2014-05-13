@@ -3,17 +3,14 @@
     margin-bottom: 10px;
 }
 
-.about-resources h1, .about-resources h2 {
+.about-resources h1,
+.about-resources h2 {
     font-weight: bold;
 }
 
 .about-resources h2 {
-    margin-top: 10px;
-    font-size: 0.9em;
-    margin-left: 20px;
-    font-size: 0.9em;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 1.2em;
+    margin: 10px 10px 5px 10px;
 }
 
 .about-resources p {
