@@ -20,7 +20,12 @@ We are always after more contributors and suggestions.
 
 ## Contributing code
 
-Come talk to us on IRC (see below), or send a pull request and we'll respond there. These links will get you going quickly:
+Come talk to us on IRC (see below), or send a pull request and we'll respond
+there.  If you implement a new feature, please add a note about it to the
+News.md file at the top level of metacpan-web so that it will appear in our
+news feed.
+
+These links will get you going quickly:
 
   * [Using our developer VM](https://github.com/CPAN-API/metacpan-developer) to get you going in minutes (depending on bandwidth)
   * [Front end bug list](https://github.com/CPAN-API/metacpan-web/issues)
