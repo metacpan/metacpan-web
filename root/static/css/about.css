@@ -4,13 +4,19 @@
 }
 
 .about-resources h1,
-.about-resources h2 {
+.about-resources h2,
+.about-resources h3 {
     font-weight: bold;
 }
 
 .about-resources h2 {
     font-size: 1.2em;
     margin: 10px 10px 5px 10px;
+}
+
+.about-resources h3 {
+    font-size: 1.0em;
+    margin: 10px 10px 5px 15px;
 }
 
 .about-resources p {
