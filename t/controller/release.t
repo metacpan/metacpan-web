@@ -135,8 +135,10 @@ sub test_heading_order {
     push @headings, 'Changes for version ' . $version;
     my $heading = 0;
 
+    # Boohoo... testing with XPATH :-(
+    my $xpath_prefix = '//div[@class="content"]/div[contains(@class, "file-group")]';
     $tx->ok(
-        '//div[@class="content"]/strong',
+        "$xpath_prefix/strong",
         sub {
             $_->is( '.', $headings[$heading],
                 "heading $headings[$heading] in expected location" );
@@ -147,7 +149,7 @@ sub test_heading_order {
 
     my $anchor = 0;
     $tx->ok(
-        '//div[@class="content"]/a[following-sibling::strong[1]]',
+        "$xpath_prefix/a[following-sibling::strong[1]]",
         sub {
             $_->is( './@name', $anchors[$anchor],
                 "Anchor $anchors[$anchor] in expected location" );
