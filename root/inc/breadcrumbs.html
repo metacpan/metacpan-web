@@ -4,7 +4,12 @@
 backpan = [];
 MACRO breadcrumb_link(version) BLOCK;
   selected = release.author == version.author && release.name == version.name ? "selected" : ""; %>
-  <option <% selected %> value="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)</option>
+<%# FIXME: This link should point to /pod (or /source?) %>
+  <option <% selected %> value="/<% [(module ? 'module' : 'release'), version.author, version.name, module.path].join('/') %>">
+    <% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %>
+      (<%version.author %> on <% version.date.dt_date_common %>)
+      <% IF NOT version.authorized %>UNAUTHORIZED<% END %>
+  </option>
 <%- END;
 FOREACH version IN versions;
     IF version.status == 'backpan';
