@@ -46,5 +46,33 @@ subtest modules => sub {
         'files sorted by documentation name, then file path';
 };
 
+subtest versions => sub {
+
+    # Something with not too many versions.
+    my @versions
+        = search_release( versions => 'Mojolicious-Plugin-HamlRenderer' );
+
+    ok( scalar @versions, 'found release versions' );
+
+    my %statuses;
+    my @dates;
+    foreach my $version (@versions) {
+
+        # Ensure we get a boolean so that conditions work as expected.
+        is_bool( $version->{authorized}, q['authorized' is a boolean] );
+
+        ++$statuses{ $version->{status} };
+        push @dates, $version->{date};
+    }
+
+    is( $statuses{latest}, 1, 'found one latest version' );
+    is(
+        $statuses{cpan} + ( $statuses{backpan} || 0 ),
+        scalar(@versions) - 1,
+        'other releases are cpan or backpan'
+    );
+
+    is_deeply [@dates], [ reverse sort @dates ], 'returned in date order';
+};
 
 done_testing;
