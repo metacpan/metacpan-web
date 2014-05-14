@@ -375,10 +375,12 @@ sub versions {
             },
             size   => 250,
             sort   => [ { date => 'desc' } ],
-            fields => [qw(
-                name date author version status maturity
-                _source.authorized
-            )],
+            fields => [
+                qw(
+                    name date author version status maturity
+                    _source.authorized
+                    )
+            ],
         }
     );
 }

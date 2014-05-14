@@ -184,7 +184,7 @@ sub search_descriptions {
                     took => $data->{took}
                 }
             );
-            }
+        }
         );
     return $cv;
 }
