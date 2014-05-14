@@ -97,18 +97,7 @@ sub view : Private {
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
     # Simplify the file data we pass to the template.
-    my @view_files;
-    foreach my $hit ( @{ $modules->{hits}->{hits} } ) {
-        my $f = $hit->{fields};
-        my $h = {};
-        while ( my ( $k, $v ) = each %$f ) {
-
-            # Strip '_source.' prefix from keys.
-            $k =~ s/^_source\.//;
-            $h->{$k} = $v;
-        }
-        push @view_files, $h;
-    }
+    my @view_files = map { $_->{fields} } @{ $modules->{hits}->{hits} };
 
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
