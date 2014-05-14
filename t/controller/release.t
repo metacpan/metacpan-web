@@ -136,7 +136,8 @@ sub test_heading_order {
     my $heading = 0;
 
     # Boohoo... testing with XPATH :-(
-    my $xpath_prefix = '//div[@class="content"]/div[contains(@class, "file-group")]';
+    my $xpath_prefix
+        = '//div[@class="content"]/div[contains(@class, "file-group")]';
     $tx->ok(
         "$xpath_prefix/strong",
         sub {
