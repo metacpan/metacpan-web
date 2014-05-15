@@ -54,11 +54,10 @@ END %>
 <!-- For plussers -->
 <div class ="plussers_div">
 
+<%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
 <% FOREACH plusser IN plusser_authors%>
-<!-- display the gravatar url for each pause plusser alongwith their author page as a link.-->
 
-<a class="display-all" title="<% plusser.id %>" href="/author/<% plusser.id %>"><img src="<% plusser.pic || '/static/icons/user.png' %>">
-</a>
+<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
 
 <% IF loop.count%35 == 0 %>
 <!--To display 35 plussers in one row. -->
