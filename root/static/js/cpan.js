@@ -99,23 +99,11 @@ $(document).ready(function () {
 
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
-
-    var userDefaultSort = new Array();
-    var tableReleases   = localStorage.author_releases;
-    var tableFavorites  = localStorage.author_favorites;
-    if( tableReleases != null || tableFavorites != null ){
-        if( tableReleases == null ) tableReleases = [[0,0]];
-        var localStore    = JSON.parse("[" + tableReleases + "]");
-        userDefaultSort.push( { tableClass: '.table-releases.tablesorter', sort: [localStore] } );
-
-        if( tableFavorites == null ) tableFavorites = [[0,0]];
-        localStore = JSON.parse("[" + tableFavorites + "]");
-        userDefaultSort.push( { tableClass: '.table-favorites.tablesorter', sort: [localStore] } );
-    } else {
-        userDefaultSort.push( { tableClass: '.tablesorter', sort: [[0,0]] } );
-    }
-    for (var i = userDefaultSort.length - 1; i >= 0; i--) {
-        $(userDefaultSort[i].tableClass).tablesorter({sortList: userDefaultSort[i].sort, widgets: ['zebra'], textExtraction: function (node) {
+    
+    $('table.tablesorter').each(function(){
+        var sortid = localStorage.getItem("tablesorter:"+ this.id);
+        if ( sortid == null ){ sortid = [0,0] } else { sortid = JSON.parse("[" + sortid + "]") };
+        $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
             if(!sort) return node.innerHTML;
@@ -125,7 +113,7 @@ $(document).ready(function () {
                 return sort;
             }
         }} );
-    };
+    });
 
     $('.tablesorter.remote th.header').each(function () {
         $(this).unbind('click');
@@ -246,7 +234,7 @@ $(document).ready(function () {
             var sortParam  = $.getUrlVar('sort');
             if( sortParam != null ){
                 sortParam  = sortParam.slice(2,5);
-                localStorage.setItem(tableid, sortParam);
+                localStorage.setItem( "tablesorter:" + tableid, sortParam );
             }
         }, 1000);
     });
