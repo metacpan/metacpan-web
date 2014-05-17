@@ -1,3 +1,13 @@
-<div class="modal fade" id="dependencies-graph" style="width:720px; margin-left:-360px; display: none;">
-  <iframe src="//widgets.stratopan.com/wheel?q=<% release.name %>" frameborder="0" width="720" height="620"></iframe>
+<div class="modal hide fade" id="dependencies-graph" style="width:720px; height=620px; margin-left:-360px">
+    <iframe width=720 height=620 frameborder=0></iframe>
 </div>
+
+<script>
+    $('#dependencies-graph').on('show', function() {
+        var iframe = $("#dependencies-graph iframe");
+        if (iframe.attr("src")) return;
+
+        var widget_url = "//widgets.stratopan.com/wheel?q=<% release.name %>"
+        iframe.attr("src", widget_url);
+    });
+</script>
