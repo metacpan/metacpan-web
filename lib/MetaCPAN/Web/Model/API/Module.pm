@@ -176,8 +176,9 @@ sub search_descriptions {
                 {
                     results => {
                         map {
+                      # NOTE: The "_source." prefix has been stripped already.
                             $_->{fields}->{id} =>
-                                $extract->( $_->{fields}->{'_source.pod'} )
+                                $extract->( $_->{fields}->{pod} )
                         } @{ $data->{hits}->{hits} }
                     },
                     took => $data->{took}

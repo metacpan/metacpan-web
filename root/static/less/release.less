@@ -1,0 +1,46 @@
+.content {
+    .release-modules,
+    .release-provides {
+        .unauthorized {
+            color: #f00;
+            font-weight: bold;
+            padding-left: 10px;
+            text-align: right;
+        }
+    }
+    .file-group {
+      margin-bottom: 10px;
+    }
+}
+
+/* Changes in release page
+ * See /release/CPAN-Changes for example
+ */
+.last-changes {
+    .group-header {
+        font-weight: bold;
+        margin-top: 1.0em;
+        display: block;
+    }
+    li:first-child .group-header {
+        margin-top: 0;
+    }
+    .changes {
+        margin-left: 1em;
+        padding-left: 1em;
+        list-style: disc;
+        .nested {
+            margin-left: 2em;
+        }
+        /* I think it looks better with no extra space on top, but left here as example
+        * for others who might feel differently :P
+        *
+        > li:not(.nested) + li.nested {
+            margin-top: 0.1em;
+        }
+        */
+        > li.nested + li:not(.nested) {
+            margin-top: 0.5em; // This is top, because we select the first element without nested
+        }
+    }
+}

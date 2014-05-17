@@ -65,9 +65,18 @@ foreach my $test (@tests) {
 
     # Check that each of the urls has the right pattern.
 
+    note 'Checking urls';
+    my $url_tests;
     foreach my $url ( @{ $xml->{url} } ) {
-        like( $url, $test->{pattern}, 'URL matches' );
+
+       # Test that the url matches
+       # but only print a TAP line for the first test or if there's a failure.
+       # ~30,000 tests is a lot of output to sift through.
+        if ( !$url_tests++ || $url !~ $test->{pattern} ) {
+            like( $url, $test->{pattern}, 'URL matches' );
+        }
     }
+    ok( $url_tests, "Tested $url_tests urls" );
 }
 
 done_testing();
