@@ -3,6 +3,7 @@ package MetaCPAN::Web::Controller::Pod;
 use HTML::Restrict;
 use Moose;
 use Try::Tiny;
+use JSON::XS qw(decode_json);
 
 use namespace::autoclean;
 
@@ -11,6 +12,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
+
+my $perltv_data;
+my $perltv_time;
 
 sub root : Chained('/') PathPart('pod') CaptureArgs(0) {
 }
@@ -160,6 +164,28 @@ sub view : Private {
 
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
+
+    # Cache the PerlTV json file in memory
+    my $CACHE = 60*60;
+    if (not $perltv_time or $perltv_time < time - $CACHE) {
+        my $perltv_file = $c->config->{perltv_file};
+        if (open my $fh, '<', $perltv_file) {
+            local $/ = undef;
+            my $json = <$fh>;
+            close $fh;
+            eval {
+                $perltv_data = decode_json $json;
+                $perltv_time = time;
+            };
+        }
+    }
+    if ($perltv_data) {
+        my $ptv = $perltv_data->{modules}{$data->{documentation}};
+        if ($ptv) {
+            # There can be more than one video per module. Show them randomly.
+            $c->stash( { perltv => $ptv->[int rand scalar @$ptv] } );
+        }
+    }
 
     $c->stash(
         {
