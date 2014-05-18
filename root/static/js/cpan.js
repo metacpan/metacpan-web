@@ -101,8 +101,9 @@ $(document).ready(function () {
     $('#signin').mouseleave(function () { $('#signin').hide() });
     
     $('table.tablesorter').each(function(){
-        var sortid = localStorage.getItem("tablesorter:"+ this.id);
-        if ( sortid == null ){ sortid = [0,0] } else { sortid = JSON.parse("[" + sortid + "]") };
+        var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
+          this.getAttribute('data-default-sort') || '0,0');
+        sortid = JSON.parse("[" + sortid + "]");
         $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");

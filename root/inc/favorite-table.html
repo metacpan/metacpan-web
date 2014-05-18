@@ -1,5 +1,7 @@
 <% IF favorites.size %>
-<table class="table table-condensed table-striped table-favorites<% IF tablesorter %> tablesorter<% END %>" id="author_favorites">
+<table id="author_favorites"
+  <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
+  class="table table-condensed table-striped table-favorites<% IF tablesorter %> tablesorter<% END %>">
   <thead>
     <tr>
       <th class="release pull-left-phone"><% author ? "Favorites" : "Distribution" %></th>
