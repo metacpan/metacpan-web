@@ -166,10 +166,10 @@ sub view : Private {
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     # Cache the PerlTV json file in memory
-    my $CACHE = 60*60;
-    if (not $perltv_time or $perltv_time < time - $CACHE) {
+    my $CACHE = 60 * 60;
+    if ( not $perltv_time or $perltv_time < time - $CACHE ) {
         my $perltv_file = $c->config->{perltv_file};
-        if (open my $fh, '<', $perltv_file) {
+        if ( open my $fh, '<', $perltv_file ) {
             local $/ = undef;
             my $json = <$fh>;
             close $fh;
@@ -180,10 +180,11 @@ sub view : Private {
         }
     }
     if ($perltv_data) {
-        my $ptv = $perltv_data->{modules}{$data->{documentation}};
+        my $ptv = $perltv_data->{modules}{ $data->{documentation} };
         if ($ptv) {
+
             # There can be more than one video per module. Show them randomly.
-            $c->stash( { perltv => $ptv->[int rand scalar @$ptv] } );
+            $c->stash( { perltv => $ptv->[ int rand scalar @$ptv ] } );
         }
     }
 

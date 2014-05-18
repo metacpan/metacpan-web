@@ -11,7 +11,7 @@ use lib "$Bin/../lib";
 use Config::General;
 use LWP::Simple;
 
-my $conf = Config::General->new("$Bin/../metacpan_web.conf");
+my $conf   = Config::General->new("$Bin/../metacpan_web.conf");
 my %config = $conf->getall;
 
 #use Data::Dumper;
@@ -19,5 +19,5 @@ my %config = $conf->getall;
 
 my $url = 'http://perltv.org/meta.json';
 
-mirror($url, $config{perltv_file});
+mirror( $url, $config{perltv_file} );
 
