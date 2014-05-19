@@ -1,3 +1,9 @@
+Title: The sorting of a table on the author page is now persistent
+------------------------------
+Date: 2014-05-19T10:50:12
+
+Now, you can set your favorite sorting type of each table on the author page and we will use it as default type. No need to set every time when access that page in the same browser.
+
 Title: Details of (++)plussers displayed.
 ------------------------------
 Date: 2014-05-12T18:40:17
