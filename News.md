@@ -1,8 +1,12 @@
-Title: The sorting of a table on the author page is now persistent
+Title: Table sorting is now persistent
 ------------------------------
 Date: 2014-05-19T10:50:12
 
-Now, you can set your favorite sorting type of each table on the author page and we will use it as default type. No need to set every time when access that page in the same browser.
+When you change the sorting of a table it will be saved in your
+browser's localStorage so that the next time you view that particular table
+it will remember your last preference.  This is saved on a per table basis
+(for example, author releases, author favorites, and reverse dependency releases).
+No need to set it every time when accessing that page in the same browser.
 
 Title: Details of (++)plussers displayed.
 ------------------------------
