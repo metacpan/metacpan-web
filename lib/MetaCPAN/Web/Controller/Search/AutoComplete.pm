@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
 use namespace::autoclean;
+use JSON::MaybeXS ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
