@@ -96,20 +96,25 @@ $(document).ready(function () {
     }
 
     SyntaxHighlighter.highlight();
-    
+
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
-    if (typeof defaultSort == "undefined") defaultSort = [[0, 0]];
-    $('.tablesorter').tablesorter({sortList: defaultSort, widgets: ['zebra'], textExtraction: function (node) {
-        var $node = $(node);
-        var sort = $node.attr("sort");
-        if(!sort) return node.innerHTML;
-        if ($node.hasClass("date")) {
-            return (new Date(sort)).getTime();
-        } else {
-            return sort;
-        }
-    }} );
+    
+    $('table.tablesorter').each(function(){
+        var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
+          this.getAttribute('data-default-sort') || '0,0');
+        sortid = JSON.parse("[" + sortid + "]");
+        $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
+            var $node = $(node);
+            var sort = $node.attr("sort");
+            if(!sort) return node.innerHTML;
+            if ($node.hasClass("date")) {
+                return (new Date(sort)).getTime();
+            } else {
+                return sort;
+            }
+        }} );
+    });
 
     $('.tablesorter.remote th.header').each(function () {
         $(this).unbind('click');
@@ -223,6 +228,18 @@ $(document).ready(function () {
     }
     $('#pod-errors').addClass('collapsed');
     $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
+
+    $('.table.tablesorter th.header').on('click', function() {
+        tableid = $(this).parents().eq(2).attr('id');
+        setTimeout(function(){
+            var sortParam  = $.getUrlVar('sort');
+            if( sortParam != null ){
+                sortParam  = sortParam.slice(2,5);
+                localStorage.setItem( "tablesorter:" + tableid, sortParam );
+            }
+        }, 1000);
+    });
+
 });
 
 function searchForNearest() {
