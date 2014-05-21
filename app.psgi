@@ -116,21 +116,20 @@ if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
 
 # Handle surrogate (fastly caching)
 my $hour_ttl = 60 * 60;
-my $day_ttl = $hour_ttl * 24;
+my $day_ttl  = $hour_ttl * 24;
 
 $app = builder {
 
     # Tell fastly to cache _asset and _asset_less for a day
     enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers',
-      set => ['Surrogate-Control' => "max-age=${day_ttl}"];
+        set => [ 'Surrogate-Control' => "max-age=${day_ttl}" ];
 
     # Tell fastly to cache /static/ for an hour
     enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers',
-      set => ['Surrogate-Control' => "max-age=${hour_ttl}"];
+        set => [ 'Surrogate-Control' => "max-age=${hour_ttl}" ];
 
     $app;
 };
-
 
 Plack::Middleware::ReverseProxy->wrap(
     sub {
