@@ -113,6 +113,14 @@ sub view : Private {
         root     => \@root_files,
         examples => \@examples,
         files    => \@view_files,
+
+        # TODO: Put this in a more general place.
+        # Maybe make a hash for feature flags?
+        (
+            map { ( $_ => $c->config->{$_} ) }
+                qw( mark_unauthorized_releases )
+        ),
+
         ( $changes ? ( last_version_changes => $changes ) : () )
 
     );
