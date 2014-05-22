@@ -230,17 +230,6 @@ DISTRIBUTIONS
       Module::Metadata 0
       strict 0
       warnings 0
-  CPAN-Meta-Requirements-2.125
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
-    provides:
-      CPAN::Meta::Requirements 2.125
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      Scalar::Util 0
-      strict 0
-      version 0.77
-      warnings 0
   CPAN-Meta-YAML-0.012
     pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.012.tar.gz
     provides:
@@ -988,7 +977,6 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.17
       HTTP::Date 1.44
-      Module::Build 0.36
       Test::More 0.47
   DateTime-Format-ISO8601-0.08
     pathname: J/JH/JHOBLITT/DateTime-Format-ISO8601-0.08.tar.gz
@@ -1502,7 +1490,7 @@ DISTRIBUTIONS
       DateTime::Locale::zu_ZA undef
     requirements:
       List::MoreUtils 0
-      Module::Build 0.36
+      Module::Build 0
       Params::Validate 0.91
       perl 5.006
   DateTime-TimeZone-1.65
@@ -2678,15 +2666,6 @@ DISTRIBUTIONS
       JSON::PP 2.27202
       Test::More 0.88
       Test::Without::Module 0.17
-  JSON-PP-2.27203
-    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
-    provides:
-      JSON::PP 2.27203
-      JSON::PP::Boolean 2.27203
-      JSON::PP::IncrParser 2.27203
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   JSON-XS-3.01
     pathname: M/ML/MLEHMANN/JSON-XS-3.01.tar.gz
     provides:
@@ -3945,6 +3924,20 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
+  Perl-Tidy-20140328
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20140328.tar.gz
+    provides:
+      Perl::Tidy 20140328
+      Perl::Tidy::DevNull 20140328
+      Perl::Tidy::Diagnostics 20140328
+      Perl::Tidy::HtmlWriter 20140328
+      Perl::Tidy::IOScalar 20140328
+      Perl::Tidy::IOScalarArray 20140328
+      Perl::Tidy::LineSink 20140328
+      Perl::Tidy::LineSource 20140328
+      Perl::Tidy::Logger 20140328
+    requirements:
+      ExtUtils::MakeMaker 0
   PerlIO-gzip-0.18
     pathname: N/NW/NWCLARK/PerlIO-gzip-0.18.tar.gz
     provides:
@@ -4091,6 +4084,13 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
+  Plack-Middleware-Headers-0.11
+    pathname: V/VO/VOJ/Plack-Middleware-Headers-0.11.tar.gz
+    provides:
+      Plack::Middleware::Headers 0.11
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      Plack::Middleware 0
   Plack-Middleware-MethodOverride-0.10
     pathname: D/DW/DWHEELER/Plack-Middleware-MethodOverride-0.10.tar.gz
     provides:
@@ -4579,7 +4579,6 @@ DISTRIBUTIONS
     provides:
       Test::Exception 0.32
     requirements:
-      Module::Build 0.38
       Sub::Uplevel 0.18
       Test::Builder 0.7
       Test::Builder::Tester 1.07

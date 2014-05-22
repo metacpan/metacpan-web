@@ -49,6 +49,7 @@ requires 'PerlIO::gzip';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
+requires 'Plack::Middleware::Headers';
 requires 'Plack::Middleware::ServerStatus::Lite';
 requires 'Plack::Middleware::Session';
 requires 'Plack::Middleware::Session::Cookie';
