@@ -309,10 +309,3 @@ function favDistribution(form) {
     });
     return false;
 }
-
-$(document).on('keydown', function (e) {
-        if (e.keyCode === 27) { 
-            $( "#dependencies-graph" ).hide(); 
-            $( ".modal-backdrop" ).hide();
-        } 
-});
