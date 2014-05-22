@@ -126,6 +126,12 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     text-decoration: none;
 }
 
+li button.dependencies-graph {
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+}
+
 .user-profiles > a {
     text-decoration: none;
 }
