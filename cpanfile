@@ -36,7 +36,7 @@ requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'Hash::AsObject';
 requires 'Hash::Merge';
-requires 'JSON::XS';
+requires 'JSON::XS', '3.01';
 requires 'List::MoreUtils';
 requires 'List::Util';
 requires 'Locale::Country','3.28';
