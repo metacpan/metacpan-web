@@ -29,12 +29,29 @@ use Plack::Middleware::ServerStatus::Lite;
 
 # explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
-$app->map(
-    '/static/' => Plack::App::File->new( root => 'root/static' )->to_app );
-$app->map( '/favicon.ico' =>
-        Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
-        ->to_app );
-$app->map( '/' => MetaCPAN::Web->psgi_app );
+
+# Static content
+my $static_app = Plack::App::File->new( root => 'root/static' )->to_app;
+$app->map( '/static/' => $static_app );
+
+# favicon
+my $fav_app = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
+    ->to_app;
+$app->map( '/favicon.ico' => $fav_app );
+
+# Main catalyst app
+my $core_app = MetaCPAN::Web->psgi_app;
+
+# Add session cookie here only
+$core_app = Plack::Middleware::Session::Cookie->wrap(
+    $core_app,
+    session_key => 'metacpan_secure',
+    expires     => 2**30,
+    secure      => 1,
+    httponly    => 1,
+);
+
+$app->map( '/' => $core_app );
 $app = $app->to_app;
 
 unless ( $ENV{HARNESS_ACTIVE} ) {
@@ -131,19 +148,6 @@ $app = builder {
     $app;
 };
 
-Plack::Middleware::ReverseProxy->wrap(
-    sub {
-        my $env    = shift;
-        my $secure = $env->{'HTTP_X_FORWARDED_PORT'}
-            && $env->{'HTTP_X_FORWARDED_PORT'} eq '443';
-        Plack::Middleware::Session::Cookie->wrap(
-            $app,
-            session_key => $secure
-            ? 'metacpan_secure'
-            : 'metacpan',
-            expires => 2**30,
-            $secure ? ( secure => 1 ) : (),
-            httponly => 1,
-        )->($env);
-    }
-);
+$app = Plack::Middleware::ReverseProxy->wrap($app);
+
+return $app;
