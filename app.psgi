@@ -31,27 +31,35 @@ use Plack::Middleware::ServerStatus::Lite;
 my $app = Plack::App::URLMap->new;
 
 # Static content
-my $static_app = Plack::App::File->new( root => 'root/static' )->to_app;
-$app->map( '/static/' => $static_app );
+{
+    my $static_app = Plack::App::File->new( root => 'root/static' )->to_app;
+    $app->map( '/static/' => $static_app );
+}
 
 # favicon
-my $fav_app = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
-    ->to_app;
-$app->map( '/favicon.ico' => $fav_app );
+{
+    my $fav_app
+        = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
+        ->to_app;
+    $app->map( '/favicon.ico' => $fav_app );
+}
 
 # Main catalyst app
-my $core_app = MetaCPAN::Web->psgi_app;
+{
+    my $core_app = MetaCPAN::Web->psgi_app;
 
-# Add session cookie here only
-$core_app = Plack::Middleware::Session::Cookie->wrap(
-    $core_app,
-    session_key => 'metacpan_secure',
-    expires     => 2**30,
-    secure      => 1,
-    httponly    => 1,
-);
+    # Add session cookie here only
+    $core_app = Plack::Middleware::Session::Cookie->wrap(
+        $core_app,
+        session_key => 'metacpan_secure',
+        expires     => 2**30,
+        secure      => 1,
+        httponly    => 1,
+    );
 
-$app->map( '/' => $core_app );
+    $app->map( '/' => $core_app );
+}
+
 $app = $app->to_app;
 
 unless ( $ENV{HARNESS_ACTIVE} ) {
@@ -132,21 +140,23 @@ if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
 }
 
 # Handle surrogate (fastly caching)
-my $hour_ttl = 60 * 60;
-my $day_ttl  = $hour_ttl * 24;
+{
+    my $hour_ttl = 60 * 60;
+    my $day_ttl  = $hour_ttl * 24;
 
-$app = builder {
+    $app = builder {
 
-    # Tell fastly to cache _asset and _asset_less for a day
-    enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers',
-        set => [ 'Surrogate-Control' => "max-age=${day_ttl}" ];
+        # Tell fastly to cache _asset and _asset_less for a day
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers',
+            set => [ 'Surrogate-Control' => "max-age=${day_ttl}" ];
 
-    # Tell fastly to cache /static/ for an hour
-    enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers',
-        set => [ 'Surrogate-Control' => "max-age=${hour_ttl}" ];
+        # Tell fastly to cache /static/ for an hour
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers',
+            set => [ 'Surrogate-Control' => "max-age=${hour_ttl}" ];
 
-    $app;
-};
+        $app;
+    };
+}
 
 $app = Plack::Middleware::ReverseProxy->wrap($app);
 
