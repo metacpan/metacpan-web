@@ -1,0 +1,3 @@
+#!/bin/sh
+
+carton exec prove -lrv $@
