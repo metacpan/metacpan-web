@@ -10,6 +10,7 @@ use autodie;
 use Carp;
 use ElasticSearch;
 use File::Spec;
+use MetaCPAN::Web::Types qw( HashRef Int Str );
 use Moose;
 use MooseX::StrictConstructor;
 use PerlIO::gzip;
@@ -17,18 +18,18 @@ use XML::Simple qw(:strict);
 
 has [ 'cpan_directory', 'object_type', 'field_name', 'xml_file', ] => (
     is       => 'ro',
-    isa      => 'Str',
+    isa      => Str,
     required => 1,
 );
 
 has 'filter' => (
     is  => 'ro',
-    isa => 'HashRef',
+    isa => HashRef,
 );
 
 has 'size' => (
     is  => 'ro',
-    isa => 'Int',
+    isa => Int,
 );
 
 # Mandatory arguments to this function are
