@@ -57,7 +57,7 @@ END %>
 <%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
 <% FOREACH plusser IN plusser_authors%>
 
-<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
+<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(20) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
 
 <% IF loop.count%35 == 0 %>
 <!--To display 35 plussers in one row. -->

@@ -1,10 +1,7 @@
 <div class="author-pic">
-<%-
-	IF author.gravatar_url;
-	author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/");
-%>
+<%- IF author.gravatar_url %>
 <a href="/author/<% author.pauseid %>">
-	<img src="<% author.gravatar_url %>">
+	<img src="<% author.gravatar_url.gravatar_fixup(130) %>">
 </a>
 <% END %>
 <strong>
