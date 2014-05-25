@@ -8,7 +8,7 @@ use mro;
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
 use URI;
-use JSON;
+use JSON::MaybeXS qw(encode_json);
 use Gravatar::URL;
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
@@ -136,7 +136,7 @@ Template::Alloy->define_vmethod(
 Template::Alloy->define_vmethod(
     'array',
     json => sub {
-        JSON::encode_json(shift);
+        encode_json(shift);
     }
 );
 

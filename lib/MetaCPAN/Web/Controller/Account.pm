@@ -2,8 +2,8 @@ package MetaCPAN::Web::Controller::Account;
 
 use Moose;
 use List::MoreUtils qw(pairwise);
-use DateTime ();
-use JSON::XS ();
+use DateTime      ();
+use JSON::MaybeXS ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
