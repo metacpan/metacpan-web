@@ -1,3 +1,28 @@
+<!-- For plussers -->
+<% IF plusser_authors.size or plusser_others %>
+<b class="hidden-phone">++ed by:</b>
+
+<div class ="plussers_div hidden-phone">
+<% author_nums = plusser_authors.size <= 5 ? plusser_authors.size : 5 %>
+<%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
+<% FOREACH plusser IN plusser_authors.slice(0, author_nums - 1) %>
+
+<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(20) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
+
+<% END %>
+
+<!-- Display counts of plussers-->
+<p>
+<% IF plusser_authors.size %>
+<% plusser_authors.size %> PAUSE user(s)</b><br>
+<% END %>
+<% IF plusser_others %>
+<% plusser_others %> non-PAUSE user(s).
+<% END %>
+</p>
+</div>
+<% END %>
+
 <div class="author-pic">
 <%- IF author.gravatar_url %>
 <a href="/author/<% author.pauseid %>">
@@ -14,7 +39,7 @@
 %>
   <div class="coderwall">
     <a href="https://coderwall.com/<% p.id %>">
-        <img alt="Endorse <% author.asciiname %> on Coderwall" 
+        <img alt="Endorse <% author.asciiname %> on Coderwall"
            title="Endorse <% author.asciiname %> on Coderwall"
              width="110" height="20"
              src="https://api.coderwall.com/<% p.id %>/endorsecount.png" /></a></div>
