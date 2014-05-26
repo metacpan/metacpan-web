@@ -50,24 +50,3 @@ END %>
   <% module.documentation %></span>
   <%- END %>
 </div>
-
-<!-- For plussers -->
-<div class ="plussers_div">
-
-<%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
-<% FOREACH plusser IN plusser_authors%>
-
-<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(20) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
-
-<% IF loop.count%35 == 0 %>
-<!--To display 35 plussers in one row. -->
-<p> </p>
-<% END %>
-<% END %>
-
-</div>
-
-<!-- Display the count of non pauseid plussers-->
-<% IF plusser_others %>
-<p><b>and <% plusser_others %> non-PAUSE user(s)</b> ++ed this.</b></p>
-<% END %>
