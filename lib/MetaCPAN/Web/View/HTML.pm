@@ -179,7 +179,10 @@ Template::Alloy->define_vmethod(
     'text',
     gravatar_fixup => sub {
         my ( $url, $size ) = @_;
-        if ( $url =~ m{^https?://(secure|www)\.gravatar\.com/avatar/} ) {
+        if ( $url
+            =~ m{^https?://([a-z0-9.-]+\.)?gravatar\.com/(avatar|userimage)/}i
+            )
+        {
             my $url = URI->new($url);
             $url->scheme('https');
             $url->host('secure.gravatar.com');
