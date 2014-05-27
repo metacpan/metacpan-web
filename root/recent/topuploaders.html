@@ -4,10 +4,10 @@
 <div class="content toplists">
 <% FOREACH author IN authors %>
 <div class="entry">
-    <%- IF author.gravatar_url; author.gravatar_url = author.gravatar_url.replace("^http://(www\.)?gravatar.com/", "https://secure.gravatar.com/") %>
+    <%- IF author.gravatar_url %>
     <div class="gravatar">
         <a href="/author/<% author.pauseid %>">
-            <img src="<% author.gravatar_url %>" class="author-img" style="width: 75px; height: 75px">
+            <img src="<% author.gravatar_url.gravatar_fixup(75) %>" class="author-img" style="width: 75px; height: 75px">
         </a>
     </div>
     <%- END %>

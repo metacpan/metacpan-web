@@ -8,6 +8,7 @@ use mro;
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
 use URI;
+use URI::QueryParam;
 use JSON;
 use Gravatar::URL;
 use Regexp::Common qw(time);
@@ -172,6 +173,26 @@ Template::Alloy->define_vmethod(
         $digest =~ tr/[+\/]/-_/;
         return $digest;
     }
+);
+
+Template::Alloy->define_vmethod(
+    'text',
+    gravatar_fixup => sub {
+        my ( $url, $size ) = @_;
+        if ( $url =~ m{^https?://(secure|www)\.gravatar\.com/avatar/} ) {
+            my $url = URI->new($url);
+            $url->scheme('https');
+            $url->host('secure.gravatar.com');
+            if ($size) {
+                $url->query_param( s => $size );
+            }
+            else {
+                $url->query_param_delete('s');
+            }
+            return $url->as_string;
+        }
+        return $url;
+    },
 );
 
 1;
