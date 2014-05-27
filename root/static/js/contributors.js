@@ -13,8 +13,9 @@ $(function(){
             // TODO make this an :before pseudo-class
             var gravatar = data.gravatar_url;
             gravatar = gravatar.replace( 
-                "^http://(www\.)?gravatar.com/",
-                "https://secure.gravatar.com/"
+                "^https?://([a-z0-9.-]+\.)?gravatar\.com/",
+                "https://secure.gravatar.com/",
+                "i"
             ).replace(
                 /s=\d+/,
                 's=20'
