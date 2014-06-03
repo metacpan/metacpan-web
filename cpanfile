@@ -1,6 +1,7 @@
 requires 'AnyEvent::Curl::Multi';
 requires 'CHI';
 requires 'CPAN::Changes', '0.21';
+requires 'CPAN::Meta', '2.141520'; # Avoid issues with List::Util dep under carton install.
 requires 'Captcha::reCAPTCHA', '0.94';
 requires 'Capture::Tiny';
 requires 'Catalyst', '5.90053';
