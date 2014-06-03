@@ -196,23 +196,22 @@ DISTRIBUTIONS
       Text::Wrap 0
       perl 5.010
       version 0.79
-  CPAN-Meta-2.140640
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.140640.tar.gz
+  CPAN-Meta-2.141520
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.141520.tar.gz
     provides:
-      CPAN::Meta 2.140640
-      CPAN::Meta::Converter 2.140640
-      CPAN::Meta::Feature 2.140640
-      CPAN::Meta::History 2.140640
-      CPAN::Meta::Prereqs 2.140640
-      CPAN::Meta::Spec 2.140640
-      CPAN::Meta::Validator 2.140640
+      CPAN::Meta 2.141520
+      CPAN::Meta::Converter 2.141520
+      CPAN::Meta::Feature 2.141520
+      CPAN::Meta::History 2.141520
+      CPAN::Meta::Prereqs 2.141520
+      CPAN::Meta::Spec 2.141520
+      CPAN::Meta::Validator 2.141520
     requirements:
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::YAML 0.008
       Carp 0
       ExtUtils::MakeMaker 6.17
       JSON::PP 2.27200
-      List::Util 1.33
       Parse::CPAN::Meta 1.4414
       Scalar::Util 0
       strict 0
@@ -229,6 +228,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Module::Metadata 0
       strict 0
+      warnings 0
+  CPAN-Meta-Requirements-2.125
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
+    provides:
+      CPAN::Meta::Requirements 2.125
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      Scalar::Util 0
+      strict 0
+      version 0.77
       warnings 0
   CPAN-Meta-YAML-0.012
     pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.012.tar.gz
@@ -977,6 +987,7 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.17
       HTTP::Date 1.44
+      Module::Build 0.36
       Test::More 0.47
   DateTime-Format-ISO8601-0.08
     pathname: J/JH/JHOBLITT/DateTime-Format-ISO8601-0.08.tar.gz
@@ -1490,7 +1501,7 @@ DISTRIBUTIONS
       DateTime::Locale::zu_ZA undef
     requirements:
       List::MoreUtils 0
-      Module::Build 0
+      Module::Build 0.36
       Params::Validate 0.91
       perl 5.006
   DateTime-TimeZone-1.65
@@ -2666,6 +2677,15 @@ DISTRIBUTIONS
       JSON::PP 2.27202
       Test::More 0.88
       Test::Without::Module 0.17
+  JSON-PP-2.27203
+    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
+    provides:
+      JSON::PP 2.27203
+      JSON::PP::Boolean 2.27203
+      JSON::PP::IncrParser 2.27203
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   JSON-XS-3.01
     pathname: M/ML/MLEHMANN/JSON-XS-3.01.tar.gz
     provides:
@@ -3583,6 +3603,37 @@ DISTRIBUTIONS
       namespace::clean 0
       overload 0
       perl 5.008
+      strict 0
+      warnings 0
+  MooseX-Types-Path-Class-0.06
+    pathname: T/TH/THEPLER/MooseX-Types-Path-Class-0.06.tar.gz
+    provides:
+      MooseX::Types::Path::Class 0.06
+    requirements:
+      Class::MOP 0
+      ExtUtils::MakeMaker 6.30
+      Moose 0.39
+      MooseX::Types 0.04
+      Path::Class 0.16
+      Test::More 0.88
+  MooseX-Types-URI-0.05
+    pathname: E/ET/ETHER/MooseX-Types-URI-0.05.tar.gz
+    provides:
+      MooseX::Types::URI 0.05
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      Module::Build::Tiny 0.030
+      Moose::Util::TypeConstraints 0
+      MooseX::Types 0
+      MooseX::Types::Moose 0
+      MooseX::Types::Path::Class 0
+      Scalar::Util 0
+      URI 0
+      URI::FromHash 0
+      URI::WithBase 0
+      URI::data 0
+      URI::file 0
+      perl 5.006
       strict 0
       warnings 0
   Net-CIDR-Lite-0.21
@@ -4579,6 +4630,7 @@ DISTRIBUTIONS
     provides:
       Test::Exception 0.32
     requirements:
+      Module::Build 0.38
       Sub::Uplevel 0.18
       Test::Builder 0.7
       Test::Builder::Tester 1.07
@@ -5148,6 +5200,19 @@ DISTRIBUTIONS
       URI 1.00
       URI::URL 5.00
       perl v5.6.0
+  URI-FromHash-0.04
+    pathname: D/DR/DROLSKY/URI-FromHash-0.04.tar.gz
+    provides:
+      URI::FromHash 0.04
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      Params::Validate 0
+      URI 0
+      URI::QueryParam 0
+      strict 0
+      warnings 0
   Variable-Magic-0.53
     pathname: V/VP/VPIT/Variable-Magic-0.53.tar.gz
     provides:
