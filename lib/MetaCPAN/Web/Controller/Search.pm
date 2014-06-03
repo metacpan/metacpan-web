@@ -54,6 +54,26 @@ sub index : Path {
 
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
+
+        if ( $results->{total} == 1 ) {
+            my $module_name
+                = $results->{results}->[0]->[0]->{module}->[0]->{names};
+            $c->res->redirect("/pod/$module_name");
+            $c->detach;
+        }
+        elsif ( !$results->{total} && !$authors->{total} ) {
+            if ( $query =~ m/:/ ) {
+                $query =~ s/:+(?)/::/g if ( $query !~ m/(\w)(\b)::(\w)(\b)/ );
+                $c->stash(
+                    {
+                        suggest => $query,
+                    }
+                );
+            }
+            $c->stash( template => 'no_result.html' );
+            $c->detach;
+        }
+
         $c->stash(
             {
                 %$results,

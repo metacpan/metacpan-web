@@ -20,10 +20,11 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
-    ok(
-        $res->content =~ /0\s+results/,
-        '0 results for an invalid search term'
-    );
+
+    use Data::Dump qw/dump/;
+    warn dump( $res->content );
+    ok( $res->content =~ /Task::Kensho/,
+        'get recommendation about Task::Kensho on No result page' );
 
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
