@@ -1,32 +1,24 @@
 <%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
-<ul class="nav nav-list slidepanel">
-  <li class="visible-phone search">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-    </form>
-  </li>
-  <li class="nav-header">Something missing?</li>
-  <li>
-    <div>
-      <a href="/about/missing_modules">Find out why</a>
+<% IF suggest %>
+  <% INCLUDE left_sidebar.html %>
+  <div class="no-results">
+    <div class="alert alert-error">
+      Did you mean :
+      <a href="/search?q=<% suggest | uri %>"><% suggest %></a>  
     </div>
-  </li>
-</ul>
-<div class="no-results">
-  <% IF suggest %>
-  <div class="alert alert-error">
-    Did you mean :
-    <a href="/search?q=<% suggest | uri %>"><% suggest %></a>  
   </div>
-  <% ELSE %>
-    <div class="hero-unit">
-        <h2>No result.</h2>
-        <p> Sorry, we didn't find a match, maybe look at Task::Kensho, <br> which is a list of recommended modules for Enlightened Perl development.</p>
-        <p>
-          <a class="btn btn-primary btn-large" href="/pod/Task::Kensho">
-            Learn more
-          </a>
-        </p>
-    </div>
-  <% END %>
-</div>
+<% ELSE %>
+  <div class="hero-unit">
+    <p class="nav-header">Something missing?
+      <a href="/about/missing_modules">Find out why</a>
+    </p>
+    <h2>No result.</h2>
+    <p> Sorry, we didn't find a match, maybe look at Task::Kensho, <br> which is a list of recommended modules for Enlightened Perl development.
+    </p>
+    <p>
+      <a class="btn btn-primary btn-large" href="/pod/Task::Kensho">
+        Learn more
+      </a>
+    </p>
+  </div>
+<% END %>

@@ -1,0 +1,20 @@
+<ul class="nav nav-list slidepanel">
+  <li class="visible-phone search">
+    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+    </form>
+  </li>
+  <!--<ul class="search-type">
+  <a href="/search?q="><li class="icon icon-module">Modules</li></a>
+  <a href="/search?q=author:<% query %>"><li class="icon icon-user">Authors</li></a>
+  <li class="icon icon-dist">Distributions</li>
+  <li class="icon icon-server">Mirrors</li>
+  </ul>
+  <hr>-->
+  <li class="nav-header">Something missing?</li>
+  <li>
+    <div>
+      <a href="/about/missing_modules">Find out why</a>
+    </div>
+  </li>
+</ul>
