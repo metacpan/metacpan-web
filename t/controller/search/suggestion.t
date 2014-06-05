@@ -12,14 +12,8 @@ my %tests = (
 test_psgi app, sub {
     my $cb = shift;
     while ( my ( $k, $v ) = each %tests ) {
-
         ok( my $res = $cb->( GET "/search?q=$k" ), 'search for ' . $k );
         my $tx = tx($res);
-        use Data::Dump qw/dump/;
-        warn dump(
-            $tx->find_value(
-                '//div[@class="no-results"]//div[@class="alert alert-error"]')
-        );
         my $module
             = $tx->find_value(
             '//div[@class="no-results"]//div[@class="alert alert-error"]//a[1]'
