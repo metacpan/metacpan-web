@@ -6,15 +6,15 @@ use strict;
 use warnings;
 
 use Daemon::Control;
-use File::Path 2.06 (); # core
+use File::Path 2.06 ();    # core
 
-my $name    = 'metacpan-www';
-my $user    = 'metacpan';
-my $root    = '/home/metacpan';
-my $home    = "$root/metacpan.org";
-my %dirs    = (
-  pid => "$home/var/run",
-  log => "$home/var/log",
+my $name = 'metacpan-www';
+my $user = 'metacpan';
+my $root = '/home/metacpan';
+my $home = "$root/metacpan.org";
+my %dirs = (
+    pid => "$home/var/run",
+    log => "$home/var/log",
 );
 my $carton  = '/usr/local/perlbrew/perls/perl-5.16.2/bin/carton';
 my $workers = 7;
@@ -35,7 +35,7 @@ my @program_args = (
     '-s', => 'Starman',
 );
 
-File::Path::make_path(values %dirs);
+File::Path::make_path( values %dirs );
 
 # Notes on unused args
 # scan_name: seems to be just 'starman master' (not useful)
