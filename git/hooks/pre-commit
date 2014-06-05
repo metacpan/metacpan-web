@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+# Hack to use carton's local::lib.
+use lib 'local/lib/perl5';
 
 use Code::TidyAll::Git::Precommit;
 Code::TidyAll::Git::Precommit->check();
