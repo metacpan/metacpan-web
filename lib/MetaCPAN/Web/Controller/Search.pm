@@ -57,16 +57,17 @@ sub index : Path {
 
         if ( $results->{total} == 1 ) {
             my $module_name
-                = $results->{results}->[0]->[0]->{module}->[0]->{names};
+                = $results->{results}->[0]->[0]->{module}->[0]->{name};
             $c->res->redirect("/pod/$module_name");
             $c->detach;
         }
         elsif ( !$results->{total} && !$authors->{total} ) {
-            if ( $query =~ m/:/ ) {
-                $query =~ s/:+(?)/::/g if ( $query !~ m/(\w)(\b)::(\w)(\b)/ );
+            my $suggest = $query;
+            $suggest =~ s/:+/::/g;
+            if ( $suggest ne $query ) {
                 $c->stash(
                     {
-                        suggest => $query,
+                        suggest => $suggest,
                     }
                 );
             }
