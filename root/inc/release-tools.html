@@ -28,6 +28,12 @@
 </li>
 <%- IF versions.size > 1 %>
 <li>
+    <select onchange="document.location.href='/module/'+this.value">
+        <option>Jump to version</option>
+        <%- PROCESS version_options %>
+    </select>
+</li>
+<li>
     <select name="release" onchange="document.location.href='/diff/file/?target=<% [release.author, release.name, module.path].join("/") %>&amp;source=' + this.value">
         <option>Diff with version</option>
     <%- PROCESS version_options %>
