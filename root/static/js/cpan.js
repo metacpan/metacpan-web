@@ -239,7 +239,13 @@ $(document).ready(function () {
             }
         }, 1000);
     });
-
+    
+    if($(".inline").find("button").hasClass("active")){
+        $(".favorite").attr("title", "Remove from favorite");
+    }
+    else{
+        $(".favorite").attr("title", "Add to favorite");
+    }
 });
 
 function searchForNearest() {
