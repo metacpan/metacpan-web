@@ -158,32 +158,33 @@ $(document).ready(function () {
         }
     });
 
-    $("#search-input").autocomplete('/search/autocomplete', {
+    $('#search-input').autocomplete({
+        serviceUrl: '/search/autocomplete',
         dataType: 'json',
-        delay: 100,
-        max: 20,
-        selectFirst: false,
+        lookupLitmit: 20,
+        paramName: 'q',
+        autoSelectFirst: false,
+        noCache: true,
+        triggerSelectOnValidInput: false,
+        maxHeight: 180,
         width: $("#search-input").width() + 5,
-        parse: function (data) {
+        transformResult: function (data) {
             var result = $.map(data, function (row) {
-                return {
-                    data: row,
-                    value: row.documentation,
-                    result: row.documentation
+                return { 
+                    data: row.documentation, 
+                    value: row.documentation 
                 };
             });
-            var uniq = {};
-            result = $.grep(result, function (row) {
-                uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
-                return uniq[row.result]++ < 1;
+            var uniq = { };
+            result   = $.grep(result, function (row) {
+                uniq[row.value] = typeof(uniq[row.value]) == 'undefined' ? 0 : uniq[row.value];
+                return uniq[row.value]++ < 1;
             });
-            return result;
+            return { suggestions: result };
         },
-        formatItem: function (item) {
-            return item.documentation;
+        onSelect: function (suggestion) {
+            document.location.href = '/pod/' + suggestion.value;
         }
-    }).result(function(e, item) {
-        document.location.href = '/pod/'+ item.documentation;
     });
 
     $('#search-input.autofocus').focus();

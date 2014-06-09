@@ -1,43 +1,42 @@
-.ac_results {
+.autocomplete-suggestions {
   padding: 0px;
   border: 1px solid #ccc;
   background-color: white;
-  overflow: hidden;
-  z-index: 99999;
+  z-index: 99999; 
+  cursor: default; 
+  overflow-x: hidden; 
+  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  font-family: arial, sans-serif;
+  font-size: 18px;  
+ }
+
+ .autocomplete-suggestions strong { 
+  font-weight: bold; 
+  color: #000000; 
 }
 
-.ac_results ul {
-  width: 100%;
-  list-style-position: outside;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.ac_results li {
+.autocomplete-suggestion { 
   margin: 0px;
   padding: 2px 5px;
-  cursor: default;
-  display: block;
-  /*
-  if width will be 100% horizontal scrollbar will apear
-  when scroll mode will be used
-  */
-  /*width: 100%;*/
-  font-size: 18px;
-  /*
-  it is very important, if line-height not setted or setted
-  in relative units scroll will be broken in firefox
-  */
-  line-height: 20px;
-  font-family: arial, sans-serif;
-  overflow: hidden;
+  display: block; 
+  white-space: nowrap; 
+  overflow: hidden; 
 }
 
-.ac_odd {
-  background-color: #f9f9f9;
+input { 
+  font-size: 28px; 
+  padding: 10px; 
+  border: 1px solid #CCC; 
+  display: block; 
+  margin: 20px 0; 
 }
 
-.ac_over {
-  background-color: #BAD3EA;
+div.autocomplete-suggestions div:nth-child(2n+2) { 
+  background: #f9f9f9; 
+}
+
+.autocomplete-selected { 
+  background: #BAD3EA !important; 
 }

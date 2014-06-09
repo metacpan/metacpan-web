@@ -90,7 +90,7 @@ $app = Plack::Middleware::Assets->wrap(
             jquery.relatize_date
             jquery.ajaxQueue
             jquery.qtip.pack
-            jquery.autocomplete.pack
+            jquery.autocomplete.min
             shCore
             shBrushPerl
             shBrushPlain
