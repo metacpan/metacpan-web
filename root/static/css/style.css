@@ -288,3 +288,7 @@ div.qtip-github table th {
 #contributors .contributor * {
     vertical-align: top;
 }
+.smaller {
+  font-size: 1.0em;
+  line-height: 2.5em;
+}
