@@ -20,10 +20,15 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET "/search?q=moose\">" ), 'GET /search?q=moose">' );
     is( $res->code, 200, 'code 200' );
-    ok(
-        $res->content =~ /0\s+results/,
-        '0 results for an invalid search term'
-    );
+    ok( $res->content =~ /Task::Kensho/,
+        'get recommendation about Task::Kensho on No result page' );
+
+    ok( $res = $cb->( GET "/search?q=ctx_request" ),
+        'GET /search?q=ctx_request' );
+    is( $res->code, 302,
+        'code 302 get redirected to the module if there is 1 result' );
+    is( $res->headers->{location},
+        '/pod/Catalyst::Test', 'get new location to module page' );
 
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
