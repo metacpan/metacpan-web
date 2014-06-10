@@ -26,6 +26,21 @@ sub by_distribution : Chained('root') PathPart('') Args(1) {
 
 }
 
+sub index : Chained('/') PathPart('release') CaptureArgs(1) {
+    my ( $self, $c, $dist ) = @_;
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
+
+}
+
+sub plusser_display : Chained('index') PathPart('plusser') Args(0) {
+    my ( $self, $c ) = @_;
+
+  # $c->stash( $c->model('API::Favorite')->find_plussers($c->stash->{data}) );
+
+    $c->stash( { template => 'plusser.html' } );
+
+}
+
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     my ( $self, $c, $author, $release ) = @_;
 
