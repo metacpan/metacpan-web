@@ -34,9 +34,6 @@ sub index : Chained('/') PathPart('release') CaptureArgs(1) {
 
 sub plusser_display : Chained('index') PathPart('plusser') Args(0) {
     my ( $self, $c ) = @_;
-
-  # $c->stash( $c->model('API::Favorite')->find_plussers($c->stash->{data}) );
-
     $c->stash( { template => 'plusser.html' } );
 
 }
