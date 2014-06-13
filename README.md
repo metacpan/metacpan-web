@@ -6,27 +6,19 @@
 We strongly recommend using [metacpan-developer](https://github.com/CPAN-API/metacpan-developer),
 this will give you a virtual machine already configured and ready to start developing on.
 
+    $ vagrant ssh
+    $ cd /home/metacpan/metacpan.org
+    $ perl bin/daemon_control.pl start
+
+You'll find some log files in var/logs.
+
 ## Installing manually
 
-Install the project dependencies:
-
-    $ cpanm --installdeps .
-
-Run test suite:
-
-    $ prove -lr t/
-
-Start server on port 5001 (which you want to make authentication work)
-
-    $ plackup -p 5001 -r
-
-## Installing manually via carton
-
-If you prefer to use carton to manage your dependencies, then the above
+If you prefer not to use the VM, the following commands will get you started:
 commands can be converted to:
 
     $ carton install
-    $ carton exec prove -lr t/
+    $ ./bin/prove t
     $ carton exec plackup -p 5001 -r
 
 ## Local configuration changes
