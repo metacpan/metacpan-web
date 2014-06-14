@@ -151,6 +151,7 @@ $(document).ready(function () {
     // Autocomplete issues:
     // #345/#396 Up/down keys should put selected value in text box for further editing.
     // #441 Allow more specific queries to send ("Ty", "Type::").
+    // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
     // Please don't steal ctrl-pg up/down.
 
     $('#search-input').autocomplete({
@@ -188,6 +189,15 @@ $(document).ready(function () {
             document.location.href = '/pod/' + suggestion.value;
         }
     });
+
+    // Disable the built-in hover events to work around the issue that
+    // if the mouse pointer is over the box before it appears the event may fire erroneously.
+    // Besides, does anybody really expect an item to be selected just by
+    // hovering over it?  Seems unintuitive to me.  I expect anyone would either
+    // click or hit a key to actually pick an item, and who's going to hover to
+    // the item they want and then instead of just clicking hit tab/enter?
+    $('.autocomplete-suggestions').off('mouseover.autocomplete');
+    $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
     $('#search-input.autofocus').focus();
 

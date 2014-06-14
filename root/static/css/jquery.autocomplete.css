@@ -37,6 +37,14 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
   background: #f9f9f9; 
 }
 
-.autocomplete-selected { 
+/* The !important is required to override the alternating row background. */
+
+/* The plugin highlights when you mouse over an item, but since I've disabled that,
+   simulate the effect with css (but use a different color than the actually "selected" item). */
+.autocomplete-suggestion:hover {
+  background: #DDEEFF !important;
+}
+/* Use two classs (and place after) to increase priority over the above hover style. */
+.autocomplete-suggestion.autocomplete-selected {
   background: #BAD3EA !important; 
 }
