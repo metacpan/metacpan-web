@@ -158,13 +158,24 @@ $(document).ready(function () {
         }
     });
 
+    // Autocomplete issues:
+    // #441 Allow more specific queries to send ("Ty", "Type::").
+    // Please don't steal ctrl-pg up/down.
+
     $('#search-input').autocomplete({
         serviceUrl: '/search/autocomplete',
+        // Wait for more typing rather than firing at every keystroke.
+        deferRequestBy: 150,
+        // If the autocomplete fires with a single colon ("type:") it will get no results
+        // and anything else typed after that will never trigger another query.
+        // Set 'preventBadQueries:false' to keep trying.
+        preventBadQueries: false,
         dataType: 'json',
         lookupLitmit: 20,
         paramName: 'q',
         autoSelectFirst: false,
-        noCache: true,
+        // This simply caches the results of a previous search by url (so no reason not to).
+        noCache: false,
         triggerSelectOnValidInput: false,
         maxHeight: 180,
         width: $("#search-input").width() + 5,
