@@ -5,3 +5,11 @@ argv = --profile=$ROOT/.perltidyrc
 
 [SortLines]
 select = .gitignore
+
+[CSSUnminifier]
+select = root/static/**/*.css
+argv = -w=4
+
+[JSBeautify]
+select = root/static/**/*.js
+argv = --indent-size 4 --brace-style expand
