@@ -130,17 +130,7 @@ $(document).ready(function () {
 
     $('.relatize').relatizeDate();
 
-    $('#search-input').keyup(function (event) {
-        // if up/down arrow is released
-        if (event.keyCode == '38' || event.keyCode == '40') {
-            // get the currently hovered query
-            var query = $('.ac_over').text();
-            if (query) {
-                $('#search-input').val(query);
-            }
-        }
-    });
-
+    // Search box: Feeling Lucky? Shift+Enter
     $('#search-input').keydown(function (event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
@@ -159,6 +149,7 @@ $(document).ready(function () {
     });
 
     // Autocomplete issues:
+    // #345/#396 Up/down keys should put selected value in text box for further editing.
     // #441 Allow more specific queries to send ("Ty", "Type::").
     // Please don't steal ctrl-pg up/down.
 
