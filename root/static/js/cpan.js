@@ -130,17 +130,7 @@ $(document).ready(function () {
 
     $('.relatize').relatizeDate();
 
-    $('#search-input').keyup(function (event) {
-        // if up/down arrow is released
-        if (event.keyCode == '38' || event.keyCode == '40') {
-            // get the currently hovered query
-            var query = $('.ac_over').text();
-            if (query) {
-                $('#search-input').val(query);
-            }
-        }
-    });
-
+    // Search box: Feeling Lucky? Shift+Enter
     $('#search-input').keydown(function (event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
@@ -158,33 +148,56 @@ $(document).ready(function () {
         }
     });
 
-    $("#search-input").autocomplete('/search/autocomplete', {
+    // Autocomplete issues:
+    // #345/#396 Up/down keys should put selected value in text box for further editing.
+    // #441 Allow more specific queries to send ("Ty", "Type::").
+    // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
+    // Please don't steal ctrl-pg up/down.
+
+    $('#search-input').autocomplete({
+        serviceUrl: '/search/autocomplete',
+        // Wait for more typing rather than firing at every keystroke.
+        deferRequestBy: 150,
+        // If the autocomplete fires with a single colon ("type:") it will get no results
+        // and anything else typed after that will never trigger another query.
+        // Set 'preventBadQueries:false' to keep trying.
+        preventBadQueries: false,
         dataType: 'json',
-        delay: 100,
-        max: 20,
-        selectFirst: false,
+        lookupLitmit: 20,
+        paramName: 'q',
+        autoSelectFirst: false,
+        // This simply caches the results of a previous search by url (so no reason not to).
+        noCache: false,
+        triggerSelectOnValidInput: false,
+        maxHeight: 180,
         width: $("#search-input").width() + 5,
-        parse: function (data) {
+        transformResult: function (data) {
             var result = $.map(data, function (row) {
-                return {
-                    data: row,
-                    value: row.documentation,
-                    result: row.documentation
+                return { 
+                    data: row.documentation, 
+                    value: row.documentation 
                 };
             });
-            var uniq = {};
-            result = $.grep(result, function (row) {
-                uniq[row.result] = typeof(uniq[row.result]) == 'undefined' ? 0 : uniq[row.result];
-                return uniq[row.result]++ < 1;
+            var uniq = { };
+            result   = $.grep(result, function (row) {
+                uniq[row.value] = typeof(uniq[row.value]) == 'undefined' ? 0 : uniq[row.value];
+                return uniq[row.value]++ < 1;
             });
-            return result;
+            return { suggestions: result };
         },
-        formatItem: function (item) {
-            return item.documentation;
+        onSelect: function (suggestion) {
+            document.location.href = '/pod/' + suggestion.value;
         }
-    }).result(function(e, item) {
-        document.location.href = '/pod/'+ item.documentation;
     });
+
+    // Disable the built-in hover events to work around the issue that
+    // if the mouse pointer is over the box before it appears the event may fire erroneously.
+    // Besides, does anybody really expect an item to be selected just by
+    // hovering over it?  Seems unintuitive to me.  I expect anyone would either
+    // click or hit a key to actually pick an item, and who's going to hover to
+    // the item they want and then instead of just clicking hit tab/enter?
+    $('.autocomplete-suggestions').off('mouseover.autocomplete');
+    $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
     $('#search-input.autofocus').focus();
 
