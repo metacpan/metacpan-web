@@ -32,9 +32,9 @@ sub index : Chained('/') PathPart('release') CaptureArgs(1) {
 
 }
 
-sub plusser_display : Chained('index') PathPart('plusser') Args(0) {
+sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( { template => 'plusser.html' } );
+    $c->stash( { template => 'plussers.html' } );
 
 }
 
