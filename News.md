@@ -1,9 +1,20 @@
+Title: Faster with Fastly
+------------------------------
+Date: 2014-06-14T18:44:15
+
+You may have noticed an increase in speed for https://metacpan.org/
+since the 22nd of May, this is because the site is now served
+through [Fastly](https://www.fastly.com/). Fastly are providing this
+service free of charge. We are not fully utilising is yet (we don't
+let Fastly cache much), but it makes all sorts of things easier
+for us and we will be able to do even more for you with it in the future.
+
 Title: Suggestion on incorrect number of colons
 ------------------------------
 Date: 2014-06-09T08:15:00
 
 Perl module name should contain only 2 colons, some common mistakes are we underuse or overuse it. Now, suggestion on no result page available when search with missing colon such as [Test:More](https://metacpan.org/search?q=Test%3AMore) or too much colons like [DBIx:::Class::::ResultSet](https://metacpan.org/search?q=DBIx%3A%3A%3AClass%3A%3A%3A%3AResultSet).
- 
+
 Title: Redirect to the module on 1 search result
 ------------------------------
 Date: 2014-06-09T08:15:00
@@ -53,4 +64,3 @@ There is also an [Atom feed](/feed/news).
 If you are interested in how the news feed itself was implemented, check out
 the article [Adding a News Feed to
 MetaCPAN](http://perlmaven.com/adding-news-feed-to-metacpan)
-
