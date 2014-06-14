@@ -11,26 +11,40 @@ table {
 caption, th, td {
     text-align: left;
     font-weight: normal;
-    float:none !important;
+    float: none !important;
 }
+
 table, th, td {
     vertical-align: middle;
 }
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
-blockquote:before, blockquote:after, q:before, q:after { content: ''; }
-blockquote, q { quotes: "" ""; }
-
-/* Remove annoying border on linked images. */
-a img { border: none; }
-
-button, body {
-font-family: Arial,Helvetica,sans-serif;
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
 }
 
-legend { padding: 5px; font-size: 1.1em; font-weight: bold }
+blockquote, q {
+    quotes: "" "";
+}
 
-fieldset { border: 1px solid #E9E9E9; }
+/* Remove annoying border on linked images. */
+a img {
+    border: none;
+}
+
+button, body {
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+legend {
+    padding: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+fieldset {
+    border: 1px solid #E9E9E9;
+}
 
 label span {
     display: inline-block;
@@ -54,20 +68,20 @@ label input[type="text"], label select {
 }
 
 .big-logo {
-  margin: 42px auto 44px auto;
-  display: block;
-  width: 322px;
-  height: 58px;
-  background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
+    margin: 42px auto 44px auto;
+    display: block;
+    width: 322px;
+    height: 58px;
+    background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
 }
 
 .small-logo {
-  position: relative;
-  margin: 0 12px 0 0;
-  float:left;
-  width: 180px;
-  height: 34px;
-  background: transparent url('/static/images/logo.png') no-repeat -1px -68px;
+    position: relative;
+    margin: 0 12px 0 0;
+    float: left;
+    width: 180px;
+    height: 34px;
+    background: transparent url('/static/images/logo.png') no-repeat -1px -68px;
 }
 
 button.favorite, a.favorite {
@@ -112,7 +126,7 @@ button.favorite.highlight, a.favorite.highlight {
     color: #fff;
     text-shadow: 0px 1px 1px #333;
     border-color: #d39534;
-    opacity: 1
+    opacity: 1;
 }
 
 button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hover {
@@ -140,8 +154,6 @@ li button.dependencies-graph {
     border-left: none;
 }
 
-
-
 #content {
     padding: 10px;
 }
@@ -154,6 +166,7 @@ ul {
     color: #999;
     font-size: 0.8em;
 }
+
 .select-text {
     -moz-user-select: all;
     -ms-user-select: all;
@@ -171,7 +184,9 @@ a.ellipsis {
     overflow: hidden;
 }
 
-code { font-family: monospace; }
+code {
+    font-family: monospace;
+}
 
 .olControlAttribution {
     bottom: 0em !important;
@@ -180,8 +195,10 @@ code { font-family: monospace; }
 body div.qtip div.content {
     padding: 0;
     margin: 0;
-    height: auto; min-height: auto;
-    width: auto; min-width: auto;
+    height: auto;
+    min-height: auto;
+    width: auto;
+    min-width: auto;
 }
 
 .ui-tooltip, .qtip {
@@ -223,13 +240,13 @@ div.qtip-github table th {
 }
 
 .file-table .name a {
-     display: inline-block;
+    display: inline-block;
 }
 
 .search-results .description {
     color: #999;
-    max-height:3em;
-    overflow:hidden;
+    max-height: 3em;
+    overflow: hidden;
 }
 
 .rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
@@ -244,51 +261,78 @@ div.qtip-github table th {
 .rating-05 {
     background-position: 0px -19px;
 }
+
 .rating-10 {
     background-position: 0px -38px;
 }
+
 .rating-15 {
     background-position: 0px -57px;
 }
+
 .rating-20 {
     background-position: 0px -76px;
 }
+
 .rating-25 {
     background-position: 0px -95px;
 }
+
 .rating-30 {
     background-position: 0px -114px;
 }
+
 .rating-35 {
     background-position: 0px -133px;
 }
+
 .rating-40 {
     background-position: 0px -152px;
 }
+
 .rating-45 {
     background-position: 0px -171px;
 }
+
 .rating-50 {
     background-position: 0px -190px;
 }
 
 /* Contributors list on release pages
- * see /release/Plack for example
- */
+* see /release/Plack for example
+*/
 
 #contributors .contributor {
     position: relative;
     text-align: left;
     padding-left: 22px;
 }
+
 #contributors .contributor.gravatar img {
     left: 0;
     position: absolute;
 }
+
 #contributors .contributor * {
     vertical-align: top;
 }
+
 .smaller {
-  font-size: 1.0em;
-  line-height: 2.5em;
+    font-size: 1.0em;
+    line-height: 2.5em;
+}
+
+/*Home page*/
+#link_to_task_kensho {
+    width: 30%;
+    padding: 5px 0px 5px 0px;
+    border-radius: 7px;
+    margin-top: 5px;
+    background-color: rgba(196, 226, 241, 0.4);
+    border-color: #4E9DAD;
+    color: #4083A3;
+}
+
+#link_to_task_kensho a {
+    color: #3a87ad;
 }
