@@ -1,5 +1,7 @@
 <title>Plussers - <% plusser_data %></title>
 <% title ='Plussers - ' _ plusser_data %>
+
+
 <ul class="nav nav-list slidepanel">
     <li class="visible-phone search">
       <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
@@ -17,11 +19,8 @@
 <div class ="plussers_disp">
 
 <% FOREACH plusser IN plusser_authors%>
-<!-- display the gravatar url for each pause plusser alongwith their author page as a link.-->
-<div class= "display-pic" scrolling="auto">
-<img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>" width ="75" height ="75">
-<a href="/author/<% plusser.id %>" style="font-size: 12pt;"><b><% plusser.id %></b></a>
-</div>
+
+<a href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"><% plusser.id %></a>
 
 <% END %>
 </div>
