@@ -30,6 +30,13 @@ test_psgi app, sub {
     is( $res->headers->{location},
         '/pod/Catalyst::Test', 'get new location to module page' );
 
+    ok( $res = $cb->( GET "/search?q=perlhacktips" ),
+        'GET /search?q=perlhacktips' );
+    is( $res->code, 200,
+        'perlhacktips should be 200 not 302 because other files match' );
+
+# TODO: Test something that has only one result but isn't indexed (/pod/X won't work).
+
     ok( $res = $cb->( GET "/search?q=moose" ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
 
