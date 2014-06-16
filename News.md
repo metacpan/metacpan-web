@@ -1,3 +1,9 @@
+Title: Link to Task::Kensho is now available on home page and no result page
+------------------------------
+Date: 2014-06-14T23:25:11
+
+If you’re absolute newbies who're not even sure what to search, it will be good idea to take a look at [Task::Kensho!](https://metacpan.org/pod/Task::Kensho) We provide a link to the module in both Home page and No result page with the idea to help CPAN beginners to get started.
+
 Title: Faster with Fastly
 ------------------------------
 Date: 2014-06-14T18:44:15
