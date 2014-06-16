@@ -32,6 +32,7 @@ FOREACH dep IN deps.sort %>
             <i class="fa fa-asterisk black"></i>Dependency graph</button>
         </li>
     <%- END %>
+    <li><a href="/feed/distribution/<% release.distribution %>"><i class="icon-rss" id="icon-rss"></i>Subscribe to <% release.distribution.replace('-', '::') %></a></li>
 </ul>
 
 <%- INCLUDE inc/dependencies-graph.html %>
