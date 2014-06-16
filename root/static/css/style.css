@@ -336,3 +336,11 @@ div.qtip-github table th {
 #link_to_task_kensho a {
     color: #3a87ad;
 }
+
+.news_feed {
+    width: 16px;
+    height: 16px;
+    background: url('/static/images/profile/feed.png') no-repeat 10px 0px;
+    padding-right: 20px;
+    float: right;  
+}
