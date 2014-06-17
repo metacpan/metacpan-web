@@ -99,7 +99,7 @@ $(document).ready(function () {
 
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
-    
+
     $('table.tablesorter').each(function(){
         var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
           this.getAttribute('data-default-sort') || '0,0');
@@ -107,7 +107,7 @@ $(document).ready(function () {
         $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
-            if(!sort) return node.innerHTML;
+            if(!sort) return $node.text();
             if ($node.hasClass("date")) {
                 return (new Date(sort)).getTime();
             } else {
