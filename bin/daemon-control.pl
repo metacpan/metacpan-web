@@ -18,18 +18,20 @@ my %dirs = (
 );
 my $carton  = '/usr/local/perlbrew/perls/perl-5.16.2/bin/carton';
 my $workers = 7;
+my $plack_env = 'production';
 
 # If running in the development vm change the user to avoid permission problems.
 if ( -d '/vagrant' ) {
     $user    = 'vagrant';
     $workers = 3;
+    $plack_env = 'development';
 }
 
 my @program_args = (
     'exec', '/usr/local/perlbrew/perls/perl-5.16.2/bin/plackup',
     '--port'    => 5001,
     '--workers' => $workers,
-    '-E'        => 'production',
+    '-E'        => $plack_env,
     '-Ilib',
     '-a'  => 'app.psgi',
     '-s', => 'Starman',
