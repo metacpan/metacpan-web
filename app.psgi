@@ -53,7 +53,7 @@ my $app = Plack::App::URLMap->new;
         $core_app,
         session_key => 'metacpan_secure',
         expires     => 2**30,
-        secure      => ($ENV{PLACK_ENV} ne 'development'),
+        secure      => ( $ENV{PLACK_ENV} ne 'development' ),
         httponly    => 1,
     );
 
