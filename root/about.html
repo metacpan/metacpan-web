@@ -1,7 +1,7 @@
 <% PROCESS inc/about-bar.html %>
-<div class="content about">
-<% USE Markdown -%>
-<% FILTER markdown %>
+<div class="content about anchors">
+<% USE MultiMarkdown(heading_ids => 1) -%>
+<% FILTER multimarkdown %>
 # About MetaCPAN
 
 MetaCPAN is an open source search engine for the Comprehensive Perl Archive
