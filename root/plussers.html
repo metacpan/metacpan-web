@@ -20,7 +20,7 @@
 
 <% FOREACH plusser IN plusser_authors%>
 
-<a href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"><% plusser.id %></a>
+<a href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>" width ="75" height ="75"><% plusser.id %></a>
 
 <% END %>
 </div>
