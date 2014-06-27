@@ -5,6 +5,8 @@ package MetaCPAN::Web;
 use strict;
 use warnings;
 
+# TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
+
 BEGIN {
     if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
         $ENV{PLACK_SERVER}       = 'Standalone';
@@ -53,7 +55,7 @@ my $app = Plack::App::URLMap->new;
         $core_app,
         session_key => 'metacpan_secure',
         expires     => 2**30,
-        secure      => ( $ENV{PLACK_ENV} ne 'development' ),
+        secure      => ( ( $ENV{PLACK_ENV} || '' ) ne 'development' ),
         httponly    => 1,
     );
 
