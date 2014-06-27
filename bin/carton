@@ -1,2 +1,2 @@
 #!/bin/sh
-perl_carton_path=~/carton/metacpan-web carton exec perl -Ilib $@
+PERL_CARTON_PATH=~/carton/metacpan-web carton exec perl -Ilib $@
