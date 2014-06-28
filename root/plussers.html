@@ -13,15 +13,15 @@
 
 <div class="pull-right hidden-phone">
 </div>
-<div class="content">
-
+<div class="plusser-title">
+<h4> PAUSE users who ++ed <% plusser_data %>.</h4>
 <!-- For plussers -->
 <div class ="plussers_disp">
-
 <% FOREACH plusser IN plusser_authors%>
 
 <a href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>" width ="75" height ="75"><% plusser.id %></a>
 
 <% END %>
+</div>
 </div>
 
