@@ -1,0 +1,27 @@
+<title>Plussers - <% plusser_data %></title>
+<% title ='Plussers - ' _ plusser_data %>
+
+
+<ul class="nav nav-list slidepanel">
+    <li class="visible-phone search">
+      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
+      </form>
+    </li>
+    <li class="nav-header"></li>
+</ul>
+
+<div class="pull-right hidden-phone">
+</div>
+<div class="plusser-title">
+<h4> PAUSE users who ++ed <a href="/release/<% plusser_data %>"><% plusser_data %></a></h4>
+<!-- For plussers -->
+<div class ="plussers_disp">
+<% FOREACH plusser IN plusser_authors%>
+
+<a href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(70) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>" width ="75" height ="75"><% plusser.id %></a>
+
+<% END %>
+</div>
+</div>
+

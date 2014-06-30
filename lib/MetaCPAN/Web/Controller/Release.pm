@@ -23,7 +23,16 @@ sub by_distribution : Chained('root') PathPart('') Args(1) {
     my $model = $c->stash->{model};
     $c->stash->{data} = $model->find($distribution);
     $c->forward('view');
+}
 
+sub index : Chained('/') PathPart('release') CaptureArgs(1) {
+    my ( $self, $c, $dist ) = @_;
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
+}
+
+sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( { template => 'plussers.html' } );
 }
 
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {

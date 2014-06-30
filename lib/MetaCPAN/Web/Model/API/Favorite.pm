@@ -140,7 +140,8 @@ sub find_plussers {
     return (
         {
             plusser_authors => \@plusser_details,
-            plusser_others  => $total_nonauthors
+            plusser_others  => $total_nonauthors,
+            plusser_data    => $distribution
         }
     );
 
