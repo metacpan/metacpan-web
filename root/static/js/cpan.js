@@ -259,6 +259,15 @@ $(document).ready(function () {
     else{
         $(".favorite").attr("title", "Add to favorite");
     }
+
+    $('.dropdown-toggle').dropdown();
+
+    $("#left-nav").affix({
+        offset: {
+            top: 100
+        }
+    });
+
 });
 
 function searchForNearest() {

@@ -140,12 +140,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     text-decoration: none;
 }
 
-li button.dependencies-graph {
-    padding: 0;
-    border: 0;
-    font-size: inherit;
-}
-
 .user-profiles > a {
     text-decoration: none;
 }
@@ -324,7 +318,7 @@ div.qtip-github table th {
 
 /*Home page*/
 #link_to_task_kensho {
-    width: 30%;
+    width: 27em;
     padding: 5px 0px 5px 0px;
     border-radius: 7px;
     margin-top: 5px;
@@ -335,6 +329,11 @@ div.qtip-github table th {
 
 #link_to_task_kensho a {
     color: #3a87ad;
+}
+
+#header-text-noresult {
+    padding-left: 0px;
+    font-size: 14px;
 }
 
 .news_feed {

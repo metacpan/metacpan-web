@@ -1,7 +1,7 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
     <% IF no_profile -%>
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
       <h4 class="alert-heading">Error</h4>
       In order to change your profile you have to <a href="<% oauth_prefix %>&amp;choice=pause" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
     </div>

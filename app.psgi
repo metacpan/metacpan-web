@@ -110,6 +110,7 @@ $app = Plack::Middleware::Assets->wrap(
             bootstrap/bootstrap-collapse
             bootstrap/bootstrap-modal
             bootstrap/bootstrap-tooltip
+            bootstrap/bootstrap-affix
             bootstrap-slidepanel
             )
     ],

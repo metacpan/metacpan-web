@@ -9,6 +9,11 @@
 @import "search.less";
 @import "table.less";
 @import "toplists.less";
+@import "button.less";
+@import "nav.less";
+@import "nav-list.less";
+@import "responsive.less";
+
 
 @iconSpritePath:          "/static/icons/glyphicons-halflings.png";
 @iconWhiteSpritePath:     "/static/icons/glyphicons-halflings-white.png";
@@ -22,6 +27,14 @@
 @navbarLinkColor: @linkColor;
 @navbarHeight: 29px;
 @gridGutterWidth: 10px;
+@navbar-default-link-color: @linkColor;
+@input-border-radius: none;
+@modal-md: 722px;
+@custom-grid-float-breakpoint: 0;
+
+.black {
+  color: @black;
+}
 
 .border-radius(@radius) {
   -webkit-border-radius: 0;
@@ -29,112 +42,8 @@
           border-radius: 0;
 }
 
-.navbar .dropdown.open {
-  .dropdown-toggle {
-      border-top: 2px solid lighten(@linkColor, 20%);
-      position: relative;
-      top: -2px;
-      margin-bottom: -2px;
-      color: @linkColor;
-  }
-}
-
-.navbar {
-    border-top: 2px solid lighten(@linkColor, 40%);
-}
-
-.navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
-    border-top-color: black;
-}
-
-.navbar .nav li.dropdown.open {
-    color: @black;
-    font-weight: bold;
-    border-top: 2px solid @linkColor;
-    margin-bottom: -5px;
-    a.dropdown-toggle {
-        background-color: #fff;
-        @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
-        .box-shadow(@shadow);
-        z-index: 9999;
-
-    }
-    position: relative;
-    top: -2px;
-
-    .dropdown-menu {
-        margin-top: -1px;
-        border: 1px solid #e9e9e9;
-    }
-}
-
-.navbar .dropdown:hover .caret,
-.navbar .open .caret {
-  .opacity(100);
-}
-
-.navbar .nav > li > a:hover {
-  border-top: 2px solid lighten(@linkColor, 20%);
-  position: relative;
-  top: -2px;
-  margin-bottom: -2px;
-  color: @linkColor;
-}
-
-.navbar .nav .active > a,
-.navbar .nav .active > a:hover {
-  color: @black;
-  font-weight: bold;
-  border-top: 2px solid @linkColor;
-  margin-bottom: -2px;
-  background-color: #fff;
-  @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
-  .box-shadow(@shadow);
-  position: relative;
-  top: -2px;
-}
-
-.navbar-inner {
-  @shadow: inset 0 -1px 0 #e9e9e9;
-  .box-shadow(@shadow);
-  border: 0;
-}
-
-.navbar .nav > li > a {
-  text-shadow: none;
-  padding: 5px 10px 5px;
-}
-
-.nav li.dropdown.open .caret,
-.nav li.dropdown.open.active .caret,
-.nav li.dropdown.open a:hover .caret,
-.navbar .nav .dropdown-toggle .caret,
-.navbar .nav .open.dropdown .caret {
-  border-top-color: @black;
-}
-
-.nav-list.nav > li > a {
-  display: inline;
-}
-
-.nav-list.nav > li > a:hover {
-  background: transparent;
-  text-decoration: underline;
-}
-
-.dependencies.nav-list.nav > li > a {
-    display: block;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.slidepanel.nav-list.nav > li > a {
-    padding-right: 0;
-}
-
-.nav-list .nav-header {
-  margin-right: auto;
+.collapse .navbar-collapse {
+    clear: none;
 }
 
 .dropdown-menu {
@@ -143,23 +52,42 @@
     max-height: 250px;
     -webkit-overflow-scrolling: touch;
 }
+
 input#search-input {
     font-size: 16px;
+    height: 30px;
 }
 
 .home {
-    padding-top: 40px;
+    padding: 40px 0 50px;
 }
 
 .home .btn {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 .home input {
-    width: 377px;
+    width: 400px;
     margin: 0px;
-    height: auto;
+    height: 30px;
     font-size: 1.4em;
+}
+
+.home-search-input {
+    width: 400px;
+}
+
+.toolbar-search {
+    margin-bottom: 2px;
+}
+
+.top-input-form {
+    border-right: none;
+    width: 340px !important; 
+}
+
+.search-form input {
+    width: 300px; 
 }
 
 form#logout {
@@ -167,25 +95,8 @@ form#logout {
 }
 
 body {
-    font-size: 0.8em;
+    font-size: 1.3em;
     margin-bottom: 10px;
-}
-
-.nav-list {
-    padding: 0px;
-    width: 170px;
-    float: left;
-}
-
-.nav-list select, .nav-list input[type=text] {
-    width: 165px;
-    line-height: auto;
-}
-
-
-
-.nav-list form {
-    margin: 0;
 }
 
 .dropdown-menu form {
@@ -231,4 +142,44 @@ body {
   padding-right: 20px;
 }
 
-@import "responsive.less";
+.container-top {
+  padding: 0 10px 10px 10px;
+}
+
+.col-md-3 {
+  width: 200px;
+}
+
+.col-md-12 {
+  margin-bottom: 60px;
+  margin-top: 25px;
+}
+
+#lab {
+  margin-top: -25px;
+  margin-bottom: 50px;
+}
+
+.tool-bar-form {
+  margin-top: 2px;
+  margin-bottom: 10px;
+  height: 30px;
+  width: 165px !important;
+}
+
+li button.dependencies-graph {
+  padding: 0;
+  font-size: inherit;
+  background: none !important;
+  background-image: none;
+  border: none;
+  color: @linkColor !important;
+}
+
+.top-content {
+  padding-bottom: 10px;
+}
+
+.row-fluid {
+  padding-bottom: 10px;
+}
