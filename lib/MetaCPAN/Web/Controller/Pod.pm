@@ -168,6 +168,7 @@ sub view : Private {
             release           => $release,
             template          => 'pod.html',
             canonical         => $canonical,
+            documented_module => $documented_module,
         }
     );
     unless ( $reqs->{pod}->{raw} ) {
