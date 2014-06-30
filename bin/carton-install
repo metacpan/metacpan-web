@@ -1,2 +1,0 @@
-#!/bin/sh
-carton install --path ~/carton/metacpan.org;

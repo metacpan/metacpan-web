@@ -16,3 +16,4 @@ local
 metacpan_web_local.conf
 perltidy.LOG
 root/static/sitemaps
+tidyall.ERR
