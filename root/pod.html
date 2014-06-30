@@ -12,6 +12,13 @@
     </form>
   </li>
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
+  <% IF documented_module.version %>
+  <li>
+    <div>
+      Module version: <% documented_module.version | html %>
+    </div>
+  </li>
+  <% END %>
   <li>
     <div>
       <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
