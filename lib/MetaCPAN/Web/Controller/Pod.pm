@@ -163,11 +163,11 @@ sub view : Private {
 
     $c->stash(
         {
-            module    => $data,
-            pod       => $hr->process( $reqs->{pod}->{raw} ),
-            release   => $release,
-            template  => 'pod.html',
-            canonical => $canonical,
+            module            => $data,
+            pod               => $hr->process( $reqs->{pod}->{raw} ),
+            release           => $release,
+            template          => 'pod.html',
+            canonical         => $canonical,
         }
     );
     unless ( $reqs->{pod}->{raw} ) {
