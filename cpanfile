@@ -65,7 +65,7 @@ requires 'Template::Alloy';
 requires 'Template::Plugin::DateTime';
 requires 'Template::Plugin::JSON';
 requires 'Template::Plugin::Markdown';
-requires 'Template::Plugin::MultiMarkdown';
+requires 'Template::Plugin::MultiMarkdown', '0.08';
 requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
 requires 'Try::Tiny', '0.09';

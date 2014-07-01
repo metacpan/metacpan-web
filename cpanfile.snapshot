@@ -4469,6 +4469,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Text::Markdown v1.0.1
+  Template-Plugin-MultiMarkdown-0.08
+    pathname: B/BA/BARBIE/Template-Plugin-MultiMarkdown-0.08.tar.gz
+    provides:
+      Template::Plugin::MultiMarkdown 0.08
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::File 0
+      Template 2.16
+      Template::Plugin::Filter 1.38
+      Test::More 0.7
+      Text::MultiMarkdown v1.0.1
+      parent 0
   Template-Plugin-Number-Format-1.02
     pathname: D/DA/DARREN/Template-Plugin-Number-Format-1.02.tar.gz
     provides:
@@ -4941,6 +4953,20 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0.42
       Text::Balanced 0
+  Text-MultiMarkdown-1.000034
+    pathname: B/BO/BOBTFISH/Text-MultiMarkdown-1.000034.tar.gz
+    provides:
+      Text::MultiMarkdown 1.000034
+    requirements:
+      Digest::MD5 0
+      Encode 0
+      ExtUtils::MakeMaker 6.42
+      FindBin 0
+      List::MoreUtils 0
+      Test::Exception 0
+      Test::More 0.42
+      Text::Markdown v1.0.26
+      perl 5.008
   Text-SimpleTable-2.03
     pathname: M/MR/MRAMBERG/Text-SimpleTable-2.03.tar.gz
     provides:
