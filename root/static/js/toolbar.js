@@ -1,8 +1,9 @@
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     $(function() {
         var el = $('.nav-list').first();
+        var topRow = $('.col-md-12').first();
         if (!el.length) return;
-        var originalTop = el.offset().top - 139; // store original top position - top content
+        var originalTop = el.offset().top - topRow.offset().top; // store original top position - top content
         var height = el.height();
         var contentHeight = $("div.content").height();
         if(height > contentHeight) return;
@@ -11,7 +12,7 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
             if ($(this).scrollTop() > originalTop + (screenHeight - height < 0 ? height - screenHeight : 0 )) {
                 el.css({
                     position: 'fixed',
-                    top: (screenHeight - height < 0 ? screenHeight - height - 20 : 0 ) + 'px'
+                    top: (screenHeight - height < 0 ? screenHeight - height : 0 ) + 'px'
                 });
             } else {
                 el.css({
