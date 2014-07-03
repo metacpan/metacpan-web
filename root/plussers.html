@@ -3,7 +3,7 @@
 
 
 <ul class="nav nav-list slidepanel">
-    <li class="visible-phone search">
+    <li class="visible-xs search">
       <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
         <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
       </form>
@@ -11,7 +11,7 @@
     <li class="nav-header"></li>
 </ul>
 
-<div class="pull-right hidden-phone">
+<div class="pull-right hidden-xs">
 </div>
 <div class="plusser-title">
 <h4> PAUSE users who ++ed <a href="/release/<% plusser_data %>"><% plusser_data %></a></h4>
