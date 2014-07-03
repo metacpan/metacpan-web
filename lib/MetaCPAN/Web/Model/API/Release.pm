@@ -73,7 +73,10 @@ sub latest_by_author {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
-                        and => [ { term => { author => uc($author) } }, ]
+                        and => [
+                            { term => { author => uc($author) } },
+                            { term => { status => 'latest' } }
+                        ]
                     },
                 }
             },
