@@ -74,37 +74,38 @@ sub process {
         # the filter fields to the field list.
 
         $search_parameters{'queryb'} = $self->filter;
-        push( @{ $search_parameters{'fields'} }, keys %{ $self->filter } );
+        push @{ $search_parameters{'fields'} }, keys %{ $self->filter };
     }
 
     my $scrolled_search = $es->scrolled_search(%search_parameters);
 
     # Open the output file, get ready to pump out the XML.
 
-    open( my $fh, '>:gzip', $self->xml_file );
+    open my $fh, '>:gzip', $self->xml_file;
 
     my @urls;
-    my $metacpan_url = '';
+    my $metacpan_url = q{};
     if ( $self->cpan_directory ) {
-        $metacpan_url = 'https://metacpan.org/' . $self->cpan_directory . '/';
+        $metacpan_url
+            = 'https://metacpan.org/' . $self->cpan_directory . q{/};
     }
 
     do {
         my @hits = $scrolled_search->drain_buffer;
-        push( @urls,
+        push @urls,
             map { $metacpan_url . $_->{'fields'}->{ $self->field_name } }
-                @hits );
+            @hits;
     } while ( $scrolled_search->next() );
 
-    $_ = $_ . ' ' for @urls;
+    $_ = $_ . q{ } for @urls;
 
     $self->{'size'} = @urls;
     my $xml = XMLout(
         {
-            'xmlns'     => "http://www.sitemaps.org/schemas/sitemap/0.9",
-            'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+            'xmlns'     => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
             'xsi:schemaLocation' =>
-                "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd",
+                'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd',
             'url' => [ sort @urls ],
         },
         'KeyAttr'    => [],
@@ -113,7 +114,8 @@ sub process {
         'OutputFile' => $fh,
     );
 
-    close($fh);
+    close $fh;
+    return;
 }
 
 1;
