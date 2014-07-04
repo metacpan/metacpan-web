@@ -37,6 +37,17 @@ sub remove_favorite {
         undef, { method => 'DELETE', token => $token } );
 }
 
+sub add_stargazer {
+    my ( $self, $data, $token ) = @_;
+    $self->request( "/user/stargazer/", $data, { token => $token } );
+}
+
+sub remove_stargazer {
+    my ( $self, $data, $token ) = @_;
+    $self->request( "/user/stargazer/" . $data->{module},
+        undef, { method => 'DELETE', token => $token } );
+}
+
 sub turing {
     my ( $self, $challenge, $answer, $token ) = @_;
     $self->request(
