@@ -1,0 +1,11 @@
+<% IF user_exists -%>
+<form action="/account/stargazer/add" style="display: inline" onsubmit="return starModule(this)">
+    <% IF mystarred %><input type="hidden" name="remove" value="1"><% END -%>
+    <input type="hidden" name="release" value="<% module.release %>">
+    <input type="hidden" name="author" value="<% module.author %>">
+    <input type="hidden" name="module" value="<% module.documentation %>">
+    <button type="submit" class="stargazer<% IF mystarred %> active<% ELSE %> highlight<% END %>"><span style="visibility:hidden;"><% total_starred %></span>Bookmark</button>
+</form>
+<% ELSE -%>
+<a href="" onclick="alert('Please sign in to bookmark the Module'); return false" class="stargazer highlight"><span style="visibility:hidden;">
+<% total_starred %></span>Bookmark</a><% END -%>
