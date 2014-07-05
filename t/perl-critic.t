@@ -41,7 +41,6 @@ my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/User.pm
     lib/MetaCPAN/Web/View/HTML.pm
     lib/Plack/Middleware/MCLess.pm
-    app.psgi
     t/encoding.t
     t/fastly_headers.t
     t/controller/author.t

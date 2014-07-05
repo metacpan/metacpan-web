@@ -1,4 +1,4 @@
-package MetaCPAN::Web;
+package MetaCPAN::Web;    ## no critic
 
 # ABSTRACT: Modern front-end for MetaCPAN
 
@@ -55,11 +55,11 @@ my $app = Plack::App::URLMap->new;
         $core_app,
         session_key => 'metacpan_secure',
         expires     => 2**30,
-        secure      => ( ( $ENV{PLACK_ENV} || '' ) ne 'development' ),
+        secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
         httponly    => 1,
     );
 
-    $app->map( '/' => $core_app );
+    $app->map( q[/] => $core_app );
 }
 
 $app = $app->to_app;
@@ -129,8 +129,8 @@ if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
     $app = Plack::Middleware::MCLess->wrap(
         $app,
         cache     => $cache,
-        cache_ttl => "60 minutes",
-        root      => "root/static",
+        cache_ttl => '60 minutes',
+        root      => 'root/static',
         files     => [
             map {"root/static/less/$_.less"}
                 qw(
