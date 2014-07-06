@@ -9,6 +9,21 @@
     padding-left: 0px !important;
 }
 
+
+#account-profile { 
+    .form-group:after {
+        clear: both !important;
+    }
+
+    .search-btn {
+        height: 34px !important;
+    }
+
+    .col-sm-6 {
+        width: 60%;
+    }
+}
+
 .account-settings {
     form {
         margin: 0px;
@@ -53,12 +68,12 @@
     // profile logos really should be in css I think..
 
     .profiles {
-        .control-group {
+        .form-group {
             margin-bottom: 5px;
             .control-label {
                 text-align: left;
                 padding-top: 0;
-                padding-left: 20px;
+                padding-left: 20px !important;
                 .input-small {
                     width: 120px;
                 }
@@ -68,9 +83,10 @@
                 .control-label {
                     padding-top: 5px;
                     background: no-repeat left 75%;
+                    left: 20px;
                 }
-                &.profile-bitbucket .control-label {
-                    background-image: url(/static/images/profile/bitbucket.png);
+                &.profile-bitbucket {
+                    background-image: url(/static/images/profile/bitbucket.png)
                 }
                 &.profile-blinklist .control-label {
                     background-image: url(/static/images/profile/blinklist.png);
@@ -278,6 +294,10 @@
                     }
                 }
             }
+        }
+        
+        .pull-right {
+            float: none !important;
         }
     }
 }
