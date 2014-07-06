@@ -223,7 +223,7 @@ $(document).ready(function () {
 
     $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function () {
       if (this.id) {
-        $(this).prepend('<a href="#'+this.id+'" class="anchor"><i class="icon-bookmark"></i></a>');
+        $(this).prepend('<a href="#'+this.id+'" class="anchor"><span class="glyphicon glyphicon-bookmark black"></span></a>');
       }
     });
 
