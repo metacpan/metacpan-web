@@ -1,7 +1,7 @@
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     $(function() {
         var el = $('.nav-list').first();
-        var topRow = $('.col-md-12').first();
+        var topRow = $('.main-content').first();
         if (!el.length) return;
         var originalTop = el.offset().top - topRow.offset().top; // store original top position - top content
         var height = el.height();
