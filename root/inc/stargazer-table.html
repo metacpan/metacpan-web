@@ -1,10 +1,12 @@
 <% IF stargazers.size %>
+<!-- I still have to add the css for starring. As, it is similar to ++ i did not change the code here. -->
 <table id="author_favorites"
   <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
+<!-- here as well. -->
   class="table table-condensed table-striped table-favorites<% IF tablesorter %> tablesorter<% END %>">
   <thead>
     <tr>
-      <th class="release pull-left-phone"><% author ? "Favorites" : "Module" %></th>
+      <th class="release pull-left-phone"><% author ? "Starred Modules" : "Module" %></th>
       <th class="abstract hidden-phone"><% author ? "Author" : "Starred By" %></th>
       <th class="date"><% day || "Date" %></th>
     </tr>

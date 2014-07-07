@@ -6,45 +6,45 @@ extends 'MetaCPAN::Web::Model::API';
 
 sub get {
     my ( $self, $token ) = @_;
-    $self->request( "/user", undef, { token => $token } );
+    $self->request( '/user', undef, { token => $token } );
 }
 
 sub delete_identity {
     my ( $self, $identity, $token ) = @_;
-    $self->request( "/user/identity/$identity", undef,
+    $self->request( '/user/identity/$identity', undef,
         { method => 'DELETE', token => $token } );
 }
 
 sub update_profile {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/profile", $data,
+    $self->request( '/user/profile', $data,
         { method => 'PUT', token => $token } );
 }
 
 sub get_profile {
     my ( $self, $token ) = @_;
-    $self->request( "/user/profile", undef, { token => $token } );
+    $self->request( '/user/profile', undef, { token => $token } );
 }
 
 sub add_favorite {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite", $data, { token => $token } );
+    $self->request( '/user/favorite', $data, { token => $token } );
 }
 
 sub remove_favorite {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite/" . $data->{distribution},
+    $self->request( '/user/favorite/' . $data->{distribution},
         undef, { method => 'DELETE', token => $token } );
 }
 
 sub add_stargazer {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/stargazer/", $data, { token => $token } );
+    $self->request( '/user/stargazer/', $data, { token => $token } );
 }
 
 sub remove_stargazer {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/stargazer/" . $data->{module},
+    $self->request( '/user/stargazer/' . $data->{module},
         undef, { method => 'DELETE', token => $token } );
 }
 
