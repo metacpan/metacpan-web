@@ -1,4 +1,4 @@
-package MetaCPAN::Web;    ## no critic
+package MetaCPAN::Web;    ## no critic (RequireFilenameMatchesPackage)
 
 # ABSTRACT: Modern front-end for MetaCPAN
 
