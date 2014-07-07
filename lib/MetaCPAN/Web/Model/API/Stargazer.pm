@@ -9,34 +9,22 @@ use List::MoreUtils qw(uniq);
 sub find_starred {
     my ( $self, $user, $name ) = @_;
 
-    # search for all users, match all according to the distribution.
-    my $starred      = $self->by_user($user);
+    my $starred      = $self->by_user( $user->{user} );
     my $starred_data = $starred->recv;
-
-    # store in an array.
     my @starred_modules
-        = map { $_->{fields}->{user} } @{ $starred_data->{hits}->{hits} };
+        = map { $_->{fields}->{module} } @{ $starred_data->{hits}->{hits} };
     my $total_starred = @starred_modules;
 
-    if ( !$total_starred ) {
-        foreach my $module (@starred_modules) {
-            if ( $name eq $module ) {
-                return (
-                    {
-                        mystargazer   => 1,
-                        total_starred => $total_starred,
-                    }
-                );
-            }
-            else {
-                return (
-                    {
-                        mystargazer   => 0,
-                        total_starred => $total_starred,
-                    }
-                );
-            }
+    foreach my $module (@starred_modules) {
+        if ( $name eq $module ) {
+            return (
+                {
+                    mystargazer   => 1,
+                    total_starred => $total_starred,
+                }
+            );
         }
+
     }
     return (
         {
@@ -54,8 +42,7 @@ sub by_user {
         {
             query  => { match_all => {} },
             filter => { term      => { user => $user }, },
-            sort   => ['module'],
-            fields => [qw(date author module)],
+            fields => [qw(date module author)],
             size   => 250,
         }
     );
