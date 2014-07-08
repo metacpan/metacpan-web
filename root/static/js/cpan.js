@@ -362,19 +362,21 @@ function starModule(form) {
         success: function () {
             var button = form.find('button');
             button.toggleClass('active');
-            var counter = button.find('span');
-            var count = counter.text();
+            var count = 0;
             if (button.hasClass('active')) {
-                counter.text(count ? parseInt(count, 10) + 1 : 1);
+                count = 1;
+                button.text("Unstar");
                 form.append('<input type="hidden" name="remove" value="1">');
-                if (!count)
+                if (!count){
                     button.toggleClass('highlight');
-            } else {
-                counter.text(parseInt(count, 10) - 1);
+		    button.text("Star");
+		}            
+		} else {
+                count=0;
                 form.find('input[name="remove"]').remove();
-                if (counter.text() === 0) {
-                    counter.text("");
+                if (count === 0) {
                     button.toggleClass('highlight');
+		    button.text("Star");
                 }
             }
         },
