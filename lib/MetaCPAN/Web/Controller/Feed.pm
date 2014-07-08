@@ -72,18 +72,21 @@ sub author : Chained('index') PathPart Args(1) {
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
+    my $release_data
+        = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
     my $author_info = $author_cv->recv;
     my $faves_cv
         = $c->model('API::Favorite')->by_user( $author_info->{user} );
-    my $faves_data = $faves_cv->recv;
-    my $data       = [
-        sort    { $b->{date} cmp $a->{date} }
-            map { $_->{fields} } @{ $faves_data->{hits}{hits} },
-        @{ $releases_cv->recv->{hits}{hits} }
-    ];
+    my $faves_data
+        = [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ];
+
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN activity of $author - MetaCPAN",
-        entries => $self->build_author_entry( $author, $data ),
+        entries => [
+            sort { $b->{date} cmp $a->{date} }
+                @{ $self->_format_release_entries($release_data) },
+            @{ $self->_format_favorite_entries( $author, $faves_data ) }
+        ],
     );
 }
 
@@ -123,26 +126,32 @@ sub build_feed {
     return $feed->as_xml;
 }
 
-sub build_author_entry {
-    my ( $self, $author, $activity ) = @_;
-    foreach my $item ( @{$activity} ) {
-        my $dist = $item->{distribution};
-        $dist =~ s/-/::/g;
-        $item->{abstract}
-            ||= "$author ++ed $item->{distribution} from $item->{author}";
-        $item->{link}
-            = $item->{name}
-            ? join( '/',
+sub _format_release_entries {
+    my ( $self, $releases ) = @_;
+    my @release_data;
+    foreach my $item ( @{$releases} ) {
+        $item->{link} = join( '/',
             'https://metacpan.org', 'release',
-            $item->{author},        $item->{name} )
-            : join( '/', 'https://metacpan.org', 'pod', $dist );
-        $item->{name}
-            = $item->{name}
-            ? "$author has released $item->{name}"
-            : "$author ++ed $item->{distribution}";
-        unless ( $item->{author} eq $author ) { $item->{author} = $author }
+            $item->{author},        $item->{name} );
+        $item->{name} = "$item->{author} has released $item->{name}";
+        push( @release_data, $item );
     }
-    return $activity;
+    return \@release_data;
+}
+
+sub _format_favorite_entries {
+    my ( $self, $author, $data ) = @_;
+    my @fav_data;
+    foreach my $fav ( @{$data} ) {
+        $fav->{abstract}
+            = "$author ++ed $fav->{distribution} from $fav->{author}";
+        $fav->{author} = $author;
+        $fav->{link}   = join( '/',
+            'https://metacpan.org', 'release', $fav->{distribution} );
+        $fav->{name} = "$author ++ed $fav->{distribution}";
+        push( @fav_data, $fav );
+    }
+    return \@fav_data;
 }
 
 sub end : Private {

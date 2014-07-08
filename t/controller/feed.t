@@ -53,56 +53,65 @@ sub valid_xml {
     return $tx;
 }
 
-subtest 'get correct author entry data format' => sub {
-    my $feed = MetaCPAN::Web::Controller::Feed->new();
-    my $data = [
+my $feed = MetaCPAN::Web::Controller::Feed->new();
+
+subtest 'get correct author favorite data format' => sub {
+    my $favorite_data = [
         {
-            abstract     => "A brand new module from PERLHACKER",
-            author       => "PERLHACKER",
-            date         => "2012-12-12T05:17:44.000Z",
-            distribution => "Some-New-Module",
-            name         => "Some-New-Module-0.001",
-            status       => "latest",
-        },
-        {
-            author       => "ABIGAIL",
-            date         => "2014-01-16T21:51:00.000Z",
-            distribution => "perl",
+            author       => 'DOLMEN',
+            date         => '2013-07-05T14:41:26.000Z',
+            distribution => 'Git-Sub',
         }
     ];
-    my $entry = $feed->build_author_entry( 'PERLHACKER', $data );
+
+    my $entry = $feed->_format_favorite_entries( 'PERLHACKER', $favorite_data );
     is(
         $entry->[0]->{abstract},
-        'A brand new module from PERLHACKER',
+        'PERLHACKER ++ed Git-Sub from DOLMEN',
         'get correct release abstract'
     );
     is(
         $entry->[0]->{link},
-        'https://metacpan.org/release/PERLHACKER/Some-New-Module-0.001',
+        'https://metacpan.org/release/Git-Sub',
         'get correct release link'
     );
     is(
         $entry->[0]->{name},
-        'PERLHACKER has released Some-New-Module-0.001',
+        'PERLHACKER ++ed Git-Sub',
         'get correct release title'
     );
     is( $entry->[0]->{author}, 'PERLHACKER', 'get correct author name' );
-    is(
-        $entry->[1]->{abstract},
-        'PERLHACKER ++ed perl from ABIGAIL',
-        'get correct favorite abstract'
-    );
-    is(
-        $entry->[1]->{link},
-        'https://metacpan.org/pod/perl',
-        'get correct link to ++ed module'
-    );
-    is(
-        $entry->[1]->{name},
-        'PERLHACKER ++ed perl',
-        'get correct ++ed title'
-    );
-    is( $entry->[1]->{author},
-        'PERLHACKER', 'author on feed should be who ++' );
 };
+
+subtest 'get correct author release data format' => sub {
+    my $data = [
+        {
+            abstract     => 'Easy OO access to the FreshBooks.com API',
+            author       => 'OALDERS',
+            date         => '2014-05-03T03:06:44.000Z',
+            distribution => 'Net-FreshBooks-API',
+            name         => 'Net-FreshBooks-API-0.24',
+            status       => 'latest',
+        }
+    ];
+
+    my $entry = $feed->_format_release_entries($data);
+    is(
+        $entry->[0]->{abstract},
+        'Easy OO access to the FreshBooks.com API',
+        'get correct release abstract'
+    );
+    is(
+        $entry->[0]->{link},
+        'https://metacpan.org/release/OALDERS/Net-FreshBooks-API-0.24',
+        'get correct release link'
+    );
+    is(
+        $entry->[0]->{name},
+        'OALDERS has released Net-FreshBooks-API-0.24',
+        'get correct release title'
+    );
+    is( $entry->[0]->{author}, 'OALDERS', 'get correct author name' );
+};
+
 done_testing;
