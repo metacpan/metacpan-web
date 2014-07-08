@@ -18,9 +18,10 @@ sub root : Chained('/') PathPart('pod') CaptureArgs(0) {
 # /pod/$name
 sub find : Chained('root') PathPart('') Args(1) {
     my ( $self, $c, @path ) = @_;
-
-    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $star_flag = 1;
+    my $user      = $c->model('API::User')->get_profile( $c->token )->recv;
     $c->stash( $c->model('API::Stargazer')->find_starred( $user, $path[0] ) );
+    $c->stash( { star_flag => $star_flag } );
 
     # TODO: Pass size param so we can disambiguate?
     $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->recv;
