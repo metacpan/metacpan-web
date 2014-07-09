@@ -49,17 +49,15 @@
                                     <button class="btn search-btn" onclick="return addField('email')">add</button>
                                 </span>
                             </div>
-                        </div>
-                    <% FOREACH email IN author.email -%>
-                        <div class="col-sm-8 col-md-6">
-                            <div class="input-group">
+                            <% FOREACH email IN author.email -%>
+                            <div class="input-group" style="padding-top:15px;">
                                 <input type="email" class="form-control" name="email" value="<% email %>" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" onclick="return removeLabel(this)">remove</button>
+                                    <button class="btn search-btn" onclick="return removeDiv(this)">remove</button>
                                 </span>
                             </div>
+                            <% END -%>
                         </div>
-                    <% END -%>
                     </div>
                 </div>
                 <div class="websites repeatable">
@@ -72,17 +70,16 @@
                                     <button class="btn search-btn" onclick="return addField('website')">add</button>
                                 </span>
                             </div>
+                            <% FOREACH website IN author.website -%>
+                                <!-- <br> -->
+                                <div class="input-group" style="padding-top:15px;">
+                                    <input type="url" class="form-control" name="website" value="<% website %>" />
+                                    <span class="input-group-btn">
+                                        <button class="btn search-btn" href="" onclick="return removeDiv(this)">remove</a></button>
+                                    </span>
+                                </div>
+                            <% END -%>
                         </div>
-                    <% FOREACH website IN author.website -%>
-                        <div class="col-sm-8 col-md-6">
-                            <div class="input-group">
-                                <input type="url" class="form-control" name="website" value="<% website %>" />
-                                <span class="input-group-btn">
-                                    <button class="btn search-btn" href="" onclick="return removeLabel(this)">remove</a></button>
-                                </span>
-                            </div>
-                        </div>
-                    <% END -%>
                     </div>
                 </div>
                 <div class="form-group">
@@ -190,8 +187,8 @@
             </div>
             <div id="profiles" class="profiles">
                 <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
-                <div class="form-control <% IF known %>profile profile-<% profile.name %><% END %>">
-                    <label class="col-sm-4 control-label">
+                <div class="form-group <% IF known %>profile profile-<% profile.name %><% END %>">
+                    <label class="col-sm-4 col-md-4 control-label">
                         <% IF known %>
                         <% known.name %>
                         <input type="hidden" name="profile.name" value="<% profile.name %>" />
@@ -199,13 +196,13 @@
                         <input class="input-small" type="text" class="form-control" name="profile.name" value="<% profile.name %>">
                         <% END %>
                     </label>
-                    <div class="col-sm-10">
-                        <div class="input-append">
-                            <input class="input-medium" type="text" class="form-control" name="profile.id" value="<% profile.id %>" />
+                    <div class="col-sm-8 col-md-6">
+                        <div class="input-group">
+                            <input class="small form-control" type="text" class="form-control" name="profile.id" value="<% profile.id %>" />
                             <span class="input-group-btn">
-                            <button class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button>
+                            <button class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button>
                             <% IF known %>
-                            <button class="btn search-btn" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank">check</button>
+                            <button class="btn search-btn" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank"><span class="glyphicon glyphicon-check"> check</span></button>
                             </span>
                             <% END %>
                         </div>
@@ -248,7 +245,7 @@ function addProfile(select) {
     html += '</label>'
     html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
         + '<input type="text" class="small form-control" name="profile.id" /> '
-        + '<span class="input-group-btn"><button class="btn btn-danger" href="" class="check" onclick="return removeDiv(this.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button> ';
+        + '<span class="input-group-btn"><button class="btn btn-danger" href="" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button> ';
     if (value) {
         html += '<button class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)"><span class="glyphicon glyphicon-check"> check</span></button>';
     }
@@ -291,7 +288,7 @@ function validateJSON(text) {
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
-    container.append('<br><div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeLabel(this)">remove</button></span></div>');
+    container.append('<br><div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeLabel(this.parentNode)">remove</button></span></div>');
     var add = container.children().last();
     add.slideDown();
     return false;
