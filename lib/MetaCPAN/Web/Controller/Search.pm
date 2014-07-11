@@ -44,7 +44,7 @@ sub index : Path {
 
         $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E}g;
         $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/g;
-        $query =~ s/module:([\w:]+)/module.name.analyzed:$1/g;
+        $query =~ s/module:(\w[\w:]*)/module.name.analyzed:$1/g;
 
         my $results
             = $query =~ /(distribution|module\.name\S*):/
