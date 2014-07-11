@@ -44,10 +44,11 @@ sub index : Path {
 
         $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E}g;
         $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/g;
+        $query =~ s/module:([\w:]+)/module.name.analyzed:$1/g;
 
         my $results
-            = $query =~ /distribution:/
-            ? $model->search_distribution( $query, $from, $user )
+            = $query =~ /(distribution|module\.name\S*):/
+            ? $model->search_expanded( $query, $from, $user )
             : $model->search_collapsed( $query, $from, $user );
 
         my @dists = $query =~ /distribution:(\S+)/g;
