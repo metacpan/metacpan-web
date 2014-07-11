@@ -61,10 +61,11 @@ sub autocomplete {
     return $cv;
 }
 
-sub search_distribution {
+sub search_expanded {
     my ( $self, $query, $from, $user ) = @_;
 
-    # the distribution is included in the query and ES does the right thing
+    # When used for a distribution or module search, the limit is included in
+    # the query and ES does the right thing.
     my $cv = $self->cv;
     my ( $data, $total );
     $data = $self->search(
