@@ -42,9 +42,12 @@ sub index : Path {
     else {
         my $user = $c->user_exists ? $c->user->id : undef;
 
-        $query =~ s{author:([a-zA-Z]*)}{author:\U$1\E}g;
-        $query =~ s/dist(ribution)?:(\w+)/file.distribution:$2/g;
-        $query =~ s/module:([\w:]+)/module.name.analyzed:$1/g;
+        # these would be nicer if we had variable-length lookbehinds...
+        $query =~ s{(^|\s)author:([a-zA-Z]+)(?=\s|$)}{$1author:\U$2\E}g;
+        $query
+            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1file.distribution:$3/g;
+        $query
+            =~ s/(^|\s)module:(\w[\w:]*)(?=\s|$)/$1module.name.analyzed:$2/g;
 
         my $results
             = $query =~ /(distribution|module\.name\S*):/
