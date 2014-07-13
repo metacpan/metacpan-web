@@ -122,7 +122,7 @@
                             <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
                             <li>
                                 <a href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)">
-                                <i class="fa fa-<% identity.lower %> fa-fx"></i>
+                                <i class="fa fa-<% identity.lower %> fa-fw"></i>
                                 <% identity %>
                                 </a>
                             </li>
