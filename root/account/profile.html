@@ -244,8 +244,8 @@ function addProfile(select) {
     }
     html += '</label>'
     html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
-        + '<input type="text" class="small form-control" name="profile.id" /> '
-        + '<span class="input-group-btn"><button class="btn btn-danger" href="" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button> ';
+        + '<input type="text" class="form-control" name="profile.id" /> '
+        + '<span class="input-group-btn"><button class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button> ';
     if (value) {
         html += '<button class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)"><span class="glyphicon glyphicon-check"> check</span></button>';
     }
