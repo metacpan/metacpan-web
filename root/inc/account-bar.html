@@ -1,6 +1,6 @@
 <% UNLESS title; title = 'MetaCPAN Account'; END %>
 <div class="account-bar slidepanel" id="account-bar">
-    <ul class="nav nav-pills nav-stacked">
+    <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="125" id="left-nav">
         <%- UNLESS user.looks_human %>
         <li<% IF req.action == 'account/turing' %> class="active"<% END %>>
             <a href="/account/turing">Verify Account</a>
