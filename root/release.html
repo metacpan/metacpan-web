@@ -84,7 +84,7 @@ documentation = documentation.merge(documentation_raw);
 <% FOREACH module IN modules %>
   <div>
     <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
-    <% IF NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
+    <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
   </div>
 <% END %>
 </div>
@@ -96,7 +96,7 @@ documentation = documentation.merge(documentation_raw);
 <% FOREACH module IN provides.sort('package') %>
   <div>
     <strong><% link_to_source(module) | none %></strong> in <% module.path %>
-    <% IF NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
+    <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
   </div>
 <% END %>
 </div>
