@@ -28,7 +28,7 @@
 </li>
 <%- IF versions.size > 1 %>
 <li>
-    <select onchange="document.location.href='/module/'+this.value">
+    <select onchange="document.location.href='/<% IF module; "module"; ELSE; "release"; END %>/'+this.value">
         <option>Jump to version</option>
         <%- PROCESS version_options %>
     </select>
