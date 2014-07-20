@@ -1,10 +1,10 @@
 <% IF user_exists -%>
 <form action="/account/stargazer/add" style="display: inline" onsubmit="return starModule(this)">
-    <% IF mystarred == 1 %><input type="hidden" name="remove" value="1"><% END -%>
     <input type="hidden" name="release" value="<% module.release %>">
     <input type="hidden" name="author" value="<% module.author %>">
     <input type="hidden" name="module" value="<% module.documentation %>">
-    <% IF mystarred == 1 %>
+    <% IF active_star  %>
+    <input type="hidden" name="remove" value="1">
     <button type="submit" class="stargazer active">Unstar</button>
     <% ELSE %> <button type="submit" class="stargazer highlight">Star</button>
     <% END %>

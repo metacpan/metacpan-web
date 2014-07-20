@@ -19,7 +19,7 @@ sub find_starred {
         if ( $name eq $module ) {
             return (
                 {
-                    mystargazer   => 1,
+                    active_star   => 1,
                     total_starred => $total_starred,
                 }
             );
@@ -28,7 +28,6 @@ sub find_starred {
     }
     return (
         {
-            mystargazer   => 0,
             total_starred => $total_starred,
         }
     );
