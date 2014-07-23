@@ -59,27 +59,7 @@ sub index : Path {
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
 
-        # The "total" is actually "total distributions".
-        if ( $results->{total} == 1 ) {
-            my $dist_files = $results->{results}->[0];
-
-            # There may be more than one file per dist.
-            if ( @$dist_files == 1 ) {
-
-                # FIXME: What's the right incantation for this?
-                # Is module name better than documentation?
-                # We may need to check indexed (in which case we need to make
-                # sure it's actually a boolean).
-                my $module_name = $dist_files->[0]->{module}->[0]->{name}
-                    || $dist_files->[0]->{documentation};
-
-                if ($module_name) {
-                    $c->res->redirect("/pod/$module_name");
-                    $c->detach;
-                }
-            }
-        }
-        elsif ( !$results->{total} && !$authors->{total} ) {
+        if ( !$results->{total} && !$authors->{total} ) {
             my $suggest = $query;
             $suggest =~ s/:+/::/g;
             if ( $suggest ne $query ) {

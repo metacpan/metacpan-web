@@ -25,10 +25,6 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET "/search?q=ctx_request" ),
         'GET /search?q=ctx_request' );
-    is( $res->code, 302,
-        'code 302 get redirected to the module if there is 1 result' );
-    is( $res->headers->{location},
-        '/pod/Catalyst::Test', 'get new location to module page' );
 
     ok( $res = $cb->( GET "/search?q=perlhacktips" ),
         'GET /search?q=perlhacktips' );
