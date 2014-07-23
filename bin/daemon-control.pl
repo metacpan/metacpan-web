@@ -61,4 +61,4 @@ my $args = {
     user         => $user,
 };
 
-Daemon::Control->new($args)->run;
+exit Daemon::Control->new($args)->run;
