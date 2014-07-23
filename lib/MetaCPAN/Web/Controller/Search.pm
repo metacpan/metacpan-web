@@ -61,7 +61,7 @@ sub index : Path {
 
         if ( !$results->{total} && !$authors->{total} ) {
             my $suggest = $query;
-            $suggest =~ s/:+/::/g;
+            $suggest =~ s/\s*:+\s*/::/g;
             if ( $suggest ne $query ) {
                 $c->stash(
                     {

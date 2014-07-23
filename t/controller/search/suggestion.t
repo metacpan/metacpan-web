@@ -4,9 +4,11 @@ use Test::More;
 use MetaCPAN::Web::Test;
 
 my %tests = (
-    'DBIx:Class:::ResultSet' => 'DBIx::Class::ResultSet',
-    'DBIx::Class:ResultSet'  => 'DBIx::Class::ResultSet',
-    'DBIx:Class'             => 'DBIx::Class',
+    'DBIx:Class:::ResultSet'   => 'DBIx::Class::ResultSet',
+    'DBIx::Class:ResultSet'    => 'DBIx::Class::ResultSet',
+    'DBIx:Class'               => 'DBIx::Class',
+    'DBIx: Class'              => 'DBIx::Class',
+    'DBIx ::Class:  ResultSet' => 'DBIx::Class::ResultSet',
 );
 
 test_psgi app, sub {
