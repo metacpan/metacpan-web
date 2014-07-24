@@ -1,6 +1,6 @@
 package MetaCPAN::Web::Model::API::Stargazer;
 use Moose;
-use namespace::autoclean;
+use MooseX::MarkAsMethods autoclean => 1;
 
 extends 'MetaCPAN::Web::Model::API';
 
@@ -20,6 +20,7 @@ sub find_starred {
             return (
                 {
                     active_star   => 1,
+                    display_star  => 1,
                     total_starred => $total_starred,
                 }
             );
@@ -28,6 +29,8 @@ sub find_starred {
     }
     return (
         {
+
+            display_star  => 1,
             total_starred => $total_starred,
         }
     );

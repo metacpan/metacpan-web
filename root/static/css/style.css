@@ -124,7 +124,7 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 }
 
 button.stargazer, a.stargazer {
-    padding: 1px 3px;
+    padding: auto;
     margin-left: 5px;
     font-size: 0.9em;
     background-color: #fff;

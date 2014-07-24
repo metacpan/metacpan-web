@@ -365,18 +365,21 @@ function starModule(form) {
             var count = 0;
             if (button.hasClass('active')) {
                 count = 1;
-                button.text("Unstar");
+		button.remove();
+		form.append('<button type="submit" class="stargazer active"><i class="icon-star"></i> Unstar</button>');
                 form.append('<input type="hidden" name="remove" value="1">');
                 if (!count){
                     button.toggleClass('highlight');
-		    button.text("Star");
+		    button.remove();
+		    form.append('<button type="submit" class="stargazer highlight"><i class="icon-star-empty"></i> Star</button>');
 		}            
 		} else {
                 count=0;
                 form.find('input[name="remove"]').remove();
                 if (count === 0) {
                     button.toggleClass('highlight');
-		    button.text("Star");
+		    button.remove();
+		    form.append('<button type="submit" class="stargazer highlight"><i class="icon-star-empty"></i> Star</button>');
                 }
             }
         },
@@ -388,4 +391,3 @@ function starModule(form) {
     });
     return false;
 }
-

@@ -45,7 +45,7 @@ END %>
     <% IF mark_unauthorized_releases && NOT release.authorized %><em class="warning">UNAUTHORIZED RELEASE</em><% END %>
   </div>
   <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
-   <% IF total_starred %>
+  <% IF display_star %>
   <div class="inline"><%- INCLUDE inc/stargazer.html %></div>
   <% END %>
   <%- IF module %>
