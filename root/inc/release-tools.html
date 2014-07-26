@@ -20,6 +20,11 @@
     </a>
 </li>
 <li>
+    <a href="/feed/distribution/<% release.distribution %>">
+    <i class="fa fa-rss-square fa-fw black" id="rss-subscription"></i>Subscribe this distribution
+    </a>
+</li>
+<li>
     <form action="/search">
         <input type="hidden" name="q" value="dist:<% release.distribution %>">
         <input type="search" name="q" placeholder="Search distribution" style="width: 153px" class="form-control tool-bar-form">
