@@ -54,6 +54,11 @@ test_psgi app, sub {
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
+    ok( $res = $cb->( GET "/search?q=rjbs&lucky=1" ),
+        'GET /search?q=&lucky=1' );
+    is( $res->headers->{location},
+        '/author/RJBS', 'get redirect to author page' );
+
     # test search operators
     my $author = 'rjbs';
     $res = $cb->( GET '/search?q=author%3Arjbs+app' );

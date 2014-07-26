@@ -45,10 +45,17 @@ sub index : Path {
         $query =~ s[^ (?: \\ | ! ) ][]x
         )
     {
-        my $module = $model->first($query)->recv;
-        $c->detach('/not_found') unless ($module);
-        $c->res->redirect("/pod/$module");
-        $c->detach;
+        my $author = $c->model('API::Author')->search($query)->recv;
+        if ( $author->{total} == 1 ) {
+            $c->res->redirect( '/author/' . uc($query) );
+            $c->detach;
+        }
+        else {
+            my $module = $model->first($query)->recv;
+            $c->detach('/not_found') unless ($module);
+            $c->res->redirect("/pod/$module");
+            $c->detach;
+        }
     }
     else {
         my $user = $c->user_exists ? $c->user->id : undef;
