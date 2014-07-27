@@ -23,13 +23,10 @@ test_psgi app, sub {
     ok( $res->content =~ /Task::Kensho/,
         'get recommendation about Task::Kensho on No result page' );
 
-    ok( $res = $cb->( GET "/search?q=ctx_request" ),
-        'GET /search?q=ctx_request' );
-
     ok( $res = $cb->( GET "/search?q=perlhacktips" ),
         'GET /search?q=perlhacktips' );
     is( $res->code, 200,
-        'perlhacktips should be 200 not 302 because other files match' );
+        'perlhacktips should be 200 not 302 because multiple files match' );
 
 # TODO: Test something that has only one result but isn't indexed (/pod/X won't work).
 
