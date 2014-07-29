@@ -54,10 +54,27 @@ test_psgi app, sub {
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
-    ok( $res = $cb->( GET "/search?q=rjbs&lucky=1" ),
+    ok( $res = $cb->( GET '/search?q=RJBS&lucky=1' ),
         'GET /search?q=&lucky=1' );
     is( $res->headers->{location},
         '/author/RJBS', 'get redirect to author page' );
+
+    ok( $res = $cb->( GET '/search?q=JSON&lucky=1' ),
+        'GET /search?q=&lucky=1' );
+    is( $res->headers->{location},
+        '/pod/JSON', 'get redirect to pod page if module is found' );
+
+    ok( $res = $cb->( GET '/search?q=win32&lucky=1' ),
+        'GET /search?q=&lucky=1' );
+    is( $res->headers->{location}, '/pod/Win32',
+        'get redirect to pod page if module found and the query not upper case'
+    );
+
+    ok( $res = $cb->( GET '/search?q=WIN32&lucky=1' ),
+        'GET /search?q=&lucky=1' );
+    is( $res->headers->{location}, '/author/WIN32',
+        'get redirect to author page when author is found and search with upper case'
+    );
 
     # test search operators
     my $author = 'rjbs';
