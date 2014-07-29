@@ -200,9 +200,9 @@
                         <div class="input-group">
                             <input class="small form-control" type="text" class="form-control" name="profile.id" value="<% profile.id %>" />
                             <span class="input-group-btn">
-                            <button class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button>
+                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"> remove</i></a>
                             <% IF known %>
-                            <button class="btn search-btn" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank"><span class="glyphicon glyphicon-check"> check</span></button>
+                            <a href="" class="btn search-btn" target="_blank" tmpl="<% known.url %>" onclick="return rewriteURL(this)"><i class="fa fa-check-square-o"> check</i></a>
                             </span>
                             <% END %>
                         </div>
@@ -245,9 +245,9 @@ function addProfile(select) {
     html += '</label>'
     html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
         + '<input type="text" class="form-control" name="profile.id" /> '
-        + '<span class="input-group-btn"><button class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><span class="glyphicon glyphicon-trash"> remove</span></button> ';
+        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"> remove</i></a> ';
     if (value) {
-        html += '<button class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)"><span class="glyphicon glyphicon-check"> check</span></button>';
+        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square-o"> check</i></a>';
     }
 
     html += '</span></div></div></div>';
@@ -260,7 +260,7 @@ function addProfile(select) {
 function rewriteURL(link) {
     link = $(link);
     var url = link.attr('tmpl');
-    var input = link.prev().prev();
+    var input = link.parent().prev();
     link.attr('href', url.replace('%s', input.val()));
     return true;
 }
