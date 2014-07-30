@@ -365,21 +365,18 @@ function starModule(form) {
             var count = 0;
             if (button.hasClass('active')) {
                 count = 1;
-		button.remove();
-		form.append('<button type="submit" class="stargazer active"><i class="icon-star"></i> Unstar</button>');
                 form.append('<input type="hidden" name="remove" value="1">');
+		button.html('<i class="icon-star"></i> Unstar');
                 if (!count){
+		    button.html('<i class="icon-star-empty"></i> Star');
                     button.toggleClass('highlight');
-		    button.remove();
-		    form.append('<button type="submit" class="stargazer highlight"><i class="icon-star-empty"></i> Star</button>');
 		}            
 		} else {
                 count=0;
                 form.find('input[name="remove"]').remove();
                 if (count === 0) {
+		    button.html('<i class="icon-star-empty"></i> Star');
                     button.toggleClass('highlight');
-		    button.remove();
-		    form.append('<button type="submit" class="stargazer highlight"><i class="icon-star-empty"></i> Star</button>');
                 }
             }
         },
