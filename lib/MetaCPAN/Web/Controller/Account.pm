@@ -39,11 +39,24 @@ sub identities : Local {
 sub index : Chained('/') PathPart('account') CaptureArgs(0) {
 }
 
-sub wot_search : Chained('index') PathPart('trust') Args(0) {
+sub trusts_display : Chained('index') PathPart('trust') Args(0) {
     my ( $self, $c ) = @_;
+    my $user         = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $trusts_cv    = $c->model('API::Trust')->by_user( $user->{user} );
+    my $trusted_data = $trusts_cv->recv;
+
+    my @trusted_authors = map {
+        {
+            author => $_->{fields}->{author},
+            date   => $_->{fields}->{date},
+        }
+    } @{ $trusted_data->{hits}->{hits} };
+
+    my $total_trusted = @trusted_authors;
     $c->stash(
         {
-            template => 'account/trustlist.html'
+            trusted_authors => \@trusted_authors,
+            template        => 'account/trustlist.html'
         }
     );
 

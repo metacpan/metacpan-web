@@ -37,6 +37,17 @@ sub remove_favorite {
         undef, { method => 'DELETE', token => $token } );
 }
 
+sub add_trust {
+    my ( $self, $data, $token ) = @_;
+    $self->request( '/user/trust/', $data, { token => $token } );
+}
+
+sub remove_trust {
+    my ( $self, $data, $token ) = @_;
+    $self->request( '/user/trust/' . $data->{author},
+        undef, { method => 'DELETE', token => $token } );
+}
+
 sub turing {
     my ( $self, $challenge, $answer, $token ) = @_;
     $self->request(

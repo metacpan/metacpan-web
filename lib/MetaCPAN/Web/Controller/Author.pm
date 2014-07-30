@@ -43,6 +43,10 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $id = $c->stash->{pauseid};
 
+    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+
+    $c->stash( $c->model('API::Trust')->find_trust( $user, $id ) );
+
     my $author_cv = $c->model('API::Author')->get($id);
 
     my $releases_cv = $c->model('API::Release')->latest_by_author($id);
