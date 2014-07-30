@@ -71,6 +71,6 @@ eval {
     };
 };
 my $error = $@;
-ok $error =~ /ParseError/, 'Error ok';
+like $error, qr/ParseError/, 'Error ok';
 
 done_testing;
