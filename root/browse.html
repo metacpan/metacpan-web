@@ -8,12 +8,7 @@
 
 <ul class="nav nav-list slidepanel">
   <li class="visible-xs">
-      <div>
-          <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-            <input type="search" placeholder="Search" name="q" class="form-control tool-bar-form">
-            <input type="submit" class="hidden">
-          </form>
-      </div>
+    <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
   <li class="nav-header">Tools</li>
   <li><div><a href="/release/<% author %>/<% release %>/">Release Info</a></div></li>
