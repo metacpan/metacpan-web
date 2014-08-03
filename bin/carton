@@ -1,2 +1,3 @@
 #!/bin/sh
-PERL_CARTON_PATH=~/carton/metacpan.org carton $@
+
+PERL_CARTON_PATH=~/carton/metacpan.org carton "$@"

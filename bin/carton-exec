@@ -1,2 +1,3 @@
 #!/bin/sh
-PERL_CARTON_PATH=~/carton/metacpan.org carton exec perl -Ilib $@
+
+`dirname "$0"`/carton exec perl -Ilib "$@"
