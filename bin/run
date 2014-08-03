@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# NOTE: This script is used by puppet/cron jobs.
+
+# This wrapper script sets up the environment to run other local (repo) scripts.
+# We need to use ./bin/carton to get the custom PERL_CARTON_PATH env var
+# (where modules are installed).
+# We also either need to chdir so that cpanfile is in $PWD
+# or we need to determine the full path and set an env var.
+# Changing to this dir is convenient for making shorter command lines,
+# so we'll do that.
+
+# Change to the parent dir of this script
+# whether called with full, relative, or no path.
+cd "`dirname "$0"`"/..
+
+# Load perl env if necessary.
+rc=/home/metacpan/.metacpanrc
+test -r "$rc" && source "$rc"
+
+# Run through carton exec (which expects ./cpanfile) to get the custom lib path.
+exec bin/carton exec "$@"
