@@ -1,0 +1,23 @@
+<% title = 'Most Trusted Authors' %>
+<%- INCLUDE inc/recent-bar.html %>
+
+<div class="content">
+<table class="table table-condensed table-striped table-releases">
+  <thead>
+    <tr>
+      <th class="position"></th>
+      <th class="name pull-left-phone">Author</th>
+      <th class="date"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% FOREACH leader IN leaders %>
+    <tr>
+      <td class="number<% IF loop.index() < 5; " strong"; END %>"><% loop.index() + 1 %></td>
+      <td class="name"><strong><a href="/author/<% leader.term %>"><% leader.term %></a></strong></td>
+      <td class="number"><% leader.count %> <% IF leader.count == 1 %>trust <% ELSE %>trusts <% END %></td>
+    </tr>
+  <% END %>
+  </tbody>
+</table>
+</div>

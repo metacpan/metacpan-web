@@ -46,4 +46,36 @@ sub by_user {
         }
     );
 }
+
+=pod
+sub gravatar_for_pauseid {
+    my ( $self, $authors ) = @_;
+    return $self->request(
+        '/author/_search',
+        {
+            query => { match_all => {} },
+            filter =>
+                { or => [ map { { term => { pauseid => $_ } } } @{$authors} ] },
+            fields => [qw(gravatar_url pauseid)],
+            size   => 1000,
+            sort   => ['pauseid']
+        }
+    );
+}
+=cut
+
+sub leaderboard {
+    my ( $self, $page ) = @_;
+    return $self->request(
+        '/trust/_search',
+        {
+            size   => 0,
+            query  => { match_all => {} },
+            facets => {
+                leaderboard =>
+                    { terms => { field => 'author', size => 600 }, },
+            },
+        }
+    );
+}
 __PACKAGE__->meta->make_immutable;
