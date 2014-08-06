@@ -2,11 +2,12 @@
 <div align="center" class="home">
   <a href="/" class="big-logo" alt="meta::cpan"></a>
   <form action="/search">
-    <input type="text" name="q" size="41" autofocus="autofocus" id="search-input" class="autofocus">
-    <br><br>
-    <button type="submit" class="btn">Search the CPAN</button>
-    <button type="submit" class="btn" name="lucky" value="1">I'm Feeling Lucky</button>
+    <input type="text" name="q" size="41" autofocus="autofocus" id="search-input" class="form-control home-search-input">
+    <br>
+    <button type="submit" class="btn search-btn">Search the CPAN</button>
+    <button type="submit" class="btn search-btn" name="lucky" value="1">I'm Feeling Lucky</button>
   </form>
+    <br>
   <%- hints = ['Press shift and enter if you are feeling lucky'] %>
   <span style="color: #999" class="hidden-phone">Hint: <% hints.pick %></span>
   <div id="link_to_task_kensho" class="alert alert-info" ><strong>New to CPAN?</strong> Maybe take a look at <a href="/pod/Task::Kensho">Task::Kensho!</a></div>

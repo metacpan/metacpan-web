@@ -1,12 +1,12 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
     <% IF no_profile -%>
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
       <h4 class="alert-heading">Error</h4>
       In order to change your profile you have to <a href="<% oauth_prefix %>&amp;choice=pause" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
     </div>
     <% ELSE -%>
-    <form method="POST" action="" class="form-horizontal">
+    <form method="POST" action="" class="form-horizontal" role="form" id="account-profile">
         <% IF errors -%>
         <fieldset><legend style="color: #600">Errors</legend>
             <ul>
@@ -21,186 +21,210 @@
         </fieldset>
         <% END %>
         <fieldset><legend>General</legend>
-        <div class="pull-right author-pic-container"><%- INCLUDE inc/author-pic.html author = author %></div>
-        <div class="control-group">
-            <label class="control-label">PAUSE ID</label>
-            <div class="controls">
-                <input type="text" value="<% author.pauseid %>" disabled="disabled" />
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-push-8 col-md-2 col-md-push-10">
+                <div class="pull-right author-pic-container"><%- INCLUDE inc/author-pic.html author = author %></div>
             </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Name</label>
-            <div class="controls">
-                <input type="text" name="name" value="<% author.name %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">ASCII Name</label>
-            <div class="controls">
-                <input type="text" name="asciiname" value="<% author.asciiname %>" />
-            </div>
-        </div>
-        <div class="email repeatable">
-            <div class="control-group">
-                <label class="control-label">Email</label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="email" name="email" value="<% author.email.shift %>" />
-                        <a class="btn" href="" onclick="return addField('email')">add</a>
+            <div class="col-sm-8 col-sm-pull-4 col-md-10 col-md-pull-2">
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">PAUSE ID</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" value="<% author.pauseid %>" disabled="disabled" />
                     </div>
                 </div>
-            <% FOREACH email IN author.email -%>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="email" name="email" value="<% email %>" />
-                        <a class="btn" href="" onclick="return removeLabel(this)">remove</a>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Name</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="name" value="<% author.name %>" />
                     </div>
                 </div>
-            <% END -%>
-            </div>
-        </div>
-        <div class="websites repeatable">
-            <div class="control-group">
-                <label class="control-label">Website</label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="url" name="website" value="<% author.website.shift %>" />
-                        <a class="btn" href="" onclick="return addField('website')">add</a>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">ASCII Name</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="asciiname" value="<% author.asciiname %>" />
                     </div>
                 </div>
-            <% FOREACH website IN author.website -%>
-                <div class="controls">
-                    <div class="input-append">
-                        <input type="url" name="website" value="<% website %>" />
-                        <a class="btn" href="" onclick="return removeLabel(this)">remove</a></label>
+                <div class="email repeatable">
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Email</label>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" value="<% author.email.shift %>" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" onclick="return addField('email')">add</button>
+                                </span>
+                            </div>
+                            <% FOREACH email IN author.email -%>
+                            <div class="input-group" style="padding-top:15px;">
+                                <input type="email" class="form-control" name="email" value="<% email %>" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" onclick="return removeDiv(this)">remove</button>
+                                </span>
+                            </div>
+                            <% END -%>
+                        </div>
                     </div>
                 </div>
-            <% END -%>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Blog</label>
-            <div class="controls">
-                <input type="url" name="blog.url" value="<% author.blog.0.url %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Feed</label>
-            <div class="controls">
-                <input type="url" name="blog.feed" value="<% author.blog.0.feed %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Avatar</label>
-            <div class="controls">
-                <input type="url" name="gravatar_url" value="<% author.gravatar_url %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <%- donation = author.donation.0.id || author.donation.1.id || author.donation.2.id %>
-            <div class="controls">
-                <label class="checkbox">
-                    <input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('#donations').slideToggle()" /> Accept donations
-                </label>
-            </div>
-        </div>
-        <div id="donations"<% UNLESS donation %> style="display: none"<% END %>>
-            <% FOREACH system IN ['PayPal', 'Wishlist', 'Flattr']; found = author.donation.grep(->(a){ a.name == system.lower }) %>
-            <div class="control-group">
-                <label class="control-label <% system.lower %>"><% system %></label>
-                <div class="controls">
-                    <input type="hidden" name="donation.name" value="<% system.lower %>" />
-                    <input type="text" name="donation.id"<% IF found.size %> value="<% found.0.id %>"<% END %> />
+                <div class="websites repeatable">
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Website</label>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="input-group">
+                                <input type="url" class="form-control" name="website" value="<% author.website.shift %>" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" onclick="return addField('website')">add</button>
+                                </span>
+                            </div>
+                            <% FOREACH website IN author.website -%>
+                                <!-- <br> -->
+                                <div class="input-group" style="padding-top:15px;">
+                                    <input type="url" class="form-control" name="website" value="<% website %>" />
+                                    <span class="input-group-btn">
+                                        <button class="btn search-btn" href="" onclick="return removeDiv(this)">remove</a></button>
+                                    </span>
+                                </div>
+                            <% END -%>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Blog</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="url" class="form-control" name="blog.url" value="<% author.blog.0.url %>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Feed</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="url" class="form-control" name="blog.feed" value="<% author.blog.0.feed %>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Avatar</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="url" class="form-control" name="gravatar_url" value="<% author.gravatar_url %>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4"></label>
+                    <%- donation = author.donation.0.id || author.donation.1.id || author.donation.2.id %>
+                    <div class="col-sm-8 col-md-6">
+                        <label class="checkbox">
+                            <input name="donations" type="checkbox"<% IF donation %> checked="checked"<% END %> onchange="$('#donations').slideToggle()" /> Accept donations
+                        </label>
+                    </div>
+                </div>
+                <div id="donations"<% UNLESS donation %> style="display: none"<% END %>>
+                    <% FOREACH system IN ['PayPal', 'Wishlist', 'Flattr']; found = author.donation.grep(->(a){ a.name == system.lower }) %>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label <% system.lower %>"><% system %></label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="hidden" name="donation.name" value="<% system.lower %>" />
+                            <input type="text" class="form-control" name="donation.id"<% IF found.size %> value="<% found.0.id %>"<% END %> />
+                        </div>
+                    </div>
+                    <% END %>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Last update</label>
+                    <div class="col-sm-8 col-md-6">
+                        <p class="checkbox">
+                            <strong class="relatize"><% author.updated.dt_http %></strong>
+                        </p>
+                    </div>
                 </div>
             </div>
-            <% END %>
         </div>
-        <div class="control-group">
-            <label class="control-label">Last update</label>
-            <div class="controls">
-                <p class="checkbox">
-                    <strong class="relatize"><% author.updated.dt_http %></strong>
-                </p>
-            </div>
-        </div>
-    </fieldset>
+        </fieldset>
 
     <fieldset><legend>Location</legend>
-        <div class="control-group">
-            <label class="control-label">Country</label>
-            <div class="controls">
-                <input type="text" name="country" value="<% author.country %>" />
-                <span class="help-inline">(two letter ISO code)</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Region</label>
-            <div class="controls">
-                <input type="text" name="region" value="<% author.region %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">City</label>
-            <div class="controls">
-                <input type="text" name="city" value="<% author.city %>" />
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Lat/long</label>
-            <div class="controls">
-                <div class="input-append">
-                <input class="input-small" type="text" placeholder="Latitude" name="latitude" value="<% author.location.0 %>" />
-                <input class="input-small" type="text" placeholder="Longitude" name="longitude" value="<% author.location.1 %>" />
-                <a class="btn" href="" onclick="return fillLocation()">locate me</a>
-                <img src="/static/icons/busy.gif" style="display: none;" id="busy" />
+        <div class="row">
+            <div class="col-sm-8 col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Country</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="country" value="<% author.country %>" />
+                        <span class="help-inline">(two letter ISO code)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Region</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="region" value="<% author.region %>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">City</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="city" value="<% author.city %>" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Lat/long</label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="input-group">
+                        <input class="input-small form-control" type="text" placeholder="Latitude" name="latitude" value="<% author.location.0 %>" />
+                        <input class="input-small form-control" type="text" placeholder="Longitude" name="longitude" value="<% author.location.1 %>" />
+                        <span class="input-group-btn">
+                            <button class="btn search-btn" type="button" onclick="return fillLocation()">locate me</button>
+                        </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </fieldset>
 
     <fieldset><legend>Profiles</legend>
-        <div class="control-group profile">
-            <div class="controls">
-                <select onchange="return addProfile(this)">
-                    <option>Add Profile</option>
-                    <% FOREACH profile IN profiles; profile.value.id = profile.key -%>
-                    <option value="<% profile.value.json %>"><% profile.value.name %></option>
-                    <% END -%>
-                    <option value="">Custom...</option>
-                </select>
-            </div>
-        </div>
-        <div id="profiles" class="profiles">
-            <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
-            <div class="control-group <% IF known %>profile profile-<% profile.name %><% END %>">
-                <label class="control-label">
-                    <% IF known %>
-                    <% known.name %>
-                    <input type="hidden" name="profile.name" value="<% profile.name %>" />
-                    <% ELSE %>
-                    <input class="input-small" type="text" name="profile.name" value="<% profile.name %>">
-                    <% END %>
-                </label>
-                <div class="controls">
-                    <div class="input-append">
-                        <input class="input-medium" type="text" name="profile.id" value="<% profile.id %>" />
-                        <a class="btn btn-danger remove" href="" onclick="return removeDiv(this.parentNode.parentNode)"><i class="icon-trash icon-white"></i><span> remove</span></a>
-                        <% IF known %>
-                        <a class="btn" href="" tmpl="<% known.url %>" onclick="return rewriteURL(this)" target="_blank">check</a>
-                        <% END %>
-                    </div>
+        <div class="row">
+        <div class="col-sm-8 col-md-10">
+            <div class="form-group profile">
+                <label class="col-sm-4 col-md-4"></label>
+                <div class="col-sm-8 col-md-6">
+                    <select class="form-control" onchange="return addProfile(this)">
+                        <option>Add Profile</option>
+                        <% FOREACH profile IN profiles; profile.value.id = profile.key -%>
+                        <option value="<% profile.value.json %>"><% profile.value.name %></option>
+                        <% END -%>
+                        <option value="">Custom...</option>
+                    </select>
                 </div>
             </div>
-            <% END -%>
+            <div id="profiles" class="profiles">
+                <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
+                <div class="form-group <% IF known %>profile profile-<% profile.name %><% END %>">
+                    <label class="col-sm-4 col-md-4 control-label">
+                        <% IF known %>
+                        <% known.name %>
+                        <input type="hidden" name="profile.name" value="<% profile.name %>" />
+                        <% ELSE %>
+                        <input class="input-small" type="text" class="form-control" name="profile.name" value="<% profile.name %>">
+                        <% END %>
+                    </label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="input-group">
+                            <input class="small form-control" type="text" class="form-control" name="profile.id" value="<% profile.id %>" />
+                            <span class="input-group-btn">
+                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"> remove</i></a>
+                            <% IF known %>
+                            <a href="" class="btn search-btn" target="_blank" tmpl="<% known.url %>" onclick="return rewriteURL(this)"><i class="fa fa-check-square-o"> check</i></a>
+                            </span>
+                            <% END %>
+                        </div>
+                    </div>
+                </div>
+                <% END -%>
+            </div>
+        </div>
         </div>
     </fieldset>
 
     <fieldset><legend>Extra</legend>
         <p>Any additional data you want to add to your profiles goes in here (JSON format).</p><br />
-        <textarea name="extra" cols="60" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
+        <textarea name="extra" class="form-control" rows="10" onkeyup="validateJSON(this)"><% author.extra.pretty_json %></textarea><div class="valid">invalid</div>
     </fieldset>
     <br />
-    <input type="submit" value="Save Profile" class="btn btn-large" />
+    <input type="submit" value="Save Profile" class="btn btn-large search-btn" />
     </form>
     <% END -%>
 </div>
@@ -212,26 +236,26 @@ function addProfile(select) {
     var profile = value ? JSON.parse(value) : null;
     select.selectedIndex = 0;
     var container = $('#profiles');
-    var html = '<div style="display: none" class="control-group'
+    var html = '<div style="display: none" class="form-group'
     if (value) {
         html += ' profile profile-' + profile.id;
     }
-    html += '"><label class="control-label">';
+    html += '"><label class="col-sm-4 col-md-4 control-label">';
     if(value) {
         html += profile.name
         + '<input type="hidden" name="profile.name" value="' + profile.id  + '" /> ';
     } else {
-        html += '<input placeholder="Profile name" class="input-small" type="text" name="profile.name" /> ';
+        html += '<input placeholder="Profile name" class="input-small" type="text" class="form-control" name="profile.name" /> ';
     }
     html += '</label>'
-    html += '<div class="controls"><div class="input-append">'
-        + '<input class="input-medium" type="text" name="profile.id" /> '
-        + '<a class="btn btn-danger remove" href="" class="check" onclick="return removeDiv(this.parentNode.parentNode)"><i class="icon-trash icon-white"></i><span> remove</span></a> ';
+    html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
+        + '<input type="text" class="form-control" name="profile.id" /> '
+        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"> remove</i></a> ';
     if (value) {
-        html += '<a class="btn" href="" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank">check</a>';
+        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square-o"> check</i></a>';
     }
 
-    html += '</div></div></div>';
+    html += '</span></div></div></div>';
 
       container.append(html);
       var add = container.children().last();
@@ -241,7 +265,7 @@ function addProfile(select) {
 function rewriteURL(link) {
     link = $(link);
     var url = link.attr('tmpl');
-    var input = link.prev().prev();
+    var input = link.parent().prev();
     link.attr('href', url.replace('%s', input.val()));
     return true;
 }
@@ -268,10 +292,8 @@ function validateJSON(text) {
 
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
-    var container = input.parent().parent().parent();
-    container.append('<div class="controls"><div class="input-append"><input type="text" name="' + id + '" />'
-    + ' <a class="btn" href="" onclick="return removeLabel(this)">remove</a></div></div>');
-
+    var container = input.parent().parent();
+    container.append('<br><div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeLabel(this.parentNode)">remove</button></span></div>');
     var add = container.children().last();
     add.slideDown();
     return false;

@@ -1,202 +1,196 @@
+
+
 <%- menu = [{
-  title = "Home",
-  path = ["/", "/search"]
-},
-{
-  title = "Recent",
-  path = ["/recent"]
-},
-{
-  title = "FAQ",
-  path = ["/about/faq"],
-  class = 'hidden-phone',
-},
-{
-  title = "Feedback",
-  path = ["https://github.com/CPAN-API/metacpan-web/issues"],
-  class = 'hidden-phone',
-},
-{
-  title = "News",
-  path = ["/news"],
-  class = 'hidden-phone',
-},
-{
-  title = "Lab",
-  path = ["/lab"],
-  class = 'hidden-phone',
-},
-] %>
+    title = "Home",
+    path = ["/", "/search"]
+    },
+    {
+    title = "Recent",
+    path = ["/recent"]
+    },
+    {
+    title = "FAQ",
+    path = ["/about/faq"],
+    class = 'hidden-xs',
+    },
+    {
+    title = "Feedback",
+    path = ["https://github.com/CPAN-API/metacpan-web/issues"],
+    class = 'hidden-xs',
+    },
+    {
+    title = "News",
+    path = ["/news"],
+    class = 'hidden-xs',
+    },
+    {
+    title = "Lab",
+    path = ["/lab"],
+    class = 'hidden-xs',
+    },
+    ] %>
 <!DOCTYPE HTML>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
-  <%- IF rss %><link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" /><% END %>
-  <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
-  <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
-<%- IF canonical %>
-  <link rel="canonical" href="https://metacpan.org<% canonical %>" />
-<%- END %>
-<%- IF meta_description %>
-  <meta name="description" content="<% meta_description %>" />
-<%- END %>
-  <link rel="shortcut icon" href="/static/icons/favicon.ico">
-  <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
-  <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
-
-  <% IF PLACK_ENV == 'development' %>
-  <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
-  <script src="/static/js/less.min.js" type="text/javascript"></script>
-  <% ELSE %>
-  <link href="<% req.env.item('psgix.assets_less').0 %>" rel="stylesheet" type="text/css">
-  <% END %>
-  <script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27829474-1']);
-  _gaq.push(['_setDomainName', 'metacpan.org']);
-  _gaq.push(['_setSiteSpeedSampleRate', 100]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-  </script>
-
-<% IF twitter_card_inc %>
-<% INCLUDE $twitter_card_inc %>
-<% END %>
-
-</head>
-<body>
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container-fluid">
-        <%- UNLESS req.uri.path == "/" %>
-        <a class="btn btn-navbar btn-slidepanel" data-toggle="slidepanel" data-target=".slidepanel">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
+        <%- IF rss %>
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" />
+        <% END %>
+        <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
+        <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
+        <%- IF canonical %>
+        <link rel="canonical" href="https://metacpan.org<% canonical %>" />
         <%- END %>
-        <ul class="nav">
-          <%-  FOREACH item IN menu;
-            active = item.path.grep(->{ this == req.uri.path} ).size;
-            IF active; %>
-          <li class="active">
-          <%- ELSE %>
-          <li class="<% item.class %>">
-          <%- END %>
-            <a href="<% item.path.0 %>"><% item.title %></a>
-          </li>
-          <%- END %>
-        </ul>
-        <ul class="nav pull-right">
-          <%- IF user_exists %>
-          <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
-          <li class="dropdown pull-left">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-
-              <li><a href="/account/identities">Identities</a></li>
-              <li><a href="/account/profile">Profile</a></li>
-              <li><a href="/account/favorite/list">Favorites</a></li>
-              <li>
-                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
-              </li>
-            </ul>
-          </li>
-          <%- ELSE %>
-          <li class="dropdown pull-left">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Sign in
-                  <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
-                <li>
-                  <a href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)"><% identity %></a>
+        <%- IF meta_description %>
+        <meta name="description" content="<% meta_description %>" />
+        <%- END %>
+        <link rel="shortcut icon" href="/static/icons/favicon.ico">
+        <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
+        <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
+        <% IF PLACK_ENV == 'development' %>
+        <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
+        <script src="/static/js/less.min.js" type="text/javascript"></script>
+        <% ELSE %>
+        <link href="<% req.env.item('psgix.assets_less').0 %>" rel="stylesheet" type="text/css">
+        <% END %>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-27829474-1']);
+            _gaq.push(['_setDomainName', 'metacpan.org']);
+            _gaq.push(['_setSiteSpeedSampleRate', 100]);
+            _gaq.push(['_trackPageview']);
+            (function() {
+              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <% IF twitter_card_inc %>
+        <% INCLUDE $twitter_card_inc %>
+        <% END %>
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+            <%- UNLESS req.uri.path == "/" %>
+                <li class="visible-xs">
+                <a data-toggle="slidepanel" data-target=".slidepanel">
+                  <i class="fa fa-bars fa-2x icon-slidepanel"></i>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
                 </li>
-                <%- END %>
-              </ul>
-          </li>
-          <% END %>
-        </ul>
-      </div>
-    </div>
-  </div>
+            <% END %>
+                    <%-  FOREACH item IN menu;
+                        active = item.path.grep(->{ this == req.uri.path} ).size;
+                          IF active; %>
+                    <li class="active">
+                        <%- ELSE %>
+                    <li class="<% item.class %>">
+                        <%- END %>
+                        <a href="<% item.path.0 %>"><% item.title %></a>
+                    </li>
+                    <%- END %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <%- IF user_exists %>
+                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Account
+                        <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/account/identities">Identities</a></li>
+                            <li><a href="/account/profile">Profile</a></li>
+                            <li><a href="/account/favorite/list">Favorites</a></li>
+                            <li>
+                                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <% ELSE %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Sign in
+                        <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
+                            <li>
+                                <a href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)">
+                                <i class="fa fa-<% identity.lower %> fa-fw"></i>
+                                <% identity %>
+                                </a>
+                            </li>
+                            <%- END %>
+                        </ul>
+                    </li>
+                    <% END %>
+                </ul>
+        </nav>
 
-  <div class="container-fluid">
-    <% IF req.uri.path != '/' %>
-    <div class="row hidden-phone">
-      <div class="span3">
-        <a href="/" class="small-logo"></a>
-      </div>
-      <div class="span6">
-        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
-          <div class="input-append">
-            <input type="text" name="q" size="41" id="search-input" class="input-xlarge span5" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
-            <button class="btn" type="submit">Search<% IF req.uri.path == '/mirrors' %> Mirrors<% END %></button>
-          </div><br>
-          <small class="smaller">
-            <% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %>
-            result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %>
-          </small>
-        </form>
-      </div>
-    </div>
-    <% END %>
-    <div class="row-fluid">
-      <div class="span12">
-      <% content | none %>
-      </div>
-    </div>
-    <div class="hidden-phone">
-      <br><br><br>
-      <div class="row-fluid">
-        <div class="span2">&nbsp;</div>
-        <div class="span1" style="text-align: center">
-          <a href="https://github.com/CPAN-API/cpan-api/wiki/API-docs">API</a>
+        <div class="container-fluid">
+            <% IF req.uri.path != '/' %>
+            <div class="row hidden-phone">
+                <div class="head-small-logo col-md-3">
+                    <a href="/" class="small-logo"></a>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
+                            <div class="input-append">
+                                <input type="text" name="q" size="41" id="search-input" class="form-control top-input-form" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
+                                <span class="input-group-btn">
+                                <button class="btn search-btn" type="submit">Search<% IF req.uri.path == '/mirrors' %> Mirrors<% END %></button>
+                                </span>
+                                <small class="smaller">
+                                <% IF total.defined; IF page > 1 %>Page <% page %> of <% END; IF total == 999; 'more than '; END; total | format_number %>
+                                result<% IF total != 1; 's'; END %> (<% took / 1000 %> seconds)<% ELSE; "&nbsp;" | none; END %>
+                                </small>
+                            </div>
+                            <!-- <br> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% END %>
+            
+            <div class="row">
+                <div class="main-content col-md-12">
+                    <% content | none %>
+                </div>
+            </div>
+
+            <div class="row footer">
+                <div class="hidden-xs hidden-sm col-md-2">&nbsp;</div>
+                <div class="col-xs-2 col-sm-1 col-md-1" style="text-align: center">
+                    <a href="https://github.com/CPAN-API/cpan-api/wiki/API-docs">API</a>
+                </div>
+                <div class="col-xs-5 col-sm-3 col-md-2" style="text-align: center">
+                    <a href="/about">About MetaCPAN</a>
+                </div>
+                <div class="hidden-xs col-sm-2 col-md-2" style="text-align: center">
+                    <a href="/mirrors">CPAN Mirrors</a>
+                </div>
+                <div class="hidden-xs col-sm-3 col-md-2" style="text-align: center">
+                    <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
+                </div>
+                <div class="hidden-xs col-sm-1 col-md-1" style="text-align: center">
+                    <a href="http://Perl.org/">Perl.org</a>
+                </div>
+                <div class="col-xs-5 col-sm-2 col-md-2" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
+                    Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
+                    <br><br>
+                    <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank" class="thumbnail sponsor-logo">
+                        <img src="/static/images/sponsors/bytemark_logo.png">
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="span2" style="text-align: center">
-          <a href="/about">About MetaCPAN</a>
-        </div>
-        <div class="span2" style="text-align: center">
-          <a href="/mirrors">CPAN Mirrors</a>
-        </div>
-        <div class="span2" style="text-align: center">
-          <a href="https://github.com/CPAN-API/metacpan-web">Fork metacpan.org</a>
-        </div>
-        <div class="span1" style="text-align: center">
-          <a href="http://Perl.org/">Perl.org</a>
-        </div>
-        <div class="span2" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
-          Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
-          <br><br>
-          <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
-            <img src="/static/images/sponsors/bytemark_logo.png" width=179 height=14>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="visible-phone row-fluid">
-      <div class="span4"><a href="https://github.com/CPAN-API/cpan-api/wiki/Beta-API-docs">API</a></div>
-      <div class="span4 center"><a href="/about/resources">About</a></div>
-      <div class="span4" style="text-align: right; font-size: 0.7em; line-height: 1; color: #999">
-        Hosting generously<br>sponsored by <a href="http://www.bytemark.co.uk/r/metacpan.org/">Bytemark</a>
-        <br><br>
-        <a href="http://www.bytemark.co.uk/r/metacpan.org/" target="_blank">
-          <img src="/static/images/sponsors/bytemark_logo.png" width=100>
-        </a>
-      </div>
-    </div>
-  </div>
-</body>
+    </body>
 </html>
+

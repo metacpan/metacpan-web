@@ -5,11 +5,9 @@
 
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
 
-<ul class="nav nav-list slidepanel"  itemscope itemtype="http://schema.org/SoftwareApplication">
-  <li class="visible-phone search">
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-      <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-    </form>
+<ul class="nav nav-list slidepanel" id="pod-navlist" itemscope itemtype="http://schema.org/SoftwareApplication">
+  <li class="visible-xs">
+    <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
   <% IF documented_module.version %>

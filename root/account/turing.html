@@ -1,13 +1,13 @@
 <% PROCESS inc/account-bar.html %>
 <div class="content account-settings">
     <% IF error -%>
-    <div class="alert alert-error">
-      <h4 class="alert-heading">Error</h4>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><strong>Error</strong></h4>
       The answer was not correct. Please try again..
     </div>
     <% END; IF success -%>
     <div class="alert alert-success">
-      <h4 class="alert-heading">Success</h4>
+      <h4 class="alert-heading"><strong>Success</strong></h4>
       Thank you.
     </div>
     <a href="<% referer %>">Continue browsing</a>

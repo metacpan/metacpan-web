@@ -3,10 +3,8 @@
 <% title = 'CPAN Mirrors' %>
 <script src="/static/openlayers/OpenLayers.js"></script>
 <ul class="nav nav-list slidepanel">
-    <li class="visible-phone search">
-      <form action="/mirrors" method="GET">
-        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-      </form>
+    <li class="visible-xs">
+      <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">Sorting</li>
     <img src="/static/icons/busy.gif" style="float: right; visibility: hidden" id="busy">

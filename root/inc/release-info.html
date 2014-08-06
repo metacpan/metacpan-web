@@ -1,8 +1,14 @@
-
-      <li><a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>">Changes</a></li>
-      <% IF is_url(release.resources.homepage) %><li><a class="nopopup" href="<% release.resources.homepage %>">Homepage</a></li><% END %>
-      <% IF release.resources.repository %>
-      <li><div>
+<li>
+    <a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>">Changes</a>
+</li>
+<% IF is_url(release.resources.homepage) %>
+<li>
+    <a class="nopopup" href="<% release.resources.homepage %>">Homepage</a>
+</li>
+<% END %>
+<% IF release.resources.repository %>
+<li>
+    <div>
         <% IF is_url(release.resources.repository.web) %>
         <a href="<% release.resources.repository.web %>">Repository</a>
         <% END %>
@@ -10,10 +16,12 @@
         (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
         <% ELSIF is_url(release.resources.repository.url) %>
         <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
-        <% END %></div>
-      </li>
-      <% END %>
-      <li><div><a href="<%
+        <% END %>
+    </div>
+</li>
+<% END %>
+<li>
+    <div><a href="<%
         IF is_url(release.resources.bugtracker.web);
           release.resources.bugtracker.web;
         ELSIF release.resources.bugtracker.mailto;
@@ -21,21 +29,29 @@
         ELSE;
           'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
         END;
-      %>">Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div></li>
-      <% IF rating.count > 0 %>
-      <li><div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div></li>
-      <% END %>
-      <li><div><%
+        %>">Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div>
+</li>
+<% IF rating.count > 0 %>
+<li>
+    <div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div>
+</li>
+<% END %>
+<li>
+    <div><%
         testers_version = release.name.remove('^' _ release.distribution _ '-?');
         cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
-          <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
-          <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
-          <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a></div>
-      </li>
-      <li><div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div></li>
-      <% IF release.license %><li>License: <% release.license.join(', ') %></li><% END %>
-
-    <%
+        <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
+        <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
+        <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px"></a>
+    </div>
+</li>
+<li>
+    <div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div>
+</li>
+<% IF release.license %>
+<li>License: <% release.license.join(', ') %></li>
+<% END %>
+<%
     BLOCK version_options;
     backpan = [];
     FOREACH version IN versions;
@@ -47,8 +63,10 @@
             NEXT;
         END %>
     <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.author %> on <% version.date.dt_date_common %>)</option>
-    <% END; IF backpan.size %>
-    <optgroup label="BackPAN"></optgroup>
-    <% FOREACH version IN backpan %>
-    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)</option><% END %>
-    <% END; END %>
+<% END; IF backpan.size %>
+<optgroup label="BackPAN"></optgroup>
+<% FOREACH version IN backpan %>
+    <option value="<% version.author; '/'; version.name; '/'; module.path %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)
+    </option>
+<% END %>
+<% END; END %>

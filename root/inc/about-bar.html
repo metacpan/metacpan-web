@@ -1,11 +1,9 @@
 <% UNLESS title; title = 'MetaCPAN About'; END %>
-<div class="nav-list tabbable tabs-left about-bar slidepanel">
-    <ul class="nav nav-tabs">
-      <li class="visible-phone search">
-      <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
-        <input type="search" placeholder="Search" name="q"><input type="submit" class="hidden">
-      </form>
-    </li>
+<div class="list-group tabbable tabs-left about-bar slidepanel">
+    <div class="visible-xs">
+        <% INCLUDE mobile/toolbar-search-form.html %>
+    </div>
+    <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="125" id="left-nav">
     <li<% IF req.action == 'about' %> class="active"<% END %>>
         <a href="/about">About MetaCPAN</a>
     </li>

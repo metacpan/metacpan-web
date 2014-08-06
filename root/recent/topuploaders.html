@@ -1,9 +1,9 @@
 <%- title = "CPAN Top Uploaders" %>
 <%- INCLUDE inc/recent-bar.html %>
 
-<div class="content toplists">
+<div class="content toplists row">
 <% FOREACH author IN authors %>
-<div class="entry">
+<div class="entry col-sm-6 col-md-3">
     <%- IF author.gravatar_url %>
     <div class="gravatar">
         <a href="/author/<% author.pauseid %>">

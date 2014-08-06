@@ -5033,15 +5033,6 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-  Scalar-List-Utils-1.38
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.38.tar.gz
-    provides:
-      List::Util 1.38
-      List::Util::XS 1.38
-      Scalar::Util 1.38
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Starman-0.4009
     pathname: M/MI/MIYAGAWA/Starman-0.4009.tar.gz
     provides:

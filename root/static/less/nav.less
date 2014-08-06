@@ -1,0 +1,89 @@
+.navbar .dropdown.open {
+    .dropdown-toggle {
+      border-top: 2px solid lighten(@linkColor, 20%);
+    position: relative;
+    top: -2px;
+    margin-bottom: -2px;
+    color: @linkColor;
+    }
+}
+
+.navbar {
+    border-top: 2px solid lighten(@linkColor, 40%);
+    min-height: 32px;
+}
+
+.navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
+    border-top-color: black;
+}
+
+.navbar .nav li.dropdown.open {
+    color: @black;
+    font-weight: bold;
+    border-top: 2px solid @linkColor;
+    margin-bottom: -5px;
+    a.dropdown-toggle {
+        background-color: #fff;
+    @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
+    .box-shadow(@shadow);
+        z-index: 9999;
+}
+
+position: relative;
+    top: -2px;
+
+    .dropdown-menu {
+    margin-top: -1px;
+    border: 1px solid #e9e9e9;
+    }
+}
+
+.navbar .dropdown:hover .caret,
+.navbar .open .caret {
+    .opacity(100);
+}
+
+.navbar .nav > li > a:hover {
+    border-top: 2px solid lighten(@linkColor, 20%);
+    position: relative;
+    top: -2px;
+    margin-bottom: -2px;
+    color: @linkColor;
+}
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+    color: @black;
+    font-weight: bold;
+    border-top: 2px solid @linkColor;
+    margin-bottom: -2px;
+    background-color: #fff;
+    @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
+    .box-shadow(@shadow);
+  position: relative;
+    top: -2px;
+}
+
+.navbar-inner {
+    @shadow: inset 0 -1px 0 #e9e9e9;
+    .box-shadow(@shadow);
+  border: 0;
+}
+
+.navbar .nav > li > a {
+    text-shadow: none;
+    padding: 5px 10px 5px;
+}
+
+.nav li.dropdown.open .caret,
+.nav li.dropdown.open.active .caret,
+.nav li.dropdown.open a:hover .caret,
+.navbar .nav .dropdown-toggle .caret,
+.navbar .nav .open.dropdown .caret {
+    border-top-color: @black;
+}
+
+ul.nav-pills.affix {
+    top: 30px;
+    /* Set the top position of pinned element */;
+}

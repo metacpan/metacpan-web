@@ -4,10 +4,20 @@
 
 <h2>List all dependencies of a distribution.</h2>
 
-<form action="/lab/dependencies">
-<input name="module" />
-<input type="submit" value="Show">
-</form>
+<div class="col-lg-6">
+    <form action="/lab/dependencies">
+        <div class="input-group">
+          <input type="text" name="module" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" id="find-dependency-btn" type="submit" value="Show">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+    </form>
+ </div><!-- /.col-lg-6 -->
+
+
+<!-- <input name="module" /> -->
+<!-- <input type="submit" value="Show"> -->
 
 <% IF module %>
 	<h3>Module: <b><% module %></b></h3>
