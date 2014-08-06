@@ -72,15 +72,18 @@ sub author : Chained('index') PathPart Args(1) {
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
-    my $data        = {
-        author => $author_cv->recv,
-        releases =>
-            [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
-    };
-
+    my $author_info = $author_cv->recv;
+    my $faves_cv
+        = $c->model('API::Favorite')->by_user( $author_info->{user} );
+    my $faves_data = $faves_cv->recv;
+    my $data       = [
+        sort    { $b->{date} cmp $a->{date} }
+            map { $_->{fields} } @{ $faves_data->{hits}{hits} },
+        @{ $releases_cv->recv->{hits}{hits} }
+    ];
     $c->stash->{feed} = $self->build_feed(
-        title => "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
-        entries => $data->{releases}
+        title   => "Recent CPAN activity of $author - MetaCPAN",
+        entries => $self->build_author_entry( $author, $data ),
     );
 }
 
@@ -98,7 +101,7 @@ sub build_entry {
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
-        $entry->{link} // join( '/',
+        $entry->{link} ||= join( '/',
             'http://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
     );
@@ -118,6 +121,28 @@ sub build_feed {
         $feed->add_entry( $self->build_entry($entry) );
     }
     return $feed->as_xml;
+}
+
+sub build_author_entry {
+    my ( $self, $author, $activity ) = @_;
+    foreach my $item ( @{$activity} ) {
+        my $dist = $item->{distribution};
+        $dist =~ s/-/::/g;
+        $item->{abstract}
+            ||= "$author ++ed $item->{distribution} from $item->{author}";
+        $item->{link}
+            = $item->{name}
+            ? join( '/',
+            'https://metacpan.org', 'release',
+            $item->{author},        $item->{name} )
+            : join( '/', 'https://metacpan.org', 'pod', $dist );
+        $item->{name}
+            = $item->{name}
+            ? "$author has released $item->{name}"
+            : "$author ++ed $item->{distribution}";
+        unless ( $item->{author} eq $author ) { $item->{author} = $author }
+    }
+    return $activity;
 }
 
 sub end : Private {

@@ -3,6 +3,7 @@ use warnings;
 use Test::More;
 use MetaCPAN::Web::Test;
 use Try::Tiny;
+use MetaCPAN::Web::Controller::Feed;
 
 my @tests
     = qw(/feed/recent /feed/author/PERLER /feed/distribution/Moose /feed/news);
@@ -52,4 +53,56 @@ sub valid_xml {
     return $tx;
 }
 
+subtest 'get correct author entry data format' => sub {
+    my $feed = MetaCPAN::Web::Controller::Feed->new();
+    my $data = [
+        {
+            abstract     => "A brand new module from PERLHACKER",
+            author       => "PERLHACKER",
+            date         => "2012-12-12T05:17:44.000Z",
+            distribution => "Some-New-Module",
+            name         => "Some-New-Module-0.001",
+            status       => "latest",
+        },
+        {
+            author       => "ABIGAIL",
+            date         => "2014-01-16T21:51:00.000Z",
+            distribution => "perl",
+        }
+    ];
+    my $entry = $feed->build_author_entry( 'PERLHACKER', $data );
+    is(
+        $entry->[0]->{abstract},
+        'A brand new module from PERLHACKER',
+        'get correct release abstract'
+    );
+    is(
+        $entry->[0]->{link},
+        'https://metacpan.org/release/PERLHACKER/Some-New-Module-0.001',
+        'get correct release link'
+    );
+    is(
+        $entry->[0]->{name},
+        'PERLHACKER has released Some-New-Module-0.001',
+        'get correct release title'
+    );
+    is( $entry->[0]->{author}, 'PERLHACKER', 'get correct author name' );
+    is(
+        $entry->[1]->{abstract},
+        'PERLHACKER ++ed perl from ABIGAIL',
+        'get correct favorite abstract'
+    );
+    is(
+        $entry->[1]->{link},
+        'https://metacpan.org/pod/perl',
+        'get correct link to ++ed module'
+    );
+    is(
+        $entry->[1]->{name},
+        'PERLHACKER ++ed perl',
+        'get correct ++ed title'
+    );
+    is( $entry->[1]->{author},
+        'PERLHACKER', 'author on feed should be who ++' );
+};
 done_testing;
