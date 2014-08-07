@@ -20,12 +20,12 @@
   <li><a href="/recent/log">Indexer Log</a></li>
   <li class="nav-header">Top Uploaders</li>
   <%-
-  	categories = {
-  		weekly = "Weekly",
-  		yearly = "Yearly",
-  		all = "All Time",
-  	};
-  	FOREACH category IN categories.keys;
+      categories = {
+          weekly = "Weekly",
+          yearly = "Yearly",
+          all = "All Time",
+      };
+      FOREACH category IN categories.keys;
   %>
   <li>
       <% IF range == category %><strong><% categories.item(category) %></strong>

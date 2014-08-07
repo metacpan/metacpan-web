@@ -1,19 +1,19 @@
 /* tables */
 table.tablesorter thead tr .header {
-	background-image: url(/static/icons/bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-	height: auto;
-	font-weight: bold;
+    background-image: url(/static/icons/bg.gif);
+    background-repeat: no-repeat;
+    background-position: center right;
+    cursor: pointer;
+    height: auto;
+    font-weight: bold;
 }
 
 table.tablesorter tbody tr.odd td {
-	background-color:#f9f9f9;
+    background-color:#f9f9f9;
 }
 table.tablesorter thead tr .headerSortUp {
-	background-image: url(/static/icons/asc.gif);
+    background-image: url(/static/icons/asc.gif);
 }
 table.tablesorter thead tr .headerSortDown {
-	background-image: url(/static/icons/desc.gif);
+    background-image: url(/static/icons/desc.gif);
 }
