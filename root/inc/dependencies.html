@@ -10,26 +10,26 @@ FOREACH dep IN deps.sort %>
     <li><a href="/pod/<% dep %>" title="<% dep %>" class="ellipsis"><% dep %></a></li>
 <%- END %>
 <%- IF deps.size == 0 && !release.metadata  %>
-	<li><i class="ttip" title="no META file provided">unknown</i></li>
+    <li><i class="ttip" title="no META file provided">unknown</i></li>
 <%- ELSIF release.metadata.dynamic_config %>
-	<li><i class="ttip" title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
+    <li><i class="ttip" title="dynamic_config enabled"><% deps.size ? "and possibly others" : "unknown" %></i></li>
 <%- ELSIF deps.size == 0 %>
-	<li><i>none</i></li>
+    <li><i>none</i></li>
 <%- END %>
     <li class="divider"></li>
     <li>
         <a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>">
-        <i class="fa fa-retweet black"></i> CPAN Testers List</a>
+        <i class="fa fa-retweet black"></i>CPAN Testers List</a>
     </li>
     <li>
         <a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]">
-        <i class="fa fa-share black"></i> Reverse dependencies</a>
+        <i class="fa fa-share black"></i>Reverse dependencies</a>
     </li>
     <%- IF deps.size %>
         <%- INCLUDE inc/dependencies-graph.html %>
         <li>
             <button class="btn btn-link dependencies-graph" data-toggle="modal" data-target="#dependencies-graph" href="#">
-            <i class="fa fa-asterisk black"></i> Dependency graph</button>
+            <i class="fa fa-asterisk black"></i>Dependency graph</button>
         </li>
     <%- END %>
 </ul>

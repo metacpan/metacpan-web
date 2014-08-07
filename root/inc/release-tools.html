@@ -1,22 +1,22 @@
 <li class="nav-header">Tools</li>
 <li>
     <a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org') %>">
-    <span class="glyphicon glyphicon-download-alt black"></span> Download (<% release.stat.size | format_bytes %>b)
+    <span class="glyphicon glyphicon-download-alt black"></span>Download (<% release.stat.size | format_bytes %>b)
     </a>
 </li>
 <%- IF module %>
 <li>
-    <a href="#" onclick="return toggleTOC()"><span class="glyphicon glyphicon-list black"></span> Toggle Table of Contents</a>
+    <a href="#" onclick="return toggleTOC()"><span class="glyphicon glyphicon-list black"></span>Toggle Table of Contents</a>
 </li>
 <%- END %>
 <li>
     <a href="http://explorer.metacpan.org/?url=/<% module ? ['module', module.author, module.release, module.path].join("/") : ['release', release.author, release.name].join("/") %>">
-    <span class="glyphicon glyphicon-list-alt black"></span> MetaCPAN Explorer
+    <span class="glyphicon glyphicon-list-alt black"></span>MetaCPAN Explorer
     </a>
 </li>
 <li>
     <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">
-    <span class="glyphicon glyphicon-star black"></span> Rate this distribution
+    <span class="glyphicon glyphicon-star black"></span>Rate this distribution
     </a>
 </li>
 <li>

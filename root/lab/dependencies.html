@@ -20,14 +20,14 @@
 <!-- <input type="submit" value="Show"> -->
 
 <% IF module %>
-	<h3>Module: <b><% module %></b></h3>
+  <h3>Module: <b><% module %></b></h3>
 
-	<% FOR d IN data %>
-	  <% IF d.orig %><b><% END %>
-	  <% d.dist  %> <% d.date %> <% d.license %>
-	  <% IF d.orig %></b><% END %>
-	  <br>
-	<% END %>
+  <% FOR d IN data %>
+    <% IF d.orig %><b><% END %>
+    <% d.dist  %> <% d.date %> <% d.license %>
+    <% IF d.orig %></b><% END %>
+    <br>
+  <% END %>
 <% END %>
 
 </div>

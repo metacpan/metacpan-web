@@ -1,12 +1,12 @@
 <table <% IF table_id %> id="<% table_id %>"<% END %>
   <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
   class="table table-condensed table-striped table-releases<% IF tablesorter %> tablesorter<% END %>">
-	<thead>
-  	<tr>
-    	<th class="name pull-left-phone">Release</th>
+    <thead>
+    <tr>
+      <th class="name pull-left-phone">Release</th>
       <th class="hidden-phone invisible"></th>
-    	<th class="date"><% day || "Uploaded" %></th>
-  	</tr>
+      <th class="date"><% day || "Uploaded" %></th>
+    </tr>
   </thead>
   <tbody>
   <%- FOREACH release IN releases %>
