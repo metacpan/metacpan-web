@@ -64,7 +64,8 @@ subtest 'get correct author favorite data format' => sub {
         }
     ];
 
-    my $entry = $feed->_format_favorite_entries( 'PERLHACKER', $favorite_data );
+    my $entry
+        = $feed->_format_favorite_entries( 'PERLHACKER', $favorite_data );
     is(
         $entry->[0]->{abstract},
         'PERLHACKER ++ed Git-Sub from DOLMEN',
