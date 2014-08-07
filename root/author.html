@@ -144,8 +144,23 @@
     </li>
 </ul>
 <!-- End left content -->
+
 <div class="content">
     <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
+<% IF releases.0 %>
     <% INCLUDE inc/release-table.html releases = aggregated, header = 1, tablesorter = 1, table_id = "author_releases" %>
+<% ELSE %>
+    <div class="message">
+        <strong>Releases</strong>
+        <p>No releases from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found</p>
+    </div>
+<% END %>
+<% IF faves.0 %>
     <% INCLUDE inc/favorite-table.html favorites = faves, author = 1 tablesorter = 1 %>
+<% ELSE %>
+    <div class="message">
+        <strong>Favorites</strong>
+        <p>No favorite distributions from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found</p>
+    </div>
+<% END %>
 </div>
