@@ -1,3 +1,9 @@
+Title: Let's move to Bootstrap 3
+------------------------------
+Date: 2014-08-06T08:55:22
+
+MetaCPAN has moved to Bootstrap 3 as well as introducing cool icons from [Font Awesome](http://fortawesome.github.io/Font-Awesome/). Let's make MetaCPAN be more colorful!
+
 Title: Link to Task::Kensho is now available on home page and no result page
 ------------------------------
 Date: 2014-06-14T23:25:11
@@ -20,12 +26,6 @@ Title: Suggestion on incorrect number of colons
 Date: 2014-06-09T08:15:00
 
 Perl module name should contain only 2 colons, some common mistakes are we underuse or overuse it. Now, suggestion on no result page available when search with missing colon such as [Test:More](https://metacpan.org/search?q=Test%3AMore) or too much colons like [DBIx:::Class::::ResultSet](https://metacpan.org/search?q=DBIx%3A%3A%3AClass%3A%3A%3A%3AResultSet).
-
-Title: Redirect to the module on 1 search result
-------------------------------
-Date: 2014-06-09T08:15:00
-
-If there's only 1 result return from a search, it will take you that module automatically. For example search for ['ctx_request'](https://metacpan.org/search?q=ctx_request), you'll see Catalyst::Test module page instead of result page.
 
 Title: Table sorting is now persistent
 ------------------------------
