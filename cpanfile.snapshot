@@ -8,6 +8,16 @@ DISTRIBUTIONS
       Algorithm::DiffOld 1.1
     requirements:
       ExtUtils::MakeMaker 0
+  Any-Moose-0.24
+    pathname: E/ET/ETHER/Any-Moose-0.24.tar.gz
+    provides:
+      Any::Moose 0.24
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.30
+      Moose 0
+      strict 0
+      warnings 0
   Any-URI-Escape-0.01
     pathname: P/PH/PHRED/Any-URI-Escape-0.01.tar.gz
     provides:
@@ -316,6 +326,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::Exception 0
+  Carp-Clan-Share-0.013
+    pathname: R/RK/RKRIMEN/Carp-Clan-Share-0.013.tar.gz
+    provides:
+      Carp::Clan::Share 0.013
+    requirements:
+      Carp::Clan 0
+      ExtUtils::MakeMaker 6.42
+      Test::More 0
   Catalyst-Action-REST-1.14
     pathname: F/FR/FREW/Catalyst-Action-REST-1.14.tar.gz
     provides:
@@ -770,6 +788,17 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  Clone-PP-1.06
+    pathname: N/NE/NEILB/Clone-PP-1.06.tar.gz
+    provides:
+      Clone::PP 1.06
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      perl 5.006
+      strict 0
+      vars 0
+      warnings 0
   Code-TidyAll-0.19
     pathname: J/JS/JSWARTZ/Code-TidyAll-0.19.tar.gz
     provides:
@@ -862,6 +891,28 @@ DISTRIBUTIONS
       Mixin::Linewise::Writers 0
       strict 0
       warnings 0
+  Config-JFDI-0.065
+    pathname: R/RO/ROKR/Config-JFDI-0.065.tar.gz
+    provides:
+      Config::JFDI 0.065
+      Config::JFDI::Carp undef
+      Config::JFDI::Source::Loader undef
+      eq 0.065
+      t::Test undef
+    requirements:
+      Any::Moose 0
+      Carp::Clan::Share 0
+      Clone 0
+      Config::Any 0
+      Config::General 0
+      Data::Visitor 0.24
+      ExtUtils::MakeMaker 6.31
+      Getopt::Usaginator 0
+      Hash::Merge::Simple 0
+      List::MoreUtils 0
+      Path::Class 0
+      Sub::Install 0
+      Test::Most 0
   Config-Tiny-2.20
     pathname: R/RS/RSAVAGE/Config-Tiny-2.20.tgz
     provides:
@@ -936,6 +987,29 @@ DISTRIBUTIONS
       Data::Page 2
       ExtUtils::MakeMaker 0
       Test::More 0.1
+  Data-Printer-0.35
+    pathname: G/GA/GARU/Data-Printer-0.35.tar.gz
+    provides:
+      DDP undef
+      Data::Printer 0.35
+      Data::Printer::Filter undef
+      Data::Printer::Filter::DB undef
+      Data::Printer::Filter::DateTime undef
+      Data::Printer::Filter::Digest undef
+    requirements:
+      Carp 0
+      Clone::PP 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      File::HomeDir 0.91
+      File::Spec 0
+      File::Temp 0
+      Package::Stash 0.3
+      Scalar::Util 0
+      Sort::Naturally 0
+      Term::ANSIColor 3
+      Test::More 0.88
+      version 0.77
   Data-UUID-1.219
     pathname: R/RJ/RJBS/Data-UUID-1.219.tar.gz
     provides:
@@ -1960,6 +2034,22 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
+  Devel-CheckCompiler-0.05
+    pathname: S/SY/SYOHEX/Devel-CheckCompiler-0.05.tar.gz
+    provides:
+      Devel::AssertC99 undef
+      Devel::CheckCompiler 0.05
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Exporter 0
+      ExtUtils::CBuilder 0
+      File::Temp 0
+      Module::Build 0.38
+      Test::More 0.98
+      Test::Requires 0
+      parent 0
+      perl 5.008001
   Devel-GlobalDestruction-0.12
     pathname: H/HA/HAARG/Devel-GlobalDestruction-0.12.tar.gz
     provides:
@@ -2242,6 +2332,30 @@ DISTRIBUTIONS
       File::Spec 0
       strict 0
       warnings 0
+  ExtUtils-ParseXS-3.24
+    pathname: S/SM/SMUELLER/ExtUtils-ParseXS-3.24.tar.gz
+    provides:
+      ExtUtils::ParseXS 3.24
+      ExtUtils::ParseXS::Constants 3.24
+      ExtUtils::ParseXS::CountLines 3.24
+      ExtUtils::ParseXS::Eval 3.24
+      ExtUtils::ParseXS::Utilities 3.24
+      ExtUtils::Typemaps 3.24
+      ExtUtils::Typemaps::Cmd 3.24
+      ExtUtils::Typemaps::InputMap 3.24
+      ExtUtils::Typemaps::OutputMap 3.24
+      ExtUtils::Typemaps::Type 3.24
+    requirements:
+      Carp 0
+      Cwd 0
+      DynaLoader 0
+      Exporter 5.57
+      ExtUtils::CBuilder 0
+      ExtUtils::MakeMaker 6.46
+      File::Basename 0
+      File::Spec 0
+      Symbol 0
+      Test::More 0.47
   Feed-Find-0.07
     pathname: B/BT/BTROTT/Feed-Find-0.07.tar.gz
     provides:
@@ -2404,6 +2518,16 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Getopt-Usaginator-0.0012
+    pathname: R/RO/ROKR/Getopt-Usaginator-0.0012.tar.gz
+    provides:
+      Getopt::Usaginator 0.0012
+    requirements:
+      ExtUtils::MakeMaker 6.31
+      File::Spec 0
+      IPC::Open3 0
+      Package::Pkg 0.0014
+      Test::Most 0
   Gravatar-URL-1.06
     pathname: M/MS/MSCHWERN/Gravatar-URL-1.06.tar.gz
     provides:
@@ -2692,6 +2816,15 @@ DISTRIBUTIONS
       Clone 0
       ExtUtils::MakeMaker 0
       perl 5.008001
+  Hash-Merge-Simple-0.051
+    pathname: R/RO/ROKR/Hash-Merge-Simple-0.051.tar.gz
+    provides:
+      Hash::Merge::Simple 0.051
+    requirements:
+      Clone 0
+      ExtUtils::MakeMaker 6.31
+      Storable 0
+      Test::Most 0
   Hash-MoreUtils-0.05
     pathname: R/RE/REHSACK/Hash-MoreUtils-0.05.tar.gz
     provides:
@@ -3040,6 +3173,21 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-Build-XSUtil-0.14
+    pathname: H/HI/HIDEAKIO/Module-Build-XSUtil-0.14.tar.gz
+    provides:
+      Module::Build::XSUtil 0.14
+    requirements:
+      Devel::CheckCompiler 0.02
+      Devel::PPPort 3.19
+      Exporter 0
+      ExtUtils::CBuilder 0
+      File::Basename 0
+      File::Path 0
+      Module::Build 0.4005
+      XSLoader 0.02
+      parent 0
+      perl 5.008005
   Module-Implementation-0.07
     pathname: D/DR/DROLSKY/Module-Implementation-0.07.tar.gz
     provides:
@@ -3768,6 +3916,47 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Mouse-2.3.0
+    pathname: G/GF/GFUJI/Mouse-2.3.0.tar.gz
+    provides:
+      Mouse 2.003000
+      Mouse::Exporter undef
+      Mouse::Meta::Attribute undef
+      Mouse::Meta::Class undef
+      Mouse::Meta::Method undef
+      Mouse::Meta::Method::Accessor undef
+      Mouse::Meta::Method::Constructor undef
+      Mouse::Meta::Method::Delegation undef
+      Mouse::Meta::Method::Destructor undef
+      Mouse::Meta::Module undef
+      Mouse::Meta::Role undef
+      Mouse::Meta::Role::Application undef
+      Mouse::Meta::Role::Composite undef
+      Mouse::Meta::Role::Method undef
+      Mouse::Meta::TypeConstraint undef
+      Mouse::Object undef
+      Mouse::PurePerl undef
+      Mouse::Role 2.003000
+      Mouse::Spec 2.003000
+      Mouse::TypeRegistry undef
+      Mouse::Util 2.003000
+      Mouse::Util::MetaRole undef
+      Mouse::Util::TypeConstraints undef
+      Squirrel undef
+      Squirrel::Role undef
+      Test::Mouse undef
+      ouse undef
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Devel::PPPort 3.19
+      ExtUtils::CBuilder 0
+      ExtUtils::ParseXS 3.22
+      Module::Build 0.4005
+      Module::Build::XSUtil 0.14
+      Scalar::Util 1.14
+      XSLoader 0.02
+      perl 5.008005
   Net-CIDR-Lite-0.21
     pathname: D/DO/DOUGW/Net-CIDR-Lite-0.21.tar.gz
     provides:
@@ -4179,6 +4368,20 @@ DISTRIBUTIONS
       Test::Requires 0
       strict 0
       warnings 0
+  Package-Pkg-0.0020
+    pathname: R/RO/ROKR/Package-Pkg-0.0020.tar.gz
+    provides:
+      Package::Pkg 0.0020
+      Package::Pkg::Lexicon undef
+      Package::Pkg::Loader undef
+    requirements:
+      Class::Load 0
+      Clone 0
+      ExtUtils::MakeMaker 6.30
+      Mouse 0
+      Sub::Install 0
+      Test::Most 0
+      Try::Tiny 0
   Package-Stash-0.36
     pathname: D/DO/DOY/Package-Stash-0.36.tar.gz
     provides:
@@ -5033,6 +5236,13 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
+  Sort-Naturally-1.03
+    pathname: B/BI/BINGOS/Sort-Naturally-1.03.tar.gz
+    provides:
+      Sort::Naturally 1.03
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5
   Starman-0.4009
     pathname: M/MI/MIYAGAWA/Starman-0.4009.tar.gz
     provides:
@@ -5475,6 +5685,20 @@ DISTRIBUTIONS
       constant 0
       strict 0
       warnings 0
+  Test-Most-0.34
+    pathname: O/OV/OVID/Test-Most-0.34.tar.gz
+    provides:
+      Test::Most 0.34
+      Test::Most::Exception 0.34
+    requirements:
+      Exception::Class 1.14
+      ExtUtils::MakeMaker 0
+      Test::Deep 0.106
+      Test::Differences 0.61
+      Test::Exception 0.31
+      Test::Harness 3.21
+      Test::More 0.88
+      Test::Warn 0.23
   Test-NoWarnings-1.04
     pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
     provides:
