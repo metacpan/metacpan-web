@@ -14,6 +14,7 @@ BEGIN {
     }
 }
 
+use Config::JFDI;
 use FindBin;
 use lib "$FindBin::RealBin/lib";
 use File::Path ();
@@ -50,6 +51,13 @@ my $app = Plack::App::URLMap->new;
 {
     my $core_app = MetaCPAN::Web->psgi_app;
 
+    my $config = Config::JFDI->new(
+        name => 'MetaCPAN::Web',
+        path => $FindBin::RealBin,
+    );
+
+    die 'cookie_secret not configured' unless $config->get->{cookie_secret};
+
     # Add session cookie here only
     $core_app = Plack::Middleware::Session::Cookie->wrap(
         $core_app,
@@ -57,6 +65,7 @@ my $app = Plack::App::URLMap->new;
         expires     => 2**30,
         secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
         httponly    => 1,
+        secret      => $config->get->{cookie_secret},
     );
 
     $app->map( q[/] => $core_app );
