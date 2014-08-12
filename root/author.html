@@ -146,6 +146,12 @@
 <!-- End left content -->
 
 <div class="content">
+    <div id="feed_subscription" class="page-header">
+        <p>Activity for <% author.name %> (<% author.pauseid %>)</p>
+        <i class="fa fa-rss fa-2x">
+            <a href="/feed/author/<% author.pauseid %>"></a>
+        </i>
+    </div>
     <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
 <% IF releases.0 %>
     <% INCLUDE inc/release-table.html releases = aggregated, header = 1, tablesorter = 1, table_id = "author_releases" %>
