@@ -55,7 +55,7 @@ requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
 requires 'Plack::Middleware::Headers';
 requires 'Plack::Middleware::ServerStatus::Lite';
-requires 'Plack::Middleware::Session';
+requires 'Plack::Middleware::Session', '0.22';
 requires 'Plack::Middleware::Session::Cookie';
 requires 'Plack::Response';
 requires 'Plack::Session';
