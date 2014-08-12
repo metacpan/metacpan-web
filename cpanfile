@@ -43,7 +43,7 @@ requires 'JSON::XS', '3.01';
 requires 'List::MoreUtils';
 requires 'List::Util';
 requires 'Locale::Country','3.28';
-requires 'Module::Build::Tiny', '0.035';
+requires 'Module::Build::Tiny', '0.037';
 requires 'Moose';
 requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
