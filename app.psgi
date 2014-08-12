@@ -18,6 +18,7 @@ use Config::JFDI;
 use FindBin;
 use lib "$FindBin::RealBin/lib";
 use File::Path ();
+use JSON qw( encode_json decode_json );
 use MetaCPAN::Web;
 use Plack::Builder;
 use Plack::App::File;
@@ -29,6 +30,7 @@ use Plack::Middleware::MCLess;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
+use Plack::Session::Store::File;
 
 # explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
@@ -63,6 +65,9 @@ my $app = Plack::App::URLMap->new;
 
     die 'cookie_secret not configured' unless $config->get->{cookie_secret};
 
+    my $storage_path = "$path/var/tmp/cookies";
+    maybe_make_path($storage_path);
+
     # Add session cookie here only
     $core_app = Plack::Middleware::Session::Cookie->wrap(
         $core_app,
@@ -71,6 +76,11 @@ my $app = Plack::App::URLMap->new;
         secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
         httponly    => 1,
         secret      => $config->get->{cookie_secret},
+        store       => Plack::Session::Store::File->new(
+            dir          => $storage_path,
+            serializer   => sub { encode_json(@_) },
+            deserializer => sub { decode_json(@_) },
+        ),
     );
 
     $app->map( q[/] => $core_app );
@@ -80,10 +90,8 @@ $app = $app->to_app;
 
 unless ( $ENV{HARNESS_ACTIVE} ) {
     my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
-    unless ( -d $scoreboard ) {
-        File::Path::make_path($scoreboard)
-            or die "Can't make_path $scoreboard: $!";
-    }
+    maybe_make_path($scoreboard);
+
     $app = Plack::Middleware::ServerStatus::Lite->wrap(
         $app,
         path       => '/server-status',
@@ -173,6 +181,14 @@ if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
 
         $app;
     };
+}
+
+sub maybe_make_path {
+    my $path = shift;
+
+    return if -d $path;
+
+    File::Path::make_path($path) or die "Can't make_path $path: $!";
 }
 
 $app = Plack::Middleware::ReverseProxy->wrap($app);
