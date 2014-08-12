@@ -72,15 +72,21 @@ sub author : Chained('index') PathPart Args(1) {
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
-    my $data        = {
-        author => $author_cv->recv,
-        releases =>
-            [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ],
-    };
+    my $release_data
+        = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
+    my $author_info = $author_cv->recv;
+    my $faves_cv
+        = $c->model('API::Favorite')->by_user( $author_info->{user} );
+    my $faves_data
+        = [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ];
 
     $c->stash->{feed} = $self->build_feed(
-        title => "Recent CPAN uploads by $data->{author}->{name} - MetaCPAN",
-        entries => $data->{releases}
+        title   => "Recent CPAN activity of $author - MetaCPAN",
+        entries => [
+            sort { $b->{date} cmp $a->{date} }
+                @{ $self->_format_release_entries($release_data) },
+            @{ $self->_format_favorite_entries( $author, $faves_data ) }
+        ],
     );
 }
 
@@ -98,7 +104,7 @@ sub build_entry {
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
-        $entry->{link} // join( '/',
+        $entry->{link} ||= join( '/',
             'http://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
     );
@@ -118,6 +124,34 @@ sub build_feed {
         $feed->add_entry( $self->build_entry($entry) );
     }
     return $feed->as_xml;
+}
+
+sub _format_release_entries {
+    my ( $self, $releases ) = @_;
+    my @release_data;
+    foreach my $item ( @{$releases} ) {
+        $item->{link} = join( '/',
+            'https://metacpan.org', 'release',
+            $item->{author},        $item->{name} );
+        $item->{name} = "$item->{author} has released $item->{name}";
+        push( @release_data, $item );
+    }
+    return \@release_data;
+}
+
+sub _format_favorite_entries {
+    my ( $self, $author, $data ) = @_;
+    my @fav_data;
+    foreach my $fav ( @{$data} ) {
+        $fav->{abstract}
+            = "$author ++ed $fav->{distribution} from $fav->{author}";
+        $fav->{author} = $author;
+        $fav->{link}   = join( '/',
+            'https://metacpan.org', 'release', $fav->{distribution} );
+        $fav->{name} = "$author ++ed $fav->{distribution}";
+        push( @fav_data, $fav );
+    }
+    return \@fav_data;
 }
 
 sub end : Private {

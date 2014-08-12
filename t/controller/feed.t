@@ -3,6 +3,7 @@ use warnings;
 use Test::More;
 use MetaCPAN::Web::Test;
 use Try::Tiny;
+use MetaCPAN::Web::Controller::Feed;
 
 my @tests
     = qw(/feed/recent /feed/author/PERLER /feed/distribution/Moose /feed/news);
@@ -51,5 +52,67 @@ sub valid_xml {
 
     return $tx;
 }
+
+my $feed = MetaCPAN::Web::Controller::Feed->new();
+
+subtest 'get correct author favorite data format' => sub {
+    my $favorite_data = [
+        {
+            author       => 'DOLMEN',
+            date         => '2013-07-05T14:41:26.000Z',
+            distribution => 'Git-Sub',
+        }
+    ];
+
+    my $entry
+        = $feed->_format_favorite_entries( 'PERLHACKER', $favorite_data );
+    is(
+        $entry->[0]->{abstract},
+        'PERLHACKER ++ed Git-Sub from DOLMEN',
+        'get correct release abstract'
+    );
+    is(
+        $entry->[0]->{link},
+        'https://metacpan.org/release/Git-Sub',
+        'get correct release link'
+    );
+    is(
+        $entry->[0]->{name},
+        'PERLHACKER ++ed Git-Sub',
+        'get correct release title'
+    );
+    is( $entry->[0]->{author}, 'PERLHACKER', 'get correct author name' );
+};
+
+subtest 'get correct author release data format' => sub {
+    my $data = [
+        {
+            abstract     => 'Easy OO access to the FreshBooks.com API',
+            author       => 'OALDERS',
+            date         => '2014-05-03T03:06:44.000Z',
+            distribution => 'Net-FreshBooks-API',
+            name         => 'Net-FreshBooks-API-0.24',
+            status       => 'latest',
+        }
+    ];
+
+    my $entry = $feed->_format_release_entries($data);
+    is(
+        $entry->[0]->{abstract},
+        'Easy OO access to the FreshBooks.com API',
+        'get correct release abstract'
+    );
+    is(
+        $entry->[0]->{link},
+        'https://metacpan.org/release/OALDERS/Net-FreshBooks-API-0.24',
+        'get correct release link'
+    );
+    is(
+        $entry->[0]->{name},
+        'OALDERS has released Net-FreshBooks-API-0.24',
+        'get correct release title'
+    );
+    is( $entry->[0]->{author}, 'OALDERS', 'get correct author name' );
+};
 
 done_testing;

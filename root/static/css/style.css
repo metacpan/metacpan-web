@@ -339,3 +339,7 @@ div.qtip-github table th {
 .news_feed {
     float: right;  
 }
+
+#icon-rss {
+    background: url('/static/icons/icon-rss.png');
+}
