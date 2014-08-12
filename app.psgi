@@ -51,9 +51,14 @@ my $app = Plack::App::URLMap->new;
 {
     my $core_app = MetaCPAN::Web->psgi_app;
 
+    my $path
+        = $ENV{HARNESS_ACTIVE}
+        ? q{./}
+        : $FindBin::RealBin;
+
     my $config = Config::JFDI->new(
         name => 'MetaCPAN::Web',
-        path => $FindBin::RealBin,
+        path => $path,
     );
 
     die 'cookie_secret not configured' unless $config->get->{cookie_secret};
