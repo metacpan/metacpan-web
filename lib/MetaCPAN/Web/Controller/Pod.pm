@@ -161,6 +161,8 @@ sub view : Private {
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
+    my $contribs = $self->groom_contributors( $c, $release );
+
     $c->stash(
         {
             module            => $data,
@@ -169,6 +171,7 @@ sub view : Private {
             template          => 'pod.html',
             canonical         => $canonical,
             documented_module => $documented_module,
+            contributors      => $contribs,
         }
     );
     unless ( $reqs->{pod}->{raw} ) {

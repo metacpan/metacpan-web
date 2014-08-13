@@ -101,7 +101,7 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
-    $self->groom_contributors( $c, $out );
+    my $contribs = $self->groom_contributors( $c, $out );
 
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
@@ -123,6 +123,8 @@ sub view : Private {
         examples => \@examples,
         files    => \@view_files,
 
+        contributors => $contribs,
+
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
         (
@@ -133,37 +135,6 @@ sub view : Private {
         ( $changes ? ( last_version_changes => $changes ) : () )
 
     );
-}
-
-# massage the x_contributors field into what we want
-sub groom_contributors {
-    my ( $self, $c, $out ) = @_;
-
-    return unless $out->{metadata}{x_contributors};
-
-    # just in case a lonely contributor makes it as a scalar
-    $out->{metadata}{x_contributors} = [ $out->{metadata}{x_contributors} ]
-        unless ref $out->{metadata}{x_contributors};
-
-    my @contributors = map {
-        s/<(.*)>//;
-        { name => $_, email => $1 }
-    } @{ $out->{metadata}{x_contributors} };
-
-    $out->{metadata}{x_contributors} = \@contributors;
-
-    for my $contributor ( @{ $out->{metadata}{x_contributors} } ) {
-
-        # heuristic to autofill pause accounts
-        $contributor->{pauseid} = uc $1
-            if !$contributor->{pauseid}
-            and $contributor->{email} =~ /^(.*)\@cpan.org/;
-
-        next unless $contributor->{pauseid};
-
-        $contributor->{url} = $c->uri_for_action( '/author/index',
-            [ $contributor->{pauseid} ] );
-    }
 }
 
 1;
