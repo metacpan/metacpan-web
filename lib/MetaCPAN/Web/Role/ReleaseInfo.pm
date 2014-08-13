@@ -111,4 +111,23 @@ sub groom_contributors {
     return \@contribs;
 }
 
+sub groom_irc {
+    my ( $self, $c, $release ) = @_;
+
+    my $irc = $release->{metadata}{resources}{x_IRC};
+    my $irc_info = ref $irc ? {%$irc} : { url => $irc };
+    $irc_info->{web} ||= $release->{metadata}{resources}{x_WebIRC};
+
+    if ( !$irc_info->{web} && $irc_info->{url} ) {
+        if ( $irc_info->{url} =~ m{^irc://freenode\.net/#?(.*)} ) {
+            $irc_info->{web} = "https://webchat.freenode.net/?channels=#$1";
+        }
+        elsif ( $irc_info->{url} =~ m{^irc://([^/]+)/#?(.*)} ) {
+            $irc_info->{web} = "https://chat.mibbit.com/$2\@$1";
+        }
+    }
+
+    return $irc_info;
+}
+
 1;
