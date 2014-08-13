@@ -85,7 +85,7 @@ my $app = Plack::App::URLMap->new;
 
             # Use try/catch so JSON doesn't barf if the cookie is bad.
             try {
-                JSON::decode_json( MIME::Base64::decode( $_[0] ) )
+                JSON::decode_json( MIME::Base64::decode( $_[0] ) );
             }
 
             # No session.
