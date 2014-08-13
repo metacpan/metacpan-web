@@ -83,9 +83,12 @@ my $app = Plack::App::URLMap->new;
         },
         deserializer => sub {
 
+            # We can't reference $_[0] from inside the try block.
+            my $cookie = $_[0];
+
             # Use try/catch so JSON doesn't barf if the cookie is bad.
             try {
-                JSON::decode_json( MIME::Base64::decode( $_[0] ) );
+                JSON::decode_json( MIME::Base64::decode($cookie) );
             }
 
             # No session.
