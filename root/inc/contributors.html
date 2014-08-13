@@ -1,13 +1,13 @@
 <% IF contributors and contributors.size %>
 
 <div id="contributors">
-    <strong>and <% contributors.size %> contributors</strong>
+    <div class="contributors-header">and <% contributors.size %> contributors</div>
     <div align="right">
-        <a name="authors" href="#authors"
-            onclick="$(this).hide(); $('#contributors ul').slideDown()"
+        <a href="#"
+            onclick="$(this).hide(); $('#contributors ul').slideDown(); return false;"
         >show them</a>
     </div>
-    <ul style="display: none">
+    <ul class="nav nav-list box-right" style="display: none">
     <% FOREACH contributor IN contributors %>
         <li class="contributor<% ' cpan' IF contributor.pauseid %>">
         <% IF contributor.pauseid %>
