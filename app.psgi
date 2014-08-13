@@ -31,7 +31,6 @@ use Plack::Middleware::MCLess;
 use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
-use Plack::Session::Store::File;
 use Try::Tiny;
 
 # explicitly call ->to_app on every Plack::App::* for performance
