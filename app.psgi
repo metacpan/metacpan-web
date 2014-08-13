@@ -17,8 +17,9 @@ BEGIN {
 use Config::JFDI;
 use FindBin;
 use lib "$FindBin::RealBin/lib";
-use File::Path ();
-use JSON qw( encode_json decode_json );
+use File::Path   ();
+use JSON         ();
+use MIME::Base64 ();
 use MetaCPAN::Web;
 use Plack::Builder;
 use Plack::App::File;
@@ -31,6 +32,7 @@ use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
 use Plack::Session::Store::File;
+use Try::Tiny;
 
 # explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
@@ -65,9 +67,6 @@ my $app = Plack::App::URLMap->new;
 
     die 'cookie_secret not configured' unless $config->get->{cookie_secret};
 
-    my $storage_path = "$path/var/tmp/cookies";
-    maybe_make_path($storage_path);
-
     # Add session cookie here only
     $core_app = Plack::Middleware::Session::Cookie->wrap(
         $core_app,
@@ -76,11 +75,22 @@ my $app = Plack::App::URLMap->new;
         secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
         httponly    => 1,
         secret      => $config->get->{cookie_secret},
-        store       => Plack::Session::Store::File->new(
-            dir          => $storage_path,
-            serializer   => sub { encode_json(@_) },
-            deserializer => sub { decode_json(@_) },
-        ),
+        serializer  => sub {
+
+            # Pass $_[0] since the json subs may have a ($) protoype.
+            # Pass '' to base64 for a blank separator (instead of newlines).
+            MIME::Base64::encode( JSON::encode_json( $_[0] ), q[] );
+        },
+        deserializer => sub {
+
+            # Use try/catch so JSON doesn't barf if the cookie is bad.
+            try {
+                JSON::decode_json( MIME::Base64::decode( $_[0] ) )
+            }
+
+            # No session.
+            catch { +{}; };
+        },
     );
 
     $app->map( q[/] => $core_app );
