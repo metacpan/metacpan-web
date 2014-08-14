@@ -38,6 +38,11 @@
 <div class="pull-right">
 <div class="pull-right"><% INCLUDE inc/author-pic.html author = author %></div>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
+<% IF perltv %>
+  <div class="box-right">
+  <a href="<% perltv.url %>"><img src="<% perltv.thumbnail %>" title="<% perltv.title %>" /></a>
+  </div>
+<% END %>
 </div>
 <% IF req.cookies.hideTOC.value %><style>#index { display:none}</style><% END %>
 <a name="___pod"></a>
