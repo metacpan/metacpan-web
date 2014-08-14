@@ -47,6 +47,6 @@ END %>
   <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
   <%- IF module %>
   <span>&nbsp;/&nbsp;
-  <% module.documentation %></span>
+  <% module.documentation or module.module.0.name %></span>
   <%- END %>
 </div>

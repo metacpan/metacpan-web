@@ -1,7 +1,12 @@
 <% twitter_card_inc = 'inc/twitter/module.html' %>
 <%# NOTE: canonical set in controller %>
 <% meta_description = module.abstract %>
-<% title = module.documentation _ (module.abstract ? ' - ' _ module.abstract : ''); rss = 'distribution/' _ module.distribution %>
+<%
+  title =
+    (module.documentation or module.module.0.name ) _
+    (module.abstract ? ' - ' _ module.abstract : '');
+  rss = 'distribution/' _ module.distribution
+%>
 
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
 
