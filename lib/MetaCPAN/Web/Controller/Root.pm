@@ -54,7 +54,12 @@ sub default : Path {
 
 sub not_found : Private {
     my ( $self, $c ) = @_;
-    $c->stash( { template => 'not_found.html' } );
+    $c->stash(
+        {
+            template => 'not_found.html',
+            search   => [ @{ $c->req->args }, @{ $c->req->captures } ],
+        }
+    );
     $c->response->status(404);
 }
 
