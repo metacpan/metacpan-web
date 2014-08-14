@@ -4,11 +4,6 @@
     <i class="fa fa-download fa-fw black"></i>Download (<% release.stat.size | format_bytes %>b)
     </a>
 </li>
-<%- IF module %>
-<li>
-    <a href="#" onclick="return toggleTOC()"><i class="fa fa-list fa-fw black"></i>Toggle Table of Contents</a>
-</li>
-<%- END %>
 <li>
     <a href="http://explorer.metacpan.org/?url=/<% module ? ['module', module.author, module.release, module.path].join("/") : ['release', release.author, release.name].join("/") %>">
     <i class="fa fa-list-alt fa-fw black"></i>MetaCPAN Explorer
