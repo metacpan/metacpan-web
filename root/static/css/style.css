@@ -72,7 +72,7 @@ label input[type="text"], label select {
     display: block;
     width: 326px;
     height: 59px;
-    background: transparent url('/static/images/metacpan-logo.png') no-repeat;
+    background: transparent url('/static/images/logo.png') no-repeat;
 }
 
 .small-logo {
@@ -81,7 +81,7 @@ label input[type="text"], label select {
     float: left;
     width: 180px;
     height: 33px;
-    background: transparent url('/static/images/metacpan-logo.png') no-repeat 0px -59px;
+    background: transparent url('/static/images/logo.png') no-repeat 0px -59px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2),
@@ -90,7 +90,7 @@ label input[type="text"], label select {
        (min-device-pixel-ratio: 2) {
 
     .big-logo, .small-logo {
-        background-image: url('/static/images/metacpan-logo@2x.png');
+        background-image: url('/static/images/logo@2x.png');
         background-size: 326px;
     }
 }
