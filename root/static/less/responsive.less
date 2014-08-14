@@ -142,13 +142,23 @@
     }
 
     .big-logo {
-        margin: 20px 0 30px 0;
-        width: 161px;
-        height: 28px;
-        background: transparent url('/static/images/logo.png') no-repeat -1px -1px;
-        background-size: 151px 47.25px;
-        background-repeat: no-repeat;
+        margin: 20px 0 25px 0;
+        width: 180px;
+        height: 33px;
+        background: transparent url('/static/images/logo.png') no-repeat 0px -59px;
     }
+
+    @media (-webkit-min-device-pixel-ratio: 2),
+          (-moz-min-device-pixel-ratio: 2),
+          (-o-min-device-pixel-ratio: 2/1),
+          (min-device-pixel-ratio: 2) {
+
+        .big-logo {
+            background-image: url('/static/images/logo@2x.png');
+            background-size: 326px;
+        }
+    }
+
 
     .home img {
         width: 137px;
