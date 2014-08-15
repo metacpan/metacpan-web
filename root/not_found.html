@@ -19,14 +19,11 @@
     <% END %>
 
     <%
-        # FIXME: this drops the first two url components and suggests a search
-        # for the rest (which makes fragile assumptions).
-        q = req.path.split('/');
-        IF q.size > 2;
-            q = q.splice(2, 99).join(" ");
+        IF search and search.size;
+            q = search.join(" ");
     %>
         <p>
-            Search the CPAN for <a href="/search?q=<% q %>"><% q %></a>
+            Search the CPAN for <a href="/search?q=<% q | url %>"><% q %></a>
         </p>
     <% END %>
     </p>
