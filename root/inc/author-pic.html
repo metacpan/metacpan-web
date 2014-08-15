@@ -4,7 +4,7 @@
 <div><b>++ed by:</b></div>
 <% author_nums = plusser_authors.size <= 5 ? plusser_authors.size : 5 %>
 <%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
-<% FOREACH plusser IN plusser_authors.slice(0, author_nums - 1) %>
+<% FOREACH plusser IN plusser_authors.shuffle.first(author_nums) %>
 
 <a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(20) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
 

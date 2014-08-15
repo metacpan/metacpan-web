@@ -17,6 +17,7 @@ use Template::Plugin::JSON;
 use Template::Plugin::Markdown;
 use Template::Plugin::Number::Format;
 use Template::Plugin::Page;
+use List::Util ();
 
 sub parse_datetime {
     my $date = shift;
@@ -139,6 +140,14 @@ Template::Alloy->define_vmethod(
     json => sub {
         JSON::encode_json(shift);
     }
+);
+
+Template::Alloy->define_vmethod(
+    'array',
+    shuffle => sub {
+        my $array = shift;
+        [ List::Util::shuffle(@$array) ];
+    },
 );
 
 Template::Alloy->define_vmethod(
