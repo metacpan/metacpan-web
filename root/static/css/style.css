@@ -67,37 +67,6 @@ label input[type="text"], label select {
     font-weight: bold;
 }
 
-.big-logo {
-    margin: 42px auto 44px auto;
-    display: block;
-    width: 326px;
-    height: 59px;
-    background: transparent url('/static/images/metacpan-logo.png') no-repeat;
-}
-
-.small-logo {
-    position: relative;
-    margin: 1px 13px 0 0;
-    float: left;
-    width: 180px;
-    height: 33px;
-    background: transparent url('/static/images/metacpan-logo.png') no-repeat 0px -59px;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2),
-       (min--moz-device-pixel-ratio: 2),
-       (-o-min-device-pixel-ratio: 2/1),
-       (min-device-pixel-ratio: 2),
-       (min-resolution: 2dppx),
-       (min-resolution: 192dpi)
-       {
-
-    .big-logo, .small-logo {
-        background-image: url('/static/images/metacpan-logo@2x.png');
-        background-size: 326px;
-    }
-}
-
 button.favorite, a.favorite {
     padding: 1px 3px;
     margin-left: 5px;
