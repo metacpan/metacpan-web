@@ -311,6 +311,19 @@ div.qtip-github table th {
 * see /release/Plack for example
 */
 
+#contributors {
+    width: 180px;
+}
+
+#contributors > ul {
+    padding-top: 0;
+}
+
+#contributors .contributors-header {
+    font-weight: bold;
+    text-align: center;
+}
+
 #contributors .contributor {
     position: relative;
     text-align: left;

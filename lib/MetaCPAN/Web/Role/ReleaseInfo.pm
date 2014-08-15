@@ -67,4 +67,48 @@ sub recv_all {
     return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
 }
 
+# massage the x_contributors field into what we want
+sub groom_contributors {
+    my ( $self, $c, $release ) = @_;
+
+    my $contribs = $release->{metadata}{x_contributors} || [];
+    my $authors  = $release->{metadata}{author}         || [];
+
+    # just in case a lonely contributor makes it as a scalar
+    $contribs = [$contribs]
+        if !ref $contribs;
+    $authors = [$authors]
+        if !ref $authors;
+
+    my %seen = ( lc "$release->{author}\@cpan.org" => 1, );
+    my @contribs;
+
+    for my $contrib ( @$authors, @$contribs ) {
+        my $name = $contrib;
+        $name =~ s/\s*<([^<>]+@[^<>]+)>//;
+        my $info = {
+            name => $name,
+            $1 ? ( email => $1 ) : (),
+        };
+
+        next
+            if $seen{ $info->{email} }++;
+
+        # heuristic to autofill pause accounts
+        if (   !$info->{pauseid}
+            and $info->{email} =~ /^(.*)\@cpan\.org$/ )
+        {
+            $info->{pauseid} = uc $1;
+        }
+
+        if ( $info->{pauseid} ) {
+            $info->{url}
+                = $c->uri_for_action( '/author/index', [ $info->{pauseid} ] );
+        }
+        push @contribs, $info;
+    }
+
+    return \@contribs;
+}
+
 1;

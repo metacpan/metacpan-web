@@ -41,7 +41,10 @@
 </ul>
 
 <div class="pull-right">
-<div class="pull-right"><% INCLUDE inc/author-pic.html author = author %></div>
+<div class="pull-right">
+<% INCLUDE inc/author-pic.html author = author %>
+<% INCLUDE inc/contributors.html contributors = contributors %>
+</div>
 <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
 </div>
 <a name="___pod"></a>
