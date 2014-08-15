@@ -282,6 +282,11 @@ div.qtip-github table th {
 
 #contributors {
     width: 180px;
+    min-height: 40px;
+}
+#contributors .btn-link {
+    border: none;
+    padding: 0;
 }
 
 #contributors > ul {
@@ -306,6 +311,12 @@ div.qtip-github table th {
 
 #contributors .contributor * {
     vertical-align: top;
+}
+
+#contributors .contributor a {
+    padding-left: 22px;
+    padding-right: 0;
+    margin-left: -22px;
 }
 
 .smaller {

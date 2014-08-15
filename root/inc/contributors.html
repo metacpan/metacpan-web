@@ -3,9 +3,9 @@
 <div id="contributors">
     <div class="contributors-header">and <% contributors.size %> contributors</div>
     <div align="right">
-        <a href="#"
+        <button class="btn-link"
             onclick="$(this).hide(); $('#contributors ul').slideDown(); return false;"
-        >show them</a>
+        >show them</button>
     </div>
     <ul class="nav nav-list box-right" style="display: none">
     <% FOREACH contributor IN contributors %>
