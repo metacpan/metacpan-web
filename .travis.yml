@@ -7,6 +7,10 @@ perl:
   - "5.12"
   - "5.10"
 
+matrix:
+  allow_failures:
+    - perl: "5.20"
+
 before_install:
   - npm install -g less
   # Pre-install from backpan to avoid upgrade breakage.
