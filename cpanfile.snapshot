@@ -2925,16 +2925,17 @@ DISTRIBUTIONS
       inc::MakeMaker undef
     requirements:
       ExtUtils::MakeMaker 6.30
-  JSON-MaybeXS-1.001000
-    pathname: M/MS/MSTROUT/JSON-MaybeXS-1.001000.tar.gz
+  JSON-MaybeXS-1.002002
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.002002.tar.gz
     provides:
-      JSON::MaybeXS 1.001000
+      JSON::MaybeXS 1.002002
     requirements:
-      Cpanel::JSON::XS 2.3310
+      ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0
       JSON::PP 2.27202
-      Test::More 0.88
-      Test::Without::Module 0.17
+      perl 5.006
   JSON-PP-2.27203
     pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
     provides:

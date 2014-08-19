@@ -29,20 +29,4 @@ sub add : Local {
     }
 }
 
-sub list : Local {
-    my ( $self, $c ) = @_;
-
-    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
-
-    my $stars_cv   = $c->model('API::Stargazer')->by_user( $user->{user} );
-    my $stars_data = $stars_cv->recv;
-    my $stars      = [
-        sort { $b->{date} cmp $a->{date} }
-        map  { $_->{fields} } @{ $stars_data->{hits}{hits} }
-    ];
-
-    $c->stash( { stars => $stars } );
-
-}
-
 __PACKAGE__->meta->make_immutable;

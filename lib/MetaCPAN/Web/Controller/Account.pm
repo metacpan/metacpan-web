@@ -26,6 +26,33 @@ sub settings : Local {
     my ( $self, $c ) = @_;
 }
 
+sub index : Chained('/') PathPart('account') CaptureArgs(0) {
+}
+
+sub stargazer_display : Chained('index') PathPart('stargazer') Args(0) {
+    my ( $self, $c ) = @_;
+    my $user         = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $stars_cv     = $c->model('API::Stargazer')->by_user( $user->{user} );
+    my $starred_data = $stars_cv->recv;
+
+    my @starred_modules = map {
+        {
+            module => $_->{fields}->{module},
+            author => $_->{fields}->{author},
+            date   => $_->{fields}->{date}
+        }
+    } @{ $starred_data->{hits}->{hits} };
+
+    my $total_starred = @starred_modules;
+    $c->stash(
+        {
+            starred_modules => \@starred_modules,
+            template        => 'account/stargazer.html'
+        }
+    );
+
+}
+
 sub identities : Local {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST'
