@@ -352,3 +352,38 @@ function favDistribution(form) {
     return false;
 }
 
+function starModule(form) {
+    form = $(form);
+    var data = form.serialize();
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: data,
+        success: function () {
+            var button = form.find('button');
+            button.toggleClass('active');
+            var counter = button.find('span');
+            var count = counter.text();
+            if (button.hasClass('active')) {
+                counter.text(count ? parseInt(count, 10) + 1 : 1);
+                form.append('<input type="hidden" name="remove" value="1">');
+                if (!count)
+                    button.toggleClass('highlight');
+            } else {
+                counter.text(parseInt(count, 10) - 1);
+                form.find('input[name="remove"]').remove();
+                if (counter.text() === 0) {
+                    counter.text("");
+                    button.toggleClass('highlight');
+                }
+            }
+        },
+        error: function () {
+            if (confirm("You have to complete a Captcha in order to star the module.")) {
+                document.location.href = "/account/turing";
+            }
+        }
+    });
+    return false;
+}
+
