@@ -8,7 +8,7 @@ sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    my $query = join( " ", $req->param('q') );
+    my $query = join q{}, $req->param('q');
 
     my $model = $c->model('API::Author');
     my $from  = ( $req->page - 1 ) * 20;

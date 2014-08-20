@@ -352,3 +352,40 @@ function favDistribution(form) {
     return false;
 }
 
+
+function trustAuthor(form) {
+    form = $(form);
+    var data = form.serialize();
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: data,
+        success: function () {
+            var button = form.find('button');
+            button.toggleClass('active');
+            var count = 0;
+            if (button.hasClass('active')) {
+                count = 1;
+                form.append('<input type="hidden" name="remove" value="1">');
+		button.html('<i class="icon-thumbs-down"></i>Distrust');
+                if (!count){
+		    button.html('<i class="icon-thumbs-up"></i>Trust');
+                    button.toggleClass('highlight');
+		}            
+		} else {
+                count=0;
+                form.find('input[name="remove"]').remove();
+                if (count === 0) {
+		    button.html('<i class="icon-thumbs-up"></i>Trust');
+                    button.toggleClass('highlight');
+                }
+            }
+        },
+        error: function () {
+            if (confirm("You have to complete a Captcha in order to trust the author.")) {
+                document.location.href = "/account/turing";
+            }
+        }
+    });
+    return false;
+}

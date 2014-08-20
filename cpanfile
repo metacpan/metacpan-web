@@ -46,6 +46,7 @@ requires 'Locale::Country','3.28';
 requires 'Module::Build::Tiny', '0.037';
 requires 'Moose';
 requires 'MooseX::ClassAttribute';
+requires 'MooseX::MarkAsMethods';
 requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
 requires 'PerlIO::gzip';
