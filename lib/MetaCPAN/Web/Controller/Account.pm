@@ -36,6 +36,19 @@ sub identities : Local {
     }
 }
 
+sub index : Chained('/') PathPart('account') CaptureArgs(0) {
+}
+
+sub wot_search : Chained('index') PathPart('trust') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash(
+        {
+            template => 'account/trustlist.html'
+        }
+    );
+
+}
+
 sub profile : Local {
     my ( $self, $c ) = @_;
     my $author = $c->model('API::User')->get_profile( $c->token )->recv;
