@@ -17,15 +17,9 @@
         <a href="/pod/<% stargazer.module; %>" class="ellipsis" title="<% stargazer.author; '/'; stargazer.module %>"><% stargazer.module %></a>
     </strong>
   </td>
-  <% IF author %>
   <td class="pull-left-phone">
     <a href="/author/<% stargazer.author %>"><% stargazer.author %></a>
   </td>
-  <% ELSE %>
-  <td class="pull-left-phone">
-    <a href="/author/<% stargazer.author %>"><% stargazer.author %></a>
-  </td>
-  <% END %>
   <td class="date relatize" sort="<% stargazer.date %>"><% stargazer.date %></td>
 </tr>
 <% END %>
