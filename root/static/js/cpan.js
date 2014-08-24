@@ -366,16 +366,16 @@ function starModule(form) {
             if (button.hasClass('active')) {
                 count = 1;
                 form.append('<input type="hidden" name="remove" value="1">');
-		button.html('<i class="icon-star"></i> Unstar');
+		button.html('<i class="fa fa-star fa-fw black"></i> Unstar');
                 if (!count){
-		    button.html('<i class="icon-star-empty"></i> Star');
+		    button.html('<i class="fa fa-star fa-fw white"></i> Star');
                     button.toggleClass('highlight');
 		}            
 		} else {
                 count=0;
                 form.find('input[name="remove"]').remove();
                 if (count === 0) {
-		    button.html('<i class="icon-star-empty"></i> Star');
+		    button.html('<i class="fa fa-star fa-fw white"></i> Star');
                     button.toggleClass('highlight');
                 }
             }

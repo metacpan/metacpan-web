@@ -5,9 +5,9 @@
     <input type="hidden" name="module" value="<% module.documentation %>">
     <% IF active_star  %>
     <input type="hidden" name="remove" value="1">
-    <button type="submit" class="stargazer active"><i class="icon-star"></i> Unstar</button>
-    <% ELSE %> <button type="submit" class="stargazer highlight"><i class="icon-star-empty"></i> Star</button>
+    <button type="submit" class="stargazer active"><i class="fa fa-star fa-fw black"></i> Unstar</button>
+    <% ELSE %> <button type="submit" class="stargazer highlight"><i class="fa fa-star fa-fw white"></i> Star</button>
     <% END %>
 </form>
 <% ELSE -%>
-<a href="" onclick="alert('Please sign in to bookmark the Module'); return false" class="stargazer highlight"><i class="icon-star-empty"></i> Star</a><% END -%>
+<a href="" onclick="alert('Please sign in to bookmark the Module'); return false" class="stargazer highlight"><i class="fa fa-star fa-fw white"></i> Star</a><% END -%>

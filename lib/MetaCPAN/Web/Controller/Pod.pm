@@ -163,7 +163,7 @@ sub view : Private {
 
     my $user = $c->model('API::User')->get_profile( $c->token )->recv;
     $c->stash(
-        $c->model('API::Stargazer')->find_starred( $user, $data->{module} ) );
+        $c->model('API::Stargazer')->find_starred( $user, $documentation ) );
 
     my $contribs = $self->groom_contributors( $c, $release );
 
