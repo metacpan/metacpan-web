@@ -1,6 +1,9 @@
 package MetaCPAN::Web::Role::ReleaseInfo;
 
 use Moose::Role;
+use URI;
+use URI::Escape qw(uri_escape uri_unescape);
+use URI::QueryParam;
 
 # TODO: are there other controllers that do (or should) include this?
 
@@ -116,14 +119,38 @@ sub groom_irc {
 
     my $irc = $release->{metadata}{resources}{x_IRC};
     my $irc_info = ref $irc ? {%$irc} : { url => $irc };
-    $irc_info->{web} ||= $release->{metadata}{resources}{x_WebIRC};
 
     if ( !$irc_info->{web} && $irc_info->{url} ) {
-        if ( $irc_info->{url} =~ m{^irc://freenode\.net/#?(.*)} ) {
-            $irc_info->{web} = "https://webchat.freenode.net/?channels=#$1";
-        }
-        elsif ( $irc_info->{url} =~ m{^irc://([^/]+)/#?(.*)} ) {
-            $irc_info->{web} = "https://chat.mibbit.com/$2\@$1";
+        my $url    = URI->new( $irc_info->{url} );
+        my $scheme = $url->scheme;
+        if ( $scheme && ( $scheme eq 'irc' || $scheme eq 'ircs' ) ) {
+            my $ssl  = $scheme eq 'ircs';
+            my $host = $url->authority;
+            $host =~ s/:(\d+)$//;
+            my $port = $1;
+            $host =~ s/^(.*)@//;
+            my $user = $1;
+            my $path = uri_unescape( $url->path );
+            $path =~ s{^/}{};
+            my $channel
+                = $path || $url->fragment || $url->query_param('channel');
+            $channel =~ s/^(?![#~!+])/#/;
+            $channel = uri_escape($channel);
+
+            if ( $host eq 'freenode.net' ) {
+                $irc_info->{web}
+                    = "https://webchat.freenode.net/?randomnick=1&prompt=1&channels=${channel}";
+            }
+            else {
+                my $server = $host
+                    . (
+                      $ssl ? q{:+} . ( $port || 6697 )
+                    : $port ? ":$port"
+                    :         q{}
+                    );
+                $irc_info->{web}
+                    = "https://chat.mibbit.com/?channel=${channel}&server=${server}";
+            }
         }
     }
 
