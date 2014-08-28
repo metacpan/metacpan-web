@@ -26,7 +26,6 @@ FOREACH dep IN deps.sort %>
         <i class="fa fa-share black"></i>Reverse dependencies</a>
     </li>
     <%- IF deps.size %>
-        <%- INCLUDE inc/dependencies-graph.html %>
         <li>
             <button class="btn btn-link dependencies-graph" data-toggle="modal" data-target="#dependencies-graph" href="#">
             <i class="fa fa-asterisk black"></i>Dependency graph</button>
@@ -34,4 +33,4 @@ FOREACH dep IN deps.sort %>
     <%- END %>
 </ul>
 
-<%- INCLUDE inc/dependencies-graph.html %>
+<%- IF deps.size; INCLUDE inc/dependencies-graph.html; END %>
