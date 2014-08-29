@@ -16,7 +16,6 @@
  */
 
 /* Use the same style on verbatim pre's for users without javascript */
-.pod code *,
 .pod pre.metacpan-verbatim *,
 .syntaxhighlighter a,
 .syntaxhighlighter div,
