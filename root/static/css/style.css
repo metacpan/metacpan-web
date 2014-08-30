@@ -123,6 +123,66 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
     text-decoration: none;
 }
 
+button.stargazer, a.stargazer {
+    padding: auto;
+    margin-left: 5px;
+    font-size: 0.9em;
+    background-color: #fff;
+    opacity: 0.5;
+    -webkit-border-radius: 3px 3px;
+    -moz-border-radius: 3px 3px;
+    border-radius: 3px 3px;
+    border: solid 1px #666;
+    color: #333;
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    min-width: 25px;
+    position: relative;
+    top: -1px;
+}
+
+/* Counter-act .breadcrumbs a */
+.breadcrumbs a.stargazer, .breadcrumbs button.stargazer {
+    font-size: 0.85em;
+    font-weight: normal;
+}
+
+button.stargazer {
+    background-color: #fca216;
+    color: #fff;
+    min-width: 35px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+button.stargazer.highlight, a.stargazer.highlight {
+    background-color: #fca216;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffc874), to(#fca216));
+    background: -moz-linear-gradient(#ffc874,#fca216);
+    color: #fff;
+    text-shadow: 0px 1px 1px #333;
+    border-color: #d39534;
+    opacity: 1;
+}
+
+button.stargazer:hover, button.stargazer.active, a.stargazer.active, a.stargazer:hover {
+    background-color: #36C;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#69F), to(#36C));
+    background: -moz-linear-gradient(#69F,#36C);
+    color: #fff;
+    text-shadow: 0px 1px 1px #333;
+    border-color: #36C;
+    opacity: 1;
+}
+
+li button.dependencies-graph {
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+}
+
 .user-profiles > a {
     text-decoration: none;
 }

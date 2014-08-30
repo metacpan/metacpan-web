@@ -161,6 +161,10 @@ sub view : Private {
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
+    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+    $c->stash(
+        $c->model('API::Stargazer')->find_starred( $user, $documentation ) );
+
     my $contribs = $self->groom_contributors( $c, $release );
 
     $c->stash(
@@ -174,9 +178,11 @@ sub view : Private {
             contributors      => $contribs,
         }
     );
+
     unless ( $reqs->{pod}->{raw} ) {
         $c->stash( pod_error => $reqs->{pod}->{message}, );
     }
 }
 
 1;
+

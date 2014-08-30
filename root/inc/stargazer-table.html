@@ -1,0 +1,28 @@
+<% IF stargazers.size %>
+<table id="stargazer_table"
+  <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
+  class="table table-condensed table-striped table-stargazers<% IF tablesorter %> tablesorter<% END %>">
+  <thead>
+    <tr>
+      <th class="release pull-left-phone"><% author ? "Starred Modules" : "Module" %></th>
+      <th class="abstract hidden-phone"><% author ? "Author" : "Starred By" %></th>
+      <th class="date"><% day || "Date" %></th>
+    </tr>
+</thead>
+<tbody>
+<% FOREACH stargazer IN stargazers %>
+<tr>
+  <td>
+    <strong>
+        <a href="/pod/<% stargazer.module; %>" class="ellipsis" title="<% stargazer.author; '/'; stargazer.module %>"><% stargazer.module %></a>
+    </strong>
+  </td>
+  <td class="pull-left-phone">
+    <a href="/author/<% stargazer.author %>"><% stargazer.author %></a>
+  </td>
+  <td class="date relatize" sort="<% stargazer.date %>"><% stargazer.date %></td>
+</tr>
+<% END %>
+</tbody>
+</table>
+<% END %>

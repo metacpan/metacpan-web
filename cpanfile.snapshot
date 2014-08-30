@@ -3759,6 +3759,26 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  MooseX-MarkAsMethods-0.15
+    pathname: R/RS/RSRCHBOY/MooseX-MarkAsMethods-0.15.tar.gz
+    provides:
+      MooseX::MarkAsMethods 0.15
+      MooseX::MarkAsMethods::MetaRole::MethodMarker 0.15
+    requirements:
+      B::Hooks::EndOfScope 0
+      ExtUtils::MakeMaker 6.30
+      File::Find 0
+      File::Temp 0
+      Moose 0.94
+      Moose::Exporter 0
+      Moose::Role 0
+      Moose::Util::MetaRole 0
+      Test::Moose 0
+      Test::More 0.92
+      namespace::autoclean 0.12
+      overload 0
+      strict 0
+      warnings 0
   MooseX-MethodAttributes-0.29
     pathname: E/ET/ETHER/MooseX-MethodAttributes-0.29.tar.gz
     provides:
