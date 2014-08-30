@@ -129,43 +129,9 @@ sub fetch_latest_distros {
                 };
         }
 
-        if ( $repo and $repo->{url} ) {
+        # See also root/inc/release-infro.html
+        if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
             $repo_found++;
-            if ( $repo->{url} =~ m{http://code.google.com/} ) {
-                $repos{google}++;
-            }
-            elsif ( $repo->{url} =~ m{git://github.com/} ) {
-                $repos{github_git}++;
-            }
-            elsif ( $repo->{url} =~ m{http://github.com/} ) {
-                $repos{github_http}++;
-            }
-            elsif ( $repo->{url} =~ m{https://github.com/} ) {
-                $repos{github_https}++;
-            }
-            elsif ( $repo->{url} =~ m{https://bitbucket.org/} ) {
-                $repos{bitbucket}++;
-            }
-            elsif ( $repo->{url} =~ m{git://git.gnome.org/} ) {
-                $repos{git_gnome}++;
-            }
-            elsif ( $repo->{url} =~ m{https://svn.perl.org/} ) {
-                $repos{svn_perl_org}++;
-            }
-            elsif ( $repo->{url} =~ m{git://} ) {
-                $repos{other_git}++;
-            }
-            elsif ( $repo->{url} =~ m{\.git$} ) {
-                $repos{other_git}++;
-            }
-            elsif ( $repo->{url} =~ m{https?://svn\.} ) {
-                $repos{other_svn}++;
-            }
-            else {
-                $repos{other}++;
-
-                #say "Other repo: $repo->{url}";
-            }
         }
         else {
             push @missing_repo,
@@ -184,7 +150,6 @@ sub fetch_latest_distros {
         missing_licenses => \@missing_licenses,
         repos_found      => $repo_found,
         missing_repos    => \@missing_repo,
-        repos            => \%repos,
         licenses         => \%licenses,
     };
 }
