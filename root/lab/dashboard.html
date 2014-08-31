@@ -30,6 +30,48 @@
     <% END %>
   <% END %>
 
+<style>
+table {
+    border: 1px solid #b8d7f9;
+}
+td {
+    border: 1px solid #b8d7f9;
+	text-align: center;
+}
+th {
+    border: 1px solid #b8d7f9;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+td:nth-child(1) {
+	text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #e7f1fd;
+}
+</style>
+
+  <% IF report.distros.size %>
+    <h3>Distributions</h3>
+    <table id="distro-table">
+    <tr class="distro-header">
+      <th class="distro-name">Name</th>
+      <th class="distro-repo">Repo</th>
+      <th class="distro-liense">License</th>
+    </tr>
+    <% FOR d IN report.distros.keys.sort %>
+    <tr class="distro-row">
+      <td class="distro-name"><% d %></td>
+      <td class="distro-repo"><% IF report.distros.$d.repo %>X<% END %></td>
+      <td class="distro-license"><% IF report.distros.$d.license %>X<% END %></td>
+    </tr>
+    <% END %>
+    </table>
+  <% END %>
+
 <% ELSE %>
 The dashboard is only available to people who have logged in to MetaCPAN.
 <% END %>

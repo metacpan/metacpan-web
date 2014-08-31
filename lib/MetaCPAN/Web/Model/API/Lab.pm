@@ -108,6 +108,8 @@ sub fetch_latest_distros {
     my $license_found = 0;
     my $repo_found    = 0;
     my $hits          = scalar @{ $r->{hits}{hits} };
+    my %distros;
+
     foreach my $d ( @{ $r->{hits}{hits} } ) {
         my $license = $d->{fields}{license};
         my $distro  = $d->{fields}{distribution};
@@ -122,6 +124,7 @@ sub fetch_latest_distros {
             $licenses{$license}++;
         }
         else {
+            $distros{$distro}{license} = 1;
             push @missing_licenses,
                 {
                 name    => $distro,
@@ -134,6 +137,7 @@ sub fetch_latest_distros {
             $repo_found++;
         }
         else {
+            $distros{$distro}{repo} = 1;
             push @missing_repo,
                 {
                 name    => $distro,
@@ -151,6 +155,7 @@ sub fetch_latest_distros {
         repos_found      => $repo_found,
         missing_repos    => \@missing_repo,
         licenses         => \%licenses,
+        distros          => \%distros,
     };
 }
 
