@@ -115,6 +115,11 @@ sub fetch_latest_distros {
         my $distro  = $d->{fields}{distribution};
         my $author  = $d->{fields}{author};
         my $repo    = $d->{fields}{'resources.repository'};
+        my $distribution = $self->request("/distribution/$distro")->recv;
+
+		if ($distribution->{bugs}) {
+			$distros{$distro}{bugs} = $distribution->{bugs}{active};
+		}
 
         if (    $license
             and $license ne 'unknown'
