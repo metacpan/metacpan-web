@@ -1,0 +1,11 @@
+<li>
+    <form action="http://perlybook.org/" method="GET" id="perlybook">
+       <input type="hidden" name="source" value="<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>">
+       <input type="hidden" name="book_selection" value="<% IF module %><% ELSE %>1<% END %>">
+       <input type="hidden" name="mobi_send" id="mobi_send" />
+       <input type="hidden" name="always_mail" id="always_mail_form" />
+       <button name="target" type="submit" value="epub" id="epub_btn">EPUB</button>
+       <button name="target" type="submit" value="mobi" id="mobi_btn">MOBI</button>
+    </form>
+</li>
+
