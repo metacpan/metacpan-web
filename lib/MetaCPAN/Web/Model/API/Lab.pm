@@ -115,11 +115,15 @@ sub fetch_latest_distros {
         my $distro  = $d->{fields}{distribution};
         my $author  = $d->{fields}{author};
         my $repo    = $d->{fields}{'resources.repository'};
-        my $distribution = $self->request("/distribution/$distro")->recv;
 
-		if ($distribution->{bugs}) {
-			$distros{$distro}{bugs} = $distribution->{bugs}{active};
-		}
+# TODO: can we fetch the bug count and the test count in one call for all the distributions?
+        my $distribution = $self->request("/distribution/$distro")->recv;
+        if ( $distribution->{bugs} ) {
+            $distros{$distro}{bugs} = $distribution->{bugs}{active};
+        }
+
+        my $release = $self->request("/release/$distro")->recv;
+        $distros{$distro}{test} = $release->{tests};
 
         if (    $license
             and $license ne 'unknown'
