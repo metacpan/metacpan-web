@@ -80,7 +80,8 @@ sub index : Path {
                 %$results,
                 single_dist => @dists == 1,
                 authors     => $authors,
-                template    => 'search.html'
+                template    => 'search.html',
+                page_size   => $page_size,
             }
         );
     }
