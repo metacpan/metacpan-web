@@ -8,7 +8,13 @@ sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    my $page_size = 20;
+    my $page_size = $req->param('size');
+    if (   not defined $page_size
+        or $page_size !~ /^\d+$/
+        or $page_size > 5000 )
+    {
+        $page_size = 20;
+    }
 
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
