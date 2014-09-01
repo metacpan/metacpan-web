@@ -6,7 +6,7 @@ extends 'MetaCPAN::Web::Model::API';
 
 sub get {
     my ( $self, $token ) = @_;
-    $self->request( "/user", undef, { token => $token } );
+    $self->request( '/user', undef, { token => $token } );
 }
 
 sub delete_identity {
@@ -17,30 +17,30 @@ sub delete_identity {
 
 sub update_profile {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/profile", $data,
+    $self->request( '/user/profile', $data,
         { method => 'PUT', token => $token } );
 }
 
 sub get_profile {
     my ( $self, $token ) = @_;
-    $self->request( "/user/profile", undef, { token => $token } );
+    $self->request( '/user/profile', undef, { token => $token } );
 }
 
 sub add_favorite {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite", $data, { token => $token } );
+    $self->request( '/user/favorite', $data, { token => $token } );
 }
 
 sub remove_favorite {
     my ( $self, $data, $token ) = @_;
-    $self->request( "/user/favorite/" . $data->{distribution},
+    $self->request( '/user/favorite/' . $data->{distribution},
         undef, { method => 'DELETE', token => $token } );
 }
 
 sub turing {
     my ( $self, $challenge, $answer, $token ) = @_;
     $self->request(
-        "/user/turing",
+        '/user/turing',
         { challenge => $challenge, answer => $answer },
         { token     => $token }
     );
