@@ -30,33 +30,9 @@
     <% END %>
   <% END %>
 
-<style>
-table {
-    border: 1px solid #b8d7f9;
-}
-td {
-    border: 1px solid #b8d7f9;
-    text-align: center;
-}
-th {
-    border: 1px solid #b8d7f9;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-td:nth-child(1) {
-    text-align: left;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-tr:nth-child(even) {
-    background-color: #e7f1fd;
-}
-</style>
-
   <% IF report.distros.size %>
     <h3>Distributions</h3>
-    <table id="distro-table">
+    <table id="dashboard-distro-table">
     <tr>
        <th></th>
        <th colspan="2">Missing</th>
