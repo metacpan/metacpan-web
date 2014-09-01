@@ -62,7 +62,7 @@ sub autocomplete {
 }
 
 sub search_expanded {
-    my ( $self, $query, $from, $user ) = @_;
+    my ( $self, $query, $from, $page_size, $user ) = @_;
 
     # When used for a distribution or module search, the limit is included in
     # the query and ES does the right thing.
@@ -71,7 +71,7 @@ sub search_expanded {
     $data = $self->search(
         $query,
         {
-            size => 20,
+            size => $page_size,
             from => $from
         }
     )->recv;
@@ -98,7 +98,7 @@ sub search_expanded {
 }
 
 sub search_collapsed {
-    my ( $self, $query, $from, $user ) = @_;
+    my ( $self, $query, $from, $page_size, $user ) = @_;
     my $cv   = AE::cv();
     my $took = 0;
     my $total;
@@ -116,11 +116,11 @@ sub search_collapsed {
         @distributions = uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         $run++;
-        } while ( @distributions < 20 + $from
+        } while ( @distributions < $page_size + $from
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions = splice( @distributions, $from, 20 );
+    @distributions = splice( @distributions, $from, $page_size );
     my $ratings   = $self->model('Rating')->get(@distributions);
     my $favorites = $self->model('Favorite')->get( $user, @distributions );
     my $results   = $self->model('Module')
@@ -406,7 +406,7 @@ sub _search_in_distributions {
     my ( $self, @distributions ) = @_;
     {
 
-# we will probably never hit that limit, since we are searching in 20 distributions max
+# we will probably never hit that limit, since we are searching in $page_size=20 distributions max
         size  => 5000,
         query => {
             filtered => {
