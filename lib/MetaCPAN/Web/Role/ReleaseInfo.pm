@@ -94,6 +94,7 @@ sub groom_contributors {
             $1 ? ( email => $1 ) : (),
         };
 
+        next if not $info->{email};
         next
             if $seen{ $info->{email} }++;
 
