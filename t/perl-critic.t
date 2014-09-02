@@ -15,13 +15,8 @@ my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/Controller/Pod.pm
     lib/MetaCPAN/Web/Controller/Release.pm
     lib/MetaCPAN/Web/Model/API.pm
-    lib/MetaCPAN/Web/Model/API/Changes/Parser.pm
     lib/MetaCPAN/Web/Test.pm
-    lib/MetaCPAN/Web/View/HTML.pm
-    lib/Plack/Middleware/MCLess.pm
     t/encoding.t
-    t/fastly_headers.t
-    t/controller/author.t
     t/controller/changes.t
     t/controller/home.t
     t/controller/pod.t
