@@ -2,6 +2,7 @@
 
 severity = 5
 verbose = 11
+theme = core
 
 [-ControlStructures::ProhibitPostfixControls]
 [-Documentation::RequirePodLinksIncludeText]
