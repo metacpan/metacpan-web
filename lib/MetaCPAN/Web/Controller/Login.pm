@@ -10,14 +10,14 @@ sub index : Path {
     if ( my $code = $c->req->parameters->{code} ) {
         my $data
             = $c->model('API')
-            ->request( "/oauth2/access_token?client_id="
+            ->request( '/oauth2/access_token?client_id='
                 . $c->config->{consumer_key}
-                . "&client_secret="
+                . '&client_secret='
                 . $c->config->{consumer_secret}
                 . "&code=$code" )->recv;
         $c->req->session->set( token => $data->{access_token} );
         $c->authenticate( { token => $data->{access_token} } );
-        my $state = $c->req->params->{state} || "";
+        my $state = $c->req->params->{state} || q{};
         $c->res->redirect( $c->uri_for("/$state") );
     }
     else {

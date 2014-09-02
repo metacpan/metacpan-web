@@ -34,7 +34,7 @@ sub get : Private {
     # We don't care about the difference here either.
     if ( !exists $file->{content} ) {
 
-        my $release = join( '/', @args );
+        my $release = join( q{/}, @args );
         my $suggest = {
             description => 'Try the release info page',
 

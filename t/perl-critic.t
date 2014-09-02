@@ -11,14 +11,7 @@ use Test::Perl::Critic;
 # Temporarily skip any files that existed before adding the tests.
 # Eventually these should all be removed (once the files are cleaned up).
 my %skip = map { ( $_ => 1 ) } qw(
-    lib/MetaCPAN/Web/Controller/Account.pm
-    lib/MetaCPAN/Web/Controller/Account/Turing.pm
-    lib/MetaCPAN/Web/Controller/Activity.pm
     lib/MetaCPAN/Web/Controller/Author.pm
-    lib/MetaCPAN/Web/Controller/Changes.pm
-    lib/MetaCPAN/Web/Controller/Feed.pm
-    lib/MetaCPAN/Web/Controller/Login.pm
-    lib/MetaCPAN/Web/Controller/Mirrors.pm
     lib/MetaCPAN/Web/Controller/Module.pm
     lib/MetaCPAN/Web/Controller/Pod.pm
     lib/MetaCPAN/Web/Controller/Recent.pm

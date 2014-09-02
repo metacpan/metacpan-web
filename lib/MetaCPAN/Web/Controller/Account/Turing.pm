@@ -10,7 +10,7 @@ sub index : Path('') {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST' ) {
         my $params = $c->req->params;
-        my $res    = $c->model("API::User")->turing(
+        my $res    = $c->model('API::User')->turing(
             @$params{qw(recaptcha_challenge_field recaptcha_response_field)},
             $c->token
         )->recv;
