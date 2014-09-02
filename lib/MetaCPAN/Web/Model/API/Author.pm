@@ -25,10 +25,10 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, @author ) = @_;
-    return $self->request( "/author/" . uc( $author[0] ) )
+    return $self->request( '/author/' . uc( $author[0] ) )
         if ( @author == 1 );
     return $self->request(
-        "/author/_search",
+        '/author/_search',
         {
             query => {
                 constant_score => {

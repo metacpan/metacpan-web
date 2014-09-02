@@ -28,17 +28,10 @@ my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/Controller/Search/AutoComplete.pm
     lib/MetaCPAN/Web/Controller/Source.pm
     lib/MetaCPAN/Web/Model/API.pm
-    lib/MetaCPAN/Web/Model/API/Author.pm
-    lib/MetaCPAN/Web/Model/API/Changes.pm
     lib/MetaCPAN/Web/Model/API/Changes/Parser.pm
     lib/MetaCPAN/Web/Model/API/Diff.pm
-    lib/MetaCPAN/Web/Model/API/Favorite.pm
     lib/MetaCPAN/Web/Model/API/File.pm
-    lib/MetaCPAN/Web/Model/API/Module.pm
-    lib/MetaCPAN/Web/Model/API/Release.pm
-    lib/MetaCPAN/Web/Model/API/User.pm
     lib/MetaCPAN/Web/Test.pm
-    lib/MetaCPAN/Web/User.pm
     lib/MetaCPAN/Web/View/HTML.pm
     lib/Plack/Middleware/MCLess.pm
     t/encoding.t

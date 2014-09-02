@@ -138,7 +138,7 @@ sub recent {
             from   => ( $page - 1 ) * 100,
             query  => $query,
             fields => [qw(name author status abstract date distribution)],
-            sort   => [ { 'date' => { order => "desc" } } ]
+            sort   => [ { 'date' => { order => 'desc' } } ]
         }
     );
 }
@@ -253,7 +253,7 @@ sub reverse_dependencies {
         {
             query => {
                 filtered => {
-                    query  => { "match_all" => {} },
+                    query  => { 'match_all' => {} },
                     filter => {
                         and => [
                             { term => { 'release.status'     => 'latest' } },
@@ -410,7 +410,7 @@ sub topuploaders {
             query  => { match_all => {} },
             facets => {
                 author => {
-                    terms        => { field => "author", size => 50 },
+                    terms        => { field => 'author', size => 50 },
                     facet_filter => $range_filter,
                 },
             },

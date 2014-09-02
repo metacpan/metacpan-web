@@ -7,7 +7,7 @@ use Try::Tiny;
 
 sub get {
     my ( $self, @path ) = @_;
-    $self->request( '/changes/' . join( '/', @path ) );
+    $self->request( '/changes/' . join( q{/}, @path ) );
 }
 
 sub last_version {
@@ -46,8 +46,8 @@ sub find_changelog {
     }
 }
 
-my $rt_cpan_base = "https://rt.cpan.org/Ticket/Display.html?id=";
-my $rt_perl_base = "https://rt.perl.org/Ticket/Display.html?id=";
+my $rt_cpan_base = 'https://rt.cpan.org/Ticket/Display.html?id=';
+my $rt_perl_base = 'https://rt.perl.org/Ticket/Display.html?id=';
 my $sep          = qr{[-:]|\s*[#]?};
 
 sub _link_issues {
