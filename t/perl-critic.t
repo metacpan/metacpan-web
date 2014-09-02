@@ -12,11 +12,8 @@ use Test::Perl::Critic;
 # Eventually these should all be removed (once the files are cleaned up).
 my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/Controller/Author.pm
-    lib/MetaCPAN/Web/Controller/Module.pm
     lib/MetaCPAN/Web/Controller/Pod.pm
-    lib/MetaCPAN/Web/Controller/Recent.pm
     lib/MetaCPAN/Web/Controller/Release.pm
-    lib/MetaCPAN/Web/Controller/Root.pm
     lib/MetaCPAN/Web/Controller/Search.pm
     lib/MetaCPAN/Web/Controller/Search/AutoComplete.pm
     lib/MetaCPAN/Web/Controller/Source.pm

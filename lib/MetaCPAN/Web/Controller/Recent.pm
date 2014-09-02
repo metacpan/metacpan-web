@@ -22,7 +22,7 @@ sub index : Path {
 
 sub log : Local {
     my ( $self, $c ) = @_;
-    $c->stash( { template => "recent/log.html" } );
+    $c->stash( { template => 'recent/log.html' } );
 }
 
 sub faves : Path('/recent/favorites') {
