@@ -11,11 +11,11 @@ sub index : Path {
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
     unless ( $req->param('q') ) {
-        $c->res->redirect('/');
+        $c->res->redirect(q{/});
         $c->detach;
     }
 
-    my $query = join( " ", $req->param('q') );
+    my $query = join( q{ }, $req->param('q') );
 
     # translate Foo/Bar.pm to Foo::Bar
     if ( $query =~ m{.pm\b} ) {

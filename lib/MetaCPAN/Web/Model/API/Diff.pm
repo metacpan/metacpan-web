@@ -7,18 +7,20 @@ extends 'MetaCPAN::Web::Model::API';
 
 sub releases {
     my ( $self, @path ) = @_;
-    return $self->request( '/diff/release/' . join( '/', @path ) );
+    return $self->request( '/diff/release/' . join( q{/}, @path ) );
 }
 
 sub files {
     my ( $self, $source, $target ) = @_;
     my @source = split( /\//, $source );
     $source
-        = $self->digest( shift @source, shift @source, join( "/", @source ) );
+        = $self->digest( shift @source, shift @source,
+        join( q{/}, @source ) );
     my @target = split( /\//, $target );
     $target
-        = $self->digest( shift @target, shift @target, join( "/", @target ) );
-    return $self->request( '/diff/file/' . join( '/', $source, $target ) );
+        = $self->digest( shift @target, shift @target,
+        join( q{/}, @target ) );
+    return $self->request( '/diff/file/' . join( q{/}, $source, $target ) );
 }
 
 sub digest {
