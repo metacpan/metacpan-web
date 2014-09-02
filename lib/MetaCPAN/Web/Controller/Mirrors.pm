@@ -37,8 +37,8 @@ sub index : Path {
                 sort => {
                     _geo_distance => {
                         location => [ $location->[1], $location->[0] ],
-                        order    => "asc",
-                        unit     => "km"
+                        order    => 'asc',
+                        unit     => 'km'
                     }
                 }
                 )

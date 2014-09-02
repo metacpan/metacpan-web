@@ -19,7 +19,7 @@ sub logout : Local {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     $c->req->session->expire;
-    $c->res->redirect('/');
+    $c->res->redirect(q{/});
 }
 
 sub settings : Local {
@@ -74,7 +74,7 @@ sub profile : Local {
         = $req->params->{latitude}
         ? [ $req->params->{latitude}, $req->params->{longitude} ]
         : undef;
-    $data->{$_} = $req->params->{$_} eq "" ? undef : $req->params->{$_}
+    $data->{$_} = $req->params->{$_} eq q{} ? undef : $req->params->{$_}
         for (qw(name asciiname gravatar_url city region country));
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
     $data->{extra}

@@ -38,7 +38,7 @@ sub root : Chained('/') PathPart('author') CaptureArgs(1) {
 }
 
 # /author/*
-sub index : Chained('root') PathPart('') Args(0) {
+sub index : Chained('root') PathPart(q{}) Args(0) {
     my ( $self, $c ) = @_;
 
     my $id = $c->stash->{pauseid};
