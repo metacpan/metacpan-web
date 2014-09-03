@@ -26,12 +26,12 @@ sub new {
     my $self  = $class->SUPER::new(@_);
 
     if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
-        warn "Use less.min.js - better for development";
+        warn 'Use less.min.js - better for development';
         return $self;
     }
 
     my $less = `lessc -v`;
-    croak("Can't find lessc command") unless $less;
+    croak(q{Can't find lessc command}) unless $less;
 
     $self->cache_ttl('30 minutes') unless $self->cache_ttl;
 

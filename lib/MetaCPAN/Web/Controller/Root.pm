@@ -8,7 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 # Sets the actions in this controller to be registered with no prefix
 # so they function identically to actions created in MyApp.pm
 #
-__PACKAGE__->config( namespace => '' );
+__PACKAGE__->config( namespace => q{} );
 
 =head1 NAME
 

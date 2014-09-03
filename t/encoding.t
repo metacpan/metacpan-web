@@ -7,7 +7,7 @@ use List::MoreUtils qw(natatime);
 use MetaCPAN::Web::Test;
 use Encode qw( is_utf8 decode encode );
 
-my ( $res_body, $content_type ) = ( '', 'text/plain' );
+my ( $res_body, $content_type ) = ( q{}, 'text/plain' );
 
 # hijack all requests
 my $api_req;
@@ -116,7 +116,7 @@ foreach my $ctype ( 'text/plain', 'application/json' ) {
             )
         {
             test_raw_response(
-                $bad->[0], $bad->[0], $bad->[1] . " come back as is",
+                $bad->[0], $bad->[0], $bad->[1] . ' come back as is',
                 warnings => [ qr/does not map to Unicode/, 'encode croaked' ],
                 not_utf8 => 1,
             );
@@ -125,12 +125,12 @@ foreach my $ctype ( 'text/plain', 'application/json' ) {
         # BLACK FLORETTE
         foreach my $str (
             encode( 'UTF-8' => "foo\x{273f}bar" ),
-            join( '',
+            join( q{},
                 map {chr} 0x66, 0x6f, 0x6f, 0xe2, 0x9c,
                 0xbf, 0x62, 0x61, 0x72 ),
             )
         {
-            test_raw_response( $str, "foo\x{273f}bar", "UTF-8 decodes" );
+            test_raw_response( $str, "foo\x{273f}bar", 'UTF-8 decodes' );
         }
 
         # HEAVY BLACK HEART
@@ -141,7 +141,7 @@ foreach my $ctype ( 'text/plain', 'application/json' ) {
         );
 
         # not sure if we'll ever actually get undef
-        is get_raw(undef), '', 'undef becomes blank';
+        is get_raw(undef), q{}, 'undef becomes blank';
         ok !@warnings, 'no warnings for undef' or diag shift @warnings;
 
         {
@@ -159,7 +159,7 @@ subtest 'check requests sent to the api' => sub {
         'simple GET',
         [ '/oogie/boogie/song', undef, {} ],
         {
-            content => '',
+            content => q{},
             method  => 'GET',
             uri     => $model->api . '/oogie/boogie/song',
         },
@@ -178,14 +178,14 @@ subtest 'check requests sent to the api' => sub {
     check_request(
         'PUT json with character string',
         [
-            '/whats/this' => { mistletoe => "1F384 🎄 CHRISTMAS TREE" },
+            '/whats/this' => { mistletoe => '1F384 🎄 CHRISTMAS TREE' },
             { method => 'PUT', token => 'nightmare' },
         ],
         {
             content =>
                 qq<{"mistletoe":"1F384 \xf0\x9f\x8e\x84 CHRISTMAS TREE"}>,
             method => 'PUT',
-            uri => $model->api_secure . "/whats/this?access_token=nightmare",
+            uri => $model->api_secure . '/whats/this?access_token=nightmare',
         },
     );
 };

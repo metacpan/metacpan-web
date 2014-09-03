@@ -11,7 +11,7 @@ sub index : PathPart('source') : Chained('/') : Args {
     my ( $source, $module );
     if ( @module == 1 ) {
         $module = $c->model('API::Module')->find(@module)->recv;
-        $module[0] = join '/', $module->{author}, $module->{release},
+        $module[0] = join q{/}, $module->{author}, $module->{release},
             $module->{path};
         $source = $c->model('API::Module')->source(@module)->recv;
     }

@@ -34,7 +34,7 @@ sub release : Chained('root') Local Args {
     # force consistent casing in URLs
     if ( @path > 2 && $path[0] ne uc( $path[0] ) ) {
         $c->res->redirect(
-            '/pod/release/' . join( '/', uc( shift @path ), @path ), 301 );
+            '/pod/release/' . join( q{/}, uc( shift @path ), @path ), 301 );
         $c->detach();
     }
 
@@ -71,7 +71,7 @@ sub view : Private {
     my $data = $c->stash->{pod_file};
 
     if ( $data->{directory} ) {
-        $c->res->redirect( '/source/' . join( '/', @path ), 301 );
+        $c->res->redirect( '/source/' . join( q{/}, @path ), 301 );
         $c->detach;
     }
 
@@ -90,7 +90,7 @@ sub view : Private {
         $c,
         {
             pod => $c->model('API')->request(
-                '/pod/' . ( $pod || join( '/', @path ) ) . '?show_errors=1'
+                '/pod/' . ( $pod || join( q{/}, @path ) ) . '?show_errors=1'
             ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
@@ -152,7 +152,7 @@ sub view : Private {
             && $documented_module->{authorized}
             && $documented_module->{indexed}
         ) ? "/pod/$documentation"
-        : join('/', '', qw( pod distribution ), $release->{distribution},
+        : join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
             # Strip $author/$release from front of path.
             @path[ 2 .. $#path ]
         );
