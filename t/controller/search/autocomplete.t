@@ -9,7 +9,7 @@ use JSON::XS;
 my @tests = (
     [ moose => 'Moose' ],
     ['moose">'],    # no match
-    [ "Acme::ǝ" => "Acme::ǝmɔA" ],
+    [ 'Acme::ǝ' => 'Acme::ǝmɔA' ],
 );
 
 test_psgi app, sub {
@@ -18,7 +18,7 @@ test_psgi app, sub {
 
         # turn off the utf8 flag to avoid warnings in test output
         my ( $test, $exp )
-            = map { is_utf8($_) ? encode( "UTF-8" => $_ ) : $_ } @$pair;
+            = map { is_utf8($_) ? encode( 'UTF-8' => $_ ) : $_ } @$pair;
 
         ok( my $res = $cb->( GET "/search/autocomplete?q=$test" ),
             "GET /search/autocomplete?q=$test" );
@@ -39,7 +39,7 @@ test_psgi app, sub {
         next unless $module;
 
         # turn off utf8 flag b/c the below m// doesn't always work with it on
-        my $doc = encode( "UTF-8" => $module->{documentation} );
+        my $doc = encode( 'UTF-8' => $module->{documentation} );
 
         is $doc, $exp, 'got the module we wanted first';
 
