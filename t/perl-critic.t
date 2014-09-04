@@ -29,10 +29,6 @@ my %skip = map { ( $_ => 1 ) } qw(
     t/model/changes.t
     t/plack/mcless.t
     t/controller/favorite/leaderboard.t
-    t/controller/search/autocomplete.t
-    t/controller/search/suggestion.t
-    t/model/changes-tests/read_dbix-class.t
-    t/model/changes-tests/read_moose.t
 );
 
 my @files = grep { !$skip{$_} }
