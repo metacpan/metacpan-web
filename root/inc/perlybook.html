@@ -1,11 +1,11 @@
 <li>
-    <form action="http://perlybook.org/" method="GET" id="perlybook">
+    <form action="http://perlybook.org/" method="GET" id="perlybook_form">
        <input type="hidden" name="source" value="<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>">
        <input type="hidden" name="book_selection" value="<% IF module %><% ELSE %>1<% END %>">
        <input type="hidden" name="mobi_send" id="mobi_send" />
        <input type="hidden" name="always_mail" id="always_mail_form" />
-       <button name="target" type="submit" value="epub" id="epub_btn">EPUB</button>
-       <button name="target" type="submit" value="mobi" id="mobi_btn">MOBI</button>
+       <input type="hidden" name="target" value="" id="perlybook_target">
+       <a href="#" onclick="$('#perlybook_target').val('mobi'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .mobi format for Kindle."><i class="fa fa-file fa-fw black"></i>MOBI</a>
+       <a href="#" onclick="$('#perlybook_target').val('epub'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .epub format for E-book readers."><i class="fa fa-file fa-fw black"></i>EPUB</a>
     </form>
 </li>
-
