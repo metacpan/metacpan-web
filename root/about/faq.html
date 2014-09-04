@@ -15,6 +15,18 @@ Type in <em>module:</em> and the namespace such as <a href="/search?q=module:Cat
 <a href="/search?q=module:Mojolicious::Plugin">Mojolicious::Plugin</a>,
 or <a href="/search?q=module:Perl::Critic::Policy">Perl::Critic::Policy</a>.
 
+## A non-comprehensive list of special search expressions:
+
+These search-terms can be combined with each other and regular search term.
+
+* <em>module:</em>  filter by part of a  module name ( e.g. [module:Plugin](/search?q=module:Plugin) )
+* <em>distribution:</em> search in the files of the specific distribution ( e.g. [distribution:Dancer auth](/search?q=distribution%3ADancer+auth) )
+* <em>author:</em> search in the modules releases by the given author ( e.g. [author:SONGMU Redis](/search?q=author%3ASONGMU+Redis) )
+* <em>version:</em> limit the search to modules with the given version number ( e.g. [version:1.00](/search?q=version%3A1.00) )
+
+Wildcards: ? matches a single character, * matches any number of characters
+( e.g. [version:1.*](/search?q=version%3A1.*) and [version:1.?](/search?q=version%3A1.?) ) 
+
 ## Why can't I find a specific module?
 
 See our [missing module](/about/missing_modules) page.
