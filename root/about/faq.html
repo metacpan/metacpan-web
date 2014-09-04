@@ -4,6 +4,30 @@
 <% FILTER multimarkdown %>
 # FAQ's answered
 
+## What third-party sites does MetaCPAN use?
+
+* [CPAN](http://www.cpan.org/) is where all the Perl modules live.
+MetaCPAN 'just' indexes those files.
+* [Perlybook](http://perlybook.org/) provides the MOBI and EPUB download capabilities.
+MetaCPAN provides direct links to download the POD in the respective formats.
+* [CPAN Testers](http://www.cpantesters.org/) collect test reports of the CPAN modules.
+MetaCPAN show the number of test reports and links to the tests.
+* [CPANTS](http://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
+MetaCPAN links to the respective pages on the CPANTS site.
+* [CPAN Ratings](http://cpanratings.perl.org/) allows users to give stars and review CPAN distributions.
+MetaCPAN show the average rating using stars and links to the reviews.
+* [search.cpan.org](http://search.cpan.org/) is another search engine for the same data.
+It is older, but the source code has not been published.
+MetaCPAN links to the respective page of each module/distribution.
+* [RT](https://rt.cpan.org/) is an installation of [Request Tracker](https://www.bestpractical.com/rt/)
+that provides a default bug~ and issue-tracking system for every CPAN distribution.
+Unless the author of the module configured it otherwise MetaCPAN will link the respective RT Queue
+of every distribution.
+* [GitHub](https://github.com/) is the most popular public version control system among Perl module developers.
+Many distributions indicate it as their public VCS. Some of them even mark GitHub as their preferred
+issue tracking system. MetaCPAN links to the GitHub repository and bug tracking system of each distributions
+if the author has included the information in the META files.
+
 ## How to list all the Plack Middleware?
 
 Search for <a href="/search?q=module:Plack::Middleware">module:Plack::Middleware</a>
