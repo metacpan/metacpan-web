@@ -1,4 +1,5 @@
 *.sw*
+*.bak
 .DS_Store
 .carton
 .includepath
