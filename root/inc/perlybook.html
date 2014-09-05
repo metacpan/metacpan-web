@@ -6,7 +6,22 @@
        <input type="hidden" name="always_mail" id="always_mail_form" />
        <input type="hidden" name="target" value="" id="perlybook_target">
        <i class="fa fa-file fa-fw black"></i>
-       <a href="#" onclick="$('#perlybook_target').val('mobi'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .mobi format for Kindle.">MOBI</a>
-       | <a href="#" onclick="$('#perlybook_target').val('epub'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .epub format for E-book readers.">EPUB</a>
+       <%
+          type = module ? 'module' : 'distribution';
+          targets = [
+            {
+               name  => 'mobi',
+               title => 'Download POD of this ' _ type _ ' in .mobi format for Kindle.',
+            },
+            {
+               name  => 'epub',
+               title => 'Download POD of this ' _ type _ ' in .epub format for E-book readers.',
+            },
+         ]
+       %>
+       <% FOREACH t IN targets %>
+          <% UNLESS loop.first %>|<% END %>
+          <a href="#" onclick="$('#perlybook_target').val('<% t.name %>'); $('#perlybook_form').submit(); return false;" title="<% t.title %>"><% t.name.upper %></a>
+       <% END %>
     </form>
 </li>
