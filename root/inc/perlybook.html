@@ -1,27 +1,20 @@
-<li>
-    <form action="http://perlybook.org/" method="GET" id="perlybook_form">
-       <input type="hidden" name="source" value="<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>">
-       <input type="hidden" name="book_selection" value="<% IF module %><% ELSE %>1<% END %>">
-       <input type="hidden" name="mobi_send" id="mobi_send" />
-       <input type="hidden" name="always_mail" id="always_mail_form" />
-       <input type="hidden" name="target" value="" id="perlybook_target">
-       <i class="fa fa-file fa-fw black"></i>
-       <%
-          type = module ? 'module' : 'distribution';
-          targets = [
-            {
-               name  => 'mobi',
-               title => 'Download POD of this ' _ type _ ' in .mobi format for Kindle.',
-            },
-            {
-               name  => 'epub',
-               title => 'Download POD of this ' _ type _ ' in .epub format for E-book readers.',
-            },
-         ]
-       %>
-       <% FOREACH t IN targets %>
-          <% UNLESS loop.first %>|<% END %>
-          <a href="#" onclick="$('#perlybook_target').val('<% t.name %>'); $('#perlybook_form').submit(); return false;" title="<% t.title %>"><% t.name.upper %></a>
-       <% END %>
-    </form>
+<li id="perlybook">
+    <i class="fa fa-file fa-fw black"></i>
+    <%
+       type = module ? 'module' : 'distribution';
+       targets = [
+         {
+            name  => 'mobi',
+            title => 'Download POD of this ' _ type _ ' in .mobi format for Kindle.',
+         },
+         {
+            name  => 'epub',
+            title => 'Download POD of this ' _ type _ ' in .epub format for E-book readers.',
+         },
+      ]
+    %>
+    <% FOREACH t IN targets %>
+       <% UNLESS loop.first %>|<% END %>
+       <a href="http://perlybook.org/?source=<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>&book_selection=<% IF module %><% ELSE %>1<% END %>&target=<% t.name %>" title="<% t.title %>"><% t.name.upper %></a>
+    <% END %>
 </li>
