@@ -21,9 +21,6 @@ my %skip = map { ( $_ => 1 ) } qw(
     t/controller/home.t
     t/controller/pod.t
     t/controller/raw.t
-    t/controller/recent.t
-    t/controller/release.t
-    t/controller/search.t
     t/metacpan/sitemap.t
 );
 

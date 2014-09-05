@@ -5,19 +5,19 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/release/DOESNTEXIST" ),
+    ok( my $res = $cb->( GET '/release/DOESNTEXIST' ),
         'GET /release/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
-    ok( $res = $cb->( GET "/release/AUTHORDOESNTEXIST/DOESNTEXIST" ),
+    ok( $res = $cb->( GET '/release/AUTHORDOESNTEXIST/DOESNTEXIST' ),
         'GET /release/AUTHORDOESNTEXIST/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
-    ok( $res = $cb->( GET "/release/PERLER/DOESNTEXIST" ),
+    ok( $res = $cb->( GET '/release/PERLER/DOESNTEXIST' ),
         'GET /release/PERLER/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
-    ok( $res = $cb->( GET "/release/Moose" ), 'GET /release/Moose' );
+    ok( $res = $cb->( GET '/release/Moose' ), 'GET /release/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
@@ -26,7 +26,7 @@ test_psgi app, sub {
 
     # Moose 2.1201 has no more Examples and breaks this test,
     # so pin to an older version for now.
-    test_heading_order( $cb->( GET "/release/ETHER/Moose-2.1005" ) );
+    test_heading_order( $cb->( GET '/release/ETHER/Moose-2.1005' ) );
 
 # FIXME: This xpath garbage is getting out of hand.  Semantic HTML would help a lot.
 # '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
@@ -51,14 +51,14 @@ test_psgi app, sub {
     is( $res->code, 301, 'code 301' );
 
     ok( $res = $cb->( GET '/release/BRICAS/CPAN-Changes-0.21' ),
-        "GET /release/BRICAS/CPAN-Changes-0.21" );
-    is( $res->code, 200, "code 200" );
+        'GET /release/BRICAS/CPAN-Changes-0.21' );
+    is( $res->code, 200, 'code 200' );
     my $tx_cc = tx($res);
     is(
         $tx_cc->find_value(
             '//a[@href="https://rt.cpan.org/Ticket/Display.html?id=84994"]'),
         'RT #84994',
-        "Link to rt is there"
+        'Link to rt is there'
     );
 
     ok( $res = $cb->( GET '/release/ANDREMAR/WWW-Curl-Simple-0.100187' ) );
@@ -67,7 +67,7 @@ test_psgi app, sub {
         $tx_cc->find_value(
             '//a[@href="https://github.com/omega/www-curl-simple/issues/8"]'),
         '#8',
-        "link to github issues is there"
+        'link to github issues is there'
     );
 
     # Test that we don't show changes for unrelated version, check issue #914
@@ -130,7 +130,7 @@ sub test_heading_order {
 
     # Confirm that the headings in the content div are in the expected order.
     my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples',
-        'Other files' );
+        'Other files', );
     my @anchors = qw(docs modules provides examples other whatsnew);
     push @headings, 'Changes for version ' . $version;
     my $heading = 0;
@@ -141,7 +141,7 @@ sub test_heading_order {
     $tx->ok(
         "$xpath_prefix/strong",
         sub {
-            $_->is( '.', $headings[$heading],
+            $_->is( q{.}, $headings[$heading],
                 "heading $headings[$heading] in expected location" );
             $heading++;
         },
@@ -156,6 +156,6 @@ sub test_heading_order {
                 "Anchor $anchors[$anchor] in expected location" );
             $anchor++;
         },
-        "anchors are correct."
+        'anchors are correct.'
     );
 }
