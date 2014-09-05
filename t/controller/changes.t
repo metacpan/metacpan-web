@@ -8,7 +8,7 @@ test_psgi app, sub {
     {
         ok(
             my $res = $cb->(
-                GET "/changes/release/RWSTAUNER/File-Spec-Native-1.003"
+                GET '/changes/release/RWSTAUNER/File-Spec-Native-1.003'
             ),
             'GET /changes/release/...'
         );
@@ -22,7 +22,7 @@ test_psgi app, sub {
     }
 
     {
-        ok( my $res = $cb->( GET "/changes/distribution/perl" ),
+        ok( my $res = $cb->( GET '/changes/distribution/perl' ),
             'GET /changes/perl' );
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);

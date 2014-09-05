@@ -17,10 +17,6 @@ my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/Model/API.pm
     lib/MetaCPAN/Web/Test.pm
     t/encoding.t
-    t/controller/changes.t
-    t/controller/home.t
-    t/controller/pod.t
-    t/controller/raw.t
     t/metacpan/sitemap.t
 );
 
