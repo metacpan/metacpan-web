@@ -7,7 +7,7 @@ test_psgi app, sub {
     my $cb = shift;
     {
         ok(
-            my $res = $cb->( GET "/favorite/leaderboard" ),
+            my $res = $cb->( GET '/favorite/leaderboard' ),
             'GET leaderboard',
         );
         is( $res->code, 200, 'code 200' );

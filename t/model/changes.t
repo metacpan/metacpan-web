@@ -6,10 +6,10 @@ use aliased 'CPAN::Changes::Release';
 
 use aliased 'MetaCPAN::Web::Model::API::Changes';
 
-my $rt = "https://rt.cpan.org/Ticket/Display.html?id=";
+my $rt = 'https://rt.cpan.org/Ticket/Display.html?id=';
 my $gh = 'https://github.com/CPAN-API/metacpan-web/issues/';
 
-subtest "RT ticket linking" => sub {
+subtest 'RT ticket linking' => sub {
     my %rt_tests = (
         'Fixed RT#1013'  => 'id=1013">RT#1013',
         'Fixed RT #1013' => 'id=1013">RT #1013',
@@ -38,7 +38,7 @@ subtest "RT ticket linking" => sub {
     }
 };
 
-subtest "GH issue linking" => sub {
+subtest 'GH issue linking' => sub {
     my %gh_tests = (
         'Fixed #1013'                             => 'issues/1013">#1013',
         'Fixed GH#1013'                           => 'issues/1013">GH#1013',
@@ -67,7 +67,7 @@ subtest 'find changelog' => sub {
         Release->new( version => 12314 ), ];
 
     my $latest = Changes->find_changelog( 0.01, $releases );
-    is( $latest->version, "0.01", "found the version we wanted.." );
+    is( $latest->version, '0.01', 'found the version we wanted..' );
 
 };
 

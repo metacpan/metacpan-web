@@ -24,11 +24,7 @@ my %skip = map { ( $_ => 1 ) } qw(
     t/controller/recent.t
     t/controller/release.t
     t/controller/search.t
-    t/controller/source.t
     t/metacpan/sitemap.t
-    t/model/changes.t
-    t/plack/mcless.t
-    t/controller/favorite/leaderboard.t
 );
 
 my @files = grep { !$skip{$_} }
