@@ -5,7 +5,8 @@
        <input type="hidden" name="mobi_send" id="mobi_send" />
        <input type="hidden" name="always_mail" id="always_mail_form" />
        <input type="hidden" name="target" value="" id="perlybook_target">
-       <a href="#" onclick="$('#perlybook_target').val('mobi'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .mobi format for Kindle."><i class="fa fa-file fa-fw black"></i>MOBI</a>
+       <i class="fa fa-file fa-fw black"></i>
+       <a href="#" onclick="$('#perlybook_target').val('mobi'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .mobi format for Kindle.">MOBI</a>
        | <a href="#" onclick="$('#perlybook_target').val('epub'); $('#perlybook_form').submit(); return false;" title="Download POD of this <% IF module %>module<% ELSE %>distribution<% END %> in .epub format for E-book readers.">EPUB</a>
     </form>
 </li>
