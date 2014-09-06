@@ -55,7 +55,7 @@ function toggleTOC() {
         newHeight = index.get(0).scrollHeight;
     }
     index.animate({ height: newHeight }, { duration: 200 });
-    $.cookie("hideTOC", (visible ? 1 : 0), { expires: 999, path: '/' });
+    localStorage.setItem('hideTOC', (visible ? 1 : 0));
     $('#index-header button').text(visible ? 'show' : 'hide');
     return false;
 }
@@ -276,7 +276,7 @@ $(document).ready(function () {
     var index = $("#index");
     if (index) {
         index.wrap('<div id="index-container"></div>');
-        var index_hidden = $.cookie('hideTOC') == 1;
+        var index_hidden = localStorage.getItem('hideTOC') == 1;
         $("#index-container").prepend('<div id="index-header"><span>Contents</span> [<button class="btn-link" onclick="toggleTOC(); return false;">'+(index_hidden ? 'show' : 'hide')+'</button>]</div>');
         if (index_hidden) {
             index.height(0);
