@@ -3,11 +3,8 @@ use warnings;
 
 use Test::More;
 
-eval q{
-    use Path::Iterator::Rule;
-    use Path::Tiny qw(path);
-};
-plan skip_all => 'Path::Iterator::Rule and Path::Tiny are needed for this test' if $@;
+use Path::Iterator::Rule;
+use Path::Tiny qw(path);
 
 # files that have inline <script> tags
 my %skip = map { $_ => 1 }
@@ -17,7 +14,7 @@ my %skip = map { $_ => 1 }
 	'root/recent/log.html';
 
 my $rule = Path::Iterator::Rule->new;
-$rule->name("*.html");
+$rule->name('*.html');
 for my $file ( $rule->all( 'root' ) ) {
     my $html = path($file)->slurp_utf8;
 	ok $html !~ /<style>/, "no inline style in $file";
