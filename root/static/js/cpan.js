@@ -52,7 +52,7 @@ function togglePanel(side) {
     if (!panel || !shower) return false;
     panel.toggle();
     shower.toggle();
-    $.cookie("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0), { expires: 999, path: '/' });
+    localStorage.setItem("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0));
     return false;
 }
 
@@ -296,7 +296,7 @@ $(document).ready(function () {
     ['right', 'left'].forEach(function (side) {
 	    var panel = $(side + "-panel");
         if (panel) {
-            var panel_hidden = $.cookie("hide_" + side + "_panel") == 1;
+            var panel_hidden = localStorage.getItem("hide_" + side + "_panel") == 1;
             if (panel_hidden) {
                 togglePanel(side);
             }
