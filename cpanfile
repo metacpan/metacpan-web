@@ -76,6 +76,8 @@ requires 'XML::Feed';
 requires 'XML::Simple';
 
 test_requires 'App::Prove';
+test_requires 'Path::Iterator::Rule', '1.008';
+test_requires 'Path::Tiny', '0.056';
 test_requires 'Perl::Tidy';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
