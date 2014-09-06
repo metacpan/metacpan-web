@@ -5,7 +5,7 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/" ), "GET /" );
+    ok( my $res = $cb->( GET q{/} ), 'GET /' );
     is( $res->code, 200, 'code 200' );
 };
 

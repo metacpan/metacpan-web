@@ -5,9 +5,9 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/pod/DOESNTEXIST" ), 'GET /pod/DOESNTEXIST' );
+    ok( my $res = $cb->( GET '/pod/DOESNTEXIST' ), 'GET /pod/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
-    ok( $res = $cb->( GET "/pod/Moose" ), 'GET /pod/Moose' );
+    ok( $res = $cb->( GET '/pod/Moose' ), 'GET /pod/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
@@ -24,7 +24,7 @@ test_psgi app, sub {
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx2 = tx($res);
     ok( $tx->find_value('//div[contains(@class, "content")]'),
-        "page has content" );
+        'page has content' );
     is(
         $tx2->find_value('//div[contains(@class, "content")]'),
         $tx->find_value('//div[contains(@class, "content")]'),

@@ -17,18 +17,7 @@ my %skip = map { ( $_ => 1 ) } qw(
     lib/MetaCPAN/Web/Model/API.pm
     lib/MetaCPAN/Web/Test.pm
     t/encoding.t
-    t/controller/changes.t
-    t/controller/home.t
-    t/controller/pod.t
-    t/controller/raw.t
-    t/controller/recent.t
-    t/controller/release.t
-    t/controller/search.t
-    t/controller/source.t
     t/metacpan/sitemap.t
-    t/model/changes.t
-    t/plack/mcless.t
-    t/controller/favorite/leaderboard.t
 );
 
 my @files = grep { !$skip{$_} }

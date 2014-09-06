@@ -22,9 +22,9 @@ my $cache = CHI->new(
 
 my $app = builder {
 
-    enable "Plack::Middleware::MCLess",
+    enable 'Plack::Middleware::MCLess',
         cache => $cache,
-        root  => "t/plack/css",
+        root  => 't/plack/css',
         files => ['t/plack/css/style.less'];
 
     return sub {
@@ -47,7 +47,7 @@ test_psgi $app, sub {
         my $res = $cb->( GET 'http://localhost/' );
         is( $res->code, 200 );
         $assets = [ split( $/, $res->content ) ];
-        is @$assets, $total, "Number of assets matches";
+        is @$assets, $total, 'Number of assets matches';
     }
 
     {
@@ -55,8 +55,8 @@ test_psgi $app, sub {
         my $res = $cb->( GET 'http://localhost' . $assets->[0] );
         is $res->code,         200;
         is $res->content_type, 'text/css';
-        is $res->content,      "#header{color:#4d926f}h2{color:#4d926f}",
-            "Content matches";
+        is $res->content,      '#header{color:#4d926f}h2{color:#4d926f}',
+            'Content matches';
     }
 
 };
@@ -64,8 +64,8 @@ test_psgi $app, sub {
 eval {
     builder {
 
-        enable "Plack::Middleware::MCLess",
-            root  => "t/plack/css",
+        enable 'Plack::Middleware::MCLess',
+            root  => 't/plack/css',
             files => ['t/plack/css/broken.less'];
 
     };
