@@ -127,10 +127,14 @@ sub groom_irc {
         if ( $scheme && ( $scheme eq 'irc' || $scheme eq 'ircs' ) ) {
             my $ssl  = $scheme eq 'ircs';
             my $host = $url->authority;
-            $host =~ s/:(\d+)$//;
-            my $port = $1;
-            $host =~ s/^(.*)@//;
-            my $user = $1;
+            my $port;
+            my $user;
+            if ($host =~ s/:(\d+)$//) {
+                $port = $1;
+            }
+            if ($host =~ s/^(.*)@//) {
+                $user = $1;
+            }
             my $path = uri_unescape( $url->path );
             $path =~ s{^/}{};
             my $channel
