@@ -162,6 +162,7 @@ sub view : Private {
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     my $contribs = $self->groom_contributors( $c, $release );
+    my $irc = $self->groom_irc( $c, $release );
 
     $c->stash(
         {
@@ -172,6 +173,7 @@ sub view : Private {
             canonical         => $canonical,
             documented_module => $documented_module,
             contributors      => $contribs,
+            irc               => $irc,
         }
     );
     unless ( $reqs->{pod}->{raw} ) {
