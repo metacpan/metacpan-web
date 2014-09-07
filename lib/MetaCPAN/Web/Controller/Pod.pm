@@ -176,6 +176,7 @@ sub view : Private {
             irc               => $irc,
         }
     );
+
     unless ( $reqs->{pod}->{raw} ) {
         $c->stash( pod_error => $reqs->{pod}->{message}, );
     }

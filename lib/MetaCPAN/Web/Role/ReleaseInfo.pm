@@ -129,10 +129,10 @@ sub groom_irc {
             my $host = $url->authority;
             my $port;
             my $user;
-            if ($host =~ s/:(\d+)$//) {
+            if ( $host =~ s/:(\d+)$// ) {
                 $port = $1;
             }
-            if ($host =~ s/^(.*)@//) {
+            if ( $host =~ s/^(.*)@// ) {
                 $user = $1;
             }
             my $path = uri_unescape( $url->path );
