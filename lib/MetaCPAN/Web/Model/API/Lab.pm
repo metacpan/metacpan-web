@@ -103,7 +103,7 @@ sub fetch_latest_distros {
 
     my %licenses;
     my %repos;
-    my $hits          = scalar @{ $r->{hits}{hits} };
+    my $hits = scalar @{ $r->{hits}{hits} };
     my %distros;
 
     foreach my $d ( @{ $r->{hits}{hits} } ) {
@@ -121,8 +121,11 @@ sub fetch_latest_distros {
         my $release = $self->request("/release/$distro")->recv;
         $distros{$distro}{test} = $release->{tests};
         my $total = 0;
-        $total += ($distros{$distro}{test}{$_} // 0) for qw(pass fail na);
-        $distros{$distro}{test}{ratio} = $total ? int(100 * ($distros{$distro}{test}{pass} // 0) / $total) : '';
+        $total += ( $distros{$distro}{test}{$_} // 0 ) for qw(pass fail na);
+        $distros{$distro}{test}{ratio}
+            = $total
+            ? int( 100 * ( $distros{$distro}{test}{pass} // 0 ) / $total )
+            : q{};
 
         if (    $license
             and $license ne 'unknown'
@@ -136,6 +139,7 @@ sub fetch_latest_distros {
 
         # See also root/inc/release-infro.html
         if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
+
             # TODO: shall we collect the types and list them?
         }
         else {
@@ -143,8 +147,8 @@ sub fetch_latest_distros {
         }
     }
     return {
-        licenses         => \%licenses,
-        distros          => \%distros,
+        licenses => \%licenses,
+        distros  => \%distros,
     };
 }
 
