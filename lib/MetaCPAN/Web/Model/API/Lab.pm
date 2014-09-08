@@ -94,7 +94,7 @@ sub fetch_latest_distros {
             },
             sort   => [ { date => 'desc' } ],
             fields => [
-                qw(distribution date license author resources.repository abstract metadata.version)
+                qw(distribution date license author resources.repository abstract metadata.version tests)
             ],
             size => $size,
         },
@@ -119,8 +119,7 @@ sub fetch_latest_distros {
             $distros{$distro}{bugs} = $distribution->{bugs}{active};
         }
 
-        my $release = $self->request("/release/$distro")->recv;
-        $distros{$distro}{test} = $release->{tests};
+        $distros{$distro}{test} = $d->{fields}{tests};
         my $total = 0;
         $total += ( $distros{$distro}{test}{$_} // 0 ) for qw(pass fail na);
         $distros{$distro}{test}{ratio}
