@@ -100,11 +100,7 @@ sub fetch_latest_distros {
         },
     )->recv;
 
-    #return $r;
-
     my %licenses;
-    my %repos;
-    my $hits = scalar @{ $r->{hits}{hits} };
     my %distros;
 
     foreach my $d ( @{ $r->{hits}{hits} } ) {
@@ -113,7 +109,7 @@ sub fetch_latest_distros {
         my $author  = $d->{fields}{author};
         my $repo    = $d->{fields}{'resources.repository'};
 
-# TODO: can we fetch the bug count and the test count in one call for all the distributions?
+     # TODO: can we fetch the bug count in one call for all the distributions?
         my $distribution = $self->request("/distribution/$distro")->recv;
         if ( $distribution->{bugs} ) {
             $distros{$distro}{bugs} = $distribution->{bugs}{active};
