@@ -292,9 +292,9 @@ $(document).ready(function () {
 
     var index = $("#index");
     if (index) {
-        index.wrap('<div id="index-container"></div>');
+        index.wrap('<div id="index-container"><div class="index-border"></div></div>');
         var index_hidden = localStorage.getItem('hideTOC') == 1;
-        $("#index-container").prepend('<div id="index-header"><span>Contents</span> [<button class="btn-link" onclick="toggleTOC(); return false;">'+(index_hidden ? 'show' : 'hide')+'</button>]</div>');
+        $("#index-container .index-border").prepend('<div id="index-header"><span>Contents</span> [<button class="btn-link" onclick="toggleTOC(); return false;">'+(index_hidden ? 'show' : 'hide')+'</button>]</div>');
         if (index_hidden) {
             index.height(0);
         }
