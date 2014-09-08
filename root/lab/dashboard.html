@@ -14,17 +14,17 @@
     <tr>
        <th></th>
        <th></th>
-       <th colspan="3">Missing</th>
        <th></th>
+       <th colspan="3">Missing</th>
        <th colspan="4">Tests</th>
     </tr>
     <tr class="distro-header">
       <th class="distro-name">Name</th>
       <th class="distro-date">Date</th>
+      <th class="distro-bugs">Bugs</th>
       <th class="distro-repo">Repo</th>
       <th class="distro-liense">License</th>
       <th class="distro-abstract">Abstract</th>
-      <th class="distro-bugs">Bugs</th>
       <th class="distro-test" >pass</th>
       <th class="distro-test" >fail</th>
       <th class="distro-test" >na</th>
@@ -34,10 +34,10 @@
     <tr class="distro-row">
       <td class="distro-name"><a href="/release/<% d %>"><% d %></a></td>
       <td class="distro-date"><% report.distros.$d.date %></td>
+      <td class="distro-bugs"><% report.distros.$d.bugs %></td>
       <td class="distro-repo"><% IF report.distros.$d.repo %>X<% END %></td>
       <td class="distro-license"><% IF report.distros.$d.license %>X<% END %></td>
       <td class="distro-repo"><% IF report.distros.$d.abstract %>X<% END %></td>
-      <td class="distro-bugs"><% report.distros.$d.bugs %></td>
       <% tests = report.distros.$d.test %>
       <td class="distro-tests" style="color: #090"><% tests.pass %></td>
       <td class="distro-tests" style="color: #900"><% tests.fail %></td>
