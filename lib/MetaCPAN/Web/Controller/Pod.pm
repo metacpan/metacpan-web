@@ -161,7 +161,7 @@ sub view : Private {
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
-    my $contribs = $self->groom_contributors( $c, $release );
+    my $contribs = $self->groom_contributors( $c, $release, $reqs->{author} );
     my $irc = $self->groom_irc( $c, $release );
 
     $c->stash(
