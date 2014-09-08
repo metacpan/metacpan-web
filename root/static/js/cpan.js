@@ -46,6 +46,16 @@ function togglePod(lines) {
     }
 }
 
+function togglePanel(side) {
+    var panel = $('#' + side + '-panel');
+    var shower = $('#show-' + side + '-panel');
+    if (!panel || !shower) return false;
+    panel.toggle();
+    shower.toggle();
+    localStorage.setItem("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0));
+    return false;
+}
+
 function toggleTOC() {
     var index = $('#index');
     if (!index) return false;
@@ -282,6 +292,16 @@ $(document).ready(function () {
             index.height(0);
         }
     }
+
+    ['right', 'left'].forEach(function (side) {
+	    var panel = $(side + "-panel");
+        if (panel) {
+            var panel_hidden = localStorage.getItem("hide_" + side + "_panel") == 1;
+            if (panel_hidden) {
+                togglePanel(side);
+            }
+        }
+    });
 });
 
 function searchForNearest() {
