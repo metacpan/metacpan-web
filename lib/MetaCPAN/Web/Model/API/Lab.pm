@@ -92,9 +92,10 @@ sub fetch_latest_distros {
                     },
                 },
             },
-            sort => [ { date => 'desc' } ],
-            fields =>
-                [qw(distribution date license author resources.repository)],
+            sort   => [ { date => 'desc' } ],
+            fields => [
+                qw(distribution date license author resources.repository abstract)
+            ],
             size => $size,
         },
     )->recv;
@@ -145,6 +146,10 @@ sub fetch_latest_distros {
         else {
             $distros{$distro}{repo} = 1;
         }
+        if ( not $d->{fields}{abstract} ) {
+            $distros{$distro}{abstract} = 1;
+        }
+
     }
     return {
         licenses => \%licenses,
