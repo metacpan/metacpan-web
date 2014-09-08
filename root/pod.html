@@ -9,7 +9,7 @@
 %>
 
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
-<div id="show-right-panel">[<button class="btn-link" onclick="togglePanel('right'); return false;">show</button>] right panel</div>
+<div id="show-right-panel">[<button class="btn-link" onclick="togglePanel('right', true); return false;">show</button>] right panel</div>
 
 <ul class="nav nav-list slidepanel" itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="visible-xs">
@@ -42,7 +42,7 @@
 </ul>
 
 <div id="right-panel" class="pull-right">
-<div>[<button class="btn-link" onclick="togglePanel('right'); return false;">hide</button>]</div>
+<div>[<button class="btn-link" onclick="togglePanel('right', true); return false;">hide</button>]</div>
 <div class="pull-right">
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html contributors = contributors %>

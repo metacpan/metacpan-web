@@ -46,13 +46,15 @@ function togglePod(lines) {
     }
 }
 
-function togglePanel(side) {
+function togglePanel(side, save) {
     var panel = $('#' + side + '-panel');
     var shower = $('#show-' + side + '-panel');
     if (!panel || !shower) return false;
     panel.toggle();
     shower.toggle();
-    localStorage.setItem("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0));
+    if (save) {
+        localStorage.setItem("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0));
+    }
     return false;
 }
 
@@ -294,11 +296,11 @@ $(document).ready(function () {
     }
 
     ['right', 'left'].forEach(function (side) {
-	    var panel = $(side + "-panel");
+        var panel = $(side + "-panel");
         if (panel) {
             var panel_hidden = localStorage.getItem("hide_" + side + "_panel") == 1;
             if (panel_hidden) {
-                togglePanel(side);
+                togglePanel(side, false);
             }
         }
     });
