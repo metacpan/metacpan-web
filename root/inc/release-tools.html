@@ -1,4 +1,5 @@
 <li class="nav-header">Tools</li>
+<% INCLUDE inc/perlybook.html %>
 <li>
     <a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org').replace('^http://', 'https://') %>">
     <i class="fa fa-download fa-fw black"></i>Download (<% release.stat.size | format_bytes %>b)

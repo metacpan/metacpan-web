@@ -1,0 +1,20 @@
+<li id="perlybook">
+    <i class="fa fa-file fa-fw black"></i>
+    <%
+       type = module ? 'module' : 'distribution';
+       targets = [
+         {
+            name  => 'mobi',
+            title => 'Download POD of this ' _ type _ ' in .mobi format for Kindle.',
+         },
+         {
+            name  => 'epub',
+            title => 'Download POD of this ' _ type _ ' in .epub format for E-book readers.',
+         },
+      ]
+    %>
+    <% FOREACH t IN targets %>
+       <% UNLESS loop.first %>|<% END %>
+       <a href="http://perlybook.org/?source=<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>&book_selection=<% IF module %><% ELSE %>1<% END %>&target=<% t.name %>" title="<% t.title %>"><% t.name.upper %></a>
+    <% END %>
+</li>
