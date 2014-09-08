@@ -145,6 +145,7 @@
                         <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="form-inline search-form">
                             <div class="input-append">
                                 <input type="text" name="q" size="41" id="search-input" class="form-control top-input-form" value="<% req.param('q').join(' ') or req.parameters.lucky %>">
+                                <input type="hidden" name="size" id="size" value="20">
                                 <span class="input-group-btn">
                                 <button class="btn search-btn" type="submit">Search<% IF req.uri.path == '/mirrors' %> Mirrors<% END %></button>
                                 </span>

@@ -282,6 +282,18 @@ $(document).ready(function () {
             index.height(0);
         }
     }
+
+    $('a[href*="/search?"]').on('click', function() {
+        var url = $(this).attr('href');
+        var result = /size=(\d+)/.exec(url);
+        if (result && result[1]) {
+            localStorage.setItem('search_size', result[1]);
+        }
+    });
+    var size = localStorage.getItem('search_size');
+    if (size) {
+        $('#size').val(size);
+    }
 });
 
 function searchForNearest() {
