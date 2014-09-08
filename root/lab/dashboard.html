@@ -15,7 +15,7 @@
        <th></th>
        <th colspan="2">Missing</th>
        <th></th>
-       <th colspan="3">Tests</th>
+       <th colspan="4">Tests</th>
     </tr>
     <tr class="distro-header">
       <th class="distro-name">Name</th>
@@ -25,6 +25,7 @@
       <th class="distro-test" >pass</th>
       <th class="distro-test" >fail</th>
       <th class="distro-test" >na</th>
+      <th class="distro-test" >pass/total</th>
     </tr>
     <% FOR d IN report.distros.keys.sort %>
     <tr class="distro-row">
@@ -36,6 +37,7 @@
       <td class="distro-tests" style="color: #090"><% tests.pass %></td>
       <td class="distro-tests" style="color: #900"><% tests.fail %></td>
       <td class="distro-tests" style=""><% tests.na %></td>
+      <td class="distro-tests" style="<% IF tests.ratio > 95 %>color: #090<% ELSIF tests.ratio < 80 %>color: #900<% END %>"><% tests.ratio %></td>
     </tr>
     <% END %>
     </table>

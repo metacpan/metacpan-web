@@ -120,6 +120,9 @@ sub fetch_latest_distros {
 
         my $release = $self->request("/release/$distro")->recv;
         $distros{$distro}{test} = $release->{tests};
+        my $total = 0;
+        $total += ($distros{$distro}{test}{$_} // 0) for qw(pass fail na);
+        $distros{$distro}{test}{ratio} = $total ? int(100 * ($distros{$distro}{test}{pass} // 0) / $total) : '';
 
         if (    $license
             and $license ne 'unknown'
