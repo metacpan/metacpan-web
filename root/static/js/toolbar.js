@@ -16,8 +16,8 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
                 });
             } else {
                 el.css({
-                    position: 'static',
-                    top: 'auto'
+                    position: 'absolute',
+                    top: originalTop
                 });
             }
         });
