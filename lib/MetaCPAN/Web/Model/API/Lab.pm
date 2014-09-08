@@ -150,6 +150,7 @@ sub fetch_latest_distros {
             $distros{$distro}{abstract} = 1;
         }
 
+        ( $distros{$distro}{date} = $d->{fields}{date} ) =~ s/\.\d+Z$//;
     }
     return {
         licenses => \%licenses,
