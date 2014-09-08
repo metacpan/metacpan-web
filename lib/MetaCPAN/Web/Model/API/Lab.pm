@@ -102,11 +102,7 @@ sub fetch_latest_distros {
     #return $r;
 
     my %licenses;
-    my @missing_licenses;
-    my @missing_repo;
     my %repos;
-    my $license_found = 0;
-    my $repo_found    = 0;
     my $hits          = scalar @{ $r->{hits}{hits} };
     my %distros;
 
@@ -129,40 +125,21 @@ sub fetch_latest_distros {
             and $license ne 'unknown'
             and $license ne 'open_source' )
         {
-            $license_found++;
             $licenses{$license}++;
         }
         else {
             $distros{$distro}{license} = 1;
-            push @missing_licenses,
-                {
-                name    => $distro,
-                pauseid => $author,
-                };
         }
 
         # See also root/inc/release-infro.html
         if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
-            $repo_found++;
+            # TODO: shall we collect the types and list them?
         }
         else {
             $distros{$distro}{repo} = 1;
-            push @missing_repo,
-                {
-                name    => $distro,
-                pauseid => $author,
-                };
         }
     }
-    @missing_licenses = sort { $a->{name} cmp $b->{name} } @missing_licenses;
-    @missing_repo     = sort { $a->{name} cmp $b->{name} } @missing_repo;
     return {
-        total_asked_for  => $size,
-        total_received   => $hits,
-        license_found    => $license_found,
-        missing_licenses => \@missing_licenses,
-        repos_found      => $repo_found,
-        missing_repos    => \@missing_repo,
         licenses         => \%licenses,
         distros          => \%distros,
     };
