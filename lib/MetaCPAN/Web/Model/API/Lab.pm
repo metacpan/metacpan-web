@@ -94,7 +94,7 @@ sub fetch_latest_distros {
             },
             sort   => [ { date => 'desc' } ],
             fields => [
-                qw(distribution date license author resources.repository abstract)
+                qw(distribution date license author resources.repository abstract metadata.version)
             ],
             size => $size,
         },
@@ -151,6 +151,7 @@ sub fetch_latest_distros {
         }
 
         ( $distros{$distro}{date} = $d->{fields}{date} ) =~ s/\.\d+Z$//;
+        $distros{$distro}{version} = $d->{fields}{'metadata.version'};
     }
     return {
         licenses => \%licenses,
