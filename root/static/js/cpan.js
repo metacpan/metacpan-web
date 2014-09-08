@@ -64,7 +64,14 @@ function toggleTOC() {
     if (!visible) {
         newHeight = index.get(0).scrollHeight;
     }
-    index.animate({ height: newHeight }, { duration: 200 });
+    index.animate({ height: newHeight }, {
+        duration: 200,
+        complete: function () {
+            if (newHeight > 0) {
+                index.css({ height: 'auto'});
+            }
+        }
+    });
     localStorage.setItem('hideTOC', (visible ? 1 : 0));
     $('#index-header button').text(visible ? 'show' : 'hide');
     return false;
