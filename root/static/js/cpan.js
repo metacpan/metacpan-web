@@ -86,6 +86,45 @@ $(document).ready(function () {
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
 
+    /**
+    * Turns all package names into metacpan.org links within <a/> tags.
+    * @param {String} code Input code.
+    * @return {String} Returns code with </a> tags.
+    */
+    function processPackages(code)
+    {
+        var destination = document.location.href.match(/\/source\//) ? 'source' : 'pod',
+            strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
+            ;
+
+        code = code.replace(/(<code class="pl keyword">(?:with|extends|use<\/code> <code class="pl plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="pl string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+        {
+            var match = null,
+                mcpan_url
+                ;
+
+            if ( match = strip_delimiters.exec(pkg) )
+            {
+                prefix = prefix + match[1];
+                pkg    = match[2];
+                suffix = match[3] + suffix;
+            }
+
+            mcpan_url = '<a href="/' + destination + '/' + pkg + '">' + pkg + '</a>';
+            return prefix + mcpan_url + suffix;
+        });
+
+        // Link our dependencies
+        return code.replace(/(<code class="pl keyword">(use|package|require)<\/code> <code class="pl plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
+    };
+
+    var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
+    SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function() {
+      var html = getCodeLinesHtml.apply(this, arguments);
+      return processPackages(html);
+    };
+
+
     var source = $("#source");
     // if this is a source-code view with destination anchor
     if (source[0] && document.location.hash) {
