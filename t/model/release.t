@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use JSON;
+use JSON::MaybeXS;
 use MetaCPAN::Web;
 
 sub search_release {

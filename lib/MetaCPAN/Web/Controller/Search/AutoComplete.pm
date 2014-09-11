@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
+use JSON::MaybeXS ();
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -11,7 +12,7 @@ sub index : Path {
     my $query = join( q{ }, $c->req->param('q') );
     my $data  = $model->autocomplete($query)->recv;
     $c->res->content_type('application/json');
-    $c->res->body( JSON::encode_json( $data->{results} ) );
+    $c->res->body( JSON::MaybeXS::encode_json( $data->{results} ) );
 }
 
 1;

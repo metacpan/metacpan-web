@@ -4,7 +4,7 @@ use utf8;
 use Encode qw(encode is_utf8);
 use Test::More;
 use MetaCPAN::Web::Test;
-use JSON::XS;
+use JSON::MaybeXS;
 
 my @tests = (
     [ moose => 'Moose' ],
