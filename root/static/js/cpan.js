@@ -165,7 +165,7 @@ $(document).ready(function () {
         var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
           this.getAttribute('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
-        $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
+        $(this).tablesorter({sortList: [sortid], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
             if(!sort) return $node.text();
