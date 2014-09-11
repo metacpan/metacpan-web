@@ -149,7 +149,7 @@ function Github() {
                     my: 'left center'
                 },
                 style: {
-                    classes: 'ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-light qtip-github'
+                    classes: 'qtip-shadow qtip-rounded qtip-light qtip-github',
                 }
             });
         },
