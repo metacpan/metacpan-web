@@ -323,12 +323,6 @@ $(document).ready(function () {
 
     $('.dropdown-toggle').dropdown();
 
-    $("#left-nav").affix({
-        offset: {
-            top: 100
-        }
-    });
-
     var index = $("#index");
     if (index) {
         index.wrap('<div id="index-container"><div class="index-border"></div></div>');
