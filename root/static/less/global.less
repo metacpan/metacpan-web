@@ -1,7 +1,3 @@
-pre, .diff-header, .diff-ul li {
-    font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
-}
-
 /* float:none prevents the span-x classes from breaking table-cell display */
 caption, th, td {
     text-align: left;
@@ -472,4 +468,10 @@ li button.dependencies-graph {
     border-left: 1px solid #e9e9e9;
     padding-left: 15px;
     line-height: 20px;
+}
+
+body .syntaxhighlighter {
+  *, * *, * * * {
+    font-family: @font-family-monospace !important;
+  }
 }
