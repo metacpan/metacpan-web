@@ -9,7 +9,7 @@ override 'load_string' => sub {
     my ( $class, $string, @args ) = @_;
 
     my $changes  = $class->new(@args);
-    my $preamble = '';
+    my $preamble = q{};
     my ( @releases, $ingroup, $indent, $spec_groups );
 
     $string =~ s/(?:\015{1,2}\012|\015|\012)/\n/gs;
@@ -28,7 +28,7 @@ override 'load_string' => sub {
         # Version & Date
         if ( $l =~ $version_line_re ) {
             my ( $v, $n ) = split m{\s+}, $l, 2;
-            my $match = '';
+            my $match = q{};
             my $d;
 
             # munge date formats, save the remainder as note
@@ -122,7 +122,7 @@ override 'load_string' => sub {
             next;
         }
 
-        $ingroup = '' if !defined $ingroup;
+        $ingroup = q{} if !defined $ingroup;
 
         next if $l =~ m{^\s*$};
 
@@ -130,7 +130,7 @@ override 'load_string' => sub {
             $indent
                 = $l =~ m{^(\s+)}
                 ? '\s' x length $1
-                : '';
+                : q{};
         }
 
         $l =~ s{^$indent}{};

@@ -34,7 +34,7 @@ my @ROGUE_DISTRIBUTIONS
 
 sub find {
     my ( $self, @path ) = @_;
-    $self->request( "/module/" . join( "/", @path ) );
+    $self->request( '/module/' . join( q{/}, @path ) );
 }
 
 sub _not_rogue {
@@ -265,7 +265,7 @@ sub search {
     ( my $clean = $query ) =~ s/::/ /g;
 
     my $negative
-        = { term => { 'file.mime' => { value => "text/x-script.perl" } } };
+        = { term => { 'file.mime' => { value => 'text/x-script.perl' } } };
 
     my $positive = {
         bool => {
@@ -435,14 +435,14 @@ sub requires {
         {
             query => {
                 filtered => {
-                    query  => { "match_all" => {} },
+                    query  => { 'match_all' => {} },
                     filter => {
                         and => [
                             { term => { 'release.status'     => 'latest' } },
                             { term => { 'release.authorized' => \1 } },
                             {
                                 term => {
-                                    "release.dependency.module" => $module
+                                    'release.dependency.module' => $module
                                 }
                             }
                         ]

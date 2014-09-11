@@ -19,16 +19,16 @@ FOREACH dep IN deps.sort %>
     <li class="divider"></li>
     <li>
         <a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>">
-        <i class="fa fa-retweet black"></i>CPAN Testers List</a>
+        <i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>
     </li>
     <li>
         <a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]">
-        <i class="fa fa-share black"></i>Reverse dependencies</a>
+        <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
     <%- IF deps.size %>
         <li>
             <button class="btn btn-link dependencies-graph" data-toggle="modal" data-target="#dependencies-graph" href="#">
-            <i class="fa fa-asterisk black"></i>Dependency graph</button>
+            <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</button>
         </li>
     <%- END %>
 </ul>

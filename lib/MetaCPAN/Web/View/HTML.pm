@@ -100,7 +100,7 @@ Template::Alloy->define_vmethod(
         'text',
         random => sub {
             my $length = shift;
-            my $rand   = "";
+            my $rand   = q{};
             $rand .= $chars[ int( rand() * @chars ) ] for ( 1 .. $length );
             return $rand;
         }
@@ -176,7 +176,7 @@ Template::Alloy->define_vmethod(
     digest => sub {
         my ($source) = @_;
         my @source = split( /\//, $source );
-        my @target = ( shift @source, shift @source, join( '/', @source ) );
+        my @target = ( shift @source, shift @source, join( q{/}, @source ) );
         my $digest = Digest::SHA1::sha1_base64(
             join( "\0", grep {defined} @target ) );
         $digest =~ tr/[+\/]/-_/;

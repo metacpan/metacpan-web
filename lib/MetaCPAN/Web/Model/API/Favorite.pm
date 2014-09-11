@@ -89,7 +89,7 @@ sub recent {
             size  => 100,
             from  => ( $page - 1 ) * 100,
             query => { match_all => {} },
-            sort  => [ { 'date' => { order => "desc" } } ]
+            sort  => [ { 'date' => { order => 'desc' } } ]
         }
     );
 }

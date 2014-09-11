@@ -101,7 +101,7 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
-    my $contribs = $self->groom_contributors( $c, $out );
+    my $contribs = $self->groom_contributors( $c, $out, $reqs->{author} );
     my $irc = $self->groom_irc( $c, $out );
 
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );

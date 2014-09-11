@@ -9,7 +9,7 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
         if(height > contentHeight) return;
         $(window).scroll(function(e) {
             var screenHeight = $(window).height();
-            if ($(this).scrollTop() > topRow.offset().top + (screenHeight - height < 0 ? height - screenHeight : 0 )) {
+            if ($(this).scrollTop() > topRow.offset().top + originalTop + (screenHeight - height < 0 ? height - screenHeight : 0 )) {
                 el.css({
                     position: 'fixed',
                     top: (screenHeight - height < 0 ? screenHeight - height : 0 ) + 'px'

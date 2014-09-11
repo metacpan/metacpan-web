@@ -5,7 +5,7 @@ use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET "/pod/Moose" ), 'GET /pod/Moose' );
+    ok( my $res = $cb->( GET '/pod/Moose' ), 'GET /pod/Moose' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
     ok( my $source = $tx->find_value('//a[text()="Source"]/@href'),
@@ -45,28 +45,28 @@ test_psgi app, sub {
     # need to do the API hits to test each type.
     my @tests = (
         [ pl => 'lib/Template/Manual.pod' ],    # pod
-        [ pl => "lib/Dist/Zilla.pm" ],
-        [ pl => "Makefile.PL" ],
+        [ pl => 'lib/Dist/Zilla.pm' ],
+        [ pl => 'Makefile.PL' ],
 
-        [ js => "META.json" ],
-        [ js => "script.js" ],
+        [ js => 'META.json' ],
+        [ js => 'script.js' ],
 
-        [ yaml => "META.yml" ],
-        [ yaml => "config.yaml" ],
+        [ yaml => 'META.yml' ],
+        [ yaml => 'config.yaml' ],
 
-        [ c => "foo.c" ],
-        [ c => "bar.h" ],
-        [ c => "baz.xs" ],
+        [ c => 'foo.c' ],
+        [ c => 'bar.h' ],
+        [ c => 'baz.xs' ],
 
         [ cpanchanges => 'Changes' ],
 
-        [ pl => { path => "bin/dzil", mime => "text/x-script.perl" } ],
+        [ pl => { path => 'bin/dzil', mime => 'text/x-script.perl' } ],
 
         # There wouldn't normally be a file with no path
         # but that doesn't mean this shouldn't work.
-        [ pl => { mime => "text/x-script.perl" } ],
+        [ pl => { mime => 'text/x-script.perl' } ],
 
-        [ plain => "README" ],
+        [ plain => 'README' ],
     );
 
     foreach my $ft_test (@tests) {
@@ -76,7 +76,7 @@ test_psgi app, sub {
         is
             MetaCPAN::Web::Controller::Source->detect_filetype($file),
             $filetype,
-            "detected filetype '$filetype' for: " . join ' ', %$file;
+            "detected filetype '$filetype' for: " . join q{ }, %$file;
     }
 
     {

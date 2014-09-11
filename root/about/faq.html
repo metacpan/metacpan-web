@@ -4,6 +4,30 @@
 <% FILTER multimarkdown %>
 # FAQ's answered
 
+## What third-party sites does MetaCPAN use?
+
+* [CPAN](http://www.cpan.org/) is where all the Perl modules live.
+MetaCPAN 'just' indexes those files.
+* [Perlybook](http://perlybook.org/) provides the MOBI and EPUB download capabilities.
+MetaCPAN provides direct links to download the POD in the respective formats.
+* [CPAN Testers](http://www.cpantesters.org/) collect test reports of the CPAN modules.
+MetaCPAN show the number of test reports and links to the tests.
+* [CPANTS](http://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
+MetaCPAN links to the respective pages on the CPANTS site.
+* [CPAN Ratings](http://cpanratings.perl.org/) allows users to give stars and review CPAN distributions.
+MetaCPAN show the average rating using stars and links to the reviews.
+* [search.cpan.org](http://search.cpan.org/) is another search engine for the same data.
+It is older, but the source code has not been published.
+MetaCPAN links to the respective page of each module/distribution.
+* [RT](https://rt.cpan.org/) is an installation of [Request Tracker](https://www.bestpractical.com/rt/)
+that provides a default bug~ and issue-tracking system for every CPAN distribution.
+Unless the author of the module configured it otherwise MetaCPAN will link the respective RT Queue
+of every distribution.
+* [GitHub](https://github.com/) is the most popular public version control system among Perl module developers.
+Many distributions indicate it as their public VCS. Some of them even mark GitHub as their preferred
+issue tracking system. MetaCPAN links to the GitHub repository and bug tracking system of each distributions
+if the author has included the information in the META files.
+
 ## How to list all the Plack Middleware?
 
 Search for <a href="/search?q=module:Plack::Middleware">module:Plack::Middleware</a>
@@ -14,6 +38,18 @@ Type in <em>module:</em> and the namespace such as <a href="/search?q=module:Cat
 <a href="/search?q=module:Dancer::Plugin">Dancer::Plugin</a>,
 <a href="/search?q=module:Mojolicious::Plugin">Mojolicious::Plugin</a>,
 or <a href="/search?q=module:Perl::Critic::Policy">Perl::Critic::Policy</a>.
+
+## A non-comprehensive list of special search expressions:
+
+These search-terms can be combined with each other and regular search term.
+
+* <em>module:</em>  filter by part of a  module name ( e.g. [module:Plugin](/search?q=module:Plugin) )
+* <em>distribution:</em> search in the files of the specific distribution ( e.g. [distribution:Dancer auth](/search?q=distribution%3ADancer+auth) )
+* <em>author:</em> search in the modules releases by the given author ( e.g. [author:SONGMU Redis](/search?q=author%3ASONGMU+Redis) )
+* <em>version:</em> limit the search to modules with the given version number ( e.g. [version:1.00](/search?q=version%3A1.00) )
+
+Wildcards: ? matches a single character, * matches any number of characters
+( e.g. [version:1.*](/search?q=version%3A1.*) and [version:1.?](/search?q=version%3A1.?) ) 
 
 ## Why can't I find a specific module?
 

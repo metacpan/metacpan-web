@@ -49,7 +49,7 @@ sub news : Chained('index') PathPart Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
-        title   => "Recent MetaCPAN News",
+        title   => 'Recent MetaCPAN News',
         entries => \@entries,
     );
 }
@@ -104,7 +104,7 @@ sub build_entry {
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
-        $entry->{link} ||= join( '/',
+        $entry->{link} ||= join( q{/},
             'http://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
     );
@@ -130,7 +130,7 @@ sub _format_release_entries {
     my ( $self, $releases ) = @_;
     my @release_data;
     foreach my $item ( @{$releases} ) {
-        $item->{link} = join( '/',
+        $item->{link} = join( q{/},
             'https://metacpan.org', 'release',
             $item->{author},        $item->{name} );
         $item->{name} = "$item->{author} has released $item->{name}";
@@ -146,7 +146,7 @@ sub _format_favorite_entries {
         $fav->{abstract}
             = "$author ++ed $fav->{distribution} from $fav->{author}";
         $fav->{author} = $author;
-        $fav->{link}   = join( '/',
+        $fav->{link}   = join( q{/},
             'https://metacpan.org', 'release', $fav->{distribution} );
         $fav->{name} = "$author ++ed $fav->{distribution}";
         push( @fav_data, $fav );

@@ -72,7 +72,7 @@ sub recv_all {
 
 # massage the x_contributors field into what we want
 sub groom_contributors {
-    my ( $self, $c, $release ) = @_;
+    my ( $self, $c, $release, $author ) = @_;
 
     my $contribs = $release->{metadata}{x_contributors} || [];
     my $authors  = $release->{metadata}{author}         || [];
@@ -83,32 +83,60 @@ sub groom_contributors {
     $authors = [$authors]
         if !ref $authors;
 
-    my %seen = ( lc "$release->{author}\@cpan.org" => 1, );
-    my @contribs;
+    my $author_info = {
+        email => [
+            lc "$release->{author}\@cpan.org",
+            @{$author->{email}},
+        ],
+        name => $author->{name},
+    };
+    my %seen = map { $_ => $author_info } (
+        @{$author_info->{email}},
+        $author_info->{name},
+    );
 
-    for my $contrib ( @$authors, @$contribs ) {
-        my $name = $contrib;
+    my @contribs = map {
+        my $name = $_;
         $name =~ s/\s*<([^<>]+@[^<>]+)>//;
-        my $info = {
-            name => $name,
-            $1 ? ( email => $1 ) : (),
-        };
+        my $email = $1;
+        my $info;
+        my $dupe;
+        if ($email and $info = $seen{$email}) {
+            $dupe = 1;
+        }
+        elsif ($info = $seen{$name}) {
+            $dupe = 1;
+        }
+        else {
+            $info = {
+                name => $name,
+                email => [],
+            };
+        }
+        $seen{$name} ||= $info;
+        if ($email) {
+            push @{$info->{email}}, $email
+                unless grep { $_ eq $email } @{$info->{email}};
+            $seen{$email} ||= $info;
+        }
+        $dupe ? () : $info;
+    } (@$authors, @$contribs);
 
-        next
-            if $seen{ $info->{email} }++;
-
+    for my $contrib ( @contribs ) {
         # heuristic to autofill pause accounts
-        if (   !$info->{pauseid}
-            and $info->{email} =~ /^(.*)\@cpan\.org$/ )
-        {
-            $info->{pauseid} = uc $1;
+        if ( !$contrib->{pauseid} ) {
+            my ($pauseid) = map { /^(.*)\@cpan\.org$/ ? $1 : () } @{$contrib->{email}};
+            $contrib->{pauseid} = uc $pauseid
+                if $pauseid;
         }
 
-        if ( $info->{pauseid} ) {
-            $info->{url}
-                = $c->uri_for_action( '/author/index', [ $info->{pauseid} ] );
+        if ( $contrib->{pauseid} ) {
+            $contrib->{url}
+                = $c->uri_for_action( '/author/index', [ $contrib->{pauseid} ] );
         }
-        push @contribs, $info;
+        if (not $contrib->{email} = $contrib->{email}[0]) {
+            delete $contrib->{email}
+        }
     }
 
     return \@contribs;
@@ -126,10 +154,14 @@ sub groom_irc {
         if ( $scheme && ( $scheme eq 'irc' || $scheme eq 'ircs' ) ) {
             my $ssl  = $scheme eq 'ircs';
             my $host = $url->authority;
-            $host =~ s/:(\d+)$//;
-            my $port = $1;
-            $host =~ s/^(.*)@//;
-            my $user = $1;
+            my $port;
+            my $user;
+            if ( $host =~ s/:(\d+)$// ) {
+                $port = $1;
+            }
+            if ( $host =~ s/^(.*)@// ) {
+                $user = $1;
+            }
             my $path = uri_unescape( $url->path );
             $path =~ s{^/}{};
             my $channel

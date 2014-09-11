@@ -20,7 +20,7 @@ test_psgi app, sub {
             = $tx->find_value(
             '//div[@class="no-results"]//div[@class="alert alert-danger"]//a[1]'
             );
-        is( $module, $v, "get no result page with suggestion" );
+        is( $module, $v, 'get no result page with suggestion' );
     }
 };
 

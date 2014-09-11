@@ -1,3 +1,4 @@
+*.bak
 *.sw*
 .DS_Store
 .carton

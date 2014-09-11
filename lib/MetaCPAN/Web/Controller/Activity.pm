@@ -19,7 +19,7 @@ sub index : Path {
         push( @$q, { term => { distribution => $distribution } } );
     }
     if ( my $requires = $req->parameters->{requires} ) {
-        push( @$q, { term => { "release.dependency.module" => $requires } } );
+        push( @$q, { term => { 'release.dependency.module' => $requires } } );
     }
     if ( $req->parameters->{f} && $req->parameters->{f} eq 'n' ) {
         push(
