@@ -15,6 +15,9 @@
         <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
             <a href="/account/favorite/list">Favorites</a>
         </li>
+         <li<% IF req.action == 'account/trust/list' %> class="active"<% END %>>
+            <a href="/account/trust">Trust List</a>
+        </li>
         <li>
             <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
         </li>

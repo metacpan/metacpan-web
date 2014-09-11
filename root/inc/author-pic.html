@@ -32,6 +32,8 @@
   <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
 </strong>
 <span title="<% author.asciiname %>"><% author.name %></span>
+<div class="inline"><%- INCLUDE inc/trust.html %></div>
+</div>
 <%-
   FOREACH p IN author.profile;
   IF p.name == 'coderwall';
@@ -49,4 +51,11 @@
   </a>
 <% END %>
 <% END %>
-</div>
+
+
+
+
+
+
+
+

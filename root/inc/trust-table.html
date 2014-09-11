@@ -1,0 +1,24 @@
+<% IF trusts.size %>
+<table id="trust_table"
+  <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
+  class="table table-condensed table-striped table-trusts<% IF tablesorter %> tablesorter<% END %>">
+  <thead>
+    <tr>
+      <th class="release pull-left-phone"><% author ? "Trusted Authors" : "Author" %></th>
+      <th class="date"><% day || "Date" %></th>
+    </tr>
+</thead>
+<tbody>
+<% FOREACH trusted_author IN trusts %>
+<tr>
+  <td>
+    <strong>
+        <a href="/author/<% trusted_author.author; %>" class="ellipsis" title="<% trusted_author.author %>"><% trusted_author.author %></a>
+    </strong>
+  </td>
+  <td class="date relatize" sort="<% trusted_author.date %>"><% trusted_author.date %></td>
+</tr>
+<% END %>
+</tbody>
+</table>
+<% END %>

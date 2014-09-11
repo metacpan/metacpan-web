@@ -1,0 +1,11 @@
+<% IF user_exists -%>
+<form action="/account/trust/add" style="display: inline" onsubmit="return trustAuthor(this)">
+    <input type="hidden" name="author" value="<% author.pauseid %>">
+    <% IF active_trust  %>
+    <input type="hidden" name="remove" value="1">
+    <button type="submit" class="trust active"><i class="icon-thumbs-down"></i>Distrust</button>
+    <% ELSE %> <button type="submit" class="trust highlight"><i class="icon-thumbs-up"></i>Trust</button>
+    <% END %>
+</form>
+<% ELSE -%>
+<a href="" onclick="alert('Please sign in to trust the Author'); return false" class="trust highlight"><i class="icon-thumbs-up"></i>Trust</a><% END -%>
