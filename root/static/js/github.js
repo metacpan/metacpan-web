@@ -149,7 +149,7 @@ function Github() {
                     my: 'left center'
                 },
                 style: {
-                    classes: 'ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-light'
+                    classes: 'ui-tooltip-rounded ui-tooltip-shadow ui-tooltip-light qtip-github'
                 }
             });
         },
@@ -192,7 +192,7 @@ function Github() {
         },
 
         render: function(data) {
-            return '<div class="qtip-github">'+ this.config[this.type].render(this, data) +'</div>';
+            return this.config[this.type].render(this, data);
         }
     }
 };
