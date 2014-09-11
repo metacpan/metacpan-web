@@ -12,10 +12,7 @@
     <h3>Distributions</h3>
     <table id="dashboard-distro-table">
     <tr>
-       <th></th>
-       <th></th>
-       <th></th>
-       <th></th>
+       <th colspan="4"></th>
        <th colspan="3">Missing</th>
        <th colspan="4">Tests</th>
     </tr>
@@ -23,7 +20,7 @@
       <th>Name</th>
       <th>Date</th>
       <th>Version</th>
-      <th>Bugs</th>
+      <th>Issues</th>
       <th>Repo</th>
       <th>License</th>
       <th>Abstract</th>
@@ -38,14 +35,14 @@
       <td><% report.distros.$d.date %></td>
       <td><% report.distros.$d.version %></td>
       <td><% report.distros.$d.bugs %></td>
-      <td><% IF report.distros.$d.repo %>X<% END %></td>
-      <td><% IF report.distros.$d.license %>X<% END %></td>
-      <td><% IF report.distros.$d.abstract %>X<% END %></td>
+      <td class="missing"><% IF report.distros.$d.repo %>X<% END %></td>
+      <td class="missing"><% IF report.distros.$d.license %>X<% END %></td>
+      <td class="missing"><% IF report.distros.$d.abstract %>X<% END %></td>
       <% tests = report.distros.$d.test %>
-      <td style="color: #090"><% tests.pass %></td>
-      <td style="color: #900"><% tests.fail %></td>
-      <td style=""><% tests.na %></td>
-      <td style="<% IF tests.ratio > 95 %>color: #090<% ELSIF tests.ratio < 80 %>color: #900<% END %>"><% tests.ratio %></td>
+      <td class="tests-pass"><% tests.pass %></td>
+      <td class="tests-fail"><% tests.fail %></td>
+      <td class="tests-na"><% tests.na %></td>
+      <td class="test-ratio <% IF tests.ratio > 95 %>test-ratio-good<% ELSIF tests.ratio < 80 %>test-ratio-bad<% END %>"><% tests.ratio %>%</td>
     </tr>
     <% END %>
     </table>
@@ -61,10 +58,4 @@
 The dashboard is only available to people who have logged in to MetaCPAN.
 <% END %>
 
-<!--
-<% USE Dumper %>
-<pre>
-<% Dumper.dump(report) %>
-</pre>
--->
 </div>
