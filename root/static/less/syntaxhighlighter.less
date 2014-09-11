@@ -11,3 +11,22 @@ body .syntaxhighlighter {
   &:extend(.syntaxhighlighter);
   *:extend(.syntaxhighlighter a) {}
 }
+
+.pod pre,
+.pod pre.metacpan-verbatim, /* keep the same specificity as shCore.css */
+.syntaxhighlighter {
+    border: 1px solid #e9e9e9;
+    width: auto !important;
+    overflow-y: hidden !important;
+    background-color: #fafafa;
+    padding: 10px;
+    -webkit-text-size-adjust: 100%; /* for iPhone <code>, issue #107 */
+}
+
+/* work around incompatibility between bootstrap and syntaxhighlighter
+ * https://github.com/alexgorbatchev/syntaxhighlighter/issues/275 */
+.syntaxhighlighter .container:before,
+.syntaxhighlighter .container:after {
+    content: none !important;
+}
+
