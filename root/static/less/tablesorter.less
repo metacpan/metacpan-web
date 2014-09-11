@@ -1,20 +1,28 @@
 /* tables */
+
 table.tablesorter {
     thead tr {
         th.header {
-            background-image: url(/static/icons/bg.gif);
-            background-repeat: no-repeat;
-            background-position: center right;
             cursor: pointer;
             height: auto;
             font-weight: bold;
-            padding-right: 20px;
-        }
-        th.headerSortUp {
-            background-image: url(/static/icons/asc.gif);
-        }
-        th.headerSortDown {
-            background-image: url(/static/icons/desc.gif);
+
+            &:after {
+                .fa;
+                float: right;
+                display: inline;
+                padding-left: 5px;
+                content: @fa-var-sort;
+            }
+            &.headerSortUp:after {
+                content: @fa-var-caret-down;
+            }
+            &.headerSortDown:after {
+                content: @fa-var-caret-up;
+            }
+            &.date:after, &.number:after {
+                float: none;
+            }
         }
     }
 }
