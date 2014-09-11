@@ -122,7 +122,6 @@ $app = Plack::Middleware::Assets->wrap(
             qw(
             jquery.min
             jquery.tablesorter
-            jquery.cookie
             jquery.relatize_date
             jquery.qtip.pack
             jquery.autocomplete.min
