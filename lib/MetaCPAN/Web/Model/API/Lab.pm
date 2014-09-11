@@ -92,22 +92,15 @@ sub fetch_latest_distros {
                     },
                 },
             },
-            sort => [ { date => 'desc' } ],
-            fields =>
-                [qw(distribution date license author resources.repository)],
+            sort   => [ { date => 'desc' } ],
+            fields => [
+                qw(distribution date license author resources.repository abstract metadata.version tests)
+            ],
             size => $size,
         },
     )->recv;
 
-    #return $r;
-
     my %licenses;
-    my @missing_licenses;
-    my @missing_repo;
-    my %repos;
-    my $license_found = 0;
-    my $repo_found    = 0;
-    my $hits          = scalar @{ $r->{hits}{hits} };
     my %distros;
 
     foreach my $d ( @{ $r->{hits}{hits} } ) {
@@ -116,55 +109,48 @@ sub fetch_latest_distros {
         my $author  = $d->{fields}{author};
         my $repo    = $d->{fields}{'resources.repository'};
 
-# TODO: can we fetch the bug count and the test count in one call for all the distributions?
+     # TODO: can we fetch the bug count in one call for all the distributions?
         my $distribution = $self->request("/distribution/$distro")->recv;
         if ( $distribution->{bugs} ) {
             $distros{$distro}{bugs} = $distribution->{bugs}{active};
         }
 
-        my $release = $self->request("/release/$distro")->recv;
-        $distros{$distro}{test} = $release->{tests};
+        $distros{$distro}{test} = $d->{fields}{tests};
+        my $total = 0;
+        $total += ( $distros{$distro}{test}{$_} // 0 ) for qw(pass fail na);
+        $distros{$distro}{test}{ratio}
+            = $total
+            ? int( 100 * ( $distros{$distro}{test}{pass} // 0 ) / $total )
+            : q{};
 
         if (    $license
             and $license ne 'unknown'
             and $license ne 'open_source' )
         {
-            $license_found++;
             $licenses{$license}++;
         }
         else {
             $distros{$distro}{license} = 1;
-            push @missing_licenses,
-                {
-                name    => $distro,
-                pauseid => $author,
-                };
         }
 
         # See also root/inc/release-infro.html
         if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
-            $repo_found++;
+
+            # TODO: shall we collect the types and list them?
         }
         else {
             $distros{$distro}{repo} = 1;
-            push @missing_repo,
-                {
-                name    => $distro,
-                pauseid => $author,
-                };
         }
+        if ( not $d->{fields}{abstract} ) {
+            $distros{$distro}{abstract} = 1;
+        }
+
+        ( $distros{$distro}{date} = $d->{fields}{date} ) =~ s/\.\d+Z$//;
+        $distros{$distro}{version} = $d->{fields}{'metadata.version'};
     }
-    @missing_licenses = sort { $a->{name} cmp $b->{name} } @missing_licenses;
-    @missing_repo     = sort { $a->{name} cmp $b->{name} } @missing_repo;
     return {
-        total_asked_for  => $size,
-        total_received   => $hits,
-        license_found    => $license_found,
-        missing_licenses => \@missing_licenses,
-        repos_found      => $repo_found,
-        missing_repos    => \@missing_repo,
-        licenses         => \%licenses,
-        distros          => \%distros,
+        licenses => \%licenses,
+        distros  => \%distros,
     };
 }
 

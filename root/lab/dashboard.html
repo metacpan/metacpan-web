@@ -6,28 +6,6 @@
 
 <%- IF user_exists %>
   <% IF pauseid %>
-
-    <% IF report.missing_repos.size %>
-      <h3>Missing repository</h3>
-      <ul>
-      <% FOR distro IN report.missing_repos %>
-        <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
-      <% END %>
-      </ul>
-    <% ELSE %>
-      Congratulations. All of your distributions have repositories.
-    <% END %>
-
-    <% IF report.missing_licenses.size %>
-      <h3>Missing licenses</h3>
-      <ul>
-      <% FOR distro IN report.missing_licenses %>
-        <li><a href="/release/<% distro.name %>"><% distro.name %></a></li>
-      <% END %>
-      </ul>
-    <% ELSE %>
-      Congratulations. All of your distributions have license.
-    <% END %>
   <% END %>
 
   <% IF report.distros.size %>
@@ -35,35 +13,46 @@
     <table id="dashboard-distro-table">
     <tr>
        <th></th>
-       <th colspan="2">Missing</th>
        <th></th>
-       <th colspan="3">Tests</th>
+       <th></th>
+       <th></th>
+       <th colspan="3">Missing</th>
+       <th colspan="4">Tests</th>
     </tr>
-    <tr class="distro-header">
-      <th class="distro-name">Name</th>
-      <th class="distro-repo">Repo</th>
-      <th class="distro-liense">License</th>
-      <th class="distro-bugs">Bugs</th>
-      <th class="distro-test" >pass</th>
-      <th class="distro-test" >fail</th>
-      <th class="distro-test" >na</th>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Version</th>
+      <th>Bugs</th>
+      <th>Repo</th>
+      <th>License</th>
+      <th>Abstract</th>
+      <th>pass</th>
+      <th>fail</th>
+      <th>na</th>
+      <th>pass/total</th>
     </tr>
     <% FOR d IN report.distros.keys.sort %>
-    <tr class="distro-row">
-      <td class="distro-name"><a href="/release/<% d %>"><% d %></a></td>
-      <td class="distro-repo"><% IF report.distros.$d.repo %>X<% END %></td>
-      <td class="distro-license"><% IF report.distros.$d.license %>X<% END %></td>
-      <td class="distro-bugs"><% report.distros.$d.bugs %></td>
+    <tr>
+      <td><a href="/release/<% d %>"><% d %></a></td>
+      <td><% report.distros.$d.date %></td>
+      <td><% report.distros.$d.version %></td>
+      <td><% report.distros.$d.bugs %></td>
+      <td><% IF report.distros.$d.repo %>X<% END %></td>
+      <td><% IF report.distros.$d.license %>X<% END %></td>
+      <td><% IF report.distros.$d.abstract %>X<% END %></td>
       <% tests = report.distros.$d.test %>
-      <td class="distro-tests" style="color: #090"><% tests.pass %></td>
-      <td class="distro-tests" style="color: #900"><% tests.fail %></td>
-      <td class="distro-tests" style=""><% tests.na %></td>
+      <td style="color: #090"><% tests.pass %></td>
+      <td style="color: #900"><% tests.fail %></td>
+      <td style=""><% tests.na %></td>
+      <td style="<% IF tests.ratio > 95 %>color: #090<% ELSIF tests.ratio < 80 %>color: #900<% END %>"><% tests.ratio %></td>
     </tr>
     <% END %>
     </table>
     <ul>
       <li>Repo X - missing link to public VCS in META files <a href="http://perlmaven.com/how-to-add-link-to-version-control-system-of-a-cpan-distributions">ways to fix it</a>.</li>
       <li>License X - missing license information in META files <a href="http://perlmaven.com/how-to-add-the-license-field-to-meta-files-on-cpan">ways to fix it</a>.</li>
+      <li>Abstract X - the <b>=head1 NAME</b> field is missing. <a href="http://blogs.perl.org/users/neilb/2014/07/give-your-modules-a-good-abstract.html">How to write good abstract</a>.</li>
       <li>Bugs - number of open bugs/tickets/issues.</li>
     </ul>
   <% END %>
