@@ -1,0 +1,13 @@
+@import "SyntaxHighlighter/shCore.css";
+@import "SyntaxHighlighter/shThemeDefault.css";
+
+body .syntaxhighlighter {
+  *, * *, * * * {
+    font-family: @font-family-monospace !important;
+  }
+}
+
+.pod pre.metacpan-verbatim {
+  &:extend(.syntaxhighlighter);
+  *:extend(.syntaxhighlighter a) {}
+}
