@@ -2,11 +2,6 @@ pre, .diff-header, .diff-ul li {
     font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace;
 }
 
-/* Tables still need 'cellspacing="0"' in the markup. */
-table {
-    border-collapse: separate;
-    border-spacing: 0;
-}
 /* float:none prevents the span-x classes from breaking table-cell display */
 caption, th, td {
     text-align: left;
@@ -27,23 +22,9 @@ blockquote, q {
     quotes: "" "";
 }
 
-/* Remove annoying border on linked images. */
-a img {
-    border: none;
-}
-
-button, body {
-    font-family: Arial,Helvetica,sans-serif;
-}
-
 legend {
-    padding: 5px;
     font-size: 1.1em;
     font-weight: bold;
-}
-
-fieldset {
-    border: 1px solid #E9E9E9;
 }
 
 label span {
@@ -129,10 +110,6 @@ button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hov
 
 .account-settings, .about {
     border-left: none;
-}
-
-#content {
-    padding: 10px;
 }
 
 ul {
@@ -342,8 +319,4 @@ div.qtip-github table th {
 
 .news_feed {
     float: right;  
-}
-
-#icon-rss {
-    background: url('/static/icons/icon-rss.png');
 }
