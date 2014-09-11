@@ -28,26 +28,37 @@
  * You should have received a copy of the GNU General Public License
  * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
  */
-SyntaxHighlighter.brushes.Yaml = function()
+
+// Contributed by Nicolas Perriault
+;(function()
 {
-	// Contributed by Nicolas Perriault
-	
-	var constants	= '~ true false on off';
+	// CommonJS
+	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
-    this.regexList = [
-        { regex: SyntaxHighlighter.regexLib.singleLinePerlComments, css: 'comments' },		// comment
-		{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,		css: 'string' },		// double quoted string
-		{ regex: SyntaxHighlighter.regexLib.singleQuotedString,		css: 'string' },		// single quoted string
-        { regex: /^\s*([a-z0-9\._:-])+\s*:\s/gmi,						css: 'variable' },		// key
-		{ regex: /\s?(\.)([a-z0-9\._-])+\s?:/gmi,					css: 'comments' },		// section
-		{ regex: /\s(@|:)([a-z0-9\._-])+\s*$/gmi,					css: 'variable bold' },	// variable, reference
-		{ regex: /\s+\d+\s?$/gm,									css: 'color2 bold' },	// integers
-		{ regex: /(\{|\}|\[|\]|,|~|:)/gm,							css: 'constants' },		// inline hash and array, comma, null
-		{ regex: /^\s+(-)+/gm,										css: 'string bold' },	// array list entry
-		{ regex: /^---/gm,											css: 'string bold' },	// category
-		{ regex: new RegExp(this.getKeywords(constants), 'gmi'),	css: 'constants' }		// constants
-        ];
-};
+	function Brush()
+	{
+		var constants  = '~ true false on off';
 
-SyntaxHighlighter.brushes.Yaml.prototype  = new SyntaxHighlighter.Highlighter();
-SyntaxHighlighter.brushes.Yaml.aliases    = ['yaml', 'yml'];
+		this.regexList = [
+			{ regex: SyntaxHighlighter.regexLib.singleLinePerlComments, css: 'comments' },		// comment
+			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,		css: 'string' },		// double quoted string
+			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,		css: 'string' },		// single quoted string
+			{ regex: /^\s*([a-z0-9\._:-])+\s*:\s/gmi,					css: 'variable' },		// key
+			{ regex: /\s?(\.)([a-z0-9\._-])+\s?:/gmi,					css: 'comments' },		// section
+			{ regex: /\s(@|:)([a-z0-9\._-])+\s*$/gmi,					css: 'variable bold' },	// variable, reference
+			{ regex: /\s+\d+\s?$/gm,									css: 'color2 bold' },	// integers
+			{ regex: /(\{|\}|\[|\]|,|~|:)/gm,							css: 'constants' },		// inline hash and array, comma, null
+			{ regex: /^\s+(-)+/gm,										css: 'string bold' },	// array list entry
+			{ regex: /^---/gm,											css: 'string bold' },	// category
+			{ regex: new RegExp(this.getKeywords(constants), 'gmi'),	css: 'constants' }		// constants
+		];
+	};
+
+	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+	Brush.aliases	= ['yaml', 'yml'];
+
+	SyntaxHighlighter.brushes.Yaml = Brush;
+
+	// CommonJS
+	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
+})();
