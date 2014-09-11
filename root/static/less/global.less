@@ -32,12 +32,11 @@ label span {
     width: 125px;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-label span img {
-    padding: 2px;
-    padding-right: 5px;
-    float: left;
+    img {
+        padding: 2px;
+        padding-right: 5px;
+        float: left;
+    }
 }
 
 label input[type="text"], label select {
@@ -66,42 +65,35 @@ button.favorite, a.favorite {
     min-width: 25px;
     position: relative;
     top: -1px;
-}
-
-/* Counter-act .breadcrumbs a */
-.breadcrumbs a.favorite, .breadcrumbs button.favorite {
-    font-size: 0.85em;
+    font-size: @font-size-base;
     font-weight: normal;
-}
-
-.breadcrumbs .favorite span {
-    font-weight: normal;
-}
-
-button.favorite {
     min-width: 35px;
     cursor: pointer;
-}
 
-button.favorite.highlight, a.favorite.highlight {
-    background-color: #fca216;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffc874), to(#fca216));
-    background: -moz-linear-gradient(#ffc874,#fca216);
-    color: #fff;
-    text-shadow: 0px 1px 1px #333;
-    border-color: #d39534;
-    opacity: 1;
-}
+    span {
+        font-weight: normal;
+    }
 
-button.favorite:hover, button.favorite.active, a.favorite.active, a.favorite:hover {
-    background-color: #36C;
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#69F), to(#36C));
-    background: -moz-linear-gradient(#69F,#36C);
-    color: #fff;
-    text-shadow: 0px 1px 1px #333;
-    border-color: #36C;
-    opacity: 1;
-    text-decoration: none;
+    .highlight {
+        background-color: #fca216;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffc874), to(#fca216));
+        background: -moz-linear-gradient(#ffc874,#fca216);
+        color: #fff;
+        text-shadow: 0px 1px 1px #333;
+        border-color: #d39534;
+        opacity: 1;
+    }
+
+    &:hover, &.active {
+        background-color: #36C;
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#69F), to(#36C));
+        background: -moz-linear-gradient(#69F,#36C);
+        color: #fff;
+        text-shadow: 0px 1px 1px #333;
+        border-color: #36C;
+        opacity: 1;
+        text-decoration: none;
+    }
 }
 
 .user-profiles > a {
@@ -129,14 +121,14 @@ ul {
     user-select: all;
 }
 
-a.ellipsis {
-    width: 160px;
-}
-
 .ellipsis {
     white-space: nowrap;
     display: block;
     overflow: hidden;
+
+    a& {
+        width: 160px;
+    }
 }
 
 .olControlAttribution {
@@ -163,35 +155,35 @@ body div.qtip div.content {
 
 div.qtip-github table {
     width: 100%;
+    td, th {
+        padding: 3px;
+        border: 1px solid #F1F1F1;
+    }
+    th {
+        padding-right: 8px;
+        white-space: nowrap;
+        background-color: #F9F9F9;
+    }
 }
 
-div.qtip-github table td, div.qtip-github table th {
-    padding: 3px;
-    border: 1px solid #F1F1F1;
-}
+.file-table {
+    .mtime, .size {
+        width: 110px;
+        font-size: 1em;
+    }
 
-div.qtip-github table th {
-    padding-right: 8px;
-    white-space: nowrap;
-    background-color: #F9F9F9;
-}
+    .documentation {
+        width: 300px;
+        font-size: 1em;
+    }
 
-.file-table .mtime, .file-table .size {
-    width: 110px;
-    font-size: 1em;
-}
-
-.file-table .documentation {
-    width: 300px;
-    font-size: 1em;
+    .name a {
+        display: inline-block;
+    }
 }
 
 .file-table td.mtime, .release-table td.date {
     text-align: right;
-}
-
-.file-table .name a {
-    display: inline-block;
 }
 
 .rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
@@ -250,40 +242,41 @@ div.qtip-github table th {
 #contributors {
     width: 180px;
     min-height: 40px;
-}
-#contributors .btn-link {
-    border: none;
-    padding: 0;
-}
 
-#contributors > ul {
-    padding-top: 0;
-}
+    .btn-link {
+        border: none;
+        padding: 0;
+    }
 
-#contributors .contributors-header {
-    font-weight: bold;
-    text-align: center;
-}
+    > ul {
+        padding-top: 0;
+    }
 
-#contributors .contributor {
-    position: relative;
-    text-align: left;
-    padding-left: 22px;
-}
+    .contributors-header {
+        font-weight: bold;
+        text-align: center;
+    }
 
-#contributors .contributor.gravatar img {
-    left: 0;
-    position: absolute;
-}
+    .contributor {
+        position: relative;
+        text-align: left;
+        padding-left: 22px;
 
-#contributors .contributor * {
-    vertical-align: top;
-}
+        &.gravatar img {
+            left: 0;
+            position: absolute;
+        }
 
-#contributors .contributor a {
-    padding-left: 22px;
-    padding-right: 0;
-    margin-left: -22px;
+        * {
+            vertical-align: top;
+        }
+
+        a {
+            padding-left: 22px;
+            padding-right: 0;
+            margin-left: -22px;
+        }
+    }
 }
 
 .smaller {
@@ -297,7 +290,7 @@ div.qtip-github table th {
 }
 
 .news_feed {
-    float: right;  
+    float: right;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {
@@ -373,10 +366,10 @@ form#logout {
 
 #map {
     margin-right: 200px !important;
-}
 
-#map img {
-    max-width: none;
+    img {
+        max-width: none;
+    }
 }
 
 .smaller {
@@ -469,6 +462,7 @@ li button.dependencies-graph {
    display: none;
    float: right;
 }
+
 #right-panel {
     /* display: none; */
 }

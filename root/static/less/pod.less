@@ -1,106 +1,93 @@
 .anchors {
-  a.anchor {
-    padding-left: 9px;
-    width: 26px;
-    margin-left: -26px;
-    vertical-align: top;
-    font-size: 14px;
-    display: inline-block;
+    a.anchor {
+        padding-left: 9px;
+        width: 26px;
+        margin-left: -26px;
+        vertical-align: top;
+        font-size: 14px;
+        display: inline-block;
 
-    span {
-      visibility: hidden;
+        span {
+            visibility: hidden;
+        }
     }
-  }
-  *:hover > a.anchor span,
-  a.anchor:focus span {
-    visibility: visible;
-  }
-  &.about-resources {
-      h1 .anchor {
-          display: block;
-          position: absolute;
-          margin-top: 3px;
-      }
-  }
+    *:hover > a.anchor span,
+    a.anchor:focus span {
+        visibility: visible;
+    }
+    &.about-resources {
+        h1 .anchor {
+            display: block;
+            position: absolute;
+            margin-top: 3px;
+        }
+    }
 }
 
-.pod html, .pod body, .pod dl, .pod dt, .pod dd, .pod h1, .pod h2, .pod h3, .pod h4, .pod h5, .pod h6, .pod pre, .pod form, .pod fieldset, .pod input, .pod p, .pod blockquote, .pod th, .pod td
-{
-    margin: 5px;
-    padding: 5px;
-}
+.pod {
+    dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
+        margin: 5px;
+        padding: 5px;
+    }
 
-#permalink {
-    margin: 5px;
-    padding: 5px;
-    float: right;
-}
+    ol {
+        list-style: decimal;
+        margin-left:40px;
 
-.pod ol {
-    list-style: decimal;
-    margin-left:40px;
+    }
 
-}
+    ul {
+        list-style: disc;
+        margin-left: 20px;
+        padding-left: 2em;
+    }
+    ul#index, ul#index ul {
+        padding-left: 0;
+    }
+    ul li {
+        margin-bottom: 0.5em;
+    }
+    ul#index li {
+        margin-bottom: 0;
+        line-height: 1.7em;
+    }
+    ul li p {
+        margin: 0;
+        padding: 0;
+    }
 
-.pod ul {
-    list-style: disc;
-    margin-left: 20px;
-    padding-left: 2em;
-}
-.pod ul#index, .pod ul#index ul {
-    padding-left: 0;
-}
-.pod ul li {
-    margin-bottom: 0.5em;
-}
-.pod ul#index li {
-    margin-bottom: 0;
-    line-height: 1.7em;
-}
-.pod ul li p {
-    margin: 0;
-    padding: 0;
-}
+    pre {
+        margin-left: 20px;
+    }
 
-.pod pre {
-    margin-left: 20px;
-}
+    h1 {
+        font-size: 1.5em;
+    }
 
-.pod h1 {
-    font-size: 1.5em;
-}
+    h2 {
+        font-size: 1.3em;
+    }
 
-.pod h2 {
-    font-size: 1.3em;
-}
+    h3, h4 {
+        font-size: 1.1em;
+    }
 
-.pod h3, .pod h4 {
-    font-size: 1.1em;
-}
+    h1, h2, h3, h4 {
+        font-weight: bold;
+    }
 
-.pod h1, .pod h2, .pod h3, .pod h4 {
-    font-weight: bold;
-}
+    p, dt {
+        font-size: 1.1em;
+    }
 
-.pod p, .pod dt {
-    font-size: 1.1em;
-}
+    dt {
+        font-weight: bold;
+    }
 
-.pod dt {
-    font-weight: bold;
-}
+    img {
+        vertical-align: top;
+    }
 
-.pod img     {
-    vertical-align: top;
-}
-
-.pod .toc A  {
-    text-decoration: none;
-}
-
-.pod .toc LI {
-    line-height: 1.2em;
-    list-style-type: none;
 }
 
 ul#index, #index ul { list-style-type: none; }
@@ -113,20 +100,23 @@ ul#index, #index ul { list-style-type: none; }
         border: 1px solid rgb(215, 215, 215);
         padding: 3px 10px;
     }
+
+    #index {
+        margin: 0;
+    }
 }
 
-#index-container #index {
-    margin: 0;
-}
 #index-header {
     text-align: center;
+
+    span {
+        font-weight: bold;
+    }
+    button {
+        padding: 0;
+    }
 }
-#index-header span {
-    font-weight: bold;
-}
-#index-header button {
-    padding: 0;
-}
+
 #index {
     overflow-y: hidden;
 }
@@ -159,47 +149,48 @@ ul#index, #index ul { list-style-type: none; }
 }
 
 #pod-errors {
-  margin: 3em 0 0 0 ;
-  padding: 10px;
-  background-color: #ffffee;
-  width: 36em;
-  border: 1px solid #cccccc;
+    margin: 3em 0 0 0 ;
+    padding: 10px;
+    background-color: #ffffee;
+    width: 36em;
+    border: 1px solid #cccccc;
+
+    &.collapsed {
+        border: none;
+        background-color: transparent;
+
+        #pod-error-detail {
+          display: none;
+        }
+    }
+
+    p.title {
+        margin: 0;
+        padding: 0;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #CC3300;
+        cursor: pointer;
+    }
+
 }
 
-#pod-errors.collapsed {
-  border: none;
-  background-color: transparent;
-}
+#pod-error-detail {
+    dl {
+        margin: 0;
+        padding: 0;
 
-#pod-errors p.title {
-  margin: 0;
-  padding: 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #CC3300;
-  cursor: pointer;
-}
-
-#pod-errors.collapsed #pod-error-detail {
-  display: none;
-}
-
-#pod-error-detail dl {
-  margin: 0;
-  padding: 0;
-}
-
-#pod-error-detail dl dt {
-  padding: 0;
-  margin: 0.8em 0 0 0;
-}
-
-#pod-error-detail dl dd {
-  margin: 0;
-  padding: 0 0 0 3em;
-}
-
-#pod-error-detail p {
-  margin: 0 0 0.4em 0;
-  padding: 0;
+        dt {
+            padding: 0;
+            margin: 0.8em 0 0 0;
+        }
+        dd {
+            margin: 0;
+            padding: 0 0 0 3em;
+        }
+    }
+    p {
+        margin: 0 0 0.4em 0;
+        padding: 0;
+    }
 }
