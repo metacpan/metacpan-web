@@ -9,7 +9,7 @@ use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
 use URI;
 use URI::QueryParam;
-use JSON;
+use JSON::MaybeXS;
 use Gravatar::URL;
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
@@ -90,7 +90,7 @@ Template::Alloy->define_vmethod( 'text',
 Template::Alloy->define_vmethod(
     'hash',
     pretty_json => sub {
-        JSON->new->utf8->pretty->encode(shift);
+        JSON::MaybeXS->new->utf8->pretty->encode(shift);
     }
 );
 
@@ -138,7 +138,7 @@ Template::Alloy->define_vmethod(
 Template::Alloy->define_vmethod(
     'array',
     json => sub {
-        JSON::encode_json(shift);
+        JSON::MaybeXS::encode_json(shift);
     }
 );
 

@@ -18,7 +18,7 @@ use Config::JFDI;
 use FindBin;
 use lib "$FindBin::RealBin/lib";
 use File::Path   ();
-use JSON         ();
+use JSON::MaybeXS ();
 use MIME::Base64 ();
 use MetaCPAN::Web;
 use Plack::Builder;
@@ -78,7 +78,7 @@ my $app = Plack::App::URLMap->new;
 
             # Pass $_[0] since the json subs may have a ($) protoype.
             # Pass '' to base64 for a blank separator (instead of newlines).
-            MIME::Base64::encode( JSON::encode_json( $_[0] ), q[] );
+            MIME::Base64::encode( JSON::MaybeXS::encode_json( $_[0] ), q[] );
         },
         deserializer => sub {
 
@@ -87,7 +87,7 @@ my $app = Plack::App::URLMap->new;
 
             # Use try/catch so JSON doesn't barf if the cookie is bad.
             try {
-                JSON::decode_json( MIME::Base64::decode($cookie) );
+                JSON::MaybeXS::decode_json( MIME::Base64::decode($cookie) );
             }
 
             # No session.
