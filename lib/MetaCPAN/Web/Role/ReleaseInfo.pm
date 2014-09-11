@@ -82,6 +82,7 @@ sub groom_contributors {
         if !ref $contribs;
     $authors = [$authors]
         if !ref $authors;
+    $authors = [ grep { $_ ne 'unknown' } @$authors ];
 
     my $author_info = {
         email => [
