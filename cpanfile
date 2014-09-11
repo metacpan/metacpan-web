@@ -50,6 +50,7 @@ requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
 requires 'PerlIO::gzip';
 requires 'MooseX::Types::URI';
+requires 'Path::Tiny', '0.056';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
@@ -77,7 +78,6 @@ requires 'XML::Simple';
 
 test_requires 'App::Prove';
 test_requires 'Path::Iterator::Rule', '1.008';
-test_requires 'Path::Tiny', '0.056';
 test_requires 'Perl::Tidy';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
