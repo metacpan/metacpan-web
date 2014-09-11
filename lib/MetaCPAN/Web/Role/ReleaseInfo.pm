@@ -85,16 +85,12 @@ sub groom_contributors {
     $authors = [ grep { $_ ne 'unknown' } @$authors ];
 
     my $author_info = {
-        email => [
-            lc "$release->{author}\@cpan.org",
-            @{$author->{email}},
-        ],
+        email =>
+            [ lc "$release->{author}\@cpan.org", @{ $author->{email} }, ],
         name => $author->{name},
     };
-    my %seen = map { $_ => $author_info } (
-        @{$author_info->{email}},
-        $author_info->{name},
-    );
+    my %seen = map { $_ => $author_info }
+        ( @{ $author_info->{email} }, $author_info->{name}, );
 
     my @contribs = map {
         my $name = $_;
@@ -102,41 +98,45 @@ sub groom_contributors {
         my $email = $1;
         my $info;
         my $dupe;
-        if ($email and $info = $seen{$email}) {
+        if ( $email and $info = $seen{$email} ) {
             $dupe = 1;
         }
-        elsif ($info = $seen{$name}) {
+        elsif ( $info = $seen{$name} ) {
             $dupe = 1;
         }
         else {
             $info = {
-                name => $name,
+                name  => $name,
                 email => [],
             };
         }
         $seen{$name} ||= $info;
         if ($email) {
-            push @{$info->{email}}, $email
-                unless grep { $_ eq $email } @{$info->{email}};
+            push @{ $info->{email} }, $email
+                unless grep { $_ eq $email } @{ $info->{email} };
             $seen{$email} ||= $info;
         }
         $dupe ? () : $info;
-    } (@$authors, @$contribs);
+    } ( @$authors, @$contribs );
 
-    for my $contrib ( @contribs ) {
+    for my $contrib (@contribs) {
+
         # heuristic to autofill pause accounts
         if ( !$contrib->{pauseid} ) {
-            my ($pauseid) = map { /^(.*)\@cpan\.org$/ ? $1 : () } @{$contrib->{email}};
+            my ($pauseid)
+                = map { /^(.*)\@cpan\.org$/ ? $1 : () }
+                @{ $contrib->{email} };
             $contrib->{pauseid} = uc $pauseid
                 if $pauseid;
         }
 
         if ( $contrib->{pauseid} ) {
             $contrib->{url}
-                = $c->uri_for_action( '/author/index', [ $contrib->{pauseid} ] );
+                = $c->uri_for_action( '/author/index',
+                [ $contrib->{pauseid} ] );
         }
-        if (not $contrib->{email} = $contrib->{email}[0]) {
-            delete $contrib->{email}
+        if ( not $contrib->{email} = $contrib->{email}[0] ) {
+            delete $contrib->{email};
         }
     }
 
