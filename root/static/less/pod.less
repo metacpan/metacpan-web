@@ -98,20 +98,34 @@ ul#index, #index ul { list-style-type: none; }
     .index-border {
         display: inline-block;
         border: 1px solid rgb(215, 215, 215);
-        padding: 3px 10px;
     }
 
     #index {
+        padding: 0 10px 3px;
         margin: 0;
+    }
+
+    .toggle-show {
+        display: none;
+    }
+
+    &.hide-index {
+        .toggle-hide {
+            display: none;
+        }
+        .toggle-show {
+            display: inline;
+        }
+        #index {
+            height: 0;
+        }
     }
 }
 
 #index-header {
     text-align: center;
+    padding-top: 3px;
 
-    span {
-        font-weight: bold;
-    }
     button {
         padding: 0;
     }

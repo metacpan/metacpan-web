@@ -57,9 +57,10 @@ function togglePanel(side) {
 }
 
 function toggleTOC() {
+    var container = $('#index-container');
+    if (container.length == 0) return false;
+    var visible = ! container.hasClass('hide-index');
     var index = $('#index');
-    if (!index) return false;
-    var visible = index.height() != 0;
     var newHeight = 0;
     if (!visible) {
         newHeight = index.get(0).scrollHeight;
@@ -73,7 +74,7 @@ function toggleTOC() {
         }
     });
     localStorage.setItem('hideTOC', (visible ? 1 : 0));
-    $('#index-header button').text(visible ? 'show' : 'hide');
+    container.toggleClass('hide-index');
     return false;
 }
 
@@ -326,10 +327,18 @@ $(document).ready(function () {
     var index = $("#index");
     if (index) {
         index.wrap('<div id="index-container"><div class="index-border"></div></div>');
+        var container = index.parent().parent();
+
         var index_hidden = localStorage.getItem('hideTOC') == 1;
-        $("#index-container .index-border").prepend('<div id="index-header"><span>Contents</span> [<button class="btn-link" onclick="toggleTOC(); return false;">'+(index_hidden ? 'show' : 'hide')+'</button>]</div>');
+        var index_right = localStorage.getItem('rightTOC') == 1;
+        index.before(
+            '<div id="index-header"><b>Contents</b>'
+            + ' [<button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button>]'
+            + '</div>');
+
+        $('.toggle-index').on('click', function (e) { e.preventDefault(); toggleTOC(); });
         if (index_hidden) {
-            index.height(0);
+            container.addClass("hide-index");
         }
     }
 
