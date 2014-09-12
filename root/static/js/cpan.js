@@ -175,8 +175,12 @@ $(document).ready(function () {
     // #441 Allow more specific queries to send ("Ty", "Type::").
     // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
     // Please don't steal ctrl-pg up/down.
-
-    $('#search-input').autocomplete({
+    var search_input = $("#search-input");
+    var ac_width = search_input.outerWidth();
+    if (search_input.hasClass('top-input-form')) {
+        ac_width += search_input.parents("form.search-form").first().find('.search-btn').first().outerWidth();
+    }
+    search_input.autocomplete({
         serviceUrl: '/search/autocomplete',
         // Wait for more typing rather than firing at every keystroke.
         deferRequestBy: 150,
@@ -192,7 +196,7 @@ $(document).ready(function () {
         noCache: false,
         triggerSelectOnValidInput: false,
         maxHeight: 180,
-        width: $("#search-input").width() + 5,
+        width: ac_width,
         transformResult: function (data) {
             var result = $.map(data, function (row) {
                 return { 
