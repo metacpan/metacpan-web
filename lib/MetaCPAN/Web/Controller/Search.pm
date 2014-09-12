@@ -8,6 +8,14 @@ sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
+    my $page_size = $req->param('size');
+    if (   not defined $page_size
+        or $page_size !~ /^\d+$/
+        or $page_size > 5000 )
+    {
+        $page_size = 20;
+    }
+
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
     unless ( $req->param('q') ) {
@@ -24,7 +32,7 @@ sub index : Path {
     }
 
     my $model = $c->model('API::Module');
-    my $from  = ( $req->page - 1 ) * 20;
+    my $from  = ( $req->page - 1 ) * $page_size;
     if (
         $req->parameters->{lucky}
         or
@@ -51,8 +59,8 @@ sub index : Path {
 
         my $results
             = $query =~ /(distribution|module\.name\S*):/
-            ? $model->search_expanded( $query, $from, $user )
-            : $model->search_collapsed( $query, $from, $user );
+            ? $model->search_expanded( $query, $from, $page_size, $user )
+            : $model->search_collapsed( $query, $from, $page_size, $user );
 
         my @dists = $query =~ /distribution:(\S+)/g;
 
@@ -78,7 +86,8 @@ sub index : Path {
                 %$results,
                 single_dist => @dists == 1,
                 authors     => $authors,
-                template    => 'search.html'
+                template    => 'search.html',
+                page_size   => $page_size,
             }
         );
     }
