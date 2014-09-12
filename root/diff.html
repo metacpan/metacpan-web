@@ -27,6 +27,13 @@ file.path = parts.join("/"); END -%>
   <li class="nav-header">Tools</li>
     <li>
       <div>
+        <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
+          Reverse diff
+        </a>
+      </div>
+    </li>
+    <li>
+      <div>
         <%- IF type == 'source' %>
         <a href="<% api_external %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
         <%- ELSE %>
