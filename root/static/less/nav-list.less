@@ -1,7 +1,6 @@
 .nav-list {
     padding: 0px 15px 0px 15px;
     width: 180px;
-    float: left;
     margin-bottom: 0;
 
     &.nav {
@@ -87,14 +86,18 @@
         background-color: #e5e5e5;
     }
 
-    &.slidepanel.sticky-panel-sticky {
-        position: fixed;
-        top: 0px;
-        bottom: auto;
-    }
-    &.slidepanel.sticky-panel-bottom {
-        position: absolute;
-        bottom: 0px;
+    &.slidepanel {
+        float: left;
+
+        &.sticky-panel-sticky {
+            position: fixed;
+            top: 0px;
+            bottom: auto;
+        }
+        &.sticky-panel-bottom {
+            position: absolute;
+            bottom: 0px;
+        }
     }
 }
 
