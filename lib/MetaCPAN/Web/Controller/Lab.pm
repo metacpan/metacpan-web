@@ -49,7 +49,10 @@ sub dashboard : Chained('index') : PathPart {
     my $user = $c->model('API::User')->get_profile( $c->token )->recv;
 
     my $report;
-    my $pauseid;
+    my $pauseid = $c->req->params->{'pauseid'};
+    if ($pauseid) {
+        $user = { pauseid => $pauseid };
+    }
 
     if ($user) {
         $pauseid = $user->{pauseid};
