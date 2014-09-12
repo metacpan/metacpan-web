@@ -340,11 +340,21 @@ $(document).ready(function () {
         index.before(
             '<div id="index-header"><b>Contents</b>'
             + ' [<button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button>]'
+            + ' <button class="btn-link toggle-index-right"><i class="fa fa-toggle-right"></i><i class="fa fa-toggle-left"></i></button>'
             + '</div>');
 
         $('.toggle-index').on('click', function (e) { e.preventDefault(); toggleTOC(); });
         if (index_hidden) {
             container.addClass("hide-index");
+        }
+
+        $('.toggle-index-right').on('click', function (e) {
+            e.preventDefault();
+            localStorage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
+            container.toggleClass('pull-right');
+        });
+        if (localStorage.getItem('rightTOC') == 1) {
+            container.addClass("pull-right");
         }
     }
 

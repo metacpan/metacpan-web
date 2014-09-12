@@ -94,6 +94,31 @@ ul#index, #index ul { list-style-type: none; }
             height: 0;
         }
     }
+
+    .toggle-index-right {
+        color: #000;
+        float: right;
+        border: 0;
+        margin: -4px 2px 0 -1em;
+    }
+
+    .fa-toggle-left {
+        display: none;
+    }
+
+    &.pull-right {
+        margin-left: 5px;
+        overflow-x: auto;
+        max-width: 225px;
+
+        .fa-toggle-right {
+            display: none;
+            visibility: collapse;
+        }
+        .fa-toggle-left {
+            display: inline-block;
+        }
+    }
 }
 
 #index-header {
