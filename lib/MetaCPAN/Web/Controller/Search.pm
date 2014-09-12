@@ -1,7 +1,13 @@
 package MetaCPAN::Web::Controller::Search;
+
 use strict;
 use warnings;
-use base 'MetaCPAN::Web::Controller';
+
+use Moose;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
+
+use MetaCPAN::Web::Types qw( PositiveInt );
 use Plack::Response;
 
 sub index : Path {
@@ -9,10 +15,7 @@ sub index : Path {
     my $req = $c->req;
 
     my $page_size = $req->param('size');
-    if (   not defined $page_size
-        or $page_size !~ /^\d+$/
-        or $page_size > 5000 )
-    {
+    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
         $page_size = 20;
     }
 
@@ -93,4 +96,5 @@ sub index : Path {
     }
 }
 
+__PACKAGE__->meta->make_immutable;
 1;
