@@ -88,7 +88,10 @@ $(document).ready(function () {
 
     var source = $("#source");
     // if this is a source-code view with destination anchor
-    if (source[0] && document.location.hash) {
+    if (source.length && source.html().length > 500000) {
+        source.removeClass();
+    }
+    else if (source[0] && document.location.hash) {
         // check for 'L{number}' anchor in URL and highlight and jump
         // to that line.
         var lineMatch = document.location.hash.match(/^#L(\d+)$/);
