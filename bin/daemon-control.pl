@@ -27,7 +27,7 @@ if ( -d '/vagrant' ) {
     $plack_env = 'development';
 }
 
-$ENV{PERL_CARTON_PATH} = "/home/$user/carton/metacpan.org";
+$ENV{PERL_CARTON_PATH} = "/home/$user/carton/metacpan-web";
 
 my @program_args = (
     'exec', '/usr/local/perlbrew/perls/perl-5.16.2/bin/plackup',
