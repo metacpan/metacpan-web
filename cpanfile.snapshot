@@ -2925,16 +2925,16 @@ DISTRIBUTIONS
       inc::MakeMaker undef
     requirements:
       ExtUtils::MakeMaker 6.30
-  JSON-MaybeXS-1.001000
-    pathname: M/MS/MSTROUT/JSON-MaybeXS-1.001000.tar.gz
+  JSON-MaybeXS-1.002002
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.002002.tar.gz
     provides:
-      JSON::MaybeXS 1.001000
+      JSON::MaybeXS 1.002002
     requirements:
-      Cpanel::JSON::XS 2.3310
-      ExtUtils::MakeMaker 0
+      ExtUtils::CBuilder 0.27
+      File::Spec 0
+      File::Temp 0
       JSON::PP 2.27202
-      Test::More 0.88
-      Test::Without::Module 0.17
+      perl 5.006
   JSON-PP-2.27203
     pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
     provides:
@@ -3885,6 +3885,28 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
+  MooseX-Types-Common-0.001012
+    pathname: E/ET/ETHER/MooseX-Types-Common-0.001012.tar.gz
+    provides:
+      MooseX::Types::Common 0.001012
+      MooseX::Types::Common::Numeric 0.001012
+      MooseX::Types::Common::String 0.001012
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.30
+      File::Spec::Functions 0
+      List::Util 0
+      Module::Build::Tiny 0.030
+      MooseX::Types 0
+      MooseX::Types::Moose 0
+      Test::Deep 0
+      Test::More 0
+      Test::Warnings 0.005
+      if 0
+      open 0
+      strict 0
+      utf8 0
+      warnings 0
   MooseX-Types-Path-Class-0.06
     pathname: T/TH/THEPLER/MooseX-Types-Path-Class-0.06.tar.gz
     provides:
@@ -4579,10 +4601,29 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  Path-Tiny-0.055
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.055.tar.gz
+  Path-Iterator-Rule-1.008
+    pathname: D/DA/DAGOLDEN/Path-Iterator-Rule-1.008.tar.gz
     provides:
-      Path::Tiny 0.055
+      PIR 1.008
+      Path::Iterator::Rule 1.008
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      File::Basename 0
+      File::Spec 0
+      List::Util 0
+      Number::Compare 0.02
+      Scalar::Util 0
+      Text::Glob 0
+      Try::Tiny 0
+      re 0
+      strict 0
+      warnings 0
+      warnings::register 0
+  Path-Tiny-0.056
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.056.tar.gz
+    provides:
+      Path::Tiny 0.056
       flock undef
     requirements:
       Carp 0
@@ -5900,6 +5941,22 @@ DISTRIBUTIONS
       Test::Builder::Tester 1.02
       Test::More 0
       perl 5.006
+  Test-Warnings-0.016
+    pathname: E/ET/ETHER/Test-Warnings-0.016.tar.gz
+    provides:
+      Test::Warnings 0.016
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      File::Spec::Functions 0
+      List::Util 0
+      Test::Builder 0
+      Test::More 0.94
+      if 0
+      parent 0
+      strict 0
+      version 0
+      warnings 0
   Test-Without-Module-0.17
     pathname: C/CO/CORION/Test-Without-Module-0.17.tar.gz
     provides:
@@ -5940,6 +5997,7 @@ DISTRIBUTIONS
     provides:
       Text::Glob 0.09
     requirements:
+      Module::Build 0.36
       Test::More 0
   Text-Markdown-1.000031
     pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
