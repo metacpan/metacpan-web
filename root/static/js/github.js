@@ -137,7 +137,7 @@ function Github() {
                             });
                         }
                     },
-                    text: '<img src="/static/icons/busy.gif" />',
+                    text: '<i class="fa fa-spinner fa-spin"></i>',
                     title: 'Github Info'
                 },
                 hide: {
