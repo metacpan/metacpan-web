@@ -117,7 +117,7 @@ $(document).ready(function () {
         }
     }
 
-    SyntaxHighlighter.highlight();
+    setTimeout(function() { SyntaxHighlighter.highlight(); }, 50);
 
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
