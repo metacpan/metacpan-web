@@ -125,3 +125,70 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
     text-transform: uppercase;
 }
+
+.irc-chat {
+  @width: 155px;
+  @height: 36px;
+  @left: 10px;
+  @border-margin: 5px;
+  @background: #b80000;
+
+  position: relative;
+  top: 0px;
+  height: @height;
+  width: @width;
+  left: 0 - @left;
+
+  display: inline-block;
+  margin-bottom: 10px;
+  border-radius: 4px 0px 0px;
+  box-shadow: 0px 2px 2px -2px #000;
+
+  a {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  /* dotted border */
+  div {
+    display: inline-block;
+    margin: @border-margin 0;
+    padding-left: @left;
+    border-style: dotted;
+    border-color: darken(@background, 12.7%);
+    border-width: 1px 0;
+    width: @width - ( @border-margin / 2 );
+    line-height: @height - ( @border-margin * 2 ) - 1;
+  }
+
+  /* right triangle on ribbon */
+  &:after {
+    @sides: @height / sqrt(2);
+
+    content: '';
+    position: absolute;
+    top: (@height - @sides) / 2;
+    left: @width - (@sides / 2);
+    width: @sides;
+    height: @sides;
+    .rotate(45deg);
+    z-index: -1;
+  }
+
+  /* lower ribbon */
+  &:before {
+    content: '';
+    position: absolute;
+    top: @height;
+    left: 1px;
+    border-top: 9px solid darken(@background, 8%);
+    border-left: 9px solid transparent;
+    .scale(1.2, 1);
+    z-index: -1;
+  }
+
+  &, &:after {
+    background-color: @background;
+    background-image: data-uri('../images/noise.png');
+  }
+}
