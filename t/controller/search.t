@@ -5,6 +5,11 @@ use Test::More;
 use MetaCPAN::Web::Test;
 use Encode qw(encode is_utf8);
 
+my %xpath = (
+    search_results => 'div[contains(@class, "search-results")]',
+    module_result  => 'div[@class="module-result"]',
+);
+
 test_psgi app, sub {
     my $cb = shift;
     ok( my $res = $cb->( GET '/search' ), 'GET /search' );
@@ -36,12 +41,12 @@ test_psgi app, sub {
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
     my $release = $tx->find_value(
-        '//div[@class="search-results"]//div[1]/big[1]/strong/a/@href');
+        qq!//$xpath{search_results}//div[1]/big[1]/strong/a/\@href!);
     ok( $release, "found release $release" );
 
     # Moose has ratings (other things on this search page likely do as well)
     $tx->like(
-        '//div[@class="search-results"]//a[starts-with(@class, "rating-")]/following-sibling::a',
+        qq!//$xpath{search_results}//a[starts-with(\@class, "rating-")]/following-sibling::a!,
         qr/\d+ reviews?/i,
         'current rating and number of reviews listed'
     );
@@ -92,7 +97,7 @@ sub search_and_find_module {
 
     # make sure there is a link tag whose content is the module name
     $tx->ok(
-        qq!grep(//div[\@class="search-results"]//div[\@class="module-result"]//a[1], "^\Q$exp_mod\E\$")!,
+        qq!grep(//$xpath{search_results}//$xpath{module_result}//a[1], "^\Q$exp_mod\E\$")!,
         "$desc: found expected module",
     );
 }
