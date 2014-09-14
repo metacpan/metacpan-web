@@ -111,7 +111,7 @@
         aggregated.push(release);
         END %>
     <li class="nav-header">Activity</li>
-    <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
+    <li><% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %></li>
     <% INCLUDE inc/release-latest.html %>
     <li class="nav-header">Tools</li>
     <li>

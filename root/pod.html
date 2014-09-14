@@ -37,7 +37,7 @@
   </li>
   <% PROCESS inc/release-info.html %>
   <li class="nav-header">Activity</li>
-  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+  <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
   <% INCLUDE inc/release-tools.html %>
 </ul>
 
