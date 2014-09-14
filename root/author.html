@@ -111,7 +111,7 @@
         aggregated.push(release);
         END %>
     <li class="nav-header">Activity</li>
-    <% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %>
+    <li><% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %></li>
     <% INCLUDE inc/release-latest.html %>
     <li class="nav-header">Tools</li>
     <li>
@@ -128,7 +128,7 @@
         <div>
             <a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a>
             <a href="http://matrix.cpantesters.org/?author=<% author.pauseid %>" title="Matrix">
-                <img src="/static/icons/grid.png" width="16" height="16" style="vertical-align: bottom; padding: 1px">
+                <i class="icon-grid"></i>
             </a>
         </div>
     </li>

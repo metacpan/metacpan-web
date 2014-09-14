@@ -37,13 +37,13 @@
   </li>
   <% PROCESS inc/release-info.html %>
   <li class="nav-header">Activity</li>
-  <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+  <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
   <% INCLUDE inc/release-tools.html %>
 </ul>
 
 <div id="right-panel" class="pull-right">
 <div>[<button class="btn-link" onclick="togglePanel('right'); return false;">hide</button>]</div>
-<div class="pull-right">
+<div class="box-right">
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html contributors = contributors %>
 </div>

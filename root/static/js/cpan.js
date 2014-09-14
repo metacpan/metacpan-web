@@ -57,9 +57,10 @@ function togglePanel(side) {
 }
 
 function toggleTOC() {
+    var container = $('#index-container');
+    if (container.length == 0) return false;
+    var visible = ! container.hasClass('hide-index');
     var index = $('#index');
-    if (!index) return false;
-    var visible = index.height() != 0;
     var newHeight = 0;
     if (!visible) {
         newHeight = index.get(0).scrollHeight;
@@ -73,7 +74,7 @@ function toggleTOC() {
         }
     });
     localStorage.setItem('hideTOC', (visible ? 1 : 0));
-    $('#index-header button').text(visible ? 'show' : 'hide');
+    container.toggleClass('hide-index');
     return false;
 }
 
@@ -85,6 +86,45 @@ $(document).ready(function () {
 
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
+
+    /**
+    * Turns all package names into metacpan.org links within <a/> tags.
+    * @param {String} code Input code.
+    * @return {String} Returns code with </a> tags.
+    */
+    function processPackages(code)
+    {
+        var destination = document.location.href.match(/\/source\//) ? 'source' : 'pod',
+            strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
+            ;
+
+        code = code.replace(/(<code class="pl keyword">(?:with|extends|use<\/code> <code class="pl plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="pl string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+        {
+            var match = null,
+                mcpan_url
+                ;
+
+            if ( match = strip_delimiters.exec(pkg) )
+            {
+                prefix = prefix + match[1];
+                pkg    = match[2];
+                suffix = match[3] + suffix;
+            }
+
+            mcpan_url = '<a href="/' + destination + '/' + pkg + '">' + pkg + '</a>';
+            return prefix + mcpan_url + suffix;
+        });
+
+        // Link our dependencies
+        return code.replace(/(<code class="pl keyword">(use|package|require)<\/code> <code class="pl plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
+    };
+
+    var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
+    SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function() {
+      var html = getCodeLinesHtml.apply(this, arguments);
+      return processPackages(html);
+    };
+
 
     var source = $("#source");
     // if this is a source-code view with destination anchor
@@ -129,7 +169,7 @@ $(document).ready(function () {
         var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
           this.getAttribute('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
-        $(this).tablesorter({sortList: [sortid], widgets: ['zebra'], textExtraction: function (node) {
+        $(this).tablesorter({sortList: [sortid], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
             if(!sort) return $node.text();
@@ -252,7 +292,7 @@ $(document).ready(function () {
 
     $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function () {
       if (this.id) {
-        $(this).prepend('<a href="#'+this.id+'" class="anchor"><span class="glyphicon glyphicon-bookmark black"></span></a>');
+        $(this).prepend('<a href="#'+this.id+'" class="anchor"><span class="fa fa-bookmark black"></span></a>');
       }
     });
 
@@ -291,19 +331,21 @@ $(document).ready(function () {
 
     $('.dropdown-toggle').dropdown();
 
-    $("#left-nav").affix({
-        offset: {
-            top: 100
-        }
-    });
-
     var index = $("#index");
     if (index) {
         index.wrap('<div id="index-container"><div class="index-border"></div></div>');
+        var container = index.parent().parent();
+
         var index_hidden = localStorage.getItem('hideTOC') == 1;
-        $("#index-container .index-border").prepend('<div id="index-header"><span>Contents</span> [<button class="btn-link" onclick="toggleTOC(); return false;">'+(index_hidden ? 'show' : 'hide')+'</button>]</div>');
+        var index_right = localStorage.getItem('rightTOC') == 1;
+        index.before(
+            '<div id="index-header"><b>Contents</b>'
+            + ' [<button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button>]'
+            + '</div>');
+
+        $('.toggle-index').on('click', function (e) { e.preventDefault(); toggleTOC(); });
         if (index_hidden) {
-            index.height(0);
+            container.addClass("hide-index");
         }
     }
 

@@ -1,7 +1,16 @@
+@import "bootstrap/bootstrap.less";
+
+@import "global.less";
+
+@import "font-awesome/font-awesome.less";
+@import "about.less";
+@import "silk.less";
+@import "diff.less";
+@import "tablesorter.less";
+@import "print.less";
 @import "account.less";
 @import "author.less";
 @import "breadcrumbs.less";
-@import "bootstrap/bootstrap.less";
 @import "log.less";
 @import "plusser.less";
 @import "pod.less";
@@ -14,10 +23,8 @@
 @import "nav-list.less";
 @import "responsive.less";
 @import "lab.less";
-
-
-@iconSpritePath:          "/static/icons/glyphicons-halflings.png";
-@iconWhiteSpritePath:     "/static/icons/glyphicons-halflings-white.png";
+@import "home.less";
+@import "syntaxhighlighter.less";
 
 @linkColor: #3366cc;
 @textColor: @black;
@@ -38,210 +45,8 @@
 @code-color:                  inherit;
 @code-bg:                     #f5f5f5;
 
-h1, .h1, h2, .h2, h3, .h3 {
-    line-height: 35px;
-}
+@font-family-monospace: Menlo, Monaco, 'DejaVu Sans Mono', Consolas, 'Bitstream Vera Sans Mono', Courier, 'Courier New', monospace;
+@font-size-base: 13px;
 
-.black {
-    color: @black;
-}
-
-.border-radius(@radius) {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-.collapse .navbar-collapse {
-    clear: none;
-}
-
-.dropdown-menu {
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 250px;
-    -webkit-overflow-scrolling: touch;
-}
-
-input#search-input {
-    font-size: 16px;
-    height: 30px;
-}
-
-.home {
-    padding: 40px 0 50px;
-}
-
-.home .btn {
-    font-size: 1.2em;
-}
-
-.home input {
-    width: 400px;
-    margin: 0px;
-    height: 30px;
-    font-size: 1.4em;
-}
-
-.home-search-input {
-    width: 400px;
-}
-
-.toolbar-search {
-    margin-bottom: 2px;
-}
-
-.top-input-form {
-    border-right: none;
-    width: 340px !important; 
-}
-
-.search-form input {
-    width: 300px; 
-}
-
-.input-small {
-    width: 50% !important;
-}
-
-form#logout {
-    display: none;
-}
-
-body {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-}
-
-.dropdown-menu form {
-    margin: 0;
-}
-
-.center {
-    text-align: center;
-}
-
-.inline {
-    display: inline;
-}
-
-.box-right {
-    float: right;
-    clear: right;
-    width: 180px;
-    padding: 10px 0 0 10px;
-    overflow: hidden;
-}
-
-#map {
-    margin-right: 200px !important;
-}
-
-#map img {
-    max-width: none;
-}
-
-.smaller {
-    font-size: 1.0em;
-    line-height: 2.5em;
-}
-
-.btn.btn-slidepanel {
-    border-radius: 2px;
-    padding: 1px 4px 5px 4px;
-    margin-top: 3px;
-}
-
-.table.tablesorter th {
-    padding-right: 20px;
-}
-
-.container-top {
-    padding: 0 10px 10px 10px;
-}
-
-.head-small-logo {
-    width: 200px;
-}
-
-.main-content {
-    margin-bottom: 60px;
-    margin-top: 25px;
-    line-height: 20px;
-}
-
-#lab {
-    margin-top: -25px;
-    margin-bottom: 50px;
-}
-
-.tool-bar-form {
-    margin-top: 2px;
-    margin-bottom: 10px;
-    height: 30px;
-    width: 165px !important;
-}
-
-li button.dependencies-graph {
-    padding: 0;
-    font-size: inherit;
-    background: none !important;
-    background-image: none;
-    border: none;
-    color: @linkColor !important;
-}
-
-.top-content {
-    padding-bottom: 10px;
-}
-
-.row-fluid {
-    padding-bottom: 10px;
-}
-
-.footer {
-    .sponsor-logo {
-        border: none;
-        float: right;
-        width: 90%;
-        padding: 0px;
-    }
-}
-
-.ui-tooltip-titlebar {
-    height: 25px !important;
-}
-
-.message {
-    padding-left: 5px;
-}
-
-.big-logo {
-    margin: 42px auto 44px auto;
-    display: block;
-    width: 326px;
-    height: 59px;
-    background-repeat: no-repeat;
-    .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
-}
-
-.small-logo {
-    position: relative;
-    margin: 1px 13px 0 0;
-    float: left;
-    width: 180px;
-    height: 33px;
-    background-repeat: no-repeat;
-    background-position: 0px -59px;
-    .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
-}
-
-#show-right-panel {
-   display: none;
-   float: right;
-}
-#right-panel {
-    /* display: none; */
-}
-
-
+@fa-font-path: "/static/fonts/";
+@icon-font-path: "/static/fonts/";

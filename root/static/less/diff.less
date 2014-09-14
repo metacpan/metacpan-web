@@ -1,0 +1,51 @@
+.diff-container {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+
+    .syntaxhighlighter {
+        border: 0px !important;
+        margin: 5px !important;
+    }
+}
+
+.diff-header {
+    #gradient .vertical(rgb(255,255,255), rgb(221,221,221));
+    padding: 5px;
+    font-family: @font-family-monospace;
+
+    a {
+        color: #000;
+    }
+}
+
+.diff-ul {
+    border-top: 1px solid #eee;
+    margin-bottom: 20px;
+
+    li {
+        border-bottom: 1px solid #eee;
+        margin: 2px;
+        font-family: @font-family-monospace;
+    }
+
+    .plus, .minus {
+        float: right;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-weight: bold;
+        font-family: sans-serif;
+        color: #fff;
+        text-align: center;
+        .border-radius(3px 3px);
+        margin-left: 5px;
+    }
+
+    .plus {
+        background-color: #090
+    }
+
+    .minus {
+        background-color: #900;
+    }
+}

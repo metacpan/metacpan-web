@@ -29,9 +29,6 @@ END %>
 
 
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
-<%- IF release.status != 'latest' %>
-  <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><span class="glyphicon glyphicon-step-forward"></span></a>
-<%- END %>
   <a rel="author" itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>"><% author.name %></a>
   <span>&nbsp;/&nbsp;</span>
   <div class="release status-<% release.status %> maturity-<% release.maturity %><% IF mark_unauthorized_releases && NOT release.authorized %> unauthorized<% END %>">
@@ -43,6 +40,11 @@ END %>
       <span class="release-name"><% release.name %></span>
     <% END %>
     <% IF mark_unauthorized_releases && NOT release.authorized %><em class="warning">UNAUTHORIZED RELEASE</em><% END %>
+    <%- IF release.status != 'latest';
+        FOREACH v IN versions; IF v.status == 'latest'; have_released = 1; END; END;
+        IF have_released; %>
+      <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><span class="fa fa-step-forward"></span></a>
+    <%- END; END; %>
   </div>
   <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
   <%- IF module %>

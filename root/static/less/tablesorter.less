@@ -1,0 +1,28 @@
+/* tables */
+
+table.tablesorter {
+    thead tr {
+        th.header {
+            cursor: pointer;
+            height: auto;
+            font-weight: bold;
+
+            &:after {
+                .fa;
+                float: right;
+                display: inline;
+                padding-left: 5px;
+                content: @fa-var-sort;
+            }
+            &.headerSortUp:after {
+                content: @fa-var-caret-down;
+            }
+            &.headerSortDown:after {
+                content: @fa-var-caret-up;
+            }
+            &.date:after, &.number:after {
+                float: none;
+            }
+        }
+    }
+}

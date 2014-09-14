@@ -1,7 +1,7 @@
 <%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
 <% IF suggest %>
     <% INCLUDE left_sidebar.html %>
-    <div class="no-results">
+    <div class="content no-results">
         <div class="alert alert-danger">
             Did you mean :
             <a href="/search?q=<% suggest | uri %>"><% suggest %></a>  

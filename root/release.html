@@ -14,7 +14,7 @@
     <li><span><a href="/source/<% release.author %>/<% release.name %>/">Browse</a> (<a href="<% api_external %>/source/<% release.author %>/<% release.name %>/">raw</a>)</span></li>
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
-    <% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %>
+    <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
     <% IF release.metadata.x_help_wanted %>
     <li>Help Wanted<ul>
     <% FOREACH position IN release.metadata.x_help_wanted %>
@@ -25,7 +25,7 @@
     <%- INCLUDE inc/release-tools.html %>
 </ul>
 
-<div class="pull-right hidden-phone">
+<div class="box-right hidden-phone">
 <% INCLUDE inc/author-pic.html author = author %>
 <% INCLUDE inc/contributors.html contributors = contributors %>
 </div>
