@@ -1,0 +1,23 @@
+// Show bookmark icons when hovering over heading tags.
+// The a.anchor may be added by js.
+.anchors {
+    a.anchor {
+        // Shrink font-size so that heading text isn't offset by invisible icon.
+        // This size is directly related to the padding/width/etc.
+        padding-left: 9px;
+        width: 26px;
+        margin-left: -26px;
+        vertical-align: top;
+        font-size: 14px;
+        display: inline-block;
+
+        span {
+            visibility: hidden;
+        }
+    }
+
+    *:hover > a.anchor span,
+    a.anchor:focus span {
+        visibility: visible;
+    }
+}
