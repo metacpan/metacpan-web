@@ -62,7 +62,7 @@ test_psgi app, sub {
 
     $tx = tx($res);
     $tx->ok(
-        '//div[@class="search-results"]//div[@class="module-result"]/a[@class="author"]',
+        qq!//$xpath{search_results}//$xpath{module_result}/a[\@class="author"]!,
         sub {
             my $node = shift;
             $node->is( q{.}, uc($author), 'dist owned by queried author' )
