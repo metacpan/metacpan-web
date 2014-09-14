@@ -8,8 +8,16 @@ my %months;
 my $m = 0;
 $months{$_} = ++$m for qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
 
+sub load {
+    my ( $class, $file ) = @_;
+    open my $fh, '<', $file
+        or die "can't open $file: $!";
+    my $content = do { local $/; <$fh> };
+    $class->parse($content);
+}
+
 sub parse {
-    my ($string) = @_;
+    my ( $class, $string ) = @_;
 
     my @lines = split /\r\n?|\n/, $string;
 
@@ -164,12 +172,17 @@ sub parse {
             $preamble .= "$line\n";
         }
     }
+    $preamble =~ s/^\s*\n//;
+    $preamble =~ s/\s+$//;
     my @entries = @releases;
     while ( my $entry = shift @entries ) {
         push @entries, @{ $entry->{entries} } if $entry->{entries};
         delete @{$entry}{qw(done nest nested)};
     }
-    return wantarray ? ( \@releases, $preamble ) : \@releases;
+    return {
+        preamble => $preamble,
+        releases => [ reverse @releases ],
+    };
 }
 
 sub _expand_tab {

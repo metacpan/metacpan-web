@@ -12,25 +12,26 @@ sub get {
 
 sub last_version {
     my ( $self, $response, $release ) = @_;
-    my $changes;
+    my $releases;
     if ( !exists $response->{content} or $response->{documentation} ) {
     }
     else {
         # I guess we have a propper changes file? :P
         try {
-            $changes
-                = MetaCPAN::Web::Model::API::Changes::Parser::parse(
+            my $changelog
+                = MetaCPAN::Web::Model::API::Changes::Parser->parse(
                 $response->{content} );
+            $releases = $changelog->{releases};
         }
         catch {
             # we don't really care?
             warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
         };
     }
-    return unless $changes && @$changes;
+    return unless $releases && @$releases;
 
     # Ok, lets make sure we get the right release..
-    my $changelog = $self->find_changelog( $release->{version}, $changes );
+    my $changelog = $self->find_changelog( $release->{version}, $releases );
 
     return unless $changelog;
     return $self->filter_release_changes( $changelog, $release );
