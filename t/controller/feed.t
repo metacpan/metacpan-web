@@ -54,7 +54,7 @@ sub valid_xml {
     return $tx;
 }
 
-my $feed = MetaCPAN::Web::Controller::Feed->new(MetaCPAN::Web->new);
+my $feed = MetaCPAN::Web::Controller::Feed->new( MetaCPAN::Web->new );
 
 subtest 'get correct author favorite data format' => sub {
     my $favorite_data = [
