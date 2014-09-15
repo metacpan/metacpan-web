@@ -141,7 +141,6 @@ $(function () {
             config.highlight = all_lines;
         }
 
-        $(source).unwrap();
         SyntaxHighlighter.highlight(config, source);
     });
 });
