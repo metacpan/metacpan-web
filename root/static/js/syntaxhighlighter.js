@@ -1,7 +1,4 @@
 $(function () {
-    SyntaxHighlighter.defaults['quick-code'] = false;
-    SyntaxHighlighter.defaults['tab-size'] = 8;
-
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
 
@@ -53,38 +50,98 @@ $(function () {
 
 
     var source = $("#source");
-    // if this is a source-code view with destination anchor
-    if (source.length && source.html().length > 500000) {
-        source.removeClass();
-    }
-    else if (source[0] && document.location.hash) {
-        // check for 'L{number}' anchor in URL and highlight and jump
-        // to that line.
-        var lineMatch = document.location.hash.match(/^#L(\d+)$/);
-        if (lineMatch) {
-            SyntaxHighlighter.defaults['highlight'] = [lineMatch[1]];
+    if (source.length) {
+        var lineMatch;
+        var packageMatch
+        if (source.html().length > 500000) {
+            source.children('code').removeClass();
         }
-        else {
-            // check for 'P{encoded_package_name}' anchor, convert to
-            // line number (if possible), and then highlight and jump
-            // as long as the matching line is not the first line in
-            // the code.
-            var packageMatch = document.location.hash.match(/^#P(\S+)$/);
-            if (packageMatch) {
-                var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
-                var leadingSource = source.html().split("package " + decodedPackageMatch + ";");
-                var lineCount = leadingSource[0].split("\n").length;
-                if (leadingSource.length > 1 && lineCount > 1) {
-                    SyntaxHighlighter.defaults['highlight'] = [lineCount];
-                    document.location.hash = "#L" + lineCount;
-                }
-                else {
-                    // reset the anchor portion of the URL (it just looks neater).
-                    document.location.hash = '';
-                }
+        else if ( lineMatch = document.location.hash.match(/^#L(\d+)$/) ) {
+            source.attr('data-line', lineMatch[1]);
+        }
+        // check for 'P{encoded_package_name}' anchor, convert to
+        // line number (if possible), and then highlight and jump
+        // as long as the matching line is not the first line in
+        // the code.
+        else if ( packageMatch = document.location.hash.match(/^#P(\S+)$/) ) {
+            var decodedPackageMatch = decodeURIComponent(packageMatch[1]);
+            var leadingSource = source.text().split("package " + decodedPackageMatch + ";");
+            var lineCount = leadingSource[0].split("\n").length;
+            if (leadingSource.length > 1 && lineCount > 1) {
+                source.attr('data-line', lineCount);
+                document.location.hash = "#L" + lineCount;
+            }
+            else {
+                // reset the anchor portion of the URL (it just looks neater).
+                document.location.hash = '';
             }
         }
     }
 
-    SyntaxHighlighter.highlight();
+    /* set perl as the default type in pod */
+    $(".pod pre > code").each(function(index, source) {
+        var have_lang;
+        if (source.className) {
+            var classes = source.className.split(/\s+/);
+            for (var i = 0; i < classes.length; i++) {
+                if (classes[i].match(/^language-(.*)/)) {
+                    return;
+                }
+            }
+        }
+        source.className = 'language-perl';
+    });
+
+    $(".content pre > code").each(function(index, source) {
+        var code = $(source);
+        var pre = code.parent();
+
+        var config = {
+            'gutter'      : false,
+            'toolbar'     : false,
+            'quick-code'  : false,
+            'tab-size'    : 8
+        };
+        if (source.className) {
+            var classes = source.className.split(/\s+/);
+            for (var i = 0; i < classes.length; i++) {
+                var res = classes[i].match(/^language-(.*)/);
+                if (res) {
+                    config.brush = res[1];
+                }
+            }
+        }
+        if (!config.brush) {
+            return;
+        }
+
+        if (pre.hasClass('line-numbers')) {
+            config.gutter = true;
+        }
+        var first_line = pre.attr('data-start');
+        if (first_line) {
+            config['first-line'] = first_line;
+        }
+        var lines = pre.attr('data-line');
+        if (lines) {
+            lines = lines.split(/,/);
+            var all_lines = [];
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                var res = line.match(/(\d+)-(\d+)/);
+                if (res) {
+                    for (var l = res[1]; l <= res[2]; l++) {
+                        all_lines.push(l);
+                    }
+                }
+                else {
+                    all_lines.push(line);
+                }
+            }
+            config.highlight = all_lines;
+        }
+
+        $(source).unwrap();
+        SyntaxHighlighter.highlight(config, source);
+    });
 });

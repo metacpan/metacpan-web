@@ -55,7 +55,7 @@
 
 <div class="content">
 <% IF !module.binary %>
-<pre class="brush: <% filetype %>; class-name: 'highlight'; toolbar: false;" id="source"><% source %></pre>
+<pre id="source" class="line-numbers"><code class="language-<% filetype %>"><% source %></code></pre>
 <% ELSE %>
 This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
