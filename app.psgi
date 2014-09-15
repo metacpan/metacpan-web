@@ -119,44 +119,50 @@ unless ( $ENV{HARNESS_ACTIVE} ) {
 }
 
 $app = Plack::Middleware::Runtime->wrap($app);
-$app = Plack::Middleware::Assets->wrap( $app,
-    files => [<root/static/css/*.css>] );
-$app = Plack::Middleware::Assets->wrap(
-    $app,
-    files => [
-        map {"root/static/js/$_.js"}
-            qw(
-            jquery.min
-            jquery.tablesorter
-            jquery.relatize_date
-            jquery.qtip.min
-            jquery.autocomplete.min
-            shCore
-            shBrushPerl
-            shBrushPlain
-            shBrushYaml
-            shBrushJScript
-            shBrushDiff
-            shBrushCpp
-            shBrushCPANChanges
-            cpan
-            toolbar
-            github
-            contributors
-            dropdown
-            bootstrap/bootstrap-dropdown
-            bootstrap/bootstrap-collapse
-            bootstrap/bootstrap-modal
-            bootstrap/bootstrap-tooltip
-            bootstrap/bootstrap-affix
-            bootstrap-slidepanel
-            )
-    ],
+my @js_files = map {"/static/js/$_.js"} (
+    qw(
+        jquery.min
+        jquery.tablesorter
+        jquery.relatize_date
+        jquery.qtip.min
+        jquery.autocomplete.min
+        shCore
+        shBrushPerl
+        shBrushPlain
+        shBrushYaml
+        shBrushJScript
+        shBrushDiff
+        shBrushCpp
+        shBrushCPANChanges
+        cpan
+        toolbar
+        github
+        contributors
+        dropdown
+        bootstrap/bootstrap-dropdown
+        bootstrap/bootstrap-collapse
+        bootstrap/bootstrap-modal
+        bootstrap/bootstrap-tooltip
+        bootstrap/bootstrap-affix
+        bootstrap-slidepanel
+        ),
 );
+my @css_files
+    = map { my $f = $_; $f =~ s{^root/}{/}; $f } glob 'root/static/css/*.css';
 
-use CHI;
-
-if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
+if ($dev_mode) {
+    my $wrap = $app;
+    $app = sub {
+        my $env = shift;
+        push @{ $env->{'psgix.assets'} ||= [] }, @js_files, @css_files;
+        $wrap->($env);
+    };
+}
+else {
+    for my $assets ( \@js_files, \@css_files ) {
+        $app = Plack::Middleware::Assets->wrap( $app,
+            files => [ map {"root$_"} @$assets ] );
+    }
 
     # Only need for live
     my $cache = CHI->new(
