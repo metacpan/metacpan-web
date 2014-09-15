@@ -31,10 +31,8 @@ test_psgi app, sub {
             is( $res->code, 200, 'code 200' );
             my $tx = tx($res);
             like(
-                $tx->find_value(
-                    q{//div[@class="content"]/pre/@class}
-                ),
-                qr/^brush: perl;/,
+                $tx->find_value(q{//div[@class="content"]/pre/code/@class}),
+                qr/\blanguage-perl\b/,
                 'has pre-block with expected syntax brush'
             );
         }
