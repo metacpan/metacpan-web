@@ -35,7 +35,9 @@
         <%- IF rss %>
         <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" />
         <% END %>
-        <link href="<% req.env.item('psgix.assets').1 %>" rel="stylesheet" type="text/css">
+        <%- FOREACH css IN req.env.item('psgix.assets').grep(/\.css$/) %>
+        <link href="<% css %>" rel="stylesheet" type="text/css">
+        <%- END %>
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
         <%- IF canonical %>
         <link rel="canonical" href="https://metacpan.org<% canonical %>" />
@@ -45,7 +47,9 @@
         <%- END %>
         <link rel="shortcut icon" href="/static/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
-        <script src="<% req.env.item('psgix.assets').0 %>" type="text/javascript"></script>
+        <%- FOREACH js IN req.env.item('psgix.assets').grep(/\.js$/) %>
+        <script src="<% js %>" type="text/javascript"></script>
+        <%- END %>
         <% IF PLACK_ENV == 'development' %>
         <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
         <script src="/static/js/less.min.js" type="text/javascript"></script>
