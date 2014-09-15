@@ -6,17 +6,25 @@ use strict;
 use warnings;
 
 # TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
+#
+use File::Basename;
+my $root_dir;
+my $dev_mode;
 
 BEGIN {
-    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
+    $root_dir = File::Basename::dirname(__FILE__);
+    $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+}
+
+BEGIN {
+    if ($dev_mode) {
         $ENV{PLACK_SERVER}       = 'Standalone';
         $ENV{METACPAN_WEB_DEBUG} = 1;
     }
 }
 
 use Config::JFDI;
-use FindBin;
-use lib "$FindBin::RealBin/lib";
+use lib "$root_dir/lib";
 use File::Path    ();
 use JSON::MaybeXS ();
 use MIME::Base64  ();
@@ -32,6 +40,9 @@ use Plack::Middleware::ReverseProxy;
 use Plack::Middleware::Session::Cookie;
 use Plack::Middleware::ServerStatus::Lite;
 use Try::Tiny;
+use CHI;
+
+my $tempdir = "$root_dir/var/tmp";
 
 # explicitly call ->to_app on every Plack::App::* for performance
 my $app = Plack::App::URLMap->new;
@@ -54,14 +65,9 @@ my $app = Plack::App::URLMap->new;
 {
     my $core_app = MetaCPAN::Web->psgi_app;
 
-    my $path
-        = $ENV{HARNESS_ACTIVE}
-        ? q{./}
-        : $FindBin::RealBin;
-
     my $config = Config::JFDI->new(
         name => 'MetaCPAN::Web',
-        path => $path,
+        path => $root_dir,
     );
 
     die 'cookie_secret not configured' unless $config->get->{cookie_secret};
@@ -101,7 +107,7 @@ my $app = Plack::App::URLMap->new;
 $app = $app->to_app;
 
 unless ( $ENV{HARNESS_ACTIVE} ) {
-    my $scoreboard = "$FindBin::RealBin/var/tmp/scoreboard";
+    my $scoreboard = "$root_dir/var/tmp/scoreboard";
     maybe_make_path($scoreboard);
 
     $app = Plack::Middleware::ServerStatus::Lite->wrap(
@@ -155,7 +161,7 @@ if ( !$ENV{PLACK_ENV} || $ENV{PLACK_ENV} ne 'development' ) {
     # Only need for live
     my $cache = CHI->new(
         driver   => 'File',
-        root_dir => '/tmp/less.cache'
+        root_dir => "$root_dir/var/tmp/less.cache",
     );
 
     # Wrap up to serve lessc parsed files
