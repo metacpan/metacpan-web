@@ -32,7 +32,7 @@ test_psgi app, sub {
     );
 
     like $tx->find_value('//div[contains(@class, "pod")]//pre/@class'),
-        qr/^brush: pl; .+; metacpan-verbatim$/,
+        qr/^brush: perl; .+; metacpan-verbatim$/,
         'verbatim pre tag has syn-hi class';
 
     # Request with lowercase author redirects to uppercase author.
