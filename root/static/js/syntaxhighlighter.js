@@ -16,7 +16,7 @@ $(function () {
             strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
             ;
 
-        code = code.replace(/(<code class="pl keyword">(?:with|extends|use<\/code> <code class="pl plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="pl string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+        code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:el)?l plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="p(?:er)?l string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
         {
             var match = null,
                 mcpan_url
@@ -34,7 +34,7 @@ $(function () {
         });
 
         // Link our dependencies
-        return code.replace(/(<code class="pl keyword">(use|package|require)<\/code> <code class="pl plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
+        return code.replace(/(<code class="p(?:er)?l keyword">(use|package|require)<\/code> <code class="p(?:er)?l plain">)([A-Za-z0-9\:]+)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
     };
 
     var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
