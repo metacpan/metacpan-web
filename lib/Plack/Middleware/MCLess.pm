@@ -44,9 +44,9 @@ sub call {
     my $self = shift;
     my $env  = shift;
 
-    $env->{'psgix.assets_less'} ||= [];
+    $env->{'psgix.assets'} ||= [];
     my $url = '/_asset_less/' . $self->key . '.css';
-    push( @{ $env->{'psgix.assets_less'} }, $url );
+    push( @{ $env->{'psgix.assets'} }, $url );
     return $self->serve if $env->{PATH_INFO} eq $url;
     return $self->app->($env);
 }

@@ -32,7 +32,7 @@ my $app = builder {
         [
             200,
             [ 'Content-type', 'text/plain' ],
-            [ map { $_ . $/ } @{ $env->{'psgix.assets_less'} } ]
+            [ map { $_ . $/ } @{ $env->{'psgix.assets'} } ]
         ];
         }
 };

@@ -53,8 +53,6 @@
         <% IF PLACK_ENV == 'development' %>
         <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
         <script src="/static/js/less.min.js" type="text/javascript"></script>
-        <% ELSE %>
-        <link href="<% req.env.item('psgix.assets_less').0 %>" rel="stylesheet" type="text/css">
         <% END %>
         <script type="text/javascript">
             var _gaq = _gaq || [];
