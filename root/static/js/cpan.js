@@ -337,7 +337,6 @@ $(document).ready(function () {
         var container = index.parent().parent();
 
         var index_hidden = localStorage.getItem('hideTOC') == 1;
-        var index_right = localStorage.getItem('rightTOC') == 1;
         index.before(
             '<div id="index-header"><b>Contents</b>'
             + ' [<button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button>]'
