@@ -75,7 +75,16 @@ sub _handle_module {
 sub fetch_latest_distros {
     my ( $self, $size, $pauseid ) = @_;
 
-    my @filter = ( { term => { status => 'latest' } } );
+# status can have all kinds of values, cpan is an attempt to find the ones that are on cpan but
+# are not authorized. Maybe it also includes ones that were superseeded by releases of other people
+    my @filter = (
+        {
+            or => [
+                { term => { status => 'latest' } },
+                { term => { status => 'cpan' } }
+            ]
+        }
+    );
     if ($pauseid) {
         push @filter, { term => { author => $pauseid } };
     }
@@ -92,14 +101,15 @@ sub fetch_latest_distros {
                     },
                 },
             },
-            sort   => [ { date => 'desc' } ],
+            sort => [
+                'distribution', { 'version_numified' => { reverse => \1 } }
+            ],
             fields => [
-                qw(distribution date license author resources.repository abstract metadata.version tests)
+                qw(distribution date license author resources.repository abstract metadata.version tests status authorized)
             ],
             size => $size,
         },
     )->recv;
-
     my %licenses;
     my %distros;
 
@@ -108,6 +118,8 @@ sub fetch_latest_distros {
         my $distro  = $d->{fields}{distribution};
         my $author  = $d->{fields}{author};
         my $repo    = $d->{fields}{'resources.repository'};
+
+        next if $distros{$distro};    # show the firs one
 
      # TODO: can we fetch the bug count in one call for all the distributions?
         my $distribution = $self->request("/distribution/$distro")->recv;
@@ -132,6 +144,9 @@ sub fetch_latest_distros {
         else {
             $distros{$distro}{license} = 1;
         }
+
+        $distros{$distro}{unauthorized}
+            = $d->{fields}{authorized} eq 'false' ? 1 : 0;
 
         # See also root/inc/release-infro.html
         if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
