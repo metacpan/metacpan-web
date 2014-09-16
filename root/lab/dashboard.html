@@ -13,14 +13,14 @@
     <table class="table-bordered table-striped tablesorter dashboard-dist-table">
     <thead>
     <tr>
-       <th colspan="4"></th>
-       <th colspan="4">Missing</th>
-       <th colspan="4">Tests</th>
+       <th class="no-sort" colspan="4"></th>
+       <th class="no-sort" colspan="4">Missing</th>
+       <th class="no-sort" colspan="4">Tests</th>
     </tr>
     <tr>
       <th>Name</th>
       <th>Date</th>
-      <th>Version</th>
+      <th class="no-sort">Version</th>
       <th>Issues</th>
       <th>Repo</th>
       <th>License</th>
@@ -36,7 +36,7 @@
     <% FOR d IN report.distros.keys.sort %>
     <tr>
       <td><a href="/release/<% d %>"><% d %></a></td>
-      <td><% report.distros.$d.date %></td>
+      <td class="date relatize" sort="<% report.distros.$d.date %>"><% report.distros.$d.date %></td>
       <td><% report.distros.$d.version %></td>
       <td><% report.distros.$d.bugs %></td>
       <td class="missing"><% IF report.distros.$d.repo %>X<% END %></td>
