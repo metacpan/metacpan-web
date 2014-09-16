@@ -166,13 +166,10 @@ $(document).ready(function () {
     $('#signin').mouseleave(function () { $('#signin').hide() });
 
     $('table.tablesorter').each(function(){
-        if (this.id == 'dashboard-dist-table') {
-            return;
-        }
         var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
           this.getAttribute('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
-        $(this).tablesorter({sortList: [sortid], textExtraction: function (node) {
+        var cfg = {sortList: [sortid], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
             if(!sort) return $node.text();
@@ -181,7 +178,18 @@ $(document).ready(function () {
             } else {
                 return sort;
             }
-        }} );
+        }};
+        if (this.id == 'dashboard-dist-table') {
+            cfg['headers'] =  {
+                0: { sorter: false },
+                1: { sorter: false },
+                2: { sorter: false },
+                4: { sorter: false },
+                5: { sorter: false }
+            };
+        }
+        cfg['debug'] = true;
+        $(this).tablesorter(cfg);
     });
 
     $('.tablesorter.remote th.header').each(function () {
@@ -194,17 +202,6 @@ $(document).ready(function () {
             var url = window.location.href.replace(window.location.search, '');
             window.location.href = url + '?' + query;
         });
-    });
-
-    $('#dashboard-dist-table').tablesorter({
-        //debug: true,
-        headers: {
-          0: { sorter: false },
-          1: { sorter: false },
-          2: { sorter: false },
-          4: { sorter: false },
-          5: { sorter: false }
-        }
     });
 
     $('.relatize').relatizeDate();
