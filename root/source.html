@@ -45,7 +45,7 @@
     </div>
   </li>
   <% IF module.sloc > 0 %>
-  <li><div><button class="btn-link pod-toggle" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></div></li>
+  <li><div><button class="btn-link pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></div></li>
   <% END %>
   <li class="nav-header">Info</li>
   <li><% module.sloc %> lines of code</li>
@@ -55,20 +55,10 @@
 
 <div class="content">
 <% IF !module.binary %>
-<pre id="source" class="line-numbers" data-pod-lines="<%
+<pre id="source" class="line-numbers pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" data-pod-lines="<%
   module.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')
 %>"><code class="language-<% filetype %>"><% source %></code></pre>
 <% ELSE %>
 This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
 </div>
-
-<script type="text/javascript">
-
-//document.getElementById('source').style.visibility = 'hidden';
-//SyntaxHighlighter.all();
-$(document).ready(function() {
-<% IF module.sloc > 0 %>
-  togglePod();
-<% END %>
-</script>
