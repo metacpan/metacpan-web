@@ -151,10 +151,19 @@ $(function () {
 
     if (source.length) {
         source.find('.syntaxhighlighter .gutter .line').each(function(i, el) {
+            var line = $(el);
             var res;
-            if (res = el.className.match(/(^|\s)number(\d+)(\s|$)/)) {
-                var id = 'L' + res[2];
-                $(el).contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
+            if (res = line.attr('class').match(/(^|\s)number(\d+)(\s|$)/)) {
+                var linenr = res[2];
+                var id = 'L' + linenr;
+                line.contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
+                var link = line.children('a');
+                link.click(function(e) {
+                    e.preventDefault();
+                    link.removeAttr('id');
+                    document.location.hash = '#' + id;
+                    link.attr('id', id);
+                });
             }
         });
 
