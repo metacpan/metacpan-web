@@ -173,19 +173,35 @@ $(document).ready(function () {
     $('#signin').mouseleave(function () { $('#signin').hide() });
 
     $('table.tablesorter').each(function(){
-        var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
-          this.getAttribute('data-default-sort') || '0,0');
+        var table = $(this);
+
+        var sortid = (
+          localStorage.getItem("tablesorter:" + table.attr('id')) ||
+          table.attr('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
-        $(this).tablesorter({sortList: [sortid], textExtraction: function (node) {
-            var $node = $(node);
-            var sort = $node.attr("sort");
-            if(!sort) return $node.text();
-            if ($node.hasClass("date")) {
-                return (new Date(sort)).getTime();
-            } else {
-                return sort;
+
+        var cfg = {
+            sortList: [ sortid ],
+            textExtraction: function (node) {
+                var $node = $(node);
+                var sort = $node.attr("sort");
+                if(!sort) return $node.text();
+                if ($node.hasClass("date")) {
+                    return (new Date(sort)).getTime();
+                } else {
+                    return sort;
+                }
+            },
+            headers : {}
+        };
+
+        table.find('thead th').each(function(i, el) {
+            if ($(el).hasClass('no-sort')) {
+                cfg.headers[i] = { sorter : false };
             }
-        }} );
+        });
+
+        table.tablesorter(cfg);
     });
 
     $('.tablesorter.remote th.header').each(function () {
