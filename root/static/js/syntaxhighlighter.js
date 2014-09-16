@@ -157,6 +157,12 @@ $(function () {
                 $(el).contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
             }
         });
+
+        var res;
+        if (res = document.location.hash.match(/^(#L\d+)(-|,|$)/)) {
+            var el = $(res[1]);
+            $('html, body').scrollTop(el.offset().top);
+        }
     }
 });
 
