@@ -334,12 +334,12 @@ $(document).ready(function () {
     $('#pod-errors').addClass('collapsed');
     $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
 
-    $('.table.tablesorter th.header').on('click', function() {
+    $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
         setTimeout(function(){
             var sortParam  = $.getUrlVar('sort');
             if( sortParam != null ){
-                sortParam  = sortParam.slice(2,5);
+                sortParam  = sortParam.slice(2, sortParam.length-2);
                 localStorage.setItem( "tablesorter:" + tableid, sortParam );
             }
         }, 1000);
