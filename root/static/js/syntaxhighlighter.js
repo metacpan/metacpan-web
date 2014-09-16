@@ -167,6 +167,5 @@ $(function () {
 });
 
 function togglePod() {
-    $('.syntaxhighlighter').toggleClass('pod-hidden');
     $('.pod-toggle').toggleClass('pod-hidden');
 }
