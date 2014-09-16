@@ -188,7 +188,7 @@ $(document).ready(function () {
                 5: { sorter: false }
             };
         }
-        cfg['debug'] = true;
+        // cfg['debug'] = true;
         $(this).tablesorter(cfg);
     });
 
