@@ -58,13 +58,6 @@ $(function () {
       return processPackages(html);
     };
 
-    var getLineNumbersHtml = SyntaxHighlighter.Highlighter.prototype.getLineNumbersHtml;
-    SyntaxHighlighter.Highlighter.prototype.getLineNumbersHtml = function() {
-      var html = getLineNumbersHtml.apply(this, arguments);
-      html = html.replace(/(<div[^>]*>\s*)(\d+)(\s*<\/div>)/g, '$1<a href="#L$2" id="L$2">$2</a>$3');
-      return html;
-    };
-
 
     var source = $("#source");
     if (source.length) {
@@ -154,6 +147,14 @@ $(function () {
             ).join(', ');
             pre.find('.syntaxhighlighter .line').filter(selector).addClass('pod-line');
         }
+
+        pre.find('.syntaxhighlighter .gutter .line').each(function(i, el) {
+            var res;
+            if (res = el.className.match(/(^|\s)number(\d+)(\s|$)/)) {
+                var id = 'L' + res[2];
+                $(el).contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
+            }
+        });
     });
 });
 
