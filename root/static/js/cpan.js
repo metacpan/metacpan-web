@@ -167,7 +167,7 @@ $(document).ready(function () {
         }
     }
 
-    setTimeout(function() { SyntaxHighlighter.highlight(); }, 50);
+    SyntaxHighlighter.highlight();
 
     $('#signin-button').mouseenter(function () { $('#signin').show() });
     $('#signin').mouseleave(function () { $('#signin').hide() });
