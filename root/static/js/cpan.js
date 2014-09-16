@@ -125,6 +125,13 @@ $(document).ready(function () {
       return processPackages(html);
     };
 
+    var getLineNumbersHtml = SyntaxHighlighter.Highlighter.prototype.getLineNumbersHtml;
+    SyntaxHighlighter.Highlighter.prototype.getLineNumbersHtml = function() {
+      var html = getLineNumbersHtml.apply(this, arguments);
+      html = html.replace(/(<div[^>]*>\s*)(\d+)(\s*<\/div>)/g, '$1<a href="#L$2" id="L$2">$2</a>$3');
+      return html;
+    };
+
 
     var source = $("#source");
     // if this is a source-code view with destination anchor
