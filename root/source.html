@@ -45,7 +45,7 @@
     </div>
   </li>
   <% IF module.sloc > 0 %>
-  <li><div><button class="btn-link" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i>Toggle pod</button></div></li>
+  <li><div><button class="btn-link pod-toggle" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></div></li>
   <% END %>
   <li class="nav-header">Info</li>
   <li><% module.sloc %> lines of code</li>
