@@ -147,15 +147,17 @@ $(function () {
             ).join(', ');
             pre.find('.syntaxhighlighter .line').filter(selector).addClass('pod-line');
         }
+    });
 
-        pre.find('.syntaxhighlighter .gutter .line').each(function(i, el) {
+    if (source.length) {
+        source.find('.syntaxhighlighter .gutter .line').each(function(i, el) {
             var res;
             if (res = el.className.match(/(^|\s)number(\d+)(\s|$)/)) {
                 var id = 'L' + res[2];
                 $(el).contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
             }
         });
-    });
+    }
 });
 
 function togglePod() {
