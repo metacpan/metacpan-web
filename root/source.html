@@ -45,7 +45,7 @@
     </div>
   </li>
   <% IF module.sloc > 0 %>
-  <li><div><a href="javascript:togglePod(<% module.pod_lines.json %>)"><i class="fa fa-exchange fa-fw black"></i>Toggle pod</a></div></li>
+  <li><div><button class="btn-link" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i>Toggle pod</button></div></li>
   <% END %>
   <li class="nav-header">Info</li>
   <li><% module.sloc %> lines of code</li>
@@ -67,7 +67,8 @@ This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file<
 //SyntaxHighlighter.all();
 $(document).ready(function() {
 <% IF module.sloc > 0 %>
-togglePod(<% module.pod_lines.json %>);
+  setPodLines(<% module.pod_lines.json %>);
+  togglePod();
 <% END %>
 if(document.location.hash)
     document.location.href = document.location.href;

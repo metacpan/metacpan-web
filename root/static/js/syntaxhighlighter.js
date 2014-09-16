@@ -144,3 +144,20 @@ $(function () {
         SyntaxHighlighter.highlight(config, source);
     });
 });
+
+function setPodLines (lines) {
+    if (!lines || !lines.length) return;
+    for (var i = 0; i < lines.length; i++) {
+        var start = lines[i][0];
+        var length = lines[i][1];
+        var selectors = [];
+        for (var x = start; x < start + length; x++) {
+            selectors.push('.number' + (x+1));
+        }
+        $('#source .syntaxhighlighter .line').filter(selectors.join(', ')).addClass('pod-line');
+    }
+}
+
+function togglePod() {
+    $('.syntaxhighlighter').toggleClass('pod-hidden');
+}
