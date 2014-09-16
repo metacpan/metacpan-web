@@ -9,7 +9,20 @@
         }
     }
     .file-group {
-      margin-bottom: 10px;
+        h2 {
+            display: inline;
+            font-weight: bold;
+            font-size: 100%;
+            margin: 0;
+            line-height: inherit;
+        }
+        ul {
+            padding-left: 0;
+        }
+        a {
+            font-weight: bold;
+        }
+        margin-bottom: 10px;
     }
 }
 
@@ -17,6 +30,7 @@
  * See /release/CPAN-Changes for example
  */
 .last-changes {
+    h2:extend(.content .file-group h2) {}
     ul {
         margin-bottom: 1em;
         padding-left: 20px;

@@ -33,7 +33,7 @@
 
 <div class="content">
 
-<%
+<%-
 documentation = [];
 documentation_raw = [];
 provides      = [];
@@ -64,93 +64,97 @@ END;
 documentation = documentation.merge(documentation_raw);
 %>
 
-<% IF documentation.size %>
+<%- IF documentation.size %>
 <div class="file-group release-documentation">
-  <a name="docs"></a><strong>Documentation</strong>
-<% FOREACH module IN documentation %>
-  <div>
-    <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
-  </div>
-<% END %>
+  <h2 id="docs">Documentation</h2>
+  <ul>
+  <%- FOREACH module IN documentation %>
+  <li>
+    <% link_to_file(module) | none %><% IF module.abstract %> - <% module.abstract; END %>
+  </li>
+  <%- END %>
+  </ul>
 </div>
-<% END %>
+<%- END %>
 
-<% IF modules.size %>
+<%- IF modules.size %>
 <div class="file-group release-modules">
-  <a name="modules"></a><strong>Modules</strong>
-<% FOREACH module IN modules %>
-  <div>
-    <strong><% link_to_file(module) | none %></strong><% IF module.abstract %> - <% module.abstract; END %>
+  <h2 id="modules">Modules</h2>
+  <ul>
+  <%- FOREACH module IN modules %>
+  <li>
+    <% link_to_file(module) | none %><% IF module.abstract %> - <% module.abstract; END %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </div>
-<% END %>
+  </li>
+  <%- END %>
+  </ul>
 </div>
-<% END %>
+<%- END %>
 
 <% IF provides.size %>
 <div class="file-group release-provides">
-  <a name="provides"></a><strong>Provides</strong>
-<% FOREACH module IN provides.sort('package') %>
-  <div>
-    <strong><% link_to_source(module) | none %></strong> in <% module.path %>
+  <h2 id="provides">Provides</h2>
+  <ul>
+  <%- FOREACH module IN provides.sort('package') %>
+  <li>
+    <% link_to_source(module) | none %> in <% module.path %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </div>
-<% END %>
+  </li>
+  <%- END %>
+  </ul>
 </div>
-<% END %>
+<%- END %>
 
-<% IF examples.size %>
+<%- IF examples.size %>
 <div class="file-group release-examples">
-  <a name="examples"></a><strong>Examples</strong>
-<% FOREACH file IN examples.sort('path') %>
-  <div>
-    <% IF file.path.match('\.pod$') %>
-      <strong>
-        <% link_to_file(file, file.path) | none %>
-      </strong>
-    <% ELSE %>
-      <strong>
-        <% link_to_source(file) | none %>
-      </strong>
-        <% IF file.pod_lines %>
-          [<strong>
-            <% link_to_file(file, "pod") | none %>
-          </strong>]
-        <% END %>
-    <% END %>
-  </div>
-<% END %>
+  <h2 id="examples">Examples</h2>
+  <ul>
+  <%- FOREACH file IN examples.sort('path') %>
+  <li>
+    <%- IF file.path.match('\.pod$') %>
+      <% link_to_file(file, file.path) | none %>
+    <%- ELSE %>
+      <% link_to_source(file) | none %>
+      <%- IF file.pod_lines %>
+        [<% link_to_file(file, "pod") | none %>]
+      <%- END %>
+    <%- END %>
+  </li>
+  <%- END %>
+  </ul>
 </div>
-<% END %>
+<%- END %>
 
-<% IF root.size %>
+<%- IF root.size %>
 <div class="file-group release-other-files">
-  <a name="other"></a><strong>Other files</strong>
-<% FOREACH file IN root %>
-<div><strong><% link_to_file(file, file.name) | none %></strong></div>
-<% END %>
+  <h2 id="other">Other files</h2>
+  <ul>
+    <%- FOREACH file IN root %>
+    <li><% link_to_file(file, file.name) | none %></li>
+    <%- END %>
+  </ul>
 </div>
-<% END %>
+<%- END %>
 
 <% MACRO change_group(group) BLOCK; %>
 <ul>
-    <% FOREACH entry IN group; %>
-    <li class="<% IF entry.entries && entry.entries.size; %>group-header<% END %>"><span class="change-entry"><% entry.text | none %></span>
-        <% IF entry.entries && entry.entries.size;
+    <%- FOREACH entry IN group; %>
+    <li class="<% IF entry.entries.size %>group-header<% END %>"><span class="change-entry"><% entry.text | none %></span>
+        <% IF entry.entries.size;
           change_group(entry.entries) | none;
         END %>
     </li>
-    <% END %>
+    <%- END %>
 </ul>
 <% END %>
 
-<% IF last_version_changes; SET v = last_version_changes; %>
+<%- IF last_version_changes %>
 
-<a name="whatsnew"></a>
-<strong>Changes for version <% v.version %></strong>
 <div class="last-changes">
-    <% change_group(v.entries) | none %>
+    <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
+    <% change_group(last_version_changes.entries) | none %>
 </div>
-<% END %>
+
+<%- END %>
 
 </div>
