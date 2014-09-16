@@ -66,7 +66,7 @@ $(function () {
         if (source.html().length > 500000) {
             source.children('code').removeClass();
         }
-        else if ( lineMatch = document.location.hash.match(/^#L(\d+)$/) ) {
+        else if ( lineMatch = document.location.hash.match(/^#L(\d+(-\d+)?(,\d+(-\d+)?)*)$/) ) {
             source.attr('data-line', lineMatch[1]);
         }
         // check for 'P{encoded_package_name}' anchor, convert to
