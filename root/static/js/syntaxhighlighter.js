@@ -1,4 +1,21 @@
 $(function () {
+    function parseLines (lines) {
+        lines = lines.split(/\s*,\s*/);
+        var all_lines = [];
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            var res = line.match(/^\s*(\d+)\s*(-\s*(\d+)\s*)?$/);
+            if (res) {
+                var start = res[1]*1;
+                var end = (res[3] || res[1])*1;
+                for (var l = start; l <= end; l++) {
+                    all_lines.push(l);
+                }
+            }
+        }
+        return all_lines;
+    }
+
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
 
@@ -124,39 +141,21 @@ $(function () {
         }
         var lines = pre.attr('data-line');
         if (lines) {
-            lines = lines.split(/,/);
-            var all_lines = [];
-            for (var i = 0; i < lines.length; i++) {
-                var line = lines[i].trim();
-                var res = line.match(/(\d+)-(\d+)/);
-                if (res) {
-                    for (var l = res[1]; l <= res[2]; l++) {
-                        all_lines.push(l);
-                    }
-                }
-                else {
-                    all_lines.push(line);
-                }
-            }
-            config.highlight = all_lines;
+            config.highlight = parseLines(lines);
         }
 
         SyntaxHighlighter.highlight(config, source);
+
+        var pod_lines = pre.attr('data-pod-lines');
+        if (pod_lines) {
+            var selector = $.map(
+                parseLines(pod_lines),
+                function (e, i) { return '.number' + e }
+            ).join(', ');
+            pre.find('.syntaxhighlighter .line').filter(selector).addClass('pod-line');
+        }
     });
 });
-
-function setPodLines (lines) {
-    if (!lines || !lines.length) return;
-    for (var i = 0; i < lines.length; i++) {
-        var start = lines[i][0];
-        var length = lines[i][1];
-        var selectors = [];
-        for (var x = start; x < start + length; x++) {
-            selectors.push('.number' + (x+1));
-        }
-        $('#source .syntaxhighlighter .line').filter(selectors.join(', ')).addClass('pod-line');
-    }
-}
 
 function togglePod() {
     $('.syntaxhighlighter').toggleClass('pod-hidden');
