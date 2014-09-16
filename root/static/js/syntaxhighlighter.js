@@ -163,6 +163,19 @@ $(function () {
             var el = $(res[1]);
             $('html, body').scrollTop(el.offset().top);
         }
+
+        $(window).on('hashchange', function() {
+            var lineMatch;
+            if (lineMatch = document.location.hash.match(/^#L(\d+(-\d+)?(,\d+(-\d+)?)*)$/) ) {
+                source.attr('data-line', lineMatch[1]);
+                var selector = $.map(
+                    parseLines(lineMatch[1]),
+                    function (e, i) { return '.number' + e }
+                ).join(', ');
+                source.find('.highlighted').removeClass('highlighted');
+                source.find('.syntaxhighlighter .line').filter(selector).addClass('highlighted');
+            }
+        });
     }
 });
 
