@@ -2,4 +2,9 @@
 
 # Use the puppet-installed wrapper to set up the env properly.
 wrapper=$HOME/bin/metacpan-web-carton
+test -x $wrapper && \
 exec $wrapper exec "$@"
+
+# If the wrapper doesn't exist, just try it with plain carton.
+cd "`dirname "$0"`"/..
+exec carton exec "$@"
