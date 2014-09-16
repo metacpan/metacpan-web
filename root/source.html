@@ -55,7 +55,9 @@
 
 <div class="content">
 <% IF !module.binary %>
-<pre id="source" class="line-numbers"><code class="language-<% filetype %>"><% source %></code></pre>
+<pre id="source" class="line-numbers" data-pod-lines="<%
+  module.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')
+%>"><code class="language-<% filetype %>"><% source %></code></pre>
 <% ELSE %>
 This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
@@ -67,7 +69,6 @@ This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file<
 //SyntaxHighlighter.all();
 $(document).ready(function() {
 <% IF module.sloc > 0 %>
-  setPodLines(<% module.pod_lines.json %>);
   togglePod();
 <% END %>
 if(document.location.hash)
