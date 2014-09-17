@@ -7,8 +7,8 @@ We strongly recommend using [metacpan-developer](https://github.com/CPAN-API/met
 this will give you a virtual machine already configured and ready to start developing on.
 
     $ vagrant ssh
-    $ cd /home/metacpan/metacpan.org
-    $ perl bin/daemon_control.pl start
+    $ cd $HOME/metacpan-web
+    $ sudo service starman_metacpan-web restart
 
 You'll find some log files in var/logs.
 
