@@ -100,15 +100,21 @@
     <% END; END; END %>
     <%
         i = 0;
-        counter = 1;
         aggregated = [];
         latest = releases[0];
         FOREACH release IN releases;
-        IF release.date.dt_canonical > latest.date.dt_canonical; latest = release; END;
-        IF last == release.distribution; counter = counter + 1; NEXT;
-        ELSE; last = release.distribution; counter = 1; END;
-        UNLESS release.name; NEXT; END;
-        aggregated.push(release);
+            IF release.date.dt_canonical > latest.date.dt_canonical;
+                latest = release;
+            END;
+            IF last == release.distribution;
+                NEXT;
+            ELSE;
+                last = release.distribution;
+            END;
+            UNLESS release.name;
+                NEXT;
+            END;
+            aggregated.push(release);
         END %>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %></li>
