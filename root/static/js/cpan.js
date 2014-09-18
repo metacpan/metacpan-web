@@ -120,8 +120,9 @@ $(document).ready(function () {
     };
 
     var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
-    SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function() {
-      var html = getCodeLinesHtml.apply(this, arguments);
+    SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function(html, lineNumbers) {
+      html = html.replace(/^ /, "&#32;");
+      html = getCodeLinesHtml.call(this, html, lineNumbers);
       return processPackages(html);
     };
 
