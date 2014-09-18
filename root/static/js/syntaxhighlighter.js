@@ -158,7 +158,21 @@ $(function () {
 
         var pod_lines = pre.attr('data-pod-lines');
         if (pod_lines) {
-            findLines(pre, pod_lines).addClass('pod-line');
+            var pods = findLines(pre, pod_lines);
+            pods.addClass('pod-line');
+            pods.each(function(i, line) {
+                var $line = $(line);
+                var prev = $line.prev();
+                if (!prev.length || !prev.hasClass('pod-line')) {
+                    if ($line.parent('.gutter').length) {
+                        $line.before('<div class="pod-placeholder">&mdash;</div>');
+                    }
+                    else {
+                        var lines = $line.nextUntil(':not(.pod-line)').length + 1;
+                        $line.before('<div class="pod-placeholder"><button onclick="togglePod()" class="btn-link"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> '+lines+' line'+(lines > 1 ? 's' : '')+' of Pod</button></div>');
+                    }
+                }
+            });
         }
     });
 
@@ -206,5 +220,23 @@ $(function () {
 });
 
 function togglePod() {
+    var scrollTop = $(window).scrollTop();
+    var topLine;
+    var topOffset;
+    $('.syntaxhighlighter .line').each(function(i, el) {
+      var line = $(el);
+      if (line.hasClass('pod-line')) {
+        return;
+      }
+      else if ($(el).offset().top < scrollTop) {
+        topLine = line;
+      }
+    });
+    if (topLine) {
+        topOffset = topLine.offset().top - scrollTop;
+    }
     $('.pod-toggle').toggleClass('pod-hidden');
+    if (topLine) {
+        $(window).scrollTop(topLine.offset().top - topOffset);
+    }
 }

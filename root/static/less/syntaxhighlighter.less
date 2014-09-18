@@ -27,6 +27,93 @@ html body .syntaxhighlighter {
     }
 }
 
+body {
+    .syntaxhighlighter {
+        .pod-line {
+            background-color: darken(@pre-bg, 5%) !important;
+        }
+        .container {
+            .pod-line {
+                border-right: 1px solid darken(@pre-bg, 15%) !important;
+            }
+        }
+        .gutter {
+            .pod-line {
+                border-left: 1px solid darken(@pre-bg, 15%) !important;
+            }
+        }
+        .pod-line:first-child,
+        :not(.pod-line) + .pod-line  {
+            border-top: 1px solid darken(@pre-bg, 15%) !important;
+        }
+        .pod-line + :not(.pod-line)  {
+            border-top: 1px solid darken(@pre-bg, 15%) !important;
+        }
+        .pod-line:last-child {
+            border-bottom: 1px solid darken(@pre-bg, 15%) !important;
+        }
+
+        .gutter {
+            .pod-placeholder {
+                text-align: right !important;
+                padding: 0 0.5em !important;
+                border-right: 3px solid transparent !important;
+            }
+        }
+    }
+    .syntaxhighlighter {
+        .pod-placeholder {
+            font-style: italic !important;
+            background-color: darken(@pre-bg, 15%) !important;
+        }
+    }
+
+    .pod-hidden {
+        .syntaxhighlighter {
+            div.pod-placeholder {
+                display: block;
+                position: static !important;
+                height: auto !important;
+                overflow: auto !important;
+            }
+            .container {
+                .pod-placeholder {
+                    position: static !important;
+                    right: auto !important;
+                    padding-left: 0 !important;
+                    border-radius: 0;
+
+                    button {
+                        text-align: left;
+                        padding-left: 2em;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .syntaxhighlighter {
+        .gutter {
+            .pod-placeholder {
+                position: absolute !important;
+                height: 0px !important;
+                overflow: hidden !important;
+            }
+        }
+        .container {
+            .pod-placeholder {
+                position: absolute !important;
+                right: 0 !important;
+                border-radius: 0 0 0 5px;
+
+                button {
+                    padding: 0 1em;
+                }
+            }
+        }
+    }
+}
+
 .show-pod {
     display: none;
 }
