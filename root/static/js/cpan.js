@@ -177,7 +177,7 @@ $(document).ready(function () {
         var sortid = (localStorage.getItem("tablesorter:"+ this.id) ||
           this.getAttribute('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
-        $(this).tablesorter({sortList: [sortid], textExtraction: function (node) {
+        var cfg = {sortList: [sortid], textExtraction: function (node) {
             var $node = $(node);
             var sort = $node.attr("sort");
             if(!sort) return $node.text();
@@ -186,7 +186,18 @@ $(document).ready(function () {
             } else {
                 return sort;
             }
-        }} );
+        }};
+        if (this.id == 'dashboard-dist-table') {
+            cfg['headers'] =  {
+                0: { sorter: false },
+                1: { sorter: false },
+                2: { sorter: false },
+                4: { sorter: false },
+                5: { sorter: false }
+            };
+        }
+        // cfg['debug'] = true;
+        $(this).tablesorter(cfg);
     });
 
     $('.tablesorter.remote th.header').each(function () {
@@ -319,12 +330,12 @@ $(document).ready(function () {
     $('#pod-errors').addClass('collapsed');
     $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
 
-    $('.table.tablesorter th.header').on('click', function() {
+    $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
         setTimeout(function(){
             var sortParam  = $.getUrlVar('sort');
             if( sortParam != null ){
-                sortParam  = sortParam.slice(2,5);
+                sortParam  = sortParam.slice(2, sortParam.length-2);
                 localStorage.setItem( "tablesorter:" + tableid, sortParam );
             }
         }, 1000);
