@@ -1,3 +1,29 @@
+Title: Server move - phase 1
+------------------------------
+Date: 2014-09-19T19:00:00
+
+We are moving servers, [Bytemark](http://www.bytemark.co.uk/) have
+asked for the old one back... and given us 2 new ones in replacement!
+
+We are moving as much as possible to [Fastly](http://www.fastly.com) CDN
+which makes switching origins very easy, and instant.
+
+So far we have moved...
+
+* http(s)://cpan.metacpan.org/
+* http://explorer.metacpan.org/
+* http://search.mcpan.org/
+* http://mcpan.org/
+* http://sco.metacpan.org/
+
+If you had either http://search.cpan.org/ or http://cpansearch.perl.org/
+in your desktop `hosts` file you'll need to
+[update the IP](https://metacpan.org/about/faq#cani_automatically_redirectlinkspointingatsearch.cpan.orgtometacpan.org)
+
+We will be documenting this a bit more under [Network Infrastructure](https://github.com/CPAN-API/network-infrastructure)
+but that's a work in progress.
+
+
 Title: Let's move to Bootstrap 3
 ------------------------------
 Date: 2014-08-06T08:55:22

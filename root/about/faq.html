@@ -50,7 +50,7 @@ These search-terms can be combined with each other and regular search term.
 * <em>version:</em> limit the search to modules with the given version number ( e.g. [version:1.00](/search?q=version%3A1.00) )
 
 Wildcards: ? matches a single character, * matches any number of characters
-( e.g. [version:1.*](/search?q=version%3A1.*) and [version:1.?](/search?q=version%3A1.?) ) 
+( e.g. [version:1.*](/search?q=version%3A1.*) and [version:1.?](/search?q=version%3A1.?) )
 
 ## Why can't I find a specific module?
 
@@ -112,12 +112,14 @@ For Chrome users, the [MetaCPAN
 Helper](https://chrome.google.com/webstore/detail/metacpan-helper/aoioenbjpmccpkincghhjfmeceknpcnb)
 extension will automatically rewrite search.cpan.org links to MetaCPAN.
 
-You can accomplish the same thing by modifying your <code>hosts</code> file.
+You can accomplish the same thing by modifying your <code>hosts</code> file
+(*Note*: these IP addresses may have to change over time, as we move servers,
+so come back here to check, if things stop working).
 Add the following lines and all links to search.cpan.org (and links to source
 code) will be redirected to MetaCPAN:
 
-    46.43.35.68 search.cpan.org
-    46.43.35.68 cpansearch.perl.org
+    5.153.225.19 search.cpan.org
+    5.153.225.19 cpansearch.perl.org
 
 If you do this, be sure to point cpanm to another mirror, as it defaults to
 search.cpan.org. Here's how:
