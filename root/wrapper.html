@@ -62,6 +62,15 @@
 
           ga('create', 'UA-27829474-1', 'auto');
           ga('send', 'pageview');
+
+          ga(function() {
+            var cookies=['__utma', '__utmb', '__utmc', '__utmv', '__utmz', '_gat'];
+            for (var i = cookies.length; i--; ) {
+              var cookie = cookies[i]+"=; expires="+(new Date(0)).toGMTString()+"; path=/";
+              document.cookie = cookie;
+              document.cookie = cookie + '; domain=.'+document.domain;
+            }
+          });
         </script>
         <% IF twitter_card_inc %>
         <% INCLUDE $twitter_card_inc %>
