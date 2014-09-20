@@ -346,9 +346,9 @@ $(document).ready(function () {
 
         var index_hidden = localStorage.getItem('hideTOC') == 1;
         index.before(
-            '<div id="index-header"><b>Contents</b>'
+            '<header><b>Contents</b>'
             + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]'
-            + '</div>');
+            + '</header>');
 
         $('.toggle-index').on('click', function (e) { e.preventDefault(); toggleTOC(); });
         if (index_hidden) {
