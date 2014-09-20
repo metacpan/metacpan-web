@@ -1,5 +1,7 @@
 /* jshint white: true, lastsemic: true */
 
+document.cookie = "hideTOC=; expires="+(new Date(0)).toGMTString()+"; path=/";
+
 $.fn.textWidth = function () {
     var html_org = $(this).html();
     var html_calc = '<span>' + html_org + '</span>';
