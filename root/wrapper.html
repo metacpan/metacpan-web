@@ -58,7 +58,8 @@
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-          ga('create', 'UA-27829474-1', 'auto');
+          ga('create', 'UA-27829474-1', {'storage': 'none', 'clientId': localStorage.getItem('gaClientId')});
+          ga(function (t) { localStorage.setItem('gaClientId', t.get('clientId')); });
           ga('send', 'pageview');
         </script>
         <% IF twitter_card_inc %>
