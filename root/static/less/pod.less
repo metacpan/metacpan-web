@@ -15,15 +15,8 @@
         margin-left: 20px;
         padding-left: 2em;
     }
-    ul#index, ul#index ul {
-        padding-left: 0;
-    }
     ul li {
         margin-bottom: 0.5em;
-    }
-    ul#index li {
-        margin-bottom: 0;
-        line-height: 1.7em;
     }
     ul li p {
         margin: 0;
@@ -64,19 +57,37 @@
 
 }
 
-ul#index, #index ul { list-style-type: none; }
+ul#index, #index ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    ul {
+        margin-left: 1.5em;
+    }
+
+    li {
+        margin-bottom: 0;
+        line-height: 1.7em;
+    }
+}
 
 #index-container {
     overflow-y: hidden;
 
+    .index-header {
+        text-align: center;
+        line-height: 24px;
+    }
+
     .index-border {
         display: inline-block;
         border: 1px solid rgb(215, 215, 215);
+        padding: 3px 10px;
     }
 
     #index {
-        padding: 0 10px 3px;
-        margin: 0;
+        overflow-y: hidden;
     }
 
     .toggle-show {
@@ -119,15 +130,6 @@ ul#index, #index ul { list-style-type: none; }
             display: inline-block;
         }
     }
-}
-
-#index-header {
-    text-align: center;
-    padding-top: 3px;
-}
-
-#index {
-    overflow-y: hidden;
 }
 
 .nogutter, .pod pre {

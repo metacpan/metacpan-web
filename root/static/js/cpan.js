@@ -364,7 +364,7 @@ $(document).ready(function () {
 
         var index_hidden = localStorage.getItem('hideTOC') == 1;
         index.before(
-            '<div id="index-header"><b>Contents</b>'
+            '<div class="index-header"><b>Contents</b>'
             + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]'
             + ' <button class="btn-link toggle-index-right"><i class="fa fa-toggle-right"></i><i class="fa fa-toggle-left"></i></button>'
             + '</div>');
