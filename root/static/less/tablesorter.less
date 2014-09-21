@@ -7,21 +7,19 @@ table.tablesorter {
             height: auto;
             font-weight: bold;
 
-            &:after {
+            &:before {
                 .fa;
+                line-height: inherit;
                 float: right;
                 display: inline;
                 padding-left: 5px;
                 content: @fa-var-sort;
             }
-            &.headerSortUp:after {
+            &.headerSortUp:before {
                 content: @fa-var-caret-down;
             }
-            &.headerSortDown:after {
+            &.headerSortDown:before {
                 content: @fa-var-caret-up;
-            }
-            &.date:after, &.number:after {
-                float: none;
             }
         }
     }
