@@ -4,16 +4,24 @@ $(function () {
         var all_lines = [];
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            var res = line.match(/^\s*(\d+)\s*(-\s*(\d+)\s*)?$/);
+            var res = line.match(/^\s*(\d+)\s*(?:-\s*(\d+)\s*)?$/);
             if (res) {
                 var start = res[1]*1;
-                var end = (res[3] || res[1])*1;
+                var end = (res[2] || res[1])*1;
                 for (var l = start; l <= end; l++) {
                     all_lines.push(l);
                 }
             }
         }
         return all_lines;
+    }
+
+    function findLines (el, lines) {
+        var selector = $.map(
+            parseLines(lines),
+            function (line) { return '.number' + line }
+        ).join(', ');
+        return el.find('.syntaxhighlighter .line').filter(selector);
     }
 
     var hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
@@ -65,7 +73,7 @@ $(function () {
     var source = $("#source");
     if (source.length) {
         var lineMatch;
-        var packageMatch
+        var packageMatch;
         if (source.html().length > 500000) {
             source.children('code').removeClass();
         }
@@ -92,22 +100,16 @@ $(function () {
     }
 
     /* set perl as the default type in pod */
-    $(".pod pre > code").each(function(index, source) {
+    $(".pod pre > code").each(function(index, code) {
         var have_lang;
-        if (source.className) {
-            var classes = source.className.split(/\s+/);
-            for (var i = 0; i < classes.length; i++) {
-                if (classes[i].match(/^language-(.*)/)) {
-                    return;
-                }
-            }
+        if (code.className && code.className.match(/(?:\s|^)language-\S+/)) {
+            return;
         }
-        source.className = 'language-perl';
+        $(code).addClass('language-perl');
     });
 
-    $(".content pre > code").each(function(index, source) {
-        var code = $(source);
-        var pre = code.parent();
+    $(".content pre > code").each(function(index, code) {
+        var pre = $(code).parent();
 
         var config = {
             'gutter'      : false,
@@ -115,13 +117,10 @@ $(function () {
             'quick-code'  : false,
             'tab-size'    : 8
         };
-        if (source.className) {
-            var classes = source.className.split(/\s+/);
-            for (var i = 0; i < classes.length; i++) {
-                var res = classes[i].match(/^language-(.*)/);
-                if (res) {
-                    config.brush = res[1];
-                }
+        if (code.className) {
+            var res = code.className.match(/(?:\s|^)language-(\S+)/);
+            if (res) {
+                config.brush = res[1];
             }
         }
         if (!config.brush) {
@@ -140,15 +139,11 @@ $(function () {
             config.highlight = parseLines(lines);
         }
 
-        SyntaxHighlighter.highlight(config, source);
+        SyntaxHighlighter.highlight(config, code);
 
         var pod_lines = pre.attr('data-pod-lines');
         if (pod_lines) {
-            var selector = $.map(
-                parseLines(pod_lines),
-                function (e, i) { return '.number' + e }
-            ).join(', ');
-            pre.find('.syntaxhighlighter .line').filter(selector).addClass('pod-line');
+            findLines(pre, pod_lines).addClass('pod-line');
         }
     });
 
@@ -180,12 +175,8 @@ $(function () {
             var lineMatch;
             if (lineMatch = document.location.hash.match(hashLines) ) {
                 source.attr('data-line', lineMatch[1]);
-                var selector = $.map(
-                    parseLines(lineMatch[1]),
-                    function (e, i) { return '.number' + e }
-                ).join(', ');
                 source.find('.highlighted').removeClass('highlighted');
-                source.find('.syntaxhighlighter .line').filter(selector).addClass('highlighted');
+                findLines(source, lineMatch[1]).addClass('highlighted');
             }
         });
     }
