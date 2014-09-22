@@ -16,6 +16,8 @@ $(function () {
         return all_lines;
     }
 
+    var hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
+
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
 
@@ -66,7 +68,7 @@ $(function () {
         if (source.html().length > 500000) {
             source.children('code').removeClass();
         }
-        else if ( lineMatch = document.location.hash.match(/^#L(\d+(-\d+)?(,\d+(-\d+)?)*)$/) ) {
+        else if ( lineMatch = document.location.hash.match(hashLines) ) {
             source.attr('data-line', lineMatch[1]);
         }
         // check for 'P{encoded_package_name}' anchor, convert to
@@ -175,7 +177,7 @@ $(function () {
 
         $(window).on('hashchange', function() {
             var lineMatch;
-            if (lineMatch = document.location.hash.match(/^#L(\d+(-\d+)?(,\d+(-\d+)?)*)$/) ) {
+            if (lineMatch = document.location.hash.match(hashLines) ) {
                 source.attr('data-line', lineMatch[1]);
                 var selector = $.map(
                     parseLines(lineMatch[1]),
