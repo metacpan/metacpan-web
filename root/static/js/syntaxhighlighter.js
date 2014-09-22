@@ -56,6 +56,7 @@ $(function () {
     var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
     SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function(html, lineNumbers) {
       html = html.replace(/^ /, "&#32;");
+      html = html.replace(/^\t/, "&#9;");
       html = getCodeLinesHtml.call(this, html, lineNumbers);
       return processPackages(html);
     };
