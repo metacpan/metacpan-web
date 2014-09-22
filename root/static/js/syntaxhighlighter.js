@@ -1,4 +1,5 @@
 $(function () {
+    // convert a string like "1,3-5,7" into an array [1,3,4,5,7]
     function parseLines (lines) {
         lines = lines.split(/\s*,\s*/);
         var all_lines = [];
@@ -63,6 +64,8 @@ $(function () {
 
     var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
     SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml = function(html, lineNumbers) {
+      // the syntax highlighter has a bug that strips spaces from the first line.
+      // replace any leading whitespace with an entity, preventing that.
       html = html.replace(/^ /, "&#32;");
       html = html.replace(/^\t/, "&#9;");
       html = getCodeLinesHtml.call(this, html, lineNumbers);
@@ -74,9 +77,12 @@ $(function () {
     if (source.length) {
         var lineMatch;
         var packageMatch;
+        // avoid highlighting excessively large blocks of code as they will take
+        // too long, causing browsers to lag and offer to kill the script
         if (source.html().length > 500000) {
             source.children('code').removeClass();
         }
+        // save highlighted lines in an attribute, to be used later
         else if ( lineMatch = document.location.hash.match(hashLines) ) {
             source.attr('data-line', lineMatch[1]);
         }
@@ -99,7 +105,7 @@ $(function () {
         }
     }
 
-    /* set perl as the default type in pod */
+    // on pod pages, set the language to perl if no other language is set
     $(".pod pre > code").each(function(index, code) {
         var have_lang;
         if (code.className && code.className.match(/(?:\s|^)language-\S+/)) {
@@ -130,10 +136,12 @@ $(function () {
         if (pre.hasClass('line-numbers')) {
             config.gutter = true;
         }
+        // starting line number can be provided by an attribute
         var first_line = pre.attr('data-start');
         if (first_line) {
             config['first-line'] = first_line;
         }
+        // highlighted lines can be provided by an attribute
         var lines = pre.attr('data-line');
         if (lines) {
             config.highlight = parseLines(lines);
@@ -148,6 +156,7 @@ $(function () {
     });
 
     if (source.length) {
+        // on the source page, make line numbers into links
         source.find('.syntaxhighlighter .gutter .line').each(function(i, el) {
             var line = $(el);
             var res;
@@ -157,6 +166,9 @@ $(function () {
                 line.contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
                 var link = line.children('a');
                 link.click(function(e) {
+                    // normally the browser would update the url and scroll to
+                    // the the link.  instead, update the hash ourselves, but
+                    // unset the id first so it doesn't scroll
                     e.preventDefault();
                     link.removeAttr('id');
                     document.location.hash = '#' + id;
@@ -165,12 +177,16 @@ $(function () {
             }
         });
 
+        // the line ids are added by javascript, so the browser won't have
+        // scrolled to it.  also, highlight ranges don't correspond to exact
+        // ids.  do the initial scroll ourselves.
         var res;
         if (res = document.location.hash.match(/^(#L\d+)(-|,|$)/)) {
             var el = $(res[1]);
             $('html, body').scrollTop(el.offset().top);
         }
 
+        // if someone changes the url hash manually, update the highlighted lines
         $(window).on('hashchange', function() {
             var lineMatch;
             if (lineMatch = document.location.hash.match(hashLines) ) {
