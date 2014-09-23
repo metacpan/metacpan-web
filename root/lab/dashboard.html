@@ -47,7 +47,7 @@
       <td class="tests-pass"><% tests.pass %></td>
       <td class="tests-fail"><% tests.fail %></td>
       <td class="tests-na"><% tests.na %></td>
-      <td class="test-ratio <% IF tests.ratio > 95 %>test-ratio-good<% ELSIF tests.ratio < 80 %>test-ratio-bad<% END %>"><% tests.ratio %>%</td>
+      <td class="test-ratio <% IF tests.ratio > 95 %>test-ratio-good<% ELSIF tests.ratio < 80 %>test-ratio-bad<% END %>"><% IF tests.ratio.length %><% tests.ratio %>%<% END %></td>
     </tr>
     <% END %>
     </tbody>
