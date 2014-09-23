@@ -39,10 +39,10 @@
       <td class="date relatize" sort="<% report.distros.$d.date %>"><% report.distros.$d.date %></td>
       <td><% report.distros.$d.version %></td>
       <td><% report.distros.$d.bugs %></td>
-      <td class="missing" <% IF report.distros.$d.repo %> title="missing link to public VCS in META files">R<% END %></td>
-      <td class="missing" <% IF report.distros.$d.license %> title="missing license information in META files">L<% END %></td>
-      <td class="missing" <% IF report.distros.$d.abstract %> title="Abstract is missing">A<% END %></td>
-      <td class="missing" <% IF report.distros.$d.unauthorized %> title="Unauthorized module">U<% END %></td>
+      <td class="missing" <% IF report.distros.$d.repo %> title="missing link to public VCS in META files">R<% ELSE %>><% END %></td>
+      <td class="missing" <% IF report.distros.$d.license %> title="missing license information in META files">L<% ELSE %>><% END %></td>
+      <td class="missing" <% IF report.distros.$d.abstract %> title="Abstract is missing">A<% ELSE %>><% END %></td>
+      <td class="missing" <% IF report.distros.$d.unauthorized %> title="Unauthorized module">U<% ELSE %>><% END %></td>
       <% tests = report.distros.$d.test %>
       <td class="tests-pass"><% tests.pass %></td>
       <td class="tests-fail"><% tests.fail %></td>
