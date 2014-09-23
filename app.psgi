@@ -159,11 +159,6 @@ if ($dev_mode) {
     };
 }
 else {
-    for my $assets ( \@js_files, \@css_files ) {
-        $app = Plack::Middleware::Assets->wrap( $app,
-            files => [ map {"root$_"} @$assets ] );
-    }
-
     # Only need for live
     my $cache = CHI->new(
         driver   => 'File',
@@ -184,6 +179,10 @@ else {
         ],
     );
 
+    for my $assets ( \@js_files, \@css_files ) {
+        $app = Plack::Middleware::Assets->wrap( $app,
+            files => [ map {"root$_"} @$assets ] );
+    }
 }
 
 # Handle surrogate (fastly caching)
