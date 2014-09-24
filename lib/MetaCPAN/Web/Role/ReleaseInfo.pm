@@ -94,8 +94,10 @@ sub groom_contributors {
 
     my @contribs = map {
         my $name = $_;
-        $name =~ s/\s*<([^<>]+@[^<>]+)>//;
-        my $email = $1;
+        my $email;
+        if ($name =~ s/\s*<([^<>]+@[^<>]+)>//) {
+            $email = $1;
+        }
         my $info;
         my $dupe;
         if ( $email and $info = $seen{$email} ) {
