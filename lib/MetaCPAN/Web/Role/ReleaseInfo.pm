@@ -95,7 +95,7 @@ sub groom_contributors {
     my @contribs = map {
         my $name = $_;
         my $email;
-        if ($name =~ s/\s*<([^<>]+@[^<>]+)>//) {
+        if ( $name =~ s/\s*<([^<>]+@[^<>]+)>// ) {
             $email = $1;
         }
         my $info;
