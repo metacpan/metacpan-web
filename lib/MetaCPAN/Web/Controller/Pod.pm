@@ -126,21 +126,24 @@ sub view : Private {
             li      => ['id'],
             ol      => [],
             p       => [qw(style)],
-            pre     => [qw(id style), {
-                class => qr/^line-numbers$/,
-                'data-line' => qr/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/,
-                'data-start' => qr/^\d+$/,
-            }],
-            span    => [qw(style)],
-            strong  => [],
-            sub     => [],
-            sup     => [],
-            table   => [qw( style border cellspacing cellpadding align )],
-            tbody   => [],
-            td      => [qw(style)],
-            tr      => [qw(style)],
-            u       => [],
-            ul      => ['id'],
+            pre     => [
+                qw(id style),
+                {
+                    class        => qr/^line-numbers$/,
+                    'data-line'  => qr/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/,
+                    'data-start' => qr/^\d+$/,
+                }
+            ],
+            span   => [qw(style)],
+            strong => [],
+            sub    => [],
+            sup    => [],
+            table  => [qw( style border cellspacing cellpadding align )],
+            tbody  => [],
+            td     => [qw(style)],
+            tr     => [qw(style)],
+            u      => [],
+            ul     => ['id'],
         }
     );
 
