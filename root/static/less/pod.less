@@ -1,37 +1,25 @@
 .pod {
-    dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td {
-        margin: 5px;
-        padding: 5px;
+    dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td, ul, ol {
+        margin: 15px 10px;
     }
 
     ol {
         list-style: decimal;
-        margin-left:40px;
-
     }
-
     ul {
         list-style: disc;
-        margin-left: 20px;
-        padding-left: 2em;
-    }
-    ul#index, ul#index ul {
-        padding-left: 0;
-    }
-    ul li {
-        margin-bottom: 0.5em;
-    }
-    ul#index li {
-        margin-bottom: 0;
-        line-height: 1.7em;
-    }
-    ul li p {
-        margin: 0;
-        padding: 0;
     }
 
-    pre {
-        margin-left: 20px;
+    li {
+        :first-child {
+            margin-top: 0;
+        }
+        :last-child {
+            margin-bottom: 0;
+        }
+        > * {
+            margin-left: 0;
+        }
     }
 
     h1 {
@@ -62,21 +50,45 @@
         vertical-align: top;
     }
 
+    pre {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10px;
+        overflow-x: auto;
+    }
 }
 
-ul#index, #index ul { list-style-type: none; }
+ul#index, #index ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    ul {
+        margin-left: 1.5em;
+    }
+
+    li {
+        margin-bottom: 0;
+        line-height: 1.7em;
+    }
+}
 
 #index-container {
     overflow-y: hidden;
 
+    .index-header {
+        text-align: center;
+        line-height: 24px;
+    }
+
     .index-border {
         display: inline-block;
         border: 1px solid rgb(215, 215, 215);
+        padding: 3px 10px;
     }
 
     #index {
-        padding: 0 10px 3px;
-        margin: 0;
+        overflow-y: hidden;
     }
 
     .toggle-show {
@@ -119,19 +131,6 @@ ul#index, #index ul { list-style-type: none; }
             display: inline-block;
         }
     }
-}
-
-#index-header {
-    text-align: center;
-    padding-top: 3px;
-
-    button {
-        padding: 0;
-    }
-}
-
-#index {
-    overflow-y: hidden;
 }
 
 .nogutter, .pod pre {
