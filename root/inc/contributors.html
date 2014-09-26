@@ -9,11 +9,13 @@
     </div>
     <ul class="nav nav-list box-right" style="display: none">
     <% FOREACH contributor IN contributors %>
-        <li class="contributor<% ' cpan' IF contributor.pauseid %>">
+        <li class="contributor"
+        <%- IF contributor.pauseid %> data-cpan-author="<% contributor.pauseid %>"<% END -%>
+        <%- IF contributor.email.size %> data-contrib-email="<% contributor.email.join(" ") %>"<% END %>>
         <% IF contributor.pauseid %>
-        <a href="<% contributor.url %>" 
-           class="cpan_author" 
-           data-cpan-author="<% contributor.pauseid %>"><% contributor.name %></a>
+        <a href="<% contributor.url %>"
+           class="cpan-author"
+        ><% contributor.name %></a>
         <% ELSE %>
         <% contributor.name %>
         <% END %>
