@@ -137,9 +137,6 @@ sub groom_contributors {
                 = $c->uri_for_action( '/author/index',
                 [ $contrib->{pauseid} ] );
         }
-        if ( not $contrib->{email} = $contrib->{email}[0] ) {
-            delete $contrib->{email};
-        }
     }
 
     return \@contribs;
