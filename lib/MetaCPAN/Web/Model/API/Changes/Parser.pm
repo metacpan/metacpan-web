@@ -21,7 +21,7 @@ sub parse {
 
     my @lines = split /\r\n?|\n/, $string;
 
-    my $preamble = '';
+    my $preamble = q{};
     my @releases;
     my $release;
     my @indents;
