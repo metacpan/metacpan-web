@@ -72,14 +72,14 @@ test_psgi app, sub {
 
     # Test that we don't show changes for unrelated version, check issue #914
     # for original bug report.
-    ok( $res = $cb->( GET '/release/SHLOMIF/Config-IniFiles-2.81/' ) );
+    ok( $res = $cb->( GET '/release/SHLOMIF/Config-IniFiles-2.43/' ) );
     $tx_cc = tx($res);
     $tx_cc->not_ok(
         '//div[@class="content"]/strong[following-sibling::div[@class="last-changes"]]'
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.81/" and @rel="nofollow"]'
+            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.43/" and @rel="nofollow"]'
         ),
         'This version',
         'Link to release search.cpan.org of this version is correct'

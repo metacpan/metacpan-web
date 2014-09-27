@@ -12,27 +12,26 @@ sub get {
 
 sub last_version {
     my ( $self, $response, $release ) = @_;
-    my $changes;
+    my $releases;
     if ( !exists $response->{content} or $response->{documentation} ) {
     }
     else {
         # I guess we have a propper changes file? :P
         try {
-            $changes
-                = MetaCPAN::Web::Model::API::Changes::Parser->load_string(
+            my $changelog
+                = MetaCPAN::Web::Model::API::Changes::Parser->parse(
                 $response->{content} );
+            $releases = $changelog->{releases};
         }
         catch {
             # we don't really care?
             warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
         };
     }
-    return unless $changes;
-    my @releases = $changes->releases;
-    return unless scalar @releases;
+    return unless $releases && @$releases;
 
     # Ok, lets make sure we get the right release..
-    my $changelog = $self->find_changelog( $release->{version}, \@releases );
+    my $changelog = $self->find_changelog( $release->{version}, $releases );
 
     return unless $changelog;
     return $self->filter_release_changes( $changelog, $release );
@@ -42,7 +41,7 @@ sub find_changelog {
     my ( $self, $version, $releases ) = @_;
 
     foreach my $rel (@$releases) {
-        return $rel if ( $rel->version eq $version );
+        return $rel if ( $rel->{version} eq $version );
     }
 }
 
@@ -121,27 +120,23 @@ sub filter_release_changes {
         $rt_base = $rt_cpan_base;
     }
 
-    foreach my $g ( $changelog->groups ) {
-        my $changes = $changelog->changes($g);
-        my @new;
-        foreach my $change (@$changes) {
+    my @entries_list = $changelog->{entries};
 
-            # lets call our filters.. this could be designed OPEN, instead of
-            # CLOSED I guess..
-
-           # We need to escape some html enteties here, since down the line we
-           # disable it to get the links to work.. Copied from html filter in
-           # Template::Alloy
-            for ($change) {
+    while ( my $entries = shift @entries_list ) {
+        for my $entry (@$entries) {
+            for ($entry) {
                 s/&/&amp;/g;
                 s/</&lt;/g;
                 s/>/&gt;/g;
                 s/"/&quot;/g;
             }
-            push( @new, $self->_link_issues( $change, $gh_base, $rt_base ) );
+            $entry->{text}
+                = $self->_link_issues( $entry->{text}, $gh_base, $rt_base );
+            push @entries_list, $entry->{entries}
+                if $entry->{entries};
         }
-        $changelog->set_changes( { group => $g }, @new );
     }
+
     return $changelog;
 }
 
