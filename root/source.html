@@ -16,36 +16,36 @@
   <li class="nav-header">Tools</li>
   <li>
     <div>
-      <a href="/release/<% module.author %>/<% module.release %>/">Release Info</a>
+      <a href="/release/<% module.author %>/<% module.release %>/"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
     </div>
   </li>
   <% IF module.documentation %>
   <li>
     <div>
-      <a href="/pod/<% module.documentation %>">Module Documentation</a>
+      <a href="/pod/<% module.documentation %>"><i class="fa fa-book fa-fw black"></i>Module Documentation</a>
     </div>
   </li>
   <% ELSIF module.slop %>
   <li>
     <div>
-      <a href="/pod/<% doc_view_url %>">Documentation View</a>
+      <a href="/pod/<% doc_view_url %>"><i class="fa fa-book fa-fw black">Documentation View</a>
     </div>
   </li>
   <% END %>
   <li>
     <div>
-      <a href="/author/<% module.author %>/">Author</a>
+      <a href="/author/<% module.author %>"><i class="fa fa-user fa-fw black"></i>Author</a>
     </div>
   </li>
   <li>&nbsp;</li>
-  <li><div><a href="<% raw_url %>">Raw code</a></div></li>
+  <li><div><a href="<% raw_url %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw code</a></div></li>
   <li>
     <div>
-      <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1">Download</a>
+      <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
     </div>
   </li>
   <% IF module.sloc > 0 %>
-  <li><div><a href="javascript:togglePod(<% module.pod_lines.json %>)">Toggle pod</a></div></li>
+  <li><div><button class="btn-link pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></div></li>
   <% END %>
   <li class="nav-header">Info</li>
   <li><% module.sloc %> lines of code</li>
@@ -55,21 +55,10 @@
 
 <div class="content">
 <% IF !module.binary %>
-<pre class="brush: <% filetype %>; class-name: 'highlight'; toolbar: false;" id="source"><% source %></pre>
+<pre id="source" class="line-numbers pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" data-pod-lines="<%
+  module.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')
+%>"><code class="language-<% filetype %>"><% source %></code></pre>
 <% ELSE %>
 This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
 </div>
-
-<script type="text/javascript">
-
-//document.getElementById('source').style.visibility = 'hidden';
-//SyntaxHighlighter.all();
-$(document).ready(function() {
-<% IF module.sloc > 0 %>
-togglePod(<% module.pod_lines.json %>);
-<% END %>
-if(document.location.hash)
-    document.location.href = document.location.href;
-});
-</script>

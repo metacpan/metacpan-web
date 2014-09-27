@@ -30,10 +30,9 @@ test_psgi app, sub {
             ok( my $res = $cb->( GET $uri ), "GET $uri" );
             is( $res->code, 200, 'code 200' );
             my $tx = tx($res);
-            ok(
-                my $source = $tx->find_value(
-                    qq{//div[\@class="content"]/pre[starts-with(\@class, "brush: $type; ")]}
-                ),
+            like(
+                $tx->find_value(q{//div[@class="content"]/pre/code/@class}),
+                qr/\blanguage-perl\b/,
                 'has pre-block with expected syntax brush'
             );
         }
@@ -44,12 +43,12 @@ test_psgi app, sub {
     # Test filetype detection.  This is based on file attributes so we don't
     # need to do the API hits to test each type.
     my @tests = (
-        [ pl => 'lib/Template/Manual.pod' ],    # pod
-        [ pl => 'lib/Dist/Zilla.pm' ],
-        [ pl => 'Makefile.PL' ],
+        [ perl => 'lib/Template/Manual.pod' ],    # pod
+        [ perl => 'lib/Dist/Zilla.pm' ],
+        [ perl => 'Makefile.PL' ],
 
-        [ js => 'META.json' ],
-        [ js => 'script.js' ],
+        [ javascript => 'META.json' ],
+        [ javascript => 'script.js' ],
 
         [ yaml => 'META.yml' ],
         [ yaml => 'config.yaml' ],
@@ -60,11 +59,11 @@ test_psgi app, sub {
 
         [ cpanchanges => 'Changes' ],
 
-        [ pl => { path => 'bin/dzil', mime => 'text/x-script.perl' } ],
+        [ perl => { path => 'bin/dzil', mime => 'text/x-script.perl' } ],
 
         # There wouldn't normally be a file with no path
         # but that doesn't mean this shouldn't work.
-        [ pl => { mime => 'text/x-script.perl' } ],
+        [ perl => { mime => 'text/x-script.perl' } ],
 
         [ plain => 'README' ],
     );
