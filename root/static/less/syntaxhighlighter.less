@@ -1,20 +1,10 @@
-@import (less) "SyntaxHighlighter/shCore.css";
-@import (less) "SyntaxHighlighter/shThemeDefault.css";
-
 body .syntaxhighlighter {
-  font-size: 90% !important;
-  *, * *, * * * {
-    font-family: @font-family-monospace !important;
-  }
-}
-
-.syntaxhighlighter {
-    border: 1px solid #e9e9e9;
-    width: auto !important;
-    overflow-y: hidden !important;
-    background-color: #fafafa;
-    padding: 10px;
-    -webkit-text-size-adjust: 100%; /* for iPhone <code>, issue #107 */
+    font-size: 100% !important;
+    margin: 0 !important;
+    /* needs higher specificity than the syntax highligher's rules */
+    &, *, * *, * * *, * * * * {
+        font-family: inherit !important;
+    }
 }
 
 /* work around incompatibility between bootstrap and syntaxhighlighter
@@ -24,3 +14,18 @@ body .syntaxhighlighter {
     content: none !important;
 }
 
+.pod-hidden {
+    .pod-line {
+        display: none;
+    }
+    .hide-pod {
+        display: none;
+    }
+    .show-pod {
+        display: inline;
+    }
+}
+
+.show-pod {
+    display: none;
+}

@@ -145,6 +145,7 @@ my @js_files = map {"/static/js/$_.js"} (
         bootstrap/bootstrap-tooltip
         bootstrap/bootstrap-affix
         bootstrap-slidepanel
+        syntaxhighlighter
         ),
 );
 my @css_files

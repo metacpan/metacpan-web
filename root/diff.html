@@ -73,7 +73,7 @@ file.path = parts.join("/"); END -%>
         <div class="diff-header">
             <a href="/source/<% diff.target %>/<% file.path %>"><% file.path %></a>
         </div>
-        <pre class="brush: diff; class-name: 'highlight'; toolbar: false; gutter: false" id="source"><% parts = file.diff.split("\n"); WHILE parts; line = parts.shift; LAST IF line.match( '^\+' ); END; parts.join("\n") %></pre>
+        <pre><code class="language-diff"><% parts = file.diff.split("\n"); WHILE parts; line = parts.shift; LAST IF line.match( '^\+' ); END; parts.join("\n") %></code></pre>
     </div>
 <% END %>
 </div>

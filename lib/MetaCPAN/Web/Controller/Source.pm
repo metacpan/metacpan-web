@@ -79,13 +79,13 @@ sub detect_filetype {
         local $_ = $file->{path};
 
         # No separate pod brush as of 2011-08-04.
-        return 'pl' if /\. ( p[ml] | psgi | pod ) $/ix;
+        return 'perl' if /\. ( p[ml] | psgi | pod ) $/ix;
 
-        return 'pl' if /^ cpanfile $/ix;
+        return 'perl' if /^ cpanfile $/ix;
 
         return 'yaml' if /\. ya?ml $/ix;
 
-        return 'js' if /\. js(on)? $/ix;
+        return 'javascript' if /\. js(on)? $/ix;
 
         return 'c' if /\. ( c | h | xs ) $/ix;
 
@@ -97,7 +97,7 @@ sub detect_filetype {
     if ( defined( $file->{mime} ) ) {
         local $_ = $file->{mime};
 
-        return 'pl' if /perl/;
+        return 'perl' if /perl/;
     }
 
     # Default to plain text.
