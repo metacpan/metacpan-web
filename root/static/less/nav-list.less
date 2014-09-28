@@ -127,11 +127,12 @@
 }
 
 .irc-chat {
-  @width: 160px;
+  @width: 175px;
   @height: 36px;
   @left: 10px;
   @border-margin: 5px;
   @background: #b80000;
+  @ribbon-angle: 30deg;
 
   position: relative;
   top: 0px;
@@ -142,7 +143,10 @@
   display: inline-block;
   margin-bottom: 10px;
   border-radius: 4px 0px 0px;
-  box-shadow: 0px 2px 2px -2px #000;
+  box-shadow: 0px 1px 2px -1px #000;
+
+  background-color: @background;
+  background-image: data-uri('../images/noise.png');
 
   a {
     color: #fff;
@@ -157,22 +161,33 @@
     border-style: dotted;
     border-color: darken(@background, 12.7%);
     border-width: 1px 0;
-    width: @width - ( @border-margin / 2 );
+    width: @width;
     line-height: @height - ( @border-margin * 2 ) - 1;
   }
 
-  /* right triangle on ribbon */
+  /* right clipping triangle */
   &:after {
-    @sides: @height / sqrt(2);
-
     content: '';
     position: absolute;
-    top: (@height - @sides) / 2;
-    left: @width - (@sides / 2);
-    width: @sides;
-    height: @sides;
-    .rotate(45deg);
-    z-index: -1;
+    z-index: 1;
+
+    width: 0;
+    height: 0;
+
+    /* how far past to cover (to hide shadow) */
+    @right-overhang: 2px;
+
+    @triangle-height: @height + 2 * @right-overhang / tan(@ribbon-angle);
+    @triangle-width: @triangle-height / 2 * tan(@ribbon-angle);
+
+    top: (@height - @triangle-height) / 2;
+    left: @width - @triangle-width + @right-overhang;
+    border-top: @triangle-height / 2 solid transparent;
+    border-right: @triangle-width solid #fff;
+    border-bottom: @triangle-height / 2 solid transparent;
+
+    /* force antialiasing */
+    transform: scale(0.9999);
   }
 
   /* lower ribbon */
@@ -185,10 +200,5 @@
     border-left: 9px solid transparent;
     .scale(1.2, 1);
     z-index: -1;
-  }
-
-  &, &:after {
-    background-color: @background;
-    background-image: data-uri('../images/noise.png');
   }
 }
