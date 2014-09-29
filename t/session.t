@@ -17,6 +17,9 @@ use URI::Escape;
         if ( my $flavor = $c->req->param('flavor') ) {
             $c->req->session->set( flavor => $flavor );
         }
+        elsif ( $c->req->param('no-flavor') ) {
+            $c->req->session->remove('flavor');
+        }
         $c->res->body('yum');
     }
 }
@@ -33,13 +36,13 @@ test_psgi app, sub {
 
         isnt $cookie, $biscuit, 'cookie has been baked';
 
-        is get_cookie( $cb, $url, $biscuit ), $biscuit, q[cookie preserved];
+        is get_cookie( $cb, $url, $biscuit ), undef,
+            q[cookie not set if unchanged];
 
-        isnt get_cookie( $cb, $url ), $biscuit, q[cookie has been eaten :'(];
+        my $erase = get_cookie( $cb, "$url?no-flavor=1", $biscuit );
+        ok + ( $erase && $erase !~ /:/ ), q[cookie unset];
 
         my $spoiled = $biscuit;
-        is get_cookie( $cb, $url, $biscuit ), $biscuit, q[cookie is back];
-
         $spoiled =~ s/:([^:])/:=/;    # Chew cookie.
         isnt get_cookie( $cb, $url, $spoiled ), $spoiled, q[cookie went bad];
 
@@ -62,12 +65,10 @@ sub get_cookie {
     is( $res->code, 200, 'code 200' )
         or diag $res->content;
 
-    my $cookie = URI::Escape::uri_unescape(
-        ( $res->header('set-cookie') =~ /([^;]+)/ )[0] );
-
-    like $cookie, qr/:\w+[=]{0,2}:/, 'looks like cookie';
-
-    #diag $cookie;
+    my $cookie = $res->header('set-cookie');
+    if ($cookie) {
+        $cookie = URI::Escape::uri_unescape( ( $cookie =~ /([^;]+)/ )[0] );
+    }
 
     return $cookie;
 }
