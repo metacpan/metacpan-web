@@ -442,13 +442,53 @@ form#logout {
     .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
 }
 
-#show-right-panel {
-   display: none;
-   float: right;
+#right-panel-toggle {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  border: 1px solid #d7d7d7;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  color: @textColor;
+
+  line-height: 20px;
+  white-space: nowrap;
+  width: 30px;
+  height: 40px;
+  padding: 5px 10px;
+  overflow: hidden;
+
+  &.panel-hide {
+    .panel-hidden {
+      display: inline;
+    }
+    .panel-visible {
+      display: none;
+    }
+  }
+  .panel-hidden {
+    display: none;
+  }
+
+  &:hover:before {
+    display: none;
+  }
+  &:before {
+    content: "-";
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 50px;
+  }
+  &.panel-hide:before {
+    content: "+";
+  }
+  &:hover {
+    width: auto;
+  }
 }
 
-#right-panel {
-    /* display: none; */
+#right-panel.panel-hide {
+    display: none;
 }
 
 .content {

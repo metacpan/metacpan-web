@@ -28,13 +28,19 @@ $.extend({
     }
 });
 
-function togglePanel(side) {
-    var panel = $('#' + side + '-panel');
-    var shower = $('#show-' + side + '-panel');
-    if (!panel || !shower) return false;
-    panel.toggle();
-    shower.toggle();
-    localStorage.setItem("hide_" + side + "_panel", (panel.css('display') == 'none' ? 1 : 0));
+function togglePanel(side, visible) {
+    var elements = $('#' + side + '-panel-toggle').add($('#' + side + '-panel'));
+    var className = 'panel-hide';
+    if (typeof visible == "undefined") {
+      visible = elements.first().hasClass(className);
+    }
+    if (visible) {
+      elements.removeClass(className);
+    }
+    else {
+      elements.addClass(className);
+    }
+    localStorage.setItem("hide_" + side + "_panel", visible ? 0 : 1);
     return false;
 }
 
@@ -275,13 +281,11 @@ $(document).ready(function () {
         }
     }
 
-    ['right', 'left'].forEach(function (side) {
-	    var panel = $(side + "-panel");
-        if (panel) {
-            var panel_hidden = localStorage.getItem("hide_" + side + "_panel") == 1;
-            if (panel_hidden) {
-                togglePanel(side);
-            }
+    ['right'].forEach(function (side) {
+        var panel = $('#' + side + "-panel");
+        if (panel.length) {
+            var panel_visible = localStorage.getItem("hide_" + side + "_panel") != 1;
+            togglePanel(side, panel_visible);
         }
     });
 
