@@ -48,13 +48,13 @@
 <li>
     <div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div>
 </li>
+<% IF release.license %>
+<li>License: <% release.license.join(', ') %></li>
+<% END %>
 <% IF irc.web %>
 <li class="irc-chat">
     <div><a target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
 </li>
-<% END %>
-<% IF release.license %>
-<li>License: <% release.license.join(', ') %></li>
 <% END %>
 <%
     BLOCK version_options;
