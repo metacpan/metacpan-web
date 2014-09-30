@@ -15,37 +15,27 @@
   </li>
   <li class="nav-header">Tools</li>
   <li>
-    <div>
-      <a href="/release/<% module.author %>/<% module.release %>/"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
-    </div>
+    <a href="/release/<% module.author %>/<% module.release %>/"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
   </li>
   <% IF module.documentation %>
   <li>
-    <div>
-      <a href="/pod/<% module.documentation %>"><i class="fa fa-book fa-fw black"></i>Module Documentation</a>
-    </div>
+    <a href="/pod/<% module.documentation %>"><i class="fa fa-book fa-fw black"></i>Module Documentation</a>
   </li>
   <% ELSIF module.slop %>
   <li>
-    <div>
-      <a href="/pod/<% doc_view_url %>"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
-    </div>
+    <a href="/pod/<% doc_view_url %>"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
   </li>
   <% END %>
   <li>
-    <div>
-      <a href="/author/<% module.author %>"><i class="fa fa-user fa-fw black"></i>Author</a>
-    </div>
+    <a href="/author/<% module.author %>"><i class="fa fa-user fa-fw black"></i>Author</a>
   </li>
   <li>&nbsp;</li>
-  <li><div><a href="<% raw_url %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw code</a></div></li>
+  <li><a href="<% raw_url %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw code</a></li>
   <li>
-    <div>
-      <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
-    </div>
+    <a href="/raw/<% module.author %>/<% module.release %>/<% module.path %>?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
   </li>
   <% IF module.sloc > 0 %>
-  <li><div><button class="btn-link pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></div></li>
+  <li><button class="btn-link pod-toggle<% IF module.sloc > 0; " pod-hidden"; END %>" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>
   <% END %>
   <li class="nav-header">Info</li>
   <li><% module.sloc %> lines of code</li>

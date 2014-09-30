@@ -26,22 +26,18 @@ file.path = parts.join("/"); END -%>
     </li>
   <li class="nav-header">Tools</li>
     <li>
-      <div>
-        <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
-          Reverse diff
-        </a>
-      </div>
+      <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
+        Reverse diff
+      </a>
     </li>
     <li>
-      <div>
-        <%- IF type == 'source' %>
-        <a href="<% api_external %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
-        <%- ELSE %>
-        <a href="<% api_external %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
-        <%- END %>
-          Raw diff
-        </a>
-      </div>
+      <%- IF type == 'source' %>
+      <a href="<% api_external %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
+      <%- ELSE %>
+      <a href="<% api_external %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
+      <%- END %>
+        Raw diff
+      </a>
     </li>
     <%- IF diff.statistics.size > 1 -%>
     <li>

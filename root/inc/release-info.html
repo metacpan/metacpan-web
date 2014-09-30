@@ -8,45 +8,42 @@
 <% END %>
 <% IF release.resources.repository %>
 <li>
-    <div>
-        <% IF is_url(release.resources.repository.web) %>
-        <a href="<% release.resources.repository.web %>">Repository</a>
-        <% END %>
-        <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
-        (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
-        <% ELSIF is_url(release.resources.repository.url) %>
-        <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
-        <% END %>
-    </div>
+    <% IF is_url(release.resources.repository.web) %>
+    <a href="<% release.resources.repository.web %>">Repository</a>
+    <% END %>
+    <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
+    (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
+    <% ELSIF is_url(release.resources.repository.url) %>
+    <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
+    <% END %>
 </li>
 <% END %>
 <li>
-    <div><a href="<%
-        IF is_url(release.resources.bugtracker.web);
-          release.resources.bugtracker.web;
-        ELSIF release.resources.bugtracker.mailto;
-          'mailto:' _ release.resources.bugtracker.mailto;
-        ELSE;
-          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
-        END;
-        %>">Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div>
+    <a href="<%
+      IF is_url(release.resources.bugtracker.web);
+        release.resources.bugtracker.web;
+      ELSIF release.resources.bugtracker.mailto;
+        'mailto:' _ release.resources.bugtracker.mailto;
+      ELSE;
+        'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
+      END;
+      %>">Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %>
 </li>
 <% IF rating.count > 0 %>
 <li>
-    <div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div>
+    <% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %>
 </li>
 <% END %>
 <li>
-    <div><%
-        testers_version = release.name.remove('^' _ release.distribution _ '-?');
-        cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
-        <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
-        <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
-        <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><i class="icon-grid"></i></a>
-    </div>
+    <%
+    testers_version = release.name.remove('^' _ release.distribution _ '-?');
+    cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
+    <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
+    <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
+    <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><i class="icon-grid"></i></a>
 </li>
 <li>
-    <div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div>
+    <a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a>
 </li>
 <% IF release.license %>
 <li>License: <% release.license.join(', ') %></li>
