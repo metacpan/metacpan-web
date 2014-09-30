@@ -139,7 +139,7 @@ sub test_heading_order {
     my $xpath_prefix
         = '//div[@class="content"]/div[contains(@class, "file-group")]';
     $tx->ok(
-        "$xpath_prefix/strong",
+        "$xpath_prefix/h2",
         sub {
             $_->is( q{.}, $headings[$heading],
                 "heading $headings[$heading] in expected location" );
@@ -150,9 +150,9 @@ sub test_heading_order {
 
     my $anchor = 0;
     $tx->ok(
-        "$xpath_prefix/a[following-sibling::strong[1]]",
+        "$xpath_prefix/h2",
         sub {
-            $_->is( './@name', $anchors[$anchor],
+            $_->is( './@id', $anchors[$anchor],
                 "Anchor $anchors[$anchor] in expected location" );
             $anchor++;
         },
