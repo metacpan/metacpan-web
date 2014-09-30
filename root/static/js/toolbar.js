@@ -1,6 +1,6 @@
 if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
     $(function() {
-        var el = $('.nav-list.slidepanel').first();
+        var el = $('.nav-list').first();
         var topRow = $('.main-content').first();
         if (!el.length) return;
         var height = el.height();

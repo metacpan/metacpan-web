@@ -1,6 +1,6 @@
 <% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
 <% twitter_card_inc = 'inc/twitter/author.html' %>
-<ul class="nav nav-list slidepanel">
+<ul class="nav-list slidepanel">
     <li class="hidden-phone"><% INCLUDE inc/author-pic.html author = author %></li>
     <li class="visible-xs">
         <% INCLUDE mobile/toolbar-search-form.html %>
@@ -58,7 +58,7 @@
     <% END; END %>
     <% IF author.donation.size; FOREACH donate IN author.donation %>
     <% IF donate.name == 'paypal' && donate.id %>
-    <br>
+    <li class="author-donate">
     <center>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
             <input type="hidden" name="cmd" value="_donations">
@@ -72,23 +72,24 @@
             <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
         </form>
     </center>
+    </li>
     <% ELSIF donate.name == 'wishlist' && donate.id %>
-    <div style="text-align: center"><a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a></div>
+    <li class="author-donate">
+        <a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a>
+    </li>
     <% ELSIF donate.name == 'flattr' && donate.id %>
-    <script type="text/javascript">
-        /* <![CDATA[ */
-          (function() {
-            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
-        
-            t.parentNode.insertBefore(s, t);
-          })();
-        /* ]]> */
-    </script>
-    <div style="text-align: center">
+    <li class="author-donate">
+        <script type="text/javascript">
+            (function() {
+              var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
+
+              t.parentNode.insertBefore(s, t);
+            })();
+        </script>
         <a class="FlattrButton" style="display:none;"
             title="<% author.name %> (<% author.pauseid %>) on MetaCPAN"
             rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
@@ -96,7 +97,7 @@
             language="en_GB" >
         <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
         </a>
-    </div>
+    </li>
     <% END; END; END %>
     <%
         i = 0;
