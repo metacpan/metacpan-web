@@ -1,10 +1,10 @@
 <%- title = "Browse " _ [author, release, undef].join('/') _ directory.join("/") %>
-<strong><big>
+<div class="breadcrumbs">
   <a href="/source/<% base = [author, release].join("/"); base %>"><% [author, release].join(" / ") %></a>
   <% FOREACH part IN directory; base = base _ "/" _ part -%>
   / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
   <% END %>
-  </big></strong><br><br>
+</div>
 
 <ul class="nav-list slidepanel">
   <li class="visible-xs">

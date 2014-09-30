@@ -1,13 +1,13 @@
 <%- rss = 'distribution/' _ module.distribution %>
 <%- title = module.path %>
-<strong><big>
+<div class="breadcrumbs">
     <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
     <% doc_view_url = [base,module.path].join("/") %>
     <% raw_url = [api_external,'source',base,module.path].join("/") %>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
     <% END %>
-  </big></strong><br><br>
+</div>
 
 <ul class="nav-list slidepanel">
   <li class="visible-xs">
