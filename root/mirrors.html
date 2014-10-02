@@ -37,10 +37,10 @@
 <div class="box-right">
   <ul class="nav-list box-right hidden-phone">
     <li class="nav-header">Countries</li>
-    <%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
-    <%- FOREACH country IN countries.unique.sort %>
-    <li><a href="#<% country %>"><% country %></a></li>
-    <% END %>
+    <%- countries = {}; FOREACH mirror IN mirrors; countries.${mirror.country} = mirror.ccode; END %>
+      <%- FOREACH country IN countries.keys.sort %>
+      <li><a href="#<% country %>"><img class="flag" src="/static/images/flag/<% countries.$country %>.png" /><% country %></a></li>
+      <% END %>
   </ul>
 </div>
 
@@ -57,7 +57,7 @@ FOREACH mirror IN mirrors;
   END;
   continent = continents.last();
   UNLESS continent.countries.last().name == mirror.country;
-    continent.countries.push({ name = mirror.country, mirrors = [] });
+    continent.countries.push({ name = mirror.country, code = mirror.ccode, mirrors = [] });
   END;
   continent.countries.last().mirrors.push(mirror);
 END;
@@ -67,7 +67,7 @@ FOREACH continent IN continents;
     <ul>
 <%-
   FOREACH country IN continent.countries %>
-      <li id="<% country.name %>"><strong><% country.name %></strong>
+      <li id="<% country.name %>"><img src="/static/images/flag/<% country.code %>.png" /> <strong><% country.name %></strong>
         <ul>
   <%-
     FOREACH mirror IN country.mirrors;
