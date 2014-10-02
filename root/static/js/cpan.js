@@ -19,7 +19,7 @@ $.extend({
         var hashes = window.location.href.slice(indexOfQ + 1).split('&');
         $.each(hashes, function (idx, hash) {
             var kv = hash.split('=');
-            vars[kv[0]] = kv[1];
+            vars[kv[0]] = decodeURIComponent(kv[1]);
         });
         return vars;
     },
