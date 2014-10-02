@@ -304,28 +304,23 @@ $(document).ready(function () {
 });
 
 function searchForNearest() {
-    document.getElementById('busy').style.visibility = 'visible';
+    $("#busy").css({ visibility: 'visible'});
     navigator.geolocation.getCurrentPosition(function(pos) {
-        document.location.href = '/mirrors?q=loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
+        var query = $.getUrlVar('q');
+        if (!query) {
+          query = '';
+        }
+        query = query.replace(/(^|\s+)loc:\S+|$/, '');
+        query = query + ' loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
+        query = query.replace(/(^|\s)\s+/g, '$1');
+        document.location.href = '/mirrors?q=' + encodeURIComponent(query);
     },
-    function() {},
+    function() {
+        $("#busy").css({ visibility: 'hidden'});
+    },
     {
         maximumAge: 600000
     });
-}
-
-function toggleProtocol(tag) {
-    var l = window.location;
-    var s = l.search ? l.search : '?q=';
-    if (! s.match(tag) ) {
-        s += " " + tag
-    } else {
-        // Toggle that protocol filter off again
-        s = s.replace(tag, "");
-    }
-    s = s.replace(/=(%20|\s)+/, '='); // cleanup lingering space if any :P
-    s = s.replace(/(%20|\s)+$/, "");
-    l.href = '/mirrors' + s;
 }
 
 function logInPAUSE(a) {

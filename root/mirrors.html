@@ -9,12 +9,24 @@
     <li class="nav-header">Sorting</li>
     <li>
       <span style="float: right; visibility: hidden" id="busy"><i class="fa fa-spinner fa-spin"></i></span>
-      <a href="javascript:searchForNearest()">Nearest</a>
+      <button class="btn-link" onclick="searchForNearest(); return false;">Nearest</button>
     </li>
     <li class="nav-header">Protocols</li>
-    <li><a href="javascript:toggleProtocol('http')">http</a></li>
-    <li><a href="javascript:toggleProtocol('ftp')">ftp</a></li>
-    <li><a href="javascript:toggleProtocol('rsync')">rsync</a></li>
+    <%-
+      FOREACH proto IN ['http', 'ftp', 'rsync'];
+        checked = 0;
+        protos = c.req.params.q ? c.req.params.q.split(/\s+/) : [];
+    %>
+    <li><a href="?q=<%
+      IF protos.grep(->(p){ p == proto }).size;
+        checked = 1;
+        protos = protos.grep(->(p){ p != proto });
+      ELSE;
+        protos.push(proto);
+      END;
+      protos.sort.join('%20');
+      %>"><i class="fa fa-fw<% checked ? " fa-check-circle" : "" %> black"></i><% proto.uc %></a></li>
+    <%- END %>
     <li class="nav-header">Continents</li>
     <%- continents = []; FOREACH mirror IN mirrors; continents.push(mirror.continent); END %>
     <% FOREACH continent IN continents.unique.sort %>
