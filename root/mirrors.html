@@ -7,8 +7,10 @@
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">Sorting</li>
-    <span style="float: right; visibility: hidden" id="busy"><i class="fa fa-spinner fa-spin"></i></span>
-    <li><a href="javascript:searchForNearest()">Nearest</a></li>
+    <li>
+      <span style="float: right; visibility: hidden" id="busy"><i class="fa fa-spinner fa-spin"></i></span>
+      <a href="javascript:searchForNearest()">Nearest</a>
+    </li>
     <li class="nav-header">Protocols</li>
     <li><a href="javascript:toggleProtocol('http')">http</a></li>
     <li><a href="javascript:toggleProtocol('ftp')">ftp</a></li>
@@ -30,9 +32,8 @@
   </ul>
 </div>
 
-<div class="content">
-<div id="map" style="width: 600px; height: 200px"></div>
-<br>
+<div class="mirrors content">
+  <div class="map"><div id="map"></div></div>
 <ul>
 <%-
 dots = [];
@@ -62,7 +63,7 @@ FOREACH continent IN continents;
       day = date.day _ '/' _ date.month _ '/' _ date.year;
     %>
           <li>
-            <a class="label<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
+            <a class="label label-default<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
             <a class="label label-warning<% mirror.http ? "" : " invisible" %>" href="<% mirror.http %>">http</a>
             <a class="label label-success<% mirror.rsync ? "" : " invisible" %>" href="<% mirror.rsync %>">rsync</a>
             <span title="active since <% day %>"><% mirror.org %>, <% mirror.city %><span>
@@ -103,4 +104,4 @@ $(function(){
 
 });
 </script>
-
+</div>
