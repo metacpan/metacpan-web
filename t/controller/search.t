@@ -46,9 +46,14 @@ test_psgi app, sub {
 
     # Moose has ratings (other things on this search page likely do as well)
     $tx->like(
-        qq!//$xpath{search_results}//a[starts-with(\@class, "rating-")]/following-sibling::a!,
+        qq!//$xpath{search_results}//a[\@href="http://cpanratings.perl.org/rate/?distribution=Moose"]/span/\@class!,
+        qr/^rating-\d+$/i, 'ratings stars shown'
+    );
+
+    $tx->like(
+        qq!//$xpath{search_results}//a[\@href="http://cpanratings.perl.org/dist/Moose"]!,
         qr/\d+ reviews?/i,
-        'current rating and number of reviews listed'
+        'review number listed'
     );
 
     ok( $res = $cb->( GET $release), "GET $release" );
