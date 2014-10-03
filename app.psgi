@@ -37,7 +37,7 @@ use Plack::Middleware::Headers;
 use Plack::Middleware::Runtime;
 use Plack::Middleware::MCLess;
 use Plack::Middleware::ReverseProxy;
-use Plack::Middleware::Session::Cookie;
+use Plack::Middleware::Session::Cookie::MetaCPAN;
 use Plack::Middleware::ServerStatus::Lite;
 use Try::Tiny;
 use CHI;
@@ -73,32 +73,13 @@ my $app = Plack::App::URLMap->new;
     die 'cookie_secret not configured' unless $config->get->{cookie_secret};
 
     # Add session cookie here only
-    $core_app = Plack::Middleware::Session::Cookie->wrap(
+    $core_app = Plack::Middleware::Session::Cookie::MetaCPAN->wrap(
         $core_app,
         session_key => 'metacpan_secure',
         expires     => 2**30,
         secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
         httponly    => 1,
         secret      => $config->get->{cookie_secret},
-        serializer  => sub {
-
-            # Pass $_[0] since the json subs may have a ($) protoype.
-            # Pass '' to base64 for a blank separator (instead of newlines).
-            MIME::Base64::encode( JSON::MaybeXS::encode_json( $_[0] ), q[] );
-        },
-        deserializer => sub {
-
-            # We can't reference $_[0] from inside the try block.
-            my $cookie = $_[0];
-
-            # Use try/catch so JSON doesn't barf if the cookie is bad.
-            try {
-                JSON::MaybeXS::decode_json( MIME::Base64::decode($cookie) );
-            }
-
-            # No session.
-            catch { +{}; };
-        },
     );
 
     $app->map( q[/] => $core_app );
