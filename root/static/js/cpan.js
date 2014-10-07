@@ -226,7 +226,7 @@ $(document).ready(function () {
         });
     }
     $('#pod-errors').addClass('collapsed');
-    $('#pod-errors p.title').click(function() { $(this).parent().toggleClass('collapsed'); });
+    $('#pod-errors > p:first-child').click(function() { $(this).parent().toggleClass('collapsed'); });
 
     $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
