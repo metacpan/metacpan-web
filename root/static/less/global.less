@@ -444,7 +444,7 @@ form#logout {
 
 #right-panel-toggle {
   position: absolute;
-  top: -20px;
+  top: -10px;
   right: 0;
   border: 1px solid #d7d7d7;
   border-right: none;
@@ -454,8 +454,10 @@ form#logout {
   line-height: 20px;
   white-space: nowrap;
   width: 30px;
-  height: 40px;
-  padding: 5px 10px;
+  height: 30px;
+  padding: 5px;
+  text-align: left;
+  .transition(~"width 0.5s");
   overflow: hidden;
 
   &.panel-hide {
@@ -471,19 +473,24 @@ form#logout {
   }
 
   &:hover:before {
-    display: none;
+    width: 0px;
+    opacity: 0;
   }
   &:before {
-    content: "-";
-    font-size: 20px;
-    padding-left: 10px;
-    padding-right: 50px;
+    overflow: hidden;
+    .transition(~"width 0.5s, opacity 0.5s");
+    color: lighten(#000, 60%);
+    content: @fa-var-minus;
+    .fa;
+    text-align: center;
+    width: 30px;
+    padding-top: 3px;
   }
   &.panel-hide:before {
-    content: "+";
+    content: @fa-var-plus;
   }
   &:hover {
-    width: auto;
+    width: 8.8em;
   }
 }
 
