@@ -149,15 +149,6 @@ ul#index, #index ul {
     width: 36em;
     border: 1px solid #cccccc;
 
-    &.collapsed {
-        border: none;
-        background-color: transparent;
-
-        #pod-error-detail {
-          display: none;
-        }
-    }
-
     > p:first-child {
         margin: 0;
         padding: 0;
@@ -167,6 +158,18 @@ ul#index, #index ul {
         cursor: pointer;
     }
 
+    #pod-error-detail {
+        margin-top: 5px;
+    }
+
+    &.collapsed {
+        border-color: transparent;
+        background-color: transparent;
+
+        #pod-error-detail {
+            display: none;
+        }
+    }
 }
 
 #pod-error-detail {
