@@ -44,12 +44,9 @@ the latest changes from master _before_ submitting a pull request.
     git pull --rebase origin master
 
 If you are comfortable rebasing, it is also helpful to squash or delete commits
-which are no longer relevant to your branch before submitting your work.  For
-example, to rework your last 15 commits.
+which are no longer relevant to your branch before submitting your work.
 
-    git rebase -i HEAD~15
-
-Just be careful to rebase only commits which have not already been merged into master.
+    git rebase -i master
 
 # Coding conventions
 
