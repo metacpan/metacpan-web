@@ -55,27 +55,52 @@ will generally be the right thing to do.  Our standards are improving, so even
 if you do follow what you see, we may ask you to make some changes, but that is
 a good thing.  We are trying to keep things tidy.
 
+## Perl Best Practices
+
 In general, the concepts discussed in "Perl Best Practices" are a good starting
 point.  Use autodie where possible and MetaCPAN::Web::Types when creating new
 Moose attributes.  Many of the other standards will be enforced by Perl::Critic.
 
+## Clear > Concise
+
 Take pains to use variable names which are easy to understand and to write
 readable code.  We value readable code over concise code.  Use singular nouns
 for class names.  Use verbs for method names.
+
+## Try::Tiny > eval { ... }
+
+You will see many eval statements in the code.  We would like to standardize on
+Try::Tiny, so feel free to swap out any eval with a Try::Tiny and use Try::Tiny
+in all new code.
+
+## Prefer single quotes
+
+Always use single quotes in cases where there is no variable interpolation.  If
+there is a single quote in the quoted item, use curly quotes.
+
+q{Isn't this a lovely day};
+
+## Include a test (or more!)
 
 Any time when a pull request includes a test, it makes it easier for us to
 review and accept, so please do test your changes whenever possible.  If your
 pull request includes visual changes, please include a before and after screen
 shot, so that we can better understand the problem you're trying to solve.
 
+## Dependencies
+
 Introducing new dependencies is fine, if they solve a specific problem which
 current dependencies cannot address.  If we prefer a different module to be used,
 we'll let you know.
+
+## It's OK to be controversial
 
 If a pull request contains any controversial changes, we'll likely wait for some
 feedback from several developers before a merge.  If you think your changes may
 be controversial, feel free to discuss them in a Github issue before starting to
 write any code.
+
+## Travis is your friend
 
 We use Travis to test all code changes.  After submitting your pull request,
 remember to check back to see whether Travis has come back with any test
