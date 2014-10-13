@@ -312,11 +312,12 @@ sub interesting_files {
                                                         } qw(
                                                         MANIFEST
                                                         README README.md README.pod
-                                                        INSTALL FAQ
+                                                        INSTALL INSTALL.md INSTALL.pod
+                                                        FAQ
                                                         Makefile.PL Build.PL
                                                         LICENSE Copying COPYRIGHT
                                                         TODO ToDo Todo
-                                                        CONTRIBUTING
+                                                        CONTRIBUTING CONTRIBUTING.md CONTRIBUTING.pod
                                                         CREDITS AUTHORS THANKS
                                                         CHANGES Changes ChangeLog Changelog CHANGELOG NEWS
                                                         META.yml META.json
