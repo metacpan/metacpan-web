@@ -147,6 +147,13 @@ $(function () {
             config.highlight = parseLines(lines);
         }
 
+        // highlighter strips leading blank lines, throwing off line numbers.
+        // add a blank line for the highlighter to strip
+        var html = $(code).html();
+        if (html.match(/^ *\n/)) {
+          $(code).html("\n " + html);
+        }
+
         SyntaxHighlighter.highlight(config, code);
 
         var pod_lines = pre.attr('data-pod-lines');
