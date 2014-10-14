@@ -39,4 +39,9 @@ sub faq : Local {
     $c->stash( template => 'about/faq.html' );
 }
 
+sub metadata : Local {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about/metadata.html' );
+}
+
 1;
