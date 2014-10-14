@@ -1,4 +1,4 @@
-<ul class="nav nav-list box-right hidden-phone dependencies">
+<ul class="nav-list box-right hidden-phone dependencies">
     <li class="nav-header">Dependencies</li>
 <%-
 deps = [];
@@ -16,7 +16,7 @@ FOREACH dep IN deps.sort %>
 <%- ELSIF deps.size == 0 %>
     <li><i>none</i></li>
 <%- END %>
-    <li class="divider"></li>
+    <li><hr /></li>
     <li>
         <a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>">
         <i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>

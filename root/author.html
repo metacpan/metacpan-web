@@ -1,23 +1,19 @@
 <% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
 <% twitter_card_inc = 'inc/twitter/author.html' %>
-<ul class="nav nav-list slidepanel">
+<ul class="nav-list slidepanel">
     <li class="hidden-phone"><% INCLUDE inc/author-pic.html author = author %></li>
     <li class="visible-xs">
         <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">Email</li>
     <li>
-        <div>
-            <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a>
-        </div>
+        <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a>
     </li>
     <%- IF author.website.size %>
     <li class="nav-header">Website</li>
     <% FOREACH website IN author.website %>
     <li>
-        <div>
-            <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
-        </div>
+        <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
     </li>
     <%- END; END %>
     <%
@@ -28,7 +24,7 @@
             FOREACH profile IN author.profile.sort('name');
             IF profiles.${profile.name} %>
         <a rel="me" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank" title="<% profile.name %> - <% profile.id%>">
-        <img src="/static/images/profile/<% profile.name %>.png" width=16 height=16 alt="<% profile.name %>">
+        <img src="/static/images/profile/<% profile.name %>.png" width="16" height="16" alt="<% profile.name %>">
         </a>
         <% END; END %>
     </div>
@@ -44,21 +40,19 @@
     <li class="nav-header">Blog</li>
     <% FOREACH blog IN author.blog -%>
     <li>
-        <div>
-            <%- IF blog.feed %>
-            <a href="<% blog.feed %>" target="_blank">
-            <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
-            </a>
-            <%- END %>
-            <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
-            <% blog.url.replace('^https?://', '') %>
-            </a>
-        </div>
+        <%- IF blog.feed %>
+        <a href="<% blog.feed %>" target="_blank">
+        <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
+        </a>
+        <%- END %>
+        <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
+        <% blog.url.replace('^https?://', '') %>
+        </a>
     </li>
     <% END; END %>
     <% IF author.donation.size; FOREACH donate IN author.donation %>
     <% IF donate.name == 'paypal' && donate.id %>
-    <br>
+    <li class="author-donate">
     <center>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
             <input type="hidden" name="cmd" value="_donations">
@@ -72,23 +66,24 @@
             <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
         </form>
     </center>
+    </li>
     <% ELSIF donate.name == 'wishlist' && donate.id %>
-    <div style="text-align: center"><a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a></div>
+    <li class="author-donate">
+        <a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a>
+    </li>
     <% ELSIF donate.name == 'flattr' && donate.id %>
-    <script type="text/javascript">
-        /* <![CDATA[ */
-          (function() {
-            var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        
-            s.type = 'text/javascript';
-            s.async = true;
-            s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
-        
-            t.parentNode.insertBefore(s, t);
-          })();
-        /* ]]> */
-    </script>
-    <div style="text-align: center">
+    <li class="author-donate">
+        <script type="text/javascript">
+            (function() {
+              var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
+
+              t.parentNode.insertBefore(s, t);
+            })();
+        </script>
         <a class="FlattrButton" style="display:none;"
             title="<% author.name %> (<% author.pauseid %>) on MetaCPAN"
             rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
@@ -96,7 +91,7 @@
             language="en_GB" >
         <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
         </a>
-    </div>
+    </li>
     <% END; END; END %>
     <%
         i = 0;
@@ -131,25 +126,19 @@
         </form>
     </li>
     <li>
-        <div>
-            <a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a>
-            <a href="http://matrix.cpantesters.org/?author=<% author.pauseid %>" title="Matrix">
-                <i class="icon-grid"></i>
-            </a>
-        </div>
+        <a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a>
+        <a href="http://matrix.cpantesters.org/?author=<% author.pauseid %>" title="Matrix">
+            <i class="icon-grid"></i>
+        </a>
     </li>
     <li>
          <a href="http://cpants.cpanauthors.org/author/<% author.pauseid %>">CPANTS</a>
     </li>
     <li>
-        <div>
-            <a href="http://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a>
-        </div>
+        <a href="http://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a>
     </li>
     <li>
-        <div>
-            <a href="https://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/">Browse CPAN directory</a>
-        </div>
+        <a href="https://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/">Browse CPAN directory</a>
     </li>
 </ul>
 <!-- End left content -->

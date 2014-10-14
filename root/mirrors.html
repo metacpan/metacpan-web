@@ -2,17 +2,31 @@
 <%- query = req.parameters.q %>
 <% title = 'CPAN Mirrors' %>
 <script src="/static/openlayers/OpenLayers.js"></script>
-<ul class="nav nav-list slidepanel">
+<ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">Sorting</li>
-    <span style="float: right; visibility: hidden" id="busy"><i class="fa fa-spinner fa-spin"></i></span>
-    <li><a href="javascript:searchForNearest()">Nearest</a></li>
+    <li>
+      <span style="float: right; visibility: hidden" id="busy"><i class="fa fa-spinner fa-spin"></i></span>
+      <button class="btn-link" onclick="searchForNearest(); return false;"><i class="fa fa-fw fa-map-marker black"></i>Nearest</button>
+    </li>
     <li class="nav-header">Protocols</li>
-    <li><a href="javascript:toggleProtocol('http')">http</a></li>
-    <li><a href="javascript:toggleProtocol('ftp')">ftp</a></li>
-    <li><a href="javascript:toggleProtocol('rsync')">rsync</a></li>
+    <%-
+      FOREACH proto IN ['http', 'ftp', 'rsync'];
+        checked = 0;
+        protos = c.req.params.q ? c.req.params.q.split(/\s+/) : [];
+    %>
+    <li><a href="?q=<%
+      IF protos.grep(->(p){ p == proto }).size;
+        checked = 1;
+        protos = protos.grep(->(p){ p != proto });
+      ELSE;
+        protos.push(proto);
+      END;
+      protos.sort.join('%20');
+      %>"><i class="fa fa-fw<% checked ? " fa-check-circle" : "" %> black"></i><% proto.uc %></a></li>
+    <%- END %>
     <li class="nav-header">Continents</li>
     <%- continents = []; FOREACH mirror IN mirrors; continents.push(mirror.continent); END %>
     <% FOREACH continent IN continents.unique.sort %>
@@ -20,17 +34,18 @@
     <% END %>
 </ul>
 
-<ul class="nav nav-list box-right hidden-phone">
-  <li class="nav-header">Countries</li>
-    <%- countries = []; FOREACH mirror IN mirrors; countries.push(mirror.country); END %>
-    <%- FOREACH country IN countries.unique.sort %>
-    <li><a href="#<% country %>"><% country %></a></li>
-    <% END %>
-</ul>
+<div class="box-right">
+  <ul class="nav-list box-right hidden-phone">
+    <li class="nav-header">Countries</li>
+    <%- countries = {}; FOREACH mirror IN mirrors; countries.${mirror.country} = mirror.ccode; END %>
+      <%- FOREACH country IN countries.keys.sort %>
+      <li><a href="#<% country %>"><img class="flag" src="/static/images/flag/<% countries.$country %>.png" /><% country %></a></li>
+      <% END %>
+  </ul>
+</div>
 
-<div class="content">
-<div id="map" style="width: 600px; height: 200px"></div>
-<br>
+<div class="mirrors content">
+  <div class="map"><div id="map"></div></div>
 <ul>
 <%-
 dots = [];
@@ -42,7 +57,7 @@ FOREACH mirror IN mirrors;
   END;
   continent = continents.last();
   UNLESS continent.countries.last().name == mirror.country;
-    continent.countries.push({ name = mirror.country, mirrors = [] });
+    continent.countries.push({ name = mirror.country, code = mirror.ccode, mirrors = [] });
   END;
   continent.countries.last().mirrors.push(mirror);
 END;
@@ -52,7 +67,7 @@ FOREACH continent IN continents;
     <ul>
 <%-
   FOREACH country IN continent.countries %>
-      <li id="<% country.name %>"><strong><% country.name %></strong>
+      <li id="<% country.name %>"><img src="/static/images/flag/<% country.code %>.png" /> <strong><% country.name %></strong>
         <ul>
   <%-
     FOREACH mirror IN country.mirrors;
@@ -60,7 +75,7 @@ FOREACH continent IN continents;
       day = date.day _ '/' _ date.month _ '/' _ date.year;
     %>
           <li>
-            <a class="label<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
+            <a class="label label-default<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
             <a class="label label-warning<% mirror.http ? "" : " invisible" %>" href="<% mirror.http %>">http</a>
             <a class="label label-success<% mirror.rsync ? "" : " invisible" %>" href="<% mirror.rsync %>">rsync</a>
             <span title="active since <% day %>"><% mirror.org %>, <% mirror.city %><span>
@@ -101,4 +116,4 @@ $(function(){
 
 });
 </script>
-
+</div>

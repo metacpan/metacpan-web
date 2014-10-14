@@ -10,29 +10,23 @@
 
 <% INCLUDE inc/breadcrumbs.html plussers_div = plusser_authors%>
 
-<ul class="nav nav-list slidepanel" itemscope itemtype="http://schema.org/SoftwareApplication">
+<ul class="nav-list slidepanel" itemscope itemtype="http://schema.org/SoftwareApplication">
   <li class="visible-xs">
     <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
   <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
   <% IF documented_module.version %>
   <li>
-    <div>
-      Module version: <% documented_module.version | html %>
-    </div>
+    Module version: <% documented_module.version | html %>
   </li>
   <% END %>
   <li>
-    <div>
-      <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">Source</a>
-      (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
-    </div>
+    <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
+    (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
   </li>
   <li>
-    <div>
-      <a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>">Browse</a>
-      (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/">raw</a>)
-    </div>
+    <a href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+    (<a href="<% api_external %>/source/<% module.author %>/<% module.release %>/">raw</a>)
   </li>
   <% PROCESS inc/release-info.html %>
   <li class="nav-header">Activity</li>

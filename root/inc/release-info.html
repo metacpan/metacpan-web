@@ -1,60 +1,57 @@
 <li>
-    <a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>">Changes</a>
+    <a href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
 </li>
 <% IF is_url(release.resources.homepage) %>
 <li>
-    <a class="nopopup" href="<% release.resources.homepage %>">Homepage</a>
+    <a class="nopopup" href="<% release.resources.homepage %>"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
 </li>
 <% END %>
 <% IF release.resources.repository %>
 <li>
-    <div>
-        <% IF is_url(release.resources.repository.web) %>
-        <a href="<% release.resources.repository.web %>">Repository</a>
-        <% END %>
-        <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
-        (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
-        <% ELSIF is_url(release.resources.repository.url) %>
-        <a href="<% release.resources.repository.url %>">Clone <% release.resources.repository.type %> repository</a>
-        <% END %>
-    </div>
+    <% IF is_url(release.resources.repository.web) %>
+    <a href="<% release.resources.repository.web %>"><i class="fa fa-fw fa-code-fork black"></i>Repository</a>
+    <% END %>
+    <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
+    (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
+    <% ELSIF is_url(release.resources.repository.url) %>
+    <a href="<% release.resources.repository.url %>"><i class="fa fa-fw fa-code-fork black"></i>Clone <% release.resources.repository.type %> repository</a>
+    <% END %>
 </li>
 <% END %>
 <li>
-    <div><a href="<%
-        IF is_url(release.resources.bugtracker.web);
-          release.resources.bugtracker.web;
-        ELSIF release.resources.bugtracker.mailto;
-          'mailto:' _ release.resources.bugtracker.mailto;
-        ELSE;
-          'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
-        END;
-        %>">Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %></div>
+    <a href="<%
+      IF is_url(release.resources.bugtracker.web);
+        release.resources.bugtracker.web;
+      ELSIF release.resources.bugtracker.mailto;
+        'mailto:' _ release.resources.bugtracker.mailto;
+      ELSE;
+        'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
+      END;
+      %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %>
 </li>
 <% IF rating.count > 0 %>
 <li>
-    <div><% INCLUDE inc/rating.html rating = rating, distribution = release.distribution %></div>
+    <% INCLUDE inc/rating.html prefix = '<i class="fa fa-fw fa-smile-o black"></i>', rating = rating, distribution = release.distribution %>
 </li>
 <% END %>
 <li>
-    <div><%
-        testers_version = release.name.remove('^' _ release.distribution _ '-?');
-        cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
-        <a href="<% cpantesters_base %>" title="(pass / fail / na)">Testers</a>
-        <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
-        <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><i class="icon-grid"></i></a>
-    </div>
+    <%
+    testers_version = release.name.remove('^' _ release.distribution _ '-?');
+    cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
+    <a href="<% cpantesters_base %>" title="(pass / fail / na)"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
+    <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
+    <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><i class="icon-grid"></i></a>
 </li>
 <li>
-    <div><a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>">Kwalitee</a></div>
+    <a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
 </li>
+<% IF release.license %>
+<li><i class="fa fa-fw fa-gavel black"></i>License: <% release.license.join(', ') %></li>
+<% END %>
 <% IF irc.web %>
 <li class="irc-chat">
     <div><a target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
 </li>
-<% END %>
-<% IF release.license %>
-<li>License: <% release.license.join(', ') %></li>
 <% END %>
 <%
     BLOCK version_options;

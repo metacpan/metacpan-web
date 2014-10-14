@@ -1,9 +1,8 @@
-<strong><big>
+<div class="breadcrumbs">
   Diff <a href="/<% type %>/<% diff.source %>"><% diff.source.split("/").first(2).join(" / ") %></a>
   &nbsp;/&nbsp;
   <a href="/<% type %>/<% diff.target %>"><% diff.target.split("/").first(2).join(" / ") %></a>
-  </big></strong><br><br>
-
+</div>
 
 <%-
 insertions = 0;
@@ -20,28 +19,24 @@ END;
 FOREACH i IN [1,2,3]; foo = parts.shift; END;
 file.path = parts.join("/"); END -%>
 
-  <ul class="nav nav-list slidepanel">
+  <ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
   <li class="nav-header">Tools</li>
     <li>
-      <div>
-        <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
-          Reverse diff
-        </a>
-      </div>
+      <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
+        Reverse diff
+      </a>
     </li>
     <li>
-      <div>
-        <%- IF type == 'source' %>
-        <a href="<% api_external %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
-        <%- ELSE %>
-        <a href="<% api_external %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
-        <%- END %>
-          Raw diff
-        </a>
-      </div>
+      <%- IF type == 'source' %>
+      <a href="<% api_external %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
+      <%- ELSE %>
+      <a href="<% api_external %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
+      <%- END %>
+        Raw diff
+      </a>
     </li>
     <%- IF diff.statistics.size > 1 -%>
     <li>

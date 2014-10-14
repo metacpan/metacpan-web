@@ -1,15 +1,17 @@
 .slidepanel {
+  display: none;
   position: fixed;
   top: 0px;
-  visibility: hidden;
-  width: 180px;
+  width: 184px;
   -webkit-transition: -webkit-transform .4s;
   z-index: 1500;
   height: 100%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .slidepanel-visible {
+  display: block;
 }
 
 .btn.btn-slidepanel {

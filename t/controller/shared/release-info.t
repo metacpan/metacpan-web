@@ -136,18 +136,19 @@ test_psgi app, sub {
                 'link for bug tracker' );
 
             # not all dists have reviews
-            my $reviews
-                = '//a[starts-with(@class, "rating-")]/following-sibling::a';
             optional_test reviews => sub {
-                $tx->is(
-                    "$reviews/\@href",
-                    "http://cpanratings.perl.org/dist/$release",
-                    'link to current reviews'
+                my $rating
+                    = qq{//a[\@href="http://cpanratings.perl.org/rate/?distribution=$release"]};
+                $tx->like( "$rating/span/\@class", qr/^rating-\d+$/,
+                    'has link to rate',
                 );
+
+                my $reviews
+                    = qq{//a[\@href="http://cpanratings.perl.org/dist/$release"]};
                 $tx->like(
                     $reviews,
                     qr/\d+ reviews?/i,
-                    'current rating and number of reviews listed'
+                    'has link to review',
                 );
             };
 
