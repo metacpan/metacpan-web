@@ -8,6 +8,12 @@ matrix:
   allow_failures:
     - perl: "5.20"
 
+env:
+  global:
+    # Carton --deployment only works on the same version of perl
+    # that the snapshot was built from.
+    - DEPLOYMENT_PERL_VERSION=5.18
+
 before_install:
   - npm install -g less
   # Pre-install from backpan to avoid upgrade breakage.
@@ -17,7 +23,7 @@ before_install:
 
 install:
   # Carton::Builder (carton install) passes --notest to cpanm.
-  - carton install
+  - 'carton install `test "${TRAVIS_PERL_VERSION}" = "${DEPLOYMENT_PERL_VERSION}" && echo " --deployment"`'
 
 
 script:
