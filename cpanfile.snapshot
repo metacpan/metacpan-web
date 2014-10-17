@@ -246,17 +246,6 @@ DISTRIBUTIONS
       Module::Metadata 0
       strict 0
       warnings 0
-  CPAN-Meta-Requirements-2.125
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-Requirements-2.125.tar.gz
-    provides:
-      CPAN::Meta::Requirements 2.125
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      Scalar::Util 0
-      strict 0
-      version 0.77
-      warnings 0
   CPAN-Meta-YAML-0.012
     pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.012.tar.gz
     provides:
@@ -1090,7 +1079,6 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.17
       HTTP::Date 1.44
-      Module::Build 0.36
       Test::More 0.47
   DateTime-Format-ISO8601-0.08
     pathname: J/JH/JHOBLITT/DateTime-Format-ISO8601-0.08.tar.gz
@@ -1604,7 +1592,7 @@ DISTRIBUTIONS
       DateTime::Locale::zu_ZA undef
     requirements:
       List::MoreUtils 0
-      Module::Build 0.36
+      Module::Build 0
       Params::Validate 0.91
       perl 5.006
   DateTime-TimeZone-1.65
@@ -2280,6 +2268,14 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Exporter-Tiny-0.042
+    pathname: T/TO/TOBYINK/Exporter-Tiny-0.042.tar.gz
+    provides:
+      Exporter::Shiny 0.042
+      Exporter::Tiny 0.042
+    requirements:
+      ExtUtils::MakeMaker 6.17
+      perl 5.006001
   ExtUtils-Config-0.007
     pathname: L/LE/LEONT/ExtUtils-Config-0.007.tar.gz
     provides:
@@ -2603,23 +2599,26 @@ DISTRIBUTIONS
       HTML::Tagset 3
       XSLoader 0
       perl 5.008
-  HTML-Restrict-2.1.9
-    pathname: O/OA/OALDERS/HTML-Restrict-2.1.9.tar.gz
+  HTML-Restrict-2.2.2
+    pathname: O/OA/OALDERS/HTML-Restrict-2.2.2.tar.gz
     provides:
-      HTML::Restrict 2.001009
+      HTML::Restrict 2.002002
     requirements:
       Carp 0
       Data::Dump 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
+      HTML::Entities 0
       HTML::Parser 0
       List::MoreUtils 0
-      Module::Build 0.3601
+      Module::Build 0.28
       Moo 1.002000
-      MooX::Types::MooseLike 0.23
       Scalar::Util 0
       Sub::Quote 0
+      Type::Tiny 1.000001
+      Types::Standard 0
       URI 0
       namespace::clean 0
+      perl 5.006
       strict 0
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
@@ -2931,19 +2930,11 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.002002
     requirements:
       ExtUtils::CBuilder 0.27
+      ExtUtils::MakeMaker 0
       File::Spec 0
       File::Temp 0
       JSON::PP 2.27202
       perl 5.006
-  JSON-PP-2.27203
-    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
-    provides:
-      JSON::PP 2.27203
-      JSON::PP::Boolean 2.27203
-      JSON::PP::IncrParser 2.27203
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   JSON-XS-3.01
     pathname: M/ML/MLEHMANN/JSON-XS-3.01.tar.gz
     provides:
@@ -3894,18 +3885,11 @@ DISTRIBUTIONS
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
-      File::Spec::Functions 0
-      List::Util 0
       Module::Build::Tiny 0.030
       MooseX::Types 0
       MooseX::Types::Moose 0
-      Test::Deep 0
-      Test::More 0
-      Test::Warnings 0.005
-      if 0
-      open 0
+      perl 5.008
       strict 0
-      utf8 0
       warnings 0
   MooseX-Types-Path-Class-0.06
     pathname: T/TH/THEPLER/MooseX-Types-Path-Class-0.06.tar.gz
@@ -4549,7 +4533,7 @@ DISTRIBUTIONS
       Carp 0
       Class::Tiny 0.010
       ExtUtils::MakeMaker 6.30
-      Path::IsDev v0.2.2
+      Path::IsDev 0
       Path::IsDev::Object 0
       Path::Tiny 0.038
       Scalar::Util 0
@@ -4643,25 +4627,6 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  PathTools-3.47
-    pathname: S/SM/SMUELLER/PathTools-3.47.tar.gz
-    provides:
-      Cwd 3.47
-      File::Spec 3.47
-      File::Spec::Cygwin 3.47
-      File::Spec::Epoc 3.47
-      File::Spec::Functions 3.47
-      File::Spec::Mac 3.47
-      File::Spec::OS2 3.47
-      File::Spec::Unix 3.47
-      File::Spec::VMS 3.47
-      File::Spec::Win32 3.47
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
-      File::Basename 0
-      Scalar::Util 0
-      Test 0
   Perl-Critic-1.121
     pathname: T/TH/THALJEF/Perl-Critic-1.121.tar.gz
     provides:
@@ -5619,7 +5584,6 @@ DISTRIBUTIONS
     provides:
       Test::Exception 0.32
     requirements:
-      Module::Build 0.38
       Sub::Uplevel 0.18
       Test::Builder 0.7
       Test::Builder::Tester 1.07
@@ -5941,22 +5905,6 @@ DISTRIBUTIONS
       Test::Builder::Tester 1.02
       Test::More 0
       perl 5.006
-  Test-Warnings-0.016
-    pathname: E/ET/ETHER/Test-Warnings-0.016.tar.gz
-    provides:
-      Test::Warnings 0.016
-    requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Spec::Functions 0
-      List::Util 0
-      Test::Builder 0
-      Test::More 0.94
-      if 0
-      parent 0
-      strict 0
-      version 0
-      warnings 0
   Test-Without-Module-0.17
     pathname: C/CO/CORION/Test-Without-Module-0.17.tar.gz
     provides:
@@ -5997,7 +5945,6 @@ DISTRIBUTIONS
     provides:
       Text::Glob 0.09
     requirements:
-      Module::Build 0.36
       Test::More 0
   Text-Markdown-1.000031
     pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
@@ -6162,6 +6109,48 @@ DISTRIBUTIONS
       constant 0
       strict 0
       warnings 0
+  Type-Tiny-1.000004
+    pathname: T/TO/TOBYINK/Type-Tiny-1.000004.tar.gz
+    provides:
+      Devel::TypeTiny::Perl56Compat 1.000004
+      Devel::TypeTiny::Perl58Compat 1.000004
+      Error::TypeTiny 1.000004
+      Error::TypeTiny::Assertion 1.000004
+      Error::TypeTiny::Compilation 1.000004
+      Error::TypeTiny::WrongNumberOfParameters 1.000004
+      Eval::TypeTiny 1.000004
+      Reply::Plugin::TypeTiny 1.000004
+      Test::TypeTiny 1.000004
+      Type::Coercion 1.000004
+      Type::Coercion::FromMoose 1.000004
+      Type::Coercion::Union 1.000004
+      Type::Library 1.000004
+      Type::Params 1.000004
+      Type::Parser 1.000004
+      Type::Registry 1.000004
+      Type::Tiny 1.000004
+      Type::Tiny::Class 1.000004
+      Type::Tiny::Duck 1.000004
+      Type::Tiny::Enum 1.000004
+      Type::Tiny::Intersection 1.000004
+      Type::Tiny::Role 1.000004
+      Type::Tiny::Union 1.000004
+      Type::Utils 1.000004
+      Types::Common::Numeric 1.000004
+      Types::Common::String 1.000004
+      Types::Standard 1.000004
+      Types::Standard::ArrayRef 1.000004
+      Types::Standard::Dict 1.000004
+      Types::Standard::HashRef 1.000004
+      Types::Standard::Map 1.000004
+      Types::Standard::ScalarRef 1.000004
+      Types::Standard::Tuple 1.000004
+      Types::TypeTiny 1.000004
+    requirements:
+      CPAN::Meta::Requirements 2.000
+      Exporter::Tiny 0.026
+      ExtUtils::MakeMaker 6.17
+      perl 5.006001
   Types-Serialiser-1.0
     pathname: M/ML/MLEHMANN/Types-Serialiser-1.0.tar.gz
     provides:

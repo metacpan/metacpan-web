@@ -32,7 +32,7 @@ requires 'Exporter';
 requires 'File::Path';
 requires 'Gravatar::URL';
 requires 'HTML::Escape';
-requires 'HTML::Restrict', '2.1.8';
+requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
 requires 'HTTP::Request';
