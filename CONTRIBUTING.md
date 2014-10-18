@@ -39,9 +39,11 @@ These links will get you going quickly:
 # Git workflow
 
 We try to keep a clean git history, so if it all possible, please rebase to get
-the latest changes from master _before_ submitting a pull request.
+the latest changes from master _before_ submitting a pull request.  You'll only
+need to do the first command (git remote add) once in your local checkout.
 
-    git pull --rebase origin master
+    git remote add upstream https://github.com/CPAN-API/metacpan-web.git
+    git pull --rebase upstream master
 
 If you are comfortable rebasing, it is also helpful to squash or delete commits
 which are no longer relevant to your branch before submitting your work.
