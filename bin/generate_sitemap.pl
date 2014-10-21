@@ -19,7 +19,7 @@ my @parts = (
         object_type => 'author',
         field_name  => 'pauseid',
         xml_file =>
-            '/home/metacpan/metacpan.org/root/static/sitemaps/authors.xml.gz',
+            '/home/metacpan/metacpan-web/root/static/sitemaps/authors.xml.gz',
         cpan_directory => 'author',
     },
 
@@ -31,7 +31,7 @@ my @parts = (
         object_type => 'release',
         field_name  => 'distribution',
         xml_file =>
-            '/home/metacpan/metacpan.org/root/static/sitemaps/releases.xml.gz',
+            '/home/metacpan/metacpan-web/root/static/sitemaps/releases.xml.gz',
         cpan_directory => 'release',
         filter         => { status => 'latest' },
     }
