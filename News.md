@@ -1,3 +1,19 @@
+Title: Server move - phase 2
+------------------------------
+Date: 2014-10-21T19:00:00
+
+We have moved all sites over to [Fastly](http://www.fastly.com)
+(where possible) and they are backed up by the new
+[Bytemark](http://www.bytemark.co.uk/) servers.
+
+We have further plans... but this will do for now,
+many thanks to our sponsors for making this possible.
+
+[network-infrastructure](https://github.com/CPAN-API/network-infrastructure)
+and [metacpan-puppet](https://github.com/CPAN-API/metacpan-puppet) have all
+our configs if you want to see details of anything.
+
+
 Title: Server move - phase 1
 ------------------------------
 Date: 2014-09-19T19:00:00
