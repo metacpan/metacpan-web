@@ -162,17 +162,11 @@ test_psgi app, sub {
             );
 
             # test format of cpantesters link
-            $tx->is(
-                '//a[text()="Testers"]/@href',
-                "http://matrix.cpantesters.org/?dist=$release+$version",
-                'link to test results'
-            );
-
             # TODO: release.tests.size
 
             $tx->is(
                 '//a[@title="Matrix"]/@href',
-                "http://www.cpantesters.org/distro/$first_letter/$release.html?oncpan=1&distmat=1&version=$version",
+                "http://matrix.cpantesters.org/?dist=$release+$version",
                 'link to test matrix'
             );
 
