@@ -143,6 +143,15 @@
         </nav>
 
         <div class="container-fluid">
+
+        <% IF site_alert_message %>
+            <div class="row">
+                <div class="site-alert-message alert alert-danger" role="alert">
+                  <% site_alert_message %>
+                </div>
+            </div>
+        <% END %>
+
             <% IF req.uri.path != '/' %>
             <div class="row hidden-phone">
                 <div class="head-small-logo col-md-3">
@@ -168,7 +177,7 @@
                 </div>
             </div>
             <% END %>
-            
+
             <div class="row">
                 <div class="main-content col-md-12">
                     <% content | none %>

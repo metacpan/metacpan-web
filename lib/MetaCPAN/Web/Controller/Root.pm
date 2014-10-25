@@ -100,6 +100,9 @@ sub end : ActionClass('RenderView') {
         = $c->stash->{api_external_secure}
         . '/oauth2/authorize?client_id='
         . $c->config->{consumer_key};
+
+    $c->stash->{site_alert_message} = $c->config->{site_alert_message};
+
     $c->res->header( Vary => 'Cookie' );
 
     unless (
