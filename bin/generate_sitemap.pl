@@ -10,16 +10,18 @@ use lib "$Bin/../lib";
 
 use MetaCPAN::Sitemap;
 
+my $out_dir = "$Bin/../root/static/sitemaps/";
+mkdir $out_dir;
+
 my @parts = (
 
     # For authors, we're looking for the pauseid, and want to build a URL
     # with 'author' in the path.
 
     {
-        object_type => 'author',
-        field_name  => 'pauseid',
-        xml_file =>
-            '/home/metacpan/metacpan-web/root/static/sitemaps/authors.xml.gz',
+        object_type    => 'author',
+        field_name     => 'pauseid',
+        xml_file       => "$out_dir/authors.xml.gz",
         cpan_directory => 'author',
     },
 
@@ -28,10 +30,9 @@ my @parts = (
     # filter on only the 'latest' entries.
 
     {
-        object_type => 'release',
-        field_name  => 'distribution',
-        xml_file =>
-            '/home/metacpan/metacpan-web/root/static/sitemaps/releases.xml.gz',
+        object_type    => 'release',
+        field_name     => 'distribution',
+        xml_file       => "$out_dir/releases.xml.gz",
         cpan_directory => 'release',
         filter         => { status => 'latest' },
     }
