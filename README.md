@@ -42,3 +42,25 @@ On Win32 (and possibly also on other platforms) when using Perl < 5.12, the
 server started with plackup will generate warnings relating to date parsing.
 These are caused by Plack due to a bug in the gmtime implementation and can be
 removed by upgrading to Perl 5.12.
+
+## Running in [docker](https://www.docker.com/)
+
+You can build a docker image with command:
+
+    docker build --tag metacpan .
+
+And when you have docker image you can run in with the command:
+
+    docker run --publish 8000:5001 --detach metacpan
+
+With running container you can open metacpan web at http://127.0.0.1:8000
+(but you need to change 127.0.0.1 to the ip of your docker virtual machine)
+
+If you want to run metacpan web with your custom config you can use config
+file from your docker host system like this:
+
+    docker run \
+        --publish 8000:5001 \
+        --volume /absolute/path/to/metacpan_web.conf:/root/metacpan_web.conf \
+        --detach \
+        metacpan
