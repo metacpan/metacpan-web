@@ -139,6 +139,42 @@ has to be changed to:
     http://search.mcpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
                   ^
 
+## What is the relation of MetaCPAN to author-*.json and the data in a PAUSE account?
+
+Every CPAN module author has an account on [PAUSE](http://pause.perl.org/pause/query).
+That account has some profile data in it (full name, ascii name, e-mail, and homepage).
+Authors can edit those at [Edit Account Info](https://pause.perl.org/pause/authenquery?ACTION=edit_cred).
+This information is collected and distributed by PAUSE via the
+[00whois.xml](http://www.cpan.org/authors/00whois.xml) file.
+
+In addition PAUSE users can upload a file called author.json or author-1.0.json to the root
+of their PAUSE account with other information.
+
+When someone asks MetaCPAN for information about an author (a PAUSE account),
+MetaCPAN will provide the data from the MetaCPAN account that was associated
+with the given PAUSE account. If no such association exists then MetaCPAN
+will default to the data found in the PAUSE account of the user
+(via the 00whois.xml file), and to the content
+of the latest author-*.json file found in the PAUSE account of that user.
+(If there is such a file.)
+
+Once a PAUSE account is connected to a MetaCPAN account, the information
+in the MetaCPAN account is initialized from those sources
+(00whois.xml and author-*.json) and from that point MetaCPAN disregards
+any changes made to those files.
+
+As of October 2014 [search.cpan.org](search.cpan.org) uses only the data in the
+PAUSE account (via the 00whois.xml). It does not use the data from the author.json
+files and from MetaCPAN.
+Thus it might show a different e-mail address or homepage of a user then what MetaCPAN does.
+
+If you, as a PAUSE author would like to keep them in sync, you can always export your MetaCPAN
+account information in json format by accessing http://api.metacpan.org/author/PAUSEID
+(replacing the word PAUSEID by your own PAUSEID). Then you can upload the result as author-*.json
+with a higher version number than the last one you uploaded.
+The PAUSE account information need to be updated manually via
+[Edit Account Info](https://pause.perl.org/pause/authenquery?ACTION=edit_cred).
+
 <% END %>
 
 </div>
