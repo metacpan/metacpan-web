@@ -27,5 +27,5 @@ FOREACH release IN recent;
   releases.push(release);
 END %>
 <% INCLUDE inc/release-table.html releases = releases %>
-<% INCLUDE inc/pager.html size = 100 %>
+<% INCLUDE inc/pager.html size = page_size %>
 </div>
