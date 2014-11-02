@@ -334,6 +334,26 @@ $(document).ready(function () {
         }
     });
 
+    $('a[href*="/requires"').on('click', function() {
+        var url = $(this).attr('href');
+        var result = /size=(\d+)/.exec(url);
+        if (result && result[1]) {
+            var requires_page_size = result[1];
+            localStorage.setItem('requires_page_size', requires_page_size);
+            return true;
+        } else {
+            requires_page_size = localStorage.getItem('requires_page_size');
+            if (requires_page_size) {
+                if (/\?/.exec(url)) {
+                    document.location.href = url + '&size=' + requires_page_size;
+                } else {
+                    document.location.href = url + '?size=' + requires_page_size;
+                }
+                return false;
+            };
+        }
+    });
+
 
 });
 
