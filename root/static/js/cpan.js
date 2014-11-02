@@ -318,6 +318,23 @@ $(document).ready(function () {
         }
     });
 
+    $('a[href*="/recent"').on('click', function() {
+        var url = $(this).attr('href');
+        var result = /size=(\d+)/.exec(url);
+        if (result && result[1]) {
+            var recent_page_size = result[1];
+            localStorage.setItem('recent_page_size', recent_page_size);
+            return true;
+        } else {
+            recent_page_size = localStorage.getItem('recent_page_size');
+            if (recent_page_size) {
+                document.location.href = url + '?size=' + recent_page_size;
+                return false;
+            };
+        }
+    });
+
+
 });
 
 function searchForNearest() {
