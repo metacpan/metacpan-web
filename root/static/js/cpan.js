@@ -301,6 +301,23 @@ $(document).ready(function () {
         $('#size').val(size);
     }
 
+    // TODO use a more specific locator for /author/PAUSID/release ?
+    $('a[href*="/releases"').on('click', function() {
+        var url = $(this).attr('href');
+        var result = /size=(\d+)/.exec(url);
+        if (result && result[1]) {
+            var releases_page_size = result[1];
+            localStorage.setItem('releases_page_size', releases_page_size);
+            return true;
+        } else {
+            releases_page_size = localStorage.getItem('releases_page_size');
+            if (releases_page_size) {
+                document.location.href = url + '?size=' + releases_page_size;
+                return false;
+            };
+        }
+    });
+
 });
 
 function searchForNearest() {
