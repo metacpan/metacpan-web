@@ -45,7 +45,7 @@ removed by upgrading to Perl 5.12.
 
 ## Running in [docker](https://www.docker.com/)
 
-This feature is highly experimental and is not oficcially supporter. It works,
+This feature is highly experimental and is not officially supported. It works,
 but it should be heavily tested.
 
 You can build a docker image with command:
