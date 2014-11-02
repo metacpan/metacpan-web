@@ -3,10 +3,19 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 
+use MetaCPAN::Web::Types qw( PositiveInt );
+
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
+    my $req = $c->req;
 
-    my $data     = $c->model('API::Favorite')->recent( $c->req->page )->recv;
+    my $page_size = $req->param('size');
+    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
+        $page_size = 100;
+    }
+
+    my $data = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
+        ->recv;
     my @faves    = map { $_->{_source} } @{ $data->{hits}->{hits} };
     my @user_ids = map { $_->{user} } @faves;
 
@@ -30,6 +39,7 @@ sub recent : Path('/favorite/recent') {
             show_clicked_by => 1,
             took            => $data->{took},
             total           => $data->{hits}->{total},
+            page_size       => $page_size,
             template        => 'favorite/recent.html',
         }
     );
