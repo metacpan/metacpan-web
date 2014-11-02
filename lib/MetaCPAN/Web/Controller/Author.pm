@@ -9,6 +9,8 @@ use Locale::Country ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+use MetaCPAN::Web::Types qw( PositiveInt );
+
 # Capture the PAUSE id in the root of the chain so we handle the upper-case redirect once.
 # Later actions in the chain can get the pauseid out of the stash.
 sub root : Chained('/') PathPart('author') CaptureArgs(1) {
@@ -84,14 +86,19 @@ sub index : Chained('root') PathPart('') Args(0) {
 # /author/*/releases
 sub releases : Chained('root') PathPart Args(0) {
     my ( $self, $c ) = @_;
+    my $req = $c->req;
 
     my $id = $c->stash->{pauseid};
 
-    my $size      = 100;
-    my $page      = $c->req->page > 0 ? $c->req->page : 1;
+    my $page_size = $req->param('size');
+    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
+        $page_size = 100;
+    }
+
+    my $page = $c->req->page > 0 ? $c->req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases_cv
-        = $c->model('API::Release')->all_by_author( $id, $size, $page );
+        = $c->model('API::Release')->all_by_author( $id, $page_size, $page );
 
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
 
@@ -100,7 +107,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $pageset = Data::Pageset->new(
         {
             total_entries    => $releases->{hits}->{total},
-            entries_per_page => $size,
+            entries_per_page => $page_size,
             current_page     => $page,
             pages_per_set    => 10,
             mode             => 'slide'
@@ -109,9 +116,10 @@ sub releases : Chained('root') PathPart Args(0) {
 
     $c->stash(
         {
-            releases => \@releases,
-            author   => $author,
-            pageset  => $pageset,
+            releases  => \@releases,
+            author    => $author,
+            pageset   => $pageset,
+            page_size => $page_size,
         }
     );
 }
