@@ -21,5 +21,5 @@ FOREACH favorite IN recent;
   favorites.push(favorite);
 END; %>
 <% INCLUDE inc/favorite-table.html favorites = favorites %>
-<% INCLUDE inc/pager.html size = 100 %>
+<% INCLUDE inc/pager.html size = page_size %>
 </div>
