@@ -160,7 +160,7 @@ test_psgi app, sub {
                 ),
                 'cpanratings link to rate this dist'
             );
-
+            #
             # TODO: release.tests.size
 
             $tx->is(
