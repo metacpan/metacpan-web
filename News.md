@@ -1,3 +1,16 @@
+Title: Liquid Web is Sponsoring MetaCPAN
+------------------------------
+Date: 2014-11-08T03:00:00
+
+We're immensely pleased to announce that [Liquid Web
+Inc.](https://www.liquidweb.com/) is our newest hosting sponsor.  This
+sponsorship entails 3 powerful machines which are provided and co-located by
+Liquid Web Inc.  Having access to this hardware will allow us greater
+redundancy in addition to giving us powerful machines to use as a staging area
+when developing new MetaCPAN features.  This is a huge development for us and
+we'd like to thank Liquid Web Inc. for this very kind donation.  More details
+to come!
+
 Title: Server move - phase 2
 ------------------------------
 Date: 2014-10-21T19:00:00
