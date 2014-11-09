@@ -9,8 +9,6 @@ use Locale::Country ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use MetaCPAN::Web::Types qw( PositiveInt );
-
 # Capture the PAUSE id in the root of the chain so we handle the upper-case redirect once.
 # Later actions in the chain can get the pauseid out of the stash.
 sub root : Chained('/') PathPart('author') CaptureArgs(1) {
@@ -88,12 +86,8 @@ sub releases : Chained('root') PathPart Args(0) {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    my $id = $c->stash->{pauseid};
-
-    my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
-        $page_size = 100;
-    }
+    my $id        = $c->stash->{pauseid};
+    my $page_size = $req->get_page_size(100);
 
     my $page = $c->req->page > 0 ? $c->req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);

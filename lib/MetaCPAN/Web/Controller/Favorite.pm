@@ -3,16 +3,11 @@ use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
 
-use MetaCPAN::Web::Types qw( PositiveInt );
-
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
-        $page_size = 100;
-    }
+    my $page_size = $req->get_page_size(100);
 
     my $data = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
         ->recv;

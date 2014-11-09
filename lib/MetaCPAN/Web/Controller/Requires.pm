@@ -5,8 +5,6 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use MetaCPAN::Web::Types qw( PositiveInt );
-
 # The order of the columns matters here. It aims to be compatible
 # to jQuery tablesorter plugin.
 __PACKAGE__->config(
@@ -30,10 +28,7 @@ sub distribution : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my $req = $c->req;
     my $cv  = AE::cv();
 
-    my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
-        $page_size = 50;
-    }
+    my $page_size = $req->get_page_size(50);
 
     my $data
         = $c->model('API::Release')
@@ -55,10 +50,7 @@ sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my $req = $c->req;
     my $cv  = AE::cv();
 
-    my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
-        $page_size = 50;
-    }
+    my $page_size = $req->get_page_size(50);
 
     my $data
         = $c->model('API::Module')
