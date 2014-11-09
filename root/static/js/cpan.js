@@ -302,60 +302,34 @@ $(document).ready(function () {
     }
 
     // TODO use a more specific locator for /author/PAUSID/release ?
-    $('a[href*="/releases"').on('click', function() {
-        var url = $(this).attr('href');
-        var result = /size=(\d+)/.exec(url);
-        if (result && result[1]) {
-            var releases_page_size = result[1];
-            localStorage.setItem('releases_page_size', releases_page_size);
-            return true;
-        } else {
-            releases_page_size = localStorage.getItem('releases_page_size');
-            if (releases_page_size) {
-                document.location.href = url + '?size=' + releases_page_size;
-                return false;
-            };
-        }
-    });
+    set_page_size('a[href*="/releases"', 'releases_page_size');
+    set_page_size('a[href*="/recent"', 'recent_page_size');
+    set_page_size('a[href*="/requires"','requires_page_size');
 
-    $('a[href*="/recent"').on('click', function() {
-        var url = $(this).attr('href');
-        var result = /size=(\d+)/.exec(url);
-        if (result && result[1]) {
-            var recent_page_size = result[1];
-            localStorage.setItem('recent_page_size', recent_page_size);
-            return true;
-        } else {
-            recent_page_size = localStorage.getItem('recent_page_size');
-            if (recent_page_size) {
-                document.location.href = url + '?size=' + recent_page_size;
-                return false;
-            };
-        }
-    });
+});
 
-    $('a[href*="/requires"').on('click', function() {
+function set_page_size(selector, storage_name) {
+    $(selector).on('click', function() {
         var url = $(this).attr('href');
         var result = /size=(\d+)/.exec(url);
         if (result && result[1]) {
-            var requires_page_size = result[1];
-            localStorage.setItem('requires_page_size', requires_page_size);
+            var page_size = result[1];
+            localStorage.setItem(storage_name, page_size);
             return true;
         } else {
-            requires_page_size = localStorage.getItem('requires_page_size');
-            if (requires_page_size) {
+            page_size = localStorage.getItem(storage_name);
+            if (page_size) {
                 if (/\?/.exec(url)) {
-                    document.location.href = url + '&size=' + requires_page_size;
+                    document.location.href = url + '&size=' + page_size;
                 } else {
-                    document.location.href = url + '?size=' + requires_page_size;
+                    document.location.href = url + '?size=' + page_size;
                 }
                 return false;
             };
         }
     });
+}
 
-
-});
 
 function searchForNearest() {
     $("#busy").css({ visibility: 'visible'});
