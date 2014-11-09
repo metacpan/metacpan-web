@@ -427,7 +427,7 @@ sub _search_in_distributions {
 }
 
 sub requires {
-    my ( $self, $module, $page, $sort ) = @_;
+    my ( $self, $module, $page, $page_size, $sort ) = @_;
     $sort ||= { date => 'desc' };
     my $cv = $self->cv;
     $self->request(
@@ -449,8 +449,8 @@ sub requires {
                     }
                 }
             },
-            size => 50,
-            from => $page * 50 - 50,
+            size => $page_size,
+            from => $page * $page_size - $page_size,
             sort => [$sort],
         }
         )->cb(

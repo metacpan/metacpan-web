@@ -82,12 +82,12 @@ sub by_user {
 }
 
 sub recent {
-    my ( $self, $page ) = @_;
+    my ( $self, $page, $page_size ) = @_;
     $self->request(
         '/favorite/_search',
         {
-            size  => 100,
-            from  => ( $page - 1 ) * 100,
+            size  => $page_size,
+            from  => ( $page - 1 ) * $page_size,
             query => { match_all => {} },
             sort  => [ { 'date' => { order => 'desc' } } ]
         }

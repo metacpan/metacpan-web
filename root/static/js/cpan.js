@@ -301,7 +301,35 @@ $(document).ready(function () {
         $('#size').val(size);
     }
 
+    // TODO use a more specific locator for /author/PAUSID/release ?
+    set_page_size('a[href*="/releases"', 'releases_page_size');
+    set_page_size('a[href*="/recent"', 'recent_page_size');
+    set_page_size('a[href*="/requires"','requires_page_size');
+
 });
+
+function set_page_size(selector, storage_name) {
+    $(selector).on('click', function() {
+        var url = $(this).attr('href');
+        var result = /size=(\d+)/.exec(url);
+        if (result && result[1]) {
+            var page_size = result[1];
+            localStorage.setItem(storage_name, page_size);
+            return true;
+        } else {
+            page_size = localStorage.getItem(storage_name);
+            if (page_size) {
+                if (/\?/.exec(url)) {
+                    document.location.href = url + '&size=' + page_size;
+                } else {
+                    document.location.href = url + '?size=' + page_size;
+                }
+                return false;
+            };
+        }
+    });
+}
+
 
 function searchForNearest() {
     $("#busy").css({ visibility: 'visible'});
