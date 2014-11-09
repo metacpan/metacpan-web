@@ -7,17 +7,13 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use MetaCPAN::Web::Types qw( PositiveInt );
 use Plack::Response;
 
 sub index : Path {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
-    my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
-        $page_size = 20;
-    }
+    my $page_size = $req->get_page_size(20);
 
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
