@@ -7,10 +7,10 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path {
     my ( $self, $c ) = @_;
-    my $req = $c->req;
+
     my $location;
     my @protocols;
-    if ( my $q = $req->parameters->{q} ) {
+    if ( my $q = $c->req->parameters->{q} ) {
         my @parts = split( /\s+/, $q );
         foreach my $part (@parts) {
             push( @protocols, $part )

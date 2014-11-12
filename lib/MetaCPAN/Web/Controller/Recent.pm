@@ -11,8 +11,7 @@ sub index : Path {
 
     my ($data)
         = $c->model('API::Release')
-        ->recent( $c->req->page, $page_size, $c->req->params->{f} || 'l' )
-        ->recv;
+        ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     $c->res->last_modified( $latest->[0]->{date} ) if (@$latest);
     $c->stash(

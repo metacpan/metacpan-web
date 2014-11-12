@@ -25,10 +25,9 @@ sub index : Chained('/') : PathPart('requires') : CaptureArgs(0) {
 
 sub distribution : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my ( $self, $c, $distribution, $sort ) = @_;
-    my $req = $c->req;
-    my $cv  = AE::cv();
 
-    my $page_size = $req->get_page_size(50);
+    my $cv        = AE::cv();
+    my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Release')
@@ -47,10 +46,9 @@ sub distribution : Chained('index') : PathPart : Args(1) : Does('Sortable') {
 
 sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     my ( $self, $c, $module, $sort ) = @_;
-    my $req = $c->req;
-    my $cv  = AE::cv();
 
-    my $page_size = $req->get_page_size(50);
+    my $cv        = AE::cv();
+    my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Module')
