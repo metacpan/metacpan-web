@@ -302,9 +302,9 @@ $(document).ready(function () {
     }
 
     // TODO use a more specific locator for /author/PAUSID/release ?
-    set_page_size('a[href*="/releases"', 'releases_page_size');
-    set_page_size('a[href*="/recent"', 'recent_page_size');
-    set_page_size('a[href*="/requires"','requires_page_size');
+    set_page_size('a[href*="/releases"]', 'releases_page_size');
+    set_page_size('a[href*="/recent"]', 'recent_page_size');
+    set_page_size('a[href*="/requires"]','requires_page_size');
 
 });
 
