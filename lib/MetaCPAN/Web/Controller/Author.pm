@@ -89,7 +89,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $id        = $c->stash->{pauseid};
     my $page_size = $req->get_page_size(100);
 
-    my $page = $c->req->page > 0 ? $c->req->page : 1;
+    my $page = $req->page > 0 ? $req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases_cv
         = $c->model('API::Release')->all_by_author( $id, $page_size, $page );

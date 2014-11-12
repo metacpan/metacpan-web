@@ -5,9 +5,8 @@ use base 'MetaCPAN::Web::Controller';
 
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
-    my $req = $c->req;
 
-    my $page_size = $req->get_page_size(100);
+    my $page_size = $c->req->get_page_size(100);
 
     my $data = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
         ->recv;
