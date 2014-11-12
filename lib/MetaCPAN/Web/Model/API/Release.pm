@@ -114,7 +114,7 @@ sub all_by_author {
 }
 
 sub recent {
-    my ( $self, $page, $type ) = @_;
+    my ( $self, $page, $page_size, $type ) = @_;
     my $query;
     if ( $type eq 'n' ) {
         $query = $self->_new_distributions_query;
@@ -134,8 +134,8 @@ sub recent {
     $self->request(
         '/release/_search',
         {
-            size   => 100,
-            from   => ( $page - 1 ) * 100,
+            size   => $page_size,
+            from   => ( $page - 1 ) * $page_size,
             query  => $query,
             fields => [qw(name author status abstract date distribution)],
             sort   => [ { 'date' => { order => 'desc' } } ]
@@ -242,7 +242,7 @@ sub find {
 
 # stolen from Module/requires
 sub reverse_dependencies {
-    my ( $self, $distribution, $page, $sort ) = @_;
+    my ( $self, $distribution, $page, $page_size, $sort ) = @_;
     $sort ||= { date => 'desc' };
     my $cv = $self->cv;
 
@@ -262,8 +262,8 @@ sub reverse_dependencies {
                     }
                 }
             },
-            size => 50,
-            from => $page * 50 - 50,
+            size => $page_size,
+            from => $page * $page_size - $page_size,
             sort => [$sort],
         }
         )->cb(

@@ -5,8 +5,12 @@ use base 'MetaCPAN::Web::Controller';
 
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
+    my $req = $c->req;
 
-    my $data     = $c->model('API::Favorite')->recent( $c->req->page )->recv;
+    my $page_size = $req->get_page_size(100);
+
+    my $data = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
+        ->recv;
     my @faves    = map { $_->{_source} } @{ $data->{hits}->{hits} };
     my @user_ids = map { $_->{user} } @faves;
 
@@ -30,6 +34,7 @@ sub recent : Path('/favorite/recent') {
             show_clicked_by => 1,
             took            => $data->{took},
             total           => $data->{hits}->{total},
+            page_size       => $page_size,
             template        => 'favorite/recent.html',
         }
     );
