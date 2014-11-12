@@ -10,6 +10,11 @@ test_psgi app, sub {
     is( $res->code, 404, 'code 404' );
     ok( $res = $cb->( GET '/author/perler' ), 'GET /author/perler' );
     is( $res->code, 301, 'code 301' );
+    is(
+        $res->header('Location'),
+        'http://localhost/author/PERLER',
+        '301 target'
+    );
     ok( $res = $cb->( GET '/author/PERLER' ), 'GET /author/PERLER' );
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
@@ -18,6 +23,21 @@ test_psgi app, sub {
     ok( $release, 'found a release' );
 
     ok( $res = $cb->( GET $release), "GET $release" );
+    is( $res->code, 200, 'code 200' );
+
+    ok( $res = $cb->( GET '/author/DOESNTEXIST/releases' ),
+        'GET /author/DOESNTEXIST/releases' );
+    is( $res->code, 404, 'code 404' );
+    ok( $res = $cb->( GET '/author/perler/releases' ),
+        'GET /author/perler/releases' );
+    is( $res->code, 301, 'code 301' );
+    is(
+        $res->header('Location'),
+        'http://localhost/author/PERLER/releases',
+        '301 target'
+    );
+    ok( $res = $cb->( GET '/author/PERLER/releases' ),
+        'GET /author/PERLER/releases' );
     is( $res->code, 200, 'code 200' );
 };
 

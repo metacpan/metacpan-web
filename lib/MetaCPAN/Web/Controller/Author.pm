@@ -94,6 +94,7 @@ sub releases : Chained('root') PathPart Args(0) {
         = $c->model('API::Release')->all_by_author( $id, $size, $page );
 
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
+    $c->detach('/not_found') unless ( $author->{pauseid} );
 
     my @releases = map { $_->{fields} } @{ $releases->{hits}->{hits} };
 
