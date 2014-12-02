@@ -1,3 +1,19 @@
+Title: SSL improvements
+------------------------------
+Date: 2014-12-02T19:30:00
+
+Our servers have had their SSL configuration upgraded,
+so we now get an A rating on [SSL Labs](https://www.ssllabs.com/ssltest/analyze.html?d=api.metacpan.org).
+
+[Fastly](https://www.fastly.com) who server all our content
+other than the [api](https://api.metacpan.org/) already had
+tight configs... and now so do we. I'd like to thank then for providing
+both examples, support and an IRC channel where Donald Stufft
+from the Python infrastructure team was able to help out.
+
+All our configs and systems are in our [github repos](https://github.com/CPAN-API/)
+so feel free to review / improve or 'borrow' configs from.
+
 Title: Liquid Web is Sponsoring MetaCPAN
 ------------------------------
 Date: 2014-11-08T03:00:00
