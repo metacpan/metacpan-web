@@ -18,6 +18,8 @@ before_install:
   - npm install -g less
   # Pre-install from backpan to avoid upgrade breakage.
   - cpanm -n http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
+  # As of 2013-11-02 travis doesn't seem to find this one yet.
+  - cpanm http://cpan.metacpan.org/authors/id/M/MA/MAKAMAKA/JSON-2.90.tar.gz
   - cpanm -n Devel::Cover::Report::Coveralls
   - cpanm -n Carton
 
