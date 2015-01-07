@@ -50,6 +50,9 @@ which are no longer relevant to your branch before submitting your work.
 
     git rebase -i master
 
+If you are not comfortable with rebasing, but want to use it, check out the steps
+from [here](https://help.github.com/articles/using-git-rebase/).
+
 # Coding conventions
 
 Please try to follow the conventions already been used in the code base.  This
