@@ -7,7 +7,7 @@ use Test::More;
 
     package ExtractFirstElement;
     use Moo;
-    with('MetaCPAN::Web::Role::Adapter');
+    with('MetaCPAN::Web::Role::Elasticsearch::Adapter');
     1;
 }
 

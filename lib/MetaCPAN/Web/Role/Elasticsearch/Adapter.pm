@@ -1,4 +1,4 @@
-package MetaCPAN::Web::Role::Adapter;
+package MetaCPAN::Web::Role::Elasticsearch::Adapter;
 
 use Moose::Role;
 
