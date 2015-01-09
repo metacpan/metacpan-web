@@ -53,12 +53,11 @@ sub index : Chained('root') PathPart('') Args(0) {
     my $faves_cv = $c->model('API::Favorite')->by_user( $author->{user} );
 
     my $faves_data = $faves_cv->recv;
-    my $faves      = [
-        sort { $b->{date} cmp $a->{date} }
-        map  { $_->{fields} } @{ $faves_data->{hits}{hits} }
-    ];
-
+    my $faves = [ map { $_->{fields} } @{ $faves_data->{hits}->{hits} } ];
+    $self->extract_first_element($faves);
+    $faves = [ sort { $b->{date} cmp $a->{date} } @{$faves} ];
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
+    $self->extract_first_element($releases);
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;
