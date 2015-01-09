@@ -4,10 +4,10 @@ use Moose::Role;
 
 =head1 METHODS
 
-=head2 extract_first_element 
+=head2 extract_first_element
 
 Elasticsearch 1.x changed the data structure returned when fields are used.
-For example before one could get a ArrayRef[HashRef[Str]] where now 
+For example before one could get a ArrayRef[HashRef[Str]] where now
 that will come in the form of ArrayRef[HashRef[ArrayRef[Str]]]
 
 This function will select the first element given an array of hash of array.
@@ -20,7 +20,7 @@ So this:
       },
        ...
    ]
-   
+
 becomes:
 
     [

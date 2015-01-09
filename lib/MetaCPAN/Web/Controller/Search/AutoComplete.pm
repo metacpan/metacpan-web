@@ -12,7 +12,11 @@ sub index : Path {
     my $query = join( q{ }, $c->req->param('q') );
     my $data  = $model->autocomplete($query)->recv;
     $c->res->content_type('application/json');
-    $c->res->body( JSON::MaybeXS::encode_json( $data->{results} ) );
+    $c->res->body(
+        JSON::MaybeXS::encode_json(
+            $self->extract_first_element( $data->{results} )
+        )
+    );
 }
 
 1;
