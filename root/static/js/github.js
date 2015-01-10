@@ -124,6 +124,20 @@ function Github() {
                         type: 'GET',
                         url: this.url,
                         success: function(res, status) {
+
+                            var error;
+                            try {
+                                // If there was an error data will likely
+                                // contain only "documentation_url" and "message".
+                                if( res.meta && res.meta.status >= 400 ){
+                                    error = res.data && res.data.message || 'An error occurred';
+                                }
+                            } catch(ignore){ }
+                            if( error ){
+                                this.set('content.text', '<i>' + error + '</i>');
+                                return;
+                            }
+
                             var qtip = this;
                             var data = self.prepareData(res.data, function(data) {
                                 var html = self.render(data);
@@ -192,7 +206,13 @@ function Github() {
         },
 
         render: function(data) {
-            return this.config[this.type].render(this, data);
+            try {
+                return this.config[this.type].render(this, data);
+            }
+            catch(x) {
+                // Don't let the spinner spin forever.
+                return '<i>Error</i>';
+            }
         }
     }
 };
