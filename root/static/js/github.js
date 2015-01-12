@@ -6,6 +6,7 @@
 
     function GithubUrl(item) {
         this.item = $(item);
+        this.href = this.item.attr('href');
     }
 
     // anchor patterns and check for www. or no subdomain to avoid user wikis, blogs, etc
@@ -181,7 +182,7 @@
         },
 
         hasGithubUrl: function() {
-            return this.item.attr('href').match('github');
+            return this.href.match('github');
         },
 
         // This loops over the keys/values found in this.config and
@@ -195,7 +196,7 @@
             }
             var self = this;
             $.each(this.config, function(type, config) {
-                var result = config.pattern.exec(self.item.attr('href'));
+                var result = config.pattern.exec(self.href);
                 if (result) {
                     self.url = config.url.call(self, result);
                     self.type = type;
