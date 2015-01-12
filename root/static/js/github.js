@@ -49,7 +49,15 @@
 
             // Release info
             repo: {
-                pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/,
+                // NOTE: Not allowing dots in the repo name might be too restrictive.
+                pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/(tree)?|\.git)*$/,
+                normalizeUrl: function(match){
+                    // Old releases might have old github urls ("/$user/$repo/tree").
+                    // Since github doesn't honor those anymore, fix the link.
+                    if( match[3] === 'tree' ){
+                        this.item.attr('href', this.href.replace(/\/tree$/, ''));
+                    }
+                },
                 render: function(data) {
                     return   '<table>'
 
@@ -198,6 +206,9 @@
             $.each(this.config, function(type, config) {
                 var result = config.pattern.exec(self.href);
                 if (result) {
+                    if( config.normalizeUrl ){
+                        config.normalizeUrl.call(self, result);
+                    }
                     self.url = config.url.call(self, result);
                     self.type = type;
                     return false;
