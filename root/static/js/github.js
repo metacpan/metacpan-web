@@ -1,3 +1,4 @@
+/*global document,$ */
 (function(){
 
     // TODO: In some cases there are separate web/clone urls, but they resolve
@@ -28,7 +29,7 @@
                     });
                 },
                 render: function(data) {
-                    if (data.issues.length == 0) {
+                    if (data.issues.length === 0) {
                         return 'There are currently no open issues.';
                     }
 
@@ -37,7 +38,7 @@
                                 +'  <tr><th>Last 15 Issues:</th><td><table>';
 
                     $.each(data.issues, function(idx, row) {
-                        result += '<tr><td><span class="relatize">'+ row.created_at +'</span></td><td><a href="'+ row.html_url +'">'+ row.title +'</a></td></tr>'
+                        result += '<tr><td><span class="relatize">'+ row.created_at +'</span></td><td><a href="'+ row.html_url +'">'+ row.title +'</a></td></tr>';
                     });
 
                     return result +'</table></td></tr></table>';
@@ -144,14 +145,14 @@
                         dataType: 'json',
                         type: 'GET',
                         url: this.url,
-                        success: function(res, status) {
+                        success: function(res) {
 
                             var error;
                             try {
                                 // If there was an error data will likely
                                 // contain only "documentation_url" and "message".
                                 if( res.meta && res.meta.status >= 400 ){
-                                    error = res.data && res.data.message || 'An error occurred';
+                                    error = (res.data && res.data.message) || 'An error occurred';
                                 }
                             } catch(ignore){ }
                             if( error ){
@@ -160,7 +161,7 @@
                             }
 
                             var qtip = this;
-                            var data = self.prepareData(res.data, function(data) {
+                            self.prepareData(res.data, function(data) {
                                 var html = self.render(data);
                                 qtip.set('content.text', html);
                                 $('.qtip-github .relatize').each(function() {
