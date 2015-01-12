@@ -5,7 +5,8 @@ use Test::More;
 
 {
 
-    package ExtractFirstElement;
+    package    ## no critic (Package)
+        ExtractFirstElement;
     use Moo;
     with('MetaCPAN::Web::Role::Elasticsearch::Adapter');
     1;
