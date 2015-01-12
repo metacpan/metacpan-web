@@ -1,12 +1,24 @@
-function Github() {
+(function(){
+
+    // TODO: In some cases there are separate web/clone urls, but they resolve
+    // to the same github repo.  If you mouse over both the requests are made
+    // twice.  It would be nice to share the responses between both.
+
+    function GithubUrl(item) {
+        this.item = $(item);
+    }
+
     // anchor patterns and check for www. or no subdomain to avoid user wikis, blogs, etc
-    return {
+
+    $.extend(GithubUrl.prototype, {
         config: {
+
+            // Release info
             issues: {
                 pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/,
-                prepareData: function(self, data, cb) {
+                prepareData: function(data, cb) {
                     // we need additionally the repo info
-                    var url = self.url.replace('/issues', '');
+                    var url = this.url.replace('/issues', '');
                     $.getJSON(url, function(repo) {
                         cb({
                             issues: data,
@@ -14,7 +26,7 @@ function Github() {
                         });
                     });
                 },
-                render: function(self, data) {
+                render: function(data) {
                     if (data.issues.length == 0) {
                         return 'There are currently no open issues.';
                     }
@@ -29,13 +41,15 @@ function Github() {
 
                     return result +'</table></td></tr></table>';
                 },
-                url: function(self, result) {
-                    return self.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'/issues?per_page=15&callback=?';
+                url: function(result) {
+                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'/issues?per_page=15&callback=?';
                 }
             },
+
+            // Release info
             repo: {
                 pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/|\.git)*$/,
-                render: function(self, data) {
+                render: function(data) {
                     return   '<table>'
 
                             +( data.description
@@ -62,13 +76,15 @@ function Github() {
                             +'  <tr><th>Last Commit:</th><td><span class="relatize">'+ data.pushed_at +'</span></td></tr>'
                             +'</table>';
                 },
-                url: function(self, result) {
-                    return self.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'?callback=?';
+                url: function(result) {
+                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'?callback=?';
                 }
             },
+
+            // Author profiles
             user: {
                 pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/?$/,
-                render: function(self, data) {
+                render: function(data) {
                     return   '<table>'
                             +( data.name
                             ?'  <tr><th>Name:</th><td>'+ data.name +'</td></tr>'
@@ -96,20 +112,16 @@ function Github() {
                             +'  <tr><th><a href="'+ data.html_url +'/repositories">Public Repos</a>:</th><td>'+ data.public_repos +'</td></tr>'
                             +'</table>';
                 },
-                url: function(self, result) {
-                    return self.githubApiUrl +'/users/'+ result[1] +'?callback=?';
+                url: function(result) {
+                    return this.githubApiUrl +'/users/'+ result[1] +'?callback=?';
                 }
             }
         },
 
         githubApiUrl: 'https://api.github.com',
         githubUrl: 'https://github.com',
-        item: null,
-        type: null,
-        url: null,
 
-        createPopup: function(item) {
-            this.item = $(item);
+        createPopup: function() {
 
             if ( !this.parseUrl() ) {
                 return;
@@ -185,7 +197,7 @@ function Github() {
             $.each(this.config, function(type, config) {
                 var result = config.pattern.exec(self.item.attr('href'));
                 if (result) {
-                    self.url = config.url(self, result);
+                    self.url = config.url.call(self, result);
                     self.type = type;
                     return false;
                 }
@@ -198,7 +210,7 @@ function Github() {
 
         prepareData: function(data, cb) {
             if (typeof this.config[this.type].prepareData === 'function') {
-                this.config[this.type].prepareData(this, data, cb);
+                this.config[this.type].prepareData.call(this, data, cb);
             }
             else {
                 cb(data);
@@ -207,19 +219,19 @@ function Github() {
 
         render: function(data) {
             try {
-                return this.config[this.type].render(this, data);
+                return this.config[this.type].render.call(this, data);
             }
             catch(x) {
                 // Don't let the spinner spin forever.
                 return '<i>Error</i>';
             }
         }
-    }
-};
+    });
 
 $(document).ready(function() {
     $('.nav-list a:not(.nopopup)').each(function() {
-          var github = new Github();
-          github.createPopup(this);
+          (new GithubUrl(this)).createPopup();
     });
 });
+
+}());
