@@ -5,17 +5,21 @@
       Identities you are connected to allow you to log into MetaCPAN. MetaCPAN also drags in some information from them to help you with filling in your <a href="/account/profile">profile</a>. This information is not exposed to anyone unless you explicitly publish it.
     </div>
     <table width="300">
-    <%- FOREACH identity IN ['Facebook', 'GitHub', 'PAUSE', 'Twitter', 'Google']; found = user.identity.grep(->(a){ a.name == identity.lower }) %>
+    <%- FOREACH identity IN ['Facebook', 'GitHub', 'PAUSE', 'Twitter', 'Google', 'OpenID']; found = user.identity.grep(->(a){ a.name == identity.lower }) %>
     <tr>
         <td><big><% identity %></big></td>
         <td>
             <%- IF found.size %>
-            <form action="<% c.uri_for("/account/identities") %>" method="POST">
-                <input type="hidden" name="delete" value="<% identity.lower %>" />
-                <button type="submit" class="btn btn-block btn-danger"><span class="fa fa-times"></span> Disconnect</a>
-            </form>
+                <form action="<% c.uri_for("/account/identities") %>" method="POST">
+                    <input type="hidden" name="delete" value="<% identity.lower %>" />
+                    <button type="submit" class="btn btn-block btn-danger"><span class="fa fa-times"></span> Disconnect</button>
+                </form>
             <%- ELSE %>
-            <a class="btn btn-block btn-success" href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)"><span class="fa fa-external-link"></span> Connect</a>
+                <%- IF identity == 'OpenID' %>
+                    <a class="btn btn-block btn-success" href="<% c.uri_for("/login/openid") %>"><span class="fa fa-external-link"></span> Connect</a>
+                <%- ELSE %>
+                    <a class="btn btn-block btn-success" href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)"><span class="fa fa-external-link"></span> Connect</a>
+                <% END %>
             <%- END %>
         </td>
     </tr>

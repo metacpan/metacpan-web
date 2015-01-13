@@ -20,6 +20,9 @@ sub index : Path {
         my $state = $c->req->params->{state} || q{};
         $c->res->redirect( $c->uri_for("/$state") );
     }
+    elsif ( $c->req->path eq 'login/openid' ) {
+        $c->stash( { template => 'account/openid-login.html' } );
+    }
     else {
         $c->stash( { template => 'account/login.html' } );
     }
