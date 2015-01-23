@@ -199,7 +199,7 @@ test_psgi app, sub {
             );
 
             $tx->like(
-                '//a[starts-with(@href, "http://explorer.metacpan.org/?url")]/@href',
+                '//a[starts-with(@href, "https://explorer.metacpan.org/?url")]/@href',
                 $type eq 'module'
                 ? qr!\?url=/module/\w+/${release}-${version}/.+!
                 : qr!\?url=/release/\w+/${release}-${version}\z!,
