@@ -55,10 +55,11 @@
             // Release info
             repo: {
                 // NOTE: Not allowing dots in the repo name might be too restrictive.
-                pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/(tree)?|\.git)*$/,
+                pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/(tree(?:\/master)?)?|\.git)*$/,
                 normalizeUrl: function(match){
                     // Old releases might have old github urls ("/$user/$repo/tree").
                     // Since github doesn't honor those anymore, fix the link.
+                    // A url like ".../tree/master" still seems to work, though.
                     if( match[3] === 'tree' ){
                         this.item.attr('href', this.href.replace(/\/tree$/, ''));
                     }
