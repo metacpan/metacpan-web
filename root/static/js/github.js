@@ -212,10 +212,10 @@
                     return false;
                 }
             });
-            if (this.type === null) {
-                return false;
+            if (this.type) {
+                return true;
             }
-            return true;
+            return false;
         },
 
         prepareData: function(data, cb) {
