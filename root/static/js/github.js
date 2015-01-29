@@ -10,6 +10,10 @@
         this.href = this.item.attr('href');
     }
 
+    GithubUrl.match = function(a){
+        return $(a).attr('href').indexOf('github') >= 0;
+    };
+
     // anchor patterns and check for www. or no subdomain to avoid user wikis, blogs, etc
 
     $.extend(GithubUrl.prototype, {
@@ -190,19 +194,12 @@
             });
         },
 
-        hasGithubUrl: function() {
-            return this.href.match('github');
-        },
-
         // This loops over the keys/values found in this.config and
         // executes the regular expression pattern found there
         // against the href attribute. If any of the regular
         // expressions matches, it will return true and stop
         // executing any other regular expressions.
         parseUrl: function() {
-            if (!this.hasGithubUrl()) {
-                return false;
-            }
             var self = this;
             $.each(this.config, function(type, config) {
                 var result = config.pattern.exec(self.href);
@@ -243,7 +240,9 @@
 
 $(document).ready(function() {
     $('.nav-list a:not(.nopopup)').each(function() {
+        if( GithubUrl.match(this) ){
           (new GithubUrl(this)).createPopup();
+        }
     });
 });
 
