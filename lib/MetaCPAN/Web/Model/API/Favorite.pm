@@ -137,6 +137,10 @@ sub find_plussers {
     # find total non pauseid users who have ++ed the dist.
     my $total_nonauthors = ( $total_plussers - $total_authors );
 
+    # number of pauseid users can be more than total plussers
+    # then set 0 to non pauseid users
+    $total_nonauthors = 0 if $total_nonauthors < 0;
+
     return (
         {
             plusser_authors => \@plusser_details,
