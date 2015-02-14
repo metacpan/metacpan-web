@@ -6,38 +6,59 @@ use Test::More;
 {
 
     package    ## no critic (Package)
-        ExtractFirstElement;
+        ExtractSingleElement;
     use Moo;
     with('MetaCPAN::Web::Role::Elasticsearch::Adapter');
     1;
 }
 
-my $extractor = ExtractFirstElement->new;
+my $extractor = ExtractSingleElement->new;
 my $test_data = [
-    { language => ['perl'], country => ['cat'] },
-    { language => [ 'haskell', 'perl' ], country => ['ind'] },
-    { language => 'go', country => ['rus'] },
-    { language => 'c',  country => 'can' },
+    {
+        'name'     => 'MetaCPAN-Client',
+        'provides' => [ 'MetaCPAN::Client', 'MetaCPAN::Client::Author', ],
+        'abstract' =>
+            'A comprehensive, DWIM-featured client to the MetaCPAN API',
+    },
+    {
+        'name'     => ['MetaCPAN-Client'],
+        'provides' => [ 'MetaCPAN::Client', 'MetaCPAN::Client::Author', ],
+        'abstract' =>
+            ['A comprehensive, DWIM-featured client to the MetaCPAN API'],
+    },
+    {
+        'name'     => ['MetaCPAN-Client'],
+        'provides' => [ 'MetaCPAN::Client', ],
+        'abstract' =>
+            ['A comprehensive, DWIM-featured client to the MetaCPAN API'],
+    }
+
 ];
 my $expected_extraction = [
     {
-        'language' => 'perl',
-        'country'  => 'cat'
+        'name'     => 'MetaCPAN-Client',
+        'provides' => [ 'MetaCPAN::Client', 'MetaCPAN::Client::Author', ],
+        'abstract' =>
+            'A comprehensive, DWIM-featured client to the MetaCPAN API',
     },
     {
-        'country'  => 'ind',
-        'language' => 'haskell'
+        'name'     => 'MetaCPAN-Client',
+        'provides' => [ 'MetaCPAN::Client', 'MetaCPAN::Client::Author', ],
+        'abstract' =>
+            'A comprehensive, DWIM-featured client to the MetaCPAN API',
     },
     {
-        'language' => 'go',
-        'country'  => 'rus'
-    },
-    {
-        'language' => 'c',
-        'country'  => 'can'
+        'name'     => 'MetaCPAN-Client',
+        'provides' => ['MetaCPAN::Client'],
+        'abstract' =>
+            'A comprehensive, DWIM-featured client to the MetaCPAN API',
     }
+
 ];
-is_deeply $extractor->extract_first_element($test_data), $expected_extraction,
-    'extract the first element from each array';
+is_deeply $extractor->single_valued_arrayref_to_scalar(
+    $test_data, [ 'name', 'abstract' ]
+    ),
+    $expected_extraction,
+    'flatten single element arrays when specified';
 
 done_testing;

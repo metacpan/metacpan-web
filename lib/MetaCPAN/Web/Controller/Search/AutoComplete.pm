@@ -14,7 +14,7 @@ sub index : Path {
     $c->res->content_type('application/json');
     $c->res->body(
         JSON::MaybeXS::encode_json(
-            $self->extract_first_element( $data->{results} )
+            $self->single_valued_arrayref_to_scalar( $data->{results} )
         )
     );
 }
