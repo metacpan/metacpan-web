@@ -23,7 +23,7 @@ test_psgi app, sub {
 
     {
         ok( my $res = $cb->( GET '/changes/distribution/perl' ),
-            'GET /changes/perl' );
+            'GET /changes/distribution/perl' );
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);
         $tx->like(
