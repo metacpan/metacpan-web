@@ -13,6 +13,7 @@ sub index : Path {
         = $c->model('API::Release')
         ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
+    $self->single_valued_arrayref_to_scalar($latest);
     $c->res->last_modified( $latest->[0]->{date} ) if (@$latest);
     $c->stash(
         {
