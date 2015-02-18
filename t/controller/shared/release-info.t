@@ -161,13 +161,6 @@ test_psgi app, sub {
                 'cpanratings link to rate this dist'
             );
 
-            # test format of cpantesters link
-            $tx->is(
-                '//a[text()="Testers"]/@href',
-                "http://www.cpantesters.org/distro/$first_letter/$release.html?oncpan=1&distmat=1&version=$version",
-                'link to test results'
-            );
-
             # TODO: release.tests.size
 
             $tx->is(
