@@ -35,9 +35,16 @@ sub news : Chained('index') PathPart Args(0) {
 
         my %e;
         $e{name} = $str =~ s/\A(.+)$//m ? $1 : 'No title';
+
+	# Use the same processing as _Header2Label in
+        # Text::MultiMarkdown
+        my $a_name = lc $e{name};
+        $a_name =~ s/[^A-Za-z0-9:_.-]//g;
+        $a_name =~ s/^[^a-z]+//gi;
+
         $str =~ s/\A\s*-+//g;
         $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}   = "http://metacpan.org/news#$e{name}";
+        $e{link}   = "http://metacpan.org/news#$a_name";
         $e{author} = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
 
