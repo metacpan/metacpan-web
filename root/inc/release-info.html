@@ -39,7 +39,7 @@
     testers_version = release.name.remove('^' _ release.distribution _ '-?');
     cpantesters_base = "http://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ testers_version %>
     <a href="http://matrix.cpantesters.org/?dist=<% release.distribution %>+<% testers_version %>" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
-    <% IF release.tests.size %>(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)<% END %>
+    <% IF release.tests.size %><span title="(pass / fail / na)">(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)</span><% END %>
 </li>
 <li>
     <a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
