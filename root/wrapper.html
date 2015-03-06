@@ -106,7 +106,7 @@
                     <li class="<% item.class %>">
                         <%- END %>
                         <a
-                          <%- IF item.icon %>class="fa fa-<% item.icon %>"<% END -%>
+                          <% IF item.icon %>class="fa fa-<% item.icon %>"<% END -%>
                           href="<% item.path.0 %>">
                             <%- IF item.image %><img src="<% item.image %>" /><% END -%>
                             <%- IF item.icon || item.image %>&nbsp;<% END -%>
