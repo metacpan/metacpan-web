@@ -27,7 +27,7 @@
       ELSE;
         'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
       END;
-      %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a><% IF distribution.bugs %> (<% distribution.bugs.active %>)<% END %>
+      %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a><% IF distribution.bugs && release.resources.bugtracker.web == distribution.bugs.source %> (<% distribution.bugs.active %>)<% END %>
 </li>
 <% IF rating.count > 0 %>
 <li>
