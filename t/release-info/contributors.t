@@ -5,7 +5,7 @@ use Test::More;
 use TestReleaseInfo;
 
 my $relinfo = TestReleaseInfo->new;
-my $ctx = $relinfo->_context;
+my $ctx     = $relinfo->_context;
 
 sub groom_contributors {
     my ( $meta, $author ) = @_;
@@ -30,12 +30,13 @@ sub groom_contributors {
 }
 
 subtest contributors => sub {
-    my $xy_string = 'X <y@cpan.org>';
-    my $xy_parsed = {
+    my $uri_prefix = 'http://localhost';
+    my $xy_string  = 'X <y@cpan.org>';
+    my $xy_parsed  = {
         name    => 'X',
         email   => [ 'y@cpan.org', ],
         pauseid => 'Y',
-        url     => '/author/Y',
+        url     => "$uri_prefix/author/Y",
     };
 
     is_deeply(

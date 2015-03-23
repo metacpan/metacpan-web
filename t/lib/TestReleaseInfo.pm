@@ -1,33 +1,23 @@
 use strict;
 use warnings;
 
-package #
-  TestReleaseInfo;
+package    #
+    TestReleaseInfo;
 
 use Moose;
 use Class::MOP;
 use Class::MOP::Class;
+use Catalyst::Test 'TestApp';
+use namespace::autoclean;
+
 with qw(MetaCPAN::Web::Role::ReleaseInfo);
 
-# I hate this.
 has _context => (
-    is => 'ro',
+    is      => 'rw',
+    lazy    => 1,
     default => sub {
-        Class::MOP::Class->create_anon_class(
-            methods => {
-                uri_for_action => sub {
-                    my ( $self, $uri, $args ) = @_;
-                    $args ||= [];
-                    if ( $uri eq '/author/index' ) {
-                        return join q[/], q[], 'author', @$args;
-                    }
-                    else {
-                        die "unmocked uri: $uri";
-                    }
-                }
-            },
-        )->new_object;
-    }
+        ( ctx_request('/robots.txt') )[1];
+    },
 );
 
 __PACKAGE__->meta->make_immutable;
