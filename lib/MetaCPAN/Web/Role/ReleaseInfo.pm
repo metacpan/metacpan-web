@@ -77,11 +77,15 @@ sub groom_contributors {
     my $contribs = $release->{metadata}{x_contributors} || [];
     my $authors  = $release->{metadata}{author}         || [];
 
-    # just in case a lonely contributor makes it as a scalar
-    $contribs = [$contribs]
-        if !ref $contribs;
-    $authors = [$authors]
-        if !ref $authors;
+    for ( \($contribs, $authors) ){
+        # If a sole contributor is a string upgrade it to an array...
+        $$_ = [$$_]
+            if !ref $$_;
+        # but if it's any other kind of value don't die trying to parse it.
+        $$_ = []
+            if ref($$_) ne 'ARRAY';
+    }
+
     $authors = [ grep { $_ ne 'unknown' } @$authors ];
 
     my $author_info = {
