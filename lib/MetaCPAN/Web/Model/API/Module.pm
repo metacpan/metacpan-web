@@ -162,24 +162,18 @@ sub search_descriptions {
                     }
                 }
             },
-            fields => [qw(_source.pod id)],
+            fields => [qw(description id)],
             size   => scalar @ids,
         }
         )->cb(
         sub {
             my ($data) = shift->recv;
-            my $extract = sub {
-                my $pod = shift;
-                $pod =~ /DESCRIPTION (.*)$/;
-                return $1 || undef;
-            };
             $cv->send(
                 {
                     results => {
                         map {
-                      # NOTE: The "_source." prefix has been stripped already.
-                            $_->{fields}->{id} =>
-                                $extract->( $_->{fields}->{pod} )
+                            ( $_->{fields}->{id} =>
+                                    $_->{fields}->{description} )
                         } @{ $data->{hits}->{hits} }
                     },
                     took => $data->{took}
