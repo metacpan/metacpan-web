@@ -30,6 +30,12 @@ $(function () {
     // Allow tilde in url (#1118). Orig: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
     SyntaxHighlighter.regexLib['url'] =  /\w+:\/\/[\w-.\/?%&=:@;#~]*/g;
 
+    // https://metacpan.org/source/RWSTAUNER/Acme-Syntax-Examples-0.001/lib/Acme/Syntax/Examples.pm
+
+    // TODO: Might be easier to do the regexp on the plain string (before
+    // highlighting), gather up all the packages, then just linkify all
+    // references to the package name in the html after highlighting.
+
     /**
     * Turns all package names into metacpan.org links within <a/> tags.
     * @param {String} code Input code.
@@ -38,10 +44,23 @@ $(function () {
     function processPackages(code)
     {
         var destination = document.location.href.match(/\/source\//) ? 'source' : 'pod',
-            strip_delimiters = /((?:q[qw]?)?.)([A-Za-z0-9\:]+)(.*)/
+            // This regexp is not great, but its good enough so far:
+            // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
+            // Space should only be allowed after qw, but it probably doesn't hurt to match it.
+            // This is a lax re for html entity, but probably good enough.
+            strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_\:]+)(.*)/
             ;
 
-        code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="p(?:er)?l string">)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+        // Wow, this regexp is hairy.
+        // We have to specifically match the "qw" followed by a non-letter or an html entity followed by a closing tag,
+        // because qw can have whitespace (newline) between the delimiter and the string(s).  Without this the delim is in $2
+        // and the "</code>" at the end matches only the delim.
+        // Without this the "qw" itself will be matched as the package.
+        // Note that this will only match the first arg in a qw.. trying to match a second string
+        // (again, possibly across a newline (which is  actually a new div))
+        // without knowing where to end (the closing delimiter) would be really difficult.
+        // See also the above comment about scanning the plain string and linkifying later.
+        code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
         {
             var match = null,
                 mcpan_url
