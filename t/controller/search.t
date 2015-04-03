@@ -56,6 +56,19 @@ test_psgi app, sub {
         'review number listed'
     );
 
+    {
+        my $description = $tx->find_value(
+            qq!//$xpath{module_result}//p[\@class="description"][1]!);
+
+        # This is very fragile.
+        ok(
+            $description =~ /Moose/
+                && $description =~ /object/i
+                && $description =~ /extension/,
+            'got description for Moose'
+        );
+    }
+
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
