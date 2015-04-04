@@ -301,6 +301,11 @@ $(document).ready(function () {
         $('#size').val(size);
     }
 
+	// The install a CPAN Module boiler plate
+	$('#install_dialog').on('click', function() {
+		$('#install_module').modal('show');	
+	});
+
     // TODO use a more specific locator for /author/PAUSID/release ?
     set_page_size('a[href*="/releases"]', 'releases_page_size');
     set_page_size('a[href*="/recent"]', 'recent_page_size');
