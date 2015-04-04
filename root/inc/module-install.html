@@ -1,0 +1,35 @@
+
+<script type="text/javascript">
+	function show_install_instructions() {
+		jQuery('#install_module').modal('show');
+	}
+</script>
+
+<div id="install_module" class="modal fade">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Module Install Instructions</h4>
+        </div>
+        <div class="modal-body">
+		<p>To install <%  module.documentation or module.module.0.name %>, simply copy and paste either of the commands in to your terminal</p>
+			<p>CPANminus</p>
+			<pre class="bash: js">
+				sudo cpanm install <%  module.documentation or module.module.0.name %>
+			</pre>
+			<p>CPAN shell</p>
+			<pre class="bash: js">
+				sudo perl -MCPAN -e shell
+				install <% module.documentation or module.module.0.name %>
+			</pre>
+		<p>For more information on module installation please visit <a href="http://www.cpan.org/modules/INSTALL.html">The detailed CPAN module installation guide</a></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+        </div>
+      </div>
+	</div>
+
+</div>
+
