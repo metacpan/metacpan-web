@@ -51,6 +51,9 @@
 <%- END %>
 <li class="nav-header">Permalinks</li>
 <li>
+	<button class="btn btn-link" id="install_dialog">Install Instructions</button>
+</li>
+<li>
     <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
 <%- IF canonical %>
