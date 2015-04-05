@@ -15,6 +15,6 @@
     -%>
     <%- FOREACH t IN targets -%>
        <%- UNLESS loop.first %> | <% END -%>
-<a href="http://perlybook.org/?source=<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>&book_selection=<% IF module %><% ELSE %>1<% END %>&target=<% t.name %>" title="<% t.title %>"><% t.name.upper %></a>
+<a href="http://perlybook.org/?source=<% IF module %><% module.documentation or module.module.0.name %><% ELSE %><% release.distribution %><% END %>&amp;book_selection=<% IF module %><% ELSE %>1<% END %>&amp;target=<% t.name %>" title="<% t.title %>"><% t.name.upper %></a>
     <%- END -%>
 </li>
