@@ -1,13 +1,13 @@
-<meta name="twitter:card"           value="summary" />
-<meta name="twitter:url"            value="<% c.req.uri %>" />
-<meta name="twitter:title"          value="<% author.name %>" />
-<meta name="twitter:description"    value="CPAN Author" />
-<meta name="twitter:site"           value="metacpan" />
+<meta name="twitter:card"           content="summary" />
+<meta name="twitter:url"            content="<% c.req.uri %>" />
+<meta name="twitter:title"          content="<% author.name %>" />
+<meta name="twitter:description"    content="CPAN Author" />
+<meta name="twitter:site"           content="metacpan" />
 <% FOREACH profile in author.profile -%>
     <%- IF profile.name == "twitter" -%>
-        <meta name="twitter:creator" value="<% profile.id %>" />
+        <meta name="twitter:creator" content="<% profile.id %>" />
     <%- END -%>
 <%- END %>
 <% IF author.gravatar_url -%>
-<meta name="twitter:image" value="<% author.gravatar_url %>" />
+<meta name="twitter:image" content="<% author.gravatar_url %>" />
 <%- END %>
