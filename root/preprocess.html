@@ -65,7 +65,7 @@ profiles = {
         IF file.documentation
         && file.authorized
         && file.indexed
-        && file.module.grep(->(module){ module.authorized && module.indexed });
+        && file.module.grep(->(module){ module.authorized && module.indexed }).size;
           # Use /pod/$name.
           path = file.documentation;
         ELSE;
