@@ -43,7 +43,15 @@ provides      = [];
 modules       = [];
 FOREACH file IN files;
   IF file.documentation && file.module;
-    modules.push(file);
+    found = 0;
+    FOREACH module IN file.module;
+      IF module.name != file.documentation;
+        found = found + 1;
+        IF found == 1;
+          modules.push(file);
+        END;
+      END;          
+    END;
     FOREACH module IN file.module;
       IF module.name != file.documentation && module.indexed && module.authorized;
         # There must be a better way...
