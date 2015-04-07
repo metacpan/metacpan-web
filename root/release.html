@@ -42,7 +42,7 @@ documentation_raw = [];
 provides      = [];
 modules       = [];
 FOREACH file IN files;
-  IF file.documentation && file.module;
+  IF file.documentation && file.module.size;
     modules.push(file);
     FOREACH module IN file.module;
       IF module.name != file.documentation && module.indexed && module.authorized;
@@ -52,7 +52,7 @@ FOREACH file IN files;
           status = file.status, package = module.name, path = file.path, release = release.name, author = release.author });
       END;
     END;
-  ELSIF file.module;
+  ELSIF file.module.size;
     FOREACH module IN file.module;
       provides.push({
         authorized = module.authorized,
