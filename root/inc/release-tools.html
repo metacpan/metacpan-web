@@ -21,11 +21,6 @@
     </a>
 </li>
 <li>
-	<a href="#" onclick="show_install_instructions(); return true;">
-	<i class="fa fa-road fa-fw black"></i>Install Instructions</a>
-	<% INCLUDE inc/module-install.html %>
-</li>
-<li>
     <form action="/search">
         <input type="hidden" name="q" value="dist:<% release.distribution %>">
         <input type="search" name="q" placeholder="Search distribution" style="width: 153px" class="form-control tool-bar-form">
@@ -55,6 +50,10 @@
 </ul>
 <%- END %>
 <li class="nav-header">Permalinks</li>
+<li>
+	<button class="btn btn-link" id="install_dialog">Install Instructions</button>
+	<% INCLUDE inc/module-install.html %>
+</li>
 <li>
     <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
