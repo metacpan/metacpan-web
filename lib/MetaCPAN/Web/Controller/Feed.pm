@@ -112,7 +112,7 @@ sub build_entry {
     $e->title( $entry->{name} );
     $e->link(
         $entry->{link} ||= join( q{/},
-            'http://metacpan.org', 'release',
+            'https://metacpan.org', 'release',
             $entry->{author},      $entry->{name} )
     );
     $e->author( $entry->{author} );
