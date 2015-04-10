@@ -113,7 +113,7 @@ sub build_entry {
     $e->link(
         $entry->{link} ||= join( q{/},
             'https://metacpan.org', 'release',
-            $entry->{author},      $entry->{name} )
+            $entry->{author},       $entry->{name} )
     );
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
