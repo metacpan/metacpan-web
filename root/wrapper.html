@@ -39,7 +39,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
         <%- IF rss %>
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="http://metacpan.org/feed/<% rss %>" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://metacpan.org/feed/<% rss %>" />
         <% END %>
         <%- FOREACH css IN req.env.item('psgix.assets').grep(/\.css$/) %>
         <link href="<% css %>" rel="stylesheet" type="text/css">
