@@ -44,7 +44,7 @@ sub news : Chained('index') PathPart Args(0) {
 
         $str =~ s/\A\s*-+//g;
         $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}   = "http://metacpan.org/news#$a_name";
+        $e{link}   = "https://metacpan.org/news#$a_name";
         $e{author} = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
 
@@ -125,7 +125,7 @@ sub build_feed {
     my ( $self, %params ) = @_;
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
-    $feed->link('http://metacpan.org/');
+    $feed->link('https://metacpan.org/');
     foreach my $entry ( @{ $params{entries} } ) {
 
         $feed->add_entry( $self->build_entry($entry) );
