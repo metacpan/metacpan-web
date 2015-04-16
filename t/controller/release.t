@@ -19,6 +19,7 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET '/release/Moose' ), 'GET /release/Moose' );
     is( $res->code, 200, 'code 200' );
+
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
     ok( $tx->find_value('//a[@href="/release/Moose"]'),
@@ -32,7 +33,7 @@ test_psgi app, sub {
 # '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
     ok(
         my $this = $tx->find_value(
-            '//li[text()="Permalinks"]/following-sibling::li[1]/a[text()="This version"]/@href'
+            '//li[text()="Permalinks"]/following-sibling::li[2]/a[text()="This version"]/@href'
         ),
         'contains link to "this" version'
     );
