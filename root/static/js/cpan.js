@@ -1,8 +1,8 @@
 /* jshint white: true, lastsemic: true */
 
-document.cookie = "hideTOC=; expires="+(new Date(0)).toGMTString()+"; path=/";
+document.cookie = "hideTOC=; expires=" + (new Date(0)).toGMTString() + "; path=/";
 
-$.fn.textWidth = function () {
+$.fn.textWidth = function() {
     var html_org = $(this).html();
     var html_calc = '<span>' + html_org + '</span>';
     $(this).html(html_calc);
@@ -12,18 +12,19 @@ $.fn.textWidth = function () {
 };
 
 $.extend({
-    getUrlVars: function () {
-        var vars = {}, hash;
+    getUrlVars: function() {
+        var vars = {},
+            hash;
         var indexOfQ = window.location.href.indexOf('?');
         if (indexOfQ == -1) return vars;
         var hashes = window.location.href.slice(indexOfQ + 1).split('&');
-        $.each(hashes, function (idx, hash) {
+        $.each(hashes, function(idx, hash) {
             var kv = hash.split('=');
             vars[kv[0]] = decodeURIComponent(kv[1]);
         });
         return vars;
     },
-    getUrlVar: function (name) {
+    getUrlVar: function(name) {
         return $.getUrlVars()[name];
     }
 });
@@ -32,13 +33,12 @@ function togglePanel(side, visible) {
     var elements = $('#' + side + '-panel-toggle').add($('#' + side + '-panel'));
     var className = 'panel-hide';
     if (typeof visible == "undefined") {
-      visible = elements.first().hasClass(className);
+        visible = elements.first().hasClass(className);
     }
     if (visible) {
-      elements.removeClass(className);
-    }
-    else {
-      elements.addClass(className);
+        elements.removeClass(className);
+    } else {
+        elements.addClass(className);
     }
     localStorage.setItem("hide_" + side + "_panel", visible ? 0 : 1);
     return false;
@@ -47,17 +47,21 @@ function togglePanel(side, visible) {
 function toggleTOC() {
     var container = $('#index-container');
     if (container.length == 0) return false;
-    var visible = ! container.hasClass('hide-index');
+    var visible = !container.hasClass('hide-index');
     var index = $('#index');
     var newHeight = 0;
     if (!visible) {
         newHeight = index.get(0).scrollHeight;
     }
-    index.animate({ height: newHeight }, {
+    index.animate({
+        height: newHeight
+    }, {
         duration: 200,
-        complete: function () {
+        complete: function() {
             if (newHeight > 0) {
-                index.css({ height: 'auto'});
+                index.css({
+                    height: 'auto'
+                });
             }
         }
     });
@@ -66,47 +70,53 @@ function toggleTOC() {
     return false;
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     $(".ttip").tooltip();
 
-    $('#signin-button').mouseenter(function () { $('#signin').show() });
-    $('#signin').mouseleave(function () { $('#signin').hide() });
+    $('#signin-button').mouseenter(function() {
+        $('#signin').show()
+    });
+    $('#signin').mouseleave(function() {
+        $('#signin').hide()
+    });
 
-    $('table.tablesorter').each(function(){
+    $('table.tablesorter').each(function() {
         var table = $(this);
 
         var sortid = (
-          localStorage.getItem("tablesorter:" + table.attr('id')) ||
-          table.attr('data-default-sort') || '0,0');
+            localStorage.getItem("tablesorter:" + table.attr('id')) ||
+            table.attr('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
 
         var cfg = {
-            sortList: [ sortid ],
-            textExtraction: function (node) {
+            sortList: [sortid],
+            textExtraction: function(node) {
                 var $node = $(node);
                 var sort = $node.attr("sort");
-                if(!sort) return $node.text();
+                if (!sort) return $node.text();
                 if ($node.hasClass("date")) {
                     return (new Date(sort)).getTime();
                 } else {
                     return sort;
                 }
             },
-            headers : {}
+            headers: {}
         };
 
         table.find('thead th').each(function(i, el) {
             if ($(el).hasClass('no-sort')) {
-                cfg.headers[i] = { sorter : false };
+                cfg.headers[i] = {
+                    sorter: false
+                };
             }
         });
 
         table.tablesorter(cfg);
     });
 
-    $('.tablesorter.remote th.header').each(function () {
+    $('.tablesorter.remote th.header').each(function() {
         $(this).unbind('click');
-        $(this).click(function (event) {
+        $(this).click(function(event) {
             var $cell = $(this);
             var params = $.getUrlVars();
             params.sort = '[[' + this.column + ',' + this.count++ % 2 + ']]';
@@ -119,7 +129,7 @@ $(document).ready(function () {
     $('.relatize').relatizeDate();
 
     // Search box: Feeling Lucky? Shift+Enter
-    $('#search-input').keydown(function (event) {
+    $('#search-input').keydown(function(event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
 
@@ -163,21 +173,23 @@ $(document).ready(function () {
         triggerSelectOnValidInput: false,
         maxHeight: 180,
         width: ac_width,
-        transformResult: function (data) {
-            var result = $.map(data, function (row) {
+        transformResult: function(data) {
+            var result = $.map(data, function(row) {
                 return {
                     data: row.documentation,
                     value: row.documentation
                 };
             });
-            var uniq = { };
-            result   = $.grep(result, function (row) {
+            var uniq = {};
+            result = $.grep(result, function(row) {
                 uniq[row.value] = typeof(uniq[row.value]) == 'undefined' ? 0 : uniq[row.value];
                 return uniq[row.value]++ < 1;
             });
-            return { suggestions: result };
+            return {
+                suggestions: result
+            };
         },
-        onSelect: function (suggestion) {
+        onSelect: function(suggestion) {
             document.location.href = '/pod/' + suggestion.value;
         }
     });
@@ -213,42 +225,43 @@ $(document).ready(function () {
         }
     }
 
-    $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function () {
-      if (this.id) {
-        $(this).prepend('<a href="#'+this.id+'" class="anchor"><span class="fa fa-bookmark black"></span></a>');
-      }
+    $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function() {
+        if (this.id) {
+            $(this).prepend('<a href="#' + this.id + '" class="anchor"><span class="fa fa-bookmark black"></span></a>');
+        }
     });
 
     var module_source_href = $('#source-link').attr('href');
-    if(module_source_href) {
+    if (module_source_href) {
         $('#pod-error-detail dt').each(function() {
             var $dt = $(this);
             var link_text = $dt.text();
             var capture = link_text.match(/Around line (\d+)/);
             $dt.html(
                 $('<a />').attr('href', module_source_href + '#L' + capture[1])
-                    .text(link_text)
+                .text(link_text)
             );
         });
     }
     $('#pod-errors').addClass('collapsed');
-    $('#pod-errors > p:first-child').click(function() { $(this).parent().toggleClass('collapsed'); });
+    $('#pod-errors > p:first-child').click(function() {
+        $(this).parent().toggleClass('collapsed');
+    });
 
     $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
-        setTimeout(function(){
-            var sortParam  = $.getUrlVar('sort');
-            if( sortParam != null ){
-                sortParam  = sortParam.slice(2, sortParam.length-2);
-                localStorage.setItem( "tablesorter:" + tableid, sortParam );
+        setTimeout(function() {
+            var sortParam = $.getUrlVar('sort');
+            if (sortParam != null) {
+                sortParam = sortParam.slice(2, sortParam.length - 2);
+                localStorage.setItem("tablesorter:" + tableid, sortParam);
             }
         }, 1000);
     });
 
-    if($(".inline").find("button").hasClass("active")){
+    if ($(".inline").find("button").hasClass("active")) {
         $(".favorite").attr("title", "Remove from favorite");
-    }
-    else{
+    } else {
         $(".favorite").attr("title", "Add to favorite");
     }
 
@@ -261,17 +274,17 @@ $(document).ready(function () {
 
         var index_hidden = localStorage.getItem('hideTOC') == 1;
         index.before(
-            '<div class="index-header"><b>Contents</b>'
-            + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]'
-            + ' <button class="btn-link toggle-index-right"><i class="fa fa-toggle-right"></i><i class="fa fa-toggle-left"></i></button>'
-            + '</div>');
+            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]' + ' <button class="btn-link toggle-index-right"><i class="fa fa-toggle-right"></i><i class="fa fa-toggle-left"></i></button>' + '</div>');
 
-        $('.toggle-index').on('click', function (e) { e.preventDefault(); toggleTOC(); });
+        $('.toggle-index').on('click', function(e) {
+            e.preventDefault();
+            toggleTOC();
+        });
         if (index_hidden) {
             container.addClass("hide-index");
         }
 
-        $('.toggle-index-right').on('click', function (e) {
+        $('.toggle-index-right').on('click', function(e) {
             e.preventDefault();
             localStorage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
             container.toggleClass('pull-right');
@@ -281,7 +294,7 @@ $(document).ready(function () {
         }
     }
 
-    ['right'].forEach(function (side) {
+    ['right'].forEach(function(side) {
         var panel = $('#' + side + "-panel");
         if (panel.length) {
             var panel_visible = localStorage.getItem("hide_" + side + "_panel") != 1;
@@ -301,15 +314,15 @@ $(document).ready(function () {
         $('#size').val(size);
     }
 
-	// The install a CPAN Module boiler plate
-	$('#install_dialog').on('click', function() {
-		$('#install_module').modal('show');
-	});
+    // The install a CPAN Module boiler plate
+    $('#install_dialog').on('click', function() {
+        $('#install_module').modal('show');
+    });
 
     // TODO use a more specific locator for /author/PAUSID/release ?
     set_page_size('a[href*="/releases"]', 'releases_page_size');
     set_page_size('a[href*="/recent"]', 'recent_page_size');
-    set_page_size('a[href*="/requires"]','requires_page_size');
+    set_page_size('a[href*="/requires"]', 'requires_page_size');
 
 });
 
@@ -337,23 +350,26 @@ function set_page_size(selector, storage_name) {
 
 
 function searchForNearest() {
-    $("#busy").css({ visibility: 'visible'});
-    navigator.geolocation.getCurrentPosition(function(pos) {
-        var query = $.getUrlVar('q');
-        if (!query) {
-          query = '';
-        }
-        query = query.replace(/(^|\s+)loc:\S+|$/, '');
-        query = query + ' loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
-        query = query.replace(/(^|\s)\s+/g, '$1');
-        document.location.href = '/mirrors?q=' + encodeURIComponent(query);
-    },
-    function() {
-        $("#busy").css({ visibility: 'hidden'});
-    },
-    {
-        maximumAge: 600000
+    $("#busy").css({
+        visibility: 'visible'
     });
+    navigator.geolocation.getCurrentPosition(function(pos) {
+            var query = $.getUrlVar('q');
+            if (!query) {
+                query = '';
+            }
+            query = query.replace(/(^|\s+)loc:\S+|$/, '');
+            query = query + ' loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
+            query = query.replace(/(^|\s)\s+/g, '$1');
+            document.location.href = '/mirrors?q=' + encodeURIComponent(query);
+        },
+        function() {
+            $("#busy").css({
+                visibility: 'hidden'
+            });
+        }, {
+            maximumAge: 600000
+        });
 }
 
 function logInPAUSE(a) {
@@ -371,7 +387,7 @@ function favDistribution(form) {
         type: 'POST',
         url: form.attr('action'),
         data: data,
-        success: function () {
+        success: function() {
             var button = form.find('button');
             button.toggleClass('active');
             var counter = button.find('span');
@@ -390,7 +406,7 @@ function favDistribution(form) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             if (confirm("You have to complete a Captcha in order to ++.")) {
                 document.location.href = "/account/turing";
             }
@@ -398,4 +414,3 @@ function favDistribution(form) {
     });
     return false;
 }
-
