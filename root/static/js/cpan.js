@@ -165,9 +165,9 @@ $(document).ready(function () {
         width: ac_width,
         transformResult: function (data) {
             var result = $.map(data, function (row) {
-                return { 
-                    data: row.documentation, 
-                    value: row.documentation 
+                return {
+                    data: row.documentation,
+                    value: row.documentation
                 };
             });
             var uniq = { };
@@ -244,7 +244,7 @@ $(document).ready(function () {
             }
         }, 1000);
     });
-    
+
     if($(".inline").find("button").hasClass("active")){
         $(".favorite").attr("title", "Remove from favorite");
     }
@@ -303,7 +303,7 @@ $(document).ready(function () {
 
 	// The install a CPAN Module boiler plate
 	$('#install_dialog').on('click', function() {
-		$('#install_module').modal('show');	
+		$('#install_module').modal('show');
 	});
 
     // TODO use a more specific locator for /author/PAUSID/release ?
