@@ -310,17 +310,36 @@ sub interesting_files {
                                                             }
                                                         }
                                                         } qw(
-                                                        MANIFEST
-                                                        README README.md
-                                                        INSTALL INSTALL.md
+                                                        AUTHORS
+                                                        Build.PL
+                                                        CHANGELOG
+                                                        CHANGES
+                                                        CONTRIBUTING
+                                                        CONTRIBUTING.md
+                                                        COPYRIGHT
+                                                        CREDITS
+                                                        ChangeLog
+                                                        Changelog
+                                                        Changes
+                                                        Copying
                                                         FAQ
-                                                        Makefile.PL Build.PL
-                                                        LICENSE Copying COPYRIGHT
-                                                        TODO ToDo Todo
-                                                        CONTRIBUTING CONTRIBUTING.md
-                                                        CREDITS AUTHORS THANKS
-                                                        CHANGES Changes ChangeLog Changelog CHANGELOG NEWS
-                                                        META.yml META.json
+                                                        INSTALL
+                                                        INSTALL.md
+                                                        LICENSE
+                                                        MANIFEST
+                                                        META.json
+                                                        META.yml
+                                                        Makefile.PL
+                                                        NEWS
+                                                        README
+                                                        README.markdown
+                                                        README.md
+                                                        README.mdown
+                                                        README.mkdn
+                                                        THANKS
+                                                        TODO
+                                                        ToDo
+                                                        Todo
                                                         cpanfile
                                                         dist.ini
                                                         )
