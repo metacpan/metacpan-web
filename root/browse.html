@@ -11,8 +11,8 @@
     <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
   <li class="nav-header">Tools</li>
-  <li><a href="/release/<% author %>/<% release %>/"><i class="fa fa-fw fa-info-circle black"></i>Release Info</a></li>
-  <li><a href="/author/<% author %>/"><i class="fa fa-user fa-fw black"></i>Author</a></li>
+  <li><a data-keyboard-shortcut="g r" href="/release/<% author %>/<% release %>/"><i class="fa fa-fw fa-info-circle black"></i>Release Info</a></li>
+  <li><a data-keyboard-shortcut="g a" href="/author/<% author %>/"><i class="fa fa-user fa-fw black"></i>Author</a></li>
   <li><a href="<% api_external_secure %>/source/<% base %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw browser</a></li>
   <li class="nav-header">Info</li>
   <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
