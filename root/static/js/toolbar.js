@@ -4,7 +4,7 @@ if( !/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
         var topRow = $('.main-content').first();
         if (!el.length) return;
         var height = el.height();
-        var content = $("div.content");
+        var content = $("div.content").height() > $("#right-panel").height() ? $("div.content") : $('#right-panel');
         if(height > content.height()) return;
 
         function alignSidebar(e) {
