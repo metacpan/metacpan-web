@@ -107,6 +107,7 @@ my @js_files = map {"/static/js/$_.js"} (
         jquery.relatize_date
         jquery.qtip.min
         jquery.autocomplete.min
+        mousetrap.min
         shCore
         shBrushPerl
         shBrushPlain

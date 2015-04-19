@@ -80,6 +80,16 @@ $(document).ready(function() {
         $('#signin').hide()
     });
 
+    // Global keyboard shortcuts
+    Mousetrap.bind('?', function() { $('#keyboard-shortcuts').modal(); });
+    Mousetrap.bind('s', function(e) { $('#search-input').focus(); e.preventDefault(); });
+
+    $('a[data-keyboard-shortcut]').each(function(index, element) {
+        Mousetrap.bind($(element).data('keyboard-shortcut'), function() {
+            window.location = $(element).attr('href');
+        });
+    });
+
     $('table.tablesorter').each(function() {
         var table = $(this);
 
