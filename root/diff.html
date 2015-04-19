@@ -24,6 +24,13 @@ file.path = parts.join("/"); END -%>
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
   <li class="nav-header">Tools</li>
+    <%- IF diff.source.split("/").size != 2 %>
+      <li>
+        <a href="?source=<% diff.source.split("/").first(2).join("/") %>&target=<% diff.target.split("/").first(2).join("/") %>">
+          Diff full distribution
+        </a>
+      </li>
+    <% END %>
     <li>
       <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
         Reverse diff
