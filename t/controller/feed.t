@@ -45,7 +45,7 @@ sub valid_xml {
     my ($res) = @_;
     my ( $tx, $err );
 
-    try { $tx = tx($res) } catch { $err = $_[0] };
+    try { $tx = tx($res, {feed => 1}) } catch { $err = $_[0] };
 
     ok( $tx, 'valid xml' );
     is( $err, undef, 'no errors' )
