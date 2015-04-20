@@ -50,7 +50,7 @@ sub override_api_response {
     return;
 }
 
-sub app { require 'app.psgi'; }
+sub app { require 'app.psgi'; }    ## no critic (Require)
 
 sub tx {
     my $tree = HTML::TreeBuilder->new_from_content( shift->content );
