@@ -2620,6 +2620,15 @@ DISTRIBUTIONS
       namespace::clean 0
       perl 5.006
       strict 0
+  HTML-Selector-XPath-0.18
+    pathname: C/CO/CORION/HTML-Selector-XPath-0.18.tar.gz
+    provides:
+      HTML::Selector::XPath 0.18
+    requirements:
+      ExtUtils::MakeMaker 6.59
+      Test::Base 0
+      Test::More 0
+      perl 5.008001
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
     provides:
@@ -5249,6 +5258,13 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5
+  Spiffy-0.46
+    pathname: I/IN/INGY/Spiffy-0.46.tar.gz
+    provides:
+      Spiffy 0.46
+      Spiffy::mixin undef
+    requirements:
+      ExtUtils::MakeMaker 6.30
   Starman-0.4009
     pathname: M/MI/MIYAGAWA/Starman-0.4009.tar.gz
     provides:
@@ -5499,6 +5515,17 @@ DISTRIBUTIONS
       File::Spec 0.8
       File::Temp 0.12
       Scalar::Util 0
+  Test-Base-0.88
+    pathname: I/IN/INGY/Test-Base-0.88.tar.gz
+    provides:
+      Test::Base 0.88
+      Test::Base::Block 0.88
+      Test::Base::Filter undef
+      Test::Base::Handle 0.88
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      Filter::Util::Call 0
+      Spiffy 0.40
   Test-CheckDeps-0.010
     pathname: L/LE/LEONT/Test-CheckDeps-0.010.tar.gz
     provides:

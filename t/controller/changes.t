@@ -13,9 +13,9 @@ test_psgi app, sub {
             'GET /changes/release/...'
         );
         is( $res->code, 200, 'code 200' );
-        my $tx = tx($res);
+        my $tx = tx( $res, { css => 1 } );
         $tx->like(
-            '//div[@class="content"]//pre[@id="source"]',
+            'div.content pre#source',
             qr/^Revision history for File-Spec-Native/,
             'source view for plain text change log'
         );

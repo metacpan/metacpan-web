@@ -72,6 +72,11 @@ sub tx {
         $xml = HTML::TreeBuilder->new_from_content( $res->content )->as_XML;
     }
 
+    # A nice alternative to XPath when the full power isn't needed.
+    if ( delete $opts->{css} ) {
+        $opts->{filter} = 'css_selector';
+    }
+
     # Upgrading some library (not sure which) in Sep/Oct 2013 started
     # returning $xml with wide characters (which cases decode to croak).
     try { $xml = decode_utf8($xml) if !Encode::is_utf8($xml); }
