@@ -53,15 +53,31 @@ sub override_api_response {
 sub app { require 'app.psgi'; }    ## no critic (Require)
 
 sub tx {
-    my $tree = HTML::TreeBuilder->new_from_content( shift->content );
-    my $xml  = $tree->as_XML;
+    my ( $res, $opts ) = @_;
+    my $xml = $res->content;
+    $opts ||= {};
+
+    # Determine type of xml document.
+    if ( delete $opts->{feed} ) {
+        ( $opts->{xmlns} ||= {} )->{rdf} = 'http://purl.org/rss/1.0/';
+    }
+
+    # Default to html (disable with `html => 0`).
+    elsif ( !exists $opts->{html} ) {
+        $opts->{html} = 1;
+    }
+
+# Text::XPath has `is_html` but the LibXML HTML parser doesn't like some html 5 (like nav).
+    if ( delete $opts->{html} ) {
+        $xml = HTML::TreeBuilder->new_from_content( $res->content )->as_XML;
+    }
 
     # Upgrading some library (not sure which) in Sep/Oct 2013 started
     # returning $xml with wide characters (which cases decode to croak).
     try { $xml = decode_utf8($xml) if !Encode::is_utf8($xml); }
     catch { warn $_[0] };
 
-    my $tx = Test::XPath->new( xml => $xml );
+    my $tx = Test::XPath->new( xml => $xml, %$opts );
 
   # https://metacpan.org/module/DWHEELER/Test-XPath-0.16/lib/Test/XPath.pm#xpc
     $tx->xpc->registerFunction(
