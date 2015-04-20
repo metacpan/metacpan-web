@@ -123,7 +123,9 @@ sub find_plussers {
 
     # find plussers by pause ids.
     my $authors
-        = $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits};
+        = @plusser_users
+        ? $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits}
+        : [];
 
     my @plusser_details = map {
         {
