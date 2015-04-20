@@ -6001,6 +6001,12 @@ DISTRIBUTIONS
       Test::More 0.42
       Text::Markdown v1.0.26
       perl 5.008
+  Text-Pluralize-1.1
+    pathname: K/KV/KVAIL/Text-Pluralize-1.1.tar.gz
+    provides:
+      Text::Pluralize 1.1
+    requirements:
+      ExtUtils::MakeMaker 0
   Text-SimpleTable-2.03
     pathname: M/MR/MRAMBERG/Text-SimpleTable-2.03.tar.gz
     provides:
