@@ -79,13 +79,17 @@ sub author : Chained('index') PathPart Args(1) {
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
+
     my $release_data
         = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
     my $author_info = $author_cv->recv;
-    my $faves_cv
-        = $c->model('API::Favorite')->by_user( $author_info->{user} );
+
+    my $faves_cv = $author_info->{user}
+        && $c->model('API::Favorite')->by_user( $author_info->{user} );
     my $faves_data
-        = [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ];
+        = $faves_cv
+        ? [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ]
+        : [];
 
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN activity of $author - MetaCPAN",
