@@ -6,24 +6,43 @@ use Try::Tiny;
 use MetaCPAN::Web;
 use MetaCPAN::Web::Controller::Feed;
 
-my @tests
-    = qw(/feed/recent /feed/author/PERLER /feed/distribution/Moose /feed/news);
+sub get_feed_ok {
+    my ( $cb, $test, $extra ) = @_;
+    subtest $test => sub {
+        ok( my $res = $cb->( GET $test), $test );
+        is( $res->code, 200, 'code 200' );
+        is(
+            $res->header('content-type'),
+            'application/rss+xml; charset=UTF-8',
+            'Content-type is application/rss+xml'
+        );
+
+        my $tx = valid_xml( $res, $test );
+        $extra->( $res, $tx ) if $extra;
+    };
+}
 
 test_psgi app, sub {
     my $cb = shift;
-    foreach my $test (@tests) {
-        subtest $test => sub {
-            ok( my $res = $cb->( GET $test), $test );
-            is( $res->code, 200, 'code 200' );
-            is(
-                $res->header('content-type'),
-                'application/rss+xml; charset=UTF-8',
-                'Content-type is application/rss+xml'
-            );
 
-            my $tx = valid_xml( $res, $test );
-        };
-    }
+    get_feed_ok( $cb, '/feed/recent' );
+    get_feed_ok(
+        $cb,
+        '/feed/author/PERLER',
+        sub {
+            my ( $res, $tx ) = @_;
+            $tx->ok(
+                q!grep(//rdf:item/rdf:description, "PERLER \+\+ed (\S+) from ([A-Z]+)")!,
+                'found favorites in author feed',
+            );
+            $tx->ok(
+                q!grep(//rdf:item/rdf:title, "PERLER has released (.+)")!,
+                'found releases in author feed',
+            );
+        }
+    );
+    get_feed_ok( $cb, '/feed/distribution/Moose' );
+    get_feed_ok( $cb, '/feed/news' );
 
     test_redirect( $cb, 'oalders' );
 };
@@ -45,7 +64,7 @@ sub valid_xml {
     my ($res) = @_;
     my ( $tx, $err );
 
-    try { $tx = tx($res, {feed => 1}) } catch { $err = $_[0] };
+    try { $tx = tx( $res, { feed => 1 } ) } catch { $err = $_[0] };
 
     ok( $tx, 'valid xml' );
     is( $err, undef, 'no errors' )

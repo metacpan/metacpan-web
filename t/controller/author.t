@@ -22,6 +22,12 @@ test_psgi app, sub {
     my $release = $tx->find_value('//table[1]//tbody/tr[1]/td[1]//a/@href');
     ok( $release, 'found a release' );
 
+    ok(
+        $tx->find_value(
+            '//table[@id="author_favorites"]//tbody/tr[1]/td[1]//a/@href'),
+        'found a favorite'
+    );
+
     ok( $res = $cb->( GET $release), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
