@@ -29,6 +29,17 @@ test_psgi app, sub {
     # so pin to an older version for now.
     test_heading_order( $cb->( GET '/release/ETHER/Moose-2.1005' ) );
 
+    ok( $tx->find_value('//div[contains(@class, "plussers")]'),
+        'has plussers' );
+
+   # Return @href as value b/c there is no child text content (it's an image).
+    ok(
+        $tx->find_value(
+            '//div[contains(@class, "plussers")]//a[contains(@href, "/author/")]/@href'
+        ),
+        'has cpan author plussers'
+    );
+
 # FIXME: This xpath garbage is getting out of hand.  Semantic HTML would help a lot.
 # '//li[text()="Permalinks"]/following-sibling::li/a[text()="This version" and not(@rel="nofollow")]/@href'
     ok(
