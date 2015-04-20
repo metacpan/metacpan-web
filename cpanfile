@@ -75,6 +75,7 @@ requires 'Template::Plugin::Markdown';
 requires 'Template::Plugin::MultiMarkdown', '0.08';
 requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
+requires 'Text::Pluralize';
 requires 'Try::Tiny', '0.09';
 requires 'URI';
 requires 'XML::Feed';

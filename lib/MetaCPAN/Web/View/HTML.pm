@@ -7,8 +7,7 @@ use base 'Catalyst::View::TT::Alloy';
 use mro;
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
-use URI;
-use URI::QueryParam;
+use List::Util ();
 use JSON::MaybeXS;
 use Gravatar::URL;
 use Regexp::Common qw(time);
@@ -17,7 +16,9 @@ use Template::Plugin::JSON;
 use Template::Plugin::Markdown;
 use Template::Plugin::Number::Format;
 use Template::Plugin::Page;
-use List::Util ();
+use Text::Pluralize ();
+use URI;
+use URI::QueryParam;
 
 sub parse_datetime {
     my $date = shift;
@@ -204,6 +205,16 @@ Template::Alloy->define_vmethod(
             return $url->as_string;
         }
         return $url;
+    },
+);
+
+Template::Alloy->define_vmethod(
+    'text',
+    pluralize => sub {
+        my ( $text, $count ) = @_;
+
+        # Send args individually since the sub has a prototype.
+        return Text::Pluralize::pluralize( $text, $count );
     },
 );
 
