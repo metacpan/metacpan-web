@@ -15,7 +15,7 @@ env:
     - DEPLOYMENT_PERL_VERSION=5.18
 
 before_install:
-  - npm install -g less
+  - npm install -g less js-beautify
   # Pre-install from backpan to avoid upgrade breakage.
   - cpanm -n http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
   - cpanm -n Devel::Cover::Report::Coveralls
