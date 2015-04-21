@@ -77,6 +77,7 @@ requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
 requires 'Text::Pluralize';
 requires 'Try::Tiny', '0.09';
+requires 'YAML', '1.15'; # fix dep chain issue
 requires 'URI';
 requires 'XML::Feed';
 requires 'XML::Simple';
