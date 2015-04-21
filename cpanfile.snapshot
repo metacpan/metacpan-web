@@ -6620,39 +6620,34 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       XML::Parser 2.23
-  YAML-0.90
-    pathname: I/IN/INGY/YAML-0.90.tar.gz
+  YAML-1.15
+    pathname: I/IN/INGY/YAML-1.15.tar.gz
     provides:
-      Spiffy 0.31
-      Test::Base::Filter undef
-      Test::YAML 0.90
-      Test::YAML::Filter 0.90
-      YAML 0.90
-      YAML::Any 0.90
-      YAML::Dumper 0.90
-      YAML::Dumper::Base 0.90
-      YAML::Error 0.90
-      YAML::Loader 0.90
-      YAML::Loader::Base 0.90
-      YAML::Marshall 0.90
-      YAML::Mo 0.90
-      YAML::Node 0.90
-      YAML::Tag 0.90
-      YAML::Type::blessed 0.90
-      YAML::Type::code 0.90
-      YAML::Type::glob 0.90
-      YAML::Type::ref 0.90
-      YAML::Type::regexp 0.90
-      YAML::Type::undef 0.90
-      YAML::Types 0.90
-      YAML::Warning 0.90
-      t::Base undef
-      t::TestYAML undef
-      yaml_mapping 0.90
-      yaml_scalar 0.90
-      yaml_sequence 0.90
+      YAML 1.15
+      YAML::Any 1.15
+      YAML::Dumper undef
+      YAML::Dumper::Base undef
+      YAML::Error undef
+      YAML::Loader undef
+      YAML::Loader::Base undef
+      YAML::Marshall undef
+      YAML::Mo 0.88
+      YAML::Node undef
+      YAML::Tag undef
+      YAML::Type::blessed undef
+      YAML::Type::code undef
+      YAML::Type::glob undef
+      YAML::Type::ref undef
+      YAML::Type::regexp undef
+      YAML::Type::undef undef
+      YAML::Types undef
+      YAML::Warning undef
+      yaml_mapping undef
+      yaml_scalar undef
+      yaml_sequence undef
     requirements:
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
+      perl 5.008001
   aliased-0.31
     pathname: O/OV/OVID/aliased-0.31.tar.gz
     provides:
