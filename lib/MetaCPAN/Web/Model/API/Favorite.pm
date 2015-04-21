@@ -10,6 +10,14 @@ sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
+
+    # If there are no distributions this will build a query with an empty
+    # filter and ES will return a parser error... so just skip it.
+    if ( !@distributions ) {
+        $cv->send( {} );
+        return $cv;
+    }
+
     $self->request(
         '/favorite/_search',
         {

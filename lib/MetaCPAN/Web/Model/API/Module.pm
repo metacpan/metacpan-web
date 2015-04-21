@@ -75,6 +75,13 @@ sub search_expanded {
             from => $from
         }
     )->recv;
+
+    # Everything after this will fail (slowly and silently) without results.
+    if ( !$data->{hits}->{total} ) {
+        $cv->send( {} );
+        return $cv;
+    }
+
     my @distributions = uniq
         map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} };
 
@@ -121,6 +128,13 @@ sub search_collapsed {
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
     @distributions = splice( @distributions, $from, $page_size );
+
+    # Everything else will fail (slowly and quietly) without distributions.
+    if ( !@distributions ) {
+        $cv->send( {} );
+        return $cv;
+    }
+
     my $ratings   = $self->model('Rating')->get(@distributions);
     my $favorites = $self->model('Favorite')->get( $user, @distributions );
     my $results   = $self->model('Module')
