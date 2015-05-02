@@ -81,9 +81,10 @@
                             +'  <tr><th>Forks:</th><td><a href="'+ data.html_url +'/network">'+ data.forks +'</a></td></tr>'
 
                             +( data.has_issues
-                            ?'  <tr><th>Open <a href="'+ data.html_url +'/issues">Issues</a>:</th><td>'+ data.open_issues +'</td></tr>'
+                            ?'  <tr><th>Open Issues: </th><td><a href="'+ data.html_url +'/issues">'+ data.open_issues +'</a></td></tr>'
                             :'' )
 
+                            +'  <tr><th>Pull Requests:</th><td><a href="'+ data.html_url +'/pulls">'+ data.html_url + '/pulls' + '</a></td></tr>'
                             +'  <tr><th>Clone URL:</th><td><a href="'+ data.clone_url +'">'+ data.clone_url +'</a></td></tr>'
                             +'  <tr><th>Git URL:</th><td><a href="'+ data.git_url +'">'+ data.git_url +'</a></td></tr>'
                             +'  <tr><th>Github URL:</th><td><a href="'+ data.html_url +'">'+ data.html_url +'</a></td></tr>'
@@ -241,10 +242,21 @@
 
 $(document).ready(function() {
     $('.nav-list a:not(.nopopup)').each(function() {
-        if( GithubUrl.match(this) ){
-          (new GithubUrl(this)).createPopup();
+        if( GithubUrl.match(this) ) {
+            (new GithubUrl(this)).createPopup();
+
         }
     });
+
+    var repository = $('a[data-keyboard-shortcut="g r"]');
+
+    if( GithubUrl.match(repository) ) {
+        Mousetrap.bind('g p', function() {
+            // we haven't hit the github api at this point, so we cheat for the url
+            var pull_request_url = repository.attr('href') + '/pulls';
+            window.location = pull_request_url;
+        });
+    }
 });
 
 }());

@@ -1,7 +1,7 @@
 <%- rss = 'distribution/' _ module.distribution %>
 <%- title = module.path %>
 <div class="breadcrumbs">
-    <a href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
+    <a data-keyboard-shortcut="g s" href="/source/<% base = [module.author, module.release].join("/"); base %>"><% [module.author, module.release].join(" / ") %></a>
     <% doc_view_url = [base,module.path].join("/") %>
     <% raw_url = [api_external_secure,'source',base,module.path].join("/") %>
   <% FOREACH part IN module.path.split("/"); base = base _ "/" _ part -%>
@@ -15,7 +15,7 @@
   </li>
   <li class="nav-header">Tools</li>
   <li>
-    <a data-keyboard-shortcut="g r" href="/release/<% module.author %>/<% module.release %>/"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
+    <a data-keyboard-shortcut="g d" href="/release/<% module.author %>/<% module.release %>/"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
   </li>
   <% IF module.documentation %>
   <li>
