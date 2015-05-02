@@ -35,7 +35,7 @@ END %>
     <span class="dropdown"><b class="caret"></b></span>
     <select class="<% module ? "" : "extend" %>" onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
     <% IF module %>
-    <a data-keyboard-shortcut="g r" class="release-name" itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+    <a data-keyboard-shortcut="g d" class="release-name" itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
     <% ELSE %>
       <span class="release-name"><% release.name %></span>
     <% END %>
