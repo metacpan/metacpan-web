@@ -241,10 +241,21 @@
 
 $(document).ready(function() {
     $('.nav-list a:not(.nopopup)').each(function() {
-        if( GithubUrl.match(this) ){
-          (new GithubUrl(this)).createPopup();
+        if( GithubUrl.match(this) ) {
+            (new GithubUrl(this)).createPopup();
+
         }
     });
+
+    var repository = $('a[data-keyboard-shortcut="g r"]');
+
+    if( GithubUrl.match(repository) ) {
+        Mousetrap.bind('g p', function() {
+            // we haven't hit the github api at this point, so we cheat for the url
+            var pull_request_url = repository.attr('href') + '/pulls';
+            window.location = pull_request_url;
+        });
+    }
 });
 
 }());
