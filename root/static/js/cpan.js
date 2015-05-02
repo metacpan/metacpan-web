@@ -90,7 +90,7 @@ $(document).ready(function() {
     });
 
     // install a default handler for 'g s' for non pod pages
-    Mousetrap.bind('g s', function(e) { });
+    Mousetrap.bind('g s', function(e) {});
 
     $('a[data-keyboard-shortcut]').each(function(index, element) {
         Mousetrap.bind($(element).data('keyboard-shortcut'), function() {
