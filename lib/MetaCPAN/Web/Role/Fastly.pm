@@ -3,6 +3,8 @@ package MetaCPAN::Web::Role::Fastly;
 use Moose::Role;
 use Net::Fastly;
 
+use MetaCPAN::Web::Types qw( ArrayRef Str );
+
 =head1 NAME
 
 MetaCPAN::Web::Role::Fastly - Methods for fastly intergration
@@ -14,7 +16,7 @@ MetaCPAN::Web::Role::Fastly - Methods for fastly intergration
 has '_surrogate_keys' => (
     traits  => ['Array'],
     is      => 'ro',
-    isa     => 'ArrayRef[Str]',
+    isa     => ArrayRef [Str],
     default => sub { [] },
     handles => {
         add_surrogate_key   => 'push',
@@ -27,7 +29,7 @@ has '_surrogate_keys' => (
 has '_surrogate_keys_to_purge' => (
     traits  => ['Array'],
     is      => 'ro',
-    isa     => 'ArrayRef[Str]',
+    isa     => ArrayRef [Str],
     default => sub { [] },
     handles => {
         purge_surrogate_key          => 'push',
