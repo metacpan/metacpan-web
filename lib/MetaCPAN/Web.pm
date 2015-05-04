@@ -9,6 +9,7 @@ use Catalyst qw/
     ConfigLoader
     Static::Simple
     Authentication
+    +MetaCPAN::Web::Role::Fastly
     /;
 
 extends 'Catalyst';
