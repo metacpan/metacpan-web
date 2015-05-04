@@ -79,20 +79,22 @@ sub fastly_magic {
 
     # Set the caching at CDN, seperate to what the user's browser does
     # https://docs.fastly.com/guides/tutorials/cache-control-tutorial
-    if($c->cdn_never_cache) {
+    if ( $c->cdn_never_cache ) {
 
-      # Make sure fastly doesn't cache this by accident
-      $c->res->header( 'Surrogate-Control' => 'no-cache' );
+        # Make sure fastly doesn't cache this by accident
+        $c->res->header( 'Surrogate-Control' => 'no-cache' );
 
-    } elsif( my $ttl = $c->cdn_cache_ttl ) {
+    }
+    elsif ( my $ttl = $c->cdn_cache_ttl ) {
 
-      # Use this value
-      $c->res->header( 'Surrogate-Control' => 'max_age=' . $ttl );
+        # Use this value
+        $c->res->header( 'Surrogate-Control' => 'max_age=' . $ttl );
 
-    } elsif( !$c->res->header('Last-Modified') ) {
+    }
+    elsif ( !$c->res->header('Last-Modified') ) {
 
-      # If Last-Modified, Fastly can use that, otherwise default to no-cache
-      $c->res->header( 'Surrogate-Control' => 'no-cache' );
+        # If Last-Modified, Fastly can use that, otherwise default to no-cache
+        $c->res->header( 'Surrogate-Control' => 'no-cache' );
 
     }
 }

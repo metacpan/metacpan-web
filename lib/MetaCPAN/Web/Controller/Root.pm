@@ -105,17 +105,8 @@ sub end : ActionClass('RenderView') {
 
     $c->res->header( Vary => 'Cookie' );
 
-    unless (
-        # Already have something set for fastly
-        $c->res->header('Surrogate-Control') ||
+    $c->fastly_magic();
 
-        # We'll use Last-Modified for now
-        $c->res->header('Last-Modified')
-        )
-    {
-        # Make sure fastly doesn't cache anything by accident
-        $c->res->header( 'Surrogate-Control' => 'no-cache' );
-    }
 }
 
 =head1 AUTHOR
