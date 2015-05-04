@@ -60,6 +60,12 @@ will generally be the right thing to do.  Our standards are improving, so even
 if you do follow what you see, we may ask you to make some changes, but that is
 a good thing.  We are trying to keep things tidy.
 
+If you are using the [developer VM](https://github.com/CPAN-API/metacpan-developer) you can run:
+
+```sh
+/home/vagrant/carton/metacpan-web/bin/tidyall
+```
+
 ## Perl Best Practices
 
 In general, the concepts discussed in "Perl Best Practices" are a good starting
