@@ -11,6 +11,8 @@
     }
 
     GithubUrl.match = function(a){
+        if ($(a).length == 0) return;
+
         return $(a).attr('href').indexOf('github') >= 0;
     };
 
