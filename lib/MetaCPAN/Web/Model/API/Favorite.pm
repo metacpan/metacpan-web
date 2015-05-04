@@ -76,7 +76,8 @@ sub get {
 }
 
 sub by_user {
-    my ( $self, $user ) = @_;
+    my ( $self, $user, $size ) = @_;
+    $size ||= 250;
     return $self->request(
         '/favorite/_search',
         {
@@ -84,7 +85,7 @@ sub by_user {
             filter => { term      => { user => $user }, },
             sort   => ['distribution'],
             fields => [qw(date author distribution)],
-            size   => 250,
+            size   => $size,
         }
     );
 }
