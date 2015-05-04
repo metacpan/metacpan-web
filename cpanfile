@@ -54,6 +54,7 @@ requires 'MooseX::Types::Common::Numeric';
 requires 'MooseX::Types::Common::String';
 requires 'MooseX::Types::Moose';
 requires 'MooseX::Types::URI';
+requires 'Net::Fastly', '1.02';
 requires 'Path::Tiny', '0.056';
 requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
