@@ -177,11 +177,17 @@ else {
 
         # Tell fastly to cache _asset and _asset_less for a day
         enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers',
-            set => [ 'Surrogate-Control' => "max-age=${day_ttl}" ];
+            set => [
+            'Surrogate-Control' => "max-age=${day_ttl}",
+            'Surrogate-Key'     => 'assets',
+            ];
 
         # Tell fastly to cache /static/ for an hour
         enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers',
-            set => [ 'Surrogate-Control' => "max-age=${hour_ttl}" ];
+            set => [
+            'Surrogate-Control' => "max-age=${hour_ttl}",
+            'Surrogate-Key'     => 'static',
+            ];
 
         $app;
     };
