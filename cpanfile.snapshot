@@ -2864,6 +2864,23 @@ DISTRIBUTIONS
       File::Temp 0
       Scalar::Util 0
       Test::More 0.88
+  IO-Socket-SSL-2.013
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.013.tar.gz
+    provides:
+      IO::Socket::SSL 2.013
+      IO::Socket::SSL::Intercept 1.93
+      IO::Socket::SSL::OCSP_Cache 2.013
+      IO::Socket::SSL::OCSP_Resolver 2.013
+      IO::Socket::SSL::PublicSuffix undef
+      IO::Socket::SSL::SSL_Context 2.013
+      IO::Socket::SSL::SSL_HANDLE 2.013
+      IO::Socket::SSL::Session_Cache 2.013
+      IO::Socket::SSL::Utils 0.031
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mozilla::CA 0
+      Net::SSLeay 1.46
+      Scalar::Util 0
   IO-String-1.08
     pathname: G/GA/GAAS/IO-String-1.08.tar.gz
     provides:
@@ -2967,6 +2984,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006002
+  LWP-Protocol-https-6.06
+    pathname: M/MS/MSCHILLI/LWP-Protocol-https-6.06.tar.gz
+    provides:
+      LWP::Protocol::https 6.06
+      LWP::Protocol::https::Socket 6.06
+    requirements:
+      ExtUtils::MakeMaker 0
+      IO::Socket::SSL 1.54
+      LWP::UserAgent 6.06
+      Mozilla::CA 20110101
+      Net::HTTPS 6
+      perl 5.008001
   Lexical-SealRequireHints-0.007
     pathname: Z/ZE/ZEFRAM/Lexical-SealRequireHints-0.007.tar.gz
     provides:
@@ -3972,6 +4001,14 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
+  Mozilla-CA-20141217
+    pathname: A/AB/ABH/Mozilla-CA-20141217.tar.gz
+    provides:
+      Mozilla::CA 20141217
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test 0
+      perl 5.006
   Net-CIDR-Lite-0.21
     pathname: D/DO/DOUGW/Net-CIDR-Lite-0.21.tar.gz
     provides:
@@ -4064,11 +4101,48 @@ DISTRIBUTIONS
       IO::Socket 1.24
       MIME::Base64 2.11
       Test::More 0.52
-  Net-HTTP-6.06
-    pathname: G/GA/GAAS/Net-HTTP-6.06.tar.gz
+  Net-Fastly-1.02
+    pathname: F/FA/FASTLY/Net-Fastly-1.02.tar.gz
     provides:
-      Net::HTTP 6.06
-      Net::HTTP::Methods 6.06
+      Net::Fastly 1.02
+      Net::Fastly::Backend undef
+      Net::Fastly::BelongsToServiceAndVersion undef
+      Net::Fastly::Client undef
+      Net::Fastly::Condition undef
+      Net::Fastly::Customer undef
+      Net::Fastly::Director undef
+      Net::Fastly::Domain undef
+      Net::Fastly::Healthcheck undef
+      Net::Fastly::Invoice undef
+      Net::Fastly::Match undef
+      Net::Fastly::Model undef
+      Net::Fastly::Origin undef
+      Net::Fastly::Service undef
+      Net::Fastly::Settings undef
+      Net::Fastly::Stats undef
+      Net::Fastly::Syslog undef
+      Net::Fastly::User undef
+      Net::Fastly::VCL undef
+      Net::Fastly::Version undef
+    requirements:
+      Class::Accessor::Fast 0
+      File::Basename 0
+      File::Spec 0
+      File::Temp 0
+      IO::Socket::SSL != 1.38
+      JSON::XS 0
+      LWP::Protocol::https 0
+      LWP::UserAgent 5.813
+      Module::Build 0.38
+      Test::More 0
+      URI 0
+      URI::Escape 0
+      YAML 0
+  Net-HTTP-6.07
+    pathname: M/MS/MSCHILLI/Net-HTTP-6.07.tar.gz
+    provides:
+      Net::HTTP 6.07
+      Net::HTTP::Methods 6.07
       Net::HTTP::NB 6.04
       Net::HTTPS 6.04
     requirements:
@@ -4077,7 +4151,18 @@ DISTRIBUTIONS
       IO::Compress::Gzip 0
       IO::Select 0
       IO::Socket::INET 0
+      URI 0
       perl 5.006002
+  Net-SSLeay-1.68
+    pathname: M/MI/MIKEM/Net-SSLeay-1.68.tar.gz
+    provides:
+      Net::SSLeay 1.68
+      Net::SSLeay::Handle 0.61
+    requirements:
+      ExtUtils::MakeMaker 6.36
+      MIME::Base64 0
+      Test::More 0.60_01
+      perl 5.005
   Net-Server-2.007
     pathname: R/RH/RHANDOM/Net-Server-2.007.tar.gz
     provides:
@@ -6683,18 +6768,18 @@ DISTRIBUTIONS
       Test::More 0
       XSLoader 0
       perl 5.008001
-  libwww-perl-6.05
-    pathname: G/GA/GAAS/libwww-perl-6.05.tar.gz
+  libwww-perl-6.13
+    pathname: E/ET/ETHER/libwww-perl-6.13.tar.gz
     provides:
-      LWP 6.05
+      LWP 6.13
       LWP::Authen::Basic undef
       LWP::Authen::Digest undef
-      LWP::Authen::Ntlm 6.00
-      LWP::ConnCache 6.02
+      LWP::Authen::Ntlm 6.13
+      LWP::ConnCache 6.13
       LWP::Debug undef
       LWP::DebugFile undef
       LWP::MemberMixin undef
-      LWP::Protocol 6.00
+      LWP::Protocol 6.13
       LWP::Protocol::GHTTP undef
       LWP::Protocol::MyFTP undef
       LWP::Protocol::cpan undef
@@ -6709,9 +6794,9 @@ DISTRIBUTIONS
       LWP::Protocol::mailto undef
       LWP::Protocol::nntp undef
       LWP::Protocol::nogo undef
-      LWP::RobotUA 6.03
-      LWP::Simple 6.00
-      LWP::UserAgent 6.05
+      LWP::RobotUA 6.13
+      LWP::Simple 6.13
+      LWP::UserAgent 6.13
     requirements:
       Digest::MD5 0
       Encode 2.12
@@ -6733,7 +6818,7 @@ DISTRIBUTIONS
       LWP::MediaTypes 6
       MIME::Base64 2.1
       Net::FTP 2.58
-      Net::HTTP 6.04
+      Net::HTTP 6.07
       URI 1.10
       URI::Escape 0
       WWW::RobotRules 6
