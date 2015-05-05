@@ -58,6 +58,9 @@ sub list_as_json : Local {
     $c->add_surrogate_key( $self->_cache_key_for_user($c) );
     $c->cdn_cache_ttl( 86_400 * 30 );    # 30 days
 
+    # Make sure the user re-requests from Fastly each time
+    $c->res->header( 'Cache-Control' => 'max-age=0, no-store, no-cache' );
+
     $c->detach( $c->view('JSON') );
 }
 
