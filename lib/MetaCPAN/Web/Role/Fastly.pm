@@ -90,7 +90,7 @@ sub fastly_magic {
     elsif ( my $ttl = $c->cdn_cache_ttl ) {
 
         # Use this value
-        $c->res->header( 'Surrogate-Control' => 'max_age=' . $ttl );
+        $c->res->header( 'Surrogate-Control' => 'max-age=' . $ttl );
 
     }
     elsif ( !$c->res->header('Last-Modified') ) {
