@@ -101,8 +101,8 @@ sub view : Private {
 
     $c->res->last_modified( $out->{date} );
 
-    my $contribs = $self->groom_contributors( $c, $out, $reqs->{author} );
-    my $irc = $self->groom_irc( $c, $out );
+    $c->stash( $c->model( 'ReleaseInfo', { %$reqs, release => $out } )
+            ->summary_hash );
 
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
@@ -123,9 +123,6 @@ sub view : Private {
         root     => \@root_files,
         examples => \@examples,
         files    => \@view_files,
-
-        contributors => $contribs,
-        irc          => $irc,
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?

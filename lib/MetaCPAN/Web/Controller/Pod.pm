@@ -169,8 +169,8 @@ sub view : Private {
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
-    my $contribs = $self->groom_contributors( $c, $release, $reqs->{author} );
-    my $irc = $self->groom_irc( $c, $release );
+    $c->stash( $c->model( 'ReleaseInfo', { %$reqs, release => $release } )
+            ->summary_hash );
 
     $c->stash(
         {
@@ -180,8 +180,6 @@ sub view : Private {
             template          => 'pod.html',
             canonical         => $canonical,
             documented_module => $documented_module,
-            contributors      => $contribs,
-            irc               => $irc,
         }
     );
 
