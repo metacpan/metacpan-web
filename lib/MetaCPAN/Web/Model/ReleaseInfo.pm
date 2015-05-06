@@ -196,7 +196,8 @@ sub normalize_issues {
        # source as the url specified in the resources.
         if (
            # If the specified url matches the source we got our counts from...
-            $issues->{url} eq $bugs->{source}
+            $self->normalize_issue_url( $issues->{url} ) eq
+            $self->normalize_issue_url( $bugs->{source} )
 
             # or if both of them look like rt.
             or all {m{^https?://rt\.cpan\.org(/|$)}}
@@ -208,6 +209,14 @@ sub normalize_issues {
     }
 
     return $issues;
+}
+
+sub normalize_issue_url {
+    local $_ = $_[1];
+
+    s{^https?:// (?:www\.)? ( github\.com / ([^/]+) / ([^/]+) ) (.*)$}{https://$1}x;
+
+    return $_;
 }
 
 __PACKAGE__->meta->make_immutable;

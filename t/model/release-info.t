@@ -228,6 +228,24 @@ subtest 'normalize_issues' => sub {
         'no resources: rt url; counts from old source: no count'
     );
 
+    foreach my $url (
+        qw(
+        https://github.com/user/repo
+        http://github.com/user/repo
+        https://github.com/user/repo/issues
+        http://www.github.com/user/repo/issues
+        https://www.github.com/user/repo/tree
+        )
+        )
+    {
+        normalize_issues_ok(
+            bugtracker( web => $url ),
+            { source => 'https://github.com/user/repo', active => 3 },
+            { url    => $url,                           active => 3 },
+            "github variation ($url) matches: specified url and count",
+        );
+    }
+
 };
 
 done_testing;
