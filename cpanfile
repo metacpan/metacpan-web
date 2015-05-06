@@ -41,6 +41,7 @@ requires 'HTTP::Request::Common';
 requires 'Hash::AsObject';
 requires 'Hash::Merge';
 requires 'JSON::MaybeXS', '1.002000';
+requires 'List::AllUtils';
 requires 'List::MoreUtils';
 requires 'List::Util';
 requires 'Locale::Country','3.28';

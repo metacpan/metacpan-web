@@ -9,6 +9,8 @@ use URI::QueryParam;    # Add methods to URI.
 
 extends 'Catalyst::Model';
 
+use List::AllUtils qw( all );
+
 sub ACCEPT_CONTEXT {
     my ( $class, $c, $args ) = @_;
     return $class->new(
@@ -29,6 +31,7 @@ sub summary_hash {
     return {
         contributors => $self->groom_contributors,
         irc          => $self->groom_irc,
+        issues       => $self->normalize_issues,
     };
 }
 
@@ -156,6 +159,55 @@ sub groom_irc {
     }
 
     return $irc_info;
+}
+
+# Normalize issue info into a simple hashref.
+# The view was getting messy trying to ensure that the issue count only showed
+# when the url in the 'release' matched the url in the 'distribution'.
+# If a release links to github, don't show the RT issue count.
+# However, there are many ways for a release to specify RT :-/
+# See t/model/issues.t for examples.
+
+sub rt_url_prefix {
+    'https://rt.cpan.org/Public/Dist/Display.html?Name=';
+}
+
+sub normalize_issues {
+    my ($self) = @_;
+    my ( $release, $distribution ) = ( $self->release, $self->distribution );
+
+    my $issues = {};
+
+    my $bugtracker = ( $release->{resources} || {} )->{bugtracker} || {};
+
+    if ( $bugtracker->{web} && $bugtracker->{web} =~ /^https?:/ ) {
+        $issues->{url} = $bugtracker->{web};
+    }
+    elsif ( $bugtracker->{mailto} ) {
+        $issues->{url} = 'mailto:' . $bugtracker->{mailto};
+    }
+    else {
+        $issues->{url} = $self->rt_url_prefix . $release->{distribution};
+    }
+
+    if ( my $bugs = $distribution->{bugs} ) {
+
+       # Include the active issue count, but only if counts came from the same
+       # source as the url specified in the resources.
+        if (
+           # If the specified url matches the source we got our counts from...
+            $issues->{url} eq $bugs->{source}
+
+            # or if both of them look like rt.
+            or all {m{^https?://rt\.cpan\.org(/|$)}}
+            ( $issues->{url}, $bugs->{source} )
+            )
+        {
+            $issues->{active} = $bugs->{active};
+        }
+    }
+
+    return $issues;
 }
 
 __PACKAGE__->meta->make_immutable;

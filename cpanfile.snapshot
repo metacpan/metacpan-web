@@ -3013,6 +3013,18 @@ DISTRIBUTIONS
     requirements:
       Test::More 0
       version 0
+  List-AllUtils-0.09
+    pathname: D/DR/DROLSKY/List-AllUtils-0.09.tar.gz
+    provides:
+      List::AllUtils 0.09
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      List::MoreUtils 0.28
+      List::Util 1.31
+      base 0
+      strict 0
+      warnings 0
   List-MoreUtils-0.33
     pathname: A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
     provides:
@@ -5336,6 +5348,16 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
+  Scalar-List-Utils-1.42
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.42.tar.gz
+    provides:
+      List::Util 1.42
+      List::Util::XS 1.42
+      Scalar::Util 1.42
+      Sub::Util 1.42
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   Sort-Naturally-1.03
     pathname: B/BI/BINGOS/Sort-Naturally-1.03.tar.gz
     provides:

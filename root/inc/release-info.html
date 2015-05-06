@@ -19,20 +19,8 @@
 </li>
 <% END %>
 <li>
-<%
-      IF is_url(release.resources.bugtracker.web);
-        SET bugtracker_url =
-        release.resources.bugtracker.web;
-      ELSIF release.resources.bugtracker.mailto;
-        SET bugtracker_url =
-        'mailto:' _ release.resources.bugtracker.mailto;
-      ELSE;
-        SET bugtracker_url =
-        'https://rt.cpan.org/Public/Dist/Display.html?Name=' _ release.distribution | uri;
-      END;
-%>
-    <a data-keyboard-shortcut="g i" href="<% bugtracker_url %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
-    <% IF distribution.bugs && bugtracker_url == distribution.bugs.source %>(<% distribution.bugs.active %>)<% END %>
+    <a data-keyboard-shortcut="g i" href="<% issues.url %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
+    <% IF issues.defined("active") %>(<% issues.active %>)<% END %>
 </li>
 <% IF rating.count > 0 %>
 <li>
