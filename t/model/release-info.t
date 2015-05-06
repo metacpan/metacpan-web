@@ -1,11 +1,17 @@
 use strict;
 use warnings;
+
 use lib 't/lib';
 use Test::More;
-use TestReleaseInfo;
+use TestContext qw( get_context );
+use Module::Runtime qw( use_module );
 
-my $relinfo = TestReleaseInfo->new;
-my $ctx     = $relinfo->_context;
+my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo');
+my $ctx   = get_context();
+
+sub release_info {
+    $model->new( c => $ctx, @_ );
+}
 
 sub groom_contributors {
     my ( $meta, $author ) = @_;
@@ -17,16 +23,15 @@ sub groom_contributors {
         gravatar_url => '/gravatar/LOCAL',
         email        => ['local@example.com'],
     };
-    $relinfo->groom_contributors(
-        $ctx,
+    release_info(
 
         # release object
-        {
+        release => {
             author   => $author->{pauseid},
             metadata => $meta,
         },
-        $author,
-    );
+        author => $author,
+    )->groom_contributors;
 }
 
 subtest contributors => sub {
