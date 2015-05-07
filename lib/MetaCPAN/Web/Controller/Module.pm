@@ -29,4 +29,6 @@ sub redirect_to_pod : PathPart('module') : Chained('/') : Args {
     $c->detach();
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

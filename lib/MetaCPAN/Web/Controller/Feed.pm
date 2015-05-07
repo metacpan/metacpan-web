@@ -171,4 +171,6 @@ sub end : Private {
     $c->res->body( $c->stash->{feed} );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

@@ -172,4 +172,3 @@ sub fetch_latest_distros {
 __PACKAGE__->meta->make_immutable;
 
 1;
-

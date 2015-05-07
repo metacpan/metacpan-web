@@ -193,3 +193,5 @@ sub plusser_by_id {
 }
 
 __PACKAGE__->meta->make_immutable;
+
+1;

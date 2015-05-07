@@ -140,4 +140,6 @@ sub filter_release_changes {
     return $changelog;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

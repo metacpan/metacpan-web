@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Favorite;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+use Moose;
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub recent : Path('/favorite/recent') {
     my ( $self, $c ) = @_;
@@ -54,5 +53,7 @@ sub index : Path('/favorite/leaderboard') {
         }
     );
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

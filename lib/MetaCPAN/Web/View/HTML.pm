@@ -1,8 +1,7 @@
 package MetaCPAN::Web::View::HTML;
 
-use strict;
-use warnings;
-use base 'Catalyst::View::TT::Alloy';
+use Moose;
+extends 'Catalyst::View::TT::Alloy';
 
 use mro;
 use Digest::MD5 qw(md5_hex);
@@ -217,5 +216,7 @@ Template::Alloy->define_vmethod(
         return Text::Pluralize::pluralize( $text, $count );
     },
 );
+
+__PACKAGE__->meta->make_immutable( inline_constructor => 0 );
 
 1;

@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Recent::TopUploaders;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+use Moose;
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub weekly : Local {
     my ( $self, $c ) = @_;
@@ -47,5 +46,7 @@ sub topuploaders : Private {
         }
     );
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

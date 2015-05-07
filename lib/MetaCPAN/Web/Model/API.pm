@@ -184,4 +184,6 @@ sub raw_api_response {
     return +{ raw => $data };
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

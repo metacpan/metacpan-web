@@ -44,4 +44,6 @@ sub metadata : Local {
     $c->stash( template => 'about/metadata.html' );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

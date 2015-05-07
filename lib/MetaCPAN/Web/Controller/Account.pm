@@ -92,4 +92,6 @@ sub profile : Local {
     }
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

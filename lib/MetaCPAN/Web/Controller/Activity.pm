@@ -1,7 +1,9 @@
 package MetaCPAN::Web::Controller::Activity;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+
+use Moose;
+
+BEGIN { extends 'MetaCPAN::Web::Controller' }
+
 use DateTime;
 
 my %res = ( week => '1w', month => 'month' );
@@ -70,5 +72,7 @@ sub index : Path {
     $c->detach('View::Raw');
 
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
