@@ -28,6 +28,8 @@ sub index : Path {
     }
 }
 
+__PACKAGE__->meta->make_immutable;
+
 use Plack::Middleware::Session::Cookie;
 
 package Plack::Middleware::Session::Cookie;

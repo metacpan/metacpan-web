@@ -92,3 +92,5 @@ sub _add_fav_list_to_stash {
 }
 
 __PACKAGE__->meta->make_immutable;
+
+1;

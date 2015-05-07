@@ -73,5 +73,6 @@ sub dashboard : Chained('index') : PathPart {
     );
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 
+1;

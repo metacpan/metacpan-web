@@ -64,4 +64,6 @@ sub get : Private {
     }
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

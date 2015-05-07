@@ -22,4 +22,6 @@ sub diff_files : Chained('index') : PathPart('file') : Args(0) {
     $c->stash( { diff => $diff, template => 'diff.html', type => 'source' } );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

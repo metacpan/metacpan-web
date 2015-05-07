@@ -33,4 +33,6 @@ sub index : PathPart('raw') : Chained('/') : Args {
     }
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

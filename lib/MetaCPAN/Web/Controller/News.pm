@@ -17,4 +17,6 @@ sub news : Local : Path('/news') {
     $c->stash( template => 'news.html', news => $news );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

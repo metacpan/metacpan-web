@@ -35,3 +35,5 @@ sub index : Path('') {
 }
 
 __PACKAGE__->meta->make_immutable;
+
+1;

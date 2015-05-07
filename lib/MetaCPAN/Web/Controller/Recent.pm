@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Recent;
-use strict;
-use warnings;
-use base 'MetaCPAN::Web::Controller';
+use Moose;
+BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path {
     my ( $self, $c ) = @_;
@@ -36,5 +35,7 @@ sub faves : Path('/recent/favorites') {
     $c->res->redirect( '/favorite/recent', 301 );
     $c->detach;
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

@@ -104,4 +104,6 @@ sub detect_filetype {
     return 'plain';
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;

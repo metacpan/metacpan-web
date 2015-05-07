@@ -9,3 +9,5 @@ BEGIN { extends 'Catalyst::Controller'; }
 with('MetaCPAN::Web::Role::Elasticsearch::Adapter');
 
 __PACKAGE__->meta->make_immutable;
+
+1;

@@ -64,4 +64,6 @@ sub module : Chained('index') : PathPart : Args(1) : Does('Sortable') {
     );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
