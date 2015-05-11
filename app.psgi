@@ -180,6 +180,8 @@ else {
             set => [
             'Surrogate-Control' => "max-age=${day_ttl}",
             'Surrogate-Key'     => 'assets',
+			# Tell the user's browser to cache for an hour
+			'Cache-Control'		=> "max-age=${hour_ttl}",
             ];
 
         # Tell fastly to cache /static/ for an hour
@@ -187,7 +189,17 @@ else {
             set => [
             'Surrogate-Control' => "max-age=${hour_ttl}",
             'Surrogate-Key'     => 'static',
+			# Tell the user's browser to cache for an hour
+			'Cache-Control'		=> "max-age=${hour_ttl}",
             ];
+
+		# Tell fastlyy to cache /source/ for a day
+		enable_if { $_[0]->{PATH_INFO} =~ m{^/source} } 'Headers',
+			set => [
+			'Surrogate-Control' => "max-age=${day_ttl}",
+			'Surrogate-Key'     => 'source',
+			'Cache-Control'		=> "max-age=${hour_ttl}",
+			];
 
         $app;
     };
