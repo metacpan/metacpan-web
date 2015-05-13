@@ -193,11 +193,12 @@ else {
 			'Cache-Control'		=> "max-age=${hour_ttl}",
             ];
 
-		# Tell fastlyy to cache /source/ for a day
+		# Tell fastly to cache /source/ for a day
 		enable_if { $_[0]->{PATH_INFO} =~ m{^/source} } 'Headers',
 			set => [
 			'Surrogate-Control' => "max-age=${day_ttl}",
 			'Surrogate-Key'     => 'source',
+			# Tell the user's browser to cache for an hour
 			'Cache-Control'		=> "max-age=${hour_ttl}",
 			];
 
