@@ -176,18 +176,31 @@ else {
     $app = builder {
 
         # Tell fastly to cache _asset and _asset_less for a day
-        enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers',
-            set => [
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers', set => [
             'Surrogate-Control' => "max-age=${day_ttl}",
             'Surrogate-Key'     => 'assets',
-            ];
+
+            # Tell the user's browser to cache for an hour
+            'Cache-Control' => "max-age=${hour_ttl}",
+        ];
 
         # Tell fastly to cache /static/ for an hour
-        enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers',
-            set => [
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers', set => [
             'Surrogate-Control' => "max-age=${hour_ttl}",
             'Surrogate-Key'     => 'static',
-            ];
+
+            # Tell the user's browser to cache for an hour
+            'Cache-Control' => "max-age=${hour_ttl}",
+        ];
+
+        # Tell fastly to cache /source/ for a day
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/source} } 'Headers', set => [
+            'Surrogate-Control' => "max-age=${day_ttl}",
+            'Surrogate-Key'     => 'source',
+
+            # Tell the user's browser to cache for an hour
+            'Cache-Control' => "max-age=${hour_ttl}",
+        ];
 
         $app;
     };
