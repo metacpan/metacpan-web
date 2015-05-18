@@ -199,14 +199,15 @@ else {
         # But NO instructions for...
         # /source/Foo::bar <- latest package (no 3rd /)
         # /source/AUTHOR/ <- author package list, nothing after 3rd /
-        enable_if { $_[0]->{PATH_INFO} =~ m{^/source/.+/.+} } 'Headers', set => [
+        enable_if { $_[0]->{PATH_INFO} =~ m{^/source/.+/.+} } 'Headers',
+            set => [
             'Surrogate-Control' => "max-age=${year_ttl}",
             'Surrogate-Key'     => 'source',
 
             # Tell the user's browser to cache for an hour,
             # incase the regex isn't quite right!
             'Cache-Control' => "max-age=${hour_ttl}",
-        ];
+            ];
 
         $app;
     };
