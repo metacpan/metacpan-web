@@ -1,5 +1,10 @@
 /* jshint white: true, lastsemic: true */
 
+// Store global data in this object
+var MetaCPAN = {};
+// Collect favs we need to check after dom ready
+MetaCPAN.favs_to_check = {};
+
 document.cookie = "hideTOC=; expires=" + (new Date(0)).toGMTString() + "; path=/";
 
 $.fn.textWidth = function() {
@@ -71,6 +76,8 @@ function toggleTOC() {
 }
 
 $(document).ready(function() {
+
+    // User customisations
     processUserData();
 
     $(".ttip").tooltip();
@@ -401,13 +408,38 @@ function logInPAUSE(a) {
 }
 
 function processUserData() {
-    // TODO: use localstorage for cacheing
+
+    // Could do some fancy localStorage thing here
+    // but as the user favs data is cached at fastly
+    // not worth the effort yet
+
+    // TODO: get this working to save hits and 403's
+    // if(document.cookie.match('metacpan_secure')) {
+    //   getFavDataFromServer();
+    // } else {
+    //   // Can't be logged in
+    //   $('.logged_out').css('display', 'inline');
+    // }
+
     getFavDataFromServer();
 }
 
 function showUserData(fav_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'inline');
+
+    // process users current favs
+    $.each(fav_data.faves, function(index, value) {
+        var distribution = value.distribution;
+
+        // On the page... make it deltable and styled as 'active'
+        if (MetaCPAN.favs_to_check[distribution]) {
+            $('#' + distribution + '-fav input[name="remove"]').val(1);
+            $('#' + distribution + '-fav button').addClass('active');
+        }
+
+    });
+
 }
 
 function getFavDataFromServer() {
@@ -418,8 +450,8 @@ function getFavDataFromServer() {
             showUserData(databack);
         },
         error: function() {
-            // Can't be logged in
-            $('.logged_out').show();
+            // Can't be logged in, should be getting 403
+            $('.logged_out').css('display', 'inline');
         }
     });
     return true;
@@ -439,13 +471,17 @@ function favDistribution(form) {
             var count = counter.text();
             if (button.hasClass('active')) {
                 counter.text(count ? parseInt(count, 10) + 1 : 1);
-                form.append('<input type="hidden" name="remove" value="1">');
+                // now added let users remove
+                form.find('input[name="remove"]').val(1);
                 if (!count)
                     button.toggleClass('highlight');
             } else {
+                // can't delete what's already deleted
+                form.find('input[name="remove"]').val(0);
+
                 counter.text(parseInt(count, 10) - 1);
-                form.find('input[name="remove"]').remove();
-                if (counter.text() === 0) {
+
+                if (counter.text() == 0) {
                     counter.text("");
                     button.toggleClass('highlight');
                 }
