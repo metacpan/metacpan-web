@@ -71,6 +71,8 @@ function toggleTOC() {
 }
 
 $(document).ready(function() {
+    processUserData();
+
     $(".ttip").tooltip();
 
     $('#signin-button').mouseenter(function() {
@@ -396,6 +398,31 @@ function logInPAUSE(a) {
     var id = prompt('Please enter your PAUSE ID:');
     if (id) document.location.href = a.href + '&id=' + id;
     return false;
+}
+
+function processUserData() {
+    // TODO: use localstorage for cacheing
+    getFavDataFromServer();
+}
+
+function showUserData(fav_data) {
+    // User is logged in, so show it
+    $('.logged_in').css('display', 'inline');
+}
+
+function getFavDataFromServer() {
+    $.ajax({
+        type: 'GET',
+        url: '/account/favorite/list_as_json',
+        success: function(databack) {
+            showUserData(databack);
+        },
+        error: function() {
+            // Can't be logged in
+            $('.logged_out').show();
+        }
+    });
+    return true;
 }
 
 function favDistribution(form) {

@@ -114,9 +114,8 @@
                     <%- END %>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <%- IF user_exists %>
                     <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
-                    <li class="dropdown">
+                    <li class="dropdown logged_in" style="display: none;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Account
                         <b class="caret"></b>
@@ -130,8 +129,7 @@
                             </li>
                         </ul>
                     </li>
-                    <% ELSE %>
-                    <li class="dropdown">
+                    <li class="dropdown logged_out" style="display: none;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Sign in
                         <b class="caret"></b>
@@ -153,7 +151,6 @@
                             </li>
                         </ul>
                     </li>
-                    <% END %>
                 </ul>
             </div>
         </nav>
@@ -250,4 +247,3 @@
         </div>
     </body>
 </html>
-
