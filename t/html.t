@@ -12,7 +12,7 @@ my %skip = map { $_ => 1 } (
     'root/inc/dependencies-graph.html', 'root/recent/log.html',
     'root/author.html',                 'root/mirrors.html',
     'root/source.html',                 'root/wrapper.html',
-    'root/about/contributors.html',
+    'root/about/contributors.html',     'root/inc/favorite.html',
 );
 
 my $rule = Path::Iterator::Rule->new;
@@ -26,4 +26,3 @@ for my $file ( $rule->all('root') ) {
 }
 
 done_testing;
-
