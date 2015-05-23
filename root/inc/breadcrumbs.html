@@ -29,7 +29,7 @@ END %>
 
 
 <div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
-  <a data-keyboard-shortcut="g a" rel="author" itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>"><% author.name %></a>
+  <a data-keyboard-shortcut="g a" rel="author" itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>" class="author-name"><% author.name %></a>
   <span>&nbsp;/&nbsp;</span>
   <div class="release status-<% release.status %> maturity-<% release.maturity %><% IF mark_unauthorized_releases && NOT release.authorized %> unauthorized<% END %>">
     <span class="dropdown"><b class="caret"></b></span>
