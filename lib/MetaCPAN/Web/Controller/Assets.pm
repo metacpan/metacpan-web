@@ -36,8 +36,11 @@ sub css : Path('style.css') : Args(0) {
     my $less = `lessc -v`;
     croak(q{Can't find lessc command}) unless $less;
 
+    my @cmd
+        = ( 'lessc', '--include-path=root/static/less:root/static/', $file );
+
     my ( $stdout, $stderr, $exit ) = capture {
-        system( 'lessc', $file );
+        system(@cmd);
     };
     die $stderr if $stderr;
 
@@ -50,7 +53,7 @@ sub css : Path('style.css') : Args(0) {
 
         # Make sure the user re-requests each time
         $c->res->header( 'Cache-Control' => 'max-age=0, no-store, no-cache' );
-        $c->res->body($stdout);
+        $c->res->body( CSS::Minifier::XS::minify($stdout) );
 
     }
     else {
