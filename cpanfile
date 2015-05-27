@@ -71,6 +71,7 @@ requires 'Plack::Test';
 requires 'Regexp::Common';
 requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
+requires 'String::BOM', '0.3';
 requires 'Template::Alloy';
 requires 'Template::Plugin::DateTime';
 requires 'Template::Plugin::JSON';

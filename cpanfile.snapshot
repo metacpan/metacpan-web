@@ -2470,6 +2470,17 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
+  File-Slurp-9999.19
+    pathname: U/UR/URI/File-Slurp-9999.19.tar.gz
+    provides:
+      File::Slurp 9999.19
+      FileSlurp_12 9999.13
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      POSIX 0
   File-Which-1.09
     pathname: A/AD/ADAMK/File-Which-1.09.tar.gz
     provides:
@@ -5399,6 +5410,14 @@ DISTRIBUTIONS
       Stream::Buffered::PerlIO undef
     requirements:
       ExtUtils::MakeMaker 6.36
+  String-BOM-0.3
+    pathname: D/DM/DMUEY/String-BOM-0.3.tar.gz
+    provides:
+      String::BOM 0.3
+    requirements:
+      File::Slurp 0
+      Test::More 0
+      version 0
   String-Format-1.17
     pathname: D/DA/DARREN/String-Format-1.17.tar.gz
     provides:

@@ -39,6 +39,18 @@ has '_surrogate_keys_to_purge' => (
     },
 );
 
+sub one_hour {
+    return 3200;
+}
+
+sub one_day {
+    return 86_400;
+}
+
+sub one_month {
+    return 2_592_000;
+}
+
 sub _net_fastly {
     my $c = shift;
 
