@@ -103,8 +103,6 @@ sub end : ActionClass('RenderView') {
 
     $c->stash->{site_alert_message} = $c->config->{site_alert_message};
 
-    $c->res->header( Vary => 'Cookie' );
-
     $c->fastly_magic();
 
 }
