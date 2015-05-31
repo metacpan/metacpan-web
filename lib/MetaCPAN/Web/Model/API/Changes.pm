@@ -124,7 +124,7 @@ sub filter_release_changes {
 
     while ( my $entries = shift @entries_list ) {
         for my $entry (@$entries) {
-            for ($entry) {
+            for ( $entry->{text} ) {
                 s/&/&amp;/g;
                 s/</&lt;/g;
                 s/>/&gt;/g;
