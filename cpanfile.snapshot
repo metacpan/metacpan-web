@@ -2495,6 +2495,13 @@ DISTRIBUTIONS
       Filesys::Notify::Simple 0.12
     requirements:
       ExtUtils::MakeMaker 6.30
+  Format-Human-Bytes-0.06
+    pathname: S/SE/SEWI/Format-Human-Bytes-0.06.tar.gz
+    provides:
+      Format::Human::Bytes 0.06
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Test::More 0
   Getopt-Long-Descriptive-0.097
     pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.097.tar.gz
     provides:
@@ -2955,6 +2962,7 @@ DISTRIBUTIONS
     provides:
       JSON::MaybeXS 1.002002
     requirements:
+      Cpanel::JSON::XS 2.3310
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -5507,6 +5515,14 @@ DISTRIBUTIONS
     requirements:
       Digest::MD5 1
       ExtUtils::MakeMaker 0
+  Template-Plugin-Comma-0.04
+    pathname: M/MI/MIYAGAWA/Template-Plugin-Comma-0.04.tar.gz
+    provides:
+      Template::Plugin::Comma 0.04
+    requirements:
+      ExtUtils::MakeMaker 0
+      Template 2.07
+      Test::More 0.32
   Template-Plugin-DateTime-0.06002
     pathname: D/DM/DMAKI/Template-Plugin-DateTime-0.06002.tar.gz
     provides:
@@ -6039,12 +6055,6 @@ DISTRIBUTIONS
       Test::Builder::Tester 1.02
       Test::More 0
       perl 5.006
-  Test-Without-Module-0.17
-    pathname: C/CO/CORION/Test-Without-Module-0.17.tar.gz
-    provides:
-      Test::Without::Module 0.17
-    requirements:
-      ExtUtils::MakeMaker 0
   Test-XPath-0.16
     pathname: D/DW/DWHEELER/Test-XPath-0.16.tar.gz
     provides:
