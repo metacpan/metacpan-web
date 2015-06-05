@@ -31,6 +31,7 @@ requires 'Encode', '2.51';
 requires 'Exporter';
 requires 'Format::Human::Bytes';
 requires 'File::Path';
+requires 'Getopt::Long::Descriptive';
 requires 'Gravatar::URL';
 requires 'HTML::Escape';
 requires 'HTML::Restrict', '2.2.2';
