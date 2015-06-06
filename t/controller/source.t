@@ -17,7 +17,32 @@ test_psgi app, sub {
         'text/html; charset=utf-8',
         'Content-type text/html; charset=utf-8'
     );
+    test_cache_headers(
+        $res,
+        {
+            cache_control     => 'max-age=3600',
+            surrogate_key     => 'source',
+            surrogate_control => 'max-age=31536000',
+        }
+    );
+
     ok( $res->content =~ /package Moose/, 'includes Moose package' );
+
+    {
+        # Check a URL that is the 'latest', e.g. no version num
+        my $uri = '/source/Moose';
+        ok( my $res = $cb->( GET $uri ), "GET $uri" );
+        is( $res->code, 200, 'code 200' );
+        test_cache_headers(
+            $res,
+            {
+                cache_control     => 'max-age=3600',
+                surrogate_key     => 'source',
+                surrogate_control => 'max-age=3600',
+            }
+        );
+
+    }
 
     {
         # Test the html produced once; test different filetypes below.
