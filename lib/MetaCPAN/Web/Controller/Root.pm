@@ -38,6 +38,12 @@ The root page (/)
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
+
+    $c->add_surrogate_key('homepage');
+    $c->res->header(
+        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_hour} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+
     $c->stash->{template} = 'home.html';
 }
 
@@ -71,6 +77,12 @@ sub forbidden : Private {
 
 sub robots : Path("robots.txt") {
     my ( $self, $c ) = @_;
+
+    $c->add_surrogate_key('robots');
+    $c->res->header(
+        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
+
     $c->stash( { template => 'robots.txt' } );
 }
 

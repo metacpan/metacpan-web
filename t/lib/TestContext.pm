@@ -13,7 +13,7 @@ our @EXPORT_OK = qw(
 );
 
 sub get_context {
-    return ( ctx_request('/robots.txt') )[1];
+    return ( ctx_request('/foo_not_real.txt') )[1];
 }
 
 1;

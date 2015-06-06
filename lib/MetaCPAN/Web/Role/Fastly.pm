@@ -17,7 +17,7 @@ The following:
 
 =head2 $c->purge_surrogate_key('bar');
 
-=head2 $c->cdn_cache_ttl(3600);
+=head2 $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
 
 Are applied when:
 
@@ -29,6 +29,11 @@ Are applied when:
 
 Is set fastly is forced to NOT cache, no matter
 what other options have been set
+
+=head2 $c->cdn_times;
+
+Returns a hashref of 'one_hour', 'one_day', 'one_week'
+and 'one_year' so we don't have numbers all over the place
 
 =cut
 
@@ -74,6 +79,21 @@ has 'cdn_never_cache' => (
     isa     => 'Bool',
     default => sub {0},
 );
+
+has 'cdn_times' => (
+    is         => 'ro',
+    isa        => 'HashRef',
+    lazy_build => 1,
+);
+
+sub _build_cdn_times {
+    return {
+        one_hour => 3600,
+        one_day  => 86_400,
+        one_week => 604_800,
+        one_year => 31_536_000
+    };
+}
 
 sub _net_fastly {
     my $c = shift;

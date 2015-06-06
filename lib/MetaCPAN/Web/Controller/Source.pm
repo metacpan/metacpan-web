@@ -9,18 +9,19 @@ sub index : PathPart('source') : Chained('/') : Args {
     my ( $self, $c, @module ) = @_;
 
     $c->add_surrogate_key('source');
-    $c->res->header( 'Cache-Control' => 'max-age=3600' );
+    $c->res->header(
+        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_hour} );
 
     if ( @module == 1 ) {
 
         # /source/Foo::bar or /source/AUTHOR/
-        $c->cdn_cache_ttl( 60 * 60 );    # 1 hour
+        $c->cdn_cache_ttl( $c->cdn_times->{one_hour} );
 
     }
     else {
         # SO can cache for a LONG time
         # /source/AUTHOR/anything e.g /source/ETHER/YAML-Tiny-1.67/
-        $c->cdn_cache_ttl( 86_400 * 365 );    # 365 days
+        $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
     }
 
     my ( $source, $module );
