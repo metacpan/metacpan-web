@@ -5,6 +5,16 @@ use Format::Human::Bytes;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+sub auto : Private {
+    my ( $self, $c ) = @_;
+
+    $c->add_surrogate_key('about');
+    $c->res->header(
+        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+
+}
+
 sub about : Local : Path('/about') {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about.html' );
@@ -48,9 +58,7 @@ sub metadata : Local {
 sub stats : Local {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('html');
     $c->add_surrogate_key('stats');
-    $c->cdn_cache_ttl(86_400);    # 1 day
 
     $c->stash( template => 'about/stats.html' );
 

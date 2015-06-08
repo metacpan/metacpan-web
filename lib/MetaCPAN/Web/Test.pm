@@ -8,6 +8,7 @@ use Plack::Test;
 use HTTP::Request::Common;
 use HTTP::Message::PSGI;
 use HTML::Tree;
+use Test::More;
 use Test::XPath;
 use Try::Tiny;
 use Encode;
@@ -18,6 +19,7 @@ our @EXPORT = qw(
     override_api_response
     app
     tx
+    test_cache_headers
 );
 
 # TODO: use Sub:Override?
@@ -98,6 +100,28 @@ sub tx {
     return $tx;
 }
 
+sub test_cache_headers {
+    my ( $res, $conf ) = @_;
+
+    is(
+        $res->header('Cache-Control'),
+        $conf->{cache_control},
+        "Cache Header: Cache-Control ok"
+    ) if $conf->{cache_control};
+
+    is(
+        $res->header('Surrogate-Key'),
+        $conf->{surrogate_key},
+        "Cache Header: Surrogate-Key ok"
+    ) if $conf->{surrogate_key};
+
+    is(
+        $res->header('Surrogate-Control'),
+        $conf->{surrogate_control},
+        "Cache Header: Surrogate-Control ok"
+    ) if $conf->{surrogate_control};
+}
+
 1;
 
 =head1 ENVIRONMENTAL VARIABLES
@@ -135,3 +159,18 @@ Returns the L<MetaCPAN::Web> psgi app.
 =head2 tx($res)
 
 Parses C<< $res->content >> and generates a L<Test::XPath> object.
+
+=head2 test_cache_headers
+
+  test_cache_headers(
+      $res,
+      {
+          cache_control     => 'max-age=3600',
+          surrogate_key     => 'source',
+          surrogate_control => 'max-age=31536000',
+      }
+  );
+
+Checks headers on a response, only checks provieded keys
+
+=cut
