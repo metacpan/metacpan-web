@@ -4,6 +4,8 @@
   <form action="/search">
     <input type="text" name="q" size="41" autofocus="autofocus" id="search-input" class="form-control home-search-input">
     <input type="hidden" name="size" id="size" value="20">
+    <input type="radio" class="search-radios" id="search_modules" name="search_type" value="modules" checked> <label for="search_modules" class="search-labels"> Modules</label>
+    <input type="radio" class="search-radios" id="search_authors" name="search_type" value="authors"> <label for="search_authors" class="search-labels"> Authors</label>
     <br>
     <button type="submit" class="btn search-btn">Search the CPAN</button>
     <button type="submit" class="btn search-btn" name="lucky" value="1">I'm Feeling Lucky</button>

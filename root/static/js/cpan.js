@@ -183,41 +183,81 @@ $(document).ready(function() {
     if (search_input.hasClass('top-input-form')) {
         ac_width += search_input.parents("form.search-form").first().find('.search-btn').first().outerWidth();
     }
-    search_input.autocomplete({
-        serviceUrl: '/search/autocomplete',
-        // Wait for more typing rather than firing at every keystroke.
-        deferRequestBy: 150,
-        // If the autocomplete fires with a single colon ("type:") it will get no results
-        // and anything else typed after that will never trigger another query.
-        // Set 'preventBadQueries:false' to keep trying.
-        preventBadQueries: false,
-        dataType: 'json',
-        lookupLitmit: 20,
-        paramName: 'q',
-        autoSelectFirst: false,
-        // This simply caches the results of a previous search by url (so no reason not to).
-        noCache: false,
-        triggerSelectOnValidInput: false,
-        maxHeight: 180,
-        width: ac_width,
-        transformResult: function(data) {
-            var result = $.map(data, function(row) {
+    search_input.bind('modules_autocomplete', function() {
+        $(this).autocomplete({
+            serviceUrl: '/search/autocomplete',
+            // Wait for more typing rather than firing at every keystroke.
+            deferRequestBy: 150,
+            // If the autocomplete fires with a single colon ("type:") it will get no results
+            // and anything else typed after that will never trigger another query.
+            // Set 'preventBadQueries:false' to keep trying.
+            preventBadQueries: false,
+            dataType: 'json',
+            lookupLitmit: 20,
+            paramName: 'q',
+            autoSelectFirst: false,
+            // This simply caches the results of a previous search by url (so no reason not to).
+            noCache: false,
+            triggerSelectOnValidInput: false,
+            maxHeight: 180,
+            width: ac_width,
+            transformResult: function(data) {
+                var result = $.map(data, function(row) {
+                    return {
+                        data: row.documentation,
+                        value: row.documentation
+                    };
+                });
+                var uniq = {};
+                result = $.grep(result, function(row) {
+                    uniq[row.value] = typeof(uniq[row.value]) == 'undefined' ? 0 : uniq[row.value];
+                    return uniq[row.value]++ < 1;
+                });
                 return {
-                    data: row.documentation,
-                    value: row.documentation
+                    suggestions: result
                 };
-            });
-            var uniq = {};
-            result = $.grep(result, function(row) {
-                uniq[row.value] = typeof(uniq[row.value]) == 'undefined' ? 0 : uniq[row.value];
-                return uniq[row.value]++ < 1;
-            });
-            return {
-                suggestions: result
-            };
-        },
-        onSelect: function(suggestion) {
-            document.location.href = '/pod/' + suggestion.value;
+            },
+            onSelect: function(suggestion) {
+                document.location.href = '/pod/' + suggestion.value;
+            }
+        });
+    });
+
+    search_input.bind('authors_autocomplete', function() {
+        $(this).constructorAutocomplete({
+            key: 'bQssESEa8XUBKzSUjarO',
+            directResults: true,
+            maxHeight: 400,
+            transformResult: function(response) {
+                if (response['sections'] && response['sections']['url']) {
+                    response['sections']['url'].forEach( function(dataset) {
+                        if (dataset.value) {
+                            dataset.value = dataset.value.replace(/^[^:]+: /, "");
+                        }
+                    });
+                }
+                return response;
+            }
+        });
+    });
+    search_input.trigger( 'modules_autocomplete' );
+    $.getScript("//cnstrc.com/js/ac.js", function() {
+        if ( $('input[name=search_type]:checked').val() == "authors" ) {
+            search_input.trigger( 'authors_autocomplete' );
+        }
+    });
+
+    $("input[name=search_type]").click(function() {
+        if ($(this).val() == "authors") {
+            if (typeof $("#search-input").autocomplete === "function") {
+                $("#search-input").autocomplete("dispose");
+            }
+            search_input.trigger('authors_autocomplete');
+        } else {
+            if (typeof $("#search-input").constructorAutocomplete === "function") {
+                $("#search-input").constructorAutocomplete("dispose");
+            }
+            search_input.trigger('modules_autocomplete');
         }
     });
 
