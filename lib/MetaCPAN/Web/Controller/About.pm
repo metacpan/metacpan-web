@@ -11,7 +11,7 @@ sub auto : Private {
     $c->add_surrogate_key('about');
     $c->res->header(
         'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
 
 }
 
@@ -59,6 +59,12 @@ sub stats : Local {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('stats');
+
+    # Only want a day for this, so they get refreshed
+    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+
+    # Only want a day for this, so they get refreshed
+    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
 
     $c->stash( template => 'about/stats.html' );
 

@@ -42,7 +42,7 @@ sub index : Path : Args(0) {
     $c->add_surrogate_key('homepage');
     $c->res->header(
         'Cache-Control' => 'max-age=' . $c->cdn_times->{one_hour} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
 
     $c->stash->{template} = 'home.html';
 }
