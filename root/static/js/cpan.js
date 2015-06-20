@@ -167,9 +167,10 @@ $(document).ready(function() {
             luckyField.type = 'hidden';
             luckyField.name = 'lucky';
             luckyField.value = '1';
-            document.forms[0].appendChild(luckyField);
 
-            document.forms[0].submit();
+            var form = event.target.form;
+            form.appendChild(luckyField);
+            form.submit();
         }
     });
 
