@@ -22,13 +22,12 @@ Script to purge things from Fastly CDN.
 
 use MetaCPAN::Web;
 use Getopt::Long::Descriptive;
-use List::MoreUtils qw(any);
 
 my ( $opt, $usage ) = describe_options(
-    'purge.pl %o <some-arg>',
-    [ 'all=s',    "purge all", ],
+    'purge.pl %o',
+    [ 'all',      "purge all", ],
     [ 'tag|t=s@', "tag(s) to purge", ],
-    [ 'url|t=s@', "url(s) to purge", ],
+    [ 'url|u=s@', "url(s) to purge", ],
     [],
     [ 'help', "print usage message and exit" ],
 );
