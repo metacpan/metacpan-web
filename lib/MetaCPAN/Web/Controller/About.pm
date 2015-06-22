@@ -9,8 +9,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('about');
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
+    $c->browser_max_age( $c->cdn_times->{one_day} );
     $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
 
 }

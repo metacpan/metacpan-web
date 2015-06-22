@@ -30,6 +30,8 @@ Are applied when:
 Is set fastly is forced to NOT cache, no matter
 what other options have been set
 
+=head2 $c->browser_max_age( $c->cdn_times->{'one_day'});
+
 =head2 $c->cdn_times;
 
 Returns a hashref of 'one_hour', 'one_day', 'one_week'
@@ -80,6 +82,12 @@ has 'cdn_never_cache' => (
     default => sub {0},
 );
 
+has 'browser_max_age' => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => sub {undef},
+);
+
 has 'cdn_times' => (
     is         => 'ro',
     isa        => 'HashRef',
@@ -99,10 +107,13 @@ sub datacenters {
 
 sub _build_cdn_times {
     return {
-        one_hour => 3600,
-        one_day  => 86_400,
-        one_week => 604_800,
-        one_year => 31_536_000
+        one_min     => 60,
+        ten_mins    => 600,
+        thirty_mins => 1800,
+        one_hour    => 3600,
+        one_day     => 86_400,
+        one_week    => 604_800,
+        one_year    => 31_536_000
     };
 }
 
@@ -122,7 +133,14 @@ sub _net_fastly {
 sub fastly_magic {
     my $c = shift;
 
-    # Some action must have triffered a purge
+    # If there is a max age for the browser to have,
+    # set the header
+    my $browser_max_age = $c->browser_max_age;
+    if ( defined $browser_max_age ) {
+        $c->res->header( 'Cache-Control' => 'max-age=' . $browser_max_age );
+    }
+
+    # Some action must have triggered a purge
     if ( $c->has_surrogate_keys_to_purge ) {
 
         # Something changed, means we need to purge some keys
