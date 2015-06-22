@@ -12,6 +12,7 @@ sub redirect_to_pod : Path : Args {
     my ( $self, $c, @path ) = @_;
 
     # Forward old '/module/' links to the new '/pod/' controller.
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
 
     # /module/AUTHOR/Release-0.0/lib/Foo/Bar.pm
     if ( @path > 1 ) {
