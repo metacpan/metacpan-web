@@ -221,6 +221,15 @@ $(document).ready(function() {
                 document.location.href = '/pod/' + suggestion.value;
             }
         });
+
+        // Disable the built-in hover events to work around the issue that
+        // if the mouse pointer is over the box before it appears the event may fire erroneously.
+        // Besides, does anybody really expect an item to be selected just by
+        // hovering over it?  Seems unintuitive to me.  I expect anyone would either
+        // click or hit a key to actually pick an item, and who's going to hover to
+        // the item they want and then instead of just clicking hit tab/enter?
+        $('.autocomplete-suggestions').off('mouseover.autocomplete');
+        $('.autocomplete-suggestions').off('mouseout.autocomplete');
     });
 
     search_input.bind('authors_autocomplete', function() {
@@ -239,6 +248,10 @@ $(document).ready(function() {
                 return response;
             }
         });
+
+        // Disable the built-in hover events (see comment above)
+        $('.autocomplete-suggestions').off('mouseover.autocomplete');
+        $('.autocomplete-suggestions').off('mouseout.autocomplete');
     });
     search_input.trigger( 'modules_autocomplete' );
     $.getScript("//cnstrc.com/js/ac.js", function() {
@@ -260,15 +273,6 @@ $(document).ready(function() {
             search_input.trigger('modules_autocomplete');
         }
     });
-
-    // Disable the built-in hover events to work around the issue that
-    // if the mouse pointer is over the box before it appears the event may fire erroneously.
-    // Besides, does anybody really expect an item to be selected just by
-    // hovering over it?  Seems unintuitive to me.  I expect anyone would either
-    // click or hit a key to actually pick an item, and who's going to hover to
-    // the item they want and then instead of just clicking hit tab/enter?
-    $('.autocomplete-suggestions').off('mouseover.autocomplete');
-    $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
     $('#search-input.autofocus').focus();
 
