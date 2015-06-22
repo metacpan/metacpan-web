@@ -6,14 +6,14 @@
                 <h4 class="modal-title">Module Install Instructions</h4>
             </div>
             <div class="modal-body">
-                <p>To install <%  module.documentation or module.module.0.name %>, simply copy and paste either of the commands in to your terminal</p>
+                <p>To install <%  module.documentation or module.module.0.name or module.package %>, simply copy and paste either of the commands in to your terminal</p>
                 <p><a href="/pod/distribution/App-cpanminus/bin/cpanm">cpanm</a></p>
                 <pre>
-                    cpanm <%  module.documentation or module.module.0.name %></pre>
+                    cpanm <%  module.documentation or module.module.0.name or release.distribution %></pre>
                 <p><a href="https://metacpan.org/pod/CPAN">CPAN shell</a></p>
                 <pre>
                     perl -MCPAN -e shell
-                    install <% module.documentation or module.module.0.name %></pre>
+                    install <% module.documentation or module.module.0.name or release.distribution %></pre>
                 <p>For more information on module installation please visit <a href="http://www.cpan.org/modules/INSTALL.html">the detailed CPAN module installation guide</a>.</p>
             </div>
             <div class="modal-footer">
