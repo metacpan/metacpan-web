@@ -13,7 +13,19 @@ use Text::Markdown qw/markdown/;
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
-sub recent : Local : Args(0) {
+sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
+
+    $c->add_surrogate_key('feed');
+    $c->browser_max_age( $c->cdn_times->{one_hour} );
+    $c->cdn_cache_ttl( $c->cdn_times->{thirty_mins} );
+
+}
+
+sub recent : Chained('feed_index') PathPart Args(0) {
+
+    $c->browser_max_age( $c->cdn_times->{one_min} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_min} );
+
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
     my $data = $c->stash;
@@ -25,6 +37,8 @@ sub recent : Local : Args(0) {
 
 sub news : Local : Args(0) {
     my ( $self, $c ) = @_;
+
+    $c->add_surrogate_key('news');
 
     my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
@@ -77,6 +91,8 @@ sub author : Local : Args(1) {
         );
     }
 
+    $c->add_surrogate_key($author);
+
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
 
@@ -108,6 +124,9 @@ sub author : Local : Args(1) {
 
 sub distribution : Local : Args(1) {
     my ( $self, $c, $distribution ) = @_;
+
+    $c->add_surrogate_key($distribution);
+
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
