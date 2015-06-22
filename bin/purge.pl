@@ -11,12 +11,15 @@ use strict;
 =head1 SYNOPSIS
 
   purge.pl --all
-  purge.pl --tag foo --tag bar
-  purge.pl --url '/about/'
+  purge.pl --key homepage --key about
 
 =head1 DESCRIPTION
 
 Script to purge things from Fastly CDN.
+
+To clear a specific URL use:
+
+  curl -X PURGE https://metacpan.org/XXXX
 
 =cut
 
@@ -26,10 +29,8 @@ use Getopt::Long::Descriptive;
 my ( $opt, $usage ) = describe_options(
     'purge.pl %o',
     [ 'all',      "purge all", ],
-    [ 'tag|t=s@', "tag(s) to purge", ],
-    [ 'url|u=s@', "url(s) to purge", ],
-    [],
-    [ 'help', "print usage message and exit" ],
+    [ 'key|k=s@', "key(s) to purge", ],
+    [], [ 'help', "print usage message and exit" ],
 );
 
 print( $usage->text ), exit if $opt->help;
@@ -42,13 +43,11 @@ if ( $opt->all ) {
 }
 else {
 
-    my $tags = $opt->tag;
-    my $urls = $opt->url;
+    my $keys = $opt->key;
 
     $c->cdn_purge_now(
         {
-            tags => $tags,
-            urls => $urls
+            keys => $keys,
         }
     );
 

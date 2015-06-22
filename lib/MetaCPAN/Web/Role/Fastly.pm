@@ -115,11 +115,11 @@ sub fastly_magic {
     if ( $c->has_surrogate_keys_to_purge ) {
 
         # Something changed, means we need to purge some keys
-        my @tags = $c->surrogate_keys_to_purge();
+        my @keys = $c->surrogate_keys_to_purge();
 
         $c->cdn_purge_now(
             {
-                tags => \@tags,
+                keys => \@keys,
             }
         );
     }
@@ -154,11 +154,21 @@ sub fastly_magic {
     }
 }
 
+sub _cdn_get_service {
+    my ( $c, $args ) = @_;
+
+    my $net_fastly = $c->_net_fastly();
+    return unless $net_fastly;
+
+    my $fsi = $c->config->{fastly_service_id};
+    return $net_fastly->get_service($fsi);
+
+}
+
 =head2 cdn_purge_now
 
   $c->cdn_purge_now({
-    tags => [ 'foo', 'bar' ]
-    urls => [ 'this', 'and/that' ],
+    keys => [ 'foo', 'bar' ]
   });
 
 =cut
@@ -166,19 +176,11 @@ sub fastly_magic {
 sub cdn_purge_now {
     my ( $c, $args ) = @_;
 
-    my $net_fastly = $c->_net_fastly();
-    return unless $net_fastly;
+    my $service = $c->_cdn_get_service();
+    return unless $service;    # dev box
 
-    my $fsi = $c->config->{fastly_service_id};
-
-    foreach my $tag ( @{ $args->{tags} || [] } ) {
-        my $purge_string = "https://metacpan.org/${fsi}/purge/${tag}";
-        $net_fastly->purge($purge_string);
-    }
-
-    foreach my $url ( @{ $args->{urls} || [] } ) {
-        my $purge_string = "https://metacpan.org/${url}";
-        $net_fastly->purge($purge_string);
+    foreach my $key ( @{ $args->{keys} || [] } ) {
+        $service->purge_by_key($key);
     }
 }
 
@@ -189,16 +191,12 @@ sub cdn_purge_now {
 =cut
 
 sub cdn_purge_all {
-    my $c          = shift;
-    my $net_fastly = $c->_net_fastly();
+    my $c = shift;
 
-    die "No access" unless $net_fastly;
+    my $fastly_service = $c->_cdn_get_service();
+    die "No access" unless $fastly_service;
 
-    my $fsi = $c->config->{fastly_service_id};
-
-    my $purge_string = "/service/${fsi}/purge_all";
-
-    $net_fastly->purge($purge_string);
+    $fastly_service->purge_all;
 }
 
 1;
