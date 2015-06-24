@@ -1,6 +1,9 @@
 package MetaCPAN::Web::Controller::Root;
 use Moose;
 use namespace::autoclean;
+use JSON::MaybeXS qw/decode_json/;
+use Path::Tiny qw/path/;
+use DateTime ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -114,6 +117,15 @@ sub end : ActionClass('RenderView') {
         . $c->config->{consumer_key};
 
     $c->stash->{site_alert_message} = $c->config->{site_alert_message};
+
+    my $file = $c->config->{home} . '/events.json';
+    eval {
+        my $all_ads = decode_json( path($file)->slurp_utf8 );
+        my $date    = DateTime->now->ymd;
+        my @ads     = grep { $_->{date} gt $date } @$all_ads;
+        my $ad      = $ads[ int rand( scalar @ads ) ];
+        $c->stash->{adserver} = $ad->{text};
+    };
 
     $c->fastly_magic();
 
