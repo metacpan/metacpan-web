@@ -30,8 +30,9 @@ my ( $opt, $usage ) = describe_options(
     'purge.pl %o',
     [ 'all',      "purge all", ],
     [ 'key|k=s@', "key(s) to purge", ],
-    [ 'list|l', 'list available cache keys' ],
-    [], [ 'help', "print usage message and exit" ],
+    [ 'list|l',   'list available cache keys' ],
+    [],
+    [ 'help', "print usage message and exit" ],
 );
 
 print( $usage->text ), exit if $opt->help;
@@ -42,12 +43,11 @@ if ( $opt->all ) {
     $c->cdn_purge_all();
 
 }
-elsif( $opt->list ){
+elsif ( $opt->list ) {
     ## no critic (MutatingList)
-    print
-        grep { !/_cache_key_for_user/ }
-        map  { s/\A.+:\s+\$c->add_surrogate_key\((.+?)\);\Z/$1/; $_ }
-            qx{git grep add_surrogate_key lib/MetaCPAN/Web/Controller/}
+    print grep { !/_cache_key_for_user/ }
+        map { s/\A.+:\s+\$c->add_surrogate_key\((.+?)\);\Z/$1/; $_ }
+        qx{git grep add_surrogate_key lib/MetaCPAN/Web/Controller/};
 }
 else {
 
