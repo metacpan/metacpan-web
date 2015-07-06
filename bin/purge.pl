@@ -43,6 +43,7 @@ if ( $opt->all ) {
 
 }
 elsif( $opt->list ){
+    ## no critic (MutatingList)
     print
         grep { !/_cache_key_for_user/ }
         map  { s/\A.+:\s+\$c->add_surrogate_key\((.+?)\);\Z/$1/; $_ }
