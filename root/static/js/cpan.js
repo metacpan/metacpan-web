@@ -239,7 +239,7 @@ $(document).ready(function() {
             maxHeight: 400,
             transformResult: function(response) {
                 if (response['sections'] && response['sections']['url']) {
-                    response['sections']['url'].forEach( function(dataset) {
+                    response['sections']['url'].forEach(function(dataset) {
                         if (dataset.value) {
                             dataset.value = dataset.value.replace(/^[^:]+: /, "");
                         }
@@ -253,10 +253,10 @@ $(document).ready(function() {
         $('.autocomplete-suggestions').off('mouseover.autocomplete');
         $('.autocomplete-suggestions').off('mouseout.autocomplete');
     });
-    search_input.trigger( 'modules_autocomplete' );
+    search_input.trigger('modules_autocomplete');
     $.getScript("//cnstrc.com/js/ac.js", function() {
-        if ( $('input[name=search_type]:checked').val() == "authors" ) {
-            search_input.trigger( 'authors_autocomplete' );
+        if ($('input[name=search_type]:checked').val() == "authors") {
+            search_input.trigger('authors_autocomplete');
         }
     });
 
