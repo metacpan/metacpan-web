@@ -282,9 +282,9 @@ $(document).ready(function() {
         var element = $(items[i]);
         var boxWidth = element.width();
         var textWidth = element.textWidth();
+        if (textWidth <= boxWidth) continue;
         var text = element.text();
         var textLength = text.length;
-        if (textWidth <= boxWidth) continue;
         var parts = [text.substr(0, Math.floor(textLength / 2)), text.substr(Math.floor(textLength / 2), textLength)];
         while (element.textWidth() > boxWidth) {
             if (textLength % 2) {
