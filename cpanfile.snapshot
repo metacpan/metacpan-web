@@ -5001,10 +5001,10 @@ DISTRIBUTIONS
       Perl::Tidy::Logger 20140328
     requirements:
       ExtUtils::MakeMaker 0
-  PerlIO-gzip-0.18
-    pathname: N/NW/NWCLARK/PerlIO-gzip-0.18.tar.gz
+  PerlIO-gzip-0.19
+    pathname: N/NW/NWCLARK/PerlIO-gzip-0.19.tar.gz
     provides:
-      PerlIO::gzip 0.18
+      PerlIO::gzip 0.19
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.004
