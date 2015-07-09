@@ -2121,51 +2121,6 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  ElasticSearch-0.68
-    pathname: D/DR/DRTECH/ElasticSearch-0.68.tar.gz
-    provides:
-      ElasticSearch 0.68
-      ElasticSearch::Error 0.68
-      ElasticSearch::QueryParser 0.68
-      ElasticSearch::ScrolledSearch 0.68
-      ElasticSearch::TestServer 0.68
-      ElasticSearch::Transport 0.68
-      ElasticSearch::Transport::HTTP 0.68
-      ElasticSearch::Transport::HTTPLite 0.68
-      ElasticSearch::Transport::HTTPTiny 0.68
-      ElasticSearch::Util 0.68
-    requirements:
-      Any::URI::Escape 0
-      Carp 0
-      Data::Dumper 0
-      ElasticSearch::SearchBuilder 0.18
-      Encode 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Path 0
-      File::Spec::Functions 0
-      File::Temp 0.22
-      HTTP::Lite 0
-      HTTP::Request 0
-      HTTP::Tiny 0
-      IO::Handle 0
-      IO::Socket 0
-      IO::Uncompress::Inflate 0
-      JSON 0
-      LWP::ConnCache 0
-      LWP::UserAgent 0
-      List::Util 0
-      POSIX 0
-      Scalar::Util 1.07
-      Task::Weaken 0
-      Test::More 0.96
-      URI 0
-      YAML 0
-      constant 0
-      overload 0
-      parent 0
-      strict 0
-      warnings 0
   ElasticSearch-SearchBuilder-0.19
     pathname: D/DR/DRTECH/ElasticSearch-SearchBuilder-0.19.tar.gz
     provides:
@@ -2724,13 +2679,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Time::Local 0
       perl 5.006002
-  HTTP-Lite-2.43
-    pathname: N/NE/NEILB/HTTP-Lite-2.43.tar.gz
-    provides:
-      HTTP::Lite 2.43
-    requirements:
-      ExtUtils::MakeMaker 6.42
-      perl 5.005
   HTTP-Message-6.06
     pathname: G/GA/GAAS/HTTP-Message-6.06.tar.gz
     provides:
@@ -2852,6 +2800,14 @@ DISTRIBUTIONS
       Hash::MultiValue 0.15
     requirements:
       ExtUtils::MakeMaker 6.30
+  Hijk-0.24
+    pathname: A/AV/AVAR/Hijk-0.24.tar.gz
+    provides:
+      Hijk 0.24
+    requirements:
+      CPAN::Meta 0
+      ExtUtils::MakeMaker 6.36
+      Time::HiRes 0
   Hook-LexWrap-0.24
     pathname: C/CH/CHORNY/Hook-LexWrap-0.24.tar.gz
     provides:
@@ -3063,16 +3019,36 @@ DISTRIBUTIONS
       Module::Build 0.21
       perl 5.006
       utf8 0
-  Log-Any-0.15
-    pathname: J/JS/JSWARTZ/Log-Any-0.15.tar.gz
+  Log-Any-1.032
+    pathname: D/DA/DAGOLDEN/Log-Any-1.032.tar.gz
     provides:
-      Log::Any 0.15
-      Log::Any::Adapter::Null 0.15
-      Log::Any::Adapter::Test 0.15
-      Log::Any::Test 0.15
+      Log::Any 1.032
+      Log::Any::Adapter 1.032
+      Log::Any::Adapter::Base 1.032
+      Log::Any::Adapter::File 1.032
+      Log::Any::Adapter::Null 1.032
+      Log::Any::Adapter::Stderr 1.032
+      Log::Any::Adapter::Stdout 1.032
+      Log::Any::Adapter::Test 1.032
+      Log::Any::Adapter::Util 1.032
+      Log::Any::Manager 1.032
+      Log::Any::Proxy 1.032
+      Log::Any::Proxy::Test 1.032
+      Log::Any::Test 1.032
     requirements:
-      ExtUtils::MakeMaker 6.30
-      Test::More 0
+      B 0
+      Carp 0
+      Data::Dumper 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      Fcntl 0
+      IO::File 0
+      Test::Builder 0
+      base 0
+      constant 0
+      perl 5.008001
+      strict 0
+      warnings 0
   MIME-Types-2.04
     pathname: M/MA/MARKOV/MIME-Types-2.04.tar.gz
     provides:
@@ -5366,6 +5342,102 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  Search-Elasticsearch-1.20
+    pathname: D/DR/DRTECH/Search-Elasticsearch-1.20.tar.gz
+    provides:
+      Search::Elasticsearch 1.20
+      Search::Elasticsearch::Bulk 1.20
+      Search::Elasticsearch::Client::0_90::Direct 1.20
+      Search::Elasticsearch::Client::0_90::Direct::Cluster 1.20
+      Search::Elasticsearch::Client::0_90::Direct::Indices 1.20
+      Search::Elasticsearch::Client::1_0::Direct 1.20
+      Search::Elasticsearch::Client::1_0::Direct::Cat 1.20
+      Search::Elasticsearch::Client::1_0::Direct::Cluster 1.20
+      Search::Elasticsearch::Client::1_0::Direct::Indices 1.20
+      Search::Elasticsearch::Client::1_0::Direct::Nodes 1.20
+      Search::Elasticsearch::Client::1_0::Direct::Snapshot 1.20
+      Search::Elasticsearch::Client::2_0::Direct 1.20
+      Search::Elasticsearch::Client::2_0::Direct::Cat 1.20
+      Search::Elasticsearch::Client::2_0::Direct::Cluster 1.20
+      Search::Elasticsearch::Client::2_0::Direct::Indices 1.20
+      Search::Elasticsearch::Client::2_0::Direct::Nodes 1.20
+      Search::Elasticsearch::Client::2_0::Direct::Snapshot 1.20
+      Search::Elasticsearch::Client::Direct 1.20
+      Search::Elasticsearch::Cxn::Factory 1.20
+      Search::Elasticsearch::Cxn::HTTPTiny 1.20
+      Search::Elasticsearch::Cxn::Hijk 1.20
+      Search::Elasticsearch::Cxn::LWP 1.20
+      Search::Elasticsearch::CxnPool::Sniff 1.20
+      Search::Elasticsearch::CxnPool::Static 1.20
+      Search::Elasticsearch::CxnPool::Static::NoPing 1.20
+      Search::Elasticsearch::Error 1.20
+      Search::Elasticsearch::Logger::LogAny 1.20
+      Search::Elasticsearch::Role::API::0_90 1.20
+      Search::Elasticsearch::Role::API::1_0 1.20
+      Search::Elasticsearch::Role::API::2_0 1.20
+      Search::Elasticsearch::Role::Bulk 1.20
+      Search::Elasticsearch::Role::Client 1.20
+      Search::Elasticsearch::Role::Client::Direct 1.20
+      Search::Elasticsearch::Role::Client::Direct::Main 1.20
+      Search::Elasticsearch::Role::Cxn 1.20
+      Search::Elasticsearch::Role::Cxn::HTTP 1.20
+      Search::Elasticsearch::Role::CxnPool 1.20
+      Search::Elasticsearch::Role::CxnPool::Sniff 1.20
+      Search::Elasticsearch::Role::CxnPool::Static 1.20
+      Search::Elasticsearch::Role::CxnPool::Static::NoPing 1.20
+      Search::Elasticsearch::Role::Is_Sync 1.20
+      Search::Elasticsearch::Role::Logger 1.20
+      Search::Elasticsearch::Role::Scroll 1.20
+      Search::Elasticsearch::Role::Serializer 1.20
+      Search::Elasticsearch::Role::Serializer::JSON 1.20
+      Search::Elasticsearch::Role::Transport 1.20
+      Search::Elasticsearch::Scroll 1.20
+      Search::Elasticsearch::Serializer::JSON 1.20
+      Search::Elasticsearch::Serializer::JSON::Cpanel 1.20
+      Search::Elasticsearch::Serializer::JSON::PP 1.20
+      Search::Elasticsearch::Serializer::JSON::XS 1.20
+      Search::Elasticsearch::TestServer 1.20
+      Search::Elasticsearch::Transport 1.20
+      Search::Elasticsearch::Util 1.20
+      Search::Elasticsearch::Util::API::Path 1.20
+      Search::Elasticsearch::Util::API::QS 1.20
+    requirements:
+      Any::URI::Escape 0
+      Data::Dumper 0
+      Encode 0
+      ExtUtils::MakeMaker 0
+      File::Temp 0
+      HTTP::Headers 0
+      HTTP::Request 0
+      HTTP::Tiny 0.043
+      Hijk 0.20
+      IO::Select 0
+      IO::Socket 0
+      IO::Uncompress::Inflate 0
+      JSON::MaybeXS 1.002002
+      JSON::PP 0
+      LWP::UserAgent 0
+      List::Util 0
+      Log::Any 1.02
+      Log::Any::Adapter 0
+      MIME::Base64 0
+      Module::Runtime 0
+      Moo 1.003
+      Moo::Role 0
+      POSIX 0
+      Package::Stash 0.34
+      Pod::Simple 3.28
+      Scalar::Util 0
+      Sub::Exporter 0
+      Test::More 0.98
+      Time::HiRes 0
+      Try::Tiny 0
+      URI 0
+      namespace::clean 0
+      overload 0
+      parent 0
+      strict 0
+      warnings 0
   Sort-Naturally-1.03
     pathname: B/BI/BINGOS/Sort-Naturally-1.03.tar.gz
     provides:
