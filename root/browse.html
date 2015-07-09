@@ -32,15 +32,15 @@
 <tbody>
 <% i = 0; FOREACH file IN files %>
 <tr>
-  <td class="name"><strong sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
+  <td class="name" sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
     file.directory == 'true' ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
   : file.mime.match("x-c") ? 'silk-page-white-c'
   : 'silk-page-white'
   -%>" title="<% file.path %>"><% file.name %></a></strong></td>
   <td class="documentation" class="ellipsis"><strong><a href="/pod/release/<% [author, release, file.path].join("/") %>" title="<% file.path %>"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
-  <td class="size"><span sort="<% file.directory == "false" ? file.${"stat.size"} : 0 %>"><% file.directory == "false" ? file.${"stat.size"} | format_bytes : "" %></td>
-  <td class="mtime" nowrap="nowrap"><span class="relatize" sort="<% date = file.${"stat.mtime"}.dt_http; date %>"><% date %></span></td>
+  <td class="size" sort="<% file.directory == "false" ? file.${"stat.size"} : 0 %>"><% file.directory == "false" ? file.${"stat.size"} | format_bytes : "" %></td>
+  <td class="mtime relatize" nowrap="nowrap" sort="<% date = file.${"stat.mtime"}.dt_http; date %>"><% date %></td>
 </tr>
 <% END %>
 </tbody>
