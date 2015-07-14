@@ -16,7 +16,7 @@ sub get {
     my ( $self, $type, $name ) = @_;
 
     if ( $type eq 'module' ) {
-        my $module = $self->request( '/permission/' . $name )->recv;
+        my $module = $self->request( '/permission/' . $name )->get;
 
         # return undef if there's a 404
         return $module->{code} ? undef : $module;
@@ -53,7 +53,7 @@ sub _get_modules_in_distribution {
     my $name = shift;
     return undef unless $name;
 
-    my $res = $self->request("/package/modules/$name")->recv;
+    my $res = $self->request("/package/modules/$name")->get;
     my @modules = $res->{modules} ? @{ $res->{modules} } : undef;
 
     return undef unless @modules;
@@ -73,7 +73,7 @@ sub _search_perms {
     my $self   = shift;
     my $search = shift;
 
-    my $perms_found = $self->request( '/permission/_search', $search )->recv;
+    my $perms_found = $self->request( '/permission/_search', $search )->get;
     my @perms = sort { $a->{module_name} cmp $b->{module_name} }
         map { $_->{_source} } @{ $perms_found->{hits}->{hits} };
     return @perms ? \@perms : undef;

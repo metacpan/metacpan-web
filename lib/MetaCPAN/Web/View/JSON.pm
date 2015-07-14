@@ -6,7 +6,7 @@ use Cpanel::JSON::XS ();
 extends 'Catalyst::View::JSON';
 
 sub encode_json {
-    my ( $self, $c, $data ) = @_;
+    my ( $self, undef, $data ) = @_;
     Cpanel::JSON::XS->new->utf8->encode($data);
 }
 

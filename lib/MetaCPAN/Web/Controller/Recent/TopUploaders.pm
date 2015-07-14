@@ -28,7 +28,7 @@ sub topuploaders : Private {
     my $data = $c->model('API::Release')->topuploaders($range);
 
     my $authors
-        = $c->model('API::Author')->get( keys %{ $data->{counts} } )->recv;
+        = $c->model('API::Author')->get( keys %{ $data->{counts} } )->get;
 
     $c->stash(
         {

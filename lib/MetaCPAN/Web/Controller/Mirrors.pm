@@ -52,7 +52,7 @@ sub index : Path : Args(0) {
                 )
             : ( sort => [ 'continent', 'country' ] )
         }
-    )->recv;
+    )->get;
     my $latest = [
         map {
             {

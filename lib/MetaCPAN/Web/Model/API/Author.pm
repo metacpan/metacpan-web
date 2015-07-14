@@ -49,7 +49,6 @@ sub get {
 sub search {
     my ( $self, $query, $from ) = @_;
 
-    my $cv     = $self->cv;
     my $search = {
         query => {
             bool => {
@@ -75,23 +74,20 @@ sub search {
         from => $from || 0,
     };
 
-    $self->request( '/author/_search', $search )->cb(
-        sub {
-            my $results = shift->recv
+    return $self->request( '/author/_search', $search )->transform(
+        done => sub {
+            my $results = shift
                 || { hits => { total => 0, hits => [] } };
-            $cv->send(
-                {
-                    results => [
-                        map { +{ %{ $_->{_source} }, id => $_->{_id} } }
-                            @{ $results->{hits}{hits} }
-                    ],
-                    total => $results->{hits}{total} || 0,
-                    took => $results->{took}
-                }
-            );
-        }
+            return {
+                results => [
+                    map { +{ %{ $_->{_source} }, id => $_->{_id} } }
+                        @{ $results->{hits}{hits} }
+                ],
+                total => $results->{hits}{total} || 0,
+                took => $results->{took}
+            };
+        },
     );
-    return $cv;
 }
 
 sub by_user {
@@ -108,7 +104,7 @@ sub by_user {
     }
     return unless $ret;
 
-    my $data = $ret->recv;
+    my $data = $ret->get;
     return ( exists $data->{authors} ? $data->{authors} : [] );
 }
 

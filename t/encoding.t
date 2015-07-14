@@ -25,7 +25,7 @@ my $model
 sub get_json {
     $res_body = shift;
     $content_type = shift if @_;
-    return $model->source(qw( who cares ))->recv;
+    return $model->source(qw( who cares ))->get;
 }
 
 sub get_raw {

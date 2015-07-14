@@ -35,14 +35,14 @@ sub identities : Local : Args(0) {
     if ( $c->req->method eq 'POST'
         && ( my $delete = $c->req->params->{delete} ) )
     {
-        $c->model('API::User')->delete_identity( $delete, $c->token )->recv;
+        $c->model('API::User')->delete_identity( $delete, $c->token )->get;
         $c->res->redirect('/account/identities');
     }
 }
 
 sub profile : Local : Args(0) {
     my ( $self, $c ) = @_;
-    my $author = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $author = $c->model('API::User')->get_profile( $c->token )->get;
     $c->stash(
         $author->{error} ? { no_profile => 1 } : { author => $author } );
     my $req = $c->req;
@@ -92,8 +92,7 @@ sub profile : Local : Args(0) {
 
     $data->{donation} = undef unless ( $req->params->{donations} );
 
-    my $res
-        = $c->model('API::User')->update_profile( $data, $c->token )->recv;
+    my $res = $c->model('API::User')->update_profile( $data, $c->token )->get;
     if ( $res->{error} ) {
         $c->stash( { author => $data, errors => $res->{errors} } );
     }

@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Role::ReleaseInfo;
 
 use Moose::Role;
+use Future;
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
@@ -28,7 +29,7 @@ sub add_favorites_data {
 sub api_requests {
     my ( $self, $c, $reqs, $data ) = @_;
 
-    return {
+    my %reqs = (
         author => $c->model('API::Author')->get( $data->{author} ),
 
         favorites => $c->model('API::Favorite')->get(
@@ -46,7 +47,16 @@ sub api_requests {
         distribution =>
             $c->model('API::Release')->distribution( $data->{distribution} ),
         %$reqs,
-    };
+    );
+    my @names   = keys %reqs;
+    my @futures = values %reqs;
+    return Future->needs_all(@futures)->transform(
+        done => sub {
+            my %results;
+            @results{@names} = @_;
+            return \%results;
+        }
+    );
 }
 
 # organize the api results into simple variables for the template
@@ -68,12 +78,6 @@ sub stash_api_results {
     $stash{contributors} = $reqs->{contributors};
 
     $c->stash( \%stash );
-}
-
-# call recv() on all values in the provided hashref
-sub recv_all {
-    my ( $self, $condvars ) = @_;
-    return +{ map { $_ => $condvars->{$_}->recv } keys %$condvars };
 }
 
 1;

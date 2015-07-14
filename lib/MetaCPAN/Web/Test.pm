@@ -15,6 +15,7 @@ use Test::More;
 use Test::XPath;
 use Try::Tiny;
 use Encode;
+use Future;
 use base 'Exporter';
 our @EXPORT = qw(
     GET
@@ -28,7 +29,7 @@ our @EXPORT = qw(
 
 # TODO: use Sub:Override?
 # save a copy in case we override
-my $orig_request = \&AnyEvent::Curl::Multi::request;
+my $orig_request = \&Net::Async::HTTP::do_request;
 
 sub override_api_response {
     require MetaCPAN::Web::Model::API;
@@ -37,17 +38,14 @@ sub override_api_response {
     my $matches   = {@_};
 
     no warnings 'redefine';
-    *AnyEvent::Curl::Multi::request = sub {
-        if ( ( $matches->{if} ? $matches->{if}->(@_) : 1 )
-            and my $res = $responder->(@_) )
+    *Net::Async::HTTP::do_request = sub {
+        my ( $self, %args ) = @_;
+        my $request = $args{request};
+        if ( ( $matches->{if} ? $matches->{if}->( $self, $request ) : 1 )
+            and my $res = $responder->( $self, $request ) )
         {
             $res = HTTP::Response->from_psgi($res) if ref $res eq 'ARRAY';
-
-          # return an object with a ->cv that's ready so that the cb will fire
-            my $ret = bless { cv => AE::cv() },
-                'AnyEvent::Curl::Multi::Handle';
-            $ret->cv->send( $res, {} );
-            return $ret;
+            return Future->wrap($res);
         }
         else {
             goto &$orig_request;

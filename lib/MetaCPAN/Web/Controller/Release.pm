@@ -66,7 +66,7 @@ sub view : Private {
 
     my $model = $c->stash->{model};
     my $data  = delete $c->stash->{data};
-    my $out   = $data->recv->{hits}->{hits}->[0]->{_source};
+    my $out   = $data->get->{hits}->{hits}->[0]->{_source};
 
     $c->detach('/not_found') unless ($out);
 
@@ -81,8 +81,7 @@ sub view : Private {
             changes => $c->model('API::Changes')->get( $author, $release ),
         },
         $out,
-    );
-    $reqs = $self->recv_all($reqs);
+    )->get;
     $self->stash_api_results( $c, $reqs, $out );
     $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 

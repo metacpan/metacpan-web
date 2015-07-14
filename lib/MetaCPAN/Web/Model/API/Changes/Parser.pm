@@ -17,7 +17,7 @@ sub load {
 }
 
 sub parse {
-    my ( $class, $string ) = @_;
+    my ( undef, $string ) = @_;
 
     my @lines = split /\r\n?|\n/, $string;
 

@@ -28,7 +28,7 @@ sub distribution : Local : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Release')
         ->reverse_dependencies( $distribution, $c->req->page, $page_size,
-        $sort )->recv;
+        $sort )->get;
     $c->stash(
         {
             %{$data},

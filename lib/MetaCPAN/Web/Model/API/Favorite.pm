@@ -5,6 +5,7 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 
 use List::Util qw(uniq);
+use Future;
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
@@ -12,16 +13,14 @@ use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
 sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
-    my $cv = $self->cv;
 
     # If there are no distributions this will build a query with an empty
     # filter and ES will return a parser error... so just skip it.
     if ( !@distributions ) {
-        $cv->send( {} );
-        return $cv;
+        return Future->wrap( {} );
     }
 
-    $self->request(
+    return $self->request(
         '/favorite/_search',
         {
             size  => 0,
@@ -49,29 +48,26 @@ sub get {
                 : (),
             }
         }
-        )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    took      => $data->{took},
-                    favorites => {
-                        map { $_->{key} => $_->{doc_count} }
-                            @{ $data->{aggregations}->{favorites}->{buckets} }
-                    },
-                    myfavorites => $user
-                    ? {
-                        map { $_->{key} => $_->{doc_count} } @{
-                            $data->{aggregations}->{myfavorites}->{entries}
-                                ->{buckets}
-                        }
-                        }
-                    : {},
-                }
-            );
+        )->transform(
+        done => sub {
+            my $data = shift;
+            return {
+                took      => $data->{took},
+                favorites => {
+                    map { $_->{key} => $_->{doc_count} }
+                        @{ $data->{aggregations}->{favorites}->{buckets} }
+                },
+                myfavorites => $user
+                ? {
+                    map { $_->{key} => $_->{doc_count} } @{
+                        $data->{aggregations}->{myfavorites}->{entries}
+                            ->{buckets}
+                    }
+                    }
+                : {},
+            };
         }
         );
-    return $cv;
 }
 
 sub by_user {
@@ -79,7 +75,7 @@ sub by_user {
     $size ||= 250;
     my $ret = $self->request( "/favorite/by_user/$user", { size => $size } );
     return unless $ret;
-    my $data = $ret->recv;
+    my $data = $ret->get;
     return [] unless exists $data->{favorites};
     return $data->{favorites};
 }
@@ -87,14 +83,14 @@ sub by_user {
 sub recent {
     my ( $self, $page, $page_size ) = @_;
     my $data = $self->request( '/favorite/recent',
-        { size => $page_size, page => $page } )->recv;
+        { size => $page_size, page => $page } )->get;
 
     my @user_ids = map { $_->{user} } @{ $data->{favorites} };
     return $data unless @user_ids;
 
     my $authors
         = $self->request( '/author/by_user', undef, { user => \@user_ids } )
-        ->recv;
+        ->get;
     if ( $authors and exists $authors->{authors} ) {
         my %author_for_user_id
             = map { $_->{user} => $_->{pauseid} } @{ $authors->{authors} };
@@ -109,7 +105,7 @@ sub recent {
 
 sub leaderboard {
     my ($self) = @_;
-    my $data = $self->request('/favorite/leaderboard')->recv;
+    my $data = $self->request('/favorite/leaderboard')->get;
     return $data;
 }
 
@@ -118,7 +114,7 @@ sub find_plussers {
 
     # search for all users, match all according to the distribution.
     my $plusser      = $self->by_dist($distribution);
-    my $plusser_data = $plusser->recv;
+    my $plusser_data = $plusser->get;
 
     # store in an array.
     my @plusser_users = map { $_->{user} }
@@ -129,7 +125,7 @@ sub find_plussers {
     # find plussers by pause ids.
     my $authors
         = @plusser_users
-        ? $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits}
+        ? $self->plusser_by_id( \@plusser_users )->get->{hits}->{hits}
         : [];
 
     my @plusser_details = map {

@@ -22,10 +22,10 @@ sub add : Local : Args(0) {
     my $data  = $c->req->params;
     my $res;
     if ( $data->{remove} ) {
-        $res = $model->remove_favorite( $data, $c->token )->recv;
+        $res = $model->remove_favorite( $data, $c->token )->get;
     }
     else {
-        $res = $model->add_favorite( $data, $c->token )->recv;
+        $res = $model->add_favorite( $data, $c->token )->get;
     }
 
     # We need to purge if the rating has changes until the fav count

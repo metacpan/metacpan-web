@@ -55,13 +55,13 @@ sub _handle_module {
     }
 
     # get the distribution that provides this module
-    my $rm  = $self->request("/module/$module")->recv;
+    my $rm  = $self->request("/module/$module")->get;
     my %dep = (
         dist => $rm->{distribution},
         date => $rm->{date},
     );
 
-    my $rd = $self->request("/release/$rm->{distribution}")->recv;
+    my $rd = $self->request("/release/$rm->{distribution}")->get;
 
     $dep{license} = $rd->{license};
 
@@ -94,7 +94,7 @@ sub fetch_latest_distros {
             ],
             size => $size,
         },
-    )->recv;
+    )->get;
     my %licenses;
     my %distros;
 
@@ -106,7 +106,7 @@ sub fetch_latest_distros {
         next if $distros{$distro};    # show the first one
 
      # TODO: can we fetch the bug count in one call for all the distributions?
-        my $distribution = $self->request("/distribution/$distro")->recv;
+        my $distribution = $self->request("/distribution/$distro")->get;
         if ( $distribution->{bugs} ) {
             $distros{$distro}{bugs} = $distribution->{bugs}{active};
         }

@@ -14,7 +14,7 @@ sub index : Path : Args(0) {
 
     my ($data)
         = $c->model('API::Release')
-        ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
+        ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->get;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     single_valued_arrayref_to_scalar($latest);
 

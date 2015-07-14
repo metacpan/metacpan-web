@@ -49,14 +49,14 @@ sub distribution {
 
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
-    my $data = $self->request("/release/latest_by_author/$pauseid")->recv;
+    my $data = $self->request("/release/latest_by_author/$pauseid")->get;
     return $data;
 }
 
 sub all_by_author {
     my ( $self, $pauseid, $page, $page_size ) = @_;
     my $data = $self->request( "/release/all_by_author/$pauseid",
-        undef, { page => $page, page_size => $page_size } )->recv;
+        undef, { page => $page, page_size => $page_size } )->get;
     return $data;
 }
 
@@ -208,11 +208,10 @@ sub find {
 sub reverse_dependencies {
     my ( $self, $distribution, $page, $page_size, $sort ) = @_;
     $sort ||= { date => 'desc' };
-    my $cv = $self->cv;
 
 # TODO: do we need to do a taint-check on $distribution before inserting it into the url?
 # maybe the fact that it came through as a Catalyst Arg is enough?
-    $self->request(
+    return $self->request(
         "/search/reverse_dependencies/$distribution",
         {
             query => {
@@ -227,20 +226,16 @@ sub reverse_dependencies {
             from => $page * $page_size - $page_size,
             sort => [$sort],
         }
-        )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    data =>
-                        [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
-                    total => $data->{hits}->{total},
-                    took  => $data->{took}
-                }
-            );
+        )->transform(
+        done => sub {
+            my $data = shift;
+            return {
+                data => [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
+                total => $data->{hits}->{total},
+                took  => $data->{took}
+            };
         }
         );
-    return $cv;
 }
 
 sub interesting_files {
@@ -360,14 +355,12 @@ sub favorites {
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $param = $range ? { range => $range } : ();
-    my $data
-        = $self->request( '/release/top_uploaders', undef, $param )->recv;
+    my $data = $self->request( '/release/top_uploaders', undef, $param )->get;
     return $data;
 }
 
 sub no_latest {
     my ( $self, @distributions ) = @_;
-    my $cv = $self->cv;
 
     # If there are no distributions return
     return {} unless (@distributions);
@@ -387,13 +380,13 @@ sub no_latest {
             },
             fields => [qw(distribution status)]
         }
-        )->cb(
-        sub {
-            my $data = shift->recv;
+        )->transform(
+        done => sub {
+            my $data = shift;
             my @latest
                 = map { $_->{fields}->{distribution} }
                 @{ $data->{hits}->{hits} };
-            $cv->send(
+            return (
                 {
                     took      => $data->{took},
                     no_latest => {
@@ -408,7 +401,6 @@ sub no_latest {
             );
         }
         );
-    return $cv;
 }
 
 __PACKAGE__->meta->make_immutable;

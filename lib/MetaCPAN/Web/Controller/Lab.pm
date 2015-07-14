@@ -43,7 +43,7 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
 sub dashboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $user = $c->model('API::User')->get_profile( $c->token )->get;
 
     my $report;
     my $pauseid = $c->req->params->{'pauseid'};

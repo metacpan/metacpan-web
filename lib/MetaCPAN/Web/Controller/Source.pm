@@ -28,15 +28,15 @@ sub index : Path : Args {
 
     my ( $source, $module );
     if ( @module == 1 ) {
-        $module = $c->model('API::Module')->find(@module)->recv;
+        $module = $c->model('API::Module')->find(@module)->get;
         $module[0] = join q{/}, $module->{author}, $module->{release},
             $module->{path};
-        $source = $c->model('API::Module')->source(@module)->recv;
+        $source = $c->model('API::Module')->source(@module)->get;
     }
     else {
-        ( $source, $module ) = (
-            $c->model('API::Module')->source(@module)->recv,
-            $c->model('API::Module')->get(@module)->recv,
+        ( $source, $module ) = map { $_->get } (
+            $c->model('API::Module')->source(@module),
+            $c->model('API::Module')->get(@module),
         );
     }
     if ( $module->{directory} ) {

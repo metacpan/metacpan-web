@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Model::API::Rating;
 use Moose;
 use namespace::autoclean;
+use Future;
 
 extends 'MetaCPAN::Web::Model::API';
 
@@ -28,16 +29,14 @@ use List::Util qw(uniq);
 sub get {
     my ( $self, @distributions ) = @_;
     @distributions = uniq @distributions;
-    my $cv = $self->cv;
 
     # If there are no distributions this will build a query with an empty
     # filter and ES will return a parser error... so just skip it.
     if ( !@distributions ) {
-        $cv->send( {} );
-        return $cv;
+        return Future->wrap( {} );
     }
 
-    $self->request(
+    return $self->request(
         '/rating/_search',
         {
             size  => 0,
@@ -59,22 +58,18 @@ sub get {
                 }
             }
         }
-        )->cb(
-        sub {
-            my ($ratings) = shift->recv;
-            $cv->send(
-                {
-                    took    => $ratings->{took},
-                    ratings => {
-                        map { $_->{key} => $_->{ratings_dist} } @{
-                            $ratings->{aggregations}->{ratings}->{buckets}
-                        }
-                    }
+        )->transform(
+        done => sub {
+            my $data = shift;
+            return {
+                took    => $data->{took},
+                ratings => {
+                    map { $_->{key} => $_->{ratings_dist} }
+                        @{ $data->{aggregations}->{ratings}->{buckets} }
                 }
-            );
+            };
         }
         );
-    return $cv;
 }
 
 __PACKAGE__->meta->make_immutable;

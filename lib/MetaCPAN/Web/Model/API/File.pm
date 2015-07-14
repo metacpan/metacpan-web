@@ -15,7 +15,7 @@ sub source {
 sub dir {
     my ( $self, @path ) = @_;
     my $path = join '/', @path;
-    my $data = $self->request("/file/dir/$path")->recv;
+    my $data = $self->request("/file/dir/$path")->get;
     return $data->{dir};
 }
 

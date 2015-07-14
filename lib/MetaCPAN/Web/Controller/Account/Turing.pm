@@ -13,7 +13,7 @@ sub index : Path('') : Args(0) {
         my $res    = $c->model('API::User')->turing(
             @$params{qw(recaptcha_challenge_field recaptcha_response_field)},
             $c->token
-        )->recv;
+        )->get;
         $c->stash(
             {
                 success => $res->{looks_human},

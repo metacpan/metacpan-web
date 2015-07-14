@@ -46,8 +46,7 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $pauseid = $c->stash->{pauseid};
 
-    my $author_cv = $c->model('API::Author')->get($pauseid);
-    my $author    = $author_cv->recv;
+    my $author = $c->model('API::Author')->get($pauseid)->get;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     my $releases = $c->model('API::Release')->latest_by_author($pauseid);
@@ -90,7 +89,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $releases
         = $c->model('API::Release')->all_by_author( $id, $page_size, $page );
 
-    my $author = $author_cv->recv;
+    my $author = $author_cv->get;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     $c->stash(

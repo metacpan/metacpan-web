@@ -21,7 +21,7 @@ sub find : Path : Args(1) {
     $c->browser_max_age('1h');
 
     # TODO: Pass size param so we can disambiguate?
-    $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->recv;
+    $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->get;
 
     # TODO: Disambiguate if there's more than once match. #176
 
@@ -41,7 +41,7 @@ sub release : Local : Args {
         $c->detach();
     }
 
-    $c->stash->{pod_file}   = $c->model('API::Module')->get(@path)->recv;
+    $c->stash->{pod_file}   = $c->model('API::Module')->get(@path)->get;
     $c->stash->{permalinks} = 1;
     $c->forward( 'view', [@path] );
 }
@@ -58,7 +58,7 @@ sub distribution : Local : Args {
     # Get latest "author/release" of dist so we can use it to find the file.
     # TODO: Pass size param so we can disambiguate?
     my $release = try {
-        $c->model('API::Release')->find($dist)->recv->{hits}{hits}->[0]
+        $c->model('API::Release')->find($dist)->get->{hits}{hits}->[0]
             ->{_source};
     } or $c->detach('/not_found');
 
@@ -66,7 +66,7 @@ sub distribution : Local : Args {
 
     unshift @path, @$release{qw( author name )};
 
-    $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->recv;
+    $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->get;
 
     $c->forward( 'view', [@path] );
 }
@@ -116,9 +116,7 @@ sub view : Private {
                 ->get( @{$data}{qw(author release)} ),
         },
         $data,
-    );
-    $reqs = $self->recv_all($reqs);
-
+    )->get;
     $self->stash_api_results( $c, $reqs, $data );
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 

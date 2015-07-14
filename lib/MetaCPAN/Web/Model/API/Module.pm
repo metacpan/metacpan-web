@@ -33,48 +33,33 @@ sub find {
 
 sub autocomplete {
     my ( $self, $query ) = @_;
-    my $cv = $self->cv;
     $self->request( "/search/autocomplete", undef,
-        { q => $query, size => 50 } )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    results => [
-                        map { $_->{fields} } @{ $data->{hits}->{hits} || [] }
-                    ]
-                }
-            );
+        { q => $query, size => 50 } )->transform(
+        done => sub {
+            my $data = shift;
+            return { results =>
+                    [ map { $_->{fields} } @{ $data->{hits}->{hits} || [] } ]
+            };
         }
         );
-    return $cv;
 }
 
 sub search_web {
     my ( $self, $query, $from, $page_size ) = @_;
-    my $cv = $self->cv;
     $self->request( "/search/web", undef,
-        { q => $query, size => $page_size // 20, from => $from // 0 } )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send($data);
-        }
-        );
-    return $cv;
+        { q => $query, size => $page_size // 20, from => $from // 0 } );
 }
 
 sub first {
     my ( $self, $query ) = @_;
-    my $cv = $self->cv;
-    $self->request( "/search/simple", undef, { q => $query } )->cb(
-        sub {
-            my ($result) = shift->recv;
-            return $cv->send(undef) unless ( $result->{hits}->{total} );
-            $cv->send(
-                $result->{hits}->{hits}->[0]->{fields}->{documentation} );
+    $self->request( "/search/simple", undef, { q => $query } )->transform(
+        done => sub {
+            my $data = shift;
+            return undef
+                unless ( $data->{hits}->{total} );
+            return $data->{hits}->{hits}->[0]->{fields}->{documentation};
         }
     );
-    return $cv;
 }
 
 sub requires {
@@ -87,7 +72,7 @@ sub requires {
             page      => $page,
             page_size => $page_size,
         },
-    )->recv;
+    )->get;
 
     return $data;
 }

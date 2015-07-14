@@ -64,7 +64,7 @@ sub prepare_app {
 
 sub save_state {
     my $self = shift;
-    my ( $id, $res, $env ) = @_;
+    my ( undef, undef, $env ) = @_;
     return
         if $env->{'psgix.session.options'}{no_store};
 
