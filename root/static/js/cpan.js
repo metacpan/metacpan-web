@@ -5,6 +5,21 @@ var MetaCPAN = {};
 // Collect favs we need to check after dom ready
 MetaCPAN.favs_to_check = {};
 
+// provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
+try {
+    MetaCPAN.storage = window.localStorage;
+}
+catch (e) {
+    MetaCPAN.storage = {
+        getItem: function(k) {
+            return this["_"+k];
+        },
+        setItem: function(k,v) {
+            return this["_"+k] = v;
+        },
+    };
+}
+
 document.cookie = "hideTOC=; expires=" + (new Date(0)).toGMTString() + "; path=/";
 
 $.fn.textWidth = function() {
@@ -45,7 +60,7 @@ function togglePanel(side, visible) {
     } else {
         elements.addClass(className);
     }
-    localStorage.setItem("hide_" + side + "_panel", visible ? 0 : 1);
+    MetaCPAN.storage.setItem("hide_" + side + "_panel", visible ? 0 : 1);
     return false;
 }
 
@@ -70,7 +85,7 @@ function toggleTOC() {
             }
         }
     });
-    localStorage.setItem('hideTOC', (visible ? 1 : 0));
+    MetaCPAN.storage.setItem('hideTOC', (visible ? 1 : 0));
     container.toggleClass('hide-index');
     return false;
 }
@@ -111,7 +126,7 @@ $(document).ready(function() {
         var table = $(this);
 
         var sortid = (
-            localStorage.getItem("tablesorter:" + table.attr('id')) ||
+            MetaCPAN.storage.getItem("tablesorter:" + table.attr('id')) ||
             table.attr('data-default-sort') || '0,0');
         sortid = JSON.parse("[" + sortid + "]");
 
@@ -326,7 +341,7 @@ $(document).ready(function() {
             var sortParam = $.getUrlVar('sort');
             if (sortParam != null) {
                 sortParam = sortParam.slice(2, sortParam.length - 2);
-                localStorage.setItem("tablesorter:" + tableid, sortParam);
+                MetaCPAN.storage.setItem("tablesorter:" + tableid, sortParam);
             }
         }, 1000);
     });
@@ -344,7 +359,7 @@ $(document).ready(function() {
         index.wrap('<div id="index-container"><div class="index-border"></div></div>');
         var container = index.parent().parent();
 
-        var index_hidden = localStorage.getItem('hideTOC') == 1;
+        var index_hidden = MetaCPAN.storage.getItem('hideTOC') == 1;
         index.before(
             '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]' + ' <button class="btn-link toggle-index-right"><i class="fa fa-toggle-right"></i><i class="fa fa-toggle-left"></i></button>' + '</div>');
 
@@ -358,10 +373,10 @@ $(document).ready(function() {
 
         $('.toggle-index-right').on('click', function(e) {
             e.preventDefault();
-            localStorage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
+            MetaCPAN.storage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
             container.toggleClass('pull-right');
         });
-        if (localStorage.getItem('rightTOC') == 1) {
+        if (MetaCPAN.storage.getItem('rightTOC') == 1) {
             container.addClass("pull-right");
         }
     }
@@ -369,7 +384,7 @@ $(document).ready(function() {
     ['right'].forEach(function(side) {
         var panel = $('#' + side + "-panel");
         if (panel.length) {
-            var panel_visible = localStorage.getItem("hide_" + side + "_panel") != 1;
+            var panel_visible = MetaCPAN.storage.getItem("hide_" + side + "_panel") != 1;
             togglePanel(side, panel_visible);
         }
     });
@@ -378,10 +393,10 @@ $(document).ready(function() {
         var url = $(this).attr('href');
         var result = /size=(\d+)/.exec(url);
         if (result && result[1]) {
-            localStorage.setItem('search_size', result[1]);
+            MetaCPAN.storage.setItem('search_size', result[1]);
         }
     });
-    var size = localStorage.getItem('search_size');
+    var size = MetaCPAN.storage.getItem('search_size');
     if (size) {
         $('#size').val(size);
     }
@@ -404,10 +419,10 @@ function set_page_size(selector, storage_name) {
         var result = /size=(\d+)/.exec(url);
         if (result && result[1]) {
             var page_size = result[1];
-            localStorage.setItem(storage_name, page_size);
+            MetaCPAN.storage.setItem(storage_name, page_size);
             return true;
         } else {
-            page_size = localStorage.getItem(storage_name);
+            page_size = MetaCPAN.storage.getItem(storage_name);
             if (page_size) {
                 if (/\?/.exec(url)) {
                     document.location.href = url + '&size=' + page_size;
