@@ -8,14 +8,13 @@ MetaCPAN.favs_to_check = {};
 // provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
 try {
     MetaCPAN.storage = window.localStorage;
-}
-catch (e) {
+} catch (e) {
     MetaCPAN.storage = {
         getItem: function(k) {
-            return this["_"+k];
+            return this["_" + k];
         },
-        setItem: function(k,v) {
-            return this["_"+k] = v;
+        setItem: function(k, v) {
+            return this["_" + k] = v;
         },
     };
 }
