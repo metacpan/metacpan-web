@@ -56,21 +56,20 @@ sub wrap {
 
     builder {
         if ( !$dev_mode ) {
+            enable 'Assets::FileCached' => (
+                files => [ map "root$_", @js_files ],
 
-            # Wrap up to serve lessc parsed files
-            enable 'MCLess' => (
-                cache => CHI->new(
-                    driver   => 'File',
-                    root_dir => "$root_dir/var/tmp/less.cache",
-                ),
-                cache_ttl => '60 minutes',
-                root      => 'root/static',
-                files     => ["root/static/less/style.less"],
+                # need js compressor
+                #filter => sub { },
+                ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
 
-            for my $assets ( \@js_files, \@css_files ) {
-                enable 'Assets' => ( files => [ map {"root$_"} @$assets ] );
-            }
+            enable 'Assets::FileCached' => (
+                files     => [ map "root$_", @css_files, @less_files ],
+                extension => 'css',
+                filter => sub { scalar `lessc -s $_[0]` },
+                ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
+            );
         }
         else {
             enable sub {

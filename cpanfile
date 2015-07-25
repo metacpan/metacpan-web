@@ -61,7 +61,6 @@ requires 'MooseX::Types::Moose';
 requires 'MooseX::Types::URI';
 requires 'Net::Fastly', '1.02';
 requires 'Path::Tiny', '0.056';
-requires 'Plack::Middleware::Assets';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
 requires 'Plack::Middleware::ServerStatus::Lite';
