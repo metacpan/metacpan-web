@@ -25,7 +25,7 @@ has app => ( is => 'ro', required => 1 );
 has wrapped => ( is => 'lazy', init_arg => 0, reader => 'to_app' );
 
 has files => ( is => 'ro', required => 1 );
-has filter => (
+has read_file => (
     is      => 'ro',
     default => sub {
         sub {
@@ -38,6 +38,7 @@ has filter => (
         };
     }
 );
+has filter => ( is => 'ro' );
 has mount => ( is => 'ro', default => '_assets' );
 
 has extension => (
@@ -106,13 +107,16 @@ sub _build_wrapped {
 }
 
 sub _build__asset_files {
-    my $self   = shift;
-    my $filter = $self->filter;
-    my @files  = @{ $self->files };
+    my $self      = shift;
+    my $read_file = $self->read_file;
+    my @files     = @{ $self->files };
     my @assets;
     my $content = '';
     for my $file (@files) {
-        $content .= $filter->($file);
+        $content .= $read_file->($file);
+    }
+    if ( my $filter = $self->filter ) {
+        $content = $filter->($content);
     }
     my $key       = md5_hex($content);
     my $file      = "$key." . $self->extension;

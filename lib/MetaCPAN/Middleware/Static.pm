@@ -67,7 +67,7 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
-                filter => sub { scalar `lessc -s $_[0]` },
+                read_file => sub { scalar `lessc -s $_[0]` },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
         }
