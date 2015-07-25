@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export PLACK_ENV=development
+plackup --no-default-middleware -s Feersum -p 5000 static-app.psgi &
+static_pid="$!"
+trap "kill $static_pid; exit 1" SIGHUP SIGINT SIGTERM
+plackup -r -p 5001
+kill $static_pid
