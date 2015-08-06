@@ -65,3 +65,103 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
 .autocomplete-suggestion.autocomplete-selected {
   background: #BAD3EA !important; 
 }
+
+.form-search .search-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 20px;
+}
+.form-search .dropdown.input-group-addon {
+  color: #64676b;
+  border-radius: 0;
+  background-color: #fff;
+  border: 1px solid #b4b4b4;
+  cursor: pointer;
+  padding-left: 0px;
+}
+.form-search .dropdown-trigger {
+  font-size: 15px;
+}
+.visuallyhidden {
+  padding: 0!important;
+  width: 1px!important;
+  border: 0!important;
+  clip: rect(0 0 0 0)!important;
+  height: 1px!important;
+  margin: -1px!important;
+  overflow: hidden!important;
+  position: absolute!important;
+}
+.dropdown-menu li {
+  color: #64676b;
+  text-align: left;
+  line-height: 20px;
+  cursor: pointer;
+  border-bottom: 0;
+}
+.form-search .dropdown-wrapper {
+  position: relative;
+  padding-left: 12px;
+}
+.form-search .input-group {
+  background: #595959;
+  background: rgba(89,89,89,.6);
+  background-clip: content-box;
+  width: 623px;
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  width: 532px;
+}
+.form-search .dropdown-menu {
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  float: left;
+  font-size: 14px;
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1000;
+  min-width: 98px;
+  left: 0;
+  right: auto;
+  top: 23px;
+}
+.form-search .input-group .form-control {
+  display: table-cell;
+  padding: 0;
+}
+.form-search .search-input {
+  height: 52px;
+  line-height: 20px;
+  padding: 0 0 0 17px;
+  font-size: 18px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  border-radius: 0;
+  border: 1px solid #b4b4b4;
+  border-right: 0;
+  box-shadow: none;
+  display: table-cell;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  padding: 6px 8px 5px;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.form-search .dropdown-menu li label {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 0;
+  padding: 0 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+}
