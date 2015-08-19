@@ -217,6 +217,13 @@ Template::Alloy->define_vmethod(
     },
 );
 
+Template::Alloy->define_vmethod(
+    'text',
+    quotemeta => sub {
+        return quotemeta( $_[0] );
+    },
+);
+
 __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
 
 1;

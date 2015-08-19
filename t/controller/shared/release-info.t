@@ -34,6 +34,16 @@ test_psgi app, sub {
         # has all optional tests
         { module => 'Dist::Zilla' },
 
+        # dist name that needs uri encoding
+        {
+            module     => 'Text::Tabs',
+            release    => 'Text-Tabs+Wrap',
+            qs_dist    => 'Text-Tabs%2BWrap',
+            home_page  => 0,
+            repository => 0,
+            reviews    => 0,
+        },
+
         # release name different than just s/::/-/g
         {
             module     => 'LWP::UserAgent',
@@ -55,6 +65,8 @@ test_psgi app, sub {
     foreach my $test (@tests) {
         ( $test->{release} = $test->{module} ) =~ s/::/-/g
             if !$test->{release};
+        my $qs_dist = $test->{qs_dist} || $test->{release};
+        my $qs_module = $test->{module};
 
         # turn tests on by default
         exists( $test->{$_} ) or $test->{$_} = 1 for @optional;
@@ -75,7 +87,7 @@ test_psgi app, sub {
 
   # these first tests are similar between the controllers only because of
   # consistecy or coincidence and are not specifically related to release-info
-            $tx->like( '/html/head/title', qr/$name/,
+            $tx->like( '/html/head/title', qr/\Q$name\E/,
                 qq[title includes name "$name"] );
 
             ok( $tx->find_value(qq<//a[\@href="$req_uri"]>),
@@ -90,12 +102,13 @@ test_psgi app, sub {
 # A fragile and unsure way to get the version, but at least an 80% solution.
 # TODO: Set up a fake cpan; We'll know what version to expect; we can test that this matches
             ok(
-                my $version
-                    = (
-                    $this =~ m!(?:/pod)?/release/[^/]+/$release-([^/"]+)! )
-                    [0],
+                my $version = (
+                    $this =~ m!(?:/pod)?/release/[^/]+/\Q$release\E-([^/"]+)!
+                    )[0],
                 'got version from "this" link'
             );
+
+            my $qs_version = $version;
 
             # TODO: latest version (should be where we already are)
             # TODO: author
@@ -116,6 +129,18 @@ test_psgi app, sub {
 
             # TODO: Download
             # TODO: Changes
+
+            foreach my $booktype (qw(mobi epub)) {
+                my ( $source, $sel )
+                    = $type eq 'module'
+                    ? ( $qs_module, '' )
+                    : ( $qs_dist, 1 );
+                $tx->is(
+                    "//a[text()=\"\U$booktype\E\"]/\@href",
+                    "http://perlybook.org/?source=$source&book_selection=$sel&target=$booktype",
+                    "link for perlybook $booktype"
+                );
+            }
 
             optional_test home_page => sub {
                 ok( $tx->find_value('//a[text()="Homepage"]/@href'),
@@ -138,7 +163,7 @@ test_psgi app, sub {
             # not all dists have reviews
             optional_test reviews => sub {
                 my $rating
-                    = qq{//a[\@href="http://cpanratings.perl.org/rate/?distribution=$release"]};
+                    = qq!//a[\@href="http://cpanratings.perl.org/rate/?distribution=$qs_dist"]!;
                 $tx->like( "$rating/span/\@class", qr/^rating-\d+$/,
                     'has link to rate',
                 );
@@ -156,16 +181,17 @@ test_psgi app, sub {
             ok(
                 $tx->find_value(
                     '//a[@href="http://cpanratings.perl.org/rate/?distribution='
-                        . $release . '"]'
+                        . $qs_dist . '"]'
                 ),
                 'cpanratings link to rate this dist'
             );
 
+            # TODO: cpantesters
             # TODO: release.tests.size
 
             $tx->is(
                 '//a[@title="Matrix"]/@href',
-                "http://matrix.cpantesters.org/?dist=$release+$version",
+                "http://matrix.cpantesters.org/?dist=$qs_dist+$qs_version",
                 'link to test matrix'
             );
 
@@ -191,11 +217,12 @@ test_psgi app, sub {
                 'reverse deps link uses dist name'
             );
 
+            my $slash = '%2F';
             $tx->like(
                 '//a[starts-with(@href, "https://explorer.metacpan.org/?url")]/@href',
                 $type eq 'module'
-                ? qr!\?url=/module/\w+/${release}-${version}/.+!
-                : qr!\?url=/release/\w+/${release}-${version}\z!,
+                ? qr!\?url=${slash}module${slash}\w+${slash}${qs_dist}-${version}${slash}.+!
+                : qr!\?url=${slash}release${slash}\w+${slash}${qs_dist}-${version}\z!,
                 'explorer link points to module file or release',
             );
 

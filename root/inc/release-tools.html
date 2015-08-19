@@ -6,12 +6,12 @@
     </a>
 </li>
 <li>
-    <a href="https://explorer.metacpan.org/?url=/<% module ? ['module', module.author, module.release, module.path].join("/") : ['release', release.author, release.name].join("/") %>">
+    <a href="https://explorer.metacpan.org/?url=<% ("/" _ ( module ? ['module', module.author, module.release, module.path].join("/") : ['release', release.author, release.name].join("/") ) ) | uri %>">
     <i class="fa fa-list-alt fa-fw black"></i>MetaCPAN Explorer
     </a>
 </li>
 <li>
-    <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution %>">
+    <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution | uri %>">
     <i class="fa fa-star fa-fw black"></i>Rate this distribution
     </a>
 </li>
@@ -35,7 +35,7 @@
     </select>
 </li>
 <li>
-    <select name="release" onchange="document.location.href='/diff/file/?target=<% [release.author, release.name, module.path].join("/") %>&amp;source=' + this.value" class="form-control tool-bar-form">
+    <select name="release" onchange="document.location.href='/diff/file/?target=<% [release.author, release.name, module.path].join("/") | uri %>&amp;source=' + encodeURIComponent(this.value)" class="form-control tool-bar-form">
         <option>Diff with version</option>
         <%- PROCESS version_options %>
     </select>
