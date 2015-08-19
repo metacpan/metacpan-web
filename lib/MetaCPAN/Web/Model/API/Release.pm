@@ -325,6 +325,7 @@ sub interesting_files {
                                                         FAQ
                                                         INSTALL
                                                         INSTALL.md
+                                                        LICENCE
                                                         LICENSE
                                                         MANIFEST
                                                         META.json
