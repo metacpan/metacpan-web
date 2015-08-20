@@ -18,7 +18,7 @@
     <li>Help Wanted<ul>
     <% FOREACH position IN release.metadata.x_help_wanted %>
       <li><% position %></li>
-    <% END %>    
+    <% END %>
     </ul></li>
     <% END %>
     <%- INCLUDE inc/release-tools.html %>
@@ -65,6 +65,27 @@ FOREACH file IN files;
 END;
 documentation = documentation.merge(documentation_raw);
 %>
+
+<% MACRO change_group(group) BLOCK; %>
+<ul>
+    <%- FOREACH entry IN group; %>
+    <li class="<% IF entry.entries.size %>group-header<% END %>"><span class="change-entry"><% entry.text | none %></span>
+        <% IF entry.entries.size;
+          change_group(entry.entries) | none;
+        END %>
+    </li>
+    <%- END %>
+</ul>
+<% END %>
+
+<%- IF last_version_changes %>
+
+<div class="last-changes">
+    <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
+    <% change_group(last_version_changes.entries) | none %>
+</div>
+
+<%- END %>
 
 <%- IF documentation.size %>
 <div class="file-group release-documentation">
@@ -138,25 +159,5 @@ documentation = documentation.merge(documentation_raw);
 </div>
 <%- END %>
 
-<% MACRO change_group(group) BLOCK; %>
-<ul>
-    <%- FOREACH entry IN group; %>
-    <li class="<% IF entry.entries.size %>group-header<% END %>"><span class="change-entry"><% entry.text | none %></span>
-        <% IF entry.entries.size;
-          change_group(entry.entries) | none;
-        END %>
-    </li>
-    <%- END %>
-</ul>
-<% END %>
-
-<%- IF last_version_changes %>
-
-<div class="last-changes">
-    <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
-    <% change_group(last_version_changes.entries) | none %>
-</div>
-
-<%- END %>
 	<% INCLUDE inc/module-install.html %>
 </div>
