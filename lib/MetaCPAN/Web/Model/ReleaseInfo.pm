@@ -187,7 +187,8 @@ sub normalize_issues {
         $issues->{url} = 'mailto:' . $bugtracker->{mailto};
     }
     else {
-        $issues->{url} = $self->rt_url_prefix . $release->{distribution};
+        $issues->{url}
+            = $self->rt_url_prefix . uri_escape( $release->{distribution} );
     }
 
     if ( my $bugs = $distribution->{bugs} ) {

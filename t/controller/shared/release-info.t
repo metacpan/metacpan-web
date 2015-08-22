@@ -3,6 +3,11 @@ use warnings;
 use Test::More 0.96;
 use MetaCPAN::Web::Test;
 
+use Module::Runtime qw( use_module );
+
+my $model     = use_module('MetaCPAN::Web::Model::ReleaseInfo');
+my $rt_prefix = $model->rt_url_prefix;
+
 # Test various aspects that should be similar
 # among controllers that show release info (in the side bar).
 # Currently this includes module and release controllers.
@@ -13,6 +18,7 @@ my @optional = qw(
     home_page
     repository
     reviews
+    issues
 );
 
 # Use a counter to make sure we at least do each optional test once.
@@ -32,7 +38,10 @@ test_psgi app, sub {
     my @tests = (
 
         # has all optional tests
-        { module => 'Dist::Zilla' },
+        {
+            module => 'Dist::Zilla',
+            issues => 'https://github.com/rjbs/Dist-Zilla/issues'
+        },
 
         # dist name that needs uri encoding
         {
@@ -69,6 +78,7 @@ test_psgi app, sub {
         my $qs_module = $test->{module};
 
         # turn tests on by default
+        $test->{issues} //= $rt_prefix . $qs_dist;
         exists( $test->{$_} ) or $test->{$_} = 1 for @optional;
 
         # short cuts
@@ -156,9 +166,10 @@ test_psgi app, sub {
                     'link for resources.repository.url' );
             };
 
-# we could test the rt.cpan.org link... i think others are verbatim from the META file
-            ok( $tx->find_value('//a[text()="Issues"]/@href'),
-                'link for bug tracker' );
+            optional_test issues => sub {
+                $tx->is( '//a[text()="Issues"]/@href', $test->{issues},
+                    'link to bug tracker' );
+            };
 
             # not all dists have reviews
             optional_test reviews => sub {

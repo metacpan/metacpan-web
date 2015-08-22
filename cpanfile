@@ -86,6 +86,7 @@ requires 'Text::Pluralize';
 requires 'Try::Tiny', '0.09';
 requires 'YAML', '1.15'; # fix dep chain issue
 requires 'URI';
+requires 'URI::Escape';
 requires 'XML::Feed';
 requires 'XML::Simple';
 
