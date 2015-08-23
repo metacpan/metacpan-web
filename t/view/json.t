@@ -46,7 +46,6 @@ test_psgi app, sub {
 
     echo_json_ok( q!{"test": [1, 2, {"hash": {}}] }!, 'arrays and hashes' );
 
-    local $TODO = 'errors encoding boolean objects';
     echo_json_ok( q!{"test": true}!, 'booleans' );
 }
 
