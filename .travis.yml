@@ -1,12 +1,13 @@
 language: perl
 perl:
+  # as of 2015-08-23 travis doesn't have 5.22
   - "5.20"
   - "5.18"
   - "5.16"
 
 matrix:
   allow_failures:
-    - perl: "5.20"
+    - perl: "5.22"
 
 env:
   global:
