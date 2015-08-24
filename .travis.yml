@@ -45,3 +45,6 @@ notifications:
 
 # Use newer travis infrastructure.
 sudo: false
+cache:
+  directories:
+    - local
