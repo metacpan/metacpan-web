@@ -90,7 +90,9 @@ Template::Alloy->define_vmethod( 'text',
 Template::Alloy->define_vmethod(
     'hash',
     pretty_json => sub {
-        JSON::MaybeXS->new->utf8->pretty->encode(shift);
+
+    # Use utf8(0) because Catatlyst expects our view to be a character string.
+        JSON::MaybeXS->new->utf8(0)->pretty->encode(shift);
     }
 );
 
