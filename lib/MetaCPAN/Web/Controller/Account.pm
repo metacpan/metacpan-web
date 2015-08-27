@@ -82,9 +82,9 @@ sub profile : Local {
     $data->{$_} = $req->params->{$_} eq q{} ? undef : $req->params->{$_}
         for (qw(name asciiname gravatar_url city region country));
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
-    $data->{extra} = eval {
-        JSON::MaybeXS->new->relaxed->utf8->decode( $req->params->{extra} );
-    };
+
+    $data->{extra} = $req->json_param('extra');
+
     $data->{donation} = undef unless ( $req->params->{donations} );
 
     my $res
