@@ -4,7 +4,6 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use Data::Dumper;
 use Path::Tiny qw/path/;
 
 sub news : Local : Path('/news') {
