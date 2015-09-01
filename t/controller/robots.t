@@ -14,7 +14,7 @@ SKIP: {
             $res,
             {
                 cache_control     => 'max-age=3600',
-                surrogate_key     => 'robots',
+                surrogate_key     => 'ROBOTS',
                 surrogate_control => 'max-age=86400',
             }
         );

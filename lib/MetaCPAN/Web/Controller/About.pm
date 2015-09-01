@@ -8,7 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub auto : Private {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('about');
+    $c->add_surrogate_key('ABOUT');
     $c->browser_max_age( $c->cdn_times->{one_day} );
     $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
 
@@ -63,7 +63,7 @@ sub metadata : Local : Args(0) {
 sub stats : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('stats');
+    $c->add_surrogate_key('STATS');
 
     # Only want a day for this, so they get refreshed
     $c->cdn_cache_ttl( $c->cdn_times->{one_day} );

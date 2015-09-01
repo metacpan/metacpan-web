@@ -11,7 +11,7 @@ test_psgi app, sub {
         $res,
         {
             cache_control     => 'max-age=3600',
-            surrogate_key     => 'homepage',
+            surrogate_key     => 'HOMEPAGE',
             surrogate_control => 'max-age=31536000',
         }
     );

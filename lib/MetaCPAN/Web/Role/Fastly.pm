@@ -13,9 +13,9 @@ MetaCPAN::Web::Role::Fastly - Methods for fastly intergration
 
 The following:
 
-=head2 $c->add_surrogate_key('foo');
+=head2 $c->add_surrogate_key('FOO');
 
-=head2 $c->purge_surrogate_key('bar');
+=head2 $c->purge_surrogate_key('BAR');
 
 =head2 $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
 
