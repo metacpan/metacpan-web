@@ -25,7 +25,22 @@ sub get_feed_ok {
 test_psgi app, sub {
     my $cb = shift;
 
-    get_feed_ok( $cb, '/feed/recent' );
+    get_feed_ok(
+        $cb,
+        '/feed/recent',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    cache_control     => 'max-age=60',
+                    surrogate_key     => 'RECENT',
+                    surrogate_control => 'max-age=60',
+                }
+            );
+        }
+
+    );
     get_feed_ok(
         $cb,
         '/feed/author/PERLER',
@@ -39,10 +54,48 @@ test_psgi app, sub {
                 q!grep(//rdf:item/rdf:title, "PERLER has released (.+)")!,
                 'found releases in author feed',
             );
+            test_cache_headers(
+                $res,
+                {
+                    #  cache_control     => 'max-age=3600',
+                    surrogate_key => 'PERLER',
+
+                    #  surrogate_control => 'max-age=31536000',
+                }
+            );
         }
     );
-    get_feed_ok( $cb, '/feed/distribution/Moose' );
-    get_feed_ok( $cb, '/feed/news' );
+    get_feed_ok(
+        $cb,
+        '/feed/distribution/Moose',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    #  cache_control     => 'max-age=3600',
+                    surrogate_key => 'MOOSE',
+
+                    #  surrogate_control => 'max-age=31536000',
+                }
+            );
+        }
+    );
+    get_feed_ok(
+        $cb,
+        '/feed/news',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    cache_control     => 'max-age=3600',
+                    surrogate_key     => 'NEWS',
+                    surrogate_control => 'max-age=3600',
+                }
+            );
+        }
+    );
 
     test_redirect( $cb, 'oalders' );
 };
@@ -58,6 +111,16 @@ sub test_redirect {
         qr{^(\w+://[^/]+)?/feed/author/\U$author},
         'redirect to uc feed'
     );
+
+    test_cache_headers(
+        $redir,
+        {
+            cache_control     => 'max-age=604800',
+            surrogate_key     => 'REDIRECT_FEED',
+            surrogate_control => 'max-age=31536000',
+        }
+    );
+
 }
 
 sub valid_xml {

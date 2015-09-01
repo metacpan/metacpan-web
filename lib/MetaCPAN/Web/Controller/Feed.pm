@@ -15,7 +15,7 @@ use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
 
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 
-    $c->add_surrogate_key('feed');
+    $c->add_surrogate_key('FEED');
     $c->browser_max_age( $c->cdn_times->{one_hour} );
     $c->cdn_cache_ttl( $c->cdn_times->{thirty_mins} );
 
@@ -25,6 +25,9 @@ sub recent : Chained('feed_index') PathPart Args(0) {
 
     $c->browser_max_age( $c->cdn_times->{one_min} );
     $c->cdn_cache_ttl( $c->cdn_times->{one_min} );
+
+    # TODO: clear on index and max out cdn_cache_ttl
+    $c->add_surrogate_key('RECENT');
 
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
@@ -38,7 +41,9 @@ sub recent : Chained('feed_index') PathPart Args(0) {
 sub news : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('news');
+    $c->add_surrogate_key('NEWS');
+    $c->browser_max_age( $c->cdn_times->{one_hour} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_hour} );
 
     my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
@@ -80,6 +85,11 @@ sub author : Local : Args(1) {
 
     # Redirect to this same action with uppercase author.
     if ( $author ne uc($author) ) {
+
+        $c->browser_max_age( $c->cdn_times->{one_week} );
+        $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
+        $c->add_surrogate_key('REDIRECT_FEED');
+
         $c->res->redirect(
 
             # NOTE: We're using Args here instead of CaptureArgs :-(.
