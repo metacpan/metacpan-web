@@ -146,8 +146,11 @@ sub fastly_magic {
         # Something changed, means we need to purge some keys
         # All keys are set as UC, with : and -'s removed
         # so make sure our purging is as well
-        my @keys = map { $_ =~ s/://g; $_ =~ s/-//g; uc $_ }
-            $c->surrogate_keys_to_purge();
+        my @keys = map {
+            $_ =~ s/://g;    #
+            $_ =~ s/-//g;    #
+            uc $_            #
+        } $c->surrogate_keys_to_purge();
 
         $c->cdn_purge_now(
             {

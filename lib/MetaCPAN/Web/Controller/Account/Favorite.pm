@@ -26,7 +26,12 @@ sub add : Local : Args(0) {
         $res = $model->add_favorite( $data, $c->token )->recv;
     }
 
-    # Clear Fastly.. something changed
+    # TODO: validate these values?
+    # We need to purge if the rating has changes until the fav count
+    # is moved from server to client side
+    $c->purge_surrogate_key( $data->{author} )       if $data->{author};
+    $c->purge_surrogate_key( $data->{distribution} ) if $data->{distribution};
+
     $c->purge_surrogate_key( $self->_cache_key_for_user($c) );
 
     if ( $c->req->looks_like_browser ) {
