@@ -144,8 +144,10 @@ sub fastly_magic {
     if ( $c->has_surrogate_keys_to_purge ) {
 
         # Something changed, means we need to purge some keys
-        # All keys are set as UC, so make sure our purging is as well
-        my @keys = map { uc $_ } $c->surrogate_keys_to_purge();
+        # All keys are set as UC, with : and -'s removed
+        # so make sure our purging is as well
+        my @keys = map { $_ =~ s/://g; $_ =~ s/-//g; uc $_ }
+            $c->surrogate_keys_to_purge();
 
         $c->cdn_purge_now(
             {
@@ -158,8 +160,11 @@ sub fastly_magic {
     if ( $c->has_surrogate_keys ) {
 
         # See http://www.fastly.com/blog/surrogate-keys-part-1/
-        # Force all keys to uc, for consistency
-        $c->res->header( 'Surrogate-Key' => uc $c->join_surrogate_keys(' ') );
+        # Force all keys to uc, and remove :'s and -'s for consistency
+        my $key = uc $c->join_surrogate_keys(' ');
+        $key =~ s/://g;    # FOO::BAR -> FOOBAR
+        $key =~ s/-//g;    # FOO-BAR -> FOOBAR
+        $c->res->header( 'Surrogate-Key' => $key );
     }
 
     # Set the caching at CDN, seperate to what the user's browser does
