@@ -177,6 +177,10 @@ sub view : Private {
     #>>>
 
     my $dist = $release->{distribution};
+
+    $c->purge_surrogate_key( $dist );
+    
+
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     $c->stash(
