@@ -21,6 +21,9 @@
     </a>
 </li>
 <li>
+    <button class="btn btn-link" data-toggle="modal" data-target="#install-instructions-dialog">Install Instructions</button>
+</li>
+<li>
     <form action="/search">
         <input type="hidden" name="q" value="dist:<% release.distribution %>">
         <input type="search" name="q" placeholder="Search distribution" style="width: 153px" class="form-control tool-bar-form">
@@ -50,9 +53,6 @@
 </ul>
 <%- END %>
 <li class="nav-header">Permalinks</li>
-<li>
-	<button class="btn btn-link" data-toggle="modal" data-target="#install-instructions-dialog">Install Instructions</button>
-</li>
 <li>
     <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %>/<% module.path %>">This version</a>
 </li>
