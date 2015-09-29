@@ -109,13 +109,6 @@ $(document).ready(function() {
 
     $(".ttip").tooltip();
 
-    $('#signin-button').mouseenter(function() {
-        $('#signin').show()
-    });
-    $('#signin').mouseleave(function() {
-        $('#signin').hide()
-    });
-
     // Global keyboard shortcuts
     Mousetrap.bind('?', function() {
         $('#keyboard-shortcuts').modal();
@@ -410,11 +403,6 @@ $(document).ready(function() {
     if (size) {
         $('#search-size').val(size);
     }
-
-    // The install a CPAN Module boiler plate
-    $('#install_dialog').on('click', function() {
-        $('#install_module').modal('show');
-    });
 
     // TODO use a more specific locator for /author/PAUSID/release ?
     set_page_size('a[href*="/releases"]', 'releases_page_size');
