@@ -123,7 +123,7 @@
                     <%- END %>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="logout"></form>
+                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="metacpan-logout"></form>
                     <li class="dropdown logged_in" style="display: none;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Account
@@ -134,7 +134,7 @@
                             <li><a href="/account/profile">Profile</a></li>
                             <li><a href="/account/favorite/list">Favorites</a></li>
                             <li>
-                                <a href="#" onclick="$('#logout').submit(); return false">Logout</a>
+                                <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
                             </li>
                         </ul>
                     </li>

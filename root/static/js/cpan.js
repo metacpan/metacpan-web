@@ -408,7 +408,7 @@ $(document).ready(function() {
     });
     var size = MetaCPAN.storage.getItem('search_size');
     if (size) {
-        $('#size').val(size);
+        $('#search-size').val(size);
     }
 
     // The install a CPAN Module boiler plate
