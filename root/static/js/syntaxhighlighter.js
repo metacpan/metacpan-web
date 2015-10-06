@@ -211,6 +211,9 @@ $(function () {
                 line.contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
                 var link = line.children('a');
                 link.click(function(e) {
+                    if (e.metaKey) {
+                        return false;
+                    }
                     // normally the browser would update the url and scroll to
                     // the the link.  instead, update the hash ourselves, but
                     // unset the id first so it doesn't scroll
