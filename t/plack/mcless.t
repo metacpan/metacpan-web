@@ -55,7 +55,8 @@ test_psgi $app, sub {
         my $res = $cb->( GET 'http://localhost' . $assets->[0] );
         is $res->code,         200;
         is $res->content_type, 'text/css';
-        is $res->content,      '#header{color:#4d926f}h2{color:#4d926f}',
+        like $res->content,
+            qr/^#header\{color:#4d926f\}h2\{color:#4d926f\}$/i,
             'Content matches';
     }
 
