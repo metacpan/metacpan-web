@@ -9,6 +9,11 @@ $(function () {
             if (res) {
                 var start = res[1]*1;
                 var end = (res[2] || res[1])*1;
+                if (start > end) {
+                    var swap = end;
+                    end = start;
+                    start = swap;
+                }
                 for (var l = start; l <= end; l++) {
                     all_lines.push(l);
                 }
