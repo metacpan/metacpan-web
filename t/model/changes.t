@@ -6,9 +6,9 @@ use aliased 'CPAN::Changes::Release';
 
 use aliased 'MetaCPAN::Web::Model::API::Changes';
 
-my $rt = 'https://rt.cpan.org/Ticket/Display.html?id=';
+my $rt      = 'https://rt.cpan.org/Ticket/Display.html?id=';
 my $rt_perl = 'https://rt.perl.org/Ticket/Display.html?id=';
-my $gh = 'https://github.com/CPAN-API/metacpan-web/issues/';
+my $gh      = 'https://github.com/CPAN-API/metacpan-web/issues/';
 
 subtest 'RT ticket linking' => sub {
     my %rt_tests = (
