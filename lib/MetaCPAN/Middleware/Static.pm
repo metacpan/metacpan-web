@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use Plack::Builder;
 use Plack::App::File;
+use JavaScript::Minifier::XS ();
 use Cwd qw(cwd);
 
 sub new { bless {}, $_[0] }
@@ -59,8 +60,7 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files => [ map "root$_", @js_files ],
 
-                # need js compressor
-                #filter => sub { },
+                filter => sub { JavaScript::Minifier::XS::minify( $_[0] ) },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
 

@@ -43,6 +43,7 @@ requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'Hash::AsObject';
 requires 'Hash::Merge';
+requires 'JavaScript::Minifier::XS';
 requires 'JSON::MaybeXS', '1.002000';
 requires 'List::AllUtils';
 requires 'List::MoreUtils';
