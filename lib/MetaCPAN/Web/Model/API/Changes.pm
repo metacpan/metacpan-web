@@ -59,6 +59,8 @@ sub _link_issues {
           (?<=\[)(?:blead)?perl\s+$sep
         |
           \brt\.perl\.org\s+\#
+        |
+          \bP5\#
         )
       |
         (

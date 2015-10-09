@@ -7,6 +7,7 @@ use aliased 'CPAN::Changes::Release';
 use aliased 'MetaCPAN::Web::Model::API::Changes';
 
 my $rt = 'https://rt.cpan.org/Ticket/Display.html?id=';
+my $rt_perl = 'https://rt.perl.org/Ticket/Display.html?id=';
 my $gh = 'https://github.com/CPAN-API/metacpan-web/issues/';
 
 subtest 'RT ticket linking' => sub {
@@ -30,6 +31,7 @@ subtest 'RT ticket linking' => sub {
         'Blah blah [rt.cpan.org #231] fixed' =>
             'id=231">rt.cpan.org #231</a>',
         'Blah blah rt.cpan.org #231 fixed' => 'id=231">rt.cpan.org #231</a>',
+        'See P5#72210 ' => "${rt_perl}72210\">P5#72210</a>",
     );
 
     while ( my ( $in, $out ) = each %rt_tests ) {
