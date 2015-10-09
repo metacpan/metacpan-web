@@ -9,6 +9,11 @@ $(function () {
             if (res) {
                 var start = res[1]*1;
                 var end = (res[2] || res[1])*1;
+                if (start > end) {
+                    var swap = end;
+                    end = start;
+                    start = swap;
+                }
                 for (var l = start; l <= end; l++) {
                     all_lines.push(l);
                 }
@@ -206,13 +211,24 @@ $(function () {
                 line.contents().wrap('<a href="#'+id+'" id="'+id+'"></a>');
                 var link = line.children('a');
                 link.click(function(e) {
+                    if (e.metaKey) {
+                        return false;
+                    }
                     // normally the browser would update the url and scroll to
                     // the the link.  instead, update the hash ourselves, but
                     // unset the id first so it doesn't scroll
                     e.preventDefault();
+
+                    var line = linenr;
+                    if (e.shiftKey && source.attr('data-line')) {
+                        var startLine = parseLines(source.attr('data-line'))[0];
+                        line = startLine < line ? startLine + '-' + line
+                                                : line + '-' + startLine;
+                    }
                     link.removeAttr('id');
-                    document.location.hash = '#' + id;
+                    document.location.hash = '#L' + line;
                     link.attr('id', id);
+                    source.attr('data-line', line);
                 });
             }
         });
