@@ -80,7 +80,7 @@ documentation = documentation.merge(documentation_raw);
 
 <%- IF last_version_changes %>
 
-<div class="last-changes">
+<div class="last-changes well">
     <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
     <% change_group(last_version_changes.entries) | none %>
 </div>
