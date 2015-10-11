@@ -89,6 +89,19 @@ function toggleTOC() {
     return false;
 }
 
+function toggleWhatsnew() {
+    var changes = $('.last-changes .change-entries');
+    var link = $('.last-changes #whatsnew-toggle-overflow');
+
+    if (link.text() == 'Show Less') {
+        changes.css('max-height', '19.5em');
+        link.text('Show More');
+    } else {
+        changes.css('max-height', 'none');
+        link.text('Show Less');
+    }
+}
+
 $(document).ready(function() {
 
     // User customisations
@@ -409,6 +422,15 @@ $(document).ready(function() {
     set_page_size('a[href*="/releases"]', 'releases_page_size');
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
+
+    var changes = $('.last-changes .change-entries');
+    if (changes.prop('scrollHeight') > changes.height()) {
+      $('#whatsnew-toggle-overflow').on('click', function() {
+        toggleWhatsnew();
+      });
+    } else {
+      $('#whatsnew-toggle-overflow').hide();
+    }
 
 });
 
