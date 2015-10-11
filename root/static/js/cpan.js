@@ -425,11 +425,11 @@ $(document).ready(function() {
 
     var changes = $('.last-changes .change-entries');
     if (changes.prop('scrollHeight') > changes.height()) {
-      $('#whatsnew-toggle-overflow').on('click', function() {
-        toggleWhatsnew();
-      });
+        $('#whatsnew-toggle-overflow').on('click', function() {
+            toggleWhatsnew();
+        });
     } else {
-      $('#whatsnew-toggle-overflow').hide();
+        $('#whatsnew-toggle-overflow').hide();
     }
 
 });
