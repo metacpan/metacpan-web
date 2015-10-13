@@ -259,13 +259,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       strict 0
       warnings 0
-  CSS-Minifier-XS-0.09
-    pathname: G/GT/GTERMARS/CSS-Minifier-XS-0.09.tar.gz
-    provides:
-      CSS::Minifier::XS 0.09
-    requirements:
-      ExtUtils::CBuilder 0
-      Test::More 0
   Captcha-reCAPTCHA-0.97
     pathname: P/PH/PHRED/Captcha-reCAPTCHA-0.97.tar.gz
     provides:
@@ -5099,17 +5092,6 @@ DISTRIBUTIONS
       Try::Tiny 0
       URI 1.59
       parent 0
-  Plack-Middleware-Assets-1.0.0
-    pathname: P/PE/PERLER/Plack-Middleware-Assets-1.0.0.tar.gz
-    provides:
-      Plack::Middleware::Assets 1.000000
-    requirements:
-      CSS::Minifier::XS 0
-      Digest::MD5 0
-      HTTP::Date 0
-      JavaScript::Minifier::XS 0
-      Module::Build 0.3601
-      Plack::Middleware 0
   Plack-Middleware-FixMissingBodyInRedirect-0.09
     pathname: S/SW/SWEETKID/Plack-Middleware-FixMissingBodyInRedirect-0.09.tar.gz
     provides:
@@ -5123,13 +5105,6 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  Plack-Middleware-Headers-0.11
-    pathname: V/VO/VOJ/Plack-Middleware-Headers-0.11.tar.gz
-    provides:
-      Plack::Middleware::Headers 0.11
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      Plack::Middleware 0
   Plack-Middleware-MethodOverride-0.10
     pathname: D/DW/DWHEELER/Plack-Middleware-MethodOverride-0.10.tar.gz
     provides:

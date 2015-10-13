@@ -23,189 +23,55 @@ BEGIN {
     }
 }
 
-use Config::JFDI;
 use lib "$root_dir/lib";
-use File::Path    ();
-use JSON::MaybeXS ();
-use MIME::Base64  ();
+use Config::JFDI;
+use File::Path ();
 use MetaCPAN::Web;
 use Plack::Builder;
-use Plack::App::File;
-use Plack::App::URLMap;
-use Plack::Middleware::Assets;
-use Plack::Middleware::Headers;
-use Plack::Middleware::Runtime;
-use Plack::Middleware::MCLess;
-use Plack::Middleware::ReverseProxy;
-use Plack::Middleware::Session::Cookie::MetaCPAN;
-use Plack::Middleware::ServerStatus::Lite;
-use Try::Tiny;
-use CHI;
 
 my $tempdir = "$root_dir/var/tmp";
 
 # explicitly call ->to_app on every Plack::App::* for performance
-my $app = Plack::App::URLMap->new;
+builder {
 
-# Static content
-{
-    my $static_app = Plack::App::File->new( root => 'root/static' )->to_app;
-    $app->map( '/static/' => $static_app );
-}
+    enable 'ReverseProxy';
+    enable 'Runtime';
 
-# favicon
-{
-    my $fav_app
-        = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
-        ->to_app;
-    $app->map( '/favicon.ico' => $fav_app );
-}
+    unless ( $ENV{HARNESS_ACTIVE} or $0 =~ /\.t$/ ) {
+        my $scoreboard = "$tempdir/scoreboard";
+        File::Path::make_path($scoreboard);
 
-# Main catalyst app
-{
-    my $core_app = MetaCPAN::Web->psgi_app;
-
-    my $config = Config::JFDI->new(
-        name => 'MetaCPAN::Web',
-        path => $root_dir,
-    );
-
-    die 'cookie_secret not configured' unless $config->get->{cookie_secret};
-
-    # Add session cookie here only
-    $core_app = Plack::Middleware::Session::Cookie::MetaCPAN->wrap(
-        $core_app,
-        session_key => 'metacpan_secure',
-        expires     => 2**30,
-        secure      => ( ( $ENV{PLACK_ENV} || q[] ) ne 'development' ),
-        httponly    => 1,
-        secret      => $config->get->{cookie_secret},
-    );
-
-    $app->map( q[/] => $core_app );
-}
-
-$app = $app->to_app;
-
-unless ( $ENV{HARNESS_ACTIVE} ) {
-    my $scoreboard = "$root_dir/var/tmp/scoreboard";
-    maybe_make_path($scoreboard);
-
-    $app = Plack::Middleware::ServerStatus::Lite->wrap(
-        $app,
-        path       => '/server-status',
-        allow      => ['127.0.0.1'],
-        scoreboard => $scoreboard,
-    ) unless $0 =~ /\.t$/;
-}
-
-$app = Plack::Middleware::Runtime->wrap($app);
-my @js_files = map {"/static/js/$_.js"} (
-    qw(
-        jquery.min
-        jquery.tablesorter
-        jquery.relatize_date
-        jquery.qtip.min
-        jquery.autocomplete.min
-        mousetrap.min
-        shCore
-        shBrushPerl
-        shBrushPlain
-        shBrushYaml
-        shBrushJScript
-        shBrushDiff
-        shBrushCpp
-        shBrushCPANChanges
-        cpan
-        toolbar
-        github
-        contributors
-        dropdown
-        bootstrap/bootstrap-dropdown
-        bootstrap/bootstrap-collapse
-        bootstrap/bootstrap-modal
-        bootstrap/bootstrap-tooltip
-        bootstrap/bootstrap-affix
-        bootstrap-slidepanel
-        syntaxhighlighter
-        ),
-);
-my @css_files
-    = map { my $f = $_; $f =~ s{^root/}{/}; $f } glob 'root/static/css/*.css';
-
-if ($dev_mode) {
-    my $wrap = $app;
-    $app = sub {
-        my $env = shift;
-        push @{ $env->{'psgix.assets'} ||= [] }, @js_files, @css_files;
-        $wrap->($env);
-    };
-}
-else {
-    # Only need for live
-    my $cache = CHI->new(
-        driver   => 'File',
-        root_dir => "$root_dir/var/tmp/less.cache",
-    );
-
-    # Wrap up to serve lessc parsed files
-    $app = Plack::Middleware::MCLess->wrap(
-        $app,
-        cache     => $cache,
-        cache_ttl => '60 minutes',
-        root      => 'root/static',
-        files     => [
-            map {"root/static/less/$_.less"}
-                qw(
-                style
-                )
-        ],
-    );
-
-    for my $assets ( \@js_files, \@css_files ) {
-        $app = Plack::Middleware::Assets->wrap( $app,
-            files => [ map {"root$_"} @$assets ] );
+        enable 'ServerStatus::Lite' => (
+            path       => '/server-status',
+            allow      => ['127.0.0.1'],
+            scoreboard => $scoreboard,
+        );
     }
-}
 
-# Handle surrogate (fastly caching)
-{
-    my $hour_ttl = 60 * 60;
-    my $day_ttl  = $hour_ttl * 24;
-    my $year_ttl = $day_ttl * 365;
+    enable '+MetaCPAN::Middleware::Static' => (
+        root     => $root_dir,
+        dev_mode => $dev_mode,
+        temp_dir => $tempdir,
+    );
 
-    $app = builder {
+    builder {
+        my $config = Config::JFDI->new(
+            name => 'MetaCPAN::Web',
+            path => $root_dir,
+        );
 
-        # Tell fastly to cache _asset and _asset_less for a day
-        enable_if { $_[0]->{PATH_INFO} =~ m{^/_asset} } 'Headers', set => [
-            'Surrogate-Control' => "max-age=${day_ttl}",
-            'Surrogate-Key'     => 'assets',
+        die 'cookie_secret not configured'
+            unless $config->get->{cookie_secret};
 
-            # Tell the user's browser to cache for an hour
-            'Cache-Control' => "max-age=${hour_ttl}",
-        ];
+        # Add session cookie here only
+        enable 'Session::Cookie::MetaCPAN' => (
+            session_key => 'metacpan_secure',
+            expires     => 2**30,
+            secure      => ( !$dev_mode ),
+            httponly    => 1,
+            secret      => $config->get->{cookie_secret},
+        );
 
-        # Tell fastly to cache /static/ for an hour
-        enable_if { $_[0]->{PATH_INFO} =~ m{^/static} } 'Headers', set => [
-            'Surrogate-Control' => "max-age=${hour_ttl}",
-            'Surrogate-Key'     => 'static',
-
-            # Tell the user's browser to cache for an hour
-            'Cache-Control' => "max-age=${hour_ttl}",
-        ];
-
-        $app;
+        MetaCPAN::Web->psgi_app;
     };
-}
-
-sub maybe_make_path {
-    my $path = shift;
-
-    return if -d $path;
-
-    File::Path::make_path($path) or die "Can't make_path $path: $!";
-}
-
-$app = Plack::Middleware::ReverseProxy->wrap($app);
-
-return $app;
+};
