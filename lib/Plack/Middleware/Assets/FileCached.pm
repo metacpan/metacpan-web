@@ -111,10 +111,7 @@ sub _build__asset_files {
     my $read_file = $self->read_file;
     my @files     = @{ $self->files };
     my @assets;
-    my $content = '';
-    for my $file (@files) {
-        $content .= $read_file->($file);
-    }
+    my $content = join "\n", map { $read_file->($_) } @files;
     if ( my $filter = $self->filter ) {
         $content = $filter->($content);
     }
