@@ -82,7 +82,10 @@ documentation = documentation.merge(documentation_raw);
 
 <div class="last-changes well">
     <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
-    <% change_group(last_version_changes.entries) | none %>
+    <div class="change-entries">
+        <% change_group(last_version_changes.entries) | none %>
+    </div>
+    <a id="whatsnew-toggle-overflow">Show More</a>
 </div>
 
 <%- END %>
