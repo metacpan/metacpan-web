@@ -351,8 +351,20 @@ input#search-input {
     width: 340px !important; 
 }
 
-.search-form input {
-    width: 300px; 
+.search-form {
+    &.form-horizontal .form-group {
+        margin: 0;
+    }
+
+    width: 450px;
+    display: inline-block;
+}
+
+.search-type {
+    label {
+        font-weight: bold;
+        margin-right: 3em;
+    }
 }
 
 .input-small {
@@ -395,6 +407,7 @@ form#logout {
 
 .head-small-logo {
     width: 200px;
+    padding-right: 5px;
 }
 
 .main-content {
@@ -442,7 +455,7 @@ form#logout {
 
 .small-logo {
     position: relative;
-    margin: 1px 13px 0 0;
+    margin: 1px 15px 5px 0;
     float: left;
     width: 180px;
     height: 33px;
