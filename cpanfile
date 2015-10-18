@@ -52,6 +52,7 @@ requires 'Locale::Country','3.28';
 requires 'Module::Build::Tiny', '0.037';
 requires 'Module::Runtime';
 requires 'Moose';
+requires 'Moo', '2.000002';
 requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
