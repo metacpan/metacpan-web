@@ -96,6 +96,7 @@ test_requires 'Perl::Tidy';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
 test_requires 'Test::More', '0.96';
+test_requires 'Perl::Critic', '1.124';
 test_requires 'Test::Perl::Critic';
 test_requires 'Test::XPath', '0.15';
 
