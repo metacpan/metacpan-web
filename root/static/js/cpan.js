@@ -282,6 +282,9 @@ $(document).ready(function() {
         $('.autocomplete-suggestions').off('mouseout.autocomplete');
     });
     search_input.trigger('modules_autocomplete');
+    // set the dropdown label based on the hidden radio button -- this can be different
+    // than the default if the user clicks the back button
+    setSearchDropdownLabel();
     $.getScript("//cnstrc.com/js/ac.js", function() {
         if ($('input[name=search_type]:checked').val() == "authors") {
             search_input.trigger('authors_autocomplete');
@@ -289,6 +292,11 @@ $(document).ready(function() {
     });
 
     $("input[name=search_type]").click(function() {
+        setSearchDropdownLabel();
+        radioId = $('input:radio[name=search_type]:checked').attr('id');
+        $('.dropdown-trigger').html(
+           $('label[for="' + radioId + '"]').text() + "<span class='caret'></span>"
+        );
         if ($(this).val() == "authors") {
             if (typeof $("#search-input").autocomplete === "function") {
                 $("#search-input").autocomplete("dispose");
@@ -575,4 +583,11 @@ function favDistribution(form) {
         }
     });
     return false;
+}
+
+function setSearchDropdownLabel() {
+    radioId = $('input[name=search_type]:checked').attr('id');
+    $('.dropdown-trigger').html(
+        $('label[for="' + radioId + '"]').text() + "<span class='caret'></span>"
+    );
 }
