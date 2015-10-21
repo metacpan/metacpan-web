@@ -30,26 +30,6 @@
   margin-left: 10px;
 }
 
-input { 
-  font-size: 28px; 
-  padding: 10px; 
-  border: 1px solid #CCC; 
-  display: block; 
-  margin: 20px 0; 
-}
-
-input[type=radio].search-radios {
-  display: inline;
-  width: auto !important;
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-label.search-labels {
-  vertical-align: middle;
-  margin: 0 45px 0 0;
-}
-
 div.autocomplete-suggestions div:nth-child(2n+2) { 
   background: #f9f9f9; 
 }

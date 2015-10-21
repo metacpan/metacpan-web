@@ -207,10 +207,8 @@ $(document).ready(function() {
     // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
     // Please don't steal ctrl-pg up/down.
     var search_input = $("#search-input");
-    var ac_width = search_input.outerWidth();
-    if (search_input.hasClass('top-input-form')) {
-        ac_width += search_input.parents("form.search-form").first().find('.search-btn').first().outerWidth();
-    }
+    var input_group = search_input.parent('.input-group');
+    var ac_width = (input_group.length ? input_group : search_input).outerWidth();
     search_input.bind('modules_autocomplete', function() {
         $(this).autocomplete({
             serviceUrl: '/search/autocomplete',

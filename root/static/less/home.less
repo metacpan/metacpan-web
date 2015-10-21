@@ -1,17 +1,3 @@
-#link_to_task_kensho {
-    width: 27em;
-    padding: 5px 0px 5px 0px;
-    border-radius: 7px;
-    margin-top: 5px;
-    background-color: rgba(196, 226, 241, 0.4);
-    border-color: #4E9DAD;
-    color: #4083A3;
-
-    a {
-        color: #3a87ad;
-    }
-}
-
 .home {
     padding: 40px 0 50px;
 
@@ -19,14 +5,34 @@
         font-size: 1.2em;
     }
 
-    input {
+    #search-input {
         width: 400px;
         margin: 0px;
         height: 30px;
         font-size: 1.4em;
     }
-}
 
-.home-search-input {
-    width: 400px;
+    .home-hint {
+        color: @headings-small-color;
+        margin-bottom: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .alert {
+        display: inline-block;
+        padding: 5px 2em;
+        border-radius: 7px;
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+        }
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
 }
