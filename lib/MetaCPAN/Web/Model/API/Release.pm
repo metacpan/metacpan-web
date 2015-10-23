@@ -4,6 +4,9 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
+use List::Util qw(first);
+use List::MoreUtils qw(uniq);
+
 =head1 NAME
 
 MetaCPAN::Web::Model::Release - Catalyst Model
@@ -438,6 +441,43 @@ sub topuploaders {
             size => 0,
         }
     );
+}
+
+sub no_latest {
+    my ( $self, @distributions ) = @_;
+
+    # If there are no distributions return
+    return {} unless (@distributions);
+
+    @distributions = uniq @distributions;
+    my $result = $self->request(
+        '/release/_search',
+        {
+            size  => scalar @distributions,
+            query => {
+                filtered => {
+                    query  => { match_all => {} },
+                    filter => {
+                        and => [
+                            { terms => { distribution => \@distributions } },
+                            { term  => { status       => 'latest' } }
+                        ]
+                    }
+                }
+            },
+            fields => [qw(distribution status)]
+        }
+    )->recv;
+
+    my @latest
+        = map { $_->{fields}->{distribution} } @{ $result->{hits}->{hits} };
+
+    my %no_latest = map {
+        my $distro = $_;
+        ( first { $_ eq $distro } @latest ) ? () : ( $distro, 1 );
+    } @distributions;
+
+    return \%no_latest;
 }
 
 __PACKAGE__->meta->make_immutable;
