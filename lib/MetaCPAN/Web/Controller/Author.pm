@@ -63,12 +63,13 @@ sub index : Chained('root') PathPart('') Args(0) {
 
         my @all_fav = map { $_->{fields}->{distribution} }
             @{ $faves_data->{hits}->{hits} };
-        my $noLatest = $c->model('API::Release')->no_latest(@all_fav);
+        my $noLatest = $c->model('API::Release')->no_latest(@all_fav)->recv;
+        $took += $noLatest->{took} || 0;
 
         $faves = [
             map {
                 my $distro = $_->{fields}->{distribution};
-                $noLatest->{$distro} ? () : $_->{fields};
+                $noLatest->{no_latest}->{$distro} ? () : $_->{fields};
             } @{ $faves_data->{hits}->{hits} }
         ];
         $self->single_valued_arrayref_to_scalar($faves);

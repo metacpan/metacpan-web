@@ -446,12 +446,13 @@ sub topuploaders {
 
 sub no_latest {
     my ( $self, @distributions ) = @_;
+    my $cv = $self->cv;
 
     # If there are no distributions return
     return {} unless (@distributions);
 
     @distributions = uniq @distributions;
-    my $result = $self->request(
+    $self->request(
         '/release/_search',
         {
             size  => scalar @distributions,
@@ -468,17 +469,28 @@ sub no_latest {
             },
             fields => [qw(distribution status)]
         }
-    )->recv;
-
-    my @latest
-        = map { $_->{fields}->{distribution} } @{ $result->{hits}->{hits} };
-
-    my %no_latest = map {
-        my $distro = $_;
-        ( first { $_ eq $distro } @latest ) ? () : ( $distro, 1 );
-    } @distributions;
-
-    return \%no_latest;
+        )->cb(
+        sub {
+            my $data = shift->recv;
+            my @latest
+                = map { $_->{fields}->{distribution} }
+                @{ $data->{hits}->{hits} };
+            $cv->send(
+                {
+                    took      => $data->{took},
+                    no_latest => {
+                        map {
+                            my $distro = $_;
+                            ( first { $_ eq $distro } @latest )
+                                ? ()
+                                : ( $distro, 1 );
+                        } @distributions
+                    }
+                }
+            );
+        }
+        );
+    return $cv;
 }
 
 __PACKAGE__->meta->make_immutable;
