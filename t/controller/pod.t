@@ -18,7 +18,7 @@ test_psgi app, sub {
 
     ok(
         my $this = $tx->find_value(
-            '//li[text()="Permalinks"]/following-sibling::li[2]/a[text()="This version"]/@href'
+            '//li[text()="Permalinks"]/following-sibling::li[a[text()="This version"]][1]/a[text()="This version"]/@href'
         ),
         'contains link to "this" version'
     );

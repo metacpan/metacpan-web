@@ -13,9 +13,9 @@
 
 <script>
     $('#dependencies-graph').on('show.bs.modal', function() {
-        var iframe = $("#dependencies-graph iframe");
+        var iframe = $("iframe", this);
         var base   = "//widgets.stratopan.com/wheel";
-        var src    = base + "?q=<% release.name %>";
+        var src    = base + "?q=<% release.name | uri %>";
         iframe.attr("src") || iframe.attr("src", src);
         if (!iframe) return e.preventDefault();
     });
