@@ -186,6 +186,9 @@ $(function () {
         if (pod_lines) {
             var pods = findLines(pre, pod_lines);
             pods.addClass('pod-line');
+            if (pods.filter('.highlighted').length) {
+                $('.pod-toggle').removeClass('pod-hidden');
+            }
             pods.each(function(i, line) {
                 var $line = $(line);
                 var prev = $line.prev();
@@ -250,7 +253,14 @@ $(function () {
             if (lineMatch = document.location.hash.match(hashLines) ) {
                 source.attr('data-line', lineMatch[1]);
                 source.find('.highlighted').removeClass('highlighted');
-                findLines(source, lineMatch[1]).addClass('highlighted');
+                var lines = findLines(source, lineMatch[1]);
+                lines.addClass('highlighted');
+                if (lines.filter('.pod-line').length) {
+                    // make sure pod is visible if we're moving to it.
+                    // also manually scroll to it in case it was hidden
+                    $('.pod-toggle').removeClass('pod-hidden');
+                    $(window).scrollTop($(lines[0]).offset().top);
+                }
             }
         });
     }
