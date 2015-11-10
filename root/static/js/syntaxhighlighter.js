@@ -67,7 +67,7 @@ $(function () {
         // (again, possibly across a newline (which is  actually a new div))
         // without knowing where to end (the closing delimiter) would be really difficult.
         // See also the above comment about scanning the plain string and linkifying later.
-        code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
+        code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
         {
             var match = null,
                 mcpan_url
