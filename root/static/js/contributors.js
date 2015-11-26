@@ -1,4 +1,23 @@
 $(function(){
+    function gravatar_fixup ( av, size ) {
+        av = av.replace(
+            /^https?:\/\/([a-z0-9.-]+\.)?gravatar\.com\//i,
+            "https://secure.gravatar.com/",
+        );
+        av = av.replace(
+            /([;&?])s=\d+/,
+            '$1s=20'
+        );
+        av = av.replace(
+            /([;&?]d=)([^;&?]+)/,
+            function (match, param, fallback) {
+                var url = decodeURIComponent(fallback);
+                url = gravatar_fixup(url);
+                return(param + encodeURIComponent(url));
+            }
+        );
+        return av;
+    }
     function updateContrib ( li, data ){
         if (!data.name) {
             return;
@@ -15,14 +34,7 @@ $(function(){
 
         var gravatar = data.gravatar_url;
         if (gravatar) {
-            gravatar = gravatar.replace(
-                "^https?://([a-z0-9.-]+\.)?gravatar\.com/",
-                "https://secure.gravatar.com/",
-                "i"
-            ).replace(
-                /s=\d+/,
-                's=20'
-            );
+            gravatar = gravatar_fixup(gravatar);
 
             var img = $('<img />')
                 .attr( 'width', 20 )
