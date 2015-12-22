@@ -2,7 +2,7 @@ $(function(){
     function gravatar_fixup ( av, size ) {
         av = av.replace(
             /^https?:\/\/([a-z0-9.-]+\.)?gravatar\.com\//i,
-            "https://secure.gravatar.com/",
+            "https://secure.gravatar.com/"
         );
         av = av.replace(
             /([;&?])s=\d+/,
