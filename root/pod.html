@@ -8,51 +8,55 @@
   rss = 'distribution/' _ module.distribution
 %>
 
-<% INCLUDE inc/breadcrumbs.html %>
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
+  <% INCLUDE inc/breadcrumbs.html schema_org = 1 %>
 
-<ul class="nav-list slidepanel" itemscope itemtype="http://schema.org/SoftwareApplication">
-  <li class="visible-xs">
-    <% INCLUDE mobile/toolbar-search-form.html %>
-  </li>
-  <li class="nav-header"><span class="relatize"><% module.date.dt_http %></span></li>
-  <% IF documented_module.version %>
-  <li>
-    Module version: <% documented_module.version | html %>
-  </li>
+  <ul class="nav-list slidepanel">
+    <li class="visible-xs">
+      <% INCLUDE mobile/toolbar-search-form.html %>
+    </li>
+    <li class="nav-header">
+      <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
+    </li>
+    <% IF documented_module.version %>
+    <li>
+      Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
+    </li>
+    <% END %>
+    <li>
+      <a data-keyboard-shortcut="g s" href="/source/<% module.author %>/<% module.release %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
+      (<a href="<% api_external_secure %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+    </li>
+    <li>
+      <a data-keyboard-shortcut="g b" href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+      (<a href="<% api_external_secure %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+    </li>
+    <% PROCESS inc/release-info.html schema_org = 1 %>
+    <li class="nav-header">Activity</li>
+    <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
+    <% INCLUDE inc/release-tools.html schema_org = 1 %>
+  </ul>
+
+  <button id="right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
+  <div id="right-panel" class="pull-right">
+  <div class="box-right">
+  <% INCLUDE inc/author-pic.html author = author %>
+  <% INCLUDE inc/contributors.html contributors = contributors %>
+  </div>
+  <% INCLUDE inc/dependencies.html dependencies = release.dependency %>
+  </div>
+  <a name="___pod"></a>
+  <div class="pod content anchors">
+  <% IF pod %>
+  <% pod | none %>
+  <% ELSIF pod_error %>
+  <p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
+  <% ELSE %>
+  <p class="pod-error">
+      No POD found for <code><% module.name %></code>.
+      Time to <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">read the source</a>?
+  </p>
   <% END %>
-  <li>
-    <a data-keyboard-shortcut="g s" href="/source/<% module.author %>/<% module.release %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
-    (<a href="<% api_external_secure %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
-  </li>
-  <li>
-    <a data-keyboard-shortcut="g b" href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
-    (<a href="<% api_external_secure %>/source/<% module.author %>/<% module.release %>/">raw</a>)
-  </li>
-  <% PROCESS inc/release-info.html %>
-  <li class="nav-header">Activity</li>
-  <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
-  <% INCLUDE inc/release-tools.html %>
-</ul>
-
-<button id="right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
-<div id="right-panel" class="pull-right">
-<div class="box-right">
-<% INCLUDE inc/author-pic.html author = author %>
-<% INCLUDE inc/contributors.html contributors = contributors %>
-</div>
-<% INCLUDE inc/dependencies.html dependencies = release.dependency %>
-</div>
-<a name="___pod"></a>
-<div class="pod content anchors">
-<% IF pod %>
-<% pod | none %>
-<% ELSIF pod_error %>
-<p class="pod-error">Error rendering POD for <code><% module.name %></code> - <% pod_error %></p>
-<% ELSE %>
-<p class="pod-error">
-    No POD found for <code><% module.name %></code>.
-    Time to <a href="/source/<% module.author %>/<% module.release %>/<% module.path %>">read the source</a>?
-</p>
-<% END %>
-	<% INCLUDE inc/module-install.html %>
+        <% INCLUDE inc/module-install.html %>
+  </div>
 </div>

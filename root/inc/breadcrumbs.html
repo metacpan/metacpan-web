@@ -28,14 +28,16 @@ END %>
 <% END %>
 
 
-<div class="breadcrumbs" itemscope itemtype="http://schema.org/SoftwareApplication">
-  <a data-keyboard-shortcut="g a" rel="author" itemprop="author" itemscope itemtype="http://schema.org/Person" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>" class="author-name"><% author.name %></a>
+<div class="breadcrumbs">
+  <span <% IF schema_org %>itemprop="author" itemscope itemtype="http://schema.org/Person"<% END %> >
+    <a <% IF schema_org %>itemprop="url" <% END %> data-keyboard-shortcut="g a" rel="author" href="/author/<% IF module; module.author; ELSE; release.author; END %>" title="<% author.asciiname %>" class="author-name"><span <% IF schema_org %>itemprop="name"<% END %> ><% author.name %></span></a>
+  </span>
   <span>&nbsp;/&nbsp;</span>
   <div class="release status-<% release.status %> maturity-<% release.maturity %><% IF mark_unauthorized_releases && NOT release.authorized %> unauthorized<% END %>">
     <span class="dropdown"><b class="caret"></b></span>
     <select class="<% module ? "" : "extend" %>" onchange="document.location.href=this.value"><% PROCESS version_dropdown %></select>
     <% IF module %>
-    <a data-keyboard-shortcut="g d" class="release-name" itemprop="name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
+    <a data-keyboard-shortcut="g d" class="release-name" href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; [module.author, module.release].join('/'); END %>"><% release.name %></a>
     <% ELSE %>
       <span class="release-name"><% release.name %></span>
     <% END %>
@@ -48,7 +50,6 @@ END %>
   <%- END; END; %>
   <div class="inline"><%- INCLUDE inc/favorite.html module = module || release %></div>
   <%- IF module %>
-  <span>&nbsp;/&nbsp;
-  <% module.documentation or module.module.0.name %></span>
+  &nbsp;/&nbsp;<span <% IF schema_org %>itemprop="name"<% END %> ><% module.documentation or module.module.0.name %></span>
   <%- END %>
 </div>
