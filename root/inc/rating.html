@@ -1,4 +1,4 @@
 <% stars = (rating.mean * 2).fmt('%.0f') / 2 %>
 <span <% IF schema_org %>itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"<% END %> >
-  <a href="http://cpanratings.perl.org/rate/?distribution=<% distribution %>"><% prefix | none %><span class="rating-<% stars * 10 %>"></a><span class="invisible" <% IF schema_org %>itemprop="ratingValue"<% END %> ><% stars %></span>(<a href="http://cpanratings.perl.org/dist/<% distribution %>"><span <% IF schema_org %>itemprop="reviewCount"<% END %> ><% rating.count %></span> review<% IF rating.count > 1; 's'; END %></a>)
+  <a href="http://cpanratings.perl.org/rate/?distribution=<% distribution %>"><% prefix | none %><span class="rating-<% stars * 10 %>"></a><span class="hidden" <% IF schema_org %>itemprop="ratingValue"<% END %> ><% stars %></span> (<a href="http://cpanratings.perl.org/dist/<% distribution %>"><span <% IF schema_org %>itemprop="reviewCount"<% END %> ><% rating.count %></span> review<% IF rating.count > 1; 's'; END %></a>)
 </span>
