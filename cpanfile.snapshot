@@ -489,15 +489,17 @@ DISTRIBUTIONS
       MooseX::Types 0
       Test::More 0
       namespace::autoclean 0
-  Catalyst-Runtime-5.90061
-    pathname: J/JJ/JJNAPIORK/Catalyst-Runtime-5.90061.tar.gz
+  Catalyst-Runtime-5.90103
+    pathname: M/MS/MSTROUT/Catalyst-Runtime-5.90103.tar.gz
     provides:
-      Catalyst 5.90061
+      Catalyst 5.90103
       Catalyst::Action undef
       Catalyst::ActionChain undef
       Catalyst::ActionContainer undef
       Catalyst::ActionRole::ConsumesContent undef
       Catalyst::ActionRole::HTTPMethods undef
+      Catalyst::ActionRole::QueryMatching undef
+      Catalyst::ActionRole::Scheme undef
       Catalyst::Base undef
       Catalyst::ClassData undef
       Catalyst::Component undef
@@ -519,12 +521,15 @@ DISTRIBUTIONS
       Catalyst::Exception::Go undef
       Catalyst::Exception::Interface undef
       Catalyst::Log undef
+      Catalyst::Middleware::Stash undef
       Catalyst::Model undef
-      Catalyst::Plugin::Unicode::Encoding 2.1
+      Catalyst::Plugin::Unicode::Encoding 99.0
       Catalyst::Request undef
+      Catalyst::Request::PartData undef
       Catalyst::Request::Upload undef
       Catalyst::Response undef
-      Catalyst::Runtime 5.90061
+      Catalyst::Response::Writer undef
+      Catalyst::Runtime 5.90103
       Catalyst::Script::CGI undef
       Catalyst::Script::Create undef
       Catalyst::Script::FastCGI undef
@@ -539,7 +544,7 @@ DISTRIBUTIONS
     requirements:
       CGI::Simple::Cookie 1.109
       CGI::Struct 0
-      Carp 0
+      Carp 1.25
       Class::C3::Adopt::NEXT 0.07
       Class::Data::Inheritable 0
       Class::Load 0.12
@@ -550,7 +555,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       HTML::Entities 0
       HTML::HeadParser 0
-      HTTP::Body 1.06
+      HTTP::Body 1.22
       HTTP::Headers 1.64
       HTTP::Request 5.814
       HTTP::Request::AsCGI 1.0
@@ -579,7 +584,7 @@ DISTRIBUTIONS
       Plack::Middleware::IIS6ScriptNameFix 0
       Plack::Middleware::IIS7KeepAliveFix 0
       Plack::Middleware::LighttpdScriptNameFix 0
-      Plack::Middleware::MethodOverride 0
+      Plack::Middleware::MethodOverride 0.12
       Plack::Middleware::RemoveRedundantBody 0.03
       Plack::Middleware::ReverseProxy 0.04
       Plack::Request::Upload 0
@@ -598,8 +603,9 @@ DISTRIBUTIONS
       Tree::Simple 1.15
       Tree::Simple::Visitor::FindByPath 0
       Try::Tiny 0.17
-      URI 1.36
-      namespace::autoclean 0.09
+      URI 1.65
+      URI::ws 0.03
+      namespace::autoclean 0.28
       namespace::clean 0.23
       perl 5.008003
   Catalyst-View-JSON-0.33
@@ -2014,11 +2020,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Devel-StackTrace-2.00
-    pathname: D/DR/DROLSKY/Devel-StackTrace-2.00.tar.gz
+  Devel-StackTrace-2.01
+    pathname: D/DR/DROLSKY/Devel-StackTrace-2.01.tar.gz
     provides:
-      Devel::StackTrace 2.00
-      Devel::StackTrace::Frame 2.00
+      Devel::StackTrace 2.01
+      Devel::StackTrace::Frame 2.01
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -2640,20 +2646,20 @@ DISTRIBUTIONS
       base 0
       integer 0
       perl 5.008
-  HTTP-Body-1.19
-    pathname: G/GE/GETTY/HTTP-Body-1.19.tar.gz
+  HTTP-Body-1.22
+    pathname: G/GE/GETTY/HTTP-Body-1.22.tar.gz
     provides:
-      HTTP::Body 1.19
-      HTTP::Body::MultiPart 1.19
-      HTTP::Body::OctetStream 1.19
-      HTTP::Body::UrlEncoded 1.19
-      HTTP::Body::XForms 1.19
-      HTTP::Body::XFormsMultipart 1.19
+      HTTP::Body 1.22
+      HTTP::Body::MultiPart 1.22
+      HTTP::Body::OctetStream 1.22
+      HTTP::Body::UrlEncoded 1.22
+      HTTP::Body::XForms 1.22
+      HTTP::Body::XFormsMultipart 1.22
       PAML undef
     requirements:
       Carp 0
       Digest::MD5 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
       File::Temp 0.14
       HTTP::Headers 0
       IO::File 1.14
@@ -2855,18 +2861,18 @@ DISTRIBUTIONS
       File::Temp 0
       Scalar::Util 0
       Test::More 0.88
-  IO-Socket-SSL-2.013
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.013.tar.gz
+  IO-Socket-SSL-2.024
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.024.tar.gz
     provides:
-      IO::Socket::SSL 2.013
-      IO::Socket::SSL::Intercept 1.93
-      IO::Socket::SSL::OCSP_Cache 2.013
-      IO::Socket::SSL::OCSP_Resolver 2.013
+      IO::Socket::SSL 2.024
+      IO::Socket::SSL::Intercept 2.014
+      IO::Socket::SSL::OCSP_Cache 2.024
+      IO::Socket::SSL::OCSP_Resolver 2.024
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.013
-      IO::Socket::SSL::SSL_HANDLE 2.013
-      IO::Socket::SSL::Session_Cache 2.013
-      IO::Socket::SSL::Utils 0.031
+      IO::Socket::SSL::SSL_Context 2.024
+      IO::Socket::SSL::SSL_HANDLE 2.024
+      IO::Socket::SSL::Session_Cache 2.024
+      IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
       Mozilla::CA 0
@@ -3974,18 +3980,18 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  MooseX-Types-Common-0.001012
-    pathname: E/ET/ETHER/MooseX-Types-Common-0.001012.tar.gz
+  MooseX-Types-Common-0.001013
+    pathname: E/ET/ETHER/MooseX-Types-Common-0.001013.tar.gz
     provides:
-      MooseX::Types::Common 0.001012
-      MooseX::Types::Common::Numeric 0.001012
-      MooseX::Types::Common::String 0.001012
+      MooseX::Types::Common 0.001013
+      MooseX::Types::Common::Numeric 0.001013
+      MooseX::Types::Common::String 0.001013
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 6.30
-      Module::Build::Tiny 0.030
+      Module::Build::Tiny 0.039
       MooseX::Types 0
       MooseX::Types::Moose 0
+      if 0
       perl 5.008
       strict 0
       warnings 0
@@ -4061,10 +4067,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20141217
-    pathname: A/AB/ABH/Mozilla-CA-20141217.tar.gz
+  Mozilla-CA-20160104
+    pathname: A/AB/ABH/Mozilla-CA-20160104.tar.gz
     provides:
-      Mozilla::CA 20141217
+      Mozilla::CA 20160104
     requirements:
       ExtUtils::MakeMaker 0
       Test 0
@@ -4161,10 +4167,10 @@ DISTRIBUTIONS
       IO::Socket 1.24
       MIME::Base64 2.11
       Test::More 0.52
-  Net-Fastly-1.02
-    pathname: F/FA/FASTLY/Net-Fastly-1.02.tar.gz
+  Net-Fastly-1.03
+    pathname: F/FA/FASTLY/Net-Fastly-1.03.tar.gz
     provides:
-      Net::Fastly 1.02
+      Net::Fastly 1.03
       Net::Fastly::Backend undef
       Net::Fastly::BelongsToServiceAndVersion undef
       Net::Fastly::Client undef
@@ -4213,10 +4219,10 @@ DISTRIBUTIONS
       IO::Socket::INET 0
       URI 0
       perl 5.006002
-  Net-SSLeay-1.68
-    pathname: M/MI/MIKEM/Net-SSLeay-1.68.tar.gz
+  Net-SSLeay-1.72
+    pathname: M/MI/MIKEM/Net-SSLeay-1.72.tar.gz
     provides:
-      Net::SSLeay 1.68
+      Net::SSLeay 1.72
       Net::SSLeay::Handle 0.61
     requirements:
       ExtUtils::MakeMaker 6.36
@@ -4739,11 +4745,11 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  Path-Iterator-Rule-1.008
-    pathname: D/DA/DAGOLDEN/Path-Iterator-Rule-1.008.tar.gz
+  Path-Iterator-Rule-1.011
+    pathname: D/DA/DAGOLDEN/Path-Iterator-Rule-1.011.tar.gz
     provides:
-      PIR 1.008
-      Path::Iterator::Rule 1.008
+      PIR 1.011
+      Path::Iterator::Rule 1.011
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -4754,14 +4760,15 @@ DISTRIBUTIONS
       Scalar::Util 0
       Text::Glob 0
       Try::Tiny 0
+      perl 5.010
       re 0
       strict 0
       warnings 0
       warnings::register 0
-  Path-Tiny-0.076
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.076.tar.gz
+  Path-Tiny-0.082
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.082.tar.gz
     provides:
-      Path::Tiny 0.076
+      Path::Tiny 0.082
       flock undef
     requirements:
       Carp 0
@@ -4774,7 +4781,7 @@ DISTRIBUTIONS
       File::Copy 0
       File::Glob 0
       File::Path 2.07
-      File::Spec 3.40
+      File::Spec 0.86
       File::Temp 0.19
       File::stat 0
       constant 0
@@ -5205,17 +5212,19 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Plack::Middleware 0
-  Plack-Middleware-MethodOverride-0.10
-    pathname: D/DW/DWHEELER/Plack-Middleware-MethodOverride-0.10.tar.gz
+  Plack-Middleware-MethodOverride-0.15
+    pathname: D/DW/DWHEELER/Plack-Middleware-MethodOverride-0.15.tar.gz
     provides:
-      Plack::Middleware::MethodOverride 0.10
+      Plack::Middleware::MethodOverride 0.15
     requirements:
-      Module::Build 0.30
-      Plack 0.9929
-      Test::Builder 0.70
-      Test::More 0.70
-      URI 0
+      ExtUtils::MakeMaker 0
+      Plack::Middleware 0
+      Plack::Request 0
+      Plack::Util::Accessor 0
+      parent 0
       perl 5.008001
+      strict 0
+      warnings 0
   Plack-Middleware-RemoveRedundantBody-0.03
     pathname: S/SW/SWEETKID/Plack-Middleware-RemoveRedundantBody-0.03.tar.gz
     provides:
@@ -5407,16 +5416,17 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-  Scalar-List-Utils-1.42
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.42.tar.gz
+  Scalar-List-Utils-1.43
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.43.tar.gz
     provides:
-      List::Util 1.42
-      List::Util::XS 1.42
-      Scalar::Util 1.42
-      Sub::Util 1.42
+      List::Util 1.43
+      List::Util::XS 1.43
+      Scalar::Util 1.43
+      Sub::Util 1.43
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+      perl 5.006
   Search-Elasticsearch-1.20
     pathname: D/DR/DRTECH/Search-Elasticsearch-1.20.tar.gz
     provides:
@@ -6421,45 +6431,44 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.000004
-    pathname: T/TO/TOBYINK/Type-Tiny-1.000004.tar.gz
+  Type-Tiny-1.000005
+    pathname: T/TO/TOBYINK/Type-Tiny-1.000005.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.000004
-      Devel::TypeTiny::Perl58Compat 1.000004
-      Error::TypeTiny 1.000004
-      Error::TypeTiny::Assertion 1.000004
-      Error::TypeTiny::Compilation 1.000004
-      Error::TypeTiny::WrongNumberOfParameters 1.000004
-      Eval::TypeTiny 1.000004
-      Reply::Plugin::TypeTiny 1.000004
-      Test::TypeTiny 1.000004
-      Type::Coercion 1.000004
-      Type::Coercion::FromMoose 1.000004
-      Type::Coercion::Union 1.000004
-      Type::Library 1.000004
-      Type::Params 1.000004
-      Type::Parser 1.000004
-      Type::Registry 1.000004
-      Type::Tiny 1.000004
-      Type::Tiny::Class 1.000004
-      Type::Tiny::Duck 1.000004
-      Type::Tiny::Enum 1.000004
-      Type::Tiny::Intersection 1.000004
-      Type::Tiny::Role 1.000004
-      Type::Tiny::Union 1.000004
-      Type::Utils 1.000004
-      Types::Common::Numeric 1.000004
-      Types::Common::String 1.000004
-      Types::Standard 1.000004
-      Types::Standard::ArrayRef 1.000004
-      Types::Standard::Dict 1.000004
-      Types::Standard::HashRef 1.000004
-      Types::Standard::Map 1.000004
-      Types::Standard::ScalarRef 1.000004
-      Types::Standard::Tuple 1.000004
-      Types::TypeTiny 1.000004
+      Devel::TypeTiny::Perl56Compat 1.000005
+      Devel::TypeTiny::Perl58Compat 1.000005
+      Error::TypeTiny 1.000005
+      Error::TypeTiny::Assertion 1.000005
+      Error::TypeTiny::Compilation 1.000005
+      Error::TypeTiny::WrongNumberOfParameters 1.000005
+      Eval::TypeTiny 1.000005
+      Reply::Plugin::TypeTiny 1.000005
+      Test::TypeTiny 1.000005
+      Type::Coercion 1.000005
+      Type::Coercion::FromMoose 1.000005
+      Type::Coercion::Union 1.000005
+      Type::Library 1.000005
+      Type::Params 1.000005
+      Type::Parser 1.000005
+      Type::Registry 1.000005
+      Type::Tiny 1.000005
+      Type::Tiny::Class 1.000005
+      Type::Tiny::Duck 1.000005
+      Type::Tiny::Enum 1.000005
+      Type::Tiny::Intersection 1.000005
+      Type::Tiny::Role 1.000005
+      Type::Tiny::Union 1.000005
+      Type::Utils 1.000005
+      Types::Common::Numeric 1.000005
+      Types::Common::String 1.000005
+      Types::Standard 1.000005
+      Types::Standard::ArrayRef 1.000005
+      Types::Standard::Dict 1.000005
+      Types::Standard::HashRef 1.000005
+      Types::Standard::Map 1.000005
+      Types::Standard::ScalarRef 1.000005
+      Types::Standard::Tuple 1.000005
+      Types::TypeTiny 1.000005
     requirements:
-      CPAN::Meta::Requirements 2.000
       Exporter::Tiny 0.026
       ExtUtils::MakeMaker 6.17
       perl 5.006001
@@ -6603,6 +6612,14 @@ DISTRIBUTIONS
       URI::QueryParam 0
       strict 0
       warnings 0
+  URI-ws-0.03
+    pathname: P/PL/PLICEASE/URI-ws-0.03.tar.gz
+    provides:
+      URI::ws 0.03
+      URI::wss 0.03
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      URI 0
   Variable-Magic-0.53
     pathname: V/VP/VPIT/Variable-Magic-0.53.tar.gz
     provides:
@@ -7036,16 +7053,15 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  namespace-autoclean-0.15
-    pathname: E/ET/ETHER/namespace-autoclean-0.15.tar.gz
+  namespace-autoclean-0.28
+    pathname: E/ET/ETHER/namespace-autoclean-0.28.tar.gz
     provides:
-      namespace::autoclean 0.15
+      namespace::autoclean 0.28
     requirements:
       B::Hooks::EndOfScope 0.12
-      Class::MOP 0.80
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
       List::Util 0
-      Module::Build::Tiny 0.030
+      Sub::Identify 0
       namespace::clean 0.20
       perl 5.006
       strict 0
