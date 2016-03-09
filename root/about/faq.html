@@ -80,19 +80,35 @@ If you are a module author you can link your [PAUSE](http://pause.perl.org/)
 account to your MetaCPAN account. But you must configure the email address
 forwarding in your PAUSE account for this to work.
 
-### Do you have multiple accounts?
+### Connecting one identity disconnects another?
 
-If you can only connect your account to github <em>or</em> PAUSE
+If you can only connect your account to GitHub _or_ PAUSE
 (e.g. connecting to one disconnects the other), it is usually because
-you have 2 accounts.
+you have (probably accidentally) created two accounts.
 
-To fix this
+To fix this:
 
- * log in with one of them
- * go to identities and disconnect that account
- * log in with the other and connect to the first
+1. Log in with one of them
+2. Go to identities and disconnect that account
+3. Log in with the other and connect to the first
 
-### Still have problems? Favorites not displaying on author page?
+### Trying to connect PAUSE just gives you JSON and doesn't work?
+
+It is possible to get your account into an inconsistent state where it won't 
+connect to PAUSE - particularly if you've connected via multiple identities, 
+and/or using multiple browsers.
+
+To fix this:
+
+1. Disconnect all identities
+2. Remove all cookies from `metacpan.org` and `api.metacpan.org`
+3. Reconnect via one identity
+4. Connect to PAUSE
+
+Make sure that you use the same browser for all of the steps - including 
+opening the link in the email from MetaCPAN.
+
+### Favorites not displaying on author page?
 
 Please see [this discussion](https://github.com/CPAN-API/metacpan-web/issues/852).
 
