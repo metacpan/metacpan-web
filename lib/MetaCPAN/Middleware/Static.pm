@@ -91,9 +91,9 @@ sub wrap {
         mount '/static' => sub {
             my $res = $static_app->(@_);
             push @{ $res->[1] }, (
-                'Cache-Control' => "max-age=${hour_ttl}",
+                'Cache-Control' => "max-age=${day_ttl}",
 
-                'Surrogate-Control' => "max-age=${hour_ttl}",
+                'Surrogate-Control' => "max-age=${year_ttl}",
                 'Surrogate-Key'     => 'assets',
             );
             $res;
