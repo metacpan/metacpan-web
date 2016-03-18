@@ -50,19 +50,19 @@ sub search {
             bool => {
                 should => [
                     {
-                        text => {
+                        match => {
                             'author.name.analyzed' =>
                                 { query => $query, operator => 'and' }
                         }
                     },
                     {
-                        text => {
+                        match => {
                             'author.asciiname.analyzed' =>
                                 { query => $query, operator => 'and' }
                         }
                     },
-                    { text => { 'author.pauseid'    => uc($query) } },
-                    { text => { 'author.profile.id' => lc($query) } },
+                    { match => { 'author.pauseid'    => uc($query) } },
+                    { match => { 'author.profile.id' => lc($query) } },
                 ]
             }
         },

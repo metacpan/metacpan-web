@@ -91,8 +91,7 @@ sub search_expanded {
     my $favorites    = $self->model('Favorite')->get( $user, @distributions );
     $_ = $_->recv for ( $ratings, $favorites, $descriptions );
     my $results = $self->_extract_results( $data, $ratings, $favorites );
-
-    map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
+    map { $_->{description} = $descriptions->{results}->{ $_->{id}[0] } }
         @{$results};
     $cv->send(
         {
@@ -127,7 +126,7 @@ sub search_collapsed {
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions = splice( @distributions, $from, $page_size );
+    @distributions = map { $_->[0] } splice( @distributions, $from, $page_size );
 
     # Everything else will fail (slowly and quietly) without distributions.
     if ( !@distributions ) {
@@ -146,7 +145,7 @@ sub search_collapsed {
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
     $results = $self->_collapse_results($results);
-    my @ids = map { $_->[0]->{id} } @$results;
+    my @ids = map { $_->[0]{id}[0] } @$results;
     $data = {
         results => $results,
         total   => $total,
@@ -154,10 +153,8 @@ sub search_collapsed {
     };
     my ($descriptions) = $self->search_descriptions(@ids)->recv;
     $data->{took} += $descriptions->{took} || 0;
-    map {
-        $_->[0]->{description}
-            = $descriptions->{results}->{ $_->[0]->{id} }
-    } @{ $data->{results} };
+    map { $_->[0]{description} = $descriptions->{results}{ $_->[0]{id}[0] } }
+        @{ $data->{results} };
     $cv->send($data);
     return $cv;
 }
@@ -179,14 +176,14 @@ sub search_descriptions {
             fields => [qw(description id)],
             size   => scalar @ids,
         }
-        )->cb(
+    )->cb(
         sub {
             my ($data) = shift->recv;
             $cv->send(
                 {
                     results => {
                         map {
-                            ( $_->{fields}->{id} =>
+                            ( $_->{fields}->{id}->[0] =>
                                     $_->{fields}->{description} )
                         } @{ $data->{hits}->{hits} }
                     },
@@ -194,7 +191,7 @@ sub search_descriptions {
                 }
             );
         }
-        );
+    );
     return $cv;
 }
 
@@ -202,18 +199,21 @@ sub _extract_results {
     my ( $self, $results, $ratings, $favorites ) = @_;
     return [
         map {
-            {
-                %{ $_->{fields} },
-                    abstract => $_->{fields}->{'abstract.analyzed'},
-                    score    => $_->{_score},
-                    rating =>
-                    $ratings->{ratings}->{ $_->{fields}->{distribution} },
-                    favorites =>
-                    $favorites->{favorites}->{ $_->{fields}->{distribution} },
-                    myfavorite => $favorites->{myfavorites}
-                    ->{ $_->{fields}->{distribution} },
+            my $res = $_;
+            for my $k ( qw/distribution author release path documentation date/ ) {
+                $res->{fields}{$k} = $res->{fields}{$k}[0]
+                    if ref $res->{fields}{$k} eq 'ARRAY';
             }
-        } @{ $results->{hits}->{hits} }
+            my $dist = $res->{fields}{distribution};
+            +{
+                %{ $res->{fields} },
+                abstract   => $res->{fields}{'abstract.analyzed'}[0],
+                score      => $res->{_score},
+                rating     => $ratings->{ratings}{$dist},
+                favorites  => $favorites->{favorites}{$dist},
+                myfavorite => $favorites->{myfavorites}{$dist},
+            }
+        } @{ $results->{hits}{hits} }
     ];
 }
 
@@ -228,9 +228,9 @@ sub _collapse_results {
         push( @{ $collapsed{$distribution}->{results} }, $result );
     }
     return [
-        map      { $collapsed{$_}->{results} }
-            sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
-            keys %collapsed
+        map  { $collapsed{$_}->{results} }
+        sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
+        keys %collapsed
     ];
 }
 
@@ -248,7 +248,7 @@ sub _search {
                     count =>
                         { terms => { size => 999, field => 'distribution' } }
                 }
-                )
+              )
             : (),
         }
     );
@@ -341,11 +341,10 @@ sub search {
             query => {
                 filtered => {
                     query => {
-                        custom_score => {
-
-                            # prefer shorter module names
-                            metacpan_script =>
-                                'prefer_shorter_module_names_400',
+                        function_score => {
+                            script_score => {
+                                script => "len = (doc.documentation.empty ? 26 : doc.documentation.value.length()); _score - len.toDouble()/400;"
+                            },
                             query => {
                                 boosting => {
                                     negative_boost => 0.5,
@@ -398,12 +397,12 @@ sub search {
                     status
                     indexed
                     authorized
-                    module
+                    module.name
                     distribution
                     date
                     id
                     pod_lines
-                    )
+                )
             ],
         }
     );
