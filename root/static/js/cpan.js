@@ -102,6 +102,11 @@ function toggleWhatsnew() {
     }
 }
 
+function setFavTitle(button) {
+    button.attr('title', button.hasClass('active') ? 'Remove from favorite' : 'Add to favorite');
+    return;
+}
+
 $(document).ready(function() {
 
     // User customisations
@@ -349,11 +354,7 @@ $(document).ready(function() {
         }, 1000);
     });
 
-    if ($(".inline").find("button").hasClass("active")) {
-        $(".favorite").attr("title", "Remove from favorite");
-    } else {
-        $(".favorite").attr("title", "Add to favorite");
-    }
+    setFavTitle($('.inline').find('button'));
 
     $('.dropdown-toggle').dropdown();
 
@@ -502,7 +503,9 @@ function showUserData(fav_data) {
         // On the page... make it deltable and styled as 'active'
         if (MetaCPAN.favs_to_check[distribution]) {
             $('#' + distribution + '-fav input[name="remove"]').val(1);
-            $('#' + distribution + '-fav button').addClass('active');
+            var button = $('#' + distribution + '-fav button');
+            button.addClass('active');
+            setFavTitle(button);
         }
 
     });
@@ -534,6 +537,7 @@ function favDistribution(form) {
         success: function() {
             var button = form.find('button');
             button.toggleClass('active');
+            setFavTitle(button);
             var counter = button.find('span');
             var count = counter.text();
             if (button.hasClass('active')) {
