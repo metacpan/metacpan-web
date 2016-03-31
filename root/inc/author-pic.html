@@ -33,16 +33,8 @@
 </strong>
 <span title="<% author.asciiname %>"><% author.name %></span>
 <%-
-  FOREACH p IN author.profile;
-  IF p.name == 'coderwall';
-%>
-  <div class="coderwall">
-    <a href="https://coderwall.com/<% p.id %>">
-        <img alt="Endorse <% author.asciiname %> on Coderwall"
-           title="Endorse <% author.asciiname %> on Coderwall"
-             width="110" height="20"
-             src="https://api.coderwall.com/<% p.id %>/endorsecount.png" /></a></div>
-<% END %>
+   FOREACH p IN author.profile;
+-%>
 <% IF p.name == "googleplus" %>
   <a rel="author" href="<% profiles.${p.name}.url.replace('%s', p.id) %>?rel=author" target="_blank" title="<% p.name %> - <% p.id%>" style="display: none;">
     <img src="/static/images/profile/<% p.name %>.png" width=16 height=16 alt="<% p.name %>">
