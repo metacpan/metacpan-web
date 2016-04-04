@@ -53,7 +53,7 @@ sub get {
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 ratings => {
                     terms_stats => {
                         value_field => 'rating.rating',
@@ -70,7 +70,7 @@ sub get {
                     took    => $ratings->{took},
                     ratings => {
                         map { $_->{term} => $_ }
-                            @{ $ratings->{facets}->{ratings}->{terms} }
+                            @{ $ratings->{aggregations}->{ratings}->{terms} }
                     }
                 }
             );

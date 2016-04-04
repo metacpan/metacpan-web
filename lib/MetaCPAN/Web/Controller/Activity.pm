@@ -40,7 +40,7 @@ sub index : Path {
         '/release/_search',
         {
             query  => { match_all => {} },
-            facets => {
+            aggregations => {
                 histo => {
                     date_histogram => { field => 'date', interval => $res },
                     facet_filter   => {
@@ -58,7 +58,7 @@ sub index : Path {
             size => 0,
         }
     )->recv;
-    my $entries = $data->{facets}->{histo}->{entries};
+    my $entries = $data->{aggregations}->{histo}->{entries};
     $data = { map { $_->{time} => $_->{count} } @$entries };
     my $line = [
         map {

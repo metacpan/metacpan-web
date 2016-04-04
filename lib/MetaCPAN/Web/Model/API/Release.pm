@@ -162,12 +162,12 @@ sub modules {
                                             {
                                                 exists => {
                                                     field =>
-                                                        'file.module.name'
+                                                        'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'file.module.indexed' =>
+                                                    'module.indexed' =>
                                                         \1
                                                 }
                                             }
@@ -178,12 +178,12 @@ sub modules {
                                             {
                                                 exists => {
                                                     field =>
-                                                        'file.pod.analyzed'
+                                                        'pod.analyzed'
                                                 }
                                             },
                                             {
                                                 term =>
-                                                    { 'file.indexed' => \1 }
+                                                    { 'indexed' => \1 }
                                             },
                                         ]
                                     }
@@ -305,7 +305,7 @@ sub interesting_files {
                                                     map {
                                                         {
                                                             term => {
-                                                                'file.name'
+                                                                'name'
                                                                     => $_
                                                             }
                                                         }
@@ -429,7 +429,7 @@ sub topuploaders {
         '/release/_search',
         {
             query  => { match_all => {} },
-            facets => {
+            aggregations => {
                 author => {
                     terms        => { field => 'author', size => 50 },
                     facet_filter => $range_filter,
