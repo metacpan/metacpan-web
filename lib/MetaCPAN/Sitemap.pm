@@ -8,7 +8,8 @@ use warnings;
 use autodie;
 
 use Carp;
-use ElasticSearch;
+use Search::Elasticsearch;
+use ElasticSearch::SearchBuilder;
 use File::Spec;
 use MetaCPAN::Web::Types qw( HashRef Int Str );
 use Moose;
@@ -51,11 +52,14 @@ sub process {
     # actually exist and b) the directory itself is writeable.
 
     # Get started. Create the ES object and the scrolled search object.
-    my $es = ElasticSearch->new(
-        servers    => 'api.metacpan.org',
-        no_refresh => 1,
+    my $es = Search::Elasticsearch->new(
+        #        nodes            => ['api.metacpan.org'],
+        nodes            => ['metacpan-01.ams4.prod.booking.com'],
+        cxn_pool         => 'Static::NoPing',
+        send_get_body_as => 'POST',
     );
-    defined $es or croak "Unable to create ElasticSearch: $!";
+
+    my $field_name = $self->field_name;
 
     # Start off with standard search parameters ..
 
@@ -63,7 +67,7 @@ sub process {
         index  => 'v0',
         size   => 5000,
         type   => $self->object_type,
-        fields => [ $self->field_name ],
+        fields => [$field_name],
     );
 
     # ..and augment them if necesary.
@@ -73,11 +77,12 @@ sub process {
         # Copy the filter over wholesale into the search parameters, and add
         # the filter fields to the field list.
 
-        $search_parameters{'queryb'} = $self->filter;
+        $search_parameters{'body'}
+            = ElasticSearch::SearchBuilder->new->query( $self->filter );
         push @{ $search_parameters{'fields'} }, keys %{ $self->filter };
     }
 
-    my $scrolled_search = $es->scrolled_search(%search_parameters);
+    my $scrolled_search = $es->scroll_helper(%search_parameters);
 
     # Open the output file, get ready to pump out the XML.
 
@@ -90,12 +95,11 @@ sub process {
             = 'https://metacpan.org/' . $self->cpan_directory . q{/};
     }
 
-    do {
-        my @hits = $scrolled_search->drain_buffer;
+    while ( $scrolled_search->refill_buffer ) {
         push @urls,
-            map { $metacpan_url . $_->{'fields'}->{ $self->field_name } }
-            @hits;
-    } while ( $scrolled_search->next() );
+            map { $metacpan_url . $_->{'fields'}->{$field_name} }
+            $scrolled_search->drain_buffer;
+    }
 
     $_ = $_ . q{ } for @urls;
 
@@ -117,5 +121,7 @@ sub process {
     close $fh;
     return;
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;

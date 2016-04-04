@@ -38,7 +38,7 @@ sub find {
 }
 
 sub _not_rogue {
-    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } }
+    my @rogue_dists = map { { term => { 'distribution' => $_ } } }
         @ROGUE_DISTRIBUTIONS;
     return { not => { filter => { or => \@rogue_dists } } };
 }
@@ -109,13 +109,13 @@ sub search_collapsed {
     do {
         $data = $self->_search( $query, $run )->recv;
         $took += $data->{took} || 0;
-        $total = @{ $data->{facets}->{count}->{terms} || [] }
+        $total = @{ $data->{aggregations}->{count}->{buckets} || [] }
             if ( $run == 1 );
         $hits = @{ $data->{hits}->{hits} || [] };
         @distributions = uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         $run++;
-        } while ( @distributions < $page_size + $from
+    } while ( @distributions < $page_size + $from
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
@@ -155,7 +155,7 @@ sub search_descriptions {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
-                        or => [ map { { term => { 'file.id' => $_ } } } @ids ]
+                        or => [ map { { term => { 'id' => $_ } } } @ids ]
                     }
                 }
             },
@@ -235,7 +235,7 @@ sub _search {
             fields => [qw(distribution)],
             $run == 1
             ? (
-                facets => {
+                aggregations => {
                     count =>
                         { terms => { size => 999, field => 'distribution' } }
                 }
@@ -264,7 +264,7 @@ sub search {
     ( my $clean = $query ) =~ s/::/ /g;
 
     my $negative
-        = { term => { 'file.mime' => { value => 'text/x-script.perl' } } };
+        = { term => { 'mime' => { value => 'text/x-script.perl' } } };
 
     my $positive = {
         bool => {
@@ -273,7 +273,7 @@ sub search {
                 # exact matches result in a huge boost
                 {
                     term => {
-                        'file.documentation' => {
+                        'documentation' => {
                             value => $query,
                             boost => 20
                         }
@@ -281,7 +281,7 @@ sub search {
                 },
                 {
                     term => {
-                        'file.module.name' => {
+                        'module.name' => {
                             value => $query,
                             boost => 20
                         }
@@ -295,8 +295,8 @@ sub search {
                             {
                                 query_string => {
                                     fields => [
-                                        qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
-                                        qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
+                                        qw(documentation.analyzed^2 module.name.analyzed^2 distribution.analyzed),
+                                        qw(documentation.camelcase module.name.camelcase distribution.camelcase)
                                     ],
                                     query                  => $clean,
                                     boost                  => 3,
@@ -349,8 +349,8 @@ sub search {
                         and => [
                             $self->_not_rogue,
                             { term => { status            => 'latest' } },
-                            { term => { 'file.authorized' => \1 } },
-                            { term => { 'file.indexed'    => \1 } },
+                            { term => { 'authorized' => \1 } },
+                            { term => { 'indexed'    => \1 } },
                             {
                                 or => [
                                     {
@@ -358,12 +358,12 @@ sub search {
                                             {
                                                 exists => {
                                                     field =>
-                                                        'file.module.name'
+                                                        'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'file.module.indexed' =>
+                                                    'module.indexed' =>
                                                         \1
                                                 }
                                             }
@@ -413,7 +413,7 @@ sub _search_in_distributions {
                         {
                             or => [
                                 map {
-                                    { term => { 'file.distribution' => $_ } }
+                                    { term => { 'distribution' => $_ } }
                                 } @distributions
                             ]
                         }

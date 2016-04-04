@@ -10,6 +10,7 @@ sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
+    @distributions or return $cv;
     $self->request(
         '/favorite/_search',
         {
@@ -26,7 +27,7 @@ sub get {
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 favorites => {
                     terms => {
                         field => 'favorite.distribution',
@@ -52,12 +53,12 @@ sub get {
                     took      => $data->{took},
                     favorites => {
                         map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{favorites}->{terms} }
+                            @{ $data->{aggregations}->{favorites}->{terms} }
                     },
                     myfavorites => $user
                     ? {
                         map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{myfavorites}->{terms} }
+                            @{ $data->{aggregations}->{myfavorites}->{terms} }
                         }
                     : {},
                 }
@@ -101,7 +102,7 @@ sub leaderboard {
         {
             size   => 0,
             query  => { match_all => {} },
-            facets => {
+            aggregations => {
                 leaderboard =>
                     { terms => { field => 'distribution', size => 600 }, },
             },

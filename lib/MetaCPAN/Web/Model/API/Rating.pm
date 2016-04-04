@@ -29,6 +29,7 @@ sub get {
     my ( $self, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
+    @distributions or return $cv;
     $self->request(
         '/rating/_search',
         {
@@ -45,7 +46,7 @@ sub get {
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 ratings => {
                     terms_stats => {
                         value_field => 'rating.rating',
@@ -62,7 +63,7 @@ sub get {
                     took    => $ratings->{took},
                     ratings => {
                         map { $_->{term} => $_ }
-                            @{ $ratings->{facets}->{ratings}->{terms} }
+                            @{ $ratings->{aggregations}->{ratings}->{terms} }
                     }
                 }
             );

@@ -69,7 +69,7 @@ sub index : Path {
         # these would be nicer if we had variable-length lookbehinds...
         $query =~ s{(^|\s)author:([a-zA-Z]+)(?=\s|$)}{$1author:\U$2\E}g;
         $query
-            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1file.distribution:$3/g;
+            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1distribution:$3/g;
         $query
             =~ s/(^|\s)module:(\w[\w:]*)(?=\s|$)/$1module.name.analyzed:$2/g;
 

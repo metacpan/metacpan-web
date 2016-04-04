@@ -43,7 +43,7 @@ sub index : Path('/favorite/leaderboard') {
     my ( $self, $c ) = @_;
 
     my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;
-    my @leaders = @{ $data->{facets}->{leaderboard}->{terms} }[ 0 .. 99 ];
+    my @leaders = @{ $data->{aggregations}->{leaderboard}->{terms} }[ 0 .. 99 ];
 
     $c->stash(
         {
