@@ -40,35 +40,41 @@ sub get {
                     filter => {
                         or => [
                             map {
-                                { term => { 'rating.distribution' => $_ } }
+                                { term => { 'distribution' => $_ } }
                             } @distributions
                         ]
                     }
                 }
             },
-            aggregations => {
-                ratings => {
-                    terms_stats => {
-                        value_field => 'rating.rating',
-                        key_field   => 'rating.distribution'
+            "aggregations" => {
+                "ratings"=>{
+                    "terms" => {
+                        "field" => "distribution"
+                    },
+                    "aggregations" => {
+                        "ratings_dist" => {
+                            "stats" => {
+                                "field" => "rating"
+                            }
+                        }
                     }
                 }
             }
         }
-        )->cb(
+    )->cb(
         sub {
             my ($ratings) = shift->recv;
             $cv->send(
                 {
                     took    => $ratings->{took},
                     ratings => {
-                        map { $_->{term} => $_ }
-                            @{ $ratings->{aggregations}->{ratings}->{terms} }
+                        map { $_->{key} => $_->{ratings_dist} }
+                            @{ $ratings->{aggregations}->{ratings}->{buckets} }
                     }
                 }
             );
         }
-        );
+    );
     return $cv;
 }
 __PACKAGE__->meta->make_immutable;
