@@ -44,9 +44,12 @@ sub get {
                 $user
                 ? (
                     myfavorites => {
-                        terms => { field => 'favorite.distribution', },
-                        facet_filter =>
-                            { term => { 'favorite.user' => $user } }
+                        filter => { term => { 'favorite.user' => $user } },
+                        aggregations => {
+                            enteries => {
+                                terms => { field => 'favorite.distribution' }
+                            }
+                        }
                     }
                   )
                 : (),
@@ -59,13 +62,13 @@ sub get {
                 {
                     took      => $data->{took},
                     favorites => {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{aggregations}->{favorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{favorites}->{buckets} }
                     },
                     myfavorites => $user
                     ? {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{aggregations}->{myfavorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{myfavorites}->{entries}->{buckets} }
                         }
                     : {},
                 }
