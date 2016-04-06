@@ -226,7 +226,7 @@ sub find {
                         and => [
                             {
                                 term => {
-                                    'release.distribution' => $distribution
+                                    'distribution' => $distribution
                                 }
                             },
                             { term => { status => 'latest' } }
@@ -256,8 +256,8 @@ sub reverse_dependencies {
                     query  => { 'match_all' => {} },
                     filter => {
                         and => [
-                            { term => { 'release.status'     => 'latest' } },
-                            { term => { 'release.authorized' => \1 } },
+                            { term => { 'status'     => 'latest' } },
+                            { term => { 'authorized' => \1 } },
                         ]
                     }
                 }
@@ -368,7 +368,7 @@ sub versions {
                     query  => { match_all => {} },
                     filter => {
                         and => [
-                            { term => { 'release.distribution' => $dist } },
+                            { term => { 'distribution' => $dist } },
                         ],
 
                     }
