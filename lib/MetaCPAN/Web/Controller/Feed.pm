@@ -76,7 +76,7 @@ sub author : Chained('index') PathPart Args(1) {
         = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
     my $author_info = $author_cv->recv;
     my $faves_cv
-        = $c->model('API::Favorite')->by_user( $author_info->{user} );
+        = $c->model('API::Favorite')->by_user( $author_info->{pauseid} );
     my $faves_data
         = [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ];
 

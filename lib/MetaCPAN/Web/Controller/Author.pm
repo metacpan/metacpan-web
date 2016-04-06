@@ -50,7 +50,7 @@ sub index : Chained('root') PathPart('') Args(0) {
     my ( $author, $data ) = ( $author_cv->recv, $releases_cv->recv );
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
-    my $faves_cv = $c->model('API::Favorite')->by_user( $author->{user} );
+    my $faves_cv = $c->model('API::Favorite')->by_user( $author->{pauseid} );
 
     my $faves_data = $faves_cv->recv;
     my $faves      = [
