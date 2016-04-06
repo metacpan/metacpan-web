@@ -59,6 +59,13 @@ sub index : Chained('root') PathPart('') Args(0) {
     ];
 
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
+    for my $r ( @{ $releases } ) {
+        next unless ref $r eq 'HASH';
+        for my $k ( keys %$r ) {
+            next unless ref $r->{$k} eq 'ARRAY';
+            $r->{$k} = $r->{$k}[0];
+        }
+    }
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;
