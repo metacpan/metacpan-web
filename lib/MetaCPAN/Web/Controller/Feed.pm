@@ -112,6 +112,11 @@ sub distribution : Chained('index') PathPart Args(1) {
 
 sub build_entry {
     my ( $self, $entry ) = @_;
+    ref $entry eq 'HASH' or warn 'WRONG ENTRY TYPE';
+    for my $k ( keys %{ $entry } ) {
+        next unless ref $entry->{$k} eq 'ARRAY';
+        $entry->{$k} = $entry->{$k}[0];
+    }
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
