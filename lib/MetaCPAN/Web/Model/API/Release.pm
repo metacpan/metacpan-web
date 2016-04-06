@@ -411,8 +411,12 @@ sub topuploaders {
             query  => { match_all => {} },
             aggregations => {
                 author => {
-                    terms        => { field => 'author', size => 50 },
-                    facet_filter => $range_filter,
+                    aggregations => {
+                        entries => {
+                            terms => { field => 'author', size => 50 }
+                        }
+                    },
+                    filter => $range_filter,
                 },
             },
             size => 0,
