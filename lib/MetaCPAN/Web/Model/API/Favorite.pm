@@ -48,11 +48,11 @@ sub get {
                         facet_filter =>
                             { term => { 'favorite.user' => $user } }
                     }
-                    )
+                  )
                 : (),
             }
         }
-        )->cb(
+    )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
