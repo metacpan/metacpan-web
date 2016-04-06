@@ -42,8 +42,7 @@ sub index : Path {
             query  => { match_all => {} },
             aggregations => {
                 histo => {
-                    date_histogram => { field => 'date', interval => $res },
-                    facet_filter   => {
+                    filter   => {
                         and => [
                             {
                                 range => {
@@ -52,14 +51,19 @@ sub index : Path {
                             },
                             @$q
                         ]
+                    },
+                    aggregations => {
+                        entries => {
+                            date_histogram => { field => 'date', interval => $res },
+                        }
                     }
                 }
             },
             size => 0,
         }
     )->recv;
-    my $entries = $data->{aggregations}->{histo}->{entries};
-    $data = { map { $_->{time} => $_->{count} } @$entries };
+    my $entries = $data->{aggregations}->{histo}->{entries}->{buckets};
+    $data = { map { $_->{key} => $_->{doc_count} } @$entries };
     my $line = [
         map {
             $data->{ $start->clone->add( months => $_ )->epoch . '000' }
