@@ -13,7 +13,15 @@ sub index : Path {
         = $c->model('API::Release')
         ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    $c->res->last_modified( $latest->[0]->{date} ) if (@$latest);
+    if ( @$latest ) {
+        $c->res->last_modified( $latest->[0]->{date} );
+        for my $e ( @$latest ) {
+            next unless ref $e eq 'HASH';
+            for my $k ( keys %$e ) {
+                $e->{$k} = $e->{$k}[0] if ref $e->{$k} eq 'ARRAY';
+            }
+        }
+    }
     $c->stash(
         {
             recent    => $latest,
