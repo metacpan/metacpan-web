@@ -53,8 +53,7 @@ sub process {
 
     # Get started. Create the ES object and the scrolled search object.
     my $es = Search::Elasticsearch->new(
-        #        nodes            => ['api.metacpan.org'],
-        nodes            => ['metacpan-01.ams4.prod.booking.com'],
+        nodes            => ['api.metacpan.org'],
         cxn_pool         => 'Static::NoPing',
         send_get_body_as => 'POST',
     );
