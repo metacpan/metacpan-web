@@ -53,15 +53,15 @@ sub get {
                     }
                 }
             },
-            "aggregations" => {
-                "ratings"=>{
-                    "terms" => {
-                        "field" => "distribution"
+            aggregations => {
+                ratings =>{
+                    terms => {
+                        field => 'distribution'
                     },
-                    "aggregations" => {
-                        "ratings_dist" => {
-                            "stats" => {
-                                "field" => "rating"
+                    aggregations => {
+                        ratings_dist => {
+                            stats => {
+                                field => 'rating'
                             }
                         }
                     }
