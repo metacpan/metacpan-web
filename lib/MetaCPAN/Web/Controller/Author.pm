@@ -6,6 +6,7 @@ use List::Util                ();
 use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
 use Locale::Country ();
+use MetaCPAN::Web::Util qw( fix_structure );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -58,14 +59,7 @@ sub index : Chained('root') PathPart('') Args(0) {
         map  { $_->{fields} } @{ $faves_data->{hits}{hits} }
     ];
 
-    my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    for my $r ( @{ $releases } ) {
-        next unless ref $r eq 'HASH';
-        for my $k ( keys %$r ) {
-            next unless ref $r->{$k} eq 'ARRAY';
-            $r->{$k} = $r->{$k}[0];
-        }
-    }
+    my $releases = [ map { fix_structure($_->{fields}) } @{ $data->{hits}->{hits} } ];
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;

@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::Recent;
 use strict;
 use warnings;
 use base 'MetaCPAN::Web::Controller';
+use MetaCPAN::Web::Util qw( fix_structure );
 
 sub index : Path {
     my ( $self, $c ) = @_;
@@ -12,15 +13,9 @@ sub index : Path {
     my ($data)
         = $c->model('API::Release')
         ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
-    my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
+    my $latest = [ map { fix_structure($_->{fields}) } @{ $data->{hits}->{hits} } ];
     if ( @$latest ) {
         $c->res->last_modified( $latest->[0]->{date} );
-        for my $e ( @$latest ) {
-            next unless ref $e eq 'HASH';
-            for my $k ( keys %$e ) {
-                $e->{$k} = $e->{$k}[0] if ref $e->{$k} eq 'ARRAY';
-            }
-        }
     }
     $c->stash(
         {
