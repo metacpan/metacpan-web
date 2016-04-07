@@ -198,17 +198,20 @@ sub modules {
             # Sort by documentation name; if there isn't one, sort by path.
             sort => [ 'documentation', 'path' ],
 
-            # Get indexed and authorized from _source to work around ES bug:
-            # https://github.com/CPAN-API/metacpan-web/issues/881
-            # https://github.com/elasticsearch/elasticsearch/issues/2551
             fields => [
                 qw(
-                    documentation path status author release
-                    pod_lines
-                    distribution
-                    _source.abstract  _source.module
-                    _source.indexed   _source.authorized
-                    )
+                      author
+                      authorized
+                      distribution
+                      documentation
+                      indexed
+                      path
+                      pod_lines
+                      release
+                      _source.abstract
+                      _source.module
+                      status
+               )
             ],
         }
     );
