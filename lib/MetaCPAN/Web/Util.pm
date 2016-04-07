@@ -1,5 +1,8 @@
 package MetaCPAN::Web::Util;
 
+use strict;
+use warnings;
+
 use base 'Exporter';
 our @EXPORT = qw(
     fix_structure

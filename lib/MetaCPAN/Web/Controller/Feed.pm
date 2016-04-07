@@ -9,6 +9,7 @@ use HTML::Escape qw/escape_html/;
 use DateTime::Format::ISO8601;
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
+use MetaCPAN::Web::Util qw( fix_structure );
 
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
@@ -112,11 +113,7 @@ sub distribution : Chained('index') PathPart Args(1) {
 
 sub build_entry {
     my ( $self, $entry ) = @_;
-    ref $entry eq 'HASH' or warn 'WRONG ENTRY TYPE';
-    for my $k ( keys %{ $entry } ) {
-        next unless ref $entry->{$k} eq 'ARRAY';
-        $entry->{$k} = $entry->{$k}[0];
-    }
+    $entry = fix_structure($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
