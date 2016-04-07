@@ -168,7 +168,7 @@ sub search_descriptions {
             my ($data) = shift->recv;
             my $extract = sub {
                 my $pod = shift;
-                return undef unless $pod;
+                return unless $pod;
                 $pod =~ /DESCRIPTION (.*)$/;
                 return ( $1 || undef );
             };
@@ -334,7 +334,7 @@ sub search {
                     query => {
                         function_score => {
                             script_score => {
-                                script => "len = (doc.documentation.empty ? 26 : doc.documentation.value.length()); _score - len.toDouble()/400;"
+                                script => 'len = (doc.documentation.empty ? 26 : doc.documentation.value.length()); _score - len.toDouble()/400;'
                             },
                             query => {
                                 boosting => {
