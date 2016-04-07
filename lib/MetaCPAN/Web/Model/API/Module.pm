@@ -175,7 +175,7 @@ sub search_descriptions {
             $cv->send(
                 {
                     results => {
-                        map { $_->{fields}{id}[0] => $extract->( $_->{_source}{pod} ) }
+                        map { $_->{fields}{id}[0] => $extract->( $_->{_source}{pod} )||undef }
                            @{ $data->{hits}{hits} }
                     },
                     took => $data->{took}
