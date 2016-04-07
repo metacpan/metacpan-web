@@ -5,6 +5,7 @@ use Encode qw(encode is_utf8);
 use Test::More;
 use MetaCPAN::Web::Test;
 use JSON::MaybeXS;
+use MetaCPAN::Web::Util qw( fix_structure );
 
 my @tests = (
     [ moose => 'Moose' ],
@@ -27,7 +28,7 @@ test_psgi app, sub {
             'application/json', 'Content-type is application/json' );
         ok( my $json = eval { decode_json( $res->content ) }, 'valid json' );
         is( ref $json, 'ARRAY', 'isa arrayref' );
-        my $module = shift @$json;
+        my $module = fix_structure( shift @$json );
 
         if ($exp) {
             ok $module, "Found module for $test";
