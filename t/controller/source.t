@@ -21,7 +21,7 @@ test_psgi app, sub {
 
     {
         # Test the html produced once; test different filetypes below.
-        my $prefix = '/source/RJBS/Dist-Zilla-4.200012';
+        my $prefix = '/source/RJBS/Dist-Zilla-5.043';
         my @tests = ( [ pl => "$prefix/bin/dzil" ], );
 
         foreach my $test (@tests) {
