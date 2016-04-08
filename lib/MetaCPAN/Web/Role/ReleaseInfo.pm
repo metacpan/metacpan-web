@@ -64,7 +64,11 @@ sub stash_api_results {
 # call recv() on all values in the provided hashref
 sub recv_all {
     my ( $self, $condvars ) = @_;
-    return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
+    my $ret = { map { $_ => $condvars->{$_}->recv } keys %$condvars };
+    for ( @{ $ret->{versions}{hits}{hits} } ) {
+        $_->{fields} = fix_structure($_->{fields});
+    }
+    return $ret;
 }
 
 1;
