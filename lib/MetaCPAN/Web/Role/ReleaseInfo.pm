@@ -4,6 +4,7 @@ use Moose::Role;
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;
+use MetaCPAN::Web::Util qw( fix_structure );
 
 # TODO: are there other controllers that do (or should) include this?
 
@@ -67,7 +68,11 @@ sub stash_api_results {
 # call recv() on all values in the provided hashref
 sub recv_all {
     my ( $self, $condvars ) = @_;
-    return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
+    my $ret = { map { $_ => $condvars->{$_}->recv } keys %$condvars };
+    for ( @{ $ret->{versions}{hits}{hits} } ) {
+        $_->{fields} = fix_structure($_->{fields});
+    }
+    return $ret;
 }
 
 # massage the x_contributors field into what we want
