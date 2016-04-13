@@ -342,9 +342,9 @@ sub search {
                 filtered => {
                     query => {
                         function_score => {
-                            script_score => {
-                                script => 'len = (doc.documentation.empty ? 26 : doc.documentation.value.length()); _score - len.toDouble()/400;'
-                            },
+                            # prefer shorter module names
+                            metacpan_script =>
+                                'prefer_shorter_module_names_400',
                             query => {
                                 boosting => {
                                     negative_boost => 0.5,
@@ -406,6 +406,7 @@ sub search {
             ],
         }
     );
+
     return $self->request( '/file/_search', $search );
 }
 
