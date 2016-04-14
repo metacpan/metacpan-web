@@ -162,12 +162,12 @@ sub modules {
                                             {
                                                 exists => {
                                                     field =>
-                                                        'file.module.name'
+                                                        'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'file.module.indexed' =>
+                                                    'module.indexed' =>
                                                         \1
                                                 }
                                             }
@@ -178,12 +178,12 @@ sub modules {
                                             {
                                                 exists => {
                                                     field =>
-                                                        'file.pod.analyzed'
+                                                        'pod.analyzed'
                                                 }
                                             },
                                             {
                                                 term =>
-                                                    { 'file.indexed' => \1 }
+                                                    { 'indexed' => \1 }
                                             },
                                         ]
                                     }
@@ -198,17 +198,20 @@ sub modules {
             # Sort by documentation name; if there isn't one, sort by path.
             sort => [ 'documentation', 'path' ],
 
-            # Get indexed and authorized from _source to work around ES bug:
-            # https://github.com/CPAN-API/metacpan-web/issues/881
-            # https://github.com/elasticsearch/elasticsearch/issues/2551
             fields => [
                 qw(
-                    documentation path status author release
-                    pod_lines
-                    distribution
-                    _source.abstract  _source.module
-                    _source.indexed   _source.authorized
-                    )
+                      author
+                      authorized
+                      distribution
+                      documentation
+                      indexed
+                      path
+                      pod_lines
+                      release
+                      _source.abstract
+                      _source.module
+                      status
+               )
             ],
         }
     );
@@ -226,7 +229,7 @@ sub find {
                         and => [
                             {
                                 term => {
-                                    'release.distribution' => $distribution
+                                    'distribution' => $distribution
                                 }
                             },
                             { term => { status => 'latest' } }
@@ -256,8 +259,8 @@ sub reverse_dependencies {
                     query  => { 'match_all' => {} },
                     filter => {
                         and => [
-                            { term => { 'release.status'     => 'latest' } },
-                            { term => { 'release.authorized' => \1 } },
+                            { term => { 'status'     => 'latest' } },
+                            { term => { 'authorized' => \1 } },
                         ]
                     }
                 }
@@ -305,7 +308,7 @@ sub interesting_files {
                                                     map {
                                                         {
                                                             term => {
-                                                                'file.name'
+                                                                'name'
                                                                     => $_
                                                             }
                                                         }
@@ -368,7 +371,7 @@ sub versions {
                     query  => { match_all => {} },
                     filter => {
                         and => [
-                            { term => { 'release.distribution' => $dist } },
+                            { term => { 'distribution' => $dist } },
                         ],
 
                     }
@@ -409,10 +412,14 @@ sub topuploaders {
         '/release/_search',
         {
             query  => { match_all => {} },
-            facets => {
+            aggregations => {
                 author => {
-                    terms        => { field => 'author', size => 50 },
-                    facet_filter => $range_filter,
+                    aggregations => {
+                        entries => {
+                            terms => { field => 'author', size => 50 }
+                        }
+                    },
+                    filter => $range_filter,
                 },
             },
             size => 0,

@@ -4,11 +4,13 @@ use warnings;
 use Test::More;
 use JSON::MaybeXS;
 use MetaCPAN::Web;
+use MetaCPAN::Web::Util qw( fix_structure );
 
 sub search_release {
     my ( $method, @args ) = @_;
     return
-        map { $_->{fields} } map { @{ $_->{hits}{hits} } }
+        map { fix_structure($_->{fields}) }
+        map { @{ $_->{hits}{hits} } }
         MetaCPAN::Web->model('API::Release')->$method(@args)->recv;
 }
 
@@ -31,7 +33,6 @@ subtest modules => sub {
     ok( scalar @files, 'found files with modules' );
 
     foreach my $file (@files) {
-
         # Ensure we get a boolean so that conditions work as expected.
         is_bool( $file->{$_}, "'$_' is a boolean" )
             for qw( indexed authorized );

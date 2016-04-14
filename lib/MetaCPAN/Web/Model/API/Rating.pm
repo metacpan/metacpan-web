@@ -29,6 +29,7 @@ sub get {
     my ( $self, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
+    @distributions or return $cv;
     $self->request(
         '/rating/_search',
         {
@@ -39,35 +40,41 @@ sub get {
                     filter => {
                         or => [
                             map {
-                                { term => { 'rating.distribution' => $_ } }
+                                { term => { 'distribution' => $_ } }
                             } @distributions
                         ]
                     }
                 }
             },
-            facets => {
-                ratings => {
-                    terms_stats => {
-                        value_field => 'rating.rating',
-                        key_field   => 'rating.distribution'
+            aggregations => {
+                ratings =>{
+                    terms => {
+                        field => 'distribution'
+                    },
+                    aggregations => {
+                        ratings_dist => {
+                            stats => {
+                                field => 'rating'
+                            }
+                        }
                     }
                 }
             }
         }
-        )->cb(
+    )->cb(
         sub {
             my ($ratings) = shift->recv;
             $cv->send(
                 {
                     took    => $ratings->{took},
                     ratings => {
-                        map { $_->{term} => $_ }
-                            @{ $ratings->{facets}->{ratings}->{terms} }
+                        map { $_->{key} => $_->{ratings_dist} }
+                            @{ $ratings->{aggregations}->{ratings}->{buckets} }
                     }
                 }
             );
         }
-        );
+    );
     return $cv;
 }
 __PACKAGE__->meta->make_immutable;

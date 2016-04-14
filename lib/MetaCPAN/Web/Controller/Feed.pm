@@ -9,6 +9,7 @@ use HTML::Escape qw/escape_html/;
 use DateTime::Format::ISO8601;
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
+use MetaCPAN::Web::Util qw( fix_structure );
 
 sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
 }
@@ -76,7 +77,7 @@ sub author : Chained('index') PathPart Args(1) {
         = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
     my $author_info = $author_cv->recv;
     my $faves_cv
-        = $c->model('API::Favorite')->by_user( $author_info->{user} );
+        = $c->model('API::Favorite')->by_user( $author_info->{pauseid} );
     my $faves_data
         = [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ];
 
@@ -101,6 +102,7 @@ sub distribution : Chained('index') PathPart Args(1) {
 
 sub build_entry {
     my ( $self, $entry ) = @_;
+    $entry = fix_structure($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(

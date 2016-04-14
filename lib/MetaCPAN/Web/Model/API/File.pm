@@ -22,12 +22,12 @@ sub dir {
                     query  => { match_all => {}, },
                     filter => {
                         and => [
-                            { term => { 'file.level'   => scalar @path } },
-                            { term => { 'file.author'  => $author } },
-                            { term => { 'file.release' => $release } },
+                            { term => { 'level'   => scalar @path } },
+                            { term => { 'author'  => $author } },
+                            { term => { 'release' => $release } },
                             {
                                 prefix => {
-                                    'file.path' => join( q{/}, @path, q{} )
+                                    'path' => join( q{/}, @path, q{} )
                                 }
                             },
                         ]
@@ -36,7 +36,7 @@ sub dir {
             },
             size   => 999,
             fields => [
-                qw(name stat.mtime path file.stat.size file.directory slop documentation mime)
+                qw(name stat.mtime path stat.size directory slop documentation mime)
             ],
         }
     );

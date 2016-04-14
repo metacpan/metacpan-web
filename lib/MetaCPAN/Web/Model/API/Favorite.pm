@@ -10,6 +10,7 @@ sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
     my $cv = $self->cv;
+    @distributions or return $cv;
     $self->request(
         '/favorite/_search',
         {
@@ -26,7 +27,7 @@ sub get {
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 favorites => {
                     terms => {
                         field => 'favorite.distribution',
@@ -36,28 +37,31 @@ sub get {
                 $user
                 ? (
                     myfavorites => {
-                        terms => { field => 'favorite.distribution', },
-                        facet_filter =>
-                            { term => { 'favorite.user' => $user } }
+                        filter => { term => { 'favorite.user' => $user } },
+                        aggregations => {
+                            enteries => {
+                                terms => { field => 'favorite.distribution' }
+                            }
+                        }
                     }
-                    )
+                  )
                 : (),
             }
         }
-        )->cb(
+    )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
                 {
                     took      => $data->{took},
                     favorites => {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{favorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{favorites}->{buckets} }
                     },
                     myfavorites => $user
                     ? {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{myfavorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{myfavorites}->{entries}->{buckets} }
                         }
                     : {},
                 }
@@ -101,7 +105,7 @@ sub leaderboard {
         {
             size   => 0,
             query  => { match_all => {} },
-            facets => {
+            aggregations => {
                 leaderboard =>
                     { terms => { field => 'distribution', size => 600 }, },
             },
@@ -122,8 +126,9 @@ sub find_plussers {
     my $total_plussers = @plusser_users;
 
     # find plussers by pause ids.
-    my $authors
-        = $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits};
+    my $authors = @plusser_users
+        ? $self->plusser_by_id( \@plusser_users )->recv->{hits}->{hits}
+        : [];
 
     my @plusser_details = map {
         {
