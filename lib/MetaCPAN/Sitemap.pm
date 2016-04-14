@@ -76,6 +76,7 @@ sub process {
         # Copy the filter over wholesale into the search parameters, and add
         # the filter fields to the field list.
 
+        # TODO: check how this should be done in ES2+ -- mickey
         $search_parameters{'body'}
             = ElasticSearch::SearchBuilder->new->query( $self->filter );
         push @{ $search_parameters{'fields'} }, keys %{ $self->filter };
