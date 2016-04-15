@@ -9,7 +9,6 @@ use autodie;
 
 use Carp;
 use Search::Elasticsearch;
-use ElasticSearch::SearchBuilder;
 use File::Spec;
 use MetaCPAN::Web::Types qw( HashRef Int Str );
 use Moose;
@@ -76,9 +75,7 @@ sub process {
         # Copy the filter over wholesale into the search parameters, and add
         # the filter fields to the field list.
 
-        # TODO: check how this should be done in ES2+ -- mickey
-        $search_parameters{'body'}
-            = ElasticSearch::SearchBuilder->new->query( $self->filter );
+        $search_parameters{'body'}{'query'}{'match'} = $self->filter;
         push @{ $search_parameters{'fields'} }, keys %{ $self->filter };
     }
 
