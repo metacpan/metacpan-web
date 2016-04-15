@@ -2081,17 +2081,6 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  ElasticSearch-SearchBuilder-0.19
-    pathname: D/DR/DRTECH/ElasticSearch-SearchBuilder-0.19.tar.gz
-    provides:
-      ElasticSearch::SearchBuilder 0.19
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.30
-      Scalar::Util 0
-      Test::More 0.96
-      strict 0
-      warnings 0
   Email-Address-1.905
     pathname: R/RJ/RJBS/Email-Address-1.905.tar.gz
     provides:
