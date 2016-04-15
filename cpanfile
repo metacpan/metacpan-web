@@ -27,7 +27,6 @@ requires 'DateTime::Format::ISO8601';
 requires 'Digest::MD5';
 requires 'Digest::SHA1';
 requires 'Search::Elasticsearch', '2.00';
-requires 'ElasticSearch::SearchBuilder';
 requires 'Encode', '2.51';
 requires 'Exporter';
 requires 'Format::Human::Bytes';
