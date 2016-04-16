@@ -3,7 +3,6 @@ package MetaCPAN::Web::Controller::Search::AutoComplete;
 use Moose;
 use JSON::MaybeXS ();
 use namespace::autoclean;
-use MetaCPAN::Web::Util qw( fix_structure );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
