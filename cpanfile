@@ -1,3 +1,4 @@
+requires 'Carp::Always';
 requires 'AnyEvent::Curl::Multi';
 requires 'CHI';
 requires 'CPAN::Changes', '0.21';
