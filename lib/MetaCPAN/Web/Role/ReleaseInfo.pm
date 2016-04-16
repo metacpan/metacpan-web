@@ -66,7 +66,7 @@ sub recv_all {
     my ( $self, $condvars ) = @_;
     my $ret = { map { $_ => $condvars->{$_}->recv } keys %$condvars };
     for ( @{ $ret->{versions}{hits}{hits} } ) {
-        $_->{fields} = fix_structure($_->{fields});
+        $self->single_valued_arrayref_to_scalar( $_->{fields} );
     }
     return $ret;
 }

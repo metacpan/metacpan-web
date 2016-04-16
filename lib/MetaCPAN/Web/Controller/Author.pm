@@ -6,7 +6,6 @@ use List::Util                ();
 use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
 use Locale::Country ();
-use MetaCPAN::Web::Util qw( fix_structure );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
