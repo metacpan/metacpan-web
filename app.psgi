@@ -14,6 +14,7 @@ my $dev_mode;
 BEGIN {
     $root_dir = File::Basename::dirname(__FILE__);
     $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
+    $dev_mode and require Carp::Always;
 }
 
 BEGIN {
