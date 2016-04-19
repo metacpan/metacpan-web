@@ -343,6 +343,7 @@ sub interesting_files {
                                                         Todo
                                                         cpanfile
                                                         dist.ini
+                                                        minil.toml
                                                         )
                                                 ]
                                             }
