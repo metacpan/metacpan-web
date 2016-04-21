@@ -38,8 +38,8 @@ sub find {
 }
 
 sub _not_rogue {
-    my @rogue_dists = map { { term => { 'distribution' => $_ } } }
-        @ROGUE_DISTRIBUTIONS;
+    my @rogue_dists
+        = map { { term => { 'distribution' => $_ } } } @ROGUE_DISTRIBUTIONS;
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
@@ -122,11 +122,12 @@ sub search_collapsed {
         @distributions = uniq( @distributions,
             map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} } );
         $run++;
-    } while ( @distributions < $page_size + $from
+        } while ( @distributions < $page_size + $from
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions = map { $_->[0] } splice( @distributions, $from, $page_size );
+    @distributions
+        = map { $_->[0] } splice( @distributions, $from, $page_size );
 
     # Everything else will fail (slowly and quietly) without distributions.
     if ( !@distributions ) {
@@ -176,7 +177,7 @@ sub search_descriptions {
             fields => [qw(description id)],
             size   => scalar @ids,
         }
-    )->cb(
+        )->cb(
         sub {
             my ($data) = shift->recv;
             $cv->send(
@@ -191,7 +192,7 @@ sub search_descriptions {
                 }
             );
         }
-    );
+        );
     return $cv;
 }
 
@@ -200,7 +201,9 @@ sub _extract_results {
     return [
         map {
             my $res = $_;
-            for my $k ( qw/distribution author release path documentation date/ ) {
+            for my $k (
+                qw/distribution author release path documentation date/)
+            {
                 $res->{fields}{$k} = $res->{fields}{$k}[0]
                     if ref $res->{fields}{$k} eq 'ARRAY';
             }
@@ -212,7 +215,7 @@ sub _extract_results {
                 rating     => $ratings->{ratings}{$dist},
                 favorites  => $favorites->{favorites}{$dist},
                 myfavorite => $favorites->{myfavorites}{$dist},
-            }
+                }
         } @{ $results->{hits}{hits} }
     ];
 }
@@ -228,9 +231,9 @@ sub _collapse_results {
         push( @{ $collapsed{$distribution}->{results} }, $result );
     }
     return [
-        map  { $collapsed{$_}->{results} }
-        sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
-        keys %collapsed
+        map      { $collapsed{$_}->{results} }
+            sort { $collapsed{$a}->{position} <=> $collapsed{$b}->{position} }
+            keys %collapsed
     ];
 }
 
@@ -248,7 +251,7 @@ sub _search {
                     count =>
                         { terms => { size => 999, field => 'distribution' } }
                 }
-              )
+                )
             : (),
         }
     );
@@ -342,6 +345,7 @@ sub search {
                 filtered => {
                     query => {
                         function_score => {
+
                             # prefer shorter module names
                             metacpan_script =>
                                 'prefer_shorter_module_names_400',
@@ -357,7 +361,7 @@ sub search {
                     filter => {
                         and => [
                             $self->_not_rogue,
-                            { term => { status            => 'latest' } },
+                            { term => { status       => 'latest' } },
                             { term => { 'authorized' => \1 } },
                             { term => { 'indexed'    => \1 } },
                             {
@@ -366,14 +370,12 @@ sub search {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'module.name'
+                                                    field => 'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'module.indexed' =>
-                                                        \1
+                                                    'module.indexed' => \1
                                                 }
                                             }
                                         ]
@@ -402,7 +404,7 @@ sub search {
                     date
                     id
                     pod_lines
-                )
+                    )
             ],
         }
     );
@@ -422,9 +424,8 @@ sub _search_in_distributions {
                     and => [
                         {
                             or => [
-                                map {
-                                    { term => { 'distribution' => $_ } }
-                                } @distributions
+                                map { { term => { 'distribution' => $_ } } }
+                                    @distributions
                             ]
                         }
                     ]

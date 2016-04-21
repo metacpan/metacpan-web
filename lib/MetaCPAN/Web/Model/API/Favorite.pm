@@ -51,11 +51,11 @@ sub get {
                             }
                         }
                     }
-                  )
+                    )
                 : (),
             }
         }
-    )->cb(
+        )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
@@ -67,8 +67,10 @@ sub get {
                     },
                     myfavorites => $user
                     ? {
-                        map { $_->{key} => $_->{doc_count} }
-                            @{ $data->{aggregations}->{myfavorites}->{entries}->{buckets} }
+                        map { $_->{key} => $_->{doc_count} } @{
+                            $data->{aggregations}->{myfavorites}->{entries}
+                                ->{buckets}
+                        }
                         }
                     : {},
                 }
@@ -111,8 +113,8 @@ sub leaderboard {
     $self->request(
         '/favorite/_search',
         {
-            size   => 0,
-            query  => { match_all => {} },
+            size         => 0,
+            query        => { match_all => {} },
             aggregations => {
                 leaderboard =>
                     { terms => { field => 'distribution', size => 600 }, },
