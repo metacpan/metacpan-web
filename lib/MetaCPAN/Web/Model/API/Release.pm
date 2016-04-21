@@ -161,14 +161,12 @@ sub modules {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'module.name'
+                                                    field => 'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'module.indexed' =>
-                                                        \1
+                                                    'module.indexed' => \1
                                                 }
                                             }
                                         ]
@@ -177,13 +175,11 @@ sub modules {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'pod.analyzed'
+                                                    field => 'pod.analyzed'
                                                 }
                                             },
                                             {
-                                                term =>
-                                                    { 'indexed' => \1 }
+                                                term => { 'indexed' => \1 }
                                             },
                                         ]
                                     }
@@ -200,18 +196,18 @@ sub modules {
 
             fields => [
                 qw(
-                      author
-                      authorized
-                      distribution
-                      documentation
-                      indexed
-                      path
-                      pod_lines
-                      release
-                      _source.abstract
-                      _source.module
-                      status
-               )
+                    author
+                    authorized
+                    distribution
+                    documentation
+                    indexed
+                    path
+                    pod_lines
+                    release
+                    _source.abstract
+                    _source.module
+                    status
+                    )
             ],
         }
     );
@@ -310,8 +306,7 @@ sub interesting_files {
                                                     map {
                                                         {
                                                             term => {
-                                                                'name'
-                                                                    => $_
+                                                                'name' => $_
                                                             }
                                                         }
                                                         } qw(
@@ -393,9 +388,7 @@ sub versions {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
-                        and => [
-                            { term => { 'distribution' => $dist } },
-                        ],
+                        and => [ { term => { 'distribution' => $dist } }, ],
 
                     }
                 }
@@ -434,7 +427,7 @@ sub topuploaders {
     $self->request(
         '/release/_search',
         {
-            query  => { match_all => {} },
+            query        => { match_all => {} },
             aggregations => {
                 author => {
                     aggregations => {

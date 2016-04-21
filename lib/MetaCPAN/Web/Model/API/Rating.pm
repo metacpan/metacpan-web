@@ -46,15 +46,14 @@ sub get {
                     query  => { match_all => {} },
                     filter => {
                         or => [
-                            map {
-                                { term => { 'distribution' => $_ } }
-                            } @distributions
+                            map { { term => { 'distribution' => $_ } } }
+                                @distributions
                         ]
                     }
                 }
             },
             aggregations => {
-                ratings =>{
+                ratings => {
                     terms => {
                         field => 'distribution'
                     },
@@ -68,20 +67,21 @@ sub get {
                 }
             }
         }
-    )->cb(
+        )->cb(
         sub {
             my ($ratings) = shift->recv;
             $cv->send(
                 {
                     took    => $ratings->{took},
                     ratings => {
-                        map { $_->{key} => $_->{ratings_dist} }
-                            @{ $ratings->{aggregations}->{ratings}->{buckets} }
+                        map { $_->{key} => $_->{ratings_dist} } @{
+                            $ratings->{aggregations}->{ratings}->{buckets}
+                        }
                     }
                 }
             );
         }
-    );
+        );
     return $cv;
 }
 

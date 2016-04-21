@@ -39,10 +39,10 @@ sub index : Path : Args(0) {
     my $data = $c->model('API')->request(
         '/release/_search',
         {
-            query  => { match_all => {} },
+            query        => { match_all => {} },
             aggregations => {
                 histo => {
-                    filter   => {
+                    filter => {
                         and => [
                             {
                                 range => {
@@ -54,7 +54,8 @@ sub index : Path : Args(0) {
                     },
                     aggregations => {
                         entries => {
-                            date_histogram => { field => 'date', interval => $res },
+                            date_histogram =>
+                                { field => 'date', interval => $res },
                         }
                     }
                 }
