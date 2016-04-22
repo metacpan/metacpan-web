@@ -72,6 +72,7 @@ requires 'Plack::Middleware::Session::Cookie';
 requires 'Plack::Response';
 requires 'Plack::Session';
 requires 'Plack::Test';
+requires 'Ref::Util', '>= 0.008';
 requires 'Regexp::Common';
 requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
