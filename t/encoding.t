@@ -162,7 +162,7 @@ subtest 'check requests sent to the api' => sub {
         {
             content => q{},
             method  => 'GET',
-            uri     => $model->api . '/oogie/boogie/song',
+            uri     => '/oogie/boogie/song',
         },
     );
 
@@ -172,7 +172,7 @@ subtest 'check requests sent to the api' => sub {
         {
             content => qq<{"\360\237\215\252":"cookies"}>,
             method  => 'POST',
-            uri     => $model->api . '/sandy/claws',
+            uri     => '/sandy/claws',
         },
     );
 
@@ -186,7 +186,7 @@ subtest 'check requests sent to the api' => sub {
             content =>
                 qq<{"mistletoe":"1F384 \xf0\x9f\x8e\x84 CHRISTMAS TREE"}>,
             method => 'PUT',
-            uri => $model->api_secure . '/whats/this?access_token=nightmare',
+            uri    => '/whats/this?access_token=nightmare',
         },
     );
 };
@@ -202,6 +202,9 @@ done_testing;
 
 sub check_request {
     my ( $desc, $args, $exp ) = @_;
+    my $uri = $model->api_secure->clone;
+    $uri->path( $exp->{uri} );
+    $exp->{uri} = $uri;
     $model->request(@$args);
 
     local $Test::Builder::Level = $Test::Builder::Level + 1;
