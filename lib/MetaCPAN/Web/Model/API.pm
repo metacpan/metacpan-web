@@ -3,17 +3,24 @@ package MetaCPAN::Web::Model::API;
 use Moose;
 extends 'Catalyst::Model';
 
-has [qw(api api_secure)] => ( is => 'ro' );
-
-use Encode ();
-use JSON::MaybeXS;
-use HTTP::Request ();
-use AnyEvent::Curl::Multi;
-use Try::Tiny 0.09;
-use MooseX::ClassAttribute;
 use namespace::autoclean;
 
+use AnyEvent::Curl::Multi;
+use Encode        ();
+use HTTP::Request ();
+use JSON::MaybeXS;
+use MetaCPAN::Web::Types qw( Uri );
+use MooseX::ClassAttribute;
+use Try::Tiny qw( catch try );
+
 class_has client => ( is => 'ro', lazy_build => 1 );
+
+has api_secure => (
+    is       => 'ro',
+    isa      => Uri,
+    coerce   => 1,
+    required => 1,
+);
 
 sub _build_client {
     return AnyEvent::Curl::Multi->new( max_concurrency => 5 );
@@ -58,13 +65,16 @@ sub model {
 
 sub request {
     my ( $self, $path, $search, $params ) = @_;
+
     my ( $token, $method ) = @$params{qw(token method)};
     $path .= "?access_token=$token" if ($token);
-    my $req     = $self->cv;
+    my $req = $self->cv;
+    my $url = $self->api_secure->clone;
+    $url->path($path);
+
     my $request = HTTP::Request->new(
         $method ? $method : $search ? 'POST' : 'GET',
-        ( $token ? $self->api_secure : $self->api ) . $path,
-        [ 'Content-type' => 'application/json' ],
+        $url, [ 'Content-type' => 'application/json' ],
     );
 
     # encode_json returns an octet string
