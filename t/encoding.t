@@ -18,7 +18,8 @@ override_api_response sub {
 
 use MetaCPAN::Web::Model::API::Module;
 my $model
-    = MetaCPAN::Web::Model::API::Module->new( api => 'http://example.com' );
+    = MetaCPAN::Web::Model::API::Module->new(
+    api_secure => 'http://example.com' );
 
 # $body
 # $body, $type
