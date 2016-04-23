@@ -42,8 +42,9 @@ sub index : Path : Args(0) {
         )
     {
         my $module = $model->first($query)->recv;
-        if ( $query eq $module ) {
-            $c->res->redirect("/pod/$module");
+        $module = $module->[0] if $module;
+        if ( $module && $module eq $query ) {
+            $c->res->redirect( '/pod/' . $module->[0] );
             $c->detach;
         }
         else {
