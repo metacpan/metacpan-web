@@ -78,14 +78,16 @@ documentation = documentation.merge(documentation_raw);
 </ul>
 <% END %>
 
-<%- IF last_version_changes %>
+<%- IF changelogs %>
 
-<div class="last-changes well">
-    <h2 id="whatsnew">Changes for version <% last_version_changes.version %></h2>
-    <div class="change-entries">
-        <% change_group(last_version_changes.entries) | none %>
+<div id="last-changes" class="well collapsed">
+    <div id="last-changes-container">
+        <h2 id="whatsnew">Changes for version <% last-changes-container.version %></h2>
+        <div class="change-entries">
+            <% change_group(last-changes-container.entries) | none %>
+        </div>
     </div>
-    <a id="whatsnew-toggle-overflow">Show More</a>
+    <button id="last-changes-toggle" class="btn-link" onclick="$('#last-changes').toggleClass('collapsed'); return false;">[ <span class="hide-more">Hide More</span><span class="show-more">Show More</span> ]</button>
 </div>
 
 <%- END %>
