@@ -131,8 +131,14 @@ sub view : Private {
                 qw( mark_unauthorized_releases )
         ),
 
-        ( $changes ? ( last_version_changes => $changes ) : () )
-
+        (
+            @$changes
+            ? (
+                last_version_changes => $changes->[0],
+                changelogs           => $changes,
+                )
+            : ()
+        )
     );
 }
 
