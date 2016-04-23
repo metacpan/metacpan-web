@@ -41,7 +41,7 @@ sub find_changelog {
     my ( $self, $version, $releases ) = @_;
 
     foreach my $rel (@$releases) {
-        return $rel if ( $rel->{version} eq $version );
+        return $rel if ( $rel->{version} eq $version || $rel->{version} eq "$version-TRIAL" );
     }
 }
 
