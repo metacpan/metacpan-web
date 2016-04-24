@@ -84,13 +84,13 @@ sub view : Private {
 
     $c->detach('/not_found') unless ( $data->{name} );
 
-    my $pod_url
-        = '/pod/' . ( $pod || join( q{/}, @path ) ) . '?show_errors=1';
+    my $pod_path = '/pod/' . ( $pod || join( q{/}, @path ) );
 
     my $reqs = $self->api_requests(
         $c,
         {
-            pod     => $c->model('API')->request($pod_url),
+            pod => $c->model('API')
+                ->request( $pod_path, undef, { show_errors => 1 } ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
