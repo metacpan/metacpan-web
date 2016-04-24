@@ -57,6 +57,7 @@ requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
 requires 'PerlIO::gzip';
+requires 'MetaCPAN::Moose';
 requires 'MooseX::Types::Common::Numeric';
 requires 'MooseX::Types::Common::String';
 requires 'MooseX::Types::Moose';

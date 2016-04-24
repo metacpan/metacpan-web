@@ -2406,6 +2406,16 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
+  Import-Into-1.002005
+    pathname: H/HA/HAARG/Import-Into-1.002005.tar.gz
+    provides:
+      Import::Into 1.002005
+    requirements:
+      ExtUtils::MakeMaker 0
+      Module::Runtime 0
+      perl 5.006
+      strict 0
+      warnings 0
   JSON-2.90
     pathname: M/MA/MAKAMAKA/JSON-2.90.tar.gz
     provides:
@@ -2676,6 +2686,20 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
+  MetaCPAN-Moose-0.000001
+    pathname: O/OA/OALDERS/MetaCPAN-Moose-0.000001.tar.gz
+    provides:
+      MetaCPAN::Moose 0.000001
+    requirements:
+      ExtUtils::MakeMaker 0
+      Import::Into 0
+      Module::Build 0.28
+      Moose 2.1605
+      MooseX::StrictConstructor 0.19
+      namespace::autoclean 0.28
+      perl 5.006
+      strict 0
+      warnings 0
   Mixin-Linewise-0.108
     pathname: R/RJ/RJBS/Mixin-Linewise-0.108.tar.gz
     provides:
