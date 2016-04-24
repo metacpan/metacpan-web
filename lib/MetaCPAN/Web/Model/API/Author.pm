@@ -1,4 +1,5 @@
 package MetaCPAN::Web::Model::API::Author;
+
 use Moose;
 use namespace::autoclean;
 
@@ -25,8 +26,10 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, @author ) = @_;
+
     return $self->request( '/author/' . uc( $author[0] ) )
         if ( @author == 1 );
+
     return $self->request(
         '/author/_search',
         {
