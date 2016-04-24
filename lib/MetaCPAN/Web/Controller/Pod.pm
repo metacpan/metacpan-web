@@ -166,8 +166,16 @@ sub view : Private {
     my $dist = $release->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
-    $c->stash( $c->model( 'ReleaseInfo', { %$reqs, release => $release } )
-            ->summary_hash );
+    $c->stash(
+        $c->model(
+            'ReleaseInfo',
+            {
+                author       => $reqs->{author},
+                distribution => $reqs->{distribution},
+                release      => $release,
+            }
+        )->summary_hash
+    );
 
     $c->stash(
         {
