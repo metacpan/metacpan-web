@@ -83,18 +83,21 @@ sub view : Private {
     $data->{documentation} = $documentation if $documentation;
 
     $c->detach('/not_found') unless ( $data->{name} );
+
+    my $pod_url
+        = '/pod/' . ( $pod || join( q{/}, @path ) ) . '?show_errors=1';
+
     my $reqs = $self->api_requests(
         $c,
         {
-            pod => $c->model('API')->request(
-                '/pod/' . ( $pod || join( q{/}, @path ) ) . '?show_errors=1'
-            ),
+            pod     => $c->model('API')->request($pod_url),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
         $data,
     );
     $reqs = $self->recv_all($reqs);
+
     $self->stash_api_results( $c, $reqs, $data );
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 
