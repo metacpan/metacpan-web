@@ -1,17 +1,20 @@
 package MetaCPAN::Sitemap;
 
-# Generate an XML file containing URLs use by the robots.txt Sitemap. We
-# use this module to generate one each for authors, modules and releases.
+=head1 DESCRIPTION
 
-use strict;
-use warnings;
+Generate an XML file containing URLs use by the robots.txt Sitemap. We use this
+module to generate one each for authors, modules and releases.
+
+=cut
+
+use MetaCPAN::Moose;
+
 use autodie;
 
 use Carp;
 use Search::Elasticsearch;
 use File::Spec;
 use MetaCPAN::Web::Types qw( HashRef Int Str );
-use Moose;
 use MooseX::StrictConstructor;
 use PerlIO::gzip;
 use XML::Simple qw(:strict);
@@ -44,16 +47,16 @@ has 'size' => (
 # the list of form fields.
 
 sub process {
-
     my $self = shift;
 
     # Check that a) the directory where the output file wants to be does
     # actually exist and b) the directory itself is writeable.
 
     # Get started. Create the ES object and the scrolled search object.
+    # XXX Remove this hardcoded URL
     my $es = Search::Elasticsearch->new(
-        nodes            => ['api.metacpan.org'],
         cxn_pool         => 'Static::NoPing',
+        nodes            => ['api.metacpan.org'],
         send_get_body_as => 'POST',
     );
 
@@ -100,7 +103,7 @@ sub process {
 
     $_ = $_ . q{ } for @urls;
 
-    $self->{'size'} = @urls;
+    $self->{size} = @urls;
     my $xml = XMLout(
         {
             'xmlns'     => 'http://www.sitemaps.org/schemas/sitemap/0.9',
