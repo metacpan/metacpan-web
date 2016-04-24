@@ -48,13 +48,8 @@ Set C<api> and C<api_secure> config parameters from the app config object.
 sub COMPONENT {
     my $self = shift;
     my ( $app, $config ) = @_;
-    $config = $self->merge_config_hashes(
-        {
-            api        => $app->config->{api},
-            api_secure => $app->config->{api_secure} || $app->config->{api}
-        },
-        $config
-    );
+    $config->{api_secure} = $app->config->{api_secure};
+
     return $self->SUPER::COMPONENT( $app, $config );
 }
 
