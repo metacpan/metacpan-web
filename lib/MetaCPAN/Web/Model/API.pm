@@ -12,6 +12,7 @@ use JSON::MaybeXS;
 use MetaCPAN::Web::Types qw( Uri );
 use MooseX::ClassAttribute;
 use Try::Tiny qw( catch try );
+use URI::QueryParam;
 
 class_has client => (
     is   => 'ro',
@@ -63,9 +64,10 @@ sub request {
     my ( $self, $path, $search, $params ) = @_;
 
     my ( $token, $method ) = @$params{qw(token method)};
-    $path .= "?access_token=$token" if ($token);
     my $req = $self->cv;
+
     my $url = $self->api_secure->clone;
+    $url->query_param( access_token => $token ) if $token;
     $url->path($path);
 
     my $request = HTTP::Request->new(
@@ -191,5 +193,4 @@ sub raw_api_response {
 }
 
 __PACKAGE__->meta->make_immutable;
-
 1;
