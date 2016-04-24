@@ -73,12 +73,12 @@ sub index : Chained('root') PathPart('') Args(0) {
     $c->stash(
         {
             author      => $author,
-            releases    => $releases,
             faves       => $faves,
+            releases    => $releases,
             show_author => 1,
+            template    => 'author.html',
             took        => $took,
             total       => $data->{hits}->{total},
-            template    => 'author.html'
         }
     );
 

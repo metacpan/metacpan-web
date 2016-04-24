@@ -42,7 +42,7 @@ sub cv {
 
 =head2 COMPONENT
 
-Set C<api> and C<api_secure> config parameters from the app config object.
+Set C<api_secure> config parameters from the app config object.
 
 =cut
 
