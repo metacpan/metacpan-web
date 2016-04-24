@@ -13,7 +13,12 @@ use MetaCPAN::Web::Types qw( Uri );
 use MooseX::ClassAttribute;
 use Try::Tiny qw( catch try );
 
-class_has client => ( is => 'ro', lazy_build => 1 );
+class_has client => (
+    is   => 'ro',
+    lazy => 1,
+    default =>
+        sub { return AnyEvent::Curl::Multi->new( max_concurrency => 5 ) },
+);
 
 has api_secure => (
     is       => 'ro',
@@ -21,10 +26,6 @@ has api_secure => (
     coerce   => 1,
     required => 1,
 );
-
-sub _build_client {
-    return AnyEvent::Curl::Multi->new( max_concurrency => 5 );
-}
 
 {
     no warnings 'once';
