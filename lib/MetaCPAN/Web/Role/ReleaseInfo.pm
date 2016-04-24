@@ -49,8 +49,8 @@ sub stash_api_results {
 
     my %to_stash = (
         author       => $reqs->{author},
-        rating       => $reqs->{rating}->{ratings}->{ $data->{distribution} },
         distribution => $reqs->{distribution},
+        rating       => $reqs->{rating}->{ratings}->{ $data->{distribution} },
         versions =>
             [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
     );
