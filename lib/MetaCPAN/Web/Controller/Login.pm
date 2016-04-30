@@ -30,27 +30,4 @@ sub index : Path {
 
 __PACKAGE__->meta->make_immutable;
 
-use Plack::Middleware::Session::Cookie;
-
-package Plack::Middleware::Session::Cookie;
-use strict;
-no warnings 'redefine';
-
-# every response contains the Vary: Cookie header
-# which will make sure that upstream caches
-# and browsers cache the responses based on the
-# value in the Cookie header.
-# With stock Plack::Middleware::Session::Cookie,
-# the cookie will change with every request
-# because a random id is generated. This will break
-# this very useful feature and the browser and
-# upstream caches will revalidate each request.
-# Overriding generate_id solves this nicely.
-# Since the generated_id is never validated against
-# anything, there seems to be no ramification.
-
-sub generate_id {
-    'session';
-}
-
 1;
