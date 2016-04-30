@@ -3,7 +3,6 @@ package MetaCPAN::Web::View::HTML;
 use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
-use mro;
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
 use List::Util ();
