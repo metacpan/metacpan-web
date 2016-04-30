@@ -12,11 +12,8 @@ with qw(
     MetaCPAN::Web::Role::ReleaseInfo
 );
 
-sub root : Chained('/') PathPart('pod') CaptureArgs(0) {
-}
-
 # /pod/$name
-sub find : Chained('root') PathPart('') Args(1) {
+sub find : Path : Args(1) {
     my ( $self, $c, @path ) = @_;
 
     # TODO: Pass size param so we can disambiguate?
@@ -28,7 +25,7 @@ sub find : Chained('root') PathPart('') Args(1) {
 }
 
 # /pod/release/$AUTHOR/$release/@path
-sub release : Chained('root') Local Args {
+sub release : Local : Args {
     my ( $self, $c, @path ) = @_;
 
     # force consistent casing in URLs
@@ -43,7 +40,7 @@ sub release : Chained('root') Local Args {
 }
 
 # /pod/distribution/$name/@path
-sub distribution : Chained('root') Local Args {
+sub distribution : Local : Args {
     my ( $self, $c, $dist, @path ) = @_;
 
 # TODO: Could we do this with one query?

@@ -2,22 +2,22 @@ package MetaCPAN::Web::Controller::Recent::TopUploaders;
 use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub weekly : Local {
+sub weekly : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward( 'topuploaders', ['weekly'] );
 }
 
-sub monthly : Local {
+sub monthly : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward( 'topuploaders', ['monthly'] );
 }
 
-sub yearly : Local {
+sub yearly : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward( 'topuploaders', ['yearly'] );
 }
 
-sub all : Local {
+sub all : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward( 'topuploaders', ['all'] );
 }

@@ -20,18 +20,18 @@ sub auto : Private {
     return $c->user_exists;
 }
 
-sub logout : Local {
+sub logout : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     $c->req->session->expire;
     $c->res->redirect(q{/});
 }
 
-sub settings : Local {
+sub settings : Local : Args(0) {
     my ( $self, $c ) = @_;
 }
 
-sub identities : Local {
+sub identities : Local : Args(0) {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST'
         && ( my $delete = $c->req->params->{delete} ) )
@@ -41,7 +41,7 @@ sub identities : Local {
     }
 }
 
-sub profile : Local {
+sub profile : Local : Args(0) {
     my ( $self, $c ) = @_;
     my $author = $c->model('API::User')->get_profile( $c->token )->recv;
     $c->stash(

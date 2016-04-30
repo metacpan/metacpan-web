@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : Path {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('mirrors');

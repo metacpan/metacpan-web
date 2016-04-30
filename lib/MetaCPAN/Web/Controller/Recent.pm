@@ -2,7 +2,7 @@ package MetaCPAN::Web::Controller::Recent;
 use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : Path {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
@@ -25,12 +25,12 @@ sub index : Path {
     );
 }
 
-sub log : Local {
+sub log : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( { template => 'recent/log.html' } );
 }
 
-sub faves : Path('/recent/favorites') {
+sub favorites : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->res->redirect( '/favorite/recent', 301 );
     $c->detach;

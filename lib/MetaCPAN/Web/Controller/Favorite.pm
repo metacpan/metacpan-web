@@ -2,7 +2,7 @@ package MetaCPAN::Web::Controller::Favorite;
 use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub recent : Path('/favorite/recent') {
+sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     my $page_size = $c->req->get_page_size(100);
@@ -38,7 +38,7 @@ sub recent : Path('/favorite/recent') {
     );
 }
 
-sub index : Path('/favorite/leaderboard') {
+sub leaderboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;

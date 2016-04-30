@@ -15,47 +15,47 @@ sub auto : Private {
 
 }
 
-sub about : Local : Path('/about') {
+sub about : Path : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about.html' );
 }
 
-sub contributors : Local {
+sub contributors : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/contributors.html' );
 }
 
-sub resources : Local {
+sub resources : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/resources.html' );
 }
 
-sub sponsors : Local {
+sub sponsors : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/sponsors.html' );
 }
 
-sub development : Local {
+sub development : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/development.html' );
 }
 
-sub missing_modules : Local {
+sub missing_modules : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/missing_modules.html' );
 }
 
-sub faq : Local {
+sub faq : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/faq.html' );
 }
 
-sub metadata : Local {
+sub metadata : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'about/metadata.html' );
 }
 
-sub stats : Local {
+sub stats : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('stats');

@@ -6,7 +6,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : Path {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     my $model = $c->model('API::Module');
     my $query = join( q{ }, $c->req->param('q') );

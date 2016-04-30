@@ -6,7 +6,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use Path::Tiny qw/path/;
 
-sub news : Local : Path('/news') {
+sub news : Path : Args(0) {
     my ( $self, $c ) = @_;
 
     my $file = $c->config->{home} . '/News.md';
