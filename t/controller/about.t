@@ -8,7 +8,7 @@ my @tests = (
         url => '/about'
     },
     {
-        url => '/about/resources',
+        url => '/about/contact',
     },
 );
 

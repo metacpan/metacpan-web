@@ -25,9 +25,15 @@ sub contributors : Local : Args(0) {
     $c->stash( template => 'about/contributors.html' );
 }
 
+sub contact : Local : Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about/contact.html' );
+}
+
 sub resources : Local : Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( template => 'about/resources.html' );
+    $c->res->redirect( '/about/contact', 301 );
+    $c->detach;
 }
 
 sub sponsors : Local : Args(0) {
