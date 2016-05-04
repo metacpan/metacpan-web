@@ -8,7 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 # NOTE: We may (be able to) put these redirects into nginx
 # but it's nice to have them here (additionally) for development.
 
-sub redirect_to_pod : PathPart('module') : Chained('/') : Args {
+sub redirect_to_pod : Path : Args {
     my ( $self, $c, @path ) = @_;
 
     # Forward old '/module/' links to the new '/pod/' controller.

@@ -16,15 +16,12 @@ __PACKAGE__->config(
     }
 );
 
-sub lab : Local : Path('/lab') {
+sub lab : Path : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( template => 'lab.html' );
 }
 
-sub index : Chained('/') : PathPart('lab') : CaptureArgs(0) { }
-
-#sub dependencies : Chained('index') : PathPart : Args(1) : Does('Sortable') {
-sub dependencies : Chained('index') : PathPart : Does('Sortable') {
+sub dependencies : Local : Args(0) : Does('Sortable') {
     my ( $self, $c ) = @_;
 
     my $module;
@@ -43,7 +40,7 @@ sub dependencies : Chained('index') : PathPart : Does('Sortable') {
     );
 }
 
-sub dashboard : Chained('index') : PathPart {
+sub dashboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     my $user = $c->model('API::User')->get_profile( $c->token )->recv;

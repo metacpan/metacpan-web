@@ -13,7 +13,7 @@ sub auto : Private {
     return 1;
 }
 
-sub add : Local {
+sub add : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     my $model = $c->model('API::User');
@@ -43,12 +43,12 @@ sub add : Local {
     }
 }
 
-sub list : Local {
+sub list : Local : Args(0) {
     my ( $self, $c ) = @_;
     $self->_add_fav_list_to_stash( $c, 1_000 );
 }
 
-sub list_as_json : Local {
+sub list_as_json : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     $self->_add_fav_list_to_stash( $c, 1_000 );

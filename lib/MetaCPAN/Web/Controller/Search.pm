@@ -9,7 +9,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use Plack::Response;
 
-sub index : Path {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 

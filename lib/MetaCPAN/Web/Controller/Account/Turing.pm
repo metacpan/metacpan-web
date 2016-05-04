@@ -6,7 +6,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 has public_key => ( is => 'ro', required => 1 );
 
-sub index : Path('') {
+sub index : Path('') : Args(0) {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST' ) {
         my $params = $c->req->params;

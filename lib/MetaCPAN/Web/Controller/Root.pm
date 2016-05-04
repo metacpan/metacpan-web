@@ -75,7 +75,7 @@ sub forbidden : Private {
     $c->response->status(403);
 }
 
-sub robots : Path("robots.txt") {
+sub robots : Path("robots.txt") : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('robots');

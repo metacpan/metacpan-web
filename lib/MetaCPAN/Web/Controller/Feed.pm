@@ -10,10 +10,7 @@ use DateTime::Format::ISO8601;
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
 
-sub index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
-}
-
-sub recent : Chained('index') PathPart Args(0) {
+sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
     my $data = $c->stash;
@@ -23,7 +20,7 @@ sub recent : Chained('index') PathPart Args(0) {
     );
 }
 
-sub news : Chained('index') PathPart Args(0) {
+sub news : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     my $file = $c->config->{home} . '/News.md';
@@ -61,7 +58,7 @@ sub news : Chained('index') PathPart Args(0) {
     );
 }
 
-sub author : Chained('index') PathPart Args(1) {
+sub author : Local : Args(1) {
     my ( $self, $c, $author ) = @_;
 
     # Redirect to this same action with uppercase author.
@@ -101,7 +98,7 @@ sub author : Chained('index') PathPart Args(1) {
     );
 }
 
-sub distribution : Chained('index') PathPart Args(1) {
+sub distribution : Local : Args(1) {
     my ( $self, $c, $distribution ) = @_;
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(

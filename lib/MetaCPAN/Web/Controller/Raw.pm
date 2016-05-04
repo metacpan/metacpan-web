@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : PathPart('raw') : Chained('/') : Args {
+sub index : Path : Args {
     my ( $self, $c, @module ) = @_;
 
     my ( $source, $module ) = (

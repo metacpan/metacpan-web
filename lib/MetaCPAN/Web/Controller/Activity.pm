@@ -8,7 +8,7 @@ use DateTime;
 
 my %res = ( week => '1w', month => 'month' );
 
-sub index : Path {
+sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     my $req = $c->req;
     my $res = $res{ $req->parameters->{res} || 'week' } || '1w';
