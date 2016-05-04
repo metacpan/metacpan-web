@@ -27,7 +27,9 @@ sub parse {
     my @indents;
     for my $linenr ( 0 .. $#lines ) {
         my $line = $lines[$linenr];
-        if ( $line =~ /^(?:version\s+)?($version::LAX)(\s+(.*))?$/i ) {
+        if ( $line
+            =~ /^(?:version\s+)?($version::LAX(?:-TRIAL)?)(\s+(.*))?$/i )
+        {
             my $version = $1;
             my $note    = $3;
             if ($note) {

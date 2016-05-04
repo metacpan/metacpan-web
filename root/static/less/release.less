@@ -29,14 +29,12 @@
 /* Changes in release page
  * See /release/CPAN-Changes for example
  */
-.last-changes {
+#last-changes {
     h2:extend(.content .file-group h2) {}
+
     ul {
         margin-bottom: 1em;
         padding-left: 20px;
-    }
-    > ul:last-child {
-        margin-bottom: 0;
     }
 
     ul, ul ul ul {
@@ -46,25 +44,28 @@
         list-style: circle;
     }
 
-    > ul > .group-header {
-        list-style: none;
-        > .change-entry {
-            font-weight: bold;
-        }
-    }
-
     .change-entries {
-        max-height: 19.5em;
-        overflow-y: hidden;
-
-        > ul:last-child {
-            margin-bottom: 0;
+        margin-bottom: 0.5em;
+        &:last-child {
+            margin-bottom: 0em;
         }
     }
 
-    #whatsnew-toggle-overflow {
-        margin-top: 1em;
+    .show-more { display: none }
+    .hide-more { display: inline }
+    &.collapsed {
+        .show-more { display: inline }
+        .hide-more { display: none }
+        #last-changes-container {
+            overflow: hidden;
+            max-height: 19.5em;
+        }
     }
 
-    margin-right: 200px;
+    #last-changes-toggle {
+        display: none;
+    }
+
+    padding-bottom: .5em;
+    overflow: auto;
 }

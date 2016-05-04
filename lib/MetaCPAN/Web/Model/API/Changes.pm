@@ -28,20 +28,43 @@ sub last_version {
             warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
         };
     }
-    return unless $releases && @$releases;
+    return [] unless $releases && @$releases;
 
-    # Ok, lets make sure we get the right release..
-    my $changelog = $self->find_changelog( $release->{version}, $releases );
+    my @releases = sort { $b->[0] <=> $a->[0] }
+        map {
+        my $v = $_->{version};
+        $v =~ s/-TRIAL$//;
+        my $dev = $_->{version} =~ /_|-TRIAL$/;
+        [ version->parse($v), $v, $dev, $_ ];
+        } @$releases;
 
-    return unless $changelog;
-    return $self->filter_release_changes( $changelog, $release );
+    my @changelogs;
+    my $found;
+    for my $r (@releases) {
+        if ($found) {
+            if ( $r->[2] ) {
+                push @changelogs, $r->[3];
+            }
+            else {
+                last;
+            }
+        }
+        elsif ( $r->[0] eq $release->{version} ) {
+            push @changelogs, $r->[3];
+            $found = 1;
+        }
+    }
+    return [ map { $self->filter_release_changes( $_, $release ) }
+            @changelogs ];
 }
 
 sub find_changelog {
     my ( $self, $version, $releases ) = @_;
 
     foreach my $rel (@$releases) {
-        return $rel if ( $rel->{version} eq $version );
+        return $rel
+            if ( $rel->{version} eq $version
+            || $rel->{version} eq "$version-TRIAL" );
     }
 }
 

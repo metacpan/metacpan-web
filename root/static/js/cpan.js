@@ -89,19 +89,6 @@ function toggleTOC() {
     return false;
 }
 
-function toggleWhatsnew() {
-    var changes = $('.last-changes .change-entries');
-    var link = $('.last-changes #whatsnew-toggle-overflow');
-
-    if (link.text() == 'Show Less') {
-        changes.css('max-height', '19.5em');
-        link.text('Show More');
-    } else {
-        changes.css('max-height', 'none');
-        link.text('Show Less');
-    }
-}
-
 function setFavTitle(button) {
     button.attr('title', button.hasClass('active') ? 'Remove from favorite' : 'Add to favorite');
     return;
@@ -410,15 +397,10 @@ $(document).ready(function() {
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
 
-    var changes = $('.last-changes .change-entries');
+    var changes = $('#last-changes-container');
     if (changes.prop('scrollHeight') > changes.height()) {
-        $('#whatsnew-toggle-overflow').on('click', function() {
-            toggleWhatsnew();
-        });
-    } else {
-        $('#whatsnew-toggle-overflow').hide();
+        $("#last-changes-toggle").show();
     }
-
 });
 
 function set_page_size(selector, storage_name) {
