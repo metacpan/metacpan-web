@@ -25,10 +25,6 @@ sub index : Path : Args(0) {
     );
 }
 
-sub log : Local : Args(0) {
-    my ( $self, $c ) = @_;
-    $c->stash( { template => 'recent/log.html' } );
-}
 
 sub favorites : Local : Args(0) {
     my ( $self, $c ) = @_;

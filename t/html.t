@@ -9,11 +9,10 @@ use Path::Tiny qw(path);
 # files that have inline <script> tags
 my %skip = map { $_ => 1 } (
     'root/account/profile.html',        'root/account/turing.html',
-    'root/inc/dependencies-graph.html', 'root/recent/log.html',
-    'root/author.html',                 'root/mirrors.html',
-    'root/source.html',                 'root/wrapper.html',
-    'root/about/contributors.html',     'root/inc/favorite.html',
-    'root/about/stats.html',
+    'root/inc/dependencies-graph.html', 'root/author.html',
+    'root/mirrors.html',                'root/source.html',
+    'root/wrapper.html',                'root/about/contributors.html',
+    'root/inc/favorite.html',           'root/about/stats.html',
 );
 
 my $rule = Path::Iterator::Rule->new;
