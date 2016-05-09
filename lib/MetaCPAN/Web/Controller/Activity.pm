@@ -39,11 +39,10 @@ sub index : Path : Args(0) {
     my $data = $c->model('API')->request(
         '/release/_search',
         {
-            query  => { match_all => {} },
-            facets => {
+            query        => { match_all => {} },
+            aggregations => {
                 histo => {
-                    date_histogram => { field => 'date', interval => $res },
-                    facet_filter   => {
+                    filter => {
                         and => [
                             {
                                 range => {
@@ -52,14 +51,20 @@ sub index : Path : Args(0) {
                             },
                             @$q
                         ]
+                    },
+                    aggregations => {
+                        entries => {
+                            date_histogram =>
+                                { field => 'date', interval => $res },
+                        }
                     }
                 }
             },
             size => 0,
         }
     )->recv;
-    my $entries = $data->{facets}->{histo}->{entries};
-    $data = { map { $_->{time} => $_->{count} } @$entries };
+    my $entries = $data->{aggregations}->{histo}->{entries}->{buckets};
+    $data = { map { $_->{key} => $_->{doc_count} } @$entries };
     my $line = [
         map {
             $data->{ $start->clone->add( months => $_ )->epoch . '000' }

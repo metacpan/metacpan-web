@@ -47,24 +47,25 @@ sub api_requests {
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
 
-    $c->stash(
-        {
-            author => $reqs->{author},
-
-            #release    => $release->{hits}->{hits}->[0]->{_source},
-            rating => $reqs->{rating}->{ratings}->{ $data->{distribution} },
-            distribution => $reqs->{distribution},
-            versions     => [
-                map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} }
-            ],
-        }
+    my %to_stash = (
+        author       => $reqs->{author},
+        distribution => $reqs->{distribution},
+        rating       => $reqs->{rating}->{ratings}->{ $data->{distribution} },
+        versions =>
+            [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
     );
+
+    my %stash
+        = map { $_ => $self->single_valued_arrayref_to_scalar( $to_stash{$_} ) }
+        ( 'rating', 'distribution', 'versions' );
+
+    $c->stash( \%stash );
 }
 
 # call recv() on all values in the provided hashref
 sub recv_all {
     my ( $self, $condvars ) = @_;
-    return { map { $_ => $condvars->{$_}->recv } keys %$condvars };
+    return +{ map { $_ => $condvars->{$_}->recv } keys %$condvars };
 }
 
 1;

@@ -46,18 +46,23 @@ sub get {
                     query  => { match_all => {} },
                     filter => {
                         or => [
-                            map {
-                                { term => { 'rating.distribution' => $_ } }
-                            } @distributions
+                            map { { term => { 'distribution' => $_ } } }
+                                @distributions
                         ]
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 ratings => {
-                    terms_stats => {
-                        value_field => 'rating.rating',
-                        key_field   => 'rating.distribution'
+                    terms => {
+                        field => 'distribution'
+                    },
+                    aggregations => {
+                        ratings_dist => {
+                            stats => {
+                                field => 'rating'
+                            }
+                        }
                     }
                 }
             }
@@ -69,8 +74,9 @@ sub get {
                 {
                     took    => $ratings->{took},
                     ratings => {
-                        map { $_->{term} => $_ }
-                            @{ $ratings->{facets}->{ratings}->{terms} }
+                        map { $_->{key} => $_->{ratings_dist} } @{
+                            $ratings->{aggregations}->{ratings}->{buckets}
+                        }
                     }
                 }
             );

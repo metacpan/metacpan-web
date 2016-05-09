@@ -38,8 +38,8 @@ sub find {
 }
 
 sub _not_rogue {
-    my @rogue_dists = map { { term => { 'file.distribution' => $_ } } }
-        @ROGUE_DISTRIBUTIONS;
+    my @rogue_dists
+        = map { { term => { 'distribution' => $_ } } } @ROGUE_DISTRIBUTIONS;
     return { not => { filter => { or => \@rogue_dists } } };
 }
 
@@ -91,8 +91,7 @@ sub search_expanded {
     my $favorites    = $self->model('Favorite')->get( $user, @distributions );
     $_ = $_->recv for ( $ratings, $favorites, $descriptions );
     my $results = $self->_extract_results( $data, $ratings, $favorites );
-
-    map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
+    map { $_->{description} = $descriptions->{results}->{ $_->{id}[0] } }
         @{$results};
     $cv->send(
         {
@@ -117,7 +116,7 @@ sub search_collapsed {
     do {
         $data = $self->_search( $query, $run )->recv;
         $took += $data->{took} || 0;
-        $total = @{ $data->{facets}->{count}->{terms} || [] }
+        $total = @{ $data->{aggregations}->{count}->{buckets} || [] }
             if ( $run == 1 );
         $hits = @{ $data->{hits}->{hits} || [] };
         @distributions = uniq( @distributions,
@@ -127,7 +126,8 @@ sub search_collapsed {
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions = splice( @distributions, $from, $page_size );
+    @distributions
+        = map { $_->[0] } splice( @distributions, $from, $page_size );
 
     # Everything else will fail (slowly and quietly) without distributions.
     if ( !@distributions ) {
@@ -146,7 +146,7 @@ sub search_collapsed {
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
     $results = $self->_collapse_results($results);
-    my @ids = map { $_->[0]->{id} } @$results;
+    my @ids = map { $_->[0]{id}[0] } @$results;
     $data = {
         results => $results,
         total   => $total,
@@ -154,10 +154,8 @@ sub search_collapsed {
     };
     my ($descriptions) = $self->search_descriptions(@ids)->recv;
     $data->{took} += $descriptions->{took} || 0;
-    map {
-        $_->[0]->{description}
-            = $descriptions->{results}->{ $_->[0]->{id} }
-    } @{ $data->{results} };
+    map { $_->[0]{description} = $descriptions->{results}{ $_->[0]{id}[0] } }
+        @{ $data->{results} };
     $cv->send($data);
     return $cv;
 }
@@ -172,7 +170,7 @@ sub search_descriptions {
                 filtered => {
                     query  => { match_all => {} },
                     filter => {
-                        or => [ map { { term => { 'file.id' => $_ } } } @ids ]
+                        or => [ map { { term => { 'id' => $_ } } } @ids ]
                     }
                 }
             },
@@ -186,7 +184,7 @@ sub search_descriptions {
                 {
                     results => {
                         map {
-                            ( $_->{fields}->{id} =>
+                            ( $_->{fields}->{id}->[0] =>
                                     $_->{fields}->{description} )
                         } @{ $data->{hits}->{hits} }
                     },
@@ -202,18 +200,23 @@ sub _extract_results {
     my ( $self, $results, $ratings, $favorites ) = @_;
     return [
         map {
+            my $res = $_;
+            for my $k (
+                qw/distribution author release path documentation date/)
             {
-                %{ $_->{fields} },
-                    abstract => $_->{fields}->{'abstract.analyzed'},
-                    score    => $_->{_score},
-                    rating =>
-                    $ratings->{ratings}->{ $_->{fields}->{distribution} },
-                    favorites =>
-                    $favorites->{favorites}->{ $_->{fields}->{distribution} },
-                    myfavorite => $favorites->{myfavorites}
-                    ->{ $_->{fields}->{distribution} },
+                $res->{fields}{$k} = $res->{fields}{$k}[0]
+                    if ref $res->{fields}{$k} eq 'ARRAY';
             }
-        } @{ $results->{hits}->{hits} }
+            my $dist = $res->{fields}{distribution};
+            +{
+                %{ $res->{fields} },
+                abstract   => $res->{fields}{'abstract.analyzed'}[0],
+                score      => $res->{_score},
+                rating     => $ratings->{ratings}{$dist},
+                favorites  => $favorites->{favorites}{$dist},
+                myfavorite => $favorites->{myfavorites}{$dist},
+                }
+        } @{ $results->{hits}{hits} }
     ];
 }
 
@@ -244,7 +247,7 @@ sub _search {
             fields => [qw(distribution)],
             $run == 1
             ? (
-                facets => {
+                aggregations => {
                     count =>
                         { terms => { size => 999, field => 'distribution' } }
                 }
@@ -273,7 +276,7 @@ sub search {
     ( my $clean = $query ) =~ s/::/ /g;
 
     my $negative
-        = { term => { 'file.mime' => { value => 'text/x-script.perl' } } };
+        = { term => { 'mime' => { value => 'text/x-script.perl' } } };
 
     my $positive = {
         bool => {
@@ -282,7 +285,7 @@ sub search {
                 # exact matches result in a huge boost
                 {
                     term => {
-                        'file.documentation' => {
+                        'documentation' => {
                             value => $query,
                             boost => 20
                         }
@@ -290,7 +293,7 @@ sub search {
                 },
                 {
                     term => {
-                        'file.module.name' => {
+                        'module.name' => {
                             value => $query,
                             boost => 20
                         }
@@ -304,8 +307,8 @@ sub search {
                             {
                                 query_string => {
                                     fields => [
-                                        qw(documentation.analyzed^2 file.module.name.analyzed^2 distribution.analyzed),
-                                        qw(documentation.camelcase file.module.name.camelcase distribution.camelcase)
+                                        qw(documentation.analyzed^2 module.name.analyzed^2 distribution.analyzed),
+                                        qw(documentation.camelcase module.name.camelcase distribution.camelcase)
                                     ],
                                     query                  => $clean,
                                     boost                  => 3,
@@ -341,7 +344,7 @@ sub search {
             query => {
                 filtered => {
                     query => {
-                        custom_score => {
+                        function_score => {
 
                             # prefer shorter module names
                             metacpan_script =>
@@ -358,23 +361,21 @@ sub search {
                     filter => {
                         and => [
                             $self->_not_rogue,
-                            { term => { status            => 'latest' } },
-                            { term => { 'file.authorized' => \1 } },
-                            { term => { 'file.indexed'    => \1 } },
+                            { term => { status       => 'latest' } },
+                            { term => { 'authorized' => \1 } },
+                            { term => { 'indexed'    => \1 } },
                             {
                                 or => [
                                     {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'file.module.name'
+                                                    field => 'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'file.module.indexed' =>
-                                                        \1
+                                                    'module.indexed' => \1
                                                 }
                                             }
                                         ]
@@ -398,7 +399,7 @@ sub search {
                     status
                     indexed
                     authorized
-                    module
+                    module.name
                     distribution
                     date
                     id
@@ -407,6 +408,7 @@ sub search {
             ],
         }
     );
+
     return $self->request( '/file/_search', $search );
 }
 
@@ -422,9 +424,8 @@ sub _search_in_distributions {
                     and => [
                         {
                             or => [
-                                map {
-                                    { term => { 'file.distribution' => $_ } }
-                                } @distributions
+                                map { { term => { 'distribution' => $_ } } }
+                                    @distributions
                             ]
                         }
                     ]

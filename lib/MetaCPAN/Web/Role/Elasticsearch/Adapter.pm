@@ -2,6 +2,8 @@ package MetaCPAN::Web::Role::Elasticsearch::Adapter;
 
 use Moose::Role;
 
+use Ref::Util qw( is_arrayref );
+
 =head1 METHODS
 
 =head2 single_valued_arrayref_to_scalar
@@ -61,6 +63,10 @@ yields:
 
 sub single_valued_arrayref_to_scalar {
     my ( $self, $array, $fields ) = @_;
+    my $is_arrayref = is_arrayref($array);
+
+    $array = [$array] unless $is_arrayref;
+
     my $has_fields = defined $fields ? 1 : 0;
     $fields ||= [];
     my %fields_to_extract = map { $_ => 1 } @{$fields};
@@ -70,14 +76,11 @@ sub single_valued_arrayref_to_scalar {
             my $value = $hash->{$field};
 
             # We only operate when have an ArrayRef of one value
-            next
-                if not( ref($value)
-                and ( ref($value) eq 'ARRAY' )
-                and ( scalar @{$value} == 1 ) );
+            next unless is_arrayref($value) && scalar @{$value} == 1;
             $hash->{$field} = $value->[0];
         }
     }
-    return $array;
+    return $is_arrayref ? $array : @{$array};
 }
 
 =head2 scalar_to_single_valued_arrayref

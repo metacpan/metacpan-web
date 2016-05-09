@@ -16,7 +16,7 @@ MetaCPAN show the number of test reports and links to the tests.
 * [CPANTS](http://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
 MetaCPAN links to the respective pages on the CPANTS site.
 * [CPAN Ratings](http://cpanratings.perl.org/) allows users to give stars and review CPAN distributions.
-MetaCPAN show the average rating using stars and links to the reviews.
+MetaCPAN show links to the reviews.
 * [search.cpan.org](http://search.cpan.org/) is another search engine for the same data.
 It is older, but the source code has not been published.
 MetaCPAN links to the respective page of each module/distribution.
@@ -65,7 +65,7 @@ See our [missing module](/about/missing_modules) page.
 ## Where can I find the API docs?
 
 The API docs can be found [in the API repository](https://github.com/CPAN-API/cpan-api/blob/master/docs/API-docs.md).
-API requests need to be sent to api.metacpan.org.
+API requests need to be sent to api-v1.metacpan.org.
 
 ## How can I try the API?
 
@@ -94,18 +94,18 @@ To fix this:
 
 ### Trying to connect PAUSE just gives you JSON and doesn't work?
 
-It is possible to get your account into an inconsistent state where it won't 
-connect to PAUSE - particularly if you've connected via multiple identities, 
+It is possible to get your account into an inconsistent state where it won't
+connect to PAUSE - particularly if you've connected via multiple identities,
 and/or using multiple browsers.
 
 To fix this:
 
 1. Disconnect all identities
-2. Remove all cookies from `metacpan.org` and `api.metacpan.org`
+2. Remove all cookies from `metacpan.org` and `api-v1.metacpan.org`
 3. Reconnect via one identity
 4. Connect to PAUSE
 
-Make sure that you use the same browser for all of the steps - including 
+Make sure that you use the same browser for all of the steps - including
 opening the link in the email from MetaCPAN.
 
 ### Favorites not displaying on author page?
@@ -185,7 +185,7 @@ files and from MetaCPAN.
 Thus it might show a different e-mail address or homepage of a user then what MetaCPAN does.
 
 If you, as a PAUSE author would like to keep them in sync, you can always export your MetaCPAN
-account information in json format by accessing http://api.metacpan.org/author/PAUSEID
+account information in json format by accessing http://api-v1.metacpan.org/author/PAUSEID
 (replacing the word PAUSEID by your own PAUSEID). Then you can upload the result as author-*.json
 with a higher version number than the last one you uploaded.
 The PAUSE account information need to be updated manually via

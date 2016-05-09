@@ -8,7 +8,7 @@ use MetaCPAN::Web;
 sub search_release {
     my ( $method, @args ) = @_;
     return
-        map { $_->{fields} } map { @{ $_->{hits}{hits} } }
+        map { @{ $_->{hits}{hits} } }
         MetaCPAN::Web->model('API::Release')->$method(@args)->recv;
 }
 

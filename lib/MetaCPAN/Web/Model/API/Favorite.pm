@@ -34,7 +34,7 @@ sub get {
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 favorites => {
                     terms => {
                         field => 'favorite.distribution',
@@ -44,9 +44,12 @@ sub get {
                 $user
                 ? (
                     myfavorites => {
-                        terms => { field => 'favorite.distribution', },
-                        facet_filter =>
-                            { term => { 'favorite.user' => $user } }
+                        filter => { term => { 'favorite.user' => $user } },
+                        aggregations => {
+                            enteries => {
+                                terms => { field => 'favorite.distribution' }
+                            }
+                        }
                     }
                     )
                 : (),
@@ -59,13 +62,15 @@ sub get {
                 {
                     took      => $data->{took},
                     favorites => {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{favorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{favorites}->{buckets} }
                     },
                     myfavorites => $user
                     ? {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{myfavorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} } @{
+                            $data->{aggregations}->{myfavorites}->{entries}
+                                ->{buckets}
+                        }
                         }
                     : {},
                 }
@@ -108,9 +113,9 @@ sub leaderboard {
     $self->request(
         '/favorite/_search',
         {
-            size   => 0,
-            query  => { match_all => {} },
-            facets => {
+            size         => 0,
+            query        => { match_all => {} },
+            aggregations => {
                 leaderboard =>
                     { terms => { field => 'distribution', size => 600 }, },
             },

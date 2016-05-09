@@ -42,8 +42,9 @@ sub index : Path : Args(0) {
         )
     {
         my $module = $model->first($query)->recv;
-        if ( $query eq $module ) {
-            $c->res->redirect("/pod/$module");
+        $module = $module->[0] if $module;
+        if ( $module && $module eq $query ) {
+            $c->res->redirect( '/pod/' . $module->[0] );
             $c->detach;
         }
         else {
@@ -69,7 +70,7 @@ sub index : Path : Args(0) {
         # these would be nicer if we had variable-length lookbehinds...
         $query =~ s{(^|\s)author:([a-zA-Z]+)(?=\s|$)}{$1author:\U$2\E}g;
         $query
-            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1file.distribution:$3/g;
+            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1distribution:$3/g;
         $query
             =~ s/(^|\s)module:(\w[\w:]*)(?=\s|$)/$1module.name.analyzed:$2/g;
 

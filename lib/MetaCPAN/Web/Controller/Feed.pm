@@ -109,6 +109,7 @@ sub distribution : Local : Args(1) {
 
 sub build_entry {
     my ( $self, $entry ) = @_;
+    $self->single_valued_arrayref_to_scalar($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
