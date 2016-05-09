@@ -51,7 +51,7 @@ $(function(){
         var author;
         var email;
         if( author = li.attr('data-cpan-author')) {
-            $.getJSON( "https://api.metacpan.org/author/" + author, function(data) {
+            $.getJSON( "https://api-v1.metacpan.org/author/" + author, function(data) {
                 updateContrib(li, data);
             });
         }
@@ -80,7 +80,7 @@ $(function(){
             };
             $.ajax({
                 type: "POST",
-                url: "https://api.metacpan.org/author/",
+                url: "https://api-v1.metacpan.org/author/",
                 data: JSON.stringify(query),
                 dataType: "json",
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8", // a lie to bypass cors
