@@ -138,7 +138,10 @@
         <a href="https://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a>
     </li>
     <li>
-        <a href="https://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/">Browse CPAN directory</a>
+        <a href="http://cpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/">Browse CPAN directory</a>
+    </li>
+    <li>
+        <a href="https://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">Browse BackPAN directory</a>
     </li>
 </ul>
 <!-- End left content -->
