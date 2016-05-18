@@ -1,5 +1,8 @@
 package MetaCPAN::Web::Elasticsearch::Adapter;
 
+use strict;
+use warnings;
+
 use Ref::Util qw( is_arrayref );
 
 our @EXPORT_OK = qw( single_valued_arrayref_to_scalar );

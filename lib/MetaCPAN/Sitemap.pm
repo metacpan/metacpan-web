@@ -7,6 +7,8 @@ module to generate one each for authors, modules and releases.
 
 =cut
 
+use strict;
+use warnings;
 use MetaCPAN::Moose;
 
 use autodie;

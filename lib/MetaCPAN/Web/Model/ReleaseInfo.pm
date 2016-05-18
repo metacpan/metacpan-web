@@ -1,5 +1,7 @@
 package MetaCPAN::Web::Model::ReleaseInfo;
 
+use strict;
+use warnings;
 use MetaCPAN::Moose;
 
 extends 'Catalyst::Model';
