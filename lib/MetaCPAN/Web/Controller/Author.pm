@@ -7,6 +7,9 @@ use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
 use Locale::Country ();
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 # Capture the PAUSE id in the root of the chain so we handle the upper-case redirect once.
@@ -59,12 +62,12 @@ sub index : Chained('root') PathPart('') Args(0) {
         $took += $faves_data->{took} || 0;
 
         $faves = [ map { $_->{fields} } @{ $faves_data->{hits}->{hits} } ];
-        $self->single_valued_arrayref_to_scalar($faves);
+        single_valued_arrayref_to_scalar($faves);
         $faves = [ sort { $b->{date} cmp $a->{date} } @{$faves} ];
     }
 
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    $self->single_valued_arrayref_to_scalar($releases);
+    single_valued_arrayref_to_scalar($releases);
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;
