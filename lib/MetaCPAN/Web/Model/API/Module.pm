@@ -313,8 +313,8 @@ sub search {
                                     query                  => $clean,
                                     boost                  => 3,
                                     default_operator       => 'AND',
-                                    allow_leading_wildcard => \0,
-                                    use_dis_max            => \1,
+                                    allow_leading_wildcard => 0,
+                                    use_dis_max            => 1,
 
                                 }
                             },
@@ -325,8 +325,8 @@ sub search {
                                     ],
                                     query                  => $clean,
                                     default_operator       => 'AND',
-                                    allow_leading_wildcard => \0,
-                                    use_dis_max            => \1,
+                                    allow_leading_wildcard => 0,
+                                    use_dis_max            => 1,
 
                                 }
                             }
@@ -362,8 +362,8 @@ sub search {
                         and => [
                             $self->_not_rogue,
                             { term => { status       => 'latest' } },
-                            { term => { 'authorized' => \1 } },
-                            { term => { 'indexed'    => \1 } },
+                            { term => { 'authorized' => 1 } },
+                            { term => { 'indexed'    => 1 } },
                             {
                                 or => [
                                     {
@@ -375,7 +375,7 @@ sub search {
                                             },
                                             {
                                                 term => {
-                                                    'module.indexed' => \1
+                                                    'module.indexed' => 1
                                                 }
                                             }
                                         ]
@@ -447,11 +447,11 @@ sub requires {
                     query  => { 'match_all' => {} },
                     filter => {
                         and => [
-                            { term => { 'release.status'     => 'latest' } },
-                            { term => { 'release.authorized' => \1 } },
+                            { term => { 'status'     => 'latest' } },
+                            { term => { 'authorized' => 1 } },
                             {
                                 term => {
-                                    'release.dependency.module' => $module
+                                    'dependency.module' => $module
                                 }
                             }
                         ]

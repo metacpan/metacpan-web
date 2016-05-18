@@ -54,18 +54,18 @@ sub search {
                 should => [
                     {
                         match => {
-                            'author.name.analyzed' =>
+                            'name.analyzed' =>
                                 { query => $query, operator => 'and' }
                         }
                     },
                     {
                         match => {
-                            'author.asciiname.analyzed' =>
+                            'asciiname.analyzed' =>
                                 { query => $query, operator => 'and' }
                         }
                     },
-                    { match => { 'author.pauseid'    => uc($query) } },
-                    { match => { 'author.profile.id' => lc($query) } },
+                    { match => { 'pauseid'    => uc($query) } },
+                    { match => { 'profile.id' => lc($query) } },
                 ]
             }
         },

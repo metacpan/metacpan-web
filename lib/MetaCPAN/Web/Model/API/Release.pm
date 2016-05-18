@@ -53,7 +53,7 @@ sub _new_distributions_query {
         constant_score => {
             filter => {
                 and => [
-                    { term => { first => \1, } },
+                    { term => { first => 1 } },
                     {
                         not =>
                             { filter => { term => { status => 'backpan' } } }
@@ -81,7 +81,7 @@ sub latest_by_author {
                 }
             },
             sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
+                'distribution', { 'version_numified' => { reverse => 1 } }
             ],
             fields => [qw(author distribution name status abstract date)],
             size   => 1000,
@@ -166,7 +166,7 @@ sub modules {
                                             },
                                             {
                                                 term => {
-                                                    'module.indexed' => \1
+                                                    'module.indexed' => 1
                                                 }
                                             }
                                         ]
@@ -179,7 +179,7 @@ sub modules {
                                                 }
                                             },
                                             {
-                                                term => { 'indexed' => \1 }
+                                                term => { 'indexed' => 1 }
                                             },
                                         ]
                                     }
@@ -256,7 +256,7 @@ sub reverse_dependencies {
                     filter => {
                         and => [
                             { term => { 'status'     => 'latest' } },
-                            { term => { 'authorized' => \1 } },
+                            { term => { 'authorized' => 1 } },
                         ]
                     }
                 }
@@ -385,20 +385,13 @@ sub versions {
             query => {
                 filtered => {
                     query  => { match_all => {} },
-                    filter => {
-                        and => [ { term => { 'distribution' => $dist } }, ],
-
-                    }
+                    filter => { term      => { distribution => $dist } }
                 }
             },
-            size   => 250,
-            sort   => [ { date => 'desc' } ],
-            fields => [
-                qw(
-                    name date author version status maturity
-                    _source.authorized
-                    )
-            ],
+            size => 250,
+            sort => [ { date => 'desc' } ],
+            fields =>
+                [qw( name date author version status maturity authorized )],
         }
     );
 }
