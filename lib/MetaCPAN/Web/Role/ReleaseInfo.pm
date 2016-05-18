@@ -2,6 +2,9 @@ package MetaCPAN::Web::Role::ReleaseInfo;
 
 use Moose::Role;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 # TODO: are there other controllers that do (or should) include this?
 
 # TODO: should some of this be in a separate (instantiable) model
@@ -56,7 +59,7 @@ sub stash_api_results {
     );
 
     my %stash
-        = map { $_ => $self->single_valued_arrayref_to_scalar( $to_stash{$_} ) }
+        = map { $_ => single_valued_arrayref_to_scalar( $to_stash{$_} ) }
         ( 'rating', 'distribution', 'versions' );
 
     $c->stash( \%stash );

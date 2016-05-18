@@ -10,6 +10,9 @@ use DateTime::Format::ISO8601;
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
@@ -109,7 +112,7 @@ sub distribution : Local : Args(1) {
 
 sub build_entry {
     my ( $self, $entry ) = @_;
-    $self->single_valued_arrayref_to_scalar($entry);
+    single_valued_arrayref_to_scalar($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(
