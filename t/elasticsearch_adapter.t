@@ -3,8 +3,8 @@ use warnings;
 
 use Test::More;
 
-use MetaCPAN::Web::Elasticsearch::Adapter
-    qw( single_valued_arrayref_to_scalar );
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
 
 my $test_data = [
     {
