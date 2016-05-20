@@ -3,16 +3,9 @@ use warnings;
 
 use Test::More;
 
-{
+use MetaCPAN::Web::Elasticsearch::Adapter
+    qw( single_valued_arrayref_to_scalar );
 
-    package    ## no critic (Package)
-        ExtractSingleElement;
-    use Moo;
-    with('MetaCPAN::Web::Role::Elasticsearch::Adapter');
-    1;
-}
-
-my $extractor = ExtractSingleElement->new;
 my $test_data = [
     {
         'name'     => 'MetaCPAN-Client',
@@ -34,6 +27,7 @@ my $test_data = [
     }
 
 ];
+
 my $expected_extraction = [
     {
         'name'     => 'MetaCPAN-Client',
@@ -55,9 +49,9 @@ my $expected_extraction = [
     }
 
 ];
-is_deeply $extractor->single_valued_arrayref_to_scalar(
-    $test_data, [ 'name', 'abstract' ]
-    ),
+
+is_deeply single_valued_arrayref_to_scalar( $test_data,
+    [ 'name', 'abstract' ] ),
     $expected_extraction,
     'flatten single element arrays when specified';
 

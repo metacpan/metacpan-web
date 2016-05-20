@@ -2416,6 +2416,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Importer-0.012
+    pathname: E/EX/EXODIST/Importer-0.012.tar.gz
+    provides:
+      Importer 0.012
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.008001
   JSON-2.90
     pathname: M/MA/MAKAMAKA/JSON-2.90.tar.gz
     provides:

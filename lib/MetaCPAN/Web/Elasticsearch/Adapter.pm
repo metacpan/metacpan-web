@@ -1,8 +1,8 @@
-package MetaCPAN::Web::Role::Elasticsearch::Adapter;
-
-use Moose::Role;
+package MetaCPAN::Web::Elasticsearch::Adapter;
 
 use Ref::Util qw( is_arrayref );
+
+our @EXPORT_OK = qw( single_valued_arrayref_to_scalar );
 
 =head1 METHODS
 
@@ -62,7 +62,7 @@ yields:
 =cut
 
 sub single_valued_arrayref_to_scalar {
-    my ( $self, $array, $fields ) = @_;
+    my ( $array, $fields ) = @_;
     my $is_arrayref = is_arrayref($array);
 
     $array = [$array] unless $is_arrayref;
@@ -81,48 +81,6 @@ sub single_valued_arrayref_to_scalar {
         }
     }
     return $is_arrayref ? $array : @{$array};
-}
-
-=head2 scalar_to_single_valued_arrayref
-
-Given an ArrayRef[HashRef[Str]], turn all scalar values of the HashRef
-into a single valued ArrayRef, i.e. a ArrayRef[HashRef[ArrayRef[Str]]]
-
-So this:
-
-    [
-      {
-        distribution => 'WhizzBang',
-        provides     => ['Food', 'Bar'],
-      },
-       ...
-   ]
-
-becomes:
-
-    [
-      {
-        distribution => ['WhizzBang'],
-        provides       => ['Food, 'Bar'],
-      },
-      ...
-    ]
-
-
-=cut
-
-sub scalar_to_single_valued_arrayref {
-    my ( $self, $array ) = @_;
-    foreach my $hash ( @{$array} ) {
-        foreach my $field ( %{$hash} ) {
-            my $value = $hash->{$field};
-
-            # Move on if we already have a ref
-            next if ref($value);
-            $hash->{$field} = [$value];
-        }
-    }
-    return $array;
 }
 
 1;
