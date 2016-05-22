@@ -29,7 +29,6 @@ sub index : Path : Args(0) {
     );
 }
 
-
 sub favorites : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->res->redirect( '/favorite/recent', 301 );
