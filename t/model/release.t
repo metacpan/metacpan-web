@@ -5,8 +5,12 @@ use Test::More;
 use JSON::MaybeXS;
 use MetaCPAN::Web;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 sub search_release {
     my ( $method, @args ) = @_;
+
     return
         map { @{ $_->{hits}{hits} } }
         MetaCPAN::Web->model('API::Release')->$method(@args)->recv;
@@ -26,11 +30,18 @@ sub is_bool {
 
 subtest modules => sub {
     my @files
-        = search_release( modules => 'OALDERS', 'HTTP-CookieMonster-0.07' );
+        = map { $_->{fields} }
+        search_release( modules => 'OALDERS', 'HTTP-CookieMonster-0.09' );
 
     ok( scalar @files, 'found files with modules' );
 
     foreach my $file (@files) {
+        single_valued_arrayref_to_scalar($file);
+
+        # this is a hack for the later sort check:
+        # 1. fix to both 'undefined value' warnings
+        # 2. make sure to push the empty values (undefined) to the end
+        $file->{"documentation"} //= "Z" x 50;
 
         # Ensure we get a boolean so that conditions work as expected.
         is_bool( $file->{$_}, "'$_' is a boolean" )
@@ -50,13 +61,15 @@ subtest versions => sub {
 
     # Something with not too many versions.
     my @versions
-        = search_release( versions => 'Mojolicious-Plugin-HamlRenderer' );
+        = map { $_->{fields} }
+        search_release( versions => 'Mojolicious-Plugin-HamlRenderer' );
 
     ok( scalar @versions, 'found release versions' );
 
     my %statuses;
     my @dates;
     foreach my $version (@versions) {
+        single_valued_arrayref_to_scalar($version);
 
         # Ensure we get a boolean so that conditions work as expected.
         is_bool( $version->{authorized}, q['authorized' is a boolean] );
