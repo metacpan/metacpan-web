@@ -68,7 +68,7 @@ sub request {
 
     my $url = $self->api_secure->clone;
     $url->query_param( access_token => $token ) if $token;
-    $url->path($path);
+    $url->path_query($path);
 
     my $request = HTTP::Request->new(
         $method ? $method : $search ? 'POST' : 'GET',
