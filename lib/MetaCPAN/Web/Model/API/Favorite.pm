@@ -132,7 +132,7 @@ sub find_plussers {
 
     # store in an array.
     my @plusser_users
-        = map { $_->{fields}->{user} } @{ $plusser_data->{hits}->{hits} };
+        = map { $_->{fields}->{user}[0] } @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
     # find plussers by pause ids.

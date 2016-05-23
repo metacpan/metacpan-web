@@ -194,6 +194,8 @@ sub modules {
             # Sort by documentation name; if there isn't one, sort by path.
             sort => [ 'documentation', 'path' ],
 
+            _source => [ "module", "abstract" ],
+
             fields => [
                 qw(
                     author
@@ -204,8 +206,6 @@ sub modules {
                     path
                     pod_lines
                     release
-                    _source.abstract
-                    _source.module
                     status
                     )
             ],
