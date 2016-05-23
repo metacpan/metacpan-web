@@ -67,8 +67,11 @@ sub request {
     my $req = $self->cv;
 
     my $url = $self->api_secure->clone;
-    $url->query_param( access_token => $token ) if $token;
+
+    # the order of the following 2 lines matters
+    # `path_query` is destructive
     $url->path_query($path);
+    $url->query_param( access_token => $token ) if $token;
 
     my $request = HTTP::Request->new(
         $method ? $method : $search ? 'POST' : 'GET',
