@@ -7,8 +7,8 @@ use MetaCPAN::Web::Test;
 use JSON::MaybeXS;
 
 my @tests = (
-    [ moose => 'Moose' ],
-    ['moose">'],    # no match
+    [ moose      => 'Moose' ],
+    [ 'moose">'  => 'Moose' ],
     [ 'Acme::ǝ' => 'Acme::ǝmɔA' ],
 );
 
@@ -44,7 +44,7 @@ test_psgi app, sub {
         is $doc, $exp, 'got the module we wanted first';
 
         # if it's not exact, is it a prefix match?
-        like $doc, qr/^\Q$test\E/i, 'first result is a prefix match';
+        like $doc, qr/^\Q$exp\E/i, 'first result is a prefix match';
 
         ok( $res = $cb->( GET "/pod/$doc" ), "GET $doc" );
         is( $res->code, 200, 'code 200' );
