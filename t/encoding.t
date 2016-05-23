@@ -203,7 +203,7 @@ done_testing;
 sub check_request {
     my ( $desc, $args, $exp ) = @_;
     my $uri = $model->api_secure->clone;
-    $uri->path( $exp->{uri} );
+    $uri->path_query( $exp->{uri} );
     $exp->{uri} = $uri;
     $model->request(@$args);
 
