@@ -94,7 +94,7 @@ sub search_expanded {
     my $favorites    = $self->model('Favorite')->get( $user, @distributions );
     $_ = $_->recv for ( $ratings, $favorites, $descriptions );
     my $results = $self->_extract_results( $data, $ratings, $favorites );
-    map { $_->{description} = $descriptions->{results}->{ $_->{id}[0] } }
+    map { $_->{description} = $descriptions->{results}->{ $_->{id} } }
         @{$results};
     $cv->send(
         {
