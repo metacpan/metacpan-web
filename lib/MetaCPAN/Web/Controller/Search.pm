@@ -8,6 +8,7 @@ use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use Plack::Response;
+use Ref::Util qw( is_arrayref );
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
@@ -42,9 +43,9 @@ sub index : Path : Args(0) {
         )
     {
         my $module = $model->first($query)->recv;
-        $module = $module->[0] if $module;
+        $module = $module->[0] if $module and is_arrayref($module);
         if ( $module && $module eq $query ) {
-            $c->res->redirect( '/pod/' . $module->[0] );
+            $c->res->redirect( '/pod/' . $module );
             $c->detach;
         }
         else {
