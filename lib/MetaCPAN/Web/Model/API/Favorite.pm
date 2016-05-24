@@ -6,6 +6,9 @@ extends 'MetaCPAN::Web::Model::API';
 
 use List::MoreUtils qw(uniq);
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
@@ -131,8 +134,9 @@ sub find_plussers {
     my $plusser_data = $plusser->recv;
 
     # store in an array.
-    my @plusser_users
-        = map { $_->{fields}->{user}[0] } @{ $plusser_data->{hits}->{hits} };
+    my @plusser_users = map { $_->{user} }
+        map { single_valued_arrayref_to_scalar( $_->{fields} ) }
+        @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
     # find plussers by pause ids.
