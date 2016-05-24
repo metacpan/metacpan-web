@@ -4,6 +4,9 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API::File';
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 =head1 NAME
 
 MetaCPAN::Web::Model::Module - Catalyst Model
@@ -146,7 +149,7 @@ sub search_collapsed {
         || 0;
     $results = $self->_extract_results( $results, $ratings, $favorites );
     $results = $self->_collapse_results($results);
-    my @ids = map { $_->[0]{id}[0] } @$results;
+    my @ids = map { $_->[0]{id} } @$results;
     $data = {
         results => $results,
         total   => $total,
@@ -154,7 +157,7 @@ sub search_collapsed {
     };
     my ($descriptions) = $self->search_descriptions(@ids)->recv;
     $data->{took} += $descriptions->{took} || 0;
-    map { $_->[0]{description} = $descriptions->{results}{ $_->[0]{id}[0] } }
+    map { $_->[0]{description} = $descriptions->{results}{ $_->[0]{id} } }
         @{ $data->{results} };
     $cv->send($data);
     return $cv;
@@ -183,10 +186,10 @@ sub search_descriptions {
             $cv->send(
                 {
                     results => {
-                        map {
-                            ( $_->{fields}->{id}->[0] =>
-                                    $_->{fields}->{description} )
-                        } @{ $data->{hits}->{hits} }
+                        map { $_->{id} => $_->{description} }
+                            map {
+                            single_valued_arrayref_to_scalar( $_->{fields} )
+                            } @{ $data->{hits}->{hits} }
                     },
                     took => $data->{took}
                 }
@@ -201,16 +204,11 @@ sub _extract_results {
     return [
         map {
             my $res = $_;
-            for my $k (
-                qw/distribution author release path documentation date/)
-            {
-                $res->{fields}{$k} = $res->{fields}{$k}[0]
-                    if ref $res->{fields}{$k} eq 'ARRAY';
-            }
+            single_valued_arrayref_to_scalar( $res->{fields} );
             my $dist = $res->{fields}{distribution};
             +{
                 %{ $res->{fields} },
-                abstract   => $res->{fields}{'abstract.analyzed'}[0],
+                abstract   => $res->{fields}{'abstract.analyzed'},
                 score      => $res->{_score},
                 rating     => $ratings->{ratings}{$dist},
                 favorites  => $favorites->{favorites}{$dist},
