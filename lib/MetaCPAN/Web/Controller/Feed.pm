@@ -80,8 +80,10 @@ sub author : Local : Args(1) {
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
 
-    my $release_data
-        = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
+    my $release_data = [
+        map { single_valued_arrayref_to_scalar($_) }
+        map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} }
+    ];
     my $author_info = $author_cv->recv;
 
     my $faves_cv = $author_info->{user}
