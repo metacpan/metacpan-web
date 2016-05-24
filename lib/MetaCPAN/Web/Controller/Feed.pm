@@ -90,7 +90,10 @@ sub author : Local : Args(1) {
         && $c->model('API::Favorite')->by_user( $author_info->{user} );
     my $faves_data
         = $faves_cv
-        ? [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ]
+        ? [
+        map { single_valued_arrayref_to_scalar($_) }
+        map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} }
+        ]
         : [];
 
     $c->stash->{feed} = $self->build_feed(
@@ -108,7 +111,10 @@ sub distribution : Local : Args(1) {
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => [ map { $_->{fields} } @{ $data->{hits}->{hits} } ]
+        entries => [
+            map { single_valued_arrayref_to_scalar($_) }
+            map { $_->{fields} } @{ $data->{hits}->{hits} }
+        ]
     );
 }
 
