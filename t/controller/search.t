@@ -44,18 +44,6 @@ test_psgi app, sub {
         qq!//$xpath{search_results}//div[1]/big[1]/strong/a/\@href!);
     ok( $release, "found release $release" );
 
-    # Moose has ratings (other things on this search page likely do as well)
-    $tx->like(
-        qq!//$xpath{search_results}//a[\@href="http://cpanratings.perl.org/rate/?distribution=Moose"]/span/\@class!,
-        qr/^rating-\d+$/i, 'ratings stars shown'
-    );
-
-    $tx->like(
-        qq!//$xpath{search_results}//a[\@href="http://cpanratings.perl.org/dist/Moose"]!,
-        qr/\d+ reviews?/i,
-        'review number listed'
-    );
-
     {
         my $description = $tx->find_value(
             qq!//$xpath{module_result}//p[\@class="description"][1]!);
