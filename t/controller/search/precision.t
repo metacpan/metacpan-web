@@ -20,8 +20,8 @@ my %tests = (
 
 test_psgi app, sub {
     my $cb = shift;
-    while ( my ( $k, $v ) = each %tests ) {
-
+    for my $k ( sort keys %tests ) {
+        my $v = $tests{$k};
         ok( my $res = $cb->( GET "/search?q=$k" ), 'search for ' . $k );
         my $tx = tx($res);
         my $module
