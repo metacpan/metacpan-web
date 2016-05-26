@@ -53,6 +53,7 @@ has release => (
 sub summary_hash {
     my ($self) = @_;
     return {
+        author       => $self->author,
         contributors => $self->groom_contributors,
         irc          => $self->groom_irc,
         issues       => $self->normalize_issues,
