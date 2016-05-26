@@ -30,9 +30,8 @@ sub get {
                     query  => { match_all => {} },
                     filter => {
                         or => [
-                            map {
-                                { term => { 'favorite.distribution' => $_ } }
-                            } @distributions
+                            map { { term => { 'distribution' => $_ } } }
+                                @distributions
                         ]
                     }
                 }
@@ -40,17 +39,17 @@ sub get {
             aggregations => {
                 favorites => {
                     terms => {
-                        field => 'favorite.distribution',
+                        field => 'distribution',
                         size  => scalar @distributions,
                     },
                 },
                 $user
                 ? (
                     myfavorites => {
-                        filter => { term => { 'favorite.user' => $user } },
+                        filter       => { term => { 'user' => $user } },
                         aggregations => {
                             enteries => {
-                                terms => { field => 'favorite.distribution' }
+                                terms => { field => 'distribution' }
                             }
                         }
                     }
