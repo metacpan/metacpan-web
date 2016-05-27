@@ -794,38 +794,38 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Code-TidyAll-0.46
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.46.tar.gz
+  Code-TidyAll-0.47
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.47.tar.gz
     provides:
-      Code::TidyAll 0.46
-      Code::TidyAll::Cache 0.46
-      Code::TidyAll::CacheModel 0.46
-      Code::TidyAll::CacheModel::Shared 0.46
-      Code::TidyAll::Config::INI::Reader 0.46
-      Code::TidyAll::Git::Precommit 0.46
-      Code::TidyAll::Git::Prereceive 0.46
-      Code::TidyAll::Git::Util 0.46
-      Code::TidyAll::Plugin 0.46
-      Code::TidyAll::Plugin::CSSUnminifier 0.46
-      Code::TidyAll::Plugin::JSBeautify 0.46
-      Code::TidyAll::Plugin::JSHint 0.46
-      Code::TidyAll::Plugin::JSLint 0.46
-      Code::TidyAll::Plugin::JSON 0.46
-      Code::TidyAll::Plugin::MasonTidy 0.46
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.46
-      Code::TidyAll::Plugin::PerlCritic 0.46
-      Code::TidyAll::Plugin::PerlTidy 0.46
-      Code::TidyAll::Plugin::PerlTidySweet 0.46
-      Code::TidyAll::Plugin::PodChecker 0.46
-      Code::TidyAll::Plugin::PodSpell 0.46
-      Code::TidyAll::Plugin::PodTidy 0.46
-      Code::TidyAll::Plugin::SortLines 0.46
-      Code::TidyAll::Result 0.46
-      Code::TidyAll::Role::Tempdir 0.46
-      Code::TidyAll::SVN::Precommit 0.46
-      Code::TidyAll::SVN::Util 0.46
-      Code::TidyAll::Util::Zglob 0.46
-      Test::Code::TidyAll 0.46
+      Code::TidyAll 0.47
+      Code::TidyAll::Cache 0.47
+      Code::TidyAll::CacheModel 0.47
+      Code::TidyAll::CacheModel::Shared 0.47
+      Code::TidyAll::Config::INI::Reader 0.47
+      Code::TidyAll::Git::Precommit 0.47
+      Code::TidyAll::Git::Prereceive 0.47
+      Code::TidyAll::Git::Util 0.47
+      Code::TidyAll::Plugin 0.47
+      Code::TidyAll::Plugin::CSSUnminifier 0.47
+      Code::TidyAll::Plugin::JSBeautify 0.47
+      Code::TidyAll::Plugin::JSHint 0.47
+      Code::TidyAll::Plugin::JSLint 0.47
+      Code::TidyAll::Plugin::JSON 0.47
+      Code::TidyAll::Plugin::MasonTidy 0.47
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.47
+      Code::TidyAll::Plugin::PerlCritic 0.47
+      Code::TidyAll::Plugin::PerlTidy 0.47
+      Code::TidyAll::Plugin::PerlTidySweet 0.47
+      Code::TidyAll::Plugin::PodChecker 0.47
+      Code::TidyAll::Plugin::PodSpell 0.47
+      Code::TidyAll::Plugin::PodTidy 0.47
+      Code::TidyAll::Plugin::SortLines 0.47
+      Code::TidyAll::Result 0.47
+      Code::TidyAll::Role::Tempdir 0.47
+      Code::TidyAll::SVN::Precommit 0.47
+      Code::TidyAll::SVN::Util 0.47
+      Code::TidyAll::Util::Zglob 0.47
+      Test::Code::TidyAll 0.47
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0

@@ -104,4 +104,4 @@ test_requires 'Perl::Critic', '1.124';
 test_requires 'Test::Perl::Critic';
 test_requires 'Test::XPath', '0.15';
 
-author_requires 'Code::TidyAll';
+author_requires 'Code::TidyAll', '>= 0.47';
