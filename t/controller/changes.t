@@ -19,13 +19,13 @@ test_psgi app, sub {
     }
 
     {
-        my $url = '/changes/distribution/perl';
+        my $url = '/changes/release/SHAY/perl-5.22.2';
         my $res = $cb->( GET $url );
         is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
         $tx->like(
             '//title',
-            qr/^perldelta - /,
+            qr{^pod/perldelta.pod - },
             'got perldelta for perl release'
         );
     }
