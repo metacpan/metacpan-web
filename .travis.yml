@@ -1,19 +1,20 @@
 language: perl
 perl:
+  - "5.24"
   - "5.22"
   - "5.20"
   - "5.18"
-  - "5.16"
 
 matrix:
   allow_failures:
-    - perl: "5.22"
+    - perl: "5.20"
+    - perl: "5.18"
 
 env:
   global:
     # Carton --deployment only works on the same version of perl
     # that the snapshot was built from.
-    - DEPLOYMENT_PERL_VERSION=5.18
+    - DEPLOYMENT_PERL_VERSION=5.22
 
 before_install:
   - npm install -g less js-beautify
