@@ -1,18 +1,15 @@
 use strict;
 use warnings;
+
 use Test::More;
 use MetaCPAN::Web::Test;
 
 test_psgi app, sub {
     my $cb = shift;
     {
-        ok(
-            my $res = $cb->(
-                GET '/changes/release/RWSTAUNER/File-Spec-Native-1.003'
-            ),
-            'GET /changes/release/...'
-        );
-        is( $res->code, 200, 'code 200' );
+        my $url = '/changes/release/RWSTAUNER/File-Spec-Native-1.003';
+        my $res = $cb->( GET $url );
+        is( $res->code, 200, "200 on $url" );
         my $tx = tx( $res, { css => 1 } );
         $tx->like(
             'div.content pre#source',
@@ -22,9 +19,9 @@ test_psgi app, sub {
     }
 
     {
-        ok( my $res = $cb->( GET '/changes/distribution/perl' ),
-            'GET /changes/distribution/perl' );
-        is( $res->code, 200, 'code 200' );
+        my $url = '/changes/distribution/perl';
+        my $res = $cb->( GET $url );
+        is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
         $tx->like(
             '//title',
@@ -35,9 +32,9 @@ test_psgi app, sub {
 
     {
         my $missing = 'test-dist-name-that-does-not-exist-i-hope';
-        ok( my $res = $cb->( GET "/changes/distribution/$missing" ),
-            "GET /changes/$missing" );
-        is( $res->code, 404, 'code 404' );
+        my $url     = "/changes/distribution/$missing";
+        my $res     = $cb->( GET $url );
+        is( $res->code, 404, "404 on $url" );
         my $tx = tx($res);
         $tx->like(
             '//div[@id="not-found"]',
