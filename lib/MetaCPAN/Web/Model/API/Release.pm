@@ -294,6 +294,8 @@ sub interesting_files {
                             { term => { release   => $release } },
                             { term => { author    => $author } },
                             { term => { directory => \0 } },
+                            { not  => { prefix    => { 'path' => 'xt/' } } },
+                            { not  => { prefix    => { 'path' => 't/' } } },
                             {
                                 or => [
                                     {
