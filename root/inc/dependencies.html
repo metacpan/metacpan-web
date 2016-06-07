@@ -2,7 +2,7 @@
     <li class="nav-header">Dependencies</li>
 <%-
 deps = [];
-FOREACH dep IN dependencies;
+FOREACH dep IN release.dependency;
 IF dep.phase != 'runtime' || dep.relationship != 'requires' || dep.module == 'perl'; NEXT; END;
 deps.push(dep.module);
 END;
@@ -22,7 +22,11 @@ FOREACH dep IN deps.sort %>
         <i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>
     </li>
     <li>
+      <%- IF module -%>
+        <a href="/requires/module/<% module.documentation or module.module.0.name %>?sort=[[2,1]]">
+      <%- ELSE -%>
         <a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]">
+      <%- END -%>
         <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
     <%- IF deps.size %>
