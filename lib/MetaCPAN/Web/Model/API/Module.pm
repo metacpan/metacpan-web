@@ -208,6 +208,7 @@ sub _extract_results {
             my $dist = $res->{fields}{distribution};
             +{
                 %{ $res->{fields} },
+                %{ $res->{_source} },
                 abstract   => $res->{fields}{'abstract.analyzed'},
                 score      => $res->{_score},
                 rating     => $ratings->{ratings}{$dist},
@@ -387,7 +388,8 @@ sub search {
                     }
                 }
             },
-            fields => [
+            _source => "module",
+            fields  => [
                 qw(
                     documentation
                     author
@@ -397,7 +399,6 @@ sub search {
                     status
                     indexed
                     authorized
-                    module.name
                     distribution
                     date
                     id
