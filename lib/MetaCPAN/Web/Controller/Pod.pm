@@ -99,7 +99,8 @@ sub view : Private {
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 
     my $hr = HTML::Restrict->new;
-    $hr->set_uri_schemes( [ undef, 'http', 'https', 'data' ] );
+    $hr->set_uri_schemes(
+        [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ] );
     $hr->set_rules(
         {
             a       => [qw( href target )],
