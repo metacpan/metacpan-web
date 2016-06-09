@@ -45,3 +45,12 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
 .autocomplete-suggestion.autocomplete-selected {
   background: #BAD3EA !important; 
 }
+
+/*
+    When auto-completing author results in the search,
+    show them under "Authors"
+    GH #1707, Dan McCormick
+*/
+#autocomplete-direct-results:before {
+  content: 'Authors'
+}
