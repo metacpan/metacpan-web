@@ -39,14 +39,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title><% IF title; title; ELSE; 'Search the CPAN'; END %> - metacpan.org</title>
         <%- IF rss %>
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://metacpan.org/feed/<% rss %>" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="<% web_secure %>/feed/<% rss %>" />
         <%- END %>
         <%- FOREACH css IN req.env.item('psgix.assets').grep(/\.css$/) %>
         <link href="<% css %>" rel="stylesheet" type="text/css">
         <%- END %>
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
         <%- IF canonical %>
-        <link rel="canonical" href="https://metacpan.org<% canonical %>" />
+        <link rel="canonical" href="<% web_secure %><% canonical %>" />
         <%- END %>
         <%- IF meta_description %>
         <meta name="description" content="<% meta_description %>" />

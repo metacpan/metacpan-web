@@ -58,7 +58,7 @@ sub process {
     # XXX Remove this hardcoded URL
     my $es = Search::Elasticsearch->new(
         cxn_pool         => 'Static::NoPing',
-        nodes            => ['api.metacpan.org'],
+        nodes            => ['api-v1.metacpan.org'],
         send_get_body_as => 'POST',
     );
 
