@@ -106,7 +106,8 @@ sub releases : Chained('root') PathPart Args(0) {
     my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
-    my @releases = map { $_->{fields} } @{ $releases->{hits}->{hits} };
+    my @releases = map { single_valued_arrayref_to_scalar( $_->{fields} ) }
+        @{ $releases->{hits}->{hits} };
 
     my $pageset = Data::Pageset->new(
         {
