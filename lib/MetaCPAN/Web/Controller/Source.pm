@@ -3,6 +3,9 @@ package MetaCPAN::Web::Controller::Source;
 use Moose;
 use namespace::autoclean;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args {
@@ -37,16 +40,18 @@ sub index : Path : Args {
             $c->model('API::Module')->get(@module)->recv,
         );
     }
-
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->recv;
         $c->res->last_modified( $module->{date} );
         $c->stash(
             {
                 template => 'browse.html',
-                files => [ map { $_->{fields} } @{ $files->{hits}->{hits} } ],
-                total => $files->{hits}->{total},
-                took  => $files->{took},
+                files    => [
+                    map { single_valued_arrayref_to_scalar( $_->{fields} ) }
+                        @{ $files->{hits}->{hits} }
+                ],
+                total     => $files->{hits}->{total},
+                took      => $files->{took},
                 author    => shift @module,
                 release   => shift @module,
                 directory => \@module,
