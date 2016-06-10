@@ -134,7 +134,7 @@ sub find_plussers {
 
     # store in an array.
     my @plusser_users = map { $_->{user} }
-        map { single_valued_arrayref_to_scalar( $_->{fields} ) }
+        map { single_valued_arrayref_to_scalar( $_->{_source} ) }
         @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
@@ -146,8 +146,8 @@ sub find_plussers {
 
     my @plusser_details = map {
         {
-            id  => $_->{fields}->{pauseid},
-            pic => $_->{fields}->{gravatar_url},
+            id  => $_->{_source}->{pauseid},
+            pic => $_->{_source}->{gravatar_url},
         }
     } @{$authors};
 
@@ -173,13 +173,18 @@ sub find_plussers {
 # to search for v0/favorite/_search/{user} for the particular $distribution.
 sub by_dist {
     my ( $self, $distribution ) = @_;
+
     return $self->request(
         '/favorite/_search',
         {
-            query  => { match_all => {} },
-            filter => { term      => { distribution => $distribution }, },
-            fields => [qw(user)],
-            size   => 1000,
+            query => {
+                filtered => {
+                    query => { match_all => {} },
+                    filter => { term => { distribution => $distribution }, },
+                }
+            },
+            _source => "user",
+            size    => 1000,
         }
     );
 }
@@ -193,9 +198,9 @@ sub plusser_by_id {
             query => { match_all => {} },
             filter =>
                 { or => [ map { { term => { user => $_ } } } @{$users} ] },
-            fields => [qw(pauseid gravatar_url)],
-            size   => 1000,
-            sort   => ['pauseid']
+            _source => { includes => [qw(pauseid gravatar_url)] },
+            size    => 1000,
+            sort    => ['pauseid']
         }
     );
 }
