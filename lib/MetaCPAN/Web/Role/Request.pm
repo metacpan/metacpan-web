@@ -3,7 +3,7 @@ package MetaCPAN::Web::Role::Request;
 use utf8;
 use Moose::Role;
 use Plack::Session;
-use JSON::MaybeXS ();
+use Cpanel::JSON::XS ();
 use MetaCPAN::Web::Types qw( PositiveInt );
 use Try::Tiny;
 
@@ -33,7 +33,8 @@ sub get_page_size {
 sub json_param {
     my ( $self, $name ) = @_;
     return try {
-        JSON::MaybeXS->new->relaxed->utf8( $self->params_are_decoded ? 0 : 1 )
+        Cpanel::JSON::XS->new->relaxed->utf8(
+            $self->params_are_decoded ? 0 : 1 )
             ->decode( $self->params->{$name} );
     }
     catch {
