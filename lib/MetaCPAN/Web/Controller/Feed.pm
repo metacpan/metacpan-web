@@ -44,7 +44,7 @@ sub news : Local : Args(0) {
 
         $str =~ s/\A\s*-+//g;
         $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}   = "https://metacpan.org/news#$a_name";
+        $e{link}   = "/news#$a_name";
         $e{author} = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
 
@@ -123,11 +123,8 @@ sub build_entry {
     single_valued_arrayref_to_scalar($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
-    $e->link(
-        $entry->{link} ||= join( q{/},
-            'https://metacpan.org', 'release',
-            $entry->{author},       $entry->{name} )
-    );
+    $e->link( $entry->{link}
+            ||= join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->summary( escape_html( $entry->{abstract} ) );
@@ -138,7 +135,7 @@ sub build_feed {
     my ( $self, %params ) = @_;
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
-    $feed->link('https://metacpan.org/');
+    $feed->link('/');
     foreach my $entry ( @{ $params{entries} } ) {
 
         $feed->add_entry( $self->build_entry($entry) );
@@ -150,9 +147,8 @@ sub _format_release_entries {
     my ( $self, $releases ) = @_;
     my @release_data;
     foreach my $item ( @{$releases} ) {
-        $item->{link} = join( q{/},
-            'https://metacpan.org', 'release',
-            $item->{author},        $item->{name} );
+        $item->{link}
+            = join( q{/}, 'release', $item->{author}, $item->{name} );
         $item->{name} = "$item->{author} has released $item->{name}";
         push( @release_data, $item );
     }
@@ -166,9 +162,8 @@ sub _format_favorite_entries {
         $fav->{abstract}
             = "$author ++ed $fav->{distribution} from $fav->{author}";
         $fav->{author} = $author;
-        $fav->{link}   = join( q{/},
-            'https://metacpan.org', 'release', $fav->{distribution} );
-        $fav->{name} = "$author ++ed $fav->{distribution}";
+        $fav->{link}   = join( q{/}, 'release', $fav->{distribution} );
+        $fav->{name}   = "$author ++ed $fav->{distribution}";
         push( @fav_data, $fav );
     }
     return \@fav_data;
