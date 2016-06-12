@@ -4,10 +4,10 @@ use parent qw(Plack::Middleware::Session::Cookie);
 
 use Plack::Util;
 use MIME::Base64;
-use JSON::MaybeXS;
+use Cpanel::JSON::XS ();
 use Try::Tiny;
 
-my $json = JSON::MaybeXS->new( canonical => 1 );
+my $json = Cpanel::JSON::XS->new->canonical(1);
 
 sub prepare_app {
     my $self = shift;
@@ -16,7 +16,8 @@ sub prepare_app {
         sub {
             # Pass $_[0] since the json subs may have a ($) protoype.
             # Pass '' to base64 for a blank separator (instead of newlines).
-            MIME::Base64::encode( JSON::MaybeXS::encode_json( $_[0] ), q[] );
+            MIME::Base64::encode( Cpanel::JSON::XS::encode_json( $_[0] ),
+                q[] );
         }
     ) unless $self->serializer;
 
@@ -27,7 +28,8 @@ sub prepare_app {
 
             # Use try/catch so JSON doesn't barf if the cookie is bad.
             try {
-                JSON::MaybeXS::decode_json( MIME::Base64::decode($cookie) );
+                Cpanel::JSON::XS::decode_json(
+                    MIME::Base64::decode($cookie) );
             }
 
             # No session.

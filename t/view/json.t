@@ -4,7 +4,7 @@ use lib 't/lib';
 use Test::More;
 use HTTP::Request::Common 'POST';
 use MetaCPAN::Web::Test;
-use JSON::MaybeXS;
+use Cpanel::JSON::XS qw( decode_json );
 
 sub post_json {
     POST(

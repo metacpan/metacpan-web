@@ -1,11 +1,13 @@
 package MetaCPAN::Web::Controller::Test;
 
 use Moose;
+use Cpanel::JSON::XS;
+
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub _json_body {
     my ( $self, $c ) = @_;
-    JSON::MaybeXS->new->utf8->decode(
+    Cpanel::JSON::XS->new->utf8->decode(
         do { local $/; $c->req->body->getline }
     );
 }
