@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
-use JSON::MaybeXS ();
+use Cpanel::JSON::XS ();
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
@@ -17,7 +17,7 @@ sub index : Path : Args(0) {
     my $data  = $model->autocomplete($query)->recv;
     $c->res->content_type('application/json');
     $c->res->body(
-        JSON::MaybeXS::encode_json(
+        Cpanel::JSON::XS::encode_json(
             single_valued_arrayref_to_scalar( $data->{results} )
         )
     );
