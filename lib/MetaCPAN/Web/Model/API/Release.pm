@@ -153,8 +153,9 @@ sub modules {
                     query  => { match_all => {} },
                     filter => {
                         and => [
-                            { term => { release => $release } },
-                            { term => { author  => $author } },
+                            { term => { release   => $release } },
+                            { term => { author    => $author } },
+                            { term => { directory => 0 } },
                             {
                                 or => [
                                     {
@@ -173,6 +174,10 @@ sub modules {
                                     },
                                     {
                                         and => [
+                                            {
+                                                range =>
+                                                    { slop => { gt => 0 } }
+                                            },
                                             {
                                                 exists => {
                                                     field => 'pod.analyzed'
