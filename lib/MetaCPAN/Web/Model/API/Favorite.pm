@@ -6,6 +6,9 @@ extends 'MetaCPAN::Web::Model::API';
 
 use List::MoreUtils qw(uniq);
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;
@@ -27,26 +30,28 @@ sub get {
                     query  => { match_all => {} },
                     filter => {
                         or => [
-                            map {
-                                { term => { 'favorite.distribution' => $_ } }
-                            } @distributions
+                            map { { term => { 'distribution' => $_ } } }
+                                @distributions
                         ]
                     }
                 }
             },
-            facets => {
+            aggregations => {
                 favorites => {
                     terms => {
-                        field => 'favorite.distribution',
+                        field => 'distribution',
                         size  => scalar @distributions,
                     },
                 },
                 $user
                 ? (
                     myfavorites => {
-                        terms => { field => 'favorite.distribution', },
-                        facet_filter =>
-                            { term => { 'favorite.user' => $user } }
+                        filter       => { term => { 'user' => $user } },
+                        aggregations => {
+                            enteries => {
+                                terms => { field => 'distribution' }
+                            }
+                        }
                     }
                     )
                 : (),
@@ -59,13 +64,15 @@ sub get {
                 {
                     took      => $data->{took},
                     favorites => {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{favorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} }
+                            @{ $data->{aggregations}->{favorites}->{buckets} }
                     },
                     myfavorites => $user
                     ? {
-                        map { $_->{term} => $_->{count} }
-                            @{ $data->{facets}->{myfavorites}->{terms} }
+                        map { $_->{key} => $_->{doc_count} } @{
+                            $data->{aggregations}->{myfavorites}->{entries}
+                                ->{buckets}
+                        }
                         }
                     : {},
                 }
@@ -108,9 +115,9 @@ sub leaderboard {
     $self->request(
         '/favorite/_search',
         {
-            size   => 0,
-            query  => { match_all => {} },
-            facets => {
+            size         => 0,
+            query        => { match_all => {} },
+            aggregations => {
                 leaderboard =>
                     { terms => { field => 'distribution', size => 600 }, },
             },
@@ -126,8 +133,9 @@ sub find_plussers {
     my $plusser_data = $plusser->recv;
 
     # store in an array.
-    my @plusser_users
-        = map { $_->{fields}->{user} } @{ $plusser_data->{hits}->{hits} };
+    my @plusser_users = map { $_->{user} }
+        map { single_valued_arrayref_to_scalar( $_->{_source} ) }
+        @{ $plusser_data->{hits}->{hits} };
     my $total_plussers = @plusser_users;
 
     # find plussers by pause ids.
@@ -138,8 +146,8 @@ sub find_plussers {
 
     my @plusser_details = map {
         {
-            id  => $_->{fields}->{pauseid},
-            pic => $_->{fields}->{gravatar_url},
+            id  => $_->{_source}->{pauseid},
+            pic => $_->{_source}->{gravatar_url},
         }
     } @{$authors};
 
@@ -165,13 +173,18 @@ sub find_plussers {
 # to search for v0/favorite/_search/{user} for the particular $distribution.
 sub by_dist {
     my ( $self, $distribution ) = @_;
+
     return $self->request(
         '/favorite/_search',
         {
-            query  => { match_all => {} },
-            filter => { term      => { distribution => $distribution }, },
-            fields => [qw(user)],
-            size   => 1000,
+            query => {
+                filtered => {
+                    query => { match_all => {} },
+                    filter => { term => { distribution => $distribution }, },
+                }
+            },
+            _source => "user",
+            size    => 1000,
         }
     );
 }
@@ -185,9 +198,9 @@ sub plusser_by_id {
             query => { match_all => {} },
             filter =>
                 { or => [ map { { term => { user => $_ } } } @{$users} ] },
-            fields => [qw(pauseid gravatar_url)],
-            size   => 1000,
-            sort   => ['pauseid']
+            _source => { includes => [qw(pauseid gravatar_url)] },
+            size    => 1000,
+            sort    => ['pauseid']
         }
     );
 }

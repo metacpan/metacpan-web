@@ -222,10 +222,11 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
+            my $revdep = $type eq 'module' ? 'module' : 'distribution';
             ok(
                 $tx->find_value(
-                    '//a[starts-with(@href, "/requires/distribution/")]'),
-                'reverse deps link uses dist name'
+                    "//a[starts-with(\@href, \"/requires/$revdep/$name?\")]"),
+                "reverse deps link uses $revdep name"
             );
 
             my $slash = '%2F';

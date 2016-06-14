@@ -53,7 +53,7 @@ sub _new_distributions_query {
         constant_score => {
             filter => {
                 and => [
-                    { term => { first => \1, } },
+                    { term => { first => 1 } },
                     {
                         not =>
                             { filter => { term => { status => 'backpan' } } }
@@ -81,7 +81,7 @@ sub latest_by_author {
                 }
             },
             sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
+                'distribution', { 'version_numified' => { reverse => 1 } }
             ],
             fields => [qw(author distribution name status abstract date)],
             size   => 1000,
@@ -161,14 +161,12 @@ sub modules {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'file.module.name'
+                                                    field => 'module.name'
                                                 }
                                             },
                                             {
                                                 term => {
-                                                    'file.module.indexed' =>
-                                                        \1
+                                                    'module.indexed' => 1
                                                 }
                                             }
                                         ]
@@ -177,13 +175,11 @@ sub modules {
                                         and => [
                                             {
                                                 exists => {
-                                                    field =>
-                                                        'file.pod.analyzed'
+                                                    field => 'pod.analyzed'
                                                 }
                                             },
                                             {
-                                                term =>
-                                                    { 'file.indexed' => \1 }
+                                                term => { 'indexed' => 1 }
                                             },
                                         ]
                                     }
@@ -198,16 +194,19 @@ sub modules {
             # Sort by documentation name; if there isn't one, sort by path.
             sort => [ 'documentation', 'path' ],
 
-            # Get indexed and authorized from _source to work around ES bug:
-            # https://github.com/CPAN-API/metacpan-web/issues/881
-            # https://github.com/elasticsearch/elasticsearch/issues/2551
+            _source => [ "module", "abstract" ],
+
             fields => [
                 qw(
-                    documentation path status author release
-                    pod_lines
+                    author
+                    authorized
                     distribution
-                    _source.abstract  _source.module
-                    _source.indexed   _source.authorized
+                    documentation
+                    indexed
+                    path
+                    pod_lines
+                    release
+                    status
                     )
             ],
         }
@@ -226,7 +225,7 @@ sub find {
                         and => [
                             {
                                 term => {
-                                    'release.distribution' => $distribution
+                                    'distribution' => $distribution
                                 }
                             },
                             { term => { status => 'latest' } }
@@ -256,8 +255,8 @@ sub reverse_dependencies {
                     query  => { 'match_all' => {} },
                     filter => {
                         and => [
-                            { term => { 'release.status'     => 'latest' } },
-                            { term => { 'release.authorized' => \1 } },
+                            { term => { 'status'     => 'latest' } },
+                            { term => { 'authorized' => 1 } },
                         ]
                     }
                 }
@@ -307,8 +306,7 @@ sub interesting_files {
                                                     map {
                                                         {
                                                             term => {
-                                                                'file.name'
-                                                                    => $_
+                                                                'name' => $_
                                                             }
                                                         }
                                                         } qw(
@@ -389,22 +387,13 @@ sub versions {
             query => {
                 filtered => {
                     query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { 'release.distribution' => $dist } },
-                        ],
-
-                    }
+                    filter => { term      => { distribution => $dist } }
                 }
             },
-            size   => 250,
-            sort   => [ { date => 'desc' } ],
-            fields => [
-                qw(
-                    name date author version status maturity
-                    _source.authorized
-                    )
-            ],
+            size => 250,
+            sort => [ { date => 'desc' } ],
+            fields =>
+                [qw( name date author version status maturity authorized )],
         }
     );
 }
@@ -431,11 +420,15 @@ sub topuploaders {
     $self->request(
         '/release/_search',
         {
-            query  => { match_all => {} },
-            facets => {
+            query        => { match_all => {} },
+            aggregations => {
                 author => {
-                    terms        => { field => 'author', size => 50 },
-                    facet_filter => $range_filter,
+                    aggregations => {
+                        entries => {
+                            terms => { field => 'author', size => 50 }
+                        }
+                    },
+                    filter => $range_filter,
                 },
             },
             size => 0,

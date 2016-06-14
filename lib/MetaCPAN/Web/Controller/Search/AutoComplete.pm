@@ -2,6 +2,10 @@ package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
 use JSON::MaybeXS ();
+
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -14,7 +18,7 @@ sub index : Path : Args(0) {
     $c->res->content_type('application/json');
     $c->res->body(
         JSON::MaybeXS::encode_json(
-            $self->single_valued_arrayref_to_scalar( $data->{results} )
+            single_valued_arrayref_to_scalar( $data->{results} )
         )
     );
 }

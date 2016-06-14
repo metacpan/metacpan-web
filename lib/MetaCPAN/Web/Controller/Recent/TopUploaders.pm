@@ -26,8 +26,8 @@ sub topuploaders : Private {
     my ( $self, $c, $range ) = @_;
 
     my $data = $c->model('API::Release')->topuploaders($range)->recv;
-    my $counts = { map { $_->{term} => $_->{count} }
-            @{ $data->{facets}{author}{terms} } };
+    my $counts = { map { $_->{key} => $_->{doc_count} }
+            @{ $data->{aggregations}{author}{entries}{buckets} } };
     my $authors = $c->model('API::Author')->get( keys %$counts )->recv;
     $c->stash(
         {
@@ -40,7 +40,7 @@ sub topuploaders : Private {
                 } @{ $authors->{hits}{hits} }
             ],
             took     => $data->{took},
-            total    => $data->{facets}{author}{total},
+            total    => $data->{aggregations}{author}{total},
             template => 'recent/topuploaders.html',
             range    => $range,
         }

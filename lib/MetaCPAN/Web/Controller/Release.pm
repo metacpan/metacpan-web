@@ -2,6 +2,9 @@ package MetaCPAN::Web::Controller::Release;
 
 use Moose;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -87,6 +90,7 @@ sub view : Private {
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
         grep { $_->{path} !~ m{/} }
+        map  { single_valued_arrayref_to_scalar($_) }
         map  { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
@@ -96,18 +100,36 @@ sub view : Private {
             $_->{path} =~ m{\b(?:eg|ex|examples?|samples?)\b}i
                 and not $_->{path} =~ m{^x?t/}
             }
+            map { single_valued_arrayref_to_scalar($_) }
             map { $_->{fields} } @{ $files->{hits}->{hits} }
     );
 
     $c->res->last_modified( $out->{date} );
 
-    $c->stash( $c->model( 'ReleaseInfo', { %$reqs, release => $out } )
-            ->summary_hash );
+    $c->stash(
+        $c->model(
+            'ReleaseInfo',
+            {
+                author       => $reqs->{author},
+                distribution => $reqs->{distribution},
+                release      => $out
+            }
+        )->summary_hash
+    );
 
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
     # Simplify the file data we pass to the template.
-    my @view_files = map { $_->{fields} } @{ $modules->{hits}->{hits} };
+    my @view_files = map { single_valued_arrayref_to_scalar($_) }
+        map +{
+        %{ $_->{fields} },
+        module => [
+            ( exists $_->{_source} and $_->{_source}{module} )
+            ? $_->{_source}{module}
+            : ()
+        ],
+        },
+        @{ $modules->{hits}->{hits} };
 
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );

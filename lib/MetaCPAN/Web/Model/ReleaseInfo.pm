@@ -1,15 +1,16 @@
 package MetaCPAN::Web::Model::ReleaseInfo;
 
-use Moose;
-use namespace::autoclean;
-
-use URI;
-use URI::Escape qw(uri_escape uri_unescape);
-use URI::QueryParam;    # Add methods to URI.
+use strict;
+use warnings;
+use MetaCPAN::Moose;
 
 extends 'Catalyst::Model';
 
 use List::AllUtils qw( all );
+use MetaCPAN::Web::Types qw( HashRef Object );
+use URI;
+use URI::Escape qw(uri_escape uri_unescape);
+use URI::QueryParam;    # Add methods to URI.
 
 sub ACCEPT_CONTEXT {
     my ( $class, $c, $args ) = @_;
@@ -21,14 +22,38 @@ sub ACCEPT_CONTEXT {
     );
 }
 
-has c            => ( is => 'ro', );
-has author       => ( is => 'ro', );
-has release      => ( is => 'ro', );
-has distribution => ( is => 'ro', );
+# Setting these attributes to required will cause the app to exit when it tries
+# to instantiate the model on startup.
+
+has author => (
+    is       => 'ro',
+    isa      => HashRef,
+    required => 0,
+);
+
+has c => (
+    is            => 'ro',
+    isa           => Object,
+    required      => 0,
+    documentation => 'Catlyst context object',
+);
+
+has distribution => (
+    is       => 'ro',
+    isa      => HashRef,
+    required => 0,
+);
+
+has release => (
+    is       => 'ro',
+    isa      => HashRef,
+    required => 0,
+);
 
 sub summary_hash {
     my ($self) = @_;
     return {
+        author       => $self->author,
         contributors => $self->groom_contributors,
         irc          => $self->groom_irc,
         issues       => $self->normalize_issues,

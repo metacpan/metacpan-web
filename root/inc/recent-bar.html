@@ -6,7 +6,7 @@
     <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
     <li class="nav-header">Filter</li>
     <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
-          <%- 
+          <%-
           filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' };
           IF c.req.uri == "/recent"; c.req.params.f ||= 'l'; END;
           FOR item IN ['l', 'n']; %>
@@ -17,7 +17,6 @@
   <li class="nav-header">Other</li>
   <li><a href="/favorite/recent">Recent Favorites</a></li>
   <li><a href="/favorite/leaderboard">Popular Distributions</a></li>
-  <li><a href="/recent/log">Indexer Log</a></li>
   <li class="nav-header">Top Uploaders</li>
   <%-
       categories = [

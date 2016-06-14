@@ -10,6 +10,9 @@ use DateTime::Format::ISO8601;
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
 
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
+
 sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/recent/index');
@@ -77,15 +80,20 @@ sub author : Local : Args(1) {
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
 
-    my $release_data
-        = [ map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} } ];
+    my $release_data = [
+        map { single_valued_arrayref_to_scalar($_) }
+        map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} }
+    ];
     my $author_info = $author_cv->recv;
 
     my $faves_cv = $author_info->{user}
         && $c->model('API::Favorite')->by_user( $author_info->{user} );
     my $faves_data
         = $faves_cv
-        ? [ map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} } ]
+        ? [
+        map { single_valued_arrayref_to_scalar($_) }
+        map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} }
+        ]
         : [];
 
     $c->stash->{feed} = $self->build_feed(
@@ -103,12 +111,16 @@ sub distribution : Local : Args(1) {
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => [ map { $_->{fields} } @{ $data->{hits}->{hits} } ]
+        entries => [
+            map { single_valued_arrayref_to_scalar($_) }
+            map { $_->{fields} } @{ $data->{hits}->{hits} }
+        ]
     );
 }
 
 sub build_entry {
     my ( $self, $entry ) = @_;
+    single_valued_arrayref_to_scalar($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
     $e->link(

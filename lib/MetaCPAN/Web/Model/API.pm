@@ -3,21 +3,30 @@ package MetaCPAN::Web::Model::API;
 use Moose;
 extends 'Catalyst::Model';
 
-has [qw(api api_secure)] => ( is => 'ro' );
-
-use Encode ();
-use JSON::MaybeXS;
-use HTTP::Request ();
-use AnyEvent::Curl::Multi;
-use Try::Tiny 0.09;
-use MooseX::ClassAttribute;
 use namespace::autoclean;
 
-class_has client => ( is => 'ro', lazy_build => 1 );
+use AnyEvent::Curl::Multi;
+use Encode        ();
+use HTTP::Request ();
+use JSON::MaybeXS;
+use MetaCPAN::Web::Types qw( Uri );
+use MooseX::ClassAttribute;
+use Try::Tiny qw( catch try );
+use URI::QueryParam;
 
-sub _build_client {
-    return AnyEvent::Curl::Multi->new( max_concurrency => 5 );
-}
+class_has client => (
+    is   => 'ro',
+    lazy => 1,
+    default =>
+        sub { return AnyEvent::Curl::Multi->new( max_concurrency => 5 ) },
+);
+
+has api_secure => (
+    is       => 'ro',
+    isa      => Uri,
+    coerce   => 1,
+    required => 1,
+);
 
 {
     no warnings 'once';
@@ -33,20 +42,15 @@ sub cv {
 
 =head2 COMPONENT
 
-Set C<api> and C<api_secure> config parameters from the app config object.
+Set C<api_secure> config parameters from the app config object.
 
 =cut
 
 sub COMPONENT {
     my $self = shift;
     my ( $app, $config ) = @_;
-    $config = $self->merge_config_hashes(
-        {
-            api        => $app->config->{api},
-            api_secure => $app->config->{api_secure} || $app->config->{api}
-        },
-        $config
-    );
+    $config->{api_secure} = $app->config->{api_secure};
+
     return $self->SUPER::COMPONENT( $app, $config );
 }
 
@@ -58,13 +62,20 @@ sub model {
 
 sub request {
     my ( $self, $path, $search, $params ) = @_;
+
     my ( $token, $method ) = @$params{qw(token method)};
-    $path .= "?access_token=$token" if ($token);
-    my $req     = $self->cv;
+    my $req = $self->cv;
+
+    my $url = $self->api_secure->clone;
+
+    # the order of the following 2 lines matters
+    # `path_query` is destructive
+    $url->path_query($path);
+    $url->query_param( access_token => $token ) if $token;
+
     my $request = HTTP::Request->new(
         $method ? $method : $search ? 'POST' : 'GET',
-        ( $token ? $self->api_secure : $self->api ) . $path,
-        [ 'Content-type' => 'application/json' ],
+        $url, [ 'Content-type' => 'application/json' ],
     );
 
     # encode_json returns an octet string
@@ -185,5 +196,4 @@ sub raw_api_response {
 }
 
 __PACKAGE__->meta->make_immutable;
-
 1;
