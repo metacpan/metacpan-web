@@ -294,10 +294,10 @@ DISTRIBUTIONS
       Scalar::Util 0
       Test::Exception 0
       Test::More 0.18
-  Carp-Clan-6.04
-    pathname: S/ST/STBEY/Carp-Clan-6.04.tar.gz
+  Carp-Clan-6.06
+    pathname: K/KE/KENTNL/Carp-Clan-6.06.tar.gz
     provides:
-      Carp::Clan 6.04
+      Carp::Clan 6.06
     requirements:
       ExtUtils::MakeMaker 0
       Test::Exception 0
@@ -910,6 +910,14 @@ DISTRIBUTIONS
       Module::Build 0.38
       URI::Escape 0
       perl 5.008001
+  Cpanel-JSON-XS-3.0213
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-3.0213.tar.gz
+    provides:
+      Cpanel::JSON::XS 3.0213
+    requirements:
+      ExtUtils::MakeMaker 0
+      Pod::Text 2.08
+      Pod::Usage 1.33
   Data-Dump-1.23
     pathname: G/GA/GAAS/Data-Dump-1.23.tar.gz
     provides:
@@ -1624,16 +1632,15 @@ DISTRIBUTIONS
       Encode::Alias 0
       ExtUtils::MakeMaker 0
       perl 5.008
-  Eval-Closure-0.13
-    pathname: D/DO/DOY/Eval-Closure-0.13.tar.gz
+  Eval-Closure-0.14
+    pathname: D/DO/DOY/Eval-Closure-0.14.tar.gz
     provides:
-      Eval::Closure 0.13
+      Eval::Closure 0.14
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-      Try::Tiny 0
       constant 0
       overload 0
       strict 0
@@ -2288,6 +2295,7 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.003005
     requirements:
       Carp 0
+      Cpanel::JSON::XS 2.3310
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -2435,31 +2443,31 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MCE-1.707
-    pathname: M/MA/MARIOROY/MCE-1.707.tar.gz
+  MCE-1.708
+    pathname: M/MA/MARIOROY/MCE-1.708.tar.gz
     provides:
-      MCE 1.707
-      MCE::Candy 1.707
-      MCE::Core::Input::Generator 1.707
-      MCE::Core::Input::Handle 1.707
-      MCE::Core::Input::Iterator 1.707
-      MCE::Core::Input::Request 1.707
-      MCE::Core::Input::Sequence 1.707
-      MCE::Core::Manager 1.707
-      MCE::Core::Validation 1.707
-      MCE::Core::Worker 1.707
-      MCE::Flow 1.707
-      MCE::Grep 1.707
-      MCE::Loop 1.707
-      MCE::Map 1.707
-      MCE::Mutex 1.707
-      MCE::Queue 1.707
-      MCE::Relay 1.707
-      MCE::Signal 1.707
-      MCE::Step 1.707
-      MCE::Stream 1.707
-      MCE::Subs 1.707
-      MCE::Util 1.707
+      MCE 1.708
+      MCE::Candy 1.708
+      MCE::Core::Input::Generator 1.708
+      MCE::Core::Input::Handle 1.708
+      MCE::Core::Input::Iterator 1.708
+      MCE::Core::Input::Request 1.708
+      MCE::Core::Input::Sequence 1.708
+      MCE::Core::Manager 1.708
+      MCE::Core::Validation 1.708
+      MCE::Core::Worker 1.708
+      MCE::Flow 1.708
+      MCE::Grep 1.708
+      MCE::Loop 1.708
+      MCE::Map 1.708
+      MCE::Mutex 1.708
+      MCE::Queue 1.708
+      MCE::Relay 1.708
+      MCE::Signal 1.708
+      MCE::Step 1.708
+      MCE::Stream 1.708
+      MCE::Subs 1.708
+      MCE::Util 1.708
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -3128,19 +3136,19 @@ DISTRIBUTIONS
       parent 0.223
       strict 1.03
       warnings 1.03
-  MooseX-ClassAttribute-0.28
-    pathname: D/DR/DROLSKY/MooseX-ClassAttribute-0.28.tar.gz
+  MooseX-ClassAttribute-0.29
+    pathname: D/DR/DROLSKY/MooseX-ClassAttribute-0.29.tar.gz
     provides:
-      MooseX::ClassAttribute 0.28
-      MooseX::ClassAttribute::Meta::Role::Attribute 0.28
-      MooseX::ClassAttribute::Trait::Application 0.28
-      MooseX::ClassAttribute::Trait::Application::ToClass 0.28
-      MooseX::ClassAttribute::Trait::Application::ToRole 0.28
-      MooseX::ClassAttribute::Trait::Attribute 0.28
-      MooseX::ClassAttribute::Trait::Class 0.28
-      MooseX::ClassAttribute::Trait::Mixin::HasClassAttributes 0.28
-      MooseX::ClassAttribute::Trait::Role 0.28
-      MooseX::ClassAttribute::Trait::Role::Composite 0.28
+      MooseX::ClassAttribute 0.29
+      MooseX::ClassAttribute::Meta::Role::Attribute 0.29
+      MooseX::ClassAttribute::Trait::Application 0.29
+      MooseX::ClassAttribute::Trait::Application::ToClass 0.29
+      MooseX::ClassAttribute::Trait::Application::ToRole 0.29
+      MooseX::ClassAttribute::Trait::Attribute 0.29
+      MooseX::ClassAttribute::Trait::Class 0.29
+      MooseX::ClassAttribute::Trait::Mixin::HasClassAttributes 0.29
+      MooseX::ClassAttribute::Trait::Role 0.29
+      MooseX::ClassAttribute::Trait::Role::Composite 0.29
     requirements:
       ExtUtils::MakeMaker 0
       List::Util 1.45
@@ -4594,43 +4602,43 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Test::More 0
-  Regexp-Common-2016020301
-    pathname: A/AB/ABIGAIL/Regexp-Common-2016020301.tar.gz
+  Regexp-Common-2016053101
+    pathname: A/AB/ABIGAIL/Regexp-Common-2016053101.tar.gz
     provides:
-      Regexp::Common 2016020301
-      Regexp::Common::CC 2016020301
-      Regexp::Common::Entry 2016020301
-      Regexp::Common::SEN 2016020301
-      Regexp::Common::URI 2016020301
-      Regexp::Common::URI::RFC1035 2016020301
-      Regexp::Common::URI::RFC1738 2016020301
-      Regexp::Common::URI::RFC1808 2016020301
-      Regexp::Common::URI::RFC2384 2016020301
-      Regexp::Common::URI::RFC2396 2016020301
-      Regexp::Common::URI::RFC2806 2016020301
-      Regexp::Common::URI::fax 2016020301
-      Regexp::Common::URI::file 2016020301
-      Regexp::Common::URI::ftp 2016020301
-      Regexp::Common::URI::gopher 2016020301
-      Regexp::Common::URI::http 2016020301
-      Regexp::Common::URI::news 2016020301
-      Regexp::Common::URI::pop 2016020301
-      Regexp::Common::URI::prospero 2016020301
-      Regexp::Common::URI::tel 2016020301
-      Regexp::Common::URI::telnet 2016020301
-      Regexp::Common::URI::tv 2016020301
-      Regexp::Common::URI::wais 2016020301
-      Regexp::Common::_support 2016020301
-      Regexp::Common::balanced 2016020301
-      Regexp::Common::comment 2016020301
-      Regexp::Common::delimited 2016020301
-      Regexp::Common::lingua 2016020301
-      Regexp::Common::list 2016020301
-      Regexp::Common::net 2016020301
-      Regexp::Common::number 2016020301
-      Regexp::Common::profanity 2016020301
-      Regexp::Common::whitespace 2016020301
-      Regexp::Common::zip 2016020301
+      Regexp::Common 2016053101
+      Regexp::Common::CC 2016053101
+      Regexp::Common::Entry 2016053101
+      Regexp::Common::SEN 2016053101
+      Regexp::Common::URI 2016053101
+      Regexp::Common::URI::RFC1035 2016053101
+      Regexp::Common::URI::RFC1738 2016053101
+      Regexp::Common::URI::RFC1808 2016053101
+      Regexp::Common::URI::RFC2384 2016053101
+      Regexp::Common::URI::RFC2396 2016053101
+      Regexp::Common::URI::RFC2806 2016053101
+      Regexp::Common::URI::fax 2016053101
+      Regexp::Common::URI::file 2016053101
+      Regexp::Common::URI::ftp 2016053101
+      Regexp::Common::URI::gopher 2016053101
+      Regexp::Common::URI::http 2016053101
+      Regexp::Common::URI::news 2016053101
+      Regexp::Common::URI::pop 2016053101
+      Regexp::Common::URI::prospero 2016053101
+      Regexp::Common::URI::tel 2016053101
+      Regexp::Common::URI::telnet 2016053101
+      Regexp::Common::URI::tv 2016053101
+      Regexp::Common::URI::wais 2016053101
+      Regexp::Common::_support 2016053101
+      Regexp::Common::balanced 2016053101
+      Regexp::Common::comment 2016053101
+      Regexp::Common::delimited 2016053101
+      Regexp::Common::lingua 2016053101
+      Regexp::Common::list 2016053101
+      Regexp::Common::net 2016053101
+      Regexp::Common::number 2016053101
+      Regexp::Common::profanity 2016053101
+      Regexp::Common::whitespace 2016053101
+      Regexp::Common::zip 2016053101
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.00473
@@ -5323,10 +5331,10 @@ DISTRIBUTIONS
       URI::file 0
       WWW::Mechanize 1.68
       perl 5.008
-  Test-WWW-Mechanize-PSGI-0.35
-    pathname: O/OA/OALDERS/Test-WWW-Mechanize-PSGI-0.35.tar.gz
+  Test-WWW-Mechanize-PSGI-0.36
+    pathname: O/OA/OALDERS/Test-WWW-Mechanize-PSGI-0.36.tar.gz
     provides:
-      Test::WWW::Mechanize::PSGI 0.35
+      Test::WWW::Mechanize::PSGI 0.36
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -5866,45 +5874,45 @@ DISTRIBUTIONS
       XML::Atom 0.38
       XML::LibXML 1.66
       XML::RSS 1.47
-  XML-LibXML-2.0124
-    pathname: S/SH/SHLOMIF/XML-LibXML-2.0124.tar.gz
+  XML-LibXML-2.0125
+    pathname: S/SH/SHLOMIF/XML-LibXML-2.0125.tar.gz
     provides:
-      XML::LibXML 2.0124
-      XML::LibXML::Attr 2.0124
-      XML::LibXML::AttributeHash 2.0124
-      XML::LibXML::Boolean 2.0124
-      XML::LibXML::CDATASection 2.0124
-      XML::LibXML::Comment 2.0124
-      XML::LibXML::Common 2.0124
-      XML::LibXML::Devel 2.0124
-      XML::LibXML::Document 2.0124
-      XML::LibXML::DocumentFragment 2.0124
-      XML::LibXML::Dtd 2.0124
-      XML::LibXML::Element 2.0124
-      XML::LibXML::ErrNo 2.0124
-      XML::LibXML::Error 2.0124
-      XML::LibXML::InputCallback 2.0124
-      XML::LibXML::Literal 2.0124
-      XML::LibXML::NamedNodeMap 2.0124
-      XML::LibXML::Namespace 2.0124
-      XML::LibXML::Node 2.0124
-      XML::LibXML::NodeList 2.0124
-      XML::LibXML::Number 2.0124
-      XML::LibXML::PI 2.0124
-      XML::LibXML::Pattern 2.0124
-      XML::LibXML::Reader 2.0124
-      XML::LibXML::RegExp 2.0124
-      XML::LibXML::RelaxNG 2.0124
-      XML::LibXML::SAX 2.0124
-      XML::LibXML::SAX::AttributeNode 2.0124
-      XML::LibXML::SAX::Builder 2.0124
-      XML::LibXML::SAX::Generator 2.0124
-      XML::LibXML::SAX::Parser 2.0124
-      XML::LibXML::Schema 2.0124
-      XML::LibXML::Text 2.0124
-      XML::LibXML::XPathContext 2.0124
-      XML::LibXML::XPathExpression 2.0124
-      XML::LibXML::_SAXParser 2.0124
+      XML::LibXML 2.0125
+      XML::LibXML::Attr 2.0125
+      XML::LibXML::AttributeHash 2.0125
+      XML::LibXML::Boolean 2.0125
+      XML::LibXML::CDATASection 2.0125
+      XML::LibXML::Comment 2.0125
+      XML::LibXML::Common 2.0125
+      XML::LibXML::Devel 2.0125
+      XML::LibXML::Document 2.0125
+      XML::LibXML::DocumentFragment 2.0125
+      XML::LibXML::Dtd 2.0125
+      XML::LibXML::Element 2.0125
+      XML::LibXML::ErrNo 2.0125
+      XML::LibXML::Error 2.0125
+      XML::LibXML::InputCallback 2.0125
+      XML::LibXML::Literal 2.0125
+      XML::LibXML::NamedNodeMap 2.0125
+      XML::LibXML::Namespace 2.0125
+      XML::LibXML::Node 2.0125
+      XML::LibXML::NodeList 2.0125
+      XML::LibXML::Number 2.0125
+      XML::LibXML::PI 2.0125
+      XML::LibXML::Pattern 2.0125
+      XML::LibXML::Reader 2.0125
+      XML::LibXML::RegExp 2.0125
+      XML::LibXML::RelaxNG 2.0125
+      XML::LibXML::SAX 2.0125
+      XML::LibXML::SAX::AttributeNode 2.0125
+      XML::LibXML::SAX::Builder 2.0125
+      XML::LibXML::SAX::Generator 2.0125
+      XML::LibXML::SAX::Parser 2.0125
+      XML::LibXML::Schema 2.0125
+      XML::LibXML::Text 2.0125
+      XML::LibXML::XPathContext 2.0125
+      XML::LibXML::XPathExpression 2.0125
+      XML::LibXML::_SAXParser 2.0125
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
