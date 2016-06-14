@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use JSON::MaybeXS;
+use Cpanel::JSON::XS qw( decode_json );
 use MetaCPAN::Web;
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>

@@ -15,8 +15,8 @@
   <li><a data-keyboard-shortcut="g a" href="/author/<% author %>"><i class="fa fa-user fa-fw black"></i>Author</a></li>
   <li><a href="<% api_external_secure %>/source/<% base %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw browser</a></li>
   <li class="nav-header">Info</li>
-  <li><% count = files.grep(->{this.directory == 'true'}).size; count %> folder<% count != 1 ? "s" : "" %></li>
-  <li><% count = files.grep(->{this.directory == 'false'}).size; count %> file<% count != 1 ? "s" : "" %></li>
+  <li><% count = files.grep(->{this.directory == 1 }).size; count %> folder<% count != 1 ? "s" : "" %></li>
+  <li><% count = files.grep(->{this.directory == 0 }).size; count %> file<% count != 1 ? "s" : "" %></li>
 </ul>
 
 <div class="content">
@@ -32,14 +32,14 @@
 <tbody>
 <% i = 0; FOREACH file IN files %>
 <tr>
-  <td class="name" sort="<% file.directory == 'true' ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
-    file.directory == 'true' ? 'silk-folder'
+  <td class="name" sort="<% file.directory == 1 ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
+    file.directory == 1 ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
   : file.mime.match("x-c") ? 'silk-page-white-c'
   : 'silk-page-white'
   -%>" title="<% file.path %>"><% file.name %></a></strong></td>
   <td class="documentation"><strong><a href="/pod/release/<% [author, release, file.path].join("/") %>" title="<% file.path %>" class="ellipsis"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
-  <td class="size" sort="<% file.directory == "false" ? file.${"stat.size"} : 0 %>"><% file.directory == "false" ? file.${"stat.size"} | format_bytes : "" %></td>
+  <td class="size" sort="<% file.directory == 0 ? file.${"stat.size"} : 0 %>"><% file.directory == 0 ? file.${"stat.size"} | format_bytes : "" %></td>
   <td class="mtime relatize" nowrap="nowrap" sort="<% date = file.${"stat.mtime"}.dt_http; date %>"><% date %></td>
 </tr>
 <% END %>

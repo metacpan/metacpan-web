@@ -910,14 +910,13 @@ DISTRIBUTIONS
       Module::Build 0.38
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-3.0213
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-3.0213.tar.gz
+  Cpanel-JSON-XS-3.0216
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-3.0216.tar.gz
     provides:
-      Cpanel::JSON::XS 3.0213
+      Cpanel::JSON::XS 3.0216
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Text 2.08
-      Pod::Usage 1.33
   Data-Dump-1.23
     pathname: G/GA/GAAS/Data-Dump-1.23.tar.gz
     provides:

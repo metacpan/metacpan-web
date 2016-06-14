@@ -91,11 +91,7 @@ subtest 'get correct author favorite data format' => sub {
         'PERLHACKER ++ed Git-Sub from DOLMEN',
         'get correct release abstract'
     );
-    is(
-        $entry->[0]->{link},
-        'https://metacpan.org/release/Git-Sub',
-        'get correct release link'
-    );
+    is( $entry->[0]->{link}, 'release/Git-Sub', 'get correct release link' );
     is(
         $entry->[0]->{name},
         'PERLHACKER ++ed Git-Sub',
@@ -124,7 +120,7 @@ subtest 'get correct author release data format' => sub {
     );
     is(
         $entry->[0]->{link},
-        'https://metacpan.org/release/OALDERS/Net-FreshBooks-API-0.24',
+        'release/OALDERS/Net-FreshBooks-API-0.24',
         'get correct release link'
     );
     is(

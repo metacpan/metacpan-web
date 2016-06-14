@@ -8,7 +8,7 @@ use namespace::autoclean;
 use AnyEvent::Curl::Multi;
 use Encode        ();
 use HTTP::Request ();
-use JSON::MaybeXS;
+use Cpanel::JSON::XS qw( decode_json encode_json );
 use MetaCPAN::Web::Types qw( Uri );
 use MooseX::ClassAttribute;
 use Try::Tiny qw( catch try );

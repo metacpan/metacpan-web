@@ -5,8 +5,8 @@ extends 'Catalyst::View::TT::Alloy';
 
 use Digest::MD5 qw(md5_hex);
 use Digest::SHA1;
-use List::Util ();
-use JSON::MaybeXS;
+use List::Util       ();
+use Cpanel::JSON::XS ();
 use Gravatar::URL;
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
@@ -91,7 +91,7 @@ Template::Alloy->define_vmethod(
     pretty_json => sub {
 
     # Use utf8(0) because Catatlyst expects our view to be a character string.
-        JSON::MaybeXS->new->utf8(0)->pretty->encode(shift);
+        Cpanel::JSON::XS->new->utf8(0)->pretty->encode(shift);
     }
 );
 
@@ -139,7 +139,7 @@ Template::Alloy->define_vmethod(
 Template::Alloy->define_vmethod(
     'array',
     json => sub {
-        JSON::MaybeXS::encode_json(shift);
+        Cpanel::JSON::XS::encode_json(shift);
     }
 );
 
