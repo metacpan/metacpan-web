@@ -36,6 +36,7 @@ sub release : Local : Args {
     }
 
     $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->recv;
+    $c->stash->{permalinks} = 1;
     $c->forward( 'view', [@path] );
 }
 
@@ -66,6 +67,7 @@ sub view : Private {
     my ( $self, $c, @path ) = @_;
 
     my $data = $c->stash->{pod_file};
+    my $permalinks = $c->stash->{permalinks};
 
     if ( $data->{directory} ) {
         $c->res->redirect( '/source/' . join( q{/}, @path ), 301 );
@@ -90,7 +92,7 @@ sub view : Private {
         $c,
         {
             pod => $c->model('API')
-                ->request( $pod_path, undef, { show_errors => 1 } ),
+                ->request( $pod_path, undef, { show_errors => 1, ($permalinks ? (permalinks => 1) : ()) } ),
             release => $c->model('API::Release')
                 ->get( @{$data}{qw(author release)} ),
         },
