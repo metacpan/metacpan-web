@@ -55,6 +55,7 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
         $c->detach();
     }
 
+    $c->stash->{permalinks} = 1;
     $c->stash->{data} = $model->get( $author, $release );
     $c->forward('view');
 }
