@@ -62,7 +62,7 @@ profiles = {
     title = file.documentation || file.path;
     # If there is pod for this file...
     IF file.documentation || file.pod_lines.size || file.module.grep(->(module){ module.associated_pod }).size;
-      IF file.status == "latest";
+      IF !permalinks;
         # If it's a PAUSE-indexed module (02packages)...
         IF file.documentation
         && file.authorized

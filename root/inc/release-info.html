@@ -1,5 +1,5 @@
 <li>
-    <a data-keyboard-shortcut="g c" href="/changes/<% IF release.status == 'latest'; 'distribution/'; release.distribution; ELSE; ['release', release.author, release.name].join('/'); END %>"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
+    <a data-keyboard-shortcut="g c" href="/changes/<% IF permalinks; ['release', release.author, release.name].join('/'); ELSE; ['distribution', release.distribution].join('/'); END %>"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
 </li>
 <% IF is_url(release.resources.homepage) %>
 <li>
