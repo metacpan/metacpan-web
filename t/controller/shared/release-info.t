@@ -104,8 +104,9 @@ test_psgi app, sub {
                 'contains permalink to resource' );
 
             ok(
-                my $this
-                    = $tx->find_value('//a[text()="This version"]/@href'),
+                my $this = $tx->find_value(
+                    '//a[text()="This version"][starts-with(@href,"/")]/@href'
+                ),
                 'contains link to "this" version'
             );
 
