@@ -32,8 +32,9 @@ sub last_version {
 
     my @releases = sort { $b->[0] <=> $a->[0] }
         map {
-        my $v = $_->{version} =~ s/-TRIAL$//r;
-        my $dev = $_->{version} =~ /_|-TRIAL$/ || $_->{note} =~ /\bTRIAL\b/;
+        my $v   = $_->{version} =~ s/-TRIAL$//r;
+        my $dev = $_->{version} =~ /_|-TRIAL$/
+            || $_->{note} && $_->{note} =~ /\bTRIAL\b/;
         [ version->parse($v), $v, $dev, $_ ];
         } @$releases;
 

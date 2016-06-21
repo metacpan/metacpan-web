@@ -46,49 +46,59 @@ $(function(){
     }
 
 
+    var filter = [];
+    var by_author = {};
+    var by_email = {};
     $('#contributors .contributor').each(function(){
         var li = $(this);
         var author;
         var email;
         if( author = li.attr('data-cpan-author')) {
-            $.getJSON( "https://api-v1.metacpan.org/author/" + author, function(data) {
-                updateContrib(li, data);
-            });
+            filter.push({ "term" : { "pauseid" : author } });
+            by_author[author] = li;
         }
         else if ( email = li.attr('data-contrib-email') ) {
-            var filter = $.map(email.split(/\s+/), function(em){
-              return {
-                "term": {
-                  "email" : em
-                }
-              };
+            $.each(email.split(/\s+/), function(i, em){
+                filter.push({ "term" : { "email" : em } });
+                by_email[em] = li;
             });
-            var query = {
-              "query" : {
-                "match_all" : {}
-              },
-              "filter": {
-                "or" : filter
-              },
-              "fields" : [
-                "name",
-                "email",
-                "pauseid",
-                "gravatar_url"
-              ],
-              "size": 1
-            };
-            $.ajax({
-                type: "POST",
-                url: "https://api-v1.metacpan.org/author/",
-                data: JSON.stringify(query),
-                dataType: "json",
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8", // a lie to bypass cors
-                processData: false,
-                success: function (data) {
-                    if (data.hits.total == 1) {
-                        updateContrib(li, data.hits.hits[0].fields);
-                    }
+        }
+    });
+
+    var query = {
+        "query" : {
+            "match_all" : {}
+        },
+        "filter": {
+            "or" : filter
+        },
+        "_source" : [
+            "name",
+            "email",
+            "pauseid",
+            "gravatar_url"
+        ]
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "https://api-v1.metacpan.org/author/",
+        data: JSON.stringify(query),
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8", // a lie to bypass cors
+        processData: false,
+        success: function (data) {
+            $.each(data.hits.hits, function(i, contrib){
+                var fields = contrib._source;
+                if (fields.email) {
+                    $.each(fields.email, function(i, email){
+                        if (by_email[email]) {
+                            updateContrib(by_email[email], fields);
+                        }
+                    });
+                }
+                if (fields.pauseid && by_author[fields.pauseid]) {
+                    updateContrib(by_author[fields.pauseid], fields);
                 }
             });
         }
