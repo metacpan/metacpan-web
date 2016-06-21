@@ -33,8 +33,15 @@
     h2:extend(.content .file-group h2) {}
 
     ul {
-        margin-bottom: 1em;
         padding-left: 20px;
+        margin-bottom: 0px;
+    }
+
+    .group-header {
+        margin-bottom: 1em;
+        &:last-child {
+            margin-bottom: 0em;
+        }
     }
 
     ul, ul ul ul {
@@ -44,13 +51,6 @@
         list-style: circle;
     }
 
-    .change-entries {
-        margin-bottom: 0.5em;
-        &:last-child {
-            margin-bottom: 0em;
-        }
-    }
-
     .show-more { display: none }
     .hide-more { display: inline }
     &.collapsed {
@@ -58,7 +58,7 @@
         .hide-more { display: none }
         #last-changes-container {
             overflow: hidden;
-            max-height: 19.5em;
+            max-height: 20em;
         }
     }
 
@@ -66,6 +66,9 @@
         display: none;
     }
 
-    padding-bottom: .5em;
+    #last-changes-container {
+        margin-bottom: 0.5em;
+    }
+    padding-bottom: 0.5em;
     overflow: auto;
 }
