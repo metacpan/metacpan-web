@@ -9,6 +9,6 @@
   <Language>en-us</Language>
   <SyndicationRight>open</SyndicationRight>
   <Image height="16" width="16" type="image/x-icon">https://metacpan.org/static/icons/favicon-16.ico</Image>
-  <Url type="text/html" template="https://metacpan.org/search?q={searchTerms}" />
+  <Url type="text/html" template="/search?q={searchTerms}" />
   <Tags>CPAN MetaCPAN Perl</Tags>
 </OpenSearchDescription>
