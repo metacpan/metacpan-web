@@ -33,7 +33,7 @@ has api_secure => (
     $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
     $AnyEvent::HTTP::USERAGENT
         = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; '
-        . '+https://github.com/CPAN-API/metacpan-web)';
+        . '+https://github.com/metacpan/metacpan-web)';
 }
 
 sub cv {
@@ -134,7 +134,7 @@ sub _strip_source_prefix_from_fields {
     # "A stored boolean field is being returned as a string, not as a boolean"
     # when requested via "fields". To work around this we can specify
     # "_source.blah" in "fields", then we strip the "_source." prefix here.
-    # https://github.com/CPAN-API/metacpan-web/issues/881
+    # https://github.com/metacpan/metacpan-web/issues/881
     # https://github.com/elasticsearch/elasticsearch/issues/2551
     # See .../API/Release.pm for examples of this.
 

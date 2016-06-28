@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/CPAN-API/metacpan-web.png?branch=master)](https://travis-ci.org/CPAN-API/metacpan-web)
-[![Coverage Status](https://coveralls.io/repos/CPAN-API/metacpan-web/badge.png)](https://coveralls.io/r/CPAN-API/metacpan-web)
+[![Build Status](https://travis-ci.org/metacpan/metacpan-web.png?branch=master)](https://travis-ci.org/metacpan/metacpan-web)
+[![Coverage Status](https://coveralls.io/repos/metacpan/metacpan-web/badge.png)](https://coveralls.io/r/metacpan/metacpan-web)
 
 ## GETTING STARTED
 
-We strongly recommend using [metacpan-developer](https://github.com/CPAN-API/metacpan-developer),
+We strongly recommend using [metacpan-developer](https://github.com/metacpan/metacpan-developer),
 this will give you a virtual machine already configured and ready to start developing on.
 
     $ vagrant ssh
