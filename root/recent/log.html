@@ -57,7 +57,7 @@
   };
   var template = function(data) {
     return '<tr><td><span class="label label-' + labels[data.level] + '">' + levels[data.level] + "</span></td>" +
-      '<td><a href="https://github.com/CPAN-API/cpan-api/blob/master/lib/MetaCPAN/Script/' + script_name(data.script) + '.pm">' + data.script + "</a></td>" +
+      '<td><a href="https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/' + script_name(data.script) + '.pm">' + data.script + "</a></td>" +
       "<td>" + data.message + "</td>" +
       '<td class="date relatize">' + data.date + "</td></tr>";
   };

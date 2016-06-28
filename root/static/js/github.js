@@ -78,7 +78,7 @@
                             :'' )
 
                             // with v3 api the number under 'watchers' is actually the number of stargazers
-                            // in the v4 api this will be corrected. see https://github.com/CPAN-API/metacpan-web/issues/975
+                            // in the v4 api this will be corrected. see https://github.com/metacpan/metacpan-web/issues/975
                             +'  <tr><th>Stars:</th><td><a href="'+ data.html_url +'/stargazers">'+ data.watchers +'</a></td></tr>'
                             +'  <tr><th>Forks:</th><td><a href="'+ data.html_url +'/network">'+ data.forks +'</a></td></tr>'
 

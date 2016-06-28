@@ -199,7 +199,7 @@ sub modules {
             sort => [ 'documentation', 'path' ],
 
             # Get indexed and authorized from _source to work around ES bug:
-            # https://github.com/CPAN-API/metacpan-web/issues/881
+            # https://github.com/metacpan/metacpan-web/issues/881
             # https://github.com/elasticsearch/elasticsearch/issues/2551
             fields => [
                 qw(
