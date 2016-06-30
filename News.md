@@ -11,7 +11,7 @@ tight configs... and now so do we. I'd like to thank then for providing
 both examples, support and an IRC channel where Donald Stufft
 from the Python infrastructure team was able to help out.
 
-All our configs and systems are in our [github repos](https://github.com/CPAN-API/)
+All our configs and systems are in our [github repos](https://github.com/metacpan/)
 so feel free to review / improve or 'borrow' configs from.
 
 Title: Liquid Web is Sponsoring MetaCPAN
@@ -38,8 +38,8 @@ We have moved all sites over to [Fastly](http://www.fastly.com)
 We have further plans... but this will do for now,
 many thanks to our sponsors for making this possible.
 
-[network-infrastructure](https://github.com/CPAN-API/network-infrastructure)
-and [metacpan-puppet](https://github.com/CPAN-API/metacpan-puppet) have all
+[network-infrastructure](https://github.com/metacpan/network-infrastructure)
+and [metacpan-puppet](https://github.com/metacpan/metacpan-puppet) have all
 our configs if you want to see details of anything.
 
 
@@ -65,7 +65,7 @@ If you had either http://search.cpan.org/ or http://cpansearch.perl.org/
 in your desktop `hosts` file you'll need to
 [update the IP](https://metacpan.org/about/faq#cani_automatically_redirectlinkspointingatsearch.cpan.orgtometacpan.org)
 
-We will be documenting this a bit more under [Network Infrastructure](https://github.com/CPAN-API/network-infrastructure)
+We will be documenting this a bit more under [Network Infrastructure](https://github.com/metacpan/network-infrastructure)
 but that's a work in progress.
 
 
