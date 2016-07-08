@@ -122,14 +122,7 @@ sub view : Private {
 
     # Simplify the file data we pass to the template.
     my @view_files = map { single_valued_arrayref_to_scalar($_) }
-        map +{
-        %{ $_->{fields} },
-        module => [
-            ( exists $_->{_source} and $_->{_source}{module} )
-            ? $_->{_source}{module}
-            : ()
-        ],
-        },
+        map +{ %{ $_->{fields} }, %{ $_->{_source} }, },
         @{ $modules->{hits}->{hits} };
 
     my $changes
