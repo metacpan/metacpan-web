@@ -96,7 +96,8 @@ sub view : Private {
                 undef,
                 {
                     show_errors => 1,
-                    ( $permalinks ? ( permalinks => 1 ) : () )
+                    ( $permalinks ? ( permalinks => 1 ) : () ),
+                    url_prefix => '/pod/',
                 }
             ),
             release => $c->model('API::Release')
