@@ -126,22 +126,22 @@
         </form>
     </li>
     <li>
-        <a href="http://cpantesters.org/author/<% author.pauseid.substr(0,1) %>/<% author.pauseid %>.html">CPANTesters Reports</a>
-        <a href="http://matrix.cpantesters.org/?author=<% author.pauseid %>" title="Matrix">
+        <a href="<% author.links.cpantesters_reports %>">CPANTesters Reports</a>
+        <a href="<% author.links.cpantesters_matrix %>" title="Matrix">
             <i class="icon-grid"></i>
         </a>
     </li>
     <li>
-         <a href="http://cpants.cpanauthors.org/author/<% author.pauseid %>">CPANTS</a>
+         <a href="<% author.links.cpants %>">CPANTS</a>
     </li>
     <li>
-        <a href="https://explorer.metacpan.org/?url=/author/<% author.pauseid %>">MetaCPAN Explorer</a>
+        <a href="<% author.links.metacpan_explorer %>">MetaCPAN Explorer</a>
     </li>
     <li>
-        <a href="http://cpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/">Browse CPAN directory</a>
+        <a href="<% author.links.cpan_directory %>">Browse CPAN directory</a>
     </li>
     <li>
-        <a href="https://cpan.metacpan.org/authors/id/<% author.pauseid.substr(0,1) %>/<% author.pauseid.substr(0,2) %>/<% author.pauseid %>/" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">Browse BackPAN directory</a>
+        <a href="<% author.links.backpan_directory %>" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">Browse BackPAN directory</a>
     </li>
 </ul>
 <!-- End left content -->
