@@ -138,12 +138,13 @@
         <a href="<% author.links.metacpan_explorer %>">MetaCPAN Explorer</a>
     </li>
     <li>
-        <a href="<% author.links.cpan_directory %>">Browse CPAN directory</a>
+        <a href="<% author.links.cpan_directory %>">CPAN directory</a> (<% author.release_count.cpan + author.release_count.latest %>)
     </li>
     <li>
-        <a href="<% author.links.backpan_directory %>" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">Browse BackPAN directory</a>
+        <a href="<% author.links.backpan_directory %>" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">BackPAN directory</a> (<% author.release_count.item('backpan-only') %>)
     </li>
 </ul>
+
 <!-- End left content -->
 
 <div class="content">
@@ -157,7 +158,11 @@
 <% ELSE %>
     <div class="message">
         <strong>Releases</strong>
-        <p>No releases from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found</p>
+        <p>No releases from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found
+        <% IF author.release_count.item("backpan-only") %>
+            <br/><a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> has <a href=<% author.links.backpan_directory %>><% author.release_count.item("backpan-only") %> distributions on BackPAN</a> that were previously on CPAN.
+        <% END %>
+        </p>
     </div>
 <% END %>
 <% IF faves.0 %>
