@@ -9,6 +9,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 use List::Util ();
+use Ref::Util qw( is_arrayref );
 
 with qw(
     MetaCPAN::Web::Role::ReleaseInfo
@@ -125,6 +126,8 @@ sub view : Private {
         map +{ %{ $_->{fields} }, %{ $_->{_source} }, },
         @{ $modules->{hits}->{hits} };
 
+    my $categories = $self->_files_to_categories( $out, \@view_files );
+
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
 
@@ -139,6 +142,11 @@ sub view : Private {
         root     => \@root_files,
         examples => \@examples,
         files    => \@view_files,
+
+        documentation     => $categories->{documentation},
+        documentation_raw => $categories->{documentation_raw},
+        provides          => $categories->{provides},
+        modules           => $categories->{modules},
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
@@ -156,6 +164,56 @@ sub view : Private {
             : ()
         )
     );
+}
+
+sub _files_to_categories {
+    my ( $self, $release, $files ) = @_;
+    my $ret = +{
+        provides          => [],
+        documentation     => [],
+        documentation_raw => [],
+        modules           => [],
+    };
+
+    for my $f ( @{$files} ) {
+        if ( length $f->{module} ) {
+            push @{ $ret->{modules} }, $f if $f->{documentation};
+            my %info = (
+                status  => $f->{status},
+                path    => $f->{path},
+                release => $release->{name},
+                author  => $release->{author},
+            );
+            for my $m (
+                is_arrayref( $f->{module} )
+                ? @{ $f->{module} }
+                : $f->{module}
+                )
+            {
+                $info{package} = $m->{name};
+                if ( $f->{documentation} ) {
+                    if (    $m->{name} ne $f->{documentation}
+                        and $m->{indexed}
+                        and $m->{authorized} )
+                    {
+                        push @{ $ret->{provides} },
+                            +{ %info, authorized => 1 };
+                    }
+                }
+                else {
+                    push @{ $ret->{provides} }, \%info;
+                }
+            }
+        }
+        elsif ( $f->{documentation} ) {
+            push @{ $ret->{documentation} }, $f;
+        }
+        else {
+            push @{ $ret->{documentation_raw} }, $f;
+        }
+    }
+
+    return $ret;
 }
 
 __PACKAGE__->meta->make_immutable;

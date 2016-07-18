@@ -35,37 +35,6 @@
 
 <div class="content">
 
-<%-
-documentation = [];
-documentation_raw = [];
-provides      = [];
-modules       = [];
-FOREACH file IN files;
-  IF file.documentation && file.module.size;
-    modules.push(file);
-    FOREACH module IN file.module;
-      IF module.name != file.documentation && module.indexed && module.authorized;
-        # There must be a better way...
-        provides.push({
-          authorized = module.authorized,
-          status = file.status, package = module.name, path = file.path, release = release.name, author = release.author });
-      END;
-    END;
-  ELSIF file.module.size;
-    FOREACH module IN file.module;
-      provides.push({
-        authorized = module.authorized,
-        status = file.status, package = module.name, path = file.path, release = release.name, author = release.author });
-    END;
-  ELSIF file.documentation;
-        documentation.push(file);
-  ELSE;
-        documentation_raw.push(file);
-  END;
-END;
-documentation = documentation.merge(documentation_raw);
-%>
-
 <% MACRO change_group(group) BLOCK; %>
 <ul>
     <%- FOREACH entry IN group; %>
