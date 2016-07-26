@@ -86,6 +86,17 @@ has 'cdn_times' => (
     lazy_build => 1,
 );
 
+sub datacenters {
+    my ($c) = @_;
+    my $net_fastly = $c->_net_fastly();
+    return unless $net_fastly;
+
+    # Uses the private interface as fastly client doesn't
+    # have this end point yet
+    my $datacenters = $net_fastly->client->_get('/datacenters');
+    return $datacenters;
+}
+
 sub _build_cdn_times {
     return {
         one_hour => 3600,
