@@ -10,7 +10,7 @@
     <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
-    <li><a href="/source/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="<% api_external_secure %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
+    <li><a href="/source/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="<% source_host %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
