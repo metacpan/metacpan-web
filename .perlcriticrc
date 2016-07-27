@@ -16,9 +16,6 @@ theme = core
 [CodeLayout::RequireTrailingCommas]
 severity = 4
 
-[TestingAndDebugging::RequireUseStrict]
-equivalent_modules = Test::Routine
-
 [ValuesAndExpressions::ProhibitEmptyQuotes]
 severity = 4
 
@@ -29,3 +26,9 @@ severity = 4
 
 [ValuesAndExpressions::ProhibitNoisyQuotes]
 severity = 4
+
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = MetaCPAN::Moose Moose
+
+[TestingAndDebugging::RequireUseWarnings]
+equivalent_modules = MetaCPAN::Moose Moose

@@ -1,7 +1,5 @@
 package MetaCPAN::Web::Controller::SysAdmin::DataCenters;
 
-use strict;
-use warnings;
 use MetaCPAN::Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
