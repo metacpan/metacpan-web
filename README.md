@@ -29,7 +29,6 @@ user can be changed in the `metacpan_web.conf` file.  Ideally you would create a
 new file called `metacpan_web_local.conf` that contains
 
     api                 http://127.0.0.1:5000
-    api_external        http://127.0.0.1:5000
     api_secure          http://127.0.0.1:5000
     api_external_secure http://127.0.0.1:5000
 
