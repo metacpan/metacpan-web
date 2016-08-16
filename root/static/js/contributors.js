@@ -82,7 +82,7 @@ $(function(){
 
     $.ajax({
         type: "POST",
-        url: "https://api-v1.metacpan.org/author/",
+        url: "https://fastapi.metacpan.org/author/",
         data: JSON.stringify(query),
         dataType: "json",
         contentType: "application/x-www-form-urlencoded; charset=UTF-8", // a lie to bypass cors
