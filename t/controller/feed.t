@@ -73,10 +73,9 @@ test_psgi app, sub {
             test_cache_headers(
                 $res,
                 {
-                    #  cache_control     => 'max-age=3600',
-                    surrogate_key => 'MOOSE',
-
-                    #  surrogate_control => 'max-age=31536000',
+                    cache_control     => 'max-age=3600',
+                    surrogate_key     => 'MOOSE',
+                    surrogate_control => 'max-age=31536000',
                 }
             );
         }
@@ -115,8 +114,8 @@ sub test_redirect {
     test_cache_headers(
         $redir,
         {
-            cache_control     => 'max-age=604800',
-            surrogate_key     => 'REDIRECT_FEED',
+            cache_control     => 'max-age=3600',
+            surrogate_key     => "REDIRECT_FEED " . uc($author),
             surrogate_control => 'max-age=31536000',
         }
     );

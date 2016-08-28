@@ -84,7 +84,7 @@ has cdn_never_cache => (
 
 has browser_max_age => (
     is      => 'rw',
-    isa     => Maybe[Int],
+    isa     => Maybe [Int],
     default => sub {undef},
 );
 
@@ -147,9 +147,10 @@ sub fastly_magic {
         # All keys are set as UC, with : and -'s removed
         # so make sure our purging is as well
         my @keys = map {
-            $_ =~ s/://g;    #
-            $_ =~ s/-//g;    #
-            uc $_            #
+            my $k = uc $_;    #
+            $k =~ s/://g;     #
+            $k =~ s/-//g;     #
+            $k                #
         } $c->surrogate_keys_to_purge();
 
         $c->cdn_purge_now(

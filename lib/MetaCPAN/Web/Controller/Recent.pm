@@ -20,6 +20,7 @@ sub index : Path : Args(0) {
 
     $c->add_surrogate_key('RECENT');
     $c->browser_max_age( $c->cdn_times->{one_min} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_min} );   # tough to paging for now
 
     $c->stash(
         {

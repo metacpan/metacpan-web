@@ -16,22 +16,14 @@ use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('FEED');
-    $c->browser_max_age( $c->cdn_times->{one_hour} );
-    $c->cdn_cache_ttl( $c->cdn_times->{thirty_mins} );
-
 }
 
 sub recent : Chained('feed_index') PathPart Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->browser_max_age( $c->cdn_times->{one_min} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_min} );
-
-    # TODO: clear on index and max out cdn_cache_ttl
-    $c->add_surrogate_key('RECENT');
-
+    # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
+
     my $data = $c->stash;
     $c->stash->{feed} = $self->build_feed(
         title   => 'Recent CPAN uploads - MetaCPAN',
@@ -207,6 +199,9 @@ sub end : Private {
     my ( $self, $c ) = @_;
     $c->res->content_type('application/rss+xml; charset=UTF-8');
     $c->res->body( $c->stash->{feed} );
+
+    $c->fastly_magic();
+
 }
 
 __PACKAGE__->meta->make_immutable;
