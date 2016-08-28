@@ -102,6 +102,8 @@ sub author : Local : Args(1) {
         );
     }
 
+    $c->browser_max_age( $c->cdn_times->{one_hour} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
     $c->add_surrogate_key($author);
 
     my $author_cv   = $c->model('API::Author')->get($author);
@@ -136,6 +138,8 @@ sub author : Local : Args(1) {
 sub distribution : Local : Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
+    $c->browser_max_age( $c->cdn_times->{one_hour} );
+    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
     $c->add_surrogate_key($distribution);
 
     my $data = $c->model('API::Release')->versions($distribution)->recv;
