@@ -63,7 +63,7 @@ requires 'MooseX::Types::Common::Numeric';
 requires 'MooseX::Types::Common::String';
 requires 'MooseX::Types::Moose';
 requires 'MooseX::Types::URI';
-requires 'Net::Fastly', '1.07';
+requires 'Net::Fastly', '1.05';
 requires 'Path::Tiny', '0.076';
 requires 'Plack', '1.0039';
 requires 'Plack::Middleware::ReverseProxy';
