@@ -176,34 +176,41 @@ sub _files_to_categories {
     };
 
     for my $f ( @{$files} ) {
-        if ( length $f->{module} ) {
-            push @{ $ret->{modules} }, $f if $f->{documentation};
-            my %info = (
-                status  => $f->{status},
-                path    => $f->{path},
-                release => $release->{name},
-                author  => $release->{author},
-            );
-            for my $m (
-                is_arrayref( $f->{module} )
-                ? @{ $f->{module} }
-                : $f->{module}
-                )
-            {
-                $info{package} = $m->{name};
-                if ( $f->{documentation} ) {
-                    if (    $m->{name} ne $f->{documentation}
-                        and $m->{indexed}
-                        and $m->{authorized} )
-                    {
-                        push @{ $ret->{provides} },
-                            +{ %info, authorized => 1 };
-                    }
-                }
-                else {
-                    push @{ $ret->{provides} }, \%info;
-                }
+        my %info = (
+            status  => $f->{status},
+            path    => $f->{path},
+            release => $release->{name},
+            author  => $release->{author},
+        );
+
+        my @modules
+            = is_arrayref( $f->{module} )
+            ? @{ $f->{module} }
+            : $f->{module};
+
+        if ( $f->{documentation} and @modules ) {
+            push @{ $ret->{modules} }, $f;
+            for my $m (@modules) {
+                push @{ $ret->{provides} },
+                    map +{
+                    %info,
+                    package    => $_->{name},
+                    authorized => $_->{authorized}
+                    },
+                    grep {
+                            $_->{name} ne $f->{documentation}
+                        and $_->{indexed}
+                        and $_->{authorized}
+                    } @modules;
             }
+        }
+        elsif (@modules) {
+            push @{ $ret->{provides} },
+                map +{
+                %info,
+                package    => $_->{name},
+                authorized => $_->{authorized}
+                }, @modules;
         }
         elsif ( $f->{documentation} ) {
             push @{ $ret->{documentation} }, $f;
@@ -219,3 +226,4 @@ sub _files_to_categories {
 __PACKAGE__->meta->make_immutable;
 
 1;
+
