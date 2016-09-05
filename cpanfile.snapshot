@@ -605,10 +605,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  CatalystX-Fastly-Role-Response-0.02
-    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.02.tar.gz
+  CatalystX-Fastly-Role-Response-0.03
+    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.03.tar.gz
     provides:
-      CatalystX::Fastly::Role::Response 0.02
+      CatalystX::Fastly::Role::Response 0.03
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0

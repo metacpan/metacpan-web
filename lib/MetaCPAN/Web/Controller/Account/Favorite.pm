@@ -29,8 +29,8 @@ sub add : Local : Args(0) {
     # TODO: validate these values?
     # We need to purge if the rating has changes until the fav count
     # is moved from server to client side
-    $c->purge_surrogate_key( $data->{author} )       if $data->{author};
-    $c->purge_surrogate_key( $data->{distribution} ) if $data->{distribution};
+    $c->purge_author_key( $data->{author} )       if $data->{author};
+    $c->purge_dist_key( $data->{distribution} ) if $data->{distribution};
 
     $c->purge_surrogate_key( $self->_cache_key_for_user($c) );
 

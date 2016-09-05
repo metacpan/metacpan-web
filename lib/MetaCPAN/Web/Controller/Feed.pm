@@ -96,7 +96,7 @@ sub author : Local : Args(1) {
 
     $c->browser_max_age( '1h' );
     $c->cdn_max_age( '1y' );
-    $c->add_surrogate_key($author);
+    $c->add_author_key($author);
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
@@ -132,7 +132,7 @@ sub distribution : Local : Args(1) {
 
     $c->browser_max_age( '1h' );
     $c->cdn_max_age( '1y' );
-    $c->add_surrogate_key($distribution);
+    $c->add_dist_key($distribution);
 
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
@@ -199,8 +199,6 @@ sub end : Private {
     my ( $self, $c ) = @_;
     $c->res->content_type('application/rss+xml; charset=UTF-8');
     $c->res->body( $c->stash->{feed} );
-
-    $c->fastly_magic();
 
 }
 

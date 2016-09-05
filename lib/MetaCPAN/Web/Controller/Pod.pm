@@ -181,8 +181,8 @@ sub view : Private {
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age( '1y' );
-    $c->add_surrogate_key($dist);
-    $c->add_surrogate_key( $release->{author} );
+    $c->add_dist_key($dist);
+    $c->add_author_key( $release->{author} );
 
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
