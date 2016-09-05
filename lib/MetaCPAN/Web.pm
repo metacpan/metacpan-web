@@ -42,6 +42,12 @@ __PACKAGE__->config(
     }
 );
 
+before 'finalize' => sub {
+    my $c = $_[0];
+    #...
+};
+
+
 sub token {
     shift->request->session->get('token');
 }

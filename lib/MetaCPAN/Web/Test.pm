@@ -167,7 +167,7 @@ Parses C<< $res->content >> and generates a L<Test::XPath> object.
       {
           cache_control     => 'max-age=3600',
           surrogate_key     => 'SOURCE',
-          surrogate_control => 'max-age=31536000',
+          surrogate_control => 'max-age=31556952',
       }
   );
 

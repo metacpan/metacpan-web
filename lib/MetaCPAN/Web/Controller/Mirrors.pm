@@ -9,9 +9,8 @@ sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('MIRRORS');
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
+    $c->browser_max_age('1d');
+    $c->cdn_max_age( '1d' );
 
     my $location;
     my @protocols;

@@ -12,19 +12,18 @@ sub index : Path : Args {
     my ( $self, $c, @module ) = @_;
 
     $c->add_surrogate_key('SOURCE');
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_hour} );
+    $c->browser_max_age( '1h' );
 
     if ( @module == 1 ) {
 
         # /source/Foo::bar or /source/AUTHOR/
-        $c->cdn_cache_ttl( $c->cdn_times->{one_hour} );
+        $c->cdn_max_age( '1h' );
 
     }
     else {
         # SO can cache for a LONG time
         # /source/AUTHOR/anything e.g /source/ETHER/YAML-Tiny-1.67/
-        $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
+        $c->cdn_max_age( '1y' );
     }
 
     my ( $source, $module );

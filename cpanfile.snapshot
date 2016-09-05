@@ -605,6 +605,14 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  CatalystX-Fastly-Role-Response-0.02
+    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.02.tar.gz
+    provides:
+      CatalystX::Fastly::Role::Response 0.02
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Moose::Role 0
   CatalystX-RoleApplicator-0.005
     pathname: H/HD/HDP/CatalystX-RoleApplicator-0.005.tar.gz
     provides:
@@ -3175,6 +3183,15 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0
       namespace::clean 0
+  MooseX-Fastly-Role-0.01
+    pathname: L/LL/LLAP/MooseX-Fastly-Role-0.01.tar.gz
+    provides:
+      MooseX::Fastly::Role 0.01
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Moose::Role 0
+      Net::Fastly 1.05
   MooseX-Getopt-0.70
     pathname: D/DR/DROLSKY/MooseX-Getopt-0.70.tar.gz
     provides:

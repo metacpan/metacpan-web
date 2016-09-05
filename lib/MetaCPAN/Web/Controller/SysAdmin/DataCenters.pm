@@ -15,9 +15,9 @@ sub list_datacenters : Path('list') : Args(0) GET {
     my $datacenters = $c->datacenters;
 
     $c->add_surrogate_key('datacenters');
-    $c->cdn_cache_ttl( $c->cdn_times->{one_day} );
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
+    $c->cdn_max_age( '1d' );
+    $c->browser_max_age('1d');
+
     $c->stash( { success => $datacenters } );
     $c->detach( $c->view('JSON') );
 }

@@ -61,10 +61,10 @@ sub list_as_json : Local : Args(0) {
     my $user = $c->stash->{user};
 
     $c->add_surrogate_key( $self->_cache_key_for_user($c) );
-    $c->cdn_cache_ttl( 86_400 * 30 );    # 30 days
+    $c->cdn_max_age( '30d' );
 
     # Make sure the user re-requests from Fastly each time
-    $c->res->header( 'Cache-Control' => 'max-age=0, no-store, no-cache' );
+    $c->browser_never_cache(1);
 
     $c->detach( $c->view('JSON') );
 }

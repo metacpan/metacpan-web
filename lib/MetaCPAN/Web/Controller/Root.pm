@@ -40,9 +40,8 @@ sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('HOMEPAGE');
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_hour} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
+    $c->browser_max_age('1h');
+    $c->cdn_max_age( '1y' );
 
     $c->stash->{template} = 'home.html';
 }
@@ -79,9 +78,8 @@ sub robots : Path("robots.txt") : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('ROBOTS');
-    $c->res->header(
-        'Cache-Control' => 'max-age=' . $c->cdn_times->{one_day} );
-    $c->cdn_cache_ttl( $c->cdn_times->{one_year} );
+    $c->browser_max_age( '1d' );
+    $c->cdn_max_age( '1y' );
 
     $c->stash( { template => 'robots.txt' } );
 }
@@ -112,9 +110,9 @@ sub end : ActionClass('RenderView') {
 
     $c->stash->{site_alert_message} = $c->config->{site_alert_message};
 
-    $c->fastly_magic();
 
 }
+
 
 =head1 AUTHOR
 
