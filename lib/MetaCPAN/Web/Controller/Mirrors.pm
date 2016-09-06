@@ -10,7 +10,7 @@ sub index : Path : Args(0) {
 
     $c->add_surrogate_key('MIRRORS');
     $c->browser_max_age('1d');
-    $c->cdn_max_age( '1d' );
+    $c->cdn_max_age('1d');
 
     my $location;
     my @protocols;

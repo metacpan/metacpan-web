@@ -12,7 +12,7 @@ sub redirect_to_pod : Path : Args {
     my ( $self, $c, @path ) = @_;
 
     # Forward old '/module/' links to the new '/pod/' controller.
-    $c->cdn_max_age( '1y' );
+    $c->cdn_max_age('1y');
 
     # /module/AUTHOR/Release-0.0/lib/Foo/Bar.pm
     if ( @path > 1 ) {

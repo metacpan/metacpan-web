@@ -15,7 +15,7 @@ sub list_datacenters : Path('list') : Args(0) GET {
     my $datacenters = $c->datacenters;
 
     $c->add_surrogate_key('datacenters');
-    $c->cdn_max_age( '1d' );
+    $c->cdn_max_age('1d');
     $c->browser_max_age('1d');
 
     $c->stash( { success => $datacenters } );

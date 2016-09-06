@@ -19,8 +19,8 @@ sub index : Path : Args(0) {
     single_valued_arrayref_to_scalar($latest);
 
     $c->add_surrogate_key('RECENT');
-    $c->browser_max_age( '1m' );
-    $c->cdn_max_age( '1m' );   # tough to paging for now
+    $c->browser_max_age('1m');
+    $c->cdn_max_age('1m');    # tough to paging for now
 
     $c->stash(
         {

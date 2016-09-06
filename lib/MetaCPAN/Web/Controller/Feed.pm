@@ -35,8 +35,8 @@ sub news : Local : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('NEWS');
-    $c->browser_max_age( '1h' );
-    $c->cdn_max_age( '1h' );
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1h');
 
     my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
@@ -79,8 +79,8 @@ sub author : Local : Args(1) {
     # Redirect to this same action with uppercase author.
     if ( $author ne uc($author) ) {
 
-        $c->browser_max_age( '7d' );
-        $c->cdn_max_age( '1y' );
+        $c->browser_max_age('7d');
+        $c->cdn_max_age('1y');
         $c->add_surrogate_key('REDIRECT_FEED');
 
         $c->res->redirect(
@@ -94,8 +94,8 @@ sub author : Local : Args(1) {
         );
     }
 
-    $c->browser_max_age( '1h' );
-    $c->cdn_max_age( '1y' );
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1y');
     $c->add_author_key($author);
 
     my $author_cv   = $c->model('API::Author')->get($author);
@@ -130,8 +130,8 @@ sub author : Local : Args(1) {
 sub distribution : Local : Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    $c->browser_max_age( '1h' );
-    $c->cdn_max_age( '1y' );
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1y');
     $c->add_dist_key($distribution);
 
     my $data = $c->model('API::Release')->versions($distribution)->recv;

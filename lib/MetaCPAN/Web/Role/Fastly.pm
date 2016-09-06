@@ -48,7 +48,6 @@ sub add_author_key {
     $c->add_surrogate_key( 'author=' . $author );
 }
 
-
 =head2 $c->purge_author_key('Ether');
 
 =cut
@@ -60,7 +59,6 @@ sub purge_author_key {
     $author = uc($author);
     $c->purge_surrogate_key( 'author=' . $author );
 }
-
 
 =head2 $c->add_dist_key('Moose');
 
@@ -106,7 +104,6 @@ has _surrogate_keys_to_purge => (
         join_surrogate_keys_to_purge => 'join',
     },
 );
-
 
 before 'finalize' => sub {
     my $c = shift;

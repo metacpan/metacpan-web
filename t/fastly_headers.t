@@ -11,7 +11,7 @@ test_psgi app, sub {
         is( $res->code,                 200,   'code 200' );
         is( $res->header('Set-Cookie'), undef, 'No cookie' );
         is( $res->header('Surrogate-Control'),
-            'max-age=31556952', 'Image Surrogate-Control as a year' );
+            'max-age=31536000', 'Image Surrogate-Control as a year' );
     }
 };
 

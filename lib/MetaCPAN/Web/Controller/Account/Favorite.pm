@@ -29,7 +29,7 @@ sub add : Local : Args(0) {
     # TODO: validate these values?
     # We need to purge if the rating has changes until the fav count
     # is moved from server to client side
-    $c->purge_author_key( $data->{author} )       if $data->{author};
+    $c->purge_author_key( $data->{author} )     if $data->{author};
     $c->purge_dist_key( $data->{distribution} ) if $data->{distribution};
 
     $c->purge_surrogate_key( $self->_cache_key_for_user($c) );
@@ -61,7 +61,7 @@ sub list_as_json : Local : Args(0) {
     my $user = $c->stash->{user};
 
     $c->add_surrogate_key( $self->_cache_key_for_user($c) );
-    $c->cdn_max_age( '30d' );
+    $c->cdn_max_age('30d');
 
     # Make sure the user re-requests from Fastly each time
     $c->browser_never_cache(1);

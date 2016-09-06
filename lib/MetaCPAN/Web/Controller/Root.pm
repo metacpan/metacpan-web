@@ -41,7 +41,7 @@ sub index : Path : Args(0) {
 
     $c->add_surrogate_key('HOMEPAGE');
     $c->browser_max_age('1h');
-    $c->cdn_max_age( '1y' );
+    $c->cdn_max_age('1y');
 
     $c->stash->{template} = 'home.html';
 }
@@ -78,8 +78,8 @@ sub robots : Path("robots.txt") : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('ROBOTS');
-    $c->browser_max_age( '1d' );
-    $c->cdn_max_age( '1y' );
+    $c->browser_max_age('1d');
+    $c->cdn_max_age('1y');
 
     $c->stash( { template => 'robots.txt' } );
 }
@@ -110,9 +110,7 @@ sub end : ActionClass('RenderView') {
 
     $c->stash->{site_alert_message} = $c->config->{site_alert_message};
 
-
 }
-
 
 =head1 AUTHOR
 

@@ -9,8 +9,8 @@ sub auto : Private {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('ABOUT');
-    $c->browser_max_age( '1d' );
-    $c->cdn_max_age( '1y' );
+    $c->browser_max_age('1d');
+    $c->cdn_max_age('1y');
 
 }
 
@@ -66,7 +66,7 @@ sub stats : Local : Args(0) {
     $c->add_surrogate_key('STATS');
 
     # Only want a day for this, so they get refreshed
-    $c->cdn_max_age( '1d' );
+    $c->cdn_max_age('1d');
 
     $c->stash( template => 'about/stats.html' );
 

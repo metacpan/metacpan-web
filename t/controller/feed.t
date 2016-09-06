@@ -33,8 +33,9 @@ test_psgi app, sub {
             test_cache_headers(
                 $res,
                 {
-                    cache_control     => 'max-age=60',
-                    surrogate_key     => 'RECENT content_type=application/rss+xml content_type=application',
+                    cache_control => 'max-age=60',
+                    surrogate_key =>
+                        'RECENT content_type=application/rss+xml content_type=application',
                     surrogate_control => 'max-age=60, stale-if-error=2592000',
                 }
             );
@@ -57,9 +58,11 @@ test_psgi app, sub {
             test_cache_headers(
                 $res,
                 {
-                    cache_control     => 'max-age=3600',
-                    surrogate_key => 'author=PERLER content_type=application/rss+xml content_type=application',
-                    surrogate_control => 'max-age=31556952, stale-if-error=2592000',
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'author=PERLER content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
                 }
             );
         }
@@ -72,9 +75,11 @@ test_psgi app, sub {
             test_cache_headers(
                 $res,
                 {
-                    cache_control     => 'max-age=3600',
-                    surrogate_key     => 'dist=MOOSE content_type=application/rss+xml content_type=application',
-                    surrogate_control => 'max-age=31556952, stale-if-error=2592000',
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'dist=MOOSE content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
                 }
             );
         }
@@ -87,9 +92,11 @@ test_psgi app, sub {
             test_cache_headers(
                 $res,
                 {
-                    cache_control     => 'max-age=3600',
-                    surrogate_key     => 'NEWS content_type=application/rss+xml content_type=application',
-                    surrogate_control => 'max-age=3600, stale-if-error=2592000',
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'NEWS content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=3600, stale-if-error=2592000',
                 }
             );
         }
@@ -115,8 +122,9 @@ sub test_redirect {
     test_cache_headers(
         $redir,
         {
-            cache_control     => 'max-age=3600',
-            surrogate_key     => "REDIRECT_FEED author=${author} content_type=application/rss+xml content_type=application",
+            cache_control => 'max-age=3600',
+            surrogate_key =>
+                "REDIRECT_FEED author=${author} content_type=application/rss+xml content_type=application",
             surrogate_control => 'max-age=31556952, stale-if-error=2592000',
         }
     );
