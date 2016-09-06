@@ -198,7 +198,8 @@ sub _files_to_categories {
                     authorized => $_->{authorized}
                     },
                     grep {
-                            $_->{name} ne $f->{documentation}
+                            defined $_->{name}
+                        and $_->{name} ne $f->{documentation}
                         and $_->{indexed}
                         and $_->{authorized}
                     } @modules;
