@@ -2528,6 +2528,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  MetaCPAN-Role-0.01
+    pathname: L/LL/LLAP/MetaCPAN-Role-0.01.tar.gz
+    provides:
+      MetaCPAN::Role 0.01
+      MetaCPAN::Role::Fastly 0.01
+      MetaCPAN::Role::Fastly::Catalyst 0.01
+    requirements:
+      Carp 0
+      CatalystX::Fastly::Role::Response 0
+      ExtUtils::MakeMaker 0
+      Moose::Role 0
+      MooseX::Fastly::Role 0
+      Net::Fastly 0
   Mixin-Linewise-0.108
     pathname: R/RJ/RJBS/Mixin-Linewise-0.108.tar.gz
     provides:
