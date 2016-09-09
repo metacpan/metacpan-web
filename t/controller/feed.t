@@ -35,8 +35,9 @@ test_psgi app, sub {
                 {
                     cache_control => 'max-age=60',
                     surrogate_key =>
-                        'RECENT content_type=application/rss+xml content_type=application',
-                    surrogate_control => 'max-age=60, stale-if-error=2592000',
+                        'RECENT DIST_UPDATES content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
                 }
             );
         }
