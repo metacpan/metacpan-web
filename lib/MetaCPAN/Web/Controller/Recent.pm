@@ -18,9 +18,9 @@ sub index : Path : Args(0) {
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     single_valued_arrayref_to_scalar($latest);
 
-    $c->add_surrogate_key('RECENT');
+    $c->add_surrogate_key( 'RECENT', 'DIST_UPDATES' );
     $c->browser_max_age('1m');
-    $c->cdn_max_age('1m');    # tough to paging for now
+    $c->cdn_max_age('1y');    # DIST_UPDATES will purge it
 
     $c->stash(
         {

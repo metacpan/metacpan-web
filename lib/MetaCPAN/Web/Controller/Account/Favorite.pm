@@ -26,7 +26,6 @@ sub add : Local : Args(0) {
         $res = $model->add_favorite( $data, $c->token )->recv;
     }
 
-    # TODO: validate these values?
     # We need to purge if the rating has changes until the fav count
     # is moved from server to client side
     $c->purge_author_key( $data->{author} )     if $data->{author};

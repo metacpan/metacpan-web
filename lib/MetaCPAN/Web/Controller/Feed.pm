@@ -15,7 +15,6 @@ use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
 
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
-
 }
 
 sub recent : Chained('feed_index') PathPart Args(0) {

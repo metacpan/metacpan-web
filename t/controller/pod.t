@@ -28,7 +28,7 @@ test_psgi app, sub {
     is(
         $res->headers->header('Surrogate-Key'),
         'dist=MOOSE author=ETHER content_type=text/html content_type=text',
-        'Surrogate-Key dist/author/content typ'
+        'Surrogate-Key dist/author/content type'
     );
 
     my $tx2 = tx($res);

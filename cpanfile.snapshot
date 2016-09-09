@@ -2528,12 +2528,12 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  MetaCPAN-Role-0.01
-    pathname: L/LL/LLAP/MetaCPAN-Role-0.01.tar.gz
+  MetaCPAN-Role-0.02
+    pathname: L/LL/LLAP/MetaCPAN-Role-0.02.tar.gz
     provides:
-      MetaCPAN::Role 0.01
-      MetaCPAN::Role::Fastly 0.01
-      MetaCPAN::Role::Fastly::Catalyst 0.01
+      MetaCPAN::Role 0.02
+      MetaCPAN::Role::Fastly 0.02
+      MetaCPAN::Role::Fastly::Catalyst 0.02
     requirements:
       Carp 0
       CatalystX::Fastly::Role::Response 0
