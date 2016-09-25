@@ -64,6 +64,9 @@ $(function(){
             });
         }
     });
+    if (filter.length == 0) {
+        return;
+    }
 
     var query = {
         "query" : {
@@ -77,7 +80,8 @@ $(function(){
             "email",
             "pauseid",
             "gravatar_url"
-        ]
+        ],
+        size: filter.length
     };
 
     $.ajax({
