@@ -93,24 +93,6 @@
         </a>
     </li>
     <% END; END; END %>
-    <%
-        i = 0;
-        aggregated = [];
-        latest = releases[0];
-        FOREACH release IN releases;
-            IF release.date.dt_canonical > latest.date.dt_canonical;
-                latest = release;
-            END;
-            IF last == release.distribution;
-                NEXT;
-            ELSE;
-                last = release.distribution;
-            END;
-            UNLESS release.name;
-                NEXT;
-            END;
-            aggregated.push(release);
-        END %>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %></li>
     <% INCLUDE inc/release-latest.html %>
