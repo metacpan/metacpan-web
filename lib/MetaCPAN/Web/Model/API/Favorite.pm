@@ -5,7 +5,7 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 
 use List::MoreUtils qw(uniq);
-
+use Ref::Util qw(is_arrayref);
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
@@ -83,17 +83,14 @@ sub get {
 }
 
 sub by_user {
-    my ( $self, $user, $size ) = @_;
-    $size ||= 250;
+    my ( $self, $users, $size ) = @_;
+    my @users = is_arrayref $users ? @{$users} : $users;
     return $self->request(
-        '/favorite/_search',
-        {
-            query  => { match_all => {} },
-            filter => { term      => { user => $user }, },
-            sort   => ['distribution'],
-            fields => [qw(date author distribution)],
-            size   => $size,
-        }
+        sprintf "/favorite/by_user?fields=%s&sort=%s&size=%s&users=%s",
+        'date,author,distribution',
+        'distribution',
+        $size || 250,
+        ( join ',' => @users )
     );
 }
 
