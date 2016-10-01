@@ -30,12 +30,17 @@ sub last_version {
     }
     return [] unless $releases && @$releases;
 
+    my $version = $release->{version};
+    eval { $version = version->parse($version) };
+
     my @releases = sort { $b->[0] <=> $a->[0] }
         map {
         my $v   = $_->{version} =~ s/-TRIAL$//r;
         my $dev = $_->{version} =~ /_|-TRIAL$/
             || $_->{note} && $_->{note} =~ /\bTRIAL\b/;
-        [ version->parse($v), $v, $dev, $_ ];
+        my $ver = ( ref $version && length $v && eval { version->parse($v) } )
+            || $v;
+        [ $ver, $v, $dev, $_ ];
         } @$releases;
 
     my @changelogs;
@@ -49,7 +54,7 @@ sub last_version {
                 last;
             }
         }
-        elsif ( $r->[0] eq $release->{version} ) {
+        elsif ( $r->[0] eq $version ) {
             push @changelogs, $r->[3];
             $found = 1;
         }
