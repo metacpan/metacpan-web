@@ -38,7 +38,7 @@
           });
           $.each(rows, function(idx, row) {
             el.append(
-               '<li><a href="https://github.com/'+ row.login +'" title="Github profile of '+ row.login +'"><img src="'+ row.avatar_url +'" class="author-img" />'
+               '<li><a href="https://github.com/'+ row.login +'" title="GitHub profile of '+ row.login +'"><img src="'+ row.avatar_url +'" class="author-img" />'
               +'<strong>'+ row.login +'</strong></a>'
               +'('+ row.contributions +' '+ (row.contributions === 1 ? 'commit' : 'commits') +')</li>'
             );
