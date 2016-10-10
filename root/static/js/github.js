@@ -7,7 +7,23 @@
 
     function GitHubUrl(item) {
         this.item = $(item);
-        this.href = this.item.attr('href');
+        var href = this.item.attr('href').replace('Perl-Email-Project', 'rjbs');
+        this.href = href; //this.item.attr('href');
+    }
+
+    // Callback to handle Github JSONP redirects
+
+    function getGithubApiJSONP_cb(success_cb) {
+        return function (res) {
+            if (res.meta.status >= 300 && res.meta.status < 400) {
+                var location     = res.meta.Location;
+                var redirect_url = location.replace(/(callback=).*?(&)/, '$1?$2');
+                $.getJSON(redirect_url, success_cb);
+            }
+            else {
+                success_cb.apply(this, arguments);
+            }
+        };
     }
 
     GitHubUrl.match = function(a){
@@ -27,12 +43,12 @@
                 prepareData: function(data, cb) {
                     // we need additionally the repo info
                     var url = this.url.replace('/issues', '');
-                    $.getJSON(url, function(repo) {
+                    $.getJSON(url, getGithubApiJSONP_cb(function(repo) {
                         cb({
                             issues: data,
                             repo: repo.data
                         });
-                    });
+                    }));
                 },
                 render: function(data) {
                     if (data.issues.length === 0) {
@@ -146,15 +162,14 @@
             }
 
             var self = this;
-
-            this.item.qtip({
+            var qtip;
+            var tooltip = this.item.qtip({
                 content: {
                     ajax: {
                         dataType: 'json',
                         type: 'GET',
                         url: this.url,
-                        success: function(res) {
-
+                        success: getGithubApiJSONP_cb(function(res) {
                             var error;
                             try {
                                 // If there was an error data will likely
@@ -164,11 +179,10 @@
                                 }
                             } catch(ignore){ }
                             if( error ){
-                                this.set('content.text', '<i>' + error + '</i>');
+                                qtip.set('content.text', '<i>' + error + '</i>');
                                 return;
                             }
 
-                            var qtip = this;
                             self.prepareData(res.data, function(data) {
                                 var html = self.render(data);
                                 qtip.set('content.text', html);
@@ -179,7 +193,7 @@
                                     }
                                 });
                             });
-                        }
+                        })
                     },
                     text: '<i class="fa fa-spinner fa-spin"></i>',
                     title: 'Github Info'
@@ -196,6 +210,7 @@
                     classes: 'qtip-shadow qtip-rounded qtip-light qtip-github',
                 }
             });
+            qtip = tooltip.qtip('api');
         },
 
         // This loops over the keys/values found in this.config and
