@@ -7,8 +7,7 @@
 
     function GithubUrl(item) {
         this.item = $(item);
-        var href = this.item.attr('href').replace('Perl-Email-Project', 'rjbs');
-        this.href = href; //this.item.attr('href');
+        this.href = this.item.attr('href');
     }
 
     // Callback to handle Github JSONP redirects
