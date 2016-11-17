@@ -5,12 +5,12 @@
     // to the same github repo.  If you mouse over both the requests are made
     // twice.  It would be nice to share the responses between both.
 
-    function GithubUrl(item) {
+    function GitHubUrl(item) {
         this.item = $(item);
         this.href = this.item.attr('href');
     }
 
-    GithubUrl.match = function(a){
+    GitHubUrl.match = function(a){
         if ($(a).length == 0) return;
 
         return $(a).attr('href').indexOf('github') >= 0;
@@ -18,7 +18,7 @@
 
     // anchor patterns and check for www. or no subdomain to avoid user wikis, blogs, etc
 
-    $.extend(GithubUrl.prototype, {
+    $.extend(GitHubUrl.prototype, {
         config: {
 
             // Release info
@@ -244,15 +244,15 @@
 
 $(document).ready(function() {
     $('.nav-list a:not(.nopopup)').each(function() {
-        if( GithubUrl.match(this) ) {
-            (new GithubUrl(this)).createPopup();
+        if( GitHubUrl.match(this) ) {
+            (new GitHubUrl(this)).createPopup();
 
         }
     });
 
     var repository = $('a[data-keyboard-shortcut="g r"]');
 
-    if( GithubUrl.match(repository) ) {
+    if( GitHubUrl.match(repository) ) {
         Mousetrap.bind('g p', function() {
             // we haven't hit the github api at this point, so we cheat for the url
             var pull_request_url = repository.attr('href') + '/pulls';
