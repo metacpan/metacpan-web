@@ -605,10 +605,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  CatalystX-Fastly-Role-Response-0.03
-    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.03.tar.gz
+  CatalystX-Fastly-Role-Response-0.06
+    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.06.tar.gz
     provides:
-      CatalystX::Fastly::Role::Response 0.03
+      CatalystX::Fastly::Role::Response 0.06
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -2528,19 +2528,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  MetaCPAN-Role-0.02
-    pathname: L/LL/LLAP/MetaCPAN-Role-0.02.tar.gz
+  MetaCPAN-Role-0.03
+    pathname: L/LL/LLAP/MetaCPAN-Role-0.03.tar.gz
     provides:
-      MetaCPAN::Role 0.02
-      MetaCPAN::Role::Fastly 0.02
-      MetaCPAN::Role::Fastly::Catalyst 0.02
+      MetaCPAN::Role 0.03
+      MetaCPAN::Role::Fastly 0.03
+      MetaCPAN::Role::Fastly::Catalyst 0.03
     requirements:
       Carp 0
-      CatalystX::Fastly::Role::Response 0
+      CatalystX::Fastly::Role::Response 0.04
       ExtUtils::MakeMaker 0
       Moose::Role 0
-      MooseX::Fastly::Role 0
-      Net::Fastly 0
+      MooseX::Fastly::Role 0.01
+      Net::Fastly 1.05
   Mixin-Linewise-0.108
     pathname: R/RJ/RJBS/Mixin-Linewise-0.108.tar.gz
     provides:
