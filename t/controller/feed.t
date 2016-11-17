@@ -25,7 +25,24 @@ sub get_feed_ok {
 test_psgi app, sub {
     my $cb = shift;
 
-    get_feed_ok( $cb, '/feed/recent' );
+    get_feed_ok(
+        $cb,
+        '/feed/recent',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    cache_control => 'max-age=60',
+                    surrogate_key =>
+                        'RECENT DIST_UPDATES content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
+                }
+            );
+        }
+
+    );
     get_feed_ok(
         $cb,
         '/feed/author/PERLER',
@@ -39,10 +56,52 @@ test_psgi app, sub {
                 q!grep(//rdf:item/rdf:title, "PERLER has released (.+)")!,
                 'found releases in author feed',
             );
+            test_cache_headers(
+                $res,
+                {
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'author=PERLER content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
+                }
+            );
         }
     );
-    get_feed_ok( $cb, '/feed/distribution/Moose' );
-    get_feed_ok( $cb, '/feed/news' );
+    get_feed_ok(
+        $cb,
+        '/feed/distribution/Moose',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'dist=MOOSE content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=31556952, stale-if-error=2592000',
+                }
+            );
+        }
+    );
+    get_feed_ok(
+        $cb,
+        '/feed/news',
+        sub {
+            my ( $res, $tx ) = @_;
+            test_cache_headers(
+                $res,
+                {
+                    cache_control => 'max-age=3600',
+                    surrogate_key =>
+                        'NEWS content_type=application/rss+xml content_type=application',
+                    surrogate_control =>
+                        'max-age=3600, stale-if-error=2592000',
+                }
+            );
+        }
+    );
 
     test_redirect( $cb, 'oalders' );
 };
@@ -58,6 +117,19 @@ sub test_redirect {
         qr{^(\w+://[^/]+)?/feed/author/\U$author},
         'redirect to uc feed'
     );
+
+    $author = uc($author);
+
+    test_cache_headers(
+        $redir,
+        {
+            cache_control => 'max-age=3600',
+            surrogate_key =>
+                "REDIRECT_FEED author=${author} content_type=application/rss+xml content_type=application",
+            surrogate_control => 'max-age=31556952, stale-if-error=2592000',
+        }
+    );
+
 }
 
 sub valid_xml {

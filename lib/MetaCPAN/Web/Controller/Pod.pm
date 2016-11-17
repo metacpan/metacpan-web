@@ -16,6 +16,8 @@ with qw(
 sub find : Path : Args(1) {
     my ( $self, $c, @path ) = @_;
 
+    $c->browser_max_age('1h');
+
     # TODO: Pass size param so we can disambiguate?
     $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->recv;
 
@@ -27,6 +29,8 @@ sub find : Path : Args(1) {
 # /pod/release/$AUTHOR/$release/@path
 sub release : Local : Args {
     my ( $self, $c, @path ) = @_;
+
+    $c->browser_max_age('1d');
 
     # force consistent casing in URLs
     if ( @path > 2 && $path[0] ne uc( $path[0] ) ) {
@@ -43,6 +47,8 @@ sub release : Local : Args {
 # /pod/distribution/$name/@path
 sub distribution : Local : Args {
     my ( $self, $c, $dist, @path ) = @_;
+
+    $c->browser_max_age('1h');
 
 # TODO: Could we do this with one query?
 # filter => { path => join('/', @path), distribution => $dist, status => latest }
@@ -158,11 +164,6 @@ sub view : Private {
         }
     );
 
-    # ensure page is not cached when latest release is a trial
-    $c->res->last_modified(
-               $reqs->{versions}->{hits}->{hits}->[0]->{fields}->{date}
-            || $data->{date} );
-
     my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
 
     #<<<
@@ -177,6 +178,12 @@ sub view : Private {
     #>>>
 
     my $dist = $release->{distribution};
+
+    # Store at fastly for a year - as we will purge!
+    $c->cdn_max_age('1y');
+    $c->add_dist_key($dist);
+    $c->add_author_key( $release->{author} );
+
     $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
 
     $c->stash(

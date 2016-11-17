@@ -21,9 +21,11 @@ test_psgi app, sub {
         test_cache_headers(
             $res,
             {
-                cache_control     => 'max-age=86400',
-                surrogate_key     => 'about',
-                surrogate_control => 'max-age=31536000',
+                cache_control => 'max-age=86400',
+                surrogate_key =>
+                    'ABOUT content_type=text/html content_type=text',
+                surrogate_control =>
+                    'max-age=31556952, stale-if-error=2592000',
             }
         );
     }

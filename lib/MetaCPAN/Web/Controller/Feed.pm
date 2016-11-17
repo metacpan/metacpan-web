@@ -13,9 +13,16 @@ use Text::Markdown qw/markdown/;
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
-sub recent : Local : Args(0) {
+sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
+}
+
+sub recent : Chained('feed_index') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
+
     my $data = $c->stash;
     $c->stash->{feed} = $self->build_feed(
         title   => 'Recent CPAN uploads - MetaCPAN',
@@ -25,6 +32,10 @@ sub recent : Local : Args(0) {
 
 sub news : Local : Args(0) {
     my ( $self, $c ) = @_;
+
+    $c->add_surrogate_key('NEWS');
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1h');
 
     my $file = $c->config->{home} . '/News.md';
     my $news = path($file)->slurp_utf8;
@@ -66,6 +77,11 @@ sub author : Local : Args(1) {
 
     # Redirect to this same action with uppercase author.
     if ( $author ne uc($author) ) {
+
+        $c->browser_max_age('7d');
+        $c->cdn_max_age('1y');
+        $c->add_surrogate_key('REDIRECT_FEED');
+
         $c->res->redirect(
 
             # NOTE: We're using Args here instead of CaptureArgs :-(.
@@ -76,6 +92,10 @@ sub author : Local : Args(1) {
             301,    # Permanent
         );
     }
+
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1y');
+    $c->add_author_key($author);
 
     my $author_cv   = $c->model('API::Author')->get($author);
     my $releases_cv = $c->model('API::Release')->latest_by_author($author);
@@ -108,6 +128,11 @@ sub author : Local : Args(1) {
 
 sub distribution : Local : Args(1) {
     my ( $self, $c, $distribution ) = @_;
+
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1y');
+    $c->add_dist_key($distribution);
+
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
@@ -173,6 +198,7 @@ sub end : Private {
     my ( $self, $c ) = @_;
     $c->res->content_type('application/rss+xml; charset=UTF-8');
     $c->res->body( $c->stash->{feed} );
+
 }
 
 __PACKAGE__->meta->make_immutable;

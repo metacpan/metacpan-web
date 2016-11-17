@@ -17,7 +17,11 @@ sub index : Path : Args(0) {
         ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->recv;
     my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     single_valued_arrayref_to_scalar($latest);
-    $c->res->last_modified( $latest->[0]->{date} ) if (@$latest);
+
+    $c->add_surrogate_key( 'RECENT', 'DIST_UPDATES' );
+    $c->browser_max_age('1m');
+    $c->cdn_max_age('1y');    # DIST_UPDATES will purge it
+
     $c->stash(
         {
             recent    => $latest,
