@@ -180,7 +180,7 @@ subtest 'check requests sent to the api' => sub {
         'PUT json with character string',
         [
             '/whats/this' => { mistletoe => '1F384 🎄 CHRISTMAS TREE' },
-            { method => 'PUT', token => 'nightmare' },
+            { access_token => 'nightmare' }, 'PUT',
         ],
         {
             content =>

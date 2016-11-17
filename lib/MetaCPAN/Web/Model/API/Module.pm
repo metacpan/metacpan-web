@@ -49,7 +49,8 @@ sub _not_rogue {
 sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv = $self->cv;
-    $self->request("/search/autocomplete?q=$query&size=20")->cb(
+    $self->request( "/search/autocomplete", undef,
+        { q => $query, size => 20 } )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(
@@ -60,7 +61,7 @@ sub autocomplete {
                 }
             );
         }
-    );
+        );
     return $cv;
 }
 

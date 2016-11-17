@@ -61,9 +61,8 @@ sub model {
 }
 
 sub request {
-    my ( $self, $path, $search, $params ) = @_;
+    my ( $self, $path, $search, $params, $method ) = @_;
 
-    my ( $token, $method ) = @$params{qw(token method)};
     my $req = $self->cv;
 
     my $url = $self->api_secure->clone;
@@ -71,11 +70,18 @@ sub request {
     # the order of the following 2 lines matters
     # `path_query` is destructive
     $url->path_query($path);
-    $url->query_param( access_token => $token ) if $token;
+    for my $param ( keys %{ $params || {} } ) {
+        $url->query_param( $param => $params->{$param} );
+    }
 
     my $request = HTTP::Request->new(
-        $method ? $method : $search ? 'POST' : 'GET',
-        $url, [ 'Content-type' => 'application/json' ],
+        (
+              $method ? $method
+            : $search ? 'POST'
+            :           'GET',
+        ),
+        $url,
+        ( $search ? [ 'Content-type' => 'application/json' ] : () ),
     );
 
     # encode_json returns an octet string
