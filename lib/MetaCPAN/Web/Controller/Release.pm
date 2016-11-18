@@ -184,9 +184,9 @@ sub _files_to_categories {
         );
 
         my @modules
-            = is_arrayref( $f->{module} )
-            ? @{ $f->{module} }
-            : $f->{module};
+            = is_arrayref( $f->{module} ) ? @{ $f->{module} }
+            : defined $f->{module}        ? $f->{module}
+            :                               ();
 
         if ( $f->{documentation} and @modules ) {
             push @{ $ret->{modules} }, $f;
