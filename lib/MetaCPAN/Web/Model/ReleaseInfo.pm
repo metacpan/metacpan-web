@@ -216,7 +216,7 @@ sub normalize_issues {
             = $self->rt_url_prefix . uri_escape( $release->{distribution} );
     }
 
-    if ( my $bugs = $distribution->{bugs} ) {
+    for my $bugs ( values %{ $distribution->{bugs} || {} } ) {
 
        # Include the active issue count, but only if counts came from the same
        # source as the url specified in the resources.
@@ -238,11 +238,19 @@ sub normalize_issues {
 }
 
 sub normalize_issue_url {
-    local $_ = $_[1];
+    my ( $self, $url ) = @_;
+    $url
+        =~ s{^https?:// (?:www\.)? ( github\.com / ([^/]+) / ([^/]+) ) (.*)$}{https://$1}x;
+    $url =~ s{
+        ^https?:// rt\.cpan\.org /
+        (?:
+            NoAuth/Bugs\.html\?Dist=
+        |
+            (?:Public/)?Dist/Display\.html\?Name=
+        )
+    }{https://rt.cpan.org/Public/Dist/Display.html?Name=}x;
 
-    s{^https?:// (?:www\.)? ( github\.com / ([^/]+) / ([^/]+) ) (.*)$}{https://$1}x;
-
-    return $_;
+    return $url;
 }
 
 __PACKAGE__->meta->make_immutable;
