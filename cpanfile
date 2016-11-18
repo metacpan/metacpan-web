@@ -29,7 +29,7 @@ requires 'DateTime::Format::HTTP';
 requires 'DateTime::Format::ISO8601';
 requires 'Digest::MD5';
 requires 'Digest::SHA1';
-requires 'Search::Elasticsearch', '2.00';
+requires 'Search::Elasticsearch', '== 2.03';
 requires 'Encode', '2.51';
 requires 'Exporter';
 requires 'Format::Human::Bytes';
