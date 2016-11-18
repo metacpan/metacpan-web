@@ -3196,15 +3196,15 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0
       namespace::clean 0
-  MooseX-Fastly-Role-0.01
-    pathname: L/LL/LLAP/MooseX-Fastly-Role-0.01.tar.gz
+  MooseX-Fastly-Role-0.02
+    pathname: L/LL/LLAP/MooseX-Fastly-Role-0.02.tar.gz
     provides:
-      MooseX::Fastly::Role 0.01
+      MooseX::Fastly::Role 0.02
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
+      HTTP::Tiny 0
       Moose::Role 0
-      Net::Fastly 1.05
   MooseX-Getopt-0.70
     pathname: D/DR/DROLSKY/MooseX-Getopt-0.70.tar.gz
     provides:
