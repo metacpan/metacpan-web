@@ -63,54 +63,8 @@ sub metadata : Local : Args(0) {
 sub stats : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->add_surrogate_key('STATS');
-
-    # Only want a day for this, so they get refreshed
-    $c->cdn_max_age('1d');
-
-    $c->stash( template => 'about/stats.html' );
-
-    # See if user has the fastly credentials
-    if ( my $fastly = $c->_net_fastly() ) {
-
-        my @interested_fields = qw(hit_ratio bandwidth requests);
-
-        my $fastly_services = $c->config->{fastly}->{service};
-
-        my %all_stats;
-        foreach my $service ( @{$fastly_services} ) {
-
-            next unless $service->{display_on_stats_page};
-
-            my $stats_from_fastly = $fastly->stats(
-                service => $service->{id},
-                by      => 'day',
-            );
-
-            my %site_stats;
-
-            # build [ { time => $time, y => $value }, {} ]
-            map {
-                my $data = $_;
-                my $time = $data->{start_time};
-                map {
-                    push @{ $site_stats{$_} },
-                        { time => $time, y => $data->{$_} };
-                    $site_stats{totals}->{$_} += $data->{$_};
-                } @interested_fields;
-
-            } @{$stats_from_fastly};
-
-            $site_stats{totals}->{bandwidth} = Format::Human::Bytes->base10(
-                $site_stats{totals}->{bandwidth} );
-
-            $all_stats{ $service->{name} } = \%site_stats;
-        }
-
-        $c->stash->{fastly_stats} = \%all_stats;
-
-    }
-
+    # Sorry PITA to maintain
+    $c->res->redirect( '/about/', 301 );
 }
 
 __PACKAGE__->meta->make_immutable;
