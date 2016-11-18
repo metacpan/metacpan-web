@@ -61,7 +61,7 @@ requires 'MooseX::StrictConstructor';
 requires 'MooseX::Fastly::Role', '0.02';
 requires 'PerlIO::gzip';
 requires 'MetaCPAN::Moose';
-requires 'MetaCPAN::Role', '0.03';
+requires 'MetaCPAN::Role', '0.05';
 requires 'MooseX::Types::Common::Numeric';
 requires 'MooseX::Types::Common::String';
 requires 'MooseX::Types::Moose';
