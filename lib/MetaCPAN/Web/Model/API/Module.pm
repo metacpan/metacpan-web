@@ -80,14 +80,14 @@ sub search_expanded {
         }
     )->recv;
 
+    my @distributions = uniq
+        map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} };
+
     # Everything after this will fail (slowly and silently) without results.
-    if ( !$data->{hits}->{total} ) {
+    unless (@distributions) {
         $cv->send( {} );
         return $cv;
     }
-
-    my @distributions = uniq
-        map { $_->{fields}->{distribution} } @{ $data->{hits}->{hits} };
 
     my @ids          = map { $_->{fields}->{id} } @{ $data->{hits}->{hits} };
     my $descriptions = $self->search_descriptions(@ids);
@@ -167,6 +167,12 @@ sub search_collapsed {
 sub search_descriptions {
     my ( $self, @ids ) = @_;
     my $cv = $self->cv;
+
+    unless (@ids) {
+        $cv->send( {} );
+        return $cv;
+    }
+
     $self->request(
         '/file/_search',
         {
