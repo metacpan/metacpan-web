@@ -49,6 +49,10 @@ sub parse {
     # handle localtime-like timestamps
     # May Tue 03 17:25:00 2005
     # /changes/distribution/Catalyst-View-PSP
+    #
+    # Thu Nov 19 09:25:53 2009
+    # /changes/distribution/GO-TermFinder
+    #
     # XXX haarg is going to rip this out and replace it with something better.
                 elsif ( $note
                     =~ s{^(\D{3})\s+(\D{3})\s+(\d{1,2})\s+([\d:]+)?\D*(\d{4})}{}
@@ -57,8 +61,11 @@ sub parse {
                     if ($4) {
 
                         # unfortunately ignores TZ data
-                        $date = sprintf( '%d-%02d-%02dT%sZ',
-                            $5, $months{$1}, $3, $4 );
+                        $date = sprintf(
+                            '%d-%02d-%02dT%sZ',
+                            $5, ( $months{$1} || $months{$2} ),
+                            $3, $4
+                        );
                     }
                     else {
                         $date
