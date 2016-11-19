@@ -8,12 +8,20 @@ matrix:
   allow_failures:
     - perl: "5.20"
     - perl: "5.18"
+  exclude:
+    - perl: "5.20"
+      env: USE_CPANFILE_SNAPSHOT=true
+    - perl: "5.18"
+      env: USE_CPANFILE_SNAPSHOT=true
 
 env:
   global:
     # Carton --deployment only works on the same version of perl
     # that the snapshot was built from.
     - DEPLOYMENT_PERL_VERSION=5.22
+  matrix:
+    - USE_CPANFILE_SNAPSHOT=true
+    - USE_CPANFILE_SNAPSHOT=false
 
 before_install:
   - npm install -g less js-beautify
@@ -24,7 +32,7 @@ before_install:
 
 install:
   # Carton::Builder (carton install) passes --notest to cpanm.
-  - 'carton install `test "${TRAVIS_PERL_VERSION}" = "${DEPLOYMENT_PERL_VERSION}" && echo " --deployment"`'
+  - 'carton install `test "${TRAVIS_PERL_VERSION}" = "${DEPLOYMENT_PERL_VERSION}" && test "${USE_CPANFILE_SNAPSHOT}" = "true" && echo " --deployment"`'
 
 
 script:
