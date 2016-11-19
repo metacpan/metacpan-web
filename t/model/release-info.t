@@ -138,7 +138,7 @@ sub normalize_issues_ok {
             distribution =>
 
                 # Default to rt url, but let data override.
-                { bugs => { source => "${rt_prefix}X", %$bugs } },
+                { bugs => { rt => { source => "${rt_prefix}X", %$bugs } } },
         }
     );
     is_deeply $instance->normalize_issues, $exp, $desc;
