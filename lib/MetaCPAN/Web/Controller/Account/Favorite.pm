@@ -8,6 +8,13 @@ sub auto : Private {
 
     # Needed to clear the cache
     my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+
+    # Probably we shouldn't be getting to this point without a defined user,
+    # but sometimes we do.  Might have been an issue with the v0 => v1
+    # migration.
+
+    $c->detach('/forbidden') unless $user;
+
     $c->stash->{user} = $user;
 
     return 1;
