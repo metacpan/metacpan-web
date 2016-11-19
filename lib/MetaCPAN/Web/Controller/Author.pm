@@ -112,24 +112,26 @@ sub releases : Chained('root') PathPart Args(0) {
     my @releases = map { single_valued_arrayref_to_scalar( $_->{fields} ) }
         @{ $releases->{hits}->{hits} };
 
-    my $pageset = Data::Pageset->new(
+    $c->stash(
         {
-            total_entries    => $releases->{hits}->{total},
-            entries_per_page => $page_size,
-            current_page     => $page,
-            pages_per_set    => 10,
-            mode             => 'slide'
+            author    => $author,
+            page_size => $page_size,
+            releases  => \@releases,
         }
     );
 
-    $c->stash(
+    return unless $releases->{hits}->{total};
+
+    my $pageset = Data::Pageset->new(
         {
-            releases  => \@releases,
-            author    => $author,
-            pageset   => $pageset,
-            page_size => $page_size,
+            current_page     => $page,
+            entries_per_page => $page_size,
+            mode             => 'slide',
+            pages_per_set    => 10,
+            total_entries    => $releases->{hits}->{total},
         }
     );
+    $c->stash( { pageset => $pageset } );
 }
 
 sub _calc_aggregated {
