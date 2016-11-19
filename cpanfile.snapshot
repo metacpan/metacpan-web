@@ -264,6 +264,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Carp-Always-0.13
+    pathname: F/FE/FERREIRA/Carp-Always-0.13.tar.gz
+    provides:
+      Carp::Always 0.13
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
   Carp-Assert-0.21
     pathname: N/NE/NEILB/Carp-Assert-0.21.tar.gz
     provides:
@@ -2592,12 +2599,12 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  MetaCPAN-Role-0.05
-    pathname: L/LL/LLAP/MetaCPAN-Role-0.05.tar.gz
+  MetaCPAN-Role-0.06
+    pathname: L/LL/LLAP/MetaCPAN-Role-0.06.tar.gz
     provides:
-      MetaCPAN::Role 0.05
-      MetaCPAN::Role::Fastly 0.05
-      MetaCPAN::Role::Fastly::Catalyst 0.05
+      MetaCPAN::Role 0.06
+      MetaCPAN::Role::Fastly 0.06
+      MetaCPAN::Role::Fastly::Catalyst 0.06
     requirements:
       Carp 0
       CatalystX::Fastly::Role::Response 0.04

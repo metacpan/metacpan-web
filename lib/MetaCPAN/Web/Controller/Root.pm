@@ -61,6 +61,8 @@ sub default : Path {
 
 sub not_found : Private {
     my ( $self, $c ) = @_;
+    $c->cdn_never_cache(1);
+
     $c->stash(
         {
             template => 'not_found.html',
@@ -72,6 +74,8 @@ sub not_found : Private {
 
 sub forbidden : Private {
     my ( $self, $c ) = @_;
+    $c->cdn_never_cache(1);
+
     $c->stash( { template => 'forbidden.html' } );
     $c->response->status(403);
 }
