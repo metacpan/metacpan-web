@@ -1,10 +1,11 @@
 use strict;
 use warnings;
-use Test::More;
+
+use MetaCPAN::Web                   ();
+use MetaCPAN::Web::Controller::Feed ();
 use MetaCPAN::Web::Test;
-use Try::Tiny;
-use MetaCPAN::Web;
-use MetaCPAN::Web::Controller::Feed;
+use Test::More;
+use Try::Tiny qw( catch try );
 
 sub get_feed_ok {
     my ( $cb, $test, $extra ) = @_;
