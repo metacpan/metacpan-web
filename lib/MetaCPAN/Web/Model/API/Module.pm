@@ -130,7 +130,11 @@ sub search_collapsed {
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions = splice( @distributions, $from, $page_size );
+    # Avoid "splice() offset past end of array" warning.
+    @distributions
+        = $from > @distributions
+        ? ()
+        : splice( @distributions, $from, $page_size );
 
     # Everything else will fail (slowly and quietly) without distributions.
     if ( !@distributions ) {
