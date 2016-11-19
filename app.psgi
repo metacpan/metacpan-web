@@ -14,7 +14,6 @@ my $dev_mode;
 BEGIN {
     $root_dir = File::Basename::dirname(__FILE__);
     $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-    $dev_mode and require Carp::Always;
 }
 
 BEGIN {
@@ -29,6 +28,11 @@ use Config::JFDI;
 use File::Path ();
 use MetaCPAN::Web;
 use Plack::Builder;
+
+BEGIN {
+    $SIG{__WARN__} = sub { MetaCPAN::Web->log->warn(@_) };
+    $dev_mode and require Devel::Confess and Devel::Confess->import;
+}
 
 my $tempdir = "$root_dir/var/tmp";
 

@@ -264,13 +264,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Carp-Always-0.13
-    pathname: F/FE/FERREIRA/Carp-Always-0.13.tar.gz
-    provides:
-      Carp::Always 0.13
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
   Carp-Assert-0.21
     pathname: N/NE/NEILB/Carp-Assert-0.21.tar.gz
     provides:
@@ -1535,6 +1528,18 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
+  Devel-Confess-0.009003
+    pathname: H/HA/HAARG/Devel-Confess-0.009003.tar.gz
+    provides:
+      Devel::Confess 0.009003
+      Devel::Confess::Builtin 0.009003
+      Devel::Confess::Source undef
+      Devel::Confess::_Util undef
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      Scalar::Util 0
+      perl 5.006
   Devel-GlobalDestruction-0.13
     pathname: H/HA/HAARG/Devel-GlobalDestruction-0.13.tar.gz
     provides:
@@ -2450,6 +2455,65 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Log-Log4perl-1.48
+    pathname: M/MS/MSCHILLI/Log-Log4perl-1.48.tar.gz
+    provides:
+      L4pResurrectable 0.01
+      Log::Log4perl 1.48
+      Log::Log4perl::Appender undef
+      Log::Log4perl::Appender::Buffer undef
+      Log::Log4perl::Appender::DBI undef
+      Log::Log4perl::Appender::File undef
+      Log::Log4perl::Appender::Limit undef
+      Log::Log4perl::Appender::RRDs undef
+      Log::Log4perl::Appender::Screen undef
+      Log::Log4perl::Appender::ScreenColoredLevels undef
+      Log::Log4perl::Appender::Socket undef
+      Log::Log4perl::Appender::String undef
+      Log::Log4perl::Appender::Synchronized undef
+      Log::Log4perl::Appender::TestArrayBuffer undef
+      Log::Log4perl::Appender::TestBuffer undef
+      Log::Log4perl::Appender::TestFileCreeper undef
+      Log::Log4perl::Catalyst undef
+      Log::Log4perl::Config undef
+      Log::Log4perl::Config::BaseConfigurator undef
+      Log::Log4perl::Config::DOMConfigurator 0.03
+      Log::Log4perl::Config::PropertyConfigurator undef
+      Log::Log4perl::Config::Watch undef
+      Log::Log4perl::DateFormat undef
+      Log::Log4perl::Filter undef
+      Log::Log4perl::Filter::Boolean undef
+      Log::Log4perl::Filter::LevelMatch undef
+      Log::Log4perl::Filter::LevelRange undef
+      Log::Log4perl::Filter::MDC undef
+      Log::Log4perl::Filter::StringMatch undef
+      Log::Log4perl::InternalDebug undef
+      Log::Log4perl::JavaMap undef
+      Log::Log4perl::JavaMap::ConsoleAppender undef
+      Log::Log4perl::JavaMap::FileAppender undef
+      Log::Log4perl::JavaMap::JDBCAppender undef
+      Log::Log4perl::JavaMap::NTEventLogAppender undef
+      Log::Log4perl::JavaMap::RollingFileAppender undef
+      Log::Log4perl::JavaMap::SyslogAppender undef
+      Log::Log4perl::JavaMap::TestBuffer undef
+      Log::Log4perl::Layout undef
+      Log::Log4perl::Layout::NoopLayout undef
+      Log::Log4perl::Layout::PatternLayout undef
+      Log::Log4perl::Layout::PatternLayout::Multiline undef
+      Log::Log4perl::Layout::SimpleLayout undef
+      Log::Log4perl::Level undef
+      Log::Log4perl::Logger undef
+      Log::Log4perl::MDC undef
+      Log::Log4perl::NDC undef
+      Log::Log4perl::Resurrector undef
+      Log::Log4perl::Util undef
+      Log::Log4perl::Util::Semaphore undef
+      Log::Log4perl::Util::TimeTracker undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Path 2.0606
+      File::Spec 0.82
+      Test::More 0.45
   MCE-1.708
     pathname: M/MA/MARIOROY/MCE-1.708.tar.gz
     provides:
