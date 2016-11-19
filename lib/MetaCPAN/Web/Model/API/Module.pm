@@ -130,8 +130,7 @@ sub search_collapsed {
         && $data->{hits}->{total}
         && $data->{hits}->{total} > $hits + ( $run - 2 ) * $RESULTS_PER_RUN );
 
-    @distributions
-        = map { $_->[0] } splice( @distributions, $from, $page_size );
+    @distributions = splice( @distributions, $from, $page_size );
 
     # Everything else will fail (slowly and quietly) without distributions.
     if ( !@distributions ) {
@@ -414,6 +413,12 @@ sub search {
             ],
         }
     );
+
+    # Ensure our requested fields are unique so that Elasticsearch doesn't
+    # return us the same value multiple times in an unexpected arrayref.  For
+    # example, distribution is listed both above and in ->_search, which calls
+    # this function (->search) and gets merged with the query above.
+    $search->{fields} = [ uniq @{ $search->{fields} || [] } ];
 
     return $self->request( '/file/_search', $search );
 }
