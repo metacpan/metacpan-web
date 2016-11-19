@@ -248,7 +248,7 @@ sub _search {
     return $self->search(
         $query,
         {
-            size   => $run * $RESULTS_PER_RUN,
+            size   => $RESULTS_PER_RUN,
             from   => ( $run - 1 ) * $RESULTS_PER_RUN,
             fields => [qw(distribution)],
             $run == 1
