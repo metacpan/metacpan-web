@@ -105,6 +105,11 @@ test_psgi app, sub {
     );
 
     test_redirect( $cb, 'oalders' );
+
+    subtest '404' => sub {
+        my $res = $cb->( GET '/feed/author/XXX343wi^^^' );
+        is( $res->code, 404, '404 when author does not exist' );
+    };
 };
 
 sub test_redirect {
