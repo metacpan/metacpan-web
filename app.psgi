@@ -1,4 +1,4 @@
-package MetaCPAN::Web;    ## no critic (RequireFilenameMatchesPackage)
+package MetaCPAN::Web::App;    ## no critic (RequireFilenameMatchesPackage)
 
 # ABSTRACT: Modern front-end for MetaCPAN
 
@@ -8,31 +8,44 @@ use warnings;
 # TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
 #
 use File::Basename;
+use Config::JFDI;
+use Log::Log4perl;
+use File::Spec;
+use File::Path ();
+use Plack::Builder;
+
 my $root_dir;
 my $dev_mode;
+my $config;
 
 BEGIN {
     $root_dir = File::Basename::dirname(__FILE__);
     $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-}
+    $config   = Config::JFDI->new(
+        name => 'MetaCPAN::Web',
+        path => $root_dir,
+    );
 
-BEGIN {
     if ($dev_mode) {
         $ENV{PLACK_SERVER}       = 'Standalone';
         $ENV{METACPAN_WEB_DEBUG} = 1;
     }
+
+    my $log4perl_config = File::Spec->rel2abs( $config->get->{log4perl_file}
+            || 'log4perl.conf', $root_dir );
+    Log::Log4perl::init($log4perl_config);
+
+    # use a unique package and tell l4p to ignore it when finding the warning location.
+    package MetaCPAN::Web::WarnHandler;
+    Log::Log4perl->wrapper_register(__PACKAGE__);
+    my $logger = Log::Log4perl->get_logger;
+    $SIG{__WARN__} = sub { $logger->warn(@_) };
+
+    $dev_mode and require Devel::Confess and Devel::Confess->import;
 }
 
 use lib "$root_dir/lib";
-use Config::JFDI;
-use File::Path ();
 use MetaCPAN::Web;
-use Plack::Builder;
-
-BEGIN {
-    $SIG{__WARN__} = sub { MetaCPAN::Web->log->warn(@_) };
-    $dev_mode and require Devel::Confess and Devel::Confess->import;
-}
 
 my $tempdir = "$root_dir/var/tmp";
 
@@ -60,11 +73,6 @@ builder {
     );
 
     builder {
-        my $config = Config::JFDI->new(
-            name => 'MetaCPAN::Web',
-            path => $root_dir,
-        );
-
         die 'cookie_secret not configured'
             unless $config->get->{cookie_secret};
 
