@@ -57,7 +57,10 @@ log4perl.appender.OUTPUT.stderr=1
 
 log4perl.appender.OUTPUT.layout=PatternLayout
 log4perl.appender.OUTPUT.layout.ConversionPattern=[%d] [%p] [%X{url}] %m%n
-}
+},
+        {
+            autoflush => 1,
+        },
     )
 );
 
