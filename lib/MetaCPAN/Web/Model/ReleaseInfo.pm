@@ -82,8 +82,10 @@ sub groom_contributors {
     $authors = [ grep { $_ ne 'unknown' } @$authors ];
 
     my $author_info = {
-        email =>
-            [ lc "$release->{author}\@cpan.org", @{ $author->{email} }, ],
+        email => [
+            lc "$release->{author}\@cpan.org",
+            @{ $author->{email} || [] },
+        ],
         name => $author->{name},
     };
     my %seen = map { $_ => $author_info }
