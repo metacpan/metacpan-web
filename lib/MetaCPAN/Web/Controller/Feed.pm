@@ -111,6 +111,14 @@ sub author : Local : Args(1) {
     ];
     my $author_info = $author_cv->recv;
 
+    # If the author can be found, we get the hashref of author info.  If it
+    # can't be found, we (confusingly) get a HashRef with "code" and "message"
+    # keys.
+
+    if ( $author_info->{code} && $author_info->{code} == 404 ) {
+        $c->detach( '/not_found', [] );
+    }
+
     my $faves_cv = $author_info->{user}
         && $c->model('API::Favorite')->by_user( $author_info->{user} );
     my $faves_data
