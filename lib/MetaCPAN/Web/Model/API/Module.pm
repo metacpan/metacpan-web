@@ -292,7 +292,7 @@ sub search {
                     term => {
                         'documentation' => {
                             value => $query,
-                            boost => 100
+                            boost => 20
                         }
                     }
                 },
@@ -300,7 +300,7 @@ sub search {
                     term => {
                         'module.name' => {
                             value => $query,
-                            boost => 100
+                            boost => 20
                         }
                     }
                 },
