@@ -13,7 +13,7 @@ sub auto : Private {
     # but sometimes we do.  Might have been an issue with the v0 => v1
     # migration.
 
-    $c->detach('/forbidden') unless $user;
+    $c->detach('/forbidden') unless $user && $user->{user};
 
     $c->stash->{user} = $user;
 
