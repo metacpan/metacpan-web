@@ -27,6 +27,8 @@ sub auto : Private {
     if ( my $token = $c->token ) {
         $c->authenticate( { token => $token } );
     }
+    Log::Log4perl::MDC->put( "ip",  $c->req->address );
+    Log::Log4perl::MDC->put( "url", $c->req->uri . '' );
     return 1;
 }
 
