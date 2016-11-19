@@ -58,9 +58,10 @@ sub news : Local : Args(0) {
         $a_name =~ s/^[^a-z]+//gi;
 
         $str =~ s/\A\s*-+//g;
-        $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}   = "/news#$a_name";
-        $e{author} = 'METACPAN';
+        $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
+        $e{link} = '/news';
+        $e{fragment} = $a_name;
+        $e{author}   = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
 
         #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
@@ -173,17 +174,16 @@ sub build_entry {
 
     my $e = XML::Feed::Entry->new('RSS');
 
-    $e->title( $entry->{name} );
-    $entry->{link} ||= do {
-        my $uri = $args{host}->clone;
-        $uri->path(
-            join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
-        $uri->as_string;
-    };
-    $e->link( $entry->{link} );
+    my $link = $args{host}->clone;
+    $link->path( $entry->{link}
+            || join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+    $link->fragment( $entry->{fragment} ) if $entry->{fragment};    # for news
+    $e->link( $link->as_string );
+
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->summary( escape_html( $entry->{abstract} ) );
+    $e->title( $entry->{name} );
     return $e;
 }
 
