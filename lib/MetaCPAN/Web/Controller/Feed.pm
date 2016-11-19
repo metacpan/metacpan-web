@@ -25,8 +25,9 @@ sub recent : Chained('feed_index') PathPart Args(0) {
 
     my $data = $c->stash;
     $c->stash->{feed} = $self->build_feed(
+        entries => $data->{recent},
+        host    => URI->new( $c->config->{web_host} ),
         title   => 'Recent CPAN uploads - MetaCPAN',
-        entries => $data->{recent}
     );
 }
 
@@ -144,12 +145,18 @@ sub distribution : Local : Args(1) {
 }
 
 sub build_entry {
-    my ( $self, $entry ) = @_;
+    my ( $self, $entry, $host ) = @_;
+
     single_valued_arrayref_to_scalar($entry);
     my $e = XML::Feed::Entry->new('RSS');
     $e->title( $entry->{name} );
-    $e->link( $entry->{link}
-            ||= join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+    unless ( $entry->{link} ) {
+        my $uri = $host->clone;
+        $uri->path(
+            join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+        $entry->{link} = $uri->as_string;
+    }
+    $e->link( $entry->{link} );
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->summary( escape_html( $entry->{abstract} ) );
@@ -161,9 +168,9 @@ sub build_feed {
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
     $feed->link('/');
-    foreach my $entry ( @{ $params{entries} } ) {
 
-        $feed->add_entry( $self->build_entry($entry) );
+    foreach my $entry ( @{ $params{entries} } ) {
+        $feed->add_entry( $self->build_entry( $entry, $params{host} ) );
     }
     return $feed->as_xml;
 }
