@@ -49,20 +49,30 @@ sub parse {
     # handle localtime-like timestamps
     # May Tue 03 17:25:00 2005
     # /changes/distribution/Catalyst-View-PSP
+    #
+    # Thu Nov 19 09:25:53 2009
+    # /changes/distribution/GO-TermFinder
+    #
+    # Sun Jan  29 2012
+    # /changes/distribution/Scalar-Constant
     # XXX haarg is going to rip this out and replace it with something better.
                 elsif ( $note
                     =~ s{^(\D{3})\s+(\D{3})\s+(\d{1,2})\s+([\d:]+)?\D*(\d{4})}{}
                     )
                 {
-                    if ($4) {
+                    my $month = $months{$1} || $months{$2};
+                    if ( $month && $3 && $4 && $5 ) {
 
                         # unfortunately ignores TZ data
-                        $date = sprintf( '%d-%02d-%02dT%sZ',
-                            $5, $months{$1}, $3, $4 );
+                        $date = sprintf( '%d-%02d-%02dT%sZ', $5, $month, $3,
+                            $4 );
+                    }
+                    elsif ( $month && $2 && $4 ) {
+                        $date = sprintf( '%d-%02d-%02d', $4, $month, $2 );
                     }
                     else {
-                        $date
-                            = sprintf( '%d-%02d-%02d', $4, $months{$1}, $2 );
+                        $note = join q{ }, grep {defined} $1, $2, $3, $4, $5,
+                            $note;
                     }
                 }
 
