@@ -1,10 +1,11 @@
 use strict;
 use warnings;
-use Test::More;
+
+use MetaCPAN::Web                   ();
+use MetaCPAN::Web::Controller::Feed ();
 use MetaCPAN::Web::Test;
-use Try::Tiny;
-use MetaCPAN::Web;
-use MetaCPAN::Web::Controller::Feed;
+use Test::More;
+use Try::Tiny qw( catch try );
 
 sub get_feed_ok {
     my ( $cb, $test, $extra ) = @_;
@@ -104,6 +105,11 @@ test_psgi app, sub {
     );
 
     test_redirect( $cb, 'oalders' );
+
+    subtest '404' => sub {
+        my $res = $cb->( GET '/feed/author/XXX343wi^^^' );
+        is( $res->code, 404, '404 when author does not exist' );
+    };
 };
 
 sub test_redirect {

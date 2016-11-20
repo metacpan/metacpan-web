@@ -2,13 +2,17 @@ package MetaCPAN::Web::Controller::Feed;
 
 use Moose;
 use namespace::autoclean;
+use feature qw( state );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
-use XML::Feed;
+
+use DateTime::Format::ISO8601 ();
 use HTML::Escape qw/escape_html/;
-use DateTime::Format::ISO8601;
+use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri );
+use Params::CheckCompiler qw( validation_for );
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
+use XML::Feed ();
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
@@ -23,10 +27,10 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
 
-    my $data = $c->stash;
     $c->stash->{feed} = $self->build_feed(
+        entries => $c->stash->{recent},
+        host    => URI->new( $c->config->{web_host} ),
         title   => 'Recent CPAN uploads - MetaCPAN',
-        entries => $data->{recent}
     );
 }
 
@@ -54,9 +58,10 @@ sub news : Local : Args(0) {
         $a_name =~ s/^[^a-z]+//gi;
 
         $str =~ s/\A\s*-+//g;
-        $e{date}   = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}   = "/news#$a_name";
-        $e{author} = 'METACPAN';
+        $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
+        $e{link} = '/news';
+        $e{fragment} = $a_name;
+        $e{author}   = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
 
         #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
@@ -67,8 +72,9 @@ sub news : Local : Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
-        title   => 'Recent MetaCPAN News',
         entries => \@entries,
+        host    => $c->config->{web_host},
+        title   => 'Recent MetaCPAN News',
     );
 }
 
@@ -106,6 +112,14 @@ sub author : Local : Args(1) {
     ];
     my $author_info = $author_cv->recv;
 
+    # If the author can be found, we get the hashref of author info.  If it
+    # can't be found, we (confusingly) get a HashRef with "code" and "message"
+    # keys.
+
+    if ( $author_info->{code} && $author_info->{code} == 404 ) {
+        $c->detach( '/not_found', [] );
+    }
+
     my $faves_cv = $author_info->{user}
         && $c->model('API::Favorite')->by_user( $author_info->{user} );
     my $faves_data
@@ -117,6 +131,7 @@ sub author : Local : Args(1) {
         : [];
 
     $c->stash->{feed} = $self->build_feed(
+        host    => $c->config->{web_host},
         title   => "Recent CPAN activity of $author - MetaCPAN",
         entries => [
             sort { $b->{date} cmp $a->{date} }
@@ -135,6 +150,7 @@ sub distribution : Local : Args(1) {
 
     my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
+        host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
         entries => [
             map { single_valued_arrayref_to_scalar($_) }
@@ -144,26 +160,53 @@ sub distribution : Local : Args(1) {
 }
 
 sub build_entry {
-    my ( $self, $entry ) = @_;
-    single_valued_arrayref_to_scalar($entry);
+    my $self = shift;
+
+    state $check = validation_for(
+        params => {
+            entry => { type => HashRef },
+            host  => { type => Uri },
+        }
+    );
+
+    my %args  = $check->(@_);
+    my $entry = $args{entry};
+
     my $e = XML::Feed::Entry->new('RSS');
-    $e->title( $entry->{name} );
-    $e->link( $entry->{link}
-            ||= join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+
+    my $link = $args{host}->clone;
+    $link->path( $entry->{link}
+            || join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+    $link->fragment( $entry->{fragment} ) if $entry->{fragment};    # for news
+    $e->link( $link->as_string );
+
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->summary( escape_html( $entry->{abstract} ) );
+    $e->title( $entry->{name} );
     return $e;
 }
 
 sub build_feed {
-    my ( $self, %params ) = @_;
+    my $self = shift;
+
+    state $check = validation_for(
+        params => {
+            entries => { type => ArrayRef },
+            host    => { type => Uri, optional => 0, },
+            title => Str,
+        }
+    );
+
+    my %params = $check->(@_);
+
     my $feed = XML::Feed->new( 'RSS', version => 2.0 );
     $feed->title( $params{title} );
     $feed->link('/');
-    foreach my $entry ( @{ $params{entries} } ) {
 
-        $feed->add_entry( $self->build_entry($entry) );
+    foreach my $entry ( @{ $params{entries} } ) {
+        $feed->add_entry(
+            $self->build_entry( entry => $entry, host => $params{host} ) );
     }
     return $feed->as_xml;
 }
