@@ -13,6 +13,9 @@ sub auto : Private {
     # this is for proxies
     $c->res->header( Vary => 'Cookie' );
 
+    if ( my $token = $c->token ) {
+        $c->authenticate( { token => $token } );
+    }
     unless ( $c->user_exists ) {
         $c->forward('/forbidden');
     }
