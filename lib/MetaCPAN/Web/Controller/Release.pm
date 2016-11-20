@@ -190,20 +190,18 @@ sub _files_to_categories {
 
         if ( $f->{documentation} and @modules ) {
             push @{ $ret->{modules} }, $f;
-            for my $m (@modules) {
-                push @{ $ret->{provides} },
-                    map +{
-                    %info,
-                    package    => $_->{name},
-                    authorized => $_->{authorized}
-                    },
-                    grep {
-                            defined $_->{name}
-                        and $_->{name} ne $f->{documentation}
-                        and $_->{indexed}
-                        and $_->{authorized}
-                    } @modules;
-            }
+            push @{ $ret->{provides} },
+                map +{
+                %info,
+                package    => $_->{name},
+                authorized => $_->{authorized}
+                },
+                grep {
+                        defined $_->{name}
+                    and $_->{name} ne $f->{documentation}
+                    and $_->{indexed}
+                    and $_->{authorized}
+                } @modules;
         }
         elsif (@modules) {
             push @{ $ret->{provides} },
