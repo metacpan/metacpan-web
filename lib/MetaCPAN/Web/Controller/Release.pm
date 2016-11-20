@@ -107,6 +107,9 @@ sub view : Private {
     );
 
     $c->res->last_modified( $out->{date} );
+    $c->cdn_max_age('1y');
+    $c->add_dist_key($distribution);
+    $c->add_author_key($author);
 
     $c->stash(
         $c->model(
