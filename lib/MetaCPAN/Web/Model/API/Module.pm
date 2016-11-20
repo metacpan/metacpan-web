@@ -50,23 +50,10 @@ sub autocomplete {
     return $cv;
 }
 
-sub search_expanded {
+sub search_web {
     my ( $self, $query, $from, $page_size ) = @_;
     my $cv = $self->cv;
-    $self->request( "/search/expanded", undef,
-        { q => $query, size => $page_size // 20, from => $from // 0 } )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send($data);
-        }
-        );
-    return $cv;
-}
-
-sub search_collapsed {
-    my ( $self, $query, $from, $page_size, $user ) = @_;
-    my $cv = $self->cv;
-    $self->request( "/search/collapsed", undef,
+    $self->request( "/search/web", undef,
         { q => $query, size => $page_size // 20, from => $from // 0 } )->cb(
         sub {
             my $data = shift->recv;
