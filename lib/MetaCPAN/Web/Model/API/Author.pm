@@ -30,17 +30,7 @@ sub get {
     return $self->request( '/author/' . uc( $author[0] ) )
         if ( @author == 1 );
 
-    return $self->request(
-        '/author/_search',
-        {
-            query => {
-                constant_score => {
-                    filter => { ids => { values => [ map {uc} @author ] } }
-                }
-            },
-            size => scalar @author,
-        }
-    );
+    return $self->request( '/author/by_id?id=' . join ',', @author );
 }
 
 sub search {
