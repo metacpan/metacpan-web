@@ -29,6 +29,11 @@ sub contact : Local : Args(0) {
     $c->stash( template => 'about/contact.html' );
 }
 
+sub meta_hack : Local : Args(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( template => 'about/meta_hack.html' );
+}
+
 sub resources : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->res->redirect( '/about/contact', 301 );
