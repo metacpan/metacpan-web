@@ -43,7 +43,7 @@ END %>
     <% END %>
     <% IF mark_unauthorized_releases && NOT release.authorized %><em class="warning">UNAUTHORIZED RELEASE</em><% END %>
   </div>
-  <%- IF permalinks;
+  <%- IF release.status != 'latest';
       FOREACH v IN versions; IF v.status == 'latest'; have_released = 1; END; END;
       IF have_released; %>
     <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><span class="fa fa-step-forward"></span></a>
