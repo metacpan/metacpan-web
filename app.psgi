@@ -35,7 +35,7 @@ BEGIN {
             || 'log4perl.conf', $root_dir );
     Log::Log4perl::init($log4perl_config);
 
-    # use a unique package and tell l4p to ignore it when finding the warning location.
+# use a unique package and tell l4p to ignore it when finding the warning location.
     package MetaCPAN::Web::WarnHandler;
     Log::Log4perl->wrapper_register(__PACKAGE__);
     my $logger = Log::Log4perl->get_logger;
