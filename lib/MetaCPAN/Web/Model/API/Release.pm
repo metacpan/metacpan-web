@@ -387,16 +387,12 @@ sub interesting_files {
 sub versions {
     my ( $self, $dist ) = @_;
     $self->request(
-        '/release/_search',
+        '/release/versions',
+        undef,
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => { term      => { distribution => $dist } }
-                }
-            },
-            size => 250,
-            sort => [ { date => 'desc' } ],
+            distribution => $dist,
+            size         => 250,
+            sort         => 'date:desc',
             fields =>
                 [qw( name date author version status maturity authorized )],
         }
