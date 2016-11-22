@@ -13,6 +13,7 @@ use MetaCPAN::Web::Types qw( Uri );
 use MooseX::ClassAttribute;
 use Try::Tiny qw( catch try );
 use URI::QueryParam;
+use Log::Log4perl;
 
 class_has client => (
     is   => 'ro',
@@ -74,6 +75,8 @@ sub request {
         $url->query_param( $param => $params->{$param} );
     }
 
+    my $current_url = Log::Log4perl::MDC->get('url');
+
     my $request = HTTP::Request->new(
         (
               $method ? $method
@@ -81,7 +84,10 @@ sub request {
             :           'GET',
         ),
         $url,
-        ( $search ? [ 'Content-type' => 'application/json' ] : () ),
+        [
+            ( $search      ? ( 'Content-Type' => 'application/json' ) : () ),
+            ( $current_url ? ( 'Referer'      => $current_url )       : () ),
+        ],
     );
 
     # encode_json returns an octet string

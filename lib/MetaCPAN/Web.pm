@@ -47,20 +47,7 @@ sub token {
     shift->request->session->get('token');
 }
 
-__PACKAGE__->log(
-    Log::Log4perl::Catalyst->new(
-        \q{
-log4perl.rootLogger=DEBUG, OUTPUT
-
-log4perl.appender.OUTPUT=Log::Log4perl::Appender::Screen
-log4perl.appender.OUTPUT.stderr=1
-
-log4perl.appender.OUTPUT.layout=PatternLayout
-log4perl.appender.OUTPUT.layout.ConversionPattern=[%d] [%p] [%X{url}] %m%n
-},
-        autoflush => 1,
-    )
-);
+__PACKAGE__->log( Log::Log4perl::Catalyst->new( undef, autoflush => 1 ) );
 
 __PACKAGE__->setup();
 __PACKAGE__->meta->make_immutable;

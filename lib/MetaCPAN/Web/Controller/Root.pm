@@ -1,5 +1,6 @@
 package MetaCPAN::Web::Controller::Root;
 use Moose;
+use Log::Log4perl::MDC;
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
