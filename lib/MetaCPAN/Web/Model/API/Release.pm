@@ -25,22 +25,8 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { 'name' => $release } },
-                            { term => { author => uc($author) } }
-                        ]
-                    }
-                }
-            }
-        }
-    );
+    $self->request( '/release/by_name_and_author', undef,
+        { name => $release, $author => uc($author) } );
 }
 
 sub distribution {
