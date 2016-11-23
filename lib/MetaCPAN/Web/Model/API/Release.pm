@@ -392,7 +392,7 @@ sub favorites {
 
 sub topuploaders {
     my ( $self, $range ) = @_;
-    $self->request('/author/top_uploaders?range=$range');
+    $self->request( '/author/top_uploaders', undef, { range => $range } );
 }
 
 __PACKAGE__->meta->make_immutable;

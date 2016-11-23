@@ -86,11 +86,14 @@ sub by_user {
     my ( $self, $users, $size ) = @_;
     my @users = is_arrayref $users ? @{$users} : $users;
     return $self->request(
-        sprintf "/favorite/by_user?fields=%s&sort=%s&size=%s&users=%s",
-        'date,author,distribution',
-        'distribution',
-        $size || 250,
-        ( join ',' => @users )
+        '/favorite/by_user',
+        undef,
+        {
+            fields => [qw<date author distribution>],
+            sort   => 'distribution',
+            size   => $size || 250,
+            user   => \@users,
+        }
     );
 }
 
