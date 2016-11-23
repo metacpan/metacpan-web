@@ -66,7 +66,7 @@ sub search_web {
 sub first {
     my ( $self, $query ) = @_;
     my $cv = $self->cv;
-    $self->search( $query, { fields => [qw(documentation)] } )->cb(
+    $self->request( "/search/simple", undef, { q => $query } )->cb(
         sub {
             my ($result) = shift->recv;
             return $cv->send(undef) unless ( $result->{hits}->{total} );
