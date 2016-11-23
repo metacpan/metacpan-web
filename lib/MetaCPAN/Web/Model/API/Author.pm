@@ -37,7 +37,7 @@ sub search {
     my ( $self, $query, $from ) = @_;
     my $cv = $self->cv;
     $from ||= 0;
-    $self->request("/author/search?key=$query&from=$from&size=10")->cb(
+    $self->request("/author/by_key?key=$query&from=$from&size=10")->cb(
         sub {
             my $results = shift->recv;
             $cv->send($results);
