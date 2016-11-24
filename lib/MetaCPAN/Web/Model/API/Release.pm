@@ -53,24 +53,13 @@ sub _new_distributions_query {
 sub latest_by_author {
     my ( $self, $author ) = @_;
     return $self->request(
-        '/release/_search',
+        '/release/latest_by_author',
+        undef,
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { author => uc($author) } },
-                            { term => { status => 'latest' } }
-                        ]
-                    },
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => 1 } }
-            ],
-            fields => [qw(author distribution name status abstract date)],
+            author => $author,
             size   => 1000,
+            fields => [qw< author distribution name status abstract date >],
+            sort   => [qw< distribution version_numified:desc >]
         }
     );
 }
