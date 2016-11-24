@@ -129,7 +129,7 @@ sub find_plussers {
     my ( $self, $distribution ) = @_;
 
     # search for all users, match all according to the distribution.
-    my $plusser      = $self->by_dist($distribution);
+    my $plusser      = $self->by_distribution($distribution);
     my $plusser_data = $plusser->recv;
 
     # store in an array.
@@ -170,23 +170,11 @@ sub find_plussers {
 
 }
 
-# to search for v0/favorite/_search/{user} for the particular $distribution.
-sub by_dist {
+sub by_distribution {
     my ( $self, $distribution ) = @_;
 
-    return $self->request(
-        '/favorite/_search',
-        {
-            query => {
-                filtered => {
-                    query => { match_all => {} },
-                    filter => { term => { distribution => $distribution }, },
-                }
-            },
-            _source => "user",
-            size    => 1000,
-        }
-    );
+    return $self->request( '/favorite/by_distribution', undef,
+        { size => 1000, fields => "user" } );
 }
 
 # finding the authors who have ++ed the distribution.
