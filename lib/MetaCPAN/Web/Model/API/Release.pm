@@ -63,77 +63,8 @@ sub recent {
 
 sub modules {
     my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/file/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { release   => $release } },
-                            { term => { author    => $author } },
-                            { term => { directory => 0 } },
-                            {
-                                or => [
-                                    {
-                                        and => [
-                                            {
-                                                exists => {
-                                                    field => 'module.name'
-                                                }
-                                            },
-                                            {
-                                                term => {
-                                                    'module.indexed' => 1
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        and => [
-                                            {
-                                                range =>
-                                                    { slop => { gt => 0 } }
-                                            },
-                                            {
-                                                exists => {
-                                                    field => 'pod.analyzed'
-                                                }
-                                            },
-                                            {
-                                                term => { 'indexed' => 1 }
-                                            },
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            size => 999,
-
-            # Sort by documentation name; if there isn't one, sort by path.
-            sort => [ 'documentation', 'path' ],
-
-            _source => [ "module", "abstract" ],
-
-            fields => [
-                qw(
-                    author
-                    authorized
-                    distribution
-                    documentation
-                    indexed
-                    path
-                    pod_lines
-                    release
-                    status
-                    )
-            ],
-        }
-    );
+    $self->request( '/release/modules', undef,
+        { author => $author, release => $release } );
 }
 
 sub find {
