@@ -98,16 +98,9 @@ sub by_user {
 }
 
 sub recent {
-    my ( $self, $page, $page_size ) = @_;
-    $self->request(
-        '/favorite/_search',
-        {
-            size  => $page_size,
-            from  => ( $page - 1 ) * $page_size,
-            query => { match_all => {} },
-            sort  => [ { 'date' => { order => 'desc' } } ]
-        }
-    );
+    my ( $self, $page, $size ) = @_;
+    $self->request( '/favorite/recent', undef,
+        { size => $size, page => $page } );
 }
 
 sub leaderboard {
