@@ -24,14 +24,9 @@ sub index : Path : Args(0) {
         push( @$q, { term => { 'release.dependency.module' => $requires } } );
     }
     if ( $req->parameters->{f} && $req->parameters->{f} eq 'n' ) {
-        push(
-            @$q,
-            @{
-                $c->model('API::Release')
-                    ->_new_distributions_query->{constant_score}->{filter}
-                    ->{and}
-            }
-        );
+        push( @$q,
+            { term => { first  => 1 } },
+            { not  => { filter => { term => { status => 'backpan' } } } } );
     }
 
     my $start

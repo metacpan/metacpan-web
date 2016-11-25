@@ -34,22 +34,6 @@ sub distribution {
     $self->request("/distribution/$dist");
 }
 
-sub _new_distributions_query {
-    return {
-        constant_score => {
-            filter => {
-                and => [
-                    { term => { first => 1 } },
-                    {
-                        not =>
-                            { filter => { term => { status => 'backpan' } } }
-                    },
-                ]
-            }
-        }
-    };
-}
-
 sub latest_by_author {
     my ( $self, $author ) = @_;
     return $self->request(
@@ -72,33 +56,9 @@ sub all_by_author {
 }
 
 sub recent {
-    my ( $self, $page, $page_size, $type ) = @_;
-    my $query;
-    if ( $type eq 'n' ) {
-        $query = $self->_new_distributions_query;
-    }
-    elsif ( $type eq 'a' ) {
-        $query = { match_all => {} };
-    }
-    else {
-        $query = {
-            constant_score => {
-                filter => {
-                    not => { filter => { term => { status => 'backpan' } } }
-                }
-            }
-        };
-    }
-    $self->request(
-        '/release/_search',
-        {
-            size   => $page_size,
-            from   => ( $page - 1 ) * $page_size,
-            query  => $query,
-            fields => [qw(name author status abstract date distribution)],
-            sort   => [ { 'date' => { order => 'desc' } } ]
-        }
-    );
+    my ( $self, $page, $size, $type ) = @_;
+    $self->request( '/release/recent', undef,
+        { type => $type, page => $page, size => $size } );
 }
 
 sub modules {
