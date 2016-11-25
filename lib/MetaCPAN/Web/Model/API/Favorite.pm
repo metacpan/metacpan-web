@@ -181,14 +181,12 @@ sub by_distribution {
 sub plusser_by_id {
     my ( $self, $users ) = @_;
     return $self->request(
-        '/author/_search',
+        '/favorite/plusser_by_user',
+        undef,
         {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
-            _source => { includes => [qw(pauseid gravatar_url)] },
-            size    => 1000,
-            sort    => ['pauseid']
+            fields => [qw< pauseid gravatar_url >],
+            size   => 1000,
+            sort   => 'pauseid'
         }
     );
 }
