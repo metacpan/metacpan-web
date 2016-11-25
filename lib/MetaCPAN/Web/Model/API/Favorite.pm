@@ -21,64 +21,13 @@ sub get {
         return $cv;
     }
 
-    $self->request(
-        '/favorite/_search',
-        {
-            size  => 0,
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        or => [
-                            map { { term => { 'distribution' => $_ } } }
-                                @distributions
-                        ]
-                    }
-                }
-            },
-            aggregations => {
-                favorites => {
-                    terms => {
-                        field => 'distribution',
-                        size  => scalar @distributions,
-                    },
-                },
-                $user
-                ? (
-                    myfavorites => {
-                        filter       => { term => { 'user' => $user } },
-                        aggregations => {
-                            enteries => {
-                                terms => { field => 'distribution' }
-                            }
-                        }
-                    }
-                    )
-                : (),
-            }
-        }
-        )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    took      => $data->{took},
-                    favorites => {
-                        map { $_->{key} => $_->{doc_count} }
-                            @{ $data->{aggregations}->{favorites}->{buckets} }
-                    },
-                    myfavorites => $user
-                    ? {
-                        map { $_->{key} => $_->{doc_count} } @{
-                            $data->{aggregations}->{myfavorites}->{entries}
-                                ->{buckets}
-                        }
-                        }
-                    : {},
-                }
-            );
-        }
-        );
+    $cv->send(
+        $self->request(
+            '/favorite/agg_dists_user', undef,
+            { distributions => \@distributions, user => $user }
+        )
+    );
+
     return $cv;
 }
 
