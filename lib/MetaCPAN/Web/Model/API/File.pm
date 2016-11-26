@@ -15,28 +15,15 @@ sub source {
 sub dir {
     my ( $self, $author, $release, @path ) = @_;
     $self->request(
-        '/file/_search',
+        '/file/dir',
+        undef,
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {}, },
-                    filter => {
-                        and => [
-                            { term => { 'level'   => scalar @path } },
-                            { term => { 'author'  => $author } },
-                            { term => { 'release' => $release } },
-                            {
-                                prefix => {
-                                    'path' => join( q{/}, @path, q{} )
-                                }
-                            },
-                        ]
-                    },
-                }
-            },
+            author  => $author,
+            release => $release,
+            dir    => ( join '/' => @path, q{} ),
             size   => 999,
             fields => [
-                qw(name stat.mtime path stat.size directory slop documentation mime)
+                qw< name stat.mtime path stat.size directory slop documentation mime >
             ],
         }
     );

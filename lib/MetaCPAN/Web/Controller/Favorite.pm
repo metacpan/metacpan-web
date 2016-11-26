@@ -40,17 +40,10 @@ sub recent : Local : Args(0) {
 
 sub leaderboard : Local : Args(0) {
     my ( $self, $c ) = @_;
-
     my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;
-    my @leaders
-        = @{ $data->{aggregations}->{leaderboard}->{terms} }[ 0 .. 99 ];
-
     $c->stash(
         {
-            leaders  => \@leaders,
-            took     => $data->{took},
-            total    => $data->{hits}->{total},
-            template => 'favorite/leaderboard.html',
+            %$data, template => 'favorite/leaderboard.html',
         }
     );
 }

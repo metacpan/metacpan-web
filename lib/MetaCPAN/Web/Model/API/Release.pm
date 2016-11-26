@@ -25,22 +25,8 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { 'name' => $release } },
-                            { term => { author => uc($author) } }
-                        ]
-                    }
-                }
-            }
-        }
-    );
+    $self->request( '/release/by_name_and_author', undef,
+        { name => $release, $author => uc($author) } );
 }
 
 sub distribution {
@@ -48,200 +34,42 @@ sub distribution {
     $self->request("/distribution/$dist");
 }
 
-sub _new_distributions_query {
-    return {
-        constant_score => {
-            filter => {
-                and => [
-                    { term => { first => 1 } },
-                    {
-                        not =>
-                            { filter => { term => { status => 'backpan' } } }
-                    },
-                ]
-            }
-        }
-    };
-}
-
 sub latest_by_author {
     my ( $self, $author ) = @_;
     return $self->request(
-        '/release/_search',
+        '/release/latest_by_author',
+        undef,
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { author => uc($author) } },
-                            { term => { status => 'latest' } }
-                        ]
-                    },
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => 1 } }
-            ],
-            fields => [qw(author distribution name status abstract date)],
+            author => $author,
             size   => 1000,
+            fields => [qw< author distribution name status abstract date >],
+            sort   => [qw< distribution version_numified:desc >]
         }
     );
 }
 
 sub all_by_author {
     my ( $self, $author, $size, $page ) = @_;
-
     $page = $page > 0 ? $page : 1;
-
-    return $self->request(
-        '/release/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        term => { author => uc($author) }
-                    },
-                }
-            },
-            sort => [ { date => 'desc' } ],
-            fields => [qw(author distribution name status abstract date)],
-            size   => $size,
-            from   => ( $page - 1 ) * $size,
-        }
-    );
+    return $self->request( '/release/all_by_author', undef,
+        { author => $author, size => $size, page => $page } );
 }
 
 sub recent {
-    my ( $self, $page, $page_size, $type ) = @_;
-    my $query;
-    if ( $type eq 'n' ) {
-        $query = $self->_new_distributions_query;
-    }
-    elsif ( $type eq 'a' ) {
-        $query = { match_all => {} };
-    }
-    else {
-        $query = {
-            constant_score => {
-                filter => {
-                    not => { filter => { term => { status => 'backpan' } } }
-                }
-            }
-        };
-    }
-    $self->request(
-        '/release/_search',
-        {
-            size   => $page_size,
-            from   => ( $page - 1 ) * $page_size,
-            query  => $query,
-            fields => [qw(name author status abstract date distribution)],
-            sort   => [ { 'date' => { order => 'desc' } } ]
-        }
-    );
+    my ( $self, $page, $size, $type ) = @_;
+    $self->request( '/release/recent', undef,
+        { type => $type, page => $page, size => $size } );
 }
 
 sub modules {
     my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/file/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { release   => $release } },
-                            { term => { author    => $author } },
-                            { term => { directory => 0 } },
-                            {
-                                or => [
-                                    {
-                                        and => [
-                                            {
-                                                exists => {
-                                                    field => 'module.name'
-                                                }
-                                            },
-                                            {
-                                                term => {
-                                                    'module.indexed' => 1
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        and => [
-                                            {
-                                                range =>
-                                                    { slop => { gt => 0 } }
-                                            },
-                                            {
-                                                exists => {
-                                                    field => 'pod.analyzed'
-                                                }
-                                            },
-                                            {
-                                                term => { 'indexed' => 1 }
-                                            },
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            size => 999,
-
-            # Sort by documentation name; if there isn't one, sort by path.
-            sort => [ 'documentation', 'path' ],
-
-            _source => [ "module", "abstract" ],
-
-            fields => [
-                qw(
-                    author
-                    authorized
-                    distribution
-                    documentation
-                    indexed
-                    path
-                    pod_lines
-                    release
-                    status
-                    )
-            ],
-        }
-    );
+    $self->request( '/release/modules', undef,
+        { author => $author, release => $release } );
 }
 
 sub find {
     my ( $self, $distribution ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            {
-                                term => {
-                                    'distribution' => $distribution
-                                }
-                            },
-                            { term => { status => 'latest' } }
-                        ]
-                    }
-                }
-            },
-            sort => [ { date => 'desc' } ],
-            size => 1
-        }
-    );
+    $self->request( "/release/find/$distribution", );
 }
 
 # stolen from Module/requires
@@ -387,16 +215,12 @@ sub interesting_files {
 sub versions {
     my ( $self, $dist ) = @_;
     $self->request(
-        '/release/_search',
+        '/release/versions',
+        undef,
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => { term      => { distribution => $dist } }
-                }
-            },
-            size => 250,
-            sort => [ { date => 'desc' } ],
+            distribution => $dist,
+            size         => 250,
+            sort         => 'date:desc',
             fields =>
                 [qw( name date author version status maturity authorized )],
         }
@@ -410,35 +234,7 @@ sub favorites {
 
 sub topuploaders {
     my ( $self, $range ) = @_;
-    my $range_filter = {
-        range => {
-            date => {
-                from => $range eq 'all' ? 0 : DateTime->now->subtract(
-                      $range eq 'weekly'  ? 'weeks'
-                    : $range eq 'monthly' ? 'months'
-                    : $range eq 'yearly'  ? 'years'
-                    :                       'weeks' => 1
-                )->truncate( to => 'day' )->iso8601
-            },
-        }
-    };
-    $self->request(
-        '/release/_search',
-        {
-            query        => { match_all => {} },
-            aggregations => {
-                author => {
-                    aggregations => {
-                        entries => {
-                            terms => { field => 'author', size => 50 }
-                        }
-                    },
-                    filter => $range_filter,
-                },
-            },
-            size => 0,
-        }
-    );
+    $self->request( '/author/top_uploaders', undef, { range => $range } );
 }
 
 __PACKAGE__->meta->make_immutable;

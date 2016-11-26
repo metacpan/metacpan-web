@@ -30,81 +30,27 @@ sub get {
     return $self->request( '/author/' . uc( $author[0] ) )
         if ( @author == 1 );
 
-    return $self->request(
-        '/author/_search',
-        {
-            query => {
-                constant_score => {
-                    filter => { ids => { values => [ map {uc} @author ] } }
-                }
-            },
-            size => scalar @author,
-        }
-    );
-
+    return $self->request( '/author/by_id', undef, { id => \@author } );
 }
 
 sub search {
     my ( $self, $query, $from ) = @_;
-
-    my $cv     = $self->cv;
-    my $search = {
-        query => {
-            bool => {
-                should => [
-                    {
-                        match => {
-                            'name.analyzed' =>
-                                { query => $query, operator => 'and' }
-                        }
-                    },
-                    {
-                        match => {
-                            'asciiname.analyzed' =>
-                                { query => $query, operator => 'and' }
-                        }
-                    },
-                    { match => { 'pauseid'    => uc($query) } },
-                    { match => { 'profile.id' => lc($query) } },
-                ]
-            }
-        },
-        size => 10,
-        from => $from || 0,
-    };
-
-    $self->request( '/author/_search', $search )->cb(
+    my $cv = $self->cv;
+    $from ||= 0;
+    $self->request( '/author/by_key', undef,
+        { key => $query, from => $from, size => 10 } )->cb(
         sub {
-            my $results = shift->recv
-                || { hits => { total => 0, hits => [] } };
-            $cv->send(
-                {
-                    results => [
-                        map { +{ %{ $_->{_source} }, id => $_->{_id} } }
-                            @{ $results->{hits}{hits} }
-                    ],
-                    total => $results->{hits}{total} || 0,
-                    took => $results->{took}
-                }
-            );
+            my $results = shift->recv;
+            $cv->send($results);
         }
-    );
+        );
     return $cv;
 }
 
 sub by_user {
     my ( $self, $users ) = @_;
-
-    my $query = return $self->request(
-        '/author/_search',
-        {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
-            fields => [qw(user pauseid)],
-            size   => 100
-        }
-    );
+    return $self->request( '/author/by_user', undef,
+        { fields => [qw<user pauseid>], user => $users } );
 }
 
 __PACKAGE__->meta->make_immutable;

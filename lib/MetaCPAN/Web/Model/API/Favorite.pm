@@ -5,7 +5,7 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 
 use List::MoreUtils qw(uniq);
-
+use Ref::Util qw(is_arrayref);
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
@@ -21,115 +21,47 @@ sub get {
         return $cv;
     }
 
-    $self->request(
-        '/favorite/_search',
-        {
-            size  => 0,
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        or => [
-                            map { { term => { 'distribution' => $_ } } }
-                                @distributions
-                        ]
-                    }
-                }
-            },
-            aggregations => {
-                favorites => {
-                    terms => {
-                        field => 'distribution',
-                        size  => scalar @distributions,
-                    },
-                },
-                $user
-                ? (
-                    myfavorites => {
-                        filter       => { term => { 'user' => $user } },
-                        aggregations => {
-                            enteries => {
-                                terms => { field => 'distribution' }
-                            }
-                        }
-                    }
-                    )
-                : (),
-            }
-        }
-        )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    took      => $data->{took},
-                    favorites => {
-                        map { $_->{key} => $_->{doc_count} }
-                            @{ $data->{aggregations}->{favorites}->{buckets} }
-                    },
-                    myfavorites => $user
-                    ? {
-                        map { $_->{key} => $_->{doc_count} } @{
-                            $data->{aggregations}->{myfavorites}->{entries}
-                                ->{buckets}
-                        }
-                        }
-                    : {},
-                }
-            );
-        }
-        );
+    $cv->send(
+        $self->request(
+            '/favorite/agg_dists_user', undef,
+            { distributions => \@distributions, user => $user }
+        )
+    );
+
     return $cv;
 }
 
 sub by_user {
-    my ( $self, $user, $size ) = @_;
-    $size ||= 250;
+    my ( $self, $users, $size ) = @_;
+    my @users = is_arrayref $users ? @{$users} : $users;
     return $self->request(
-        '/favorite/_search',
+        '/favorite/by_user',
+        undef,
         {
-            query  => { match_all => {} },
-            filter => { term      => { user => $user }, },
-            sort   => ['distribution'],
-            fields => [qw(date author distribution)],
-            size   => $size,
+            fields => [qw<date author distribution>],
+            sort   => 'distribution',
+            size   => $size || 250,
+            user   => \@users,
         }
     );
 }
 
 sub recent {
-    my ( $self, $page, $page_size ) = @_;
-    $self->request(
-        '/favorite/_search',
-        {
-            size  => $page_size,
-            from  => ( $page - 1 ) * $page_size,
-            query => { match_all => {} },
-            sort  => [ { 'date' => { order => 'desc' } } ]
-        }
-    );
+    my ( $self, $page, $size ) = @_;
+    $self->request( '/favorite/recent', undef,
+        { size => $size, page => $page } );
 }
 
 sub leaderboard {
-    my ( $self, $page ) = @_;
-    $self->request(
-        '/favorite/_search',
-        {
-            size         => 0,
-            query        => { match_all => {} },
-            aggregations => {
-                leaderboard =>
-                    { terms => { field => 'distribution', size => 600 }, },
-            },
-        }
-    );
+    my ($self) = @_;
+    $self->request('/favorite/leaderboard');
 }
 
 sub find_plussers {
     my ( $self, $distribution ) = @_;
 
     # search for all users, match all according to the distribution.
-    my $plusser      = $self->by_dist($distribution);
+    my $plusser      = $self->by_distribution($distribution);
     my $plusser_data = $plusser->recv;
 
     # store in an array.
@@ -170,37 +102,23 @@ sub find_plussers {
 
 }
 
-# to search for v0/favorite/_search/{user} for the particular $distribution.
-sub by_dist {
+sub by_distribution {
     my ( $self, $distribution ) = @_;
 
-    return $self->request(
-        '/favorite/_search',
-        {
-            query => {
-                filtered => {
-                    query => { match_all => {} },
-                    filter => { term => { distribution => $distribution }, },
-                }
-            },
-            _source => "user",
-            size    => 1000,
-        }
-    );
+    return $self->request( '/favorite/by_distribution', undef,
+        { size => 1000, fields => "user" } );
 }
 
 # finding the authors who have ++ed the distribution.
 sub plusser_by_id {
     my ( $self, $users ) = @_;
     return $self->request(
-        '/author/_search',
+        '/favorite/plusser_by_user',
+        undef,
         {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
-            _source => { includes => [qw(pauseid gravatar_url)] },
-            size    => 1000,
-            sort    => ['pauseid']
+            fields => [qw< pauseid gravatar_url >],
+            size   => 1000,
+            sort   => 'pauseid'
         }
     );
 }
