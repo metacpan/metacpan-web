@@ -43,7 +43,7 @@ sub leaderboard : Local : Args(0) {
 
     my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;
     my @leaders
-        = @{ $data->{aggregations}->{leaderboard}->{terms} }[ 0 .. 99 ];
+        = @{ $data->{aggregations}->{leaderboard}->{buckets} }[ 0 .. 99 ];
 
     $c->stash(
         {
