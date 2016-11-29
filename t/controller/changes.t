@@ -25,7 +25,7 @@ test_psgi app, sub {
         my $tx = tx($res);
         $tx->like(
             '//title',
-            qr{^pod/perldelta.pod - },
+            qr/^perldelta - /,
             'got perldelta for perl release'
         );
     }
