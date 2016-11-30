@@ -125,8 +125,7 @@ sub view : Private {
     $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
 
     # Simplify the file data we pass to the template.
-    my @view_files = map { single_valued_arrayref_to_scalar($_) }
-        map +{ %{ $_->{fields} }, %{ $_->{_source} }, },
+    my @view_files = map +{ %{ $_->{fields} }, %{ $_->{_source} }, },
         @{ $modules->{hits}->{hits} };
 
     my $categories = $self->_files_to_categories( $out, \@view_files );
