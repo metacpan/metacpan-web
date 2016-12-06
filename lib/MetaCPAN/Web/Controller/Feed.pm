@@ -9,7 +9,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 use DateTime::Format::ISO8601 ();
 use HTML::Escape qw/escape_html/;
 use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri );
-use Params::CheckCompiler qw( validation_for );
+use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
 use XML::Feed ();
@@ -194,7 +194,7 @@ sub build_feed {
         params => {
             entries => { type => ArrayRef },
             host    => { type => Uri, optional => 0, },
-            title => Str,
+            title   => { type => Str },
         }
     );
 
