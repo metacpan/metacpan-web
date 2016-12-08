@@ -4074,23 +4074,6 @@ DISTRIBUTIONS
       JSON 0
       Test::More 0
       Test::Warn 0
-  Params-CheckCompiler-0.07
-    pathname: D/DR/DROLSKY/Params-CheckCompiler-0.07.tar.gz
-    provides:
-      Params::CheckCompiler 0.07
-      Params::CheckCompiler::Compiler 0.07
-      Params::CheckCompiler::Exceptions 0.07
-    requirements:
-      Eval::Closure 0
-      Exception::Class 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      List::SomeUtils 0
-      Scalar::Util 0
-      Sub::Name 0
-      overload 0
-      strict 0
-      warnings 0
   Params-Util-1.07
     pathname: A/AD/ADAMK/Params-Util-1.07.tar.gz
     provides:
@@ -4120,6 +4103,23 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       vars 0
+      warnings 0
+  Params-ValidationCompiler-0.21
+    pathname: D/DR/DROLSKY/Params-ValidationCompiler-0.21.tar.gz
+    provides:
+      Params::ValidationCompiler 0.21
+      Params::ValidationCompiler::Compiler 0.21
+      Params::ValidationCompiler::Exceptions 0.21
+    requirements:
+      Carp 0
+      Eval::Closure 0
+      Exception::Class 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      List::Util 1.29
+      Scalar::Util 0
+      overload 0
+      strict 0
       warnings 0
   Path-Class-0.36
     pathname: K/KW/KWILLIAMS/Path-Class-0.36.tar.gz

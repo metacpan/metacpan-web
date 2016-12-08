@@ -69,7 +69,7 @@ requires 'MooseX::Types::Moose';
 requires 'MooseX::Types::URI', '0.08';
 requires 'Net::Fastly', '1.05';
 requires 'Path::Tiny', '0.076';
-requires 'Params::CheckCompiler';
+requires 'Params::ValidationCompiler';
 requires 'Plack', '1.0039';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
