@@ -181,14 +181,11 @@ sub _files_to_categories {
         my %info = (
             status  => $f->{status},
             path    => $f->{path},
-            release => $release->{name},
-            author  => $release->{author},
+            release => $f->{release},
+            author  => $f->{author},
         );
 
-        my @modules
-            = is_arrayref( $f->{module} ) ? @{ $f->{module} }
-            : defined $f->{module}        ? $f->{module}
-            :                               ();
+        my @modules = @{ $f->{module} || [] };
 
         if ( $f->{documentation} and @modules ) {
             push @{ $ret->{modules} }, $f;
