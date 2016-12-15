@@ -89,6 +89,10 @@ sub view : Private {
         }
         grep { $_->{associated_pod} } @{ $data->{module} || [] };
     $data->{documentation} = $documentation if $documentation;
+    if ( $pod && $pod ne "$data->{author}/$data->{release}/$data->{path}" ) {
+        $data->{pod_path}
+            = $pod =~ s{^\Q$data->{author}/$data->{release}/}{}r;
+    }
 
     $c->detach('/not_found') unless ( $data->{name} );
 
