@@ -177,18 +177,37 @@ sub _files_to_categories {
         modules           => [],
     };
 
+    my %skip;
+
+    for my $f (@$files) {
+        next if $f->{documentation};
+        for my $module ( @{ $f->{module} || [] } ) {
+            my $assoc = $module->{associated_pod} or next;
+            $assoc =~ s{^\Q$f->{author}/$f->{release}/}{};
+            if (   $assoc ne $f->{path}
+                && $assoc eq $f->{path} =~ s{\.pm$}{\.pod}r )
+            {
+                my ($assoc_file) = grep $_->{path} eq $assoc, @$files;
+                $f->{$_} ||= $assoc_file->{$_} for qw(
+                    abstract
+                    documentation
+                );
+                $skip{$assoc}++;
+            }
+        }
+    }
+
     for my $f ( @{$files} ) {
+        next
+            if $skip{ $f->{path} };
         my %info = (
             status  => $f->{status},
             path    => $f->{path},
-            release => $release->{name},
-            author  => $release->{author},
+            release => $f->{release},
+            author  => $f->{author},
         );
 
-        my @modules
-            = is_arrayref( $f->{module} ) ? @{ $f->{module} }
-            : defined $f->{module}        ? $f->{module}
-            :                               ();
+        my @modules = @{ $f->{module} || [] };
 
         if ( $f->{documentation} and @modules ) {
             push @{ $ret->{modules} }, $f;
