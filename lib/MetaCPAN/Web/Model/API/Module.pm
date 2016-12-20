@@ -50,7 +50,7 @@ sub autocomplete {
     my ( $self, $query ) = @_;
     my $cv = $self->cv;
     $self->request( "/search/autocomplete", undef,
-        { q => $query, size => 20 } )->cb(
+        { q => $query, size => 50 } )->cb(
         sub {
             my $data = shift->recv;
             $cv->send(

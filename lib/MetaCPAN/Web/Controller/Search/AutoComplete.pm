@@ -2,9 +2,7 @@ package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
 use Cpanel::JSON::XS ();
-
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
+use List::Util qw(uniq);
 
 use namespace::autoclean;
 
@@ -12,15 +10,27 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
-    my $model = $c->model('API::Module');
-    my $query = join( q{ }, $c->req->param('q') );
-    my $data  = $model->autocomplete($query)->recv;
+    my $query       = join( q{ }, $c->req->param('q') );
+    my $module_data = $c->model('API::Module')->autocomplete($query);
+    my $author_data = $c->model('API::Author')->search($query);
+    my @results     = (
+        (
+            map +{
+                value => "$_->{pauseid} - $_->{name}",
+                data  => { id => $_->{pauseid}, type => 'author' }
+            },
+            @{ $author_data->recv->{results} }
+        ),
+        (
+            map +{ value => $_, data => { module => $_, type => 'module' } },
+            uniq map $_->{documentation},
+            @{ $module_data->recv->{results} }
+        ),
+    );
+
     $c->res->content_type('application/json');
     $c->res->body(
-        Cpanel::JSON::XS::encode_json(
-            single_valued_arrayref_to_scalar( $data->{results} )
-        )
-    );
+        Cpanel::JSON::XS::encode_json( { suggestions => \@results } ) );
 }
 
 __PACKAGE__->meta->make_immutable;
