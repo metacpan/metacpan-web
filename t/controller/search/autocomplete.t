@@ -26,8 +26,8 @@ test_psgi app, sub {
         is( $res->header('content-type'),
             'application/json', 'Content-type is application/json' );
         ok( my $json = eval { decode_json( $res->content ) }, 'valid json' );
-        is( ref $json, 'ARRAY', 'isa arrayref' );
-        my $module = shift @$json;
+        is( ref $json, 'HASH', 'isa hashref' );
+        my $module = $json->{suggestions}->[0];
 
         if ($exp) {
             ok $module, "Found module for $test";
@@ -39,7 +39,7 @@ test_psgi app, sub {
         next unless $module;
 
         # turn off utf8 flag b/c the below m// doesn't always work with it on
-        my $doc = encode( 'UTF-8' => $module->{documentation} );
+        my $doc = encode( 'UTF-8' => $module->{value} );
 
         is $doc, $exp, 'got the module we wanted first';
 
