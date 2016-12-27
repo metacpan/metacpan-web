@@ -263,7 +263,9 @@ $(document).ready(function() {
 
     $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function() {
         if (this.id) {
-            $(this).prepend('<a href="#' + this.id + '" class="anchor"><span class="fa fa-bookmark black"></span></a>');
+            $(document.createElement('a')).attr('href', '#' + this.id).addClass('anchor').append(
+                $(document.createElement('span')).addClass('fa fa-bookmark black')
+            ).prependTo(this);
         }
     });
 
