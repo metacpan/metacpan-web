@@ -125,7 +125,7 @@ sub view : Private {
         [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ] );
     $hr->set_rules(
         {
-            a       => [qw( href target )],
+            a       => [qw( href id target )],
             b       => [],
             br      => [],
             caption => [],
