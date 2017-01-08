@@ -3,6 +3,8 @@ package MetaCPAN::Web::Controller::Pod;
 use HTML::Restrict;
 use Moose;
 use Try::Tiny;
+use URI;
+use HTML::Escape qw(escape_html);
 
 use namespace::autoclean;
 
@@ -121,7 +123,8 @@ sub view : Private {
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 
     my $hr = HTML::Restrict->new(
-        uri_schemes => [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ],
+        uri_schemes =>
+            [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ],
         rules => {
             a       => [qw( href id target )],
             b       => [],
@@ -141,7 +144,6 @@ sub view : Private {
             h5      => ['id'],
             h6      => ['id'],
             i       => [],
-            img     => [ qw( alt border height width src title / ), ],
             li      => ['id'],
             ol      => [],
             p       => [],
@@ -163,7 +165,41 @@ sub view : Private {
             tr    => [],
             u     => [],
             ul    => [ { id => qr/^index$/ } ],
-        }
+        },
+        replace_img => sub {
+            my ( $tagname, $attrs, $text ) = @_;
+            my $tag = '<img';
+            for my $attr (qw( alt border height width src title)) {
+                next
+                    unless exists $attrs->{$attr};
+                my $val = $attrs->{$attr};
+                if ( $attr eq 'src' ) {
+                    if ( $val =~ m{^(?:(?:https?|ftp|data):)?//} ) {
+
+                        # use directly
+                    }
+                    elsif ( $val =~ /^[0-9a-zA-Z.+-]+:/ ) {
+
+                        # bad protocol
+                        return '';
+                    }
+                    else {
+                        my $base = "https://st.aticpan.org/source/";
+                        if ( $val =~ s{^/}{} ) {
+                            $base .= "$data->{author}/$data->{release}/";
+                        }
+                        else {
+                            $base .= $pod
+                                || "$data->{author}/$data->{release}/$data->{path}";
+                        }
+                        $val = URI->new_abs( $val, $base )->as_string;
+                    }
+                }
+                $tag .= qq{ $attr="} . escape_html($val) . qq{"};
+            }
+            $tag .= ' />';
+            return $tag;
+        },
     );
 
     my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
