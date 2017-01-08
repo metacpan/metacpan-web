@@ -120,11 +120,9 @@ sub view : Private {
     $self->stash_api_results( $c, $reqs, $data );
     $self->add_favorites_data( $data, $reqs->{favorites}, $data );
 
-    my $hr = HTML::Restrict->new;
-    $hr->set_uri_schemes(
-        [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ] );
-    $hr->set_rules(
-        {
+    my $hr = HTML::Restrict->new(
+        uri_schemes => [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ],
+        rules => {
             a       => [qw( href id target )],
             b       => [],
             br      => [],
