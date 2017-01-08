@@ -132,7 +132,7 @@ sub view : Private {
             center  => [],
             code    => [ { class => qr/^language-\S+$/ } ],
             dd      => [],
-            div     => [],
+            div     => [ { class => qr/^pod-errors(?:-detail)?$/ } ],
             dl      => [],
             dt      => ['id'],
             em      => [],

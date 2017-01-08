@@ -271,7 +271,7 @@ $(document).ready(function() {
 
     var module_source_href = $('#source-link').attr('href');
     if (module_source_href) {
-        $('#pod-error-detail dt').each(function() {
+        $('.pod-errors-detail dt').each(function() {
             var $dt = $(this);
             var link_text = $dt.text();
             var capture = link_text.match(/Around line (\d+)/);
@@ -281,8 +281,8 @@ $(document).ready(function() {
             );
         });
     }
-    $('#pod-errors').addClass('collapsed');
-    $('#pod-errors > p:first-child').click(function() {
+    $('.pod-errors').addClass('collapsed');
+    $('.pod-errors > p:first-child').click(function() {
         $(this).parent().toggleClass('collapsed');
     });
 
