@@ -17,9 +17,9 @@
         <script>
         var RecaptchaOptions = { theme : 'white' };
         </script>
-        <form action="<% c.req.uri %>" method="POST">
+        <form action="<% c.req.uri.as_string %>" method="POST">
         <% captcha | none %>
-        <input type="hidden" name="r" value="<% referer || c.req.referer || c.uri_for('/') %>" />
+        <input type="hidden" name="r" value="<% referer || c.req.referer || c.uri_for('/').as_string %>" />
         </form>
     </fieldset>
     <% END %>

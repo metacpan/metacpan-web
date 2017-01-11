@@ -2,17 +2,17 @@
 <div class="text-center">
   <ul class="pagination">
     <li<% UNLESS pager.previous_page %> class="disabled"<% END %>>
-      <a href="<% c.req.uri_with( p = pager.previous_page ) %>">«</a>
+      <a href="<% c.req.uri_with( p = pager.previous_page ).as_string %>">«</a>
     </li>
 <%-
 FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
   IF p < 1; NEXT; END; %>
     <li<% IF p == page %> class="active"<% END %>>
-      <a href="<% c.req.uri_with( p = p ) %>"><% p %></a>
+      <a href="<% c.req.uri_with( p = p ).as_string %>"><% p %></a>
     </li>
 <%- END %>
     <li<% UNLESS pager.next_page %> class="disabled"<% END %>>
-      <a href="<% c.req.uri_with( p = pager.next_page ) %>">»</a>
+      <a href="<% c.req.uri_with( p = pager.next_page ).as_string %>">»</a>
     </li>
   </ul>
 </div>
@@ -23,7 +23,7 @@ FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
        <li class="disabled"><a>Results per page:</a></li>
     <% FOREACH page_size IN [10, 20, 50, 100, 200, 500] %>
       <li <% IF page_size == size %> class="active"<% END %>>
-        <a href="<% c.req.uri_with( p = page, size = page_size ) %>"><% page_size %></a>
+        <a href="<% c.req.uri_with( p = page, size = page_size ).as_string %>"><% page_size %></a>
       </li>
     <% END %>
   </ul>
@@ -33,15 +33,15 @@ FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
 
 <div class="text-center">
 <ul class="pagination">
-<li class="previous <% UNLESS pageset.previous_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.previous_page ) %>">&laquo; Previous page</a></li>
+<li class="previous <% UNLESS pageset.previous_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.previous_page ).as_string %>">&laquo; Previous page</a></li>
 
 <% FOREACH page_num IN pageset.pages_in_set %>
 <li <% IF page_num == pageset.current_page %> class="active"<% END %>>
-  <a href="<% c.req.uri_with( p = page_num ) %>"><% page_num %></a>
+  <a href="<% c.req.uri_with( p = page_num ).as_string %>"><% page_num %></a>
 </li>
 <% END %>
 
-<li class="next <% UNLESS pageset.next_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.next_page ) %>">Next page &raquo;</a></li>
+<li class="next <% UNLESS pageset.next_page %>disabled<% END %>"><a href="<% c.req.uri_with( p = pageset.next_page ).as_string %>">Next page &raquo;</a></li>
 
 </ul>
 </div>

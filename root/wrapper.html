@@ -135,7 +135,7 @@
                     <%- END %>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <form action="<% c.uri_for("/account/logout") %>" method="POST" id="metacpan-logout"></form>
+                    <form action="<% c.uri_for("/account/logout").as_string %>" method="POST" id="metacpan-logout"></form>
                     <li class="dropdown logged_in" style="display: none;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Account

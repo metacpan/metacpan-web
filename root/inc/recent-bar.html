@@ -5,7 +5,7 @@
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
     <li class="nav-header">Filter</li>
-    <form action="<% c.uri_for('/recent') %>" method="get" onchange="this.form.submit()">
+    <form action="<% c.uri_for('/recent').as_string %>" method="get" onchange="this.form.submit()">
           <%-
           filter = { l = 'Latest releases', n = 'New distributions', a = 'Including BackPAN' };
           IF c.req.uri == "/recent"; c.req.params.f ||= 'l'; END;
