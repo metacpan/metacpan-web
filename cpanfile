@@ -59,7 +59,7 @@ requires 'Moo', '2.000002';
 requires 'MooseX::ClassAttribute';
 requires 'MooseX::Role::Parameterized', '1.02';
 requires 'MooseX::StrictConstructor';
-requires 'MooseX::Fastly::Role', '0.02';
+requires 'MooseX::Fastly::Role', '0.03';
 requires 'PerlIO::gzip';
 requires 'MetaCPAN::Moose';
 requires 'MetaCPAN::Role', '0.06';
