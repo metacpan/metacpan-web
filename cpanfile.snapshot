@@ -264,13 +264,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Carp-Always-0.13
-    pathname: F/FE/FERREIRA/Carp-Always-0.13.tar.gz
-    provides:
-      Carp::Always 0.13
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
   Carp-Assert-0.21
     pathname: N/NE/NEILB/Carp-Assert-0.21.tar.gz
     provides:
@@ -2234,7 +2227,6 @@ DISTRIBUTIONS
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
-      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   IO-String-1.08
@@ -2314,7 +2306,6 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.003005
     requirements:
       Carp 0
-      Cpanel::JSON::XS 2.3310
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -3267,15 +3258,16 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0
       namespace::clean 0
-  MooseX-Fastly-Role-0.02
-    pathname: L/LL/LLAP/MooseX-Fastly-Role-0.02.tar.gz
+  MooseX-Fastly-Role-0.03
+    pathname: L/LL/LLAP/MooseX-Fastly-Role-0.03.tar.gz
     provides:
-      MooseX::Fastly::Role 0.02
+      MooseX::Fastly::Role 0.03
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
       HTTP::Tiny 0
       Moose::Role 0
+      Net::Fastly 1.08
   MooseX-Getopt-0.70
     pathname: D/DR/DROLSKY/MooseX-Getopt-0.70.tar.gz
     provides:
@@ -3646,10 +3638,10 @@ DISTRIBUTIONS
       Test::More 0.52
       Time::Local 1.19
       perl 5.00404
-  Net-Fastly-1.05
-    pathname: F/FA/FASTLY/Net-Fastly-1.05.tar.gz
+  Net-Fastly-1.08
+    pathname: F/FA/FASTLY/Net-Fastly-1.08.tar.gz
     provides:
-      Net::Fastly 1.05
+      Net::Fastly 1.08
       Net::Fastly::Backend undef
       Net::Fastly::BelongsToServiceAndVersion undef
       Net::Fastly::Client undef
@@ -3680,7 +3672,7 @@ DISTRIBUTIONS
       JSON::XS 0
       LWP::Protocol::https 0
       LWP::UserAgent 5.813
-      Module::Build 0.38
+      Module::Build::Tiny 0.034
       Test::More 0
       URI 0
       URI::Escape 0
