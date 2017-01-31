@@ -66,21 +66,7 @@ sub index : Path : Args(0) {
         }
     }
     else {
-        my $user = $c->user_exists ? $c->user->id : undef;
-
-        # these would be nicer if we had variable-length lookbehinds...
-        $query =~ s{(^|\s)author:([a-zA-Z]+)(?=\s|$)}{$1author:\U$2\E}g;
-        $query
-            =~ s/(^|\s)dist(ribution)?:([\w-]+)(?=\s|$)/$1distribution:$3/g;
-        $query
-            =~ s/(^|\s)module:(\w[\w:]*)(?=\s|$)/$1module.name.analyzed:$2/g;
-
-        my $results
-            = $query =~ /(distribution|module\.name\S*):/
-            ? $model->search_expanded( $query, $from, $page_size, $user )
-            : $model->search_collapsed( $query, $from, $page_size, $user );
-
-        my @dists = $query =~ /distribution:(\S+)/g;
+        my $results = $model->search_web( $query, $from, $page_size );
 
         my $authors = $c->model('API::Author')->search( $query, $from );
         ( $results, $authors ) = ( $results->recv, $authors->recv );
@@ -102,7 +88,7 @@ sub index : Path : Args(0) {
         $c->stash(
             {
                 %$results,
-                single_dist => @dists == 1,
+                single_dist => !$results->{collapsed},
                 authors     => $authors,
                 template    => 'search.html',
                 page_size   => $page_size,
