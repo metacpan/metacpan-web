@@ -77,14 +77,7 @@ sub fetch_latest_distros {
 
 # status can have all kinds of values, cpan is an attempt to find the ones that are on cpan but
 # are not authorized. Maybe it also includes ones that were superseeded by releases of other people
-    my @filter = (
-        {
-            or => [
-                { term => { status => 'latest' } },
-                { term => { status => 'cpan' } }
-            ]
-        }
-    );
+    my @filter = ( { not => { term => { status => 'backpan' } } } );
     if ($pauseid) {
         push @filter, { term => { author => $pauseid } };
     }
@@ -102,9 +95,9 @@ sub fetch_latest_distros {
                 },
             },
             sort => [
-                'distribution', { 'version_numified' => { reverse => \1 } }
+                'distribution', { 'version_numified' => { reverse => 1 } }
             ],
-            fields => [
+            _source => [
                 qw(distribution date license author resources.repository abstract metadata.version tests status authorized)
             ],
             size => $size,
@@ -114,12 +107,12 @@ sub fetch_latest_distros {
     my %distros;
 
     foreach my $d ( @{ $r->{hits}{hits} } ) {
-        my $license = $d->{fields}{license};
-        my $distro  = $d->{fields}{distribution};
-        my $author  = $d->{fields}{author};
-        my $repo    = $d->{fields}{'resources.repository'};
+        my $license = $d->{_source}{license}[0];
+        my $distro  = $d->{_source}{distribution};
+        my $author  = $d->{_source}{author};
+        my $repo    = $d->{_source}{'resources.repository'};
 
-        next if $distros{$distro};    # show the firs one
+        next if $distros{$distro};    # show the first one
 
      # TODO: can we fetch the bug count in one call for all the distributions?
         my $distribution = $self->request("/distribution/$distro")->recv;
@@ -127,7 +120,7 @@ sub fetch_latest_distros {
             $distros{$distro}{bugs} = $distribution->{bugs}{active};
         }
 
-        $distros{$distro}{test} = $d->{fields}{tests};
+        $distros{$distro}{test} = $d->{_source}{tests};
         my $total = 0;
         $total += ( $distros{$distro}{test}{$_} // 0 ) for qw(pass fail na);
         $distros{$distro}{test}{ratio}
@@ -146,7 +139,7 @@ sub fetch_latest_distros {
         }
 
         $distros{$distro}{unauthorized}
-            = $d->{fields}{authorized} eq 'false' ? 1 : 0;
+            = $d->{_source}{authorized} eq 'false' ? 1 : 0;
 
         # See also root/inc/release-infro.html
         if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
@@ -156,13 +149,14 @@ sub fetch_latest_distros {
         else {
             $distros{$distro}{repo} = 1;
         }
-        if ( not $d->{fields}{abstract} ) {
+        if ( not $d->{_source}{abstract} ) {
             $distros{$distro}{abstract} = 1;
         }
 
-        ( $distros{$distro}{date} = $d->{fields}{date} ) =~ s/\.\d+Z$//;
-        $distros{$distro}{version} = $d->{fields}{'metadata.version'};
+        ( $distros{$distro}{date} = $d->{_source}{date} ) =~ s/\.\d+Z$//;
+        $distros{$distro}{version} = $d->{_source}{'metadata.version'};
     }
+
     return {
         licenses => \%licenses,
         distros  => \%distros,
