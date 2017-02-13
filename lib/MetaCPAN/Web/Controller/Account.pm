@@ -52,21 +52,24 @@ sub profile : Local : Args(0) {
     return unless ( $req->method eq 'POST' );
 
     my $data = $author;
-    $data->{blog} = $req->param('blog.url')
+    $data->{blog}
+        = $req->param('blog.url')
         ? [
         pairwise { { url => $a, feed => $b } }
         @{ [ $req->param('blog.url') ] },
         @{ [ $req->param('blog.feed') ] }
         ]
         : undef;
-    $data->{donation} = $req->param('donation.name')
+    $data->{donation}
+        = $req->param('donation.name')
         ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('donation.name') ] },
         @{ [ $req->param('donation.id') ] }
         ]
         : undef;
-    $data->{profile} = $req->param('profile.name')
+    $data->{profile}
+        = $req->param('profile.name')
         ? [
         pairwise { { name => $a, id => $b } }
         @{ [ $req->param('profile.name') ] },
@@ -82,7 +85,7 @@ sub profile : Local : Args(0) {
         for (qw(name asciiname gravatar_url city region country));
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
 
-    $data->{extra} = $req->json_param('extra');
+    $data->{extra} = $req->json_param('extra') if ( $req->param('extra') );
 
     $data->{donation} = undef unless ( $req->params->{donations} );
 
