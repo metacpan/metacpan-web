@@ -82,7 +82,7 @@ sub profile : Local : Args(0) {
         for (qw(name asciiname gravatar_url city region country));
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
 
-    $data->{extra} = $req->json_param('extra') if ( $req->param('extra') );
+    $data->{extra} = $req->param('extra') ? $req->json_param('extra') : undef;
 
     $data->{donation} = undef unless ( $req->params->{donations} );
 
