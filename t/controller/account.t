@@ -25,12 +25,11 @@ test_psgi app, sub {
     my ( $token, $user_exists );
     my $authenticate_args;
 
-    no warnings 'once';
+    no warnings 'once', 'redefine';
     *MetaCPAN::Web::token = sub { return $token; };
     *MetaCPAN::Web::authenticate
         = sub { ( undef, $authenticate_args ) = @_; };
     *MetaCPAN::Web::user_exists = sub { return $user_exists; };
-
     subtest 'auto' => sub {
         ok(
             my $res = $cb->( GET '/account/profile' ),
@@ -203,7 +202,6 @@ test_psgi app, sub {
         ok( my $res = $cb->( GET '/account/logout' ), 'GET /account/logout' );
         is( $res->code, 403, '... and the response is 403' );
 
-        no warnings 'redefine';
         my $expired;
         *Plack::Session::expire = sub { ++$expired };
 
