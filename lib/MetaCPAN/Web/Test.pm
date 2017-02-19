@@ -15,6 +15,7 @@ use Encode;
 use base 'Exporter';
 our @EXPORT = qw(
     GET
+    POST
     test_psgi
     override_api_response
     app
