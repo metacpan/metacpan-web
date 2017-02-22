@@ -36,8 +36,9 @@ test_psgi app, sub {
             'GET /account/profile without token'
         );
         is( $res->code, 403, '... and the user cannot get in' );
-        is( $res->header('Vary'),
-            'Cookie', '... and the Vary header for proxies is there' );
+        is( $res->header('Cache-Control'),
+            'private',
+            '... and the private Cache-Control header for proxies is there' );
         is( $authenticate_args, undef,
             '... and we did not try to authenticate' );
 
