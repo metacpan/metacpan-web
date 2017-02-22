@@ -13,6 +13,8 @@ sub auto : Private {
     # this is for proxies
     $c->res->header( Vary => 'Cookie' );
 
+    $c->cdn_never_cache(1);
+
     if ( my $token = $c->token ) {
         $c->authenticate( { token => $token } );
     }
