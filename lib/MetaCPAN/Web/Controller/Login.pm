@@ -7,6 +7,10 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
+
+    # Never cache at CDN
+    $c->cdn_never_cache(1);
+
     if ( my $code = $c->req->parameters->{code} ) {
         my $data = $c->model('API')->request(
             '/oauth2/access_token',
@@ -29,6 +33,10 @@ sub index : Path : Args(0) {
 
 sub openid : Local : Args(0) {
     my ( $self, $c ) = @_;
+
+    # Never cache at CDN
+    $c->cdn_never_cache(1);
+
     $c->stash( { template => 'account/openid-login.html' } );
 }
 
