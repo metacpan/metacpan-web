@@ -294,7 +294,7 @@ function validateJSON(text) {
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
-    container.append('<br><div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
+    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
     var add = container.children().last();
     add.slideDown();
     return false;
