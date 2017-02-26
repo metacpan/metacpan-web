@@ -35,7 +35,7 @@
     <% IF release.tests.size %><span title="(pass / fail / na)">(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)</span><% END %>
 </li>
 <li>
-    <a href="http://cpants.charsbar.org/dist/overview/<% release.distribution %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
+    <a href="http://cpants.cpanauthors.org/release/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
 </li>
 <% IF release.license %>
 <li><i class="fa fa-fw fa-gavel black"></i>License: <% release.license.join(', ') %></li>
