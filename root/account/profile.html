@@ -52,14 +52,14 @@
                             <div class="input-group">
                                 <input type="email" class="form-control" name="email" value="<% author.email.shift %>" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" onclick="return addField('email')">add</button>
+                                    <button class="btn search-btn" type="button" onclick="return addField('email')">add</button>
                                 </span>
                             </div>
                             <% FOREACH email IN author.email -%>
                             <div class="input-group" style="padding-top:15px;">
                                 <input type="email" class="form-control" name="email" value="<% email %>" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" onclick="return removeDiv(this)">remove</button>
+                                    <button class="btn search-btn" type="button" onclick="return removeDiv(this)">remove</button>
                                 </span>
                             </div>
                             <% END -%>
@@ -73,7 +73,7 @@
                             <div class="input-group">
                                 <input type="url" class="form-control" name="website" value="<% author.website.shift %>" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" onclick="return addField('website')">add</button>
+                                    <button class="btn search-btn" type="button" onclick="return addField('website')">add</button>
                                 </span>
                             </div>
                             <% FOREACH website IN author.website -%>
@@ -81,7 +81,7 @@
                                 <div class="input-group" style="padding-top:15px;">
                                     <input type="url" class="form-control" name="website" value="<% website %>" />
                                     <span class="input-group-btn">
-                                        <button class="btn search-btn" href="" onclick="return removeDiv(this)">remove</a></button>
+                                        <button class="btn search-btn" type="button" href="" onclick="return removeDiv(this)">remove</a></button>
                                     </span>
                                 </div>
                             <% END -%>
@@ -300,7 +300,7 @@ function validateJSON(text) {
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
-    container.append('<br><div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button class="btn search-btn" onclick="return removeLabel(this.parentNode)">remove</button></span></div>');
+    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button type="button" class="btn search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
     var add = container.children().last();
     add.slideDown();
     return false;
