@@ -192,6 +192,12 @@
                 </div>
             </div>
             <div id="profiles" class="profiles">
+                <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
+                    <label class="col-sm-4 col-md-4 control-label">metacpan</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" value="<% author.user %>" disabled="disabled" />
+                    </div>
+                </div>
                 <% FOREACH profile IN author.profile.sort('name'); known = profiles.${profile.name} -%>
                 <div class="form-group <% IF known %>profile profile-<% profile.name %><% END %>">
                     <label class="col-sm-4 col-md-4 control-label">
