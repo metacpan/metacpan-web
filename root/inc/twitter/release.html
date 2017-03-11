@@ -3,3 +3,6 @@
 <meta name="twitter:title"       content="<% release.metadata.name %>" />
 <meta name="twitter:description" content="<% release.abstract %>" />
 <meta name="twitter:site"        content="metacpan" />
+<% IF author.gravatar_url -%>
+<meta name="twitter:image" content="<% author.gravatar_url %>" />
+<%- END %>
