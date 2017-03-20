@@ -83,8 +83,7 @@ sub _add_fav_list_to_stash {
 
     my $user = $c->user;
 
-    my $faves_cv
-        = $c->model('API::Favorite')->by_user( $user->id, $size );
+    my $faves_cv   = $c->model('API::Favorite')->by_user( $user->id, $size );
     my $faves_data = $faves_cv->recv;
     my $faves      = [
         sort { $b->{date} cmp $a->{date} }
