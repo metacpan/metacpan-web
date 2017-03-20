@@ -6,18 +6,13 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub auto : Private {
     my ( $self, $c ) = @_;
 
-    # Needed to clear the cache
-    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
-
-    # Probably we shouldn't be getting to this point without a defined user,
-    # but sometimes we do.  Might have been an issue with the v0 => v1
-    # migration.
-
-    $c->detach('/forbidden') unless $user && $user->{user};
-
-    $c->stash->{user} = $user;
-
-    return 1;
+    if ( my $token = $c->token ) {
+        $c->authenticate( { token => $token } );
+    }
+    unless ( $c->user_exists ) {
+        $c->forward('/forbidden');
+    }
+    return $c->user_exists;
 }
 
 sub add : Local : Args(0) {
@@ -78,18 +73,17 @@ sub list_as_json : Local : Args(0) {
 sub _cache_key_for_user {
     my ( $self, $c ) = @_;
 
-    my $user = $c->stash->{user};
+    my $user = $c->user;
 
-    return 'user/' . $user->{user};
+    return 'user/' . $user->id;
 }
 
 sub _add_fav_list_to_stash {
     my ( $self, $c, $size ) = @_;
 
-    my $user = $c->stash->{user};
+    my $user = $c->user;
 
-    my $faves_cv
-        = $c->model('API::Favorite')->by_user( $user->{user}, $size );
+    my $faves_cv   = $c->model('API::Favorite')->by_user( $user->id, $size );
     my $faves_data = $faves_cv->recv;
     my $faves      = [
         sort { $b->{date} cmp $a->{date} }
