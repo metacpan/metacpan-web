@@ -58,7 +58,8 @@ test_psgi app, sub {
             module     => 'LWP::UserAgent',
             release    => 'libwww-perl',
             repository => 0,
-            home_page  => 0
+            home_page  => 0,
+            issues     => 'https://github.com/libwww-perl/libwww-perl/issues',
         },
 
         # no optional tests

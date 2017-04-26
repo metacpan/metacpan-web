@@ -11,6 +11,8 @@ use MetaCPAN::Web::Types qw( HashRef Object );
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
+use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
+    qw/ single_valued_arrayref_to_scalar /;
 
 sub ACCEPT_CONTEXT {
     my ( $class, $c, $args ) = @_;
@@ -63,7 +65,9 @@ sub summary_hash {
 # massage the x_contributors field into what we want
 sub groom_contributors {
     my ($self) = @_;
-    my ( $release, $author ) = ( $self->release, $self->author );
+    my ( $release, $author )
+        = ( $self->release,
+        single_valued_arrayref_to_scalar( $self->author ) );
 
     my $contribs = $release->{metadata}{x_contributors} || [];
     my $authors  = $release->{metadata}{author}         || [];
@@ -82,11 +86,8 @@ sub groom_contributors {
     $authors = [ grep { $_ ne 'unknown' } @$authors ];
 
     my $author_info = {
-        email => [
-            lc "$release->{author}\@cpan.org",
-            @{ $author->{email} || [] },
-        ],
-        name => $author->{name},
+        email => [ lc "$release->{author}\@cpan.org", $author->{email} ],
+        name  => $author->{name},
     };
     my %seen = map { $_ => $author_info }
         ( @{ $author_info->{email} }, $author_info->{name}, );
