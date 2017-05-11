@@ -28,6 +28,20 @@ test_psgi app, sub {
         is( $res->code, 200, 'found' );
         like( $res->content, qr{ETHER}, 'ETHER in content' );
     }
+
+    {
+        ok( my $res = $cb->( GET '/permission/author/!!!DOESNTEXIST' ),
+            'GET /permission/author/DOESNTEXIST' );
+        is( $res->code, 404, 'not found' );
+    }
+    {
+        ok( my $res = $cb->( GET '/permission/author/OALDERS' ),
+            'GET /permission/author/OALDERS' );
+        is( $res->code, 200, 'found' );
+        like( $res->content, qr{OALDERS},        'OALDERS in content' );
+        like( $res->content, qr{HTML::Restrict}, 'owner in content' );
+        like( $res->content, qr{LWP::UserAgent}, 'co-maint in content' );
+    }
 };
 
 done_testing;

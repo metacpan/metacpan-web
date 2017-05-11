@@ -5,6 +5,12 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+sub author : Local Args(1) {
+    my ( $self, $c, $pause_id ) = @_;
+
+    $c->forward( 'get', $c, [ 'author', $pause_id ] );
+}
+
 sub distribution : Local Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
