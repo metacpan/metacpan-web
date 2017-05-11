@@ -11,6 +11,7 @@ theme = core
 [-RegularExpressions::RequireDotMatchAnything]
 [-RegularExpressions::RequireExtendedFormatting]
 [-RegularExpressions::RequireLineBoundaryMatching]
+[-Subroutines::ProhibitExplicitReturnUndef]
 [-Variables::ProhibitPunctuationVars]
 
 [CodeLayout::RequireTrailingCommas]
