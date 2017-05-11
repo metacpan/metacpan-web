@@ -123,6 +123,9 @@
         <a href="<% author.links.cpan_directory %>">CPAN directory</a> (<% author.release_count.cpan + author.release_count.latest %>)
     </li>
     <li>
+        <a href="/permission/author/<% author.pauseid %>">Module permissions</a>
+    </li>
+    <li>
         <a href="<% author.links.backpan_directory %>" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">BackPAN directory</a> (<% author.release_count.item('backpan-only') %>)
     </li>
 </ul>
