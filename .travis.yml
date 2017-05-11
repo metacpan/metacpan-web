@@ -6,6 +6,7 @@ perl:
 
 matrix:
   allow_failures:
+    - perl: "5.22"
     - perl: "5.20"
     - perl: "5.18"
   exclude:
