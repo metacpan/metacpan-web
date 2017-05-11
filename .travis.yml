@@ -1,18 +1,12 @@
 language: perl
 perl:
   - "5.22"
-  - "5.20"
-  - "5.18"
 
 matrix:
   allow_failures:
     - perl: "5.22"
-    - perl: "5.20"
-    - perl: "5.18"
   exclude:
-    - perl: "5.20"
-      env: USE_CPANFILE_SNAPSHOT=true
-    - perl: "5.18"
+    - perl: "5.22"
       env: USE_CPANFILE_SNAPSHOT=true
 
 env:
