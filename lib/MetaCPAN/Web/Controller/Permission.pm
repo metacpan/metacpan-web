@@ -39,7 +39,7 @@ sub get : Private {
         $c->detach('/not_found');
     }
 
-    $c->stash( { name => $name, permission => $perms } );
+    $c->stash( { search_term => $name, permission => $perms } );
 }
 
 __PACKAGE__->meta->make_immutable;
