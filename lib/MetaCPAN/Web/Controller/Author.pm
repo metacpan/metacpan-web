@@ -72,7 +72,7 @@ sub index : Chained('root') PathPart('') Args(0) {
                 $noLatest->{no_latest}->{$distro} ? () : $_->{fields};
             } @{ $faves_data->{hits}->{hits} }
         ];
-        $self->single_valued_arrayref_to_scalar($faves);
+        single_valued_arrayref_to_scalar($faves);
         $faves = [ sort { $b->{date} cmp $a->{date} } @{$faves} ];
     }
 
