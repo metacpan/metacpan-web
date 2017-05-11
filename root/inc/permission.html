@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Co-Maintainers</th>
+  </tr>
+  <% FOREACH module IN permission %>
+    <tr>
+      <td>
+        <a href="/pod/<% module.module_name %>"><% module.module_name %></a>
+      </td>
+      <td>
+        <a href="/author/<% module.owner %>"><% module.owner %></a>
+      </td>
+      <td>
+        <% FOREACH co_maintainer IN module.co_maintainers %>
+          <a href="/author/<% co_maintainer %>"><% co_maintainer %></a>
+        <% END %>
+      </td>
+    </tr>
+  <% END %>
+</table>
