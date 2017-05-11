@@ -1,0 +1,17 @@
+<% title = 'module permissions for ' . name %>
+
+<h1>Module Permissions</h1>
+
+<p>
+  <a href="/pod/<% permission.module_name %>"><% permission.module_name %></a> is owned by <a href="/author/<% permission.owner %>"><% permission.owner %></a>.
+</p>
+
+<p>
+  This module is also maintained by
+</p>
+
+<ul>
+  <% FOREACH co_maintainer IN permission.co_maintainers %>
+    <li><a href="/author/<% co_maintainer %>"><% co_maintainer %></a></li>
+  <% END %>
+</ul>
