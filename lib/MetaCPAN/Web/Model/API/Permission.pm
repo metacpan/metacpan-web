@@ -51,30 +51,14 @@ sub _get_author_modules {
 sub _get_modules_in_distribution {
     my $self = shift;
     my $name = shift;
+    return undef unless $name;
 
-    my $release = $self->request( '/release/' . $name )->recv;
-
-    # ugh
+    # ugh. Can't see a better way to get a model.
     my $model = MetaCPAN::Web::Model::API::Release->new(
         api_secure => $self->{api_secure} );
 
-    my $pkg_search = {
-        query => {
-            bool => {
-                must => [
-                    { term => { distribution => $release->{distribution} } },
-                    { term => { dist_version => $release->{version} } },
-                ]
-            },
-        },
-        size => 1_000,
-    };
-
-    my $found_modules
-        = $self->request( '/package/_search', $pkg_search )->recv;
-
-    my @modules = map { $_->{_source}->{module_name} }
-        @{ $found_modules->{hits}->{hits} };
+    my $res = $self->request("/package/modules/$name")->recv;
+    my @modules = $res->{modules} ? @{ $res->{modules} } : undef;
 
     return undef unless @modules;
 
