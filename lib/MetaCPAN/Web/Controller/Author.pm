@@ -63,7 +63,7 @@ sub index : Chained('root') PathPart('') Args(0) {
 
         my @all_fav = map { $_->{fields}->{distribution} }
             @{ $faves_data->{hits}->{hits} };
-        my $noLatest = $c->model('API::Release')->no_latest(@all_fav)->recv;
+        my $noLatest = $c->model('API::Release')->no_latest(@all_fav);
         $took += $noLatest->{took} || 0;
 
         $faves = [
