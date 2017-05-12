@@ -174,7 +174,7 @@ sub view : Private {
                     unless exists $attrs->{$attr};
                 my $val = $attrs->{$attr};
                 if ( $attr eq 'src' ) {
-                    if ( $val =~ m{^(?:(?:https?|ftp|data):)?//} ) {
+                    if ( $val =~ m{^(?:(?:https?|ftp):)?//|^data:} ) {
 
                         # use directly
                     }
