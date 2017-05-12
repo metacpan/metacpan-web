@@ -61,7 +61,17 @@ sub index : Chained('root') PathPart('') Args(0) {
             = $c->model('API::Favorite')->by_user( $author->{user} )->recv;
         $took += $faves_data->{took} || 0;
 
-        $faves = [ map { $_->{fields} } @{ $faves_data->{hits}->{hits} } ];
+        my @all_fav = map { $_->{fields}->{distribution} }
+            @{ $faves_data->{hits}->{hits} };
+        my $noLatest = $c->model('API::Release')->no_latest(@all_fav)->recv;
+        $took += $noLatest->{took} || 0;
+
+        $faves = [
+            map {
+                my $distro = $_->{fields}->{distribution};
+                $noLatest->{no_latest}->{$distro} ? () : $_->{fields};
+            } @{ $faves_data->{hits}->{hits} }
+        ];
         single_valued_arrayref_to_scalar($faves);
         $faves = [ sort { $b->{date} cmp $a->{date} } @{$faves} ];
     }
