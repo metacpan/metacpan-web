@@ -55,91 +55,10 @@ has release => (
 sub summary_hash {
     my ($self) = @_;
     return {
-        author       => $self->author,
-        contributors => $self->groom_contributors,
-        irc          => $self->groom_irc,
-        issues       => $self->normalize_issues,
+        author => $self->author,
+        irc    => $self->groom_irc,
+        issues => $self->normalize_issues,
     };
-}
-
-# massage the x_contributors field into what we want
-sub groom_contributors {
-    my ($self) = @_;
-    my ( $release, $author )
-        = ( $self->release,
-        single_valued_arrayref_to_scalar( $self->author ) );
-
-    my $contribs = $release->{metadata}{x_contributors} || [];
-    my $authors  = $release->{metadata}{author}         || [];
-
-    for ( \( $contribs, $authors ) ) {
-
-        # If a sole contributor is a string upgrade it to an array...
-        $$_ = [$$_]
-            if !ref $$_;
-
-        # but if it's any other kind of value don't die trying to parse it.
-        $$_ = []
-            if ref($$_) ne 'ARRAY';
-    }
-
-    $authors = [ grep { $_ ne 'unknown' } @$authors ];
-
-    my $author_info = {
-        email => [ lc "$release->{author}\@cpan.org", $author->{email} ],
-        name  => $author->{name},
-    };
-    my %seen = map { $_ => $author_info }
-        ( @{ $author_info->{email} }, $author_info->{name}, );
-
-    my @contribs = map {
-        my $name = $_;
-        my $email;
-        if ( $name =~ s/\s*<([^<>]+@[^<>]+)>// ) {
-            $email = $1;
-        }
-        my $info;
-        my $dupe;
-        if ( $email and $info = $seen{$email} ) {
-            $dupe = 1;
-        }
-        elsif ( $info = $seen{$name} ) {
-            $dupe = 1;
-        }
-        else {
-            $info = {
-                name  => $name,
-                email => [],
-            };
-        }
-        $seen{$name} ||= $info;
-        if ($email) {
-            push @{ $info->{email} }, $email
-                unless grep { $_ eq $email } @{ $info->{email} };
-            $seen{$email} ||= $info;
-        }
-        $dupe ? () : $info;
-    } ( @$authors, @$contribs );
-
-    for my $contrib (@contribs) {
-
-        # heuristic to autofill pause accounts
-        if ( !$contrib->{pauseid} ) {
-            my ($pauseid)
-                = map { /^(.*)\@cpan\.org$/ ? $1 : () }
-                @{ $contrib->{email} };
-            $contrib->{pauseid} = uc $pauseid
-                if $pauseid;
-        }
-
-        if ( $contrib->{pauseid} ) {
-            $contrib->{url}
-                = $self->c->uri_for_action( '/author/index',
-                [ $contrib->{pauseid} ] );
-        }
-    }
-
-    return \@contribs;
 }
 
 sub groom_irc {

@@ -36,6 +36,9 @@ sub api_requests {
             $data->{distribution}
         ),
 
+        contributors => $c->model('API::Contributors')
+            ->get( $data->{author}, $data->{release} ),
+
         rating => $c->model('API::Rating')->get( $data->{distribution} ),
 
         versions =>
@@ -61,6 +64,8 @@ sub stash_api_results {
     my %stash
         = map { $_ => single_valued_arrayref_to_scalar( $to_stash{$_} ) }
         ( 'rating', 'distribution', 'versions' );
+
+    $stash{contributors} = $reqs->{contributors};
 
     $c->stash( \%stash );
 }

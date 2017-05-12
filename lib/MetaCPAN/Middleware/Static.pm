@@ -38,7 +38,6 @@ sub wrap {
             cpan
             toolbar
             github
-            contributors
             dropdown
             bootstrap/bootstrap-dropdown
             bootstrap/bootstrap-collapse
