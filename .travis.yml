@@ -13,26 +13,32 @@ env:
     # that the snapshot was built from.
     - DEPLOYMENT_PERL_VERSION=5.22
   matrix:
-    - USE_CPANFILE_SNAPSHOT=true
+    - COVERAGE=1 USE_CPANFILE_SNAPSHOT=true
     - USE_CPANFILE_SNAPSHOT=false
 
 before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init
+
   - npm install -g less js-beautify
   # Pre-install from backpan to avoid upgrade breakage.
   - cpanm -n http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
-  - cpanm -n Devel::Cover::Report::Coveralls
   - cpanm -n App::cpm Carton
 
 install:
+  - cpan-install --coverage   # installs converage prereqs, if enabled
   - 'cpm install `test "${USE_CPANFILE_SNAPSHOT}" = "false" && echo " --resolver metadb" || echo " --resolver snapshot"`'
+
+before_script:
+  - coverage-setup
 
 script:
   # Devel::Cover isn't in the cpanfile
   # but if it's installed into the global dirs this should work.
-  - HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,local carton exec prove -lr -j 2 t
+  - carton exec prove -lr -j$(test-jobs) t
 
 after_success:
-  - cover -report coveralls
+  - coverage-report
 
 notifications:
   email:
