@@ -23,12 +23,10 @@ before_install:
   # Pre-install from backpan to avoid upgrade breakage.
   - cpanm -n http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
   - cpanm -n Devel::Cover::Report::Coveralls
-  - cpanm -n Carton
+  - cpanm -n App::cpm Carton
 
 install:
-  # Carton::Builder (carton install) passes --notest to cpanm.
-  - 'carton install `test "${TRAVIS_PERL_VERSION}" = "${DEPLOYMENT_PERL_VERSION}" && test "${USE_CPANFILE_SNAPSHOT}" = "true" && echo " --deployment"`'
-
+  - 'cpm install `test "${USE_CPANFILE_SNAPSHOT}" = "false" && echo " --resolver metadb" || echo " --resolver snapshot"`'
 
 script:
   # Devel::Cover isn't in the cpanfile
@@ -37,7 +35,6 @@ script:
 
 after_success:
   - cover -report coveralls
-
 
 notifications:
   email:
