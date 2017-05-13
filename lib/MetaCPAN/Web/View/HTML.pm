@@ -204,6 +204,7 @@ Template::Alloy->define_vmethod(
         my ( $text, $count ) = @_;
 
         # Send args individually since the sub has a prototype.
+        $count //= 0;
         return Text::Pluralize::pluralize( $text, $count );
     },
 );
