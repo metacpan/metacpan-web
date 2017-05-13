@@ -31,7 +31,7 @@ install:
 script:
   # Devel::Cover isn't in the cpanfile
   # but if it's installed into the global dirs this should work.
-  - HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,local carton exec prove -lr t
+  - HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,local carton exec prove -lr -j 2 t
 
 after_success:
   - cover -report coveralls
