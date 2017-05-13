@@ -27,8 +27,8 @@ sub get {
     my ( $self, $author, $release ) = @_;
     my $cv = $self->cv;
 
-    $self->request( '/release/contributors/' . $author . '/' . $release,
-        )->cb(
+    $self->request( '/release/contributors/' . $author . '/' . $release, )
+        ->cb(
         sub {
             my ($contributors) = shift->recv;
             $cv->send( $contributors->{contributors} );
