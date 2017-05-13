@@ -168,7 +168,7 @@ sub view : Private {
         },
         replace_img => sub {
             my ( $tagname, $attrs, $text ) = @_;
-            my $tag = '<img class="img-responsive"';
+            my $tag = '<img';
             for my $attr (qw( alt border height width src title)) {
                 next
                     unless exists $attrs->{$attr};
