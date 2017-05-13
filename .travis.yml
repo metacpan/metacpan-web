@@ -5,9 +5,7 @@ perl:
 matrix:
   allow_failures:
     - perl: "5.22"
-  exclude:
-    - perl: "5.22"
-      env: USE_CPANFILE_SNAPSHOT=true
+      env: USE_CPANFILE_SNAPSHOT=false
 
 env:
   global:
@@ -23,21 +21,18 @@ before_install:
   # Pre-install from backpan to avoid upgrade breakage.
   - cpanm -n http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/common-sense-3.6.tar.gz
   - cpanm -n Devel::Cover::Report::Coveralls
-  - cpanm -n Carton
+  - cpanm -n App::cpm Carton
 
 install:
-  # Carton::Builder (carton install) passes --notest to cpanm.
-  - 'carton install `test "${TRAVIS_PERL_VERSION}" = "${DEPLOYMENT_PERL_VERSION}" && test "${USE_CPANFILE_SNAPSHOT}" = "true" && echo " --deployment"`'
-
+  - 'cpm install `test "${USE_CPANFILE_SNAPSHOT}" = "false" && echo " --resolver metadb" || echo " --resolver snapshot"`'
 
 script:
   # Devel::Cover isn't in the cpanfile
   # but if it's installed into the global dirs this should work.
-  - HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,local carton exec prove -lrv t
+  - HARNESS_PERL_SWITCHES=-MDevel::Cover=+ignore,local carton exec prove -lr -j 2 t
 
 after_success:
   - cover -report coveralls
-
 
 notifications:
   email:

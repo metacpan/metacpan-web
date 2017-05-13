@@ -100,6 +100,7 @@ requires 'XML::Feed';
 requires 'XML::Simple';
 
 test_requires 'App::Prove';
+test_requires 'Code::TidyAll', '>= 0.47';
 test_requires 'Path::Iterator::Rule', '1.008';
 test_requires 'Perl::Tidy';
 test_requires 'Test::Code::TidyAll';
@@ -109,4 +110,3 @@ test_requires 'Perl::Critic', '1.124';
 test_requires 'Test::Perl::Critic';
 test_requires 'Test::XPath', '0.15';
 
-author_requires 'Code::TidyAll', '>= 0.47';
