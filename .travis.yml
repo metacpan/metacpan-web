@@ -5,9 +5,7 @@ perl:
 matrix:
   allow_failures:
     - perl: "5.22"
-  exclude:
-    - perl: "5.22"
-      env: USE_CPANFILE_SNAPSHOT=true
+      env: USE_CPANFILE_SNAPSHOT=false
 
 env:
   global:
