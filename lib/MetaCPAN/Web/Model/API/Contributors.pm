@@ -27,6 +27,9 @@ sub get {
     my ( $self, $author, $release ) = @_;
     my $cv = $self->cv;
 
+    # If there's no release, we'll just redirect
+    $release //= {};
+
     $self->request( '/release/contributors/' . $author . '/' . $release, )
         ->cb(
         sub {
