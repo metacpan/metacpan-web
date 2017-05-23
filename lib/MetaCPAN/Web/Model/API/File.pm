@@ -18,21 +18,18 @@ sub dir {
         '/file/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {}, },
-                    filter => {
-                        and => [
-                            { term => { 'level'   => scalar @path } },
-                            { term => { 'author'  => $author } },
-                            { term => { 'release' => $release } },
-                            {
-                                prefix => {
-                                    'path' => join( q{/}, @path, q{} )
-                                }
-                            },
-                        ]
-                    },
-                }
+                bool => {
+                    must => [
+                        { term => { 'level'   => scalar @path } },
+                        { term => { 'author'  => $author } },
+                        { term => { 'release' => $release } },
+                        {
+                            prefix => {
+                                'path' => join( q{/}, @path, q{} )
+                            }
+                        },
+                    ]
+                },
             },
             size   => 999,
             fields => [

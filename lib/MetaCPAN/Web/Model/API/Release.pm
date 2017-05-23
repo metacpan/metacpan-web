@@ -32,14 +32,11 @@ sub get {
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { 'name' => $release } },
-                            { term => { author => uc($author) } }
-                        ]
-                    }
+                bool => {
+                    must => [
+                        { term => { 'name' => $release } },
+                        { term => { author => uc($author) } }
+                    ]
                 }
             }
         }
@@ -73,14 +70,11 @@ sub latest_by_author {
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { author => uc($author) } },
-                            { term => { status => 'latest' } }
-                        ]
-                    },
+                bool => {
+                    must => [
+                        { term => { author => uc($author) } },
+                        { term => { status => 'latest' } }
+                    ]
                 }
             },
             sort => [
@@ -100,15 +94,8 @@ sub all_by_author {
     return $self->request(
         '/release/_search',
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        term => { author => uc($author) }
-                    },
-                }
-            },
-            sort => [ { date => 'desc' } ],
+            query => { term => { author => uc($author) } },
+            sort  => [      { date      => 'desc' } ],
             fields => [qw(author distribution name status abstract date)],
             size   => $size,
             from   => ( $page - 1 ) * $size,
@@ -152,49 +139,54 @@ sub modules {
         '/file/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { release   => $release } },
-                            { term => { author    => $author } },
-                            { term => { directory => 0 } },
-                            {
-                                or => [
+                bool => {
+                    must => [
+                        { term => { release   => $release } },
+                        { term => { author    => $author } },
+                        { term => { directory => 0 } },
+                        {
+                            bool => {
+                                should => [
                                     {
-                                        and => [
-                                            {
-                                                exists => {
-                                                    field => 'module.name'
+                                        bool => {
+                                            must => [
+                                                {
+                                                    exists => {
+                                                        field => 'module.name'
+                                                    }
+                                                },
+                                                {
+                                                    term => {
+                                                        'module.indexed' => 1
+                                                    }
                                                 }
-                                            },
-                                            {
-                                                term => {
-                                                    'module.indexed' => 1
-                                                }
-                                            }
-                                        ]
+                                            ]
+                                        }
                                     },
                                     {
-                                        and => [
-                                            {
-                                                range =>
-                                                    { slop => { gt => 0 } }
-                                            },
-                                            {
-                                                exists => {
-                                                    field => 'pod.analyzed'
-                                                }
-                                            },
-                                            {
-                                                term => { 'indexed' => 1 }
-                                            },
-                                        ]
+                                        bool => {
+                                            must => [
+                                                {
+                                                    range => {
+                                                        slop => { gt => 0 }
+                                                    }
+                                                },
+                                                {
+                                                    exists => {
+                                                        field =>
+                                                            'pod.analyzed'
+                                                    }
+                                                },
+                                                {
+                                                    term => { 'indexed' => 1 }
+                                                },
+                                            ]
+                                        }
                                     }
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             },
             size => 999,
@@ -227,18 +219,15 @@ sub find {
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            {
-                                term => {
-                                    'distribution' => $distribution
-                                }
-                            },
-                            { term => { status => 'latest' } }
-                        ]
-                    }
+                bool => {
+                    must => [
+                        {
+                            term => {
+                                'distribution' => $distribution
+                            }
+                        },
+                        { term => { status => 'latest' } }
+                    ]
                 }
             },
             sort => [ { date => 'desc' } ],
@@ -259,14 +248,11 @@ sub reverse_dependencies {
         "/search/reverse_dependencies/$distribution",
         {
             query => {
-                filtered => {
-                    query  => { 'match_all' => {} },
-                    filter => {
-                        and => [
-                            { term => { 'status'     => 'latest' } },
-                            { term => { 'authorized' => 1 } },
-                        ]
-                    }
+                bool => {
+                    must => [
+                        { term => { 'status'     => 'latest' } },
+                        { term => { 'authorized' => 1 } },
+                    ]
                 }
             },
             size => $page_size,
@@ -295,67 +281,64 @@ sub interesting_files {
         '/file/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { term => { release   => $release } },
-                            { term => { author    => $author } },
-                            { term => { directory => \0 } },
-                            { not  => { prefix    => { 'path' => 'xt/' } } },
-                            { not  => { prefix    => { 'path' => 't/' } } },
-                            {
-                                or => [
+                bool => {
+                    must => [
+                        { term => { release   => $release } },
+                        { term => { author    => $author } },
+                        { term => { directory => \0 } },
+                        { not  => { prefix    => { 'path' => 'xt/' } } },
+                        { not  => { prefix    => { 'path' => 't/' } } },
+                        {
+                            bool => {
+                                should => [
                                     {
-                                        and => [
-                                            { term => { level => 0 } },
-                                            {
-                                                or => [
-                                                    map {
-                                                        {
-                                                            term => {
-                                                                'name' => $_
-                                                            }
-                                                        }
-                                                        } qw(
-                                                        AUTHORS
-                                                        Build.PL
-                                                        CHANGELOG
-                                                        CHANGES
-                                                        CONTRIBUTING
-                                                        CONTRIBUTING.md
-                                                        COPYRIGHT
-                                                        CREDITS
-                                                        ChangeLog
-                                                        Changelog
-                                                        Changes
-                                                        Copying
-                                                        FAQ
-                                                        INSTALL
-                                                        INSTALL.md
-                                                        LICENCE
-                                                        LICENSE
-                                                        MANIFEST
-                                                        META.json
-                                                        META.yml
-                                                        Makefile.PL
-                                                        NEWS
-                                                        README
-                                                        README.markdown
-                                                        README.md
-                                                        README.mdown
-                                                        README.mkdn
-                                                        THANKS
-                                                        TODO
-                                                        ToDo
-                                                        Todo
-                                                        cpanfile
-                                                        dist.ini
-                                                        minil.toml
-                                                        )
-                                                ]
-                                            }
-                                        ]
+                                        bool => {
+                                            must => [
+                                                { term => { level => 0 } },
+                                                {
+                                                    terms => {
+                                                        name => [
+                                                            qw(
+                                                                AUTHORS
+                                                                Build.PL
+                                                                CHANGELOG
+                                                                CHANGES
+                                                                CONTRIBUTING
+                                                                CONTRIBUTING.md
+                                                                COPYRIGHT
+                                                                CREDITS
+                                                                ChangeLog
+                                                                Changelog
+                                                                Changes
+                                                                Copying
+                                                                FAQ
+                                                                INSTALL
+                                                                INSTALL.md
+                                                                LICENCE
+                                                                LICENSE
+                                                                MANIFEST
+                                                                META.json
+                                                                META.yml
+                                                                Makefile.PL
+                                                                NEWS
+                                                                README
+                                                                README.markdown
+                                                                README.md
+                                                                README.mdown
+                                                                README.mkdn
+                                                                THANKS
+                                                                TODO
+                                                                ToDo
+                                                                Todo
+                                                                cpanfile
+                                                                dist.ini
+                                                                minil.toml
+                                                                )
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
                                     },
                                     map {
                                         { prefix     => { 'name' => $_ } },
@@ -369,8 +352,8 @@ sub interesting_files {
                                         )
                                 ]
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             },
 
@@ -392,14 +375,9 @@ sub versions {
     $self->request(
         '/release/_search',
         {
-            query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => { term      => { distribution => $dist } }
-                }
-            },
-            size => 250,
-            sort => [ { date => 'desc' } ],
+            query => { term => { distribution => $dist } },
+            size  => 250,
+            sort  => [      { date            => 'desc' } ],
             fields =>
                 [qw( name date author version status maturity authorized )],
         }
@@ -457,14 +435,11 @@ sub no_latest {
         {
             size  => scalar @distributions,
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => [
-                            { terms => { distribution => \@distributions } },
-                            { term  => { status       => 'latest' } }
-                        ]
-                    }
+                bool => {
+                    must => [
+                        { terms => { distribution => \@distributions } },
+                        { term  => { status       => 'latest' } }
+                    ]
                 }
             },
             fields => [qw(distribution status)]

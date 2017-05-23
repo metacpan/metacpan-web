@@ -87,12 +87,9 @@ sub fetch_latest_distros {
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => \@filter,
-                    },
-                },
+                bool => {
+                    must => \@filter,
+                }
             },
             sort => [
                 'distribution', { 'version_numified' => { reverse => 1 } }

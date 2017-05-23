@@ -42,15 +42,7 @@ sub get {
         {
             size  => 0,
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        or => [
-                            map { { term => { 'distribution' => $_ } } }
-                                @distributions
-                        ]
-                    }
-                }
+                terms => { distribution => \@distributions }
             },
             aggregations => {
                 ratings => {

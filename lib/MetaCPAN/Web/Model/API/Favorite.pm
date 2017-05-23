@@ -26,15 +26,7 @@ sub get {
         {
             size  => 0,
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        or => [
-                            map { { term => { 'distribution' => $_ } } }
-                                @distributions
-                        ]
-                    }
-                }
+                terms => { 'distribution' => \@distributions }
             },
             aggregations => {
                 favorites => {
@@ -177,12 +169,7 @@ sub by_dist {
     return $self->request(
         '/favorite/_search',
         {
-            query => {
-                filtered => {
-                    query => { match_all => {} },
-                    filter => { term => { distribution => $distribution }, },
-                }
-            },
+            query   => { term => { distribution => $distribution } },
             _source => "user",
             size    => 1000,
         }

@@ -85,19 +85,16 @@ sub requires {
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { 'match_all' => {} },
-                    filter => {
-                        and => [
-                            { term => { 'status'     => 'latest' } },
-                            { term => { 'authorized' => 1 } },
-                            {
-                                term => {
-                                    'dependency.module' => $module
-                                }
+                bool => {
+                    must => [
+                        { term => { 'status'     => 'latest' } },
+                        { term => { 'authorized' => 1 } },
+                        {
+                            term => {
+                                'dependency.module' => $module
                             }
-                        ]
-                    }
+                        }
+                    ]
                 }
             },
             size => $page_size,
