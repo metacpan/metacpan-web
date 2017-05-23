@@ -182,9 +182,7 @@ sub plusser_by_id {
     return $self->request(
         '/author/_search',
         {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            query => { terms => { user => $users } },
             _source => { includes => [qw(pauseid gravatar_url)] },
             size    => 1000,
             sort    => ['pauseid']

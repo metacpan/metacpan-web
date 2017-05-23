@@ -52,13 +52,12 @@ sub _new_distributions_query {
     return {
         constant_score => {
             filter => {
-                and => [
-                    { term => { first => 1 } },
-                    {
-                        not =>
-                            { filter => { term => { status => 'backpan' } } }
-                    },
-                ]
+                bool => {
+                    must => [
+                        { term  => { first  => 1 } },
+                        { terms => { status => [qw< cpan latest >] } },
+                    ]
+                }
             }
         }
     };
@@ -116,7 +115,7 @@ sub recent {
         $query = {
             constant_score => {
                 filter => {
-                    not => { filter => { term => { status => 'backpan' } } }
+                    terms => { status => [qw< cpan latest >] }
                 }
             }
         };

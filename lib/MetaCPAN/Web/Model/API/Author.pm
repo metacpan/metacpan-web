@@ -98,9 +98,7 @@ sub by_user {
     my $query = return $self->request(
         '/author/_search',
         {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            query  => { terms => { user => $users } },
             fields => [qw(user pauseid)],
             size   => 100
         }
