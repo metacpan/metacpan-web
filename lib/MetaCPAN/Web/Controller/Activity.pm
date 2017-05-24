@@ -43,14 +43,17 @@ sub index : Path : Args(0) {
             aggregations => {
                 histo => {
                     filter => {
-                        and => [
-                            {
-                                range => {
-                                    date => { from => $start->epoch . '000' }
-                                }
-                            },
-                            @$q
-                        ]
+                        bool => {
+                            must => [
+                                {
+                                    range => {
+                                        date =>
+                                            { from => $start->epoch . '000' }
+                                    }
+                                },
+                                @$q
+                            ]
+                        }
                     },
                     aggregations => {
                         entries => {

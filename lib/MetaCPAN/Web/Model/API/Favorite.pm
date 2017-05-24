@@ -26,15 +26,7 @@ sub get {
         {
             size  => 0,
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        or => [
-                            map { { term => { 'distribution' => $_ } } }
-                                @distributions
-                        ]
-                    }
-                }
+                terms => { 'distribution' => \@distributions }
             },
             aggregations => {
                 favorites => {
@@ -177,12 +169,7 @@ sub by_dist {
     return $self->request(
         '/favorite/_search',
         {
-            query => {
-                filtered => {
-                    query => { match_all => {} },
-                    filter => { term => { distribution => $distribution }, },
-                }
-            },
+            query   => { term => { distribution => $distribution } },
             _source => "user",
             size    => 1000,
         }
@@ -195,9 +182,7 @@ sub plusser_by_id {
     return $self->request(
         '/author/_search',
         {
-            query => { match_all => {} },
-            filter =>
-                { or => [ map { { term => { user => $_ } } } @{$users} ] },
+            query => { terms => { user => $users } },
             _source => { includes => [qw(pauseid gravatar_url)] },
             size    => 1000,
             sort    => ['pauseid']

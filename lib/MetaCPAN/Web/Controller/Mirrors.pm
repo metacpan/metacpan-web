@@ -14,7 +14,7 @@ sub index : Path : Args(0) {
 
     my $location;
     my @protocols;
-    if ( my $q = $c->req->parameters->{q} ) {
+    if ( my $q = $c->req->parameters->{'q'} ) {
         my @parts = split( /\s+/, $q );
         foreach my $part (@parts) {
             push( @protocols, $part )
@@ -25,16 +25,21 @@ sub index : Path : Args(0) {
         }
     }
 
-    my @or;
-    push( @or, { not => { filter => { missing => { field => $_ } } } } )
-        for (@protocols);
+    my @filters
+        = map +{ filter => { missing => { field => $_ } } },
+        @protocols;
 
     my $data = $c->model('API')->request(
         '/mirror/_search',
         {
             size  => 999,
-            query => { match_all => {} },
-            @or ? ( filter => { and => \@or } ) : (),
+            query => (
+                @filters
+                ? {
+                    bool => { must_not => { bool => should => \@filters } }
+                    }
+                : { match_all => {} }
+            ),
             $location
             ? (
                 sort => {

@@ -75,24 +75,19 @@ sub _handle_module {
 sub fetch_latest_distros {
     my ( $self, $size, $pauseid ) = @_;
 
-# status can have all kinds of values, cpan is an attempt to find the ones that are on cpan but
-# are not authorized. Maybe it also includes ones that were superseeded by releases of other people
-    my @filter = ( { not => { term => { status => 'backpan' } } } );
-    if ($pauseid) {
-        push @filter, { term => { author => $pauseid } };
-    }
-
     my $cv = $self->cv;
     my $r  = $self->request(
         '/release/_search',
         {
             query => {
-                filtered => {
-                    query  => { match_all => {} },
-                    filter => {
-                        and => \@filter,
-                    },
-                },
+                bool => {
+                    must => [
+                        { terms => { status => [qw< cpan latest >] } },
+                        (
+                            $pauseid ? { term => { author => $pauseid } } : ()
+                        ),
+                    ],
+                }
             },
             sort => [
                 'distribution', { 'version_numified' => { reverse => 1 } }
