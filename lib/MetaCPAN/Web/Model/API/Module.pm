@@ -79,42 +79,17 @@ sub first {
 
 sub requires {
     my ( $self, $module, $page, $page_size, $sort ) = @_;
-    $sort ||= { date => 'desc' };
-    my $cv = $self->cv;
-    $self->request(
-        '/release/_search',
+
+    my $data = $self->request(
+        "/release/requires/$module",
+        undef,
         {
-            query => {
-                bool => {
-                    must => [
-                        { term => { 'status'     => 'latest' } },
-                        { term => { 'authorized' => 1 } },
-                        {
-                            term => {
-                                'dependency.module' => $module
-                            }
-                        }
-                    ]
-                }
-            },
-            size => $page_size,
-            from => $page * $page_size - $page_size,
-            sort => [$sort],
-        }
-        )->cb(
-        sub {
-            my $data = shift->recv;
-            $cv->send(
-                {
-                    data =>
-                        [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
-                    total => $data->{hits}->{total},
-                    took  => $data->{took}
-                }
-            );
-        }
-        );
-    return $cv;
+            page      => $page,
+            page_size => $page_size,
+        },
+    )->recv;
+
+    return $data;
 }
 
 __PACKAGE__->meta->make_immutable;
