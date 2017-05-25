@@ -23,7 +23,6 @@ __PACKAGE__->config(
 sub distribution : Local : Args(1) : Does('Sortable') {
     my ( $self, $c, $distribution, $sort ) = @_;
 
-    my $cv        = AE::cv();
     my $page_size = $c->req->get_page_size(50);
 
     my $data
@@ -44,12 +43,11 @@ sub distribution : Local : Args(1) : Does('Sortable') {
 sub module : Local : Args(1) : Does('Sortable') {
     my ( $self, $c, $module, $sort ) = @_;
 
-    my $cv        = AE::cv();
     my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Module')
-        ->requires( $module, $c->req->page, $page_size, $sort )->recv;
+        ->requires( $module, $c->req->page, $page_size, $sort );
     $c->stash(
         {
             %{$data},
