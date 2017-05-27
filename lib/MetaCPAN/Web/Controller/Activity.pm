@@ -20,17 +20,13 @@ sub index : Path : Args(0) {
     if ( my $distribution = $req->parameters->{distribution} ) {
         push( @$q, { term => { distribution => $distribution } } );
     }
-    if ( my $requires = $req->parameters->{requires} ) {
-        push( @$q, { term => { 'release.dependency.module' => $requires } } );
+    if ( my $module = $req->parameters->{module} ) {
+        push( @$q, { term => { 'dependency.module' => $module } } );
     }
     if ( $req->parameters->{f} && $req->parameters->{f} eq 'n' ) {
-        push(
-            @$q,
-            @{
-                $c->model('API::Release')
-                    ->_new_distributions_query->{constant_score}->{filter}
-                    ->{and}
-            }
+        push( @$q,
+            { term  => { first  => 1 } },
+            { terms => { status => [qw< cpan latest >] } },
         );
     }
 
