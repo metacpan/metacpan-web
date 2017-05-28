@@ -48,21 +48,6 @@ sub distribution {
     $self->request("/distribution/$dist");
 }
 
-sub _new_distributions_query {
-    return {
-        constant_score => {
-            filter => {
-                bool => {
-                    must => [
-                        { term  => { first  => 1 } },
-                        { terms => { status => [qw< cpan latest >] } },
-                    ]
-                }
-            }
-        }
-    };
-}
-
 sub latest_by_author {
     my ( $self, $author ) = @_;
     return $self->request(
@@ -106,7 +91,18 @@ sub recent {
     my ( $self, $page, $page_size, $type ) = @_;
     my $query;
     if ( $type eq 'n' ) {
-        $query = $self->_new_distributions_query;
+        $query = {
+            constant_score => {
+                filter => {
+                    bool => {
+                        must => [
+                            { term  => { first  => 1 } },
+                            { terms => { status => [qw< cpan latest >] } },
+                        ]
+                    }
+                }
+            }
+        };
     }
     elsif ( $type eq 'a' ) {
         $query = { match_all => {} };
