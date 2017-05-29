@@ -12,17 +12,12 @@ sub recent : Local : Args(0) {
     my @faves    = map { $_->{_source} } @{ $data->{hits}->{hits} };
     my @user_ids = map { $_->{user} } @faves;
 
-    my $authors
-        = $c->model('API::Author')->by_user( \@user_ids )->recv->{hits}
-        ->{hits};
-
-    my %author_for_user_id
-        = map { $_->{fields}->{user} => $_->{fields}->{pauseid} } @{$authors};
+    my $authors = $c->model('API::Author')->by_user( \@user_ids );
+    my %author_for_user_id = map { $_->{user} => $_->{pauseid} } @{$authors};
 
     foreach my $fave (@faves) {
-        if ( exists $author_for_user_id{ $fave->{user} } ) {
-            $fave->{clicked_by_author} = $author_for_user_id{ $fave->{user} };
-        }
+        next unless exists $author_for_user_id{ $fave->{user} };
+        $fave->{clicked_by_author} = $author_for_user_id{ $fave->{user} };
     }
 
     $c->stash(
