@@ -80,20 +80,10 @@ sub _cache_key_for_user {
 
 sub _add_fav_list_to_stash {
     my ( $self, $c, $size ) = @_;
-
     my $user = $c->user;
-
-    my $faves_cv   = $c->model('API::Favorite')->by_user( $user->id, $size );
-    my $faves_data = $faves_cv->recv;
-    my $faves      = [
-        sort { $b->{date} cmp $a->{date} }
-        map  { $_->{fields} } @{ $faves_data->{hits}{hits} }
-    ];
-
+    my $faves = $c->model('API::Favorite')->by_user( $user->id, $size );
     $c->stash( { faves => $faves } );
-
     return $user;
-
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -77,16 +77,11 @@ sub get {
 sub by_user {
     my ( $self, $user, $size ) = @_;
     $size ||= 250;
-    return $self->request(
-        '/favorite/_search',
-        {
-            query  => { match_all => {} },
-            filter => { term      => { user => $user }, },
-            sort   => ['distribution'],
-            fields => [qw(date author distribution)],
-            size   => $size,
-        }
-    );
+    my $ret = $self->request( "/favorite/by_user/$user", { size => $size } );
+    return unless $ret;
+    my $data = $ret->recv;
+    return [] unless exists $data->{favorites};
+    return $data->{favorites};
 }
 
 sub recent {
