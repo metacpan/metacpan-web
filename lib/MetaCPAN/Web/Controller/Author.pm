@@ -54,27 +54,7 @@ sub index : Chained('root') PathPart('') Args(0) {
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     my $took  = $data->{took};
-    my $faves = [];
-
-    if ( $author->{user} ) {
-        my $faves_data
-            = $c->model('API::Favorite')->by_user( $author->{user} )->recv;
-        $took += $faves_data->{took} || 0;
-
-        my @all_fav = map { $_->{fields}->{distribution} }
-            @{ $faves_data->{hits}->{hits} };
-        my $noLatest = $c->model('API::Release')->no_latest(@all_fav);
-        $took += $noLatest->{took} || 0;
-
-        $faves = [
-            map {
-                my $distro = $_->{fields}->{distribution};
-                $noLatest->{no_latest}->{$distro} ? () : $_->{fields};
-            } @{ $faves_data->{hits}->{hits} }
-        ];
-        single_valued_arrayref_to_scalar($faves);
-        $faves = [ sort { $b->{date} cmp $a->{date} } @{$faves} ];
-    }
+    my $faves = $c->model('API::Favorite')->by_user( $author->{user} );
 
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     single_valued_arrayref_to_scalar($releases);

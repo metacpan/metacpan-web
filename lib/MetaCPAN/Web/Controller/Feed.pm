@@ -120,15 +120,7 @@ sub author : Local : Args(1) {
         $c->detach( '/not_found', [] );
     }
 
-    my $faves_cv = $author_info->{user}
-        && $c->model('API::Favorite')->by_user( $author_info->{user} );
-    my $faves_data
-        = $faves_cv
-        ? [
-        map { single_valued_arrayref_to_scalar($_) }
-        map { $_->{fields} } @{ $faves_cv->recv->{hits}{hits} }
-        ]
-        : [];
+    my $faves = $c->model('API::Favorite')->by_user( $author_info->{user} );
 
     $c->stash->{feed} = $self->build_feed(
         host    => $c->config->{web_host},
@@ -136,7 +128,7 @@ sub author : Local : Args(1) {
         entries => [
             sort { $b->{date} cmp $a->{date} }
                 @{ $self->_format_release_entries($release_data) },
-            @{ $self->_format_favorite_entries( $author, $faves_data ) }
+            @{ $self->_format_favorite_entries( $author, $faves ) }
         ],
     );
 }

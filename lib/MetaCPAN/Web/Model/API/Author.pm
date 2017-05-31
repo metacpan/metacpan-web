@@ -3,6 +3,8 @@ package MetaCPAN::Web::Model::API::Author;
 use Moose;
 use namespace::autoclean;
 
+use Ref::Util qw( is_arrayref );
+
 extends 'MetaCPAN::Web::Model::API';
 
 =head1 NAME
@@ -94,15 +96,20 @@ sub search {
 
 sub by_user {
     my ( $self, $users ) = @_;
+    return [] unless $users;
 
-    my $query = return $self->request(
-        '/author/_search',
-        {
-            query  => { terms => { user => $users } },
-            fields => [qw(user pauseid)],
-            size   => 100
-        }
-    );
+    my $ret;
+    if ( is_arrayref($users) ) {
+        return unless @{$users};
+        $ret = $self->request( '/author/by_user', undef, { user => $users } );
+    }
+    else {
+        $ret = $self->request("/author/by_user/$users");
+    }
+    return unless $ret;
+
+    my $data = $ret->recv;
+    return ( exists $data->{authors} ? $data->{authors} : [] );
 }
 
 __PACKAGE__->meta->make_immutable;
