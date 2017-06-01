@@ -13,7 +13,11 @@ env:
     # that the snapshot was built from.
     - DEPLOYMENT_PERL_VERSION=5.22
   matrix:
+
+    # Get one passing run with coverage and one passing run with Test::Vars
+    # checks.  If run together they more than double the build time.
     - COVERAGE=1 USE_CPANFILE_SNAPSHOT=true
+    - USE_CPANFILE_SNAPSHOT=true
     - USE_CPANFILE_SNAPSHOT=false
 
 before_install:
