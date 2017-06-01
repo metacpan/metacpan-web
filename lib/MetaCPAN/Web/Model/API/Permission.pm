@@ -53,10 +53,6 @@ sub _get_modules_in_distribution {
     my $name = shift;
     return undef unless $name;
 
-    # ugh. Can't see a better way to get a model.
-    my $model = MetaCPAN::Web::Model::API::Release->new(
-        api_secure => $self->{api_secure} );
-
     my $res = $self->request("/package/modules/$name")->recv;
     my @modules = $res->{modules} ? @{ $res->{modules} } : undef;
 

@@ -59,8 +59,6 @@ sub list_as_json : Local : Args(0) {
 
     $self->_add_fav_list_to_stash( $c, 1_000 );
 
-    my $user = $c->stash->{user};
-
     $c->add_surrogate_key( $self->_cache_key_for_user($c) );
     $c->cdn_max_age('30d');
 

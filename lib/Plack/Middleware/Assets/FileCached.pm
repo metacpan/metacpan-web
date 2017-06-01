@@ -79,7 +79,6 @@ sub _build_wrapped {
 
     my $file_app = Plack::App::File->new( root => "$cache_dir" )->to_app;
     my $static_app = sub {
-        my ($env) = @_;
         my $res = &$file_app;
         push @{ $res->[1] }, 'Cache-Control', 'max-age=31556926';
         return $res;

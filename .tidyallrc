@@ -9,3 +9,6 @@ select = .gitignore
 [JSBeautify]
 select = root/static/js/cpan.js
 argv = --indent-size 4 --end_with_newline
+
+[Test::Vars]
+select = {lib,t}/**/*.pm

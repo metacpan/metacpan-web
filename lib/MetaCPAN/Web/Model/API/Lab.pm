@@ -55,15 +55,13 @@ sub _handle_module {
     }
 
     # get the distribution that provides this module
-    my $cv  = $self->cv;
     my $rm  = $self->request("/module/$module")->recv;
     my %dep = (
         dist => $rm->{distribution},
         date => $rm->{date},
     );
 
-    my $cv2 = $self->cv;
-    my $rd  = $self->request("/release/$rm->{distribution}")->recv;
+    my $rd = $self->request("/release/$rm->{distribution}")->recv;
 
     $dep{license} = $rd->{license};
 
@@ -75,8 +73,7 @@ sub _handle_module {
 sub fetch_latest_distros {
     my ( $self, $size, $pauseid ) = @_;
 
-    my $cv = $self->cv;
-    my $r  = $self->request(
+    my $r = $self->request(
         '/release/_search',
         {
             query => {
@@ -104,7 +101,6 @@ sub fetch_latest_distros {
     foreach my $d ( @{ $r->{hits}{hits} } ) {
         my $license = $d->{_source}{license}[0];
         my $distro  = $d->{_source}{distribution};
-        my $author  = $d->{_source}{author};
         my $repo    = $d->{_source}{'resources.repository'};
 
         next if $distros{$distro};    # show the first one
