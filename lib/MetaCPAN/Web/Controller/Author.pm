@@ -44,34 +44,31 @@ sub root : Chained('/') PathPart('author') CaptureArgs(1) {
 sub index : Chained('root') PathPart('') Args(0) {
     my ( $self, $c ) = @_;
 
-    my $id = $c->stash->{pauseid};
+    my $pauseid = $c->stash->{pauseid};
 
-    my $author_cv = $c->model('API::Author')->get($id);
-
-    my $releases_cv = $c->model('API::Release')->latest_by_author($id);
-
-    my ( $author, $data ) = ( $author_cv->recv, $releases_cv->recv );
+    my $author_cv = $c->model('API::Author')->get($pauseid);
+    my $author    = $author_cv->recv;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
-    my $took  = $data->{took};
-    my $faves = $c->model('API::Favorite')->by_user( $author->{user} );
-
-    my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    single_valued_arrayref_to_scalar($releases);
+    my $releases = $c->model('API::Release')->latest_by_author($pauseid);
 
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
-        @$releases;
+        @{ $releases->{releases} };
     $c->res->last_modified($date) if $date;
+
+    my $faves = $c->model('API::Favorite')->by_user( $author->{user} );
+
+    my $took = $releases->{took};
 
     $c->stash(
         {
             author   => $author,
             faves    => $faves,
-            releases => $releases,
+            releases => $releases->{releases},
             template => 'author.html',
             took     => $took,
-            total    => $data->{hits}->{total},
+            total    => $releases->{total},
         }
     );
 
