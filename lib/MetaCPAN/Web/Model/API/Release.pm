@@ -49,25 +49,10 @@ sub distribution {
 }
 
 sub latest_by_author {
-    my ( $self, $author ) = @_;
-    return $self->request(
-        '/release/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        { term => { author => uc($author) } },
-                        { term => { status => 'latest' } }
-                    ]
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => 1 } }
-            ],
-            fields => [qw(author distribution name status abstract date)],
-            size   => 1000,
-        }
-    );
+    my ( $self, $pauseid ) = @_;
+    my $data = $self->request("/release/latest_by_author/$pauseid")->recv;
+    return unless $data;
+    return +{ releases => $data->{releases}, took => $data->{took} };
 }
 
 sub all_by_author {

@@ -104,12 +104,6 @@ sub author : Local : Args(1) {
     $c->add_author_key($author);
 
     my $author_cv   = $c->model('API::Author')->get($author);
-    my $releases_cv = $c->model('API::Release')->latest_by_author($author);
-
-    my $release_data = [
-        map { single_valued_arrayref_to_scalar($_) }
-        map { $_->{fields} } @{ $releases_cv->recv->{hits}{hits} }
-    ];
     my $author_info = $author_cv->recv;
 
     # If the author can be found, we get the hashref of author info.  If it
@@ -120,6 +114,8 @@ sub author : Local : Args(1) {
         $c->detach( '/not_found', [] );
     }
 
+    my $releases = $c->model('API::Release')->latest_by_author($author);
+
     my $faves = $c->model('API::Favorite')->by_user( $author_info->{user} );
 
     $c->stash->{feed} = $self->build_feed(
@@ -127,7 +123,7 @@ sub author : Local : Args(1) {
         title   => "Recent CPAN activity of $author - MetaCPAN",
         entries => [
             sort { $b->{date} cmp $a->{date} }
-                @{ $self->_format_release_entries($release_data) },
+                @{ $self->_format_release_entries( $releases->{releases} ) },
             @{ $self->_format_favorite_entries( $author, $faves ) }
         ],
     );
