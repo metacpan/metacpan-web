@@ -4,29 +4,16 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
-
     my $page_size = $c->req->get_page_size(100);
-
-    my $data = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
-        ->recv;
-    my @faves    = map { $_->{_source} } @{ $data->{hits}->{hits} };
-    my @user_ids = map { $_->{user} } @faves;
-
-    my $authors = $c->model('API::Author')->by_user( \@user_ids );
-    my %author_for_user_id = map { $_->{user} => $_->{pauseid} } @{$authors};
-
-    foreach my $fave (@faves) {
-        next unless exists $author_for_user_id{ $fave->{user} };
-        $fave->{clicked_by_author} = $author_for_user_id{ $fave->{user} };
-    }
-
+    my $data
+        = $c->model('API::Favorite')->recent( $c->req->page, $page_size );
     $c->stash(
         {
             header          => 1,
-            recent          => \@faves,
             show_clicked_by => 1,
+            recent          => $data->{favorites},
             took            => $data->{took},
-            total           => $data->{hits}->{total},
+            total           => $data->{total},
             page_size       => $page_size,
             template        => 'favorite/recent.html',
         }
