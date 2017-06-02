@@ -13,30 +13,10 @@ sub source {
 }
 
 sub dir {
-    my ( $self, $author, $release, @path ) = @_;
-    $self->request(
-        '/file/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        { term => { 'level'   => scalar @path } },
-                        { term => { 'author'  => $author } },
-                        { term => { 'release' => $release } },
-                        {
-                            prefix => {
-                                'path' => join( q{/}, @path, q{} )
-                            }
-                        },
-                    ]
-                },
-            },
-            size   => 999,
-            fields => [
-                qw(name stat.mtime path stat.size directory slop documentation mime)
-            ],
-        }
-    );
+    my ( $self, @path ) = @_;
+    my $path = join '/', @path;
+    my $data = $self->request("/file/dir/$path")->recv;
+    return $data->{dir};
 }
 
 __PACKAGE__->meta->make_immutable;

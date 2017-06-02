@@ -40,17 +40,12 @@ sub index : Path : Args {
         );
     }
     if ( $module->{directory} ) {
-        my $files = $c->model('API::File')->dir(@module)->recv;
+        my $files = $c->model('API::File')->dir(@module);
         $c->res->last_modified( $module->{date} );
         $c->stash(
             {
-                template => 'browse.html',
-                files    => [
-                    map { single_valued_arrayref_to_scalar( $_->{fields} ) }
-                        @{ $files->{hits}->{hits} }
-                ],
-                total     => $files->{hits}->{total},
-                took      => $files->{took},
+                template  => 'browse.html',
+                files     => $files,
                 author    => shift @module,
                 release   => shift @module,
                 directory => \@module,
