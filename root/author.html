@@ -139,7 +139,7 @@
     </div>
     <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
 <% IF releases.0 %>
-    <% INCLUDE inc/release-table.html releases = aggregated, header = 1, tablesorter = 1, table_id = "author_releases" %>
+    <% INCLUDE inc/release-table.html releases = releases, header = 1, tablesorter = 1, table_id = "author_releases" %>
 <% ELSE %>
     <div class="message">
         <strong>Releases</strong>
