@@ -58,23 +58,20 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $releases = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
     single_valued_arrayref_to_scalar($releases);
+
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @$releases;
     $c->res->last_modified($date) if $date;
 
-    my ( $aggregated, $latest ) = @{ $self->_calc_aggregated($releases) };
-
     $c->stash(
         {
-            aggregated => $aggregated,
-            author     => $author,
-            faves      => $faves,
-            latest     => $latest,
-            releases   => $releases,
-            template   => 'author.html',
-            took       => $took,
-            total      => $data->{hits}->{total},
+            author   => $author,
+            faves    => $faves,
+            releases => $releases,
+            template => 'author.html',
+            took     => $took,
+            total    => $data->{hits}->{total},
         }
     );
 
@@ -122,29 +119,6 @@ sub releases : Chained('root') PathPart Args(0) {
         }
     );
     $c->stash( { pageset => $pageset } );
-}
-
-sub _calc_aggregated {
-    my ( $self, $releases ) = @_;
-
-    my @aggregated;
-    my $latest = $releases->[0];
-    my $last;
-
-    for my $rel ( @{$releases} ) {
-        my ( $canon_rel, $canon_lat ) = map {
-            DateTime::Format::ISO8601->parse_datetime($_)
-                ->strftime("%Y%m%d%H%M%S")
-        } ( $rel->{date}, $latest->{date} );
-        $latest = $rel if $canon_rel > $canon_lat;
-
-        next if $last and $last eq $rel->{distribution};
-        $last = $rel->{distribution};
-        next unless $rel->{name};
-        push @aggregated, $rel;
-    }
-
-    return [ \@aggregated, $latest ];
 }
 
 __PACKAGE__->meta->make_immutable;
