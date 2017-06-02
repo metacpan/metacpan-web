@@ -86,15 +86,25 @@ sub by_user {
 
 sub recent {
     my ( $self, $page, $page_size ) = @_;
-    $self->request(
-        '/favorite/_search',
-        {
-            size  => $page_size,
-            from  => ( $page - 1 ) * $page_size,
-            query => { match_all => {} },
-            sort  => [ { 'date' => { order => 'desc' } } ]
+    my $data = $self->request( '/favorite/recent',
+        { size => $page_size, page => $page } )->recv;
+
+    my @user_ids = map { $_->{user} } @{ $data->{favorites} };
+    return $data unless @user_ids;
+
+    my $authors
+        = $self->request( '/author/by_user', undef, { user => \@user_ids } )
+        ->recv;
+    if ( $authors and exists $authors->{authors} ) {
+        my %author_for_user_id
+            = map { $_->{user} => $_->{pauseid} } @{ $authors->{authors} };
+        for my $fav ( @{ $data->{favorites} } ) {
+            next unless exists $author_for_user_id{ $fav->{user} };
+            $fav->{clicked_by_author} = $author_for_user_id{ $fav->{user} };
         }
-    );
+    }
+
+    return $data;
 }
 
 sub leaderboard {
