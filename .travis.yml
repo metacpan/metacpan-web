@@ -18,7 +18,7 @@ env:
     # checks.  If run together they more than double the build time.
     - COVERAGE=1 USE_CPANFILE_SNAPSHOT=true
     - USE_CPANFILE_SNAPSHOT=true
-    - USE_CPANFILE_SNAPSHOT=false
+    - USE_CPANFILE_SNAPSHOT=false HARNESS_VERBOSE=1
 
 before_install:
   - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
