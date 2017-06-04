@@ -23,7 +23,7 @@ commands can be converted to:
 
 ## Local configuration changes
 
-The backend defaults to `api.metacpan.org`. Running a local API server is
+The backend defaults to `fastapi.metacpan.org`. Running a local API server is
 optional and not required to hack on the front-end.  The address to the API
 user can be changed in the `metacpan_web.conf` file.  Ideally you would create a
 new file called `metacpan_web_local.conf` that contains
