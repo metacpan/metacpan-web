@@ -353,11 +353,6 @@ sub versions {
     );
 }
 
-sub favorites {
-    my ( $self, $dist ) = @_;
-    $self->request( '/favorite/_search', {} );
-}
-
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $range_filter = {
