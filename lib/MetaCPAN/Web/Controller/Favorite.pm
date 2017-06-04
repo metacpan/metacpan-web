@@ -23,15 +23,14 @@ sub recent : Local : Args(0) {
 sub leaderboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $data = $c->model('API::Favorite')->leaderboard( $c->req->page )->recv;
-    my @leaders
-        = @{ $data->{aggregations}->{leaderboard}->{buckets} }[ 0 .. 99 ];
+    my $data = $c->model('API::Favorite')->leaderboard();
+    return unless $data;
 
     $c->stash(
         {
-            leaders  => \@leaders,
+            leaders  => $data->{leaderboard},
             took     => $data->{took},
-            total    => $data->{hits}->{total},
+            total    => $data->{total},
             template => 'favorite/leaderboard.html',
         }
     );
