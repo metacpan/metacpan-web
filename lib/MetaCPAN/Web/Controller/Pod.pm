@@ -217,6 +217,9 @@ sub view : Private {
 
     my $dist = $release->{distribution};
 
+    my $versions = $c->model('API::Release')->versions($dist);
+    $c->stash( { versions => $versions } );
+
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');
     $c->add_dist_key($dist);

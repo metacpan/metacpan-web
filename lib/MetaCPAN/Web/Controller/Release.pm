@@ -133,14 +133,14 @@ sub view : Private {
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
 
+    my $versions = $c->model('API::Release')->versions($distribution);
+
     # TODO: make took more automatic (to include all)
     $c->stash(
         template => 'release.html',
         release  => $out,
         total    => $modules->{hits}->{total},
-        took     => List::Util::max(
-            $modules->{took}, $files->{took}, $reqs->{versions}->{took}
-        ),
+        took     => List::Util::max( $modules->{took}, $files->{took} ),
         root     => \@root_files,
         examples => \@examples,
         files    => \@view_files,
@@ -149,6 +149,7 @@ sub view : Private {
         documentation_raw => $categories->{documentation_raw},
         provides          => $categories->{provides},
         modules           => $categories->{modules},
+        versions          => $versions,
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
