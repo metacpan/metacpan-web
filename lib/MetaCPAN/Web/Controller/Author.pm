@@ -87,24 +87,21 @@ sub releases : Chained('root') PathPart Args(0) {
 
     my $page = $req->page > 0 ? $req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);
-    my $releases_cv
+    my $releases
         = $c->model('API::Release')->all_by_author( $id, $page_size, $page );
 
-    my ( $author, $releases ) = ( $author_cv->recv, $releases_cv->recv );
+    my $author = $author_cv->recv;
     $c->detach('/not_found') unless ( $author->{pauseid} );
-
-    my @releases = map { single_valued_arrayref_to_scalar( $_->{fields} ) }
-        @{ $releases->{hits}->{hits} };
 
     $c->stash(
         {
             author    => $author,
             page_size => $page_size,
-            releases  => \@releases,
+            releases  => $releases->{releases},
         }
     );
 
-    return unless $releases->{hits}->{total};
+    return unless $releases->{total};
 
     my $pageset = Data::Pageset->new(
         {
@@ -112,7 +109,7 @@ sub releases : Chained('root') PathPart Args(0) {
             entries_per_page => $page_size,
             mode             => 'slide',
             pages_per_set    => 10,
-            total_entries    => $releases->{hits}->{total},
+            total_entries    => $releases->{total},
         }
     );
     $c->stash( { pageset => $pageset } );
