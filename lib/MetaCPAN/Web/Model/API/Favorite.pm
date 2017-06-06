@@ -108,18 +108,9 @@ sub recent {
 }
 
 sub leaderboard {
-    my ( $self, $page ) = @_;
-    $self->request(
-        '/favorite/_search',
-        {
-            size         => 0,
-            query        => { match_all => {} },
-            aggregations => {
-                leaderboard =>
-                    { terms => { field => 'distribution', size => 600 }, },
-            },
-        }
-    );
+    my ($self) = @_;
+    my $data = $self->request('/favorite/leaderboard')->recv;
+    return $data;
 }
 
 sub find_plussers {
