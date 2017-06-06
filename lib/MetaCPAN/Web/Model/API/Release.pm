@@ -352,35 +352,10 @@ sub favorites {
 
 sub topuploaders {
     my ( $self, $range ) = @_;
-    my $range_filter = {
-        range => {
-            date => {
-                from => $range eq 'all' ? 0 : DateTime->now->subtract(
-                      $range eq 'weekly'  ? 'weeks'
-                    : $range eq 'monthly' ? 'months'
-                    : $range eq 'yearly'  ? 'years'
-                    :                       'weeks' => 1
-                )->truncate( to => 'day' )->iso8601
-            },
-        }
-    };
-    $self->request(
-        '/release/_search',
-        {
-            query        => { match_all => {} },
-            aggregations => {
-                author => {
-                    aggregations => {
-                        entries => {
-                            terms => { field => 'author', size => 50 }
-                        }
-                    },
-                    filter => $range_filter,
-                },
-            },
-            size => 0,
-        }
-    );
+    my $param = $range ? { range => $range } : ();
+    my $data
+        = $self->request( '/release/top_uploaders', undef, $param )->recv;
+    return $data;
 }
 
 sub no_latest {
