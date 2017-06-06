@@ -97,7 +97,7 @@ sub request {
         sub {
             my $cv = shift;
             try {
-                my ( $response, $stats ) = $cv->recv;
+                my ($response) = $cv->recv;
                 if ( !$response ) {
                     $req->croak(
                         "bad response when requesting " . $request->uri );

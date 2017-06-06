@@ -264,6 +264,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Carp-Always-0.13
+    pathname: F/FE/FERREIRA/Carp-Always-0.13.tar.gz
+    provides:
+      Carp::Always 0.13
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
   Carp-Assert-0.21
     pathname: N/NE/NEILB/Carp-Assert-0.21.tar.gz
     provides:
@@ -758,38 +765,39 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Code-TidyAll-0.47
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.47.tar.gz
+  Code-TidyAll-0.59
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.59.tar.gz
     provides:
-      Code::TidyAll 0.47
-      Code::TidyAll::Cache 0.47
-      Code::TidyAll::CacheModel 0.47
-      Code::TidyAll::CacheModel::Shared 0.47
-      Code::TidyAll::Config::INI::Reader 0.47
-      Code::TidyAll::Git::Precommit 0.47
-      Code::TidyAll::Git::Prereceive 0.47
-      Code::TidyAll::Git::Util 0.47
-      Code::TidyAll::Plugin 0.47
-      Code::TidyAll::Plugin::CSSUnminifier 0.47
-      Code::TidyAll::Plugin::JSBeautify 0.47
-      Code::TidyAll::Plugin::JSHint 0.47
-      Code::TidyAll::Plugin::JSLint 0.47
-      Code::TidyAll::Plugin::JSON 0.47
-      Code::TidyAll::Plugin::MasonTidy 0.47
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.47
-      Code::TidyAll::Plugin::PerlCritic 0.47
-      Code::TidyAll::Plugin::PerlTidy 0.47
-      Code::TidyAll::Plugin::PerlTidySweet 0.47
-      Code::TidyAll::Plugin::PodChecker 0.47
-      Code::TidyAll::Plugin::PodSpell 0.47
-      Code::TidyAll::Plugin::PodTidy 0.47
-      Code::TidyAll::Plugin::SortLines 0.47
-      Code::TidyAll::Result 0.47
-      Code::TidyAll::Role::Tempdir 0.47
-      Code::TidyAll::SVN::Precommit 0.47
-      Code::TidyAll::SVN::Util 0.47
-      Code::TidyAll::Util::Zglob 0.47
-      Test::Code::TidyAll 0.47
+      Code::TidyAll 0.59
+      Code::TidyAll::Cache 0.59
+      Code::TidyAll::CacheModel 0.59
+      Code::TidyAll::CacheModel::Shared 0.59
+      Code::TidyAll::Config::INI::Reader 0.59
+      Code::TidyAll::Git::Precommit 0.59
+      Code::TidyAll::Git::Prereceive 0.59
+      Code::TidyAll::Git::Util 0.59
+      Code::TidyAll::Plugin 0.59
+      Code::TidyAll::Plugin::CSSUnminifier 0.59
+      Code::TidyAll::Plugin::JSBeautify 0.59
+      Code::TidyAll::Plugin::JSHint 0.59
+      Code::TidyAll::Plugin::JSLint 0.59
+      Code::TidyAll::Plugin::JSON 0.59
+      Code::TidyAll::Plugin::MasonTidy 0.59
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.59
+      Code::TidyAll::Plugin::PerlCritic 0.59
+      Code::TidyAll::Plugin::PerlTidy 0.59
+      Code::TidyAll::Plugin::PerlTidySweet 0.59
+      Code::TidyAll::Plugin::PodChecker 0.59
+      Code::TidyAll::Plugin::PodSpell 0.59
+      Code::TidyAll::Plugin::PodTidy 0.59
+      Code::TidyAll::Plugin::SortLines 0.59
+      Code::TidyAll::Result 0.59
+      Code::TidyAll::Role::HasIgnore 0.59
+      Code::TidyAll::Role::Tempdir 0.59
+      Code::TidyAll::SVN::Precommit 0.59
+      Code::TidyAll::SVN::Util 0.59
+      Code::TidyAll::Util::Zglob 0.59
+      Test::Code::TidyAll 0.59
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0
@@ -803,8 +811,7 @@ DISTRIBUTIONS
       File::Find 0
       File::Path 0
       File::Slurp::Tiny 0
-      File::Spec::Functions 0
-      File::Temp 0
+      File::Spec 0
       File::Which 0
       File::Zglob 0
       Getopt::Long 0
@@ -814,9 +821,16 @@ DISTRIBUTIONS
       List::Compare 0
       List::SomeUtils 0
       Log::Any 0
-      Moo 0
+      Moo 2.000000
       Moo::Role 0
+      Path::Tiny 0.098
       Scalar::Util 0
+      Specio 0.30
+      Specio::Declare 0
+      Specio::Library::Builtins 0
+      Specio::Library::Numeric 0
+      Specio::Library::Path::Tiny 0.04
+      Specio::Library::String 0
       Test::Builder 0
       Text::Diff 1.44
       Text::Diff::Table 0
@@ -826,7 +840,22 @@ DISTRIBUTIONS
       base 0
       constant 0
       strict 0
-      vars 0
+      warnings 0
+  Code-TidyAll-Plugin-Test-Vars-0.04
+    pathname: M/MA/MAXMIND/Code-TidyAll-Plugin-Test-Vars-0.04.tar.gz
+    provides:
+      Code::TidyAll::Plugin::Test::Vars 0.04
+    requirements:
+      Code::TidyAll 0.50
+      Code::TidyAll::Plugin 0
+      ExtUtils::MakeMaker 0
+      Moo 0
+      PPI::Document 0
+      Path::Tiny 0
+      Test::Vars 0.008
+      autodie 0
+      perl 5.006
+      strict 0
       warnings 0
   Config-Any-0.27
     pathname: B/BR/BRICAS/Config-Any-0.27.tar.gz
@@ -902,6 +931,19 @@ DISTRIBUTIONS
       perl v5.8.1
       strict 0
       utf8 0
+  Const-Fast-0.014
+    pathname: L/LE/LEONT/Const-Fast-0.014.tar.gz
+    provides:
+      Const::Fast 0.014
+    requirements:
+      Carp 0
+      Module::Build::Tiny 0.021
+      Scalar::Util 0
+      Storable 0
+      Sub::Exporter::Progressive 0.001007
+      perl 5.008
+      strict 0
+      warnings 0
   Cookie-Baker-0.06
     pathname: K/KA/KAZEBURO/Cookie-Baker-0.06.tar.gz
     provides:
@@ -4158,11 +4200,11 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  Path-Tiny-0.094
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.094.tar.gz
+  Path-Tiny-0.104
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.104.tar.gz
     provides:
-      Path::Tiny 0.094
-      Path::Tiny::Error 0.094
+      Path::Tiny 0.104
+      Path::Tiny::Error 0.104
     requirements:
       Carp 0
       Cwd 0
@@ -4890,6 +4932,90 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5
+  Specio-0.37
+    pathname: D/DR/DROLSKY/Specio-0.37.tar.gz
+    provides:
+      Specio 0.37
+      Specio::Coercion 0.37
+      Specio::Constraint::AnyCan 0.37
+      Specio::Constraint::AnyDoes 0.37
+      Specio::Constraint::AnyIsa 0.37
+      Specio::Constraint::Enum 0.37
+      Specio::Constraint::Intersection 0.37
+      Specio::Constraint::ObjectCan 0.37
+      Specio::Constraint::ObjectDoes 0.37
+      Specio::Constraint::ObjectIsa 0.37
+      Specio::Constraint::Parameterizable 0.37
+      Specio::Constraint::Parameterized 0.37
+      Specio::Constraint::Role::CanType 0.37
+      Specio::Constraint::Role::DoesType 0.37
+      Specio::Constraint::Role::Interface 0.37
+      Specio::Constraint::Role::IsaType 0.37
+      Specio::Constraint::Simple 0.37
+      Specio::Constraint::Structurable 0.37
+      Specio::Constraint::Structured 0.37
+      Specio::Constraint::Union 0.37
+      Specio::Declare 0.37
+      Specio::DeclaredAt 0.37
+      Specio::Exception 0.37
+      Specio::Exporter 0.37
+      Specio::Helpers 0.37
+      Specio::Library::Builtins 0.37
+      Specio::Library::Numeric 0.37
+      Specio::Library::Perl 0.37
+      Specio::Library::String 0.37
+      Specio::Library::Structured 0.37
+      Specio::Library::Structured::Dict 0.37
+      Specio::Library::Structured::Map 0.37
+      Specio::Library::Structured::Tuple 0.37
+      Specio::OO 0.37
+      Specio::PartialDump 0.37
+      Specio::Registry 0.37
+      Specio::Role::Inlinable 0.37
+      Specio::Subs 0.37
+      Specio::TypeChecks 0.37
+      Test::Specio 0.37
+    requirements:
+      B 0
+      Carp 0
+      Devel::StackTrace 0
+      Eval::Closure 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      IO::File 0
+      List::Util 1.33
+      MRO::Compat 0
+      Module::Runtime 0
+      Role::Tiny 1.003003
+      Role::Tiny::With 0
+      Scalar::Util 0
+      Storable 0
+      Test::Fatal 0
+      Test::More 0.96
+      overload 0
+      parent 0
+      perl 5.008
+      re 0
+      strict 0
+      version 0.83
+      warnings 0
+  Specio-Library-Path-Tiny-0.04
+    pathname: D/DR/DROLSKY/Specio-Library-Path-Tiny-0.04.tar.gz
+    provides:
+      Specio::Library::Path::Tiny 0.04
+    requirements:
+      ExtUtils::MakeMaker 0
+      Path::Tiny 0.087
+      Scalar::Util 0
+      Specio 0.29
+      Specio::Declare 0
+      Specio::Exporter 0
+      Specio::Library::Builtins 0
+      Specio::PartialDump 0
+      overload 0
+      parent 0
+      strict 0
+      warnings 0
   Spiffy-0.46
     pathname: I/IN/INGY/Spiffy-0.46.tar.gz
     provides:
@@ -5423,6 +5549,18 @@ DISTRIBUTIONS
       Test::SharedFork 0.29
       Time::HiRes 0
       perl 5.008001
+  Test-Vars-0.014
+    pathname: D/DR/DROLSKY/Test-Vars-0.014.tar.gz
+    provides:
+      Test::Vars 0.014
+    requirements:
+      B 0
+      ExtUtils::MakeMaker 6.59
+      List::Util 1.33
+      Module::Build::Tiny 0.035
+      Test::More 0.88
+      parent 0
+      perl 5.010000
   Test-WWW-Mechanize-1.44
     pathname: P/PE/PETDANCE/Test-WWW-Mechanize-1.44.tar.gz
     provides:

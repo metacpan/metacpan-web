@@ -345,6 +345,11 @@ sub versions {
     return ( $data->{releases} || [] );
 }
 
+sub favorites {
+    my $self = shift;
+    $self->request( '/favorite/_search', {} );
+}
+
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $range_filter = {

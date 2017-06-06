@@ -78,7 +78,7 @@ sub first {
 }
 
 sub requires {
-    my ( $self, $module, $page, $page_size, $sort ) = @_;
+    my ( $self, $module, $page, $page_size ) = @_;
 
     my $data = $self->request(
         "/release/requires/$module",

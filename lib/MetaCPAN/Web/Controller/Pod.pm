@@ -167,7 +167,9 @@ sub view : Private {
             ul    => [ { id => qr/^index$/ } ],
         },
         replace_img => sub {
-            my ( $tagname, $attrs, $text ) = @_;
+
+            # last arg is $text, which we don't need
+            my ( $tagname, $attrs, undef ) = @_;
             my $tag = '<img';
             for my $attr (qw( alt border height width src title)) {
                 next
