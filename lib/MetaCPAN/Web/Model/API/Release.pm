@@ -346,7 +346,7 @@ sub versions {
 }
 
 sub favorites {
-    my ( $self, $dist ) = @_;
+    my $self = shift;
     $self->request( '/favorite/_search', {} );
 }
 
