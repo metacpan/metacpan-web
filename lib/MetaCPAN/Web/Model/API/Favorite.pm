@@ -131,43 +131,44 @@ sub find_plussers {
             my @plusser_users = map { $_->{user} }
                 map { single_valued_arrayref_to_scalar( $_->{_source} ) }
                 @{ $plusser_data->{hits}->{hits} };
-            my $total_plussers = @plusser_users;
 
-            # find plussers by pause ids.
-            return Future->done( { hits => { hits => [] } }, $total_plussers )
-                unless @plusser_users;
-            $self->plusser_by_id( \@plusser_users )->transform(
-                done => sub {
-                    return ( $_[0], $total_plussers );
+            $self->get_plusser_authors( \@plusser_users )->then(
+                sub {
+                    my @plusser_authors = @{ +shift };
+                    return Future->done(
+                        {
+                            plusser_authors => \@plusser_authors,
+                            plusser_others =>
+                                scalar( @plusser_users - @plusser_authors ),
+                            plusser_data => $distribution
+                        }
+                    );
                 }
             );
         }
-        )->transform(
+    );
+
+    # find plussers by pause ids.
+
+}
+
+sub get_plusser_authors {
+    my ( $self, $users ) = @_;
+    return Future->done( [] ) unless $users and @{$users};
+
+    $self->request( '/author/by_user', undef, { user => $users } )
+        ->transform(
         done => sub {
-            my ( $data, $total_plussers ) = @_;
-            my $authors         = $data->{hits}{hits};
-            my @plusser_details = map {
-                {
-                    id  => $_->{_source}->{pauseid},
-                    pic => $_->{_source}->{gravatar_url},
-                }
-            } @{$authors};
-            my $total_authors = @plusser_details;
+            my $res = shift;
+            return [] unless $res->{authors};
 
-            # find total non pauseid users who have ++ed the dist.
-            my $total_nonauthors = ( $total_plussers - $total_authors );
-
-            # number of pauseid users can be more than total plussers
-            # then set 0 to non pauseid users
-            $total_nonauthors = 0 if $total_nonauthors < 0;
-
-            return (
-                {
-                    plusser_authors => \@plusser_details,
-                    plusser_others  => $total_nonauthors,
-                    plusser_data    => $distribution
-                }
-            );
+            return [
+                map +{
+                    id  => $_->{pauseid},
+                    pic => $_->{gravatar_url},
+                },
+                @{ $res->{authors} }
+            ];
         }
         );
 }
@@ -182,20 +183,6 @@ sub by_dist {
             query   => { term => { distribution => $distribution } },
             _source => "user",
             size    => 1000,
-        }
-    );
-}
-
-# finding the authors who have ++ed the distribution.
-sub plusser_by_id {
-    my ( $self, $users ) = @_;
-    return $self->request(
-        '/author/_search',
-        {
-            query => { terms => { user => $users } },
-            _source => { includes => [qw(pauseid gravatar_url)] },
-            size    => 1000,
-            sort    => ['pauseid']
         }
     );
 }
