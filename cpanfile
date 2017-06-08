@@ -18,7 +18,7 @@ requires 'Catalyst::View::TT::Alloy';
 requires 'CatalystX::RoleApplicator';
 requires 'CatalystX::Fastly::Role::Response', '0.06';
 requires 'Config::General';
-requires 'Config::JFDI';
+requires 'Config::ZOMG', '1.000000';
 requires 'Cpanel::JSON::XS';
 requires 'Data::Dumper';
 requires 'Data::Pageset';

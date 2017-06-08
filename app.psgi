@@ -8,7 +8,7 @@ use warnings;
 # TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
 #
 use File::Basename;
-use Config::JFDI;
+use Config::ZOMG ();
 use Log::Log4perl;
 use File::Spec;
 use File::Path ();
@@ -21,7 +21,7 @@ my $config;
 BEGIN {
     $root_dir = File::Basename::dirname(__FILE__);
     $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
-    $config   = Config::JFDI->new(
+    $config   = Config::ZOMG->open(
         name => 'MetaCPAN::Web',
         path => $root_dir,
     );
@@ -31,8 +31,9 @@ BEGIN {
         $ENV{METACPAN_WEB_DEBUG} = 1;
     }
 
-    my $log4perl_config = File::Spec->rel2abs( $config->get->{log4perl_file}
-            || 'log4perl.conf', $root_dir );
+    my $log4perl_config
+        = File::Spec->rel2abs( $config->{log4perl_file} || 'log4perl.conf',
+        $root_dir );
     Log::Log4perl::init($log4perl_config);
 
 # use a unique package and tell l4p to ignore it when finding the warning location.
@@ -74,7 +75,7 @@ builder {
 
     builder {
         die 'cookie_secret not configured'
-            unless $config->get->{cookie_secret};
+            unless $config->{cookie_secret};
 
         # Add session cookie here only
         enable 'Session::Cookie::MetaCPAN' => (
@@ -82,7 +83,7 @@ builder {
             expires     => 2**30,
             secure      => ( !$dev_mode ),
             httponly    => 1,
-            secret      => $config->get->{cookie_secret},
+            secret      => $config->{cookie_secret},
         );
 
         MetaCPAN::Web->psgi_app;

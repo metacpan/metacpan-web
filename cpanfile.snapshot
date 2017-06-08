@@ -919,6 +919,18 @@ DISTRIBUTIONS
       perl v5.8.1
       strict 0
       utf8 0
+  Config-ZOMG-1.000000
+    pathname: F/FR/FREW/Config-ZOMG-1.000000.tar.gz
+    provides:
+      Config::ZOMG 1.000000
+      Config::ZOMG::Source::Loader 1.000000
+    requirements:
+      Clone 0
+      Config::Any 0
+      ExtUtils::MakeMaker 6.30
+      Hash::Merge::Simple 0
+      List::Util 0
+      Moo 0
   Cookie-Baker-0.07
     pathname: K/KA/KAZEBURO/Cookie-Baker-0.07.tar.gz
     provides:
