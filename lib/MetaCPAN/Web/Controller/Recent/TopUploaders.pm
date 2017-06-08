@@ -25,22 +25,24 @@ sub all : Local : Args(0) {
 sub topuploaders : Private {
     my ( $self, $c, $range ) = @_;
 
-    my $data = $c->model('API::Release')->topuploaders($range)->recv;
-    my $counts = { map { $_->{key} => $_->{doc_count} }
-            @{ $data->{aggregations}{author}{entries}{buckets} } };
-    my $authors = $c->model('API::Author')->get( keys %$counts )->recv;
+    my $data = $c->model('API::Release')->topuploaders($range);
+
+    my $authors
+        = $c->model('API::Author')->get( keys %{ $data->{counts} } )->recv;
+
     $c->stash(
         {
             authors => [
                 sort { $b->{releases} <=> $a->{releases} } map {
                     {
                         %{ $_->{_source} },
-                            releases => $counts->{ $_->{_source}->{pauseid} }
+                            releases =>
+                            $data->{counts}{ $_->{_source}->{pauseid} }
                     }
                 } @{ $authors->{hits}{hits} }
             ],
             took     => $data->{took},
-            total    => $data->{aggregations}{author}{total},
+            total    => $data->{total},
             template => 'recent/topuploaders.html',
             range    => $range,
         }
