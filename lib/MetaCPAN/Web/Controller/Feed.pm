@@ -136,12 +136,14 @@ sub distribution : Local : Args(1) {
     $c->cdn_max_age('1y');
     $c->add_dist_key($distribution);
 
-    my $versions = $c->model('API::Release')->versions($distribution);
-
+    my $data = $c->model('API::Release')->versions($distribution)->recv;
     $c->stash->{feed} = $self->build_feed(
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => $versions,
+        entries => [
+            map { single_valued_arrayref_to_scalar($_) }
+            map { $_->{fields} } @{ $data->{hits}->{hits} }
+        ]
     );
 }
 

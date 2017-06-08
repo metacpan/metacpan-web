@@ -41,9 +41,10 @@ sub api_requests {
 
         rating => $c->model('API::Rating')->get( $data->{distribution} ),
 
+        versions =>
+            $c->model('API::Release')->versions( $data->{distribution} ),
         distribution =>
             $c->model('API::Release')->distribution( $data->{distribution} ),
-
         %$reqs,
     };
 }
@@ -56,11 +57,13 @@ sub stash_api_results {
         author       => $reqs->{author},
         distribution => $reqs->{distribution},
         rating       => $reqs->{rating}->{ratings}->{ $data->{distribution} },
+        versions =>
+            [ map { $_->{fields} } @{ $reqs->{versions}->{hits}->{hits} } ],
     );
 
     my %stash
         = map { $_ => single_valued_arrayref_to_scalar( $to_stash{$_} ) }
-        ( 'rating', 'distribution' );
+        ( 'rating', 'distribution', 'versions' );
 
     $stash{contributors} = $reqs->{contributors};
 
