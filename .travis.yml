@@ -40,9 +40,9 @@ before_script:
   - coverage-setup
 
 script:
-  # Devel::Cover isn't in the cpanfile
-  # but if it's installed into the global dirs this should work.
-  - carton exec prove -lr -j$(test-jobs) t
+  # Parallel tests seem to have Heisenfailures.  Disable for now.
+  # - carton exec prove -lr -j$(test-jobs) t
+  - carton exec prove -lr t
 
 after_success:
   - coverage-report
