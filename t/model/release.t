@@ -8,6 +8,14 @@ use MetaCPAN::Web;
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
+sub search_release {
+    my ( $method, @args ) = @_;
+
+    return
+        map { @{ $_->{hits}{hits} } }
+        MetaCPAN::Web->model('API::Release')->$method(@args)->recv;
+}
+
 my ( $true, $false ) = @{ decode_json('[true, false]') };
 
 # Explicitly test that we get a boolean.
@@ -21,11 +29,9 @@ sub is_bool {
 }
 
 subtest modules => sub {
-    my @args = ( 'OALDERS', 'HTTP-CookieMonster-0.09' );
     my @files
         = map { $_->{fields} }
-        @{ MetaCPAN::Web->model('API::Release')->modules(@args)
-            ->recv->{hits}{hits} };
+        search_release( modules => 'OALDERS', 'HTTP-CookieMonster-0.09' );
 
     ok( scalar @files, 'found files with modules' );
 
@@ -54,8 +60,9 @@ subtest modules => sub {
 subtest versions => sub {
 
     # Something with not too many versions.
-    my @versions = @{ MetaCPAN::Web->model('API::Release')
-            ->versions('Mojolicious-Plugin-HamlRenderer') };
+    my @versions
+        = map { $_->{fields} }
+        search_release( versions => 'Mojolicious-Plugin-HamlRenderer' );
 
     ok( scalar @versions, 'found release versions' );
 
