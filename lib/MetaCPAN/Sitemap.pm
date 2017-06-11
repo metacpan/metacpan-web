@@ -1,41 +1,42 @@
 package MetaCPAN::Sitemap;
-
-=head1 DESCRIPTION
-
-Generate an XML file containing URLs use by the robots.txt Sitemap. We use this
-module to generate one each for authors, modules and releases.
-
-=cut
-
 use strict;
 use warnings;
-use MetaCPAN::Moose;
+use IO::Socket::SSL qw(SSL_VERIFY_PEER);
+use IO::Async::Loop;
+use IO::Async::SSL;
+use Net::Async::HTTP;
+use Cpanel::JSON::XS;
+use IO::Compress::Gzip;
+use HTML::Entities qw(encode_entities_numeric);
 
-use autodie;
+use Moo;
 
-use Carp;
-use Search::Elasticsearch;
-use File::Spec;
-use MetaCPAN::Web::Types qw( HashRef Int Str );
-use MooseX::StrictConstructor;
-use PerlIO::gzip;
-use XML::Simple qw(:strict);
-
-has [ 'cpan_directory', 'object_type', 'field_name', 'xml_file', ] => (
-    is       => 'ro',
-    isa      => Str,
-    required => 1,
+has api_secure  => ( is => 'ro', required => 1 );
+has url_prefix  => ( is => 'ro', required => 1 );
+has object_type => ( is => 'ro', required => 1 );
+has field_name  => ( is => 'ro', required => 1 );
+has filter      => ( is => 'ro' );
+has size        => ( is => 'ro', default  => 1000 );
+has loop => ( is => 'lazy', default => sub { IO::Async::Loop->new } );
+has ua => (
+    is      => 'lazy',
+    default => sub {
+        my $self = shift;
+        my $http = Net::Async::HTTP->new(
+            user_agent =>
+                'MetaCPAN-Web/1.0 (https://github.com/metacpan/metacpan-web)',
+            max_connections_per_host => 5,
+            SSL_verify_mode          => SSL_VERIFY_PEER,
+            timeout                  => 10,
+        );
+        $self->loop->add($http);
+        $http;
+    }
 );
 
-has 'filter' => (
-    is  => 'ro',
-    isa => HashRef,
-);
-
-has 'size' => (
-    is  => 'ro',
-    isa => Int,
-);
+sub DEMOLISH {
+    $_[0]->ua->remove_from_parent;
+}
 
 # Mandatory arguments to this function are
 # [] search object_type (author and release)
@@ -48,82 +49,72 @@ has 'size' => (
 # [] filter - contains filter for a field that also needs to be included in
 # the list of form fields.
 
-sub process {
-    my $self = shift;
+my $json = Cpanel::JSON::XS->new->utf8->canonical;
 
-    # Check that a) the directory where the output file wants to be does
-    # actually exist and b) the directory itself is writeable.
-
-    # Get started. Create the ES object and the scrolled search object.
-    # XXX Remove this hardcoded URL
-    my $es = Search::Elasticsearch->new(
-        cxn_pool         => 'Static::NoPing',
-        nodes            => ['https://fastapi.metacpan.org'],
-        send_get_body_as => 'POST',
+sub _request {
+    my ( $self, $content, $cb ) = @_;
+    my $url          = $self->api_secure . '/';
+    my $content_type = 'text/plain';
+    if ( ref $content ) {
+        $url .= $self->object_type . '/';
+        $content_type = 'application/json';
+        $content      = $json->encode($content);
+    }
+    $url .= '_search/scroll?scroll=1m&size=' . $self->size;
+    $self->ua->POST( $url, $content, content_type => $content_type, )->then(
+        sub {
+            my $response = shift;
+            my $content  = $json->decode( $response->content );
+            return Future->done
+                if !@{ $content->{hits}{hits} };
+            $cb->( $content->{hits}{hits} );
+            return $self->_request( $content->{_scroll_id}, $cb );
+        }
     );
+}
 
-    my $field_name = $self->field_name;
+sub write {
+    my ( $self, $file ) = @_;
 
-    # Start off with standard search parameters ..
+    my $fh = IO::Compress::Gzip->new( $file . '.new' );
+    $fh->print(<<'END_XML_HEADER');
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+END_XML_HEADER
 
-    my %search_parameters = (
-        index  => 'v1',
-        size   => 5000,
-        type   => $self->object_type,
-        fields => [$field_name],
-    );
-
-    # ..and augment them if necesary.
-
-    if ( $self->filter ) {
-
-        # Copy the filter over wholesale into the search parameters, and add
-        # the filter fields to the field list.
-
-        $search_parameters{'body'}{'query'}{'match'} = $self->filter;
-        push @{ $search_parameters{'fields'} }, keys %{ $self->filter };
-    }
-
-    my $scrolled_search = $es->scroll_helper(%search_parameters);
-
-    # Open the output file, get ready to pump out the XML.
-
-    open my $fh, '>:gzip', $self->xml_file;
-
-    my @urls;
-    my $metacpan_url = q{};
-    if ( $self->cpan_directory ) {
-        $metacpan_url
-            = 'https://metacpan.org/' . $self->cpan_directory . q{/};
-    }
-
-    while ( $scrolled_search->refill_buffer ) {
-        push @urls,
-            map { $metacpan_url . $_->{'fields'}->{$field_name} }
-            $scrolled_search->drain_buffer;
-    }
-
-    $_ = $_ . q{ } for @urls;
-
-    $self->{size} = @urls;
-    XMLout(
+    $self->_request(
         {
-            'xmlns'     => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-            'xsi:schemaLocation' =>
-                'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd',
-            'url' => [ sort @urls ],
+            fields => [ $self->field_name ],
+            query  => { match_all => {} },
+            ( $self->filter ? ( filter => $self->filter ) : () ),
+            sort => [ $self->field_name ],
         },
-        'KeyAttr'    => [],
-        'RootName'   => 'urlset',
-        'XMLDecl'    => q/<?xml version='1.0' encoding='UTF-8'?>/,
-        'OutputFile' => $fh,
-    );
-
-    close $fh;
+        sub {
+            my $hits = shift;
+            for my $hit (@$hits) {
+                my $link_field = $hit->{fields}{ $self->field_name };
+                $link_field = $link_field->[0] if ref $link_field;
+                my $url = $self->url_prefix . $link_field;
+                $fh->print( "    <url><loc>"
+                        . encode_entities_numeric($url)
+                        . "</loc></url>\n" );
+            }
+        }
+    )->get;
+    $fh->print("</urlset>\n");
+    $fh->close;
+    rename "$file.new", "$file";
     return;
 }
 
-__PACKAGE__->meta->make_immutable;
-
 1;
+__END__
+
+=head1 DESCRIPTION
+
+Generate an XML file containing URLs use by the robots.txt Sitemap. We use this
+module to generate one each for authors, modules and releases.
+
+=cut

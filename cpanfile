@@ -59,7 +59,6 @@ requires 'Moo', '2.000002';
 requires 'Moose', '2.1605';
 requires 'MooseX::Fastly::Role', '0.03';
 requires 'MooseX::Role::Parameterized', '1.02';
-requires 'MooseX::StrictConstructor';
 requires 'MooseX::Types::Common::Numeric';
 requires 'MooseX::Types::Common::String';
 requires 'MooseX::Types::Moose';
@@ -68,7 +67,6 @@ requires 'Net::Async::HTTP';
 requires 'Net::Fastly', '1.05';
 requires 'Params::ValidationCompiler';
 requires 'Path::Tiny', '0.076';
-requires 'PerlIO::gzip';
 requires 'Plack', '1.0039';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
@@ -95,7 +93,6 @@ requires 'Try::Tiny', '0.24';
 requires 'URI', '1.71';
 requires 'URI::Escape';
 requires 'XML::Feed';
-requires 'XML::Simple';
 requires 'YAML', '1.15'; # fix dep chain issue
 
 test_requires 'App::Prove';
