@@ -47,7 +47,7 @@ sub module : Local : Args(1) : Does('Sortable') {
 
     my $data
         = $c->model('API::Module')
-        ->requires( $module, $c->req->page, $page_size, $sort );
+        ->requires( $module, $c->req->page, $page_size, $sort )->get;
     $c->stash(
         {
             %{$data},

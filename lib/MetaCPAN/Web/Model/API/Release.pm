@@ -49,15 +49,13 @@ sub distribution {
 
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
-    my $data = $self->request("/release/latest_by_author/$pauseid")->get;
-    return $data;
+    $self->request("/release/latest_by_author/$pauseid");
 }
 
 sub all_by_author {
     my ( $self, $pauseid, $page, $page_size ) = @_;
-    my $data = $self->request( "/release/all_by_author/$pauseid",
-        undef, { page => $page, page_size => $page_size } )->get;
-    return $data;
+    $self->request( "/release/all_by_author/$pauseid",
+        undef, { page => $page, page_size => $page_size } );
 }
 
 sub recent {
@@ -355,15 +353,14 @@ sub favorites {
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $param = $range ? { range => $range } : ();
-    my $data = $self->request( '/release/top_uploaders', undef, $param )->get;
-    return $data;
+    $self->request( '/release/top_uploaders', undef, $param );
 }
 
 sub no_latest {
     my ( $self, @distributions ) = @_;
 
     # If there are no distributions return
-    return {} unless (@distributions);
+    return Future->done( {} ) unless (@distributions);
 
     @distributions = uniq @distributions;
     $self->request(

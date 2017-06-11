@@ -65,16 +65,14 @@ sub first {
 sub requires {
     my ( $self, $module, $page, $page_size ) = @_;
 
-    my $data = $self->request(
+    $self->request(
         "/release/requires/$module",
         undef,
         {
             page      => $page,
             page_size => $page_size,
         },
-    )->get;
-
-    return $data;
+    );
 }
 
 __PACKAGE__->meta->make_immutable;

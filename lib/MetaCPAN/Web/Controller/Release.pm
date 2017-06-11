@@ -31,7 +31,7 @@ sub by_distribution : Chained('root') PathPart('') Args(1) {
 
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
     my ( $self, $c, $dist ) = @_;
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
 }
 
 sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
@@ -121,7 +121,8 @@ sub view : Private {
         )->summary_hash
     );
 
-    $c->stash( $c->model('API::Favorite')->find_plussers($distribution) );
+    $c->stash(
+        $c->model('API::Favorite')->find_plussers($distribution)->get );
 
     # Simplify the file data we pass to the template.
     my @view_files = map +{ %{ $_->{fields} }, %{ $_->{_source} }, },

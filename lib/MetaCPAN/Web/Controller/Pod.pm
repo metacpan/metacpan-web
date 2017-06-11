@@ -222,7 +222,7 @@ sub view : Private {
     $c->add_dist_key($dist);
     $c->add_author_key( $release->{author} );
 
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist) );
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
 
     $c->stash(
         $c->model(

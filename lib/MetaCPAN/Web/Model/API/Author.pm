@@ -102,10 +102,11 @@ sub by_user {
     else {
         $ret = $self->request("/author/by_user/$users");
     }
-    return unless $ret;
-
-    my $data = $ret->get;
-    return ( exists $data->{authors} ? $data->{authors} : [] );
+    $ret->transform(
+        done => sub {
+            return exists $_[0]->{authors} ? $_[0]->{authors} : [];
+        }
+    );
 }
 
 __PACKAGE__->meta->make_immutable;

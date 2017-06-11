@@ -40,7 +40,7 @@ sub index : Path : Args {
         );
     }
     if ( $module->{directory} ) {
-        my $files = $c->model('API::File')->dir(@module);
+        my $files = $c->model('API::File')->dir(@module)->get;
         $c->res->last_modified( $module->{date} );
         $c->stash(
             {

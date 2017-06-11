@@ -27,12 +27,14 @@ sub dependencies {
     }
     $deps{$module}{orig} = 1;
 
-    return [
-        map { $deps{$_} }
-            reverse
-            sort { $deps{$a}{date} cmp $deps{$b}{date} }
-            keys %deps
-    ];
+    return Future->done(
+        [
+            map { $deps{$_} }
+                reverse
+                sort { $deps{$a}{date} cmp $deps{$b}{date} }
+                keys %deps
+        ]
+    );
 }
 
 my %CORE = map { $_ => 1 } qw(
@@ -73,7 +75,7 @@ sub _handle_module {
 sub fetch_latest_distros {
     my ( $self, $size, $pauseid ) = @_;
 
-    my $r = $self->request(
+    $self->request(
         '/release/_search',
         {
             query => {
@@ -94,64 +96,73 @@ sub fetch_latest_distros {
             ],
             size => $size,
         },
-    )->get;
-    my %licenses;
-    my %distros;
+        )->transform(
+        done => sub {
+            my $data = shift;
+            my %licenses;
+            my %distros;
 
-    foreach my $d ( @{ $r->{hits}{hits} } ) {
-        my $license = $d->{_source}{license}[0];
-        my $distro  = $d->{_source}{distribution};
-        my $repo    = $d->{_source}{'resources.repository'};
+            foreach my $d ( @{ $data->{hits}{hits} } ) {
+                my $license = $d->{_source}{license}[0];
+                my $distro  = $d->{_source}{distribution};
+                my $repo    = $d->{_source}{'resources.repository'};
 
-        next if $distros{$distro};    # show the first one
+                next if $distros{$distro};    # show the first one
 
      # TODO: can we fetch the bug count in one call for all the distributions?
-        my $distribution = $self->request("/distribution/$distro")->get;
-        if ( $distribution->{bugs} ) {
-            $distros{$distro}{bugs} = $distribution->{bugs}{active};
+                my $distribution
+                    = $self->request("/distribution/$distro")->get;
+                if ( $distribution->{bugs} ) {
+                    $distros{$distro}{bugs} = $distribution->{bugs}{active};
+                }
+
+                $distros{$distro}{test} = $d->{_source}{tests};
+                my $total = 0;
+                $total += ( $distros{$distro}{test}{$_} // 0 )
+                    for qw(pass fail na);
+                $distros{$distro}{test}{ratio}
+                    = $total
+                    ? int(
+                    100 * ( $distros{$distro}{test}{pass} // 0 ) / $total )
+                    : q{};
+
+                if (    $license
+                    and $license ne 'unknown'
+                    and $license ne 'open_source' )
+                {
+                    $licenses{$license}++;
+                }
+                else {
+                    $distros{$distro}{license} = 1;
+                }
+
+                $distros{$distro}{unauthorized}
+                    = $d->{_source}{authorized} eq 'false' ? 1 : 0;
+
+                # See also root/inc/release-infro.html
+                if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
+
+                    # TODO: shall we collect the types and list them?
+                }
+                else {
+                    $distros{$distro}{repo} = 1;
+                }
+                if ( not $d->{_source}{abstract} ) {
+                    $distros{$distro}{abstract} = 1;
+                }
+
+                ( $distros{$distro}{date} = $d->{_source}{date} )
+                    =~ s/\.\d+Z$//;
+                $distros{$distro}{version}
+                    = $d->{_source}{'metadata.version'};
+            }
+
+            return {
+                licenses => \%licenses,
+                distros  => \%distros,
+            };
         }
-
-        $distros{$distro}{test} = $d->{_source}{tests};
-        my $total = 0;
-        $total += ( $distros{$distro}{test}{$_} // 0 ) for qw(pass fail na);
-        $distros{$distro}{test}{ratio}
-            = $total
-            ? int( 100 * ( $distros{$distro}{test}{pass} // 0 ) / $total )
-            : q{};
-
-        if (    $license
-            and $license ne 'unknown'
-            and $license ne 'open_source' )
-        {
-            $licenses{$license}++;
-        }
-        else {
-            $distros{$distro}{license} = 1;
-        }
-
-        $distros{$distro}{unauthorized}
-            = $d->{_source}{authorized} eq 'false' ? 1 : 0;
-
-        # See also root/inc/release-infro.html
-        if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
-
-            # TODO: shall we collect the types and list them?
-        }
-        else {
-            $distros{$distro}{repo} = 1;
-        }
-        if ( not $d->{_source}{abstract} ) {
-            $distros{$distro}{abstract} = 1;
-        }
-
-        ( $distros{$distro}{date} = $d->{_source}{date} ) =~ s/\.\d+Z$//;
-        $distros{$distro}{version} = $d->{_source}{'metadata.version'};
-    }
-
-    return {
-        licenses => \%licenses,
-        distros  => \%distros,
-    };
+        );
 }
 
 __PACKAGE__->meta->make_immutable;

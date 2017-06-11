@@ -6,7 +6,8 @@ sub recent : Local : Args(0) {
     my ( $self, $c ) = @_;
     my $page_size = $c->req->get_page_size(100);
     my $data
-        = $c->model('API::Favorite')->recent( $c->req->page, $page_size );
+        = $c->model('API::Favorite')->recent( $c->req->page, $page_size )
+        ->get;
     $c->stash(
         {
             header          => 1,
@@ -23,7 +24,7 @@ sub recent : Local : Args(0) {
 sub leaderboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $data = $c->model('API::Favorite')->leaderboard();
+    my $data = $c->model('API::Favorite')->leaderboard->get;
     return unless $data;
 
     $c->stash(

@@ -15,8 +15,11 @@ sub source {
 sub dir {
     my ( $self, @path ) = @_;
     my $path = join '/', @path;
-    my $data = $self->request("/file/dir/$path")->get;
-    return $data->{dir};
+    my $data = $self->request("/file/dir/$path")->transform(
+        done => sub {
+            $_[0]->{dir};
+        }
+    );
 }
 
 __PACKAGE__->meta->make_immutable;
