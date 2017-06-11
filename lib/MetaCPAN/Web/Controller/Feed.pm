@@ -2,17 +2,19 @@ package MetaCPAN::Web::Controller::Feed;
 
 use Moose;
 use namespace::autoclean;
-use feature qw( state );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use DateTime::Format::ISO8601 ();
 use HTML::Escape qw/escape_html/;
-use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri );
+use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri Enum Undef );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
-use XML::Feed ();
+use XML::Feed               ();
+use XML::Feed::Format::RSS  ();
+use XML::Feed::Format::Atom ();
+use XML::RSS                ();
 
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
@@ -25,6 +27,7 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     $c->forward('/recent/index');
 
     $c->stash->{feed} = $self->build_feed(
+        format  => $c->req->params->{'type'},
         entries => $c->stash->{recent},
         host    => URI->new( $c->config->{web_host} ),
         title   => 'Recent CPAN uploads - MetaCPAN',
@@ -69,6 +72,7 @@ sub news : Local : Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
+        format  => $c->req->params->{'type'},
         entries => \@entries,
         host    => $c->config->{web_host},
         title   => 'Recent MetaCPAN News',
@@ -116,6 +120,7 @@ sub author : Local : Args(1) {
         = $c->model('API::Favorite')->by_user( $author_info->{user} )->get;
 
     $c->stash->{feed} = $self->build_feed(
+        format  => $c->req->params->{'type'},
         host    => $c->config->{web_host},
         title   => "Recent CPAN activity of $author - MetaCPAN",
         entries => [
@@ -136,26 +141,30 @@ sub distribution : Local : Args(1) {
     my $data = $c->model('API::Release')->versions($distribution)->get;
 
     $c->stash->{feed} = $self->build_feed(
+        format  => $c->req->params->{'type'},
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
         entries => $data->{releases},
     );
 }
 
+my $feed_check = validation_for(
+    params => {
+        entries => { type => ArrayRef [HashRef] },
+        host   => { type => Uri, optional => 0, },
+        title  => { type => Str },
+        format => {
+            type => Enum( [qw(atom rdf rss)] )
+                ->plus_coercions( Undef, '"rdf"', Str, 'lc $_' ),
+            default => 'rdf'
+        },
+    },
+);
+
 sub build_entry {
-    my $self = shift;
-
-    state $check = validation_for(
-        params => {
-            entry => { type => HashRef },
-            host  => { type => Uri },
-        }
-    );
-
-    my %args  = $check->(@_);
+    my ( $self, %args ) = @_;
     my $entry = $args{entry};
-
-    my $e = XML::Feed::Entry->new('RSS');
+    my $e     = XML::Feed::Entry->new( $args{format} );
 
     my $link = $args{host}->clone;
     $link->path( $entry->{link}
@@ -175,29 +184,26 @@ sub build_entry {
 }
 
 sub build_feed {
-    my $self = shift;
+    my $self   = shift;
+    my %params = $feed_check->(@_);
 
-    state $check = validation_for(
-        params => {
-            entries => { type => ArrayRef },
-            host    => { type => Uri, optional => 0, },
-            title   => { type => Str },
-        }
-    );
-
-    my %params = $check->(@_);
-
-    my $feed = XML::Feed->new( 'RSS', version => 2.0 );
+    my ($format) = my @args
+        = $params{format} eq 'rdf' ? ( 'RSS', version => '1.0' )
+        : $params{format} eq 'rss' ? ( 'RSS', version => '2.0' )
+        : $params{format} eq 'atom' ? ('Atom')
+        :                             ();
+    my $feed = XML::Feed->new(@args);
     $feed->title( $params{title} );
     $feed->link('/');
 
     foreach my $entry ( @{ $params{entries} } ) {
         $feed->add_entry( $self->build_entry(
-            entry => $entry,
-            host  => $params{host}
+            entry  => $entry,
+            host   => $params{host},
+            format => $format,
         ) );
     }
-    return $feed->as_xml;
+    return $feed;
 }
 
 sub _format_release_entries {
@@ -228,9 +234,15 @@ sub _format_favorite_entries {
 
 sub end : Private {
     my ( $self, $c ) = @_;
-    $c->res->content_type('application/rss+xml; charset=UTF-8');
-    $c->res->body( $c->stash->{feed} );
-
+    my $feed = $c->stash->{feed};
+    $c->detach('/end')
+        if !$feed;
+    $c->res->content_type(
+        $feed->format eq 'Atom'
+        ? 'application/atom+xml; charset=UTF-8'
+        : 'application/rss+xml; charset=UTF-8'
+    );
+    $c->res->body( $feed->as_xml );
 }
 
 __PACKAGE__->meta->make_immutable;
