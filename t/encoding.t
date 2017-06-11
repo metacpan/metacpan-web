@@ -3,7 +3,6 @@ use strict;
 use warnings;
 use utf8;
 use Test::More;
-use List::MoreUtils qw(natatime);
 use MetaCPAN::Web::Test;
 use Encode qw( is_utf8 decode encode );
 
@@ -52,8 +51,8 @@ sub test_raw_response {
         }
 
         if ( my $w = $opts{warnings} ) {
-            my $iter = natatime 2, @$w;
-            while ( my ( $re, $desc ) = $iter->() ) {
+            for my $i ( map $_ * 2, 0 .. @$w / 2 - 1 ) {
+                my ( $re, $desc ) = @{$w}[ $i, $i + 1 ];
                 like pop(@warnings), $re, $desc;
             }
         }

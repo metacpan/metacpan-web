@@ -4,7 +4,7 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
-use List::MoreUtils qw(uniq);
+use List::Util qw(uniq);
 
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;

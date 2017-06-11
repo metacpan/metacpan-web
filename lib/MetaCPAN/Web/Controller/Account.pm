@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Account;
 
 use Moose;
-use List::MoreUtils qw(pairwise);
 use DateTime ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -50,25 +49,34 @@ sub profile : Local : Args(0) {
     return unless ( $req->method eq 'POST' );
 
     my $data = $author;
-    $data->{blog} = $req->param('blog.url')
+
+    my @blog_url  = $req->param('blog.url');
+    my @blog_feed = $req->param('blog.feed');
+    $data->{blog}
+        = $req->param('blog.url')
         ? [
-        pairwise { { url => $a, feed => $b } }
-        @{ [ $req->param('blog.url') ] },
-        @{ [ $req->param('blog.feed') ] }
+        map +{ url => $blog_url[$_], feed => $blog_feed[$_] },
+        ( 0 .. $#blog_url )
         ]
         : undef;
-    $data->{donation} = $req->param('donation.name')
+
+    my @donation_name = $req->param('donation.name');
+    my @donation_id   = $req->param('donation.id');
+    $data->{donation}
+        = $req->param('donation.name')
         ? [
-        pairwise { { name => $a, id => $b } }
-        @{ [ $req->param('donation.name') ] },
-        @{ [ $req->param('donation.id') ] }
+        map +{ name => $donation_name[$_], id => $donation_id[$_] },
+        ( 0 .. $#donation_name )
         ]
         : undef;
-    $data->{profile} = $req->param('profile.name')
+
+    my @profile_name = $req->param('profile.name');
+    my @profile_id   = $req->param('profile.id');
+    $data->{profile}
+        = $req->param('profile.name')
         ? [
-        pairwise { { name => $a, id => $b } }
-        @{ [ $req->param('profile.name') ] },
-        @{ [ $req->param('profile.id') ] }
+        map +{ name => $profile_name[$_], id => $profile_id[$_] },
+        ( 0 .. $#profile_name )
         ]
         : undef;
 

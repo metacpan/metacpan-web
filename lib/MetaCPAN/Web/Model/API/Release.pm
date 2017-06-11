@@ -4,8 +4,7 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
-use List::Util qw(first);
-use List::MoreUtils qw(uniq);
+use List::Util qw(first uniq);
 
 =head1 NAME
 
