@@ -19,17 +19,6 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 =head1 METHODS
 
-=head2 auto
-
-=cut
-
-sub auto : Private {
-    my ( $self, $c ) = @_;
-    Log::Log4perl::MDC->put( "ip",  $c->req->address );
-    Log::Log4perl::MDC->put( "url", $c->req->uri . '' );
-    return 1;
-}
-
 =head2 index
 
 The root page (/)
