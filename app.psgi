@@ -54,6 +54,17 @@ my $tempdir = "$root_dir/var/tmp";
 builder {
 
     enable 'ReverseProxy';
+    enable sub {
+        my $app = shift;
+        sub {
+            my ($env) = @_;
+            Log::Log4perl::MDC->put( "ip",      $env->{REMOTE_ADDR} );
+            Log::Log4perl::MDC->put( "method",  $env->{REMOTE_METHOD} );
+            Log::Log4perl::MDC->put( "url",     $env->{REQUEST_URI} );
+            Log::Log4perl::MDC->put( "referer", $env->{HTTP_REFERER} );
+            $app->($env);
+        };
+    };
     enable 'Runtime';
 
     unless ( $ENV{HARNESS_ACTIVE} or $0 =~ /\.t$/ ) {
