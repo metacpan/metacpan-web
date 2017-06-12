@@ -7,7 +7,6 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use Plack::Response;
 use Ref::Util qw( is_arrayref );
 
 sub index : Path : Args(0) {

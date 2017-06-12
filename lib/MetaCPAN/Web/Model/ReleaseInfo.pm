@@ -6,7 +6,7 @@ use MetaCPAN::Moose;
 
 extends 'Catalyst::Model';
 
-use List::AllUtils qw( all );
+use List::Util qw( all );
 use MetaCPAN::Web::Types qw( HashRef Object );
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);

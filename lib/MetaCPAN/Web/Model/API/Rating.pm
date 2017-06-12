@@ -23,7 +23,7 @@ it under the same terms as Perl itself.
 
 =cut
 
-use List::MoreUtils qw(uniq);
+use List::Util qw(uniq);
 
 sub get {
     my ( $self, @distributions ) = @_;
