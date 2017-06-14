@@ -78,7 +78,6 @@ requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
 requires 'Template::Alloy';
 requires 'Template::Plugin::DateTime';
-requires 'Template::Plugin::JSON';
 requires 'Template::Plugin::Markdown';
 requires 'Template::Plugin::MultiMarkdown', '0.08';
 requires 'Template::Plugin::Number::Format';

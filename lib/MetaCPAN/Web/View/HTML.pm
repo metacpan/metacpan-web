@@ -9,7 +9,6 @@ use Cpanel::JSON::XS ();
 use Gravatar::URL;
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
-use Template::Plugin::JSON;
 use Template::Plugin::Markdown;
 use Template::Plugin::Number::Format;
 use Template::Plugin::Page;
@@ -74,15 +73,6 @@ Template::Alloy->define_vmethod( 'text',
     dt_date_common => \&common_date_format );
 
 Template::Alloy->define_vmethod(
-    'hash',
-    pretty_json => sub {
-
-    # Use utf8(0) because Catatlyst expects our view to be a character string.
-        Cpanel::JSON::XS->new->utf8(0)->pretty->encode(shift);
-    }
-);
-
-Template::Alloy->define_vmethod(
     'text',
     decode_punycode => sub {
         my $url_string = shift;
@@ -101,12 +91,14 @@ Template::Alloy->define_vmethod(
     }
 );
 
-Template::Alloy->define_vmethod(
-    'array',
-    json => sub {
-        Cpanel::JSON::XS::encode_json(shift);
-    }
-);
+my $json = Cpanel::JSON::XS->new->canonical->allow_nonref;
+Template::Alloy->define_vmethod( $_, json => sub { $json->encode( $_[0] ) } )
+    for 'text', 'array', 'hash';
+
+my $pretty_json = Cpanel::JSON::XS->new->canonical->pretty->allow_nonref;
+Template::Alloy->define_vmethod( $_,
+    pretty_json => sub { $json->encode( $_[0] ) } )
+    for 'text', 'array', 'hash';
 
 Template::Alloy->define_vmethod(
     'array',
