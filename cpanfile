@@ -23,7 +23,6 @@ requires 'DateTime', '1.24';
 requires 'DateTime::Format::HTTP';
 requires 'DateTime::Format::ISO8601';
 requires 'Devel::Confess';
-requires 'Digest::MD5';
 requires 'Digest::SHA';
 requires 'Encode', '2.51';
 requires 'Exporter';

@@ -3,7 +3,6 @@ package MetaCPAN::Web::View::HTML;
 use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
-use Digest::MD5 qw(md5_hex);
 use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
@@ -95,15 +94,6 @@ Template::Alloy->define_vmethod(
         }
     );
 }
-
-Template::Alloy->define_vmethod(
-    'text',
-    to_color => sub {
-        my $md5 = md5_hex( md5_hex(shift) );
-        my $color = substr( $md5, 0, 6 );
-        return "#$color";
-    },
-);
 
 Template::Alloy->define_vmethod(
     'text',
