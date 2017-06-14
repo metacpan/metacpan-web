@@ -5,37 +5,41 @@
 use strict;
 use warnings;
 
-use FindBin qw ($Bin);
-use lib "$Bin/../lib";
+use File::Basename;
+use File::Spec;
+use Cwd;
+use Config::ZOMG;
+my $root_dir;
 
+BEGIN {
+    my $bin_dir = File::Basename::dirname(__FILE__);
+    $root_dir
+        = Cwd::abs_path( File::Spec->catdir( $bin_dir, File::Spec->updir ) );
+}
+use lib "$root_dir/lib";
 use MetaCPAN::Sitemap;
 
-my $out_dir = "$Bin/../root/static/sitemaps/";
-mkdir $out_dir;
-
-my @parts = (
-
-    # For authors, we're looking for the pauseid, and want to build a URL
-    # with 'author' in the path.
-
-    {
-        object_type    => 'author',
-        field_name     => 'pauseid',
-        xml_file       => "$out_dir/authors.xml.gz",
-        cpan_directory => 'author',
-    },
-
-    # For releases, we're looking for a download URL; since we're not
-    # building a URL, the cpan_directory is missing, but we also want to
-    # filter on only the 'latest' entries.
-
-    {
-        object_type    => 'release',
-        field_name     => 'distribution',
-        xml_file       => "$out_dir/releases.xml.gz",
-        cpan_directory => 'release',
-        filter         => { status => 'latest' },
-    }
+my $config = Config::ZOMG->open(
+    name => 'MetaCPAN::Web',
+    path => $root_dir,
 );
 
-MetaCPAN::Sitemap->new($_)->process for @parts;
+my $out_dir = "$root_dir/root/static/sitemaps/";
+mkdir $out_dir;
+
+my $web_host = $config->{web_host};
+$web_host =~ s{/\z}{};
+my $sitemaps = $config->{sitemap};
+
+for my $file ( sort keys %$sitemaps ) {
+    my %sm_config = %{ $sitemaps->{$file} };
+    my $full_file = $out_dir . $file;
+    $sm_config{url_prefix} ||= do {
+        my $metacpan_url = $sm_config{metacpan_url};
+        s{/\z}{}, s{\A/}{} for $metacpan_url;
+        "$web_host/$metacpan_url/";
+    };
+    $sm_config{api_secure} = $config->{api_secure};
+    my $sitemap = MetaCPAN::Sitemap->new(%sm_config);
+    $sitemap->write($full_file);
+}

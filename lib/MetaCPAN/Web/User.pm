@@ -28,7 +28,7 @@ sub for_session {
 
 sub from_session {
     my ( $self, $c, $id ) = @_;
-    my $user = $c->model('API::User')->get($id)->recv;
+    my $user = $c->model('API::User')->get($id)->get;
     $self->obj( Hash::AsObject->new($user) ) if ($user);
     return $user ? $self : undef;
 }
@@ -36,7 +36,7 @@ sub from_session {
 sub find_user {
     my ( $self, $auth, $c ) = @_;
     my $obj = Hash::AsObject->new(
-        $c->model('API::User')->get( $auth->{token} )->recv );
+        $c->model('API::User')->get( $auth->{token} )->get );
     $self->obj($obj);
     return $self;
 }

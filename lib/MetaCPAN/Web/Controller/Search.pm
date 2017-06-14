@@ -41,14 +41,14 @@ sub index : Path : Args(0) {
         $query =~ s[^ (?: \\ | ! ) ][]x
         )
     {
-        my $module = $model->first($query)->recv;
+        my $module = $model->first($query)->get;
         $module = $module->[0] if $module and is_arrayref($module);
         if ( $module && $module eq $query ) {
             $c->res->redirect( '/pod/' . $module );
             $c->detach;
         }
         else {
-            my $author = $c->model('API::Author')->search($query)->recv;
+            my $author = $c->model('API::Author')->search($query)->get;
             if (   $author->{total} == 1
                 && $query eq $author->{results}->[0]->{pauseid} )
             {
@@ -68,7 +68,7 @@ sub index : Path : Args(0) {
         my $results = $model->search_web( $query, $from, $page_size );
 
         my $authors = $c->model('API::Author')->search( $query, $from );
-        ( $results, $authors ) = ( $results->recv, $authors->recv );
+        ( $results, $authors ) = ( $results->get, $authors->get );
 
         if ( !$results->{total} && !$authors->{total} ) {
             my $suggest = $query;

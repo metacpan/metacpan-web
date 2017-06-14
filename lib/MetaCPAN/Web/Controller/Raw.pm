@@ -8,9 +8,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub index : Path : Args {
     my ( $self, $c, @module ) = @_;
 
-    my ( $source, $module ) = (
-        $c->model('API::Module')->source(@module)->recv,
-        $c->model('API::Module')->get(@module)->recv
+    my ( $source, $module ) = map { $_->get } (
+        $c->model('API::Module')->source(@module),
+        $c->model('API::Module')->get(@module),
     );
     $c->detach('/not_found') unless ( $source->{raw} );
     if ( $c->req->parameters->{download} ) {

@@ -28,7 +28,7 @@ sub get : Private {
     my $c    = shift;
     my ( $type, $name ) = @_;
 
-    my $perms = $c->model('API::Permission')->get( $type, $name );
+    my $perms = $c->model('API::Permission')->get( $type, $name )->get;
 
     if ( !$perms ) {
         $c->stash(

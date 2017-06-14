@@ -11,7 +11,7 @@ sub index : Path : Args(0) {
 
     my %args = map { $_ => $c->req->parameters->{$_} }
         keys %{ $c->req->parameters };
-    my $line = $c->model('API')->request( '/activity', undef, \%args )->recv;
+    my $line = $c->model('API')->request( '/activity', undef, \%args )->get;
     return unless $line and exists $line->{activity};
 
     $c->res->content_type('image/svg+xml');

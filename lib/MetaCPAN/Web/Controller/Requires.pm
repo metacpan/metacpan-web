@@ -28,7 +28,7 @@ sub distribution : Local : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Release')
         ->reverse_dependencies( $distribution, $c->req->page, $page_size,
-        $sort )->recv;
+        $sort )->get;
     $c->stash(
         {
             %{$data},
@@ -47,7 +47,7 @@ sub module : Local : Args(1) : Does('Sortable') {
 
     my $data
         = $c->model('API::Module')
-        ->requires( $module, $c->req->page, $page_size, $sort );
+        ->requires( $module, $c->req->page, $page_size, $sort )->get;
     $c->stash(
         {
             %{$data},

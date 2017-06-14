@@ -20,7 +20,7 @@ sub index : Path : Args(0) {
                 client_secret => $c->config->{consumer_secret},
                 code          => $code,
             },
-        )->recv;
+        )->get;
         $c->req->session->set( token => $data->{access_token} );
         $c->authenticate( { token => $data->{access_token} } );
         my $state = $c->req->params->{state} || q{};

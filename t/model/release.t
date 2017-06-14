@@ -13,7 +13,7 @@ sub search_release {
 
     return
         map { @{ $_->{hits}{hits} } }
-        MetaCPAN::Web->model('API::Release')->$method(@args)->recv;
+        MetaCPAN::Web->model('API::Release')->$method(@args)->get;
 }
 
 my ( $true, $false ) = @{ decode_json('[true, false]') };

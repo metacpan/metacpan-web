@@ -22,10 +22,10 @@ sub add : Local : Args(0) {
     my $data  = $c->req->params;
     my $res;
     if ( $data->{remove} ) {
-        $res = $model->remove_favorite( $data, $c->token )->recv;
+        $res = $model->remove_favorite( $data, $c->token )->get;
     }
     else {
-        $res = $model->add_favorite( $data, $c->token )->recv;
+        $res = $model->add_favorite( $data, $c->token )->get;
     }
 
     # We need to purge if the rating has changes until the fav count
@@ -79,7 +79,7 @@ sub _cache_key_for_user {
 sub _add_fav_list_to_stash {
     my ( $self, $c, $size ) = @_;
     my $user = $c->user;
-    my $faves = $c->model('API::Favorite')->by_user( $user->id, $size );
+    my $faves = $c->model('API::Favorite')->by_user( $user->id, $size )->get;
     $c->stash( { faves => $faves } );
     return $user;
 }

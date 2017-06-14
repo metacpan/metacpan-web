@@ -28,7 +28,7 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
     my $data;
 
     if ( $module = $c->req->params->{'module'} ) {
-        $data = $c->model('API::Lab')->dependencies($module);
+        $data = $c->model('API::Lab')->dependencies($module)->get;
     }
 
     $c->stash(
@@ -43,7 +43,7 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
 sub dashboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    my $user = $c->model('API::User')->get_profile( $c->token )->recv;
+    my $user = $c->model('API::User')->get_profile( $c->token )->get;
 
     my $report;
     my $pauseid = $c->req->params->{'pauseid'};
@@ -55,7 +55,7 @@ sub dashboard : Local : Args(0) {
         $pauseid = $user->{pauseid};
         if ($pauseid) {
             $report = $c->model('API::Lab')
-                ->fetch_latest_distros( 1000, $pauseid );
+                ->fetch_latest_distros( 1000, $pauseid )->get;
         }
     }
 

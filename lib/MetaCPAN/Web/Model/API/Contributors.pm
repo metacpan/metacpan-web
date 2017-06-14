@@ -25,19 +25,17 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    my $cv = $self->cv;
 
     # If there's no release, we'll just redirect
     $release //= {};
 
     $self->request( '/release/contributors/' . $author . '/' . $release, )
-        ->cb(
-        sub {
-            my ($contributors) = shift->recv;
-            $cv->send( $contributors->{contributors} );
+        ->transform(
+        done => sub {
+            my $data = shift;
+            return $data->{contributors};
         }
         );
-    return $cv;
 }
 
 __PACKAGE__->meta->make_immutable;

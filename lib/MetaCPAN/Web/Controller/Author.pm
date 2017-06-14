@@ -46,18 +46,17 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $pauseid = $c->stash->{pauseid};
 
-    my $author_cv = $c->model('API::Author')->get($pauseid);
-    my $author    = $author_cv->recv;
+    my $author = $c->model('API::Author')->get($pauseid)->get;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
-    my $releases = $c->model('API::Release')->latest_by_author($pauseid);
+    my $releases = $c->model('API::Release')->latest_by_author($pauseid)->get;
 
     my $date = List::Util::max
         map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
         @{ $releases->{releases} };
     $c->res->last_modified($date) if $date;
 
-    my $faves = $c->model('API::Favorite')->by_user( $author->{user} );
+    my $faves = $c->model('API::Favorite')->by_user( $author->{user} )->get;
 
     my $took = $releases->{took};
 
@@ -88,9 +87,10 @@ sub releases : Chained('root') PathPart Args(0) {
     my $page = $req->page > 0 ? $req->page : 1;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases
-        = $c->model('API::Release')->all_by_author( $id, $page_size, $page );
+        = $c->model('API::Release')->all_by_author( $id, $page_size, $page )
+        ->get;
 
-    my $author = $author_cv->recv;
+    my $author = $author_cv->get;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
     $c->stash(

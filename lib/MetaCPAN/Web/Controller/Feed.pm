@@ -103,8 +103,7 @@ sub author : Local : Args(1) {
     $c->cdn_max_age('1y');
     $c->add_author_key($author);
 
-    my $author_cv   = $c->model('API::Author')->get($author);
-    my $author_info = $author_cv->recv;
+    my $author_info = $c->model('API::Author')->get($author)->get;
 
     # If the author can be found, we get the hashref of author info.  If it
     # can't be found, we (confusingly) get a HashRef with "code" and "message"
@@ -114,9 +113,10 @@ sub author : Local : Args(1) {
         $c->detach( '/not_found', [] );
     }
 
-    my $releases = $c->model('API::Release')->latest_by_author($author);
+    my $releases = $c->model('API::Release')->latest_by_author($author)->get;
 
-    my $faves = $c->model('API::Favorite')->by_user( $author_info->{user} );
+    my $faves
+        = $c->model('API::Favorite')->by_user( $author_info->{user} )->get;
 
     $c->stash->{feed} = $self->build_feed(
         host    => $c->config->{web_host},
@@ -136,7 +136,7 @@ sub distribution : Local : Args(1) {
     $c->cdn_max_age('1y');
     $c->add_dist_key($distribution);
 
-    my $data = $c->model('API::Release')->versions($distribution)->recv;
+    my $data = $c->model('API::Release')->versions($distribution)->get;
     $c->stash->{feed} = $self->build_feed(
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",

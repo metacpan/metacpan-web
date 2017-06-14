@@ -5,22 +5,39 @@ extends 'Catalyst::Model';
 
 use namespace::autoclean;
 
-use AnyEvent::Curl::Multi;
-use Encode        ();
-use HTTP::Request ();
+use Encode ();
 use Cpanel::JSON::XS qw( decode_json encode_json );
-use MetaCPAN::Web::Types qw( Uri );
-use MooseX::ClassAttribute;
-use Try::Tiny qw( catch try );
+use IO::Async::Loop;
+use IO::Async::SSL;
+use IO::Socket::SSL qw(SSL_VERIFY_PEER);
+use Net::Async::HTTP;
+use URI;
 use URI::QueryParam;
+use MetaCPAN::Web::Types qw( Uri );
+use Try::Tiny qw( catch try );
 use Log::Log4perl;
 
-class_has client => (
-    is   => 'ro',
-    lazy => 1,
-    default =>
-        sub { return AnyEvent::Curl::Multi->new( max_concurrency => 5 ) },
-);
+my $loop;
+
+sub loop {
+    $loop ||= IO::Async::Loop->new;
+}
+
+my $client;
+
+sub client {
+    $client ||= do {
+        my $http = Net::Async::HTTP->new(
+            user_agent =>
+                'MetaCPAN-Web/1.0 (https://github.com/metacpan/metacpan-web)',
+            max_connections_per_host => 5,
+            SSL_verify_mode          => SSL_VERIFY_PEER,
+            timeout                  => 10,
+        );
+        $_[0]->loop->add($http);
+        $http;
+    };
+}
 
 has api_secure => (
     is       => 'ro',
@@ -28,18 +45,6 @@ has api_secure => (
     coerce   => 1,
     required => 1,
 );
-
-{
-    no warnings 'once';
-    $AnyEvent::HTTP::PERSISTENT_TIMEOUT = 0;
-    $AnyEvent::HTTP::USERAGENT
-        = 'Mozilla/5.0 (compatible; U; MetaCPAN-Web/1.0; '
-        . '+https://github.com/metacpan/metacpan-web)';
-}
-
-sub cv {
-    AE::cv;
-}
 
 =head2 COMPONENT
 
@@ -63,8 +68,6 @@ sub model {
 
 sub request {
     my ( $self, $path, $search, $params, $method ) = @_;
-
-    my $req = $self->cv;
 
     my $url = $self->api_secure->clone;
 
@@ -93,39 +96,23 @@ sub request {
     # encode_json returns an octet string
     $request->add_content( encode_json($search) ) if $search;
 
-    $self->client->request($request)->cv->cb(
-        sub {
-            my $cv = shift;
-            try {
-                my ($response) = $cv->recv;
-                if ( !$response ) {
-                    $req->croak(
-                        "bad response when requesting " . $request->uri );
-                    return;
-                }
-                my $content_type = $response->header('content-type') || '';
-                my $data = $response->content;
+    $self->client->do_request( request => $request )->transform(
+        done => sub {
+            my $response     = shift;
+            my $content_type = $response->header('content-type') || '';
+            my $data         = $response->content;
 
-                if ( $content_type =~ /^application\/json/ ) {
-                    try {
-                        my $json = $self->process_json_response($data);
-                        $req->send($json);
-                    }
-                    catch {
-                        $req->send( $self->raw_api_response($data) );
-                    };
-                }
-                else {
-                    # Response is raw data, e.g. text/plain
-                    $req->send( $self->raw_api_response($data) );
-                }
+            if ( $content_type =~ /^application\/json/ ) {
+                my $out;
+                eval { $out = $self->process_json_response($data); };
+                return $out
+                    if $out;
             }
-            catch {
-                $req->croak($_);
-            };
+
+            # Response is raw data, e.g. text/plain
+            return $self->raw_api_response($data);
         }
     );
-    return $req;
 }
 
 sub process_json_response {

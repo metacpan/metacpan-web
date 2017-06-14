@@ -16,10 +16,14 @@ sub get {
     my ( $self, $type, $name ) = @_;
 
     if ( $type eq 'module' ) {
-        my $module = $self->request( '/permission/' . $name )->recv;
+        return $self->request( '/permission/' . $name )->transform(
+            done => sub {
 
-        # return undef if there's a 404
-        return $module->{code} ? undef : $module;
+                # return undef if there's a 404
+                my $data = shift;
+                return $data->{code} ? undef : $data;
+            }
+        );
     }
 
     if ( $type eq 'distribution' ) {
@@ -51,32 +55,40 @@ sub _get_author_modules {
 sub _get_modules_in_distribution {
     my $self = shift;
     my $name = shift;
-    return undef unless $name;
+    return Future->done(undef) unless $name;
 
-    my $res = $self->request("/package/modules/$name")->recv;
-    my @modules = $res->{modules} ? @{ $res->{modules} } : undef;
+    $self->request("/package/modules/$name")->then(
+        sub {
+            my $res = shift;
+            my @modules = $res->{modules} ? @{ $res->{modules} } : undef;
 
-    return undef unless @modules;
+            return Future->done(undef) unless @modules;
 
-    my @perm_search
-        = map { +{ term => { module_name => $_ } } } @modules;
+            my @perm_search
+                = map { +{ term => { module_name => $_ } } } @modules;
 
-    my $search = {
-        query => { bool => { should => \@perm_search } },
-        size  => 1_000,
-    };
+            my $search = {
+                query => { bool => { should => \@perm_search } },
+                size  => 1_000,
+            };
 
-    return $self->_search_perms($search);
+            return $self->_search_perms($search);
+        }
+    );
 }
 
 sub _search_perms {
     my $self   = shift;
     my $search = shift;
 
-    my $perms_found = $self->request( '/permission/_search', $search )->recv;
-    my @perms = sort { $a->{module_name} cmp $b->{module_name} }
-        map { $_->{_source} } @{ $perms_found->{hits}->{hits} };
-    return @perms ? \@perms : undef;
+    $self->request( '/permission/_search', $search )->transform(
+        done => sub {
+            my $perms = shift;
+            my @perms = sort { $a->{module_name} cmp $b->{module_name} }
+                map { $_->{_source} } @{ $perms->{hits}->{hits} };
+            return @perms ? \@perms : undef;
+        }
+    );
 }
 
 __PACKAGE__->meta->make_immutable;

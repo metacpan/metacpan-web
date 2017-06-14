@@ -27,7 +27,7 @@ sub release : Local Args(2) {
 sub get : Private {
     my ( $self, $c, @args ) = @_;
 
-    my $file = $c->model('API::Changes')->get(@args)->recv;
+    my $file = $c->model('API::Changes')->get(@args)->get;
 
     # NOTE: There is currently no differentiation (from the API)
     # of whether the release doesn't exist or we couldn't find a change log.
