@@ -108,6 +108,7 @@ sub recent {
                                 = $author_for_user_id{ $fav->{user} };
                         }
                     }
+                    return $data;
                 }
                 );
         }
@@ -147,9 +148,6 @@ sub find_plussers {
             );
         }
     );
-
-    # find plussers by pause ids.
-
 }
 
 sub get_plusser_authors {
