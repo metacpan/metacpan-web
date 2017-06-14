@@ -124,14 +124,11 @@ sub find_plussers {
     my ( $self, $distribution ) = @_;
 
     # search for all users, match all according to the distribution.
-    $self->by_dist($distribution)->then(
+    $self->request("/favorite/users_by_distribution/$distribution")->then(
         sub {
             my $plusser_data = shift;
-
-            # store in an array.
-            my @plusser_users = map { $_->{user} }
-                map { single_valued_arrayref_to_scalar( $_->{_source} ) }
-                @{ $plusser_data->{hits}->{hits} };
+            my @plusser_users
+                = $plusser_data->{users} ? @{ $plusser_data->{users} } : ();
 
             $self->get_plusser_authors( \@plusser_users )->then(
                 sub {
@@ -169,20 +166,6 @@ sub get_plusser_authors {
             ];
         }
         );
-}
-
-# to search for v0/favorite/_search/{user} for the particular $distribution.
-sub by_dist {
-    my ( $self, $distribution ) = @_;
-
-    return $self->request(
-        '/favorite/_search',
-        {
-            query   => { term => { distribution => $distribution } },
-            _source => "user",
-            size    => 1000,
-        }
-    );
 }
 
 __PACKAGE__->meta->make_immutable;
