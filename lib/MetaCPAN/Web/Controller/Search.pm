@@ -50,7 +50,7 @@ sub index : Path : Args(0) {
         else {
             my $author = $c->model('API::Author')->search($query)->get;
             if (   $author->{total} == 1
-                && $query eq $author->{results}->[0]->{pauseid} )
+                && $query eq $author->{authors}->[0]->{pauseid} )
             {
                 $c->res->redirect( '/author/' . uc($query) );
                 $c->detach;

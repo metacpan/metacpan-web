@@ -19,7 +19,7 @@ sub index : Path : Args(0) {
                 value => "$_->{pauseid} - $_->{name}",
                 data  => { id => $_->{pauseid}, type => 'author' }
             },
-            @{ $author_data->get->{results} }
+            @{ $author_data->get->{authors} }
         ),
         (
             map +{ value => $_, data => { module => $_, type => 'module' } },
