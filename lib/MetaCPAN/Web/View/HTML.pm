@@ -4,7 +4,7 @@ use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
 use Digest::MD5 qw(md5_hex);
-use Digest::SHA1;
+use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
 use Gravatar::URL;
@@ -166,7 +166,7 @@ Template::Alloy->define_vmethod(
         my ($source) = @_;
         my @source = split( /\//, $source );
         my @target = ( shift @source, shift @source, join( q{/}, @source ) );
-        my $digest = Digest::SHA1::sha1_base64(
+        my $digest = Digest::SHA::sha1_base64(
             join( "\0", grep {defined} @target ) );
         $digest =~ tr/[+\/]/-_/;
         return $digest;
