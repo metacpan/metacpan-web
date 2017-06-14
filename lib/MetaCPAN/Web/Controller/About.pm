@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::About;
 
 use Moose;
-use Format::Human::Bytes;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
