@@ -48,46 +48,8 @@ sub get {
 
 sub search {
     my ( $self, $query, $from ) = @_;
-
-    my $search = {
-        query => {
-            bool => {
-                should => [
-                    {
-                        match => {
-                            'name.analyzed' =>
-                                { query => $query, operator => 'and' }
-                        }
-                    },
-                    {
-                        match => {
-                            'asciiname.analyzed' =>
-                                { query => $query, operator => 'and' }
-                        }
-                    },
-                    { match => { 'pauseid'    => uc($query) } },
-                    { match => { 'profile.id' => lc($query) } },
-                ]
-            }
-        },
-        size => 10,
-        from => $from || 0,
-    };
-
-    return $self->request( '/author/_search', $search )->transform(
-        done => sub {
-            my $results = shift
-                || { hits => { total => 0, hits => [] } };
-            return {
-                results => [
-                    map { +{ %{ $_->{_source} }, id => $_->{_id} } }
-                        @{ $results->{hits}{hits} }
-                ],
-                total => $results->{hits}{total} || 0,
-                took => $results->{took}
-            };
-        },
-    );
+    return $self->request( '/author/search', undef,
+        { q => $query, from => $from } );
 }
 
 sub by_user {
