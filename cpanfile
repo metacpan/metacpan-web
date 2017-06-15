@@ -78,7 +78,6 @@ requires 'Plack::Test';
 requires 'Ref::Util', '>= 0.008';
 requires 'Regexp::Common';
 requires 'Regexp::Common::time';
-requires 'Search::Elasticsearch', '== 2.03';
 requires 'Starman', '>= 0.4008';
 requires 'Template::Alloy';
 requires 'Template::Plugin::Comma';
