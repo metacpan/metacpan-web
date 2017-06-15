@@ -7,9 +7,6 @@ extends 'MetaCPAN::Web::Model::API';
 use List::Util qw(uniq);
 use Future;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 sub get {
     my ( $self, $user, @distributions ) = @_;
     @distributions = uniq @distributions;

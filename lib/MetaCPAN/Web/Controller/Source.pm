@@ -3,9 +3,6 @@ package MetaCPAN::Web::Controller::Source;
 use Moose;
 use namespace::autoclean;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args {

@@ -11,8 +11,6 @@ use MetaCPAN::Web::Types qw( HashRef Object );
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
 
 sub ACCEPT_CONTEXT {
     my ( $class, $c, $args ) = @_;
