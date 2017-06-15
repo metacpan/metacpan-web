@@ -7,9 +7,6 @@ use DateTime::Format::ISO8601 ();
 use namespace::autoclean;
 use Locale::Country ();
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 # Capture the PAUSE id in the root of the chain so we handle the upper-case redirect once.

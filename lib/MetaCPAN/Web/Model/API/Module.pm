@@ -4,9 +4,6 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API::File';
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 =head1 NAME
 
 MetaCPAN::Web::Model::Module - Catalyst Model
