@@ -207,33 +207,8 @@ sub reverse_dependencies {
     my ( $self, $distribution, $page, $page_size, $sort ) = @_;
     $sort ||= { date => 'desc' };
 
-# TODO: do we need to do a taint-check on $distribution before inserting it into the url?
-# maybe the fact that it came through as a Catalyst Arg is enough?
-    return $self->request(
-        "/search/reverse_dependencies/$distribution",
-        {
-            query => {
-                bool => {
-                    must => [
-                        { term => { 'status'     => 'latest' } },
-                        { term => { 'authorized' => 1 } },
-                    ]
-                }
-            },
-            size => $page_size,
-            from => $page * $page_size - $page_size,
-            sort => [$sort],
-        }
-        )->transform(
-        done => sub {
-            my $data = shift;
-            return {
-                data => [ map { $_->{_source} } @{ $data->{hits}->{hits} } ],
-                total => $data->{hits}->{total},
-                took  => $data->{took}
-            };
-        }
-        );
+    return $self->request( "/reverse_dependencies/dist/$distribution",
+        undef, { sort => $sort } );
 }
 
 sub interesting_files {

@@ -63,7 +63,7 @@ sub requires {
     my ( $self, $module, $page, $page_size ) = @_;
 
     $self->request(
-        "/release/requires/$module",
+        "/reverse_dependencies/module/$module",
         undef,
         {
             page      => $page,
