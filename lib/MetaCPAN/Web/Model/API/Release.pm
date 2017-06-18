@@ -320,59 +320,10 @@ sub versions {
     );
 }
 
-sub favorites {
-    my $self = shift;
-    $self->request( '/favorite/_search', {} );
-}
-
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $param = $range ? { range => $range } : ();
     $self->request( '/release/top_uploaders', undef, $param );
-}
-
-sub no_latest {
-    my ( $self, @distributions ) = @_;
-
-    # If there are no distributions return
-    return Future->done( {} ) unless (@distributions);
-
-    @distributions = uniq @distributions;
-    $self->request(
-        '/release/_search',
-        {
-            size  => scalar @distributions,
-            query => {
-                bool => {
-                    must => [
-                        { terms => { distribution => \@distributions } },
-                        { term  => { status       => 'latest' } }
-                    ]
-                }
-            },
-            fields => [qw(distribution status)]
-        }
-        )->transform(
-        done => sub {
-            my $data = shift;
-            my @latest
-                = map { $_->{fields}->{distribution} }
-                @{ $data->{hits}->{hits} };
-            return (
-                {
-                    took      => $data->{took},
-                    no_latest => {
-                        map {
-                            my $distro = $_;
-                            ( first { $_ eq $distro } @latest )
-                                ? ()
-                                : ( $distro, 1 );
-                        } @distributions
-                    }
-                }
-            );
-        }
-        );
 }
 
 __PACKAGE__->meta->make_immutable;
