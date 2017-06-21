@@ -2,9 +2,6 @@ package MetaCPAN::Web::Controller::Release;
 
 use Moose;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -90,9 +87,7 @@ sub view : Private {
 
     my @root_files = (
         sort { $a->{name} cmp $b->{name} }
-        grep { $_->{path} !~ m{/} }
-        map  { single_valued_arrayref_to_scalar($_) }
-        map  { $_->{fields} } @{ $files->{hits}->{hits} }
+        grep { $_->{path} !~ m{/} } @{ $files->{files} }
     );
 
     my @examples = (
@@ -100,9 +95,7 @@ sub view : Private {
             grep {
             $_->{path} =~ m{\b(?:eg|ex|examples?|samples?)\b}i
                 and not $_->{path} =~ m{^x?t/}
-            }
-            map { single_valued_arrayref_to_scalar($_) }
-            map { $_->{fields} } @{ $files->{hits}->{hits} }
+            } @{ $files->{files} }
     );
 
     $c->res->last_modified( $out->{date} );
