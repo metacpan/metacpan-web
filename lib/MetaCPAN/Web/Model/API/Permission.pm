@@ -53,7 +53,7 @@ sub _get_modules_in_distribution {
             return Future->done(undef)
                 unless keys %{$res};
 
-            $self->request( '/permission/by_module',
+            $self->request( '/permission/by_module', undef,
                 { module => $res->{modules} } )->transform(
                 done => sub {
                     $_[0]->{permissions};
