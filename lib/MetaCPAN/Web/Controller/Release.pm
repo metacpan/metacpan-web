@@ -131,7 +131,7 @@ sub view : Private {
         release  => $out,
         total    => $modules->{total},
         took     => List::Util::max(
-            $modules->{took}, $files->{took}, $reqs->{versions}->{took}
+            $modules->{took}, $files->{took}, $reqs->{versions}{took}
         ),
         root     => \@root_files,
         examples => \@examples,
