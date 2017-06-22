@@ -1,9 +1,6 @@
 package MetaCPAN::Web::Controller::Recent;
 use Moose;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(0) {
@@ -15,8 +12,6 @@ sub index : Path : Args(0) {
     my ($data)
         = $c->model('API::Release')
         ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->get;
-    my $latest = [ map { $_->{fields} } @{ $data->{hits}->{hits} } ];
-    single_valued_arrayref_to_scalar($latest);
 
     $c->add_surrogate_key( 'RECENT', 'DIST_UPDATES' );
     $c->browser_max_age('1m');
@@ -24,7 +19,7 @@ sub index : Path : Args(0) {
 
     $c->stash(
         {
-            recent    => $latest,
+            recent    => $data->{releases},
             took      => $data->{took},
             total     => $data->{hits}->{total},
             template  => 'recent.html',
