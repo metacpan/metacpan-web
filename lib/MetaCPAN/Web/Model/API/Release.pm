@@ -60,41 +60,12 @@ sub all_by_author {
 
 sub recent {
     my ( $self, $page, $page_size, $type ) = @_;
-    my $query;
-    if ( $type eq 'n' ) {
-        $query = {
-            constant_score => {
-                filter => {
-                    bool => {
-                        must => [
-                            { term  => { first  => 1 } },
-                            { terms => { status => [qw< cpan latest >] } },
-                        ]
-                    }
-                }
-            }
-        };
-    }
-    elsif ( $type eq 'a' ) {
-        $query = { match_all => {} };
-    }
-    else {
-        $query = {
-            constant_score => {
-                filter => {
-                    terms => { status => [qw< cpan latest >] }
-                }
-            }
-        };
-    }
     $self->request(
-        '/release/_search',
+        '/release/recent',
         {
-            size   => $page_size,
-            from   => ( $page - 1 ) * $page_size,
-            query  => $query,
-            fields => [qw(name author status abstract date distribution)],
-            sort   => [ { 'date' => { order => 'desc' } } ]
+            page      => $page,
+            page_size => $page_size,
+            type      => $type,
         }
     );
 }
