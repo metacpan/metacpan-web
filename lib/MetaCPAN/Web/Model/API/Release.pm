@@ -62,6 +62,7 @@ sub recent {
     my ( $self, $page, $page_size, $type ) = @_;
     $self->request(
         '/release/recent',
+        undef,
         {
             page      => $page,
             page_size => $page_size,
