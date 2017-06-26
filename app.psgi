@@ -5,6 +5,12 @@ package MetaCPAN::Web::App;    ## no critic (RequireFilenameMatchesPackage)
 use strict;
 use warnings;
 
+# prevent output buffering when in Docker containers (e.g. in docker-compose)
+if ( -e "/.dockerenv" ) {
+    STDERR->autoflush;
+    STDOUT->autoflush;
+}
+
 # TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
 #
 use File::Basename;
