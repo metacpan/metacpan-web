@@ -30,7 +30,7 @@ sub client {
         my $http = Net::Async::HTTP->new(
             user_agent =>
                 'MetaCPAN-Web/1.0 (https://github.com/metacpan/metacpan-web)',
-            max_connections_per_host => 5,
+            max_connections_per_host => $ENV{NET_ASYNC_HTTP_MAXCONNS} || 5,
             SSL_verify_mode          => SSL_VERIFY_PEER,
             timeout                  => 10,
         );
