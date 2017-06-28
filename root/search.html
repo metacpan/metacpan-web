@@ -6,7 +6,7 @@
 <% IF authors.total %>
   <div class="author-results">
     <ul class="authors clearfix">
-      <%- FOREACH author IN authors.results %>
+      <%- FOREACH author IN authors.authors %>
         <li>
           <a href="/author/<% author.id %>" title="Author page for <% author.name | html %>">
             <%- IF author.gravatar_url %>
