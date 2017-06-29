@@ -29,9 +29,8 @@ sub is_bool {
 }
 
 subtest modules => sub {
-    my @files
-        = map { $_->{fields} }
-        search_release( modules => 'OALDERS', 'HTTP-CookieMonster-0.09' );
+    my @files = @{ MetaCPAN::Web->model('API::Release')
+            ->modules( 'OALDERS', 'HTTP-CookieMonster-0.09' )->get->{files} };
 
     ok( scalar @files, 'found files with modules' );
 

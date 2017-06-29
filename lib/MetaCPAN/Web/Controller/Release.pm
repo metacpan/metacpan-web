@@ -118,10 +118,9 @@ sub view : Private {
         $c->model('API::Favorite')->find_plussers($distribution)->get );
 
     # Simplify the file data we pass to the template.
-    my @view_files = map +{ %{ $_->{fields} }, %{ $_->{_source} }, },
-        @{ $modules->{hits}->{hits} };
+    my $view_files = $modules->{files};
 
-    my $categories = $self->_files_to_categories( $out, \@view_files );
+    my $categories = $self->_files_to_categories( $out, $view_files );
 
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
@@ -130,13 +129,13 @@ sub view : Private {
     $c->stash(
         template => 'release.html',
         release  => $out,
-        total    => $modules->{hits}->{total},
+        total    => $modules->{total},
         took     => List::Util::max(
             $modules->{took}, $files->{took}, $reqs->{versions}->{took}
         ),
         root     => \@root_files,
         examples => \@examples,
-        files    => \@view_files,
+        files    => $view_files,
 
         documentation     => $categories->{documentation},
         documentation_raw => $categories->{documentation_raw},
@@ -174,7 +173,9 @@ sub _files_to_categories {
 
     for my $f (@$files) {
         next if $f->{documentation};
-        for my $module ( @{ $f->{module} || [] } ) {
+        my @modules
+            = is_arrayref( $f->{module} ) ? @{ $f->{module} } : $f->{module};
+        for my $module ( grep {defined} @modules ) {
             my $assoc = $module->{associated_pod} or next;
             $assoc =~ s{^\Q$f->{author}/$f->{release}/}{};
             if (   $assoc ne $f->{path}
@@ -200,7 +201,8 @@ sub _files_to_categories {
             author  => $f->{author},
         );
 
-        my @modules = @{ $f->{module} || [] };
+        my @modules
+            = is_arrayref( $f->{module} ) ? @{ $f->{module} } : $f->{module};
 
         if ( $f->{documentation} and @modules ) {
             push @{ $ret->{modules} }, $f;
