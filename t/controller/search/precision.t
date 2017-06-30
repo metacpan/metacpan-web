@@ -18,6 +18,14 @@ my %tests = (
     'dbix class resultset' => 'DBIx::Class::ResultSet',
 );
 
+my %authors = (
+    '  LLAP   ' => 'LLAP',
+    'PERLER   ' => 'PERLER',
+    '    NEILB' => 'NEILB',
+    'RWSTAUNER' => 'RWSTAUNER',
+    ' OALDERS ' => 'OALDERS',
+);
+
 test_psgi app, sub {
     my $cb = shift;
     for my $k ( sort keys %tests ) {
@@ -28,6 +36,17 @@ test_psgi app, sub {
             = $tx->find_value(
             '//div[@class="module-result"][1]/big[1]//a[1]');
         is( $module, $v, "$v is first result" );
+    }
+
+    for my $k ( sort keys %authors ) {
+        ok( my $res = $cb->( GET "/search?q=$k" ), qq{search for "$k"} );
+        my $v  = $authors{$k};
+        my $tx = tx($res);
+        my $author
+            = $tx->find_value(
+            '//div[@class="author-results"]/ul[@class="authors clearfix"]/li[1]/a[1]'
+            );
+        like( $author, qr/\b$v\b/, "$v is first result" );
     }
 };
 
