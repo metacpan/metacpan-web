@@ -30,7 +30,6 @@ sub index : Path : Args(0) {
         $query =~ s{\.pm\b}{};
     }
 
-    # remove leading and/or trailing whitespace
     $query =~ s/^\s+//;
     $query =~ s/\s+$//;
 
