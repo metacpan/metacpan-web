@@ -30,6 +30,10 @@ sub index : Path : Args(0) {
         $query =~ s{\.pm\b}{};
     }
 
+    # trim leading/traling whitespace
+    $query =~ s/^\s+//;
+    $query =~ s/\s+$//;
+
     my $model = $c->model('API::Module');
     my $from  = ( $req->page - 1 ) * $page_size;
     if (
