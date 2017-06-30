@@ -12,8 +12,6 @@ RUN cpanm App::cpm && \
     cpm install -L /carton && \
     rm -fr /root/.cpanm /root/.perl-cpm /tmp/*
 
-COPY . /metacpan-web
-
 RUN chown -R metacpan-web:users /metacpan-web /carton
 
 VOLUME /carton
