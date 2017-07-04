@@ -78,25 +78,7 @@ sub modules {
 
 sub find {
     my ( $self, $distribution ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        {
-                            term => {
-                                'distribution' => $distribution
-                            }
-                        },
-                        { term => { status => 'latest' } }
-                    ]
-                }
-            },
-            sort => [ { date => 'desc' } ],
-            size => 1
-        }
-    );
+    $self->request("/release/latest_by_distribution/$distribution");
 }
 
 # stolen from Module/requires
