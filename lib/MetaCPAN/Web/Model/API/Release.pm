@@ -115,16 +115,7 @@ sub interesting_files {
 
 sub versions {
     my ( $self, $dist ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => { term => { distribution => $dist } },
-            size  => 250,
-            sort  => [      { date            => 'desc' } ],
-            fields =>
-                [qw( name date author version status maturity authorized )],
-        }
-    );
+    $self->request("/release/versions/$dist");
 }
 
 sub topuploaders {
