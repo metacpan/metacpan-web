@@ -17,54 +17,8 @@ sub get {
         return Future->wrap( {} );
     }
 
-    return $self->request(
-        '/favorite/_search',
-        {
-            size  => 0,
-            query => {
-                terms => { 'distribution' => \@distributions }
-            },
-            aggregations => {
-                favorites => {
-                    terms => {
-                        field => 'distribution',
-                        size  => scalar @distributions,
-                    },
-                },
-                $user
-                ? (
-                    myfavorites => {
-                        filter       => { term => { 'user' => $user } },
-                        aggregations => {
-                            enteries => {
-                                terms => { field => 'distribution' }
-                            }
-                        }
-                    }
-                    )
-                : (),
-            }
-        }
-        )->transform(
-        done => sub {
-            my $data = shift;
-            return {
-                took      => $data->{took},
-                favorites => {
-                    map { $_->{key} => $_->{doc_count} }
-                        @{ $data->{aggregations}->{favorites}->{buckets} }
-                },
-                myfavorites => $user
-                ? {
-                    map { $_->{key} => $_->{doc_count} } @{
-                        $data->{aggregations}->{myfavorites}->{entries}
-                            ->{buckets}
-                    }
-                    }
-                : {},
-            };
-        }
-        );
+    return $self->request( '/favorite/agg_by_distributions',
+        { user => $user, distribution => \@distributions } );
 }
 
 sub by_user {
