@@ -75,37 +75,17 @@ sub _handle_module {
 sub fetch_latest_distros {
     my ( $self, $size, $pauseid ) = @_;
 
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        { terms => { status => [qw< cpan latest >] } },
-                        (
-                            $pauseid ? { term => { author => $pauseid } } : ()
-                        ),
-                    ],
-                }
-            },
-            sort => [
-                'distribution', { 'version_numified' => { reverse => 1 } }
-            ],
-            _source => [
-                qw(distribution date license author resources.repository abstract metadata.version tests status authorized)
-            ],
-            size => $size,
-        },
-        )->transform(
+    $self->request( "/release/by_author/$pauseid", undef, { size => $size } )
+        ->transform(
         done => sub {
             my $data = shift;
             my %licenses;
             my %distros;
 
-            foreach my $d ( @{ $data->{hits}{hits} } ) {
-                my $license = $d->{_source}{license}[0];
-                my $distro  = $d->{_source}{distribution};
-                my $repo    = $d->{_source}{'resources.repository'};
+            foreach my $d ( @{ $data->{releases} } ) {
+                my $license = $d->{license}[0];
+                my $distro  = $d->{distribution};
+                my $repo    = $d->{'resources.repository'};
 
                 next if $distros{$distro};    # show the first one
 
@@ -116,7 +96,7 @@ sub fetch_latest_distros {
                     $distros{$distro}{bugs} = $distribution->{bugs}{active};
                 }
 
-                $distros{$distro}{test} = $d->{_source}{tests};
+                $distros{$distro}{test} = $d->{tests};
                 my $total = 0;
                 $total += ( $distros{$distro}{test}{$_} // 0 )
                     for qw(pass fail na);
@@ -137,7 +117,7 @@ sub fetch_latest_distros {
                 }
 
                 $distros{$distro}{unauthorized}
-                    = $d->{_source}{authorized} eq 'false' ? 1 : 0;
+                    = $d->{authorized} eq 'false' ? 1 : 0;
 
                 # See also root/inc/release-infro.html
                 if ( $repo and ( $repo->{url} or $repo->{web} ) ) {
@@ -147,14 +127,13 @@ sub fetch_latest_distros {
                 else {
                     $distros{$distro}{repo} = 1;
                 }
-                if ( not $d->{_source}{abstract} ) {
+                if ( not $d->{abstract} ) {
                     $distros{$distro}{abstract} = 1;
                 }
 
-                ( $distros{$distro}{date} = $d->{_source}{date} )
-                    =~ s/\.\d+Z$//;
+                ( $distros{$distro}{date} = $d->{date} ) =~ s/\.\d+Z$//;
                 $distros{$distro}{version}
-                    = $d->{_source}{'metadata.version'};
+                    = $d->{'metadata.version'};
             }
 
             return {
