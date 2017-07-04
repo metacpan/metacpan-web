@@ -14,9 +14,6 @@ use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
 use XML::Feed ();
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
 }
@@ -137,13 +134,11 @@ sub distribution : Local : Args(1) {
     $c->add_dist_key($distribution);
 
     my $data = $c->model('API::Release')->versions($distribution)->get;
+
     $c->stash->{feed} = $self->build_feed(
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => [
-            map { single_valued_arrayref_to_scalar($_) }
-            map { $_->{fields} } @{ $data->{hits}->{hits} }
-        ]
+        entries => $data->{releases},
     );
 }
 
