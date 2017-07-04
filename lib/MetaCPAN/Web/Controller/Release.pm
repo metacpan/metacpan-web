@@ -22,7 +22,7 @@ sub by_distribution : Chained('root') PathPart('') Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
     my $model = $c->stash->{model};
-    $c->stash->{data} = $model->find($distribution)->get->{release};
+    $c->stash->{data} = $model->find($distribution);
     $c->forward('view');
 }
 
@@ -54,9 +54,7 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     }
 
     $c->stash->{permalinks} = 1;
-    my $data = $model->get( $author, $release )->get->{hits}->{hits}->[0]
-        ->{_source};
-    $c->stash->{data} = $data;
+    $c->stash->{data} = $model->get( $author, $release );
 
     $c->forward('view');
 }
@@ -65,7 +63,8 @@ sub view : Private {
     my ( $self, $c ) = @_;
 
     my $model = $c->stash->{model};
-    my $out   = delete $c->stash->{data};
+    my $data  = delete $c->stash->{data};
+    my $out   = $data->get->{release};
 
     $c->detach('/not_found') unless ($out);
 

@@ -201,7 +201,7 @@ sub view : Private {
         },
     );
 
-    my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
+    my $release = $reqs->{release}{release};
 
     #<<<
     my $canonical = ( $documented_module
