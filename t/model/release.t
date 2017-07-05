@@ -5,9 +5,6 @@ use Test::More;
 use Cpanel::JSON::XS qw( decode_json );
 use MetaCPAN::Web;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 my ( $true, $false ) = @{ decode_json('[true, false]') };
 
 # Explicitly test that we get a boolean.
@@ -27,7 +24,6 @@ subtest modules => sub {
     ok( scalar @files, 'found files with modules' );
 
     foreach my $file (@files) {
-        single_valued_arrayref_to_scalar($file);
 
         # this is a hack for the later sort check:
         # 1. fix to both 'undefined value' warnings

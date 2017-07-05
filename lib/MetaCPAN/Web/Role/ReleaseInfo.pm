@@ -3,9 +3,6 @@ package MetaCPAN::Web::Role::ReleaseInfo;
 use Moose::Role;
 use Future;
 
-use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
-    qw/ single_valued_arrayref_to_scalar /;
-
 # TODO: are there other controllers that do (or should) include this?
 
 # TODO: should some of this be in a separate (instantiable) model
@@ -62,21 +59,15 @@ sub api_requests {
 # organize the api results into simple variables for the template
 sub stash_api_results {
     my ( $self, $c, $reqs, $data ) = @_;
-
-    my %to_stash = (
-        author       => $reqs->{author},
-        distribution => $reqs->{distribution},
-        rating   => $reqs->{rating}{distributions}{ $data->{distribution} },
-        versions => $reqs->{versions}{releases},
+    $c->stash(
+        {
+            author       => $reqs->{author},
+            distribution => $reqs->{distribution},
+            rating => $reqs->{rating}{distributions}{ $data->{distribution} },
+            versions     => $reqs->{versions}{releases},
+            contributors => $reqs->{contributors},
+        }
     );
-
-    my %stash
-        = map { $_ => single_valued_arrayref_to_scalar( $to_stash{$_} ) }
-        ( 'rating', 'distribution', 'versions' );
-
-    $stash{contributors} = $reqs->{contributors};
-
-    $c->stash( \%stash );
 }
 
 1;
