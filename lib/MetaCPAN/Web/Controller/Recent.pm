@@ -21,7 +21,7 @@ sub index : Path : Args(0) {
         {
             recent    => $data->{releases},
             took      => $data->{took},
-            total     => $data->{hits}->{total},
+            total     => $data->{total},
             template  => 'recent.html',
             page_size => $page_size,
         }

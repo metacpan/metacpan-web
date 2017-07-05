@@ -33,13 +33,10 @@ sub topuploaders : Private {
     $c->stash(
         {
             authors => [
-                sort { $b->{releases} <=> $a->{releases} } map {
-                    {
-                        %{ $_->{_source} },
-                            releases =>
-                            $data->{counts}{ $_->{_source}->{pauseid} }
-                    }
-                } @{ $authors->{hits}{hits} }
+                sort { $b->{releases} <=> $a->{releases} }
+                    map +{ %{$_},
+                    releases => $data->{counts}{ $_->{pauseid} } },
+                @{ $authors->{authors} }
             ],
             took     => $data->{took},
             total    => $data->{total},
