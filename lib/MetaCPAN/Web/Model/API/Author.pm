@@ -27,12 +27,23 @@ it under the same terms as Perl itself.
 =cut
 
 sub get {
-    my ( $self, @author ) = @_;
+    my ( $self, $author ) = @_;
 
-    return $self->request( '/author/' . uc( $author[0] ) )
-        if ( @author == 1 );
+    return $self->request( '/author/' . uc($author) );
+}
 
-    return $self->request( '/author/by_ids', { id => \@author } );
+sub get_multiple {
+    my ( $self, @authors ) = @_;
+    return $self->request( '/author/by_ids', { id => [ map uc, @authors ] } )
+        ->transform(
+        done => sub {
+            my $data = shift;
+            my %authors;
+            $authors{ $_->{pauseid} } = $_ for @{ $data->{authors} };
+            $data->{authors} = [ @authors{@authors} ];
+            $data;
+        }
+        );
 }
 
 sub search {
