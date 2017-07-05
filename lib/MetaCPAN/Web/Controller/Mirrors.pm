@@ -12,61 +12,14 @@ sub index : Path : Args(0) {
     $c->browser_max_age('1d');
     $c->cdn_max_age('1d');
 
-    my $location;
-    my @protocols;
-    if ( my $q = $c->req->parameters->{'q'} ) {
-        my @parts = split( /\s+/, $q );
-        foreach my $part (@parts) {
-            push( @protocols, $part )
-                if ( grep { $_ eq $part } qw(http ftp rsync) );
-        }
-        if ( $q =~ /loc\:([^\s]+)/ ) {
-            $location = [ split( /,/, $1 ) ];
-        }
-    }
+    my $query = $c->req->parameters->{'q'};
+    my $data  = $c->model('API::Mirror')->search($query)->get;
 
-    my @filters
-        = map +{ filter => { missing => { field => $_ } } },
-        @protocols;
-
-    my $data = $c->model('API')->request(
-        '/mirror/_search',
-        {
-            size  => 999,
-            query => (
-                @filters
-                ? {
-                    bool => { must_not => { bool => should => \@filters } }
-                    }
-                : { match_all => {} }
-            ),
-            $location
-            ? (
-                sort => {
-                    _geo_distance => {
-                        location => [ $location->[1], $location->[0] ],
-                        order    => 'asc',
-                        unit     => 'km'
-                    }
-                }
-                )
-            : ( sort => [ 'continent', 'country' ] )
-        }
-    )->get;
-    my $latest = [
-        map {
-            {
-                %{ $_->{_source} }, distance => $location
-                    ? $_->{sort}->[0]
-                    : undef
-            }
-        } @{ $data->{hits}->{hits} }
-    ];
     $c->stash(
         {
-            mirrors  => $latest,
+            mirrors  => $data->{mirrors},
             took     => $data->{took},
-            total    => $data->{hits}->{total},
+            total    => $data->{total},
             template => 'mirrors.html',
         }
     );

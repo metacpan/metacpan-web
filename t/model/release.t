@@ -8,14 +8,6 @@ use MetaCPAN::Web;
 use Importer 'MetaCPAN::Web::Elasticsearch::Adapter' =>
     qw/ single_valued_arrayref_to_scalar /;
 
-sub search_release {
-    my ( $method, @args ) = @_;
-
-    return
-        map { @{ $_->{hits}{hits} } }
-        MetaCPAN::Web->model('API::Release')->$method(@args)->get;
-}
-
 my ( $true, $false ) = @{ decode_json('[true, false]') };
 
 # Explicitly test that we get a boolean.
@@ -60,15 +52,14 @@ subtest versions => sub {
 
     # Something with not too many versions.
     my @versions
-        = map { $_->{fields} }
-        search_release( versions => 'Mojolicious-Plugin-HamlRenderer' );
+        = @{ MetaCPAN::Web->model('API::Release')
+            ->versions('Mojolicious-Plugin-HamlRenderer')->get->{releases} };
 
     ok( scalar @versions, 'found release versions' );
 
     my %statuses;
     my @dates;
     foreach my $version (@versions) {
-        single_valued_arrayref_to_scalar($version);
 
         # Ensure we get a boolean so that conditions work as expected.
         is_bool( $version->{authorized}, q['authorized' is a boolean] );
