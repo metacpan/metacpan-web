@@ -58,8 +58,7 @@ sub distribution : Local : Args {
     # Get latest "author/release" of dist so we can use it to find the file.
     # TODO: Pass size param so we can disambiguate?
     my $release = try {
-        $c->model('API::Release')->find($dist)->get->{hits}{hits}->[0]
-            ->{_source};
+        $c->model('API::Release')->find($dist)->get->{release};
     } or $c->detach('/not_found');
 
     # TODO: Disambiguate if there's more than once match. #176
@@ -202,7 +201,7 @@ sub view : Private {
         },
     );
 
-    my $release = $reqs->{release}->{hits}->{hits}->[0]->{_source};
+    my $release = $reqs->{release}{release};
 
     #<<<
     my $canonical = ( $documented_module
