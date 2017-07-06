@@ -5,8 +5,6 @@ use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
-use List::Util ();
-use Ref::Util qw( is_arrayref );
 
 with qw(
     MetaCPAN::Web::Role::ReleaseInfo
@@ -83,22 +81,6 @@ sub view : Private {
     $self->stash_api_results( $c, $reqs, $out );
     $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
-    # shortcuts
-    my ( $files, $modules ) = @{$reqs}{qw(files modules)};
-
-    my @root_files = (
-        sort { $a->{name} cmp $b->{name} }
-        grep { $_->{path} !~ m{/} } @{ $files->{files} }
-    );
-
-    my @examples = (
-        sort { $a->{path} cmp $b->{path} }
-            grep {
-            $_->{path} =~ m{\b(?:eg|ex|examples?|samples?)\b}i
-                and not $_->{path} =~ m{^x?t/}
-            } @{ $files->{files} }
-    );
-
     $c->res->last_modified( $out->{date} );
     $c->cdn_max_age('1y');
     $c->add_dist_key($distribution);
@@ -118,10 +100,8 @@ sub view : Private {
     $c->stash(
         $c->model('API::Favorite')->find_plussers($distribution)->get );
 
-    # Simplify the file data we pass to the template.
-    my $view_files = $modules->{files};
-
-    my $categories = $self->_files_to_categories( $out, $view_files );
+    my $categories = $self->_files_to_categories( map @{ $_->{files} },
+        @{$reqs}{qw(files modules)} );
 
     my $changes
         = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
@@ -130,18 +110,8 @@ sub view : Private {
     $c->stash(
         template => 'release.html',
         release  => $out,
-        total    => $modules->{total},
-        took     => List::Util::max(
-            $modules->{took}, $files->{took}, $reqs->{versions}{took}
-        ),
-        root     => \@root_files,
-        examples => \@examples,
-        files    => $view_files,
 
-        documentation     => $categories->{documentation},
-        documentation_raw => $categories->{documentation_raw},
-        provides          => $categories->{provides},
-        modules           => $categories->{modules},
+        %$categories,
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
@@ -162,79 +132,73 @@ sub view : Private {
 }
 
 sub _files_to_categories {
-    my ( $self, $release, $files ) = @_;
+    my $self = shift;
+    my %files = map +( $_->{path} => $_ ), @_;
+
     my $ret = +{
-        provides          => [],
-        documentation     => [],
-        documentation_raw => [],
-        modules           => [],
+        provides      => [],
+        documentation => [],
+        modules       => [],
+        other         => [],
+        examples      => [],
     };
 
-    my %skip;
-
-    for my $f (@$files) {
-        next if $f->{documentation};
-        my @modules
-            = is_arrayref( $f->{module} ) ? @{ $f->{module} } : $f->{module};
-        for my $module ( grep {defined} @modules ) {
-            my $assoc = $module->{associated_pod} or next;
-            $assoc =~ s{^\Q$f->{author}/$f->{release}/}{};
-            if (   $assoc ne $f->{path}
-                && $assoc eq $f->{path} =~ s{\.pm$}{\.pod}r )
-            {
-                my ($assoc_file) = grep $_->{path} eq $assoc, @$files;
-                $f->{$_} ||= $assoc_file->{$_} for qw(
-                    abstract
-                    documentation
-                );
-                $skip{$assoc}++;
-            }
-        }
-    }
-
-    for my $f ( @{$files} ) {
+    for my $path ( sort keys %files ) {
+        my $f = $files{$path};
         next
-            if $skip{ $f->{path} };
-        my %info = (
-            status  => $f->{status},
-            path    => $f->{path},
-            release => $f->{release},
-            author  => $f->{author},
-        );
+            if $f->{skip};
+        my $path = $f->{path};
+        my @modules = @{ $f->{module} || [] };
 
-        my @modules
-            = is_arrayref( $f->{module} ) ? @{ $f->{module} } : $f->{module};
+        for my $module (@modules) {
+            my $assoc = $module->{associated_pod}
+                or next;
+            $assoc =~ s{^\Q$f->{author}/$f->{release}/}{};
+            next
+                if $assoc eq $f->{path}
+                || $assoc ne $f->{path} =~ s{\.pm$}{\.pod}r;
 
-        if ( $f->{documentation} and @modules ) {
-            push @{ $ret->{modules} }, $f;
-            push @{ $ret->{provides} },
-                map +{
-                %info,
-                package    => $_->{name},
-                authorized => $_->{authorized}
-                },
-                grep {
-                        defined $_->{name}
-                    and $_->{name} ne $f->{documentation}
-                    and $_->{indexed}
-                    and $_->{authorized}
-                } @modules;
+            my $assoc_file = $files{$assoc}
+                or next;
+
+            $f->{$_} ||= $assoc_file->{$_} for qw(
+                abstract
+                documentation
+            );
+            $assoc_file->{skip}++;
         }
-        elsif (@modules) {
+
+        if (@modules) {
+            my %s;
+            if ( $f->{documentation} ) {
+                push @{ $ret->{modules} }, $f;
+                $s{ $f->{documentation} }++;
+            }
+
             push @{ $ret->{provides} },
-                map +{
-                %info,
-                package    => $_->{name},
-                authorized => $_->{authorized}
-                }, @modules;
+                grep !$s{ $_->{name} }++,
+                map +{ %$f, %$_, }, @modules;
+        }
+        elsif ( $f->{documentation} && $path =~ m/\.pm$/ ) {
+            push @{ $ret->{modules} }, $f;
         }
         elsif ( $f->{documentation} ) {
             push @{ $ret->{documentation} }, $f;
         }
+        elsif ( $path =~ m{^(?:eg|ex|examples?|samples?)\b}i ) {
+            push @{ $ret->{examples} }, $f;
+        }
+        elsif ( $path =~ m/\.pod$/ ) {
+            push @{ $ret->{documentation} }, $f;
+        }
         else {
-            push @{ $ret->{documentation_raw} }, $f;
+            push @{ $ret->{other} }, $f;
         }
     }
+
+    $ret->{provides}
+        = [ sort { $a->{name} cmp $b->{name} || $a->{path} cmp $b->{path} }
+            @{ $ret->{provides} } ];
 
     return $ret;
 }
@@ -242,4 +206,3 @@ sub _files_to_categories {
 __PACKAGE__->meta->make_immutable;
 
 1;
-
