@@ -10,10 +10,6 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-with qw(
-    MetaCPAN::Web::Role::ReleaseInfo
-);
-
 # /pod/$name
 sub find : Path : Args(1) {
     my ( $self, $c, @path ) = @_;
@@ -21,7 +17,17 @@ sub find : Path : Args(1) {
     $c->browser_max_age('1h');
 
     # TODO: Pass size param so we can disambiguate?
-    $c->stash->{pod_file} = $c->model('API::Module')->find(@path)->get;
+    my $pod_file = $c->stash->{pod_file}
+        = $c->model('API::Module')->find(@path)->get;
+
+    $c->detach('/not_found')
+        if !$pod_file->{name};
+
+    my $release_info
+        = $c->model('ReleaseInfo')
+        ->get( $pod_file->{author}, $pod_file->{release} )
+        ->else( sub { Future->done( {} ) } );
+    $c->stash( $release_info->get );
 
     # TODO: Disambiguate if there's more than once match. #176
 
@@ -41,8 +47,17 @@ sub release : Local : Args {
         $c->detach();
     }
 
-    $c->stash->{pod_file}   = $c->model('API::Module')->get(@path)->get;
-    $c->stash->{permalinks} = 1;
+    my $release_data = $c->model('ReleaseInfo')->get( @path[ 0, 1 ] )
+        ->else( sub { Future->done( {} ) } );
+    my $pod_file = $c->model('API::Module')->get(@path);
+    $c->stash(
+        {
+            pod_file => $pod_file->get,
+            %{ $release_data->get },
+            permalinks => 1,
+        }
+    );
+
     $c->forward( 'view', [@path] );
 }
 
@@ -57,15 +72,18 @@ sub distribution : Local : Args {
 
     # Get latest "author/release" of dist so we can use it to find the file.
     # TODO: Pass size param so we can disambiguate?
-    my $release = try {
-        $c->model('API::Release')->find($dist)->get->{release};
+    my $release_data = try {
+        $c->model('ReleaseInfo')->find($dist)->get;
     } or $c->detach('/not_found');
 
-    # TODO: Disambiguate if there's more than once match. #176
+    unshift @path, @{ $release_data->{release} }{qw( author name )};
 
-    unshift @path, @$release{qw( author name )};
-
-    $c->stash->{pod_file} = $c->model('API::Module')->get(@path)->get;
+    $c->stash(
+        {
+            %$release_data,
+            pod_file => $c->model('API::Module')->get(@path)->get,
+        }
+    );
 
     $c->forward( 'view', [@path] );
 }
@@ -81,7 +99,7 @@ sub view : Private {
         $c->detach;
     }
 
-    my ( $documentation, $pod, $documented_module )
+    my ( $documentation, $assoc_pod, $documented_module )
         = map { $_->{name}, $_->{associated_pod}, $_ }
         grep { @path > 1 || $path[0] eq $_->{name} }
         grep {
@@ -89,35 +107,67 @@ sub view : Private {
             || $data->{documentation} eq $_->{name}
         }
         grep { $_->{associated_pod} } @{ $data->{module} || [] };
+
     $data->{documentation} = $documentation if $documentation;
-    if ( $pod && $pod ne "$data->{author}/$data->{release}/$data->{path}" ) {
+
+    if (   $assoc_pod
+        && $assoc_pod ne "$data->{author}/$data->{release}/$data->{path}" )
+    {
         $data->{pod_path}
-            = $pod =~ s{^\Q$data->{author}/$data->{release}/}{}r;
+            = $assoc_pod =~ s{^\Q$data->{author}/$data->{release}/}{}r;
     }
 
     $c->detach('/not_found') unless ( $data->{name} );
 
-    my $pod_path = '/pod/' . ( $pod || join( q{/}, @path ) );
+    my $pod_path = '/pod/' . ( $assoc_pod || join( q{/}, @path ) );
 
-    my $reqs = $self->api_requests(
-        $c,
+    my $pod = $c->model('API')->request(
+        $pod_path,
+        undef,
         {
-            pod => $c->model('API')->request(
-                $pod_path,
-                undef,
-                {
-                    show_errors => 1,
-                    ( $permalinks ? ( permalinks => 1 ) : () ),
-                    url_prefix => '/pod/',
-                }
-            ),
-            release => $c->model('API::Release')
-                ->get( @{$data}{qw(author release)} ),
-        },
-        $data,
+            show_errors => 1,
+            ( $permalinks ? ( permalinks => 1 ) : () ),
+            url_prefix => '/pod/',
+        }
     )->get;
-    $self->stash_api_results( $c, $reqs, $data );
-    $self->add_favorites_data( $data, $reqs->{favorites}, $data );
+
+    my $pod_html = $self->filter_html( $pod->{raw}, $data );
+
+    my $release = $c->stash->{release};
+
+    #<<<
+    my $canonical = ( $documented_module
+            && $documented_module->{authorized}
+            && $documented_module->{indexed}
+        ) ? "/pod/$documentation"
+        : join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
+            # Strip $author/$release from front of path.
+            @path[ 2 .. $#path ]
+        );
+    #>>>
+
+    # Store at fastly for a year - as we will purge!
+    $c->cdn_max_age('1y');
+    $c->add_dist_key( $release->{distribution} );
+    $c->add_author_key( $release->{author} );
+
+    $c->stash(
+        {
+            template          => 'pod.html',
+            module            => $data,
+            pod               => $pod_html,
+            canonical         => $canonical,
+            documented_module => $documented_module,
+        }
+    );
+
+    unless ( $pod->{raw} ) {
+        $c->stash( pod_error => $pod->{message}, );
+    }
+}
+
+sub filter_html {
+    my ( $self, $html, $data ) = @_;
 
     my $hr = HTML::Restrict->new(
         uri_schemes =>
@@ -188,7 +238,7 @@ sub view : Private {
                             $base .= "$data->{author}/$data->{release}/";
                         }
                         else {
-                            $base .= $pod
+                            $base .= $data->{associated_pod}
                                 || "$data->{author}/$data->{release}/$data->{path}";
                         }
                         $val = URI->new_abs( $val, $base )->as_string;
@@ -200,54 +250,7 @@ sub view : Private {
             return $tag;
         },
     );
-
-    my $release = $reqs->{release}{release};
-
-    #<<<
-    my $canonical = ( $documented_module
-            && $documented_module->{authorized}
-            && $documented_module->{indexed}
-        ) ? "/pod/$documentation"
-        : join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
-            # Strip $author/$release from front of path.
-            @path[ 2 .. $#path ]
-        );
-    #>>>
-
-    my $dist = $release->{distribution};
-
-    # Store at fastly for a year - as we will purge!
-    $c->cdn_max_age('1y');
-    $c->add_dist_key($dist);
-    $c->add_author_key( $release->{author} );
-
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
-
-    $c->stash(
-        $c->model(
-            'ReleaseInfo',
-            {
-                author       => $reqs->{author},
-                distribution => $reqs->{distribution},
-                release      => $release,
-            }
-        )->summary_hash
-    );
-
-    $c->stash(
-        {
-            module            => $data,
-            pod               => $hr->process( $reqs->{pod}->{raw} ),
-            release           => $release,
-            template          => 'pod.html',
-            canonical         => $canonical,
-            documented_module => $documented_module,
-        }
-    );
-
-    unless ( $reqs->{pod}->{raw} ) {
-        $c->stash( pod_error => $reqs->{pod}->{message}, );
-    }
+    $hr->process($html);
 }
 
 __PACKAGE__->meta->make_immutable;

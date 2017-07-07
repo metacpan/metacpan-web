@@ -6,22 +6,17 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-with qw(
-    MetaCPAN::Web::Role::ReleaseInfo
-);
-
 sub root : Chained('/') PathPart('release') CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{model} = $c->model('API::Release');
+    $c->stash->{current_model_instance}
+        = $c->model( 'ReleaseInfo', full_details => 1 );
 }
 
 sub by_distribution : Chained('root') PathPart('') Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    my $model = $c->stash->{model};
-    $c->stash->{data} = $model->find($distribution);
-    $c->forward('view');
+    $c->forward( 'view', [ $c->model->find($distribution) ] );
 }
 
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
@@ -37,8 +32,6 @@ sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     my ( $self, $c, $author, $release ) = @_;
 
-    my $model = $c->stash->{model};
-
     # force consistent casing in URLs
     if ( $author ne uc($author) ) {
         $c->res->redirect(
@@ -52,66 +45,38 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     }
 
     $c->stash->{permalinks} = 1;
-    $c->stash->{data} = $model->get( $author, $release );
-
-    $c->forward('view');
+    $c->forward( 'view', [ $c->model->get( $author, $release ) ] );
 }
 
 sub view : Private {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $release_info ) = @_;
 
-    my $model = $c->stash->{model};
-    my $data  = delete $c->stash->{data};
-    my $out   = $data->get->{release};
-
-    $c->detach('/not_found') unless ($out);
-
-    my ( $author, $release, $distribution )
-        = ( $out->{author}, $out->{name}, $out->{distribution} );
-
-    my $reqs = $self->api_requests(
-        $c,
-        {
-            files   => $model->interesting_files( $author,      $release ),
-            modules => $model->modules( $author,                $release ),
-            changes => $c->model('API::Changes')->get( $author, $release ),
-        },
-        $out,
+    my $data = $release_info->else(
+        sub {
+            my $error = shift;
+            return Future->fail($error)
+                if !ref $error;
+            $c->detach('/not_found')
+                if $error->{code} == 404;
+            $c->detach( '/internal_error', $error );
+        }
     )->get;
-    $self->stash_api_results( $c, $reqs, $out );
-    $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
-    $c->res->last_modified( $out->{date} );
+    my $release = $data->{release};
+
+    $c->res->last_modified( $release->{date} );
     $c->cdn_max_age('1y');
-    $c->add_dist_key($distribution);
-    $c->add_author_key($author);
+    $c->add_dist_key( $release->{distribution} );
+    $c->add_author_key( $release->{author} );
+
+    my $categories = $self->_files_to_categories( map @$_,
+        $data->{files}, $data->{modules} );
 
     $c->stash(
-        $c->model(
-            'ReleaseInfo',
-            {
-                author       => $reqs->{author},
-                distribution => $reqs->{distribution},
-                release      => $out
-            }
-        )->summary_hash
-    );
-
-    $c->stash(
-        $c->model('API::Favorite')->find_plussers($distribution)->get );
-
-    my $categories = $self->_files_to_categories( map @{ $_->{files} },
-        @{$reqs}{qw(files modules)} );
-
-    my $changes
-        = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
-
-    # TODO: make took more automatic (to include all)
-    $c->stash(
-        template => 'release.html',
-        release  => $out,
-
+        %$data,
         %$categories,
+
+        template => 'release.html',
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
@@ -119,15 +84,6 @@ sub view : Private {
             map { ( $_ => $c->config->{$_} ) }
                 qw( mark_unauthorized_releases )
         ),
-
-        (
-            @$changes
-            ? (
-                last_version_changes => $changes->[0],
-                changelogs           => $changes,
-                )
-            : ()
-        )
     );
 }
 
