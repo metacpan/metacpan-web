@@ -85,13 +85,12 @@ profiles = {
   END;
 
   MACRO link_to_source(file, linktext) BLOCK;
-    # NOTE: The 'package' attribute is fabricated in the release template.
+    # NOTE: The 'name' attribute is fabricated in the release template.
     path = ['source', file.author, file.release, file.path].join('/');
-    # Append "#P${package}" if we have a package name.
-    IF file.package;
-      path = path _  '#P' _ file.package;
+    IF file.name;
+      path = path _  '#P' _ file.name;
     END
-    %><a href="/<% path %>"><% linktext || file.package || file.path %></a><%
+    %><a href="/<% path %>"><% linktext || file.name || file.path %></a><%
   END;
 
   # protocols = {

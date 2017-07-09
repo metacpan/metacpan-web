@@ -94,7 +94,7 @@
 <div class="file-group release-provides">
   <h2 id="provides">Provides</h2>
   <ul>
-  <%- FOREACH module IN provides.sort('package') %>
+  <%- FOREACH module IN provides %>
   <li>
     <% link_to_source(module) | none %> in <% module.path %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
@@ -108,7 +108,7 @@
 <div class="file-group release-examples">
   <h2 id="examples">Examples</h2>
   <ul>
-  <%- FOREACH file IN examples.sort('path') %>
+  <%- FOREACH file IN examples %>
   <li>
     <%- IF file.path.match('\.pod$') %>
       <% link_to_file(file, file.path) | none %>
@@ -124,11 +124,11 @@
 </div>
 <%- END %>
 
-<%- IF root.size %>
+<%- IF other.size %>
 <div class="file-group release-other-files">
   <h2 id="other">Other files</h2>
   <ul>
-    <%- FOREACH file IN root %>
+    <%- FOREACH file IN other %>
     <li><% link_to_file(file, file.name) | none %></li>
     <%- END %>
   </ul>
