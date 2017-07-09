@@ -23,7 +23,7 @@ test_psgi app, sub {
             {
                 cache_control => 'max-age=86400',
                 surrogate_key =>
-                    'ABOUT content_type=text/html content_type=text',
+                    'ABOUT STATIC content_type=text/html content_type=text',
                 surrogate_control =>
                     'max-age=31556952, stale-if-error=2592000',
             }

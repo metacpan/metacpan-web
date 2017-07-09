@@ -34,6 +34,7 @@ sub root : Chained('/') PathPart('author') CaptureArgs(1) {
         $c->detach;
     }
 
+    $c->add_author_key($id);
     $c->stash( { pauseid => $id } );
 }
 
