@@ -49,12 +49,11 @@ sub search_web {
 
 sub first {
     my ( $self, $query ) = @_;
-    $self->request( "/search/simple", undef, { q => $query } )->transform(
+    $self->request( "/search/first", undef, { q => $query } )->transform(
         done => sub {
             my $data = shift;
-            return undef
-                unless ( $data->{hits}->{total} );
-            return $data->{hits}->{hits}->[0]->{fields}->{documentation};
+            return unless $data;
+            return $data->{documentation};
         }
     );
 }
