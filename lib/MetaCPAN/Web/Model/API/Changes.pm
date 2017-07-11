@@ -4,72 +4,74 @@ extends 'MetaCPAN::Web::Model::API';
 
 use MetaCPAN::Web::Model::API::Changes::Parser;
 use Try::Tiny;
+use Ref::Util qw(is_arrayref);
 
 sub get {
     my ( $self, @path ) = @_;
     $self->request( '/changes/' . join( q{/}, @path ) );
 }
 
-sub last_version {
-    my ( $self, $response, $release ) = @_;
-    my $releases;
-    if ( !exists $response->{content} or $response->{documentation} ) {
-    }
-    else {
-        # I guess we have a propper changes file? :P
-        try {
-            my $changelog
-                = MetaCPAN::Web::Model::API::Changes::Parser->parse(
-                $response->{content} );
-            $releases = $changelog->{releases};
-        }
-        catch {
-            # we don't really care?
-            warn "Error parsing changes: $_" if $ENV{CATALYST_DEBUG};
-        };
-    }
-    return [] unless $releases && @$releases;
+sub release_changes {
+    my ( $self, $path, %opts ) = @_;
+    $path = join '/', @$path
+        if is_arrayref($path);
+    $self->get($path)->transform(
+        done => sub {
+            my $file    = shift;
+            my $content = $file->{content}
+                or return [];
 
-    my $version = $release->{version};
-    eval { $version = version->parse($version) };
+            my $version
+                = _parse_version( $opts{version} || $file->{version} );
 
-    my @releases = sort { $b->[0] <=> $a->[0] }
-        map {
-        my $v   = $_->{version} =~ s/-TRIAL$//r;
-        my $dev = $_->{version} =~ /_|-TRIAL$/
-            || $_->{note} && $_->{note} =~ /\bTRIAL\b/;
-        my $ver = ( ref $version && length $v && eval { version->parse($v) } )
-            || $v;
-        [ $ver, $v, $dev, $_ ];
-        } @$releases;
+            my @releases = _releases($content);
 
-    my @changelogs;
-    my $found;
-    for my $r (@releases) {
-        if ($found) {
-            if ( $r->[2] ) {
-                push @changelogs, $r->[3];
+            my @changelogs;
+            while ( my $r = pop @releases ) {
+                if ( $r->{version_parsed} eq $version ) {
+                    $r->{current} = 1;
+                    push @changelogs, $r;
+                    if ( $opts{include_dev} ) {
+                        for my $dev_r (@releases) {
+                            last
+                                if !$dev_r->{dev};
+                            push @changelogs, $dev_r;
+                        }
+                    }
+                }
             }
-            else {
-                last;
-            }
+            return \@changelogs;
         }
-        elsif ( $r->[0] eq $version ) {
-            push @changelogs, $r->[3];
-            $found = 1;
-        }
-    }
-    return \@changelogs;
+    );
 }
 
-sub find_changelog {
-    my ( $self, $version, $releases ) = @_;
+sub _releases {
+    my ($content) = @_;
+    my $changelog
+        = MetaCPAN::Web::Model::API::Changes::Parser->parse($content);
 
-    foreach my $rel (@$releases) {
-        return $rel
-            if ( $rel->{version} eq $version
-            || $rel->{version} eq "$version-TRIAL" );
-    }
+    my @releases = sort { $b->{version_parsed} cmp $a->{version_parsed} }
+        map {
+        my $v     = _parse_version( $_->{version} );
+        my $trial = $_->{version} =~ /-TRIAL$/
+            || $_->{note} && $_->{note} =~ /\bTRIAL\b/;
+        my $dev = $trial || $_->{version} =~ /_/;
+        +{
+            %$_,
+            version_parsed => $v,
+            trial          => $trial,
+            dev            => $dev,
+        };
+        } @{ $changelog->{releases} || [] };
+    return @releases;
+}
+
+sub _parse_version {
+    my ($v) = @_;
+    $v =~ s/-TRIAL$//;
+    $v =~ s/_//g;
+    eval { $v = version->parse($v) };
+    return $v;
 }
 
 __PACKAGE__->meta->make_immutable;

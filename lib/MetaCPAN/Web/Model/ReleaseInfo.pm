@@ -113,7 +113,10 @@ sub _release_data {
                 files =>
                     $self->_release->interesting_files( $author, $release ),
                 modules => $self->_release->modules( $author, $release ),
-                changes => $self->_changes->get( $author,     $release ),
+                changes => $self->_changes->release_changes(
+                    [ $author, $release ],
+                    include_dev => 1
+                ),
                 )
             : ()
         ),
@@ -151,9 +154,7 @@ sub normalize {
                     ? (
                         files   => $data->{files}{files},
                         modules => $data->{modules}{files},
-                        changes => $self->_changes->last_version(
-                            $data->{changes}, $data->{release}{release}
-                        ),
+                        changes => $data->{changes},
                         )
                     : ()
                 ),
