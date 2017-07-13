@@ -13,7 +13,7 @@
 /var
 carton.lock
 cover_db/
-local
+local/
 log4perl_local.conf
 metacpan_web_local.conf
 perltidy.LOG
