@@ -27,19 +27,7 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        { term => { 'name' => $release } },
-                        { term => { author => uc($author) } }
-                    ]
-                }
-            }
-        }
-    );
+    $self->request("/release/by_author_and_name/$author/$release");
 }
 
 sub distribution {
@@ -78,25 +66,7 @@ sub modules {
 
 sub find {
     my ( $self, $distribution ) = @_;
-    $self->request(
-        '/release/_search',
-        {
-            query => {
-                bool => {
-                    must => [
-                        {
-                            term => {
-                                'distribution' => $distribution
-                            }
-                        },
-                        { term => { status => 'latest' } }
-                    ]
-                }
-            },
-            sort => [ { date => 'desc' } ],
-            size => 1
-        }
-    );
+    $self->request("/release/latest_by_distribution/$distribution");
 }
 
 # stolen from Module/requires

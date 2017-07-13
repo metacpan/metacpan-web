@@ -36,40 +36,8 @@ sub get {
         return Future->done( {} );
     }
 
-    return $self->request(
-        '/rating/_search',
-        {
-            size  => 0,
-            query => {
-                terms => { distribution => \@distributions }
-            },
-            aggregations => {
-                ratings => {
-                    terms => {
-                        field => 'distribution'
-                    },
-                    aggregations => {
-                        ratings_dist => {
-                            stats => {
-                                field => 'rating'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        )->transform(
-        done => sub {
-            my $data = shift;
-            return {
-                took    => $data->{took},
-                ratings => {
-                    map { $_->{key} => $_->{ratings_dist} }
-                        @{ $data->{aggregations}->{ratings}->{buckets} }
-                }
-            };
-        }
-        );
+    return $self->request( '/rating/by_distributions',
+        { distribution => \@distributions } );
 }
 
 __PACKAGE__->meta->make_immutable;

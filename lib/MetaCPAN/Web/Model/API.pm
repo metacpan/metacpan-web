@@ -104,7 +104,7 @@ sub request {
 
             if ( $content_type =~ /^application\/json/ ) {
                 my $out;
-                eval { $out = $self->process_json_response($data); };
+                eval { $out = decode_json($data); };
                 return $out
                     if $out;
             }
@@ -113,53 +113,6 @@ sub request {
             return $self->raw_api_response($data);
         }
     );
-}
-
-sub process_json_response {
-    my ( $self, $data ) = @_;
-
-    # Let json error propagate.
-    my $json = decode_json($data);
-
-    $self->_strip_source_prefix_from_fields($json);
-
-    return $json;
-}
-
-sub _strip_source_prefix_from_fields {
-    my ( $self, $json ) = @_;
-
-    # There appears to be a bug in older (than 0.90) ES versions where
-    # "A stored boolean field is being returned as a string, not as a boolean"
-    # when requested via "fields". To work around this we can specify
-    # "_source.blah" in "fields", then we strip the "_source." prefix here.
-    # https://github.com/metacpan/metacpan-web/issues/881
-    # https://github.com/elasticsearch/elasticsearch/issues/2551
-    # See .../API/Release.pm for examples of this.
-
-    # Don't autovivify.
-    if ( exists( $json->{hits} ) && exists( $json->{hits}->{hits} ) ) {
-        foreach my $hit ( @{ $json->{hits}->{hits} } ) {
-
-            next unless exists $hit->{fields};
-
-            my $fields = $hit->{fields};
-            foreach my $orig ( keys %$fields ) {
-                my $key = $orig;    # copy
-
-                # Strip '_source.' prefix from keys.
-                if ( $key =~ s/^_source\.// ) {
-                    warn "Field $key overwritten with $orig in ${\ref $self}"
-                        if exists $fields->{$key};
-
-                    # Update original reference.
-                    $fields->{$key} = delete $fields->{$orig};
-                }
-            }
-        }
-    }
-
-    # No return, reference is modified.
 }
 
 # cache these
