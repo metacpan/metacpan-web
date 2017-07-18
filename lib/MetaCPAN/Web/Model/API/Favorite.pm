@@ -102,8 +102,7 @@ sub get_plusser_authors {
     my ( $self, $users ) = @_;
     return Future->done( [] ) unless $users and @{$users};
 
-    $self->request( '/author/by_user', undef, { user => $users } )
-        ->transform(
+    $self->request( '/author/by_user', { user => $users } )->transform(
         done => sub {
             my $res = shift;
             return [] unless $res->{authors};
@@ -116,7 +115,7 @@ sub get_plusser_authors {
                 @{ $res->{authors} }
             ];
         }
-        );
+    );
 }
 
 __PACKAGE__->meta->make_immutable;
