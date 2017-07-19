@@ -6,12 +6,7 @@ use Test::More;
 use TestContext qw( get_context );
 use Module::Runtime qw( use_module );
 
-my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo');
-my $ctx   = get_context();
-
-sub release_info {
-    $model->new( c => $ctx, @_ );
-}
+my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo')->new;
 
 my $rt_prefix = $model->rt_url_prefix;
 
@@ -21,16 +16,13 @@ sub bugtracker {
 
 sub normalize_issues_ok {
     my ( $release, $bugs, $exp, $desc ) = @_;
-    my $instance = $model->new(
-        {
-            release => { distribution => 'X', %$release },
-            distribution =>
+    my $normalized = $model->normalize_issues(
+        { distribution => 'X', %$release },
 
-                # Default to rt url, but let data override.
-                { bugs => { rt => { source => "${rt_prefix}X", %$bugs } } },
-        }
+        # Default to rt url, but let data override.
+        { bugs => { rt => { source => "${rt_prefix}X", %$bugs } } },
     );
-    is_deeply $instance->normalize_issues, $exp, $desc;
+    is_deeply $normalized, $exp, $desc;
 }
 
 subtest 'normalize_issues' => sub {

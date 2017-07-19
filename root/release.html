@@ -47,14 +47,14 @@
 </ul>
 <% END %>
 
-<%- IF changelogs %>
+<%- IF changes %>
 
 <div id="last-changes" class="well collapsed">
     <div id="last-changes-container">
-        <%- FOREACH changes IN changelogs %>
-        <h2 id="whatsnew">Changes for version <% changes.version %></h2>
+        <%- FOREACH rel IN changes %>
+        <h2 id="whatsnew">Changes for version <% rel.version %><% IF rel.date %> - <% rel.date.dt_date_common %><% END; IF rel.trial %> ( TRIAL RELEASE )<% END %></h2>
         <div class="change-entries">
-            <% change_group(changes.entries) | none %>
+            <% change_group(rel.entries) | none %>
         </div>
         <%- END %>
     </div>

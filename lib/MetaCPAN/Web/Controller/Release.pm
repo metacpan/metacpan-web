@@ -6,22 +6,17 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-with qw(
-    MetaCPAN::Web::Role::ReleaseInfo
-);
-
 sub root : Chained('/') PathPart('release') CaptureArgs(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash->{model} = $c->model('API::Release');
+    $c->stash->{current_model_instance}
+        = $c->model( 'ReleaseInfo', full_details => 1 );
 }
 
 sub by_distribution : Chained('root') PathPart('') Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    my $model = $c->stash->{model};
-    $c->stash->{data} = $model->find($distribution);
-    $c->forward('view');
+    $c->forward( 'view', [ $c->model->find($distribution) ] );
 }
 
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
@@ -37,8 +32,6 @@ sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     my ( $self, $c, $author, $release ) = @_;
 
-    my $model = $c->stash->{model};
-
     # force consistent casing in URLs
     if ( $author ne uc($author) ) {
         $c->res->redirect(
@@ -52,66 +45,41 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     }
 
     $c->stash->{permalinks} = 1;
-    $c->stash->{data} = $model->get( $author, $release );
-
-    $c->forward('view');
+    $c->forward( 'view', [ $c->model->get( $author, $release ) ] );
 }
 
 sub view : Private {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $release_info ) = @_;
 
-    my $model = $c->stash->{model};
-    my $data  = delete $c->stash->{data};
-    my $out   = $data->get->{release};
-
-    $c->detach('/not_found') unless ($out);
-
-    my ( $author, $release, $distribution )
-        = ( $out->{author}, $out->{name}, $out->{distribution} );
-
-    my $reqs = $self->api_requests(
-        $c,
-        {
-            files   => $model->interesting_files( $author,      $release ),
-            modules => $model->modules( $author,                $release ),
-            changes => $c->model('API::Changes')->get( $author, $release ),
-        },
-        $out,
+    my $data = $release_info->else(
+        sub {
+            my $error = shift;
+            return Future->fail($error)
+                if !ref $error;
+            $c->detach('/not_found')
+                if $error->{code} == 404;
+            $c->detach( '/internal_error', $error );
+        }
     )->get;
-    $self->stash_api_results( $c, $reqs, $out );
-    $self->add_favorites_data( $out, $reqs->{favorites}, $out );
 
-    $c->res->last_modified( $out->{date} );
+    my $release = $data->{release};
+
+    $c->res->last_modified( $release->{date} );
     $c->cdn_max_age('1y');
-    $c->add_dist_key($distribution);
-    $c->add_author_key($author);
+    $c->add_dist_key( $release->{distribution} );
+    $c->add_author_key( $release->{author} );
+
+    my $categories = $self->_files_to_categories( map @$_,
+        $data->{files}, $data->{modules} );
+
+    my @changes = _link_issue_changelogs( $release, @{ $data->{changes} } );
 
     $c->stash(
-        $c->model(
-            'ReleaseInfo',
-            {
-                author       => $reqs->{author},
-                distribution => $reqs->{distribution},
-                release      => $out
-            }
-        )->summary_hash
-    );
-
-    $c->stash(
-        $c->model('API::Favorite')->find_plussers($distribution)->get );
-
-    my $categories = $self->_files_to_categories( map @{ $_->{files} },
-        @{$reqs}{qw(files modules)} );
-
-    my $changes
-        = $c->model('API::Changes')->last_version( $reqs->{changes}, $out );
-
-    # TODO: make took more automatic (to include all)
-    $c->stash(
-        template => 'release.html',
-        release  => $out,
-
+        %$data,
         %$categories,
+        changes => \@changes,
+
+        template => 'release.html',
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?
@@ -119,15 +87,6 @@ sub view : Private {
             map { ( $_ => $c->config->{$_} ) }
                 qw( mark_unauthorized_releases )
         ),
-
-        (
-            @$changes
-            ? (
-                last_version_changes => $changes->[0],
-                changelogs           => $changes,
-                )
-            : ()
-        )
     );
 }
 
@@ -201,6 +160,103 @@ sub _files_to_categories {
             @{ $ret->{provides} } ];
 
     return $ret;
+}
+
+my $rt_cpan_base = 'https://rt.cpan.org/Ticket/Display.html?id=';
+my $rt_perl_base = 'https://rt.perl.org/Ticket/Display.html?id=';
+my $sep          = qr{[-:]|\s*[#]?};
+
+sub _link_issue_changelogs {
+    my ( $release, @changelogs ) = @_;
+
+    my $gh_base;
+    my $rt_base;
+    my $bt = $release->{resources}{bugtracker}
+        && $release->{resources}{bugtracker}{web};
+    my $repo = $release->{resources}{repository};
+    $repo = ref $repo ? $repo->{url} : $repo;
+    if ( $bt && $bt =~ m|^https?://github\.com/| ) {
+        $gh_base = $bt;
+        $gh_base =~ s{/*$}{/};
+    }
+    elsif ( $repo && $repo =~ m|\bgithub\.com/([^/]+/[^/]+)| ) {
+        my $name = $1;
+        $name =~ s/\.git$//;
+        $gh_base = "https://github.com/$name/issues/";
+    }
+    if ( $bt && $bt =~ m|\brt\.perl\.org\b| ) {
+        $rt_base = $rt_perl_base;
+    }
+    else {
+        $rt_base = $rt_cpan_base;
+    }
+
+    for my $changelog (@changelogs) {
+        my @entries_list = $changelog->{entries};
+        while ( my $entries = shift @entries_list ) {
+            for my $entry (@$entries) {
+                for ( $entry->{text} ) {
+                    s/&/&amp;/g;
+                    s/</&lt;/g;
+                    s/>/&gt;/g;
+                    s/"/&quot;/g;
+                }
+                $entry->{text}
+                    = _link_issue_text( $entry->{text}, $gh_base, $rt_base );
+                push @entries_list, $entry->{entries}
+                    if $entry->{entries};
+            }
+        }
+    }
+    return @changelogs;
+}
+
+sub _link_issue_text {
+    my ( $change, $gh_base, $rt_base ) = @_;
+    $change =~ s{(
+      (?:
+        (
+          \b(?:blead)?perl\s+(?:RT|bug)$sep
+        |
+          (?<=\[)(?:blead)?perl\s+$sep
+        |
+          \brt\.perl\.org\s+\#
+        |
+          \bP5\#
+        )
+      |
+        (
+          \bCPAN\s+(?:RT|bug)$sep
+        |
+          (?<=\[)CPAN\s+$sep
+        |
+          \brt\.cpan\.org\s+\#
+        )
+      |
+        (\bRT$sep)
+      |
+        (\b(?:GH|PR)$sep)
+      |
+        ((?:\bbug\s*)?\#)
+      )
+      (\d+)\b
+    )}{
+        my $text = $1;
+        my $issue = $7;
+        my $base
+          = $2 ? $rt_perl_base
+          : $3 ? $rt_cpan_base
+          : $4 ? $rt_base
+          : $5 ? $gh_base
+          # this form is non-specific, so guess based on issue number
+          : ($gh_base && $issue < 10000)
+                ? $gh_base
+                : $rt_base
+        ;
+        $base ? qq{<a href="$base$issue">$text</a>} : $text;
+    }xgei;
+
+    return $change;
 }
 
 __PACKAGE__->meta->make_immutable;
