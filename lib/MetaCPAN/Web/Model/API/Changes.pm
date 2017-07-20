@@ -27,7 +27,7 @@ sub release_changes {
             my @releases = _releases($content);
 
             my @changelogs;
-            while ( my $r = pop @releases ) {
+            while ( my $r = shift @releases ) {
                 if ( $r->{version_parsed} eq $version ) {
                     $r->{current} = 1;
                     push @changelogs, $r;
