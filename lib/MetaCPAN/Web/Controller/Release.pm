@@ -141,10 +141,16 @@ sub _files_to_categories {
         elsif ( $f->{documentation} && $path =~ m/\.pm$/ ) {
             push @{ $ret->{modules} }, $f;
         }
+        elsif ( $path =~ m{^(?:eg|ex|examples?|samples?)\b}i ) {
+            push @{ $ret->{examples} }, $f;
+        }
         elsif ( $f->{documentation} ) {
             push @{ $ret->{documentation} }, $f;
         }
-        elsif ( $path =~ m{^(?:eg|ex|examples?|samples?)\b}i ) {
+        elsif ( $path =~ m/\.pm$/ ) {
+            push @{ $ret->{modules} }, $f;
+        }
+        elsif ( $path =~ m{(?:eg|ex|examples?|samples?)\b}i ) {
             push @{ $ret->{examples} }, $f;
         }
         elsif ( $path =~ m/\.pod$/ ) {
