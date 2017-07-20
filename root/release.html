@@ -38,7 +38,7 @@
 <% MACRO change_group(group) BLOCK; %>
 <ul>
     <%- FOREACH entry IN group; %>
-    <li class="<% IF entry.entries.size %>group-header<% END %>"><span class="change-entry"><% entry.text | none %></span>
+    <li class="<% IF entry.entries.size %>group-header<% END %>"><span class="change-entry"><% entry.html | none %></span>
         <% IF entry.entries.size;
           change_group(entry.entries) | none;
         END %>

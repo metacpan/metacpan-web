@@ -201,14 +201,10 @@ sub _link_issue_changelogs {
         my @entries_list = $changelog->{entries};
         while ( my $entries = shift @entries_list ) {
             for my $entry (@$entries) {
-                for ( $entry->{text} ) {
-                    s/&/&amp;/g;
-                    s/</&lt;/g;
-                    s/>/&gt;/g;
-                    s/"/&quot;/g;
-                }
-                $entry->{text}
-                    = _link_issue_text( $entry->{text}, $gh_base, $rt_base );
+                my $html = $entry->{text} =~ s/&/&amp;/gr =~ s/</&lt;/gr
+                    =~ s/>/&gt;/gr =~ s/"/&quot;/gr;
+                $entry->{html}
+                    = _link_issue_text( $html, $gh_base, $rt_base );
                 push @entries_list, $entry->{entries}
                     if $entry->{entries};
             }
