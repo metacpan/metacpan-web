@@ -272,7 +272,7 @@ sub normalize_issue_url {
         |
             (?:Public/)?Dist/Display\.html\?Name=
         )
-    }{https://rt.cpan.org/Public/Dist/Display.html?Name=}x;
+    }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
 }
