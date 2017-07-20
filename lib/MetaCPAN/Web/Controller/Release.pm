@@ -69,7 +69,7 @@ sub view : Private {
     $c->add_dist_key( $release->{distribution} );
     $c->add_author_key( $release->{author} );
 
-    my $categories = $self->_files_to_categories( map @$_,
+    my $categories = $self->_files_to_categories( map @$_, grep defined,
         $data->{files}, $data->{modules} );
 
     my @changes = _link_issue_changelogs( $release, @{ $data->{changes} } );
