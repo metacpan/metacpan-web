@@ -16,7 +16,8 @@ sub root : Chained('/') PathPart('release') CaptureArgs(0) {
 sub by_distribution : Chained('root') PathPart('') Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    $c->forward( 'view', [ $c->model->find($distribution) ] );
+    $c->stash( release_info => $c->model->find($distribution) );
+    $c->forward('view');
 }
 
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
@@ -44,12 +45,17 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
         $c->detach();
     }
 
-    $c->stash->{permalinks} = 1;
-    $c->forward( 'view', [ $c->model->get( $author, $release ) ] );
+    $c->stash(
+        permalinks   => 1,
+        release_info => $c->model->get( $author, $release ),
+    );
+    $c->forward('view');
 }
 
 sub view : Private {
-    my ( $self, $c, $release_info ) = @_;
+    my ( $self, $c ) = @_;
+
+    my $release_info = $c->stash->{release_info};
 
     my $data = $release_info->else(
         sub {
