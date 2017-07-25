@@ -23,6 +23,7 @@ sub get {
 
 sub by_user {
     my ( $self, $user, $size ) = @_;
+    return Future->done unless $user;
     $size ||= 250;
     my $ret
         = $self->request( "/favorite/by_user/$user", { size => $size } )
@@ -73,6 +74,7 @@ sub leaderboard {
 
 sub find_plussers {
     my ( $self, $distribution ) = @_;
+    return Future->done unless $distribution;
 
     # search for all users, match all according to the distribution.
     $self->request("/favorite/users_by_distribution/$distribution")->then(
