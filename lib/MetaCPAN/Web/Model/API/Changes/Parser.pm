@@ -94,7 +94,7 @@ sub parse {
                 }
 
                 # start with W3CDTF, ignore rest
-                elsif ( $note =~ m{^($CPAN::Changes::W3CDTF_REGEX)} ) {
+                elsif ( $note =~ s{^($CPAN::Changes::W3CDTF_REGEX)}{} ) {
                     $date = $1;
                     $date =~ s{ }{T};
 

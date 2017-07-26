@@ -6,63 +6,168 @@ use MetaCPAN::Moose;
 
 extends 'Catalyst::Model';
 
-use List::Util qw( all );
-use MetaCPAN::Web::Types qw( HashRef Object );
+use List::Util qw( all max );
+use Ref::Util qw( is_hashref );
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
 
+my %models = (
+    _release      => 'API::Release',
+    _author       => 'API::Author',
+    _contributors => 'API::Contributors',
+    _changes      => 'API::Changes',
+    _rating       => 'API::Rating',
+    _favorite     => 'API::Favorite',
+);
+
+has [ keys %models ] => ( is => 'ro' );
+has full_details => ( is => 'ro' );
+
 sub ACCEPT_CONTEXT {
-    my ( $class, $c, $args ) = @_;
-    return $class->new(
-        {
-            c => $c,
-            %$args,
+    my ( $class, $c, @args ) = @_;
+    @args = %{ $args[0] }
+        if @args == 1 and is_hashref( $args[0] );
+    push @args, map +( $_ => $c->model( $models{$_} ) ), keys %models;
+    return $class->new(@args);
+}
+
+sub find {
+    my ( $self, $dist ) = @_;
+    my $release   = $self->_release->find($dist);
+    my %dist_data = $self->_dist_data($dist);
+    $release->then(
+        sub {
+            my $data = shift;
+            if ( !$data->{release} ) {
+                $_->cancel for values %dist_data;
+                return Future->fail(
+                    { code => 404, message => 'Not found' } );
+            }
+            $self->_wrap(
+                release => $data,
+                %dist_data,
+                $self->_release_data(
+                    $data->{release}{author},
+                    $data->{release}{name}
+                ),
+            );
         }
+    )->then( $self->normalize );
+}
+
+sub get {
+    my ( $self, $author, $release_name ) = @_;
+    my $release = $self->_release->get( $author, $release_name );
+    my %release_data = $self->_release_data( $author, $release_name );
+    $release->then(
+        sub {
+            my $data = shift;
+            if ( !$data->{release} ) {
+                $_->cancel for values %release_data;
+                return Future->fail(
+                    { code => 404, message => 'Not found' } );
+            }
+            $self->_wrap(
+                release => $data,
+                %release_data,
+                $self->_dist_data( $data->{release}{distribution} ),
+            );
+        }
+    )->then( $self->normalize );
+}
+
+sub _wrap {
+    my ( $self, %data ) = @_;
+    my @keys   = keys %data;
+    my @values = values %data;
+    Future->needs_all( map { Future->wrap($_)->else_done( {} ) } @values )
+        ->transform(
+        done => sub {
+            my %out;
+            @out{@keys} = @_;
+            \%out;
+        }
+        );
+}
+
+sub _dist_data {
+    my ( $self, $dist ) = @_;
+    return (
+        favorites    => $self->_favorite->get( undef, $dist ),
+        plussers     => $self->_favorite->find_plussers($dist),
+        rating       => $self->_rating->get($dist),
+        versions     => $self->_release->versions($dist),
+        distribution => $self->_release->distribution($dist),
     );
 }
 
-# Setting these attributes to required will cause the app to exit when it tries
-# to instantiate the model on startup.
+sub _release_data {
+    my ( $self, $author, $release ) = @_;
+    return (
+        author       => $self->_author->get($author),
+        contributors => $self->_contributors->get( $author, $release ),
+        (
+            $self->full_details
+            ? (
+                files =>
+                    $self->_release->interesting_files( $author, $release ),
+                modules => $self->_release->modules( $author, $release ),
+                changes => $self->_changes->release_changes(
+                    [ $author, $release ],
+                    include_dev => 1
+                ),
+                )
+            : ()
+        ),
+    );
+}
 
-has author => (
-    is       => 'ro',
-    isa      => HashRef,
-    required => 0,
-);
-
-has c => (
-    is            => 'ro',
-    isa           => Object,
-    required      => 0,
-    documentation => 'Catlyst context object',
-);
-
-has distribution => (
-    is       => 'ro',
-    isa      => HashRef,
-    required => 0,
-);
-
-has release => (
-    is       => 'ro',
-    isa      => HashRef,
-    required => 0,
-);
-
-sub summary_hash {
-    my ($self) = @_;
-    return {
-        author => $self->author,
-        irc    => $self->groom_irc,
-        issues => $self->normalize_issues,
+sub normalize {
+    my $self = shift;
+    sub {
+        my $data = shift;
+        my $dist = $data->{release}{release}{distribution};
+        Future->done(
+            {
+                took => max(
+                    grep defined,
+                    map $_->{took},
+                    grep is_hashref($_),
+                    values %$data
+                ),
+                release      => $data->{release}{release},
+                favorites    => $data->{favorites}{favorites}{$dist},
+                rating       => $data->{rating}{distributions}{$dist},
+                versions     => $data->{versions}{releases},
+                distribution => $data->{distribution},
+                author       => $data->{author},
+                contributors => $data->{contributors},
+                irc          => $self->groom_irc( $data->{release}{release} ),
+                issues       => $self->normalize_issues(
+                    $data->{release}{release},
+                    $data->{distribution}
+                ),
+                %{ $data->{plussers} },
+                (
+                    $self->full_details
+                    ? (
+                        files   => $data->{files}{files},
+                        modules => $data->{modules}{files},
+                        changes => $data->{changes},
+                        )
+                    : ()
+                ),
+            }
+        );
     };
 }
 
 sub groom_irc {
-    my ($self) = @_;
+    my ( $self, $release ) = @_;
 
-    my $irc = $self->release->{metadata}{resources}{x_IRC};
+    my $irc = $release->{metadata}{resources}{x_IRC}
+        or return {};
     my $irc_info = ref $irc ? {%$irc} : { url => $irc };
 
     if ( !$irc_info->{web} && $irc_info->{url} ) {
@@ -118,8 +223,7 @@ sub rt_url_prefix {
 }
 
 sub normalize_issues {
-    my ($self) = @_;
-    my ( $release, $distribution ) = ( $self->release, $self->distribution );
+    my ( $self, $release, $distribution ) = @_;
 
     my $issues = {};
 
@@ -168,7 +272,7 @@ sub normalize_issue_url {
         |
             (?:Public/)?Dist/Display\.html\?Name=
         )
-    }{https://rt.cpan.org/Public/Dist/Display.html?Name=}x;
+    }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
 }

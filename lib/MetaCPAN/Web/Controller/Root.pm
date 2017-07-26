@@ -59,6 +59,14 @@ sub not_found : Private {
     $c->response->status(404);
 }
 
+sub internal_error : Private {
+    my ( $self, $c ) = @_;
+    $c->cdn_never_cache(1);
+
+    $c->stash( { template => 'internal_error.html' } );
+    $c->response->status(500);
+}
+
 sub forbidden : Private {
     my ( $self, $c ) = @_;
     $c->cdn_never_cache(1);

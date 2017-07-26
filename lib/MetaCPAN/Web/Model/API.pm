@@ -98,9 +98,9 @@ sub request {
 
     $self->client->do_request( request => $request )->transform(
         done => sub {
-            my $response     = shift;
+            my $response = shift;
+            my $data = $response->decoded_content( charset => 'none' );
             my $content_type = $response->header('content-type') || '';
-            my $data         = $response->content;
 
             if ( $content_type =~ /^application\/json/ ) {
                 my $out;
@@ -110,7 +110,7 @@ sub request {
             }
 
             # Response is raw data, e.g. text/plain
-            return $self->raw_api_response($data);
+            return $self->raw_api_response( $data, $response );
         }
     );
 }
@@ -124,7 +124,7 @@ my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 # Do raw files, git diffs, etc get converted? Any text that goes into ES?
 
 sub raw_api_response {
-    my ( $self, $data ) = @_;
+    my ( $self, $data, $response ) = @_;
 
     # we have to assume an encoding; doing nothing is like assuming latin1
     # we'll probably have the least number of issues if we assume utf8
@@ -144,7 +144,7 @@ sub raw_api_response {
         warn $_[0];
     };
 
-    return +{ raw => $data };
+    return +{ raw => $data, code => $response->code };
 }
 
 __PACKAGE__->meta->make_immutable;
