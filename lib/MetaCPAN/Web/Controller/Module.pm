@@ -19,12 +19,12 @@ sub redirect_to_pod : Path : Args {
 
         # Force the author arg to uppercase to avoid another redirect.
         $c->res->redirect(
-            '/pod/release/' . join( q{/}, uc( shift @path ), @path ), 301 );
+            $c->uri_for( '/pod/release', uc( shift @path ), @path ), 301 );
     }
 
     # /module/Foo::Bar
     else {
-        $c->res->redirect( '/pod/' . join( q{/}, @path ), 301 );
+        $c->res->redirect( $c->uri_for( '/pod', @path ), 301 );
     }
 
     $c->detach();

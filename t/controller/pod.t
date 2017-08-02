@@ -23,6 +23,9 @@ test_psgi app, sub {
         'contains link to "this" version'
     );
 
+    # just in case, for comparisons
+    $this =~ s{^http://[^/]+}{};
+
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );
     is(
@@ -45,8 +48,8 @@ test_psgi app, sub {
         =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
     ok( $res = $cb->( GET $lc_this ), "GET $lc_this" );
     is( $res->code, 301, '301 on lowercase author name' );
-    is( $res->headers->header('location'),
-        $this, 'redirect to uppercase author name' );
+    my $location = $res->headers->header('location') =~ s{^http://[^/]+}{}r;
+    is( $location, $this, 'redirect to uppercase author name' );
 };
 
 done_testing;

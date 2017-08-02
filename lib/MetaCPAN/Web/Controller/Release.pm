@@ -37,12 +37,7 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
     # force consistent casing in URLs
     if ( $author ne uc($author) ) {
         $c->res->redirect(
-            $c->uri_for_action(
-                $c->controller->action_for('by_author_and_release'),
-                [ uc($author), $release ]
-            ),
-            301
-        );
+            $c->uri_for_action( $c->action, uc($author), $release ), 301 );
         $c->detach();
     }
 
