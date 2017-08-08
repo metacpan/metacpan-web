@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Release;
 
 use Moose;
+use Future;
 
 use namespace::autoclean;
 

@@ -5,6 +5,7 @@ use Moose;
 use Try::Tiny;
 use URI;
 use HTML::Escape qw(escape_html);
+use Future;
 
 use namespace::autoclean;
 

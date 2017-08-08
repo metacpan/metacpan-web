@@ -11,6 +11,7 @@ use Ref::Util qw( is_hashref );
 use URI;
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
+use Future;
 
 my %models = (
     _release      => 'API::Release',

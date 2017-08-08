@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Model::API::Permission;
 
 use Moose;
+use Future;
 
 extends 'MetaCPAN::Web::Model::API';
 
