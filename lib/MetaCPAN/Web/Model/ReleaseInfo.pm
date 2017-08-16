@@ -192,7 +192,7 @@ sub groom_irc {
             $channel =~ s/^(?![#~!+])/#/;
             $channel = uri_escape($channel);
 
-            if ( $host =~ /(?:^|\.)freenode\.net$/ ) {
+            if ( $host =~ /(?:^|\.)freenode\.(?:com|org|net)$/ ) {
                 $irc_info->{web}
                     = "https://webchat.freenode.net/?randomnick=1&prompt=1&channels=${channel}";
             }
