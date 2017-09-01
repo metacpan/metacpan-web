@@ -27,7 +27,7 @@ it under the same terms as Perl itself.
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/by_author_and_name/$author/$release");
+    $self->request("/release/$author/$release");
 }
 
 sub distribution {
