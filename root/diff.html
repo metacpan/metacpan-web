@@ -62,12 +62,18 @@ file.path = parts.join("/"); END -%>
   </ul>
 
 <div class="content">
-<ul class="diff-ul">
+<table class="table-striped diff-list">
 <% FOREACH file IN diff.statistics %>
-<li><a href="#<% file.path %>"><% file.path %></a><span class="minus"><% file.deletions %></span><span class="plus"><% file.insertions %></span></li>
+<tr>
+  <td><a href="#<% file.path %>"><% file.path %></a></td>
+  <td><a href="#<% file.path %>" class="minus"><% file.deletions %></a><a href="#<% file.path %>" class="plus"><% file.insertions %></a></td>
+</tr>
 <% END %>
-<li> <% files %> file<% IF files > 1 %>s<% END %> changed  <% IF type == 'source' %> (This is a file diff) <% ELSE %> (This is a version diff) <% END %><span class="minus"><% deletions %></span><span class="plus"><% insertions %></span>
-</ul>
+<tr>
+  <td><% files %> file<% IF files > 1 %>s<% END %> changed  <% IF type == 'source' %> (This is a file diff) <% ELSE %> (This is a version diff) <% END %></td>
+  <td><span class="minus"><% deletions %></span><span class="plus"><% insertions %></span></td>
+</tr>
+</table>
 
 <% FOREACH file IN diff.statistics %>
     <a name="<% file.path %>"></a>
