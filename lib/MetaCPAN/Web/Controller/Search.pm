@@ -47,7 +47,7 @@ sub index : Path : Args(0) {
         my $module = $model->first($query)->get;
         $module = $module->[0] if $module and is_arrayref($module);
         if ( $module && $module eq $query ) {
-            $c->res->redirect( '/pod/' . $module );
+            $c->res->redirect( $c->uri_for( '/pod', $module ) );
             $c->detach;
         }
         else {
@@ -55,11 +55,11 @@ sub index : Path : Args(0) {
             if (   $author->{total} == 1
                 && $query eq $author->{authors}->[0]->{pauseid} )
             {
-                $c->res->redirect( '/author/' . uc($query) );
+                $c->res->redirect( $c->uri_for( '/author', uc($query) ) );
                 $c->detach;
             }
             elsif ($module) {
-                $c->res->redirect("/pod/$module");
+                $c->res->redirect( $c->uri_for( '/pod', $module ) );
                 $c->detach;
             }
             else {

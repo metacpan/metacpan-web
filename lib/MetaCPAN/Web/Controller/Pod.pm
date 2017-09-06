@@ -37,20 +37,23 @@ sub find : Path : Args(1) {
 
 # /pod/release/$AUTHOR/$release/@path
 sub release : Local : Args {
-    my ( $self, $c, @path ) = @_;
+    my ( $self, $c, $author, $release, @path ) = @_;
 
+    if ( !@path ) {
+        $c->detach('/not_found');
+    }
     $c->browser_max_age('1d');
 
     # force consistent casing in URLs
-    if ( @path > 2 && $path[0] ne uc( $path[0] ) ) {
+    if ( $author ne uc $author ) {
         $c->res->redirect(
-            '/pod/release/' . join( q{/}, uc( shift @path ), @path ), 301 );
+            $c->uri_for( $c->action, uc $author, $release, @path ), 301 );
         $c->detach();
     }
 
-    my $release_data = $c->model('ReleaseInfo')->get( @path[ 0, 1 ] )
-        ->else( sub { Future->done( {} ) } );
-    my $pod_file = $c->model('API::Module')->get(@path);
+    my $release_data
+        = $c->model('ReleaseInfo')->get( $author, $release )->else_done( {} );
+    my $pod_file = $c->model('API::Module')->get( $author, $release, @path );
     $c->stash(
         {
             pod_file => $pod_file->get,
@@ -59,7 +62,7 @@ sub release : Local : Args {
         }
     );
 
-    $c->forward( 'view', [@path] );
+    $c->forward( 'view', [ $author, $release, @path ] );
 }
 
 # /pod/distribution/$name/@path
@@ -96,7 +99,7 @@ sub view : Private {
     my $permalinks = $c->stash->{permalinks};
 
     if ( $data->{directory} ) {
-        $c->res->redirect( '/source/' . join( q{/}, @path ), 301 );
+        $c->res->redirect( $c->uri_for( '/source', @path ), 301 );
         $c->detach;
     }
 
