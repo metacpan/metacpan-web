@@ -93,7 +93,7 @@ sub detect_filetype {
         # No separate pod brush as of 2011-08-04.
         return 'perl' if /\. ( p[ml] | psgi | pod ) $/ix;
 
-        return 'perl' if /^ cpanfile $/ix;
+        return 'perl' if /^ (cpan|alien)file $/ix;
 
         return 'yaml' if /\. ya?ml $/ix;
 
