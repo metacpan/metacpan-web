@@ -3,10 +3,45 @@ package MetaCPAN::Web::Model::API::Changes::Parser;
 use Moose;
 use version qw();
 
-use CPAN::Changes;
 my %months;
 my $m = 0;
 $months{$_} = ++$m for qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+my $months = join '|', keys %months;
+
+our $W3CDTF_REGEX = qr{
+    (\d\d\d\d) # Year
+    (?:
+        [-/](\d\d|$months) # -Month
+        (?:
+            [-/](\d\d) # -Day
+            (?:
+                [T\s]
+                (\d\d):(\d\d) # Hour:Minute
+                (?:
+                    :(\d\d)     # :Second
+                    (\.\d+)?    # .Fractional_Second
+                )?
+                (
+                    Z          # UTC
+                    | [+-]\d\d:\d\d    # Hour:Minute TZ offset
+                      (?::\d\d)?       # :Second TZ offset
+                )?
+            )?
+        )?
+    )?
+}x;
+
+our $UNKNOWN_VALS = join(
+    '|',
+    (
+        'Unknown Release Date',
+        'Unknown',
+        'Not Released',
+        'Development Release',
+        'Development',
+        'Developer Release',
+    )
+);
 
 sub load {
     my ( $class, $file ) = @_;
@@ -42,7 +77,7 @@ sub parse {
             if ($note) {
 
                 # unknown dates
-                if ( $note =~ s{^($CPAN::Changes::UNKNOWN_VALS)}{}i ) {
+                if ( $note =~ s{^($UNKNOWN_VALS)}{}i ) {
                     $date = $1;
                 }
 
@@ -94,8 +129,12 @@ sub parse {
                 }
 
                 # start with W3CDTF, ignore rest
-                elsif ( $note =~ s{^($CPAN::Changes::W3CDTF_REGEX)}{} ) {
+                elsif ( $note =~ s{^($W3CDTF_REGEX)}{} && defined $3 ) {
                     $date = $1;
+                    my $month = $3;
+                    if ( $month =~ /\D/ ) {
+                        $date =~ s{$month}{sprintf "%02d", $months{$month}}e;
+                    }
                     $date =~ s{ }{T};
 
                     # Add UTC TZ if date ends at H:M, H:M:S or H:M:S.FS
