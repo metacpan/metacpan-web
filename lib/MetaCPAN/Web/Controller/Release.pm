@@ -92,6 +92,14 @@ sub view : Private {
     );
 }
 
+my %module_field_map = (
+    (
+        map +( $_ => $_ ),
+        qw(authorized indexed version associated_pod version_numified)
+    ),
+    name => 'module_name',
+);
+
 sub _files_to_categories {
     my $self = shift;
     my %files = map +( $_->{path} => $_ ), @_;
@@ -137,8 +145,14 @@ sub _files_to_categories {
             }
 
             push @{ $ret->{provides} },
-                grep !$s{ $_->{name} }++,
-                map +{ %$f, %$_, }, @modules;
+                grep !$s{ $_->{module_name} }++, map {
+                ;
+                my $entry = {%$f};
+                my $m     = $_;
+                $entry->{ $module_field_map{$_} } = $m->{$_}
+                    for grep exists $m->{$_}, keys %module_field_map;
+                $entry;
+                } @modules;
         }
         elsif ( $f->{documentation} && $path =~ m/\.pm$/ ) {
             push @{ $ret->{modules} }, $f;
@@ -163,9 +177,12 @@ sub _files_to_categories {
         }
     }
 
-    $ret->{provides}
-        = [ sort { $a->{name} cmp $b->{name} || $a->{path} cmp $b->{path} }
-            @{ $ret->{provides} } ];
+    $ret->{provides} = [
+        sort {
+                   $a->{module_name} cmp $b->{module_name}
+                || $a->{path} cmp $b->{path}
+        } @{ $ret->{provides} }
+    ];
 
     return $ret;
 }

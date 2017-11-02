@@ -81,10 +81,10 @@ profiles = {
   MACRO link_to_source(file, linktext) BLOCK;
     # NOTE: The 'name' attribute is fabricated in the release template.
     path = ['source', file.author, file.release, file.path].join('/');
-    IF file.name;
-      path = path _  '#P' _ file.name;
+    IF file.module_name;
+      path = path _  '#P' _ file.module_name;
     END
-    %><a href="/<% path %>"><% linktext || file.name || file.path %></a><%
+    %><a href="/<% path %>"><% linktext || file.module_name || file.path %></a><%
   END;
 
   # protocols = {
