@@ -32,7 +32,10 @@ around execute => sub {
             if defined $p_order && defined $order->[$p_order];
     }
 
-    return $self->$orig( @_, { $sort->{column} => $sort->{order} } );
+    # convert sort to the non-structure form (so we can pass it in URL)
+    # API can handle it.
+    my $sort_param = sprintf "%s:%s", $sort->{column}, $sort->{order};
+    return $self->$orig( @_, $sort_param );
 };
 
 1;

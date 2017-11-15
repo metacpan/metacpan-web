@@ -72,7 +72,7 @@ sub find {
 # stolen from Module/requires
 sub reverse_dependencies {
     my ( $self, $distribution, $page, $page_size, $sort ) = @_;
-    $sort ||= { date => 'desc' };
+    $sort ||= 'date:desc';
 
     return $self->request( "/reverse_dependencies/dist/$distribution",
         undef, { sort => $sort } );
