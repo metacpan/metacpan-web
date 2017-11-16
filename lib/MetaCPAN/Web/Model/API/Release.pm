@@ -74,8 +74,15 @@ sub reverse_dependencies {
     my ( $self, $distribution, $page, $page_size, $sort ) = @_;
     $sort ||= 'date:desc';
 
-    return $self->request( "/reverse_dependencies/dist/$distribution",
-        undef, { sort => $sort } );
+    return $self->request(
+        "/reverse_dependencies/dist/$distribution",
+        undef,
+        {
+            page      => $page,
+            page_size => $page_size,
+            sort      => $sort,
+        }
+    );
 }
 
 sub interesting_files {
