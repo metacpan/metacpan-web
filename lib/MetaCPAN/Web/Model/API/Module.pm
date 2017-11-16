@@ -59,7 +59,7 @@ sub first {
 }
 
 sub requires {
-    my ( $self, $module, $page, $page_size ) = @_;
+    my ( $self, $module, $page, $page_size, $sort ) = @_;
 
     $self->request(
         "/reverse_dependencies/module/$module",
@@ -67,6 +67,7 @@ sub requires {
         {
             page      => $page,
             page_size => $page_size,
+            sort      => $sort,
         },
     );
 }
