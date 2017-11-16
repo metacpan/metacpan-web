@@ -15,7 +15,6 @@ use URI;
 use URI::QueryParam;
 use MetaCPAN::Web::Types qw( Uri );
 use Try::Tiny qw( catch try );
-use Log::Log4perl;
 
 my $loop;
 
@@ -46,6 +45,8 @@ has api_secure => (
     required => 1,
 );
 
+has log         => ( is => 'ro' );
+has debug       => ( is => 'ro' );
 has request_uri => ( is => 'ro' );
 
 =head2 COMPONENT
@@ -57,9 +58,14 @@ Set C<api_secure> config parameters from the app config object.
 sub COMPONENT {
     my $self = shift;
     my ( $app, $config ) = @_;
-    $config->{api_secure} = $app->config->{api_secure};
+    my $args = {
+        %$config,
+        api_secure => $app->config->{api_secure},
+        log        => $app->log,
+        debug      => $app->debug,
+    };
 
-    return $self->SUPER::COMPONENT( $app, $config );
+    return $self->SUPER::COMPONENT( $app, $args );
 }
 
 sub ACCEPT_CONTEXT {
@@ -106,6 +112,22 @@ sub request {
     $self->client->do_request( request => $request )->transform(
         done => sub {
             my $response = shift;
+            my $logger   = $self->log;
+            if ( $self->debug && $logger && $logger->is_debug ) {
+                my $content = $request->content;
+                if ( length $content > 40 ) {
+                    $content = substr( $content, 0, 37 ) . '...';
+                }
+                $logger->debug(
+                    sprintf q[API: "%s %s %s" %s %s%s],
+                    $request->method,
+                    $url->path,
+                    $response->protocol // 'TEST',
+                    $response->code,
+                    length ${ $response->content_ref },
+                    ( $content ? " '$content'" : '' )
+                );
+            }
             my $data = $response->decoded_content( charset => 'none' );
             my $content_type = $response->header('content-type') || '';
 
