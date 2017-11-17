@@ -445,6 +445,7 @@ DISTRIBUTIONS
       MooseX::Emulate::Class::Accessor::Fast 0.00903
       MooseX::Getopt 0.48
       MooseX::MethodAttributes::Role::AttrContainer::Inheritable 0.24
+      MooseX::Role::WithOverloading 0.09
       Path::Class 0.09
       Plack 0.9991
       Plack::Middleware::Conditional 0
@@ -2244,7 +2245,6 @@ DISTRIBUTIONS
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
-      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   IO-String-1.08
@@ -3394,6 +3394,30 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  MooseX-Role-WithOverloading-0.17
+    pathname: E/ET/ETHER/MooseX-Role-WithOverloading-0.17.tar.gz
+    provides:
+      MooseX::Role::WithOverloading 0.17
+      MooseX::Role::WithOverloading::Meta::Role 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::Composite 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToClass 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToInstance 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToRole 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::FixOverloadedRefs 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::ToClass 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::ToInstance 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Application::ToRole 0.17
+      MooseX::Role::WithOverloading::Meta::Role::Composite 0.17
+    requirements:
+      ExtUtils::MakeMaker 0
+      Moose 0.94
+      Moose::Exporter 0
+      Moose::Role 1.15
+      aliased 0
+      namespace::autoclean 0.16
+      namespace::clean 0.19
+      perl 5.006
   MooseX-StrictConstructor-0.21
     pathname: D/DR/DROLSKY/MooseX-StrictConstructor-0.21.tar.gz
     provides:
@@ -6275,6 +6299,17 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
+  aliased-0.34
+    pathname: E/ET/ETHER/aliased-0.34.tar.gz
+    provides:
+      aliased 0.34
+    requirements:
+      Carp 0
+      Exporter 0
+      Module::Build::Tiny 0.039
+      perl 5.006
+      strict 0
+      warnings 0
   common-sense-3.74
     pathname: M/ML/MLEHMANN/common-sense-3.74.tar.gz
     provides:
