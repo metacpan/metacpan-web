@@ -23,7 +23,7 @@ sub index : Path : Args(0) {
         ),
         (
             map +{ value => $_, data => { module => $_, type => 'module' } },
-            uniq @{ $module_data->get->{results} }
+            uniq map { $_->{name} } @{ $module_data->get->{results} }
         ),
     );
 
