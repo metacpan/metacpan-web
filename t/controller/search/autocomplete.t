@@ -8,7 +8,7 @@ use Cpanel::JSON::XS qw( decode_json );
 
 my @tests = (
     [ moose      => 'Moose' ],
-    [ 'moose">'  => 'Moose' ],
+    [ 'DBIx'     => 'DBIx::Class' ],
     [ 'Acme::ǝ' => 'Acme::ǝmɔA' ],
 );
 
