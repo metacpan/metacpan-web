@@ -32,6 +32,7 @@ requires 'Exporter';
 requires 'File::Path';
 requires 'Format::Human::Bytes';
 requires 'Future';
+requires 'Gazelle';
 requires 'Getopt::Long::Descriptive';
 requires 'Gravatar::URL';
 requires 'HTML::Escape';
