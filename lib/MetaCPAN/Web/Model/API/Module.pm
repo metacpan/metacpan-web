@@ -30,13 +30,11 @@ sub find {
 
 sub autocomplete {
     my ( $self, $query ) = @_;
-    $self->request( "/search/autocomplete", undef,
-        { q => $query, size => 50 } )->transform(
+    $self->request( "/search/autocomplete/suggest",
+        undef, { q => $query, size => 50 } )->transform(
         done => sub {
             my $data = shift;
-            return { results =>
-                    [ map { $_->{fields} } @{ $data->{hits}->{hits} || [] } ]
-            };
+            return { results => $data->{suggestions} };
         }
         );
 }
