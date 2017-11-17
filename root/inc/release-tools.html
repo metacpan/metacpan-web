@@ -41,6 +41,14 @@
         <input type="submit" style="display: none">
     </form>
 </li>
+<li>
+    <form action="https://grep.metacpan.org/search">
+        <input type="hidden" name="qd" value="<% release.distribution %>">
+        <input type="hidden" name="source" value="metacpan">
+         <input type="search" name="q" placeholder="grep distribution" style="width: 153px" class="form-control tool-bar-form">
+         <input type="submit" style="display: none">
+     </form>
+</li>
 <%- IF versions.size > 1 %>
 <li>
     <select onchange="document.location.href='/<% IF module; "module"; ELSE; "release"; END %>/'+this.value" class="form-control tool-bar-form">
