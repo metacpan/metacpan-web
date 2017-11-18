@@ -49,14 +49,9 @@ test_psgi app, sub {
         ok( $res = $cb->( GET "/pod/$doc" ), "GET $doc" );
         is( $res->code, 200, 'code 200' );
 
-    TODO: {
-            local $TODO = 'unicode path names have issues (cpan-api#248)'
-                if $exp =~ /[^[:ascii:]]/;
-
-         # use ok() rather than like() b/c the diag output is huge if it fails
-            ok( $res->content =~ /$doc/,
-                "/pod/$doc content includes module name '$exp'" );
-        }
+        # use ok() rather than like() b/c the diag output is huge if it fails
+        ok( $res->content =~ /$doc/,
+            "/pod/$doc content includes module name '$exp'" );
     }
 };
 
