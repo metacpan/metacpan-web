@@ -60,12 +60,6 @@ sub COMPONENT {
     return $self->SUPER::COMPONENT( $app, $config );
 }
 
-sub model {
-    my ( $self, $model ) = @_;
-    return MetaCPAN::Web->model('API') unless $model;
-    return MetaCPAN::Web->model("API::$model");
-}
-
 sub request {
     my ( $self, $path, $search, $params, $method ) = @_;
 
