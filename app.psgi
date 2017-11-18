@@ -13,6 +13,7 @@ use Log::Log4perl;
 use File::Spec;
 use File::Path ();
 use Plack::Builder;
+use Digest::SHA;
 
 my $root_dir;
 my $dev_mode;
@@ -58,10 +59,19 @@ builder {
         my $app = shift;
         sub {
             my ($env) = @_;
-            Log::Log4perl::MDC->put( "ip",      $env->{REMOTE_ADDR} );
-            Log::Log4perl::MDC->put( "method",  $env->{REMOTE_METHOD} );
-            Log::Log4perl::MDC->put( "url",     $env->{REQUEST_URI} );
-            Log::Log4perl::MDC->put( "referer", $env->{HTTP_REFERER} );
+            my $request_id = Digest::SHA::sha1_hex(
+                join( "\0",
+                    $env->{REMOTE_ADDR}, $env->{REQUEST_URI}, time, $$, rand,
+                )
+            );
+            $env->{'MetaCPAN::Web.request_id'} = $request_id;
+
+            Log::Log4perl::MDC->remove;
+            Log::Log4perl::MDC->put( "request_id", $request_id );
+            Log::Log4perl::MDC->put( "ip",         $env->{REMOTE_ADDR} );
+            Log::Log4perl::MDC->put( "method",     $env->{REMOTE_METHOD} );
+            Log::Log4perl::MDC->put( "url",        $env->{REQUEST_URI} );
+            Log::Log4perl::MDC->put( "referer",    $env->{HTTP_REFERER} );
             $app->($env);
         };
     };

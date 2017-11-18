@@ -48,6 +48,7 @@ has api_secure => (
 has log         => ( is => 'ro' );
 has debug       => ( is => 'ro' );
 has request_uri => ( is => 'ro' );
+has request_id  => ( is => 'ro' );
 
 =head2 COMPONENT
 
@@ -74,6 +75,7 @@ sub ACCEPT_CONTEXT {
         $self = $self->new(
             %$self,
             request_url => $r->uri,
+            request_id  => $r->env->{'MetaCPAN::Web.request_id'},
         );
     }
     return $self;
@@ -92,6 +94,7 @@ sub request {
     }
 
     my $current_url = $self->request_uri;
+    my $request_id  = $self->request_id;
 
     my $request = HTTP::Request->new(
         (
@@ -103,6 +106,7 @@ sub request {
         [
             ( $search ? ( 'Content-Type' => 'application/json' ) : () ),
             ( $current_url ? ( 'Referer' => $current_url->as_string ) : () ),
+            ( $request_id ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
         ],
     );
 
