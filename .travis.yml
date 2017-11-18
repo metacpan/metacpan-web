@@ -5,7 +5,7 @@ perl:
 matrix:
   fast_finish: true
   allow_failures:
-    - env: USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$TRAVIS_BUILD_DIR/no-snapshot HARNESS_VERBOSE=1
+    - env: USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$HOME/no-snapshot HARNESS_VERBOSE=1
     - env: USE_CPANFILE_SNAPSHOT=true COVERAGE=1
 env:
   global:
@@ -13,13 +13,13 @@ env:
     # that the snapshot was built from.
     - DEPLOYMENT_PERL_VERSION=5.22
     - DEVEL_COVER_OPTIONS="-ignore,^local/"
-    - PERL_CARTON_PATH=$TRAVIS_BUILD_DIR/local
+    - PERL_CARTON_PATH=$HOME/local
     - CPAN_RESOLVER=snapshot
   matrix:
 
     # Get one passing run with coverage and one passing run with Test::Vars
     # checks.  If run together they more than double the build time.
-    - USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$TRAVIS_BUILD_DIR/no-snapshot HARNESS_VERBOSE=1
+    - USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$HOME/no-snapshot HARNESS_VERBOSE=1
     - USE_CPANFILE_SNAPSHOT=true
     - USE_CPANFILE_SNAPSHOT=true COVERAGE=1
 
@@ -60,3 +60,10 @@ sudo: false
 cache:
   directories:
     - local
+
+addons:
+  artifacts:
+    debug: false
+    s3_region: "us-east-1"
+    paths:
+    - $TRAVIS_BUILD_DIR/cpanfile.snapshot
