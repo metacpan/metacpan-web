@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/metacpan/metacpan-web.svg?branch=master)](https://travis-ci.org/metacpan/metacpan-web)
 [![Coverage Status](https://coveralls.io/repos/metacpan/metacpan-web/badge.svg)](https://coveralls.io/r/metacpan/metacpan-web)
+[![Kritika Analysis Status](https://kritika.io/users/oalders/repos/4190324575950687/heads/master/status.svg)](https://kritika.io/users/oalders/repos/4190324575950687/heads/master/)
 
 ## GETTING STARTED
 
