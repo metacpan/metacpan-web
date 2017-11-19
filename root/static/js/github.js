@@ -54,9 +54,14 @@
                         return 'There are currently no open issues.';
                     }
 
+                    var issues_text = 'Last 15 Issues';
+                    if (data.issues.length <= 15) {
+                        issues_text = 'Issues';
+                    }
+
                     var result = '<table>'
                                 +'  <tr><th>Open <a href="'+ data.repo.html_url +'/issues">Issues</a>:</th><td>'+ data.repo.open_issues +'</td></tr>'
-                                +'  <tr><th>Last 15 Issues:</th><td><table>';
+                                +'  <tr><th>' + issues_text + ':</th><td><table>';
 
                     $.each(data.issues, function(idx, row) {
                         result += '<tr><td><span class="relatize">'+ row.created_at +'</span></td><td><a href="'+ row.html_url +'">'+ row.title +'</a></td></tr>';
