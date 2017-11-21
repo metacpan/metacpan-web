@@ -51,6 +51,8 @@ use MetaCPAN::Web;
 
 my $tempdir = "$root_dir/var/tmp";
 
+STDERR->autoflush;
+
 # explicitly call ->to_app on every Plack::App::* for performance
 builder {
 
