@@ -3,14 +3,12 @@ package MetaCPAN::Web::View::HTML;
 use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
-use Digest::MD5 qw(md5_hex);
-use Digest::SHA1;
+use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
 use Gravatar::URL;
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
-use Template::Plugin::JSON;
 use Template::Plugin::Markdown;
 use Template::Plugin::Number::Format;
 use Template::Plugin::Page;
@@ -75,37 +73,6 @@ Template::Alloy->define_vmethod( 'text',
     dt_date_common => \&common_date_format );
 
 Template::Alloy->define_vmethod(
-    'hash',
-    pretty_json => sub {
-
-    # Use utf8(0) because Catatlyst expects our view to be a character string.
-        Cpanel::JSON::XS->new->utf8(0)->pretty->encode(shift);
-    }
-);
-
-{
-    my @chars = ( 'a' .. 'z', 'A' .. 'Z', 0 .. 9, qw(- _) );
-    Template::Alloy->define_vmethod(
-        'text',
-        random => sub {
-            my $length = shift;
-            my $rand   = q{};
-            $rand .= $chars[ int( rand() * @chars ) ] for ( 1 .. $length );
-            return $rand;
-        }
-    );
-}
-
-Template::Alloy->define_vmethod(
-    'text',
-    to_color => sub {
-        my $md5 = md5_hex( md5_hex(shift) );
-        my $color = substr( $md5, 0, 6 );
-        return "#$color";
-    },
-);
-
-Template::Alloy->define_vmethod(
     'text',
     decode_punycode => sub {
         my $url_string = shift;
@@ -124,12 +91,14 @@ Template::Alloy->define_vmethod(
     }
 );
 
-Template::Alloy->define_vmethod(
-    'array',
-    json => sub {
-        Cpanel::JSON::XS::encode_json(shift);
-    }
-);
+my $json = Cpanel::JSON::XS->new->canonical->allow_nonref;
+Template::Alloy->define_vmethod( $_, json => sub { $json->encode( $_[0] ) } )
+    for 'text', 'array', 'hash';
+
+my $pretty_json = Cpanel::JSON::XS->new->canonical->pretty->allow_nonref;
+Template::Alloy->define_vmethod( $_,
+    pretty_json => sub { $json->encode( $_[0] ) } )
+    for 'text', 'array', 'hash';
 
 Template::Alloy->define_vmethod(
     'array',
@@ -166,7 +135,7 @@ Template::Alloy->define_vmethod(
         my ($source) = @_;
         my @source = split( /\//, $source );
         my @target = ( shift @source, shift @source, join( q{/}, @source ) );
-        my $digest = Digest::SHA1::sha1_base64(
+        my $digest = Digest::SHA::sha1_base64(
             join( "\0", grep {defined} @target ) );
         $digest =~ tr/[+\/]/-_/;
         return $digest;

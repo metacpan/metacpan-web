@@ -2,7 +2,7 @@ package Plack::Middleware::Assets::FileCached;
 use Moo;
 use File::Temp ();
 use Plack::App::File;
-use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha1_hex);
 use File::Path ();
 
 sub wrap {
@@ -114,7 +114,7 @@ sub _build__asset_files {
     if ( my $filter = $self->filter ) {
         $content = $filter->($content);
     }
-    my $key       = md5_hex($content);
+    my $key       = sha1_hex($content);
     my $file      = "$key." . $self->extension;
     my $disk_file = $self->cache_dir . "/$file";
     if ( !-e $disk_file ) {

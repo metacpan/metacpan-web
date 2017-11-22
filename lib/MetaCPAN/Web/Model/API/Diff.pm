@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Model::API::Diff;
 use Moose;
 use namespace::autoclean;
-use Digest::SHA1;
+use Digest::SHA;
 
 extends 'MetaCPAN::Web::Model::API';
 
@@ -25,7 +25,7 @@ sub files {
 
 sub digest {
     my $self = shift;
-    my $digest = Digest::SHA1::sha1_base64( join( "\0", grep {defined} @_ ) );
+    my $digest = Digest::SHA::sha1_base64( join( "\0", grep {defined} @_ ) );
     $digest =~ tr/[+\/]/-_/;
     return $digest;
 }
