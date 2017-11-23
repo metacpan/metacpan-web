@@ -231,12 +231,11 @@ test_psgi app, sub {
                 "reverse deps link uses $revdep name"
             );
 
-            my $slash = '%2F';
             $tx->like(
                 '//a[starts-with(@href, "https://explorer.metacpan.org/?url")]/@href',
                 $type eq 'module'
-                ? qr!\?url=${slash}module${slash}\w+${slash}${qs_dist}-${version}${slash}.+!
-                : qr!\?url=${slash}release${slash}\w+${slash}${qs_dist}-${version}\z!,
+                ? qr!\?url=/module/\w+/${qs_dist}-${version}/.+!
+                : qr!\?url=/release/\w+/${qs_dist}-${version}\z!,
                 'explorer link points to module file or release',
             );
 
