@@ -4,7 +4,7 @@ use MetaCPAN::Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-# This is used by http://mirrors.cpan.org/ fetch our
+# This is used by https://mirrors.cpan.org/ fetch our
 # datacenters and update the official CPAN list
 
 # /sysadmin/datacenters/list

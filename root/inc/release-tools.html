@@ -15,7 +15,7 @@
     </a>
 </li>
 <li>
-    <a href="<% 'http://cpanratings.perl.org/rate/?distribution=' _ release.distribution | uri %>">
+    <a href="<% 'https://cpanratings.perl.org/rate/?distribution=' _ release.distribution | uri %>">
     <i class="fa fa-star fa-fw black"></i>Rate this distribution
     </a>
 </li>
@@ -81,9 +81,9 @@
 </li>
 <li class="nav-header">S.C.O</li>
 <li>
-    <a href="http://search.cpan.org/~<% release.author %>/<% release.name %>/<% module.path %>" rel="nofollow">This version</a>
+    <a href="https://search.cpan.org/~<% release.author %>/<% release.name %>/<% module.path %>" rel="nofollow">This version</a>
 </li>
 <li>
-    <a href="http://search.cpan.org/<% module ? "perldoc?$module.documentation" : ["dist", release.metadata.name].join('/') %>" rel="nofollow">Latest version</a>
+    <a href="https://search.cpan.org/<% module ? "perldoc?$module.documentation" : ["dist", release.metadata.name].join('/') %>" rel="nofollow">Latest version</a>
 </li>
 <%- END %>

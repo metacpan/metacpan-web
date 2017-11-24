@@ -31,9 +31,9 @@ Title: Server move - phase 2
 ------------------------------
 Date: 2014-10-21T19:00:00
 
-We have moved all sites over to [Fastly](http://www.fastly.com)
+We have moved all sites over to [Fastly](https://www.fastly.com)
 (where possible) and they are backed up by the new
-[Bytemark](http://www.bytemark.co.uk/) servers.
+[Bytemark](https://www.bytemark.co.uk/) servers.
 
 We have further plans... but this will do for now,
 many thanks to our sponsors for making this possible.
@@ -47,10 +47,10 @@ Title: Server move - phase 1
 ------------------------------
 Date: 2014-09-19T19:00:00
 
-We are moving servers, [Bytemark](http://www.bytemark.co.uk/) have
+We are moving servers, [Bytemark](https://www.bytemark.co.uk/) have
 asked for the old one back... and given us 2 new ones in replacement!
 
-We are moving as much as possible to [Fastly](http://www.fastly.com) CDN
+We are moving as much as possible to [Fastly](https://www.fastly.com) CDN
 which makes switching origins very easy, and instant.
 
 So far we have moved...
@@ -123,7 +123,7 @@ Title: Dependency Graphs are Here
 Date: 2014-05-13T20:50:10
 
 Jeffrey Thalhammer took the time this week to contribute dependency graphs to
-MetaCPAN.  The graphs are hosted by [Stratopan](http://stratopan.com) and they
+MetaCPAN.  The graphs are hosted by [Stratopan](https://stratopan.com) and they
 can be found on module and release pages under the "Reverse Dependencies" link.
 
 Thanks very much to [THALJEF](https://metacpan.org/author/THALJEF) for
@@ -140,4 +140,4 @@ There is also an [Atom feed](/feed/news).
 
 If you are interested in how the news feed itself was implemented, check out
 the article [Adding a News Feed to
-MetaCPAN](http://perlmaven.com/adding-news-feed-to-metacpan)
+MetaCPAN](https://perlmaven.com/adding-news-feed-to-metacpan)

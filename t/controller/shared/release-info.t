@@ -176,13 +176,13 @@ test_psgi app, sub {
             # not all dists have reviews
             optional_test reviews => sub {
                 my $rating
-                    = qq!//a[\@href="http://cpanratings.perl.org/rate/?distribution=$qs_dist"]!;
+                    = qq!//a[\@href="https://cpanratings.perl.org/rate/?distribution=$qs_dist"]!;
                 $tx->like( "$rating/span/\@class", qr/^rating-\d+$/,
                     'has link to rate',
                 );
 
                 my $reviews
-                    = qq{//a[\@href="http://cpanratings.perl.org/dist/$release"]};
+                    = qq{//a[\@href="https://cpanratings.perl.org/dist/$release"]};
                 $tx->like(
                     $reviews,
                     qr/\d+ reviews?/i,
@@ -193,7 +193,7 @@ test_psgi app, sub {
             # all dists should get a link to rate it; test built url
             ok(
                 $tx->find_value(
-                    '//a[@href="http://cpanratings.perl.org/rate/?distribution='
+                    '//a[@href="https://cpanratings.perl.org/rate/?distribution='
                         . $qs_dist . '"]'
                 ),
                 'cpanratings link to rate this dist'
@@ -204,7 +204,7 @@ test_psgi app, sub {
 
             $tx->is(
                 '//a[@title="Matrix"]/@href',
-                "http://matrix.cpantesters.org/?dist=$qs_dist+$qs_version",
+                "https://matrix.cpantesters.org/?dist=$qs_dist+$qs_version",
                 'link to test matrix'
             );
 

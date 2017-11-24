@@ -24,7 +24,7 @@ test_psgi app, sub {
     );
 
     # just in case, for comparisons
-    $this =~ s{^http://[^/]+}{};
+    $this =~ s{^https?://[^/]+}{};
 
     my $latest = $res->content;
     ok( $res = $cb->( GET $this ), "GET $this" );

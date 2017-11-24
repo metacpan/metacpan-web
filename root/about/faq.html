@@ -7,17 +7,17 @@
 
 ## What third-party sites does MetaCPAN use?
 
-* [CPAN](http://www.cpan.org/) is where all the Perl modules live.
+* [CPAN](https://www.cpan.org/) is where all the Perl modules live.
 MetaCPAN 'just' indexes those files.
 * [Perlybook](http://perlybook.org/) provides the MOBI and EPUB download capabilities.
 MetaCPAN provides direct links to download the POD in the respective formats.
-* [CPAN Testers](http://www.cpantesters.org/) collect test reports of the CPAN modules.
+* [CPAN Testers](https://www.cpantesters.org/) collect test reports of the CPAN modules.
 MetaCPAN show the number of test reports and links to the tests.
-* [CPANTS](http://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
+* [CPANTS](https://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
 MetaCPAN links to the respective pages on the CPANTS site.
-* [CPAN Ratings](http://cpanratings.perl.org/) allows users to give stars and review CPAN distributions.
+* [CPAN Ratings](https://cpanratings.perl.org/) allows users to give stars and review CPAN distributions.
 MetaCPAN show the average rating using stars and links to the reviews.
-* [search.cpan.org](http://search.cpan.org/) is another search engine for the same data.
+* [search.cpan.org](https://search.cpan.org/) is another search engine for the same data.
 It is older, but the source code has not been published.
 MetaCPAN links to the respective page of each module/distribution.
 * [RT](https://rt.cpan.org/) is an installation of [Request Tracker](https://www.bestpractical.com/rt/)
@@ -76,7 +76,7 @@ to try sending queries to the back-end.
 
 ### Is your PAUSE email set up?
 
-If you are a module author you can link your [PAUSE](http://pause.perl.org/)
+If you are a module author you can link your [PAUSE](https://pause.perl.org/)
 account to your MetaCPAN account. But you must configure the email address
 forwarding in your PAUSE account for this to work.
 
@@ -157,7 +157,7 @@ has to be changed to:
 
 ## What is the relation of MetaCPAN to author-*.json and the data in a PAUSE account?
 
-Every CPAN module author has an account on [PAUSE](http://pause.perl.org/pause/query).
+Every CPAN module author has an account on [PAUSE](https://pause.perl.org/pause/query).
 That account has some profile data in it (full name, ascii name, e-mail, and homepage).
 Authors can edit those at [Edit Account Info](https://pause.perl.org/pause/authenquery?ACTION=edit_cred).
 This information is collected and distributed by PAUSE via the
@@ -179,13 +179,13 @@ in the MetaCPAN account is initialized from those sources
 (00whois.xml and author-*.json) and from that point MetaCPAN disregards
 any changes made to those files.
 
-As of October 2014 [search.cpan.org](http://search.cpan.org/) uses only the data in the
+As of October 2014 [search.cpan.org](https://search.cpan.org/) uses only the data in the
 PAUSE account (via the 00whois.xml). It does not use the data from the author.json
 files and from MetaCPAN.
 Thus it might show a different e-mail address or homepage of a user then what MetaCPAN does.
 
 If you, as a PAUSE author would like to keep them in sync, you can always export your MetaCPAN
-account information in json format by accessing http://fastapi.metacpan.org/author/PAUSEID
+account information in json format by accessing https://fastapi.metacpan.org/author/PAUSEID
 (replacing the word PAUSEID by your own PAUSEID). Then you can upload the result as author-*.json
 with a higher version number than the last one you uploaded.
 The PAUSE account information need to be updated manually via
