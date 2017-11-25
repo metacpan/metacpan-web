@@ -15,6 +15,8 @@ use URI;
 use URI::QueryParam;
 use MetaCPAN::Web::Types qw( Uri );
 use Try::Tiny qw( catch try );
+use HTTP::Request;
+use HTTP::Request::Common ();
 
 my $loop;
 
@@ -86,32 +88,37 @@ sub request {
 
     my $url = $self->api_secure->clone;
 
+    $method ||= $search ? 'POST' : 'GET';
+
     # the order of the following 2 lines matters
     # `path_query` is destructive
     $url->path_query($path);
-    for my $param ( keys %{ $params || {} } ) {
-        $url->query_param( $param => $params->{$param} );
-    }
 
     my $current_url = $self->request_uri;
     my $request_id  = $self->request_id;
+    if ( $method eq 'GET' || $search ) {
+        for my $param ( keys %{ $params || {} } ) {
+            $url->query_param( $param => $params->{$param} );
+        }
+    }
 
-    my $request = HTTP::Request->new(
-        (
-              $method ? $method
-            : $search ? 'POST'
-            :           'GET',
-        ),
+    my $request = HTTP::Request::Common->can($method)->(
         $url,
-        [
-            ( $search ? ( 'Content-Type' => 'application/json' ) : () ),
-            ( $current_url ? ( 'Referer' => $current_url->as_string ) : () ),
-            ( $request_id ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
-        ],
+        (
+            $search
+            ? (
+                'Content-Type' => 'application/json',
+                'Content'      => encode_json($search),
+                )
+            : $method eq 'POST' && $params ? (
+                'Content_Type' => 'multipart/form-data',
+                'Content'      => $params,
+                )
+            : ()
+        ),
+        ( $current_url ? ( 'Referer' => $current_url->as_string ) : () ),
+        ( $request_id ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
     );
-
-    # encode_json returns an octet string
-    $request->add_content( encode_json($search) ) if $search;
 
     $self->client->do_request( request => $request )->transform(
         done => sub {
