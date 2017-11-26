@@ -1,0 +1,17 @@
+<%
+  title = 'Pod Renderer' _ (pod_name ? ' - ' _ pod_name : '')
+%>
+<div class="pod content anchors">
+  <div>
+    <form method="POST" enctype="multipart/form-data" id="metacpan-pod-renderer-form">
+      <div><textarea name="pod"><% pod %></textarea></div>
+      <div><input type="file" name="pod_file" accept=".pl, .pod, .pm, text/plain, text/x-perl-file, text/x-pod-file"/></div>
+      <div><input type="submit" value="Render" /></div>
+    </form>
+  </div>
+  <div id="metacpan-pod-rendered"><% pod_rendered | none %>
+  <% IF pod_error %>
+      <p class="pod-error">Error rendering POD - <% pod_error %></p>
+  <% END %>
+  </div>
+</div>

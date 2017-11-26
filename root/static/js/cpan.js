@@ -302,8 +302,7 @@ $(document).ready(function() {
 
     $('.dropdown-toggle').dropdown();
 
-    var index = $("#index");
-    if (index) {
+    function format_index(index) {
         index.wrap('<div id="index-container"><div class="index-border"></div></div>');
         var container = index.parent().parent();
 
@@ -327,6 +326,10 @@ $(document).ready(function() {
         if (MetaCPAN.storage.getItem('rightTOC') == 1) {
             container.addClass("pull-right");
         }
+    }
+    var index = $("#index");
+    if (index.length) {
+        format_index(index);
     }
 
     ['right'].forEach(function(side) {
@@ -358,6 +361,61 @@ $(document).ready(function() {
     if (changes.prop('scrollHeight') > changes.height()) {
         $("#last-changes-toggle").show();
     }
+
+    var pod2html_form = $('#metacpan-pod-renderer-form');
+    var pod2html_text = $('[name="pod"]', pod2html_form);
+    var pod2html_update = function(pod) {
+        if (!pod) {
+            pod = pod2html_text.get(0).value;
+        }
+        var rendered = $('#metacpan-pod-rendered');
+        rendered.html('<h2>Loading...</h2>');
+        document.title = "Pod Renderer - metacpan.org";
+        $.ajax({
+            url: '/pod2html',
+            method: 'POST',
+            data: {
+                pod: pod,
+                raw: true
+            },
+            success: function(data, stat, req) {
+                rendered.html(data);
+                var title = req.getResponseHeader('X-Pod-Title');
+                if (title) {
+                    document.title = "Pod Renderer - " + title + " - metacpan.org";
+                }
+                var index = $("#index");
+                if (index.length) {
+                    format_index(index);
+                }
+            },
+            error: function(data, stat) {
+                rendered.html('<p class="pod-error">Error rendering POD' +
+                    (data && data.length ? ' - ' + data : '') +
+                    '</p>');
+            }
+        });
+    };
+    if (window.FileReader) {
+        $('input[type="file"]', pod2html_form).on('change', function(e) {
+            var files = this.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    pod2html_text.get(0).value = e.target.result;
+                    pod2html_update(pod2html_text.get(0).value);
+                };
+                reader.readAsText(file);
+            }
+            this.value = null;
+        });
+    }
+    pod2html_form.on('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        pod2html_update();
+    });
 });
 
 function set_page_size(selector, storage_name) {

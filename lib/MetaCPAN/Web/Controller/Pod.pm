@@ -1,11 +1,13 @@
 package MetaCPAN::Web::Controller::Pod;
 
 use HTML::Restrict;
+use HTML::TokeParser;
 use Moose;
 use Try::Tiny;
 use URI;
 use HTML::Escape qw(escape_html);
 use Future;
+use Encode ();
 
 use namespace::autoclean;
 
@@ -170,6 +172,58 @@ sub view : Private {
     }
 }
 
+sub pod2html : Path('/pod2html') {
+    my ( $self, $c ) = @_;
+    my $pod_file = $c->req->upload('pod_file');
+    my $pod = $pod_file ? $pod_file->slurp : $c->req->parameters->{pod};
+
+    if ( defined $pod ) {
+        $c->stash( { pod => $pod } );
+        my $encoded_pod = Encode::encode( 'UTF-8', $pod );
+        my $html
+            = $c->model('API')
+            ->request( 'pod_render', undef, { pod => $encoded_pod }, 'POST' )
+            ->get->{raw};
+        $html = $self->filter_html($html);
+        my ( $pod_name, $abstract );
+        my $p = HTML::TokeParser->new( \$html );
+        while ( my $t = $p->get_token ) {
+            my ( $type, $tag, $attr ) = @$t;
+            if (   $type eq 'S'
+                && $tag eq 'h1'
+                && $attr->{id}
+                && $attr->{id} eq 'NAME' )
+            {
+                my $name_section = $p->get_trimmed_text('h1');
+                if ($name_section) {
+                    ( $pod_name, $abstract )
+                        = $name_section =~ /(?:NAME\s+)?([^-]+)\s*-\s*(.*)/s;
+                }
+                last;
+            }
+        }
+        if ( $c->req->parameters->{raw} ) {
+            $c->res->content_type('text/plain');
+            $c->res->header( 'X-Pod-Title' => $pod_name )
+                if $pod_name;
+            $c->res->header( 'X-Pod-Abstract' => $abstract )
+                if $abstract;
+            $c->res->body($html);
+            $c->detach;
+        }
+        else {
+            $c->stash(
+                {
+                    pod_rendered => $html,
+                    ( $pod_name ? ( pod_name => $pod_name ) : () ),
+                    ( $abstract ? ( abstract => $abstract ) : () ),
+                }
+            );
+        }
+    }
+
+}
+
 sub filter_html {
     my ( $self, $html, $data ) = @_;
 
@@ -236,7 +290,7 @@ sub filter_html {
                         # bad protocol
                         return '';
                     }
-                    else {
+                    elsif ($data) {
                         my $base = "https://st.aticpan.org/source/";
                         if ( $val =~ s{^/}{} ) {
                             $base .= "$data->{author}/$data->{release}/";
@@ -246,6 +300,9 @@ sub filter_html {
                                 || "$data->{author}/$data->{release}/$data->{path}";
                         }
                         $val = URI->new_abs( $val, $base )->as_string;
+                    }
+                    else {
+                        $val = '/static/images/gray.png';
                     }
                 }
                 $tag .= qq{ $attr="} . escape_html($val) . qq{"};
