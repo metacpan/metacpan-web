@@ -71,12 +71,28 @@ sub wrap {
             );
         }
         else {
+            my @assets = (@js_files);
+            if ( `lessc --version` =~ /lessc/ ) {
+                enable 'Assets::Dev' => (
+                    files     => [ map "root$_", @css_files, @less_files ],
+                    extension => 'css',
+                    read_file => sub {
+                        my $file = shift;
+                        my ($root_path) = $file =~ m{^root/(.*)/};
+                        scalar
+                            `lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
+                    },
+                );
+            }
+            else {
+                push @assets, @css_files, @less_files;
+            }
+
             enable sub {
                 my ($app) = @_;
                 sub {
                     my ($env) = @_;
-                    push @{ $env->{'psgix.assets'} ||= [] },
-                        ( @js_files, @css_files, @less_files, );
+                    push @{ $env->{'psgix.assets'} ||= [] }, @assets;
                     $app->($env);
                 };
             };
