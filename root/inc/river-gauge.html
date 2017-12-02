@@ -1,0 +1,10 @@
+<!--
+  Unlike an <img>, an <object> grafts the SVG document into the DOM, which
+  means browsers will display the <title> elements of the SVG.  Yay!
+-->
+<object data="/river/gauge/<% distribution | uri | html %>"
+  type="image/svg+xml"
+  width="24px"
+  height="16px"
+  alt="river gauge for <% distribution %>"
+  class="river-gauge"></object>
