@@ -17,6 +17,7 @@ sub recent : Local : Args(0) {
             total           => $data->{total},
             page_size       => $page_size,
             template        => 'favorite/recent.html',
+            favorite_type   => 'recent',
         }
     );
 }
@@ -29,10 +30,11 @@ sub leaderboard : Local : Args(0) {
 
     $c->stash(
         {
-            leaders  => $data->{leaderboard},
-            took     => $data->{took},
-            total    => $data->{total},
-            template => 'favorite/leaderboard.html',
+            leaders       => $data->{leaderboard},
+            took          => $data->{took},
+            total         => $data->{total},
+            template      => 'favorite/leaderboard.html',
+            favorite_type => 'leaderboard',
         }
     );
 }
