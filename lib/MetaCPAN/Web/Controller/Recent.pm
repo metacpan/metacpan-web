@@ -9,9 +9,10 @@ sub index : Path : Args(0) {
 
     my $page_size = $req->get_page_size(100);
 
+    my $filter = $req->params->{f} || 'l';
     my ($data)
         = $c->model('API::Release')
-        ->recent( $req->page, $page_size, $req->params->{f} || 'l' )->get;
+        ->recent( $req->page, $page_size, $filter )->get;
 
     $c->add_surrogate_key( 'RECENT', 'DIST_UPDATES' );
     $c->browser_max_age('1m');
@@ -24,6 +25,7 @@ sub index : Path : Args(0) {
             total     => $data->{total},
             template  => 'recent.html',
             page_size => $page_size,
+            filter    => $filter,
         }
     );
 }
