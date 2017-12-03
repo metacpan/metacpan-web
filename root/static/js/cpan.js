@@ -262,13 +262,16 @@ $(document).ready(function() {
         }
     }
 
-    $('.anchors').find('h1,h2,h3,h4,h5,h6,dt').each(function() {
-        if (this.id) {
-            $(document.createElement('a')).attr('href', '#' + this.id).addClass('anchor').append(
-                $(document.createElement('span')).addClass('fa fa-bookmark black')
-            ).prependTo(this);
-        }
-    });
+    function create_anchors(top) {
+        top.find('h1,h2,h3,h4,h5,h6,dt').each(function() {
+            if (this.id) {
+                $(document.createElement('a')).attr('href', '#' + this.id).addClass('anchor').append(
+                    $(document.createElement('span')).addClass('fa fa-bookmark black')
+                ).prependTo(this);
+            }
+        });
+    }
+    create_anchors($('.anchors'));
 
     var module_source_href = $('#source-link').attr('href');
     if (module_source_href) {
@@ -368,8 +371,15 @@ $(document).ready(function() {
         if (!pod) {
             pod = pod2html_text.get(0).value;
         }
+        var submit = pod2html_form.find('input[type="submit"]');
+        submit.attr("disabled", "disabled");
         var rendered = $('#metacpan-pod-rendered');
-        rendered.html('<h2>Loading...</h2>');
+        var loading = $('#metacpan-pod-renderer-loading');
+        var error = $('#metacpan-pod-renderer-error');
+        rendered.hide();
+        rendered.html('');
+        loading.show();
+        error.hide();
         document.title = "Pod Renderer - metacpan.org";
         $.ajax({
             url: '/pod2html',
@@ -380,19 +390,29 @@ $(document).ready(function() {
             },
             success: function(data, stat, req) {
                 rendered.html(data);
-                var title = req.getResponseHeader('X-Pod-Title');
-                if (title) {
+                loading.hide();
+                error.hide();
+                var res = $('#NAME + p').text().match(/^([^-]+?)\s*-\s*(.*)/);
+                if (res) {
+                    var title = res[0];
+                    var abstract = res[1];
                     document.title = "Pod Renderer - " + title + " - metacpan.org";
                 }
-                var index = $("#index");
+                var index = $("#index", rendered);
                 if (index.length) {
                     format_index(index);
                 }
+                create_anchors(rendered);
+                rendered.show();
+                submit.removeAttr("disabled");
             },
             error: function(data, stat) {
-                rendered.html('<p class="pod-error">Error rendering POD' +
-                    (data && data.length ? ' - ' + data : '') +
-                    '</p>');
+                rendered.hide();
+                loading.hide();
+                error.html('Error rendering POD' +
+                    (data && data.length ? ' - ' + data : ''));
+                error.show();
+                submit.removeAttr("disabled");
             }
         });
     };

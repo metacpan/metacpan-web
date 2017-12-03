@@ -9,9 +9,11 @@
       <div><input type="submit" value="Render" /></div>
     </form>
   </div>
-  <div id="metacpan-pod-rendered"><% pod_rendered | none %>
+  <div id="metacpan-pod-renderer-loading" style="display: none"></div>
+  <div id="metacpan-pod-rendered"><% pod_rendered | none %></div>
   <% IF pod_error %>
-      <p class="pod-error">Error rendering POD - <% pod_error %></p>
+  <div id="metacpan-pod-renderer-error" class="pod-error">Error rendering POD - <% pod_error %></div>
+  <% ELSE %>
+  <div id="metacpan-pod-renderer-error" class="pod-error" style="display: none"></div>
   <% END %>
-  </div>
 </div>
