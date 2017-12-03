@@ -7,7 +7,7 @@ use Try::Tiny;
 use URI;
 use HTML::Escape qw(escape_html);
 use Future;
-use Encode ();
+use Encode qw( encode decode DIE_ON_ERR LEAVE_SRC );
 
 use namespace::autoclean;
 
@@ -174,17 +174,35 @@ sub view : Private {
 
 sub pod2html : Path('/pod2html') {
     my ( $self, $c ) = @_;
-    my $pod_file = $c->req->upload('pod_file');
-    my $pod = $pod_file ? $pod_file->slurp : $c->req->parameters->{pod};
+    my $pod;
+    if ( my $pod_file = $c->req->upload('pod_file') ) {
+        my $raw_pod = $pod_file->slurp;
+        eval {
+            $pod = decode( 'UTF-8', $raw_pod, DIE_ON_ERR | LEAVE_SRC );
+            1;
+        } or $pod = decode( 'cp1252', $raw_pod );
+    }
+    elsif ( $pod = $c->req->parameters->{pod} ) {
+    }
+    else {
+        return;
+    }
 
-    if ( defined $pod ) {
-        $c->stash( { pod => $pod } );
-        my $encoded_pod = Encode::encode( 'UTF-8', $pod );
-        my $html
-            = $c->model('API')
-            ->request( 'pod_render', undef, { pod => $encoded_pod }, 'POST' )
-            ->get->{raw};
-        $html = $self->filter_html($html);
+    $c->stash( { pod => $pod } );
+
+    my $html
+        = $c->model('API')
+        ->request( 'pod_render', undef, { pod => encode( 'UTF-8', $pod ) },
+        'POST' )->get->{raw};
+
+    $html = $self->filter_html($html);
+
+    if ( $c->req->parameters->{raw} ) {
+        $c->res->content_type('text/html');
+        $c->res->body($html);
+        $c->detach;
+    }
+    else {
         my ( $pod_name, $abstract );
         my $p = HTML::TokeParser->new( \$html );
         while ( my $t = $p->get_token ) {
@@ -202,26 +220,14 @@ sub pod2html : Path('/pod2html') {
                 last;
             }
         }
-        if ( $c->req->parameters->{raw} ) {
-            $c->res->content_type('text/plain');
-            $c->res->header( 'X-Pod-Title' => $pod_name )
-                if $pod_name;
-            $c->res->header( 'X-Pod-Abstract' => $abstract )
-                if $abstract;
-            $c->res->body($html);
-            $c->detach;
-        }
-        else {
-            $c->stash(
-                {
-                    pod_rendered => $html,
-                    ( $pod_name ? ( pod_name => $pod_name ) : () ),
-                    ( $abstract ? ( abstract => $abstract ) : () ),
-                }
-            );
-        }
+        $c->stash(
+            {
+                pod_rendered => $html,
+                ( $pod_name ? ( pod_name => $pod_name ) : () ),
+                ( $abstract ? ( abstract => $abstract ) : () ),
+            }
+        );
     }
-
 }
 
 sub filter_html {
