@@ -56,7 +56,27 @@ STDERR->autoflush;
 # explicitly call ->to_app on every Plack::App::* for performance
 builder {
 
-    enable 'ReverseProxy';
+    enable sub {
+        my $app = shift;
+        sub {
+            my ($env) = @_;
+            if ( $env->{HTTP_FASTLY_SSL} ) {
+                $env->{HTTPS} = 'ON';
+                $env->{'psgi.url_scheme'} = 'https';
+            }
+            if ( my $host = $env->{HTTP_X_FORWARDED_HOST} ) {
+                $env->{HTTP_HOST} = $host;
+            }
+            if ( my $port = $env->{HTTP_X_FORWARDED_PORT} ) {
+                $env->{SERVER_PORT} = $port;
+            }
+            if ( my $addrs = $env->{HTTP_X_FORWARDED_FOR} ) {
+                my @addrs = map s/^\s+//r =~ s/\s+$//r, split /,/, $addrs;
+                $env->{REMOTE_ADDR} = $addrs[0];
+            }
+            $app->($env);
+        };
+    };
     enable sub {
         my $app = shift;
         sub {
