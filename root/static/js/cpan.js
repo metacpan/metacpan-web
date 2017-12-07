@@ -373,7 +373,7 @@ $(document).ready(function() {
         }
         var submit = pod2html_form.find('input[type="submit"]');
         submit.attr("disabled", "disabled");
-        var rendered = $('#metacpan-pod-rendered');
+        var rendered = $('#metacpan-pod-renderer-output');
         var loading = $('#metacpan-pod-renderer-loading');
         var error = $('#metacpan-pod-renderer-error');
         rendered.hide();
