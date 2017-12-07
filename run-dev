@@ -3,7 +3,14 @@
 export METACPAN_WEB_PORT=5001
 export PLACK_ENV=development
 export COLUMNS="$(tput cols)"
-plackup -r -o localhost -p "$METACPAN_WEB_PORT" &
+
+suffix="$METACPAN_WEB_CONFIG_LOCAL_SUFFIX"
+[ -z "$suffix" ] && suffix="local"
+
+log4perl="$(perl -MConfig::ZOMG -e'print Config::ZOMG->new(name => "MetaCPAN::Web")->load->{log4perl_file}')"
+[ -z "$log4perl" ] && log4perl="log4perl.conf"
+
+plackup -r -R metacpan_web.conf -R "metacpan_web_$suffix.conf" -R "$log4perl" -o localhost -p "$METACPAN_WEB_PORT" &
 app_pid="$!"
 trap 'kill "$app_pid"; exit 1' SIGHUP SIGINT SIGTERM SIGQUIT
 while true; do
