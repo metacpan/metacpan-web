@@ -25,7 +25,10 @@
   <big><strong>
    <% link_to_file(item) | none %>
    <%- IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big><% INCLUDE inc/favorite.html release = item favorites = release.favorites %><br>
+  </strong></big>
+  <% INCLUDE inc/river-gauge.html, distribution = item.distribution %>
+  <% INCLUDE inc/favorite.html release = item favorites = release.favorites %>
+  <br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
   <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
