@@ -134,7 +134,7 @@
 
 <div class="content">
     <div id="feed_subscription" class="page-header">
-        <p>Distributions uploaded by <span class="author-name"><% author.name %></span> (<% author.pauseid %>)</p>
+        <p><% IF releases.0 %><% releases.size %><% ELSE %>No<% END %> distributions uploaded by <span class="author-name"><% author.name %></span> (<% author.pauseid %>)</p>
         <a href="/feed/author/<% author.pauseid %>"><i class="fa fa-rss fa-2x black"></i></a>
     </div>
     <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
