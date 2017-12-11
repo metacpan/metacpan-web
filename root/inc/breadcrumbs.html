@@ -48,7 +48,7 @@ END %>
       IF have_released; %>
     <a class="latest" href="<% IF module %>/pod/<% module.documentation %><% ELSE %>/release/<% release.distribution; END %>" title="<%- IF release.maturity == 'developer'; 'dev release, '; END %>go to latest"><span class="fa fa-step-forward"></span></a>
   <%- END; END; %>
-  <% INCLUDE inc/river-gauge.html, distribution = release.distribution %>
+  <% INCLUDE inc/river-gauge.html, river = distribution.river, distribution = release.distribution %>
   <%- INCLUDE inc/favorite.html %>
   <%- IF module %>
   &nbsp;/&nbsp;<span <% IF schema_org %>itemprop="name"<% END %> ><% module.documentation or module.module.0.name %></span>
