@@ -21,6 +21,10 @@ sub gauge : Chained('root') PathPart('gauge') Args(1) {
             template     => 'river/gauge.svg',
         }
     );
+
+    $c->cdn_max_age('1y');
+    $c->add_dist_key( $dist->{name} );
+
     $c->detach( $c->view("Raw") );
 }
 
