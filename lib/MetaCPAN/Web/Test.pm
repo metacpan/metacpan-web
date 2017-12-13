@@ -5,8 +5,6 @@ package MetaCPAN::Web::Test;
 use strict;
 use warnings;
 
-use lib '.';    # require app.psgi under 5.26
-
 use Plack::Test;
 use HTTP::Request::Common;
 use HTTP::Message::PSGI;
@@ -54,7 +52,11 @@ sub override_api_response {
     return;
 }
 
-sub app { require 'app.psgi'; }    ## no critic (Require)
+my $app;
+
+sub app {
+    $app ||= do './app.psgi' || die( $@ || $! );
+}
 
 sub tx {
     my ( $res, $opts ) = @_;
