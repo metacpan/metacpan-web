@@ -18,7 +18,8 @@ __PACKAGE__->config(
 
 sub lab : Path : Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( template => 'lab.html' );
+    $c->res->redirect( '/tools', 301 );
+    $c->detach;
 }
 
 sub dependencies : Local : Args(0) : Does('Sortable') {

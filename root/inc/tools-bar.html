@@ -1,12 +1,15 @@
 <div class="tabbable tabs-left about-bar slidepanel">
     <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="105" id="left-nav">
-    <li<% IF req.action == 'lab' %> class="active"<% END %>>
-        <a href="/lab">Lab</a>
+    <li<% IF req.action == 'tools' %> class="active"<% END %>>
+        <a href="/tools">Tools</a>
+    </li>
+    <li<% IF req.action == 'pod2html' %> class="active"<% END %>>
+        <a href="/pod2html">Pod Renderer</a>
     </li>
     <li<% IF req.action == '/lab/dashboard' %> class="active"<% END %>>
-        <a href="/lab/dashboard">Dashboard</a>
+        <a href="/lab/dashboard">Lab: Dashboard</a>
     </li>
     <li<% IF req.action == '/lab/dependencies' %> class="active"<% END %>>
-        <a href="/lab/dependencies">Dependencies</a>
+        <a href="/lab/dependencies">Lab: Dependencies</a>
     </li>
 </div>
