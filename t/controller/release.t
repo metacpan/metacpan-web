@@ -91,14 +91,14 @@ test_psgi app, sub {
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="https://search.cpan.org/~SHLOMIF/Config-IniFiles-2.43/" and @rel="nofollow"]'
+            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.43/" and @rel="nofollow"]'
         ),
         'This version',
         'Link to release search.cpan.org of this version is correct'
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="https://search.cpan.org/dist/Config-IniFiles" and @rel="nofollow"]'
+            '//a[@href="http://search.cpan.org/dist/Config-IniFiles" and @rel="nofollow"]'
         ),
         'Latest version',
         'Link to release search.cpan.org of the latest version is correct'
@@ -113,14 +113,14 @@ test_psgi app, sub {
     $tx_cc = tx($res);
     is(
         $tx_cc->find_value(
-            '//a[@href="https://search.cpan.org/~SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm" and @rel="nofollow"]'
+            '//a[@href="http://search.cpan.org/~SHLOMIF/Config-IniFiles-2.83/lib/Config/IniFiles.pm" and @rel="nofollow"]'
         ),
         'This version',
         'Link to module search.cpan.org of this version is correct'
     );
     is(
         $tx_cc->find_value(
-            '//a[@href="https://search.cpan.org/perldoc?Config::IniFiles" and @rel="nofollow"]'
+            '//a[@href="http://search.cpan.org/perldoc?Config::IniFiles" and @rel="nofollow"]'
         ),
         'Latest version',
         'Link to module search.cpan.org of the latest version is correct'
