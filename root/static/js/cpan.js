@@ -301,7 +301,7 @@ $(document).ready(function() {
         }, 1000);
     });
 
-    setFavTitle($('.inline').find('button'));
+    setFavTitle($('.breadcrumbs .favorite'));
 
     $('.dropdown-toggle').dropdown();
 

@@ -11,11 +11,10 @@
 <% IF defined(bucket) %>
 
   <svg width="24px"
-       height="16px"
+       height="15px"
        version="1.1"
        xmlns="http://www.w3.org/2000/svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink"
-       xmlns:html="http://www.w3.org/1999/xhtml">
+       xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <g>
       <!--
@@ -25,9 +24,9 @@
       -->
       <title>
         <%~~%>
-        River stage <% "{zero|one|two|three|four|five|flood}".pluralize(bucket) %> <html:br/>
+        River stage <% "{zero|one|two|three|four|five|flood}".pluralize(bucket) %> &#10;
         <%~ IF river.total ~%>
-          • <% river.immediate %> direct <% "dependent".pluralize(river.immediate) %> <html:br/><%~~%>
+          • <% river.immediate %> direct <% "dependent".pluralize(river.immediate) %> &#10;<%~~%>
           • <% river.total %> total <% "dependent".pluralize(river.total) %>
         <%~ ELSE ~%>
           No dependents
