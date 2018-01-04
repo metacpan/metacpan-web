@@ -132,7 +132,7 @@ sub request {
                 $logger->debug(
                     sprintf q[API: "%s %s %s" %s %s%s],
                     $request->method,
-                    $url->path,
+                    $url->path_query,
                     $response->protocol // 'TEST',
                     $response->code,
                     length ${ $response->content_ref },
