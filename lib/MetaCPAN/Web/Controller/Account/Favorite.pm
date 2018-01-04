@@ -3,18 +3,6 @@ package MetaCPAN::Web::Controller::Account::Favorite;
 use Moose;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub auto : Private {
-    my ( $self, $c ) = @_;
-
-    if ( my $token = $c->token ) {
-        $c->authenticate( { token => $token } );
-    }
-    unless ( $c->user_exists ) {
-        $c->forward('/forbidden');
-    }
-    return $c->user_exists;
-}
-
 sub add : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
