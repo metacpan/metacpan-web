@@ -38,32 +38,29 @@ sub by_user {
 sub recent {
     my ( $self, $page, $page_size ) = @_;
     $self->request( '/favorite/recent',
-        { size => $page_size, page => $page } )->then(
-        sub {
-            my $data = shift;
-            my @user_ids = map { $_->{user} } @{ $data->{favorites} };
-            return Future->done unless @user_ids;
-            $self->request( '/author/by_user', undef, { user => \@user_ids } )
-                ->transform(
-                done => sub {
-                    my $authors = shift;
-                    if ( $authors and exists $authors->{authors} ) {
-                        my %author_for_user_id
-                            = map { $_->{user} => $_->{pauseid} }
-                            @{ $authors->{authors} };
-                        for my $fav ( @{ $data->{favorites} } ) {
-                            next
-                                unless
-                                exists $author_for_user_id{ $fav->{user} };
-                            $fav->{clicked_by_author}
-                                = $author_for_user_id{ $fav->{user} };
-                        }
+        { size => $page_size, page => $page } )->then( sub {
+        my $data = shift;
+        my @user_ids = map { $_->{user} } @{ $data->{favorites} };
+        return Future->done unless @user_ids;
+        $self->request( '/author/by_user', undef, { user => \@user_ids } )
+            ->transform(
+            done => sub {
+                my $authors = shift;
+                if ( $authors and exists $authors->{authors} ) {
+                    my %author_for_user_id
+                        = map { $_->{user} => $_->{pauseid} }
+                        @{ $authors->{authors} };
+                    for my $fav ( @{ $data->{favorites} } ) {
+                        next
+                            unless exists $author_for_user_id{ $fav->{user} };
+                        $fav->{clicked_by_author}
+                            = $author_for_user_id{ $fav->{user} };
                     }
-                    return $data;
                 }
-                );
-        }
-        );
+                return $data;
+            }
+            );
+        } );
 }
 
 sub leaderboard {
@@ -75,27 +72,21 @@ sub find_plussers {
     my ( $self, $distribution ) = @_;
 
     # search for all users, match all according to the distribution.
-    $self->request("/favorite/users_by_distribution/$distribution")->then(
-        sub {
-            my $plusser_data = shift;
-            my @plusser_users
-                = $plusser_data->{users} ? @{ $plusser_data->{users} } : ();
+    $self->request("/favorite/users_by_distribution/$distribution")
+        ->then( sub {
+        my $plusser_data = shift;
+        my @plusser_users
+            = $plusser_data->{users} ? @{ $plusser_data->{users} } : ();
 
-            $self->get_plusser_authors( \@plusser_users )->then(
-                sub {
-                    my @plusser_authors = @{ +shift };
-                    return Future->done(
-                        {
-                            plusser_authors => \@plusser_authors,
-                            plusser_others =>
-                                scalar( @plusser_users - @plusser_authors ),
-                            plusser_data => $distribution
-                        }
-                    );
-                }
-            );
-        }
-    );
+        $self->get_plusser_authors( \@plusser_users )->then( sub {
+            my @plusser_authors = @{ +shift };
+            return Future->done( {
+                plusser_authors => \@plusser_authors,
+                plusser_others => scalar( @plusser_users - @plusser_authors ),
+                plusser_data   => $distribution
+            } );
+        } );
+        } );
 }
 
 sub get_plusser_authors {

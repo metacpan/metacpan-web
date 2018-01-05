@@ -8,8 +8,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub _json_body {
     my ( $self, $c ) = @_;
     Cpanel::JSON::XS->new->utf8->decode(
-        do { local $/; $c->req->body->getline }
-    );
+        do { local $/; $c->req->body->getline } );
 }
 
 sub json_echo : Local {

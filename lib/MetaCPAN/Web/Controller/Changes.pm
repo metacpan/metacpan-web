@@ -43,12 +43,10 @@ sub get : Private {
             link_text => $release,
         };
 
-        $c->stash(
-            {
-                message => 'Change log not found for release.',
-                suggest => $suggest,
-            }
-        );
+        $c->stash( {
+            message => 'Change log not found for release.',
+            suggest => $suggest,
+        } );
         $c->detach('/not_found');
     }
 

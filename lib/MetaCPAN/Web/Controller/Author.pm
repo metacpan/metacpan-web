@@ -57,16 +57,14 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $took = $releases->{took};
 
-    $c->stash(
-        {
-            author   => $author,
-            faves    => $faves,
-            releases => $releases->{releases},
-            template => 'author.html',
-            took     => $took,
-            total    => $releases->{total},
-        }
-    );
+    $c->stash( {
+        author   => $author,
+        faves    => $faves,
+        releases => $releases->{releases},
+        template => 'author.html',
+        took     => $took,
+        total    => $releases->{total},
+    } );
 
     $c->stash( author_country_name =>
             Locale::Country::code2country( $author->{country} ) )
@@ -90,25 +88,21 @@ sub releases : Chained('root') PathPart Args(0) {
     my $author = $author_cv->get;
     $c->detach('/not_found') unless ( $author->{pauseid} );
 
-    $c->stash(
-        {
-            author    => $author,
-            page_size => $page_size,
-            releases  => $releases->{releases},
-        }
-    );
+    $c->stash( {
+        author    => $author,
+        page_size => $page_size,
+        releases  => $releases->{releases},
+    } );
 
     return unless $releases->{total};
 
-    my $pageset = Data::Pageset->new(
-        {
-            current_page     => $page,
-            entries_per_page => $page_size,
-            mode             => 'slide',
-            pages_per_set    => 10,
-            total_entries    => $releases->{total},
-        }
-    );
+    my $pageset = Data::Pageset->new( {
+        current_page     => $page,
+        entries_per_page => $page_size,
+        mode             => 'slide',
+        pages_per_set    => 10,
+        total_entries    => $releases->{total},
+    } );
     $c->stash( { pageset => $pageset } );
 }
 

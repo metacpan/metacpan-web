@@ -81,11 +81,8 @@ builder {
         my $app = shift;
         sub {
             my ($env) = @_;
-            my $request_id = Digest::SHA::sha1_hex(
-                join( "\0",
-                    $env->{REMOTE_ADDR}, $env->{REQUEST_URI}, time, $$, rand,
-                )
-            );
+            my $request_id = Digest::SHA::sha1_hex( join( "\0",
+                $env->{REMOTE_ADDR}, $env->{REQUEST_URI}, time, $$, rand, ) );
             $env->{'MetaCPAN::Web.request_id'} = $request_id;
 
             Log::Log4perl::MDC->remove;

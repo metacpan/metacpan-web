@@ -62,16 +62,15 @@ sub _request {
         $content      = $json->encode($content);
     }
     $url .= '_search/scroll?scroll=1m&size=' . $self->size;
-    $self->ua->POST( $url, $content, content_type => $content_type, )->then(
-        sub {
-            my $response = shift;
-            my $content  = $json->decode( $response->content );
-            return Future->done
-                if !@{ $content->{hits}{hits} };
-            $cb->( $content->{hits}{hits} );
-            return $self->_request( $content->{_scroll_id}, $cb );
-        }
-    );
+    $self->ua->POST( $url, $content, content_type => $content_type, )
+        ->then( sub {
+        my $response = shift;
+        my $content  = $json->decode( $response->content );
+        return Future->done
+            if !@{ $content->{hits}{hits} };
+        $cb->( $content->{hits}{hits} );
+        return $self->_request( $content->{_scroll_id}, $cb );
+        } );
 }
 
 sub write {

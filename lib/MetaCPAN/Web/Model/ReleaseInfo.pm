@@ -37,45 +37,39 @@ sub find {
     my ( $self, $dist ) = @_;
     my $release   = $self->_release->find($dist);
     my %dist_data = $self->_dist_data($dist);
-    $release->then(
-        sub {
-            my $data = shift;
-            if ( !$data->{release} ) {
-                $_->cancel for values %dist_data;
-                return Future->fail(
-                    { code => 404, message => 'Not found' } );
-            }
-            $self->_wrap(
-                release => $data,
-                %dist_data,
-                $self->_release_data(
-                    $data->{release}{author},
-                    $data->{release}{name}
-                ),
-            );
+    $release->then( sub {
+        my $data = shift;
+        if ( !$data->{release} ) {
+            $_->cancel for values %dist_data;
+            return Future->fail( { code => 404, message => 'Not found' } );
         }
-    )->then( $self->normalize );
+        $self->_wrap(
+            release => $data,
+            %dist_data,
+            $self->_release_data(
+                $data->{release}{author},
+                $data->{release}{name}
+            ),
+        );
+    } )->then( $self->normalize );
 }
 
 sub get {
     my ( $self, $author, $release_name ) = @_;
     my $release = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
-    $release->then(
-        sub {
-            my $data = shift;
-            if ( !$data->{release} ) {
-                $_->cancel for values %release_data;
-                return Future->fail(
-                    { code => 404, message => 'Not found' } );
-            }
-            $self->_wrap(
-                release => $data,
-                %release_data,
-                $self->_dist_data( $data->{release}{distribution} ),
-            );
+    $release->then( sub {
+        my $data = shift;
+        if ( !$data->{release} ) {
+            $_->cancel for values %release_data;
+            return Future->fail( { code => 404, message => 'Not found' } );
         }
-    )->then( $self->normalize );
+        $self->_wrap(
+            release => $data,
+            %release_data,
+            $self->_dist_data( $data->{release}{distribution} ),
+        );
+    } )->then( $self->normalize );
 }
 
 sub _wrap {
@@ -129,38 +123,36 @@ sub normalize {
     sub {
         my $data = shift;
         my $dist = $data->{release}{release}{distribution};
-        Future->done(
-            {
-                took => max(
-                    grep defined,
-                    map $_->{took},
-                    grep is_hashref($_),
-                    values %$data
-                ),
-                release      => $data->{release}{release},
-                favorites    => $data->{favorites}{favorites}{$dist},
-                rating       => $data->{rating}{distributions}{$dist},
-                versions     => $data->{versions}{releases},
-                distribution => $data->{distribution},
-                author       => $data->{author},
-                contributors => $data->{contributors},
-                irc          => $self->groom_irc( $data->{release}{release} ),
-                issues       => $self->normalize_issues(
-                    $data->{release}{release},
-                    $data->{distribution}
-                ),
-                %{ $data->{plussers} },
-                (
-                    $self->full_details
-                    ? (
-                        files   => $data->{files}{files},
-                        modules => $data->{modules}{files},
-                        changes => $data->{changes},
-                        )
-                    : ()
-                ),
-            }
-        );
+        Future->done( {
+            took => max(
+                grep defined,
+                map $_->{took},
+                grep is_hashref($_),
+                values %$data
+            ),
+            release      => $data->{release}{release},
+            favorites    => $data->{favorites}{favorites}{$dist},
+            rating       => $data->{rating}{distributions}{$dist},
+            versions     => $data->{versions}{releases},
+            distribution => $data->{distribution},
+            author       => $data->{author},
+            contributors => $data->{contributors},
+            irc          => $self->groom_irc( $data->{release}{release} ),
+            issues       => $self->normalize_issues(
+                $data->{release}{release},
+                $data->{distribution}
+            ),
+            %{ $data->{plussers} },
+            (
+                $self->full_details
+                ? (
+                    files   => $data->{files}{files},
+                    modules => $data->{modules}{files},
+                    changes => $data->{changes},
+                    )
+                : ()
+            ),
+        } );
     };
 }
 

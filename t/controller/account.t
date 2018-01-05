@@ -7,17 +7,15 @@ use Test::Deep;
 use Cpanel::JSON::XS qw( decode_json );
 
 my ( $res_body, $api_req );
-override_api_response(
-    sub {
-        my ( undef, $req ) = @_;
+override_api_response( sub {
+    my ( undef, $req ) = @_;
 
-        if ( $req->method eq 'PUT' ) {
-            $api_req  = $req;
-            $res_body = $req->content;
-        }
-        return [ 200, [ "Content-Type" => "application/json" ], [$res_body] ];
+    if ( $req->method eq 'PUT' ) {
+        $api_req  = $req;
+        $res_body = $req->content;
     }
-);
+    return [ 200, [ "Content-Type" => "application/json" ], [$res_body] ];
+} );
 
 test_psgi app, sub {
     my $cb = shift;
@@ -119,20 +117,16 @@ test_psgi app, sub {
             decode_json( $api_req->content ),
             {
                 'email' => [ 'foo@example.org', 'bar@example.org' ],
-                'blog'  => [
-                    {
-                        'feed' => 'http://example.org/feed1',
-                        'url'  => 'http://example.org/blog1',
-                    }
-                ],
+                'blog'  => [ {
+                    'feed' => 'http://example.org/feed1',
+                    'url'  => 'http://example.org/blog1',
+                } ],
                 'asciiname'    => 'asciiname1',
                 'gravatar_url' => 'gravatar_url1',
-                'donation'     => [
-                    {
-                        'name' => 'donation.name1',
-                        'id'   => 'donation.id1',
-                    }
-                ],
+                'donation'     => [ {
+                    'name' => 'donation.name1',
+                    'id'   => 'donation.id1',
+                } ],
                 'website' =>
                     [ 'http://example.org/web1', 'http://example.org/web2' ],
                 'user'    => '12345678901234567890',
