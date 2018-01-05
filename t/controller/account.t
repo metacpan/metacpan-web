@@ -151,9 +151,9 @@ test_psgi app, sub {
                 'city'     => 'city1',
                 'country'  => 'country1',
                 'extra'    => {},
-                'updated'  => '2017-02-15T22:18:19', # set above in $res_body
-                'name'     => 'Բարեւ',
-                'pauseid'  => 'FOO',
+                'updated' => '2017-02-15T22:18:19',   # set above in $res_body
+                'name'    => 'Բարեւ',
+                'pauseid' => 'FOO',
             },
             '... and the API PUT request contains the right stuff'
         );

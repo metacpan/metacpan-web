@@ -116,7 +116,7 @@ test_psgi app, sub {
             ok(
                 my $version = (
                     $this =~ m!(?:/pod)?/release/[^/]+/\Q$release\E-([^/"]+)!
-                    )[0],
+                )[0],
                 'got version from "this" link'
             );
 

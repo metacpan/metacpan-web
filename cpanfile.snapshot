@@ -102,6 +102,47 @@ DISTRIBUTIONS
       Storable 0
       Test::Deep 0
       Test::More 0
+  CHI-0.60
+    pathname: J/JS/JSWARTZ/CHI-0.60.tar.gz
+    provides:
+      CHI 0.60
+      CHI::CacheObject 0.60
+      CHI::Driver 0.60
+      CHI::Driver::Base::CacheContainer 0.60
+      CHI::Driver::CacheCache 0.60
+      CHI::Driver::FastMmap 0.60
+      CHI::Driver::File 0.60
+      CHI::Driver::Memory 0.60
+      CHI::Driver::Metacache 0.60
+      CHI::Driver::Null 0.60
+      CHI::Driver::RawMemory 0.60
+      CHI::Driver::Role::HasSubcaches 0.60
+      CHI::Driver::Role::IsSizeAware 0.60
+      CHI::Driver::Role::IsSubcache 0.60
+      CHI::Stats 0.60
+    requirements:
+      Carp::Assert 0.20
+      Class::Load 0
+      Data::UUID 0
+      Digest::JHash 0
+      Digest::MD5 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0.80
+      Hash::MoreUtils 0
+      JSON::MaybeXS 1.003003
+      List::MoreUtils 0.13
+      Log::Any 0.08
+      Moo 1.003
+      MooX::Types::MooseLike 0.23
+      MooX::Types::MooseLike::Base 0
+      MooX::Types::MooseLike::Numeric 0
+      Storable 0
+      String::RewritePrefix 0
+      Task::Weaken 0
+      Time::Duration 1.06
+      Time::Duration::Parse 0.03
+      Time::HiRes 1.30
+      Try::Tiny 0.05
   CPAN-Changes-0.400002
     pathname: H/HA/HAARG/CPAN-Changes-0.400002.tar.gz
     provides:
@@ -404,7 +445,6 @@ DISTRIBUTIONS
       MooseX::Emulate::Class::Accessor::Fast 0.00903
       MooseX::Getopt 0.48
       MooseX::MethodAttributes::Role::AttrContainer::Inheritable 0.24
-      MooseX::Role::WithOverloading 0.09
       Path::Class 0.09
       Plack 0.9991
       Plack::Middleware::Conditional 0
@@ -617,6 +657,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  Clone-Choose-0.008
+    pathname: H/HE/HERMES/Clone-Choose-0.008.tar.gz
+    provides:
+      Clone::Choose 0.008
+    requirements:
+      ExtUtils::MakeMaker 0
+      Storable 0
+      perl 5.008001
   Code-TidyAll-0.69
     pathname: D/DR/DROLSKY/Code-TidyAll-0.69.tar.gz
     provides:
@@ -721,6 +769,7 @@ DISTRIBUTIONS
       Config::Any::XML undef
       Config::Any::YAML undef
     requirements:
+      Config::General 2.47
       Module::Pluggable::Object 3.6
   Config-General-2.63
     pathname: T/TL/TLINDEN/Config-General-2.63.tar.gz
@@ -829,6 +878,13 @@ DISTRIBUTIONS
       Data::Page 2
       ExtUtils::MakeMaker 0
       Test::More 0.1
+  Data-UUID-1.221
+    pathname: R/RJ/RJBS/Data-UUID-1.221.tar.gz
+    provides:
+      Data::UUID 1.221
+    requirements:
+      Digest::MD5 0
+      ExtUtils::MakeMaker 0
   Data-Visitor-0.30
     pathname: D/DO/DOY/Data-Visitor-0.30.tar.gz
     provides:
@@ -1431,11 +1487,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Devel-StackTrace-2.03
-    pathname: D/DR/DROLSKY/Devel-StackTrace-2.03.tar.gz
+  Devel-StackTrace-2.02
+    pathname: D/DR/DROLSKY/Devel-StackTrace-2.02.tar.gz
     provides:
-      Devel::StackTrace 2.03
-      Devel::StackTrace::Frame 2.03
+      Devel::StackTrace 2.02
+      Devel::StackTrace::Frame 2.02
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -1462,6 +1518,18 @@ DISTRIBUTIONS
       Digest::SHA 1
       ExtUtils::MakeMaker 0
       perl 5.004
+  Digest-JHash-0.10
+    pathname: S/SH/SHLOMIF/Digest-JHash-0.10.tar.gz
+    provides:
+      Digest::JHash 0.10
+    requirements:
+      DynaLoader 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      perl 5.008
+      strict 0
+      vars 0
+      warnings 0
   Digest-SHA1-2.13
     pathname: G/GA/GAAS/Digest-SHA1-2.13.tar.gz
     provides:
@@ -1713,6 +1781,13 @@ DISTRIBUTIONS
       Filesys::Notify::Simple 0.12
     requirements:
       ExtUtils::MakeMaker 6.30
+  Format-Human-Bytes-0.06
+    pathname: S/SE/SEWI/Format-Human-Bytes-0.06.tar.gz
+    provides:
+      Format::Human::Bytes 0.06
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Test::More 0
   Future-0.35
     pathname: P/PE/PEVANS/Future-0.35.tar.gz
     provides:
@@ -2077,6 +2152,15 @@ DISTRIBUTIONS
       Hash::AsObject 0.13
     requirements:
       ExtUtils::MakeMaker 0
+  Hash-Merge-0.298
+    pathname: H/HE/HERMES/Hash-Merge-0.298.tar.gz
+    provides:
+      Hash::Merge 0.298
+    requirements:
+      Clone::Choose 0.008
+      ExtUtils::MakeMaker 0
+      Scalar::Util 0
+      perl 5.008001
   Hash-Merge-Simple-0.051
     pathname: R/RO/ROKR/Hash-Merge-Simple-0.051.tar.gz
     provides:
@@ -2086,6 +2170,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.31
       Storable 0
       Test::Most 0
+  Hash-MoreUtils-0.05
+    pathname: R/RE/REHSACK/Hash-MoreUtils-0.05.tar.gz
+    provides:
+      Hash::MoreUtils 0.05
+    requirements:
+      Test::More 0.90
   Hash-MultiValue-0.16
     pathname: A/AR/ARISTOTLE/Hash-MultiValue-0.16.tar.gz
     provides:
@@ -2837,6 +2927,24 @@ DISTRIBUTIONS
       Sub::Defer 2.003001
       Sub::Quote 2.003001
       perl 5.006
+  MooX-Types-MooseLike-0.29
+    pathname: M/MA/MATEU/MooX-Types-MooseLike-0.29.tar.gz
+    provides:
+      MooX::Types::MooseLike 0.29
+      MooX::Types::MooseLike::Base 0.29
+    requirements:
+      ExtUtils::MakeMaker 0
+      Module::Runtime 0.014
+  MooX-Types-MooseLike-Numeric-1.03
+    pathname: M/MA/MATEU/MooX-Types-MooseLike-Numeric-1.03.tar.gz
+    provides:
+      MooX::Types::MooseLike::Numeric 1.03
+    requirements:
+      ExtUtils::MakeMaker 0
+      Moo 1.004002
+      MooX::Types::MooseLike 0.23
+      Test::Fatal 0.003
+      Test::More 0.96
   Moose-2.2007
     pathname: E/ET/ETHER/Moose-2.2007.tar.gz
     provides:
@@ -3326,30 +3434,6 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MooseX-Role-WithOverloading-0.17
-    pathname: E/ET/ETHER/MooseX-Role-WithOverloading-0.17.tar.gz
-    provides:
-      MooseX::Role::WithOverloading 0.17
-      MooseX::Role::WithOverloading::Meta::Role 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::Composite 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToClass 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToInstance 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::Composite::ToRole 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::FixOverloadedRefs 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::ToClass 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::ToInstance 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Application::ToRole 0.17
-      MooseX::Role::WithOverloading::Meta::Role::Composite 0.17
-    requirements:
-      ExtUtils::MakeMaker 0
-      Moose 0.94
-      Moose::Exporter 0
-      Moose::Role 1.15
-      aliased 0
-      namespace::autoclean 0.16
-      namespace::clean 0.19
-      perl 5.006
   MooseX-StrictConstructor-0.21
     pathname: D/DR/DROLSKY/MooseX-StrictConstructor-0.21.tar.gz
     provides:
@@ -4398,27 +4482,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20171214
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20171214.tar.gz
+  Perl-Tidy-20180101
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20180101.tar.gz
     provides:
-      Perl::Tidy 20171214
-      Perl::Tidy::Debugger 20171214
-      Perl::Tidy::DevNull 20171214
-      Perl::Tidy::Diagnostics 20171214
-      Perl::Tidy::FileWriter 20171214
-      Perl::Tidy::Formatter 20171214
-      Perl::Tidy::HtmlWriter 20171214
-      Perl::Tidy::IOScalar 20171214
-      Perl::Tidy::IOScalarArray 20171214
-      Perl::Tidy::IndentationItem 20171214
-      Perl::Tidy::LineBuffer 20171214
-      Perl::Tidy::LineSink 20171214
-      Perl::Tidy::LineSource 20171214
-      Perl::Tidy::Logger 20171214
-      Perl::Tidy::Tokenizer 20171214
-      Perl::Tidy::VerticalAligner 20171214
-      Perl::Tidy::VerticalAligner::Alignment 20171214
-      Perl::Tidy::VerticalAligner::Line 20171214
+      Perl::Tidy 20180101
+      Perl::Tidy::Debugger 20180101
+      Perl::Tidy::DevNull 20180101
+      Perl::Tidy::Diagnostics 20180101
+      Perl::Tidy::FileWriter 20180101
+      Perl::Tidy::Formatter 20180101
+      Perl::Tidy::HtmlWriter 20180101
+      Perl::Tidy::IOScalar 20180101
+      Perl::Tidy::IOScalarArray 20180101
+      Perl::Tidy::IndentationItem 20180101
+      Perl::Tidy::LineBuffer 20180101
+      Perl::Tidy::LineSink 20180101
+      Perl::Tidy::LineSource 20180101
+      Perl::Tidy::Logger 20180101
+      Perl::Tidy::Tokenizer 20180101
+      Perl::Tidy::VerticalAligner 20180101
+      Perl::Tidy::VerticalAligner::Alignment 20180101
+      Perl::Tidy::VerticalAligner::Line 20180101
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.007
@@ -5050,6 +5134,14 @@ DISTRIBUTIONS
     requirements:
       Digest::MD5 1
       ExtUtils::MakeMaker 0
+  Template-Plugin-Comma-0.04
+    pathname: M/MI/MIYAGAWA/Template-Plugin-Comma-0.04.tar.gz
+    provides:
+      Template::Plugin::Comma 0.04
+    requirements:
+      ExtUtils::MakeMaker 0
+      Template 2.07
+      Test::More 0.32
   Template-Plugin-DateTime-0.06002
     pathname: D/DM/DMAKI/Template-Plugin-DateTime-0.06002.tar.gz
     provides:
@@ -5059,6 +5151,17 @@ DISTRIBUTIONS
       DateTime::Format::Strptime 0
       ExtUtils::MakeMaker 6.42
       Template 0
+  Template-Plugin-JSON-0.07
+    pathname: N/NE/NEILB/Template-Plugin-JSON-0.07.tar.gz
+    provides:
+      Template::Plugin::JSON 0.07
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.64
+      JSON 2.12
+      Moose 0
+      Template 2.20
+      perl 5.006
   Template-Plugin-Markdown-0.02
     pathname: N/NA/NAOYA/Template-Plugin-Markdown-0.02.tar.gz
     provides:
@@ -5390,72 +5493,72 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-Simple-1.302111
-    pathname: E/EX/EXODIST/Test-Simple-1.302111.tar.gz
+  Test-Simple-1.302106
+    pathname: E/EX/EXODIST/Test-Simple-1.302106.tar.gz
     provides:
-      Test2 1.302111
-      Test2::API 1.302111
-      Test2::API::Breakage 1.302111
-      Test2::API::Context 1.302111
-      Test2::API::Instance 1.302111
-      Test2::API::Stack 1.302111
-      Test2::Event 1.302111
-      Test2::Event::Bail 1.302111
-      Test2::Event::Diag 1.302111
-      Test2::Event::Encoding 1.302111
-      Test2::Event::Exception 1.302111
-      Test2::Event::Fail 1.302111
-      Test2::Event::Generic 1.302111
-      Test2::Event::Note 1.302111
-      Test2::Event::Ok 1.302111
-      Test2::Event::Pass 1.302111
-      Test2::Event::Plan 1.302111
-      Test2::Event::Skip 1.302111
-      Test2::Event::Subtest 1.302111
-      Test2::Event::TAP::Version 1.302111
-      Test2::Event::Waiting 1.302111
-      Test2::EventFacet 1.302111
-      Test2::EventFacet::About 1.302111
-      Test2::EventFacet::Amnesty 1.302111
-      Test2::EventFacet::Assert 1.302111
-      Test2::EventFacet::Control 1.302111
-      Test2::EventFacet::Error 1.302111
-      Test2::EventFacet::Info 1.302111
-      Test2::EventFacet::Meta 1.302111
-      Test2::EventFacet::Parent 1.302111
-      Test2::EventFacet::Plan 1.302111
-      Test2::EventFacet::Trace 1.302111
-      Test2::Formatter 1.302111
-      Test2::Formatter::TAP 1.302111
-      Test2::Hub 1.302111
-      Test2::Hub::Interceptor 1.302111
-      Test2::Hub::Interceptor::Terminator 1.302111
-      Test2::Hub::Subtest 1.302111
-      Test2::IPC 1.302111
-      Test2::IPC::Driver 1.302111
-      Test2::IPC::Driver::Files 1.302111
-      Test2::Tools::Tiny 1.302111
-      Test2::Util 1.302111
-      Test2::Util::ExternalMeta 1.302111
-      Test2::Util::Facets2Legacy 1.302111
-      Test2::Util::HashBase 1.302111
-      Test2::Util::Trace 1.302111
-      Test::Builder 1.302111
-      Test::Builder::Formatter 1.302111
+      Test2 1.302106
+      Test2::API 1.302106
+      Test2::API::Breakage 1.302106
+      Test2::API::Context 1.302106
+      Test2::API::Instance 1.302106
+      Test2::API::Stack 1.302106
+      Test2::Event 1.302106
+      Test2::Event::Bail 1.302106
+      Test2::Event::Diag 1.302106
+      Test2::Event::Encoding 1.302106
+      Test2::Event::Exception 1.302106
+      Test2::Event::Fail 1.302106
+      Test2::Event::Generic 1.302106
+      Test2::Event::Note 1.302106
+      Test2::Event::Ok 1.302106
+      Test2::Event::Pass 1.302106
+      Test2::Event::Plan 1.302106
+      Test2::Event::Skip 1.302106
+      Test2::Event::Subtest 1.302106
+      Test2::Event::TAP::Version 1.302106
+      Test2::Event::Waiting 1.302106
+      Test2::EventFacet 1.302106
+      Test2::EventFacet::About 1.302106
+      Test2::EventFacet::Amnesty 1.302106
+      Test2::EventFacet::Assert 1.302106
+      Test2::EventFacet::Control 1.302106
+      Test2::EventFacet::Error 1.302106
+      Test2::EventFacet::Info 1.302106
+      Test2::EventFacet::Meta 1.302106
+      Test2::EventFacet::Parent 1.302106
+      Test2::EventFacet::Plan 1.302106
+      Test2::EventFacet::Trace 1.302106
+      Test2::Formatter 1.302106
+      Test2::Formatter::TAP 1.302106
+      Test2::Hub 1.302106
+      Test2::Hub::Interceptor 1.302106
+      Test2::Hub::Interceptor::Terminator 1.302106
+      Test2::Hub::Subtest 1.302106
+      Test2::IPC 1.302106
+      Test2::IPC::Driver 1.302106
+      Test2::IPC::Driver::Files 1.302106
+      Test2::Tools::Tiny 1.302106
+      Test2::Util 1.302106
+      Test2::Util::ExternalMeta 1.302106
+      Test2::Util::Facets2Legacy 1.302106
+      Test2::Util::HashBase 1.302106
+      Test2::Util::Trace 1.302106
+      Test::Builder 1.302106
+      Test::Builder::Formatter 1.302106
       Test::Builder::IO::Scalar 2.114
-      Test::Builder::Module 1.302111
-      Test::Builder::Tester 1.302111
-      Test::Builder::Tester::Color 1.302111
-      Test::Builder::Tester::Tie 1.302111
-      Test::Builder::TodoDiag 1.302111
-      Test::More 1.302111
-      Test::Simple 1.302111
-      Test::Tester 1.302111
-      Test::Tester::Capture 1.302111
-      Test::Tester::CaptureRunner 1.302111
-      Test::Tester::Delegate 1.302111
-      Test::use::ok 1.302111
-      ok 1.302111
+      Test::Builder::Module 1.302106
+      Test::Builder::Tester 1.302106
+      Test::Builder::Tester::Color 1.302106
+      Test::Builder::Tester::Tie 1.302106
+      Test::Builder::TodoDiag 1.302106
+      Test::More 1.302106
+      Test::Simple 1.302106
+      Test::Tester 1.302106
+      Test::Tester::Capture 1.302106
+      Test::Tester::CaptureRunner 1.302106
+      Test::Tester::Delegate 1.302106
+      Test::use::ok 1.302106
+      ok 1.302106
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -5629,6 +5732,17 @@ DISTRIBUTIONS
       Test::More 0
       Test::use::ok 0
       Tie::RefHash 0
+  Time-Duration-1.20
+    pathname: N/NE/NEILB/Time-Duration-1.20.tar.gz
+    provides:
+      Time::Duration 1.20
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      constant 0
+      perl 5.006
+      strict 0
+      warnings 0
   Time-Duration-Parse-0.13
     pathname: N/NE/NEILB/Time-Duration-Parse-0.13.tar.gz
     provides:
@@ -6244,17 +6358,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  aliased-0.34
-    pathname: E/ET/ETHER/aliased-0.34.tar.gz
-    provides:
-      aliased 0.34
-    requirements:
-      Carp 0
-      Exporter 0
-      Module::Build::Tiny 0.039
-      perl 5.006
-      strict 0
-      warnings 0
   common-sense-3.74
     pathname: M/ML/MLEHMANN/common-sense-3.74.tar.gz
     provides:
