@@ -8,6 +8,15 @@ use MetaCPAN::Web::Test::HTML5::Element::SVG ();    ## no perlimports
 
 use constant SVG_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::SVG';
 
+use MetaCPAN::Web::Test::HTML5::Element::MathML;
+use constant MATHML_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::MathML';
+
+my @html5_elements = qw(
+    article audio aside bdi datalist canvas details dialog embed figcaption
+    figure footer header main mark menuitem meter nav output progress rp rt
+    ruby section source summary svg time track video wbr
+);
+
 my @svg_elements = qw(
     a altGlyph altGlyphDef altGlyphItem animate animateColor animateMotion
     animateTransform audio canvas circle clipPath color-profile cursor defs desc
@@ -23,65 +32,58 @@ my @svg_elements = qw(
     switch symbol text textPath title tref tspan unknown use video view vkern
 );
 
+my @mathml_elements = qw(
+    annotation-xml annotation maction maligngroup malignmark math menclose
+    merror mfenced mfrac mglyph mi mlabeledtr mlongdiv mmultiscripts mn mo
+    mover mpadded mphantom mroot mrow ms mscarries mscarry msgroup msline
+    mspace msqrt msrow mstack mstyle msub msubsup msup mtable mtd mtext mtr
+    munder munderover semantics
+);
+
 sub start {
     my $self = shift;
     my $e;
-    my $pos = $self->{'_pos'} || $self;
-    if ( !$pos->isa(SVG_CLASS) ) {
-        local $HTML::TreeBuilder::isBodyElement{article}    = 1;
-        local $HTML::TreeBuilder::isBodyElement{audio}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{aside}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{bdi}        = 1;
-        local $HTML::TreeBuilder::isBodyElement{datalist}   = 1;
-        local $HTML::TreeBuilder::isBodyElement{canvas}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{details}    = 1;
-        local $HTML::TreeBuilder::isBodyElement{dialog}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{embed}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{figcaption} = 1;
-        local $HTML::TreeBuilder::isBodyElement{figure}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{footer}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{header}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{main}       = 1;
-        local $HTML::TreeBuilder::isBodyElement{mark}       = 1;
-        local $HTML::TreeBuilder::isBodyElement{menuitem}   = 1;
-        local $HTML::TreeBuilder::isBodyElement{meter}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{nav}        = 1;
-        local $HTML::TreeBuilder::isBodyElement{output}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{progress}   = 1;
-        local $HTML::TreeBuilder::isBodyElement{rp}         = 1;
-        local $HTML::TreeBuilder::isBodyElement{rt}         = 1;
-        local $HTML::TreeBuilder::isBodyElement{ruby}       = 1;
-        local $HTML::TreeBuilder::isBodyElement{section}    = 1;
-        local $HTML::TreeBuilder::isBodyElement{source}     = 1;
-        local $HTML::TreeBuilder::isBodyElement{summary}    = 1;
-        local $HTML::TreeBuilder::isBodyElement{svg}        = 1;
-        local $HTML::TreeBuilder::isBodyElement{template}   = 1;
-        local $HTML::TreeBuilder::isBodyElement{time}       = 1;
-        local $HTML::TreeBuilder::isBodyElement{track}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{video}      = 1;
-        local $HTML::TreeBuilder::isBodyElement{wbr}        = 1;
-        $e = $self->SUPER::start(@_);
+    my $pos = $self->pos;
 
-        if ( $e->tag eq 'svg' ) {
-            bless $e, SVG_CLASS;
+    my $type = 'html';
+
+    if ( $pos->isa(SVG_CLASS) ) {
+        $type = 'svg';
+    }
+    elsif ( $pos->isa(MATHML_CLASS) ) {
+        $type = 'mathml';
+        if ( $pos->tag eq 'annotation-xml') {
+            if (my $encoding = $pos->attr('encoding')) {
+                if ($encoding eq 'SVG1.1' || $encoding eq 'image/svg+xml') {
+                    $type = 'svg';
+                }
+                elsif ($encoding eq 'text/html') {
+                    $type = 'html';
+                }
+            }
         }
     }
-    else {
-        local %HTML::TreeBuilder::isHeadElement       = ();
-        local %HTML::TreeBuilder::isHeadOrBodyElement = ();
-        local %HTML::TreeBuilder::isBodyElement       = map +( $_ => 1 ),
-            @svg_elements;
-        $e = $self->SUPER::start(@_);
-        bless $e, SVG_CLASS;
-    }
-    return $e;
-}
 
-sub _valid_name {
-    my ( $self, $attr ) = @_;
-    $attr =~ s/^xlink://;
-    return 1 if $attr =~ /\A[krxyz]\z/;
-    $self->SUPER::_valid_name($attr);
+    local %HTML::TreeBuilder::isHeadElement
+        = %HTML::TreeBuilder::isHeadElement;
+    local %HTML::TreeBuilder::isHeadOrBodyElement
+        = %HTML::TreeBuilder::isHeadOrBodyElement;
+    local %HTML::TreeBuilder::isBodyElement
+        = %HTML::TreeBuilder::isBodyElement,
+            map +( $_ => 1 ), @html_elements;
+
+    if ($type eq 'svg') {
+        %HTML::TreeBuilder::isHeadElement       = ();
+        %HTML::TreeBuilder::isHeadOrBodyElement = ();
+        %HTML::TreeBuilder::isBodyElement       = map +( $_ => 1 ), @svg_elements;
+    }
+    elsif ($type eq 'mathml') {
+        %HTML::TreeBuilder::isHeadElement       = ();
+        %HTML::TreeBuilder::isHeadOrBodyElement = ();
+        %HTML::TreeBuilder::isBodyElement       = map +( $_ => 1 ), @mathml_elements;
+    }
+
+    return $self->SUPER::start(@_);
 }
 
 1;
