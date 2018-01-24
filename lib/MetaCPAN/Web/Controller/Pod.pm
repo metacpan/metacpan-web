@@ -183,10 +183,15 @@ sub pod2html : Path('/pod2html') {
 
     $c->stash( { pod => $pod } );
 
-    my $html
-        = $c->model('API')
-        ->request( 'pod_render', undef, { pod => encode( 'UTF-8', $pod ) },
-        'POST' )->get->{raw};
+    my $html = $c->model('API')->request(
+        'pod_render',
+        undef,
+        {
+            pod         => encode( 'UTF-8', $pod ),
+            show_errors => 1,
+        },
+        'POST'
+    )->get->{raw};
 
     $html = $self->filter_html($html);
 
