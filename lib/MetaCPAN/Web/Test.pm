@@ -14,6 +14,7 @@ use Test::XPath;
 use Try::Tiny;
 use Encode;
 use Future;
+use MetaCPAN::Web::Test::HTML5::TreeBuilder;
 use base 'Exporter';
 our @EXPORT = qw(
     GET
@@ -75,7 +76,8 @@ sub tx {
 
 # Text::XPath has `is_html` but the LibXML HTML parser doesn't like some html 5 (like nav).
     if ( delete $opts->{html} ) {
-        $xml = HTML::TreeBuilder->new_from_content( $res->content )->as_XML;
+        $xml = MetaCPAN::Web::Test::HTML5::TreeBuilder->new_from_content($xml)
+            ->as_XML;
     }
 
     # A nice alternative to XPath when the full power isn't needed.
