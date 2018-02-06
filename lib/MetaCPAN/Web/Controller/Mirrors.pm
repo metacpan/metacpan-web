@@ -15,14 +15,12 @@ sub index : Path : Args(0) {
     my $query = $c->req->parameters->{'q'};
     my $data  = $c->model('API::Mirror')->search($query)->get;
 
-    $c->stash(
-        {
-            mirrors  => $data->{mirrors},
-            took     => $data->{took},
-            total    => $data->{total},
-            template => 'mirrors.html',
-        }
-    );
+    $c->stash( {
+        mirrors  => $data->{mirrors},
+        took     => $data->{took},
+        total    => $data->{total},
+        template => 'mirrors.html',
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

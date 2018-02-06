@@ -154,13 +154,11 @@ sub valid_xml {
 my $feed = MetaCPAN::Web::Controller::Feed->new( MetaCPAN::Web->new );
 
 subtest 'get correct author favorite data format' => sub {
-    my $favorite_data = [
-        {
-            author       => 'DOLMEN',
-            date         => '2013-07-05T14:41:26.000Z',
-            distribution => 'Git-Sub',
-        }
-    ];
+    my $favorite_data = [ {
+        author       => 'DOLMEN',
+        date         => '2013-07-05T14:41:26.000Z',
+        distribution => 'Git-Sub',
+    } ];
 
     my $entry
         = $feed->_format_favorite_entries( 'PERLHACKER', $favorite_data );
@@ -179,16 +177,14 @@ subtest 'get correct author favorite data format' => sub {
 };
 
 subtest 'get correct author release data format' => sub {
-    my $data = [
-        {
-            abstract     => 'Easy OO access to the FreshBooks.com API',
-            author       => 'OALDERS',
-            date         => '2014-05-03T03:06:44.000Z',
-            distribution => 'Net-FreshBooks-API',
-            name         => 'Net-FreshBooks-API-0.24',
-            status       => 'latest',
-        }
-    ];
+    my $data = [ {
+        abstract     => 'Easy OO access to the FreshBooks.com API',
+        author       => 'OALDERS',
+        date         => '2014-05-03T03:06:44.000Z',
+        distribution => 'Net-FreshBooks-API',
+        name         => 'Net-FreshBooks-API-0.24',
+        status       => 'latest',
+    } ];
 
     my $entry = $feed->_format_release_entries($data);
     is(

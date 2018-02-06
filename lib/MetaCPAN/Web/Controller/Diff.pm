@@ -12,7 +12,7 @@ sub release : Local : Args(4) {
     my ( $self, $c, @path ) = @_;
     my $diff = $c->model('API::Diff')->releases(@path)->get;
     $c->stash(
-        { diff => $diff, template => 'diff.html', type => 'release' } );
+    { diff => $diff, template => 'diff.html', type => 'release' } );
 }
 
 sub file : Local : Args(0) {

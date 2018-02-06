@@ -28,14 +28,12 @@ sub dependencies {
     }
     $deps{$module}{orig} = 1;
 
-    return Future->done(
-        [
-            map { $deps{$_} }
-                reverse
-                sort { $deps{$a}{date} cmp $deps{$b}{date} }
-                keys %deps
-        ]
-    );
+    return Future->done( [
+        map { $deps{$_} }
+            reverse
+            sort { $deps{$a}{date} cmp $deps{$b}{date} }
+            keys %deps
+    ] );
 }
 
 my %CORE = map { $_ => 1 } qw(

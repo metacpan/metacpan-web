@@ -15,12 +15,10 @@ sub gauge : Chained('root') PathPart('gauge') Args(1) {
         unless $dist->{name};
 
     $c->res->content_type('image/svg+xml');
-    $c->stash(
-        {
-            distribution => $dist,
-            template     => 'river/gauge.svg',
-        }
-    );
+    $c->stash( {
+        distribution => $dist,
+        template     => 'river/gauge.svg',
+    } );
 
     $c->cdn_max_age('1y');
     $c->browser_max_age('7d');

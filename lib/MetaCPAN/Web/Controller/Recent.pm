@@ -18,16 +18,14 @@ sub index : Path : Args(0) {
     $c->browser_max_age('1m');
     $c->cdn_max_age('1y');    # DIST_UPDATES will purge it
 
-    $c->stash(
-        {
-            recent    => $data->{releases},
-            took      => $data->{took},
-            total     => $data->{total},
-            template  => 'recent.html',
-            page_size => $page_size,
-            filter    => $filter,
-        }
-    );
+    $c->stash( {
+        recent    => $data->{releases},
+        took      => $data->{took},
+        total     => $data->{total},
+        template  => 'recent.html',
+        page_size => $page_size,
+        filter    => $filter,
+    } );
 }
 
 sub favorites : Local : Args(0) {

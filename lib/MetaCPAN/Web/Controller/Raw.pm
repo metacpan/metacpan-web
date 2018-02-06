@@ -23,13 +23,11 @@ sub index : Path : Args {
         $c->res->header( 'Content-Disposition' => $content_disposition );
     }
     else {
-        $c->stash(
-            {
-                source   => $source->{raw},
-                module   => $module,
-                template => 'raw.html'
-            }
-        );
+        $c->stash( {
+            source   => $source->{raw},
+            module   => $module,
+            template => 'raw.html'
+        } );
     }
 }
 

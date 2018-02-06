@@ -48,20 +48,18 @@ sub _get_author_modules {
 sub _get_modules_in_distribution {
     my ( $self, $name ) = @_;
 
-    $self->request("/package/modules/$name")->then(
-        sub {
-            my $res = shift;
-            return Future->done(undef)
-                unless keys %{$res};
+    $self->request("/package/modules/$name")->then( sub {
+        my $res = shift;
+        return Future->done(undef)
+            unless keys %{$res};
 
-            $self->request( '/permission/by_module',
-                { module => $res->{modules} } )->transform(
-                done => sub {
-                    $_[0]->{permissions};
-                }
-                );
-        }
-    );
+        $self->request( '/permission/by_module',
+            { module => $res->{modules} } )->transform(
+            done => sub {
+                $_[0]->{permissions};
+            }
+            );
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

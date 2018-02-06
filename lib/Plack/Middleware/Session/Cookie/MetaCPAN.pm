@@ -12,30 +12,26 @@ my $json = Cpanel::JSON::XS->new->canonical(1);
 sub prepare_app {
     my $self = shift;
 
-    $self->serializer(
-        sub {
-            # Pass $_[0] since the json subs may have a ($) protoype.
-            # Pass '' to base64 for a blank separator (instead of newlines).
-            MIME::Base64::encode( Cpanel::JSON::XS::encode_json( $_[0] ),
-                q[] );
+    $self->serializer( sub {
+
+        # Pass $_[0] since the json subs may have a ($) protoype.
+        # Pass '' to base64 for a blank separator (instead of newlines).
+        MIME::Base64::encode( Cpanel::JSON::XS::encode_json( $_[0] ), q[] );
+    } ) unless $self->serializer;
+
+    $self->deserializer( sub {
+
+        # We can't reference @_ from inside the try block.
+        my ($cookie) = @_;
+
+        # Use try/catch so JSON doesn't barf if the cookie is bad.
+        try {
+            Cpanel::JSON::XS::decode_json( MIME::Base64::decode($cookie) );
         }
-    ) unless $self->serializer;
 
-    $self->deserializer(
-        sub {
-            # We can't reference @_ from inside the try block.
-            my ($cookie) = @_;
-
-            # Use try/catch so JSON doesn't barf if the cookie is bad.
-            try {
-                Cpanel::JSON::XS::decode_json(
-                    MIME::Base64::decode($cookie) );
-            }
-
-            # No session.
-            catch { +{}; };
-        }
-    ) unless $self->deserializer;
+        # No session.
+        catch { +{}; };
+    } ) unless $self->deserializer;
 
     $self->SUPER::prepare_app;
     my $wrap = $self->app;

@@ -56,13 +56,11 @@ sub release : Local : Args {
     my $release_data
         = $c->model('ReleaseInfo')->get( $author, $release )->else_done( {} );
     my $pod_file = $c->model('API::Module')->get( $author, $release, @path );
-    $c->stash(
-        {
-            pod_file => $pod_file->get,
-            %{ $release_data->get },
-            permalinks => 1,
-        }
-    );
+    $c->stash( {
+        pod_file => $pod_file->get,
+        %{ $release_data->get },
+        permalinks => 1,
+    } );
 
     $c->forward( 'view', [ $author, $release, @path ] );
 }
@@ -84,12 +82,9 @@ sub distribution : Local : Args {
 
     unshift @path, @{ $release_data->{release} }{qw( author name )};
 
-    $c->stash(
-        {
-            %$release_data,
-            pod_file => $c->model('API::Module')->get(@path)->get,
-        }
-    );
+    $c->stash( {
+        %$release_data, pod_file => $c->model('API::Module')->get(@path)->get,
+    } );
 
     $c->forward( 'view', [@path] );
 }
@@ -157,15 +152,13 @@ sub view : Private {
     $c->add_dist_key( $release->{distribution} );
     $c->add_author_key( $release->{author} );
 
-    $c->stash(
-        {
-            template          => 'pod.html',
-            module            => $data,
-            pod               => $pod_html,
-            canonical         => $canonical,
-            documented_module => $documented_module,
-        }
-    );
+    $c->stash( {
+        template          => 'pod.html',
+        module            => $data,
+        pod               => $pod_html,
+        canonical         => $canonical,
+        documented_module => $documented_module,
+    } );
 
     unless ( $pod->{raw} ) {
         $c->stash( pod_error => $pod->{message}, );
@@ -220,13 +213,11 @@ sub pod2html : Path('/pod2html') {
                 last;
             }
         }
-        $c->stash(
-            {
-                pod_rendered => $html,
-                ( $pod_name ? ( pod_name => $pod_name ) : () ),
-                ( $abstract ? ( abstract => $abstract ) : () ),
-            }
-        );
+        $c->stash( {
+            pod_rendered => $html,
+            ( $pod_name ? ( pod_name => $pod_name ) : () ),
+            ( $abstract ? ( abstract => $abstract ) : () ),
+        } );
     }
 }
 
@@ -258,13 +249,11 @@ sub filter_html {
             li      => ['id'],
             ol      => [],
             p       => [],
-            pre     => [
-                {
-                    class        => qr/^line-numbers$/,
-                    'data-line'  => qr/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/,
-                    'data-start' => qr/^\d+$/,
-                }
-            ],
+            pre     => [ {
+                class        => qr/^line-numbers$/,
+                'data-line'  => qr/^\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*$/,
+                'data-start' => qr/^\d+$/,
+            } ],
             span   => [ { style => qr/^white-space: nowrap;$/ } ],
             strong => [],
             sub    => [],

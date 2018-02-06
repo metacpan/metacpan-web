@@ -39,23 +39,19 @@ sub index : Path : Args {
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->get;
         $c->res->last_modified( $module->{date} );
-        $c->stash(
-            {
-                template  => 'browse.html',
-                files     => $files,
-                author    => shift @module,
-                release   => shift @module,
-                directory => \@module,
-            }
-        );
+        $c->stash( {
+            template  => 'browse.html',
+            files     => $files,
+            author    => shift @module,
+            release   => shift @module,
+            directory => \@module,
+        } );
     }
     elsif ( exists $source->{raw} ) {
         $module->{content} = $source->{raw};
-        $c->stash(
-            {
-                file => $module,
-            }
-        );
+        $c->stash( {
+            file => $module,
+        } );
         $c->forward('content');
     }
     else {
@@ -75,12 +71,10 @@ sub content : Private {
         $c->stash( { source => $module->{content}, filetype => $filetype } );
     }
     $c->res->last_modified( $module->{date} );
-    $c->stash(
-        {
-            template => 'source.html',
-            module   => $module,
-        }
-    );
+    $c->stash( {
+        template => 'source.html',
+        module   => $module,
+    } );
 }
 
 # Class method to ease testing.

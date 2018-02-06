@@ -53,16 +53,14 @@ sub view : Private {
 
     my $release_info = $c->stash->{release_info};
 
-    my $data = $release_info->else(
-        sub {
-            my $error = shift;
-            return Future->fail($error)
-                if !ref $error;
-            $c->detach('/not_found')
-                if $error->{code} == 404;
-            $c->detach( '/internal_error', $error );
-        }
-    )->get;
+    my $data = $release_info->else( sub {
+        my $error = shift;
+        return Future->fail($error)
+            if !ref $error;
+        $c->detach('/not_found')
+            if $error->{code} == 404;
+        $c->detach( '/internal_error', $error );
+    } )->get;
 
     my $release = $data->{release};
 

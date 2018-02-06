@@ -32,13 +32,11 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
         $data = $c->model('API::Lab')->dependencies($module)->get;
     }
 
-    $c->stash(
-        {
-            template => 'lab/dependencies.html',
-            module   => $module,
-            data     => $data
-        }
-    );
+    $c->stash( {
+        template => 'lab/dependencies.html',
+        module   => $module,
+        data     => $data
+    } );
 }
 
 sub dashboard : Local : Args(0) {
@@ -62,13 +60,11 @@ sub dashboard : Local : Args(0) {
 
     $report->{user} = $user;
 
-    $c->stash(
-        {
-            template => 'lab/dashboard.html',
-            pauseid  => $pauseid,
-            report   => $report,
-        }
-    );
+    $c->stash( {
+        template => 'lab/dashboard.html',
+        pauseid  => $pauseid,
+        report   => $report,
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

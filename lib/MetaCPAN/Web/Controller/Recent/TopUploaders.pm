@@ -31,20 +31,17 @@ sub topuploaders : Private {
         = $c->model('API::Author')->get_multiple( keys %{ $data->{counts} } )
         ->get;
 
-    $c->stash(
-        {
-            authors => [
-                sort { $b->{releases} <=> $a->{releases} }
-                    map +{ %{$_},
-                    releases => $data->{counts}{ $_->{pauseid} } },
-                @{ $authors->{authors} }
-            ],
-            took     => $data->{took},
-            total    => $data->{total},
-            template => 'recent/topuploaders.html',
-            range    => $range,
-        }
-    );
+    $c->stash( {
+        authors => [
+            sort { $b->{releases} <=> $a->{releases} }
+                map +{ %{$_}, releases => $data->{counts}{ $_->{pauseid} } },
+            @{ $authors->{authors} }
+        ],
+        took     => $data->{took},
+        total    => $data->{total},
+        template => 'recent/topuploaders.html',
+        range    => $range,
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

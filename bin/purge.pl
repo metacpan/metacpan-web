@@ -53,10 +53,8 @@ else {
 
     my $keys = $opt->key;
 
-    $c->cdn_purge_now(
-        {
-            keys => $keys,
-        }
-    );
+    $c->cdn_purge_now( {
+        keys => $keys,
+    } );
 
 }

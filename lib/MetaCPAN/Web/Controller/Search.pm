@@ -77,25 +77,21 @@ sub index : Path : Args(0) {
             my $suggest = $query;
             $suggest =~ s/\s*:+\s*/::/g;
             if ( $suggest ne $query ) {
-                $c->stash(
-                    {
-                        suggest => $suggest,
-                    }
-                );
+                $c->stash( {
+                    suggest => $suggest,
+                } );
             }
             $c->stash( template => 'no_result.html' );
             $c->detach;
         }
 
-        $c->stash(
-            {
-                %$results,
-                single_dist => !$results->{collapsed},
-                authors     => $authors,
-                template    => 'search.html',
-                page_size   => $page_size,
-            }
-        );
+        $c->stash( {
+            %$results,
+            single_dist => !$results->{collapsed},
+            authors     => $authors,
+            template    => 'search.html',
+            page_size   => $page_size,
+        } );
     }
 }
 

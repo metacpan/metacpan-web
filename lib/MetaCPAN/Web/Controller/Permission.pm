@@ -31,11 +31,9 @@ sub get : Private {
     my $perms = $c->model('API::Permission')->get( $type, $name )->get;
 
     if ( !$perms ) {
-        $c->stash(
-            {
-                message => 'Permissions not found for ' . $name
-            }
-        );
+        $c->stash( {
+            message => 'Permissions not found for ' . $name
+        } );
         $c->detach('/not_found');
     }
 

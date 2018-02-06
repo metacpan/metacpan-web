@@ -29,15 +29,13 @@ sub distribution : Local : Args(1) : Does('Sortable') {
         = $c->model('API::Release')
         ->reverse_dependencies( $distribution, $c->req->page, $page_size,
         $sort )->get;
-    $c->stash(
-        {
-            %{$data},
-            type_of_required => 'distribution',
-            required         => $distribution,
-            page_size        => $page_size,
-            template         => 'requires.html'
-        }
-    );
+    $c->stash( {
+        %{$data},
+        type_of_required => 'distribution',
+        required         => $distribution,
+        page_size        => $page_size,
+        template         => 'requires.html'
+    } );
 }
 
 sub module : Local : Args(1) : Does('Sortable') {
@@ -48,15 +46,13 @@ sub module : Local : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Module')
         ->requires( $module, $c->req->page, $page_size, $sort )->get;
-    $c->stash(
-        {
-            %{$data},
-            type_of_required => 'module',
-            required         => $module,
-            page_size        => $page_size,
-            template         => 'requires.html'
-        }
-    );
+    $c->stash( {
+        %{$data},
+        type_of_required => 'module',
+        required         => $module,
+        page_size        => $page_size,
+        template         => 'requires.html'
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;
