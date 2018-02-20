@@ -28,8 +28,8 @@ sub index : Path : Args(0) {
     );
 
     $c->res->content_type('application/json');
-    $c->res->body(
-        Cpanel::JSON::XS::encode_json( { suggestions => \@results } ) );
+    $c->res->body( Cpanel::JSON::XS::encode_json(
+        { suggestions => \@results } ) );
 }
 
 __PACKAGE__->meta->make_immutable;

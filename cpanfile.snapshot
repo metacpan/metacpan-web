@@ -4482,27 +4482,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20180101
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20180101.tar.gz
+  Perl-Tidy-20180220
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20180220.tar.gz
     provides:
-      Perl::Tidy 20180101
-      Perl::Tidy::Debugger 20180101
-      Perl::Tidy::DevNull 20180101
-      Perl::Tidy::Diagnostics 20180101
-      Perl::Tidy::FileWriter 20180101
-      Perl::Tidy::Formatter 20180101
-      Perl::Tidy::HtmlWriter 20180101
-      Perl::Tidy::IOScalar 20180101
-      Perl::Tidy::IOScalarArray 20180101
-      Perl::Tidy::IndentationItem 20180101
-      Perl::Tidy::LineBuffer 20180101
-      Perl::Tidy::LineSink 20180101
-      Perl::Tidy::LineSource 20180101
-      Perl::Tidy::Logger 20180101
-      Perl::Tidy::Tokenizer 20180101
-      Perl::Tidy::VerticalAligner 20180101
-      Perl::Tidy::VerticalAligner::Alignment 20180101
-      Perl::Tidy::VerticalAligner::Line 20180101
+      Perl::Tidy 20180220
+      Perl::Tidy::Debugger 20180220
+      Perl::Tidy::DevNull 20180220
+      Perl::Tidy::Diagnostics 20180220
+      Perl::Tidy::FileWriter 20180220
+      Perl::Tidy::Formatter 20180220
+      Perl::Tidy::HtmlWriter 20180220
+      Perl::Tidy::IOScalar 20180220
+      Perl::Tidy::IOScalarArray 20180220
+      Perl::Tidy::IndentationItem 20180220
+      Perl::Tidy::LineBuffer 20180220
+      Perl::Tidy::LineSink 20180220
+      Perl::Tidy::LineSource 20180220
+      Perl::Tidy::Logger 20180220
+      Perl::Tidy::Tokenizer 20180220
+      Perl::Tidy::VerticalAligner 20180220
+      Perl::Tidy::VerticalAligner::Alignment 20180220
+      Perl::Tidy::VerticalAligner::Line 20180220
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.007

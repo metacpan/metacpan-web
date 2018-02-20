@@ -135,8 +135,8 @@ Template::Alloy->define_vmethod(
         my ($source) = @_;
         my @source = split( /\//, $source );
         my @target = ( shift @source, shift @source, join( q{/}, @source ) );
-        my $digest = Digest::SHA::sha1_base64(
-            join( "\0", grep {defined} @target ) );
+        my $digest = Digest::SHA::sha1_base64( join(
+            "\0", grep {defined} @target ) );
         $digest =~ tr/[+\/]/-_/;
         return $digest;
     }

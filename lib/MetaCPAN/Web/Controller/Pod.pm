@@ -264,7 +264,7 @@ sub filter_html {
             td     => [],
             tr     => [],
             u      => [],
-            ul     => [ { id    => qr/^index$/ } ],
+            ul     => [ { id => qr/^index$/ } ],
         },
         replace_img => sub {
 

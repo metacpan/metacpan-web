@@ -188,8 +188,10 @@ sub build_feed {
     $feed->link('/');
 
     foreach my $entry ( @{ $params{entries} } ) {
-        $feed->add_entry(
-            $self->build_entry( entry => $entry, host => $params{host} ) );
+        $feed->add_entry( $self->build_entry(
+            entry => $entry,
+            host  => $params{host}
+        ) );
     }
     return $feed->as_xml;
 }

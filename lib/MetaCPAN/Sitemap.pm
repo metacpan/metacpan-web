@@ -12,13 +12,13 @@ use Future;
 
 use Moo;
 
-has api_secure  => ( is => 'ro', required => 1 );
-has url_prefix  => ( is => 'ro', required => 1 );
-has object_type => ( is => 'ro', required => 1 );
-has field_name  => ( is => 'ro', required => 1 );
+has api_secure  => ( is => 'ro',   required => 1 );
+has url_prefix  => ( is => 'ro',   required => 1 );
+has object_type => ( is => 'ro',   required => 1 );
+has field_name  => ( is => 'ro',   required => 1 );
 has filter      => ( is => 'ro' );
-has size        => ( is => 'ro', default  => 1000 );
-has loop => ( is => 'lazy', default => sub { IO::Async::Loop->new } );
+has size        => ( is => 'ro',   default  => 1000 );
+has loop        => ( is => 'lazy', default  => sub { IO::Async::Loop->new } );
 has ua => (
     is      => 'lazy',
     default => sub {
