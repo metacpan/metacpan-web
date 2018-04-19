@@ -18,6 +18,9 @@
     <li class="nav-header">
       <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
     </li>
+    <li>
+      Distribution: <% module.distribution | html %></span>
+    </li>
     <% IF documented_module.version %>
     <li>
       Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
