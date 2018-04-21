@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Account::Turing;
 
 use Moose;
-use Captcha::reCAPTCHA;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 has public_key => ( is => 'ro', required => 1 );
@@ -20,8 +19,8 @@ sub index : Path('') : Args(0) {
         } );
     }
     $c->stash( {
-        template => 'account/turing.html',
-        captcha  => Captcha::reCAPTCHA->new->get_html_v2( $self->public_key ),
+        template      => 'account/turing.html',
+        recaptcha_key => $self->public_key,
     } );
 
 }

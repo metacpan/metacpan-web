@@ -14,12 +14,14 @@
     <% ELSE %>
     <fieldset><legend>Verify Account</legend>
         <p>Please solve the Captcha. This will allow you to ++ modules. You'll have to complete this test only once.</p><br />
-        <script>
-        var RecaptchaOptions = { theme : 'white' };
-        </script>
-        <form action="<% c.req.uri.as_string %>" method="POST">
-        <% captcha | none %>
-        <input type="hidden" name="r" value="<% referer || c.req.referer || c.uri_for('/').as_string %>" />
+        <form id="metacpan-recaptcha-form" action="<% c.req.uri.as_string %>" method="POST">
+            <script>
+              function recaptchaSuccess ( response ) {
+                document.getElementById('metacpan-recaptcha-form').submit();
+              }
+            </script>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <div class="g-recaptcha" data-sitekey="<% recaptcha_key %>" data-callback="recaptchaSuccess"></div>
         </form>
     </fieldset>
     <% END %>
