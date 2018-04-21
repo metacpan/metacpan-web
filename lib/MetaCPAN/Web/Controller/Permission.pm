@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Permission;
 
 use Moose;
+use List::Util qw(uniq);
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
@@ -38,6 +39,12 @@ sub get : Private {
     }
 
     $c->stash( { search_term => $name, permission => $perms } );
+
+    return if $type eq 'module';
+    $c->stash( {
+        num_owners   => scalar( uniq map $_->{owner},               @$perms ),
+        num_comaints => scalar( uniq map @{ $_->{co_maintainers} }, @$perms ),
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;
