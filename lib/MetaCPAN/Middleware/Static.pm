@@ -1,10 +1,11 @@
 package MetaCPAN::Middleware::Static;
 use strict;
 use warnings;
-use Plack::Builder;
-use Plack::App::File;
-use JavaScript::Minifier::XS ();
+
 use Cwd qw(cwd);
+use JavaScript::Minifier::XS ();
+use Plack::App::File         ();
+use Plack::Builder;
 
 sub new { bless {}, $_[0] }
 
