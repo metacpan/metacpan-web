@@ -124,6 +124,28 @@ sub favorites : Chained('root') PathPart Args(0) {
         if $author->{country};
 }
 
+# /author/*/contributions
+sub contributions : Chained('root') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $pauseid = $c->stash->{pauseid};
+
+    my $author = $c->model('API::Author')->get($pauseid)->get;
+    $c->detach('/not_found') unless ( $author->{pauseid} );
+
+    my $contributions = $c->model('API::Contributors')->unique_dists_by_pauseid( $pauseid )->get;
+
+    $c->stash( {
+        author        => $author,
+        contributions => $contributions,
+        template      => 'author-contributions.html',
+    } );
+
+    $c->stash( author_country_name =>
+            Locale::Country::code2country( $author->{country} ) )
+        if $author->{country};
+}
+
 # /author/*/releases
 sub releases : Chained('root') PathPart Args(0) {
     my ( $self, $c ) = @_;
@@ -158,6 +180,7 @@ sub releases : Chained('root') PathPart Args(0) {
     } );
     $c->stash( { pageset => $pageset } );
 }
+
 
 __PACKAGE__->meta->make_immutable;
 

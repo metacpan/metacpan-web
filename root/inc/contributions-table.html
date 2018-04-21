@@ -1,0 +1,22 @@
+<% IF contributions.size %>
+<table id="author_contributions"
+  <% IF tablesorter %>data-default-sort="<% default_sort || '0,0' %>"<% END %>
+  class="table table-condensed table-striped table-contributions<% IF tablesorter %> tablesorter<% END %>">
+  <thead>
+    <tr>
+      <th class="release pull-left-phone">Distributions contributed to:</th>
+    </tr>
+</thead>
+<tbody>
+<% FOREACH contrib IN contributions %>
+<tr>
+  <td>
+    <strong>
+        <a href="/release/<% contrib.distribution; %>" class="ellipsis" title="<% contrib.author; '/'; contrib.distribution %>"><% contrib.distribution %></a>
+    </strong>
+  </td>
+</tr>
+<% END %>
+</tbody>
+</table>
+<% END %>

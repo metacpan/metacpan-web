@@ -38,6 +38,22 @@ sub get {
         );
 }
 
+sub unique_dists_by_pauseid {
+    my ( $self, $pauseid ) = @_;
+
+    $self->request( '/contributor/by_pauseid/' . $pauseid )->transform(
+        done => sub {
+            my $data = shift;
+            my %dists = map { $_->{distribution} => $_->{author} }
+                @{ $data->{contributors} };
+            return [
+                map +{ distribution => $_, author => $dists{$_} },
+                sort keys %dists
+            ];
+        }
+    );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

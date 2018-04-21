@@ -1,0 +1,16 @@
+<% INCLUDE inc/author-leftbar.html author = author %>
+
+<div class="content">
+    <div id="feed_subscription" class="page-header">
+        <a href="/feed/author/<% author.pauseid %>"><i class="fa fa-rss fa-2x black"></i></a>
+    </div>
+    <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
+<% IF contributions.0 %>
+    <% INCLUDE inc/contributions-table.html contributions = contributions, author = 1 tablesorter = 1 %>
+<% ELSE %>
+    <div class="message">
+        <strong>Contributions</strong>
+        <p>No contributions from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found</p>
+    </div>
+<% END %>
+</div>
