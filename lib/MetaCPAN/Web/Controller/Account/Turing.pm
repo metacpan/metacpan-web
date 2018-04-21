@@ -10,10 +10,8 @@ sub index : Path('') : Args(0) {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST' ) {
         my $params = $c->req->params;
-        my $res    = $c->model('API::User')->turing(
-            @$params{qw(recaptcha_challenge_field recaptcha_response_field)},
-            $c->token
-        )->get;
+        my $res    = $c->model('API::User')
+            ->turing( $params->{'g-recaptcha-response'}, $c->token, )->get;
         $c->stash( {
             success => $res->{looks_human},
             error   => $res->{error},
@@ -23,8 +21,7 @@ sub index : Path('') : Args(0) {
     }
     $c->stash( {
         template => 'account/turing.html',
-        captcha =>
-            Captcha::reCAPTCHA->new->get_html( $self->public_key, undef, 1 ),
+        captcha  => Captcha::reCAPTCHA->new->get_html_v2( $self->public_key ),
     } );
 
 }

@@ -40,11 +40,11 @@ sub remove_favorite {
 }
 
 sub turing {
-    my ( $self, $challenge, $answer, $token ) = @_;
+    my ( $self, $answer, $token ) = @_;
     $self->request(
         '/user/turing',
-        { challenge    => $challenge, answer => $answer },
-        { access_token => $token }
+        { answer       => $answer },
+        { access_token => $token },
     );
 }
 
