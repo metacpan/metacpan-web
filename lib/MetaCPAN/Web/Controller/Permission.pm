@@ -16,6 +16,18 @@ sub distribution : Local Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
     $c->forward( 'get', $c, [ 'distribution', $distribution ] );
+
+    my $modules       = $c->stash->{permission};
+    my $total_modules = scalar @$modules;
+    my %num_modules_of;
+    for my $module (@$modules) {
+        ++$num_modules_of{ $module->{owner} };
+        ++$num_modules_of{$_} for @{ $module->{co_maintainers} };
+    }
+    my @releaser = sort grep { $num_modules_of{$_} == $total_modules }
+        keys %num_modules_of;
+
+    $c->stash( releaser => \@releaser );
 }
 
 sub module : Local Args(1) {
