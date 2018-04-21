@@ -71,6 +71,59 @@ sub index : Chained('root') PathPart('') Args(0) {
         if $author->{country};
 }
 
+# /author/*/uploads
+sub uploads : Chained('root') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $pauseid = $c->stash->{pauseid};
+
+    my $author = $c->model('API::Author')->get($pauseid)->get;
+    $c->detach('/not_found') unless ( $author->{pauseid} );
+
+    my $releases = $c->model('API::Release')->latest_by_author($pauseid)->get;
+
+    my $date = List::Util::max
+        map { DateTime::Format::ISO8601->parse_datetime( $_->{date} ) }
+        @{ $releases->{releases} };
+    $c->res->last_modified($date) if $date;
+
+    my $took = $releases->{took};
+
+    $c->stash( {
+        author   => $author,
+        releases => $releases->{releases},
+        template => 'author-uploads.html',
+        took     => $took,
+        total    => $releases->{total},
+    } );
+
+    $c->stash( author_country_name =>
+            Locale::Country::code2country( $author->{country} ) )
+        if $author->{country};
+}
+
+# /author/*/favorites
+sub favorites : Chained('root') PathPart Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $pauseid = $c->stash->{pauseid};
+
+    my $author = $c->model('API::Author')->get($pauseid)->get;
+    $c->detach('/not_found') unless ( $author->{pauseid} );
+
+    my $faves = $c->model('API::Favorite')->by_user( $author->{user} )->get;
+
+    $c->stash( {
+        author   => $author,
+        faves    => $faves,
+        template => 'author-favorites.html',
+    } );
+
+    $c->stash( author_country_name =>
+            Locale::Country::code2country( $author->{country} ) )
+        if $author->{country};
+}
+
 # /author/*/releases
 sub releases : Chained('root') PathPart Args(0) {
     my ( $self, $c ) = @_;

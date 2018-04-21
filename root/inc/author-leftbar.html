@@ -1,0 +1,131 @@
+<% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
+<% twitter_card_inc = 'inc/twitter/author.html' %>
+<ul class="nav-list slidepanel">
+    <li class="hidden-phone"><% INCLUDE inc/author-pic.html author = author %></li>
+    <li class="visible-xs">
+        <% INCLUDE mobile/toolbar-search-form.html %>
+    </li>
+    <li class="nav-header">Email</li>
+    <li>
+        <a href="mailto:<% author.email.0 %>" class="ellipsis" title="<%author.email.0 %>"><% author.email.0 %></a>
+    </li>
+    <%- IF author.website.size %>
+    <li class="nav-header">Website</li>
+    <% FOREACH website IN author.website %>
+    <li>
+        <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
+    </li>
+    <%- END; END %>
+    <%
+        IF author.profile.size -%>
+    <li class="nav-header">Profiles</li>
+    <div class="user-profiles">
+        <%-
+            FOREACH profile IN author.profile.sort('name');
+            IF profiles.${profile.name} %>
+        <a rel="me" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank" title="<% profiles.${profile.name}.name %> - <% profile.id%>">
+        <img src="/static/images/profile/<% profile.name %>.png" width="16" height="16" alt="<% profiles.${profile.name}.name %>">
+        </a>
+        <% END; END %>
+    </div>
+    <% END %>
+    <% IF author.country || author.city || author.region %>
+    <li class="nav-header">Location</li>
+    <% IF author.country %>
+    <img src="/static/images/flag/<% author.country.lower %>.png" alt="<% author_country_name %>" title="<% author_country_name %>" width=16 height=11> &nbsp;
+    <%- END %>
+    <%- author.city; %><% IF author.city && author.region %>, <% END %><%- author.region %><br>
+    <% END %>
+    <% IF author.blog.size %>
+    <li class="nav-header">Blog</li>
+    <% FOREACH blog IN author.blog -%>
+    <li>
+        <%- IF blog.feed %>
+        <a href="<% blog.feed %>" target="_blank">
+        <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
+        </a>
+        <%- END %>
+        <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
+        <% blog.url.replace('^https?://', '') %>
+        </a>
+    </li>
+    <% END; END %>
+    <% IF author.donation.size; FOREACH donate IN author.donation %>
+    <% IF donate.name == 'paypal' && donate.id %>
+    <li class="author-donate">
+    <center>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="<% donate.id %>">
+            <input type="hidden" name="lc" value="US">
+            <input type="hidden" name="item_name" value="Donation to CPAN Author <% author.pauseid %> via MetaCPAN">
+            <input type="hidden" name="no_note" value="0">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+    </center>
+    </li>
+    <% ELSIF donate.name == 'wishlist' && donate.id %>
+    <li class="author-donate">
+        <a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a>
+    </li>
+    <% ELSIF donate.name == 'flattr' && donate.id %>
+    <li class="author-donate">
+        <script type="text/javascript">
+            (function() {
+              var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+
+              s.type = 'text/javascript';
+              s.async = true;
+              s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
+
+              t.parentNode.insertBefore(s, t);
+            })();
+        </script>
+        <a class="FlattrButton" style="display:none;"
+            title="<% author.name %> (<% author.pauseid %>) on MetaCPAN"
+            rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
+            href="/author/<% author.pauseid %>"
+            language="en_GB" >
+        <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
+        </a>
+    </li>
+    <% END; END; END %>
+    <li class="nav-header">Activity</li>
+    <li><% INCLUDE inc/activity.html query = 'author=' _ author.pauseid %></li>
+    <% INCLUDE inc/release-latest.html %>
+    <li class="nav-header">Tools</li>
+    <li>
+        Search distributions:<br>
+    </li>
+    <li class="toolbar-search-form">
+        <form action="/search">
+            <input type="hidden" name="q" value="author:<% author.pauseid %>">
+            <input type="text" name="q" class="form-control tool-bar-form">
+            <input type="submit" style="display: none">
+        </form>
+    </li>
+    <li>
+        <a href="<% author.links.cpantesters_reports %>">CPANTesters Reports</a>
+        <a href="<% author.links.cpantesters_matrix %>" title="Matrix">
+            <i class="icon-grid"></i>
+        </a>
+    </li>
+    <li>
+         <a href="<% author.links.cpants %>">CPANTS</a>
+    </li>
+    <li>
+        <a href="<% author.links.metacpan_explorer %>">MetaCPAN Explorer</a>
+    </li>
+    <li>
+        <a href="<% author.links.cpan_directory %>">CPAN directory</a> (<% author.release_count.cpan + author.release_count.latest %>)
+    </li>
+    <li>
+        <a href="/permission/author/<% author.pauseid %>">Module permissions</a>
+    </li>
+    <li>
+        <a href="<% author.links.backpan_directory %>" title="See all releases ever done by <% author.pauseid %>, not just those currently on CPAN.">BackPAN directory</a> (<% author.release_count.item('backpan-only') %>)
+    </li>
+</ul>

@@ -1,0 +1,16 @@
+<% INCLUDE inc/author-leftbar.html author = author %>
+
+<div class="content">
+    <div id="feed_subscription" class="page-header">
+        <a href="/feed/author/<% author.pauseid %>"><i class="fa fa-rss fa-2x black"></i></a>
+    </div>
+    <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
+<% IF faves.0 %>
+    <% INCLUDE inc/favorite-table.html favorites = faves, author = 1 tablesorter = 1 %>
+<% ELSE %>
+    <div class="message">
+        <strong>Favorites</strong>
+        <p>No favorite distributions from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found</p>
+    </div>
+<% END %>
+</div>

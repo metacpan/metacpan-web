@@ -1,0 +1,21 @@
+<% INCLUDE inc/author-leftbar.html author = author %>
+
+<div class="content">
+    <div id="feed_subscription" class="page-header">
+        <p><% IF releases.0 %><% releases.size %><% ELSE %>No<% END %> distributions uploaded by <span class="author-name"><% author.name %></span> (<% author.pauseid %>)</p>
+        <a href="/feed/author/<% author.pauseid %>"><i class="fa fa-rss fa-2x black"></i></a>
+    </div>
+    <div class="visible-xs inline-author-pic"><% INCLUDE inc/author-pic.html author = author %></div>
+<% IF releases.0 %>
+    <% INCLUDE inc/release-table.html releases = releases, header = 1, tablesorter = 1, table_id = "author_releases" %>
+<% ELSE %>
+    <div class="message">
+        <strong>Releases</strong>
+        <p>No releases from <a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> could be found
+        <% IF author.release_count.item("backpan-only") %>
+            <br/><a href="/author/<% author.pauseid %>"><%- author.pauseid %></a> has <a href=<% author.links.backpan_directory %>><% author.release_count.item("backpan-only") %> distributions on BackPAN</a> that were previously on CPAN.
+        <% END %>
+        </p>
+    </div>
+<% END %>
+</div>
