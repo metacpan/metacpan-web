@@ -66,13 +66,13 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
-                read_file => sub { scalar `lessc -s $_[0]` },
+                read_file => sub { scalar `less -s $_[0]` },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
         }
         else {
             my @assets = (@js_files);
-            if ( `lessc --version` =~ /lessc/ ) {
+            if ( `less --version` =~ /lessc/ ) {
                 enable 'Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
@@ -80,7 +80,7 @@ sub wrap {
                         my $file = shift;
                         my ($root_path) = $file =~ m{^root/(.*)/};
                         scalar
-                            `lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
+                            `less -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
                     },
                 );
             }
