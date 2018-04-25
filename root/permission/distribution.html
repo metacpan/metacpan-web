@@ -2,4 +2,24 @@
 
 <h1>Module Permissions for <% search_term %></h1>
 
+<table class="table table-striped" style="width: auto; min-width: 33%">
+  <tr>
+    <th>Authorized Releasers (<% releaser.size %>)</th>
+  </tr>
+  <% FOREACH author IN releaser %>
+    <tr>
+      <td>
+        <a href="/author/<% author %>"><% author %></a>
+      </td>
+    </tr>
+  <% END %>
+  <% IF releaser.size == 0 %>
+    <tr>
+      <td>
+        <i>No owner<% IF num_comaints %> or co-maintainer<% END %> has permissions for all modules in this distribution.</i>
+      </td>
+    </tr>
+  <% END %>
+</table>
+
 <% INCLUDE 'inc/permission.html' %>
