@@ -26,7 +26,7 @@
    <% link_to_file(item) | none %>
    <%- IF item.abstract; ' - '; item.abstract; END %>
   </strong></big>
-  <% INCLUDE inc/river-gauge.html, distribution = item.distribution %>
+  <% INCLUDE inc/river-gauge.html, distribution = item.distribution, river = item.river %>
   <% INCLUDE inc/favorite.html release = item favorites = release.favorites %>
   <br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>

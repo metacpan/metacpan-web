@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
+with 'MetaCPAN::Web::Role::RiverData';
 
 use List::Util qw(first uniq);
 
@@ -37,13 +38,15 @@ sub distribution {
 
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
-    $self->request("/release/latest_by_author/$pauseid");
+    $self->request("/release/latest_by_author/$pauseid")
+        ->then( $self->add_river );
 }
 
 sub all_by_author {
     my ( $self, $pauseid, $page, $page_size ) = @_;
     $self->request( "/release/all_by_author/$pauseid",
-        undef, { page => $page, page_size => $page_size } );
+        undef, { page => $page, page_size => $page_size } )
+        ->then( $self->add_river );
 }
 
 sub recent {
@@ -56,7 +59,7 @@ sub recent {
             page_size => $page_size,
             type      => $type,
         }
-    );
+    )->then( $self->add_river );
 }
 
 sub modules {
@@ -90,7 +93,7 @@ sub reverse_dependencies {
             $data->{releases} ||= delete $data->{data};
             return $data;
         }
-    );
+    )->then( $self->add_river );
 }
 
 sub interesting_files {
