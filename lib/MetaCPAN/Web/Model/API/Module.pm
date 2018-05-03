@@ -67,6 +67,14 @@ sub requires {
             page_size => $page_size,
             sort      => $sort,
         },
+    )->transform(
+        done => sub {
+            my ($data) = @_;
+
+            # api should really be returning in this form already
+            $data->{releases} ||= delete $data->{data};
+            return $data;
+        }
     );
 }
 

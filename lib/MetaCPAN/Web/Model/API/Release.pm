@@ -74,13 +74,21 @@ sub reverse_dependencies {
     my ( $self, $distribution, $page, $page_size, $sort ) = @_;
     $sort ||= 'date:desc';
 
-    return $self->request(
+    $self->request(
         "/reverse_dependencies/dist/$distribution",
         undef,
         {
             page      => $page,
             page_size => $page_size,
             sort      => $sort,
+        }
+    )->transform(
+        done => sub {
+            my ($data) = @_;
+
+            # api should really be returning in this form already
+            $data->{releases} ||= delete $data->{data};
+            return $data;
         }
     );
 }
