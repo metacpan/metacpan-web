@@ -3,6 +3,7 @@ use Moose;
 use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API::File';
+with 'MetaCPAN::Web::Role::RiverData';
 
 =head1 NAME
 
@@ -42,7 +43,9 @@ sub autocomplete {
 sub search_web {
     my ( $self, $query, $from, $page_size ) = @_;
     $self->request( "/search/web", undef,
-        { q => $query, size => $page_size // 20, from => $from // 0 } );
+        { q => $query, size => $page_size // 20, from => $from // 0 } )
+        ->then( $self->add_river(
+        sub { map @$_, @{ $_[0]{results} || [] } } ) );
 }
 
 sub first {
@@ -67,7 +70,15 @@ sub requires {
             page_size => $page_size,
             sort      => $sort,
         },
-    );
+    )->transform(
+        done => sub {
+            my ($data) = @_;
+
+            # api should really be returning in this form already
+            $data->{releases} ||= delete $data->{data};
+            return $data;
+        }
+    )->then( $self->add_river );
 }
 
 __PACKAGE__->meta->make_immutable;
