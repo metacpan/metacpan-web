@@ -6,6 +6,9 @@
     <a class="nopopup" href="<% release.resources.homepage %>"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
 </li>
 <% END %>
+<li>
+    <a class="nopopup" href="/contributing-to/<% [release.author, release.name].join('/') %>"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
+</li>
 <% IF release.resources.repository %>
 <li>
     <% IF is_url(release.resources.repository.web) %>
