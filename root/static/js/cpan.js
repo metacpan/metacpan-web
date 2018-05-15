@@ -121,13 +121,7 @@ $(document).ready(function() {
     $('table.tablesorter').each(function() {
         var table = $(this);
 
-        var sortid = (
-            MetaCPAN.storage.getItem("tablesorter:" + table.attr('id')) ||
-            table.attr('data-default-sort') || '0,0');
-        sortid = JSON.parse("[" + sortid + "]");
-
         var cfg = {
-            sortList: [sortid],
             textExtraction: function(node) {
                 var $node = $(node);
                 var sort = $node.attr("sort");
@@ -141,13 +135,47 @@ $(document).ready(function() {
             headers: {}
         };
 
+        var sortable = [];
         table.find('thead th').each(function(i, el) {
             if ($(el).hasClass('no-sort')) {
                 cfg.headers[i] = {
                     sorter: false
                 };
+            } else {
+                sortable.push(i);
             }
         });
+
+        var sortid;
+        if (table.attr('id')) {
+            sortid = MetaCPAN.storage.getItem("tablesorter:" + table.attr('id'));
+        }
+        if (!sortid && table.attr('data-default-sort')) {
+            sortid = table.attr('data-default-sort');
+        }
+        if (!sortid) {
+            sortid = '0,0';
+        }
+        try {
+            sortid = JSON.parse('[' + sortid + ']');
+        } catch (e) {
+            sortid = [0, 0];
+        }
+
+        var found;
+        $(sortable).each(function(i, col) {
+            if (sortid[0] == col) {
+                found = true;
+                return false;
+            }
+        });
+        if (found) {
+            cfg.sortList = [sortid];
+        } else if (sortable.length) {
+            cfg.sortList = [
+                [sortable[0], 0]
+            ];
+        }
 
         table.tablesorter(cfg);
     });
