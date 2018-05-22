@@ -7,7 +7,16 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use List::Util ();
 
-sub index : Chained('/') : PathPart('contributing-to') : CaptureArgs(0) {
+sub index : Chained('/') : PathPart('contributing-to') : CaptureArgs(0) { }
+
+sub dist : Chained('index') : PathPart('') : Args(1) {
+    my ( $self, $c, $dist ) = @_;
+
+    my $release = $c->model('API::Release')->find($dist)->get->{release};
+    if ( $release && $release->{author} && $release->{name} ) {
+        return $c->forward( 'get', [ $release->{author}, $release->{name} ] );
+    }
+    $c->detach('/not_found');
 }
 
 sub release : Chained('index') : PathPart('') : Args(2) {
