@@ -35,7 +35,7 @@ sub release : Chained('index') : PathPart('') : Args(2) {
 sub get : Private {
     my ( $self, $c, @args ) = @_;
 
-    my $contributing_re = qr/(CONTRIBUTING|HACKING)/i;
+    my $contributing_re = qr/CONTRIBUTING|HACKING/i;
     my $files
         = $c->model('API::Release')->interesting_files(@args)->get->{files};
 
@@ -54,12 +54,14 @@ sub get : Private {
         $c->detach('/not_found');
     }
     else {
-        my $path = join '/' => @$file{qw(author release path)};
-        if ( $path =~ /\.(pod|pm)$/ ) {
-            $c->res->redirect( "/pod/release/$path", 301 );
+        my @path = split m{/}, $file->{path};
+        if ( $file->{pod_lines} && @{ $file->{pod_lines} } ) {
+            $c->forward( "/pod/release",
+                [ $file->{author}, $file->{release}, @path ] );
         }
         else {
-            $c->res->redirect( "/source/$path", 301 );
+            $c->forward( "/source/index",
+                [ $file->{author}, $file->{release}, @path ] );
         }
     }
 }
