@@ -129,7 +129,7 @@
   <h2 id="other">Other files</h2>
   <ul>
     <%- FOREACH file IN other %>
-    <li><% link_to_file(file, file.name) | none %></li>
+    <li><% link_to_file(file, file.path) | none %></li>
     <%- END %>
   </ul>
 </div>
