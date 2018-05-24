@@ -24,6 +24,13 @@ sub index : Path : Args(0) {
 
     my $query = join( q{ }, $req->param('q') );
 
+    if ( $query eq '{searchTerms}' ) {
+
+        # url is being used directly from opensearch plugin
+        $c->res->redirect(q{/});
+        $c->detach;
+    }
+
     # translate Foo/Bar.pm to Foo::Bar
     if ( $query =~ m{.pm\b} ) {
         $query =~ s{/}{::}g;
