@@ -1,10 +1,13 @@
 package MetaCPAN::Middleware::Static;
+
 use strict;
 use warnings;
-use Plack::Builder;
-use Plack::App::File;
-use JavaScript::Minifier::XS ();
+
 use Cwd qw(cwd);
+use JavaScript::Minifier::XS ();
+use Path::Tiny qw( path );
+use Plack::App::File ();
+use Plack::Builder;
 
 sub new { bless {}, $_[0] }
 
@@ -54,6 +57,8 @@ sub wrap {
 
     my @less_files = ('/static/less/style.less');
 
+    my $less = -x path( 'usr', 'bin', 'less' ) ? 'less' : 'lessc';
+
     builder {
         if ( !$dev_mode ) {
             enable 'Assets::FileCached' => (
@@ -66,13 +71,13 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
-                read_file => sub { scalar `lessc -s $_[0]` },
+                read_file => sub { scalar `$less -s $_[0]` },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
         }
         else {
             my @assets = (@js_files);
-            if ( `lessc --version` =~ /lessc/ ) {
+            if ( `less --version` =~ /lessc/ ) {
                 enable 'Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
@@ -80,7 +85,7 @@ sub wrap {
                         my $file = shift;
                         my ($root_path) = $file =~ m{^root/(.*)/};
                         scalar
-                            `lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
+                            `$less -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
                     },
                 );
             }
