@@ -64,6 +64,7 @@ sub view : Private {
 
     my $release = $data->{release};
 
+    $c->browser_max_age('1h');
     $c->res->last_modified( $release->{date} );
     $c->cdn_max_age('1y');
     $c->add_dist_key( $release->{distribution} );
