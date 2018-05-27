@@ -124,36 +124,9 @@ we can push the right buttons to have your work removed from MetaCPAN as well.
 
 ## Can I _automatically_ redirect links pointing at search.cpan.org to metacpan.org?
 
-For Chrome users, the [MetaCPAN
-redirect](https://chrome.google.com/webstore/detail/metacpan-redirect/ojemidgoiffinacbckopjjndlobmgpmk)
-extension will automatically rewrite search.cpan.org links to MetaCPAN.
-
-You can accomplish the same thing by modifying your <code>hosts</code> file
-(*Note*: these IP addresses may have to change over time, as we move servers,
-so come back here to check, if things stop working).
-Add the following lines and all links to search.cpan.org (and links to source
-code) will be redirected to MetaCPAN:
-
-    5.153.225.19 search.cpan.org
-    5.153.225.19 cpansearch.perl.org
-
-If you do this, be sure to point cpanm to another mirror, as it defaults to
-search.cpan.org. Here's how:
-
-    export PERL_CPANM_OPT="--mirror http://www.cpan.no/" # Insert your closest mirror here.
-
-## Can I _manually_ redirect links pointing at search.cpan.org to metacpan.org?
-
-If you find yourself to be on search.cpan.org and you want to get redirected to
-corresponding metacpan page, just change the domain name with
-search.**m**cpan.org. For example:
-
-    http://search.cpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
-
-has to be changed to:
-
-    http://search.mcpan.org/~xsawyerx/MetaCPAN-API-0.43/lib/MetaCPAN/API.pm
-                  ^
+As [announced](https://log.perl.org/2018/05/goodbye-search-dot-cpan-dot-org.html)
+by the Perl NOC, all traffic will be redirected to from search.cpan.org to MetaCPAN.org as
+of 25th of June 2018.
 
 ## What is the relation of MetaCPAN to author-*.json and the data in a PAUSE account?
 
