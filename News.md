@@ -1,3 +1,25 @@
+Title: The traffic is comming
+------------------------------
+Date: 2018-12-02T19:30:00
+
+A [announced](https://log.perl.org/2018/05/goodbye-search-dot-cpan-dot-org.html)
+in the Perl NOC, search.cpan.org is going to redirect all traffic to MetaCPAN
+from 25th of June 2018. We are doing lots of work to prepare for this
+trebbeling of traffic.
+
+Title: MetaHack 2
+------------------------------
+Date: 2017-11-02T19:30:00
+
+http://www.olafalders.com/2017/10/12/announcing-metahack-v2/
+
+https://metacpan.org/about/meta_hack
+
+http://blogs.perl.org/users/leo_lapworth/2017/11/metahack-2.html
+
+
+
+
 Title: SSL improvements
 ------------------------------
 Date: 2014-12-02T19:30:00
