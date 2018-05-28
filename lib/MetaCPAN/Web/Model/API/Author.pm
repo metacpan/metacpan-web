@@ -3,6 +3,7 @@ package MetaCPAN::Web::Model::API::Author;
 use Moose;
 use namespace::autoclean;
 
+use Future ();
 use Ref::Util qw( is_arrayref );
 
 extends 'MetaCPAN::Web::Model::API';
@@ -54,7 +55,7 @@ sub search {
 
 sub by_user {
     my ( $self, $users ) = @_;
-    return [] unless $users;
+    return Future->done( [] ) unless $users;
 
     my $ret;
     if ( is_arrayref($users) ) {
