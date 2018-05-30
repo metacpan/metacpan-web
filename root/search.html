@@ -32,9 +32,7 @@
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
   <% END %>
   <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
-  <%- IF item.rating.count > 0 %>
-  &nbsp;<% INCLUDE inc/rating.html rating = item.rating, distribution = item.distribution %>
-  <%- END %> -
+  -
   <span class="relatize"><% item.date.dt_http %></span>
   <%- IF !single_dist %>
     -

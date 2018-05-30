@@ -81,11 +81,6 @@ So far we have moved...
 * http://explorer.metacpan.org/
 * http://search.mcpan.org/
 * http://mcpan.org/
-* http://sco.metacpan.org/
-
-If you had either http://search.cpan.org/ or http://cpansearch.perl.org/
-in your desktop `hosts` file you'll need to
-[update the IP](https://metacpan.org/about/faq#cani_automatically_redirectlinkspointingatsearch.cpan.orgtometacpan.org)
 
 We will be documenting this a bit more under [Network Infrastructure](https://github.com/metacpan/network-infrastructure)
 but that's a work in progress.
