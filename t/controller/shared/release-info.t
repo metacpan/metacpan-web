@@ -17,7 +17,6 @@ my @optional = qw(
     favorited
     home_page
     repository
-    reviews
     issues
 );
 
@@ -172,32 +171,6 @@ test_psgi app, sub {
                 $tx->is( '//a[text()="Issues"]/@href', $test->{issues},
                     'link to bug tracker' );
             };
-
-            # not all dists have reviews
-            optional_test reviews => sub {
-                my $rating
-                    = qq!//a[\@href="https://cpanratings.perl.org/rate/?distribution=$qs_dist"]!;
-                $tx->like( "$rating/span/\@class", qr/^rating-\d+$/,
-                    'has link to rate',
-                );
-
-                my $reviews
-                    = qq{//a[\@href="https://cpanratings.perl.org/dist/$release"]};
-                $tx->like(
-                    $reviews,
-                    qr/\d+ reviews?/i,
-                    'has link to review',
-                );
-            };
-
-            # all dists should get a link to rate it; test built url
-            ok(
-                $tx->find_value(
-                    '//a[@href="https://cpanratings.perl.org/rate/?distribution='
-                        . $qs_dist . '"]'
-                ),
-                'cpanratings link to rate this dist'
-            );
 
             # TODO: cpantesters
             # TODO: release.tests.size

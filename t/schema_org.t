@@ -12,18 +12,6 @@ sub check_author {
     $tx->ok( './/span[@itemprop="name"]', 'author\'s name found' );
 }
 
-sub check_rating {
-    my ($tx) = @_;
-    $tx->ok( '@itemscope', 'root node needs an itemscope' );
-    $tx->is(
-        '@itemtype',
-        'http://schema.org/AggregateRating',
-        'rating has correct type'
-    );
-    $tx->ok( './/span[@itemprop="ratingValue"]', 'rating found' );
-    $tx->ok( './/span[@itemprop="reviewCount"]', 'review count found' );
-}
-
 sub check_offer {
     my ($tx) = @_;
     $tx->ok( '@itemscope', 'root node needs an itemscope' );
@@ -45,8 +33,6 @@ sub check_application {
 
     $tx->ok( './/span[@itemprop="author"]', \&check_author,
         'author node found' );
-    $tx->ok( './/span[@itemprop="aggregateRating"]',
-        \&check_rating, 'rating found' );
     $tx->ok( './/span[@itemprop="offers"]', \&check_offer, 'offers found' );
 }
 

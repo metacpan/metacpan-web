@@ -25,11 +25,6 @@
     <a data-keyboard-shortcut="g i" href="<% issues.url %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
     <% IF issues.defined("active") %>(<% issues.active %>)<% END %>
 </li>
-<% IF rating.count > 0 %>
-<li>
-    <% INCLUDE inc/rating.html prefix = '<i class="fa fa-fw fa-smile-o black"></i>', rating = rating, distribution = release.distribution %>
-</li>
-<% END %>
 <li>
     <%
     testers_version = release.name.remove('^' _ release.distribution.quotemeta _ '-?');
