@@ -79,11 +79,4 @@
 <li>
     <a <% IF schema_org %>itemprop="url"<% END %> href="<% canonical %>">Latest version</a>
 </li>
-<li class="nav-header">S.C.O</li>
-<li>
-    <a href="http://search.cpan.org/~<% release.author %>/<% release.name %>/<% module.path %>" rel="nofollow">This version</a>
-</li>
-<li>
-    <a href="http://search.cpan.org/<% module ? "perldoc?$module.documentation" : ["dist", release.metadata.name].join('/') %>" rel="nofollow">Latest version</a>
-</li>
 <%- END %>
