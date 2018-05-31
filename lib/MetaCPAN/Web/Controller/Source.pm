@@ -62,18 +62,17 @@ sub index : Path : Args {
 sub content : Private {
     my ( $self, $c ) = @_;
 
-    # FIXME: $module should really just be $file
-    my $module = $c->stash->{file};
+    my $file = $c->stash->{file};
 
     # could this be a method/function somewhere else?
-    if ( !$module->{binary} ) {
-        my $filetype = $self->detect_filetype($module);
-        $c->stash( { source => $module->{content}, filetype => $filetype } );
+    if ( !$file->{binary} ) {
+        my $filetype = $self->detect_filetype($file);
+        $c->stash( { source => $file->{content}, filetype => $filetype } );
     }
-    $c->res->last_modified( $module->{date} );
+    $c->res->last_modified( $file->{date} );
     $c->stash( {
         template => 'source.html',
-        module   => $module,
+        file     => $file,
     } );
 }
 
