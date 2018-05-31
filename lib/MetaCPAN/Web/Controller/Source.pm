@@ -8,21 +8,6 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub index : Path : Args {
     my ( $self, $c, @module ) = @_;
 
-    $c->add_surrogate_key('SOURCE');
-    $c->browser_max_age('1h');
-
-    if ( @module == 1 ) {
-
-        # /source/Foo::bar or /source/AUTHOR/
-        $c->cdn_max_age('1h');
-
-    }
-    else {
-        # SO can cache for a LONG time
-        # /source/AUTHOR/anything e.g /source/ETHER/YAML-Tiny-1.67/
-        $c->cdn_max_age('1y');
-    }
-
     my ( $source, $module );
     if ( @module == 1 ) {
         $module = $c->model('API::Module')->find(@module)->get;
@@ -63,6 +48,13 @@ sub content : Private {
     my ( $self, $c ) = @_;
 
     my $file = $c->stash->{file};
+
+    $c->add_surrogate_key('SOURCE');
+    $c->add_dist_key( $file->{distribution} );
+    $c->add_author_key( $file->{author} );
+
+    $c->browser_max_age('1h');
+    $c->cdn_max_age('1y');
 
     # could this be a method/function somewhere else?
     if ( !$file->{binary} ) {
