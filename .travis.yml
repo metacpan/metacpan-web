@@ -38,7 +38,7 @@ before_install:
 
 install:
   - cpan-install --coverage   # installs converage prereqs, if enabled
-  - cpm install -L $PERL_CARTON_PATH --resolver $CPAN_RESOLVER
+  - AUTHOR_TESTING=0 cpm install -L $PERL_CARTON_PATH --resolver $CPAN_RESOLVER
 
 before_script:
   - coverage-setup
