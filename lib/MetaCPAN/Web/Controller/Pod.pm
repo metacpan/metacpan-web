@@ -9,6 +9,7 @@ use HTML::Restrict   ();
 use HTML::TokeParser ();
 use Try::Tiny qw( try );
 use URI ();
+use MetaCPAN::Web::HTML::CSS qw(filter_style);
 
 use namespace::autoclean;
 
