@@ -8,7 +8,7 @@ use HTTP::Request::Common;
 use LWP::UserAgent;
 
 check_sitemap( 'https://metacpan.org/sitemap-releases.xml.gz' );
-check_sitemap( 'https://metacpan.org/sitemap-releases.xml.gz' )
+check_sitemap( 'https://metacpan.org/sitemap-releases.xml.gz' );
 
 done_testing();
 
