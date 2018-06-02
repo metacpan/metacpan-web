@@ -7,7 +7,7 @@
 </li>
 <% END %>
 <li>
-    <a class="nopopup" href="/contributing-to/<% [release.author, release.name].join('/') %>"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
+    <a class="nopopup" href="/contributing-to/<% IF permalinks; [release.author, release.name].join('/'); ELSE; release.distribution; END %>"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
 </li>
 <% IF release.resources.repository %>
 <li>
