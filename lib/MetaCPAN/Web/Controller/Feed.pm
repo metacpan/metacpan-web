@@ -167,6 +167,10 @@ sub build_entry {
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->summary( escape_html( $entry->{abstract} ) );
     $e->title( $entry->{name} );
+
+    # this is a hack to work around RT#124346
+    delete $e->{entry}{content}
+        if $e->isa('XML::Feed::Entry::Format::RSS');
     return $e;
 }
 
