@@ -22,12 +22,14 @@ sub by_distribution : Chained('root') PathPart('') Args(1) {
 }
 
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
-    my ( $self, $c, $dist ) = @_;
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
+    my ( $self, $c, $distribution ) = @_;
+    $c->stash( distribution => $distribution );
 }
 
 sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
     my ( $self, $c ) = @_;
+    my $dist = $c->stash->{distribution};
+    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
     $c->stash( { template => 'plussers.html' } );
 }
 
@@ -46,6 +48,15 @@ sub by_author_and_release : Chained('root') PathPart('') Args(2) {
         release_info => $c->model->get( $author, $release ),
     );
     $c->forward('view');
+}
+
+sub source : Chained('index') PathPart('source') Args {
+    my ( $self, $c, @path ) = @_;
+    my $dist    = $c->stash->{distribution};
+    my $release = $c->model('API::Release')->find($dist)->get->{release}
+        or $c->detach('/not_found');
+    $c->forward( '/source/index',
+        [ $release->{author}, $release->{name}, @path ] );
 }
 
 sub view : Private {
