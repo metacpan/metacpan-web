@@ -20,15 +20,6 @@ if (!MetaCPAN.storage) {
     };
 }
 
-$.fn.textWidth = function() {
-    var html_org = $(this).html();
-    var html_calc = '<span>' + html_org + '</span>';
-    $(this).html(html_calc);
-    var width = $(this).find('span:first').width();
-    $(this).html(html_org);
-    return width;
-};
-
 $.extend({
     getUrlVars: function() {
         var vars = {},
@@ -270,22 +261,17 @@ $(document).ready(function() {
 
     var items = $('.ellipsis');
     for (var i = 0; i < items.length; i++) {
-        var element = $(items[i]);
-        var boxWidth = element.width();
-        var textWidth = element.textWidth();
-        if (textWidth <= boxWidth) continue;
-        var text = element.text();
-        var textLength = text.length;
-        var parts = [text.substr(0, Math.floor(textLength / 2)), text.substr(Math.floor(textLength / 2), textLength)];
-        while (element.textWidth() > boxWidth) {
-            if (textLength % 2) {
-                parts[0] = parts[0].substr(0, parts[0].length - 1);
-            } else {
-                parts[1] = parts[1].substr(1, parts[1].length);
-            }
-            textLength--;
-            element.html(parts.join('…'));
-        }
+        var element = items[i];
+        var text = element.textContent;
+        var cut = Math.floor(text.length / 5 * 3);
+        var start = document.createElement('span');
+        start.appendChild(document.createTextNode(text.substr(0, cut)));
+        var end = document.createElement('span');
+        end.appendChild(document.createTextNode(text.substr(cut)));
+        $(element).empty();
+        element.appendChild(end);
+        start.style.maxWidth = 'calc(100% - ' + end.clientWidth + 'px)';
+        element.insertBefore(start, end);
     }
 
     function create_anchors(top) {
