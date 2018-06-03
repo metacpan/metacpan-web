@@ -108,24 +108,37 @@ Template::Alloy->define_vmethod(
     },
 );
 
+sub gravatar_image {
+    my ( $emails, $size ) = @_;
+    my $avatar;
+    $emails = ['']
+        if !@$emails;
+    while ( my $email = pop @$emails ) {
+        $avatar = Gravatar::URL::gravatar_url(
+            https   => 1,
+            base    => 'https://www.gravatar.com/avatar/',
+            email   => $email,
+            size    => $size || 80,
+            default => ( $avatar || 'identicon' ),
+        );
+    }
+    return $avatar;
+}
+
 Template::Alloy->define_vmethod(
     'hash',
     gravatar_image => sub {
-        my ( $author, $size, $default ) = @_;
-        my ($email)
-            = ref $author->{email} ? @{ $author->{email} } : $author->{email};
-        Gravatar::URL::gravatar_url(
-            email   => $email,
-            size    => $size,
-            default => Gravatar::URL::gravatar_url(
-
-               # Fallback to the CPAN address, as used by s.c.o, which will in
-               # turn fallback to a generated image.
-                email   => $author->{pauseid} . '@cpan.org',
-                size    => $size,
-                default => $default,
-            )
+        my ( $author, $size ) = @_;
+        my @emails = List::Util::uniq(
+            map lc,
+            (
+                  ref $author->{email} ? @{ $author->{email} }
+                : $author->{email}     ? $author->{email}
+                :                        ()
+            ),
+            $author->{pauseid} . '@cpan.org'
         );
+        gravatar_image( \@emails, $size );
     }
 );
 
@@ -141,31 +154,6 @@ Template::Alloy->define_vmethod(
         return $digest;
     }
 );
-
-sub gravatar_fixup {
-    my ( $url, $size ) = @_;
-    if ( $url
-        =~ m{^https?://([a-z0-9.-]+\.)?gravatar\.com/(avatar|userimage)/}i )
-    {
-        my $url = URI->new($url);
-        $url->scheme('https');
-        $url->host('secure.gravatar.com');
-        if ($size) {
-            $url->query_param( s => $size );
-        }
-        else {
-            $url->query_param_delete('s');
-        }
-        if ( my $fallback = $url->query_param('d') ) {
-            $url->query_param( d => gravatar_fixup( $fallback, $size ) );
-        }
-        return $url->as_string;
-    }
-    return $url;
-}
-
-Template::Alloy->define_vmethod( 'text',
-    gravatar_fixup => \&gravatar_fixup, );
 
 Template::Alloy->define_vmethod(
     'text',

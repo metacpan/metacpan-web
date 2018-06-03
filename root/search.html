@@ -9,9 +9,7 @@
       <%- FOREACH author IN authors.authors %>
         <li>
           <a href="/author/<% author.id %>" title="Author page for <% author.name | html %>">
-            <%- IF author.gravatar_url %>
-              <img src="<% author.gravatar_url.gravatar_fixup(30) %>">
-            <%- END %>
+            <img src="<% author.gravatar_image(30) %>">
             <% author.name | html %> (<% author.pauseid %>)
           </a>
         </li>

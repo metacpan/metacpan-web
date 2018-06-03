@@ -85,7 +85,7 @@ sub profile : Local : Args(0) {
         ? [ $req->params->{latitude}, $req->params->{longitude} ]
         : undef;
     $data->{$_} = $req->params->{$_} eq q{} ? undef : $req->params->{$_}
-        for (qw(name asciiname gravatar_url city region country));
+        for (qw(name asciiname city region country));
     $data->{$_} = [ grep {$_} $req->param($_) ] for (qw(website email));
 
     $data->{extra} = $req->param('extra') ? $req->json_param('extra') : undef;
