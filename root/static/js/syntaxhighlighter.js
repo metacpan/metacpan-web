@@ -122,11 +122,11 @@ $(function () {
             var lineCount = leadingSource[0].split("\n").length;
             if (leadingSource.length > 1 && lineCount > 1) {
                 source.attr('data-line', lineCount);
-                document.location.hash = "#L" + lineCount;
             }
-            else {
+            else if (window.history && window.history.replaceState) {
                 // reset the anchor portion of the URL (it just looks neater).
-                document.location.hash = '';
+                var loc = document.location.toString().replace(/#.*/, '');
+                window.history.replaceState(null, '', loc);
             }
         }
     }
