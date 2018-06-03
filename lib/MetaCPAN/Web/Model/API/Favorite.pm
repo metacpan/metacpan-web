@@ -96,15 +96,7 @@ sub get_plusser_authors {
     $self->request( '/author/by_user', { user => $users } )->transform(
         done => sub {
             my $res = shift;
-            return [] unless $res->{authors};
-
-            return [
-                map +{
-                    id  => $_->{pauseid},
-                    pic => $_->{gravatar_url},
-                },
-                @{ $res->{authors} }
-            ];
+            return $res->{authors} || [];
         }
     );
 }

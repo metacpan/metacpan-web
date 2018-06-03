@@ -15,11 +15,11 @@
 <h4> PAUSE users who ++ed <a href="/release/<% plusser_data %>"><% plusser_data %></a></h4>
 <!-- For plussers -->
 <div class ="plussers_disp">
-<% FOREACH plusser IN plusser_authors%>
+<% FOREACH plusser IN plusser_authors %>
 
 <div class="plusser">
-    <a href="/author/<% plusser.id %>">
-        <img src="<% plusser.pic.gravatar_fixup(75) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="" width="75" height="75">
+    <a href="/author/<% plusser.pauseid %>">
+        <img src="<% plusser.gravatar_url.gravatar_fixup(75) || '/static/icons/user.png' %>" title="<% plusser.pauseid %>" alt="" width="75" height="75">
         <% plusser.id %>
     </a>
 </div>
