@@ -12,6 +12,7 @@ use Future;
 
 use Moo;
 
+
 has api_secure  => ( is => 'ro',   required => 1 );
 has url_prefix  => ( is => 'ro',   required => 1 );
 has object_type => ( is => 'ro',   required => 1 );
@@ -96,6 +97,10 @@ END_XML_HEADER
             for my $hit (@$hits) {
                 my $link_field = $hit->{fields}{ $self->field_name };
                 $link_field = $link_field->[0] if ref $link_field;
+
+                # our robots.txt blocks /source/
+                next if $link_field =~ /source/;
+
                 my $url = $self->url_prefix . $link_field;
                 $fh->print( "    <url><loc>"
                         . encode_entities_numeric($url)
