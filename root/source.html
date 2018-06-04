@@ -45,7 +45,7 @@
 
 <div class="content">
 <% IF !file.binary %>
-<pre id="source" class="line-numbers pod-toggle<% IF file.sloc > 0; " pod-hidden"; END %>" data-pod-lines="<%
+<pre id="source" class="line-numbers pod-toggle<% IF file.sloc > 10; " pod-hidden"; END %>" data-pod-lines="<%
   file.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')
 %>"><code class="language-<% filetype %>"><% source %></code></pre>
 <% ELSE %>
