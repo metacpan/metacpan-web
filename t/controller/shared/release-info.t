@@ -141,18 +141,6 @@ test_psgi app, sub {
             # TODO: Download
             # TODO: Changes
 
-            foreach my $booktype (qw(mobi epub)) {
-                my ( $source, $sel )
-                    = $type eq 'module'
-                    ? ( $qs_module, '' )
-                    : ( $qs_dist, 1 );
-                $tx->is(
-                    "//a[text()=\"\U$booktype\E\"]/\@href",
-                    "http://perlybook.org/?source=$source&book_selection=$sel&target=$booktype",
-                    "link for perlybook $booktype"
-                );
-            }
-
             optional_test home_page => sub {
                 ok( $tx->find_value('//a[text()="Homepage"]/@href'),
                     'link for resources.homepage' );
