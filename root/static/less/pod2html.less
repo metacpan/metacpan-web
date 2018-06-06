@@ -47,4 +47,49 @@
             }
         }
     }
+
+    > .panel {
+        position: relative;
+    }
+
+    .dragoverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        display: none;
+    }
+    .drayoverlay-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.2;
+        border-radius: 4px;
+        background-color: #0000ff;
+        opacity: 0.2;
+    }
+    .dragoverlay-label {
+        width: 150px;
+        border: blue 5px dashed;
+        border-radius: 20px;
+        padding: 58px 0 58px 0;
+        margin-left: auto;
+        margin-right: auto;
+        top: 50%;
+        position: relative;
+        margin-top: -70px;
+        background: #aaf;
+        color: #fff;
+        font-size: 24px;
+        line-height: 1em;
+        text-align: center;
+    }
+
+    &.dragging .dragoverlay {
+        display: block;
+    }
 }

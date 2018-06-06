@@ -436,7 +436,7 @@ $(document).ready(function() {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     pod2html_text.get(0).value = e.target.result;
-                    pod2html_update(pod2html_text.get(0).value);
+                    pod2html_update(e.target.result);
                 };
                 reader.readAsText(file);
             }
@@ -447,6 +447,41 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         pod2html_update();
+    });
+
+    var renderer = $(".metacpan-pod-renderer")
+
+    var dragTimer;
+    renderer.on("dragover", function(event) {
+        event.preventDefault();
+        if (dragTimer) {
+            window.clearTimeout(dragTimer);
+        }
+        dragTimer = window.setTimeout(function() {
+            renderer.removeClass("dragging");
+            window.clearTimeout(dragTimer);
+            dragTimer = null;
+        }, 500);
+    });
+
+    $(document).on("dragenter", function(event) {
+        renderer.addClass("dragging");
+    });
+
+    renderer.on("drop", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        renderer.removeClass("dragging");
+        if (dragTimer) {
+            window.clearTimeout(dragTimer);
+            dragTimer = null;
+        }
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            pod2html_text.get(0).value = e.target.result;
+            pod2html_update(e.target.result);
+        };
+        reader.readAsText(event.originalEvent.dataTransfer.files[0]);
     });
 });
 
