@@ -3,15 +3,16 @@ package MetaCPAN::Web::Types;
 use strict;
 use warnings;
 
-use parent 'MooseX::Types::Combine';
+use Type::Library -base;
+use Type::Utils -all;
 
-__PACKAGE__->provide_types_from(
-    qw(
-        MooseX::Types::Common::Numeric
-        MooseX::Types::Common::String
-        MooseX::Types::Moose
-        MooseX::Types::URI
-        )
-);
+BEGIN {
+    extends qw(
+        Types::Standard
+        Types::Common::Numeric
+        Types::Common::String
+        Types::URI
+    );
+}
 
 1;

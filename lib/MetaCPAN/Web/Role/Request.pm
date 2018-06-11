@@ -4,7 +4,7 @@ use utf8;
 use Moose::Role;
 use Plack::Session;
 use Cpanel::JSON::XS ();
-use MetaCPAN::Web::Types qw( PositiveInt );
+use MetaCPAN::Web::Types qw( is_PositiveInt );
 use Try::Tiny;
 
 use namespace::autoclean;
