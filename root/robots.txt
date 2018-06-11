@@ -5,6 +5,7 @@ Disallow: /login/
 Disallow: /diff/
 Disallow: /source/
 Disallow: /raw/
+Disallow: /account/
 
 # Do not allow changing the default per page as is not useful
 Disallow: /*?*size=*
