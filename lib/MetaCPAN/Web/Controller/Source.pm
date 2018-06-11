@@ -8,6 +8,10 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub index : Path : Args {
     my ( $self, $c, @module ) = @_;
 
+    if ( $c->req->params->{raw} ) {
+        $c->detach( 'raw', \@module );
+    }
+
     my ( $source, $module );
     if ( @module == 1 ) {
         $module = $c->model('API::Module')->find(@module)->get;
@@ -43,6 +47,20 @@ sub index : Path : Args {
     else {
         $c->detach('/not_found');
     }
+}
+
+sub raw : Private {
+    my ( $self, $c, @module ) = @_;
+
+    if ( @module == 1 ) {
+        my $module = $c->model('API::Module')->find(@module)->get;
+        @module = @{$module}{qw(author release path)};
+    }
+
+    $c->res->redirect( $c->config->{api_external_secure}
+            . '/source/'
+            . join( '/', @module ) );
+    $c->detach;
 }
 
 sub add_cache_headers {
