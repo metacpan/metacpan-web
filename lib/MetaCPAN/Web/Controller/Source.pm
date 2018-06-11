@@ -11,8 +11,7 @@ sub index : Path : Args {
     my ( $source, $module );
     if ( @module == 1 ) {
         $module = $c->model('API::Module')->find(@module)->get;
-        $module[0] = join q{/}, $module->{author}, $module->{release},
-            $module->{path};
+        @module = @{$module}{qw(author release path)};
         $source = $c->model('API::Module')->source(@module)->get;
     }
     else {
