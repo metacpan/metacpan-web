@@ -23,7 +23,9 @@ sub index : Path : Args {
     }
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->get;
-        $c->res->last_modified( $module->{date} );
+
+        $self->add_cache_headers( $c, $module );
+
         $c->stash( {
             template  => 'browse.html',
             files     => $files,
@@ -44,10 +46,8 @@ sub index : Path : Args {
     }
 }
 
-sub content : Private {
-    my ( $self, $c ) = @_;
-
-    my $file = $c->stash->{file};
+sub add_cache_headers {
+    my ( $self, $c, $file ) = @_;
 
     $c->add_surrogate_key('SOURCE');
     $c->add_dist_key( $file->{distribution} );
@@ -55,6 +55,16 @@ sub content : Private {
 
     $c->browser_max_age('1h');
     $c->cdn_max_age('1y');
+
+    $c->res->last_modified( $file->{date} );
+}
+
+sub content : Private {
+    my ( $self, $c ) = @_;
+
+    my $file = $c->stash->{file};
+
+    $self->add_cache_headers( $c, $file );
 
     # could this be a method/function somewhere else?
     if ( !$file->{binary} ) {
