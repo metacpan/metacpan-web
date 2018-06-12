@@ -4,10 +4,9 @@
 <div class="content toplists row">
 <% FOREACH author IN authors %>
 <div class="entry col-sm-6 col-md-3">
-    <%- IF author.gravatar_url %>
     <div class="gravatar">
         <a href="/author/<% author.pauseid %>">
-            <img src="<% author.gravatar_url.gravatar_fixup(75) %>" class="author-img" style="width: 75px; height: 75px">
+            <img src="<% author.gravatar_image(75) %>" class="author-img" style="width: 75px; height: 75px">
         </a>
     </div>
     <%- END %>

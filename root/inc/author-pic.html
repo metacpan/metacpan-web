@@ -6,7 +6,7 @@
 <%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
 <% FOREACH plusser IN plusser_authors.shuffle.first(author_nums) %>
 
-<a class="display-all" href="/author/<% plusser.id %>"><img src="<% plusser.pic.gravatar_fixup(20) || '/static/icons/user.png' %>" title="<% plusser.id %>" alt="<% plusser.id %>"></a>
+<a class="display-all" href="/author/<% plusser.pauseid %>"><img src="<% plusser.gravatar_image(20) %>" title="<% plusser.pauseid %>" alt="<% plusser.pauseid %>"></a>
 
 <% END %>
 
@@ -23,11 +23,9 @@
 <% END %>
 
 <div class="author-pic">
-<%- IF author.gravatar_url %>
 <a href="/author/<% author.pauseid %>">
-  <img src="<% author.gravatar_url.gravatar_fixup(130) %>">
+  <img src="<% author.gravatar_image(130) %>">
 </a>
-<% END %>
 <strong>
   <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
 </strong>

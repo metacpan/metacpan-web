@@ -16,8 +16,8 @@
         <a href="/author/<% contributor.pauseid %>"
            class="cpan-author"
         >
-        <%- IF contributor.gravatar_url -%>
-        <img class="gravatar" width="20" height="20" src="<% contributor.gravatar_url.gravatar_fixup(20) %>" />
+        <%- IF contributor.pauseid || contributor.email.size -%>
+        <img class="gravatar" width="20" height="20" src="<% contributor.gravatar_image(20) %>" />
         <%- END -%>
         <% contributor.name %></a>
         <% ELSE %>

@@ -68,7 +68,7 @@ test_psgi app, sub {
         );
 
         $res_body
-            = q({"asciiname":"foo","email":["foobar@cpan.org"],"gravatar_url":"https://secure.gravatar.com/avatar/12345678901234567890123456789012?s=130&d=identicon","name":"foo","pauseid":"FOO","updated":"2017-02-15T22:18:19","user":"12345678901234567890","website":[]});
+            = q({"asciiname":"foo","email":["foobar@cpan.org"],"name":"foo","pauseid":"FOO","updated":"2017-02-15T22:18:19","user":"12345678901234567890","website":[]});
         ok(
             $res = $cb->( GET '/account/profile' ),
             'GET /account/profile happy case'
@@ -96,7 +96,6 @@ test_psgi app, sub {
             'longitude'     => '9.7320 E',
             'name'          => 'Բարեւ',
             'asciiname'     => 'asciiname1',
-            'gravatar_url'  => 'gravatar_url1',
             'city'          => 'city1',
             'region'        => 'region1',
             'country'       => 'country1',
@@ -121,9 +120,8 @@ test_psgi app, sub {
                     'feed' => 'http://example.org/feed1',
                     'url'  => 'http://example.org/blog1',
                 } ],
-                'asciiname'    => 'asciiname1',
-                'gravatar_url' => 'gravatar_url1',
-                'donation'     => [ {
+                'asciiname' => 'asciiname1',
+                'donation'  => [ {
                     'name' => 'donation.name1',
                     'id'   => 'donation.id1',
                 } ],
@@ -156,14 +154,13 @@ test_psgi app, sub {
             'Բարեւ', '... and the new user data is in the page' );
 
         $form = [
-            'name'         => 'Բարեւ',
-            'asciiname'    => 'asciiname1',
-            'utf8'         => '🐪',
-            'gravatar_url' => '',
-            'city'         => '',
-            'region'       => '',
-            'country'      => '',
-            'extra'        => '',
+            'name'      => 'Բարեւ',
+            'asciiname' => 'asciiname1',
+            'utf8'      => '🐪',
+            'city'      => '',
+            'region'    => '',
+            'country'   => '',
+            'extra'     => '',
         ];
         ok(
             $res = $cb->( POST '/account/profile', $form ),
@@ -172,22 +169,21 @@ test_psgi app, sub {
         cmp_deeply(
             decode_json( $api_req->content ),
             {
-                'updated'      => '2017-02-15T22:18:19',
-                'user'         => '12345678901234567890',
-                'name'         => 'Բարեւ',
-                'asciiname'    => 'asciiname1',
-                'pauseid'      => 'FOO',
-                'country'      => undef,
-                'blog'         => undef,
-                'city'         => undef,
-                'donation'     => undef,
-                'email'        => [],
-                'gravatar_url' => undef,
-                'location'     => undef,
-                'profile'      => undef,
-                'website'      => [],
-                'region'       => undef,
-                'extra'        => undef,
+                'updated'   => '2017-02-15T22:18:19',
+                'user'      => '12345678901234567890',
+                'name'      => 'Բարեւ',
+                'asciiname' => 'asciiname1',
+                'pauseid'   => 'FOO',
+                'country'   => undef,
+                'blog'      => undef,
+                'city'      => undef,
+                'donation'  => undef,
+                'email'     => [],
+                'location'  => undef,
+                'profile'   => undef,
+                'website'   => [],
+                'region'    => undef,
+                'extra'     => undef,
             },
             '... and the API PUT request contains the right stuff'
         );
