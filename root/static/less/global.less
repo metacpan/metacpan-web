@@ -139,6 +139,19 @@ ul {
     white-space: nowrap;
     display: block;
     overflow: hidden;
+    width: 100%;
+    span {
+        display: inline-block;
+        vertical-align: bottom;
+
+        &:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+a.ellipsis:hover * {
+    text-decoration: underline;
 }
 
 .btn-link {
