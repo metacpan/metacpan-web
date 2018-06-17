@@ -10,5 +10,17 @@ my $port = $ENV{METACPAN_WEB_PORT} || 5001;
 
 builder {
     enable '+MetaCPAN::Middleware::Static' => root => $root_dir;
-    mount '/' => Plack::App::Proxy->new(remote => "http://localhost:$port")->to_app;
+    enable sub {
+        my ($app) = @_;
+        sub {
+            my ($env) = @_;
+            $env->{HTTP_X_FORWARDED_HTTPS} = 'ON'
+                if $env->{'psgi.url_scheme'} eq 'https';
+            $app->($env);
+        };
+    };
+    mount '/' => Plack::App::Proxy->new(
+        remote => "http://localhost:$port",
+        preserve_host_header => 1,
+    )->to_app;
 };

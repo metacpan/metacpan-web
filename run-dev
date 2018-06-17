@@ -1,5 +1,24 @@
 #!/bin/bash
 
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --suffix)
+            METACPAN_WEB_CONFIG_LOCAL_SUFFIX="$2"
+            export METACPAN_WEB_CONFIG_LOCAL_SUFFIX
+            shift
+        ;;
+        --suffix=*)
+            METACPAN_WEB_CONFIG_LOCAL_SUFFIX="${1:9}"
+            export METACPAN_WEB_CONFIG_LOCAL_SUFFIX
+        ;;
+        *)
+            echo "Unsupported option $1" >&2
+            exit 1
+        ;;
+    esac
+    shift
+done
+
 export METACPAN_WEB_PORT=5001
 export PLACK_ENV=development
 export COLUMNS="$(tput cols)"
