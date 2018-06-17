@@ -103,9 +103,19 @@ sub wrap {
         mount '/sitemap-releases.xml.gz' => Plack::App::File->new(
             file => 'root/static/sitemaps/sitemap-releases.xml.gz' )->to_app;
 
-        mount '/favicon.ico' =>
-            Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
+        my $favicon_app
+            = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
             ->to_app;
+        mount '/favicon.ico' => sub {
+            my $res = $favicon_app->(@_);
+            push @{ $res->[1] },
+                (
+                'Cache-Control'     => "max-age=${day_ttl}",
+                'Surrogate-Control' => "max-age=${year_ttl}",
+                'Surrogate-Key'     => 'assets',
+                );
+            $res;
+        };
         my $static_app
             = Plack::App::File->new( root => 'root/static' )->to_app;
         mount '/static' => sub {
