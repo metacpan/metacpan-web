@@ -1,0 +1,13 @@
+<%- title = "CPAN Authors" %>
+
+<div class="content row">
+  <ul class="author-index">
+    <%- FOREACH letter IN [ 'A' .. 'Z' ] -%>
+<%    %><li<% IF letter == prefix; ' class="current"' | none; END %>><a href="/authors/<% letter %>"><% letter %></a></li><% -%>
+    <%- END %>
+  </ul>
+
+  <%- INCLUDE inc/author-grid.html %>
+
+  <%- INCLUDE inc/pager.html size = page_size %>
+</div>

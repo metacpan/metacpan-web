@@ -1,0 +1,31 @@
+.author-index {
+    text-align: center;
+    width: 100%;
+    li {
+        display: inline;
+
+        a {
+            display: inline-block;
+            text-align: center;
+            line-height: 28px;
+            width: 28px;
+            color: #fff;
+            background-color: @linkColor;
+            border: @linkColor 1px solid;
+            margin: 2px;
+        }
+
+        &.current {
+            a {
+                color: @linkColor;
+                background-color: #fff;
+            }
+        }
+
+        &:nth-child(13)::after {
+            display: block;
+            content: " ";
+        }
+    }
+    margin-bottom: 10px;
+}

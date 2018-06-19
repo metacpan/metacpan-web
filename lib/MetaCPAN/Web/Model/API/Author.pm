@@ -5,6 +5,7 @@ use namespace::autoclean;
 
 use Future ();
 use Ref::Util qw( is_arrayref );
+use URL::Encode qw(url_encode_utf8);
 
 extends 'MetaCPAN::Web::Model::API';
 
@@ -68,6 +69,27 @@ sub by_user {
     $ret->transform(
         done => sub {
             return exists $_[0]->{authors} ? $_[0]->{authors} : [];
+        }
+    );
+}
+
+sub by_prefix {
+    my ( $self, $prefix, $page_size, $page ) = @_;
+
+    return Future->done( [] )
+        unless defined $prefix;
+
+    $page_size //= 100;
+    $page      //= 1;
+
+    my $from = $page_size * ( $page - 1 );
+
+    my $ret = $self->request(
+        '/author/by_prefix/' . url_encode_utf8($prefix),
+        undef,
+        {
+            from => $from,
+            size => $page_size,
         }
     );
 }
