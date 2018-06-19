@@ -1,19 +1,6 @@
 <%- title = "CPAN Top Uploaders" %>
 <%- INCLUDE inc/recent-bar.html %>
 
-<div class="content toplists row">
-<% FOREACH author IN authors %>
-<div class="entry col-sm-6 col-md-3">
-    <div class="gravatar">
-        <a href="/author/<% author.pauseid %>">
-            <img src="<% author.gravatar_image(75) %>" class="author-img" style="width: 75px; height: 75px">
-        </a>
-    </div>
-    <strong class="pauseid">
-        <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
-    </strong>
-    <span class="name" title="<% author.asciiname %>"><% author.name %></span>
-    <strong class="count"><% author.releases %> release<% IF author.releases > 1 %>s<% END %></strong>
-</div>
-<% END %>
+<div class="content row">
+  <%- INCLUDE inc/author-grid.html %>
 </div>

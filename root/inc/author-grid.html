@@ -1,0 +1,18 @@
+<div class="author-grid">
+<% FOREACH author IN authors %>
+<div class="entry col-sm-6 col-md-3">
+    <div class="gravatar">
+        <a href="/author/<% author.pauseid %>">
+            <img src="<% author.gravatar_image(75) %>" class="author-img" style="width: 75px; height: 75px">
+        </a>
+    </div>
+    <strong class="pauseid">
+        <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
+    </strong>
+    <span class="name" title="<% author.asciiname %>"><% author.name %></span>
+    <%- IF author.releases.defined %>
+    <strong class="count"><% author.releases %> release<% IF author.releases > 1 %>s<% END %></strong>
+    <%- END %>
+</div>
+<% END %>
+</div>
