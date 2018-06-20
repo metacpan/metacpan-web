@@ -18,13 +18,13 @@
   </div>
 <% END %>
 
-<% FOREACH group IN results; item = group.0 %>
+<% FOREACH group IN results; item = group.hits.0 %>
   <div class="module-result">
   <big><strong>
    <% link_to_file(item) | none %>
    <%- IF item.abstract; ' - '; item.abstract; END %>
   </strong></big>
-  <% INCLUDE inc/river-gauge.html, distribution = item.distribution, river = item.river %>
+  <% INCLUDE inc/river-gauge.html, distribution = item.distribution, river = group.river %>
   <% INCLUDE inc/favorite.html release = item favorites = release.favorites %>
   <br>
   <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
@@ -38,12 +38,12 @@
   <%- END %>
   <!-- <% item.score %> -->
 <br>
-<% IF group.size > 1 %>
+<% IF group.hits.size > 1 %>
 <ul>
-  <% FOREACH item IN group; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
+  <% FOREACH item IN group.hits; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
   <% link_to_file(item) | none %>
   <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
-  <% IF group.size > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.size - 4 %> more result<% IF group.size - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
+  <% IF group.total > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.total - 4 %> more result<% IF group.total - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
 </ul>
 <% END %>
   </div>

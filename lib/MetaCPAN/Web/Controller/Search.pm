@@ -75,10 +75,10 @@ sub index : Path : Args(0) {
         }
     }
     else {
-        my $results = $model->search_web( $query, $from, $page_size );
-
-        my $authors = $c->model('API::Author')->search( $query, $from );
-        ( $results, $authors ) = ( $results->get, $authors->get );
+        my ( $results, $authors ) = Future->needs_all(
+            $model->search_web( $query, $from, $page_size ),
+            $c->model('API::Author')->search( $query, $from ),
+        )->get;
 
         if ( !$results->{total} && !$authors->{total} ) {
             my $suggest = $query;
