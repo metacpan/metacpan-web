@@ -42,10 +42,9 @@ sub autocomplete {
 
 sub search_web {
     my ( $self, $query, $from, $page_size ) = @_;
-    $self->request( "/search/web", undef,
+    $self->request( "/search/web/v2", undef,
         { q => $query, size => $page_size // 20, from => $from // 0 } )
-        ->then( $self->add_river(
-        sub { map @$_, @{ $_[0]{results} || [] } } ) );
+        ->then( $self->add_river( sub { @{ $_[0]{results} || [] } } ) );
 }
 
 sub first {
