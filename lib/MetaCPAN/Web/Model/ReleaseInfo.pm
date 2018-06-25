@@ -171,8 +171,11 @@ sub groom_irc {
             my $host = $url->authority;
             my $port;
             my $user;
-            if ( $host =~ s/:(\d+)$// ) {
-                $port = $1;
+            if ( $host =~ s/:(\+)?(\d+)$// ) {
+                $port = $2;
+                if ($1) {
+                    $ssl = 1;
+                }
             }
             if ( $host =~ s/^(.*)@// ) {
                 $user = $1;
@@ -182,22 +185,19 @@ sub groom_irc {
             my $channel
                 = $path || $url->fragment || $url->query_param('channel');
             $channel =~ s/^(?![#~!+])/#/;
-            $channel = uri_escape($channel);
 
-            if ( $host =~ /(?:^|\.)freenode\.(?:com|org|net)$/ ) {
-                $irc_info->{web}
-                    = "https://webchat.freenode.net/?randomnick=1&prompt=1&channels=${channel}";
-            }
-            else {
-                my $server = $host
-                    . (
-                      $ssl ? q{:+} . ( $port || 6697 )
-                    : $port ? ":$port"
-                    :         q{}
-                    );
-                $irc_info->{web}
-                    = "https://chat.mibbit.com/?channel=${channel}&server=${server}";
-            }
+            my $link
+                = 'irc://'
+                . $host
+                . (
+                  $ssl ? q{:+} . ( $port || 6697 )
+                : $port ? ":$port"
+                :         q{}
+                )
+                . '/'
+                . $channel
+                . '?nick=mc-guest-?';
+            $irc_info->{web} = 'https://kiwiirc.com/nextclient/#' . $link;
         }
     }
 
