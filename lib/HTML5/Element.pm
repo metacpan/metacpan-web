@@ -1,11 +1,11 @@
-package MetaCPAN::Web::Test::HTML5::Element;
+package HTML5::Element;
 use strict;
 use warnings;
 
 use parent 'HTML::Element';
 
-use MetaCPAN::Web::Test::HTML5::Element::SVG;
-use constant SVG_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::SVG';
+use HTML5::Element::SVG;
+use constant SVG_CLASS => 'HTML5::Element::SVG';
 
 sub insert_element {
     my ($self, $tag, @more) = @_;

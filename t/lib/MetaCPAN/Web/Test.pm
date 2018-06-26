@@ -8,11 +8,11 @@ use warnings;
 use HTTP::Request::Common qw( GET POST );    ## no perlimports
 use HTTP::Message::PSGI   ();                ## no perlimports
 use Plack::Test           qw( test_psgi);    ## no perlimports
+use HTML5::TreeBuilder;
 use base 'Exporter';
-use Encode                                  qw( decode_utf8 );
-use Future                                  ();
-use MetaCPAN::Web::Test::HTML5::TreeBuilder ();
-use Test::More import => [qw( is )];
+use Encode      qw( decode_utf8 );
+use Future      ();
+use Test::More  import => [qw( is )];
 use Test::XPath ();
 use Try::Tiny   qw( catch try );
 our @EXPORT = qw(
@@ -75,8 +75,7 @@ sub tx {
 
 # Text::XPath has `is_html` but the LibXML HTML parser doesn't like some html 5 (like nav).
     if ( delete $opts->{html} ) {
-        $xml = MetaCPAN::Web::Test::HTML5::TreeBuilder->new_from_content($xml)
-            ->as_XML;
+        $xml = HTML5::TreeBuilder->new_from_content($xml)->as_XML;
     }
 
     # Upgrading some library (not sure which) in Sep/Oct 2013 started

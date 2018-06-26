@@ -1,8 +1,8 @@
-package MetaCPAN::Web::Test::HTML5::Element::SVG;
+package HTML5::Element::SVG;
 use strict;
 use warnings;
 
-use parent 'MetaCPAN::Web::Test::HTML5::Element';
+use parent 'HTML5::Element';
 
 sub starttag_XML {
     my $self   = shift;

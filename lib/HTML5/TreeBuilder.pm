@@ -1,15 +1,14 @@
-package MetaCPAN::Web::Test::HTML5::TreeBuilder;
+package HTML5::TreeBuilder;
 use strict;
 use warnings;
 
 use parent 'HTML::TreeBuilder';
 
-use MetaCPAN::Web::Test::HTML5::Element::SVG ();    ## no perlimports
+use HTML5::Element::SVG;
+use constant SVG_CLASS => 'HTML5::Element::SVG';
 
-use constant SVG_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::SVG';
-
-use MetaCPAN::Web::Test::HTML5::Element::MathML;
-use constant MATHML_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::MathML';
+use HTML5::Element::MathML;
+use constant MATHML_CLASS => 'HTML5::Element::MathML';
 
 my @html5_elements = qw(
     article audio aside bdi datalist canvas details dialog embed figcaption
