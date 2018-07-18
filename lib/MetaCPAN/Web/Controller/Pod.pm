@@ -274,31 +274,35 @@ sub filter_html {
             #
             # SVG tags.
             #
-            circle  => [qw(id cx cy r style transform)],
-            clippath=> [qw(id clippathunits style transform)],
-            defs    => [qw(id style transform)],
-            ellipse => [qw(id cx cy rx ry style transform)],
-            g       => [qw(id style transform)],
-            line    => [qw(id style transform x1 y1 x2 y2)],
-            marker  => [qw(id markerheight markerunits markerwidth orient refx refy)],
-            mask    => [qw(id height maskunits maskcontentunits style x y width)],
+            circle   => [qw(id cx cy r style transform)],
+            clippath => [qw(id clippathunits style transform)],
+            defs     => [qw(id style transform)],
+            ellipse  => [qw(id cx cy rx ry style transform)],
+            g        => [qw(id style transform)],
+            line     => [qw(id style transform x1 y1 x2 y2)],
+            marker   => [
+                qw(id markerheight markerunits markerwidth orient refx refy)],
+            mask =>
+                [qw(id height maskunits maskcontentunits style x y width)],
             lineargradient => [
-                        qw(id gradientunits gradienttransform spreadmethod
-                           x1 x2 y1 y2 xlink:href)
+                qw(id gradientunits gradienttransform spreadmethod
+                    x1 x2 y1 y2 xlink:href)
             ],
-            path    => [qw(id d pathlength style transform)],
-            polygon => [qw(id points style transform)],
-            polyline=> [qw(id points style transform)],
+            path           => [qw(id d pathlength style transform)],
+            polygon        => [qw(id points style transform)],
+            polyline       => [qw(id points style transform)],
             radialgradient => [
-                        qw(id gradientunits gradienttransform spreadmethod
-                           cx cy fx fy r xlink:href)
+                qw(id gradientunits gradienttransform spreadmethod
+                    cx cy fx fy r xlink:href)
             ],
-            rect    => [qw(id height style transform x y width)],
-            stop    => [qw(id offset style)],
-            svg     => [qw(id height preserveaspectratio version viewbox
-                           width xmlns xmlns:xlink)],
-            title   => [qw(id style)],
-            use     => [qw(id height transform width x xlink xlink:href y)],
+            rect => [qw(id height style transform x y width)],
+            stop => [qw(id offset style)],
+            svg  => [
+                qw(id height preserveaspectratio version viewbox
+                    width xmlns xmlns:xlink)
+            ],
+            title => [qw(id style)],
+            use   => [qw(id height transform width x xlink xlink:href y)],
         },
         replace_img => sub {
 
