@@ -32,6 +32,7 @@ sub release : Chained('index') : PathPart('') : Args(2) {
     $c->forward( 'get', [ $author, $release ] );
 }
 
+# /contributing-to/$name
 sub get : Private {
     my ( $self, $c, @args ) = @_;
 
@@ -42,16 +43,19 @@ sub get : Private {
     my $file = List::Util::first { $_->{name} =~ /$contributing_re/ } @$files;
 
     if ( !exists $file->{path} ) {
-        my $release = join q{/}, @args;
+        my $pod_file = $c->stash->{module}
+            = $c->model('API::Module')->find(@args)->get;
+
+        my $release_info
+            = $c->model('ReleaseInfo')
+            ->get( $pod_file->{author}, $pod_file->{release} )
+            ->else( sub { Future->done( {} ) } );
+        $c->stash( $release_info->get );
+
         $c->stash( {
-            message => 'Ask the author on how to contribute to this release.',
-            suggest => {
-                description => 'Try the release info page',
-                url         => $c->uri_for("/release/$release"),
-                link_text   => $release,
-            }
+            template => 'contributing_not_found.html'
         } );
-        $c->detach('/not_found');
+        $c->response->status(404);
     }
     else {
         my @path = split m{/}, $file->{path};
