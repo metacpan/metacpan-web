@@ -1,0 +1,78 @@
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
+  <% INCLUDE inc/breadcrumbs.html schema_org = 1 %>
+
+  <ul class="nav-list slidepanel">
+    <li class="visible-xs">
+      <% INCLUDE mobile/toolbar-search-form.html %>
+    </li>
+    <li class="nav-header">
+      <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
+    </li>
+    <li>
+      Distribution: <% module.distribution | html %></span>
+    </li>
+    <% IF documented_module.version %>
+    <li>
+      Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
+    </li>
+    <% END %>
+    <li>
+      <a data-keyboard-shortcut="g s" href="/source/<% module.author %>/<% module.release %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
+      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+    </li>
+    <% IF module.pod_path %>
+    <li>
+      <a data-keyboard-shortcut="g p" href="/source/<% module.author %>/<% module.release %>/<% module.pod_path %>"><i class="fa fa-fw fa-file-code-o black"></i>Pod Source</a>
+      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/<% module.pod_path %>">raw</a>)
+    </li>
+    <% END %>
+    <li>
+      <a data-keyboard-shortcut="g b" href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+    </li>
+    <% PROCESS inc/release-info.html schema_org = 1 %>
+    <li class="nav-header">Activity</li>
+    <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
+    <% INCLUDE inc/release-tools.html schema_org = 1 %>
+  </ul>
+
+  <button id="right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
+  <div id="right-panel" class="pull-right">
+  <div class="box-right">
+  <% INCLUDE inc/author-pic.html author = author %>
+  <% INCLUDE inc/contributors.html contributors = contributors %>
+  </div>
+  <% INCLUDE inc/dependencies.html release = release, module = module %>
+  </div>
+
+  <div class="content about">
+  <% USE MultiMarkdown(heading_ids => 1) -%>
+  <% FILTER multimarkdown %>
+# Oops, this distribution has no CONTRIBUTING.md yet!
+
+### For module authors
+
+Please add a `CONTRIBUTING` or `CONTRIBUTING.md` file, containing a
+short description about how you would like people to contribute, for
+example:
+
+- I prefer to get pull requests rather than patches. Please do pull
+requests on branches.
+- Please add an entry for each change in Changes as well.
+- If it's a significant change, please email me first, so we can discuss
+it, and I can tag it as being worked on.
+
+For larger dists, you can also add a `Contributing.pod` to further
+elaborate on your contributing process; see
+[Moose::Manual::Contributing][moose] as an example.
+
+[moose]: https://metacpan.org/pod/distribution/Moose/lib/Moose/Manual/Contributing.pod  
+
+### For module users
+
+Please encourage the module author to add the above file, either through
+posting an issue or contacting them directly.
+
+  <% END %>
+  </div>
+</div>
