@@ -2574,6 +2574,17 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Mac-SystemDirectory-0.10
+    pathname: E/ET/ETHER/Mac-SystemDirectory-0.10.tar.gz
+    provides:
+      Mac::SystemDirectory 0.10
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+      perl 5.006
+      strict 0
+      warnings 0
   MetaCPAN-Moose-0.000003
     pathname: O/OA/OALDERS/MetaCPAN-Moose-0.000003.tar.gz
     provides:
