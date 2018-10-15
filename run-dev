@@ -39,5 +39,9 @@ done
 for fast_handler in Feersum Gazelle Starlet Starman; do
     perl -mPlack::Handler::$fast_handler -e1 &>/dev/null && break
 done
+unset HTTP_PROXY
+unset http_proxy
+unset HTTPS_PROXY
+unset https_proxy
 plackup --no-default-middleware -s "$fast_handler" -o localhost -p 5000 static-app.psgi
 kill "$app_pid"
