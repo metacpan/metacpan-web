@@ -29,7 +29,8 @@ FOREACH dep IN deps.sort %>
       <%- END -%>
         <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
-    <%- IF deps.size %>
+    <%- IF 0 && deps.size %>
+        <!-- Disabled for now, since stratopan's TLS cert is expired -->
         <li>
             <button class="btn btn-link" data-toggle="modal" data-target="#dependencies-graph">
             <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</button>
@@ -37,4 +38,4 @@ FOREACH dep IN deps.sort %>
     <%- END %>
 </ul>
 
-<%- IF deps.size; INCLUDE inc/dependencies-graph.html; END %>
+<%- IF 0 && deps.size; INCLUDE inc/dependencies-graph.html; END %>
