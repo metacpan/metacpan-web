@@ -80,7 +80,7 @@ function toggleTOC() {
 }
 
 function setFavTitle(button) {
-    button.attr('title', button.hasClass('active') ? 'Remove from favorite' : 'Add to favorite');
+    button.attr('title', button.hasClass('active') ? 'Remove from favorites' : 'Add to favorites');
     return;
 }
 
