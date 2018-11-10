@@ -1,13 +1,14 @@
 package MetaCPAN::Web::Controller::Pod;
 
-use HTML::Restrict;
-use HTML::TokeParser;
 use Moose;
-use Try::Tiny;
-use URI;
-use HTML::Escape qw(escape_html);
-use Future;
+
 use Encode qw( encode decode DIE_ON_ERR LEAVE_SRC );
+use Future;
+use HTML::Escape qw(escape_html);
+use HTML::Restrict   ();
+use HTML::TokeParser ();
+use Try::Tiny qw( try );
+use URI ();
 
 use namespace::autoclean;
 
@@ -153,11 +154,11 @@ sub view : Private {
     $c->add_author_key( $release->{author} );
 
     $c->stash( {
-        template          => 'pod.html',
-        module            => $data,
-        pod               => $pod_html,
         canonical         => $canonical,
         documented_module => $documented_module,
+        module            => $data,
+        pod               => $pod_html,
+        template          => 'pod.html',
     } );
 
     unless ( $pod->{raw} ) {

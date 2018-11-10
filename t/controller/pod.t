@@ -8,6 +8,13 @@ test_psgi app, sub {
 
     ok( my $res = $cb->( GET '/pod/DOESNTEXIST' ), 'GET /pod/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
+
+    subtest 'coverage' => sub {
+        my $res = $cb->( GET '/pod/release/ETHER/Moose-2.2010/lib/Moose.pm' );
+        is( $res->code, 200, 'found older Moose pod' );
+        like( $res->content, qr{92\.19% Coverage}, 'coverage in sidebar' );
+    };
+
     ok( $res = $cb->( GET '/pod/Moose' ), 'GET /pod/Moose' );
     is( $res->code, 200, 'code 200' );
 

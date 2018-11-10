@@ -8,7 +8,7 @@ extends 'Catalyst::Model';
 
 use List::Util qw( all max );
 use Ref::Util qw( is_hashref );
-use URI;
+use URI ();
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
 use Future;
@@ -102,6 +102,7 @@ sub _release_data {
     return (
         author       => $self->_author->get($author),
         contributors => $self->_contributors->get( $author, $release ),
+        coverage     => $self->_release->coverage($release),
         (
             $self->full_details
             ? (
@@ -130,6 +131,7 @@ sub normalize {
                 grep is_hashref($_),
                 values %$data
             ),
+            coverage     => $data->{coverage},
             release      => $data->{release}{release},
             favorites    => $data->{favorites}{favorites}{$dist},
             rating       => $data->{rating}{distributions}{$dist},
