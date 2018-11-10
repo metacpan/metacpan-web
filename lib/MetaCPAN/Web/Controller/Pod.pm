@@ -1,13 +1,14 @@
 package MetaCPAN::Web::Controller::Pod;
 
-use HTML::Restrict;
-use HTML::TokeParser;
 use Moose;
-use Try::Tiny;
-use URI;
-use HTML::Escape qw(escape_html);
-use Future;
+
 use Encode qw( encode decode DIE_ON_ERR LEAVE_SRC );
+use Future;
+use HTML::Escape qw(escape_html);
+use HTML::Restrict   ();
+use HTML::TokeParser ();
+use Try::Tiny qw( try );
+use URI ();
 
 use namespace::autoclean;
 
