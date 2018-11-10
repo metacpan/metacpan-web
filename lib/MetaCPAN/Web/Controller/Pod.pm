@@ -153,11 +153,11 @@ sub view : Private {
     $c->add_author_key( $release->{author} );
 
     $c->stash( {
-        template          => 'pod.html',
-        module            => $data,
-        pod               => $pod_html,
         canonical         => $canonical,
         documented_module => $documented_module,
+        module            => $data,
+        pod               => $pod_html,
+        template          => 'pod.html',
     } );
 
     unless ( $pod->{raw} ) {
