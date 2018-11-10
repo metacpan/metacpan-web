@@ -26,6 +26,11 @@ it under the same terms as Perl itself.
 
 =cut
 
+sub coverage {
+    my ( $self, $release ) = @_;
+    $self->request("/cover/$release");
+}
+
 sub get {
     my ( $self, $author, $release ) = @_;
     $self->request("/release/$author/$release");

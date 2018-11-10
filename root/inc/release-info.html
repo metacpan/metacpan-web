@@ -35,6 +35,13 @@
 <li>
     <a href="http://cpants.cpanauthors.org/release/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
 </li>
+<% IF coverage %>
+  <li>
+    <i class="fa fa-fw fa-pie-chart black"></i>
+    <a href="<% coverage.url %>"><% coverage.criteria.total %>% Coverage </a>
+  </li>
+<% END %>
+
 <% IF release.license %>
 <li><i class="fa fa-fw fa-gavel black"></i>License: <% release.license.join(', ') %></li>
 <% END %>
