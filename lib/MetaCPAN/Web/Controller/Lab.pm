@@ -42,7 +42,10 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
 sub dashboard : Local : Args(0) {
     my ( $self, $c ) = @_;
 
+    $c->stash( { template => 'lab/dashboard.html' } );
+
     my $user = $c->model('API::User')->get_profile( $c->token )->get;
+    return unless $user;
 
     my $report;
     my $pauseid = $c->req->params->{'pauseid'};
@@ -50,20 +53,22 @@ sub dashboard : Local : Args(0) {
         $user = { pauseid => $pauseid };
     }
 
+    # I'm not sure if the 300 limit actually corresponds to max distros.
+    # Setting it at 100 for OALDERS, I got less than 30 results back.
+
     if ($user) {
         $pauseid = $user->{pauseid};
         if ($pauseid) {
             $report = $c->model('API::Lab')
-                ->fetch_latest_distros( 1000, $pauseid )->get;
+                ->fetch_latest_distros( 300, $pauseid )->get;
         }
     }
 
     $report->{user} = $user;
 
     $c->stash( {
-        template => 'lab/dashboard.html',
-        pauseid  => $pauseid,
-        report   => $report,
+        pauseid => $pauseid,
+        report  => $report,
     } );
 }
 

@@ -82,7 +82,7 @@ sub fetch_latest_distros {
             my %distros;
 
             foreach my $d ( @{ $data->{releases} } ) {
-                my $license = $d->{license}[0];
+                my $license = $d->{license};
                 my $distro  = $d->{distribution};
                 my $repo    = $d->{'resources.repository'};
 
