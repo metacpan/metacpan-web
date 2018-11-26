@@ -113,37 +113,21 @@ Template::Alloy->define_vmethod(
     },
 );
 
-sub gravatar_image {
-    my ( $emails, $size ) = @_;
-    my $avatar;
-    $emails = ['']
-        if !@$emails;
-    while ( my $email = pop @$emails ) {
-        $avatar = Gravatar::URL::gravatar_url(
-            https   => 1,
-            base    => 'https://www.gravatar.com/avatar/',
-            email   => $email,
-            size    => $size || 80,
-            default => ( $avatar || 'identicon' ),
-        );
-    }
-    return $avatar;
-}
-
 Template::Alloy->define_vmethod(
     'hash',
     gravatar_image => sub {
         my ( $author, $size ) = @_;
-        my @emails = List::Util::uniq(
-            map lc,
-            (
-                  ref $author->{email} ? @{ $author->{email} }
-                : $author->{email}     ? $author->{email}
-                :                        ()
-            ),
-            $author->{pauseid} . '@cpan.org'
+        my $email
+            = ( $author && $author->{pauseid} )
+            ? $author->{pauseid} . '@cpan.org'
+            : '';
+        return Gravatar::URL::gravatar_url(
+            https   => 1,
+            base    => 'https://www.gravatar.com/avatar/',
+            email   => $email,
+            size    => $size || 80,
+            default => 'identicon',
         );
-        gravatar_image( \@emails, $size );
     }
 );
 
