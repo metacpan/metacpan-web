@@ -111,7 +111,7 @@ my %module_field_map = (
 );
 
 sub _files_to_categories {
-    my $self = shift;
+    my $self  = shift;
     my %files = map +( $_->{path} => $_ ), @_;
 
     my $ret = +{
@@ -126,7 +126,7 @@ sub _files_to_categories {
         my $f = $files{$path};
         next
             if $f->{skip};
-        my $path = $f->{path};
+        my $path    = $f->{path};
         my @modules = @{ $f->{module} || [] };
 
         for my $module (@modules) {

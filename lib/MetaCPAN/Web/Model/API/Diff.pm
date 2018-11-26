@@ -24,7 +24,7 @@ sub files {
 }
 
 sub digest {
-    my $self = shift;
+    my $self   = shift;
     my $digest = Digest::SHA::sha1_base64( join( "\0", grep {defined} @_ ) );
     $digest =~ tr/[+\/]/-_/;
     return $digest;

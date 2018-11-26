@@ -23,7 +23,7 @@ my $model
 # $body
 # $body, $type
 sub get_json {
-    $res_body = shift;
+    $res_body     = shift;
     $content_type = shift if @_;
     return $model->source(qw( who cares ))->get;
 }
