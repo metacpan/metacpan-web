@@ -74,7 +74,7 @@ test_psgi app, sub {
     foreach my $test (@tests) {
         ( $test->{release} = $test->{module} ) =~ s/::/-/g
             if !$test->{release};
-        my $qs_dist = $test->{qs_dist} || $test->{release};
+        my $qs_dist   = $test->{qs_dist} || $test->{release};
         my $qs_module = $test->{module};
 
         # turn tests on by default

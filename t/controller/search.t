@@ -125,7 +125,7 @@ sub search_and_find_module {
     my ( $cb, $query, $exp_mod, $desc ) = @_;
     $query = encode( 'UTF-8' => $query ) if is_utf8($query);
     my $res = req_200_ok( $cb, GET("/search?q=$query"), $desc );
-    my $tx = tx($res);
+    my $tx  = tx($res);
 
     # make sure there is a link tag whose content is the module name
     $tx->ok(

@@ -66,7 +66,7 @@ sub _cache_key_for_user {
 
 sub _add_fav_list_to_stash {
     my ( $self, $c, $size ) = @_;
-    my $user = $c->user;
+    my $user  = $c->user;
     my $faves = $c->model('API::Favorite')->by_user( $user->id, $size )->get;
     $c->stash( { faves => $faves } );
     return $user;

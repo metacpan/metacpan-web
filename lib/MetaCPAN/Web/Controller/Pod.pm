@@ -298,10 +298,8 @@ sub filter_html {
             ],
             rect => [qw(id height style transform x y width)],
             stop => [qw(id offset style)],
-            svg  => [
-                qw(id height preserveaspectratio version viewbox
-                    width xmlns xmlns:xlink)
-            ],
+            svg  => [ qw(id height preserveaspectratio version viewbox
+                    width xmlns xmlns:xlink) ],
             title => [qw(id style)],
             use   => [qw(id height transform width x xlink xlink:href y)],
         },

@@ -56,7 +56,7 @@ sub find {
 
 sub get {
     my ( $self, $author, $release_name ) = @_;
-    my $release = $self->_release->get( $author, $release_name );
+    my $release      = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
     $release->then( sub {
         my $data = shift;

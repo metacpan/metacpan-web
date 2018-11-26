@@ -61,7 +61,7 @@ builder {
         sub {
             my ($env) = @_;
             if ( $env->{HTTP_FASTLY_SSL} ) {
-                $env->{HTTPS} = 'ON';
+                $env->{HTTPS}             = 'ON';
                 $env->{'psgi.url_scheme'} = 'https';
             }
             if ( my $host = $env->{HTTP_X_FORWARDED_HOST} ) {

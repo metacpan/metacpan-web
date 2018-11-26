@@ -50,7 +50,7 @@ test_psgi app, sub {
     {
         # Test the html produced once; test different filetypes below.
         my $prefix = '/source/RJBS/Dist-Zilla-5.043';
-        my @tests = ( [ pl => "$prefix/bin/dzil" ], );
+        my @tests  = ( [ pl => "$prefix/bin/dzil" ], );
 
         foreach my $test (@tests) {
             my ( $type, $uri ) = @$test;

@@ -67,8 +67,7 @@ subtest 'normalize_issues' => sub {
     }
 
     # Examples found in the api (distinct after replacing dist name with X):
-    foreach my $url (
-        qw(
+    foreach my $url ( qw(
         http://rt.cpan.org
         http://rt.cpan.org/Dist/Display.html?Name=X
         http://rt.cpan.org/Dist/Display.html?Queue=X
@@ -83,8 +82,7 @@ subtest 'normalize_issues' => sub {
         http://rt.cpan.org/Public/Dist/Display.html?Queue=X
         http://rt.cpan.org/Public/Dist/Display.html?Status=Active&Name=X
         http://rt.cpan.org/Ticket/Create.html?Queue=X
-        )
-        )
+        ) )
     {
         normalize_issues_ok(
             bugtracker( web => $url ),
@@ -109,15 +107,13 @@ subtest 'normalize_issues' => sub {
         'no resources: rt url; counts from old source: no count'
     );
 
-    foreach my $url (
-        qw(
+    foreach my $url ( qw(
         https://github.com/user/repo
         http://github.com/user/repo
         https://github.com/user/repo/issues
         http://www.github.com/user/repo/issues
         https://www.github.com/user/repo/tree
-        )
-        )
+        ) )
     {
         normalize_issues_ok(
             bugtracker( web => $url ),
