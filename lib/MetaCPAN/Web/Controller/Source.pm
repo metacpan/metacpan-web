@@ -16,7 +16,9 @@ sub index : Path : Args {
     if ( @module == 1 ) {
         $module = $c->model('API::Module')->find(@module)->get;
         @module = @{$module}{qw(author release path)};
-        $source = $c->model('API::Module')->source(@module)->get;
+        if ( 3 == grep defined, @module ) {
+            $source = $c->model('API::Module')->source(@module)->get;
+        }
     }
     else {
         ( $source, $module ) = map { $_->get } (

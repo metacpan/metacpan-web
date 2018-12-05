@@ -24,6 +24,8 @@ sub get {
 sub by_user {
     my ( $self, $user, $size ) = @_;
     $size ||= 250;
+    return Future->done( [] )
+        if !defined $user;
     my $ret
         = $self->request( "/favorite/by_user/$user", { size => $size } )
         ->transform(

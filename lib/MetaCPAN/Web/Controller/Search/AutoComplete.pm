@@ -16,8 +16,9 @@ sub index : Path : Args(0) {
     my @results     = (
         (
             map +{
-                value => "$_->{pauseid} - $_->{name}",
-                data  => { id => $_->{pauseid}, type => 'author' }
+                value => join( ' - ',
+                    $_->{pauseid}, $_->{name} || $_->{asciiname} || () ),
+                data => { id => $_->{pauseid}, type => 'author' }
             },
             @{ $author_data->get->{authors} }
         ),

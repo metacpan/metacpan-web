@@ -21,8 +21,8 @@ sub distribution : Local Args(1) {
     my $total_modules = scalar @$modules;
     my %num_modules_of;
     for my $module (@$modules) {
-        ++$num_modules_of{ $module->{owner} };
-        ++$num_modules_of{$_} for @{ $module->{co_maintainers} };
+        ++$num_modules_of{$_}
+            for $module->{owner} // (), @{ $module->{co_maintainers} };
     }
     my @releaser = sort grep { $num_modules_of{$_} == $total_modules }
         keys %num_modules_of;

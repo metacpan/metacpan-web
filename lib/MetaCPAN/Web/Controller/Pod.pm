@@ -72,6 +72,9 @@ sub distribution : Local : Args {
 
     $c->browser_max_age('1h');
 
+    $c->detach('/not_found')
+        if !defined $dist || !@path;
+
 # TODO: Could we do this with one query?
 # filter => { path => join('/', @path), distribution => $dist, status => latest }
 

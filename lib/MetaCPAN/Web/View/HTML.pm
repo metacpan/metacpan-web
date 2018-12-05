@@ -61,8 +61,13 @@ sub format_datetime {
 # format just the date consistent with W3CDTF / ISO 8601 / RFC 3339
 sub common_date_format {
     my $date = shift;
-    my $dt   = parse_datetime($date);
-    return sprintf( '%04d-%02d-%02d', @$dt{qw(year month day)} );
+    my $dt   = parse_datetime($date)
+        or return undef;
+    my ( $year, $month, $day ) = @$dt{qw(year month day)};
+
+    return undef
+        unless defined $year && defined $month && defined $day;
+    return sprintf( '%04d-%02d-%02d', $year, $month, $day );
 }
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
@@ -83,8 +88,8 @@ Template::Alloy->define_vmethod(
         }
 
         # This might fail if somebody adds xmpp:foo@bar.com for example.
-        my $host = eval { $uri->ihost };
-        if ($@) {
+        my $host = $uri->host && eval { $uri->ihost };
+        if ( !$host ) {
             $host = $url_string;
         }
         return $host;

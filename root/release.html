@@ -52,7 +52,7 @@
 <div id="last-changes" class="well collapsed">
     <div id="last-changes-container">
         <%- FOREACH rel IN changes %>
-        <h2 id="whatsnew">Changes for version <% rel.version %><% IF rel.date %> - <% rel.date.dt_date_common %><% END; IF rel.trial %> ( TRIAL RELEASE )<% END %></h2>
+        <h2 id="whatsnew">Changes for version <% rel.version %><% IF rel.date && rel.date.dt_date_common %> - <% rel.date.dt_date_common %><% END; IF rel.trial %> ( TRIAL RELEASE )<% END %></h2>
         <div class="change-entries">
             <% change_group(rel.entries) | none %>
         </div>
