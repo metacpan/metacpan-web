@@ -19,7 +19,10 @@ test_psgi app, sub {
         'Content-type text/html; charset=utf-8'
     );
 
-    ok( $res = $cb->( GET "$source?download=1" ), "GET $source?download=1" );
+    $tx = tx($res);
+    ok( my $dl = $tx->find_value('//a[text()="Download"]/@href'),
+        'contains link to Download' );
+    ok( $res = $cb->( GET $dl ), "GET $dl" );
     is(
         $res->header('Content-Disposition'),
         'attachment; filename=Moose.pm',
@@ -28,7 +31,7 @@ test_psgi app, sub {
     is(
         $res->header('Content-Type'),
         'text/plain; charset=UTF-8',
-        'cotent-type text/plain'
+        'content-type text/plain'
     );
 
 };
