@@ -26,6 +26,11 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
 
+    ## TODO: fix this N+1 Query.
+    for my $entry (@{$c->stash->{recent}}) {
+        $entry->{changes} = $c->model('API::Changes')->release_changes([ $entry->{author}, $entry->{name} ])->get;
+    }
+
     $c->stash->{feed} = $self->build_feed(
         format  => $c->req->params->{'type'},
         entries => $c->stash->{recent},
@@ -174,8 +179,19 @@ sub build_entry {
 
     $e->author( $entry->{author} );
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
-    $e->summary( escape_html( $entry->{abstract} ) );
     $e->title( $entry->{name} );
+
+    my $summary = $entry->{abstract};
+    if (@{$entry->{changes}}) {
+        $summary .= "\n";
+        for my $changelog (@{$entry->{changes}}) {
+            $summary .= "Changes for $changelog->{version} - $changelog->{date}\n";
+            for my $entry (@{$changelog->{entries}}) {
+                $summary .= "- " . $entry->{text} . "\n";
+            }
+        }
+    }
+    $e->summary( escape_html( $summary ) );
 
     # this is a hack to work around RT#124346
     delete $e->{entry}{content}
