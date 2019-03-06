@@ -26,19 +26,25 @@
       Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
     </li>
     <% END %>
+    <% IF permalinks || release.status != 'latest';
+        source_base = '/source/' _ module.author _ '/' _ module.release;
+      ELSE
+        source_base = '/release/' _ module.distribution _ '/source';
+      END
+    -%>
     <li>
-      <a data-keyboard-shortcut="g s" href="/source/<% module.author %>/<% module.release %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
-      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/<% module.path %>">raw</a>)
+      <a data-keyboard-shortcut="g s" href="<% source_base %>/<% module.path %>"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
+      (<a href="<% source_base %>/<% module.path %>?raw=1">raw</a>)
     </li>
     <% IF module.pod_path %>
     <li>
-      <a data-keyboard-shortcut="g p" href="/source/<% module.author %>/<% module.release %>/<% module.pod_path %>"><i class="fa fa-fw fa-file-code-o black"></i>Pod Source</a>
-      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/<% module.pod_path %>">raw</a>)
+      <a data-keyboard-shortcut="g p" href="<% source_base %>/<% module.pod_path %>"><i class="fa fa-fw fa-file-code-o black"></i>Pod Source</a>
+      (<a href="<% source_base %>/<% module.pod_path %>?raw=1">raw</a>)
     </li>
     <% END %>
     <li>
-      <a data-keyboard-shortcut="g b" href="/source/<% module.author %>/<% module.release %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
-      (<a href="<% source_host %>/source/<% module.author %>/<% module.release %>/">raw</a>)
+      <a data-keyboard-shortcut="g b" href="<% source_base %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+      (<a href="<% source_base %>/<% module.path.split("/").splice(0,-1).join("/") %>?raw=1">raw</a>)
     </li>
     <% PROCESS inc/release-info.html schema_org = 1 %>
     <li class="nav-header">Activity</li>
