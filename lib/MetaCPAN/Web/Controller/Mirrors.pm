@@ -9,6 +9,7 @@ sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('MIRRORS');
+    $c->add_surrogate_key('STATIC');
     $c->browser_max_age('1d');
     $c->cdn_max_age('1d');
 

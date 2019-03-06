@@ -8,6 +8,7 @@ sub auto : Private {
     my ( $self, $c ) = @_;
 
     $c->add_surrogate_key('ABOUT');
+    $c->add_surrogate_key('STATIC');
     $c->browser_max_age('1d');
     $c->cdn_max_age('1y');
 
