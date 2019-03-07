@@ -51,7 +51,7 @@ my $value_re = qr{
 }x;
 
 my $color_re = qr{
-(?:
+(?<color>
     [a-zA-Z]+
 |
     \#[0-9a-zA-Z]{1,6}
@@ -63,13 +63,44 @@ my $color_re = qr{
 }x;
 
 my $unit_re = qr{
-(?:
-        [0-9](?:\.[0-9]+)?
+(?<unit>
+        [+-]?[0-9]+(?:\.[0-9]+)?(?i:e[+-][0-9]+)?
         (?:ch|em|ex|rem|vh|vw|vmin|vmax|px|cm|mm|in|pc|pt|%)
 |
         0
 )
 }x;
+
+my %unit_factor = (
+    px  => 1,
+    cm  => 96/2.54,
+    mm  => 96/2.54/10,
+    in  => 96,
+    pc  => 16,
+    pt  => 4/3,
+
+    # estimate based on common font sizes, close enough for our purposes
+    ch  => 8,
+    em  => 14.3,
+    ex  => 7.5,
+    rem => 10,
+
+);
+
+sub map_units {
+    my $in = shift;
+    my ($unit) = $in =~ s/([a-z]+)$//;
+    $in *= 1;
+
+    return 0
+        if $in == 0;
+
+    if (my $factor = $unit_factor{$unit}) {
+        return $in * $factor;
+    }
+
+    return undef;
+}
 
 my ($border_style_re) = map qr{$_}, join('|', qw(
     none
@@ -161,7 +192,14 @@ sub filter_style {
     @$rules = grep {
         my ($rule, $value) = @$_;
         my $filter = $filters->{$rule};
-        $rule && $value =~ /\A$filter\z/;
+        $filter && $value =~ /\A$filter\z/ && do {
+            if (my $units = $-{unit}) {
+                !grep $_ < 0, grep defined, map map_units($_), @$units;
+            }
+            else {
+                1;
+            }
+        };
     } @$rules;
     return style_gen($rules);
 }
