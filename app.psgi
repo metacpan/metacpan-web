@@ -12,6 +12,7 @@ use Config::ZOMG ();
 use Log::Log4perl;
 use File::Spec;
 use File::Path ();
+use File::Find ();
 use Plack::Builder;
 use Digest::SHA;
 
@@ -52,6 +53,48 @@ use MetaCPAN::Web;
 my $tempdir = "$root_dir/var/tmp";
 
 STDERR->autoflush;
+
+if ( !$dev_mode ) {
+    my $view = MetaCPAN::Web->view('HTML');
+
+    if ( my $tmpl_cache = $view->config->{COMPILE_DIR} ) {
+        File::Path::rmtree( [ glob "$tmpl_cache/*" ] );
+    }
+
+    my @tmpl_dir = @{ $view->include_path };
+    my $alloy    = Template::Alloy->new( $view->config );
+
+    s{/\z}{} for @tmpl_dir;
+
+    my @templates;
+    for my $tmpl_dir (@tmpl_dir) {
+        File::Find::find(
+            {
+                no_chdir => 1,
+                wanted   => sub {
+                    if ( $_ eq $tmpl_dir . '/static' ) {
+                        $File::Find::prune = 1;
+                        return;
+                    }
+
+                    return
+                        if -d;
+
+                    push @templates, File::Spec->abs2rel( $_, $tmpl_dir );
+                },
+            },
+            $tmpl_dir,
+        );
+    }
+
+    for my $template (@templates) {
+
+        # might faile if we try to load something that isn't actually a
+        # template, and it can't be parsed.  Although that shouldn't happen
+        # because we are skipping static files.
+        eval { $alloy->load_template($template) };
+    }
+}
 
 # explicitly call ->to_app on every Plack::App::* for performance
 builder {
