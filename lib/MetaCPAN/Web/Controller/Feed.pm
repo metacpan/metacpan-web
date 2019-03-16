@@ -26,14 +26,21 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
 
-    my $changes
-        = $c->model('API::Changes')
-        ->by_releases( [
-        map { [ $_->{author}, $_->{name} ] } @{ $c->stash->{recent} }
-        ] )->get;
+    my %changes_index;
 
-    my %changes_index
-        = map { ( $_->{author} . '/' . $_->{name} ) => $_ } @$changes;
+    my @copy = @{ $c->stash->{recent} };
+    while ( my @batch = splice( @copy, 0, 10 ) ) {
+        my $changes
+            = $c->model('API::Changes')
+            ->by_releases( [ map { [ $_->{author}, $_->{name} ] } @batch ] )
+            ->get;
+
+        for my $x (@$changes) {
+            my $k = $x->{author} . '/' . $x->{name};
+            $changes_index{$k} = $x;
+        }
+    }
+
     for ( @{ $c->stash->{recent} } ) {
 
         # Provided in Model/API/Changes.pm Line 67
