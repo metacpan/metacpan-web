@@ -26,9 +26,19 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
 
-    ## TODO: fix this N+1 Query.
-    for my $entry (@{$c->stash->{recent}}) {
-        $entry->{changes} = $c->model('API::Changes')->release_changes([ $entry->{author}, $entry->{name} ])->get;
+    my $changes
+        = $c->model('API::Changes')
+        ->by_releases( [
+        map { [ $_->{author}, $_->{name} ] } @{ $c->stash->{recent} }
+        ] )->get;
+
+    my %changes_index
+        = map { ( $_->{author} . '/' . $_->{name} ) => $_ } @$changes;
+    for ( @{ $c->stash->{recent} } ) {
+
+        # Provided in Model/API/Changes.pm Line 67
+        my $k = $_->{author} . '/' . $_->{name};
+        $_->{changes} = $changes_index{$k};
     }
 
     $c->stash->{feed} = $self->build_feed(
@@ -181,17 +191,22 @@ sub build_entry {
     $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
     $e->title( $entry->{name} );
 
-    my $summary = $entry->{abstract};
-    if (@{$entry->{changes}}) {
-        $summary .= "\n";
-        for my $changelog (@{$entry->{changes}}) {
-            $summary .= "Changes for $changelog->{version} - $changelog->{date}\n";
-            for my $entry (@{$changelog->{entries}}) {
-                $summary .= "- " . $entry->{text} . "\n";
-            }
+    if ( my $changelog = $entry->{changes} ) {
+        my $content = '<p>' . escape_html( $entry->{abstract} ) . '</p>';
+        $content .= '<p>Changes for ' . escape_html( $changelog->{version} );
+        if ( $changelog->{date} ) {
+            $content .= ' - ' . escape_html( $changelog->{date} );
         }
+        $content .= '</p><ul>';
+        for my $entry ( @{ $changelog->{entries} } ) {
+            $content .= '<li>' . escape_html( $entry->{text} ) . "</li>\n";
+        }
+        $content .= '</ul>';
+        $e->summary($content);
     }
-    $e->summary( escape_html( $summary ) );
+    else {
+        $e->summary( escape_html( $entry->{abstract} ) );
+    }
 
     # this is a hack to work around RT#124346
     delete $e->{entry}{content}
