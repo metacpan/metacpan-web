@@ -59,7 +59,7 @@ sub by_releases {
             my @changelogs;
             for my $change (@changes) {
                 next unless $change->{release} =~ m/-([0-9_\.]+(-TRIAL)?)\z/;
-                my $version = _parse_version($1);
+                my $version  = _parse_version($1);
                 my @releases = _releases( $change->{changes_text} );
 
                 while ( my $r = shift @releases ) {
