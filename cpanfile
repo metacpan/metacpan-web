@@ -77,6 +77,7 @@ requires 'Template::Plugin::Markdown';
 requires 'Template::Plugin::MultiMarkdown', '0.08';
 requires 'Template::Plugin::Number::Format';
 requires 'Template::Plugin::Page';
+requires 'Term::Size::Any';
 requires 'Text::Pluralize';
 requires 'Try::Tiny', '0.24';
 requires 'Type::Library';
