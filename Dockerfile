@@ -10,7 +10,7 @@ ENV PERL_MM_USE_DEFAULT=1 PERL_CARTON_PATH=/carton
 COPY cpanfile cpanfile.snapshot /metacpan-web/
 WORKDIR /metacpan-web
 
-RUN cpanm App::cpm \
+RUN cpanm --notest App::cpm \
     && cpm install -g Carton \
     && useradd -m metacpan-web -g users \
     && mkdir /carton \
