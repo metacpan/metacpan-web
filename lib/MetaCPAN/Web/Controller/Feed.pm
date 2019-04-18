@@ -29,7 +29,7 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     my %changes_index;
 
     my @copy = @{ $c->stash->{recent} };
-    while ( my @batch = splice( @copy, 0, 10 ) ) {
+    while ( my @batch = splice( @copy, 0, 100 ) ) {
         my $changes
             = $c->model('API::Changes')
             ->by_releases( [ map { [ $_->{author}, $_->{name} ] } @batch ] )
