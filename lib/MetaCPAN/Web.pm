@@ -45,7 +45,16 @@ sub token {
 
 __PACKAGE__->log( Log::Log4perl::Catalyst->new( undef, autoflush => 1 ) );
 
-__PACKAGE__->setup();
+# Squash warning when running under Docker
+# Trouble trying to detect your terminal size, looking at $ENV{COLUMNS}
+if ( exists $ENV{'affinity:container'} ) {
+    require Term::Size::Perl;
+    no warnings 'once', 'redefine';
+    *Term::Size::Perl::chars = sub {80};
+    use warnings;
+}
+
+__PACKAGE__->setup;
 __PACKAGE__->meta->make_immutable;
 
 1;
