@@ -26,7 +26,7 @@ BEGIN {
     $config   = Config::ZOMG->open(
         name => 'MetaCPAN::Web',
         path => $root_dir,
-    )->load;
+    );
 
     if ($dev_mode) {
         $ENV{PLACK_SERVER}       = 'Standalone';
