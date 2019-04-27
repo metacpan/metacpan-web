@@ -16,15 +16,14 @@ env:
     - PERL_CARTON_PATH=$HOME/local
     - CPAN_RESOLVER=snapshot
 
-
     - DOCKER_IMAGE_NAME=metacpan-web
   matrix:
 
     # Get one passing run with coverage and one passing run with Test::Vars
     # checks.  If run together they more than double the build time.
-    - USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$HOME/no-snapshot HARNESS_VERBOSE=1
-    - USE_CPANFILE_SNAPSHOT=true
-    - USE_CPANFILE_SNAPSHOT=true COVERAGE=1
+    - USE_CPANFILE_SNAPSHOT=false CPAN_RESOLVER=metadb PERL_CARTON_PATH=$HOME/no-snapshot HARNESS_VERBOSE=1  BUILD_DOCKER=no
+    - USE_CPANFILE_SNAPSHOT=true BUILD_DOCKER=yes
+    - USE_CPANFILE_SNAPSHOT=true COVERAGE=1  BUILD_DOCKER=no
 
 before_install:
   - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
@@ -64,11 +63,13 @@ deploy:
       - deploy/build.sh
     on:
       branch: master
+      condition: $BUILD_DOCKER -eq 'yes'
   - provider: script
     script:
       - deploy/push.sh
     on:
       branch: master
+      condition: $BUILD_DOCKER -eq 'yes'
 
 notifications:
   email:
