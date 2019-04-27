@@ -63,13 +63,13 @@ deploy:
       - deploy/build.sh
     on:
       branch: master
-      condition: $BUILD_DOCKER -eq 'yes'
+      condition: $BUILD_DOCKER = 'yes'
   - provider: script
     script:
       - deploy/push.sh
     on:
       branch: master
-      condition: $BUILD_DOCKER -eq 'yes'
+      condition: $BUILD_DOCKER = 'yes'
 
 notifications:
   email:
