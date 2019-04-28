@@ -152,7 +152,7 @@
                         <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <%- FOREACH identity IN ['Facebook', 'GitHub', 'Twitter', 'Google'] %>
+                            <%- FOREACH identity IN ['GitHub', 'Twitter', 'Google'] %>
                             <li>
                                 <a href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)">
                                 <i class="fa fa-<% identity.lower %> fa-fw"></i>
