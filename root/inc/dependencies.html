@@ -33,13 +33,4 @@ FOREACH dep IN deps.sort %>
         <a href="https://cpandeps.grinnz.com/?dist=<% release.distribution | uri %>">
         <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</a>
     </li>
-    <%- IF 0 && deps.size %>
-        <!-- Disabled for now, since stratopan's TLS cert is expired -->
-        <li>
-            <button class="btn btn-link" data-toggle="modal" data-target="#dependencies-graph">
-            <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</button>
-        </li>
-    <%- END %>
 </ul>
-
-<%- IF 0 && deps.size; INCLUDE inc/dependencies-graph.html; END %>
