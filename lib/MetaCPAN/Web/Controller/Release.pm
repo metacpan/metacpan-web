@@ -266,7 +266,7 @@ sub _link_issue_text {
       |
         (\bRT$sep)
       |
-        (\b(?:GH|PR)$sep)
+        (\b(?:GH|PR|[Gg]it[Hh]ub)$sep)
       |
         ((?:\bbug\s*)?\#)
       )
