@@ -29,12 +29,10 @@ FOREACH dep IN deps.sort %>
       <%- END -%>
         <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
-<%- IF deps.size %>
     <li>
         <a href="https://cpandeps.grinnz.com/?dist=<% release.distribution | uri %>">
         <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</a>
     </li>
-<%- END %>
     <%- IF 0 && deps.size %>
         <!-- Disabled for now, since stratopan's TLS cert is expired -->
         <li>
