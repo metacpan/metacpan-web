@@ -30,13 +30,4 @@
   <a rel="author" href="/author/<% author.pauseid %>"><% author.pauseid %></a>
 </strong>
 <span title="<% author.asciiname %>"><% author.name %></span>
-<%-
-   FOREACH p IN author.profile;
--%>
-<% IF p.name == "googleplus" %>
-  <a rel="author" href="<% profiles.${p.name}.url.replace('%s', p.id) %>?rel=author" target="_blank" title="<% p.name %> - <% p.id%>" style="display: none;">
-    <img src="/static/images/profile/<% p.name %>.png" width=16 height=16 alt="<% p.name %>">
-  </a>
-<% END %>
-<% END %>
 </div>
