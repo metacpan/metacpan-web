@@ -45,6 +45,41 @@ sub release_changes {
     );
 }
 
+sub by_releases {
+    my ( $self, $releases ) = @_;
+
+    my %release_lookup = map { ( $_->[0] . '/' . $_->[1] ) => $_ } @$releases;
+    my $path = 'by_releases?'
+        . join( '&', map { 'release=' . $_ } keys %release_lookup );
+    $self->get($path)->transform(
+        done => sub {
+            my $response = shift;
+            my @changes  = @{ $response->{changes} };
+
+            my @changelogs;
+            for my $change (@changes) {
+                next unless $change->{release} =~ m/-([0-9_\.]+(-TRIAL)?)\z/;
+                my $version  = _parse_version($1);
+                my @releases = _releases( $change->{changes_text} );
+
+                while ( my $r = shift @releases ) {
+                    if ( $r->{version_parsed} eq $version ) {
+                        $r->{current} = 1;
+
+                        # Used in Controller/Feed.pm Line 37
+                        $r->{author} = $change->{author};
+                        $r->{name}   = $change->{release};
+
+                        push @changelogs, $r;
+                        last;
+                    }
+                }
+            }
+            return \@changelogs;
+        }
+    );
+}
+
 sub _releases {
     my ($content) = @_;
     my $changelog
