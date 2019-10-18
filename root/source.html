@@ -45,9 +45,14 @@
 
 <div class="content">
 <% IF !file.binary %>
+  <% IF filetype == 'markdown' %>
+    <% USE MultiMarkdown(heading_ids => 1) -%>
+    <% FILTER multimarkdown %><% source.filter_html %><% END %>
+  <% ELSE %>
 <pre id="source" class="line-numbers pod-toggle<% IF file.sloc > 10; " pod-hidden"; END %>" data-pod-lines="<%
   file.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')
 %>"><code class="language-<% filetype %>"><% source %></code></pre>
+  <% END %>
 <% ELSE %>
 This file cannot be displayed inline.  Try the <a href="<% raw_url %>">raw file</a>.
 <% END %>
