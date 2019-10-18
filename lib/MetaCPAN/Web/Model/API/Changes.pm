@@ -49,7 +49,7 @@ sub by_releases {
     my ( $self, $releases ) = @_;
 
     my %release_lookup = map { ( $_->[0] . '/' . $_->[1] ) => $_ } @$releases;
-    my $path = 'by_releases?'
+    my $path           = 'by_releases?'
         . join( '&', map { 'release=' . $_ } keys %release_lookup );
     $self->get($path)->transform(
         done => sub {
