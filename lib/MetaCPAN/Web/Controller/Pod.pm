@@ -33,7 +33,7 @@ sub find : Path : Args(1) {
         ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
-    # TODO: Disambiguate if there's more than once match. #176
+    # TODO: Disambiguate if there's more than one match. #176
 
     $c->forward( 'view', [@path] );
 }
