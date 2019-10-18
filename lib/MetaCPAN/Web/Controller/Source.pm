@@ -116,6 +116,8 @@ sub detect_filetype {
 
         return 'c' if /\. ( c | h | xs ) $/ix;
 
+        return 'markdown' if /\. md $/ix;
+
         # Are other changelog files likely to be in CPAN::Changes format?
         return 'cpanchanges' if /^ Changes $/ix;
     }

@@ -48,21 +48,28 @@ test_psgi app, sub {
     }
 
     {
-        # Test the html produced once; test different filetypes below.
-        my $prefix = '/source/RJBS/Dist-Zilla-5.043';
-        my @tests  = ( [ pl => "$prefix/bin/dzil" ], );
+        # Test Markdown and non-Markdown html produced once each; test
+        # different filetypes below.
+        my @tests = (
+            {
+                uri      => '/source/RJBS/Dist-Zilla-5.043/bin/dzil',
+                xpath    => '//div[@class="content"]/pre/code/@class',
+                expected => qr/\blanguage-perl\b/,
+                desc     => 'has pre-block with expected syntax brush',
+            },
+            {
+                uri      => '/source/ETHER/Moose-2.1005/README.md',
+                xpath    => '//h1[@id="moose"]',
+                expected => qr/^Moose$/,
+                desc     => 'markdown rendered as HTML',
+            },
+        );
 
         foreach my $test (@tests) {
-            my ( $type, $uri ) = @$test;
-
-            ok( my $res = $cb->( GET $uri ), "GET $uri" );
+            ok( my $res = $cb->( GET $test->{uri} ), "GET $test->{uri}" );
             is( $res->code, 200, 'code 200' );
-            my $tx = tx($res);
-            like(
-                $tx->find_value(q{//div[@class="content"]/pre/code/@class}),
-                qr/\blanguage-perl\b/,
-                'has pre-block with expected syntax brush'
-            );
+            like( tx($res)->find_value( $test->{xpath} ),
+                $test->{expected}, $test->{desc}, );
         }
     }
 };
@@ -92,6 +99,8 @@ test_psgi app, sub {
         # There wouldn't normally be a file with no path
         # but that doesn't mean this shouldn't work.
         [ perl => { mime => 'text/x-script.perl' } ],
+
+        [ markdown => 'CONTRIBUTING.md' ],
 
         [ plain => 'README' ],
     );

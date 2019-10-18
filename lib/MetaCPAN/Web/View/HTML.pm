@@ -7,6 +7,7 @@ use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
 use Gravatar::URL;
+use MetaCPAN::Web::RenderUtil 'filter_html';
 use Regexp::Common qw(time);
 use Template::Plugin::DateTime;
 use Template::Plugin::Markdown;
@@ -161,6 +162,8 @@ Template::Alloy->define_vmethod(
         return quotemeta( $_[0] );
     },
 );
+
+Template::Alloy->define_vmethod( 'text', filter_html => \&filter_html );
 
 __PACKAGE__->meta->make_immutable( inline_constructor => 0 );
 
