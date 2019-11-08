@@ -1,0 +1,44 @@
+<%- IF notification %>
+<%-
+    USE format;
+    MAILTO = format('mailto:%s?subject=%s&body=%s');
+    NOTIFICATION = {
+        NEEDHELP = {
+            email = 1,
+            title = "Looking for help!",
+            text = "The maintainer of this distribution is looking for people to help them improve this module! If you're interested then please contact them via ",
+            body = format("Hey %s,\r\n\r\nI'm willing to provide some time to help you with new feature for the %s module. if you can let me know what you would like to be done.\r\n\r\nKind Regards,")
+        },
+        ADOPTME = {
+            title  = "Why not adopt me?",
+            text   = "This distribution is up for adoption! If you're interested then please contact pause module admins via ",
+            body   = format("Hey %s,\r\n\r\nI'm interested in adopting the %s module. If you can grant me the privilidge I will release the next version. Kind Regards,"),
+            email  = author.email,
+            name   = author.name
+        },
+        HANDOFF = {
+            title  = "Take me over?",
+            text   = "The maintainer of this distribution is looking for someone to take over! If you're intereset then please contact them via ",
+            body   = format("Hey %s,\r\n\r\nI'm interested in taking over the %s module. If you can grant me the privilidge I will release the next version.\r\n\r\n Kind Regards,")
+        },
+    }.$notification;
+    IF NOTIFICATION.email
+        NOTIFICATION.mailto = MAILTO(
+            (NOTIFICATION.email || author.email),
+            (NOTIFICATION.title _ ' <' _ release.main_module _ '>') | url,
+            NOTIFICATION.body((NOTIFICATION.name || author.name), release.main_module) | url
+        );
+    END
+%>
+<div id="notification" class="well collapsed notify-<% notification %>">
+    <div id="notification-container">
+        <h2><% NOTIFICATION.title %></h2>
+        <span>
+            <% NOTIFICATION.text %>
+            <%- IF NOTIFICATION.email %>
+            <a href="<% NOTIFICATION.mailto %>">email</a>
+            <%- END %>.
+        </span>
+    </div>
+</div>
+<%- END %>
