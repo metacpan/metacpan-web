@@ -284,10 +284,11 @@ sub normalise_notification_type {
     my ( $self, $permission ) = @_;
     return unless $permission && $permission->{co_maintainers};
     for ( reverse @{ $permission->{co_maintainers} } ) {
-        if ( $_ =~ m/NEEDHELP|ADOPTME|HANDOFF/ ) {
+        if ( $_ =~ m/^(NEEDHELP|ADOPTME|HANDOFF)$/ ) {
             return $_;
         }
     }
+    return '';
 }
 
 __PACKAGE__->meta->make_immutable;
