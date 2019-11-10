@@ -28,8 +28,7 @@ sub find : Path : Args(1) {
 
     my $release_info
         = $c->model('ReleaseInfo')
-        ->get( $pod_file->{author}, $pod_file->{release},
-        $pod_file->{module}->[0]->{name} )
+        ->get( $pod_file->{author}, $pod_file->{release} )
         ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
@@ -106,7 +105,7 @@ sub view : Private {
 
     my ( $documentation, $assoc_pod, $documented_module )
         = map { $_->{name}, $_->{associated_pod}, $_ }
-        grep  { @path > 1 || $path[0] eq $_->{name} }
+        grep { @path > 1 || $path[0] eq $_->{name} }
         grep {
               !$data->{documentation}
             || $data->{documentation} eq $_->{name}
