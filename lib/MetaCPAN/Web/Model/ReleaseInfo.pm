@@ -282,7 +282,7 @@ sub normalize_issue_url {
 
 sub normalise_notification_type {
     my ( $self, $permission ) = @_;
-    return unless $permission && $permission->{co_maintainers};
+    return '' unless $permission && $permission->{co_maintainers};
     for ( reverse @{ $permission->{co_maintainers} } ) {
         if ( $_ =~ m/^(NEEDHELP|ADOPTME|HANDOFF)$/ ) {
             return $_;
