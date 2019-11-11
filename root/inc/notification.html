@@ -37,10 +37,11 @@
         );
     END;
 %>
+<input id="<% notification %>" type="checkbox" class="notification-toggle-checkbox" />
 <div id="notification" class="well collapsed notify-<% notification %>">
-    <button class="remove-notification" onclick="this.parentNode.classList.add('notification-hide')">
+    <label class="remove-notification" for="<% notification %>" >
         <i class="fa fa-fw fa-close black""></i>
-    </button>
+    </label>
     <div id="notification-container">
         <h2><% NOTIFICATION.title %></h2>
         <span>

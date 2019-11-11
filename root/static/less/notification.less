@@ -4,7 +4,11 @@
     position: relative;
 }
 
-#notification.notification-hide {
+.notification-toggle-checkbox {
+    display: none;
+}
+
+.notification-toggle-checkbox:checked ~ #notification {
     max-height: 0;
     border: none;
     min-height: 0;
@@ -13,12 +17,11 @@
     transition: min-height .5s cubic-bezier(0, 1, 0.5, 1);
 }
 
-button.remove-notification {
+label.remove-notification {
     position: absolute;
-    right: 4px;
-    top: 4px;
-    border-color: transparent;
-    background: transparent;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
 }
 
 #notification h2 {
