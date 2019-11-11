@@ -1,0 +1,99 @@
+{
+   "orientation" : "any",
+   "scope" : "/",
+   "start_url" : "/",
+   "theme_color" : "#da2037",
+   "icons" : [
+      {
+         "src" : "/static/manifest-icons/96x96-icon.png",
+         "type" : "image/png",
+         "sizes" : "96x96"
+      },
+      {
+         "src" : "/static/manifest-icons/76x76-icon.png",
+         "type" : "image/png",
+         "sizes" : "76x76"
+      },
+      {
+         "sizes" : "72x72",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/72x72-icon.png"
+      },
+      {
+         "sizes" : "70x70",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/70x70-icon.png"
+      },
+      {
+         "sizes" : "60x60",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/60x60-icon.png"
+      },
+      {
+         "sizes" : "57x57",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/57x57-icon.png"
+      },
+      {
+         "sizes" : "48x48",
+         "src" : "/static/manifest-icons/48x48-icon.png",
+         "type" : "image/png"
+      },
+      {
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/36x36-icon.png",
+         "sizes" : "36x36"
+      },
+      {
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/310x310-icon.png",
+         "sizes" : "310x310"
+      },
+      {
+         "sizes" : "192x192",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/192x192-icon.png"
+      },
+      {
+         "sizes" : "180x180",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/180x180-icon.png"
+      },
+      {
+         "sizes" : "152x152",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/152x152-icon.png"
+      },
+      {
+         "sizes" : "150x150",
+         "src" : "/static/manifest-icons/150x150-icon.png",
+         "type" : "image/png"
+      },
+      {
+         "sizes" : "144x144",
+         "src" : "/static/manifest-icons/144x144-icon.png",
+         "type" : "image/png"
+      },
+      {
+         "sizes" : "128x128",
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/128x128-icon.png"
+      },
+      {
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/120x120-icon.png",
+         "sizes" : "120x120"
+      },
+      {
+         "type" : "image/png",
+         "src" : "/static/manifest-icons/114x114-icon.png",
+         "sizes" : "114x114"
+      }
+   ],
+   "dir" : "auto",
+   "background_color" : "#fff",
+   "name" : "metacpan",
+   "description" : "A search engine for CPAN",
+   "short_name" : "cpan",
+   "display" : "standalone"
+}

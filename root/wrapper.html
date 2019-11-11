@@ -100,6 +100,7 @@
         <% IF twitter_card_inc %>
         <% INCLUDE $twitter_card_inc %>
         <% END %>
+        <link rel="manifest" href="/static/manifest.json">
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -132,6 +133,11 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <form action="<% c.uri_for("/account/logout").as_string %>" method="POST" id="metacpan-logout"></form>
+                    <li>
+                        <a href="#" id="install-pwa" style="display: none">
+                            Install standalone application
+                        </a>
+                    </li>
                     <li class="dropdown logged_in" style="display: none;">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         Account
@@ -273,5 +279,42 @@
             </div>
           </div>
         </div>
-    </body>
+	<script>
+        (function () {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                    console.log(registrations);
+                    if (!registrations.length) navigator.serviceWorker.register('/service_worker').then(function (worker) {
+                        console.log('Service Worker Registered');
+                    });
+                });
+
+                var pwa = {
+                    pushButton: document.getElementById('install-pwa'),
+                    deferredPrompt: undefined
+                };
+
+                window.addEventListener('beforeinstallprompt', function (e) {
+                    if (pwa.pushButton) {
+                        e.preventDefault();
+                        pwa.deferredPrompt = e;
+                        pwa.pushButton.style.display = 'block';
+                    }
+                });
+
+                if (pwa.pushButton) pwa.pushButton.addEventListener('click', function (e) {
+                    pwa.pushButton.style.display = 'none';
+                    pwa.deferredPrompt.prompt();
+                    app.deferredPrompt.userChoice.then(function (choiceResult) {
+                        if (choiceResult.outcome !== 'accepted') {
+                            app.pushButton.style.display = 'block';
+                        } else {
+                            app.deferredPrompt = null;
+                        }
+                    });
+                });
+            }
+        })();
+        </script>
+     </body>
 </html>

@@ -83,6 +83,16 @@ sub robots : Path("robots.txt") : Args(0) {
     $c->stash( { template => 'robots.txt' } );
 }
 
+sub service_worker : Path("service_worker") : Args(0) {
+    my ( $self, $c ) = @_;
+    $c->res->content_type('application/javascript');
+    $c->stash( {
+        version      => 'v1.0',
+        template     => 'service_worker.js',
+        current_view => 'Raw'
+    } );
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
