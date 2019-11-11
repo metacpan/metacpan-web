@@ -82,7 +82,7 @@ subtest 'normalize_issues' => sub {
         http://rt.cpan.org/Public/Dist/Display.html?Queue=X
         http://rt.cpan.org/Public/Dist/Display.html?Status=Active&Name=X
         http://rt.cpan.org/Ticket/Create.html?Queue=X
-        ) )
+    ) )
     {
         normalize_issues_ok(
             bugtracker( web => $url ),
@@ -113,7 +113,7 @@ subtest 'normalize_issues' => sub {
         https://github.com/user/repo/issues
         http://www.github.com/user/repo/issues
         https://www.github.com/user/repo/tree
-        ) )
+    ) )
     {
         normalize_issues_ok(
             bugtracker( web => $url ),
@@ -123,6 +123,80 @@ subtest 'normalize_issues' => sub {
         );
     }
 
+};
+
+subtest 'normalize_notification_type' => sub {
+    my @tests = (
+        {
+            params   => undef,
+            expected => 0,
+            message  => 'undef passed as params'
+        },
+        {
+            params   => 'string',
+            expected => 0,
+            message  => 'string passed as params'
+        },
+        {
+            params   => [qw/one two three/],
+            expected => 0,
+            message  => 'array passed as params'
+        },
+        {
+            params   => {},
+            expected => 0,
+            message  => 'empty hash of data passed'
+        },
+        {
+            params => {
+                permission => {}
+            },
+            expected => 0,
+            message  => 'empty permissions hash past'
+        },
+        {
+            params => {
+                permission => {
+                    co_maintainers => [ 'ONE', 'TWO', 'THREE' ]
+                }
+            },
+            expected => 0,
+            message =>
+                'co_maintainers passed without "special" co_maintainer existing'
+        },
+        {
+            params => {
+                permission => {
+                    co_maintainers => [ 'ADOPTME', 'ONE', 'TWO', 'THREE' ]
+                }
+            },
+            expected => 'ADOPTME',
+            message  => 'ADOPTME passed in co_maintainers'
+        },
+        {
+            params => {
+                permission => {
+                    co_maintainers => [ 'ONE', 'NEEDHELP', 'TWO', 'THREE' ]
+                }
+            },
+            expected => 'NEEDHELP',
+            message  => 'NEEDHELP passed in co_maintainers'
+        },
+        {
+            params => {
+                permission => {
+                    co_maintainers => [ 'ONE', 'TWO', 'THREE', 'HANDOFF' ]
+                }
+            },
+            expected => 'HANDOFF',
+            message  => 'HANDOFF passed in co_maintainers'
+        }
+    );
+
+    for my $test (@tests) {
+        is( $model->normalize_notification_type( $test->{params} ),
+            $test->{expected}, $test->{message} );
+    }
 };
 
 done_testing;
