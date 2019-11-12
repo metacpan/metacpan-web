@@ -21,6 +21,7 @@ sub wrap {
 
     my @js_files = map {"/static/js/$_.js"} (
         qw(
+            pwa
             jquery.min
             jquery.tablesorter
             jquery.relatize_date
