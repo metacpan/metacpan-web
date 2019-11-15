@@ -1,0 +1,45 @@
+#notification {
+    margin-bottom: 15px;
+    overflow: auto;
+    position: relative;
+}
+
+.notification-toggle-checkbox {
+    display: none;
+}
+
+.notification-toggle-checkbox:checked ~ #notification {
+    max-height: 0;
+    border: none;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    transition: min-height .5s cubic-bezier(0, 1, 0.5, 1);
+}
+
+label.remove-notification {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+#notification h2 {
+    display: block;
+    font-weight: bold;
+    font-size: 100%;
+    margin: 0;
+    line-height: inherit;
+}
+
+.notify-NEEDHELP {
+    background: #d7f5dd
+}
+
+.notify-ADOPTME {
+    background: #f5efd7;
+}
+
+.notify-HANDOFF {
+    background: #d7e1f5;
+}
