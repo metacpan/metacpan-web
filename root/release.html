@@ -1,4 +1,4 @@
-<% title = release.name _ ' - ' _ release.abstract; rss = 'distribution/' _ release.distribution %>
+<% title = release.name _ ' - ' _ release.abstract; rss = 'distribution/' _ release.distribution; rss_title = 'Recent CPAN Uploads of ' _ release.distribution _ ' - MetaCPAN' %>
 <% canonical = '/release/' _ release.distribution %>
 <% meta_description = release.abstract %>
 <% twitter_card_inc = 'inc/twitter/release.html' %>
