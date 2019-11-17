@@ -1,4 +1,4 @@
-<% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid %>
+<% title = author.name _ " (" _ author.pauseid _ ")"; rss = 'author/' _ author.pauseid; rss_title = 'Recent CPAN Activity of ' _ author.pauseid _ ' - MetaCPAN' %>
 <% twitter_card_inc = 'inc/twitter/author.html' %>
 <ul class="nav-list slidepanel">
     <li class="hidden-phone"><% INCLUDE inc/author-pic.html author = author %></li>

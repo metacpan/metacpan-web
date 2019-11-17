@@ -1,4 +1,4 @@
-<%- rss = 'distribution/' _ file.distribution %>
+<%- rss = 'distribution/' _ file.distribution; rss_title = 'Recent CPAN Uploads of ' _ file.distribution _ ' - MetaCPAN' %>
 <%- title = file.path %>
 <div class="breadcrumbs">
     <a data-keyboard-shortcut="g s" href="/source/<% base = [file.author, file.release].join("/"); base %>"><% [file.author, file.release].join(" / ") %></a>
