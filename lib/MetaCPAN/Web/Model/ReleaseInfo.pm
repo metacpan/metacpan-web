@@ -289,14 +289,14 @@ sub normalize_notification_type {
                 ADOPTME  => 1,
                 HANDOFF  => 1
             );
-            if (   $data->{permission}->{owner}
-                && $special{ $data->{permission}->{owner} } )
+            if ( defined $data->{permission}{owner}
+                && exists $special{ $data->{permission}{owner} } )
             {
-                return $data->{permission}->{owner};
+                return $data->{permission}{owner};
             }
             elsif ( is_arrayref( $data->{permission}{co_maintainers} ) ) {
                 for ( reverse @{ $data->{permission}{co_maintainers} } ) {
-                    if ( $special{$_} ) {
+                    if ( exists $special{$_} ) {
                         return $_;
                     }
                 }
