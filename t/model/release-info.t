@@ -185,12 +185,67 @@ subtest 'normalize_notification_type' => sub {
         {
             params => {
                 permission => {
+                    owner          => 'LNATION',
                     co_maintainers => [ 'ONE', 'TWO', 'THREE', 'HANDOFF' ]
                 }
             },
             expected => 'HANDOFF',
             message  => 'HANDOFF passed in co_maintainers'
-        }
+        },
+        {
+            params => {
+                permission => {
+                    owner => ''
+                }
+            },
+            expected => 0,
+            message  => 'Null string as owner'
+        },
+        {
+            params => {
+                permission => {
+                    owner => undef
+                }
+            },
+            expected => 0,
+            message  => 'Undef as owner'
+        },
+        {
+            params => {
+                permission => {
+                    owner => 'LNATION'
+                }
+            },
+            expected => 0,
+            message  => 'LNATION as owner'
+        },
+        {
+            params => {
+                permission => {
+                    owner => 'ADOPTME'
+                }
+            },
+            expected => 'ADOPTME',
+            message  => 'ADOPTME passed as owner'
+        },
+        {
+            params => {
+                permission => {
+                    owner => 'HANDOFF'
+                }
+            },
+            expected => 'HANDOFF',
+            message  => 'HANDOFF passed as owner'
+        },
+        {
+            params => {
+                permission => {
+                    owner => 'NEEDHELP'
+                }
+            },
+            expected => 'NEEDHELP',
+            message  => 'NEEDHELP passed as owner'
+        },
     );
 
     for my $test (@tests) {
