@@ -283,12 +283,22 @@ sub normalize_issue_url {
 sub normalize_notification_type {
     my ( $self, $data ) = @_;
     if ( is_hashref($data) ) {
-        if (   is_hashref( $data->{permission} )
-            && is_arrayref( $data->{permission}{co_maintainers} ) )
-        {
-            for ( reverse @{ $data->{permission}{co_maintainers} } ) {
-                if ( $_ =~ m/^(NEEDHELP|ADOPTME|HANDOFF)$/ ) {
-                    return $_;
+        if ( is_hashref( $data->{permission} ) ) {
+            my %special = (
+                NEEDHELP => 1,
+                ADOPTME  => 1,
+                HANDOFF  => 1
+            );
+            if ( defined $data->{permission}{owner}
+                && exists $special{ $data->{permission}{owner} } )
+            {
+                return $data->{permission}{owner};
+            }
+            elsif ( is_arrayref( $data->{permission}{co_maintainers} ) ) {
+                for ( reverse @{ $data->{permission}{co_maintainers} } ) {
+                    if ( exists $special{$_} ) {
+                        return $_;
+                    }
                 }
             }
         }
