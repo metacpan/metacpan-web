@@ -31,9 +31,9 @@
     END;
     IF NOTIFICATION.has_email;
         NOTIFICATION.mailto = MAILTO(
-            (NOTIFICATION.email || author.email),
+            (NOTIFICATION.email || author.email.0 || author.email),
             (NOTIFICATION.title _ ' <' _ NOTIFICATION.module _ '>') | url,
-            NOTIFICATION.body((NOTIFICATION.name || author.name), NOTIFICATION.module) | url
+            NOTIFICATION.body((NOTIFICATION.name || author.asciiname || author.name), NOTIFICATION.module) | url
         );
     END;
 %>
