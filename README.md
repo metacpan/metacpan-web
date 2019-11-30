@@ -4,18 +4,12 @@
 
 ## GETTING STARTED
 
-We strongly recommend using [metacpan-developer](https://github.com/metacpan/metacpan-developer),
+We strongly recommend using [metacpan-docker](https://github.com/metacpan/metacpan-docker),
 this will give you a virtual machine already configured and ready to start developing on.
-
-    $ vagrant ssh
-    $ cd $HOME/metacpan-web
-    $ sudo service starman_metacpan-web restart
-
-You'll find some log files in var/logs.
 
 ## Installing manually
 
-If you prefer not to use the VM, the following commands will get you started:
+If you prefer not to use the Docker, the following commands will get you started:
 commands can be converted to:
 
     $ carton install
