@@ -5304,6 +5304,13 @@ DISTRIBUTIONS
       Test::Harness 3.35
       Test::More 1.302047
       Test::Warn 0.30
+  Test-Needs-0.002006
+    pathname: H/HA/HAARG/Test-Needs-0.002006.tar.gz
+    provides:
+      Test::Needs 0.002006
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.006
   Test-NoWarnings-1.04
     pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
     provides:

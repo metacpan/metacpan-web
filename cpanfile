@@ -100,6 +100,7 @@ test_requires 'Perl::Tidy' => '20181120';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
 test_requires 'Test::More', '0.96';
+test_requires 'Test::Needs';
 test_requires 'Test::Perl::Critic';
 test_requires 'Test::XPath', '0.15';
 
