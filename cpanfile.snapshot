@@ -607,41 +607,44 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Code-TidyAll-0.70
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.70.tar.gz
+  Code-TidyAll-0.74
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.74.tar.gz
     provides:
-      Code::TidyAll 0.70
-      Code::TidyAll::Cache 0.70
-      Code::TidyAll::CacheModel 0.70
-      Code::TidyAll::CacheModel::Shared 0.70
-      Code::TidyAll::Config::INI::Reader 0.70
-      Code::TidyAll::Git::Precommit 0.70
-      Code::TidyAll::Git::Prereceive 0.70
-      Code::TidyAll::Git::Util 0.70
-      Code::TidyAll::Plugin 0.70
-      Code::TidyAll::Plugin::CSSUnminifier 0.70
-      Code::TidyAll::Plugin::JSBeautify 0.70
-      Code::TidyAll::Plugin::JSHint 0.70
-      Code::TidyAll::Plugin::JSLint 0.70
-      Code::TidyAll::Plugin::JSON 0.70
-      Code::TidyAll::Plugin::MasonTidy 0.70
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.70
-      Code::TidyAll::Plugin::PerlCritic 0.70
-      Code::TidyAll::Plugin::PerlTidy 0.70
-      Code::TidyAll::Plugin::PerlTidySweet 0.70
-      Code::TidyAll::Plugin::PodChecker 0.70
-      Code::TidyAll::Plugin::PodSpell 0.70
-      Code::TidyAll::Plugin::PodTidy 0.70
-      Code::TidyAll::Plugin::SortLines 0.70
-      Code::TidyAll::Result 0.70
-      Code::TidyAll::Role::HasIgnore 0.70
-      Code::TidyAll::Role::RunsCommand 0.70
-      Code::TidyAll::Role::Tempdir 0.70
-      Code::TidyAll::SVN::Precommit 0.70
-      Code::TidyAll::SVN::Util 0.70
-      Code::TidyAll::Util::Zglob 0.70
-      Code::TidyAll::Zglob 0.70
-      Test::Code::TidyAll 0.70
+      Code::TidyAll 0.74
+      Code::TidyAll::Cache 0.74
+      Code::TidyAll::CacheModel 0.74
+      Code::TidyAll::CacheModel::Shared 0.74
+      Code::TidyAll::Config::INI::Reader 0.74
+      Code::TidyAll::Git::Precommit 0.74
+      Code::TidyAll::Git::Prereceive 0.74
+      Code::TidyAll::Git::Util 0.74
+      Code::TidyAll::Plugin 0.74
+      Code::TidyAll::Plugin::CSSUnminifier 0.74
+      Code::TidyAll::Plugin::GenericTransformer 0.74
+      Code::TidyAll::Plugin::GenericValidator 0.74
+      Code::TidyAll::Plugin::JSBeautify 0.74
+      Code::TidyAll::Plugin::JSHint 0.74
+      Code::TidyAll::Plugin::JSLint 0.74
+      Code::TidyAll::Plugin::JSON 0.74
+      Code::TidyAll::Plugin::MasonTidy 0.74
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.74
+      Code::TidyAll::Plugin::PerlCritic 0.74
+      Code::TidyAll::Plugin::PerlTidy 0.74
+      Code::TidyAll::Plugin::PerlTidySweet 0.74
+      Code::TidyAll::Plugin::PodChecker 0.74
+      Code::TidyAll::Plugin::PodSpell 0.74
+      Code::TidyAll::Plugin::PodTidy 0.74
+      Code::TidyAll::Plugin::SortLines 0.74
+      Code::TidyAll::Result 0.74
+      Code::TidyAll::Role::GenericExecutable 0.74
+      Code::TidyAll::Role::HasIgnore 0.74
+      Code::TidyAll::Role::RunsCommand 0.74
+      Code::TidyAll::Role::Tempdir 0.74
+      Code::TidyAll::SVN::Precommit 0.74
+      Code::TidyAll::SVN::Util 0.74
+      Code::TidyAll::Util::Zglob 0.74
+      Code::TidyAll::Zglob 0.74
+      Test::Code::TidyAll 0.74
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0
