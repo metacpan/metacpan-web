@@ -102,8 +102,8 @@ DISTRIBUTIONS
       Alien::Libxml2 0.11
     requirements:
       Alien::Base 0.73
-      Alien::Build 1.6
-      Alien::Build::MM 1.6
+      Alien::Build 1.60
+      Alien::Build::MM 1.60
       Alien::Build::Plugin::Build::SearchDep 0.35
       Alien::Build::Plugin::Prefer::BadVersion 1.05
       ExtUtils::CBuilder 0
@@ -195,7 +195,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.22
       CGI::Simple::Util 1.22
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -1741,30 +1740,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  ExtUtils-ParseXS-3.35
-    pathname: S/SM/SMUELLER/ExtUtils-ParseXS-3.35.tar.gz
-    provides:
-      ExtUtils::ParseXS 3.35
-      ExtUtils::ParseXS::Constants 3.35
-      ExtUtils::ParseXS::CountLines 3.35
-      ExtUtils::ParseXS::Eval 3.35
-      ExtUtils::ParseXS::Utilities 3.35
-      ExtUtils::Typemaps 3.35
-      ExtUtils::Typemaps::Cmd 3.35
-      ExtUtils::Typemaps::InputMap 3.35
-      ExtUtils::Typemaps::OutputMap 3.35
-      ExtUtils::Typemaps::Type 3.35
-    requirements:
-      Carp 0
-      Cwd 0
-      DynaLoader 0
-      Exporter 5.57
-      ExtUtils::CBuilder 0
-      ExtUtils::MakeMaker 6.46
-      File::Basename 0
-      File::Spec 0
-      Symbol 0
-      Test::More 0.47
   FFI-CheckLib-0.25
     pathname: P/PL/PLICEASE/FFI-CheckLib-0.25.tar.gz
     provides:
@@ -2071,12 +2046,12 @@ DISTRIBUTIONS
       File::Temp 0.14
       HTTP::Headers 0
       IO::File 1.14
-  HTTP-Cookies-6.07
-    pathname: O/OA/OALDERS/HTTP-Cookies-6.07.tar.gz
+  HTTP-Cookies-6.08
+    pathname: O/OA/OALDERS/HTTP-Cookies-6.08.tar.gz
     provides:
-      HTTP::Cookies 6.07
-      HTTP::Cookies::Microsoft 6.07
-      HTTP::Cookies::Netscape 6.07
+      HTTP::Cookies 6.08
+      HTTP::Cookies::Microsoft 6.08
+      HTTP::Cookies::Netscape 6.08
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -2327,14 +2302,6 @@ DISTRIBUTIONS
       Encode 2.10
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
-  IO-Socket-IP-0.39
-    pathname: P/PE/PEVANS/IO-Socket-IP-0.39.tar.gz
-    provides:
-      IO::Socket::IP 0.39
-    requirements:
-      IO::Socket 0
-      Socket 1.97
-      Test::More 0.88
   IO-Socket-SSL-2.066
     pathname: S/SU/SULLR/IO-Socket-SSL-2.066.tar.gz
     provides:
@@ -2349,7 +2316,6 @@ DISTRIBUTIONS
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
-      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   IO-String-1.08
@@ -2741,39 +2707,39 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  MCE-1.863
-    pathname: M/MA/MARIOROY/MCE-1.863.tar.gz
+  MCE-1.864
+    pathname: M/MA/MARIOROY/MCE-1.864.tar.gz
     provides:
-      MCE 1.863
-      MCE::Candy 1.863
-      MCE::Channel 1.863
-      MCE::Channel::Mutex 1.863
-      MCE::Channel::Simple 1.863
-      MCE::Channel::Threads 1.863
-      MCE::Child 1.863
-      MCE::Core::Input::Generator 1.863
-      MCE::Core::Input::Handle 1.863
-      MCE::Core::Input::Iterator 1.863
-      MCE::Core::Input::Request 1.863
-      MCE::Core::Input::Sequence 1.863
-      MCE::Core::Manager 1.863
-      MCE::Core::Validation 1.863
-      MCE::Core::Worker 1.863
-      MCE::Flow 1.863
-      MCE::Grep 1.863
-      MCE::Loop 1.863
-      MCE::Map 1.863
-      MCE::Mutex 1.863
-      MCE::Mutex::Channel 1.863
-      MCE::Mutex::Channel2 1.863
-      MCE::Mutex::Flock 1.863
-      MCE::Queue 1.863
-      MCE::Relay 1.863
-      MCE::Signal 1.863
-      MCE::Step 1.863
-      MCE::Stream 1.863
-      MCE::Subs 1.863
-      MCE::Util 1.863
+      MCE 1.864
+      MCE::Candy 1.864
+      MCE::Channel 1.864
+      MCE::Channel::Mutex 1.864
+      MCE::Channel::Simple 1.864
+      MCE::Channel::Threads 1.864
+      MCE::Child 1.864
+      MCE::Core::Input::Generator 1.864
+      MCE::Core::Input::Handle 1.864
+      MCE::Core::Input::Iterator 1.864
+      MCE::Core::Input::Request 1.864
+      MCE::Core::Input::Sequence 1.864
+      MCE::Core::Manager 1.864
+      MCE::Core::Validation 1.864
+      MCE::Core::Worker 1.864
+      MCE::Flow 1.864
+      MCE::Grep 1.864
+      MCE::Loop 1.864
+      MCE::Map 1.864
+      MCE::Mutex 1.864
+      MCE::Mutex::Channel 1.864
+      MCE::Mutex::Channel2 1.864
+      MCE::Mutex::Flock 1.864
+      MCE::Queue 1.864
+      MCE::Relay 1.864
+      MCE::Signal 1.864
+      MCE::Step 1.864
+      MCE::Stream 1.864
+      MCE::Subs 1.864
+      MCE::Util 1.864
     requirements:
       Carp 0
       Errno 0
@@ -4609,27 +4575,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20190915
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20190915.tar.gz
+  Perl-Tidy-20191203
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20191203.tar.gz
     provides:
-      Perl::Tidy 20190915
-      Perl::Tidy::Debugger 20190915
-      Perl::Tidy::DevNull 20190915
-      Perl::Tidy::Diagnostics 20190915
-      Perl::Tidy::FileWriter 20190915
-      Perl::Tidy::Formatter 20190915
-      Perl::Tidy::HtmlWriter 20190915
-      Perl::Tidy::IOScalar 20190915
-      Perl::Tidy::IOScalarArray 20190915
-      Perl::Tidy::IndentationItem 20190915
-      Perl::Tidy::LineBuffer 20190915
-      Perl::Tidy::LineSink 20190915
-      Perl::Tidy::LineSource 20190915
-      Perl::Tidy::Logger 20190915
-      Perl::Tidy::Tokenizer 20190915
-      Perl::Tidy::VerticalAligner 20190915
-      Perl::Tidy::VerticalAligner::Alignment 20190915
-      Perl::Tidy::VerticalAligner::Line 20190915
+      Perl::Tidy 20191203
+      Perl::Tidy::Debugger 20191203
+      Perl::Tidy::DevNull 20191203
+      Perl::Tidy::Diagnostics 20191203
+      Perl::Tidy::FileWriter 20191203
+      Perl::Tidy::Formatter 20191203
+      Perl::Tidy::HtmlWriter 20191203
+      Perl::Tidy::IOScalar 20191203
+      Perl::Tidy::IOScalarArray 20191203
+      Perl::Tidy::IndentationItem 20191203
+      Perl::Tidy::LineBuffer 20191203
+      Perl::Tidy::LineSink 20191203
+      Perl::Tidy::LineSource 20191203
+      Perl::Tidy::Logger 20191203
+      Perl::Tidy::Tokenizer 20191203
+      Perl::Tidy::VerticalAligner 20191203
+      Perl::Tidy::VerticalAligner::Alignment 20191203
+      Perl::Tidy::VerticalAligner::Line 20191203
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.007
@@ -4965,17 +4931,6 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       Scalar::Util 0
-      perl 5.006
-  Scalar-List-Utils-1.53
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.53.tar.gz
-    provides:
-      List::Util 1.53
-      List::Util::XS 1.53
-      Scalar::Util 1.53
-      Sub::Util 1.53
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
       perl 5.006
   Scope-Guard-0.21
     pathname: C/CH/CHOCOLATE/Scope-Guard-0.21.tar.gz
@@ -5606,84 +5561,6 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-Simple-1.302169
-    pathname: E/EX/EXODIST/Test-Simple-1.302169.tar.gz
-    provides:
-      Test2 1.302169
-      Test2::API 1.302169
-      Test2::API::Breakage 1.302169
-      Test2::API::Context 1.302169
-      Test2::API::Instance 1.302169
-      Test2::API::Stack 1.302169
-      Test2::Event 1.302169
-      Test2::Event::Bail 1.302169
-      Test2::Event::Diag 1.302169
-      Test2::Event::Encoding 1.302169
-      Test2::Event::Exception 1.302169
-      Test2::Event::Fail 1.302169
-      Test2::Event::Generic 1.302169
-      Test2::Event::Note 1.302169
-      Test2::Event::Ok 1.302169
-      Test2::Event::Pass 1.302169
-      Test2::Event::Plan 1.302169
-      Test2::Event::Skip 1.302169
-      Test2::Event::Subtest 1.302169
-      Test2::Event::TAP::Version 1.302169
-      Test2::Event::V2 1.302169
-      Test2::Event::Waiting 1.302169
-      Test2::EventFacet 1.302169
-      Test2::EventFacet::About 1.302169
-      Test2::EventFacet::Amnesty 1.302169
-      Test2::EventFacet::Assert 1.302169
-      Test2::EventFacet::Control 1.302169
-      Test2::EventFacet::Error 1.302169
-      Test2::EventFacet::Hub 1.302169
-      Test2::EventFacet::Info 1.302169
-      Test2::EventFacet::Info::Table 1.302169
-      Test2::EventFacet::Meta 1.302169
-      Test2::EventFacet::Parent 1.302169
-      Test2::EventFacet::Plan 1.302169
-      Test2::EventFacet::Render 1.302169
-      Test2::EventFacet::Trace 1.302169
-      Test2::Formatter 1.302169
-      Test2::Formatter::TAP 1.302169
-      Test2::Hub 1.302169
-      Test2::Hub::Interceptor 1.302169
-      Test2::Hub::Interceptor::Terminator 1.302169
-      Test2::Hub::Subtest 1.302169
-      Test2::IPC 1.302169
-      Test2::IPC::Driver 1.302169
-      Test2::IPC::Driver::Files 1.302169
-      Test2::Tools::Tiny 1.302169
-      Test2::Util 1.302169
-      Test2::Util::ExternalMeta 1.302169
-      Test2::Util::Facets2Legacy 1.302169
-      Test2::Util::HashBase 1.302169
-      Test2::Util::Trace 1.302169
-      Test::Builder 1.302169
-      Test::Builder::Formatter 1.302169
-      Test::Builder::IO::Scalar 2.114
-      Test::Builder::Module 1.302169
-      Test::Builder::Tester 1.302169
-      Test::Builder::Tester::Color 1.302169
-      Test::Builder::Tester::Tie 1.302169
-      Test::Builder::TodoDiag 1.302169
-      Test::More 1.302169
-      Test::Simple 1.302169
-      Test::Tester 1.302169
-      Test::Tester::Capture 1.302169
-      Test::Tester::CaptureRunner 1.302169
-      Test::Tester::Delegate 1.302169
-      Test::use::ok 1.302169
-      ok 1.302169
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      File::Temp 0
-      Scalar::Util 1.13
-      Storable 0
-      perl 5.006002
-      utf8 0
   Test-TCP-2.22
     pathname: M/MI/MIYAGAWA/Test-TCP-2.22.tar.gz
     provides:
@@ -5760,11 +5637,11 @@ DISTRIBUTIONS
     provides:
       Test::XPath 0.19
     requirements:
-      ExtUtils::MakeMaker 0
+      Module::Build 0.30
       Test::Builder 0.70
       Test::More 0.70
       XML::LibXML 1.70
-      perl 5.006
+      perl 5.006002
   Text-Diff-1.45
     pathname: N/NE/NEILB/Text-Diff-1.45.tar.gz
     provides:
@@ -5850,17 +5727,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Time-Local-1.28
-    pathname: D/DR/DROLSKY/Time-Local-1.28.tar.gz
-    provides:
-      Time::Local 1.28
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      constant 0
-      parent 0
-      strict 0
   TimeDate-2.30
     pathname: G/GB/GBARR/TimeDate-2.30.tar.gz
     provides:
@@ -6497,13 +6363,6 @@ DISTRIBUTIONS
       Test::More 0
       XML::Parser 2.23
       perl 5.006
-  XSLoader-0.24
-    pathname: S/SA/SAPER/XSLoader-0.24.tar.gz
-    provides:
-      XSLoader 0.24
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0.47
   XString-0.002
     pathname: A/AT/ATOOMIC/XString-0.002.tar.gz
     provides:
@@ -6608,7 +6467,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6
+      HTTP::Status 6.18
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6

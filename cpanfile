@@ -95,7 +95,7 @@ test_requires 'App::Prove';
 test_requires 'Code::TidyAll', '>= 0.74';
 test_requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
 test_requires 'Path::Iterator::Rule', '1.008';
-test_requires 'Perl::Critic', '1.124';
+test_requires 'Perl::Critic', '1.136';
 test_requires 'Perl::Tidy' => '20190915';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
