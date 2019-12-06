@@ -5,6 +5,15 @@ on:
     - push
 
 jobs:
+    docker:
+        runs-on: ubuntu-latest
+        name: Docker
+        steps:
+            - uses: actions/checkout@v1
+            - name: docker build
+              run: docker build . -t mweb
+            - name: run Perl tests
+              run: docker run -i mweb carton exec prove -lr t
     test:
         runs-on: ubuntu-latest
         name: Dockerless
