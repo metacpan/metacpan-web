@@ -8,9 +8,10 @@ use Cwd qw(cwd);
 
 sub new { bless {}, $_[0] }
 
-my $hour_ttl = 60 * 60;
-my $day_ttl  = $hour_ttl * 24;
-my $year_ttl = $day_ttl * 365;
+my $hour_ttl   = 60 * 60;
+my $day_ttl    = $hour_ttl * 24;
+my $year_ttl   = $day_ttl * 365;
+my $lessc_path = `which yarn` ? 'yarn lessc' : 'lessc';
 
 sub wrap {
     my ( $self, $app, %args ) = @_;
@@ -66,13 +67,13 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
-                read_file => sub { scalar `yarn lessc -s $_[0]` },
+                read_file => sub { scalar `$lessc_path -s $_[0]` },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
         }
         else {
             my @assets = (@js_files);
-            if ( `yarn lessc --version` =~ /lessc/ ) {
+            if ( `$lessc_path --version` =~ /lessc/ ) {
                 enable 'Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
@@ -80,7 +81,7 @@ sub wrap {
                         my $file = shift;
                         my ($root_path) = $file =~ m{^root/(.*)/};
                         scalar
-                            `yarn lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
+                            `$lessc_path -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
                     },
                 );
             }
