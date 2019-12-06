@@ -1,0 +1,24 @@
+{
+  "name": "metacpan-web",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metacpan/metacpan-web.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/metacpan/metacpan-web/issues"
+  },
+  "homepage": "https://github.com/metacpan/metacpanweb#readme",
+  "devDependencies": {
+    "js-beautify": "^1.10.2"
+  },
+  "dependencies": {
+    "less": "^3.10.3",
+    "package.json": "^2.0.1",
+    "yarn": "^1.19.2"
+  }
+}

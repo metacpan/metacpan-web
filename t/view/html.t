@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
+use Test::Needs { perl => '5.026' };    # heredocs
 
 use lib 't/lib';
 use TestContext qw( get_context );

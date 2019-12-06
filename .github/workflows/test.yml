@@ -1,0 +1,63 @@
+---
+name: test
+
+on:
+    - push
+
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        name: Docker
+        steps:
+            - uses: actions/checkout@v1
+            - name: docker build
+              run: docker build . -t mweb
+            - name: run Perl tests
+              run: docker run -i mweb carton exec prove -lr t
+    test:
+        runs-on: ubuntu-latest
+        name: Dockerless
+        strategy:
+            matrix:
+                perl-version:
+                    - "5.22"
+                    - "5.28"
+                    - "5.30"
+                resolver:
+                    - metacpan
+                    #- snapshot
+        container:
+            image: perl:${{ matrix.perl-version }}
+            env:
+                DEVEL_COVER_OPTIONS: "-ignore,^local/"
+        steps:
+            - uses: actions/checkout@v1
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: "12"
+            - run: npm install -g yarn && yarn install
+            - name: Install Carton
+              run: >
+                  curl -sL https://git.io/cpm | perl -
+                  install -g Carton
+                  --show-build-log-on-failure
+            - name: Install deps
+              run: >
+                  curl -sL https://git.io/cpm | perl -
+                  install
+                  --cpanfile cpanfile
+                  --resolver ${{ matrix.resolver }}
+                  --show-build-log-on-failure
+                  --local-lib-contained=local
+              if: success()
+            - name: Maybe update cpanfile.snapshot
+              run: carton
+              if: success()
+            - name: Run Tests
+              run: carton exec prove -lr --jobs 2 t
+              if: success()
+            - uses: actions/upload-artifact@master
+              with:
+                  name: "${{ matrix.perl-version }}.${{ matrix.resolver }}"
+                  path: cpanfile.snapshot
+              if: success() && matrix.resolver == 'metacpan'

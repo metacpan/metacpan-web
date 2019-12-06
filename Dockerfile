@@ -3,11 +3,11 @@ FROM metacpan/metacpan-base:latest
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && apt-get update \
     && apt-get install -y nodejs npm \
-    && npm install less -g
+    && npm install -g yarn
 
 ENV PERL_MM_USE_DEFAULT=1 PERL_CARTON_PATH=/carton
 
-COPY cpanfile cpanfile.snapshot /metacpan-web/
+COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
 RUN cpanm --notest App::cpm \
@@ -15,7 +15,8 @@ RUN cpanm --notest App::cpm \
     && useradd -m metacpan-web -g users \
     && mkdir /carton \
     && cpm install -L /carton \
-    && rm -fr /root/.cpanm /root/.perl-cpm /tmp/*
+    && rm -fr /root/.cpanm /root/.perl-cpm /tmp/* \
+    && yarn install
 
 RUN chown -R metacpan-web:users /metacpan-web /carton
 

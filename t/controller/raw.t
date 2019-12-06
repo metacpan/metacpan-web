@@ -12,7 +12,7 @@ test_psgi app, sub {
         'contains link to Source' );
     $source =~ s/^\/source/\/raw/;
     ok( $res = $cb->( GET $source ), "GET $source" );
-    ok( $res->code(200), 'code 200' );
+    ok( $res->code(200),             'code 200' );
     is(
         $res->header('Content-Type'),
         'text/html; charset=utf-8',

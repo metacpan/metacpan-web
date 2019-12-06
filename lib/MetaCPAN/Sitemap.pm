@@ -19,7 +19,7 @@ has field_name  => ( is => 'ro',   required => 1 );
 has filter      => ( is => 'ro' );
 has size        => ( is => 'ro',   default  => 1000 );
 has loop        => ( is => 'lazy', default  => sub { IO::Async::Loop->new } );
-has ua => (
+has ua          => (
     is      => 'lazy',
     default => sub {
         my $self = shift;

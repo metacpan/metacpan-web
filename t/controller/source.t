@@ -11,7 +11,7 @@ test_psgi app, sub {
     ok( my $source = $tx->find_value('//a[text()="Source"]/@href'),
         'contains link to Source' );
     ok( $res = $cb->( GET $source ), "GET $source" );
-    ok( $res->code(200), 'code 200' );
+    ok( $res->code(200),             'code 200' );
     is(
         $res->header('Content-Type'),
         'text/html; charset=utf-8',

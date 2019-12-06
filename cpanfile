@@ -44,7 +44,7 @@ requires 'IO::Socket::SSL';
 requires 'Importer';
 requires 'JavaScript::Minifier::XS';
 requires 'List::Util', '1.45';
-requires 'Locale::Country','3.28';
+requires 'Locale::Country','3.62';
 requires 'Log::Dispatch';
 requires 'Log::Log4perl::Catalyst';
 requires 'Log::Log4perl::Layout::JSON';
@@ -92,14 +92,15 @@ requires 'XML::Feed';
 requires 'YAML', '1.15'; # fix dep chain issue
 
 test_requires 'App::Prove';
-test_requires 'Code::TidyAll', '>= 0.47';
+test_requires 'Code::TidyAll', '>= 0.74';
 test_requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
 test_requires 'Path::Iterator::Rule', '1.008';
-test_requires 'Perl::Critic', '1.124';
-test_requires 'Perl::Tidy' => '20181120';
+test_requires 'Perl::Critic', '1.136';
+test_requires 'Perl::Tidy' => '20190915';
 test_requires 'Test::Code::TidyAll';
 test_requires 'Test::MockObject','1.09';
 test_requires 'Test::More', '0.96';
+test_requires 'Test::Needs';
 test_requires 'Test::Perl::Critic';
 test_requires 'Test::XPath', '0.15';
 

@@ -50,7 +50,7 @@ test_psgi app, sub {
 
         # This is very fragile.
         ok(
-            $description =~ /Moose/
+            $description        =~ /Moose/
                 && $description =~ /object/i
                 && $description =~ /extension/,
             'got description for Moose'

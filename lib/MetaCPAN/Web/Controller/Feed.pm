@@ -173,9 +173,9 @@ sub distribution : Local : Args(1) {
 my $feed_check = validation_for(
     params => {
         entries => { type => ArrayRef [HashRef] },
-        host   => { type => Uri, optional => 0, },
-        title  => { type => Str },
-        format => {
+        host    => { type => Uri, optional => 0, },
+        title   => { type => Str },
+        format  => {
             type => Enum( [qw(atom rdf rss)] )
                 ->plus_coercions( Undef, '"rdf"', Str, 'lc $_' ),
             default => 'rdf'

@@ -24,7 +24,7 @@ my %models = (
 );
 
 has [ keys %models ] => ( is => 'ro' );
-has full_details => ( is => 'ro' );
+has full_details     => ( is => 'ro' );
 
 sub ACCEPT_CONTEXT {
     my ( $class, $c, @args ) = @_;
