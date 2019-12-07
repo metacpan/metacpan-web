@@ -8,8 +8,6 @@ RUN apt install -f && curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && apt-get update \
     && apt-get install -y nodejs yarn
 
-ENV PERL_MM_USE_DEFAULT=1
-
 COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
