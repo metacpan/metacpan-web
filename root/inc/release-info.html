@@ -44,6 +44,11 @@
 <% IF release.license %>
 <li><i class="fa fa-fw fa-gavel black"></i>License: <% release.license.join(', ') %></li>
 <% END %>
+<% IF release.metadata.prereqs.runtime.requires.perl %>
+<li>
+  <i class="fa fa-fw fa-greater-than-equal black"></i>Perl: <% release.metadata.prereqs.runtime.requires.perl | version %>
+</li>
+<% END %>
 <% IF irc.web %>
 <li class="irc-chat">
     <div><a target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
