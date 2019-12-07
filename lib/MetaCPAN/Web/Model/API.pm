@@ -96,7 +96,7 @@ sub request {
 
     my $current_url = $self->request_uri;
     my $request_id  = $self->request_id;
-    if ( $method eq 'GET' || $search ) {
+    if ( $method =~ /^(GET|DELETE)$/ || $search ) {
         for my $param ( keys %{ $params || {} } ) {
             $url->query_param( $param => $params->{$param} );
         }
