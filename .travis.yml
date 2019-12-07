@@ -80,14 +80,6 @@ notifications:
   irc: "irc.perl.org#metacpan-infra
 
 # Use newer travis infrastructure.
-sudo: false
 cache:
   directories:
     - local
-
-addons:
-  artifacts:
-    debug: false
-    s3_region: "us-east-1"
-    paths:
-    - $TRAVIS_BUILD_DIR/cpanfile.snapshot
