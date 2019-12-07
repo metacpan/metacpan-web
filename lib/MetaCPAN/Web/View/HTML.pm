@@ -3,6 +3,7 @@ package MetaCPAN::Web::View::HTML;
 use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
+use version;
 use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
@@ -70,6 +71,9 @@ sub common_date_format {
         unless defined $year && defined $month && defined $day;
     return sprintf( '%04d-%02d-%02d', $year, $month, $day );
 }
+
+Template::Alloy->define_vmethod( 'text',
+    version => sub { version->parse(shift)->normal } );
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
