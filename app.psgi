@@ -50,7 +50,8 @@ BEGIN {
 use lib "$root_dir/lib";
 use MetaCPAN::Web;
 
-my $tempdir = "$root_dir/var/tmp";
+# do not use the read only mount point when running from a docker container
+my $tempdir = is_linux_container() ? "/var/tmp" : "$root_dir/var/tmp";
 
 STDERR->autoflush;
 
@@ -173,3 +174,8 @@ builder {
         MetaCPAN::Web->psgi_app;
     };
 };
+
+sub is_linux_container {
+    return -e '/proc/1/cgroup';
+}
+
