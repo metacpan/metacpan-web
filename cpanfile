@@ -106,5 +106,6 @@ requires 'Test::MockObject','1.09';
 requires 'Test::More', '0.96';
 requires 'Test::Needs';
 requires 'Test::Perl::Critic';
+requires 'Test::Warnings';
 requires 'Test::XPath', '0.15';
 

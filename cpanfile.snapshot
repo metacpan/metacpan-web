@@ -5632,6 +5632,19 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
+  Test-Warnings-0.027
+    pathname: E/ET/ETHER/Test-Warnings-0.027.tar.gz
+    provides:
+      Test::Warnings 0.027
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Test::Builder 0
+      parent 0
+      perl 5.006
+      strict 0
+      warnings 0
   Test-XPath-0.19
     pathname: M/MA/MANWAR/Test-XPath-0.19.tar.gz
     provides:
