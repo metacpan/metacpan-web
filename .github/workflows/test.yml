@@ -16,9 +16,10 @@ jobs:
               run: docker run -i latest_branch carton exec prove -lr --jobs 2 t
             - name: push build to Docker hub
               run: >
+                  echo "${{ secrets.DOCKER_HUB_TOKEN }}" |
                   docker login
-                  -u ${{secrets.DOCKER_HUB_USER}}
-                  -p ${{secrets.DOCKER_HUB_TOKEN}}
+                  -u ${{ secrets.DOCKER_HUB_USER }}
+                  --password-stdin
                   && docker push latest_branch
               if: success()
     test:
