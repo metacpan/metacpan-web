@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 requires 'Capture::Tiny';
 requires 'Catalyst', '5.90103';
 requires 'Catalyst::Action::RenderView';
