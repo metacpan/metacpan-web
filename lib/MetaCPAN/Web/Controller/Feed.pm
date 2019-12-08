@@ -199,7 +199,10 @@ sub build_entry {
     $e->title( $entry->{name} );
 
     if ( my $changelog = $entry->{changes} ) {
-        my $content = '<p>' . escape_html( $entry->{abstract} ) . '</p>';
+        my $content;
+        if ( $entry->{abstract} ) {
+            $content = '<p>' . escape_html( $entry->{abstract} ) . '</p>';
+        }
         $content .= '<p>Changes for ' . escape_html( $changelog->{version} );
         if ( $changelog->{date} ) {
             $content .= ' - ' . escape_html( $changelog->{date} );

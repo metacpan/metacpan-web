@@ -5,6 +5,7 @@ use MetaCPAN::Web                   ();
 use MetaCPAN::Web::Controller::Feed ();
 use MetaCPAN::Web::Test;
 use Test::More;
+use Test::Warnings;
 use Try::Tiny qw( catch try );
 
 sub get_feed_ok {
