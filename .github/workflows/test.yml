@@ -11,9 +11,16 @@ jobs:
         steps:
             - uses: actions/checkout@v1
             - name: docker build
-              run: docker build . -t mweb
+              run: docker build . -t latest_branch
             - name: run Perl tests
-              run: docker run -i mweb carton exec prove -lr --jobs 2 t
+              run: docker run -i latest_branch carton exec prove -lr --jobs 2 t
+            - name: push build to Docker hub
+              run: >
+                  docker login
+                  -u ${{secrets.DOCKER_HUB_USER}}
+                  -p ${{secrets.DOCKER_HUB_TOKEN}}
+                  && docker push latest_branch
+              if: success()
     test:
         runs-on: ubuntu-latest
         name: Dockerless
