@@ -2,13 +2,15 @@ FROM metacpan/metacpan-base:latest
 
 ARG CPM_ARGS=--without-test
 
-RUN apt install -f && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash \
     && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y nodejs yarn
-
-ENV PERL_MM_USE_DEFAULT=1
+    && apt-get install -y -f --no-install-recommends nodejs=10.17.0-1nodesource1 yarn=1.19.2-1 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /metacpan-web/
 WORKDIR /metacpan-web
