@@ -11,7 +11,7 @@ jobs:
         steps:
             - uses: actions/checkout@v1
             - name: docker build
-              run: docker build . --build-arg CPM_ARGS='--with-test' -t mweb
+              run: docker build . -t mweb
             - name: run Perl tests
               run: docker run -i mweb carton exec prove -lr t
     test:

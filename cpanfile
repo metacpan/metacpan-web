@@ -94,16 +94,17 @@ requires 'URI::Escape';
 requires 'XML::Feed';
 requires 'YAML', '1.15'; # fix dep chain issue
 
-test_requires 'App::Prove';
-test_requires 'Code::TidyAll', '>= 0.74';
-test_requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
-test_requires 'Path::Iterator::Rule', '1.008';
-test_requires 'Perl::Critic', '1.136';
-test_requires 'Perl::Tidy' => '20190915';
-test_requires 'Test::Code::TidyAll';
-test_requires 'Test::MockObject','1.09';
-test_requires 'Test::More', '0.96';
-test_requires 'Test::Needs';
-test_requires 'Test::Perl::Critic';
-test_requires 'Test::XPath', '0.15';
+# Test dependencies
+requires 'App::Prove';
+requires 'Code::TidyAll', '>= 0.74';
+requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
+requires 'Path::Iterator::Rule', '1.008';
+requires 'Perl::Critic', '1.136';
+requires 'Perl::Tidy' => '20190915';
+requires 'Test::Code::TidyAll';
+requires 'Test::MockObject','1.09';
+requires 'Test::More', '0.96';
+requires 'Test::Needs';
+requires 'Test::Perl::Critic';
+requires 'Test::XPath', '0.15';
 
