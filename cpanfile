@@ -1,5 +1,6 @@
-requires 'CPAN::Changes', '0.21';
-requires 'CPAN::Meta', '2.141520'; # Avoid issues with List::Util dep under carton install.
+use strict;
+use warnings;
+
 requires 'Capture::Tiny';
 requires 'Catalyst', '5.90103';
 requires 'Catalyst::Action::RenderView';
@@ -16,7 +17,9 @@ requires 'CatalystX::Fastly::Role::Response', '0.06';
 requires 'CatalystX::RoleApplicator';
 requires 'Config::General';
 requires 'Config::ZOMG', '1.000000';
+requires 'CPAN::Changes', '0.21';
 requires 'Cpanel::JSON::XS';
+requires 'CPAN::Meta', '2.141520'; # Avoid issues with List::Util dep under carton install.
 requires 'Data::Pageset';
 requires 'DateTime', '1.24';
 requires 'DateTime::Format::HTTP';
@@ -30,6 +33,7 @@ requires 'Future';
 requires 'Gazelle';
 requires 'Getopt::Long::Descriptive';
 requires 'Gravatar::URL';
+requires 'Hash::AsObject';
 requires 'HTML::Escape';
 requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Selector::XPath';
@@ -37,11 +41,10 @@ requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
-requires 'Hash::AsObject';
+requires 'Importer';
 requires 'IO::Async::Loop';
 requires 'IO::Async::SSL';
 requires 'IO::Socket::SSL';
-requires 'Importer';
 requires 'JavaScript::Minifier::XS';
 requires 'List::Util', '1.45';
 requires 'Locale::Country','3.62';
@@ -81,26 +84,27 @@ requires 'Term::Size::Any';
 requires 'Text::Pluralize';
 requires 'Try::Tiny', '0.24';
 requires 'Type::Library';
-requires 'Type::Utils';
 requires 'Types::Common::Numeric';
 requires 'Types::Common::String';
 requires 'Types::Standard';
 requires 'Types::URI';
+requires 'Type::Utils';
 requires 'URI', '1.71';
 requires 'URI::Escape';
 requires 'XML::Feed';
 requires 'YAML', '1.15'; # fix dep chain issue
 
-test_requires 'App::Prove';
-test_requires 'Code::TidyAll', '>= 0.74';
-test_requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
-test_requires 'Path::Iterator::Rule', '1.008';
-test_requires 'Perl::Critic', '1.136';
-test_requires 'Perl::Tidy' => '20190915';
-test_requires 'Test::Code::TidyAll';
-test_requires 'Test::MockObject','1.09';
-test_requires 'Test::More', '0.96';
-test_requires 'Test::Needs';
-test_requires 'Test::Perl::Critic';
-test_requires 'Test::XPath', '0.15';
+# Test dependencies
+requires 'App::Prove';
+requires 'Code::TidyAll', '>= 0.74';
+requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
+requires 'Path::Iterator::Rule', '1.008';
+requires 'Perl::Critic', '1.136';
+requires 'Perl::Tidy' => '20190915';
+requires 'Test::Code::TidyAll';
+requires 'Test::MockObject','1.09';
+requires 'Test::More', '0.96';
+requires 'Test::Needs';
+requires 'Test::Perl::Critic';
+requires 'Test::XPath', '0.15';
 

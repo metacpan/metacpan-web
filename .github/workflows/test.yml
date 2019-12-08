@@ -11,21 +11,19 @@ jobs:
         steps:
             - uses: actions/checkout@v1
             - name: docker build
-              run: docker build . --build-arg CPM_ARGS='--with-test' -t mweb
+              run: docker build . -t mweb
             - name: run Perl tests
-              run: docker run -i mweb carton exec prove -lr t
+              run: docker run -i mweb carton exec prove -lr --jobs 2 t
     test:
         runs-on: ubuntu-latest
         name: Dockerless
         strategy:
             matrix:
                 perl-version:
-                    - "5.22"
-                    - "5.28"
                     - "5.30"
                 resolver:
                     - metacpan
-                    #- snapshot
+                    - snapshot
         container:
             image: perl:${{ matrix.perl-version }}
             env:
@@ -34,7 +32,7 @@ jobs:
             - uses: actions/checkout@v1
             - uses: actions/setup-node@v1
               with:
-                  node-version: "12"
+                  node-version: "10"
             - run: npm install -g yarn && yarn install
             - name: Install Carton
               run: >
