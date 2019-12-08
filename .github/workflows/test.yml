@@ -13,7 +13,7 @@ jobs:
             - name: docker build
               run: docker build . -t mweb
             - name: run Perl tests
-              run: docker run -i mweb carton exec prove -lr t
+              run: docker run -i mweb carton exec prove -lr --jobs 2 t
     test:
         runs-on: ubuntu-latest
         name: Dockerless
