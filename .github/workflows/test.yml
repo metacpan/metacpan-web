@@ -20,12 +20,10 @@ jobs:
         strategy:
             matrix:
                 perl-version:
-                    - "5.22"
-                    - "5.28"
                     - "5.30"
                 resolver:
                     - metacpan
-                    #- snapshot
+                    - snapshot
         container:
             image: perl:${{ matrix.perl-version }}
             env:
