@@ -11,16 +11,19 @@ jobs:
         steps:
             - uses: actions/checkout@v1
             - name: docker build
-              run: docker build . -t latest_branch
+              run: docker build . -t metacpan/metacpan-web:latest_branch
             - name: run Perl tests
-              run: docker run -i latest_branch carton exec prove -lr --jobs 2 t
+              run: >
+                  docker run -i
+                  metacpan/metacpan-web:latest_branch
+                  carton exec prove -lr --jobs 2 t
             - name: push build to Docker hub
               run: >
                   echo "${{ secrets.DOCKER_HUB_TOKEN }}" |
                   docker login
                   -u ${{ secrets.DOCKER_HUB_USER }}
                   --password-stdin
-                  && docker push latest_branch
+                  && docker push metacpan/metacpan-web:latest_branch
               if: success()
     test:
         runs-on: ubuntu-latest
