@@ -19,6 +19,6 @@
   "dependencies": {
     "less": "^3.10.3",
     "package.json": "^2.0.1",
-    "yarn": "^1.19.2"
+    "yarn": "^1.22.0"
   }
 }
