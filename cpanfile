@@ -108,4 +108,5 @@ requires 'Test::Needs';
 requires 'Test::Perl::Critic';
 requires 'Test::Warnings';
 requires 'Test::XPath', '0.15';
+requires 'WWW::Form::UrlEncoded::XS';
 
