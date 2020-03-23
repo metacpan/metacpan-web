@@ -10,11 +10,15 @@ this will give you a virtual machine already configured and ready to start devel
 ## Installing manually
 
 If you prefer not to use the Docker, the following commands will get you started:
-commands can be converted to:
 
     $ carton install
+    $ npm install
+    $ export PATH="$(realpath ./node_modules/.bin):$PATH"
     $ ./bin/prove t
     $ carton exec plackup -p 5001 -r
+
+To run the tests in parallel, add `-j8` (or however many CPUs you have) to the
+`prove` command.
 
 ## Local configuration changes
 
@@ -28,7 +32,6 @@ new file called `metacpan_web_local.conf` that contains
     api_external_secure http://127.0.0.1:5000
 
 which will be loaded on top of the existing config file.
-
 
 ## COMPATIBILITY NOTES
 
