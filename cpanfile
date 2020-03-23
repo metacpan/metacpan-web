@@ -91,6 +91,7 @@ requires 'Types::URI';
 requires 'Type::Utils';
 requires 'URI', '1.71';
 requires 'URI::Escape';
+requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::Feed';
 requires 'YAML', '1.15'; # fix dep chain issue
 
@@ -108,5 +109,3 @@ requires 'Test::Needs';
 requires 'Test::Perl::Critic';
 requires 'Test::Warnings';
 requires 'Test::XPath', '0.15';
-requires 'WWW::Form::UrlEncoded::XS';
-
