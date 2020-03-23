@@ -16,6 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Dockerless
         strategy:
+            fail-fast: false
             matrix:
                 perl-version:
                     - "5.30"
