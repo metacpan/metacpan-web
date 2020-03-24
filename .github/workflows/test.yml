@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Docker
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - name: docker build
               run: docker build . -t mweb
             - name: run Perl tests
@@ -28,7 +28,7 @@ jobs:
             env:
                 DEVEL_COVER_OPTIONS: "-ignore,^local/"
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
                   node-version: "10"
