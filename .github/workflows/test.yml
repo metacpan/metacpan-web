@@ -7,11 +7,19 @@ jobs:
         runs-on: ubuntu-latest
         name: Docker
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - name: docker build
-              run: docker build . -t mweb
+              run: docker build . -t metacpan/metacpan-web:latest
             - name: run Perl tests
-              run: docker run -i mweb carton exec prove -lr --jobs 2 t
+              run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
+            - name: push build to Docker hub
+              run: >
+                  echo "${{ secrets.DOCKER_HUB_TOKEN }}" |
+                  docker login
+                  -u ${{ secrets.DOCKER_HUB_USER }}
+                  --password-stdin
+                  && docker push metacpan/metacpan-web:latest
+              if: success() && github.ref == 'refs/heads/master'
     test:
         runs-on: ubuntu-latest
         name: Dockerless
@@ -28,7 +36,7 @@ jobs:
             env:
                 DEVEL_COVER_OPTIONS: "-ignore,^local/"
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
                   node-version: "10"
