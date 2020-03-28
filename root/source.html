@@ -4,6 +4,7 @@
     <a data-keyboard-shortcut="g s" href="/source/<% base = [file.author, file.release].join("/"); base %>"><% [file.author, file.release].join(" / ") %></a>
     <% doc_view_url = [base,file.path].join("/") %>
     <% raw_url = [api_external_secure,'source',base,file.path].join("/") %>
+    <% permalink_url = ['','source',base,file.path].join("/") %>
   <% FOREACH part IN file.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
     <% END %>
@@ -31,6 +32,7 @@
   </li>
   <li>&nbsp;</li>
   <li><a href="<% raw_url %>"><i class="fa fa-file-text-o fa-fw black"></i>Raw code</a></li>
+  <li><a href="<% permalink_url %>"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
   <li>
     <a href="/raw/<% file.author %>/<% file.release %>/<% file.path %>?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
   </li>

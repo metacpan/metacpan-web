@@ -45,6 +45,37 @@ test_psgi app, sub {
             }
         );
 
+        # Check the "Raw code" and "Permalink" URLs
+        my @versioned_link_tests = (
+            {
+                xpath    => '//a[text()="Raw code"]/@href',
+                expected => qr{\bfastapi.metacpan.org/},
+                desc     => 'raw code points to fastapi'
+            },
+            {
+                xpath => '//a[text()="Raw code"]/@href',
+                #<<<       Maintainer vvvvv       vvvvvvvvvvvvvvvv Dist version number #>>>
+                expected => qr{source/[^/]+/Moose-\d+(?:\.\d+){0,}/},
+                desc => 'raw code includes specific version'
+            },
+
+            {
+                xpath    => '//a[text()="Permalink"]/@href',
+                expected => qr{\bsource/[^/]+/Moose-\d+(?:\.\d+){0,}/},
+                desc     => 'Permalink includes specific version'
+            },
+        );
+
+        my $versioned_link_tx = tx($res);
+        foreach my $versioned_link_test (@versioned_link_tests) {
+            like(
+                $versioned_link_tx->find_value(
+                    $versioned_link_test->{xpath}
+                ),
+                $versioned_link_test->{expected},
+                $versioned_link_test->{desc},
+            );
+        }
     }
 
     {
