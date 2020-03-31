@@ -71,11 +71,11 @@
     <%- END %>
 </ul>
 <%- END;
-stable = [];
+has_latest = 0;
 FOREACH version IN versions;
-    IF version.maturity == 'released';
-        stable.push(version);
-        NEXT;
+    IF version.status == 'latest';
+        has_latest = 1;
+        LAST;
     END;
 END %>
 <li class="nav-header">Permalinks</li>
@@ -83,7 +83,7 @@ END %>
     <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %><% IF module; "/"; module.path; END %>">This version</a>
 </li>
 <%- IF canonical %>
-<% IF stable.size >= 1 %><li>
+<% IF has_latest %><li>
     <a <% IF schema_org %>itemprop="url"<% END %> href="<% canonical %>">Latest version</a>
 </li><%- END %>
 <%- END %>
