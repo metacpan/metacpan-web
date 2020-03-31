@@ -56,6 +56,12 @@
         <%- PROCESS version_options %>
     </select>
 </li>
+<%- ELSE -%>
+<li>
+    <select class="form-control tool-bar-form" style="font-style: italic" disabled="disabled">
+        <option>No other versions</option>
+    </select>
+</li>
 <%- END %>
 <% IF release.metadata.x_help_wanted %>
 <li class="nav-header">Help Wanted</li>
@@ -64,13 +70,20 @@
     <li><% position %></li>
     <%- END %>
 </ul>
-<%- END %>
+<%- END;
+stable = [];
+FOREACH version IN versions;
+    IF version.maturity == 'released';
+        stable.push(version);
+        NEXT;
+    END;
+END %>
 <li class="nav-header">Permalinks</li>
 <li>
     <a href="/<% module ? "pod/release" : "release" %>/<% release.author %>/<% release.name %><% IF module; "/"; module.path; END %>">This version</a>
 </li>
 <%- IF canonical %>
-<li>
+<% IF stable.size >= 1 %><li>
     <a <% IF schema_org %>itemprop="url"<% END %> href="<% canonical %>">Latest version</a>
-</li>
+</li><%- END %>
 <%- END %>

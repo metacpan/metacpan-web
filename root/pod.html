@@ -27,6 +27,11 @@
       Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
     </li>
     <% END %>
+    <% IF release.maturity == 'developer' %>
+    <li>
+      <b style="color: #ff4500">Development release</b>
+    </li>
+    <% END %>
     <% IF permalinks || release.status != 'latest';
         source_base = '/source/' _ module.author _ '/' _ module.release;
       ELSE
