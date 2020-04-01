@@ -1,10 +1,17 @@
+Title: Source code permalinks are here
+------------------------------
+Date: 2020-03-29T00:00:00
+
+Versioned permalinks from source code pages are [now available]
+(https://twitter.com/metacpan/status/1244677954275336200)
+
 Title: Rendering .md files
 ------------------------------
 Date: 2019-10-18T01:54:00
 
 We're now rendering .md files as HTML instead of as raw code.
 
-Title: The traffic is comming
+Title: The traffic is coming
 ------------------------------
 Date: 2018-12-02T19:30:00
 
