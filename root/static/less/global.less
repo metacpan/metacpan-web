@@ -536,3 +536,22 @@ form#logout {
     text-align: center;
     margin: 1px 15% 20px;
 }
+
+.dist-release {
+    &.status-cpan .release-name {
+        color: #999;
+    }
+    &.status-backpan .release-name {
+        color: #a00;
+    }
+    &.maturity-developer .release-name {
+        color: #ff4500;
+    }
+    &.unauthorized .release-name {
+        color: #f00;
+    }
+    &.unauthorized .warning {
+        color: #f00;
+        font-weight: bold;
+    }
+}
