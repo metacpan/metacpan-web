@@ -108,7 +108,7 @@ we'll let you know.
 
 If a pull request contains any controversial changes, we'll likely wait for some
 feedback from several developers before a merge.  If you think your changes may
-be controversial, feel free to discuss them in a Github issue before starting to
+be controversial, feel free to discuss them in a GitHub issue before starting to
 write any code.
 
 ## Travis is your friend
