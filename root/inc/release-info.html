@@ -65,11 +65,11 @@
             backpan.push(version);
             NEXT;
         END %>
-    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.author %> on <% version.date.dt_date_common %>)</option>
+    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distname_version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.author %> on <% version.date.dt_date_common %>)</option>
 <% END; IF backpan.size %>
 <optgroup label="BackPAN"></optgroup>
 <% FOREACH version IN backpan %>
-    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)
+    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distname_version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% version.date.dt_date_common %>)
     </option>
 <% END %>
 <% END; END %>
