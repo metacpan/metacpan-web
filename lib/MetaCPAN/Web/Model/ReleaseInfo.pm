@@ -96,7 +96,7 @@ sub _wrap {
 
 sub _dist_data {
     my ( $self, $dist ) = @_;
-    
+
     return (
         favorites    => $self->_favorite->get( undef, $dist ),
         plussers     => $self->_favorite->find_plussers($dist),
@@ -131,13 +131,13 @@ sub _release_data {
 sub normalize {
     my $self = shift;
     sub {
-        my $data = shift;
-        my $dist = $data->{release}{release}{distribution};
+        my $data     = shift;
+        my $dist     = $data->{release}{release}{distribution};
         my $releases = $data->{versions}{releases};
-        $_->{distname_version} =
-            CPAN::DistnameInfo->new( $_->{download_url} )->version
-                for @$releases;
-        
+        $_->{distname_version}
+            = CPAN::DistnameInfo->new( $_->{download_url} )->version
+            for @$releases;
+
         Future->done( {
             took => max(
                 grep defined,
