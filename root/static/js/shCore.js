@@ -2379,7 +2379,7 @@ function stripCData(original)
 
 	var copyLength = copy.length;
 
-	if (copy.indexOf(right) == copyLength - rightLength)
+	if ((copyLength >= rightLength) && (copy.indexOf(right) == copyLength - rightLength))
 	{
 		copy = copy.substring(0, copyLength - rightLength);
 		changed = true;
