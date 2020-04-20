@@ -1,5 +1,25 @@
 #!/bin/bash
 
+# This script is a convenient way to run metacpan-web from a local system
+# without using Docker or any VM solution.  It should be faster and more
+# convenient to debug than running plackup manually.
+#
+# It starts two web servers.  The first on port 5001 using a simple server
+# with no concurrency (to aid in debugging) to handle the dynamic requests.
+# The second on port 5000 using a "fast" server that can handle many
+# concurrent requests which will serve the static files and proxy to the
+# first server.
+
+# Rather than running plackup, you can simply run:
+#
+# ./run-dev
+#
+# or
+#
+# carton exec ./run-dev
+#
+# Then browse to http://localhost:5000/
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --suffix)
