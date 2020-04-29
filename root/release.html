@@ -10,6 +10,7 @@
     <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
+    <% INCLUDE inc/release-status.html maturity = release.maturity, banner_class = 'release-banner' %>
     <li><a href="/source/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="<% source_host %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
