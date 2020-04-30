@@ -487,24 +487,24 @@ $(document).ready(function() {
 });
 
 function set_page_size(selector, storage_name) {
-    $(selector).on('click', function() {
-        var url = $(this).attr('href');
-        var result = /size=(\d+)/.exec(url);
+    $(selector).each(function() {
+        var url = this.href;
+        var result = /[&;?]size=(\d+)(?:$|[&;])/.exec(url);
+        var size;
         if (result && result[1]) {
-            var page_size = result[1];
-            MetaCPAN.storage.setItem(storage_name, page_size);
-            return true;
-        } else {
-            page_size = MetaCPAN.storage.getItem(storage_name);
-            if (page_size) {
-                if (/\?/.exec(url)) {
-                    document.location.href = url + '&size=' + page_size;
-                } else {
-                    document.location.href = url + '?size=' + page_size;
-                }
-                return false;
-            };
+            size = result[1];
+            $(this).click(function() {
+                MetaCPAN.storage.setItem(storage_name, size);
+                return true;
+            });
+        } else if (size = MetaCPAN.storage.getItem(storage_name)) {
+            if (/\?/.exec(url)) {
+                this.href += '&size=' + size;
+            } else {
+                this.href += '?size=' + size;
+            }
         }
+        return true;
     });
 }
 
