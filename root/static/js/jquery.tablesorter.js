@@ -695,9 +695,13 @@
                     this.config = {};
                     // merge and extend.
 
-                    var match = RegExp('[?&]sort=([^&]*)').exec(window.location.search);
+                    // MetaCPAN: it's insane for a library like this to be
+                    // looking at the URL rather than its API.  There doesn't
+                    // seem to be any way to disable this, so just remove it.
+                    // We can do sorting ourselves.
+                    // var match = RegExp('[?&]sort=([^&]*)').exec(window.location.search);
                     // We need to get the decodeURIComponent() fix upstream, be careful when updating this!
-                    if(JSON && match) settings.sortList = JSON.parse(decodeURIComponent(match[1]));
+                    // if(JSON && match) settings.sortList = JSON.parse(decodeURIComponent(match[1]));
                     config = $.extend(this.config, $.tablesorter.defaults, settings);
                     // store common expression for speed
                     $this = $(this);

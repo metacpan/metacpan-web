@@ -128,13 +128,13 @@ $(document).ready(function() {
 
         var sortable = [];
         table.find('thead th').each(function(i, el) {
+            var header = {};
             if ($(el).hasClass('no-sort')) {
-                cfg.headers[i] = {
-                    sorter: false
-                };
+                header.sorter = false;
             } else {
                 sortable.push(i);
             }
+            cfg.headers[i] = header;
         });
 
         var sortid;
@@ -145,7 +145,12 @@ $(document).ready(function() {
             sortid = table.attr('data-default-sort');
         }
         if (!sortid) {
-            sortid = '0,0';
+            var match = /[?&]sort=\[\[([0-9,]+)\]\]/.exec(window.location.search);
+            if (match) {
+                sortid = decodeURIComponent(match[1]);
+            } else {
+                sortid = '0,0';
+            }
         }
         try {
             sortid = JSON.parse('[' + sortid + ']');
@@ -153,20 +158,16 @@ $(document).ready(function() {
             sortid = [0, 0];
         }
 
-        var found;
-        $(sortable).each(function(i, col) {
-            if (sortid[0] == col) {
-                found = true;
-                return false;
-            }
-        });
-        if (found) {
-            cfg.sortList = [sortid];
-        } else if (sortable.length) {
-            cfg.sortList = [
-                [sortable[0], 0]
-            ];
+        var sortCol;
+        var sortHeader = cfg.headers[sortid[0]];
+        if (typeof sortHeader === 'undefined') {
+            sortLCol = [sortable[0], 0];
+        } else if (sortHeader.sorter == false) {
+            sortCol = [sortable[0], 0];
+        } else {
+            sortCol = sortid;
         }
+        cfg.sortList = [sortCol];
 
         table.tablesorter(cfg);
     });
