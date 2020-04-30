@@ -23,9 +23,9 @@ FOREACH dep IN deps.sort %>
     </li>
     <li>
       <%- IF module -%>
-        <a href="/requires/module/<% module.documentation or module.module.0.name %>?sort=[[2,1]]">
+        <a href="/requires/module/<% module.documentation or module.module.0.name %>">
       <%- ELSE -%>
-        <a href="/requires/distribution/<% release.distribution %>?sort=[[2,1]]">
+        <a href="/requires/distribution/<% release.distribution %>">
       <%- END -%>
         <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
