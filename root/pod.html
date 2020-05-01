@@ -18,19 +18,13 @@
     <li class="nav-header">
       <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
     </li>
+    <% INCLUDE inc/release-status.html maturity = release.maturity, banner_class = 'release-banner' %>
     <li>
       Distribution: <% module.distribution | html %></span>
     </li>
     <% IF documented_module.version %>
     <li>
       Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
-    </li>
-    <% END %>
-    <% IF release.maturity == 'developer' %>
-    <li>
-      <span class="dist-release maturity-developer">
-        <b class="release-name">Development release</b>
-      </span>
     </li>
     <% END %>
     <% IF permalinks || release.status != 'latest';

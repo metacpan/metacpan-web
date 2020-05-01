@@ -14,6 +14,7 @@
   <li class="visible-xs">
     <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
+  <% INCLUDE inc/release-status.html maturity = maturity, banner_class = 'release-banner-source' %>
   <li class="nav-header">Tools</li>
   <li>
     <a data-keyboard-shortcut="g d" href="/release/<% file.author %>/<% file.release %>"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>

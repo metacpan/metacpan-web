@@ -554,4 +554,21 @@ form#logout {
         color: #f00;
         font-weight: bold;
     }
+    
+    &.maturity-developer .release-banner {
+        color: #fff;
+        background-color: #D9534F;
+        padding: 0px 4px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    
+    &.maturity-developer .release-banner-source {
+        &:extend(.dist-release.maturity-developer .release-banner all);
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
 }
+

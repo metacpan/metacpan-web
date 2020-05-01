@@ -37,12 +37,14 @@ sub index : Path : Args {
             author    => shift @module,
             release   => shift @module,
             directory => \@module,
+            maturity  => $module->{maturity},
         } );
     }
     elsif ( exists $source->{raw} ) {
         $module->{content} = $source->{raw};
         $c->stash( {
-            file => $module,
+            file     => $module,
+            maturity => $module->{maturity},
         } );
         $c->forward('content');
     }
