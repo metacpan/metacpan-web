@@ -188,7 +188,7 @@ test_psgi app, sub {
             my $revdep = $type eq 'module' ? 'module' : 'distribution';
             ok(
                 $tx->find_value(
-                    "//a[starts-with(\@href, \"/requires/$revdep/$name?\")]"),
+                    "//a[starts-with(\@href, \"/requires/$revdep/$name\")]"),
                 "reverse deps link uses $revdep name"
             );
 

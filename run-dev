@@ -56,7 +56,7 @@ while true; do
     sleep 1
     ( echo '' >/dev/tcp/localhost/"$METACPAN_WEB_PORT" ) 2>/dev/null && break
 done
-for fast_handler in Feersum Gazelle Starlet Starman; do
+for fast_handler in Gazelle Starlet Starman; do
     perl -mPlack::Handler::$fast_handler -e1 &>/dev/null && break
 done
 unset HTTP_PROXY
