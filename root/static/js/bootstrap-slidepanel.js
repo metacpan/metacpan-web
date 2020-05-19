@@ -57,8 +57,10 @@
       
       if(!$target) $target = $(selector)
 
-  	  $this.css('transform', 'translateX(' + width + 'px)')
       $target.css('transform', 'translateX(' + width + 'px)').addClass('slidepanel-visible');
+      $this.find("i").each(function(){
+        $(this).removeClass('fa-bars').addClass('fa-times');
+      });
     }
 
    , hide: function ( $target ) {
@@ -68,9 +70,10 @@
         , e
       
       if(!$target) $target = $(selector)
-
+      $this.find("i").each(function(){
+        $(this).removeClass('fa-times').addClass('fa-bars');
+      });
       $target.css('transform', 'translateX(0px)').removeClass('slidepanel-visible');
-  	  $this.css('transform', 'translateX(0px)')
     }
   }
 
