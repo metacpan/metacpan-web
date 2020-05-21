@@ -16,6 +16,20 @@
 
   var SlidePanel = function (element) {
     this.element = $(element)
+
+    var $this = this.element
+        , selector = $this.attr('data-target')
+        , $target = $(selector)
+
+    this.clickOutsideHandler = (function(evt) {
+      let targetElement = evt.target // clicked element
+      do {
+        if (targetElement === $target[0]) return
+        targetElement = targetElement.parentNode
+      } while (targetElement)
+
+      this.hide()
+    }).bind(this)
   }
 
   SlidePanel.prototype = {
@@ -61,6 +75,8 @@
       $this.find("i").each(function(){
         $(this).removeClass('fa-bars').addClass('fa-times');
       });
+
+      document.addEventListener('click', this.clickOutsideHandler)
     }
 
    , hide: function ( $target ) {
@@ -74,6 +90,8 @@
         $(this).removeClass('fa-times').addClass('fa-bars');
       });
       $target.css('transform', 'translateX(0px)').removeClass('slidepanel-visible');
+
+      document.removeEventListener('click', this.clickOutsideHandler)
     }
   }
 
