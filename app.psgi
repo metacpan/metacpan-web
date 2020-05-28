@@ -43,8 +43,6 @@ BEGIN {
     Log::Log4perl->wrapper_register(__PACKAGE__);
     my $logger = Log::Log4perl->get_logger;
     $SIG{__WARN__} = sub { $logger->warn(@_) };
-
-    $dev_mode and require Devel::Confess and Devel::Confess->import;
 }
 
 use lib "$root_dir/lib";
