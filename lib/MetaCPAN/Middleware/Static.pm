@@ -11,7 +11,7 @@ sub new { bless {}, $_[0] }
 my $hour_ttl   = 60 * 60;
 my $day_ttl    = $hour_ttl * 24;
 my $year_ttl   = $day_ttl * 365;
-my $lessc_path = `which yarn` ? 'yarn lessc' : 'lessc';
+my $lessc_path = `which yarn` ? 'yarn -s run lessc' : 'lessc';
 
 sub wrap {
     my ( $self, $app, %args ) = @_;

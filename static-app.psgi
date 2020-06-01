@@ -22,5 +22,6 @@ builder {
     mount '/' => Plack::App::Proxy->new(
         remote => "http://localhost:$port",
         preserve_host_header => 1,
+        backend => 'LWP',
     )->to_app;
 };
