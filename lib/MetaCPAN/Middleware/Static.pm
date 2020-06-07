@@ -8,17 +8,20 @@ use Cwd qw(cwd);
 
 sub new { bless {}, $_[0] }
 
-my $hour_ttl   = 60 * 60;
-my $day_ttl    = $hour_ttl * 24;
-my $year_ttl   = $day_ttl * 365;
-my $lessc_path = `which yarn` ? 'yarn -s run lessc' : 'lessc';
+my $hour_ttl = 60 * 60;
+my $day_ttl  = $hour_ttl * 24;
+my $year_ttl = $day_ttl * 365;
 
 sub wrap {
     my ( $self, $app, %args ) = @_;
     my $root_dir = $args{root} || cwd;
-    my $dev_mode = $args{dev_mode}
-        || ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' );
+    my $dev_mode
+        = exists $args{dev_mode}
+        ? $args{dev_mode}
+        : ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' );
     my $tempdir = $args{temp_dir};
+    my $config  = $args{config};
+    my $lessc   = $config->{lessc_command};
 
     my @js_files = map {"/static/js/$_.js"} (
         qw(
@@ -67,21 +70,22 @@ sub wrap {
             enable 'Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
-                read_file => sub { scalar `$lessc_path -s $_[0]` },
+                read_file => sub { scalar `$lessc -s $_[0]` },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
         }
         else {
             my @assets = (@js_files);
-            if ( `$lessc_path --version` =~ /lessc/ ) {
+            if ( `$lessc --version` =~ /lessc/ ) {
                 enable 'Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
                     read_file => sub {
                         my $file = shift;
                         my ($root_path) = $file =~ m{^root/(.*)/};
-                        scalar
-                            `$lessc_path -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
+                        return
+                            scalar
+                            `$lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
                     },
                 );
             }
