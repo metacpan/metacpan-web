@@ -197,7 +197,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -223,6 +222,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Text::Wrap 0.003
       version 0.9906
+  CPAN-DistnameInfo-0.12
+    pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
+    provides:
+      CPAN::DistnameInfo 0.12
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   Canary-Stability-2013
     pathname: M/ML/MLEHMANN/Canary-Stability-2013.tar.gz
     provides:
@@ -1649,6 +1655,43 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
+  Encode-3.06
+    pathname: D/DA/DANKOGAI/Encode-3.06.tar.gz
+    provides:
+      Encode 3.06
+      Encode::Alias 2.24
+      Encode::Byte 2.04
+      Encode::CJKConstants 2.02
+      Encode::CN 2.03
+      Encode::CN::HZ 2.10
+      Encode::Config 2.05
+      Encode::EBCDIC 2.02
+      Encode::Encoder 2.03
+      Encode::Encoding 2.08
+      Encode::GSM0338 2.07
+      Encode::Guess 2.08
+      Encode::Internal 3.06
+      Encode::JP 2.04
+      Encode::JP::H2Z 2.02
+      Encode::JP::JIS7 2.08
+      Encode::KR 2.03
+      Encode::KR::2022_KR 2.04
+      Encode::MIME::Header 2.28
+      Encode::MIME::Header::ISO_2022_JP 1.09
+      Encode::MIME::Name 1.03
+      Encode::Symbol 2.02
+      Encode::TW 2.03
+      Encode::UTF_EBCDIC 3.06
+      Encode::Unicode 2.18
+      Encode::Unicode::UTF7 2.10
+      Encode::XS 3.06
+      Encode::utf8 3.06
+      encoding 3.00
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 0
+      Storable 0
+      parent 0.221
   Encode-Locale-1.05
     pathname: G/GA/GAAS/Encode-Locale-1.05.tar.gz
     provides:
@@ -5580,6 +5623,84 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
+  Test-Simple-1.302175
+    pathname: E/EX/EXODIST/Test-Simple-1.302175.tar.gz
+    provides:
+      Test2 1.302175
+      Test2::API 1.302175
+      Test2::API::Breakage 1.302175
+      Test2::API::Context 1.302175
+      Test2::API::Instance 1.302175
+      Test2::API::Stack 1.302175
+      Test2::Event 1.302175
+      Test2::Event::Bail 1.302175
+      Test2::Event::Diag 1.302175
+      Test2::Event::Encoding 1.302175
+      Test2::Event::Exception 1.302175
+      Test2::Event::Fail 1.302175
+      Test2::Event::Generic 1.302175
+      Test2::Event::Note 1.302175
+      Test2::Event::Ok 1.302175
+      Test2::Event::Pass 1.302175
+      Test2::Event::Plan 1.302175
+      Test2::Event::Skip 1.302175
+      Test2::Event::Subtest 1.302175
+      Test2::Event::TAP::Version 1.302175
+      Test2::Event::V2 1.302175
+      Test2::Event::Waiting 1.302175
+      Test2::EventFacet 1.302175
+      Test2::EventFacet::About 1.302175
+      Test2::EventFacet::Amnesty 1.302175
+      Test2::EventFacet::Assert 1.302175
+      Test2::EventFacet::Control 1.302175
+      Test2::EventFacet::Error 1.302175
+      Test2::EventFacet::Hub 1.302175
+      Test2::EventFacet::Info 1.302175
+      Test2::EventFacet::Info::Table 1.302175
+      Test2::EventFacet::Meta 1.302175
+      Test2::EventFacet::Parent 1.302175
+      Test2::EventFacet::Plan 1.302175
+      Test2::EventFacet::Render 1.302175
+      Test2::EventFacet::Trace 1.302175
+      Test2::Formatter 1.302175
+      Test2::Formatter::TAP 1.302175
+      Test2::Hub 1.302175
+      Test2::Hub::Interceptor 1.302175
+      Test2::Hub::Interceptor::Terminator 1.302175
+      Test2::Hub::Subtest 1.302175
+      Test2::IPC 1.302175
+      Test2::IPC::Driver 1.302175
+      Test2::IPC::Driver::Files 1.302175
+      Test2::Tools::Tiny 1.302175
+      Test2::Util 1.302175
+      Test2::Util::ExternalMeta 1.302175
+      Test2::Util::Facets2Legacy 1.302175
+      Test2::Util::HashBase 1.302175
+      Test2::Util::Trace 1.302175
+      Test::Builder 1.302175
+      Test::Builder::Formatter 1.302175
+      Test::Builder::IO::Scalar 2.114
+      Test::Builder::Module 1.302175
+      Test::Builder::Tester 1.302175
+      Test::Builder::Tester::Color 1.302175
+      Test::Builder::Tester::Tie 1.302175
+      Test::Builder::TodoDiag 1.302175
+      Test::More 1.302175
+      Test::Simple 1.302175
+      Test::Tester 1.302175
+      Test::Tester::Capture 1.302175
+      Test::Tester::CaptureRunner 1.302175
+      Test::Tester::Delegate 1.302175
+      Test::use::ok 1.302175
+      ok 1.302175
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0
+      Scalar::Util 1.13
+      Storable 0
+      perl 5.006002
+      utf8 0
   Test-TCP-2.22
     pathname: M/MI/MIYAGAWA/Test-TCP-2.22.tar.gz
     provides:
@@ -5669,11 +5790,11 @@ DISTRIBUTIONS
     provides:
       Test::XPath 0.19
     requirements:
-      ExtUtils::MakeMaker 0
+      Module::Build 0.30
       Test::Builder 0.70
       Test::More 0.70
       XML::LibXML 1.70
-      perl 5.006
+      perl 5.006002
   Text-Diff-1.45
     pathname: N/NE/NEILB/Text-Diff-1.45.tar.gz
     provides:
@@ -5759,6 +5880,17 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Time-Local-1.30
+    pathname: D/DR/DROLSKY/Time-Local-1.30.tar.gz
+    provides:
+      Time::Local 1.30
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      constant 0
+      parent 0
+      strict 0
   TimeDate-2.32
     pathname: A/AT/ATOOMIC/TimeDate-2.32.tar.gz
     provides:
@@ -6511,7 +6643,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6
+      HTTP::Status 6.18
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6
