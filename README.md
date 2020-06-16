@@ -21,7 +21,7 @@ This will give you a virtual machine already configured and ready to start devel
 If you prefer not to use Docker, the following commands will get you started:
 
     $ carton install
-    $ npm install
+    $ yarn install
     $ export PATH="$(realpath ./node_modules/.bin):$PATH"
     $ ./bin/prove t
     $ carton exec plackup -p 5001 -r
