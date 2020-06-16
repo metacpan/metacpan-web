@@ -23,7 +23,8 @@ test_psgi app, sub {
     ok( $res = $cb->( GET '/search?q=&lucky=1' ), 'GET /search?q=&lucky=1' );
     is( $res->code, 302, 'code 302' );
 
-    ok( $res = $cb->( GET '/search?q=moose">' ), 'GET /search?q=moose">' );
+    ok( $res = $cb->( GET '/search?q=nothingatall' ),
+        'GET /search?q=nothingatall' );
     is( $res->code, 200, 'code 200' );
     ok( $res->content =~ /Task::Kensho/,
         'get recommendation about Task::Kensho on No result page' );
