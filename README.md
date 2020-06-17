@@ -29,6 +29,15 @@ If you prefer not to use Docker, the following commands will get you started:
 To run the tests in parallel, add `-j8` (or however many CPUs you have) to the
 `prove` command.
 
+## Local Git and testing considerations
+
+You will want to set up the supplied pre-commit Git hook like so:
+
+    $ ./git/setup.sh
+
+which causes `tidyall` to be run before each commit. You can manually
+run this with `tidyall path/to/file`
+
 ## Local Configuration Changes
 
 The back end defaults to `fastapi.metacpan.org`. Running a local API server is
