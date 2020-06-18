@@ -71,7 +71,7 @@
         <link rel="shortcut icon" href="/static/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
         <%- FOREACH js IN req.env.item('psgix.assets').grep(/\.js$/) %>
-        <script src="<% js %>" type="text/javascript"></script>
+        <script src="<% js %>" type="text/javascript" defer></script>
         <%- END %>
         <%- FOREACH less IN req.env.item('psgix.assets').grep(/\.less$/) %>
         <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
