@@ -26,7 +26,8 @@ sub _build__static_app {
     my $file_app  = Plack::App::File->new( root => "$cache_dir" )->to_app;
     sub {
         my $res = &$file_app;
-        push @{ $res->[1] }, 'Cache-Control', 'max-age=31556926';
+        push @{ $res->[1] }, 'Cache-Control',
+            'public, max-age=31536000, immutable';
         return $res;
     };
 }
