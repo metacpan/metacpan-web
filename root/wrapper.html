@@ -91,12 +91,6 @@
           });
           ga('send', 'pageview');
         </script>
-        <% IF stats_page %>
-        <%# Just for the stats page %>
-        <script src="/static/stats/d3.v3.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/static/stats/epoch.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="/static/stats/epoch.min.css">
-        <% END %>
         <% IF twitter_card_inc %>
         <% INCLUDE $twitter_card_inc %>
         <% END %>
