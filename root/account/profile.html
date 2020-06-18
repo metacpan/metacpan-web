@@ -311,7 +311,7 @@ function fillLocation() {
     });
     return false;
 }
-$(function () {
+document.addEventListener('DOMContentLoaded', function () {
     $(window).bind("resize", formFixer);
     formFixer();
 });

@@ -88,7 +88,7 @@ FOREACH continent IN continents;
 <%- END %>
 </ul>
 <script type="text/javascript">
-$(function(){
+document.addEventListener('DOMContentLoaded', function(){
   $('#map').width("auto");
   map = new OpenLayers.Map( 'map' );
   map.addLayer(new OpenLayers.Layer.OSM());
