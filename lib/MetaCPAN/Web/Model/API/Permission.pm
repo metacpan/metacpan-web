@@ -62,6 +62,36 @@ sub _get_modules_in_distribution {
     } );
 }
 
+sub get_notification_type {
+    my ( $self, $module ) = @_;
+
+    $self->get( module => $module )->then( \&_permissions_to_notification );
+}
+
+sub _permissions_to_notification {
+    my $data = shift;
+
+    my $type;
+    my %special = (
+        NEEDHELP => 1,
+        ADOPTME  => 1,
+        HANDOFF  => 1
+    );
+    for my $maint ( $data->{owner} || '', @{ $data->{co_maintainers} || [] },
+        )
+    {
+        if ( exists $special{$maint} ) {
+            $type = $maint;
+            last;
+        }
+    }
+
+    Future->done( {
+        took         => $data->{took} || 0,
+        notification => $type,
+    } );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

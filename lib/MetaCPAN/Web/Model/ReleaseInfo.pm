@@ -48,8 +48,8 @@ sub find {
         $self->_wrap(
             release => $data,
             %dist_data,
-            permission => $self->_permission->get(
-                'module', $data->{release}{main_module}
+            notification => $self->_permission->get_notification_type(
+                $data->{release}{main_module}
             ),
             $self->_release_data(
                 $data->{release}{author},
@@ -60,7 +60,7 @@ sub find {
 }
 
 sub get {
-    my ( $self, $author, $release_name, $module_name ) = @_;
+    my ( $self, $author, $release_name ) = @_;
     my $release      = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
     $release->then( sub {
@@ -72,8 +72,8 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            permission => $self->_permission->get(
-                'module', $module_name || $data->{release}{main_module}
+            notification => $self->_permission->get_notification_type(
+                $data->{release}{main_module}
             ),
             $self->_dist_data( $data->{release}{distribution} ),
         );
@@ -141,7 +141,7 @@ sub normalize {
                 grep is_hashref($_),
                 values %$data
             ),
-            notification => $self->normalize_notification_type($data),
+            notification => $data->{notification}{notification},
             coverage     => $data->{coverage},
             release      => $data->{release}{release},
             favorites    => $data->{favorites}{favorites},
@@ -281,32 +281,6 @@ sub normalize_issue_url {
     }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
-}
-
-sub normalize_notification_type {
-    my ( $self, $data ) = @_;
-    if ( is_hashref($data) ) {
-        if ( is_hashref( $data->{permission} ) ) {
-            my %special = (
-                NEEDHELP => 1,
-                ADOPTME  => 1,
-                HANDOFF  => 1
-            );
-            if ( defined $data->{permission}{owner}
-                && exists $special{ $data->{permission}{owner} } )
-            {
-                return $data->{permission}{owner};
-            }
-            elsif ( is_arrayref( $data->{permission}{co_maintainers} ) ) {
-                for ( reverse @{ $data->{permission}{co_maintainers} } ) {
-                    if ( exists $special{$_} ) {
-                        return $_;
-                    }
-                }
-            }
-        }
-    }
-    return 0;
 }
 
 __PACKAGE__->meta->make_immutable;
