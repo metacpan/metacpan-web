@@ -159,7 +159,7 @@ sub normalize {
                 $data->{release}{release},
                 $data->{distribution}
             ),
-            %{ $data->{plussers} },
+            plussers => $data->{plussers}{plussers},
             (
                 $self->full_details
                 ? (

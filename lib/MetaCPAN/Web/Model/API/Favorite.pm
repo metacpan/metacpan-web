@@ -79,13 +79,22 @@ sub find_plussers {
         my $plusser_data = shift;
         my @plusser_users
             = $plusser_data->{users} ? @{ $plusser_data->{users} } : ();
+        my $took = $plusser_data->{took} || 0;
 
         $self->get_plusser_authors( \@plusser_users )->then( sub {
-            my @plusser_authors = @{ +shift };
+            my $plusser_user_data = shift;
+
+            $took += $plusser_user_data->{took};
+            my $other_count = @plusser_users - $plusser_user_data->{total};
+            my $authors     = $plusser_user_data->{authors};
+
             return Future->done( {
-                plusser_authors => \@plusser_authors,
-                plusser_others => scalar( @plusser_users - @plusser_authors ),
-                plusser_data   => $distribution
+                plussers => {
+                    authors      => $authors,
+                    others       => $other_count,
+                    distribution => $distribution,
+                },
+                took => $took,
             } );
         } );
         } );
@@ -95,12 +104,7 @@ sub get_plusser_authors {
     my ( $self, $users ) = @_;
     return Future->done( [] ) unless $users and @{$users};
 
-    $self->request( '/author/by_user', { user => $users } )->transform(
-        done => sub {
-            my $res = shift;
-            return $res->{authors} || [];
-        }
-    );
+    $self->request( '/author/by_user', { user => $users } );
 }
 
 __PACKAGE__->meta->make_immutable;
