@@ -120,13 +120,22 @@ sub wrap {
         my $static_app
             = Plack::App::File->new( root => 'root/static' )->to_app;
         mount '/static' => sub {
-            my $res = $static_app->(@_);
-            push @{ $res->[1] }, (
-                'Cache-Control' => "max-age=${day_ttl}",
-
-                'Surrogate-Control' => "max-age=${year_ttl}",
+            my $env = shift;
+            my $res = $static_app->($env);
+            if ( $env->{PATH_INFO} =~ m{^/(?:images|icons|fonts)/} ) {
+                push @{ $res->[1] },
+                    ( 'Cache-Control' =>
+                        "public, max-age=${year_ttl}, immutable", );
+            }
+            else {
+                push @{ $res->[1] },
+                    ( 'Cache-Control' => "public, max-age=${day_ttl}", );
+            }
+            push @{ $res->[1] },
+                (
                 'Surrogate-Key'     => 'assets',
-            );
+                'Surrogate-Control' => "max-age=${year_ttl}",
+                );
             $res;
         };
 
