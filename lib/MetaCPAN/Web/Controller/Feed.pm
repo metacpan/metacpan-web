@@ -136,10 +136,11 @@ sub author : Local : Args(1) {
         $c->detach( '/not_found', [] );
     }
 
+    my $user = $author_info->{author}->{user};
+
     my $releases = $c->model('API::Release')->latest_by_author($author)->get;
 
-    my $faves
-        = $c->model('API::Favorite')->by_user( $author_info->{user} )->get;
+    my $faves = $c->model('API::Favorite')->by_user($user)->get;
 
     $c->stash->{feed} = $self->build_feed(
         format  => $c->req->params->{'type'},

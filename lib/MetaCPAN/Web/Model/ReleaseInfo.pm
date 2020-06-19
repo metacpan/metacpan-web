@@ -152,7 +152,7 @@ sub normalize {
             rating       => $data->{rating}{distributions}{$dist},
             versions     => $releases,
             distribution => $data->{distribution},
-            author       => $data->{author},
+            author       => $data->{author}{author},
             contributors => $data->{contributors},
             irc          => $self->groom_irc( $data->{release}{release} ),
             issues       => $self->normalize_issues(
