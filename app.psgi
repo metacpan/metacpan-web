@@ -154,6 +154,7 @@ builder {
         root     => $root_dir,
         dev_mode => $dev_mode,
         temp_dir => $tempdir,
+        config   => $config,
     );
 
     builder {
