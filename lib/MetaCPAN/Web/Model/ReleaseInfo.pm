@@ -132,7 +132,6 @@ sub normalize {
     my $self = shift;
     sub {
         my $data = shift;
-        my $dist = $data->{release}{release}{distribution};
 
         Future->done( {
             took => max(
@@ -145,7 +144,7 @@ sub normalize {
             coverage     => $data->{coverage},
             release      => $data->{release}{release},
             favorites    => $data->{favorites}{favorites},
-            rating       => $data->{rating}{distributions}{$dist},
+            rating       => $data->{rating}{rating},
             versions     => $data->{versions}{versions},
             distribution => $data->{distribution}{distribution},
             author       => $data->{author}{author},
