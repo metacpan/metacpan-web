@@ -2,8 +2,6 @@
 
 // Store global data in this object
 var MetaCPAN = {};
-// Collect favs we need to check after dom ready
-MetaCPAN.favs_to_check = {};
 
 // provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
 try {
@@ -566,9 +564,11 @@ function showUserData(fav_data) {
         var distribution = value.distribution;
 
         // On the page... make it deltable and styled as 'active'
-        if (MetaCPAN.favs_to_check[distribution]) {
-            $('#' + distribution + '-fav input[name="remove"]').val(1);
-            var button = $('#' + distribution + '-fav button');
+        var fav_display = $('#' + distribution + '-fav');
+
+        if (fav_display.length) {
+            fav_display.find('input[name="remove"]').val(1);
+            var button = fav_display.find('button');
             button.addClass('active');
             setFavTitle(button);
         }

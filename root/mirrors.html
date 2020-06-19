@@ -1,7 +1,7 @@
 
 <%- query = req.parameters.q %>
 <% title = 'CPAN Mirrors' %>
-<script src="/static/openlayers/OpenLayers.js"></script>
+<script defer src="/static/openlayers/OpenLayers.js"></script>
 <ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
@@ -88,7 +88,7 @@ FOREACH continent IN continents;
 <%- END %>
 </ul>
 <script type="text/javascript">
-$(function(){
+document.addEventListener('DOMContentLoaded', function(){
   $('#map').width("auto");
   map = new OpenLayers.Map( 'map' );
   map.addLayer(new OpenLayers.Layer.OSM());
