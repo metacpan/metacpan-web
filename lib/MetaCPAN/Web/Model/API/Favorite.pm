@@ -7,18 +7,17 @@ extends 'MetaCPAN::Web::Model::API';
 use List::Util qw(uniq);
 use Future;
 
-sub get {
-    my ( $self, $user, @distributions ) = @_;
-    @distributions = uniq @distributions;
-
-    # If there are no distributions this will build a query with an empty
-    # filter and ES will return a parser error... so just skip it.
-    if ( !@distributions ) {
-        return Future->wrap( {} );
-    }
+sub by_dist {
+    my ( $self, $dist ) = @_;
 
     return $self->request( '/favorite/agg_by_distributions',
-        { user => $user, distribution => \@distributions } );
+        { distribution => $dist } )->then( sub {
+        my $data = shift;
+        Future->done( {
+            favorites => $data->{favorites}{$dist},
+            took      => $data->{took},
+        } );
+        } );
 }
 
 sub by_user {

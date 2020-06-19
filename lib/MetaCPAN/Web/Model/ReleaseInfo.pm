@@ -98,7 +98,7 @@ sub _dist_data {
     my ( $self, $dist ) = @_;
 
     return (
-        favorites    => $self->_favorite->get( undef, $dist ),
+        favorites    => $self->_favorite->by_dist($dist),
         plussers     => $self->_favorite->find_plussers($dist),
         rating       => $self->_rating->get($dist),
         versions     => $self->_release->versions($dist),
@@ -144,7 +144,7 @@ sub normalize {
             notification => $self->normalize_notification_type($data),
             coverage     => $data->{coverage},
             release      => $data->{release}{release},
-            favorites    => $data->{favorites}{favorites}{$dist},
+            favorites    => $data->{favorites}{favorites},
             rating       => $data->{rating}{distributions}{$dist},
             versions     => $data->{versions}{versions},
             distribution => $data->{distribution}{distribution},
