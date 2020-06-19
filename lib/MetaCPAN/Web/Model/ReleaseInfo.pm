@@ -159,7 +159,7 @@ sub normalize {
                 $self->full_details
                 ? (
                     files   => $data->{files}{files},
-                    modules => $data->{modules}{files},
+                    modules => $data->{modules}{modules},
                     changes => $data->{changes}{changes},
                     )
                 : ()

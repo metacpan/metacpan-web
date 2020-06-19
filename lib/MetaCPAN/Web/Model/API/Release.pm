@@ -6,6 +6,7 @@ extends 'MetaCPAN::Web::Model::API';
 with 'MetaCPAN::Web::Role::RiverData';
 
 use CPAN::DistnameInfo;
+use Future ();
 
 =head1 NAME
 
@@ -70,7 +71,13 @@ sub recent {
 
 sub modules {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/modules/$author/$release");
+    $self->request("/release/modules/$author/$release")->then( sub {
+        my $data = shift;
+        if ( my $modules = delete $data->{files} ) {
+            $data->{modules} = $modules;
+        }
+        Future->done($data);
+    } );
 }
 
 sub find {
