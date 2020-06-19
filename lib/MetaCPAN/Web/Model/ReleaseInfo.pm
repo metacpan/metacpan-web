@@ -12,7 +12,6 @@ use URI ();
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
 use Future;
-use CPAN::DistnameInfo;
 
 my %models = (
     _release      => 'API::Release',
@@ -131,12 +130,8 @@ sub _release_data {
 sub normalize {
     my $self = shift;
     sub {
-        my $data     = shift;
-        my $dist     = $data->{release}{release}{distribution};
-        my $releases = $data->{versions}{releases};
-        $_->{distname_version}
-            = CPAN::DistnameInfo->new( $_->{download_url} )->version
-            for @$releases;
+        my $data = shift;
+        my $dist = $data->{release}{release}{distribution};
 
         Future->done( {
             took => max(
@@ -150,7 +145,7 @@ sub normalize {
             release      => $data->{release}{release},
             favorites    => $data->{favorites}{favorites}{$dist},
             rating       => $data->{rating}{distributions}{$dist},
-            versions     => $releases,
+            versions     => $data->{versions}{versions},
             distribution => $data->{distribution},
             author       => $data->{author}{author},
             contributors => $data->{contributors},

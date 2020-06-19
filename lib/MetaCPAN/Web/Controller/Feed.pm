@@ -167,7 +167,7 @@ sub distribution : Local : Args(1) {
         format  => $c->req->params->{'type'},
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $distribution - MetaCPAN",
-        entries => $data->{releases},
+        entries => $data->{versions},
     );
 }
 

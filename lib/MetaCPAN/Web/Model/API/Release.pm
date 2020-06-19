@@ -5,7 +5,7 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 with 'MetaCPAN::Web::Role::RiverData';
 
-use List::Util qw(first uniq);
+use CPAN::DistnameInfo;
 
 =head1 NAME
 
@@ -108,7 +108,17 @@ sub interesting_files {
 
 sub versions {
     my ( $self, $dist ) = @_;
-    $self->request("/release/versions/$dist");
+    $self->request("/release/versions/$dist")->then( sub {
+        my ($data) = @_;
+        my $releases = delete $data->{releases};
+        for my $release (@$releases) {
+            $release->{distname_version}
+                = CPAN::DistnameInfo->new( $release->{download_url} )
+                ->version;
+        }
+        $data->{versions} = $releases;
+        Future->done($data);
+    } );
 }
 
 sub topuploaders {

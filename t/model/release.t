@@ -49,7 +49,7 @@ subtest versions => sub {
     # Something with not too many versions.
     my @versions
         = @{ MetaCPAN::Web->model('API::Release')
-            ->versions('Mojolicious-Plugin-HamlRenderer')->get->{releases} };
+            ->versions('Mojolicious-Plugin-HamlRenderer')->get->{versions} };
 
     ok( scalar @versions, 'found release versions' );
 
