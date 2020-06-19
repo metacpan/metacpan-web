@@ -160,7 +160,7 @@ sub normalize {
                 ? (
                     files   => $data->{files}{files},
                     modules => $data->{modules}{files},
-                    changes => $data->{changes},
+                    changes => $data->{changes}{changes},
                     )
                 : ()
             ),
