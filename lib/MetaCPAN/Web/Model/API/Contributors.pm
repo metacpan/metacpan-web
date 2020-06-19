@@ -26,16 +26,7 @@ it under the same terms as Perl itself.
 sub get {
     my ( $self, $author, $release ) = @_;
 
-    # If there's no release, we'll just redirect
-    $release //= {};
-
-    $self->request( '/release/contributors/' . $author . '/' . $release, )
-        ->transform(
-        done => sub {
-            my $data = shift;
-            return $data->{contributors};
-        }
-        );
+    $self->request( '/release/contributors/' . $author . '/' . $release );
 }
 
 __PACKAGE__->meta->make_immutable;

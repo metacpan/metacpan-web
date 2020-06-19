@@ -148,7 +148,7 @@ sub normalize {
             versions     => $data->{versions}{versions},
             distribution => $data->{distribution},
             author       => $data->{author}{author},
-            contributors => $data->{contributors},
+            contributors => $data->{contributors}{contributors},
             irc          => $self->groom_irc( $data->{release}{release} ),
             issues       => $self->normalize_issues(
                 $data->{release}{release},
