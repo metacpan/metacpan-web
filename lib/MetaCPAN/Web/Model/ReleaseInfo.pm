@@ -12,9 +12,9 @@ use URI ();
 use URI::Escape qw(uri_escape uri_unescape);
 use URI::QueryParam;    # Add methods to URI.
 use Future;
-use CPAN::DistnameInfo;
 
 my %models = (
+    _distribution => 'API::Distribution',
     _release      => 'API::Release',
     _author       => 'API::Author',
     _contributors => 'API::Contributors',
@@ -48,8 +48,8 @@ sub find {
         $self->_wrap(
             release => $data,
             %dist_data,
-            permission => $self->_permission->get(
-                'module', $data->{release}{main_module}
+            notification => $self->_permission->get_notification_type(
+                $data->{release}{main_module}
             ),
             $self->_release_data(
                 $data->{release}{author},
@@ -60,7 +60,7 @@ sub find {
 }
 
 sub get {
-    my ( $self, $author, $release_name, $module_name ) = @_;
+    my ( $self, $author, $release_name ) = @_;
     my $release      = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
     $release->then( sub {
@@ -72,8 +72,8 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            permission => $self->_permission->get(
-                'module', $module_name || $data->{release}{main_module}
+            notification => $self->_permission->get_notification_type(
+                $data->{release}{main_module}
             ),
             $self->_dist_data( $data->{release}{distribution} ),
         );
@@ -98,11 +98,11 @@ sub _dist_data {
     my ( $self, $dist ) = @_;
 
     return (
-        favorites    => $self->_favorite->get( undef, $dist ),
+        favorites    => $self->_favorite->by_dist($dist),
         plussers     => $self->_favorite->find_plussers($dist),
         rating       => $self->_rating->get($dist),
         versions     => $self->_release->versions($dist),
-        distribution => $self->_release->distribution($dist),
+        distribution => $self->_distribution->get($dist),
     );
 }
 
@@ -111,7 +111,7 @@ sub _release_data {
     return (
         author       => $self->_author->get($author),
         contributors => $self->_contributors->get( $author, $release ),
-        coverage     => $self->_release->coverage($release),
+        coverage     => $self->_release->coverage( $author, $release ),
         (
             $self->full_details
             ? (
@@ -131,12 +131,7 @@ sub _release_data {
 sub normalize {
     my $self = shift;
     sub {
-        my $data     = shift;
-        my $dist     = $data->{release}{release}{distribution};
-        my $releases = $data->{versions}{releases};
-        $_->{distname_version}
-            = CPAN::DistnameInfo->new( $_->{download_url} )->version
-            for @$releases;
+        my $data = shift;
 
         Future->done( {
             took => max(
@@ -145,27 +140,27 @@ sub normalize {
                 grep is_hashref($_),
                 values %$data
             ),
-            notification => $self->normalize_notification_type($data),
-            coverage     => $data->{coverage},
+            notification => $data->{notification}{notification},
+            coverage     => $data->{coverage}{coverage},
             release      => $data->{release}{release},
-            favorites    => $data->{favorites}{favorites}{$dist},
-            rating       => $data->{rating}{distributions}{$dist},
-            versions     => $releases,
-            distribution => $data->{distribution},
-            author       => $data->{author},
-            contributors => $data->{contributors},
+            favorites    => $data->{favorites}{favorites},
+            rating       => $data->{rating}{rating},
+            versions     => $data->{versions}{versions},
+            distribution => $data->{distribution}{distribution},
+            author       => $data->{author}{author},
+            contributors => $data->{contributors}{contributors},
             irc          => $self->groom_irc( $data->{release}{release} ),
             issues       => $self->normalize_issues(
                 $data->{release}{release},
-                $data->{distribution}
+                $data->{distribution}{distribution}
             ),
-            %{ $data->{plussers} },
+            plussers => $data->{plussers}{plussers},
             (
                 $self->full_details
                 ? (
                     files   => $data->{files}{files},
-                    modules => $data->{modules}{files},
-                    changes => $data->{changes},
+                    modules => $data->{modules}{modules},
+                    changes => $data->{changes}{changes},
                     )
                 : ()
             ),
@@ -285,32 +280,6 @@ sub normalize_issue_url {
     }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
-}
-
-sub normalize_notification_type {
-    my ( $self, $data ) = @_;
-    if ( is_hashref($data) ) {
-        if ( is_hashref( $data->{permission} ) ) {
-            my %special = (
-                NEEDHELP => 1,
-                ADOPTME  => 1,
-                HANDOFF  => 1
-            );
-            if ( defined $data->{permission}{owner}
-                && exists $special{ $data->{permission}{owner} } )
-            {
-                return $data->{permission}{owner};
-            }
-            elsif ( is_arrayref( $data->{permission}{co_maintainers} ) ) {
-                for ( reverse @{ $data->{permission}{co_maintainers} } ) {
-                    if ( exists $special{$_} ) {
-                        return $_;
-                    }
-                }
-            }
-        }
-    }
-    return 0;
 }
 
 __PACKAGE__->meta->make_immutable;

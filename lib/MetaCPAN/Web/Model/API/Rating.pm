@@ -24,20 +24,16 @@ it under the same terms as Perl itself.
 
 =cut
 
-use List::Util qw(uniq);
-
 sub get {
-    my ( $self, @distributions ) = @_;
-    @distributions = uniq @distributions;
-
-    # If there are no distributions this will build a query with an empty
-    # filter and ES will return a parser error... so just skip it.
-    if ( !@distributions ) {
-        return Future->done( {} );
-    }
+    my ( $self, $dist ) = @_;
 
     return $self->request( '/rating/by_distributions',
-        { distribution => \@distributions } );
+        { distribution => $dist } )->then( sub {
+        my $data  = shift;
+        my $dists = delete $data->{distributions};
+        $data->{rating} = $dists->{$dist};
+        Future->done($data);
+        } );
 }
 
 __PACKAGE__->meta->make_immutable;

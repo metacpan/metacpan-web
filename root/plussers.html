@@ -1,5 +1,5 @@
-<title>Plussers - <% plusser_data %></title>
-<% title ='Plussers - ' _ plusser_data %>
+<title>Plussers - <% plussers.distribution %></title>
+<% title ='Plussers - ' _ plussers.distribution %>
 
 
 <ul class="visible-xs nav-list slidepanel">
@@ -12,10 +12,10 @@
 <div class="pull-right hidden-xs">
 </div>
 <div class="plusser-title">
-<h4> PAUSE users who ++ed <a href="/release/<% plusser_data %>"><% plusser_data %></a></h4>
+<h4> PAUSE users who ++ed <a href="/release/<% plussers.distribution %>"><% plussers.distribution %></a></h4>
 <!-- For plussers -->
 <div class ="plussers_disp">
-<% FOREACH plusser IN plusser_authors %>
+<% FOREACH plusser IN plussers.authors %>
 
 <div class="plusser">
     <a href="/author/<% plusser.pauseid %>">

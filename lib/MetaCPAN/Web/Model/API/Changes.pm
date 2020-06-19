@@ -5,6 +5,7 @@ extends 'MetaCPAN::Web::Model::API';
 use MetaCPAN::Web::Model::API::Changes::Parser;
 use Try::Tiny;
 use Ref::Util qw(is_arrayref);
+use Future ();
 
 sub get {
     my ( $self, @path ) = @_;
@@ -15,34 +16,35 @@ sub release_changes {
     my ( $self, $path, %opts ) = @_;
     $path = join '/', @$path
         if is_arrayref($path);
-    $self->get($path)->transform(
-        done => sub {
-            my $file    = shift;
-            my $content = $file->{content}
-                or return [];
+    $self->get($path)->then( sub {
+        my $file = shift;
 
-            my $version
-                = _parse_version( $opts{version} || $file->{version} );
+        my $content = $file->{content}
+            or return Future->done( { code => 404 } );
 
-            my @releases = _releases($content);
+        my $version
+            = _parse_version( $opts{version} || $file->{version} );
 
-            my @changelogs;
-            while ( my $r = shift @releases ) {
-                if ( $r->{version_parsed} eq $version ) {
-                    $r->{current} = 1;
-                    push @changelogs, $r;
-                    if ( $opts{include_dev} ) {
-                        for my $dev_r (@releases) {
-                            last
-                                if !$dev_r->{dev};
-                            push @changelogs, $dev_r;
-                        }
+        my @releases = _releases($content);
+
+        my @changelogs;
+        while ( my $r = shift @releases ) {
+            if ( $r->{version_parsed} eq $version ) {
+                $r->{current} = 1;
+                push @changelogs, $r;
+                if ( $opts{include_dev} ) {
+                    for my $dev_r (@releases) {
+                        last
+                            if !$dev_r->{dev};
+                        push @changelogs, $dev_r;
                     }
                 }
             }
-            return \@changelogs;
         }
-    );
+        return Future->done( {
+            changes => \@changelogs,
+        } );
+    } );
 }
 
 sub by_releases {

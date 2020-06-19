@@ -1,10 +1,10 @@
 <!-- For plussers -->
-<% IF plusser_authors.size or plusser_others %>
+<% IF plussers.authors.size or plussers.others %>
 <div class="plussers hidden-phone">
 <div><b>++ed by:</b></div>
-<% author_nums = plusser_authors.size <= 5 ? plusser_authors.size : 5 %>
+<% author_nums = plussers.authors.size <= 5 ? plussers.authors.size : 5 %>
 <%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
-<% FOREACH plusser IN plusser_authors.shuffle.first(author_nums) %>
+<% FOREACH plusser IN plussers.authors.shuffle.first(author_nums) %>
 
 <a class="display-all" href="/author/<% plusser.pauseid %>"><img src="<% plusser.gravatar_image(20) %>" title="<% plusser.pauseid %>" alt="<% plusser.pauseid %>"></a>
 
@@ -12,11 +12,11 @@
 
 <!-- Display counts of plussers-->
 <p>
-<% IF plusser_authors.size %>
-<a href="/release/<% plusser_data %>/plussers"><% "%d PAUSE user(s)".pluralize(plusser_authors.size) %></a><br>
+<% IF plussers.authors.size %>
+<a href="/release/<% plussers.distribution %>/plussers"><% "%d PAUSE user(s)".pluralize(plussers.authors.size) %></a><br>
 <% END %>
-<% IF plusser_others %>
-<% "%d non-PAUSE user(s)".pluralize(plusser_others) %>.
+<% IF plussers.others %>
+<% "%d non-PAUSE user(s)".pluralize(plussers.others) %>.
 <% END %>
 </p>
 </div>

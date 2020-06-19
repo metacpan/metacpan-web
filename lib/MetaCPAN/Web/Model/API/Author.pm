@@ -30,7 +30,17 @@ it under the same terms as Perl itself.
 sub get {
     my ( $self, $author ) = @_;
 
-    return $self->request( '/author/' . uc($author) );
+    return $self->request( '/author/' . uc($author) )->then( sub {
+        my $data = shift;
+        if ( $data->{code} ) {
+            return Future->done($data);
+        }
+        else {
+            return Future->done( {
+                author => $data,
+            } );
+        }
+    } );
 }
 
 sub get_multiple {

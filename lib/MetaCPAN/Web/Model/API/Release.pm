@@ -5,7 +5,8 @@ use namespace::autoclean;
 extends 'MetaCPAN::Web::Model::API';
 with 'MetaCPAN::Web::Role::RiverData';
 
-use List::Util qw(first uniq);
+use CPAN::DistnameInfo;
+use Future ();
 
 =head1 NAME
 
@@ -27,18 +28,19 @@ it under the same terms as Perl itself.
 =cut
 
 sub coverage {
-    my ( $self, $release ) = @_;
-    $self->request("/cover/$release");
+    my ( $self, $author, $release ) = @_;
+    $self->request("/cover/$release")->then( sub {
+        my $data = shift;
+        if ( !$data->{release} ) {
+            return Future->done( { code => 404 } );
+        }
+        return Future->done( { coverage => $data } );
+    } );
 }
 
 sub get {
     my ( $self, $author, $release ) = @_;
     $self->request("/release/$author/$release");
-}
-
-sub distribution {
-    my ( $self, $dist ) = @_;
-    $self->request("/distribution/$dist");
 }
 
 sub latest_by_author {
@@ -69,7 +71,13 @@ sub recent {
 
 sub modules {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/modules/$author/$release");
+    $self->request("/release/modules/$author/$release")->then( sub {
+        my $data = shift;
+        if ( my $modules = delete $data->{files} ) {
+            $data->{modules} = $modules;
+        }
+        Future->done($data);
+    } );
 }
 
 sub find {
@@ -108,7 +116,17 @@ sub interesting_files {
 
 sub versions {
     my ( $self, $dist ) = @_;
-    $self->request("/release/versions/$dist");
+    $self->request("/release/versions/$dist")->then( sub {
+        my ($data) = @_;
+        my $releases = delete $data->{releases};
+        for my $release (@$releases) {
+            $release->{distname_version}
+                = CPAN::DistnameInfo->new( $release->{download_url} )
+                ->version;
+        }
+        $data->{versions} = $releases;
+        Future->done($data);
+    } );
 }
 
 sub topuploaders {
