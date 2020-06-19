@@ -14,6 +14,7 @@ use URI::QueryParam;    # Add methods to URI.
 use Future;
 
 my %models = (
+    _distribution => 'API::Distribution',
     _release      => 'API::Release',
     _author       => 'API::Author',
     _contributors => 'API::Contributors',
@@ -101,7 +102,7 @@ sub _dist_data {
         plussers     => $self->_favorite->find_plussers($dist),
         rating       => $self->_rating->get($dist),
         versions     => $self->_release->versions($dist),
-        distribution => $self->_release->distribution($dist),
+        distribution => $self->_distribution->get($dist),
     );
 }
 
@@ -146,13 +147,13 @@ sub normalize {
             favorites    => $data->{favorites}{favorites}{$dist},
             rating       => $data->{rating}{distributions}{$dist},
             versions     => $data->{versions}{versions},
-            distribution => $data->{distribution},
+            distribution => $data->{distribution}{distribution},
             author       => $data->{author}{author},
             contributors => $data->{contributors}{contributors},
             irc          => $self->groom_irc( $data->{release}{release} ),
             issues       => $self->normalize_issues(
                 $data->{release}{release},
-                $data->{distribution}
+                $data->{distribution}{distribution}
             ),
             plussers => $data->{plussers}{plussers},
             (

@@ -36,11 +36,6 @@ sub get {
     $self->request("/release/$author/$release");
 }
 
-sub distribution {
-    my ( $self, $dist ) = @_;
-    $self->request("/distribution/$dist");
-}
-
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
     $self->request("/release/latest_by_author/$pauseid")
