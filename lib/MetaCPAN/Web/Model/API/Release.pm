@@ -27,8 +27,14 @@ it under the same terms as Perl itself.
 =cut
 
 sub coverage {
-    my ( $self, $release ) = @_;
-    $self->request("/cover/$release");
+    my ( $self, $author, $release ) = @_;
+    $self->request("/cover/$release")->then( sub {
+        my $data = shift;
+        if ( !$data->{release} ) {
+            return Future->done( { code => 404 } );
+        }
+        return Future->done( { coverage => $data } );
+    } );
 }
 
 sub get {

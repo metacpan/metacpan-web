@@ -111,7 +111,7 @@ sub _release_data {
     return (
         author       => $self->_author->get($author),
         contributors => $self->_contributors->get( $author, $release ),
-        coverage     => $self->_release->coverage($release),
+        coverage     => $self->_release->coverage( $author, $release ),
         (
             $self->full_details
             ? (
@@ -141,7 +141,7 @@ sub normalize {
                 values %$data
             ),
             notification => $data->{notification}{notification},
-            coverage     => $data->{coverage},
+            coverage     => $data->{coverage}{coverage},
             release      => $data->{release}{release},
             favorites    => $data->{favorites}{favorites},
             rating       => $data->{rating}{rating},
