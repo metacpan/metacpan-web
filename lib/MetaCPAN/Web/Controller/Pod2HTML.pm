@@ -51,7 +51,7 @@ sub pod2html : Path : Args(0) {
     $c->stash( {
         pod          => $pod,
         pod_rendered => $html,
-        %{ pod_info($html) },
+        ( length $html ? %{ pod_info($html) } : () ),
     } );
 }
 
@@ -73,7 +73,7 @@ sub pod_info {
             };
         }
     }
-    return;
+    return {};
 }
 
 __PACKAGE__->meta->make_immutable;
