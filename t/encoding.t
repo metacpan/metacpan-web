@@ -1,7 +1,6 @@
 # vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 use strict;
 use warnings;
-use utf8;
 use Test::More;
 use MetaCPAN::Web::Test;
 use Encode qw( is_utf8 decode encode );
@@ -178,7 +177,8 @@ subtest 'check requests sent to the api' => sub {
     check_request(
         'PUT json with character string',
         [
-            '/whats/this' => { mistletoe => '1F384 🎄 CHRISTMAS TREE' },
+            '/whats/this' =>
+                { mistletoe => "1F384 \x{1F384} CHRISTMAS TREE" },
             { access_token => 'nightmare' }, 'PUT',
         ],
         {

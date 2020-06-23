@@ -630,13 +630,6 @@ DISTRIBUTIONS
       Class::Data::Inheritable 0.08
     requirements:
       ExtUtils::MakeMaker 0
-  Class-ErrorHandler-0.04
-    pathname: T/TO/TOKUHIROM/Class-ErrorHandler-0.04.tar.gz
-    provides:
-      Class::ErrorHandler 0.04
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.008_001
   Class-Inspector-1.36
     pathname: P/PL/PLICEASE/Class-Inspector-1.36.tar.gz
     provides:
@@ -1015,21 +1008,6 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  DateTime-Format-Flexible-0.32
-    pathname: T/TH/THINC/DateTime-Format-Flexible-0.32.tar.gz
-    provides:
-      DateTime::Format::Flexible 0.32
-      DateTime::Format::Flexible::lang undef
-      DateTime::Format::Flexible::lang::de undef
-      DateTime::Format::Flexible::lang::en undef
-      DateTime::Format::Flexible::lang::es undef
-    requirements:
-      DateTime 0
-      DateTime::Format::Builder 0.74
-      DateTime::TimeZone 0
-      ExtUtils::MakeMaker 0
-      List::MoreUtils 0
-      Module::Pluggable 0
   DateTime-Format-HTTP-0.42
     pathname: C/CK/CKRAS/DateTime-Format-HTTP-0.42.tar.gz
     provides:
@@ -1045,56 +1023,6 @@ DISTRIBUTIONS
     requirements:
       DateTime 0.18
       DateTime::Format::Builder 0.77
-  DateTime-Format-Mail-0.403
-    pathname: B/BO/BOOK/DateTime-Format-Mail-0.403.tar.gz
-    provides:
-      DateTime::Format::Mail 0.403
-    requirements:
-      Carp 0
-      DateTime 1.04
-      ExtUtils::MakeMaker 0
-      Params::Validate 0
-      perl 5.006
-      strict 0
-      vars 0
-  DateTime-Format-Natural-1.08
-    pathname: S/SC/SCHUBIGER/DateTime-Format-Natural-1.08.tar.gz
-    provides:
-      DateTime::Format::Natural 1.08
-      DateTime::Format::Natural::Calc 1.44
-      DateTime::Format::Natural::Compat 0.07
-      DateTime::Format::Natural::Duration 0.06
-      DateTime::Format::Natural::Duration::Checks 0.04
-      DateTime::Format::Natural::Expand 0.03
-      DateTime::Format::Natural::Extract 0.11
-      DateTime::Format::Natural::Formatted 0.07
-      DateTime::Format::Natural::Helpers 0.06
-      DateTime::Format::Natural::Lang::Base 1.08
-      DateTime::Format::Natural::Lang::EN 1.66
-      DateTime::Format::Natural::Rewrite 0.06
-      DateTime::Format::Natural::Test 0.10
-      DateTime::Format::Natural::Utils 0.05
-      DateTime::Format::Natural::Wrappers 0.03
-    requirements:
-      Carp 0
-      Clone 0
-      Cwd 0
-      DateTime 0
-      DateTime::TimeZone 0
-      Exporter 0
-      File::Find 0
-      File::Spec 0
-      FindBin 0
-      Getopt::Long 0
-      List::MoreUtils 0
-      Module::Util 0
-      Params::Validate 0
-      Scalar::Util 0
-      Storable 0
-      Term::ReadLine 0
-      Test::MockTime 0
-      Test::More 0
-      boolean 0
   DateTime-Format-Strptime-1.77
     pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.77.tar.gz
     provides:
@@ -1120,14 +1048,6 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Format-W3CDTF-0.07
-    pathname: G/GW/GWILLIAMS/DateTime-Format-W3CDTF-0.07.tar.gz
-    provides:
-      DateTime::Format::W3CDTF 0.07
-    requirements:
-      DateTime 0
-      ExtUtils::MakeMaker 6.36
-      Test::More 0.61
   DateTime-Locale-1.25
     pathname: D/DR/DROLSKY/DateTime-Locale-1.25.tar.gz
     provides:
@@ -1635,14 +1555,6 @@ DISTRIBUTIONS
       Digest::SHA 1
       ExtUtils::MakeMaker 0
       perl 5.004
-  Digest-SHA1-2.13
-    pathname: G/GA/GAAS/Digest-SHA1-2.13.tar.gz
-    provides:
-      Digest::SHA1 2.13
-    requirements:
-      Digest::base 1.00
-      ExtUtils::MakeMaker 0
-      perl 5.004
   Dist-CheckConflicts-0.11
     pathname: D/DO/DOY/Dist-CheckConflicts-0.11.tar.gz
     provides:
@@ -1793,19 +1705,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Feed-Find-0.07
-    pathname: B/BT/BTROTT/Feed-Find-0.07.tar.gz
-    provides:
-      Feed::Find 0.07
-    requirements:
-      Class::ErrorHandler 0
-      ExtUtils::MakeMaker 6.42
-      Filter::Util::Call 0
-      HTML::Parser 0
-      LWP 0
-      Test::More 0
-      URI 0
-      perl 5.008001
   File-Listing-6.04
     pathname: G/GA/GAAS/File-Listing-6.04.tar.gz
     provides:
@@ -2163,6 +2062,11 @@ DISTRIBUTIONS
       HTTP::Date 0
       Module::Build::Tiny 0.035
       perl 5.008001
+  HTTP-Lite-2.44
+    pathname: N/NE/NEILB/HTTP-Lite-2.44.tar.gz
+    provides:
+      HTTP::Lite 2.44
+    requirements:
   HTTP-Message-6.22
     pathname: O/OA/OALDERS/HTTP-Message-6.22.tar.gz
     provides:
@@ -3046,14 +2950,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Module-Util-1.09
-    pathname: M/MA/MATTLAW/Module-Util-1.09.tar.gz
-    provides:
-      Module::Util 1.09
-    requirements:
-      Module::Build 0.40
-      Test::More 0
-      perl v5.5.3
   Moo-2.003006
     pathname: H/HA/HAARG/Moo-2.003006.tar.gz
     provides:
@@ -5534,15 +5430,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.17
       strict 0
       warnings 0
-  Test-MockTime-0.17
-    pathname: D/DD/DDICK/Test-MockTime-0.17.tar.gz
-    provides:
-      Test::MockTime 0.17
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
-      Time::Local 0
-      Time::Piece 1.08
   Test-Most-0.35
     pathname: O/OV/OVID/Test-Most-0.35.tar.gz
     provides:
@@ -6166,23 +6053,6 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  URI-Fetch-0.13
-    pathname: N/NE/NEILB/URI-Fetch-0.13.tar.gz
-    provides:
-      URI::Fetch 0.13
-      URI::Fetch::Response 0.13
-    requirements:
-      Carp 0
-      Class::ErrorHandler 0
-      ExtUtils::MakeMaker 0
-      LWP::UserAgent 0
-      Storable 0
-      URI 0
-      base 0
-      constant 0
-      perl 5.008_001
-      strict 0
-      warnings 0
   URI-Find-20160806
     pathname: M/MS/MSCHWERN/URI-Find-20160806.tar.gz
     provides:
@@ -6301,71 +6171,34 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
-  XML-Atom-0.42
-    pathname: M/MI/MIYAGAWA/XML-Atom-0.42.tar.gz
+  XML-FeedPP-0.95
+    pathname: M/MA/MARKOV/XML-FeedPP-0.95.tar.gz
     provides:
-      LWP::UserAgent::AtomClient undef
-      XML::Atom 0.42
-      XML::Atom::Base undef
-      XML::Atom::Category undef
-      XML::Atom::Client undef
-      XML::Atom::Content undef
-      XML::Atom::Entry undef
-      XML::Atom::ErrorHandler undef
-      XML::Atom::Feed undef
-      XML::Atom::Link undef
-      XML::Atom::Namespace 0.42
-      XML::Atom::Person undef
-      XML::Atom::Server undef
-      XML::Atom::Thing undef
-      XML::Atom::Util undef
+      XML::FeedPP 0.95
+      XML::FeedPP::Atom 0.95
+      XML::FeedPP::Atom::Atom03 0.95
+      XML::FeedPP::Atom::Atom03::Entry 0.95
+      XML::FeedPP::Atom::Atom03::Feed 0.95
+      XML::FeedPP::Atom::Atom10 0.95
+      XML::FeedPP::Atom::Atom10::Entry 0.95
+      XML::FeedPP::Atom::Atom10::Feed 0.95
+      XML::FeedPP::Atom::Common 0.95
+      XML::FeedPP::Atom::Common::Entry 0.95
+      XML::FeedPP::Atom::Common::Feed 0.95
+      XML::FeedPP::Element 0.95
+      XML::FeedPP::Item 0.95
+      XML::FeedPP::Plugin 0.95
+      XML::FeedPP::RDF 0.95
+      XML::FeedPP::RDF::Channel 0.95
+      XML::FeedPP::RDF::Item 0.95
+      XML::FeedPP::RSS 0.95
+      XML::FeedPP::RSS::Channel 0.95
+      XML::FeedPP::RSS::Item 0.95
+      XML::FeedPP::Util 0.95
     requirements:
-      Class::Data::Inheritable 0
-      DateTime 0
-      DateTime::TimeZone 0
-      Digest::SHA1 0
-      ExtUtils::MakeMaker 6.59
-      LWP::UserAgent 0
-      MIME::Base64 0
-      Module::Build::Tiny 0.034
-      URI 0
-      XML::LibXML 1.69
-      XML::XPath 0
-      perl 5.008001
-  XML-Feed-0.59
-    pathname: D/DA/DAVECROSS/XML-Feed-0.59.tar.gz
-    provides:
-      XML::Feed 0.59
-      XML::Feed::Content 0.59
-      XML::Feed::Enclosure 0.59
-      XML::Feed::Entry 0.59
-      XML::Feed::Entry::Format::Atom 0.59
-      XML::Feed::Entry::Format::RSS 0.59
-      XML::Feed::Format::Atom 0.59
-      XML::Feed::Format::RSS 0.59
-      XML::Feed::Util 0.59
-    requirements:
-      Class::ErrorHandler 0
-      DateTime 0
-      DateTime::Format::Flexible 0
-      DateTime::Format::ISO8601 0
-      DateTime::Format::Mail 0
-      DateTime::Format::Natural 0
-      DateTime::Format::W3CDTF 0
-      Feed::Find 0
-      HTML::Entities 0
-      HTML::TokeParser 0
-      LWP::UserAgent 0
-      List::Util 0
-      Module::Pluggable 0
-      Scalar::Util 0
+      ExtUtils::MakeMaker 0
       Test::More 0
-      URI 0
-      URI::Fetch 0
-      XML::Atom 0.38
-      XML::LibXML 1.66
-      XML::RSS 1.47
-      perl v5.10.0
+      XML::TreePP 0.39
   XML-LibXML-2.0204
     pathname: S/SH/SHLOMIF/XML-LibXML-2.0204.tar.gz
     provides:
@@ -6441,43 +6274,6 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  XML-Parser-2.46
-    pathname: T/TO/TODDR/XML-Parser-2.46.tar.gz
-    provides:
-      XML::Parser 2.46
-      XML::Parser::Expat 2.46
-      XML::Parser::Style::Debug undef
-      XML::Parser::Style::Objects undef
-      XML::Parser::Style::Stream undef
-      XML::Parser::Style::Subs undef
-      XML::Parser::Style::Tree undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      LWP::UserAgent 0
-      perl 5.00405
-  XML-RSS-1.61
-    pathname: S/SH/SHLOMIF/XML-RSS-1.61.tar.gz
-    provides:
-      XML::RSS 1.61
-      XML::RSS::Private::Output::Base 1.61
-      XML::RSS::Private::Output::Roles::ImageDims 1.61
-      XML::RSS::Private::Output::Roles::ModulesElems 1.61
-      XML::RSS::Private::Output::V0_9 1.61
-      XML::RSS::Private::Output::V0_91 1.61
-      XML::RSS::Private::Output::V1_0 1.61
-      XML::RSS::Private::Output::V2_0 1.61
-    requirements:
-      Carp 0
-      DateTime::Format::Mail 0
-      DateTime::Format::W3CDTF 0
-      ExtUtils::MakeMaker 0
-      HTML::Entities 0
-      Module::Build 0.28
-      XML::Parser 0
-      perl 5.008
-      strict 0
-      vars 0
-      warnings 0
   XML-SAX-1.02
     pathname: G/GR/GRANTM/XML-SAX-1.02.tar.gz
     provides:
@@ -6506,39 +6302,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
-  XML-XPath-1.44
-    pathname: M/MA/MANWAR/XML-XPath-1.44.tar.gz
+  XML-TreePP-0.43
+    pathname: K/KA/KAWASAKI/XML-TreePP-0.43.tar.gz
     provides:
-      XML::XPath 1.44
-      XML::XPath::Boolean 1.44
-      XML::XPath::Builder 1.44
-      XML::XPath::Expr 1.44
-      XML::XPath::Function 1.44
-      XML::XPath::Literal 1.44
-      XML::XPath::LocationPath 1.44
-      XML::XPath::Node 1.44
-      XML::XPath::Node::Attribute 1.44
-      XML::XPath::Node::AttributeImpl 1.44
-      XML::XPath::Node::Comment 1.44
-      XML::XPath::Node::Element 1.44
-      XML::XPath::Node::Namespace 1.44
-      XML::XPath::Node::PI 1.44
-      XML::XPath::Node::Text 1.44
-      XML::XPath::NodeSet 1.44
-      XML::XPath::Number 1.44
-      XML::XPath::Parser 1.44
-      XML::XPath::PerlSAX 1.44
-      XML::XPath::Root 1.44
-      XML::XPath::Step 1.44
-      XML::XPath::Variable 1.44
-      XML::XPath::XMLParser 1.44
+      XML::TreePP 0.43
     requirements:
       ExtUtils::MakeMaker 0
-      Path::Tiny 0.076
-      Scalar::Util 1.45
+      LWP 5.811
       Test::More 0
-      XML::Parser 2.23
-      perl 5.006
   XString-0.002
     pathname: A/AT/ATOOMIC/XString-0.002.tar.gz
     provides:
@@ -6585,13 +6356,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  boolean-0.46
-    pathname: I/IN/INGY/boolean-0.46.tar.gz
-    provides:
-      boolean 0.46
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.008001
   common-sense-3.74
     pathname: M/ML/MLEHMANN/common-sense-3.74.tar.gz
     provides:

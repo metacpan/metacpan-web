@@ -93,7 +93,7 @@ requires 'Type::Utils';
 requires 'URI', '1.71';
 requires 'URI::Escape';
 requires 'WWW::Form::UrlEncoded::XS';
-requires 'XML::Feed';
+requires 'XML::FeedPP';
 requires 'YAML', '1.15'; # fix dep chain issue
 
 # Test dependencies

@@ -11,10 +11,7 @@ use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri Enum Undef );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny qw/path/;
 use Text::Markdown qw/markdown/;
-use XML::Feed               ();
-use XML::Feed::Format::RSS  ();
-use XML::Feed::Format::Atom ();
-use XML::RSS                ();
+use XML::FeedPP ();
 
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
     my ( $self, $c ) = @_;
@@ -187,7 +184,7 @@ my $feed_check = validation_for(
 sub build_entry {
     my ( $self, %args ) = @_;
     my $entry = $args{entry};
-    my $e     = XML::Feed::Entry->new( $args{format} );
+    my $e     = $args{class}->new;
 
     my $link = $args{host}->clone;
     $link->path( $entry->{link}
@@ -196,13 +193,14 @@ sub build_entry {
     $e->link( $link->as_string );
 
     $e->author( $entry->{author} );
-    $e->issued( DateTime::Format::ISO8601->parse_datetime( $entry->{date} ) );
+    $e->pubDate( $entry->{date} );
     $e->title( $entry->{name} );
 
+    my $content = escape_html( $entry->{abstract} // '' );
+
     if ( my $changelog = $entry->{changes} ) {
-        my $content;
-        if ( $entry->{abstract} ) {
-            $content = '<p>' . escape_html( $entry->{abstract} ) . '</p>';
+        if ($content) {
+            $content = "<p>$content</p>";
         }
         $content .= '<p>Changes for ' . escape_html( $changelog->{version} );
         if ( $changelog->{date} ) {
@@ -213,15 +211,9 @@ sub build_entry {
             $content .= '<li>' . escape_html( $entry->{text} ) . "</li>\n";
         }
         $content .= '</ul>';
-        $e->summary($content);
     }
-    else {
-        $e->summary( escape_html( $entry->{abstract} ) );
-    }
+    $e->description($content);
 
-    # this is a hack to work around RT#124346
-    delete $e->{entry}{content}
-        if $e->isa('XML::Feed::Entry::Format::RSS');
     return $e;
 }
 
@@ -229,20 +221,23 @@ sub build_feed {
     my $self   = shift;
     my %params = $feed_check->(@_);
 
-    my ($format) = my @args
-        = $params{format} eq 'rdf' ? ( 'RSS', version => '1.0' )
-        : $params{format} eq 'rss' ? ( 'RSS', version => '2.0' )
-        : $params{format} eq 'atom' ? ('Atom')
-        :                             ();
-    my $feed = XML::Feed->new(@args);
+    my $format
+        = $params{format} eq 'rdf'  ? 'RDF'
+        : $params{format} eq 'rss'  ? 'RSS'
+        : $params{format} eq 'atom' ? 'Atom::Atom10'
+        :                             die "invalid format";
+
+    my $feed_class = "XML::FeedPP::$format";
+
+    my $feed = $feed_class->new;
     $feed->title( $params{title} );
     $feed->link('/');
 
     foreach my $entry ( @{ $params{entries} } ) {
-        $feed->add_entry( $self->build_entry(
-            entry  => $entry,
-            host   => $params{host},
-            format => $format,
+        $feed->add_item( $self->build_entry(
+            class => $feed->item_class,
+            entry => $entry,
+            host  => $params{host},
         ) );
     }
     return $feed;
@@ -280,11 +275,11 @@ sub end : Private {
     $c->detach('/end')
         if !$feed;
     $c->res->content_type(
-        $feed->format eq 'Atom'
+        $feed->isa('XML::FeedPP::Atom')
         ? 'application/atom+xml; charset=UTF-8'
         : 'application/rss+xml; charset=UTF-8'
     );
-    $c->res->body( $feed->as_xml );
+    $c->res->body( $feed->to_string( indent => 2 ) );
 }
 
 __PACKAGE__->meta->make_immutable;

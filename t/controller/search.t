@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use utf8;
 use Test::More;
 use MetaCPAN::Web::Test;
 use Encode qw(encode is_utf8);
@@ -107,7 +106,9 @@ test_psgi app, sub {
     # as of 2013-01-20 there was only one page of results
     search_and_find_module(
         $cb,
-        'ねんねこ',    # no idea what this means - rwstauner 2013-01-20
+
+        # no idea what this means - rwstauner 2013-01-20
+        "\x{306d}\x{3093}\x{306d}\x{3053}",
         'Lingua::JA::WordNet',
         'search for UTF-8 characters',
     );

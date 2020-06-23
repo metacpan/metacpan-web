@@ -1,15 +1,14 @@
 use strict;
 use warnings;
-use utf8;
 use Encode qw(encode is_utf8);
 use Test::More;
 use MetaCPAN::Web::Test;
 use Cpanel::JSON::XS qw( decode_json );
 
 my @tests = (
-    [ moose      => 'Moose' ],
-    [ 'DBIx'     => 'DBIx::Class' ],
-    [ 'Acme::ǝ' => 'Acme::ǝmɔA' ],
+    [ moose           => 'Moose' ],
+    [ 'DBIx'          => 'DBIx::Class' ],
+    [ "Acme::\x{1dd}" => "Acme::\x{1dd}m\x{254}A" ],
 );
 
 test_psgi app, sub {
