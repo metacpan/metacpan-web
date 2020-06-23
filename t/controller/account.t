@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use utf8;
 use MetaCPAN::Web::Test;
 use Test::More;
 use Test::Deep;
@@ -94,7 +93,7 @@ test_psgi app, sub {
             'profile.id'    => 'stackoverflow_username',
             'latitude'      => '52.3759 N',
             'longitude'     => '9.7320 E',
-            'name'          => 'Բարեւ',
+            'name'          => "\x{532}\x{561}\x{580}\x{565}\x{582}",
             'asciiname'     => 'asciiname1',
             'city'          => 'city1',
             'region'        => 'region1',
@@ -105,7 +104,7 @@ test_psgi app, sub {
             'website'       => 'http://example.org/web2',
             'email'         => 'foo@example.org',
             'email'         => 'bar@example.org',
-            'utf8'          => '🐪',
+            'utf8'          => "\x{1f42a}",
         ];
         ok(
             my $res = $cb->( POST '/account/profile', $form ),
@@ -144,19 +143,22 @@ test_psgi app, sub {
                 'country'  => 'country1',
                 'extra'    => {},
                 'updated' => '2017-02-15T22:18:19',   # set above in $res_body
-                'name'    => 'Բարեւ',
+                'name'    => "\x{532}\x{561}\x{580}\x{565}\x{582}",
                 'pauseid' => 'FOO',
             },
             '... and the API PUT request contains the right stuff'
         );
         my $tx = tx($res);
-        $tx->is( '//input[@name="name"]/@value',
-            'Բարեւ', '... and the new user data is in the page' );
+        $tx->is(
+            '//input[@name="name"]/@value',
+            "\x{532}\x{561}\x{580}\x{565}\x{582}",
+            '... and the new user data is in the page'
+        );
 
         $form = [
-            'name'      => 'Բարեւ',
+            'name'      => "\x{532}\x{561}\x{580}\x{565}\x{582}",
             'asciiname' => 'asciiname1',
-            'utf8'      => '🐪',
+            'utf8'      => "\x{1f42a}",
             'city'      => '',
             'region'    => '',
             'country'   => '',
@@ -171,7 +173,7 @@ test_psgi app, sub {
             {
                 'updated'   => '2017-02-15T22:18:19',
                 'user'      => '12345678901234567890',
-                'name'      => 'Բարեւ',
+                'name'      => "\x{532}\x{561}\x{580}\x{565}\x{582}",
                 'asciiname' => 'asciiname1',
                 'pauseid'   => 'FOO',
                 'country'   => undef,

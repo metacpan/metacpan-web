@@ -1,6 +1,5 @@
 package MetaCPAN::Web::Role::Request;
 
-use utf8;
 use Moose::Role;
 use Plack::Session;
 use Cpanel::JSON::XS ();
@@ -45,7 +44,7 @@ sub json_param {
 
 sub params_are_decoded {
     my ($self) = @_;
-    return $self->params->{utf8} eq "🐪";
+    return $self->params->{utf8} eq "\x{1f42a}";
 }
 
 1;
