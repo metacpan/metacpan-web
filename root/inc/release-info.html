@@ -3,7 +3,7 @@
 </li>
 <% IF is_url(release.resources.homepage) %>
 <li>
-    <a class="nopopup" href="<% release.resources.homepage %>"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
+    <a rel="noopener nofollow" class="nopopup" href="<% release.resources.homepage %>"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
 </li>
 <% END %>
 <li>
@@ -12,32 +12,32 @@
 <% IF release.resources.repository %>
 <li>
     <% IF is_url(release.resources.repository.web) %>
-    <a data-keyboard-shortcut="g r" href="<% release.resources.repository.web %>"><i class="fa fa-fw fa-code-fork black"></i>Repository</a>
+    <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="<% release.resources.repository.web %>"><i class="fa fa-fw fa-code-fork black"></i>Repository</a>
     <% END %>
     <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
-    (<a href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
+    (<a rel="noopener nofollow" href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
     <% ELSIF is_url(release.resources.repository.url) %>
-    <a href="<% release.resources.repository.url %>"><i class="fa fa-fw fa-code-fork black"></i>Clone <% release.resources.repository.type %> repository</a>
+    <a rel="noopener nofollow" href="<% release.resources.repository.url %>"><i class="fa fa-fw fa-code-fork black"></i>Clone <% release.resources.repository.type %> repository</a>
     <% END %>
 </li>
 <% END %>
 <li>
-    <a data-keyboard-shortcut="g i" href="<% issues.url %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
+    <a rel="noopener nofollow" data-keyboard-shortcut="g i" href="<% issues.url %>"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
     <% IF issues.defined("active") %>(<% issues.active %>)<% END %>
 </li>
 <li>
     <%
     testers_version = release.name.remove('^' _ release.distribution.quotemeta _ '-?');
     cpantesters_base = "https://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ (testers_version | uri) %>
-    <a href="http://matrix.cpantesters.org/?dist=<% release.distribution | uri %>+<% testers_version | uri %>" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
-    <% IF release.tests.size %><span title="(pass / fail / na)">(<a href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)</span><% END %>
+    <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=<% release.distribution | uri %>+<% testers_version | uri %>" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
+    <% IF release.tests.size %><span title="(pass / fail / na)">(<a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)</span><% END %>
 </li>
 <li>
-    <a href="http://cpants.cpanauthors.org/release/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
+    <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
 </li>
 <% IF coverage.url %>
   <li>
-    <i class="fa fa-fw fa-pie-chart black"></i><a href="<% coverage.url %>"><% coverage.criteria.total %>% Coverage </a>
+    <i class="fa fa-fw fa-pie-chart black"></i><a rel="noopener nofollow" href="<% coverage.url %>"><% coverage.criteria.total %>% Coverage </a>
   </li>
 <% END %>
 
@@ -51,7 +51,7 @@
 <% END %>
 <% IF irc.web %>
 <li class="irc-chat">
-    <div><a target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
+    <div><a rel="noopener nofollow" target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
 </li>
 <% END %>
 <%
