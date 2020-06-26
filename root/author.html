@@ -13,7 +13,7 @@
     <li class="nav-header">Website</li>
     <% FOREACH website IN author.website %>
     <li>
-        <a rel="me" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
+        <a rel="me noopener nofollow" href="<% website %>" title="<% website %>" target="_blank"><% website.decode_punycode %></a>
     </li>
     <%- END; END %>
     <%
@@ -23,7 +23,7 @@
         <%-
             FOREACH profile IN author.profile.sort('name');
             IF profiles.${profile.name} %>
-        <a rel="me" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank" title="<% profiles.${profile.name}.name %> - <% profile.id%>">
+        <a rel="me noopener nofollow" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank" title="<% profiles.${profile.name}.name %> - <% profile.id%>">
         <img src="/static/images/profile/<% profile.name %>.png" width="16" height="16" alt="<% profiles.${profile.name}.name %>">
         </a>
         <% END; END %>
@@ -41,11 +41,11 @@
     <% FOREACH blog IN author.blog -%>
     <li>
         <%- IF blog.feed %>
-        <a href="<% blog.feed %>" target="_blank">
+        <a rel="noopener nofollow" href="<% blog.feed %>" target="_blank">
         <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
         </a>
         <%- END %>
-        <a href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
+        <a rel="noopener nofollow" href="<% blog.url %>" title="<% blog.url %>" target="_blank" class="ellipsis" style="width: 140px">
         <% blog.url.replace('^https?://', '') %>
         </a>
     </li>
@@ -69,7 +69,7 @@
     </li>
     <% ELSIF donate.name == 'wishlist' && donate.id %>
     <li class="author-donate">
-        <a rel="me" href="<% donate.id %>" target="_blank">Wishlist</a>
+        <a rel="me noopener nofollow" href="<% donate.id %>" target="_blank">Wishlist</a>
     </li>
     <% ELSIF donate.name == 'flattr' && donate.id %>
     <li class="author-donate">
