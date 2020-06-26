@@ -17,6 +17,8 @@
     "js-beautify": "^1.10.2"
   },
   "dependencies": {
+    "bootstrap": "3.1.1",
+    "jquery": "3.5.1",
     "less": "^3.10.3",
     "pkg.json": "^2.0.7",
     "yarn": "^1.22.0"

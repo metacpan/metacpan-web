@@ -1,0 +1,13 @@
+#!/usr/bin/env perl
+
+use File::Copy qw(copy);
+
+# add pinned versions with "yarn add packagename@1.2.3"
+my @DEPS = (
+  [ 'node_modules/jquery/dist/jquery.min.js', 'root/static/js/jquery.min.js' ],
+  [ 'node_modules/bootstrap/dist/js/bootstrap.min.js', 'root/static/js/bootstrap.min.js' ],
+);
+my $CMD = "yarn install";
+
+system $CMD and die "$CMD FAILED: $!";
+copy @$_ for @DEPS;
