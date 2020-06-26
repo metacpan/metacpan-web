@@ -132,7 +132,7 @@ sub wrap {
         mount '/static' => sub {
             my $env = shift;
             my $res = $static_app->($env);
-            if ( $env->{PATH_INFO} =~ m{^/(?:images|icons|fonts)/} ) {
+            if ( $env->{PATH_INFO} =~ m{^/(?:images|icons|fonts|modules)/} ) {
                 push @{ $res->[1] },
                     ( 'Cache-Control' =>
                         "public, max-age=${year_ttl}, immutable", );

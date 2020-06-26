@@ -1,7 +1,7 @@
-
 <%- query = req.parameters.q %>
-<% title = 'CPAN Mirrors' %>
-<script defer src="/static/openlayers/OpenLayers.js"></script>
+<%- title = 'CPAN Mirrors' %>
+<%- assets.push("/static/modules/ol-v6.3.1/ol.js") %>
+<%- assets.push("/static/modules/ol-v6.3.1/ol.css") %>
 <ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
@@ -90,30 +90,27 @@ FOREACH continent IN continents;
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function(){
   $('#map').width("auto");
-  map = new OpenLayers.Map( 'map' );
-  map.addLayer(new OpenLayers.Layer.OSM());
   var dots = <% dots.json %>;
-  var styleMap = new OpenLayers.StyleMap(OpenLayers.Util.applyDefaults(
-          {fillColor: "#BAD3EA", fillOpacity: 1, strokeColor: "#36C", pointRadius: 4},
-          OpenLayers.Feature.Vector.style["default"]));
-  var markers = new OpenLayers.Layer.Vector("name", {styleMap: styleMap});
-  map.addLayer(markers);
-
-  for(var i = 0; i < dots.length; i++) {
-    var lonLat = new OpenLayers.LonLat( dots[i][0], dots[i][1] )
-          .transform(
-            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-            map.getProjectionObject() // to Spherical Mercator Projection
-          );
-
-    markers.addFeatures([
-      new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))]);
-  }
-  map.setCenter (new OpenLayers.LonLat( 14,35 ).transform(
-    new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-    map.getProjectionObject() // to Spherical Mercator Projection
-  ), 2);
-
+  var dotFeatures = dots.map(
+    d => new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat( d )))
+  );
+  var dotSource = new ol.source.Vector({ features: dotFeatures });
+  var style = new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 4,
+      fill: new ol.style.Fill({ color: '#BAD3EA' }),
+      stroke: new ol.style.Stroke({ color: '#36C', width: 1 }),
+    }),
+    zIndex: Infinity,
+  });
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({source: new ol.source.OSM()}),
+      new ol.layer.Vector({ source: dotSource, style: style }),
+    ],
+    view: new ol.View({ center: ol.proj.fromLonLat([ 14,35 ]), zoom: 2 }),
+  });
 });
 </script>
 </div>
