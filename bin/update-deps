@@ -6,8 +6,12 @@ use File::Copy qw(copy);
 my @DEPS = (
   [ 'node_modules/jquery/dist/jquery.min.js', 'root/static/js/jquery.min.js' ],
   [ 'node_modules/bootstrap/dist/js/bootstrap.min.js', 'root/static/js/bootstrap.min.js' ],
+  [ 'node_modules/ol/ol.css', 'root/static/modules/ol-v6.4.2/ol.css' ],
 );
 my $CMD = "yarn install";
 
 system $CMD and die "$CMD FAILED: $!";
 copy @$_ for @DEPS;
+
+my $CMD2 = "yarn run build";
+system $CMD2 and die "$CMD2 FAILED: $!";
