@@ -121,6 +121,27 @@ builder {
         };
     };
     enable sub {
+
+        # put all security-related headers here
+        my $app = shift;
+        sub {
+            my ($env) = @_;
+            Plack::Util::response_cb(
+                $app->($env),
+                sub {
+                    push @{ $_[0][1] },
+                        'Content-Security-Policy' => join( '; ',
+                        "default-src * 'unsafe-inline'",
+                        "frame-ancestors 'self' *.metacpan.org",
+                        "script-src 'self' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com *.flattr.com",
+                        ),
+                        'X-Frame-Options' => "SAMEORIGIN",
+                        ;
+                },
+            );
+        };
+    };
+    enable sub {
         my $app = shift;
         sub {
             my ($env) = @_;
