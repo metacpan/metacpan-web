@@ -4,7 +4,14 @@ $(function() {
     var topRow = $('.main-content').first();
     if (!el.length) return;
     var height = el.height();
-    var content = $("div.content").height() > $("#right-panel").height() ? $("div.content") : $('#right-panel');
+    var content = $("div.content");
+    if (!content.length) return;
+
+    var right_panel = $("#right-panel");
+    if (right_panel.length && right_panel.height() > content.height()) {
+        content = right_panel;
+    }
+
     if(height > content.height()) return;
 
     function alignSidebar(e) {
