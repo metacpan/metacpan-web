@@ -97,6 +97,7 @@ sub end : ActionClass('RenderView') {
         $c->stash->{PLACK_ENV} = 'development';
     }
     $c->stash->{req}        = $c->req;
+    $c->stash->{assets}     = $c->req->env->{'psgix.assets'} || [];
     $c->stash->{api}        = $c->config->{api};
     $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
     $c->stash->{api_external_secure} = $c->config->{api_external_secure}

@@ -58,7 +58,7 @@
         <%- IF rss %>
         <link rel="alternate" type="application/rss+xml" title="<% IF rss_title; rss_title; ELSE; 'RSS'; END %>" href="/feed/<% rss %>" />
         <%- END %>
-        <%- FOREACH css IN req.env.item('psgix.assets').grep(/\.css$/) %>
+        <%- FOREACH css IN assets.grep(/\.css$/) %>
         <link href="<% css %>" rel="stylesheet" type="text/css">
         <%- END %>
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
@@ -70,11 +70,11 @@
         <%- END %>
         <link rel="shortcut icon" href="/static/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
-        <%- FOREACH js IN req.env.item('psgix.assets').grep(/\.js$/) %>
+        <%- FOREACH js IN assets.grep(/\.js$/) %>
         <script src="<% js %>" type="text/javascript" defer></script>
         <%- END %>
-        <%- FOREACH less IN req.env.item('psgix.assets').grep(/\.less$/) %>
-        <link rel="stylesheet/less" type="text/css" href="/static/less/style.less">
+        <%- FOREACH less IN assets.grep(/\.less$/) %>
+        <link rel="stylesheet/less" type="text/css" href="<% less %>">
         <%- need_less = 1 %>
         <%- END %>
         <%- IF need_less %>
