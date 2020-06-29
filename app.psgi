@@ -131,7 +131,7 @@ builder {
                 sub {
                     push @{ $_[0][1] },
                         'Content-Security-Policy' => join( '; ',
-                        "default-src * 'unsafe-inline'",
+                        "default-src * data: 'unsafe-inline'",
                         "frame-ancestors 'self' *.metacpan.org",
                         "script-src 'self' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com *.flattr.com",
                         ),
