@@ -129,11 +129,12 @@ builder {
             Plack::Util::response_cb(
                 $app->($env),
                 sub {
-                    push @{ $_[0][1] },
-                        'Content-Security-Policy' => join( '; ',
+                    push @{ $_[0][1] }, 'Content-Security-Policy' => join(
+                        '; ',
                         "default-src * data: 'unsafe-inline'",
                         "frame-ancestors 'self' *.metacpan.org",
-                        # temporary 'unsafe-eval' because root/static/js/jquery.tablesorter.js
+
+        # temporary 'unsafe-eval' because root/static/js/jquery.tablesorter.js
                         "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com *.flattr.com",
                         ),
                         'X-Frame-Options' => "SAMEORIGIN",
