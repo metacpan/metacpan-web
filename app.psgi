@@ -133,7 +133,8 @@ builder {
                         'Content-Security-Policy' => join( '; ',
                         "default-src * data: 'unsafe-inline'",
                         "frame-ancestors 'self' *.metacpan.org",
-                        "script-src 'self' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com *.flattr.com",
+                        # temporary 'unsafe-eval' because root/static/js/jquery.tablesorter.js
+                        "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com *.flattr.com",
                         ),
                         'X-Frame-Options' => "SAMEORIGIN",
                         ;
