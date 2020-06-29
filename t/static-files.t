@@ -613,12 +613,8 @@ my %files = (
         '1ccba126177dcbbdf7cc7fb24c8bb876fd3350a6',
     'root/static/images/profile/couchsurfing.png' =>
         '69344764309bcf9c9f5e873c3eda5741ec81cbfb',
-    'root/static/images/profile/delicious.png' =>
-        '067d882869a6ee120133667242c1bca67ede9771',
     'root/static/images/profile/design_float.png' =>
         '8f46d9093cada523fb674717063cf2018d24af08',
-    'root/static/images/profile/digg.png' =>
-        'aae77decd2cfc094d196e6dade9c192760b9493b',
     'root/static/images/profile/dopplr.png' =>
         '2dbed99d2f09ba268954a03b9a3425b4a14e3ef8',
     'root/static/images/profile/dotshare.png' =>
@@ -657,10 +653,6 @@ my %files = (
         'b55daba74ec340398ba2264afe81c3e5e5633a7d',
     'root/static/images/profile/identica.png' =>
         'c20219860fb36018fc075e6d6ef817055fcc4100',
-    'root/static/images/profile/klout.png' =>
-        'af3fa3074f58c421cda0b4f4eb80e2d214499511',
-    'root/static/images/profile/lanyrd.png' =>
-        '8ceb089a61be41b14be9098806ee4bef2d18a96c',
     'root/static/images/profile/lastfm.png' =>
         '5c8d66437824599a2a79fe1842bf739b9009e8ec',
     'root/static/images/profile/linkedin.png' =>
