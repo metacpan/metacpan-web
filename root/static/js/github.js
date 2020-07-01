@@ -10,21 +10,6 @@
         this.href = this.item.attr('href');
     }
 
-    // Callback to handle Github JSONP redirects
-
-    function getGithubApiJSONP_cb(success_cb) {
-        return function (res) {
-            if (res.meta.status >= 300 && res.meta.status < 400) {
-                var location     = res.meta.Location;
-                var redirect_url = location.replace(/(callback=).*?(&)/, '$1?$2');
-                $.getJSON(redirect_url, success_cb);
-            }
-            else {
-                success_cb.apply(this, arguments);
-            }
-        };
-    }
-
     GitHubUrl.match = function(a){
         if ($(a).length == 0) return;
 
@@ -42,12 +27,12 @@
                 prepareData: function(data, cb) {
                     // we need additionally the repo info
                     var url = this.url.replace('/issues', '');
-                    $.getJSON(url, getGithubApiJSONP_cb(function(repo) {
+                    $.getJSON(url, function(repo) {
                         cb({
                             issues: data,
-                            repo: repo.data
+                            repo: repo
                         });
-                    }));
+                    });
                 },
                 render: function(data) {
                     if (data.issues.length === 0) {
@@ -70,7 +55,7 @@
                     return result +'</table></td></tr></table>';
                 },
                 url: function(result) {
-                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'/issues?per_page=15&callback=?';
+                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'/issues?per_page=15';
                 }
             },
 
@@ -115,7 +100,7 @@
                             +'</table>';
                 },
                 url: function(result) {
-                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2] +'?callback=?';
+                    return this.githubApiUrl +'/repos/'+ result[1] +'/'+ result[2];
                 }
             },
 
@@ -151,7 +136,7 @@
                             +'</table>';
                 },
                 url: function(result) {
-                    return this.githubApiUrl +'/users/'+ result[1] +'?callback=?';
+                    return this.githubApiUrl +'/users/'+ result[1];
                 }
             }
         },
@@ -173,21 +158,12 @@
                         dataType: 'json',
                         type: 'GET',
                         url: this.url,
-                        success: getGithubApiJSONP_cb(function(res) {
-                            var error;
-                            try {
-                                // If there was an error data will likely
-                                // contain only "documentation_url" and "message".
-                                if( res.meta && res.meta.status >= 400 ){
-                                    error = (res.data && res.data.message) || 'An error occurred';
-                                }
-                            } catch(ignore){ }
-                            if( error ){
-                                qtip.set('content.text', '<i>' + error + '</i>');
-                                return;
-                            }
-
-                            self.prepareData(res.data, function(data) {
+                        error: function(data) {
+                            var error = (data && data.message) || 'An error occurred';
+                            qtip.set('content.text', '<i>' + error + '</i>');
+                        },
+                        success: function(data) {
+                            self.prepareData(data, function(data) {
                                 var html = self.render(data);
                                 qtip.set('content.text', html);
                                 $('.qtip-github .relatize').each(function() {
@@ -197,7 +173,7 @@
                                     }
                                 });
                             });
-                        })
+                        },
                     },
                     text: '<i class="fa fa-spinner fa-spin"></i>',
                     title: 'Github Info'
