@@ -14,7 +14,9 @@
   },
   "homepage": "https://github.com/metacpan/metacpanweb#readme",
   "devDependencies": {
-    "js-beautify": "^1.10.2"
+    "js-beautify": "^1.10.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "bootstrap": "3.1.1",
