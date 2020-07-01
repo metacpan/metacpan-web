@@ -22,6 +22,9 @@ sub wrap {
     my $tempdir = $args{temp_dir};
     my $config  = $args{config};
     my $lessc   = $config->{lessc_command};
+    if ( $lessc && `$lessc --version` !~ /lessc/ ) {
+        undef $lessc;
+    }
 
     my @js_files = map {"/static/js/$_.js"} (
         qw(
@@ -60,6 +63,9 @@ sub wrap {
 
     builder {
         if ( !$dev_mode ) {
+            die "no lessc available!"
+                if !defined $lessc;
+
             enable 'Assets::FileCached' => (
                 files => [ map "root$_", @js_files ],
 
@@ -76,7 +82,7 @@ sub wrap {
         }
         else {
             my @assets = (@js_files);
-            if ( `$lessc --version` =~ /lessc/ ) {
+            if ($lessc) {
                 enable 'Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
@@ -126,7 +132,7 @@ sub wrap {
         mount '/static' => sub {
             my $env = shift;
             my $res = $static_app->($env);
-            if ( $env->{PATH_INFO} =~ m{^/(?:images|icons|fonts)/} ) {
+            if ( $env->{PATH_INFO} =~ m{^/(?:images|icons|fonts|modules)/} ) {
                 push @{ $res->[1] },
                     ( 'Cache-Control' =>
                         "public, max-age=${year_ttl}, immutable", );
