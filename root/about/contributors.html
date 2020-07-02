@@ -47,31 +47,29 @@
         },
 
         fetch: function(url) {
-          url = url.replace(/callback=jsonp[^&]+/, 'callback=?');
-          $.getJSON(url, function(res) {
-            cv.requestFinished(res);
+          $.getJSON(url, function(res, statusMessage, jqXHR) {
+            cv.requestFinished(res, jqXHR);
           });
         },
 
-        paginate: function(meta) {
-          var self = this;
-          if (typeof meta.Link == 'undefined') {
+        paginate: function(jqXHR) {
+          var link = jqXHR.getResponseHeader('Link');
+          if (!link) {
             return;
           }
-          $.each(meta.Link, function(idx, row) {
-            var url = row[0];
-            var type = row[1];
-            if (type.rel !== 'next') {
-              return;
-            }
+          var self = this;
+          var links = link.split(/\s*,\s*/).map(
+            l => l.match(/<(.*?)>;\s*rel="(.*?)"/)
+          ).filter(lt => lt[2] === "next").map(lt => lt[1]);
+          $.each(links, function(idx, url) {
             requests++;
             self.fetch(url);
           });
         },
 
-        requestFinished: function(res) {
-          this.paginate(res.meta);
-          $.each(res.data, function(idx, row) {
+        requestFinished: function(data, jqXHR) {
+          this.paginate(jqXHR);
+          $.each(data, function(idx, row) {
             if (typeof result[row.login] == 'undefined') {
               result[row.login] = row;
             }
@@ -87,7 +85,7 @@
     }();
 
     $.each(repos, function(idx, repo) {
-      var url = [baseUrl, repo, path].join('/') +'?per_page=100&callback=?';
+      var url = [baseUrl, repo, path].join('/') +'?per_page=100';
       cv.fetch(url);
     });
 
