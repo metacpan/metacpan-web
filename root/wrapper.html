@@ -2,6 +2,7 @@
     title = "Home",
     path = ["/", "/search"],
     image = "/static/icons/metacpan-icon.png",
+    alt = "MetaCPAN icon",
     },
     {
     title = "grep::cpan",
@@ -118,8 +119,8 @@
                         <%- END %>
                         <a href="<% item.path.0 %>">
                             <%- IF item.icon %><i class="fa fa-<% item.icon %>"></i><% END -%>
-                            <%- IF item.image %><img src="<% item.image %>" /><% END -%>
-                            <% item.title -%>
+                            <%- IF item.image %><img src="<% item.image %>" <%- IF item.alt %> alt="<% item.alt %>"<% END -%>/><% END -%>
+                            <%- item.title -%>
                         </a>
                     </li>
                     <%- END %>
@@ -224,22 +225,22 @@
             <div class="row" style="padding: 50px 15px 30px">
               <div class="col-xs-9 col-md-3" style="padding:25px">
                 <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/bytemark_logo.png">
+                  <img width="170" src="/static/images/sponsors/bytemark_logo.png" alt="Bytemark logo">
                 </a>
               </div>
               <div class="col-xs-9 col-md-3" style="padding:15px">
                 <a target="_blank" href="https://www.liquidweb.com/" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/liquidweb_color.png">
+                  <img width="170" src="/static/images/sponsors/liquidweb_color.png" alt="liquidweb logo">
                 </a>
               </div>
               <div class="col-xs-9 col-md-3" style="padding:15px">
                 <a target="_blank" href="https://www.yellowbot.com/" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/yellowbot-small.png">
+                  <img width="170" src="/static/images/sponsors/yellowbot-small.png" alt="YellowBot logo">
                 </a>
               </div>
               <div class="col-xs-9 col-md-3" style="padding:15px">
                 <a href="https://www.fastly.com/" target="_blank" rel="noopener">
-                  <img src="/static/images/sponsors/fastly_logo.png" width=110 height=51>
+                  <img src="/static/images/sponsors/fastly_logo.png" width=110 height=51 alt="Fastly logo">
                 </a>
               </div>
             </div>
