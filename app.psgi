@@ -42,7 +42,7 @@ BEGIN {
     package MetaCPAN::Web::WarnHandler;
     Log::Log4perl->wrapper_register(__PACKAGE__);
     my $logger = Log::Log4perl->get_logger;
-    $SIG{__WARN__} = sub { $logger->warn(@_) };
+    $SIG{__WARN__} = sub { $logger ? $logger->warn(@_) : warn @_ };
 }
 
 use lib "$root_dir/lib";
