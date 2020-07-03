@@ -106,6 +106,17 @@ test_psgi app, sub {
             'email'         => 'bar@example.org',
             'utf8'          => "\x{1f42a}",
         ];
+        subtest 'profile validation' => sub {
+            my @bad_form = @$form;
+            $bad_form[23] = "\x80";    # asciiname
+            ok(
+                my $res = $cb->( POST '/account/profile', \@bad_form ),
+                'POST /account/profile with non-ASCII asciiname'
+            );
+            my $tx = tx($res);
+            $tx->is( '//legend[@style="color: #600"]',
+                "Errors", 'shows errors', );
+        };
         ok(
             my $res = $cb->( POST '/account/profile', $form ),
             'POST /account/profile with all fields'
