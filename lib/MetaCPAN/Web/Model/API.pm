@@ -120,7 +120,13 @@ sub request {
         ( $request_id ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
     );
 
-    $self->client->do_request( request => $request )->transform(
+    my $req_p = $self->client->do_request( request => $request );
+    $req_p = $req_p->catch( sub {
+
+        # retry once
+        $self->client->do_request( request => $request );
+    } );
+    $req_p->transform(
         done => sub {
             my $response = shift;
             my $logger   = $self->log;
