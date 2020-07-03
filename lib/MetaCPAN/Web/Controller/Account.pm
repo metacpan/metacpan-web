@@ -92,6 +92,20 @@ sub profile : Local : Args(0) {
 
     $data->{donation} = undef unless ( $req->params->{donations} );
 
+    # validation
+    my @form_errors;
+    push @form_errors,
+        {
+        field   => 'asciiname',
+        message => "ASCII name must only have ASCII characters",
+        }
+        if defined $data->{asciiname}
+        and $data->{asciiname} =~ /[^\x20-\x7F]/;
+    if (@form_errors) {
+        $c->stash( { author => $data, errors => \@form_errors } );
+        return;
+    }
+
     my $res = $c->model('API::User')->update_profile( $data, $c->token )->get;
     if ( $res->{error} ) {
         $c->stash( { author => $data, errors => $res->{errors} } );
