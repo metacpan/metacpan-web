@@ -206,4 +206,23 @@ subtest 'get correct author release data format' => sub {
     is( $entry->[0]->{author}, 'OALDERS', 'get correct author name' );
 };
 
+# do this last so the override_api_response only affects this
+my $how_many = 0;
+override_api_response(
+    if => sub { !$how_many++ },    # fail only once
+    sub { Future->fail("Error"); },
+);
+test_psgi app, sub {
+    my $cb = shift;
+    subtest 'retry on transient failure' => sub {
+        ok( my $res = $cb->( GET '/feed/recent' ) );
+        is( $res->code, 200, 'code 200' );
+        is(
+            $res->header('content-type'),
+            'application/rss+xml; charset=UTF-8',
+            'Content-type is application/rss+xml'
+        );
+    };
+};
+
 done_testing;
