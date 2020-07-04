@@ -86,9 +86,13 @@ sub _permissions_to_notification {
         }
     }
 
+    my %data;
+    if ($type) {
+        $data{type} = $type;
+    }
     Future->done( {
         took         => $data->{took} || 0,
-        notification => $type,
+        notification => ( %data ? \%data : undef ),
     } );
 }
 
