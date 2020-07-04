@@ -46,11 +46,13 @@ sub get : Private {
         my $pod_file = $c->stash->{module}
             = $c->model('API::Module')->find(@args)->get;
 
-        my $release_info
-            = $c->model('ReleaseInfo')
-            ->get( $pod_file->{author}, $pod_file->{release} )
-            ->else( sub { Future->done( {} ) } );
-        $c->stash( $release_info->get );
+        my @ri_request_info = @$pod_file{qw(author release)};
+        if ( !grep !defined, @ri_request_info ) {
+            my $release_info
+                = $c->model('ReleaseInfo')->get(@ri_request_info)
+                ->else( sub { Future->done( {} ) } );
+            $c->stash( $release_info->get );
+        }
 
         $c->stash( {
             template => 'contributing_not_found.html'

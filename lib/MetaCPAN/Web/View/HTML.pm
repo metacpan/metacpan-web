@@ -72,8 +72,13 @@ sub common_date_format {
     return sprintf( '%04d-%02d-%02d', $year, $month, $day );
 }
 
-Template::Alloy->define_vmethod( 'text',
-    version => sub { version->parse(shift)->normal } );
+Template::Alloy->define_vmethod(
+    'text',
+    version => sub {
+        my $v = shift;
+        eval { version->parse($v)->normal } || $v;
+    }
+);
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
 
