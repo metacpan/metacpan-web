@@ -22,8 +22,9 @@ FOREACH p IN [page - 10 .. [page + 10, pager.last_page].nsort.0 ];
   <ul class="pagination">
        <li class="disabled"><a>Results per page:</a></li>
     <% FOREACH page_size IN [10, 20, 50, 100, 200, 500] %>
+      <% first_result = size * ( page - 1); new_page = 1 + ( first_result / page_size ); new_page.remove('[.]\d+) %>
       <li <% IF page_size == size %> class="active"<% END %>>
-        <a href="<% c.req.uri_with( p = page, size = page_size ).as_string %>"><% page_size %></a>
+        <a href="<% c.req.uri_with( p = new_page, size = page_size ).as_string %>"><% page_size %></a>
       </li>
     <% END %>
   </ul>
