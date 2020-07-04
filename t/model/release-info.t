@@ -3,7 +3,6 @@ use warnings;
 
 use lib 't/lib';
 use Test::More;
-use TestContext qw( get_context );
 use Module::Runtime qw( use_module );
 
 my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo')->new;
