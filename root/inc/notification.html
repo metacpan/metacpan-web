@@ -6,19 +6,19 @@
         NEEDHELP = {
             title = "Looking for help!",
             text = "The maintainer of this distribution is looking for people to help them improve this module! If you're interested then please contact them via ",
-            body = format("Hey %s,\r\n\r\nI'm willing to provide some time to help you with new feature for the %s module. if you can let me know what you would like to be done.\r\n\r\nKind Regards,")
+            body = format("Hello,\r\n\r\nI'm willing to provide some time to help you with new feature for the %s module, if you can let me know what you would like to be done.\r\n\r\nKind Regards,")
         },
         ADOPTME = {
             title  = "Why not adopt me?",
             text   = "This distribution is up for adoption! If you're interested then please contact the PAUSE module admins via ",
-            body   = format("Hey %s,\r\n\r\nI'm interested in adopting the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n Kind Regards,"),
+            body   = format("Hello,\r\n\r\nI'm interested in adopting the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n Kind Regards,"),
             email  = 'modules@perl.org',
             name   = 'PAUSE Admins'
         },
         HANDOFF = {
             title  = "Take me over?",
             text   = "The maintainer of this distribution is looking for someone to take over! If you're interested then please contact them via ",
-            body   = format("Hey %s,\r\n\r\nI'm interested in taking over the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n Kind Regards,")
+            body   = format("Hello,\r\n\r\nI'm interested in taking over the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n Kind Regards,")
         },
     }.$notification;
     IF pod_file && pod_file.module.0;
@@ -29,7 +29,7 @@
     NOTIFICATION.mailto = MAILTO(
         (NOTIFICATION.email || author.email.0 || author.email),
         (NOTIFICATION.title _ ' <' _ NOTIFICATION.module _ '>') | url,
-        NOTIFICATION.body((NOTIFICATION.name || author.asciiname || author.name), NOTIFICATION.module) | url
+        NOTIFICATION.body(NOTIFICATION.module) | url
     );
 %>
 <input id="<% notification %>" type="checkbox" class="notification-toggle-checkbox" />
