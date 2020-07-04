@@ -22,15 +22,10 @@
             body   = format("Hello,\r\n\r\nI'm interested in taking over the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n Kind Regards,")
         },
     }.$notification_type;
-    IF pod_file && pod_file.module.0;
-        NOTIFICATION.module = pod_file.module.0.name;
-    ELSE;
-        NOTIFICATION.module = release.main_module;
-    END;
     NOTIFICATION.mailto = MAILTO(
         (NOTIFICATION.email || author.email.0 || author.email),
-        (NOTIFICATION.title _ ' <' _ NOTIFICATION.module _ '>') | url,
-        NOTIFICATION.body(NOTIFICATION.module) | url
+        (NOTIFICATION.title _ ' <' _ notification.module_name _ '>') | url,
+        NOTIFICATION.body(notification.module_name) | url
     );
 %>
 <input id="<% notification_type %>" type="checkbox" class="notification-toggle-checkbox" />

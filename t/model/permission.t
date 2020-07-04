@@ -23,29 +23,35 @@ subtest 'notification_type' => sub {
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 co_maintainers => [ 'ADOPTME', 'ONE', 'TWO', 'THREE' ]
             },
             expected => {
-                type => 'ADOPTME',
+                module_name => 'Mod::Name',
+                type        => 'ADOPTME',
             },
             message => 'ADOPTME passed in co_maintainers'
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 co_maintainers => [ 'ONE', 'NEEDHELP', 'TWO', 'THREE' ]
             },
             expected => {
-                type => 'NEEDHELP',
+                module_name => 'Mod::Name',
+                type        => 'NEEDHELP',
             },
             message => 'NEEDHELP passed in co_maintainers'
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 owner          => 'LNATION',
                 co_maintainers => [ 'ONE', 'TWO', 'THREE', 'HANDOFF' ]
             },
             expected => {
-                type => 'HANDOFF',
+                module_name => 'Mod::Name',
+                type        => 'HANDOFF',
             },
             message => 'HANDOFF passed in co_maintainers'
         },
@@ -72,28 +78,34 @@ subtest 'notification_type' => sub {
         },
         {
             params => {
-                owner => 'ADOPTME'
+                module_name => 'Mod::Name',
+                owner       => 'ADOPTME'
             },
             expected => {
-                type => 'ADOPTME',
+                module_name => 'Mod::Name',
+                type        => 'ADOPTME',
             },
             message => 'ADOPTME passed as owner'
         },
         {
             params => {
-                owner => 'HANDOFF'
+                module_name => 'Mod::Name',
+                owner       => 'HANDOFF'
             },
             expected => {
-                type => 'HANDOFF',
+                module_name => 'Mod::Name',
+                type        => 'HANDOFF',
             },
             message => 'HANDOFF passed as owner'
         },
         {
             params => {
-                owner => 'NEEDHELP'
+                module_name => 'Mod::Name',
+                owner       => 'NEEDHELP'
             },
             expected => {
-                type => 'NEEDHELP',
+                module_name => 'Mod::Name',
+                type        => 'NEEDHELP',
             },
             message => 'NEEDHELP passed as owner'
         },

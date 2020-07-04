@@ -88,7 +88,8 @@ sub _permissions_to_notification {
 
     my %data;
     if ($type) {
-        $data{type} = $type;
+        $data{type}        = $type;
+        $data{module_name} = $data->{module_name};
     }
     Future->done( {
         took         => $data->{took} || 0,
