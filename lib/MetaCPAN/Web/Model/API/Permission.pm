@@ -62,7 +62,7 @@ sub _get_modules_in_distribution {
     } );
 }
 
-sub get_notification_type {
+sub get_notification_info {
     my ( $self, $module ) = @_;
 
     $self->get( module => $module )->then( \&_permissions_to_notification );
