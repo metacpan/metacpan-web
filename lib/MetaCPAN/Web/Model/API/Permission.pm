@@ -64,36 +64,31 @@ sub _get_modules_in_distribution {
 
 sub get_notification_info {
     my ( $self, $module ) = @_;
-
-    $self->get( module => $module )->then( \&_permissions_to_notification );
-}
-
-sub _permissions_to_notification {
-    my $data = shift;
-
-    my $type;
-    my %special = (
-        NEEDHELP => 1,
-        ADOPTME  => 1,
-        HANDOFF  => 1
-    );
-    for my $maint ( $data->{owner} || '', @{ $data->{co_maintainers} || [] },
-        )
-    {
-        if ( exists $special{$maint} ) {
-            $type = $maint;
-            last;
+    $self->get( module => $module )->then( sub {
+        my $data = shift;
+        my $type;
+        my %special = (
+            NEEDHELP => 1,
+            ADOPTME  => 1,
+            HANDOFF  => 1
+        );
+        for my $maint ( $data->{owner} || '',
+            @{ $data->{co_maintainers} || [] }, )
+        {
+            if ( exists $special{$maint} ) {
+                $type = $maint;
+                last;
+            }
         }
-    }
-
-    my %data;
-    if ($type) {
-        $data{type}        = $type;
-        $data{module_name} = $data->{module_name};
-    }
-    Future->done( {
-        took         => $data->{took} || 0,
-        notification => ( %data ? \%data : undef ),
+        my %data;
+        if ($type) {
+            $data{type}        = $type;
+            $data{module_name} = $data->{module_name};
+        }
+        Future->done( {
+            took         => $data->{took} || 0,
+            notification => ( %data ? \%data : undef ),
+        } );
     } );
 }
 

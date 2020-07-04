@@ -1,10 +1,11 @@
 use strict;
 use warnings;
 
-use lib 't/lib';
 use Test::More;
-use TestContext qw( get_context );
+use MetaCPAN::Web;
 use MetaCPAN::Web::Model::API::Permission;
+use MetaCPAN::Web::Test;
+use Cpanel::JSON::XS qw( decode_json encode_json );
 
 subtest 'notification_type' => sub {
     my @tests = (
@@ -111,13 +112,22 @@ subtest 'notification_type' => sub {
         },
     );
 
+    my $api_data;
+    override_api_response( sub {
+        my ( undef, $req ) = @_;
+        return [
+            200,
+            [ "Content-Type" => "application/json" ],
+            [ encode_json $api_data ],
+        ];
+    } );
+
+    my $model = MetaCPAN::Web->model('API::Permission');
     for my $test (@tests) {
-        my $notif
-            = MetaCPAN::Web::Model::API::Permission::_permissions_to_notification(
-            $test->{params} );
+        $api_data = $test->{params};
+        my $notif = $model->get_notification_info( $api_data->{module_name} );
         is_deeply( $notif->get->{notification},
             $test->{expected}, $test->{message} );
-
     }
 };
 
