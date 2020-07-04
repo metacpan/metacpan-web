@@ -17,7 +17,6 @@
             text   = "This distribution is up for adoption!",
             contactwhom = "the PAUSE module admins",
             body   = format("Hello,\r\n\r\nI'm interested in adopting the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n"),
-            email  = 'modules@perl.org',
         },
         HANDOFF = {
             title  = "Take me over?",
@@ -28,7 +27,7 @@
         },
     }.$notification_type;
     NOTIFICATION.mailto = MAILTO(
-        (NOTIFICATION.email || author.email.0 || author.email),
+        notification.emails.join(','),
         NOTIFICATION.subject(notification.module_name) | url,
         NOTIFICATION.body(notification.module_name) | url
     );

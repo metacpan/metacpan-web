@@ -13,6 +13,17 @@ MetaCPAN::Web::Model::Permission - Catalyst Model for 06perms
 
 =cut
 
+# copied from Model::ReleaseInfo
+my %models = ( _author => 'API::Author', );
+has [ keys %models ] => ( is => 'ro' );
+
+sub ACCEPT_CONTEXT {
+    my ( $self, $c ) = @_;
+    $self->new( %$self,
+        ( map +( $_ => $c->model( $models{$_} ) ), keys %models ),
+    );
+}
+
 sub get {
     my ( $self, $type, $name ) = @_;
     return Future->done(undef) unless $name;
@@ -72,22 +83,32 @@ sub get_notification_info {
             ADOPTME  => 1,
             HANDOFF  => 1
         );
-        for my $maint ( $data->{owner} || '',
-            @{ $data->{co_maintainers} || [] }, )
-        {
+        my @perm_holders = grep length, $data->{owner} || '',
+            @{ $data->{co_maintainers} || [] };
+        for my $maint (@perm_holders) {
             if ( exists $special{$maint} ) {
                 $type = $maint;
                 last;
             }
         }
-        my %data;
-        if ($type) {
-            $data{type}        = $type;
-            $data{module_name} = $data->{module_name};
-        }
-        Future->done( {
+        return Future->done( {
             took         => $data->{took} || 0,
-            notification => ( %data ? \%data : undef ),
+            notification => undef,
+        } )
+            if !$type;
+        my @notifiable_ids = grep !$special{$_}, @perm_holders;
+        $self->_author->get_multiple(@notifiable_ids)->then( sub {
+            my @emails = map $_->{email}, @{ $_[0]{authors} };
+            push @emails, 'modules@perl.org'
+                if $type eq 'ADOPTME' or !@emails;
+            Future->done( {
+                took         => $data->{took} || 0,
+                notification => {
+                    type        => $type,
+                    module_name => $data->{module_name},
+                    emails      => \@emails,
+                },
+            } );
         } );
     } );
 }

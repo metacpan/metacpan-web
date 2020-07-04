@@ -30,6 +30,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'ADOPTME',
+                emails      => [
+                    'one@example.com',   'two@example.com',
+                    'three@example.com', 'modules@perl.org'
+                ],
             },
             message => 'ADOPTME passed in co_maintainers'
         },
@@ -41,6 +45,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'NEEDHELP',
+                emails      => [
+                    'one@example.com', 'two@example.com',
+                    'three@example.com'
+                ],
             },
             message => 'NEEDHELP passed in co_maintainers'
         },
@@ -53,6 +61,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'HANDOFF',
+                emails      => [
+                    'lnation@example.com', 'one@example.com',
+                    'two@example.com',     'three@example.com'
+                ],
             },
             message => 'HANDOFF passed in co_maintainers'
         },
@@ -85,6 +97,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'ADOPTME',
+                emails      => ['modules@perl.org'],
             },
             message => 'ADOPTME passed as owner'
         },
@@ -96,6 +109,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'HANDOFF',
+                emails      => ['modules@perl.org'],
             },
             message => 'HANDOFF passed as owner'
         },
@@ -107,6 +121,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'NEEDHELP',
+                emails      => ['modules@perl.org'],
             },
             message => 'NEEDHELP passed as owner'
         },
@@ -115,14 +130,27 @@ subtest 'notification_type' => sub {
     my $api_data;
     override_api_response( sub {
         my ( undef, $req ) = @_;
+        my $this_api_data = $api_data;
+        if ( $req->uri !~ /permission/ ) {
+            $this_api_data = {
+                authors => [
+                    map +( {
+                        pauseid => $_,
+                        email   => lc($_) . '@example.com',
+                    } ),
+                    @{ decode_json( $req->content )->{id} }
+                ]
+            };
+        }
         return [
             200,
             [ "Content-Type" => "application/json" ],
-            [ encode_json $api_data ],
+            [ encode_json $this_api_data ],
         ];
     } );
 
-    my $model = MetaCPAN::Web->model('API::Permission');
+    my $model = MetaCPAN::Web->model( 'API::Permission',
+        api_secure => 'http://example.com' );
     for my $test (@tests) {
         $api_data = $test->{params};
         my $notif = $model->get_notification_info( $api_data->{module_name} );
