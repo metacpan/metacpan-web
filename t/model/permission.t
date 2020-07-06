@@ -1,10 +1,11 @@
 use strict;
 use warnings;
 
-use lib 't/lib';
 use Test::More;
-use TestContext qw( get_context );
+use MetaCPAN::Web;
 use MetaCPAN::Web::Model::API::Permission;
+use MetaCPAN::Web::Test;
+use Cpanel::JSON::XS qw( decode_json encode_json );
 
 subtest 'notification_type' => sub {
     my @tests = (
@@ -23,33 +24,56 @@ subtest 'notification_type' => sub {
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 co_maintainers => [ 'ADOPTME', 'ONE', 'TWO', 'THREE' ]
             },
-            expected => 'ADOPTME',
-            message  => 'ADOPTME passed in co_maintainers'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'ADOPTME',
+                emails      => [
+                    'one@example.com',   'two@example.com',
+                    'three@example.com', 'modules@perl.org'
+                ],
+            },
+            message => 'ADOPTME passed in co_maintainers'
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 co_maintainers => [ 'ONE', 'NEEDHELP', 'TWO', 'THREE' ]
             },
-            expected => 'NEEDHELP',
-            message  => 'NEEDHELP passed in co_maintainers'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'NEEDHELP',
+                emails      => [
+                    'one@example.com', 'two@example.com',
+                    'three@example.com'
+                ],
+            },
+            message => 'NEEDHELP passed in co_maintainers'
         },
         {
             params => {
+                module_name    => 'Mod::Name',
                 owner          => 'LNATION',
                 co_maintainers => [ 'ONE', 'TWO', 'THREE', 'HANDOFF' ]
             },
-            expected => 'HANDOFF',
-            message  => 'HANDOFF passed in co_maintainers'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'HANDOFF',
+                emails      => [
+                    'lnation@example.com', 'one@example.com',
+                    'two@example.com',     'three@example.com'
+                ],
+            },
+            message => 'HANDOFF passed in co_maintainers'
         },
         {
             params => {
                 owner => ''
             },
             expected => undef,
-            ,
-            message => 'Null string as owner'
+            message  => 'Null string as owner',
         },
         {
             params => {
@@ -67,34 +91,71 @@ subtest 'notification_type' => sub {
         },
         {
             params => {
-                owner => 'ADOPTME'
+                module_name => 'Mod::Name',
+                owner       => 'ADOPTME'
             },
-            expected => 'ADOPTME',
-            message  => 'ADOPTME passed as owner'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'ADOPTME',
+                emails      => ['modules@perl.org'],
+            },
+            message => 'ADOPTME passed as owner'
         },
         {
             params => {
-                owner => 'HANDOFF'
+                module_name => 'Mod::Name',
+                owner       => 'HANDOFF'
             },
-            expected => 'HANDOFF',
-            message  => 'HANDOFF passed as owner'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'HANDOFF',
+                emails      => ['modules@perl.org'],
+            },
+            message => 'HANDOFF passed as owner'
         },
         {
             params => {
-                owner => 'NEEDHELP'
+                module_name => 'Mod::Name',
+                owner       => 'NEEDHELP'
             },
-            expected => 'NEEDHELP',
-            message  => 'NEEDHELP passed as owner'
+            expected => {
+                module_name => 'Mod::Name',
+                type        => 'NEEDHELP',
+                emails      => ['modules@perl.org'],
+            },
+            message => 'NEEDHELP passed as owner'
         },
     );
 
-    for my $test (@tests) {
-        my $notif
-            = MetaCPAN::Web::Model::API::Permission::_permissions_to_notification(
-            $test->{params} );
-        is( $notif->get->{notification}, $test->{expected},
-            $test->{message} );
+    my $api_data;
+    override_api_response( sub {
+        my ( undef, $req ) = @_;
+        my $this_api_data = $api_data;
+        if ( $req->uri !~ /permission/ ) {
+            $this_api_data = {
+                authors => [
+                    map +( {
+                        pauseid => $_,
+                        email   => lc($_) . '@example.com',
+                    } ),
+                    @{ decode_json( $req->content )->{id} }
+                ]
+            };
+        }
+        return [
+            200,
+            [ "Content-Type" => "application/json" ],
+            [ encode_json $this_api_data ],
+        ];
+    } );
 
+    my $model = MetaCPAN::Web->model( 'API::Permission',
+        api_secure => 'http://example.com' );
+    for my $test (@tests) {
+        $api_data = $test->{params};
+        my $notif = $model->get_notification_info( $api_data->{module_name} );
+        is_deeply( $notif->get->{notification},
+            $test->{expected}, $test->{message} );
     }
 };
 

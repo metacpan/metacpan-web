@@ -48,7 +48,7 @@ sub find {
         $self->_wrap(
             release => $data,
             %dist_data,
-            notification => $self->_permission->get_notification_type(
+            notification => $self->_permission->get_notification_info(
                 $data->{release}{main_module}
             ),
             $self->_release_data(
@@ -72,7 +72,7 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            notification => $self->_permission->get_notification_type(
+            notification => $self->_permission->get_notification_info(
                 $data->{release}{main_module}
             ),
             $self->_dist_data( $data->{release}{distribution} ),
