@@ -120,7 +120,7 @@
                         <a href="<% item.path.0 %>">
                             <%- IF item.icon %><i class="fa fa-<% item.icon %>"></i><% END -%>
                             <%- IF item.image %><img src="<% item.image %>" <%- IF item.alt %> alt="<% item.alt %>"<% END -%>/><% END -%>
-                            <%- item.title -%>
+                            <% item.title -%>
                         </a>
                     </li>
                     <%- END %>
