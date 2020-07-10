@@ -36,18 +36,4 @@
     %><a href="/<% path %>"><% linktext || file.module_name || file.path %></a><%
   END;
 
-  # protocols = {
-  #   "bzr" = 10,
-  #   "https" = 11742,
-  #   "http" = 30367,
-  #   "git+ssh:":1,
-  #   "svn:":16,
-  #   "git:":14934,
-  #   "cvs:":4,
-  #   "svn+ssh:":1,
-  #   "ssh:":12
-  # };
-  MACRO is_url(url) BLOCK;
-    url && url.match("^(bzr|https?|git+ssh|svn|ssh|svn+ssh|mailto|git|irc):") ? 1 : 0;
-  END;
  -%>

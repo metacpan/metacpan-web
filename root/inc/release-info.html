@@ -1,7 +1,7 @@
 <li>
     <a data-keyboard-shortcut="g c" href="/changes/<% IF permalinks; ['release', release.author, release.name].join('/'); ELSE; ['distribution', release.distribution].join('/'); END %>"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
 </li>
-<% IF is_url(release.resources.homepage) %>
+<% IF release.resources.homepage.is_url %>
 <li>
     <a rel="noopener nofollow" class="nopopup" href="<% release.resources.homepage %>"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
 </li>
@@ -11,12 +11,12 @@
 </li>
 <% IF release.resources.repository %>
 <li>
-    <% IF is_url(release.resources.repository.web) %>
+    <% IF release.resources.repository.web.is_url %>
     <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="<% release.resources.repository.web %>"><i class="fa fa-fw fa-code-fork black"></i>Repository</a>
     <% END %>
-    <% IF is_url(release.resources.repository.web) && is_url(release.resources.repository.url) %>
+    <% IF release.resources.repository.web.is_url && release.resources.repository.url.is_url %>
     (<a rel="noopener nofollow" href="<% release.resources.repository.url %>"><% release.resources.repository.type %> clone</a>)
-    <% ELSIF is_url(release.resources.repository.url) %>
+    <% ELSIF release.resources.repository.url.is_url %>
     <a rel="noopener nofollow" href="<% release.resources.repository.url %>"><i class="fa fa-fw fa-code-fork black"></i>Clone <% release.resources.repository.type %> repository</a>
     <% END %>
 </li>

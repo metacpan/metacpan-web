@@ -74,6 +74,16 @@ sub common_date_format {
 
 Template::Alloy->define_vmethod(
     'text',
+    is_url => sub {
+        my $url = shift;
+        return $url
+            && $url
+            =~ /^(?:bzr|https?|git\+ssh|svn|ssh|svn\+ssh|mailto|git|irc):/;
+    }
+);
+
+Template::Alloy->define_vmethod(
+    'text',
     version => sub {
         my $v = shift;
         eval { version->parse($v)->normal } || $v;
