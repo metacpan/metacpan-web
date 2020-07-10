@@ -16,6 +16,7 @@ sub auto : Private {
     unless ( $c->user_exists ) {
         $c->forward('/forbidden');
     }
+    $c->stash( { user => $c->user } );
     return $c->user_exists;
 }
 
