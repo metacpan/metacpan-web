@@ -96,7 +96,8 @@ sub wrap {
                 );
             }
             else {
-                push @assets, @css_files, @less_files;
+                push @assets, '/static/js/less.min.js', @css_files,
+                    @less_files;
             }
 
             enable sub {
