@@ -70,7 +70,7 @@
   <ul>
   <%- FOREACH module IN documentation %>
   <li>
-    <% link_to_file(module) | none %><% IF module.abstract %> - <% module.abstract; END %>
+    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
   </li>
   <%- END %>
   </ul>
@@ -83,7 +83,7 @@
   <ul>
   <%- FOREACH module IN modules %>
   <li>
-    <% link_to_file(module) | none %><% IF module.abstract %> - <% module.abstract; END %>
+    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
   </li>
   <%- END %>
@@ -97,7 +97,7 @@
   <ul>
   <%- FOREACH module IN provides %>
   <li>
-    <% link_to_source(module) | none %> in <% module.path %>
+    <% INCLUDE "inc/link-to-source.html" file = module %> in <% module.path %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
   </li>
   <%- END %>
@@ -112,11 +112,11 @@
   <%- FOREACH file IN examples %>
   <li>
     <%- IF file.path.match('\.pod$') %>
-      <% link_to_file(file, file.path) | none %>
+      <% INCLUDE "inc/link-to-file.html" file = file, linktext = file.path %>
     <%- ELSE %>
-      <% link_to_source(file) | none %>
+      <% INCLUDE "inc/link-to-source.html" file = file %>
       <%- IF file.pod_lines %>
-        [<% link_to_file(file, "pod") | none %>]
+        [<% INCLUDE "inc/link-to-file.html" file = file, linktext = "pod" %>]
       <%- END %>
     <%- END %>
   </li>
@@ -130,7 +130,7 @@
   <h2 id="other">Other files</h2>
   <ul>
     <%- FOREACH file IN other %>
-    <li><% link_to_file(file, file.path) | none %></li>
+    <li><% INCLUDE "inc/link-to-file.html" file = file, linktext = file.path %></li>
     <%- END %>
   </ul>
 </div>
