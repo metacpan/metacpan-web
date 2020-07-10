@@ -85,7 +85,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $id        = $c->stash->{pauseid};
     my $page_size = $req->get_page_size(100);
 
-    my $page      = $req->page > 0 ? $req->page : 1;
+    my $page      = $req->page;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases
         = $c->model('API::Release')->all_by_author( $id, $page_size, $page )
@@ -97,6 +97,7 @@ sub releases : Chained('root') PathPart Args(0) {
 
     $c->stash( {
         author    => $author_info->{author},
+        page      => $page,
         page_size => $page_size,
         releases  => $releases->{releases},
     } );

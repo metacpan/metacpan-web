@@ -23,16 +23,18 @@ __PACKAGE__->config(
 sub distribution : Local : Args(1) : Does('Sortable') {
     my ( $self, $c, $distribution, $sort ) = @_;
 
+    my $page      = $c->req->page;
     my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Release')
-        ->reverse_dependencies( $distribution, $c->req->page, $page_size,
-        $sort )->get;
+        ->reverse_dependencies( $distribution, $page, $page_size, $sort )
+        ->get;
     $c->stash( {
         %{$data},
         type_of_required => 'distribution',
         required         => $distribution,
+        page             => $page,
         page_size        => $page_size,
         template         => 'requires.html'
     } );
@@ -41,15 +43,17 @@ sub distribution : Local : Args(1) : Does('Sortable') {
 sub module : Local : Args(1) : Does('Sortable') {
     my ( $self, $c, $module, $sort ) = @_;
 
+    my $page      = $c->req->page;
     my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Module')
-        ->requires( $module, $c->req->page, $page_size, $sort )->get;
+        ->requires( $module, $page, $page_size, $sort )->get;
     $c->stash( {
         %{$data},
         type_of_required => 'module',
         required         => $module,
+        page             => $page,
         page_size        => $page_size,
         template         => 'requires.html'
     } );

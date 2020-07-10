@@ -13,6 +13,7 @@ sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
     my $req = $c->req;
 
+    my $page      = $req->page;
     my $page_size = $req->get_page_size(20);
 
     # Redirect back to main page if search query is empty irrespective of
@@ -41,7 +42,7 @@ sub index : Path : Args(0) {
     $query =~ s/\s+$//;
 
     my $model = $c->model('API::Module');
-    my $from  = ( $req->page - 1 ) * $page_size;
+    my $from  = ( $page - 1 ) * $page_size;
     if (
         $req->parameters->{lucky}
         or
@@ -97,6 +98,7 @@ sub index : Path : Args(0) {
             single_dist => !$results->{collapsed},
             authors     => $authors,
             template    => 'search.html',
+            page        => $page,
             page_size   => $page_size,
         } );
     }
