@@ -58,12 +58,15 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $faves = $c->model('API::Favorite')->by_user( $author->{user} )->get;
 
+    my $profiles = $c->model('API::Author')->profile_data;
+
     my $took = $releases->{took};
 
     $c->stash( {
         author   => $author,
         faves    => $faves,
         releases => $releases->{releases},
+        profiles => $profiles,
         template => 'author.html',
         took     => $took,
         total    => $releases->{total},

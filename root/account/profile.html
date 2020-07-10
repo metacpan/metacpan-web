@@ -178,8 +178,14 @@
                 <div class="col-sm-8 col-md-6">
                     <select class="form-control" onchange="return addProfile(this)">
                         <option>Add Profile</option>
-                        <% FOREACH profile IN profiles; profile.value.id = profile.key -%>
-                        <option value="<% profile.value.json %>"><% profile.value.name %></option>
+                        <% FOREACH profile IN profiles;
+                            option_value = {
+                                id => profile.key,
+                                name => profile.value.name,
+                                url => profile.value.url_format,
+                            };
+                        -%>
+                        <option value="<% option_value.json %>"><% profile.value.name %></option>
                         <% END -%>
                         <option value="">Custom...</option>
                     </select>

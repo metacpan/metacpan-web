@@ -92,6 +92,10 @@ sub profile : Local : Args(0) {
 
     $data->{donation} = undef unless ( $req->params->{donations} );
 
+    $c->stash( {
+        profiles => $c->model('API::Author')->profile_data,
+    } );
+
     # validation
     my @form_errors;
     push @form_errors,

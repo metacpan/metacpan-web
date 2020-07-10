@@ -5,44 +5,6 @@ page = req.page;
 user = c.user;
 user_exists = c.user_exists
 
-profiles = {
-  bitbucket = { name = 'Bitbucket', url = 'https://bitbucket.org/%s'},
-  coderwall = { name = 'Coderwall', url = 'https://coderwall.com/%s'},
-  couchsurfing = { name = 'Couch Surfing', url = 'https://www.couchsurfing.org/people/%s/'},
-  dotshare = { name = 'Dotshare', url = 'http://dotshare.it/~%s/' },
-  facebook = { name = 'Facebook', url = 'https://www.facebook.com/%s' },
-  flickr = { name = 'Flickr', url = 'https://www.flickr.com/people/%s/' },
-  github = { name = 'GitHub', url = 'https://github.com/%s' },
-  gitlab = { name = 'GitLab', url = 'https://gitlab.com/%s' },
-  'github-meets-cpan' = { name = 'GitHub Meets CPAN', url = 'https://gh.metacpan.org/user/%s' },
-  hackernews = { name = 'Hacker News', url = 'https://news.ycombinator.com/user?id=%s' },
-  hackerrank = { name = 'HackerRank', url = 'https://www.hackerrank.com/%s' },
-  hackthissite = { name = 'HackThisSite', url = 'https://www.hackthissite.org/user/view/%s' },
-  identica = { name = 'Identi.ca', url = 'https://identi.ca/%s' },
-  lastfm = { name = 'LastFM', url = 'https://www.last.fm/user/%s' },
-  linkedin = { name = 'LinkedIn', url = 'https://www.linkedin.com/in/%s' },
-  meetup = { name = 'Meetup', url = 'https://www.meetup.com/members/%s' },
-  myspace = { name = 'MySpace', url = 'https://www.myspace.com/%s' },
-  newsblur  = { name = 'Newsblur', url = 'https://%s.newsblur.com/' },
-  ohloh = { name = 'Open Hub', url = 'https://www.openhub.net/accounts/%s' },
-  perlmonks = { name = 'PerlMonks', url = 'https://www.perlmonks.org/?node=%s' },
-  pinboard = { name = 'Pinboard', url = 'https://pinboard.in/u:%s' },
-  prepan = { name = 'PrePAN', url = 'http://prepan.org/user/%s' },
-  reddit = { name = 'Reddit', url = 'https://www.reddit.com/user/%s' },
-  slideshare = { name = 'SlideShare', url = 'https://www.slideshare.net/%s' },
-  sourceforge = { name = 'SourceForge', url = 'https://sourceforge.net/users/%s' },
-  speakerdeck = { name = 'SpeakerDeck', url = 'https://speakerdeck.com/u/%s' },
-  stackexchange = { name = 'StackExchange', url = 'https://stackexchange.com/users/%s?tab=accounts' },
-  stackoverflow = { name = 'StackOverflow', url = 'https://stackoverflow.com/users/%s/' },
-  stackoverflowcareers = { name = 'Stack Overflow Careers', url = 'https://careers.stackoverflow.com/%s' },
-  steam = { name = 'Steam', url = 'https://steamcommunity.com/id/%s' },
-  stumbleupon = { name = 'StumbleUpon', url = 'https://www.stumbleupon.com/stumbler/%s/' },
-  tumblr = { name = 'Tumblr', url = 'http://%s.tumblr.com/' },
-  twitter = { name = 'Twitter', url = 'https://twitter.com/%s' },
-  vimeo = { name = 'Vimeo', url = 'https://vimeo.com/%s' },
-  youtube = { name = 'Youtube', url = 'https://www.youtube.com/user/%s' },
-  };
-
   utf8_form_input = '<input type="hidden" name="utf8" value="🐪" />';
 -%>
 <%-
