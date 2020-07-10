@@ -10,9 +10,9 @@ use Cpanel::JSON::XS ();
 use Gravatar::URL;
 use MetaCPAN::Web::RenderUtil 'filter_html';
 use Regexp::Common qw(time);
+use Number::Format;
 use Template::Plugin::DateTime;
 use Template::Plugin::Markdown;
-use Template::Plugin::Number::Format;
 use Template::Plugin::Page;
 use Text::Pluralize ();
 use URI;
@@ -78,6 +78,23 @@ Template::Alloy->define_vmethod(
         my $v = shift;
         eval { version->parse($v)->normal } || $v;
     }
+);
+
+my $formatter = Number::Format->new;
+Template::Alloy->define_vmethod(
+    'text',
+    format_number => sub {
+        my ($number) = @_;
+        $formatter->format_number($number);
+    },
+);
+
+Template::Alloy->define_vmethod(
+    'text',
+    format_bytes => sub {
+        my ($number) = @_;
+        $formatter->format_bytes($number);
+    },
 );
 
 Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );

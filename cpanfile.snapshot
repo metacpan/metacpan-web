@@ -5197,14 +5197,6 @@ DISTRIBUTIONS
       Test::More 0.7
       Text::MultiMarkdown 1.000035
       parent 0
-  Template-Plugin-Number-Format-1.06
-    pathname: D/DA/DARREN/Template-Plugin-Number-Format-1.06.tar.gz
-    provides:
-      Template::Plugin::Number::Format 1.06
-    requirements:
-      ExtUtils::MakeMaker 0
-      Number::Format 0
-      Template 2.07
   Template-Plugin-Page-0.10
     pathname: L/LB/LBROCARD/Template-Plugin-Page-0.10.tar.gz
     provides:
