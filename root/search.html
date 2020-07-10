@@ -1,4 +1,4 @@
-<%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
+<%- title = 'Search for "' _ search_query _ '"' %>
 
 <% INCLUDE left_sidebar.html %>
 
@@ -34,7 +34,7 @@
   <span class="relatize"><% item.date.dt_http %></span>
   <%- IF !single_dist %>
     -
-    <a href="/search?q=dist:<% item.distribution %>+<% query %>">Search in distribution</a>
+    <a href="/search?q=dist:<% item.distribution %>+<% search_query %>">Search in distribution</a>
   <%- END %>
   <!-- <% item.score %> -->
 <br>
@@ -43,7 +43,7 @@
   <% FOREACH item IN group.hits; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
    <% INCLUDE "inc/link-to-file.html" file = item %>
   <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
-  <% IF group.total > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% query %>"><% group.total - 4 %> more result<% IF group.total - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
+  <% IF group.total > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% search_query %>"><% group.total - 4 %> more result<% IF group.total - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
 </ul>
 <% END %>
   </div>

@@ -24,6 +24,7 @@ sub index : Path : Args(0) {
     }
 
     my $query = join( q{ }, $req->param('q') );
+    $c->stash( { search_query => $query } );
 
     if ( $query eq '{searchTerms}' ) {
 

@@ -51,8 +51,8 @@ sub not_found : Private {
     $c->cdn_never_cache(1);
 
     $c->stash( {
-        template => 'not_found.html',
-        search   => [ @{ $c->req->args }, @{ $c->req->captures } ],
+        template     => 'not_found.html',
+        search_terms => [ @{ $c->req->args }, @{ $c->req->captures } ],
     } );
     $c->response->status(404);
 }
