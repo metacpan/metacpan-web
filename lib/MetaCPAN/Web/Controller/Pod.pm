@@ -141,16 +141,17 @@ sub view : Private {
             && $documented_module->{authorized}
             && $documented_module->{indexed}
         ) ? "/pod/$documentation"
-        : join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
-            # Strip $author/$release from front of path.
-            @path[ 2 .. $#path ]
-        );
+        : $release ?
+            join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
+                # Strip $author/$release from front of path.
+                @path[ 2 .. $#path ]
+            ) : undef;
     #>>>
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');
-    $c->add_dist_key( $release->{distribution} );
-    $c->add_author_key( $release->{author} );
+    $c->add_dist_key( $release ? $release->{distribution} : $path[1] );
+    $c->add_author_key( $path[0] );
 
     $c->stash( {
         canonical         => $canonical,
