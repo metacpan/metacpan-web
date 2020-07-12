@@ -22,6 +22,7 @@ sub recent : Chained('feed_index') PathPart Args(0) {
 
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
+    die join "\n", @{ $c->error } if @{ $c->error };
 
     my %changes_index;
 
