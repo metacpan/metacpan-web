@@ -80,6 +80,15 @@ sub find_plussers {
             = $plusser_data->{users} ? @{ $plusser_data->{users} } : ();
         my $took = $plusser_data->{took} || 0;
 
+        return Future->done( {
+            plussers => {
+                authors      => [],
+                others       => 0,
+                distribution => $distribution,
+            },
+            took => 0,
+        } )
+            if !keys %$plusser_data;
         $self->get_plusser_authors( \@plusser_users )->then( sub {
             my $plusser_user_data = shift;
 

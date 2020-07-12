@@ -90,24 +90,30 @@ sub parse {
     #
     # Sun Jan  29 2012
     # /changes/distribution/Scalar-Constant
+    #
+    # Sun Mar  0 11:40 2014 (AMS time)
+    # /release/YVES/Sereal-Encoder-3.000_004
     # XXX haarg is going to rip this out and replace it with something better.
                 elsif ( $note
                     =~ s{^(\D{3})\s+(\D{3})\s+(\d{1,2})\s+([\d:]+)?\D*(\d{4})}{}
                     )
                 {
+                    my @m     = @{^CAPTURE};
                     my $month = $months{$1} || $months{$2};
-                    if ( $month && $3 && $4 && $5 ) {
+                    if ( $month && !grep +( !defined || /[^\d:]/ ),
+                        @m[ 2 .. 4 ] )
+                    {
 
                         # unfortunately ignores TZ data
-                        $date = sprintf( '%d-%02d-%02dT%sZ', $5, $month, $3,
-                            $4 );
+                        $date = sprintf( '%d-%02d-%02dT%sZ',
+                            $m[4], $month, $m[2], $m[3] );
                     }
-                    elsif ( $month && $2 && $4 ) {
-                        $date = sprintf( '%d-%02d-%02d', $4, $month, $2 );
+                    elsif ( $month && $m[1] && $m[3] ) {
+                        $date
+                            = sprintf( '%d-%02d-%02d', $m[3], $month, $m[1] );
                     }
                     else {
-                        $note = join q{ }, grep {defined} $1, $2, $3, $4, $5,
-                            $note;
+                        $note = join q{ }, grep {defined} @m, $note;
                     }
                 }
 

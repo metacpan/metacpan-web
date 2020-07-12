@@ -16,6 +16,7 @@ sub distribution : Local Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
     $c->forward( 'get', $c, [ 'distribution', $distribution ] );
+    die join "\n", @{ $c->error } if @{ $c->error };
 
     my $modules       = $c->stash->{permission};
     my $total_modules = scalar @$modules;

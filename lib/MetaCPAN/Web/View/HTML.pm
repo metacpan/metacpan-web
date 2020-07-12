@@ -91,18 +91,18 @@ Template::Alloy->define_vmethod(
     'text',
     decode_punycode => sub {
         my $url_string = shift;
-        my $uri        = URI->new($url_string);
-        if ( !$uri->scheme ) {
-            $uri = URI->new("http://$url_string")
-                ;    # default to http:// if no scheme in original...
-        }
-
-        # This might fail if somebody adds xmpp:foo@bar.com for example.
-        my $host = $uri->host && eval { $uri->ihost };
-        if ( !$host ) {
-            $host = $url_string;
-        }
-        return $host;
+        eval {
+            my $uri = URI->new($url_string);
+            if ( !$uri->scheme ) {
+                $uri = URI->new("http://$url_string")
+                    ;    # default to http:// if no scheme in original...
+            }
+            my $host = $uri->host && eval { $uri->ihost };
+            if ( !$host ) {
+                $host = $url_string;
+            }
+            return $host;
+        } || $url_string;
     }
 );
 
