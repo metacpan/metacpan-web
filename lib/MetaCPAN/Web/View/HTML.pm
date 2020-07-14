@@ -45,10 +45,12 @@ around render => sub {
 
     my $vars = { $args ? %$args : %{ $c->stash } };
 
+    my $req = $c->req;
+
     $vars->{api_public}  = $self->api_public;
     $vars->{source_host} = $self->source_host;
-    $vars->{assets}      = $c->req->env->{'psgix.assets'} || [];
-    $vars->{req}         = $c->req;
+    $vars->{assets}      = $req->env->{'psgix.assets'} || [];
+    $vars->{req}         = $req;
     $vars->{oauth_prefix}
         = $self->api_public
         . '/oauth2/authorize?client_id='
