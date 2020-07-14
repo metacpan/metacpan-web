@@ -26,8 +26,10 @@ sub index : Path : Args {
             $c->model('API::Module')->get(@module),
         );
     }
-    die "Bad module supplied\n"
+
+    $c->detach('/not_found')
         if grep +( $_->{code} || 0 ) > 399, $source, $module;
+
     if ( $module->{directory} ) {
         my $files = $c->model('API::File')->dir(@module)->get;
 
