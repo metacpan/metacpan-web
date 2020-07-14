@@ -94,13 +94,20 @@ sub index : Path : Args(0) {
             $c->detach;
         }
 
+        my $pageset = Data::Pageset->new( {
+            current_page     => $page,
+            entries_per_page => $page_size,
+            mode             => 'slide',
+            pages_per_set    => 10,
+            total_entries    => $results->{total},
+        } );
+
         $c->stash( {
             %$results,
             single_dist => !$results->{collapsed},
             authors     => $authors,
+            pageset     => $pageset,
             template    => 'search.html',
-            page        => $page,
-            page_size   => $page_size,
         } );
     }
 }

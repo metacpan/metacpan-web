@@ -95,15 +95,6 @@ sub releases : Chained('root') PathPart Args(0) {
     $c->detach('/not_found')
         if $author_info->{code} && $author_info->{code} == 404;
 
-    $c->stash( {
-        author    => $author_info->{author},
-        page      => $page,
-        page_size => $page_size,
-        releases  => $releases->{releases},
-    } );
-
-    return unless $releases->{total};
-
     my $pageset = Data::Pageset->new( {
         current_page     => $page,
         entries_per_page => $page_size,
@@ -111,6 +102,16 @@ sub releases : Chained('root') PathPart Args(0) {
         pages_per_set    => 10,
         total_entries    => $releases->{total},
     } );
+
+    $c->stash( {
+        author   => $author_info->{author},
+        total    => $releases->{total},
+        releases => $releases->{releases},
+        pageset  => $pageset,
+    } );
+
+    return unless $releases->{total};
+
     $c->stash( { pageset => $pageset } );
 }
 

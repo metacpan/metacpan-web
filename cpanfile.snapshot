@@ -5170,14 +5170,6 @@ DISTRIBUTIONS
       DateTime::Format::Strptime 0
       ExtUtils::MakeMaker 6.42
       Template 0
-  Template-Plugin-Page-0.10
-    pathname: L/LB/LBROCARD/Template-Plugin-Page-0.10.tar.gz
-    provides:
-      Template::Plugin::Page 0.10
-    requirements:
-      Data::Page 0.14
-      ExtUtils::MakeMaker 0
-      Template 2.07
   Template-Toolkit-3.007
     pathname: A/AT/ATOOMIC/Template-Toolkit-3.007.tar.gz
     provides:

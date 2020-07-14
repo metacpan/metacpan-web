@@ -12,7 +12,6 @@ use MetaCPAN::Web::RenderUtil 'filter_html';
 use Regexp::Common qw(time);
 use Number::Format;
 use Template::Plugin::DateTime;
-use Template::Plugin::Page;
 use Text::MultiMarkdown;
 use Text::Pluralize ();
 use URI;

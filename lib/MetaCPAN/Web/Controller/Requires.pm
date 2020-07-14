@@ -30,12 +30,20 @@ sub distribution : Local : Args(1) : Does('Sortable') {
         = $c->model('API::Release')
         ->reverse_dependencies( $distribution, $page, $page_size, $sort )
         ->get;
+
+    my $pageset = Data::Pageset->new( {
+        current_page     => $page,
+        entries_per_page => $page_size,
+        mode             => 'slide',
+        pages_per_set    => 10,
+        total_entries    => $data->{total},
+    } );
+
     $c->stash( {
         %{$data},
         type_of_required => 'distribution',
         required         => $distribution,
-        page             => $page,
-        page_size        => $page_size,
+        pageset          => $pageset,
         template         => 'requires.html'
     } );
 }
@@ -49,12 +57,20 @@ sub module : Local : Args(1) : Does('Sortable') {
     my $data
         = $c->model('API::Module')
         ->requires( $module, $page, $page_size, $sort )->get;
+
+    my $pageset = Data::Pageset->new( {
+        current_page     => $page,
+        entries_per_page => $page_size,
+        mode             => 'slide',
+        pages_per_set    => 10,
+        total_entries    => $data->{total},
+    } );
+
     $c->stash( {
         %{$data},
         type_of_required => 'module',
         required         => $module,
-        page             => $page,
-        page_size        => $page_size,
+        pageset          => $pageset,
         template         => 'requires.html'
     } );
 }

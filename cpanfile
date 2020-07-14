@@ -77,7 +77,6 @@ requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
 requires 'Template::Alloy';
 requires 'Template::Plugin::DateTime';
-requires 'Template::Plugin::Page';
 requires 'Term::Size::Any';
 requires 'Text::MultiMarkdown';
 requires 'Text::Pluralize';
