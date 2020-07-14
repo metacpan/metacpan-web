@@ -1,5 +1,5 @@
 <%
-  rss = 'recent?f=' _ c.req.params.f || 'l';
+  rss = 'recent?f=' _ filter;
   rss_title = 'Recent CPAN Uploads - MetaCPAN';
   title = "Recent";
   INCLUDE inc/recent-bar.html;
