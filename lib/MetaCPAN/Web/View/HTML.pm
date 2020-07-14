@@ -56,6 +56,9 @@ around render => sub {
         . '/oauth2/authorize?client_id='
         . $c->config->{consumer_key};
     $vars->{site_alert_message} = $c->config->{site_alert_message};
+    $vars->{page_url}           = sub {
+        @_ ? $req->uri_with(@_) : $req->uri->clone;
+    };
 
     return $self->$orig( $c, $template, $vars );
 };
