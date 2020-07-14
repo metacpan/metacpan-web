@@ -150,7 +150,7 @@ subtest 'notification_type' => sub {
     } );
 
     my $model = MetaCPAN::Web->model( 'API::Permission',
-        api_secure => 'http://example.com' );
+        api => 'http://example.com' );
     for my $test (@tests) {
         $api_data = $test->{params};
         my $notif = $model->get_notification_info( $api_data->{module_name} );

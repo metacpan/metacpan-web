@@ -96,17 +96,12 @@ sub end : ActionClass('RenderView') {
     if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
         $c->stash->{PLACK_ENV} = 'development';
     }
-    $c->stash->{req}        = $c->req;
-    $c->stash->{assets}     = $c->req->env->{'psgix.assets'} || [];
-    $c->stash->{api}        = $c->config->{api};
-    $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
-    $c->stash->{api_external_secure} = $c->config->{api_external_secure}
-        || $c->stash->{api_secure};
+    $c->stash->{req}    = $c->req;
+    $c->stash->{assets} = $c->req->env->{'psgix.assets'} || [];
     $c->stash->{oauth_prefix}
-        = $c->stash->{api_external_secure}
+        = $c->api_public
         . '/oauth2/authorize?client_id='
         . $c->config->{consumer_key};
-    $c->stash->{source_host} = $c->config->{source_host};
 
     $c->stash->{site_alert_message} = $c->config->{site_alert_message};
 

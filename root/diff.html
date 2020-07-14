@@ -38,9 +38,9 @@ file.path = parts.join("/"); END -%>
     </li>
     <li>
       <%- IF type == 'source' %>
-      <a href="<% api_external_secure %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
+      <a href="<% api_public %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
       <%- ELSE %>
-      <a href="<% api_external_secure %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
+      <a href="<% api_public %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
       <%- END %>
         Raw diff
       </a>

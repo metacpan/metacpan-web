@@ -18,6 +18,39 @@ use Text::Pluralize ();
 use URI;
 use URI::QueryParam;
 
+has api_public => (
+    is       => 'ro',
+    required => 1,
+);
+has source_host => (
+    is       => 'ro',
+    required => 1,
+);
+
+sub COMPONENT {
+    my ( $class, $app, $args ) = @_;
+
+    $args = $class->merge_config_hashes(
+        {
+            api_public  => $app->config->{api_public} || $app->config->{api},
+            source_host => $app->config->{source_host},
+        },
+        $args,
+    );
+    return $class->SUPER::COMPONENT( $app, $args );
+}
+
+around render => sub {
+    my ( $orig, $self, $c, $template, $args ) = @_;
+
+    my $vars = { $args ? %$args : %{ $c->stash } };
+
+    $vars->{api_public}  = $self->api_public;
+    $vars->{source_host} = $self->source_host;
+
+    return $self->$orig( $c, $template, $vars );
+};
+
 sub parse_datetime {
     my $date = shift;
     if ( $date =~ /^\d+$/ ) {
