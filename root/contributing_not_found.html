@@ -46,8 +46,7 @@
   </div>
 
   <div class="content about">
-  <% USE MultiMarkdown(heading_ids => 1) -%>
-  <% FILTER multimarkdown %>
+  <% FILTER markdown %>
 ## Oops! No Contributing guidelines for <%= module.distribution | html %> found
 
 This distribution doesn't include its own guidelines for contributors

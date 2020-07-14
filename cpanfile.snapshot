@@ -5177,26 +5177,6 @@ DISTRIBUTIONS
       DateTime::Format::Strptime 0
       ExtUtils::MakeMaker 6.42
       Template 0
-  Template-Plugin-Markdown-0.02
-    pathname: N/NA/NAOYA/Template-Plugin-Markdown-0.02.tar.gz
-    provides:
-      Template::Plugin::Markdown 0.02
-    requirements:
-      ExtUtils::MakeMaker 0
-      Text::Markdown v1.0.1
-  Template-Plugin-MultiMarkdown-0.12
-    pathname: B/BA/BARBIE/Template-Plugin-MultiMarkdown-0.12.tar.gz
-    provides:
-      Template::Plugin::MultiMarkdown 0.12
-    requirements:
-      ExtUtils::MakeMaker 0
-      FindBin 0
-      IO::File 0
-      Template 2.16
-      Template::Plugin::Filter 1.38
-      Test::More 0.7
-      Text::MultiMarkdown 1.000035
-      parent 0
   Template-Plugin-Page-0.10
     pathname: L/LB/LBROCARD/Template-Plugin-Page-0.10.tar.gz
     provides:

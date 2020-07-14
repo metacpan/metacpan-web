@@ -12,8 +12,8 @@ use MetaCPAN::Web::RenderUtil 'filter_html';
 use Regexp::Common qw(time);
 use Number::Format;
 use Template::Plugin::DateTime;
-use Template::Plugin::Markdown;
 use Template::Plugin::Page;
+use Text::MultiMarkdown;
 use Text::Pluralize ();
 use URI;
 use URI::QueryParam;
@@ -71,6 +71,15 @@ sub common_date_format {
         unless defined $year && defined $month && defined $day;
     return sprintf( '%04d-%02d-%02d', $year, $month, $day );
 }
+
+my $md_render = Text::MultiMarkdown->new( heading_ids => 1 );
+Template::Alloy->define_vmethod(
+    'text',
+    markdown => sub {
+        my $md = shift;
+        $md_render->markdown($md);
+    }
+);
 
 Template::Alloy->define_vmethod(
     'text',

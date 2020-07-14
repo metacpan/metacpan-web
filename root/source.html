@@ -49,8 +49,7 @@
 <div class="content">
 <% IF !file.binary %>
   <% IF filetype == 'markdown' %>
-    <% USE MultiMarkdown(heading_ids => 1) %>
-    <% source | multimarkdown | filter_html %>
+    <% source | markdown | filter_html %>
   <% ELSE %>
 <pre id="source" class="line-numbers pod-toggle<% IF file.sloc > 10; " pod-hidden"; END %>" data-pod-lines="<%
   file.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')

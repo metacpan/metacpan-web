@@ -2,8 +2,7 @@
 <%- rss = "news"; rss_title = 'Recent MetaCPAN News' %>
 <a class="news_feed" href="/feed/news"><i class="fa fa-rss fa-2x"></i></a>
 <div class="content anchors">
-<% USE MultiMarkdown(heading_ids => 1) -%>
-<% FILTER multimarkdown %>
+<% FILTER markdown %>
 
 <% news %>
 

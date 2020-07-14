@@ -10,7 +10,7 @@ use HTML::Escape qw/escape_html/;
 use MetaCPAN::Web::Types qw( ArrayRef HashRef Str Uri Enum Undef );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny qw/path/;
-use Text::Markdown qw/markdown/;
+use Text::MultiMarkdown qw/markdown/;
 use XML::FeedPP ();
 
 sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
