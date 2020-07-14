@@ -42,7 +42,6 @@ requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
-requires 'Importer';
 requires 'IO::Async::Loop';
 requires 'IO::Async::SSL';
 requires 'IO::Socket::SSL';
