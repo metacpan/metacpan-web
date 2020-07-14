@@ -47,6 +47,13 @@ around render => sub {
 
     $vars->{api_public}  = $self->api_public;
     $vars->{source_host} = $self->source_host;
+    $vars->{assets}      = $c->req->env->{'psgix.assets'} || [];
+    $vars->{req}         = $c->req;
+    $vars->{oauth_prefix}
+        = $self->api_public
+        . '/oauth2/authorize?client_id='
+        . $c->config->{consumer_key};
+    $vars->{site_alert_message} = $c->config->{site_alert_message};
 
     return $self->$orig( $c, $template, $vars );
 };

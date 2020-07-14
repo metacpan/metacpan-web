@@ -89,19 +89,7 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {
-    my ( $self, $c ) = @_;
-
-    $c->stash->{req}    = $c->req;
-    $c->stash->{assets} = $c->req->env->{'psgix.assets'} || [];
-    $c->stash->{oauth_prefix}
-        = $c->api_public
-        . '/oauth2/authorize?client_id='
-        . $c->config->{consumer_key};
-
-    $c->stash->{site_alert_message} = $c->config->{site_alert_message};
-
-}
+sub end : ActionClass('RenderView') { }
 
 =head1 AUTHOR
 
