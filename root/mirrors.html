@@ -1,4 +1,3 @@
-<%- query = req.parameters.q %>
 <%- title = 'CPAN Mirrors' %>
 <%- assets.push("/static/modules/ol-v6.3.1/ol.js") %>
 <%- assets.push("/static/modules/ol-v6.3.1/ol.css") %>
@@ -15,16 +14,16 @@
     <%-
       FOREACH proto IN ['http', 'ftp', 'rsync'];
         checked = 0;
-        protos = c.req.params.q ? c.req.params.q.split(/\s+/) : [];
+        protos = protocols;
     %>
     <li><a href="?q=<%
       IF protos.grep(->(p){ p == proto }).size;
         checked = 1;
         protos = protos.grep(->(p){ p != proto });
       ELSE;
-        protos.push(proto);
+        protos = protos.merge(proto.list);
       END;
-      protos.sort.join('%20');
+      protos.sort.join(' ') | url;
       %>"><i class="fa fa-fw<% checked ? " fa-check-circle" : "" %> black"></i><% proto.uc %></a></li>
     <%- END %>
     <li class="nav-header">Continents</li>

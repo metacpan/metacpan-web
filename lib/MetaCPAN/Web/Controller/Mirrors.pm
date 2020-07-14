@@ -13,14 +13,17 @@ sub index : Path : Args(0) {
     $c->browser_max_age('1d');
     $c->cdn_max_age('1d');
 
-    my $query = $c->req->parameters->{'q'};
-    my $data  = $c->model('API::Mirror')->search($query)->get;
+    my $query  = join( q{ }, $c->req->param('q') );
+    my @protos = $query =~ /(\S+)/g;
+    my $data   = $c->model('API::Mirror')->search($query)->get;
 
     $c->stash( {
-        mirrors  => $data->{mirrors},
-        took     => $data->{took},
-        total    => $data->{total},
-        template => 'mirrors.html',
+        mirrors      => $data->{mirrors},
+        took         => $data->{took},
+        total        => $data->{total},
+        search_query => $query,
+        protocols    => \@protos,
+        template     => 'mirrors.html',
     } );
 }
 
