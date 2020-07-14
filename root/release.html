@@ -9,7 +9,7 @@
     <li class="visible-xs">
     <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
-    <li class="nav-header"><span class="relatize"><% release.date.dt_http %></span></li>
+    <li class="nav-header"><span class="relatize"><% datetime(release.date).to_http %></span></li>
     <% INCLUDE inc/release-status.html maturity = release.maturity, banner_class = 'release-banner' %>
     <li><a href="/source/<% release.author %>/<% release.name %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="<% source_host %>/source/<% release.author %>/<% release.name %>/">raw</a>)</li>
     <% PROCESS inc/release-info.html %>
@@ -53,7 +53,7 @@
 <div id="last-changes" class="well collapsed">
     <div id="last-changes-container">
         <%- FOREACH rel IN changes %>
-        <h2 id="whatsnew">Changes for version <% rel.version %><% IF rel.date && rel.date.dt_date_common %> - <% rel.date.dt_date_common %><% END; IF rel.trial %> (TRIAL RELEASE)<% END %></h2>
+        <h2 id="whatsnew">Changes for version <% rel.version %><% IF rel.date %> - <% datetime(rel.date).to_ymd %><% END; IF rel.trial %> (TRIAL RELEASE)<% END %></h2>
         <div class="change-entries">
             <% change_group(rel.entries) | none %>
         </div>

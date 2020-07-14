@@ -31,7 +31,7 @@
   <% END %>
   <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
   -
-  <span class="relatize"><% item.date.dt_http %></span>
+  <span class="relatize"><% datetime(item.date).to_http %></span>
   <%- IF !single_dist %>
     -
     <a href="/search?q=dist:<% item.distribution %>+<% search_query %>">Search in distribution</a>

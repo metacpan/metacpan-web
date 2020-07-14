@@ -7,7 +7,7 @@ MACRO breadcrumb_link(version) BLOCK;
 <%# FIXME: This link should point to /pod (or /source?) %>
   <option <% selected %> value="/<% [(module ? 'module' : 'release'), version.author, version.name].join('/'); IF module; "/"; module.path; END %>">
     <% version.distname_version _ (version.maturity == 'developer' ? ' DEV' : '') %>
-      (<%version.author %> on <% version.date.dt_date_common %>)
+      (<%version.author %> on <% datetime(version.date).to_ymd %>)
       <% IF mark_unauthorized_releases && NOT version.authorized %>UNAUTHORIZED<% END %>
   </option>
 <%- END;

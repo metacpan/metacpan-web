@@ -76,7 +76,6 @@ requires 'Regexp::Common';
 requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
 requires 'Template::Alloy';
-requires 'Template::Plugin::DateTime';
 requires 'Term::Size::Any';
 requires 'Text::MultiMarkdown';
 requires 'Text::Pluralize';
@@ -89,6 +88,7 @@ requires 'Types::URI';
 requires 'Type::Utils';
 requires 'URI', '1.71';
 requires 'URI::Escape';
+requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::FeedPP';
 requires 'YAML', '1.15'; # fix dep chain issue

@@ -70,14 +70,13 @@ FOREACH continent IN continents;
         <ul>
   <%-
     FOREACH mirror IN country.mirrors;
-      date = mirror.inceptdate.dt;
-      day = date.day _ '/' _ date.month _ '/' _ date.year;
+      date = datetime(mirror.inceptdate);
     %>
           <li>
             <a class="label label-default<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
             <a class="label label-warning<% mirror.http ? "" : " invisible" %>" href="<% mirror.http %>">http</a>
             <a class="label label-success<% mirror.rsync ? "" : " invisible" %>" href="<% mirror.rsync %>">rsync</a>
-            <span title="active since <% day %>"><% mirror.org %>, <% mirror.city %><span>
+            <span title="active since <% date.strftime("%B %u, %Y") %>"><% mirror.org %>, <% mirror.city %><span>
             <%- IF mirror.distance %> (<% mirror.distance | format_number %> km)<% END %>
           </li>
     <%- END %>

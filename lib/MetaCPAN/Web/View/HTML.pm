@@ -4,6 +4,8 @@ use Moose;
 extends 'Catalyst::View::TT::Alloy';
 
 use version;
+use DateTime;
+use DateTime::Format::ISO8601;
 use Digest::SHA;
 use List::Util       ();
 use Cpanel::JSON::XS ();
@@ -11,11 +13,11 @@ use Gravatar::URL;
 use MetaCPAN::Web::RenderUtil 'filter_html';
 use Regexp::Common qw(time);
 use Number::Format;
-use Template::Plugin::DateTime;
 use Text::MultiMarkdown;
 use Text::Pluralize ();
 use URI;
 use URI::QueryParam;
+use With::Roles;
 
 has api_public => (
     is       => 'ro',
@@ -62,60 +64,6 @@ around render => sub {
     return $self->$orig( $c, $template, $vars );
 };
 
-sub parse_datetime {
-    my $date = shift;
-    if ( $date =~ /^\d+$/ ) {
-        my ( $sec, $min, $hour, $mday, $mon, $year ) = localtime($date);
-        return {
-            year   => $year + 1900,
-            month  => $mon + 1,
-            day    => $mday,
-            hour   => $hour,
-            minute => $min,
-            second => $sec,
-        };
-    }
-    elsif ( $date =~ /$RE{time}{iso}{-keep}/ ) {
-        return {
-            year   => $2,
-            month  => $3,
-            day    => $4,
-            hour   => $5,
-            minute => $6,
-            second => $7,
-        };
-    }
-    else {
-        return;
-    }
-}
-
-my @MoY = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
-my @DoW = qw(Mon Tue Wed Thu Fri Sat Sun);
-
-sub format_datetime {
-    my $date = shift;
-    my $dt   = parse_datetime($date);
-    return sprintf(
-        '%02d %s %04d %02d:%02d:%02d GMT',
-        $dt->{day},
-        $MoY[ $dt->{month} - 1 ],
-        @$dt{qw(year hour minute second)}
-    );
-}
-
-# format just the date consistent with W3CDTF / ISO 8601 / RFC 3339
-sub common_date_format {
-    my $date = shift;
-    my $dt   = parse_datetime($date)
-        or return undef;
-    my ( $year, $month, $day ) = @$dt{qw(year month day)};
-
-    return undef
-        unless defined $year && defined $month && defined $day;
-    return sprintf( '%04d-%02d-%02d', $year, $month, $day );
-}
-
 my $md_render = Text::MultiMarkdown->new( heading_ids => 1 );
 Template::Alloy->define_vmethod(
     'text',
@@ -160,12 +108,30 @@ Template::Alloy->define_vmethod(
     },
 );
 
-Template::Alloy->define_vmethod( 'text', dt => \&parse_datetime );
-
-Template::Alloy->define_vmethod( 'text', dt_http => \&format_datetime );
-
-Template::Alloy->define_vmethod( 'text',
-    dt_date_common => \&common_date_format );
+my $datetime = DateTime->with::roles('MetaCPAN::Web::Role::Date');
+Template::Alloy->define_vmethod(
+    'text',
+    datetime => sub {
+        my $date = shift;
+        if ( ref $date ) {
+            if ( !$date->DOES('MetaCPAN::Web::Role::Date') ) {
+                $date->with::roles('MetaCPAN::Web::Role::Date');
+            }
+            return $date;
+        }
+        elsif ( $date =~ /\A[0-9]+\z/ ) {
+            return $datetime->from_epoch( epoch => $date );
+        }
+        else {
+            my $datetime = DateTime::Format::ISO8601->parse_datetime($date);
+            my $tz       = $datetime->time_zone;
+            $datetime->set_time_zone('GMT')
+                if $tz->isa('DateTime::TimeZone::Local')
+                || $tz->isa('DateTime::TimeZone::Floating');
+            return $datetime->with::roles('MetaCPAN::Web::Role::Date');
+        }
+    }
+);
 
 Template::Alloy->define_vmethod(
     'text',
