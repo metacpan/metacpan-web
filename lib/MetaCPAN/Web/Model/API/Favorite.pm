@@ -38,11 +38,11 @@ sub by_user {
 
 sub recent {
     my ( $self, $page, $page_size ) = @_;
-    $self->request( '/favorite/recent',
+    $self->request( '/favorite/recent', undef,
         { size => $page_size, page => $page } )->then( sub {
         my $data     = shift;
         my @user_ids = map { $_->{user} } @{ $data->{favorites} };
-        return Future->done unless @user_ids;
+        return Future->done($data) unless @user_ids;
         $self->request( '/author/by_user', undef, { user => \@user_ids } )
             ->transform(
             done => sub {

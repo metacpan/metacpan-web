@@ -2,9 +2,9 @@
     <div class="container openid-login">
         <p>Log into MetaCPAN using OpenID</p>
         <i class="fa fa-openid fa-2x fa-fw"></i>
-        <form action="<% api_external_secure %>/login/openid">
+        <form action="<% api_public %>/login/openid">
             <div class="input-group login-form">
-                <input type="hidden" name="client_id" value="<% c.config.consumer_key %>">
+                <input type="hidden" name="client_id" value="<% consumer_key %>">
                 <input type="text" class="form-control" name="openid_identifier">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="submit">Log in</button>

@@ -22,9 +22,10 @@
     <div class="user-profiles">
         <%-
             FOREACH profile IN author.profile.sort('name');
-            IF profiles.${profile.name} %>
-        <a rel="me noopener nofollow" href="<% profiles.${profile.name}.url.replace('%s', profile.id) %>" target="_blank" title="<% profiles.${profile.name}.name %> - <% profile.id%>">
-        <img src="/static/images/profile/<% profile.name %>.png" width="16" height="16" alt="<% profiles.${profile.name}.name %>">
+            profile_data = profiles.${profile.name};
+            IF profile_data; %>
+        <a rel="me noopener nofollow" href="<% profile_data.url_for(profile.id) %>" target="_blank" title="<% profile_data.name %> - <% profile.id%>">
+        <img src="<% profile_data.icon %>" width="16" height="16" alt="<% profile_data.name %>">
         </a>
         <% END; END %>
     </div>

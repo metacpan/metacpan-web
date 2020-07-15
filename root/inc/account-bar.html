@@ -1,22 +1,20 @@
 <% UNLESS title; title = 'MetaCPAN Account'; END %>
-<div class="account-bar slidepanel" id="account-bar">
-    <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="105" id="left-nav">
-        <%- UNLESS user.looks_human %>
-        <li<% IF req.action == 'account/turing' %> class="active"<% END %>>
-            <a href="/account/turing">Verify Account</a>
-        </li>
-        <%- END %>
-        <li<% IF req.action == 'account/identities' %> class="active"<% END %>>
-            <a href="/account/identities">Identities</a>
-        </li>
-        <li<% IF req.action == 'account/profile' %> class="active"<% END %>>
-            <a href="/account/profile">Profile</a>
-        </li>
-        <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
-            <a href="/account/favorite/list">Favorites</a>
-        </li>
-        <li>
-            <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
-        </li>
-    </ul>
-</div>
+<ul class="nav-list slidepanel nav nav-pills nav-stacked">
+    <%- UNLESS user.looks_human %>
+    <li<% IF req.action == 'account/turing' %> class="active"<% END %>>
+        <a href="/account/turing">Verify Account</a>
+    </li>
+    <%- END %>
+    <li<% IF req.action == 'account/identities' %> class="active"<% END %>>
+        <a href="/account/identities">Identities</a>
+    </li>
+    <li<% IF req.action == 'account/profile' %> class="active"<% END %>>
+        <a href="/account/profile">Profile</a>
+    </li>
+    <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
+        <a href="/account/favorite/list">Favorites</a>
+    </li>
+    <li>
+        <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
+    </li>
+</ul>

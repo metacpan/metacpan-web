@@ -6,7 +6,8 @@
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">
-      <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
+      <%- module_date = datetime(module.date) -%>
+      <time class="relatize" itemprop="dateModified" datetime="<% module_date.to_ymd %>"><% module_date.to_http %></time>
     </li>
     <li>
       Distribution: <% module.distribution | html %></span>
@@ -46,8 +47,7 @@
   </div>
 
   <div class="content about">
-  <% USE MultiMarkdown(heading_ids => 1) -%>
-  <% FILTER multimarkdown %>
+  <% FILTER markdown %>
 ## Oops! No Contributing guidelines for <%= module.distribution | html %> found
 
 This distribution doesn't include its own guidelines for contributors

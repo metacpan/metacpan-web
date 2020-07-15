@@ -1,8 +1,7 @@
 <% title = 'MetaCPAN Metadata' %>
 <% PROCESS inc/about-bar.html %>
 <div class="content about anchors">
-<% USE MultiMarkdown(heading_ids => 1) -%>
-<% FILTER multimarkdown %>
+<% FILTER markdown %>
 ## Metadata
 
 MetaCPAN uses the [CPAN::Meta spec](/pod/CPAN::Meta::Spec) for much of the

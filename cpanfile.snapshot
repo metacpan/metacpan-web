@@ -121,20 +121,6 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  AppConfig-1.71
-    pathname: N/NE/NEILB/AppConfig-1.71.tar.gz
-    provides:
-      AppConfig 1.71
-      AppConfig::Args 1.71
-      AppConfig::CGI 1.71
-      AppConfig::File 1.71
-      AppConfig::Getopt 1.71
-      AppConfig::State 1.71
-      AppConfig::Sys 1.71
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
-      perl 5.008008
   B-Hooks-EndOfScope-0.24
     pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.24.tar.gz
     provides:
@@ -2338,13 +2324,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Importer-0.025
-    pathname: E/EX/EXODIST/Importer-0.025.tar.gz
-    provides:
-      Importer 0.025
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.008001
   JSON-4.02
     pathname: I/IS/ISHIGAKI/JSON-4.02.tar.gz
     provides:
@@ -5168,111 +5147,6 @@ DISTRIBUTIONS
     requirements:
       Digest::MD5 1
       ExtUtils::MakeMaker 0
-  Template-Plugin-DateTime-0.06002
-    pathname: D/DM/DMAKI/Template-Plugin-DateTime-0.06002.tar.gz
-    provides:
-      Template::Plugin::DateTime 0.06002
-    requirements:
-      DateTime 0
-      DateTime::Format::Strptime 0
-      ExtUtils::MakeMaker 6.42
-      Template 0
-  Template-Plugin-Markdown-0.02
-    pathname: N/NA/NAOYA/Template-Plugin-Markdown-0.02.tar.gz
-    provides:
-      Template::Plugin::Markdown 0.02
-    requirements:
-      ExtUtils::MakeMaker 0
-      Text::Markdown v1.0.1
-  Template-Plugin-MultiMarkdown-0.12
-    pathname: B/BA/BARBIE/Template-Plugin-MultiMarkdown-0.12.tar.gz
-    provides:
-      Template::Plugin::MultiMarkdown 0.12
-    requirements:
-      ExtUtils::MakeMaker 0
-      FindBin 0
-      IO::File 0
-      Template 2.16
-      Template::Plugin::Filter 1.38
-      Test::More 0.7
-      Text::MultiMarkdown 1.000035
-      parent 0
-  Template-Plugin-Number-Format-1.06
-    pathname: D/DA/DARREN/Template-Plugin-Number-Format-1.06.tar.gz
-    provides:
-      Template::Plugin::Number::Format 1.06
-    requirements:
-      ExtUtils::MakeMaker 0
-      Number::Format 0
-      Template 2.07
-  Template-Plugin-Page-0.10
-    pathname: L/LB/LBROCARD/Template-Plugin-Page-0.10.tar.gz
-    provides:
-      Template::Plugin::Page 0.10
-    requirements:
-      Data::Page 0.14
-      ExtUtils::MakeMaker 0
-      Template 2.07
-  Template-Toolkit-3.007
-    pathname: A/AT/ATOOMIC/Template-Toolkit-3.007.tar.gz
-    provides:
-      Template 3.007
-      Template::Base 3.007
-      Template::Config 3.007
-      Template::Constants 3.007
-      Template::Context 3.007
-      Template::Directive 3.007
-      Template::Document 3.007
-      Template::Exception 3.007
-      Template::Filters 3.007
-      Template::Grammar 3.007
-      Template::Iterator 3.007
-      Template::Monad::Assert 3.007
-      Template::Monad::Scalar 3.007
-      Template::Namespace::Constants 3.007
-      Template::Parser 3.007
-      Template::Perl 3.007
-      Template::Plugin 3.007
-      Template::Plugin::Assert 3.007
-      Template::Plugin::CGI 3.007
-      Template::Plugin::Datafile 3.007
-      Template::Plugin::Date 3.007
-      Template::Plugin::Date::Calc 3.007
-      Template::Plugin::Date::Manip 3.007
-      Template::Plugin::Directory 3.007
-      Template::Plugin::Dumper 3.007
-      Template::Plugin::File 3.007
-      Template::Plugin::Filter 3.007
-      Template::Plugin::Format 3.007
-      Template::Plugin::HTML 3.007
-      Template::Plugin::Image 3.007
-      Template::Plugin::Iterator 3.007
-      Template::Plugin::Math 3.007
-      Template::Plugin::Pod 3.007
-      Template::Plugin::Procedural 3.007
-      Template::Plugin::Scalar 3.007
-      Template::Plugin::String 3.007
-      Template::Plugin::Table 3.007
-      Template::Plugin::URL 3.007
-      Template::Plugin::View 3.007
-      Template::Plugin::Wrap 3.007
-      Template::Plugins 3.007
-      Template::Provider 3.007
-      Template::Service 3.007
-      Template::Stash 3.007
-      Template::Stash::Context 3.007
-      Template::Stash::XS undef
-      Template::Test 3.007
-      Template::TieString 3.007
-      Template::Toolkit 3.007
-      Template::VMethods 3.007
-      Template::View 3.007
-    requirements:
-      AppConfig 1.56
-      ExtUtils::MakeMaker 0
-      File::Spec 0.8
-      File::Temp 0.12
-      Scalar::Util 0
   Term-Size-Any-0.002
     pathname: F/FE/FERREIRA/Term-Size-Any-0.002.tar.gz
     provides:
@@ -6171,6 +6045,12 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  With-Roles-0.001002
+    pathname: H/HA/HAARG/With-Roles-0.001002.tar.gz
+    provides:
+      With::Roles 0.001002
+    requirements:
+      ExtUtils::MakeMaker 0
   XML-FeedPP-0.95
     pathname: M/MA/MARKOV/XML-FeedPP-0.95.tar.gz
     provides:

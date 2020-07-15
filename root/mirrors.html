@@ -1,4 +1,3 @@
-<%- query = req.parameters.q %>
 <%- title = 'CPAN Mirrors' %>
 <%- assets.push("/static/modules/ol-v6.3.1/ol.js") %>
 <%- assets.push("/static/modules/ol-v6.3.1/ol.css") %>
@@ -15,16 +14,16 @@
     <%-
       FOREACH proto IN ['http', 'ftp', 'rsync'];
         checked = 0;
-        protos = c.req.params.q ? c.req.params.q.split(/\s+/) : [];
+        protos = protocols;
     %>
     <li><a href="?q=<%
       IF protos.grep(->(p){ p == proto }).size;
         checked = 1;
         protos = protos.grep(->(p){ p != proto });
       ELSE;
-        protos.push(proto);
+        protos = protos.merge(proto.list);
       END;
-      protos.sort.join('%20');
+      protos.sort.join(' ') | url;
       %>"><i class="fa fa-fw<% checked ? " fa-check-circle" : "" %> black"></i><% proto.uc %></a></li>
     <%- END %>
     <li class="nav-header">Continents</li>
@@ -71,14 +70,13 @@ FOREACH continent IN continents;
         <ul>
   <%-
     FOREACH mirror IN country.mirrors;
-      date = mirror.inceptdate.dt;
-      day = date.day _ '/' _ date.month _ '/' _ date.year;
+      date = datetime(mirror.inceptdate);
     %>
           <li>
             <a class="label label-default<% mirror.ftp ? "" : " invisible" %>" href="<% mirror.ftp %>">ftp</a>
             <a class="label label-warning<% mirror.http ? "" : " invisible" %>" href="<% mirror.http %>">http</a>
             <a class="label label-success<% mirror.rsync ? "" : " invisible" %>" href="<% mirror.rsync %>">rsync</a>
-            <span title="active since <% day %>"><% mirror.org %>, <% mirror.city %><span>
+            <span title="active since <% date.strftime("%B %u, %Y") %>"><% mirror.org %>, <% mirror.city %><span>
             <%- IF mirror.distance %> (<% mirror.distance | format_number %> km)<% END %>
           </li>
     <%- END %>

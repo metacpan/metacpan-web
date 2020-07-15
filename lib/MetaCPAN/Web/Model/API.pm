@@ -40,7 +40,7 @@ sub client {
     };
 }
 
-has api_secure => (
+has api => (
     is       => 'ro',
     isa      => Uri,
     coerce   => 1,
@@ -52,23 +52,20 @@ has debug       => ( is => 'ro' );
 has request_uri => ( is => 'ro' );
 has request_id  => ( is => 'ro' );
 
-=head2 COMPONENT
-
-Set C<api_secure> config parameters from the app config object.
-
-=cut
-
 sub COMPONENT {
-    my $self = shift;
-    my ( $app, $config ) = @_;
-    my $args = {
-        %$config,
-        api_secure => $app->config->{api_secure},
-        log        => $app->log,
-        debug      => $app->debug,
-    };
+    my ( $class, $app, $args ) = @_;
 
-    return $self->SUPER::COMPONENT( $app, $args );
+    $args = $class->merge_config_hashes( $class->config, $args );
+    $args = $class->merge_config_hashes(
+        {
+            api   => $app->config->{api},
+            log   => $app->log,
+            debug => $app->debug,
+        },
+        $args
+    );
+
+    return $class->SUPER::COMPONENT( $app, $args );
 }
 
 sub ACCEPT_CONTEXT {
@@ -86,7 +83,7 @@ sub ACCEPT_CONTEXT {
 sub request {
     my ( $self, $path, $search, $params, $method ) = @_;
 
-    my $url = $self->api_secure->clone;
+    my $url = $self->api->clone;
 
     $method ||= $search ? 'POST' : 'GET';
 

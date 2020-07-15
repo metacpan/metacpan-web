@@ -16,8 +16,7 @@ override_api_response sub {
 
 use MetaCPAN::Web::Model::API::Module;
 my $model
-    = MetaCPAN::Web::Model::API::Module->new(
-    api_secure => 'http://example.com' );
+    = MetaCPAN::Web::Model::API::Module->new( api => 'http://example.com' );
 
 # $body
 # $body, $type
@@ -201,7 +200,7 @@ done_testing;
 
 sub check_request {
     my ( $desc, $args, $exp ) = @_;
-    my $uri = $model->api_secure->clone;
+    my $uri = $model->api->clone;
     $uri->path_query( $exp->{uri} );
     $exp->{uri} = $uri;
     $model->request(@$args);

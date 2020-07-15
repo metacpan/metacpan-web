@@ -16,7 +16,8 @@
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">
-      <time class="relatize" itemprop="dateModified" datetime="<% module.date.dt_date_common %>"><% module.date.dt_http %></time>
+      <%- module_date = datetime(module.date) -%>
+      <time class="relatize" itemprop="dateModified" datetime="<% module_date.to_ymd %>"><% module_date.to_http %></time>
     </li>
     <% INCLUDE inc/release-status.html maturity = release.maturity, banner_class = 'release-banner' %>
     <li>

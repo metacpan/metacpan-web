@@ -16,7 +16,7 @@
     <% INCLUDE mobile/toolbar-search-form.html %>
   </li>
   <li class="nav-header">Activity</li>
-  <li><% INCLUDE inc/activity.html query = 'f=' _ c.req.params.f || 'l' %></li>
+  <li><% INCLUDE inc/activity.html query = 'f=' _ filter || 'l' %></li>
   <li class="nav-header">Recent Uploads</li>
   <%
     INCLUDE sidebar_group

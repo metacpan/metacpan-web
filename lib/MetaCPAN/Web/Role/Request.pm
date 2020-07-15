@@ -9,8 +9,9 @@ use Try::Tiny;
 use namespace::autoclean;
 
 sub page {
-    my $page = shift->parameters->{p};
-    return $page && $page =~ /^\d+$/ ? $page : 1;
+    my $self = shift;
+    my $page = $self->param('p');
+    return is_PositiveInt($page) ? $page : 1;
 }
 
 sub session {

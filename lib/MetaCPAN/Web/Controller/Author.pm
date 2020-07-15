@@ -58,12 +58,15 @@ sub index : Chained('root') PathPart('') Args(0) {
 
     my $faves = $c->model('API::Favorite')->by_user( $author->{user} )->get;
 
+    my $profiles = $c->model('API::Author')->profile_data;
+
     my $took = $releases->{took};
 
     $c->stash( {
         author   => $author,
         faves    => $faves,
         releases => $releases->{releases},
+        profiles => $profiles,
         template => 'author.html',
         took     => $took,
         total    => $releases->{total},
@@ -82,7 +85,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $id        = $c->stash->{pauseid};
     my $page_size = $req->get_page_size(100);
 
-    my $page      = $req->page > 0 ? $req->page : 1;
+    my $page      = $req->page;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases
         = $c->model('API::Release')->all_by_author( $id, $page_size, $page )
@@ -92,14 +95,6 @@ sub releases : Chained('root') PathPart Args(0) {
     $c->detach('/not_found')
         if $author_info->{code} && $author_info->{code} == 404;
 
-    $c->stash( {
-        author    => $author_info->{author},
-        page_size => $page_size,
-        releases  => $releases->{releases},
-    } );
-
-    return unless $releases->{total};
-
     my $pageset = Data::Pageset->new( {
         current_page     => $page,
         entries_per_page => $page_size,
@@ -107,6 +102,16 @@ sub releases : Chained('root') PathPart Args(0) {
         pages_per_set    => 10,
         total_entries    => $releases->{total},
     } );
+
+    $c->stash( {
+        author   => $author_info->{author},
+        total    => $releases->{total},
+        releases => $releases->{releases},
+        pageset  => $pageset,
+    } );
+
+    return unless $releases->{total};
+
     $c->stash( { pageset => $pageset } );
 }
 

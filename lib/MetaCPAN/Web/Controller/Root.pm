@@ -51,8 +51,8 @@ sub not_found : Private {
     $c->cdn_never_cache(1);
 
     $c->stash( {
-        template => 'not_found.html',
-        search   => [ @{ $c->req->args }, @{ $c->req->captures } ],
+        template     => 'not_found.html',
+        search_terms => [ @{ $c->req->args }, @{ $c->req->captures } ],
     } );
     $c->response->status(404);
 }
@@ -89,28 +89,7 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {
-    my ( $self, $c ) = @_;
-
-    # Pass through to the front end
-    if ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' ) {
-        $c->stash->{PLACK_ENV} = 'development';
-    }
-    $c->stash->{req}        = $c->req;
-    $c->stash->{assets}     = $c->req->env->{'psgix.assets'} || [];
-    $c->stash->{api}        = $c->config->{api};
-    $c->stash->{api_secure} = $c->config->{api_secure} || $c->config->{api};
-    $c->stash->{api_external_secure} = $c->config->{api_external_secure}
-        || $c->stash->{api_secure};
-    $c->stash->{oauth_prefix}
-        = $c->stash->{api_external_secure}
-        . '/oauth2/authorize?client_id='
-        . $c->config->{consumer_key};
-    $c->stash->{source_host} = $c->config->{source_host};
-
-    $c->stash->{site_alert_message} = $c->config->{site_alert_message};
-
-}
+sub end : ActionClass('RenderView') { }
 
 =head1 AUTHOR
 

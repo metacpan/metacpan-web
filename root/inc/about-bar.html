@@ -1,9 +1,8 @@
 <% UNLESS title; title = 'MetaCPAN About'; END %>
-<div class="list-group tabbable tabs-left about-bar slidepanel">
-    <div class="visible-xs">
+<ul class="nav-list slidepanel nav nav-pills nav-stacked">
+    <li class="visible-xs">
         <% INCLUDE mobile/toolbar-search-form.html %>
-    </div>
-    <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="105" id="left-nav">
+    </li>
     <li<% IF req.action == 'about' %> class="active"<% END %>>
         <a href="/about">About MetaCPAN</a>
     </li>
@@ -31,5 +30,4 @@
     <li<% IF req.action == 'about/metadata' %> class="active"<% END %>>
         <a href="/about/metadata">Distribution Metadata</a>
     </li>
-    </ul>
-</div>
+</ul>

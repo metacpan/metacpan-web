@@ -3,7 +3,7 @@
 <div class="breadcrumbs">
     <a data-keyboard-shortcut="g s" href="/source/<% base = [file.author, file.release].join("/"); base %>"><% [file.author, file.release].join(" / ") %></a>
     <% doc_view_url = [base,file.path].join("/") %>
-    <% raw_url = [api_external_secure,'source',base,file.path].join("/") %>
+    <% raw_url = [api_public,'source',base,file.path].join("/") %>
     <% permalink_url = ['','source',base,file.path].join("/") %>
   <% FOREACH part IN file.path.split("/"); base = base _ "/" _ part -%>
     / <% UNLESS loop.last %><a href="/source/<% base %>"><% part %></a><% ELSE %><% part %><% END %>
@@ -49,8 +49,7 @@
 <div class="content">
 <% IF !file.binary %>
   <% IF filetype == 'markdown' %>
-    <% USE MultiMarkdown(heading_ids => 1) %>
-    <% source | multimarkdown | filter_html %>
+    <% source | markdown | filter_html %>
   <% ELSE %>
 <pre id="source" class="line-numbers pod-toggle<% IF file.sloc > 10; " pod-hidden"; END %>" data-pod-lines="<%
   file.pod_lines.map(->(lines){ lines.0+1 _ "-" _ (lines.0+lines.1) }).join(', ')

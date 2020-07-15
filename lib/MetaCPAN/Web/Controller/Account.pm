@@ -16,6 +16,7 @@ sub auto : Private {
     unless ( $c->user_exists ) {
         $c->forward('/forbidden');
     }
+    $c->stash( { user => $c->user } );
     return $c->user_exists;
 }
 
@@ -91,6 +92,10 @@ sub profile : Local : Args(0) {
     $data->{extra} = $req->param('extra') ? $req->json_param('extra') : undef;
 
     $data->{donation} = undef unless ( $req->params->{donations} );
+
+    $c->stash( {
+        profiles => $c->model('API::Author')->profile_data,
+    } );
 
     # validation
     my @form_errors;

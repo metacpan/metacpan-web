@@ -1,4 +1,4 @@
-<%- query = req.param('q').join(' '); title = 'Search for "' _ query _ '"' %>
+<%- title = 'Search for "' _ search_query _ '"' %>
 <% IF suggest %>
     <% INCLUDE left_sidebar.html %>
     <div class="content no-results">

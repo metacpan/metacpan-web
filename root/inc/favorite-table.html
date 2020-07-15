@@ -26,7 +26,7 @@
     <a href="/author/<% favorite.clicked_by_author %>"><% favorite.clicked_by_author %></a>
   </td>
   <% END %>
-  <td class="date relatize" sort="<% favorite.date.dt_http %>"><% favorite.date.dt_http %></td>
+  <td class="date relatize" sort="<% date = datetime(favorite.date).to_http; date %>"><% date %></td>
 </tr>
 <% END %>
 </tbody>

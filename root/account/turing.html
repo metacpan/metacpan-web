@@ -14,7 +14,7 @@
     <% ELSE %>
     <fieldset><legend>Verify Account</legend>
         <p>Please solve the Captcha. This will allow you to ++ modules. You'll have to complete this test only once.</p><br />
-        <form id="metacpan-recaptcha-form" action="<% c.req.uri.as_string %>" method="POST">
+        <form id="metacpan-recaptcha-form" method="POST">
             <script>
               function recaptchaSuccess ( response ) {
                 document.getElementById('metacpan-recaptcha-form').submit();

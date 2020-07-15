@@ -1,0 +1,28 @@
+<%
+title = file.documentation || file.path;
+# If there is pod for this file...
+IF file.documentation || file.pod_lines.size || file.module.grep(->(module){ module.associated_pod }).size;
+  IF !permalinks;
+    # If it's a PAUSE-indexed module (02packages)...
+    IF file.documentation
+    && file.authorized
+    && file.indexed
+    && file.module.grep(->(module){ module.authorized && module.indexed }).size;
+      # Use /pod/$name.
+      path = file.documentation;
+    ELSE;
+      # Use distribution (version-independent) url.
+        path = ['distribution', file.distribution, file.path].join('/');
+    END;
+  # Else use versioned url.
+  ELSE;
+    path = ['release', file.author, file.release, file.path].join("/");
+  END;
+-%>
+<a href="/pod/<% path %>"><% linktext || title %></a>
+<%-
+# Else show source.
+ELSE;
+  INCLUDE "inc/link-to-source.html" file = file, linktext = linktext;
+END;
+-%>

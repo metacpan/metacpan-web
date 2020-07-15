@@ -37,12 +37,12 @@ test_psgi app, sub {
         is( $res->code, 404, "404 on $url" );
         my $tx = tx($res);
         $tx->like(
-            '//div[@id="not-found"]',
+            '//div[@class="error-page"]',
             qr/Change log not found for release.+Try the release info page:/,
             'Suggest release info page for not-found dist.'
         );
         $tx->like(
-            qq{//div[\@id="not-found"]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
+            qq{//div[\@class="error-page"]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
             qr{/$missing$}, 'link to suggested release',
         );
     }
