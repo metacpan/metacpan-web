@@ -53,6 +53,8 @@ sub list_as_json : Local : Args(0) {
     # Make sure the user re-requests from Fastly each time
     $c->browser_never_cache(1);
 
+    delete $c->stash->{user};
+
     $c->detach( $c->view('JSON') );
 }
 
