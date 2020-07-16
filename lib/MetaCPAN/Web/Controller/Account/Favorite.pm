@@ -39,13 +39,13 @@ sub add : Local : Args(0) {
 
 sub list : Local : Args(0) {
     my ( $self, $c ) = @_;
-    $self->_add_fav_list_to_stash( $c, 1_000 );
+    $c->stash( { faves => $self->faves( $c, 1_000 )->get } );
 }
 
 sub list_as_json : Local : Args(0) {
     my ( $self, $c ) = @_;
 
-    $self->_add_fav_list_to_stash( $c, 1_000 );
+    $c->stash->{json}{faves} = $self->faves( $c, 1_000 )->get;
 
     $c->add_surrogate_key( $self->_cache_key_for_user($c) );
     $c->cdn_max_age('30d');
@@ -53,9 +53,7 @@ sub list_as_json : Local : Args(0) {
     # Make sure the user re-requests from Fastly each time
     $c->browser_never_cache(1);
 
-    delete $c->stash->{user};
-
-    $c->detach( $c->view('JSON') );
+    $c->stash( { current_view => 'JSON' } );
 }
 
 sub _cache_key_for_user {
@@ -66,12 +64,10 @@ sub _cache_key_for_user {
     return 'user/' . $user->id;
 }
 
-sub _add_fav_list_to_stash {
+sub faves {
     my ( $self, $c, $size ) = @_;
-    my $user  = $c->user;
-    my $faves = $c->model('API::Favorite')->by_user( $user->id, $size )->get;
-    $c->stash( { faves => $faves } );
-    return $user;
+    my $user = $c->user;
+    return $c->model('API::Favorite')->by_user( $user->id, $size );
 }
 
 __PACKAGE__->meta->make_immutable;
