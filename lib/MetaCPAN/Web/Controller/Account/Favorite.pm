@@ -47,21 +47,12 @@ sub list_as_json : Local : Args(0) {
 
     $c->stash->{json}{faves} = $self->faves( $c, 1_000 )->get;
 
-    $c->add_surrogate_key( $self->_cache_key_for_user($c) );
     $c->cdn_max_age('30d');
 
     # Make sure the user re-requests from Fastly each time
     $c->browser_never_cache(1);
 
     $c->stash( { current_view => 'JSON' } );
-}
-
-sub _cache_key_for_user {
-    my ( $self, $c ) = @_;
-
-    my $user = $c->user;
-
-    return 'user/' . $user->id;
 }
 
 sub faves {
