@@ -74,7 +74,9 @@ sub requires {
             my ($data) = @_;
 
             # api should really be returning in this form already
-            $data->{releases} ||= delete $data->{data};
+            $data->{releases} ||= delete $data->{data} || [];
+            $data->{total} ||= 0;
+            $data->{took} ||= 0;
             return $data;
         }
     )->then( $self->add_river );
