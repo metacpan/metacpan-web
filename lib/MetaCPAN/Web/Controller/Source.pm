@@ -66,7 +66,7 @@ sub raw : Private {
     }
 
     $c->res->redirect(
-        $c->config->{api_public} . '/source/' . join( '/', @module ) );
+        $c->view->api_public . '/source/' . join( '/', @module ) );
     $c->detach;
 }
 
