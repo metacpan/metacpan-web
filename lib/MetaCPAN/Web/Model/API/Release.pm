@@ -104,8 +104,8 @@ sub reverse_dependencies {
 
             # api should really be returning in this form already
             $data->{releases} ||= delete $data->{data};
-            $data->{total} ||= 0;
-            $data->{took} ||= 0;
+            $data->{total}    ||= 0;
+            $data->{took}     ||= 0;
             return $data;
         }
     )->then( $self->add_river );

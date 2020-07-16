@@ -123,10 +123,10 @@ Template::Alloy->define_vmethod(
             return $datetime->from_epoch( epoch => $date );
         }
         else {
-            my $datetime = eval { DateTime::Format::ISO8601->parse_datetime($date) };
-            return
-                undef if !$datetime;
-            my $tz       = $datetime->time_zone;
+            my $datetime
+                = eval { DateTime::Format::ISO8601->parse_datetime($date) };
+            return undef if !$datetime;
+            my $tz = $datetime->time_zone;
             $datetime->set_time_zone('UTC')
                 if $tz->isa('DateTime::TimeZone::Local')
                 || $tz->isa('DateTime::TimeZone::Floating');
