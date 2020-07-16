@@ -128,10 +128,10 @@ sub parse {
 
                 # handle dist-zilla style, again ingoring TZ data
                 elsif ( $note
-                    =~ s{^(\d{4}-\d\d-\d\d)\s+(\d\d:\d\d(?::\d\d)?)(?:\s+[A-Za-z]+/[A-Za-z_-]+)}{}
+                    =~ s{^(\d{4}-\d\d-\d\d)\s+(\d\d:\d\d)(?::(\d\d))?(?:\s+[A-Za-z]+/[A-Za-z_-]+)}{}
                     )
                 {
-                    $date = sprintf( '%sT%sZ', $1, $2 );
+                    $date = sprintf( '%sT%s:%02dZ', $1, $2, $3 // 0 );
                 }
 
                 # start with W3CDTF, ignore rest
@@ -144,9 +144,12 @@ sub parse {
                     $date =~ s{ }{T};
 
                     # Add UTC TZ if date ends at H:M, H:M:S or H:M:S.FS
+                    if ( length($date) == 16 ) {
+                        $date .= ':00';
+                    }
+
                     $date .= 'Z'
-                        if length($date) == 16
-                        || length($date) == 19
+                        if length($date) == 19
                         || $date =~ m{\.\d+$};
                 }
 
