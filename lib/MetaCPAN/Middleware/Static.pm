@@ -5,6 +5,15 @@ use Plack::Builder;
 use Plack::App::File;
 use JavaScript::Minifier::XS ();
 use Cwd qw(cwd);
+use Plack::MIME;
+
+Plack::MIME->add_type(
+    '.eot'   => 'application/vnd.ms-fontobject',
+    '.otf'   => 'font/otf',
+    '.ttf'   => 'font/ttf',
+    '.woff'  => 'application/font-woff',
+    '.woff2' => 'application/font-woff2',
+);
 
 sub new { bless {}, $_[0] }
 
