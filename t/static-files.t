@@ -52,14 +52,6 @@ my %files = (
         '6225ccc4ec94d060f19efab97ca42d842845b949',
     'root/static/fonts/fontawesome-webfont.woff' =>
         '7d65e0227d0d7cdc1718119cd2a7dce0638f151c',
-    'root/static/fonts/glyphicons-halflings-regular.eot' =>
-        'f3a9a3b609133c3d21d6b42abbf7f43bd111df72',
-    'root/static/fonts/glyphicons-halflings-regular.svg' =>
-        '3ef91859cbec165ac97df6957b176f69e8d6a04d',
-    'root/static/fonts/glyphicons-halflings-regular.ttf' =>
-        'aafafdc09404c4aa4447d7e898a2183def9cc1b1',
-    'root/static/fonts/glyphicons-halflings-regular.woff' =>
-        '22037a3455914e5662fa51a596677bdb329e2c5c',
     'root/static/icons/apple-touch-icon.png' =>
         'b0697c267731b7ee53e8e7a3bbd9f6476c0ba29a',
     'root/static/icons/asc.gif' => '05fa1fbc4b6541c3e8176d235766fa0e411e9931',

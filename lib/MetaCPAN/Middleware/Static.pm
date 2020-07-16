@@ -26,33 +26,33 @@ sub wrap {
         undef $lessc;
     }
 
-    my @js_files = map {"/static/js/$_.js"} (
+    my @js_files = map {"/static/$_"} (
         qw(
-            jquery.min
-            jquery.tablesorter
-            jquery.relatize_date
-            jquery.qtip.min
-            jquery.autocomplete.min
-            mousetrap.min
-            shCore
-            shBrushPerl
-            shBrushPlain
-            shBrushYaml
-            shBrushJScript
-            shBrushDiff
-            shBrushCpp
-            shBrushCPANChanges
-            cpan
-            toolbar
-            github
-            dropdown
-            bootstrap/bootstrap-dropdown
-            bootstrap/bootstrap-collapse
-            bootstrap/bootstrap-modal
-            bootstrap/bootstrap-tooltip
-            bootstrap/bootstrap-affix
-            bootstrap-slidepanel
-            syntaxhighlighter
+            js/jquery.min.js
+            js/jquery.tablesorter.js
+            js/jquery.relatize_date.js
+            js/jquery.qtip.min.js
+            js/jquery.autocomplete.min.js
+            js/mousetrap.min.js
+            js/shCore.js
+            js/shBrushPerl.js
+            js/shBrushPlain.js
+            js/shBrushYaml.js
+            js/shBrushJScript.js
+            js/shBrushDiff.js
+            js/shBrushCpp.js
+            js/shBrushCPANChanges.js
+            js/cpan.js
+            js/toolbar.js
+            js/github.js
+            js/dropdown.js
+            modules/bootstrap-v3.4.1/js/dropdown.js
+            modules/bootstrap-v3.4.1/js/collapse.js
+            modules/bootstrap-v3.4.1/js/modal.js
+            modules/bootstrap-v3.4.1/js/tooltip.js
+            modules/bootstrap-v3.4.1/js/affix.js
+            js/bootstrap-slidepanel.js
+            js/syntaxhighlighter.js
             ),
     );
 
