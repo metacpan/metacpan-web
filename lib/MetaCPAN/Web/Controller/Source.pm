@@ -65,7 +65,7 @@ sub raw : Private {
         @module = @{$module}{qw(author release path)};
     }
 
-    $c->res->redirect( $c->api_public . '/source/' . join( '/', @module ) );
+    $c->res->redirect( $c->config->{api_public} . '/source/' . join( '/', @module ) );
     $c->detach;
 }
 
