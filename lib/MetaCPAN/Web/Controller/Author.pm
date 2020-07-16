@@ -100,7 +100,7 @@ sub releases : Chained('root') PathPart Args(0) {
         entries_per_page => $page_size,
         mode             => 'slide',
         pages_per_set    => 10,
-        total_entries    => $releases->{total},
+        total_entries    => $releases->{total} // 0,
     } );
 
     $c->stash( {
