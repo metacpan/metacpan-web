@@ -1,10 +1,10 @@
 <table class="table table-striped">
   <tr>
-    <th>Module (<% permission.size %>)</th>
-    <th>Owner (<% num_owners %>)</th>
-    <th>Co-Maintainers (<% num_comaints %>)</th>
+    <th>Module (<% permissions.size %>)</th>
+    <th>Owner (<% owner_count %>)</th>
+    <th>Co-Maintainers (<% comaint_count %>)</th>
   </tr>
-  <% FOREACH module IN permission %>
+  <% FOREACH module IN permissions %>
     <tr>
       <td>
         <a href="/pod/<% module.module_name %>"><% module.module_name %></a>

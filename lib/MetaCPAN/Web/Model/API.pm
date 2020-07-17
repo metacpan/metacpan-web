@@ -17,6 +17,8 @@ use MetaCPAN::Web::Types qw( Uri );
 use Try::Tiny qw( catch try );
 use HTTP::Request;
 use HTTP::Request::Common ();
+use URI::Escape qw(uri_escape);
+use Ref::Util qw(is_arrayref);
 
 my $loop;
 
@@ -86,6 +88,10 @@ sub request {
     my $url = $self->api->clone;
 
     $method ||= $search ? 'POST' : 'GET';
+
+    if ( is_arrayref($path) ) {
+        $path = join '/', map uri_escape($_), @$path;
+    }
 
     # the order of the following 2 lines matters
     # `path_query` is destructive

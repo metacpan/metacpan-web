@@ -30,9 +30,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'ADOPTME',
+                authors     => [ 'ONE', 'TWO', 'THREE', ],
                 emails      => [
-                    'one@example.com',   'two@example.com',
-                    'three@example.com', 'modules@perl.org'
+                    'modules@perl.org', 'one@example.com',
+                    'two@example.com',  'three@example.com',
                 ],
             },
             message => 'ADOPTME passed in co_maintainers'
@@ -45,9 +46,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'NEEDHELP',
+                authors     => [ 'ONE', 'TWO', 'THREE', ],
                 emails      => [
                     'one@example.com', 'two@example.com',
-                    'three@example.com'
+                    'three@example.com',
                 ],
             },
             message => 'NEEDHELP passed in co_maintainers'
@@ -61,9 +63,10 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'HANDOFF',
+                authors     => [ 'LNATION', 'ONE', 'TWO', 'THREE', ],
                 emails      => [
                     'lnation@example.com', 'one@example.com',
-                    'two@example.com',     'three@example.com'
+                    'two@example.com',     'three@example.com',
                 ],
             },
             message => 'HANDOFF passed in co_maintainers'
@@ -97,6 +100,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'ADOPTME',
+                authors     => [],
                 emails      => ['modules@perl.org'],
             },
             message => 'ADOPTME passed as owner'
@@ -109,6 +113,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'HANDOFF',
+                authors     => [],
                 emails      => ['modules@perl.org'],
             },
             message => 'HANDOFF passed as owner'
@@ -121,6 +126,7 @@ subtest 'notification_type' => sub {
             expected => {
                 module_name => 'Mod::Name',
                 type        => 'NEEDHELP',
+                authors     => [],
                 emails      => ['modules@perl.org'],
             },
             message => 'NEEDHELP passed as owner'
@@ -130,8 +136,8 @@ subtest 'notification_type' => sub {
     my $api_data;
     override_api_response( sub {
         my ( undef, $req ) = @_;
-        my $this_api_data = $api_data;
-        if ( $req->uri !~ /permission/ ) {
+        my $this_api_data;
+        if ( $req->uri =~ m{/author/by_ids\b} ) {
             $this_api_data = {
                 authors => [
                     map +( {
@@ -141,6 +147,12 @@ subtest 'notification_type' => sub {
                     @{ decode_json( $req->content )->{id} }
                 ]
             };
+        }
+        elsif ( $req->uri =~ m{/permission/by_module\b} ) {
+            $this_api_data = { permissions => [ $api_data, ], };
+        }
+        else {
+            die "unexpected API call";
         }
         return [
             200,

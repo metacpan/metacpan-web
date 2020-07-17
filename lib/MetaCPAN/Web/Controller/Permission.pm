@@ -9,17 +9,20 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub author : Local Args(1) {
     my ( $self, $c, $pause_id ) = @_;
 
-    $c->forward( 'get', $c, [ 'author', $pause_id ] );
+    my $perms = $c->model('API::Permission')->by_author($pause_id)->get;
+    $c->stash( {
+        %$perms, search_term => $pause_id,
+    } );
+    $c->forward('view');
 }
 
 sub distribution : Local Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    $c->forward( 'get', $c, [ 'distribution', $distribution ] );
-    die join "\n", @{ $c->error } if @{ $c->error };
+    my $perms = $c->model('API::Permission')->by_dist($distribution)->get;
 
-    my $modules       = $c->stash->{permission};
-    my $total_modules = scalar @$modules;
+    my $modules       = $perms->{permissions} || [];
+    my $total_modules = @$modules;
     my %num_modules_of;
     for my $module (@$modules) {
         ++$num_modules_of{$_}
@@ -28,35 +31,40 @@ sub distribution : Local Args(1) {
     my @releaser = sort grep { $num_modules_of{$_} == $total_modules }
         keys %num_modules_of;
 
-    $c->stash( releaser => \@releaser );
+    $c->stash( {
+        %$perms,
+        releaser    => \@releaser,
+        search_term => $distribution,
+    } );
+    $c->forward('view');
 }
 
 sub module : Local Args(1) {
     my ( $self, $c, $module ) = @_;
 
-    $c->forward( 'get', $c, [ 'module', $module ] );
+    my $perms = $c->model('API::Permission')->by_module($module)->get;
+    $c->stash( {
+        %$perms, search_term => $module,
+    } );
+    $c->forward('view');
 }
 
-sub get : Private {
-    my $self = shift;
-    my $c    = shift;
-    my ( $type, $name ) = @_;
+sub view : Private {
+    my ( $self, $c ) = @_;
+    my $perms = $c->stash->{permissions};
 
-    my $perms = $c->model('API::Permission')->get( $type, $name )->get;
-
-    if ( !$perms ) {
+    if ( !( $perms && @$perms ) ) {
         $c->stash( {
-            message => 'Permissions not found for ' . $name
+            message => 'Permissions not found for '
+                . $c->stash->{search_term},
         } );
         $c->detach('/not_found');
     }
 
-    $c->stash( { search_term => $name, permission => $perms } );
-
-    return if $type eq 'module';
     $c->stash( {
-        num_owners   => scalar( uniq map $_->{owner},               @$perms ),
-        num_comaints => scalar( uniq map @{ $_->{co_maintainers} }, @$perms ),
+        owner_count => scalar( uniq map $_->{owner}, @$perms ),
+        comaint_count =>
+            scalar( uniq map @{ $_->{co_maintainers} }, @$perms ),
     } );
 }
 
