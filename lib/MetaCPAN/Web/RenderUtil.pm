@@ -48,7 +48,7 @@ sub filter_html {
             table  => [ qw( border cellspacing cellpadding align ), ],
             tbody  => [],
             th     => [],
-            td     => [],
+            td     => [qw( colspan rowspan )],
             tr     => [],
             u      => [],
             ul     => [ { id => qr/^index$/ } ],
