@@ -2,6 +2,7 @@
 
 <h1>Module Permissions for <% search_term %></h1>
 
+<% FOR permission IN permissions %>
 <p>
   <a href="/pod/<% permission.module_name %>"><% permission.module_name %></a> is owned by <a href="/author/<% permission.owner %>"><% permission.owner %></a>.
 </p>
@@ -15,3 +16,4 @@
     <li><a href="/author/<% co_maintainer %>"><% co_maintainer %></a></li>
   <% END %>
 </ul>
+<% END %>
