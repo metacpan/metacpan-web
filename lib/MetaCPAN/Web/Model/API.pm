@@ -76,7 +76,11 @@ sub ACCEPT_CONTEXT {
         $self = $self->new(
             %$self,
             request_url => $r->uri,
-            request_id  => $r->env->{'MetaCPAN::Web.request_id'},
+            (
+                $r->env
+                ? ( request_id => $r->env->{'MetaCPAN::Web.request_id'}, )
+                : ()
+            ),
         );
     }
     return $self;
