@@ -2,8 +2,7 @@ Title: Source code permalinks are here
 ------------------------------
 Date: 2020-03-29T00:00:00
 
-Versioned permalinks from source code pages are [now available]
-(https://twitter.com/metacpan/status/1244677954275336200)
+Versioned permalinks from source code pages are [now available](https://twitter.com/metacpan/status/1244677954275336200)
 
 Title: Rendering .md files
 ------------------------------
