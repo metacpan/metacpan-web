@@ -23,6 +23,9 @@ To clear a specific URL use:
 
 =cut
 
+use File::Basename ();
+use File::Spec ();
+use lib File::Spec->catdir(File::Basename::dirname(__FILE__), File::Spec->updir, 'lib');
 use MetaCPAN::Web;
 use Getopt::Long::Descriptive;
 
