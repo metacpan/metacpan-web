@@ -33,7 +33,7 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
     }
 
     $c->stash( {
-        template => 'lab/dependencies.html',
+        template => 'lab/dependencies.tx',
         module   => $module,
         data     => $data,
     } );
@@ -67,7 +67,7 @@ sub dashboard : Local : Args(1) {
     $c->stash( {
         pauseid  => $pauseid,
         report   => $report,
-        template => 'lab/dashboard.html',
+        template => 'lab/dashboard.tx',
     } );
 }
 

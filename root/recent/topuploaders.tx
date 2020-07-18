@@ -1,0 +1,21 @@
+%%  cascade base::recent {
+%%      title => $title || "CPAN Top Uploaders",
+%%  }
+%%  override content -> {
+<div class="content toplists row">
+%%  for $authors -> $author {
+<div class="entry col-sm-6 col-md-3">
+    <div class="gravatar">
+        <a href="/author/[% $author.pauseid %]">
+            <img src="[% gravatar_image($author, 75) %]" class="author-img" style="width: 75px; height: 75px">
+        </a>
+    </div>
+    <strong class="pauseid">
+        <a rel="author" href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a>
+    </strong>
+    <span class="name" title="[% $author.asciiname %]">[% $author.name %]</span>
+    <strong class="count">[% $author.releases %] release[% if $author.releases > 1 { %]s[% } %]</strong>
+</div>
+%%  }
+</div>
+%%  }

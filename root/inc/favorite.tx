@@ -1,0 +1,13 @@
+<div id="[% $release.distribution %]-fav" class="logged_in">
+<form action="/account/favorite/add" style="display: inline" onsubmit="return favDistribution(this)">
+    <input type="hidden" name="remove" value="0">
+    <input type="hidden" name="release" value="[% $release.name %]">
+    <input type="hidden" name="author" value="[% $release.author %]">
+    <input type="hidden" name="distribution" value="[% $release.distribution %]">
+    <button type="submit" class="favorite[% if $favorites { %] highlight[% } %]"><span>[% $favorites %]</span> ++</button>
+</form>
+</div>
+<div class="logged_out">
+<a href="" onclick="alert('Please sign in to add favorites'); return false" class="favorite[% if $favorites { %] highlight[% } %]">
+<span>[% $favorites %]</span> ++</a>
+</div>

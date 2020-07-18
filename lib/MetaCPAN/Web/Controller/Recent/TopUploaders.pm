@@ -39,8 +39,8 @@ sub topuploaders : Private {
         ],
         took     => $data->{took},
         total    => $data->{total},
-        template => 'recent/topuploaders.html',
         range    => $range,
+        template => 'recent/topuploaders.tx',
     } );
 }
 

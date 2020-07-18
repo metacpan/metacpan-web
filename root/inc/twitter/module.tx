@@ -1,0 +1,5 @@
+<meta name="twitter:card"        content="summary" />
+<meta name="twitter:url"         content="[% $page_url() %]" />
+<meta name="twitter:title"       content="[% $module.documentation %]" />
+<meta name="twitter:description" content="[% $module.abstract %]" />
+<meta name="twitter:site"        content="metacpan" />

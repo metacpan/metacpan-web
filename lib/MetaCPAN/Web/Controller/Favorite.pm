@@ -22,8 +22,8 @@ sub recent : Local : Args(0) {
         recent          => $data->{favorites},
         took            => $data->{took},
         pageset         => $pageset,
-        template        => 'favorite/recent.html',
         favorite_type   => 'recent',
+        template        => 'favorite/recent.tx',
     } );
 }
 
@@ -37,7 +37,7 @@ sub leaderboard : Local : Args(0) {
         leaders       => $data->{leaderboard},
         took          => $data->{took},
         total         => $data->{total},
-        template      => 'favorite/leaderboard.html',
+        template      => 'favorite/leaderboard.tx',
         favorite_type => 'leaderboard',
     } );
 }

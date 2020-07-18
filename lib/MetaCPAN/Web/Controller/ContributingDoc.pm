@@ -55,7 +55,7 @@ sub get : Private {
         }
 
         $c->stash( {
-            template => 'contributing_not_found.html'
+            template => 'contributing_not_found.tx',
         } );
         $c->response->status(404);
     }

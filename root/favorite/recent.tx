@@ -1,0 +1,9 @@
+%%  cascade base::recent {
+%%      title     => $title || "Recent Favorites",
+%%  }
+%%  override content -> {
+<div class="content">
+    %%  include inc::favorite_table { favorites => $recent, per_day => 1 }
+    %%  include inc::pager
+</div>
+%%  }

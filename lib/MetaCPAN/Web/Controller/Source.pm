@@ -36,12 +36,12 @@ sub index : Path : Args {
         $self->add_cache_headers( $c, $module );
 
         $c->stash( {
-            template  => 'browse.html',
             files     => $files,
             author    => shift @module,
             release   => shift @module,
             directory => \@module,
             maturity  => $module->{maturity},
+            template  => 'browse.tx',
         } );
     }
     elsif ( exists $source->{raw} ) {
@@ -98,7 +98,7 @@ sub content : Private {
     $c->res->last_modified( $file->{date} );
     $c->stash( {
         file                => $file,
-        template            => 'source.html',
+        template            => 'source.tx',
         suppress_stickeryou => 1,
     } );
 }

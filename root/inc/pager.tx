@@ -1,0 +1,38 @@
+%%  if $pageset && $pageset.total_entries {
+    %%  if $pageset.last_page > 1 {
+<div class="text-center">
+  <ul class="pagination">
+    <li class="[% if !$pageset.previous_page { 'disabled' } %]">
+      <a href="[% $page_url({ p => $pageset.previous_page }) %]">«</a>
+    </li>
+
+    %%  for $pageset.pages_in_set -> $page_num {
+    <li [% if $page_num == $pageset.current_page { %] class="active"[% } %]>
+      <a href="[% $page_url({ p => $pageset.current_page }) %]">[% $page_num %]</a>
+    </li>
+    %%  }
+
+    <li class="[% if !$pageset.next_page { 'disabled' } %]">
+      <a href="[% $page_url({ p => $pageset.next_page }) %]">»</a>
+    </li>
+  </ul>
+</div>
+    %%  }
+
+<div class="text-center">
+  <ul class="pagination">
+    <li class="disabled"><a>Results per page:</a></li>
+    %%  for [10, 20, 50, 100, 200, 500] -> $page_size {
+      <li [% if $page_size == $pageset.entries_per_page { %] class="active"[% } %]>
+        <a href="[% $page_url({ p => $pageset.current_page, size => $page_size}) %]">[% $page_size %]</a>
+      </li>
+    %%  }
+  </ul>
+</div>
+
+<div class="text-center smaller">
+    [% $pageset.total_entries | format_number %]
+    [% pluralize("result", $pageset.total_entries) %]
+    [% if $took { %] ([% $took / 1000 %] seconds)[% } %]
+</div>
+%%  }

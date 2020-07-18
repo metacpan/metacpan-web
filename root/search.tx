@@ -1,0 +1,68 @@
+%%  cascade base::search {
+%%      title => $title || 'Search for "' ~ $search_query ~ '"',
+%%  }
+%%  override content -> {
+<div class="content search-results">
+%% if $authors.total {
+  <div class="author-results">
+    <ul class="authors clearfix">
+    %% for $authors.authors -> $author {
+      <li>
+        <a href="/author/[% $author.id %]" title="Author page for [% $author.name %]">
+          <img src="[% gravatar_image($author, 30) %]">
+          [% $author.name %] ([% $author.pauseid %])
+        </a>
+      </li>
+    %% }
+    </ul>
+  </div>
+%% }
+
+%% for $results -> $group {
+  %% my $first= $group.hits.0;
+  <div class="module-result">
+    <h3>
+      %% include inc::link_to_file { file => $first };
+      %% if $first.abstract { ' - ' ~ $first.abstract }
+      %% include inc::river_gauge { distribution => $first.distribution, river => $group.river };
+      %% include inc::favorite { release => $first, favorites => $release.favorites };
+    </h3>
+    %%  if $first.description {
+    <p class="description">[% $first.description.substr(0, 250) ~ '...' %]</p>
+    %%  }
+    <a class="author" href="/author/[% $first.author | uri %]">[% $first.author %]</a><a href="/release/[% if $first.status == 'latest' { $first.distribution } else { $first.author ~ '/' ~ $first.release } %]">/[% $first.release %]</a>
+    -
+    <span class="relatize">[% datetime($first.date).to_http %]</span>
+    %%  if !$single_dist {
+    -
+    <a href="/search?q=dist:[% $first.distribution %]+[% $search_query %]">Search in distribution</a>
+    %%  }
+    <!-- [% $first.score %] -->
+    %%  if $group.hits.size() > 1 {
+    <ul class="inner-results">
+    %%  for $group.hits -> $item {
+      %%  if $~item.is_first { next }
+      %%  if $~item > 3      { last }
+      <li>
+        %%  include inc::link_to_file { file => $item };
+        %%  if $item.abstract {
+        - [% $item.abstract %]
+        %%  }
+      </li>
+      <!-- [% $item.score %] -->
+      %%  }
+      %% if $group.total > 4 {
+      <li>
+        <a href="/search?q=distribution:[% $first.distribution %]+[% $search_query %]">[% $group.total - 4 %] more result[% if $group.total - 4 > 1 { 's' } %] from [% $first.distribution %] »</a>
+      </li>
+      %%  }
+    </ul>
+    %%  }
+  </div>
+%%  }
+
+%% include inc::pager
+
+</div>
+
+%%  }

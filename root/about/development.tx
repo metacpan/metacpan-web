@@ -1,0 +1,105 @@
+%%  cascade base::about::markdown
+%%  override about -> {
+# Development
+
+
+## MetaCPAN Needs You!
+
+Our code base is based on current best practices and modern web technologies.
+Our stack includes Catalyst, Minion, Plack, Elasticsearch, jQuery, Bootstrap
+and NGINX.  We also use Puppet and Ansible for deployment and Docker for
+development VMs.  We have integration with Twitter, GitHub, PAUSE, and Google.
+All code is managed on GitHub and we have an active channel (#metacpan) on
+irc.perl.org.  Try the <a
+href="https://widget01.mibbit.com/?autoConnect=true&server=irc.perl.org&channel=%23metacpan&nick=">mibbit
+web client</a> to access the channel.  The IRC channel has an <a
+href="https://irclog.perlgeek.de/metacpan/">archive</a> as well.
+
+There are many available projects within MetaCPAN which you could take on or
+contribute to and there is also room for you to suggest improvements which you
+would like to make.
+
+The [wishlist](https://github.com/metacpan/metacpan-api/wiki/Wishlist) contains
+(larger) items that we want to 'get around to'.
+The project list is ever growing and subject to change as
+volunteers take items on, but here's a sampling of what we'd love for you to
+consider working on.
+
+## Improve Search
+
+metacpan.org already has workable search functionality, but it could be
+improved a lot.  This is our main pain point.  We need help in the following
+areas:
+
+* Porting our Elasticsearch from 2.4.3 to the latest version
+* Optimizing current searches so that they return results faster
+* Improving the current search to return more relevant results
+* Adding the ability to search on other things, like authors
+* Including TRIAL releases in search results
+
+You do not need to have any working knowledge of Elasticsearch in order to take
+this on.  We are here to point you at the resources you need to be successful
+with this.  Taking this on means you'll learn a lot about Elasticsearch and
+you'll get experience working with a lot of data at once.  These are skills
+which can benefity you greatly in your professional life working in IT.
+
+## Bug Fixes
+
+There are hundreds of outstanding issues waiting to be resolved.  The large
+number of tickets is not indicative of a lack of response on the part of
+MetaCPAN developers (we try to stay on top of them), but it indicates the
+enthusiasm with which people are helping us track ways to improve.  Starting
+with some open issues would be a good way to familiarize yourself with our
+codebase.
+
+
+## API Documentation
+
+Because things traditionally have changed so rapidly, our documentation has
+either not kept up or not been written to completion.  You can help us (and
+many Perl developers) by documenting the API and posting example code for both
+new and experienced MetaCPAN users.
+
+## What Can We Offer you?
+
+It's already clear from the materials above that there are many ways for you to
+make your mark on MetaCPAN, but what can we offer you?  You will have the
+chance to be mentored by experienced (and employed) Perl developers.  We will
+carefully review all of your code and give you constructive (and kind)
+feedback.  We will help you improve your code and your coding practices.
+MetaCPAN is a positive place.   We will help you get from A to B with your
+code, but your work won't be trashed and you won't be insulted. We value all
+contributions and we want every contributor to know that she or he is
+appreciated.  There are some harsh places on the Internet and in Open Source.
+This is not one of them.
+
+You'll have the chance to learn about the technologies as listed in our "stack"
+above.  You will have help and guidance in working with these technologies from
+people who are quite familiar with them.  Your code will deploy on robust
+hardware (think 30+ GB of RAM).  Your code will often deploy within hours or
+even minutes of being submitted.  Your work will immediately be put to the test
+by our many users on our very busy services.  You'll gain experience in NoSQL
+(Elasticsearch), Git, and also in participating in an Open Source project which
+functions as a highly available web service.  You will gain experience not just
+in writing code, but in participating in the full cycle of code deployment,
+skills which are quite valuable in the real world.
+
+If any of this sounds remotely interesting to you, please don't hesitate to get
+in touch.  If you just want to see how you like the project, feel free to get
+involved via GitHub, IRC or both.  We'll guide you through the process and you
+can decide for yourself if it's a good fit for you.  We look forward to hearing
+from you.
+
+A good first read is the "[How to contribute](https://github.com/metacpan/metacpan-web/blob/master/.github/CONTRIBUTING.md)" document.
+
+  Main repositories:
+
+  Front end: [https://github.com/metacpan/metacpan-web](https://github.com/metacpan/metacpan-web)
+
+  API: [https://github.com/metacpan/metacpan-api](https://github.com/metacpan/metacpan-api)
+
+  Swagger docs: [https://fastapi.metacpan.org/static/index.html]
+
+  Example scripts: [https://github.com/metacpan/metacpan-examples](https://github.com/metacpan/metacpan-examples)
+
+%%  }

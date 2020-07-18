@@ -1,0 +1,14 @@
+%%  cascade inc::notification::base {
+%%    title         => 'Why not adopt me?',
+%%    email_subject => 'Adopt ' ~ $module_name ~ '?',
+%%    email_contact => 'the PAUSE module admins',
+%%  }
+%%  override text -> {
+This distribution is up for adoption!
+%%  }
+%%  override email_body -> {
+Hello,
+
+I'm interested in adopting the [% $module_name %] module. If you can grant me the privilege I will release the next version.
+
+%%  }

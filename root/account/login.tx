@@ -1,0 +1,12 @@
+%%  cascade base::account
+%%  override content -> {
+<div class="content account-settings">
+    %%  if $success == "mail_sent" {
+    <p>An email has been sent to the email address associated with the PAUSE account. Please check your inbox and verify your account by visiting the link in the mail.</p>
+    <p>If you do not receive the email, please ensure that you have properly set up email forwarding for your PAUSE account.</p>
+    %%  }
+    %%  else if $error {
+    <p>There has been an error with your request: [% $error %]</p>
+    %%  }
+</div>
+%%  }

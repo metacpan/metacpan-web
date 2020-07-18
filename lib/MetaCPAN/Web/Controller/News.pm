@@ -13,7 +13,10 @@ sub news : Path : Args(0) {
     my $news = path($file)->slurp_utf8;
     $news =~ s/^Title:\s*//gm;
 
-    $c->stash( template => 'news.html', news => $news );
+    $c->stash( {
+        news     => $news,
+        template => 'news.tx',
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

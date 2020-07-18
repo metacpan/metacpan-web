@@ -1,0 +1,59 @@
+%%  cascade base::about {
+%%      title => $title || 'meta::hack',
+%%  }
+%%  override content -> {
+<div class="content about">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>meta::hack</h1>
+      <p class="lead">
+        In December 2019, several MetaCPAN developers came together in Toronto
+        for an invite-only intensive workshop, dubbed meta::hack v4, to do
+        focused maintenance and feature work on MetaCPAN.
+      </p>
+      <p>
+        This event was made possible by the generous donations of sponsors.
+      </p>
+    </div>
+  </div>
+
+  <div class="about-sponsor">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center">Platinum Sponsors</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2 col-xs-12">
+        <a href="https://cpanel.com/" target="_blank" rel="noopener"><img src="/static/images/sponsors/cpanel.png" width="180"></a>
+      </div>
+      <div class="col-sm-10 col-xs-12">
+                  <p>
+<a href="https://cpanel.com/" target="_blank" rel="noopener">cPanel</a> is a web-based control panel for managing a web hosting account. It provides a simple yet powerful interface for managing email accounts, security, domains, databases, and more. cPanel was originally written (in Perl!) by Nick Koston in 1997. cPanel (the company) now employees over 200 people, and Nick is their CEO. They've been using Perl for nearly 20 years now, and have long been supporters of Perl and its community. You may recognise some of their developers who are CPAN authors: Todd Rinaldo (<a href="https://metacpan.org/author/TODDR">TODDR</a>), Xan Hilmisdóttir (<a href="https://metacpan.org/author/XAN">XAN</a>), and others. Their CEO, Nick, still develops in Perl today.
+                  </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center">Silver Sponsors</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2 col-xs-12">
+        <a href="http://www.booking.com/" target="_blank" rel="noopener">
+          <img src="/static/images/sponsors/booking.png" class="img-responsive pull-right">
+        </a>
+      </div>
+      <div class="col-sm-10 col-xs-12">
+        <p>
+          <a href="https://www.booking.com/" target="_blank" rel="noopener">Booking.com</a>
+          <span>B.V., part of the Priceline Group (Nasdaq: PCLN), owns and operates </span><span><a href="https://www.booking.com" target="_blank" rel="noopener">Booking.com</a></span><span>, the world leader in booking accommodations online. Each day, over 1,200,000 room nights are reserved on Booking.com. Booking.com has supported Perl in countless ways over the years, and employs many well-known CPAN authors, including Sawyer X, Philippe Bruhat, Mickey Nasriachi, Rafa&euml;l Garcia-Suarez, Yves Orton, Stevan Little, Graham Knop, Abigail and an awful lot more (you can see a hopefully complete list in the </span><span><a href="https://metacpan.org/source/BOOK/Acme-CPANAuthors-Booking-2016073001/lib/Acme/CPANAuthors/Booking.pm">source</a></span><span>&nbsp;of </span><span><a href="https://metacpan.org/pod/Acme::CPANAuthors::Booking">ACME::CPANAuthors::Booking</a></span><span>).</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+%%  }

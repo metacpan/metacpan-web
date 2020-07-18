@@ -1,0 +1,11 @@
+<meta name="twitter:card"           content="summary" />
+<meta name="twitter:url"            content="[% $page_url() %]" />
+<meta name="twitter:title"          content="[% $author.name %]" />
+<meta name="twitter:description"    content="CPAN Author" />
+<meta name="twitter:site"           content="metacpan" />
+%%  for $author.profile -> $profile {
+    %%  if $profile.name == "twitter" {
+        <meta name="twitter:creator" content="[% $profile.id %]" />
+    %%  }
+%%  }
+<meta name="twitter:image" content="[% gravatar_image($author, 400) %]" />

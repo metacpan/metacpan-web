@@ -44,7 +44,7 @@ sub distribution : Local : Args(1) : Does('Sortable') {
         type_of_required => 'distribution',
         required         => $distribution,
         pageset          => $pageset,
-        template         => 'requires.html'
+        template         => 'requires.tx',
     } );
 }
 
@@ -71,7 +71,7 @@ sub module : Local : Args(1) : Does('Sortable') {
         type_of_required => 'module',
         required         => $module,
         pageset          => $pageset,
-        template         => 'requires.html'
+        template         => 'requires.tx',
     } );
 }
 

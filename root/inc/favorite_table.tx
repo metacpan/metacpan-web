@@ -1,0 +1,46 @@
+%%  for $favorites -> $favorite {
+  %%  my $date = datetime($favorite.date).to_http;
+  %%  my $day = datetime($favorite.date).strftime("%F");
+  %%  my $day_start = $~favorite.is_first ||
+  %%    $per_day && $day != datetime($~favorite.peek_prev.date).strftime("%F");
+  %%  my $day_end = $~favorite.is_last ||
+  %%    $per_day && $day != datetime($~favorite.peek_next.date).strftime("%F");
+
+  %%  if $day_start {
+<table id="author_favorites"
+  %%  if $tablesorter {
+  data-default-sort="[% $default_sort || '0,0' %]"
+  %%  }
+  class="table table-condensed table-striped table-favorites[% if $tablesorter { %] tablesorter[% } %]">
+  <thead>
+    <tr>
+      <th class="release pull-left-phone">[% $author ? "Favorites" : "Distribution" %]</th>
+      <th class="abstract hidden-phone">[% $author ? "Author" : "Favorited By" %]</th>
+      <th class="date">[% $per_day ? datetime($favorite.date).strftime("%A, %e %B %Y") : "Date" %]</th>
+    </tr>
+</thead>
+<tbody>
+  %%  }
+<tr>
+  <td>
+    <strong>
+        <a href="/release/[% $favorite.distribution %]" class="ellipsis" title="[% $favorite.author ~ '/' ~ $favorite.distribution %]">[% $favorite.distribution %]</a>
+    </strong>
+  </td>
+  %%  if $author {
+  <td class="pull-left-phone">
+    <a href="/author/[% $favorite.author %]">[% $favorite.author %]</a>
+  </td>
+  %%  }
+  %%  else {
+  <td class="pull-left-phone">
+    <a href="/author/[% $favorite.clicked_by_author %]">[% $favorite.clicked_by_author %]</a>
+  </td>
+  %%  }
+  <td class="date relatize" sort="[% $date %]">[% $date %]</td>
+</tr>
+  %%  if $day_end {
+</tbody>
+</table>
+  %%  }
+%%  }

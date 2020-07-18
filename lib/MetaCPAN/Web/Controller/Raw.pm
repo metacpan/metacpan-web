@@ -26,7 +26,7 @@ sub index : Path : Args {
         $c->stash( {
             source   => $source->{raw},
             module   => $module,
-            template => 'raw.html'
+            template => 'raw.tx'
         } );
     }
 }

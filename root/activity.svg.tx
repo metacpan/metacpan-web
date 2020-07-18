@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="170" height="22" version="1.1"
+xmlns="http://www.w3.org/2000/svg">
+%%  my $max = $data.max() || 1;
+%%  my $width = (170 / $data.size()).int();
+%%  for $data -> $week {
+%%      my $height = $week / $max * 20;
+<rect x="[% $~week * $width %]"
+      y="[% 20 - $height %]"
+      width="[% $width - 1 %]"
+      height="[% $height %]"
+      style="fill:#36C; fill-opacity:0.3" />
+<rect x="[% $~week * $width %]"
+      y="21"
+      width="[% $width - 1 %]"
+      height="1"
+      style="fill:#36C; fill-opacity:0.6" />
+%%  }
+</svg>

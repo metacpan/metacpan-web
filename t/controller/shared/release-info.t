@@ -176,7 +176,7 @@ test_psgi app, sub {
             $tx->like(
 
                 # "go to" option has no value attr
-                '//select[@name="release"]/option[@value][1]',
+                q[//*[contains-token(@class, 'version-jump')]//select/option[@value][1]],
                 qr/\([A-Z]{3,9} on \d{4}-\d{2}-\d{2}\)$/,
                 'version ends with pause id and date  in common format'
             );
@@ -195,8 +195,8 @@ test_psgi app, sub {
             $tx->like(
                 '//a[starts-with(@href, "https://explorer.metacpan.org/?url")]/@href',
                 $type eq 'module'
-                ? qr!\?url=/module/\w+/${qs_dist}-${version}/.+!
-                : qr!\?url=/release/\w+/${qs_dist}-${version}\z!,
+                ? qr!\?url=%2Fmodule%2F\w+%2F${qs_dist}-${version}%2F.+!
+                : qr!\?url=%2Frelease%2F\w+%2F${qs_dist}-${version}\z!,
                 'explorer link points to module file or release',
             );
 

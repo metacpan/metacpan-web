@@ -1,0 +1,23 @@
+%%  if $plussers.authors.size() or $plussers.others {
+<div class="plussers hidden-phone">
+<div><b>++ed by:</b></div>
+%%  if $plussers.authors.size() {
+<div>
+%%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
+%%  for $plussers.authors.shuffle() -> $plusser {
+    %%  if $~plusser.index >= 5 { last }
+<a class="display-all" href="/author/[% $plusser.pauseid %]"><img src="[% gravatar_image($plusser, 20) %]" title="[% $plusser.pauseid %]" alt="[% $plusser.pauseid %]"></a>
+%%  }
+</div>
+<!-- Display counts of plussers-->
+<div>
+    <a href="/release/[% $plussers.distribution %]/plussers">[% pluralize("%d PAUSE user(s)", $plussers.authors.size()) %]</a>
+</div>
+%%  }
+%%  if $plussers.others {
+<div>
+    [% pluralize("%d non-PAUSE user(s)", $plussers.others) %]
+</div>
+%%  }
+</div>
+%%  }

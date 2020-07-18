@@ -1,0 +1,33 @@
+[%
+my $title = $file.documentation || $file.path;
+
+# If there is pod for this file...
+if $file.documentation || $file.pod_lines.size() || $file.module.map(-> $m { $m.associated_pod ? 1 : 0 }).sum() {
+-%]
+<a href="/pod/[%
+  if !$permalinks {
+    # If it's a PAUSE-indexed module (02packages)...
+    if $file.documentation
+        && $file.authorized
+        && $file.indexed
+        && $file.module.map(-> $m { $m.authorized && $m.indexed }).sum() {
+      # Use /pod/$name.
+      $file.documentation;
+    }
+    else {
+      # Use distribution (version-independent) url.
+      'distribution/' ~ $file.distribution ~ '/' ~ $file.path;
+    }
+  }
+  else {
+    # Else use versioned url.
+    'release/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path;
+  }
+%]">[% $linktext || $title %]</a>
+[%-
+}
+# Else show source.
+else {
+  include inc::link_to_source
+}
+-%]

@@ -1,0 +1,16 @@
+%%  cascade base
+%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_content -> {
+[%-
+for [
+  [ '/tools',             'Tools' ],
+  [ '/pod2html',          'Pod Renderer' ],
+  [ '/lab/dashboard',     'Lab: Dashboard' ],
+  [ '/lab/dependencies',  'Lab: Dependencies' ],
+] -> $l {
+%]
+<li class="[% if $current[$l.0] { 'active' } %]">
+    <a href="[% $l.0 %]">[% $l.1 %]</a>
+</li>
+%%  }
+%%  }
