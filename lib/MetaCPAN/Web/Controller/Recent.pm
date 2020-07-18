@@ -30,11 +30,11 @@ sub index : Path : Args(0) {
     $c->stash( {
         recent    => $data->{releases},
         took      => $data->{took},
-        template  => 'recent.html',
         page      => $page,
         page_size => $page_size,
         pageset   => $pageset,
         filter    => $filter,
+        template  => 'recent.tx',
     } );
 }
 

@@ -1,0 +1,41 @@
+%%  cascade base::release {}
+%%  override page_content -> {
+  <div class="about anchors">
+  %%  block contributing_body | markdown -> {
+
+## Oops! No Contributing guidelines for [% $release.distribution %] found
+
+This distribution doesn't include its own guidelines for contributors
+for this release (yet.)
+
+If you want to contribute, there are some generic guidelines below, but
+please get in touch with the author(s) first, so you don't waste any
+time working on something already being worked on, or if they have
+specific ideas on how to do it.
+
+#### For module authors
+
+Please add a `CONTRIBUTING` or `CONTRIBUTING.md` file, containing a
+short description about how you would like people to contribute, for
+example:
+
+- I prefer to get pull requests rather than patches. Please do pull
+requests on branches.
+- Please add an entry for each change in Changes as well.
+- If it's a significant change, please email me first, so we can discuss
+it, and I can tag it as being worked on.
+
+For larger dists, you can also add a `Contributing.pod` to further
+elaborate on your contributing process; see
+[Moose::Manual::Contributing][moose] as an example.
+
+[moose]: /contributing-to/Moose
+
+#### For module users
+
+Please encourage the module author to add the above file, either through
+posting an issue or contacting them directly.
+
+  %%  }
+  </div>
+%%  }

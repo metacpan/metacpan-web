@@ -90,7 +90,9 @@ sub index : Path : Args(0) {
                     suggest => $suggest,
                 } );
             }
-            $c->stash( template => 'no_result.html' );
+            $c->stash( {
+                template => 'no_result.tx',
+            } );
             $c->detach;
         }
 
@@ -107,7 +109,7 @@ sub index : Path : Args(0) {
             single_dist => !$results->{collapsed},
             authors     => $authors,
             pageset     => $pageset,
-            template    => 'search.html',
+            template    => 'search.tx',
         } );
     }
 }

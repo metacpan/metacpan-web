@@ -1,0 +1,55 @@
+%%  cascade base {
+%%      title => $title || 'Browse ' ~ [$author, $release].merge($directory).join('/'),
+%%  }
+%%  override breadcrumbs -> {
+<div class="breadcrumbs">
+  <a href="/source/[% $author %]/[% $release %]">[% $author %] / [% $release %]</a>
+  %%  for $directory -> $part {
+    %%  my $link = $base ~ '/' ~ $directory.slice(0, $~part).join('/')
+    / [% if $~part.is_last { $part } else { %]<a href="/source/[% $link %]">[% $part %]</a>[% } %]
+  %%  }
+</div>
+%%  }
+%%  override left_nav_content -> {
+  %%  include inc::release_status { maturity => $maturity, banner_class => 'release-banner-source' }
+  <li class="nav-header">Tools</li>
+  <li><a data-keyboard-shortcut="g d" href="/release/[% $author %]/[% $release %]"><i class="fa fa-fw fa-info-circle black"></i>Release Info</a></li>
+  <li><a data-keyboard-shortcut="g a" href="/author/[% $author %]"><i class="fa fa-user fa-fw black"></i>Author</a></li>
+  <li><a href="[% $source_host %]/source/[% [$author, $release].merge($directory).join('/') %]"><i class="fa fa-file-text-o fa-fw black"></i>Raw browser</a></li>
+  <li class="nav-header">Info</li>
+  %%  my $folder_count = $files.map(-> $f { $f.directory ? 1 : 0 }).sum();
+  %%  my $file_count = $files.size() - $folder_count;
+  <li>[% pluralize("%d folder(s)", $folder_count) %]</li>
+  <li>[% pluralize("%d file(s)", $file_count) %]</li>
+%%  }
+%%  override content -> {
+<div class="content">
+<table id="metacpan-file-browse" class="table table-condensed table-striped file-table tablesorter">
+<thead>
+    <tr>
+    <th class="name">Name</th>
+    <th class="documentation">Documentation</th>
+    <th class="size">Size</th>
+    <th class="mtime">Last Modified</th>
+    </tr>
+</thead>
+<tbody>
+%% for $files -> $file {
+<tr>
+  <td class="name" sort="[% ( $file.directory == 1 ? "!" : '' ) ~ $file.name %]"><a href="/source/[% $author %]/[% $release %]/[% $file.path %]" class="[%
+    $file.directory             ? 'silk-folder'
+  : $file.mime.match("perl")    ? 'silk-page-white-code'
+  : $file.mime.match("x-c")     ? 'silk-page-white-c'
+                                : 'silk-page-white'
+%]" title="[% $file.path %]">[% $file.name %]</a></td>
+  <td class="documentation"><strong><a href="/pod/release/[% $author %]/[% $release %]/[% $file.path %]" title="[% $file.path %]" class="ellipsis">[% $file.slop ? $file.documentation ? $file.documentation : $file.name : "" %]</a></strong></td>
+  <!-- [% $file | dump %] -->
+  <td class="size" sort="[% $file.directory ? 0 : $file.stat.size %]">[% $file.directory ? '' : format_bytes($file.stat.size) %]</td>
+  %%  my $date = datetime($file.stat.mtime).to_http;
+  <td class="mtime relatize" nowrap="nowrap" sort="[% $date %]">[% $date %]</td>
+</tr>
+%%  }
+</tbody>
+</table>
+</div>
+%%  }

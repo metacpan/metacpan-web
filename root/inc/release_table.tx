@@ -1,0 +1,35 @@
+%%  for $releases -> $release {
+  %%  my $date = datetime($release.date).to_http;
+  %%  my $day = datetime($release.date).strftime("%F");
+  %%  my $day_start = $~release.is_first ||
+  %%    $per_day && $day != datetime($~release.peek_prev.date).strftime("%F");
+  %%  my $day_end = $~release.is_last ||
+  %%    $per_day && $day != datetime($~release.peek_next.date).strftime("%F");
+
+%%  if $day_start {
+<table [% if $table_id { %] id="[% $table_id %]"[% } %]
+  %%  if $tablesorter {
+  data-default-sort="[% $default_sort || '1,0' %]"
+  %%  }
+  class="table table-condensed table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
+  <thead>
+    <tr>
+      <th class="river-gauge"><span class="sr-only">River gauge</span></th>
+      <th class="name pull-left-phone">Release</th>
+      <th class="hidden-phone invisible no-sort"></th>
+      <th class="date">[% $per_day ? datetime($release.date).strftime("%A, %e %B %Y") : "Uploaded" %]</th>
+    </tr>
+  </thead>
+  <tbody>
+%%  }
+    <tr>
+      <td class="river-gauge" sort="[% $release.river.total || 0 %]">[% include inc::river_gauge { distribution => $release.distribution, river => $release.river } %]</td>
+      <td class="name"><strong><a href="/release/[% $release.status == 'latest' ? $release.distribution : $release.author ~ '/' ~ $release.name %]" class="ellipsis" title="[% $release.author ~ '/' ~ $release.name %]">[% $release.name %]</a></strong></td>
+      <td class="abstract">[% $release.abstract %]</td>
+      <td class="date relatize" sort="[% $date %]">[% $date %]</td>
+    </tr>
+%%  if $day_end {
+  </tbody>
+</table>
+%%  }
+%%  }

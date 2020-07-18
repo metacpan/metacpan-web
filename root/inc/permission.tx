@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <tr>
+    <th>Module ([% $permissions.size() %])</th>
+    <th>Owner ([% $owner_count %])</th>
+    <th>Co-Maintainers ([% $comaint_count %])</th>
+  </tr>
+  %% for $permissions -> $module {
+    <tr>
+      <td>
+        <a href="/pod/[% $module.module_name %]">[% $module.module_name %]</a>
+      </td>
+      <td>
+        <a href="/author/[% $module.owner %]">[% $module.owner %]</a>
+      </td>
+      <td>
+        %%  for $module.co_maintainers -> $co_maintainer {
+          <a href="/author/[% $co_maintainer %]">[% $co_maintainer %]</a>
+        %%  }
+      </td>
+    </tr>
+  %%  }
+</table>

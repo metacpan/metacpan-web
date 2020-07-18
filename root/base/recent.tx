@@ -1,0 +1,44 @@
+%%  cascade base {
+%%      rss       => $rss || 'recent',
+%%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
+%%      title     => $title || 'Recent',
+%%  }
+%%  override left_nav_content -> {
+
+%%  macro sidebar_group -> $selected, $group {
+    %%  for $group -> $entry {
+    <li>
+        %%  if $selected == $entry.0 {
+            <strong>[% $entry.1 %]</strong>
+        %%  }
+        %%  else {
+            <a href="[% $entry.2 %]">[% $entry.1 %]</a>
+        %%  }
+    </li>
+    %%  }
+%%  }
+    <li class="nav-header">Activity</li>
+    <li>
+        %%  include inc::activity { query => $filter || 'l' }
+    </li>
+    <li class="nav-header">Recent Uploads</li>
+    %%  sidebar_group($filter || 'l', [
+    %%      [ "l", "Latest releases",   "/recent" ],
+    %%      [ "n", "New distributions", "/recent?f=n" ],
+    %%  ]);
+    <li class="nav-header">Favorites</li>
+    %%  sidebar_group($favorite_type, [
+    %%      [ "recent",      "Recent Favorites",      "/favorite/recent" ],
+    %%      [ "leaderboard", "Popular Distributions", "/favorite/leaderboard" ],
+    %%  ]);
+    <li class="nav-header">Top Uploaders</li>
+    %%  sidebar_group($range, [
+    %%      [ "weekly", "Weekly",   "/recent/topuploaders/weekly" ],
+    %%      [ "yearly", "Yearly",   "/recent/topuploaders/yearly" ],
+    %%      [ "all",    "All Time", "/recent/topuploaders/all" ],
+    %%  ]);
+    <li class="nav-header">Project Partners</li>
+        <li><a href="https://www.loadview-testing.com/api-testing/">LoadView API Testing</a></li>
+        <li><a href="https://webhostingbuddy.com/wordpress-hosting/">WordPress Hosting Buddy</a></li>
+</ul>
+%%  }

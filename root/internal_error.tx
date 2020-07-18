@@ -1,0 +1,3 @@
+%%  cascade base::error {
+%%      message => $message || 'Internal Server Error',
+%%  }

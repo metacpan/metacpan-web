@@ -1,0 +1,24 @@
+%%  cascade base {
+%%      title     => $title || 'Module permissions for ' ~ $search_term,
+%%  }
+%%  override content -> {
+
+<h1>Module Permissions for [% $search_term %]</h1>
+
+%%  for $permissions -> $permission {
+<p>
+  <a href="/pod/[% $permission.module_name %]">[% $permission.module_name %]</a> is owned by <a href="/author/[% $permission.owner %]">[% $permission.owner %]</a>.
+</p>
+
+<p>
+  This module is also maintained by
+</p>
+
+<ul>
+  %%  for $permission.co_maintainers -> $co_maintainer {
+    <li><a href="/author/[% $co_maintainer %]">[% $co_maintainer %]</a></li>
+  %%  }
+</ul>
+%%  }
+
+%%  }

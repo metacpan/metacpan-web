@@ -1,0 +1,50 @@
+[%-
+    my $bucket = $river.bucket;
+    my $empty  = "#e4e2e2";
+    my $filled = "#7ea3f2";
+-%]
+%%  if !$embed {
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+%%  }
+%%  if defined($bucket) {
+  <svg width="24px"
+       height="15px"
+       version="1.1"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <g>
+      %%# There is some careful attention below to the resulting whitespace
+      %%# after template interpolation, ensuring that the tooltip looks good on
+      %%# both Chrome and Firefox. Please don't adjust it blithely, thanks!
+      <title>
+        [%- -%]
+        River stage [% pluralize("{zero|one|two|three|four|five|flood}", $bucket) %] &#10;
+        %%  if $river.total {
+          • [% $river.immediate %] direct [% pluralize("dependent", $river.immediate) %] &#10;[%- -%]
+          • [% $river.total %] total [% pluralize("dependent", $river.total) %]
+        %%  }
+        %%  else {
+          No dependents
+        %%  }
+      </title>
+
+      %%# 5 bars, 4x15px, 1px apart, colored #e4e2e2 or #7ea3f2
+      %%  for [0, 1, 2, 3, 4] -> $bar {
+      <rect x="[% $bar * 5 %]"  y="0" width="4" height="15" fill="[% $bucket > $bar ? $filled : $empty %]" />
+      %%  }
+    </g>
+  </svg>
+
+%%  }
+%%  else {
+  %% # Chrome (at least) requires a 1x1 svg or it renders as a missing image
+  <svg width="1px" height="1px" version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g>
+      <title>No river data available</title>
+    </g>
+  </svg>
+%% }

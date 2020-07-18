@@ -38,7 +38,7 @@ test_psgi app, sub {
     $tx2->find_value( '//div[contains(@class, "content")]',
         'page has content' );
     $tx2->like(
-        '//div[@class="content about"]',
+        q[//div[contains-token(@class, 'about')]],
         qr/No Contributing guidelines.+found/,
         'content includes "No Contributing guidelines"'
     );

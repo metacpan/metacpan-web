@@ -1,0 +1,27 @@
+%%  cascade base::about::markdown
+%%  override about -> {
+# Missing module ? - why can I not find a specific module?
+
+## Is it in the index?
+
+MetaCPAN uses the [PAUSE](https://pause.perl.org/)-generated
+[02packages.details.txt](https://cpan.metacpan.org/modules/02packages.details.txt)
+file. If it's not in there, then the module author will need to fix this.
+(Authors are usually emailed about this when they upload a distribution).
+
+## Is the distribution POD only with no package?
+
+A distribution must contain a package, even if it is 100% POD. A good example
+of this done correctly is [Catalyst::Manual](/pod/Catalyst::Manual).  Check
+the package declaration in the source of this file.  That's the key to getting
+your pure POD distribution indexed by PAUSE.
+
+## I still think this is a bug
+
+We do have bugs, so this is possible, please help by...
+
+ * Please check existing [issues](https://github.com/metacpan/metacpan-web/issues/)
+ * Create an [issue](https://github.com/metacpan/metacpan-web/issues/new)
+ * Become a [developer](/about/development)
+
+%%  }

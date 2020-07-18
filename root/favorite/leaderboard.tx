@@ -1,0 +1,25 @@
+%%  cascade base::recent {
+%%      title => $title || 'Popular Distributions',
+%%  }
+%%  override content -> {
+<div class="content">
+<table class="table table-condensed table-striped table-releases">
+  <thead>
+    <tr>
+      <th class="position"></th>
+      <th class="name pull-left-phone">Distribution</th>
+      <th class="date"></th>
+    </tr>
+  </thead>
+  <tbody>
+  %%  for $leaders -> $leader {
+    <tr>
+      <td class="number[% if $~leader.index < 5 { " strong" } %]">[% $~leader.index + 1 %]</td>
+      <td class="name"><a href="/release/[% $leader.key %]">[% $leader.key %]</a></td>
+      <td class="number">[% $leader.doc_count %] ++</td>
+    </tr>
+  %%  }
+  </tbody>
+</table>
+</div>
+%%  }

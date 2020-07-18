@@ -16,8 +16,10 @@ sub index : Path : Args(0) {
 
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );
-    $c->stash( { data => $line->{activity}, template => 'activity.xml' } );
-    $c->detach('View::Raw');
+    $c->stash( {
+        data     => $line->{activity},
+        template => 'activity.svg.tx',
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -2,6 +2,8 @@ package MetaCPAN::Web::Controller::Root;
 use Moose;
 use Log::Log4perl::MDC;
 use namespace::autoclean;
+use HTTP::Status ();
+use Try::Tiny;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
@@ -43,7 +45,9 @@ sub index : Path : Args(0) {
     $c->browser_max_age('1h');
     $c->cdn_max_age('1y');
 
-    $c->stash->{template} = 'home.html';
+    $c->stash( {
+        template => 'home.tx',
+    } );
 }
 
 =head2 default
@@ -62,7 +66,7 @@ sub not_found : Private {
     $c->cdn_never_cache(1);
 
     $c->stash( {
-        template     => 'not_found.html',
+        template     => 'not_found.tx',
         search_terms => [ @{ $c->req->args }, @{ $c->req->captures } ],
     } );
     $c->response->status(404);
@@ -72,7 +76,9 @@ sub internal_error : Private {
     my ( $self, $c ) = @_;
     $c->cdn_never_cache(1);
 
-    $c->stash( { template => 'internal_error.html' } );
+    $c->stash( {
+        template => 'internal_error.tx',
+    } );
     $c->response->status(500);
 }
 
@@ -80,7 +86,9 @@ sub forbidden : Private {
     my ( $self, $c ) = @_;
     $c->cdn_never_cache(1);
 
-    $c->stash( { template => 'forbidden.html' } );
+    $c->stash( {
+        template => 'forbidden.tx',
+    } );
     $c->response->status(403);
 }
 
@@ -91,7 +99,9 @@ sub robots : Path("robots.txt") : Args(0) {
     $c->browser_max_age('1d');
     $c->cdn_max_age('1y');
 
-    $c->stash( { template => 'robots.txt' } );
+    $c->stash( {
+        template => 'robots.txt',
+    } );
 }
 
 =head2 end
@@ -100,7 +110,34 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') { }
+sub end : ActionClass('RenderView') {
+    my ( $self, $c ) = @_;
+
+    my @error = @{ $c->error };
+    if (@error) {    # && !$c->debug) {
+        my %stash = %{ $c->stash };
+
+        $c->forward('/internal_error');
+        $c->forward( $c->view );
+        if ( @{ $c->error } != @error ) {
+            %{ $c->stash } = %stash;
+
+            $c->error(0);
+            $c->error( \@error );
+        }
+        else {
+            $c->error(0);
+        }
+    }
+
+    if ( my $status_code = $c->response->status ) {
+        if ( $status_code != 200 ) {
+            $c->{stash}->{status_code} = $status_code;
+            $c->{stash}->{status_message}
+                = HTTP::Status::status_message($status_code);
+        }
+    }
+}
 
 =head1 AUTHOR
 

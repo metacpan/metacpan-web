@@ -1,0 +1,34 @@
+%%  cascade base {
+%%      title => $title || 'MetaCPAN About'
+%%  }
+%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_content -> {
+<li class="[% if $current['about'] { 'active' } %]">
+    <a href="/about">About MetaCPAN</a>
+</li>
+<li class="[% if $current['about/contact'] { 'active' } %]">
+    <a href="/about/contact">Contact</a>
+</li>
+<li class="[% if $current['about/development'] { 'active' } %]">
+    <a href="/about/development">Development</a>
+</li>
+<li class="[% if $current['about/faq'] { 'active' } %]">
+    <a href="/about/faq">FAQ</a>
+</li>
+<li class="[% if $current['about/sponsors'] { 'active' } %]">
+    <a href="/about/sponsors">Sponsors</a>
+</li>
+<li class="[% if $current['about/contributors'] { 'active' } %]">
+    <a href="/about/contributors">Contributors</a>
+</li>
+<li class="[% if $current['about/meta_hack'] { 'active' } %]">
+    <a href="/about/meta_hack">meta::hack</a>
+</li>
+<li class="[% if $current['about/missing_modules'] { 'active' } %]">
+    <a href="/about/missing_modules">Missing Modules</a>
+</li>
+<li class="[% if $current['about/metadata'] { 'active' } %]">
+    <a href="/about/metadata">Distribution Metadata</a>
+</li>
+</ul>
+%%  }

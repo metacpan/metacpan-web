@@ -1,8 +1,0 @@
-<%
-    path = ['source', file.author, file.release, file.path].join('/');
-    IF file.module_name;
-        path = path _  '#P' _ file.module_name;
-    END
--%>
-<a href="/<% path %>"><% linktext || file.module_name || file.path %></a>
-<%- -%>

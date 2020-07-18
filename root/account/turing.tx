@@ -1,0 +1,32 @@
+%%  cascade base::account
+%%  override content -> {
+<div class="content account-settings">
+    %%  if $error {
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><strong>Error</strong></h4>
+      The answer was not correct. Please try again..
+    </div>
+    %%  }
+    %%  if $success {
+    <div class="alert alert-success">
+      <h4 class="alert-heading"><strong>Success</strong></h4>
+      Thank you.
+    </div>
+    <a href="[% $referer %]">Continue browsing</a>
+    %%  }
+    %%  else {
+    <fieldset><legend>Verify Account</legend>
+        <p>Please solve the Captcha. This will allow you to ++ modules. You'll have to complete this test only once.</p><br />
+        <form id="metacpan-recaptcha-form" method="POST">
+            <script>
+              function recaptchaSuccess ( response ) {
+                document.getElementById('metacpan-recaptcha-form').submit();
+              }
+            </script>
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <div class="g-recaptcha" data-sitekey="[% $recaptcha_key %]" data-callback="recaptchaSuccess"></div>
+        </form>
+    </fieldset>
+    %%  }
+</div>
+%%  }

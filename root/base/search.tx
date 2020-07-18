@@ -1,0 +1,9 @@
+%%  cascade base
+%%  override left_nav_content -> {
+    <li class="nav-header">Something missing?</li>
+    <li>
+        <div>
+          <a href="/about/missing_modules">Find out why</a>
+        </div>
+    </li>
+%%  }

@@ -103,6 +103,28 @@ sub tx {
             return $result;
         }
     );
+
+    # contains-token is from XPath 3.1, useful for class matching
+    $tx->xpc->registerFunction(
+        'contains-token',
+        sub {
+            my ( $nodelist, $token ) = @_;
+            my $result = XML::LibXML::NodeList->new;
+
+            s/\A\s+//, s/\s+\z// for $token;
+            if ( length $token ) {
+                for my $node ( $nodelist->get_nodelist ) {
+                    my @tokens = split /\s+/, $node->nodeValue;
+                    if ( grep $_ eq $token, @tokens ) {
+                        $result->push($node);
+                    }
+                }
+            }
+
+            return $result;
+        }
+    );
+
     return $tx;
 }
 

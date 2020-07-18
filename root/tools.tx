@@ -1,0 +1,36 @@
+%%  cascade base::tools
+%%  override content -> {
+<div class="content">
+  <h2 class="content-head">Assorted Tools</h1>
+
+  <ul>
+    <li><a href="/pod2html">Pod Renderer</a> - Render arbitrary Pod to HTML through MetaCPAN.</li>
+  </ul>
+
+
+  <h2 class="content-head">MacOS</h1>
+
+  <ul>
+    <li><a href="https://github.com/oalders/alfred-metacpan-workflow" rel="nofollow">Alfred MetaCPAN Workflow (written in Go)</a></li>
+    <li><a href="https://github.com/2shortplanks/alfred-metacpan" rel="nofollow">Alfred MetaCPAN Workflow (written in Perl)</a></li>
+    <li><a href="https://github.com/ssoriche/launchbar-metacpan/releases" rel="nofollow">LaunchBar MetaCPAN action</a></li>
+  </ul>
+
+  <h2 class="content-head">API Integrations</h1>
+
+  <ul>
+    <li><a href="http://mapofcpan.org/" rel="nofollow">Map of CPAN</a></li>
+    <li><a href="https://gh.metacpan.org/" rel="nofollow">GitHub Meets CPAN</a></li>
+    <li><a href="https://www.perlmodules.net/" rel="nofollow">PerlModules.net</a></li>
+  </ul>
+
+  <h2 class="content-head">Lab - Experimental features <span style="color:#FF0000">TESTING ZONE</span></h2>
+
+  <p>Try them and <a href="https://github.com/metacpan/metacpan-web/issues">let us know</a> how to improve them.</p>
+
+  <ul>
+    <li><a href="/lab/dashboard">Dashboard</a> - a personalised dashboard (for logged in authors)</li>
+    <li><a href="/lab/dependencies">Dependencies</a> - list the dependencies of a module</li>
+  </ul>
+</div>
+%%  }

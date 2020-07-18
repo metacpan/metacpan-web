@@ -1,0 +1,117 @@
+%%  cascade base::release {
+%%  }
+%%  override page_content -> {
+%%  if $changes.size() {
+%%    macro change_group ->($group) {
+<ul>
+  %%  for $group -> $entry {
+  <li class="[% if $entry.entries.size() { %]group-header[% } %]"><span class="change-entry">[% $entry.html | mark_raw %]</span>
+    %%  if $entry.entries.size() {
+    %%    change_group($entry.entries);
+    %%  }
+  </li>
+  %%  }
+</ul>
+%%  }
+<div id="last-changes" class="well collapsed">
+  <div id="last-changes-container">
+    %%  for $changes -> $rel {
+    <h2 id="whatsnew">Changes for version [% $rel.version %][% if $rel.date && datetime($rel.date) { %] - [% datetime($rel.date).to_ymd() } if $rel.trial { %] (TRIAL RELEASE)[% } %]</h2>
+    <div class="change-entries">
+      %%  change_group($rel.entries);
+    </div>
+    %%  }
+  </div>
+  <button id="last-changes-toggle" class="btn-link" onclick="$('#last-changes').toggleClass('collapsed'); return false;">[ <span class="hide-more">Show less</span><span class="show-more">Show more</span> ]</button>
+</div>
+%%  }
+
+%%  if $documentation.size() {
+<div class="file-group release-documentation">
+  <h2 id="docs">Documentation</h2>
+  %%  for $documentation -> $module {
+  <div class="release-row">
+    <div class="left">
+      %%  include inc::link_to_file { file => $module };
+    </div>
+    <div class="right">
+      %%  if $module.abstract { $module.abstract }
+    </div>
+  </div>
+  %%  }
+</div>
+%%  }
+
+%%  if $modules.size() {
+<div class="file-group release-modules">
+  <h2 id="modules">Modules</h2>
+  %%  for $modules -> $module {
+  <div class="release-row">
+    <div class="left">
+      %%  include inc::link_to_file { file => $module };
+    </div>
+    <div class="right">
+      %%  if $module.abstract { $module.abstract }
+      %%  if $mark_unauthorized_releases && $module.indexed && !$module.authorized {
+      <em class="unauthorized">UNAUTHORIZED</em>
+      %%  }
+    </div>
+  </div>
+  %%  }
+</div>
+%%  }
+
+%%  if $provides.size() {
+<div class="file-group release-provides">
+  <h2 id="provides">Provides</h2>
+  %%  for $provides -> $module {
+  <div class="release-row">
+    <div class="left">
+      %%  include inc::link_to_source { file => $module };
+    </div>
+    <div class="right">
+      in [% $module.path %]
+      %%  if $mark_unauthorized_releases && $module.indexed && !$module.authorized {
+      <em class="unauthorized">UNAUTHORIZED</em>
+      %%  }
+    </div>
+  </div>
+  %%  }
+</div>
+%%  }
+
+%%  if $examples.size() {
+<div class="file-group release-examples">
+  <h2 id="examples">Examples</h2>
+  <ul>
+    %%  for $examples -> $file {
+    <li>
+      %%  if $file.path.match(rx('\.pod')) {
+      %%    include inc::link_to_file { file => $file, linktext => $file.path };
+      %%  }
+      %%  else {
+      %%    include inc::link_to_source { file => $file };
+      %%    if $file.pod_files.size() {
+      %%      include inc::link_to_file { file => $file, linktext => 'pod' };
+      %%    }
+      %%  }
+    </li>
+    %%  }
+  </ul>
+</div>
+%%  }
+
+%%  if $other.size() {
+<div class="file-group release-other-files">
+  <h2 id="other">Other files</h2>
+  <ul>
+    %%  for $other -> $file {
+    <li>
+      %%  include inc::link_to_file { file => $file, linktext => $file.path };
+    </li>
+    %%  }
+  </ul>
+</div>
+%%  }
+
+%%  }

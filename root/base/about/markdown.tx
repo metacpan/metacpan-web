@@ -1,0 +1,6 @@
+%%  cascade base::about
+%%  override content -> {
+<div class="content about anchors">
+%%  block about | markdown -> { }
+</div>
+%%  }

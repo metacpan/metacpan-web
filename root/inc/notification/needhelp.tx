@@ -1,0 +1,14 @@
+%%  cascade inc::notification::base {
+%%    title         => 'Looking for help!',
+%%    email_subject => 'Looking for help with ' ~ $module_name ~ '?',
+%%    email_contact => 'them',
+%%  }
+%%  override text -> {
+The maintainer of this distribution is looking for people to help them improve this module!
+%%  }
+%%  override email_body -> {
+Hello,
+
+I'm willing to provide some time to help you with new feature for the [% $module_name %] module, if you can let me know what you would like to be done.
+
+%%  }

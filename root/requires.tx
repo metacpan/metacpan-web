@@ -1,0 +1,28 @@
+%%  cascade base {
+%%      title => $title || "Distributions which depend on " ~ required,
+%%  }
+%%  override left_nav_content -> {
+<li class="nav-header">Activity</li>
+<li>
+%%  include inc::activity { query => type_of_required ~ "=" ~ required }
+</li>
+%%  }
+%%  override content -> {
+
+<div class="content">
+    <strong>Distributions Which Depend on <a href="/[% $type_of_required == 'distribution' ? 'release' : 'module' %]/[% $required %]">[% $required %]</a></strong>
+    %%  if $releases.size() {
+        %%  include inc::release_table {
+        %%      header          => 1,
+        %%      tablesorter     => 1,
+        %%      default_sort    => '2,1',
+        %%      table_id        => 'revdep_releases',
+        %%  };
+        %%  include inc::pager;
+    %%  }
+    %%  else {
+    <p>No distributions depending on <a href="/[% $type_of_required == 'distribution' ? 'release' : 'module' %]/[% $required %]">[% $required %]</a> could be found</p>
+    %%  }
+</div>
+
+%%  }

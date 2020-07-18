@@ -1,0 +1,6 @@
+%%  cascade inc::notification::base {
+%%    title => 'Deprecated.',
+%%  }
+%%  override text -> {
+The maintainer of this module has indicated that the module is deprecated and no longer suitable for use.
+%%  }
