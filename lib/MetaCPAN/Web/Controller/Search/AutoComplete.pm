@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
-use Cpanel::JSON::XS ();
 use List::Util qw(uniq);
 
 use namespace::autoclean;
@@ -28,9 +27,10 @@ sub index : Path : Args(0) {
         ),
     );
 
-    $c->res->content_type('application/json');
-    $c->res->body( Cpanel::JSON::XS::encode_json(
-        { suggestions => \@results } ) );
+    $c->stash( {
+        current_view => 'JSON',
+        json         => { suggestions => \@results },
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

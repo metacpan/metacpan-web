@@ -8,16 +8,41 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub auto : Private {
     my ( $self, $c ) = @_;
 
-    $c->cdn_never_cache(1);
+    $c->res->header( 'Vary', 'Cookie' );
 
     if ( my $token = $c->token ) {
         $c->authenticate( { token => $token } );
     }
-    unless ( $c->user_exists ) {
-        $c->forward('/forbidden');
+    my $attrib = $c->action->attributes;
+    my $auth   = $attrib->{Auth} && $attrib->{Auth}[0] // 1;
+    if ( $c->user_exists ) {
+        $c->cdn_never_cache(1);
+
+        if ( my $user_id = $c->user && $c->user->id ) {
+            $c->add_surrogate_key("user/$user_id");
+        }
+        $c->stash( { user => $c->user } );
     }
-    $c->stash( { user => $c->user } );
-    return $c->user_exists;
+    elsif ($auth) {
+        $c->forward('/forbidden');
+        return 0;
+    }
+    return 1;
+}
+
+sub login_status : Local : Args(0) : Auth(0) {
+    my ( $self, $c ) = @_;
+    $c->stash( { current_view => 'JSON' } );
+    delete $c->stash->{user};
+
+    if ( $c->user_exists ) {
+        $c->stash->{json}{logged_in} = \1;
+        $c->forward('/account/favorite/list_as_json');
+    }
+    else {
+        $c->stash->{json}{logged_in} = \0;
+        $c->cdn_max_age('30d');
+    }
 }
 
 sub logout : Local : Args(0) {

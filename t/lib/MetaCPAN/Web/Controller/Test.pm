@@ -15,7 +15,7 @@ sub _json_body {
 sub json_echo : Local {
     my ( $self, $c ) = @_;
 
-    $c->stash->{echo} = $self->_json_body($c);
+    $c->stash->{json}{echo} = $self->_json_body($c);
 
     $c->detach( $c->view('JSON') );
 }

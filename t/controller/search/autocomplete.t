@@ -22,8 +22,11 @@ test_psgi app, sub {
         ok( my $res = $cb->( GET "/search/autocomplete?q=$test" ),
             "GET /search/autocomplete?q=$test" );
         is( $res->code, 200, 'code 200' );
-        is( $res->header('content-type'),
-            'application/json', 'Content-type is application/json' );
+        is(
+            $res->header('content-type'),
+            'application/json; charset=utf-8',
+            'Content-type is application/json'
+        );
         ok( my $json = eval { decode_json( $res->content ) }, 'valid json' );
         is( ref $json, 'HASH', 'isa hashref' );
         my $module = $json->{suggestions}->[0];

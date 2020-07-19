@@ -580,9 +580,13 @@ function showUserData(fav_data) {
 function getFavDataFromServer() {
     $.ajax({
         type: 'GET',
-        url: '/account/favorite/list_as_json',
+        url: '/account/login_status',
         success: function(databack) {
-            showUserData(databack);
+            if (databack.logged_in) {
+                showUserData(databack);
+            } else {
+                $('.logged_out').css('display', 'inline');
+            }
         },
         error: function() {
             // Can't be logged in, should be getting 403

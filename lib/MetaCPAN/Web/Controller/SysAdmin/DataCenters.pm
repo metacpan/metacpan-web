@@ -27,7 +27,7 @@ sub list_datacenters : Path('list') : Args(0) GET {
     $c->cdn_max_age('1d');
     $c->browser_max_age('1d');
 
-    $c->stash( { success => $datacenters } );
+    $c->stash( { json => { success => $datacenters } } );
     $c->detach( $c->view('JSON') );
 }
 
