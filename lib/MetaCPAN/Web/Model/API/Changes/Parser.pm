@@ -3,10 +3,9 @@ package MetaCPAN::Web::Model::API::Changes::Parser;
 use Moose;
 use version qw();
 
-my %months;
-my $m = 0;
-$months{$_} = ++$m for qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
-my $months = join '|', keys %months;
+my @months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+my %months = map +( $months[$_] => $_ ), 0 .. $#months;
+my $months = join '|', @months;
 
 our $W3CDTF_REGEX = qr{
     (\d\d\d\d) # Year
@@ -141,6 +140,7 @@ sub parse {
                     if ( $month =~ /\D/ ) {
                         $date =~ s{$month}{sprintf "%02d", $months{$month}}e;
                     }
+                    $date =~ s{/}{-}g;
                     $date =~ s{ }{T};
 
                     # Add UTC TZ if date ends at H:M, H:M:S or H:M:S.FS
