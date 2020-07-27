@@ -21,8 +21,6 @@ sub add : Local : Args(0) {
     $c->purge_author_key( $data->{author} )     if $data->{author};
     $c->purge_dist_key( $data->{distribution} ) if $data->{distribution};
 
-    $c->purge_surrogate_key( $self->_cache_key_for_user($c) );
-
     if ( $c->req->looks_like_browser ) {
         $c->res->redirect(
               $res->{error}
@@ -31,9 +29,9 @@ sub add : Local : Args(0) {
         );
     }
     else {
-        $c->stash( { success => $res->{error} ? \0 : \1 } );
         $c->res->code(400) if ( $res->{error} );
-        $c->detach( $c->view('JSON') );
+        $c->stash->{json}{success} = $res->{error} ? \0 : \1;
+        $c->stash( { current_view => 'JSON' } );
     }
 }
 
