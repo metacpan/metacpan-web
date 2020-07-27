@@ -69,8 +69,11 @@ sub identities : Local : Args(0) {
 sub profile : Local : Args(0) {
     my ( $self, $c ) = @_;
     my $author = $c->model('API::User')->get_profile( $c->token )->get;
-    $c->stash(
-        $author->{error} ? { no_profile => 1 } : { author => $author } );
+    $c->stash( {
+        ( $author->{error} ? ( no_profile => 1 ) : ( author => $author ) ),
+        profiles => $c->model('API::Author')->profile_data,
+    } );
+
     my $req = $c->req;
     return unless ( $req->method eq 'POST' );
 
@@ -117,10 +120,6 @@ sub profile : Local : Args(0) {
     $data->{extra} = $req->param('extra') ? $req->json_param('extra') : undef;
 
     $data->{donation} = undef unless ( $req->params->{donations} );
-
-    $c->stash( {
-        profiles => $c->model('API::Author')->profile_data,
-    } );
 
     # validation
     my @form_errors;
