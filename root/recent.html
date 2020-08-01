@@ -14,7 +14,7 @@
 releases = [];
 FOREACH release IN recent;
   date = datetime(release.date);
-  day = date.strftime("%A, %u %B %Y");
+  day = date.strftime("%A, %e %B %Y");
   IF day != last;
     IF releases.size;
       INCLUDE inc/release-table.html releases = releases day = last;
