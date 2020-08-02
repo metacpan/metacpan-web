@@ -12,6 +12,7 @@ sub releases {
 
 sub files {
     my ( $self, $source, $target ) = @_;
+    $_ //= '' for $source, $target;
     my @source = split( /\//, $source );
     $source
         = $self->digest( shift @source, shift @source,
