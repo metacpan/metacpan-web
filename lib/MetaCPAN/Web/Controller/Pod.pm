@@ -131,6 +131,7 @@ sub view : Private {
             url_prefix => '/pod/',
         }
     )->get;
+    $c->detach('/not_found') if ( $pod->{code} || 0 ) > 399;
 
     my $pod_html = filter_html( $pod->{raw}, $data );
 
