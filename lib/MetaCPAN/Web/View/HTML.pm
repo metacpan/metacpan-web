@@ -113,6 +113,7 @@ Template::Alloy->define_vmethod(
     'text',
     datetime => sub {
         my $date = shift;
+        return undef if !defined $date;
         if ( ref $date ) {
             if ( !$date->DOES('MetaCPAN::Web::Role::Date') ) {
                 $date->with::roles('MetaCPAN::Web::Role::Date');
