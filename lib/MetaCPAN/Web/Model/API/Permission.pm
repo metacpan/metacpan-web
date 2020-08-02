@@ -87,6 +87,7 @@ sub _permissions_to_notification {
 
             for my $notif (@notif) {
                 my @emails = map $emails{$_}, @{ $notif->{authors} };
+                @emails = map ref($_) ? @$_ : $_, @emails;
                 unshift @emails, 'modules@perl.org'
                     if $notif->{type} eq 'ADOPTME' or !@emails;
                 $notif->{emails} = \@emails;

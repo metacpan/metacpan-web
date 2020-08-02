@@ -142,7 +142,9 @@ subtest 'notification_type' => sub {
                 authors => [
                     map +( {
                         pauseid => $_,
-                        email   => lc($_) . '@example.com',
+                        email   => /one/i
+                        ? [ lc($_) . '@example.com' ]
+                        : lc($_) . '@example.com',
                     } ),
                     @{ decode_json( $req->content )->{id} }
                 ]
