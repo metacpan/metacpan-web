@@ -6,18 +6,18 @@ use MetaCPAN::Web::Test;
 use Cpanel::JSON::XS qw( decode_json );
 
 my @tests = (
-    [ moose           => 'Moose' ],
-    [ 'DBIx'          => 'DBIx::Class' ],
-    [ "Acme::\x{1dd}" => "Acme::\x{1dd}m\x{254}A" ],
+    [ moose           => 'Moose',                  1 ],
+    [ 'DBIx'          => 'DBIx::Class',            1 ],
+    [ "Acme::\x{1dd}" => "Acme::\x{1dd}m\x{254}A", 0 ],
 );
 
 test_psgi app, sub {
     my $cb = shift;
-    foreach my $pair (@tests) {
+    foreach my $tuple (@tests) {
 
         # turn off the utf8 flag to avoid warnings in test output
-        my ( $test, $exp )
-            = map { is_utf8($_) ? encode( 'UTF-8' => $_ ) : $_ } @$pair;
+        my ( $test, $exp, $get_pod )
+            = map { is_utf8($_) ? encode( 'UTF-8' => $_ ) : $_ } @$tuple;
 
         ok( my $res = $cb->( GET "/search/autocomplete?q=$test" ),
             "GET /search/autocomplete?q=$test" );
@@ -48,12 +48,14 @@ test_psgi app, sub {
         # if it's not exact, is it a prefix match?
         like $doc, qr/^\Q$exp\E/i, 'first result is a prefix match';
 
-        ok( $res = $cb->( GET "/pod/$doc" ), "GET $doc" );
-        is( $res->code, 200, 'code 200' );
+        if ($get_pod) {
+            ok( $res = $cb->( GET "/pod/$doc" ), "GET $doc" );
+            is( $res->code, 200, 'code 200' );
 
-        # use ok() rather than like() b/c the diag output is huge if it fails
-        ok( $res->content =~ /$doc/,
-            "/pod/$doc content includes module name '$exp'" );
+         # use ok() rather than like() b/c the diag output is huge if it fails
+            ok( $res->content =~ /$doc/,
+                "/pod/$doc content includes module name '$exp'" );
+        }
     }
 };
 
