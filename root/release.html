@@ -67,13 +67,16 @@
 <%- IF documentation.size %>
 <div class="file-group release-documentation">
   <h2 id="docs">Documentation</h2>
-  <ul>
   <%- FOREACH module IN documentation %>
-  <li>
-    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
-  </li>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-file.html" file = module %>
+    </div>
+    <div class="right">
+    <% IF module.abstract; module.abstract; END %>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 
