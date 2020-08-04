@@ -97,14 +97,17 @@
 <% IF provides.size %>
 <div class="file-group release-provides">
   <h2 id="provides">Provides</h2>
-  <ul>
   <%- FOREACH module IN provides %>
-  <li>
-    <% INCLUDE "inc/link-to-source.html" file = module %> in <% module.path %>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-source.html" file = module %>
+    </div>
+    <div class="right">
+    in <% module.path %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </li>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 
