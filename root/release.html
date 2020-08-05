@@ -67,41 +67,50 @@
 <%- IF documentation.size %>
 <div class="file-group release-documentation">
   <h2 id="docs">Documentation</h2>
-  <ul>
   <%- FOREACH module IN documentation %>
-  <li>
-    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
-  </li>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-file.html" file = module %>
+    </div>
+    <div class="right">
+    <% IF module.abstract; module.abstract; END %>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 
 <%- IF modules.size %>
 <div class="file-group release-modules">
   <h2 id="modules">Modules</h2>
-  <ul>
   <%- FOREACH module IN modules %>
-  <li>
-    <% INCLUDE "inc/link-to-file.html" file = module %><% IF module.abstract %> - <% module.abstract; END %>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-file.html" file = module %>
+    </div>
+    <div class="right">
+    <% IF module.abstract; module.abstract; END %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </li>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 
 <% IF provides.size %>
 <div class="file-group release-provides">
   <h2 id="provides">Provides</h2>
-  <ul>
   <%- FOREACH module IN provides %>
-  <li>
-    <% INCLUDE "inc/link-to-source.html" file = module %> in <% module.path %>
+  <div class="release-row">
+    <div class="left">
+    <% INCLUDE "inc/link-to-source.html" file = module %>
+    </div>
+    <div class="right">
+    in <% module.path %>
     <% IF module.indexed AND NOT module.authorized %><em class="unauthorized">UNAUTHORIZED</em><% END %>
-  </li>
+    </div>
+  </div>
   <%- END %>
-  </ul>
 </div>
 <%- END %>
 

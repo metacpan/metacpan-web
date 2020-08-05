@@ -1,6 +1,21 @@
 .content {
+    .release-documentation,
     .release-modules,
     .release-provides {
+        display: table;
+        div.release-row:nth-child(2n) {
+            background-color: #f5f5f5;
+        }
+        div.release-row {
+            display: table-row;
+            div.left, div.right {
+                display: table-cell;
+            }
+            div.left {
+                font-weight: bold;
+                padding-right: 1em;
+            }
+        }
         .unauthorized {
             color: #f00;
             font-weight: bold;
