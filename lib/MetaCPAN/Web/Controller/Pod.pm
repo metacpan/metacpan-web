@@ -137,16 +137,12 @@ sub view : Private {
 
     my $release = $c->stash->{release};
 
-    #<<<
-    my $canonical = ( $documented_module
+    my $canonical
+        = (    $documented_module
             && $documented_module->{authorized}
-            && $documented_module->{indexed}
-        ) ? "/pod/$documentation"
-        : join(q{/}, q{}, qw( pod distribution ), $release->{distribution},
-            # Strip $author/$release from front of path.
-            @path[ 2 .. $#path ]
-        );
-    #>>>
+            && $documented_module->{indexed} )
+        ? "/pod/$documentation"
+        : "/pod/distribution/$release->{distribution}/$data->{path}";
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');
