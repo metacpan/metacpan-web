@@ -94,6 +94,7 @@ requires 'XML::FeedPP';
 requires 'YAML', '1.15'; # fix dep chain issue
 
 # Test dependencies
+requires 'aliased', '0.34';
 requires 'App::Prove';
 requires 'Code::TidyAll', '>= 0.74';
 requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
