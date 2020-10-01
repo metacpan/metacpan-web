@@ -11,7 +11,7 @@
 
 <!-- vim-markdown-toc -->
 
-# Getting Started
+# Let's get Started
 
 We strongly recommend using [metacpan-docker](https://github.com/metacpan/metacpan-docker).
 This will give you a virtual machine already configured and ready to start developing on.
