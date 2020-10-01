@@ -20,7 +20,7 @@ sub get_object { shift->obj }
 sub store {'Catalyst::Authentication::Plugin::Store::Proxy'}
 
 sub for_session {
-    my $self = shift;
+    my $self    = shift;
     my ($token) = map { $_->{token} }
         grep { $_->{client} eq 'metacpan' } @{ $self->obj->{identity} };
     return $token;

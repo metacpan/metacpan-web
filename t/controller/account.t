@@ -153,9 +153,9 @@ test_psgi app, sub {
                 'city'     => 'city1',
                 'country'  => 'country1',
                 'extra'    => {},
-                'updated' => '2017-02-15T22:18:19',   # set above in $res_body
-                'name'    => "\x{532}\x{561}\x{580}\x{565}\x{582}",
-                'pauseid' => 'FOO',
+                'updated'  => '2017-02-15T22:18:19',  # set above in $res_body
+                'name'     => "\x{532}\x{561}\x{580}\x{565}\x{582}",
+                'pauseid'  => 'FOO',
             },
             '... and the API PUT request contains the right stuff'
         );
