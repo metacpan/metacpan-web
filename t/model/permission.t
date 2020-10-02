@@ -19,7 +19,7 @@ subtest 'notification_type' => sub {
                 co_maintainers => [ 'ONE', 'TWO', 'THREE' ]
             },
             expected => undef,
-            message =>
+            message  =>
                 'co_maintainers passed without "special" co_maintainer existing'
         },
         {

@@ -79,7 +79,7 @@ sub news : Local : Args(0) {
 
         $str =~ s/\A\s*-+//g;
         $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link} = '/news';
+        $e{link}     = '/news';
         $e{fragment} = $a_name;
         $e{author}   = 'METACPAN';
         $str =~ s/^\s*|\s*$//g;
