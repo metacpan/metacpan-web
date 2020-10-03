@@ -53,6 +53,11 @@ sub wrap {
             js/shBrushCPANChanges.js
             js/cpan.js
             js/toolbar.js
+            js/colors/colors.js
+            js/colors/colorPicker.data.js
+            js/colors/colorPicker.js
+            js/colors/jsColor.js
+            js/MetaTheme.js
             js/github.js
             js/dropdown.js
             modules/bootstrap-v3.4.1/js/dropdown.js

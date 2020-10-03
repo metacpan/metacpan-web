@@ -16,7 +16,11 @@ sub index : Path : Args(0) {
 
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );
-    $c->stash( { data => $line->{activity}, template => 'activity.xml' } );
+    $c->stash( {
+        data     => $line->{activity},
+        template => 'activity.xml',
+        color    => $args{color} || '#36C'
+    } );
     $c->detach('View::Raw');
 }
 

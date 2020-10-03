@@ -14,6 +14,9 @@
     <li<% IF req.action == 'account/favorite/list' %> class="active"<% END %>>
         <a href="/account/favorite/list">Favorites</a>
     </li>
+    <li<% IF req.action == 'account/theme' %> class="active"<% END %>>
+        <a href="/account/theme">Theme</a>
+    </li>
     <li>
         <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
     </li>

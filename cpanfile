@@ -92,6 +92,7 @@ requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::FeedPP';
 requires 'YAML', '1.15'; # fix dep chain issue
+requires 'Colouring::In', '0.21';
 
 # Test dependencies
 requires 'App::Prove';

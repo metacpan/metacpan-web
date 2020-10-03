@@ -91,6 +91,11 @@
           });
           ga('send', 'pageview');
         </script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			MetaTheme.load();
+		});
+	</script>
         <% IF twitter_card_inc %>
         <% INCLUDE $twitter_card_inc %>
         <% END %>
@@ -132,6 +137,7 @@
                             <li><a href="/account/identities">Identities</a></li>
                             <li><a href="/account/profile">Profile</a></li>
                             <li><a href="/account/favorite/list">Favorites</a></li>
+                            <li><a href="/account/theme">Theme</a></li>
                             <li>
                                 <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
                             </li>
