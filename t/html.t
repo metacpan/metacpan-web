@@ -11,7 +11,7 @@ my %skip = map { $_ => 1 } (
     'root/account/profile.html', 'root/account/turing.html',
     'root/author.html',          'root/mirrors.html',
     'root/wrapper.html',         'root/about/contributors.html',
-    'root/inc/favorite.html',
+    'root/inc/favorite.html',    'root/account/theme.html'
 );
 
 my $rule = Path::Iterator::Rule->new;

@@ -283,3 +283,106 @@
     }
 }
 
+.onoffswitch {
+    position: relative; width: 90px;
+    display: inline-block;
+    margin-left: 1em;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; 
+    float: left; 
+    width: 50%; 
+    height: 30px; 
+    padding: 0; 
+    line-height: 30px;
+    font-size: 14px; 
+    color: white; 
+    font-family: Trebuchet, Arial, sans-serif; 
+    font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Dark";
+    padding-left: 10px;
+    background-color: rgb(36,36,36); color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Light";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    width: 22px;
+    height: 22px;
+    margin: 6px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 56px;
+    border: 2px solid #999999;
+    border-radius: 22px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+fieldset.inner > input {
+    display: none;
+}
+fieldset.inner > label {
+    width: 100%;
+}
+fieldset.inner {
+    position: relative;
+}
+input:checked ~ label span.arrow {
+    top: -0.5em;
+    transform: rotate(180deg);
+}
+
+fieldset.inner input ~ .row .col-md-10 > .form-group *,
+fieldset.inner input ~ .row .col-md-10 > .form-group {
+    transition: 1s max-height, 1s margin;
+}
+
+fieldset.inner input:checked ~ .row .col-md-10 > .form-group *,
+fieldset.inner input:checked ~ .row .col-md-10 > .form-group {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    float: none;
+    transition: 1s max-height, 1s margin;
+    pointer-events: none;
+}
+
+.inner i.fa.fa-chevron-down {
+    position: absolute;
+    right: 2em;
+    top: 0;
+}
+
+.inner input:checked ~ label i.fa.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+

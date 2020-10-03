@@ -1,850 +1,742 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.6.0">
-    <title></title>
-    <style>
-
-    .onoffswitch {
-    position: relative; width: 90px;
-    display: inline-block;
-    margin-left: 1em;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-    }
-    .onoffswitch-checkbox {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    }
-    .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
-    }
-    .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-    }
-    .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-    }
-    .onoffswitch-inner:before {
-    content: "Dark";
-    padding-left: 10px;
-    background-color: rgb(36,36,36); color: #FFFFFF;
-    }
-    .onoffswitch-inner:after {
-    content: "Light";
-    padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
-    text-align: right;
-    }
-    .onoffswitch-switch {
-    width: 22px;
-    height: 22px;
-    margin: 6px;
-    background: #FFFFFF;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 56px;
-    border: 2px solid #999999;
-    border-radius: 22px;
-    transition: all 0.3s ease-in 0s;
-    }
-    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-    }
-    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
-    }
-    fieldset.inner > input {
-    display: none;
-    }
-
-    fieldset.inner > label {
-    width: 100%;
-    }
-
-    fieldset.inner {
-    position: relative;
-    }
-
-    input:checked ~ label span.arrow {
-    top: -0.5em;
-    transform: rotate(180deg);
-    }
-
-    fieldset.inner input ~ .row .col-md-10 > .form-group *,  
-    fieldset.inner input ~ .row .col-md-10 > .form-group {
-    transition: 1s max-height, 1s margin;
-    }
-
-    fieldset.inner input:checked ~ .row .col-md-10 > .form-group *, 
-    fieldset.inner input:checked ~ .row .col-md-10 > .form-group {
-    max-height: 0;
-    margin: 0;
-    padding: 0;
-    opacity: 0;
-    float: none;
-    transition: 1s max-height, 1s margin;
-	pointer-events: none;
-    }
-
-	.inner i.fa.fa-chevron-down {
-	    position: absolute;
-	    right: 2em;
-	    top: 0;
-	}
-
-
-	.inner input:checked ~ label i.fa.fa-chevron-down {
-	    transform: rotate(180deg);
-	}
-
-    </style>
-</head>
-<body>
-    <%PROCESS inc/account-bar.html %>
-    <div class="content account-settings">
-        <%IF no_profile -%>
-        <div class="alert alert-danger">
-            <h4 class="alert-heading">Error</h4>In order to change your profile you have to <a href="%3C%%20oauth_prefix%20%%3E&amp;choice=pause" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
-        </div><%ELSE -%>
-        <form method="post" action="" class="form-horizontal" role="form" accept-charset="utf-8">
-            <input type="hidden" name="utf8" value="🐪"> <%IF errors -%>
-            <fieldset>
-                <legend style="color: #600">Errors</legend>
-                <ul>
-                    <%FOREACH error IN errors -%>
-                    <li><%error.field %>: <%error.message %></li><%END -%>
-                </ul>
-            </fieldset><%ELSIF success -%>
-            <fieldset>
-                <legend style="color: #060">Success</legend>
-                <p>The profile has been updated.</p>
-            </fieldset><%END %>
-            <!-- TODO FONT --!>
-            <fieldset>
+<%PROCESS inc/account-bar.html %>
+<div class="content account-settings">
+    <%IF no_profile -%>
+    <div class="alert alert-danger">
+        <h4 class="alert-heading">Error</h4>In order to change your profile you have to <a href="%3C%%20oauth_prefix%20%%3E&amp;choice=pause" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
+    </div><%ELSE -%>
+    <form method="post" action="" class="form-horizontal" role="form" accept-charset="utf-8">
+        <input type="hidden" name="utf8" value="🐪"> <%IF errors -%>
+        <fieldset>
+            <legend style="color: #600">Errors</legend>
+            <ul>
+                <%FOREACH error IN errors -%>
+                <li><%error.field %>: <%error.message %></li><%END -%>
+            </ul>
+        </fieldset><%ELSIF success -%>
+        <fieldset>
+            <legend style="color: #060">Success</legend>
+            <p>The profile has been updated.</p>
+        </fieldset><%END %>
+        <!-- TODO FONT --!>
+        <fieldset>
 		<legend>Fonts</legend>
 		 <div class="row">
-                    <div class="col-sm-8 col-md-10">
-                       	<div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">Body Font</label>
-                            <div class="col-sm-8 col-md-6">
-                                <select class="form-control" name="body_font_family">
-                                </select>
+                <div class="col-sm-8 col-md-10">
+                   	<div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Body Font</label>
+                        <div class="col-sm-8 col-md-6">
+                            <select class="form-control" name="body_font_family">
+                            </select>
 			    </div>
-                        </div>
-                       	<div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">Syntax Font</label>
-                            <div class="col-sm-8 col-md-6">
-                                <select class="form-control" name="syntax_font_family">
-                                </select>
-                            </div>
-                        </div>
-			<div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">Body Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="body_font_size" value="">
-                            </div>
-                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">Input Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="input_font_size" value="">
-                            </div>
-                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H1 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h1_font_size" value="">
-                            </div>
-                         </div>
-                         <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H2 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h2_font_size" value="">
-                            </div>
-                         </div>
-                         <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H3 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h3_font_size" value="">
-                            </div>
-                         </div>
-
-                         <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H4 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h4_font_size" value="">
-                            </div>
-                         </div>
-
-                         <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H5 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h5_font_size" value="">
-                            </div>
-                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">H6 Font Size</label>
-                            <div class="col-sm-8 col-md-6">
-                                <input type="number" class="form-control" name="h6_font_size" value="">
-                            </div>
-                         </div>
-                   </div>
-		</div>
-            </fieldset>
-            <fieldset>
-                <legend>Color Scheme</legend>
-                <div class="row">
-                    <div class="col-sm-8 col-md-10">
-			<div class="form-group">
-                            <label class="col-sm-4 col-md-4 control-label">Dark Mode</label>
-                            <div class="onoffswitch">
-                                <input type="checkbox" name="dark_mode" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" <%IF author.theme.dark_mode %> checked <%END %>> <label class="onoffswitch-label" for="myonoffswitch"><span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span></label>
-                            </div>
+                    </div>
+                   	<div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Syntax Font</label>
+                        <div class="col-sm-8 col-md-6">
+                            <select class="form-control" name="syntax_font_family">
+                            </select>
                         </div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="inner" style="position:relative;">
-                            <input type="checkbox" style="display:none" id="toggle_all" checked> <label for="toggle_all"><i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-			</div>
-			<fieldset class="inner">
-                            <input type="checkbox" id="main_colors" checked> <label for="main_colors"><legend>Main Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Main Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="main_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Main Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="main_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Main Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="main_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Main Box Shadow Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="main_box_shadow_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Main Text Shadow Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="main_text_shadow_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="secondary_colors" checked> <label for="secondary_colors"><legend>Secondary Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                   <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Secondary Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="secondary_background_color">
-                                        </div>
-                                    </div>
-                                   <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Secondary Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="secondary_font_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="nav_colors" checked> <label for="nav_colors"><legend>Navigation Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Selected Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_selected_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Selected Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_selected_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Selected Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_selected_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Selected Box Shadow Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_selected_box_shadow_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_hover_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Side Selected Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_side_selected_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Side Selected Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_side_selected_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Nav Side Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="nav_side_hover_background_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="input_colors" checked> <label for="input_colors"><legend>Input Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Input Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="input_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Input Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="input_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Input Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="input_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Input Focus Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="input_focus_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Input Focus Box Shadow Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="input_focus_box_shadow_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="btn_colors" checked> <label for="btn_colors"><legend>Button Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Secondary Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_secondary_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Secondary Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_third_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Button Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="btn_hover_background_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="link_colors" checked> <label for="link_colors"><legend>Link Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Link Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="link_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Link Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="link_hover_font_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="syntax_colors" checked> <label for="syntax_colors"><legend>Syntax Highlighting Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Keyword Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_keyword_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Plain Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_plain_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Functions Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_functions_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax String Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_string_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Comments Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_comments_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Variable Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_variable_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Line Number Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_line_number_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Line Number Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_hover_line_number_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Syntax Selected Line Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="syntax_selected_line_background_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="activity_colors" checked> <label for="activity_colors"><legend>Activity Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Activity Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="activity_background_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="primary_colors" checked> <label for="primary_colors"><legend>Primary Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Primary Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="primary_hover_border_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-			<fieldset class="inner">
-                            <input type="checkbox" id="success_colors" checked> <label for="success_colors"><legend>Success Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Success Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="success_hover_border_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="warning_colors" checked> <label for="warning_colors"><legend>Warning Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Warning Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="warning_hover_border_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="danger_colors" checked> <label for="danger_colors"><legend>Danger Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Danger Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="danger_hover_border_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="info_colors" checked> <label for="info_colors"><legend>Info Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_border_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Hover Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_hover_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Hover Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_hover_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Info Hover Border Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="info_hover_border_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="inner">
-                            <input type="checkbox" id="alert_colors" checked> <label for="alert_colors"><legend>Alert Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
-                            <div class="row">
-                                <div class="col-sm-8 col-md-10">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Success Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_success_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Success Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_success_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Success Link Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_success_link_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Warning Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_warning_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Warning Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_warning_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Warning Link Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_warning_link_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Info Background Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_info_background_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Info Font Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_info_font_color">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 col-md-4 control-label">Alert Info Link Color</label>
-                                        <div class="col-sm-8 col-md-6">
-                                            <input class="form-control" name="alert_info_link_color">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
+			<div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Body Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="body_font_size" value="">
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Input Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="input_font_size" value="">
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H1 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h1_font_size" value="">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H2 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h2_font_size" value="">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H3 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h3_font_size" value="">
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H4 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h4_font_size" value="">
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H5 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h5_font_size" value="">
+                        </div>
+                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">H6 Font Size</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="number" class="form-control" name="h6_font_size" value="">
+                        </div>
+                     </div>
+               </div>
+		</div>
+        </fieldset>
+        <fieldset>
+            <legend>Color Scheme</legend>
+            <div class="row">
+                <div class="col-sm-8 col-md-10">
+			<div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Dark Mode</label>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="dark_mode" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" <%IF author.theme.dark_mode %> checked <%END %>> <label class="onoffswitch-label" for="myonoffswitch"><span class="onoffswitch-inner"></span> <span class="onoffswitch-switch"></span></label>
+                        </div>
                     </div>
                 </div>
-            </fieldset><br>
-            <input type="submit" value="Save Profile" class="btn btn-large search-btn">
-        </form><%END -%>
-    </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $(window).bind("resize", formFixer);
+                <div class="col-sm-12">
+                    <div class="inner" style="position:relative;">
+                        <input type="checkbox" style="display:none" id="toggle_all" checked> <label for="toggle_all"><i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+			</div>
+			<fieldset class="inner">
+                        <input type="checkbox" id="main_colors" checked> <label for="main_colors"><legend>Main Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Main Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="main_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Main Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="main_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Main Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="main_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Main Box Shadow Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="main_box_shadow_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Main Text Shadow Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="main_text_shadow_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="secondary_colors" checked> <label for="secondary_colors"><legend>Secondary Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                               <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Secondary Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="secondary_background_color">
+                                    </div>
+                                </div>
+                               <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Secondary Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="secondary_font_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="nav_colors" checked> <label for="nav_colors"><legend>Navigation Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Selected Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_selected_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Selected Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_selected_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Selected Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_selected_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Selected Box Shadow Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_selected_box_shadow_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_hover_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Side Selected Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_side_selected_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Side Selected Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_side_selected_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Nav Side Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="nav_side_hover_background_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="input_colors" checked> <label for="input_colors"><legend>Input Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Input Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="input_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Input Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="input_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Input Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="input_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Input Focus Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="input_focus_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Input Focus Box Shadow Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="input_focus_box_shadow_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="btn_colors" checked> <label for="btn_colors"><legend>Button Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Secondary Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_secondary_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Secondary Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_third_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Button Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="btn_hover_background_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="link_colors" checked> <label for="link_colors"><legend>Link Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Link Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="link_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Link Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="link_hover_font_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="syntax_colors" checked> <label for="syntax_colors"><legend>Syntax Highlighting Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Keyword Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_keyword_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Plain Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_plain_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Functions Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_functions_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax String Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_string_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Comments Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_comments_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Variable Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_variable_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Line Number Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_line_number_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Line Number Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_hover_line_number_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Syntax Selected Line Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="syntax_selected_line_background_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="activity_colors" checked> <label for="activity_colors"><legend>Activity Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Activity Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="activity_background_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="primary_colors" checked> <label for="primary_colors"><legend>Primary Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Primary Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="primary_hover_border_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+			<fieldset class="inner">
+                        <input type="checkbox" id="success_colors" checked> <label for="success_colors"><legend>Success Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Success Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="success_hover_border_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="warning_colors" checked> <label for="warning_colors"><legend>Warning Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Warning Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="warning_hover_border_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="danger_colors" checked> <label for="danger_colors"><legend>Danger Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Danger Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="danger_hover_border_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="info_colors" checked> <label for="info_colors"><legend>Info Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_border_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Hover Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_hover_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Hover Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_hover_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Info Hover Border Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="info_hover_border_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="inner">
+                        <input type="checkbox" id="alert_colors" checked> <label for="alert_colors"><legend>Alert Colors</legend> <i class="fa fa-chevron-down" aria-hidden="true"></i></label>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-10">
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Success Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_success_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Success Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_success_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Success Link Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_success_link_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Warning Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_warning_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Warning Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_warning_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Warning Link Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_warning_link_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Info Background Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_info_background_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Info Font Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_info_font_color">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 col-md-4 control-label">Alert Info Link Color</label>
+                                    <div class="col-sm-8 col-md-6">
+                                        <input class="form-control" name="alert_info_link_color">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </fieldset><br>
+        <input type="submit" value="Save Profile" class="btn btn-large search-btn">
+    </form><%END -%>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    $(window).bind("resize", formFixer);
 	formFixer();
 	MetaTheme.afterLoad('setColorPickers');
 	MetaTheme.afterLoad('setFontFields');
-    });
+});
 
-    document.querySelector('input[name="dark_mode"]').addEventListener('change', function () {
-        var mode = this.checked ? 'dark' : 'light';
-        MetaTheme.switchMode(mode);
-    });
+document.querySelector('input[name="dark_mode"]').addEventListener('change', function () {
+    var mode = this.checked ? 'dark' : 'light';
+    MetaTheme.switchMode(mode);
+});
 
-    document.querySelector('.account-settings form').addEventListener('submit', function () {
-        window.localStorage.removeItem('author');
-    });
+document.querySelector('.account-settings form').addEventListener('submit', function () {
+    window.localStorage.removeItem('author');
+});
 
-    document.querySelector('input#toggle_all').addEventListener('change', function (e) {
+document.querySelector('input#toggle_all').addEventListener('change', function (e) {
 	document.querySelectorAll('fieldset.inner input[type="checkbox"]:first-child').forEach(function (inp) {
 		inp.checked = e.target.checked;
 	});
-    });
+});
 
-    function formFixer( e ) {
-        if($(window).width()<=480){
-            $('form').removeClass('form-horizontal');
-        }
-        else{
-            $('form').addClass('form-horizontal');
-        }
+function formFixer( e ) {
+    if($(window).width()<=480){
+        $('form').removeClass('form-horizontal');
     }
-    </script>
+    else{
+        $('form').addClass('form-horizontal');
+    }
+}
+</script>
 </body>
 </html>
