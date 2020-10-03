@@ -406,7 +406,9 @@
 			'.dropdown-menu > li > a': {},
 			'.navbar .nav li.dropdown.open a.dropdown-toggle': {},
 			'.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus': {},
-			'.navbar .nav > li > a > img': {}
+			'.navbar .nav > li > a > img': {},
+			'ul.nav-list.slidepanel.sticky-panel-top.slidepanel-visible, ul.nav-list.slidepanel.slidepanel-visible': {},
+			'button#right-panel-toggle': {},
 		},
 		load: function () {
 			var cb = function (author) {
@@ -885,6 +887,15 @@
 			this.styles['.small-logo'] = {
 				'background-size': '326px 92px',
 				'background-image': 'url(' + this.custom.logo + ')'
+			};
+			this.styles['ul.nav-list.slidepanel.sticky-panel-top.slidepanel-visible, ul.nav-list.slidepanel.slidepanel-visible'] = {
+				'background': this.custom.nav_background_color,
+				'border-color': this.custom.nav_border_color
+			};
+			this.styles['button#right-panel-toggle'] = {
+				'background': this.custom.main_background_color,
+				'color': this.custom.main_font_color,
+    				'border-color': this.custom.main_border_color
 			};
 			this.removeAttachedCSS();
 			return this.attachCSS();
