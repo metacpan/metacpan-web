@@ -111,6 +111,15 @@ DISTRIBUTIONS
       ExtUtils::CBuilder 0
       ExtUtils::MakeMaker 6.52
       perl 5.006
+  Anonymous-Object-0.03
+    pathname: L/LN/LNATION/Anonymous-Object-0.03.tar.gz
+    provides:
+      Anonymous::Object 0.03
+    requirements:
+      Data::Dumper 0
+      ExtUtils::MakeMaker 0
+      Scalar::Util 0
+      perl 5.006
   Apache-LogFormat-Compiler-0.36
     pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.36.tar.gz
     provides:
@@ -787,6 +796,19 @@ DISTRIBUTIONS
       Test::Vars 0.008
       autodie 0
       perl 5.006
+      strict 0
+      warnings 0
+  Colouring-In-0.21
+    pathname: L/LN/LNATION/Colouring-In-0.21.tar.gz
+    provides:
+      Colouring::In 0.21
+    requirements:
+      Anonymous::Object 0.02
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      overload 0
+      perl 5.006
+      smallnum 0.05
       strict 0
       warnings 0
   Config-Any-0.32
@@ -2048,11 +2070,6 @@ DISTRIBUTIONS
       HTTP::Date 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  HTTP-Lite-2.44
-    pathname: N/NE/NEILB/HTTP-Lite-2.44.tar.gz
-    provides:
-      HTTP::Lite 2.44
-    requirements:
   HTTP-Message-6.22
     pathname: O/OA/OALDERS/HTTP-Message-6.22.tar.gz
     provides:
@@ -4511,27 +4528,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20200110
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20200110.tar.gz
+  Perl-Tidy-20201001
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20201001.tar.gz
     provides:
-      Perl::Tidy 20200110
-      Perl::Tidy::Debugger 20200110
-      Perl::Tidy::DevNull 20200110
-      Perl::Tidy::Diagnostics 20200110
-      Perl::Tidy::FileWriter 20200110
-      Perl::Tidy::Formatter 20200110
-      Perl::Tidy::HtmlWriter 20200110
-      Perl::Tidy::IOScalar 20200110
-      Perl::Tidy::IOScalarArray 20200110
-      Perl::Tidy::IndentationItem 20200110
-      Perl::Tidy::LineBuffer 20200110
-      Perl::Tidy::LineSink 20200110
-      Perl::Tidy::LineSource 20200110
-      Perl::Tidy::Logger 20200110
-      Perl::Tidy::Tokenizer 20200110
-      Perl::Tidy::VerticalAligner 20200110
-      Perl::Tidy::VerticalAligner::Alignment 20200110
-      Perl::Tidy::VerticalAligner::Line 20200110
+      Perl::Tidy 20201001
+      Perl::Tidy::Debugger 20201001
+      Perl::Tidy::DevNull 20201001
+      Perl::Tidy::Diagnostics 20201001
+      Perl::Tidy::FileWriter 20201001
+      Perl::Tidy::Formatter 20201001
+      Perl::Tidy::HtmlWriter 20201001
+      Perl::Tidy::IOScalar 20201001
+      Perl::Tidy::IOScalarArray 20201001
+      Perl::Tidy::IndentationItem 20201001
+      Perl::Tidy::LineBuffer 20201001
+      Perl::Tidy::LineSink 20201001
+      Perl::Tidy::LineSource 20201001
+      Perl::Tidy::Logger 20201001
+      Perl::Tidy::Tokenizer 20201001
+      Perl::Tidy::VerticalAligner 20201001
+      Perl::Tidy::VerticalAligner::Alignment 20201001
+      Perl::Tidy::VerticalAligner::Line 20201001
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.007
@@ -5384,84 +5401,6 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.88
       perl 5.008_001
-  Test-Simple-1.302175
-    pathname: E/EX/EXODIST/Test-Simple-1.302175.tar.gz
-    provides:
-      Test2 1.302175
-      Test2::API 1.302175
-      Test2::API::Breakage 1.302175
-      Test2::API::Context 1.302175
-      Test2::API::Instance 1.302175
-      Test2::API::Stack 1.302175
-      Test2::Event 1.302175
-      Test2::Event::Bail 1.302175
-      Test2::Event::Diag 1.302175
-      Test2::Event::Encoding 1.302175
-      Test2::Event::Exception 1.302175
-      Test2::Event::Fail 1.302175
-      Test2::Event::Generic 1.302175
-      Test2::Event::Note 1.302175
-      Test2::Event::Ok 1.302175
-      Test2::Event::Pass 1.302175
-      Test2::Event::Plan 1.302175
-      Test2::Event::Skip 1.302175
-      Test2::Event::Subtest 1.302175
-      Test2::Event::TAP::Version 1.302175
-      Test2::Event::V2 1.302175
-      Test2::Event::Waiting 1.302175
-      Test2::EventFacet 1.302175
-      Test2::EventFacet::About 1.302175
-      Test2::EventFacet::Amnesty 1.302175
-      Test2::EventFacet::Assert 1.302175
-      Test2::EventFacet::Control 1.302175
-      Test2::EventFacet::Error 1.302175
-      Test2::EventFacet::Hub 1.302175
-      Test2::EventFacet::Info 1.302175
-      Test2::EventFacet::Info::Table 1.302175
-      Test2::EventFacet::Meta 1.302175
-      Test2::EventFacet::Parent 1.302175
-      Test2::EventFacet::Plan 1.302175
-      Test2::EventFacet::Render 1.302175
-      Test2::EventFacet::Trace 1.302175
-      Test2::Formatter 1.302175
-      Test2::Formatter::TAP 1.302175
-      Test2::Hub 1.302175
-      Test2::Hub::Interceptor 1.302175
-      Test2::Hub::Interceptor::Terminator 1.302175
-      Test2::Hub::Subtest 1.302175
-      Test2::IPC 1.302175
-      Test2::IPC::Driver 1.302175
-      Test2::IPC::Driver::Files 1.302175
-      Test2::Tools::Tiny 1.302175
-      Test2::Util 1.302175
-      Test2::Util::ExternalMeta 1.302175
-      Test2::Util::Facets2Legacy 1.302175
-      Test2::Util::HashBase 1.302175
-      Test2::Util::Trace 1.302175
-      Test::Builder 1.302175
-      Test::Builder::Formatter 1.302175
-      Test::Builder::IO::Scalar 2.114
-      Test::Builder::Module 1.302175
-      Test::Builder::Tester 1.302175
-      Test::Builder::Tester::Color 1.302175
-      Test::Builder::Tester::Tie 1.302175
-      Test::Builder::TodoDiag 1.302175
-      Test::More 1.302175
-      Test::Simple 1.302175
-      Test::Tester 1.302175
-      Test::Tester::Capture 1.302175
-      Test::Tester::CaptureRunner 1.302175
-      Test::Tester::Delegate 1.302175
-      Test::use::ok 1.302175
-      ok 1.302175
-    requirements:
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      File::Temp 0
-      Scalar::Util 1.13
-      Storable 0
-      perl 5.006002
-      utf8 0
   Test-TCP-2.22
     pathname: M/MI/MIYAGAWA/Test-TCP-2.22.tar.gz
     provides:
@@ -6326,3 +6265,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Package::Stash 0.23
       perl 5.008001
+  smallnum-0.05
+    pathname: L/LN/LNATION/smallnum-0.05.tar.gz
+    provides:
+      smallnum 0.05
+    requirements:
+      ExtUtils::MakeMaker 0
+      POSIX 0
+      perl 5.006
