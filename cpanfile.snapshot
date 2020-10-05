@@ -111,15 +111,6 @@ DISTRIBUTIONS
       ExtUtils::CBuilder 0
       ExtUtils::MakeMaker 6.52
       perl 5.006
-  Anonymous-Object-0.03
-    pathname: L/LN/LNATION/Anonymous-Object-0.03.tar.gz
-    provides:
-      Anonymous::Object 0.03
-    requirements:
-      Data::Dumper 0
-      ExtUtils::MakeMaker 0
-      Scalar::Util 0
-      perl 5.006
   Apache-LogFormat-Compiler-0.36
     pathname: K/KA/KAZEBURO/Apache-LogFormat-Compiler-0.36.tar.gz
     provides:
@@ -798,12 +789,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Colouring-In-0.21
-    pathname: L/LN/LNATION/Colouring-In-0.21.tar.gz
+  Colouring-In-0.22
+    pathname: L/LN/LNATION/Colouring-In-0.22.tar.gz
     provides:
-      Colouring::In 0.21
+      Colouring::In 0.22
     requirements:
-      Anonymous::Object 0.02
       ExtUtils::MakeMaker 0
       Test::More 0
       overload 0

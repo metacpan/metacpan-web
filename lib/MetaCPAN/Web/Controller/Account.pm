@@ -282,11 +282,11 @@ sub theme : Local : Args(0) {
     {
         # TODO add validation using Colouring::In
         my $color = Colouring::In->validate( $req->params->{$style} );
-        if ( !$color->valid ) {
+        if ( !$color->{valid} ) {
             push @form_errors,
                 {
                 field   => $style,
-                message => $color->color . " is not a valid color.",
+                message => $color->{color} . " is not a valid color.",
                 };
             next;
         }
