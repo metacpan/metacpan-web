@@ -1,4 +1,45 @@
 @media print {
     .pod { margin: 0px; border: 0px solid #000; padding: 0px}
     .home, .header, .search-bar, .box-right, .footer, a.favorite {display:none}
+    .page-pod {
+        .sticky-panel-top,
+        .sticky-panel-sticky,
+        .dependencies,
+        .search-form,
+        .head-small-logo,
+        .dropdown,
+        .logged_in,
+        .footer + div,
+        .footer + div + div,
+        .toggle-index,
+	#right-panel-toggle,
+        .toggle-index-right {
+            display: none !important;
+        }
+        a[href]:after {
+            content: none !important;
+        }
+        #index-container {
+            width: 100%;
+        }
+        .index-border {
+            width: 100%;
+        }
+        .pod {
+            margin-top: 1.5em;
+        }
+        .index-header {
+            color: transparent !important;
+            display: flex;
+            align-items: center;
+        }
+        .index-header b {
+            display: block !important;
+        }
+        .index-header b {
+            color: black;
+            margin: auto;
+        }
+    }
 }
+
