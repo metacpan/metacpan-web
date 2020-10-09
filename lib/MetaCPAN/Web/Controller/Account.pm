@@ -140,6 +140,7 @@ sub profile : Local : Args(0) {
         $c->stash( { author => $data, errors => $res->{errors} } );
     }
     else {
+        $c->purge_author_key( $data->{pauseid} ) if exists $data->{pauseid};
         $c->stash( { success => 1, author => $res } );
     }
 }
