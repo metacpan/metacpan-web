@@ -1,4 +1,44 @@
 @media print {
     .pod { margin: 0px; border: 0px solid #000; padding: 0px}
     .home, .header, .search-bar, .box-right, .footer, a.favorite {display:none}
+    #page-pod {
+        ul.nav-list.slidepanel.sticky-panel-top,
+        ul.nav-list.slidepanel.sticky-panel-bottom.sticky-panel-sticky,
+        ul.nav-list.box-right.hidden-phone.dependencies,
+        form.search-form.form-horizontal,
+        .head-small-logo.col-md-3,
+        span.dropdown,
+        div#libwww-perl-fav,
+        button#right-panel-toggle,
+        .row.footer + div,
+        .row.footer + div + div,
+        button.btn-link.toggle-index {
+            display: none !important;
+        }
+        a[href]:after {
+            content: none !important;
+        }
+        div#index-container {
+            width: 100%;
+        }
+        .index-border {
+            width: 100%;
+        }
+        .pod.content.anchors {
+            margin-top: 1.5em;
+        }
+        .index-header {
+            color: transparent !important;
+            display: flex;
+            align-items: center;
+        }
+        .index-header b {
+            display: block !important;
+        }
+        .index-header b {
+            color: black;
+            margin: auto;
+        }
+    }
 }
+
