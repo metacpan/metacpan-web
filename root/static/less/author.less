@@ -2,6 +2,14 @@
     display: inline-block;
 }
 
+.author-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    .box-shadow(2px 2px 5px #ccc);
+}
+
 .author-pic {
     text-align: center;
 
@@ -9,12 +17,8 @@
         display: block;
     }
 
-    > a > img {
-        width: 130px;
-        height: 130px;
-        border-radius: 8px;
-        margin-bottom: 5px;
-        .box-shadow(2px 2px 5px #ccc);
+    img {
+        .author-avatar;
     }
 }
 
