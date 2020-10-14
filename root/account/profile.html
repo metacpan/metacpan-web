@@ -23,14 +23,20 @@
         <% END %>
         <fieldset><legend>General</legend>
         <div class="row">
-            <div class="col-xs-12 col-sm-4 col-sm-push-8 col-md-2 col-md-push-10">
-                <div class="pull-right author-pic-container"><%- INCLUDE inc/author-pic.html author = author %></div>
-            </div>
-            <div class="col-sm-8 col-sm-pull-4 col-md-10 col-md-pull-2">
+            <div class="col-sm-8 col-md-10">
                 <div class="form-group">
                     <label class="col-sm-4 col-md-4 control-label">PAUSE ID</label>
                     <div class="col-sm-8 col-md-6">
                         <input type="text" class="form-control" value="<% author.pauseid %>" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Avatar</label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="form-control-static">
+                            <div><img class="author-avatar" src="<% author.gravatar_image(130) %>" alt="Author image"></div>
+                            <div><a href="https://en.gravatar.com/emails/">Change Gravatar for <% author.pauseid.lower %>@cpan.org</a></div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">

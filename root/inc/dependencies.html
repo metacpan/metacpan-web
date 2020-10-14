@@ -30,7 +30,7 @@ FOREACH dep IN deps.sort %>
         <i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
     </li>
     <li>
-        <a href="https://cpandeps.grinnz.com/?dist=<% release.distribution | uri %>">
+        <a href="https://cpandeps.grinnz.com/?dist=<% release.distribution | uri %><% IF permalinks || release.status != 'latest' %>&dist_version=<% release.version | uri %><% END %>">
         <i class="fa fa-asterisk fa-fw black"></i>Dependency graph</a>
     </li>
 </ul>

@@ -62,7 +62,7 @@ sub view : Private {
     }
 
     $c->stash( {
-        owner_count => scalar( uniq map $_->{owner}, @$perms ),
+        owner_count   => scalar( uniq map $_->{owner}, @$perms ),
         comaint_count =>
             scalar( uniq map @{ $_->{co_maintainers} }, @$perms ),
     } );

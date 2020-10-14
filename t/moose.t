@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use lib 't/lib';
 use Test::More;
-use File::Find ();        # core
+use File::Find      ();    # core
 use Module::Runtime ();
 
 sub uses_moose_ok {
