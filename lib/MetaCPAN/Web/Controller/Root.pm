@@ -19,6 +19,17 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 =head1 METHODS
 
+=head2 begin
+
+The begin block runs for all urls.
+
+=cut
+
+sub begin : Private {
+    my ( $self, $c ) = @_;
+    $c->stash( { page_class => 'page-metacpan' } );
+}
+
 =head2 index
 
 The root page (/)
