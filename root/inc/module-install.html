@@ -6,15 +6,17 @@
                 <h4 class="modal-title">Module Install Instructions</h4>
             </div>
             <div class="modal-body">
-                <p>To install <%  module.documentation or module.module.0.name or module.package %>, simply copy and paste either of the commands in to your terminal</p>
+                <p>To install <% module.documentation or module.module.0.name or module.package %>, copy and paste the appropriate command in to your terminal.</p>
                 <p><a href="/pod/distribution/App-cpanminus/bin/cpanm">cpanm</a></p>
                 <pre>
-                    cpanm <%  release.main_module or module.documentation or module.module.0.name or (release.author _ "/" _ release.archive) %></pre>
+                    cpanm <% release.main_module or module.documentation or module.module.0.name or (release.author _ "/" _ release.archive) %>
+                </pre>
                 <p><a href="/pod/CPAN">CPAN shell</a></p>
                 <pre>
                     perl -MCPAN -e shell
-                    install <% release.main_module or odule.documentation or module.module.0.name or (release.author _ "/" _ release.archive) %></pre>
-                <p>For more information on module installation please visit <a href="https://www.cpan.org/modules/INSTALL.html">the detailed CPAN module installation guide</a>.</p>
+                    install <% release.main_module or module.documentation or module.module.0.name or (release.author _ "/" _ release.archive) %>
+                </pre>
+                <p>For more information on module installation, please visit <a href="https://www.cpan.org/modules/INSTALL.html">the detailed CPAN module installation guide</a>.</p>
             </div>
             <div class="modal-footer">
                 <a href="#" data-dismiss="modal" class="btn">Close</a>
