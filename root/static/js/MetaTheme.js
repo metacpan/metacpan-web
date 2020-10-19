@@ -64,9 +64,11 @@
 		colorSelectors: [
 			'main_background_color',
 			'main_font_color',
+			'main_second_font_color',
 			'main_border_color',
 			'main_box_shadow_color',
 			'main_text_shadow_color',
+			'main_hover_background_color',
 			'secondary_background_color',
 			'secondary_font_color',
 			'nav_background_color',
@@ -138,21 +140,30 @@
 			'info_hover_border_color',
 			'alert_success_background_color',
 			'alert_success_font_color',
+			'alert_success_border_color',
 			'alert_success_link_color',
 			'alert_warning_background_color',
+			'alert_warning_border_color',
 			'alert_warning_font_color',
 			'alert_warning_link_color',
 			'alert_info_background_color',
+			'alert_info_border_color',
 			'alert_info_font_color',
-			'alert_info_link_color'
+			'alert_info_link_color',
+			'alert_danger_background_color',
+			'alert_danger_border_color',
+			'alert_danger_font_color',
+			'alert_danger_link_color'
 		],
 		dark: {
 			logo: '/static/images/metacpan-logo-light.png',
 			main_background_color: '#333639',
 			main_font_color: '#dadada',
+			main_second_font_color: '#cacaca',
 			main_border_color: '#1f2225',
 			main_box_shadow_color: '#5b5e61',
 			main_text_shadow_color: 'rgba(91, 94, 97, 0.75)',
+			main_hover_background_color: '#1f2325',
 			secondary_background_color: '#3d4043',
 			secondary_font_color: '#dadada',
 			nav_background_color: '#1f2225',
@@ -224,21 +235,30 @@
 			info_hover_border_color: '#269abc',
 			alert_success_background_color: '#d7f5dd',
 			alert_success_font_color: '#333333',
-			alert_success_link_color: '#444444',
+			alert_success_border_color: '#d6e9c6',
+			alert_success_link_color: '#337ab7',
 			alert_warning_background_color: '#f5efd7',
 			alert_warning_font_color: '#333333',
-			alert_warning_link_color: '#444444',
+			alert_warning_border_color: '#faebcc',
+			alert_warning_link_color: '#337ab7',
 			alert_info_background_color: '#d7e1f5',
 			alert_info_font_color: '#333333',
-			alert_info_link_color: '#444444'
+			alert_info_border_color: '#4083a3',
+			alert_info_link_color: '#337ab7',
+			alert_danger_background_color: '#f2dede',
+			alert_danger_font_color: '#333333',
+			alert_danger_border_color: '#ebccd1',
+			alert_danger_link_color: '#337ab7'
 		},
 		light: {
 			logo: '/static/images/metacpan-logo@2x.png',
 			main_background_color: '#ffffff',
 			main_font_color: '#333333',
+			main_second_font_color: '#545454',
 			main_border_color: '#e5e5e5',
 			main_box_shadow_color: '#cccccc',
 			main_text_shadow_color: 'rgba(255, 255, 255, 0.75)',
+			main_hover_background_color: '#ddeeff',
 			secondary_background_color: '#f9f9f9',
 			secondary_font_color: '#333333',
 			nav_background_color: '#f8f8f8',
@@ -310,13 +330,20 @@
 			info_hover_border_color: '#269abc',
 			alert_success_background_color: '#d7f5dd',
 			alert_success_font_color: '#333333',
-			alert_success_link_color: '#444444',
+			alert_success_border_color: '#d6e9c6',
+			alert_success_link_color: '#337ab7',
 			alert_warning_background_color: '#f5efd7',
 			alert_warning_font_color: '#333333',
-			alert_warning_link_color: '#444444',
+			alert_warning_border_color: '#faebcc',
+			alert_warning_link_color: '#337ab7',
 			alert_info_background_color: '#d7e1f5',
 			alert_info_font_color: '#333333',
-			alert_info_link_color: '#444444'
+			alert_info_border_color: '#4083a3',
+			alert_info_link_color: '#337ab7',
+			alert_danger_background_color: '#f2dede',
+			alert_danger_font_color: '#333333',
+			alert_danger_border_color: '#ebccd1',
+			alert_danger_link_color: '#337ab7'
 		},
 		custom: {},
 		styles: {
@@ -409,6 +436,19 @@
 			'.navbar .nav > li > a > img': {},
 			'ul.nav-list.slidepanel.sticky-panel-top.slidepanel-visible, ul.nav-list.slidepanel.slidepanel-visible': {},
 			'button#right-panel-toggle': {},
+			'.search-results .description': {},
+			'.alert-danger': {},
+			'.alert-danger a, .alert-danger a:hover': {},
+			'.alert-warning': {},
+			'.alert-warning a, .alert-warningr a:hover': {},
+			'.alert-info': {},
+			'.alert-info a, .alert-info a:hover': {},
+			'.alert-success': {},
+			'.alert-success a, .alert-success a:hover': {},
+			'.autocomplete-suggestions': {},
+			'.autocomplete-suggestions strong': {},
+			'div.autocomplete-suggestions div:nth-child(2n+2)': {},
+			'.autocomplete-suggestion:hover': {}
 		},
 		load: function () {
 			var cb = function (author) {
@@ -896,6 +936,56 @@
 				'background': this.custom.main_background_color,
 				'color': this.custom.main_font_color,
     				'border-color': this.custom.main_border_color
+			};
+			this.styles['.search-results .description'] = {
+				'color': this.custom.main_second_font_color
+			};
+			this.styles['.alert-success'] = {
+				'background-color': this.custom.alert_success_background_color,
+				'color': this.custom.alert_success_font_color,
+				'border-color': this.custom.alert_success_border_color
+			};
+			this.styles['.alert-success a, .alert-success a:hover'] = {
+				'color': this.custom.alert_success_link_color,
+			};
+			this.styles['.alert-danger'] = {
+				'background-color': this.custom.alert_danger_background_color,
+				'color': this.custom.alert_danger_font_color,
+				'border-color': this.custom.alert_danger_border_color
+			};
+			this.styles['.alert-danger a, .alert-danger a:hover'] = {
+				'color': this.custom.alert_danger_link_color,
+			};
+			this.styles['.alert-warning'] = {
+				'background-color': this.custom.alert_warning_background_color,
+				'color': this.custom.alert_warning_font_color,
+				'border-color': this.custom.alert_warning_border_color
+			};
+			this.styles['.alert-warning a, .alert-warning a:hover'] = {
+				'color': this.custom.alert_warning_link_color,
+			};
+
+			this.styles['.alert-info'] = {
+				'background-color': this.custom.alert_info_background_color,
+				'color': this.custom.alert_info_font_color,
+				'border-color': this.custom.alert_info_border_color
+			};
+			this.styles['.alert-info a, .alert-info a:hover'] = {
+				'color': this.custom.alert_info_link_color,
+			};
+			this.styles['.autocomplete-suggestions'] = {
+				'background-color': this.custom.main_background_color,
+				'color': this.custom.main_secondary_font_color,
+				'border': this.custom.main_border_color,
+			};
+			this.styles['.autocomplete-suggestions strong'] = {
+				color: this.custom.main_font_color
+			};
+			this.styles['div.autocomplete-suggestions div:nth-child(2n+2)'] = {
+				background: this.custom.secondary_background_color
+			};
+			this.styles['.autocomplete-suggestion:hover'] = {
+				background: this.custom.main_hover_background_color + ' !important'
 			};
 			this.removeAttachedCSS();
 			return this.attachCSS();

@@ -198,9 +198,11 @@ sub theme : Local : Args(0) {
     for my $style (
         'main_background_color',
         'main_font_color',
+        'main_second_font_color',
         'main_border_color',
         'main_box_shadow_color',
         'main_text_shadow_color',
+        'main_hover_background_color',
         'secondary_background_color',
         'secondary_font_color',
         'nav_background_color',
@@ -272,13 +274,20 @@ sub theme : Local : Args(0) {
         'info_hover_border_color',
         'alert_success_background_color',
         'alert_success_font_color',
+        'alert_success_border_color',
         'alert_success_link_color',
         'alert_warning_background_color',
         'alert_warning_font_color',
+        'alert_warning_border_color',
         'alert_warning_link_color',
         'alert_info_background_color',
         'alert_info_font_color',
-        'alert_info_link_color'
+        'alert_info_border_color',
+        'alert_info_link_color',
+        'alert_danger_background_color',
+        'alert_danger_font_color',
+        'alert_danger_border_color',
+        'alert_danger_link_color'
         )
     {
         # TODO add validation using Colouring::In
