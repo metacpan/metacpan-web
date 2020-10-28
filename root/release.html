@@ -124,7 +124,7 @@
       <% INCLUDE "inc/link-to-file.html" file = file, linktext = file.path %>
     <%- ELSE %>
       <% INCLUDE "inc/link-to-source.html" file = file %>
-      <%- IF file.pod_lines %>
+      <%- IF file.pod_lines.size %>
         [<% INCLUDE "inc/link-to-file.html" file = file, linktext = "pod" %>]
       <%- END %>
     <%- END %>
