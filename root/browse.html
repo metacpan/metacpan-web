@@ -33,7 +33,7 @@
 <tbody>
 <% i = 0; FOREACH file IN files %>
 <tr>
-  <td class="name" sort="<% file.directory == 1 ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path].join("/") %>" class="<%
+  <td class="name" sort="<% file.directory == 1 ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path | uri ].join("/") %>" class="<%
     file.directory == 1 ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
   : file.mime.match("x-c") ? 'silk-page-white-c'
