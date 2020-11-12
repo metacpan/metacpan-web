@@ -1,5 +1,5 @@
 <%- title = 'CPAN Mirrors' %>
-<%- assets.push("/static/modules/ol-v6.4.2/ol.js") %>
+<%- assets.push("/static/js/mirror.js") %>
 <%- assets.push("/static/modules/ol-v6.4.2/ol.css") %>
 <ul class="nav-list slidepanel">
     <li class="visible-xs">
@@ -86,29 +86,6 @@ FOREACH continent IN continents;
 <%- END %>
 </ul>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded', function(){
-  $('#map').width("auto");
-  var dots = <% dots.json %>;
-  var dotFeatures = dots.map(
-    d => new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat( d )))
-  );
-  var dotSource = new ol.source.Vector({ features: dotFeatures });
-  var style = new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 4,
-      fill: new ol.style.Fill({ color: '#BAD3EA' }),
-      stroke: new ol.style.Stroke({ color: '#36C', width: 1 }),
-    }),
-    zIndex: Infinity,
-  });
-  var map = new ol.Map({
-    target: 'map',
-    layers: [
-      new ol.layer.Tile({source: new ol.source.OSM()}),
-      new ol.layer.Vector({ source: dotSource, style: style }),
-    ],
-    view: new ol.View({ center: ol.proj.fromLonLat([ 14,35 ]), zoom: 2 }),
-  });
-});
+var mirror_dots = <% dots.json %>;
 </script>
 </div>
