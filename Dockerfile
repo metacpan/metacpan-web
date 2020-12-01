@@ -1,6 +1,6 @@
 FROM metacpan/metacpan-base:latest
 
-ARG CPM_ARGS=--without-test
+ARG CPM_ARGS=--with-test
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
