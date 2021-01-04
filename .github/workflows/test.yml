@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
     docker:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         name: Docker
         steps:
             - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
                   && docker push metacpan/metacpan-web:latest
               if: success() && github.ref == 'refs/heads/master'
     test:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         name: Dockerless
         strategy:
             fail-fast: false
@@ -61,7 +61,7 @@ jobs:
             - name: Run Tests
               run: carton exec prove -lr --jobs 2 t
               if: success()
-            - uses: actions/upload-artifact@master
+            - uses: actions/upload-artifact@v2
               with:
                   name: "${{ matrix.perl-version }}.${{ matrix.resolver }}"
                   path: cpanfile.snapshot
