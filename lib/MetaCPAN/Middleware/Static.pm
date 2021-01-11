@@ -62,7 +62,7 @@ sub wrap {
             modules/bootstrap-v3.4.1/js/affix.js
             js/bootstrap-slidepanel.js
             js/syntaxhighlighter.js
-            ),
+        ),
     );
 
     my @css_files = map { my $f = $_; $f =~ s{^\Q$root_dir\E/root/}{/}; $f }
