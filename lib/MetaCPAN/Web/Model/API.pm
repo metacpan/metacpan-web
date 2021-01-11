@@ -123,8 +123,8 @@ sub request {
                 )
             : ()
         ),
-        ( $current_url ? ( 'Referer' => $current_url->as_string ) : () ),
-        ( $request_id ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
+        ( $current_url ? ( 'Referer' => $current_url->as_string )   : () ),
+        ( $request_id  ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
     );
 
     my $req_p = $self->client->do_request( request => $request );

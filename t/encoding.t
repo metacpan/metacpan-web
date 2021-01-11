@@ -125,7 +125,7 @@ foreach my $ctype ( 'text/plain', 'application/json' ) {
             encode( 'UTF-8' => "foo\x{273f}bar" ),
             join( q{},
                 map {chr} 0x66, 0x6f, 0x6f, 0xe2, 0x9c,
-                0xbf, 0x62, 0x61, 0x72 ),
+                0xbf,           0x62, 0x61, 0x72 ),
             )
         {
             test_raw_response( $str, "foo\x{273f}bar", 'UTF-8 decodes' );
