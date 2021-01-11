@@ -47,7 +47,7 @@ sub filter_html {
             sup    => [],
             table  => [ qw( border cellspacing cellpadding align ), ],
             tbody  => [],
-            th     => [],
+            th     => [qw( colspan rowspan )],
             td     => [qw( colspan rowspan )],
             tr     => [],
             u      => [],
