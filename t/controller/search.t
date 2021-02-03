@@ -1,8 +1,8 @@
 use strict;
 use warnings;
 use Test::More;
-use MetaCPAN::Web::Test;
-use Encode qw(encode is_utf8);
+use MetaCPAN::Web::Test qw( app GET test_psgi tx );
+use Encode qw( encode is_utf8 );
 
 my %xpath = (
     search_results => 'div[contains(@class, "search-results")]',

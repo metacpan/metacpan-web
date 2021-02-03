@@ -1,10 +1,8 @@
 use strict;
 use warnings;
 use Test::More;
-use MetaCPAN::Web::Test;
-use MIME::Base64;
-use Try::Tiny;
-use URI::Escape;
+use MetaCPAN::Web::Test qw( app test_psgi );
+use URI::Escape ();
 
 {
     package    ## no critic (Package)

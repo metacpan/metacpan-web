@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More 0.96;
-use MetaCPAN::Web::Test;
+use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 
 use Module::Runtime qw( use_module );
 

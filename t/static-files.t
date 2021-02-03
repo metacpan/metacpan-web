@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use Digest::SHA;
+use Digest::SHA ();
 
 # This test validates that all of the static files in the images, icons, and
 # fonts directories have the expected content. These files are served with an

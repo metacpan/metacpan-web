@@ -1,8 +1,8 @@
 use strict;
 use warnings;
-use Encode qw(encode is_utf8);
+use Encode qw( encode is_utf8 );
 use Test::More;
-use MetaCPAN::Web::Test;
+use MetaCPAN::Web::Test qw( app GET test_psgi );
 use Cpanel::JSON::XS qw( decode_json );
 
 my @tests = (

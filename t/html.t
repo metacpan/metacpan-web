@@ -4,7 +4,7 @@ use warnings;
 use Test::More;
 
 use Path::Iterator::Rule;
-use Path::Tiny qw(path);
+use Path::Tiny qw( path );
 
 # files that have inline <script> tags
 my %skip = map { $_ => 1 } (
