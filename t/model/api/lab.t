@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use MetaCPAN::Web;
+use MetaCPAN::Web ();
 
 my $model = MetaCPAN::Web->model('API::Lab');
 

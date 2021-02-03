@@ -1,8 +1,8 @@
 use strict;
 use warnings;
-use MetaCPAN::Web::Test;
+use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
 use Test::More;
-use Test::Deep;
+use Test::Deep qw( cmp_deeply );
 use Cpanel::JSON::XS qw( decode_json );
 
 my ( $res_body, $api_req );

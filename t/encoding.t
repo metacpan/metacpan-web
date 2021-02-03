@@ -2,8 +2,8 @@
 use strict;
 use warnings;
 use Test::More;
-use MetaCPAN::Web::Test;
-use Encode qw( is_utf8 decode encode );
+use MetaCPAN::Web::Test qw( override_api_response );
+use Encode qw( encode is_utf8 );
 
 my ( $res_body, $content_type ) = ( q{}, 'text/plain' );
 
@@ -14,7 +14,7 @@ override_api_response sub {
     return [ 200, [ Content_Type => $content_type ], [$res_body] ];
 };
 
-use MetaCPAN::Web::Model::API::Module;
+use MetaCPAN::Web::Model::API::Module ();
 my $model
     = MetaCPAN::Web::Model::API::Module->new( api => 'http://example.com' );
 

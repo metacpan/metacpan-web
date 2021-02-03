@@ -3,7 +3,7 @@ use warnings;
 
 use Test::More;
 use Cpanel::JSON::XS qw( decode_json );
-use MetaCPAN::Web;
+use MetaCPAN::Web ();
 
 my ( $true, $false ) = @{ decode_json('[true, false]') };
 

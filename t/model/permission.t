@@ -2,9 +2,9 @@ use strict;
 use warnings;
 
 use Test::More;
-use MetaCPAN::Web;
-use MetaCPAN::Web::Model::API::Permission;
-use MetaCPAN::Web::Test;
+use MetaCPAN::Web                         ();
+use MetaCPAN::Web::Model::API::Permission ();
+use MetaCPAN::Web::Test qw( override_api_response );
 use Cpanel::JSON::XS qw( decode_json encode_json );
 
 subtest 'notification_type' => sub {
