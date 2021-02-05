@@ -1,5 +1,5 @@
 package Plack::Middleware::Assets::Dev;
-use Digest::SHA qw(sha1_hex);
+use Digest::SHA qw( sha1_hex );
 use Moo;
 
 with 'Plack::Middleware::Assets::Core';

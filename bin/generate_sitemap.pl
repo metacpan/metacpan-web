@@ -5,10 +5,11 @@
 use strict;
 use warnings;
 
-use File::Basename;
-use File::Spec;
-use Cwd;
-use Config::ZOMG;
+use File::Basename ();
+use File::Spec     ();
+use Cwd            ();
+use Config::ZOMG   ();
+
 my $root_dir;
 
 BEGIN {

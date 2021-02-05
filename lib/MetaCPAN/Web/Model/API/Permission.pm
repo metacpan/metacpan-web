@@ -2,7 +2,7 @@ package MetaCPAN::Web::Model::API::Permission;
 
 use Moose;
 use Future;
-use List::Util qw(uniq);
+use List::Util qw( uniq );
 
 extends 'MetaCPAN::Web::Model::API';
 

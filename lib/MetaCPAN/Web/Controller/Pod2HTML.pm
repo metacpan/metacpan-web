@@ -2,9 +2,9 @@ package MetaCPAN::Web::Controller::Pod2HTML;
 
 use Moose;
 
-use Encode qw( encode decode DIE_ON_ERR LEAVE_SRC );
+use Encode qw( decode DIE_ON_ERR encode LEAVE_SRC );
 use HTML::TokeParser ();
-use MetaCPAN::Web::RenderUtil 'filter_html';
+use MetaCPAN::Web::RenderUtil qw( filter_html );
 use Future;
 
 use namespace::autoclean;

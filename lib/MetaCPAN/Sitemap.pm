@@ -1,13 +1,13 @@
 package MetaCPAN::Sitemap;
 use strict;
 use warnings;
-use IO::Socket::SSL qw(SSL_VERIFY_PEER);
+use IO::Socket::SSL qw( SSL_VERIFY_PEER );
 use IO::Async::Loop;
 use IO::Async::SSL;
 use Net::Async::HTTP;
-use Cpanel::JSON::XS;
-use IO::Compress::Gzip;
-use HTML::Entities qw(encode_entities_numeric);
+use Cpanel::JSON::XS   ();
+use IO::Compress::Gzip ();
+use HTML::Entities qw( encode_entities_numeric );
 use Future;
 
 use Moo;
