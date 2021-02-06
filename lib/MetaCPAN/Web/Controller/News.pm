@@ -4,7 +4,7 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use Path::Tiny qw/path/;
+use Path::Tiny qw( path );
 
 sub news : Path : Args(0) {
     my ( $self, $c ) = @_;

@@ -1,6 +1,6 @@
 package Plack::Middleware::Assets::FileCached;
 use File::Temp ();
-use Digest::SHA qw(sha1_hex);
+use Digest::SHA qw( sha1_hex );
 use File::Path ();
 use Moo;
 

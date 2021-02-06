@@ -4,7 +4,6 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
-use List::Util qw(uniq);
 use Future;
 
 sub by_dist {

@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Role::Date;
 use strict;
 use warnings;
-use Role::Tiny;
+use Role::Tiny qw( requires );
 
 requires 'strftime';
 

@@ -1,10 +1,10 @@
 package MetaCPAN::Middleware::Static;
 use strict;
 use warnings;
-use Plack::Builder;
+use Plack::Builder qw( builder enable mount );
 use Plack::App::File;
 use JavaScript::Minifier::XS ();
-use Cwd qw(cwd);
+use Cwd qw( cwd );
 use Plack::MIME;
 
 Plack::MIME->add_type(

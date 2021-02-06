@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Type::Library -base;
-use Type::Utils -all;
+use Type::Utils qw( extends );
 
 BEGIN {
     extends qw(

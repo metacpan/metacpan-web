@@ -2,9 +2,8 @@ package MetaCPAN::Web::Model::API::Changes;
 use Moose;
 extends 'MetaCPAN::Web::Model::API';
 
-use MetaCPAN::Web::Model::API::Changes::Parser;
-use Try::Tiny;
-use Ref::Util qw(is_arrayref);
+use MetaCPAN::Web::Model::API::Changes::Parser ();
+use Ref::Util qw( is_arrayref );
 use Future ();
 
 sub get {

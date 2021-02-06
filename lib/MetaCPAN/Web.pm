@@ -48,7 +48,7 @@ __PACKAGE__->log( Log::Log4perl::Catalyst->new( undef, autoflush => 1 ) );
 # Squash warnings when not in a terminal (like when running under Docker)
 # Catalyst throws warnings if it can't detect the size, even if $ENV{COLUMNS}
 # exists. Just lie to it to shut it up.
-use Term::Size::Perl;
+use Term::Size::Perl ();
 if ( !Term::Size::Perl::chars() ) {
     no warnings 'once', 'redefine';
     *Term::Size::Perl::chars = sub { $ENV{COLUMNS} || 80 };

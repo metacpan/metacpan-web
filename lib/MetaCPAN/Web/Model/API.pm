@@ -9,16 +9,16 @@ use Encode ();
 use Cpanel::JSON::XS qw( decode_json encode_json );
 use IO::Async::Loop;
 use IO::Async::SSL;
-use IO::Socket::SSL qw(SSL_VERIFY_PEER);
+use IO::Socket::SSL qw( SSL_VERIFY_PEER );
 use Net::Async::HTTP;
-use URI;
+use URI ();
 use URI::QueryParam;
 use MetaCPAN::Web::Types qw( Uri );
 use Try::Tiny qw( catch try );
 use HTTP::Request;
 use HTTP::Request::Common ();
-use URI::Escape qw(uri_escape);
-use Ref::Util qw(is_arrayref);
+use URI::Escape qw( uri_escape );
+use Ref::Util qw( is_arrayref );
 
 my $loop;
 

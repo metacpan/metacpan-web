@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Sub::Exporter -setup => { exports => [qw(filter_html)], };
 
-use HTML::Escape qw(escape_html);
+use HTML::Escape qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
 
