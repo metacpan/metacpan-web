@@ -151,6 +151,46 @@ with a higher version number than the last one you uploaded.
 The PAUSE account information need to be updated manually via
 [Edit Account Info](https://pause.perl.org/pause/authenquery?ACTION=edit_cred).
 
+## How to adopt a distribution?
+
+### What does the "Take me over?", "Why not adopt me?", "Looking for help!" mean?
+
+CPAN Distributions can be marked by their authors (or by the CPAN admins when the author is not available)
+to be "up for adoption". This can be done by adding one of the following PAUSE accounts
+as co-maintainers: ADOPTME, HANDOFF, or NEEDHELP. For a more detailed explanation
+read the post [Marking modules as 'available for adoption'](http://neilb.org/2013/08/07/adoptme.html).
+
+
+### How to become the maintainer or co-maintainer of a CPAN distribution?
+
+See the description how to [adopt a CPAN module](http://neilb.org/2013/07/24/adopt-a-module.html)
+and check out the [CPAN adoption request template](http://neilb.org/2014/01/31/adoption-request.html).
+
+See also the list of [CPAN Adoption Candidates](https://neilb.org/adoption/).
+
+### How to mark a distribution that is up for adoption?
+
+If you are the maintainer of the distribution you can follow these steps:
+
+* Visit [PAUSE](https://pause.perl.org/)
+* Click on "Add Comaintainers"
+* Filter for the name of the distribution.
+* Check the box next to the name of the distribution.
+* Type in HANDOFF as userid.
+* Click on "Make Co-Maintainer"
+* Within an hour the change will show up on MetaCPAN.
+
+### How to remove the "adopt me" banner from the module?
+
+Remove the author ADOPTME, HANDOFF, or NEEDHELP from the project.
+
+* Visit [PAUSE](https://pause.perl.org/)
+* Click on "Remove Comaintainers".
+* Filter for the name of the distribution.
+* Check which one of the above 3 are listed.
+* Select them and click on "Remove".
+* Within an hour the change will show up on MetaCPAN.
+
 <% END %>
 
 </div>
