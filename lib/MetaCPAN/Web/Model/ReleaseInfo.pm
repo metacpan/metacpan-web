@@ -58,7 +58,7 @@ sub find {
 }
 
 sub get {
-    my ( $self, $author, $release_name ) = @_;
+    my ( $self, $author, $release_name, $module_info ) = @_;
     my $release      = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
     $release->then( sub {
@@ -70,7 +70,8 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            notification => $self->_get_notifications( $data->{release} ),
+            notification =>
+                $self->_get_notifications( $data->{release}, $module_info ),
             $self->_dist_data( $data->{release}{distribution} ),
         );
     } )->then( $self->normalize );
@@ -279,7 +280,7 @@ sub normalize_issue_url {
 }
 
 sub _get_notifications {
-    my ( $self, $release ) = @_;
+    my ( $self, $release, $module ) = @_;
     return $self->_permission->get_notification_info(
         $release->{main_module} )->then( sub {
         my $data = shift;
@@ -289,6 +290,9 @@ sub _get_notifications {
         unless ( $data->{notification} ) {
             if ( $release->{deprecated} ) {
                 $data->{notification} = { type => 'DEPRECATED' };
+            }
+            elsif ( $module && $module->{deprecated} ) {
+                $data->{notification} = { type => 'MODULE_DEPRECATED' };
             }
         }
 

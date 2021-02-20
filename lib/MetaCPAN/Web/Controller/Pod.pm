@@ -30,8 +30,8 @@ sub find : Path : Args(1) {
 
     my $release_info
         = $c->model('ReleaseInfo')
-        ->get( $pod_file->{author}, $pod_file->{release},
-        $pod_file->{module}[0]{name} )->else( sub { Future->done( {} ) } );
+        ->get( $pod_file->{author}, $pod_file->{release}, $pod_file )
+        ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
     # TODO: Disambiguate if there's more than one match. #176
