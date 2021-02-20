@@ -48,9 +48,7 @@ sub find {
         $self->_wrap(
             release => $data,
             %dist_data,
-            notification => $self->_permission->get_notification_info(
-                $data->{release}{main_module}
-            ),
+            notification => $self->_get_notifications( $data->{release} ),
             $self->_release_data(
                 $data->{release}{author},
                 $data->{release}{name}
@@ -72,9 +70,7 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            notification => $self->_permission->get_notification_info(
-                $data->{release}{main_module}
-            ),
+            notification => $self->_get_notifications( $data->{release} ),
             $self->_dist_data( $data->{release}{distribution} ),
         );
     } )->then( $self->normalize );
@@ -280,6 +276,12 @@ sub normalize_issue_url {
     }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
+}
+
+sub _get_notifications {
+    my ( $self, $release ) = @_;
+    return $self->_permission->get_notification_info(
+        $release->{main_module} );
 }
 
 __PACKAGE__->meta->make_immutable;
