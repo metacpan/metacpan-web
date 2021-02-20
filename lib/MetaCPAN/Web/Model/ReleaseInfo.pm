@@ -281,7 +281,21 @@ sub normalize_issue_url {
 sub _get_notifications {
     my ( $self, $release ) = @_;
     return $self->_permission->get_notification_info(
-        $release->{main_module} );
+        $release->{main_module} )->then( sub {
+        my $data = shift;
+
+        # Unless we already have Notifications from Permissions, see if there
+        # are others needing to be added.
+        unless ( $data->{notification} ) {
+            if ( $release->{deprecated} ) {
+                $data->{notification} = { type => 'DEPRECATED' };
+            }
+        }
+
+        # Return the Notifications (either Permission based, or for Deprecated
+        # status).
+        return Future->wrap($data);
+        } );
 }
 
 __PACKAGE__->meta->make_immutable;
