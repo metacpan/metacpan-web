@@ -40,10 +40,12 @@
         <h2><% NOTIFICATION.title %></h2>
         <span>
             <% NOTIFICATION.text %>
-            If you're interested then please contact
-            <% NOTIFICATION.contactwhom %> via
-            <a href="<% NOTIFICATION.mailto %>">email</a>.
-            <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+            <%- IF NOTIFICATION.contactwhom %>
+                If you're interested then please contact
+                <% NOTIFICATION.contactwhom %> via
+                <a href="<% NOTIFICATION.mailto %>">email</a>.
+                <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+            <%- END %>
         </span>
     </div>
 </div>
