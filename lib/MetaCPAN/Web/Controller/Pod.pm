@@ -30,8 +30,8 @@ sub find : Path : Args(1) {
 
     my $release_info
         = $c->model('ReleaseInfo')
-        ->get( $pod_file->{author}, $pod_file->{release},
-        $pod_file->{module}[0]{name} )->else( sub { Future->done( {} ) } );
+        ->get( $pod_file->{author}, $pod_file->{release}, $pod_file )
+        ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
     # TODO: Disambiguate if there's more than one match. #176
@@ -55,11 +55,13 @@ sub release : Local : Args {
         $c->detach();
     }
 
+    my $pod_file
+        = $c->model('API::Module')->get( $author, $release, @path )->get;
     my $release_data
-        = $c->model('ReleaseInfo')->get( $author, $release )->else_done( {} );
-    my $pod_file = $c->model('API::Module')->get( $author, $release, @path );
+        = $c->model('ReleaseInfo')->get( $author, $release, $pod_file )
+        ->else_done( {} );
     $c->stash( {
-        pod_file => $pod_file->get,
+        pod_file => $pod_file,
         %{ $release_data->get },
         permalinks => 1,
     } );

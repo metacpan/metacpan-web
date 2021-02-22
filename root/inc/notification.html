@@ -24,6 +24,14 @@
             text   = "The maintainer of this distribution is looking for someone to take over!",
             body   = "Hello,\r\n\r\nI'm interested in taking over the %s module. If you can grant me the privilege I will release the next version.\r\n\r\n"
         },
+        DEPRECATED = {
+            title  = "Deprecated.",
+            text   = "The maintainer of this distribution has indicated that it is deprecated and no longer suitable for use.",
+        },
+        MODULE_DEPRECATED = {
+            title  = "Deprecated.",
+            text   = "The maintainer of this module has indicated that the module is deprecated and no longer suitable for use.",
+        },
     }.$notification_type;
     NOTIFICATION.mailto = MAILTO.sprintf(
         notification.emails.join(','),
@@ -34,16 +42,18 @@
 <input id="<% notification_type %>" type="checkbox" class="notification-toggle-checkbox" />
 <div id="notification" class="well collapsed notify-<% notification_type %>">
     <label class="remove-notification" for="<% notification_type %>" >
-        <i class="fa fa-fw fa-close black""></i>
+        <i class="fa fa-fw fa-close black"></i>
     </label>
     <div id="notification-container">
         <h2><% NOTIFICATION.title %></h2>
         <span>
             <% NOTIFICATION.text %>
-            If you're interested then please contact
-            <% NOTIFICATION.contactwhom %> via
-            <a href="<% NOTIFICATION.mailto %>">email</a>.
-            <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+            <%- IF NOTIFICATION.contactwhom %>
+                If you're interested then please contact
+                <% NOTIFICATION.contactwhom %> via
+                <a href="<% NOTIFICATION.mailto %>">email</a>.
+                <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+            <%- END %>
         </span>
     </div>
 </div>

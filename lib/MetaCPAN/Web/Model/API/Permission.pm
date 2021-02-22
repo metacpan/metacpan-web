@@ -79,13 +79,28 @@ sub _permissions_to_notification {
                 authors     => [ grep !$special{$_}, @perm_holders ],
                 };
         }
-        my @all_authors = uniq( map @{ $_->{authors} }, @notif );
+
+        Future->done( {
+            took          => ( $perm_data->{took} || 0 ),
+            notifications => \@notif,
+        } );
+    };
+}
+
+sub _add_email_to_notification {
+    my ($self) = @_;
+    sub {
+        my $data = shift;
+
+        my $notifications = $data->{notifications} || [];
+        my @all_authors   = uniq( map @{ $_->{authors} }, @{$notifications} );
+
         $self->_author->get_multiple(@all_authors)->then( sub {
             my $author_data = shift;
             my %emails      = map +( $_->{pauseid} => $_->{email} ),
                 @{ $author_data->{authors} };
 
-            for my $notif (@notif) {
+            for my $notif ( @{$notifications} ) {
                 my @emails = map $emails{$_}, @{ $notif->{authors} };
                 @emails = map ref($_) ? @$_ : $_, @emails;
                 unshift @emails, 'modules@perl.org'
@@ -95,10 +110,9 @@ sub _permissions_to_notification {
 
             Future->done( {
                 took => (
-                      ( $perm_data->{took} || 0 )
-                    + ( $author_data->{took} || 0 )
+                    ( $data->{took} || 0 ) + ( $author_data->{took} || 0 )
                 ),
-                notifications => \@notif,
+                notifications => $notifications,
             } );
         } );
     };
@@ -107,7 +121,7 @@ sub _permissions_to_notification {
 sub get_notification_info {
     my ( $self, $module ) = @_;
     $self->by_module($module)->then( $self->_permissions_to_notification )
-        ->then( sub {
+        ->then( $self->_add_email_to_notification )->then( sub {
         my $data = shift;
         Future->done( {
             took         => $data->{took},

@@ -48,9 +48,7 @@ sub find {
         $self->_wrap(
             release => $data,
             %dist_data,
-            notification => $self->_permission->get_notification_info(
-                $data->{release}{main_module}
-            ),
+            notification => $self->_get_notifications( $data->{release} ),
             $self->_release_data(
                 $data->{release}{author},
                 $data->{release}{name}
@@ -60,7 +58,7 @@ sub find {
 }
 
 sub get {
-    my ( $self, $author, $release_name ) = @_;
+    my ( $self, $author, $release_name, $module_info ) = @_;
     my $release      = $self->_release->get( $author, $release_name );
     my %release_data = $self->_release_data( $author, $release_name );
     $release->then( sub {
@@ -72,9 +70,8 @@ sub get {
         $self->_wrap(
             release => $data,
             %release_data,
-            notification => $self->_permission->get_notification_info(
-                $data->{release}{main_module}
-            ),
+            notification =>
+                $self->_get_notifications( $data->{release}, $module_info ),
             $self->_dist_data( $data->{release}{distribution} ),
         );
     } )->then( $self->normalize );
@@ -280,6 +277,29 @@ sub normalize_issue_url {
     }{https://rt.cpan.org/Dist/Display.html?Name=}x;
 
     return $url;
+}
+
+sub _get_notifications {
+    my ( $self, $release, $module ) = @_;
+    return $self->_permission->get_notification_info(
+        $release->{main_module} )->then( sub {
+        my $data = shift;
+
+        # Unless we already have Notifications from Permissions, see if there
+        # are others needing to be added.
+        unless ( $data->{notification} ) {
+            if ( $release->{deprecated} ) {
+                $data->{notification} = { type => 'DEPRECATED' };
+            }
+            elsif ( $module && $module->{deprecated} ) {
+                $data->{notification} = { type => 'MODULE_DEPRECATED' };
+            }
+        }
+
+        # Return the Notifications (either Permission based, or for Deprecated
+        # status).
+        return Future->wrap($data);
+        } );
 }
 
 __PACKAGE__->meta->make_immutable;
