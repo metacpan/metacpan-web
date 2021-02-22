@@ -287,7 +287,7 @@ sub _get_notifications {
 
         # Unless we already have Notifications from Permissions, see if there
         # are others needing to be added.
-        unless ( $data->{notification} ) {
+        unless ( 1 || $data->{notification} ) {
             if ( $release->{deprecated} ) {
                 $data->{notification} = { type => 'DEPRECATED' };
             }
