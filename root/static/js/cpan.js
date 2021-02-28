@@ -93,8 +93,8 @@ $(document).ready(function() {
         $(this).click(function(event) {
             $('#keyboard-shortcuts').modal();
             event.preventDefault();
-        }
-    )});
+        })
+    });
 
     // Global keyboard shortcuts
     Mousetrap.bind('?', function() {
