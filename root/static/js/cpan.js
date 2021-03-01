@@ -89,6 +89,13 @@ $(document).ready(function() {
 
     $(".ttip").tooltip();
 
+    $('.help-btn').each(function() {
+        $(this).click(function(event) {
+            $('#keyboard-shortcuts').modal();
+            event.preventDefault();
+        })
+    });
+
     // Global keyboard shortcuts
     Mousetrap.bind('?', function() {
         $('#keyboard-shortcuts').modal();
