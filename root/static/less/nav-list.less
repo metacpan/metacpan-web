@@ -1,6 +1,6 @@
 .nav-list {
     padding-left: 0px;
-    width: 174px;
+    width: @sidebar-width;
     margin-bottom: 0;
     line-height: 1.54em;
     float: left;
@@ -24,7 +24,7 @@
     }
 
     select, input[type=text] {
-        width: 165px;
+        width: (@sidebar-width - 10px);
         line-height: auto;
     }
 
@@ -82,7 +82,7 @@
 }
 
 .irc-chat {
-  @width: 175px;
+  @width: @sidebar-width;
   @height: 36px;
   @left: 10px;
   @border-margin: 5px;
