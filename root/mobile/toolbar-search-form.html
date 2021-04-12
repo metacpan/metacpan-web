@@ -1,5 +1,5 @@
 <div>
-    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>">
+    <form action="/search">
         <input type="search" class="form-control tool-bar-form" placeholder="Search" name="q">
         <input type="submit" class="hidden">
     </form>

@@ -179,12 +179,12 @@
                     <a href="/" class="small-logo"></a>
                 </div>
                 <div class="col-md-9">
-                    <form action="<% IF req.uri.path == '/mirrors'; req.uri.path; ELSE; '/search'; END %>" class="search-form form-horizontal">
+                    <form action="/search" class="search-form form-horizontal">
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" name="q" size="41" id="search-input" class="form-control" value="<% search_query %>">
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" type="submit">Search<% IF req.uri.path == '/mirrors' %> Mirrors<% END %></button>
+                                    <button class="btn search-btn" type="submit">Search</button>
                                     <button class="btn search-btn help-btn">?</button>
                                 </span>
                             </div>
@@ -207,9 +207,6 @@
                 </div>
                 <div class="col-xs-5 col-sm-3 col-md-2" style="text-align: center">
                     <a href="/about">About MetaCPAN</a>
-                </div>
-                <div class="hidden-xs col-sm-2 col-md-2" style="text-align: center">
-                    <a href="/mirrors">CPAN Mirrors</a>
                 </div>
                 <div class="hidden-xs col-sm-3 col-md-2" style="text-align: center">
                     <a href="https://github.com/metacpan/metacpan-web">Fork metacpan.org</a>
