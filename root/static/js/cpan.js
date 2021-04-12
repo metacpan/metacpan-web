@@ -514,29 +514,6 @@ function set_page_size(selector, storage_name) {
 }
 
 
-function searchForNearest() {
-    $("#busy").css({
-        visibility: 'visible'
-    });
-    navigator.geolocation.getCurrentPosition(function(pos) {
-            var query = $.getUrlVar('q');
-            if (!query) {
-                query = '';
-            }
-            query = query.replace(/(^|\s+)loc:\S+|$/, '');
-            query = query + ' loc:' + pos.coords.latitude + ',' + pos.coords.longitude;
-            query = query.replace(/(^|\s)\s+/g, '$1');
-            document.location.href = '/mirrors?q=' + encodeURIComponent(query);
-        },
-        function() {
-            $("#busy").css({
-                visibility: 'hidden'
-            });
-        }, {
-            maximumAge: 600000
-        });
-}
-
 function logInPAUSE(a) {
     if (!a.href.match(/pause/))
         return true;
