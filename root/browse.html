@@ -33,12 +33,12 @@
 <tbody>
 <% i = 0; FOREACH file IN files %>
 <tr>
-  <td class="name" sort="<% file.directory == 1 ? "!" _ file.name : file.name %>"><strong><a href="/source/<% [author, release, file.path | uri ].join("/") %>" class="<%
+  <td class="name" sort="<% file.directory == 1 ? "!" _ file.name : file.name %>"><a href="/source/<% [author, release, file.path | uri ].join("/") %>" class="<%
     file.directory == 1 ? 'silk-folder'
   : file.mime.match("perl") ? 'silk-page-white-code'
   : file.mime.match("x-c") ? 'silk-page-white-c'
   : 'silk-page-white'
-  -%>" title="<% file.path %>"><% file.name %></a></strong></td>
+  -%>" title="<% file.path %>"><% file.name %></a></td>
   <td class="documentation"><strong><a href="/pod/release/<% [author, release, file.path].join("/") %>" title="<% file.path %>" class="ellipsis"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
   <td class="size" sort="<% file.directory == 0 ? file.${"stat.size"} : 0 %>"><% file.directory == 0 ? file.${"stat.size"} | format_bytes : "" %></td>
   <td class="mtime relatize" nowrap="nowrap" sort="<% date = datetime(file.${"stat.mtime"}).to_http; date %>"><% date %></td>

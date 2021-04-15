@@ -13,7 +13,7 @@
   <%- FOREACH release IN releases %>
     <tr>
       <td class="river-gauge" sort="<% release.river.total || 0 %>"><% INCLUDE inc/river-gauge.html, distribution = release.distribution, river = release.river %></td>
-      <td class="name"><strong><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" title="<% release.author; '/'; release.name %>"><% release.name %></a></strong></td>
+      <td class="name"><a href="/release/<% IF release.status == 'latest'; release.distribution; ELSE; release.author; '/'; release.name; END %>" class="ellipsis" title="<% release.author; '/'; release.name %>"><% release.name %></a></td>
       <td class="abstract"><% IF release.abstract; release.abstract; END %></td>
       <td class="date relatize" sort="<% date = datetime(release.date).to_http; date %>"><% date %></td>
     </tr>
