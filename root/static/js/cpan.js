@@ -269,11 +269,22 @@ $(document).ready(function() {
     for (var i = 0; i < items.length; i++) {
         var element = items[i];
         var text = element.textContent;
+
+        // try to find a reasonable place to cut to allow mid-abbreviation.
+        // we want to cut "near" the middle, but prefer on a boundary.
         var cut = Math.floor(text.length / 5 * 3);
+        var start_text = text.substr(0, cut);
+        var end_text = text.substr(cut);
+        var res = start_text.match(/^(.*[- :])(.*?)$/);
+        if (res && res[1].length > text.length / 4) {
+            start_text = res[1];
+            end_text = res[2] + end_text;
+        }
+
         var start = document.createElement('span');
-        start.appendChild(document.createTextNode(text.substr(0, cut)));
+        start.appendChild(document.createTextNode(start_text));
         var end = document.createElement('span');
-        end.appendChild(document.createTextNode(text.substr(cut)));
+        end.appendChild(document.createTextNode(end_text));
         $(element).empty();
         element.appendChild(end);
         start.style.maxWidth = 'calc(100% - ' + end.clientWidth + 'px)';
