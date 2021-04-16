@@ -64,34 +64,12 @@
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
-            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
         </form>
     </center>
     </li>
     <% ELSIF donate.name == 'wishlist' && donate.id %>
     <li class="author-donate">
         <a rel="me noopener nofollow" href="<% donate.id %>" target="_blank">Wishlist</a>
-    </li>
-    <% ELSIF donate.name == 'flattr' && donate.id %>
-    <li class="author-donate">
-        <script type="text/javascript">
-            (function() {
-              var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-
-              s.type = 'text/javascript';
-              s.async = true;
-              s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
-
-              t.parentNode.insertBefore(s, t);
-            })();
-        </script>
-        <a class="FlattrButton" style="display:none;"
-            title="<% author.name %> (<% author.pauseid %>) on MetaCPAN"
-            rev="flattr;uid:<% donate.id %>;button:compact;category:software;tags:perl,cpan,metacpan;"
-            href="/author/<% author.pauseid %>"
-            language="en_GB" >
-        <% author.name %> is <% author.pauseid %> on CPAN, the Comprehensive Perl Archive Network.
-        </a>
     </li>
     <% END; END; END %>
     <li class="nav-header">Activity</li>
