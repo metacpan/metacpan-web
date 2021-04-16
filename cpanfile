@@ -75,7 +75,7 @@ requires 'Ref::Util', '>= 0.008';
 requires 'Regexp::Common';
 requires 'Regexp::Common::time';
 requires 'Starman', '>= 0.4008';
-requires 'Template::Alloy';
+requires 'Template::Alloy', '== 1.020';
 requires 'Term::Size::Any';
 requires 'Text::MultiMarkdown';
 requires 'Text::Pluralize';
