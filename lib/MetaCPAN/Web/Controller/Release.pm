@@ -154,15 +154,14 @@ sub _files_to_categories {
                 $s{ $f->{documentation} }++;
             }
 
-            push @{ $ret->{provides} },
-                grep !$s{ $_->{module_name} }++, map {
+            push @{ $ret->{provides} }, grep !$s{ $_->{module_name} }++, map {
                 ;
                 my $entry = {%$f};
                 my $m     = $_;
                 $entry->{ $module_field_map{$_} } = $m->{$_}
                     for grep exists $m->{$_}, keys %module_field_map;
                 $entry;
-                } @modules;
+            } @modules;
         }
         elsif ( $f->{documentation} && $path =~ m/\.pm$/ ) {
             push @{ $ret->{modules} }, $f;
