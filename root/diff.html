@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
-  Diff <a href="/<% type %>/<% diff.source %>"><% diff.source.split("/").first(2).join(" / ") %></a>
+  Diff <a href="/<% type %>/<% diff.source.path %>"><% diff.source.author %> / <% diff.source.release %></a>
   &nbsp;/&nbsp;
-  <a href="/<% type %>/<% diff.target %>"><% diff.target.split("/").first(2).join(" / ") %></a>
+  <a href="/<% type %>/<% diff.target.path %>"><% diff.target.author %> / <% diff.target.release %></a>
 </div>
 
 <%-
@@ -12,36 +12,27 @@ FOREACH file IN diff.statistics;
 files += 1;
 insertions += file.insertions;
 deletions += file.deletions;
-parts = file.target.split("/");
-IF file.target == '/dev/null';
-    parts = file.source.split("/");
-END;
-FOREACH i IN [1,2,3]; foo = parts.shift; END;
-file.path = parts.join("/"); END -%>
+END -%>
 
   <ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
   <li class="nav-header">Tools</li>
-    <%- IF diff.source.split("/").size != 2 %>
+    <%- IF diff.source.file %>
       <li>
-        <a href="?source=<% diff.source.split("/").first(2).join("/") %>&target=<% diff.target.split("/").first(2).join("/") %>">
+        <a href="?source=<% diff.source.author %>/<% diff.source.release %>&amp;target=<% diff.target.author %>/<% diff.target.release %>">
           Diff full distribution
         </a>
       </li>
     <% END %>
     <li>
-      <a href="?target=<% diff.source %>&amp;source=<% diff.target %>">
+      <a href="?source=<% diff.target.path %>&amp;target=<% diff.source.path %>">
         Reverse diff
       </a>
     </li>
     <li>
-      <%- IF type == 'source' %>
-      <a href="<% api_public %>/diff/file/<% diff.source.digest %>/<% diff.target.digest %>?content-type=text/plain">
-      <%- ELSE %>
-      <a href="<% api_public %>/diff/release/<% diff.source %>/<% diff.target %>?content-type=text/plain">
-      <%- END %>
+      <a href="<% api_public %>/diff/<% diff.source.file ? 'file' : 'release' %>/<% diff.source.id %>/<% diff.target.id %>?content-type=text/plain">
         Raw diff
       </a>
     </li>
@@ -50,7 +41,7 @@ file.path = parts.join("/"); END -%>
       <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">
         <option>Jump to file</option>
         <% FOREACH file IN diff.statistics -%>
-        <option value="<% file.path %>"><% file.path %></option>
+        <option value="<% file.file %>"><% file.file %></option>
         <% END -%>
       </select>
     </li>
@@ -65,23 +56,23 @@ file.path = parts.join("/"); END -%>
 <table class="table-striped diff-list">
 <% FOREACH file IN diff.statistics %>
 <tr>
-  <td><a href="#<% file.path %>"><% file.path %></a></td>
-  <td><a href="#<% file.path %>" class="minus"><% file.deletions %></a><a href="#<% file.path %>" class="plus"><% file.insertions %></a></td>
+  <td><a href="#<% file.file %>"><% file.file %></a></td>
+  <td><a href="#<% file.file %>" class="minus"><% file.deletions %></a><a href="#<% file.file %>" class="plus"><% file.insertions %></a></td>
 </tr>
 <% END %>
 <tr>
-  <td><% files %> file<% IF files > 1 %>s<% END %> changed  <% IF type == 'source' %> (This is a file diff) <% ELSE %> (This is a version diff) <% END %></td>
+  <td><% files %> file<% IF files > 1 %>s<% END %> changed  <% IF diff.source.file %> (This is a file diff) <% ELSE %> (This is a version diff) <% END %></td>
   <td><span class="minus"><% deletions %></span><span class="plus"><% insertions %></span></td>
 </tr>
 </table>
 
 <% FOREACH file IN diff.statistics %>
-    <a name="<% file.path %>"></a>
+    <a name="<% file.file %>"></a>
     <div class="diff-container">
         <div class="diff-header">
-            <a href="/source/<% diff.target %>/<% file.path %>"><% file.path %></a>
+            <a href="/source/<% diff.target.path %>/<% file.file %>"><% file.file %></a>
         </div>
-        <pre><code class="language-diff"><% parts = file.diff.split("\n"); WHILE parts; line = parts.shift; LAST IF line.match( '^\+' ); END; parts.join("\n") %></code></pre>
+        <pre><code class="language-diff"><% file.diff %></code></pre>
     </div>
 <% END %>
 </div>
