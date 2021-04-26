@@ -10,14 +10,14 @@
 %>
 
 <div itemscope itemtype="http://schema.org/SoftwareApplication">
-  <% INCLUDE inc/breadcrumbs.html schema_org = 1 %>
+  <% INCLUDE inc/breadcrumbs.html %>
   <ul class="nav-list slidepanel">
     <li class="visible-xs">
       <% INCLUDE mobile/toolbar-search-form.html %>
     </li>
     <li class="nav-header">
       <%- module_date = datetime(module.date) -%>
-      <time class="relatize" itemprop="dateModified" datetime="<% module_date.to_ymd %>"><% module_date.to_http %></time>
+      <time class="relatize" datetime="<% module_date.to_ymd %>"><% module_date.to_http %></time>
     </li>
     <% INCLUDE inc/release-status.html maturity = release.maturity, banner_class = 'release-banner' %>
     <li>
@@ -25,7 +25,7 @@
     </li>
     <% IF documented_module.version %>
     <li>
-      Module version: <span itemprop="softwareVersion"><% documented_module.version | html %></span>
+      Module version: <% documented_module.version | html %>
     </li>
     <% END %>
     <% IF permalinks || release.status != 'latest';
@@ -48,10 +48,10 @@
       <a data-keyboard-shortcut="g b" href="<% source_base %>/<% module.path.split("/").splice(0,-1).join("/") %>"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
       (<a href="<% source_base %>/<% module.path.split("/").splice(0,-1).join("/") %>?raw=1">raw</a>)
     </li>
-    <% PROCESS inc/release-info.html schema_org = 1 %>
+    <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
-    <% INCLUDE inc/release-tools.html schema_org = 1 %>
+    <% INCLUDE inc/release-tools.html %>
   </ul>
 
   <button id="right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
