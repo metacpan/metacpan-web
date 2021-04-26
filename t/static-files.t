@@ -73,6 +73,8 @@ my %files = (
         '2a9659e15773869426894fe38acff4b797e17b65',
     'root/static/icons/metacpan-icon.png' =>
         '1b893940fe0107f9e9da5c50a40320c26f25774a',
+    'root/static/icons/metacpan-icon-large.png' =>
+        'b0697c267731b7ee53e8e7a3bbd9f6476c0ba29a',
     'root/static/icons/package.png' =>
         'cbb30244c85540bedd8761b1394cb5162c98c6b6',
     'root/static/icons/page_white.png' =>
