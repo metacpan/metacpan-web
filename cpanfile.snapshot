@@ -551,16 +551,6 @@ DISTRIBUTIONS
       Carp 0
       ExtUtils::MakeMaker 0
       Moose::Role 0
-  CatalystX-RoleApplicator-0.005
-    pathname: H/HD/HDP/CatalystX-RoleApplicator-0.005.tar.gz
-    provides:
-      CatalystX::RoleApplicator 0.005
-    requirements:
-      Catalyst::Runtime 5.7
-      Class::MOP 0.80
-      ExtUtils::MakeMaker 0
-      Moose 0.73
-      MooseX::RelatedClassRoles 0.003
   Class-Accessor-0.51
     pathname: K/KA/KASEI/Class-Accessor-0.51.tar.gz
     provides:
@@ -3490,15 +3480,6 @@ DISTRIBUTIONS
       Moose::Util::MetaRole 0
       namespace::autoclean 0.08
       perl 5.006
-  MooseX-RelatedClassRoles-0.004
-    pathname: H/HD/HDP/MooseX-RelatedClassRoles-0.004.tar.gz
-    provides:
-      MooseX::RelatedClassRoles 0.004
-    requirements:
-      Class::MOP 0.80
-      ExtUtils::MakeMaker 0
-      Moose 0.73
-      MooseX::Role::Parameterized 0.04
   MooseX-Role-Parameterized-1.11
     pathname: E/ET/ETHER/MooseX-Role-Parameterized-1.11.tar.gz
     provides:
