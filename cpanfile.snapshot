@@ -199,17 +199,6 @@ DISTRIBUTIONS
       Storable 0
       Test::Deep 0
       Test::More 0
-  CPAN-Changes-0.400002
-    pathname: H/HA/HAARG/CPAN-Changes-0.400002.tar.gz
-    provides:
-      CPAN::Changes 0.400002
-      CPAN::Changes::Group undef
-      CPAN::Changes::Release undef
-      Test::CPAN::Changes 0.400002
-    requirements:
-      ExtUtils::MakeMaker 0
-      Text::Wrap 0.003
-      version 0.9906
   CPAN-DistnameInfo-0.12
     pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
     provides:

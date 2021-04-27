@@ -17,7 +17,6 @@ requires 'CatalystX::Fastly::Role::Response', '0.06';
 requires 'CatalystX::RoleApplicator';
 requires 'Config::General';
 requires 'Config::ZOMG', '1.000000';
-requires 'CPAN::Changes', '0.21';
 requires 'Cpanel::JSON::XS';
 requires 'CPAN::DistnameInfo', '0.12';
 requires 'CPAN::Meta', '2.141520'; # Avoid issues with List::Util dep under carton install.
