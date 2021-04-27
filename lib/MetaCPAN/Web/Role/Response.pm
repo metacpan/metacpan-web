@@ -2,7 +2,7 @@ package MetaCPAN::Web::Role::Response;
 
 use Moose::Role;
 use DateTime::Format::HTTP;
-use Regexp::Common qw(time);
+use DateTime::Format::ISO8601 ();
 
 =head2 last_modified
 
@@ -14,20 +14,15 @@ an ISO8601 formatted date string.
 
 sub last_modified {
     my ( $self, $date ) = @_;
-    if ( $date =~ /^\d+$/ ) {
+    if ( ref $date ) {
+
+        # assume it's a DateTime
+    }
+    elsif ( $date =~ /^\d+$/ ) {
         $date = DateTime->from_epoch( epoch => $date );
     }
-    elsif ( $date =~ /$RE{time}{iso}{-keep}/ ) {
-        $date = eval {
-            DateTime->new(
-                year   => $2,
-                month  => $3,
-                day    => $4,
-                hour   => $5,
-                minute => $6,
-                second => $7,
-            );
-        };
+    else {
+        $date = DateTime::Format::ISO8601->parse_datetime($date);
     }
     return unless ( eval { $date->isa('DateTime') } );
     $self->header(

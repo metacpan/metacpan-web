@@ -11,7 +11,6 @@ use List::Util       ();
 use Cpanel::JSON::XS ();
 use Gravatar::URL    ();
 use MetaCPAN::Web::RenderUtil qw( filter_html );
-use Regexp::Common qw(time);
 use Number::Format      ();
 use Text::MultiMarkdown ();
 use Text::Pluralize     ();
