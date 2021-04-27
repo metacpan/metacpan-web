@@ -1,5 +1,22 @@
 <%- rss = "recent"; rss_title = 'Recent CPAN Uploads - MetaCPAN' %>
 <%- canonical = "/" %>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MetaCPAN",
+    "url": "/",
+    "image": "/static/icons/metacpan-icon-large.png"
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "/search?q={query}",
+      "query-input": "required name=query",
+      "query": "required"
+    }
+  }
+]
+</script>
 
 <div align="center" class="home">
   <a href="/" class="big-logo" alt="meta::cpan"></a>
