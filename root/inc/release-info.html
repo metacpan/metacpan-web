@@ -48,6 +48,16 @@
   <i class="fa fa-fw fa-greater-than-equal black"></i>Perl: <% release.metadata.prereqs.runtime.requires.perl | version %>
 </li>
 <% END %>
+<% IF release.metadata.x_help_wanted %>
+<li class="nav-header">Help Wanted</li>
+<li>
+  <ul>
+    <%- FOREACH position IN release.metadata.x_help_wanted %>
+    <li><% position %></li>
+    <%- END %>
+  </ul>
+</li>
+<%- END %>
 <% IF irc.web %>
 <li class="irc-chat">
     <div><a rel="noopener nofollow" target="_blank" href="<% irc.web %>">Questions? Chat with us!</a></div>
