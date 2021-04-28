@@ -27,9 +27,8 @@
 </li>
 <li>
     <%
-    testers_version = release.name.remove('^' _ release.distribution.quotemeta _ '-?');
-    cpantesters_base = "https://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ (testers_version | uri) %>
-    <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=<% release.distribution | uri %>+<% testers_version | uri %>" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
+    cpantesters_base = "https://www.cpantesters.org/distro/" _ release.distribution.chunk(1).0.uc _ "/" _ release.distribution _ ".html?oncpan=1&distmat=1&version=" _ (release.distnameinfo.version | uri) %>
+    <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=<% release.distribution | uri %>+<% release.distnameinfo.version | uri %>" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
     <% IF release.tests.size %><span title="(pass / fail / na)">(<a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=2" style="color: #090"><% release.tests.pass %></a> / <a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=3" style="color: #900"><% release.tests.fail %></a> / <a rel="noopener nofollow" href="<% cpantesters_base %>&amp;grade=4"><% release.tests.na %></a>)</span><% END %>
 </li>
 <li>
@@ -65,11 +64,11 @@
             backpan.push(version);
             NEXT;
         END %>
-    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distname_version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.author %> on <% datetime(version.date).to_ymd %>)</option>
+    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distnameinfo.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<% version.author %> on <% datetime(version.date).to_ymd %>)</option>
 <% END; IF backpan.size %>
 <optgroup label="BackPAN"></optgroup>
 <% FOREACH version IN backpan %>
-    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distname_version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% datetime(version.date).to_ymd %>)
+    <option value="<% version.author; '/'; version.name; IF module; '/'; module.path; END %>"><% version.distnameinfo.version _ (version.maturity == 'developer' ? ' DEV' : '') %> (<%version.author %> on <% datetime(version.date).to_ymd %>)
     </option>
 <% END %>
 <% END; END %>
