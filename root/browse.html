@@ -40,8 +40,8 @@
   : 'silk-page-white'
   -%>" title="<% file.path %>"><% file.name %></a></td>
   <td class="documentation"><strong><a href="/pod/release/<% [author, release, file.path].join("/") %>" title="<% file.path %>" class="ellipsis"><% file.slop ? file.documentation ? file.documentation : file.name : "" %></a></strong></td>
-  <td class="size" sort="<% file.directory == 0 ? file.${"stat.size"} : 0 %>"><% file.directory == 0 ? file.${"stat.size"} | format_bytes : "" %></td>
-  <td class="mtime relatize" nowrap="nowrap" sort="<% date = datetime(file.${"stat.mtime"}).to_http; date %>"><% date %></td>
+  <td class="size" sort="<% file.directory == 0 ? file.stat.size : 0 %>"><% file.directory == 0 ? file.stat.size | format_bytes : "" %></td>
+  <td class="mtime relatize" nowrap="nowrap" sort="<% date = datetime(file.stat.mtime).to_http; date %>"><% date %></td>
 </tr>
 <% END %>
 </tbody>
