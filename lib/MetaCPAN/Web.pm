@@ -3,7 +3,6 @@ use Moose;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.90042;
-use CatalystX::RoleApplicator;
 
 use Catalyst qw/
     ConfigLoader
@@ -15,14 +14,14 @@ use Log::Log4perl::Catalyst;
 
 extends 'Catalyst';
 
-__PACKAGE__->apply_request_class_roles( qw(
+__PACKAGE__->request_class_traits( [ qw(
     MetaCPAN::Web::Role::Request
     Catalyst::TraitFor::Request::REST::ForBrowsers
-) );
+) ] );
 
-__PACKAGE__->apply_response_class_roles( qw(
+__PACKAGE__->response_class_traits( [ qw(
     MetaCPAN::Web::Role::Response
-) );
+) ] );
 
 __PACKAGE__->config(
     name                                        => 'MetaCPAN::Web',

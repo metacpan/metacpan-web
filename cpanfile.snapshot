@@ -199,17 +199,6 @@ DISTRIBUTIONS
       Storable 0
       Test::Deep 0
       Test::More 0
-  CPAN-Changes-0.400002
-    pathname: H/HA/HAARG/CPAN-Changes-0.400002.tar.gz
-    provides:
-      CPAN::Changes 0.400002
-      CPAN::Changes::Group undef
-      CPAN::Changes::Release undef
-      Test::CPAN::Changes 0.400002
-    requirements:
-      ExtUtils::MakeMaker 0
-      Text::Wrap 0.003
-      version 0.9906
   CPAN-DistnameInfo-0.12
     pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
     provides:
@@ -562,16 +551,6 @@ DISTRIBUTIONS
       Carp 0
       ExtUtils::MakeMaker 0
       Moose::Role 0
-  CatalystX-RoleApplicator-0.005
-    pathname: H/HD/HDP/CatalystX-RoleApplicator-0.005.tar.gz
-    provides:
-      CatalystX::RoleApplicator 0.005
-    requirements:
-      Catalyst::Runtime 5.7
-      Class::MOP 0.80
-      ExtUtils::MakeMaker 0
-      Moose 0.73
-      MooseX::RelatedClassRoles 0.003
   Class-Accessor-0.51
     pathname: K/KA/KASEI/Class-Accessor-0.51.tar.gz
     provides:
@@ -2761,20 +2740,6 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Modern-Perl-1.20200211
-    pathname: C/CH/CHROMATIC/Modern-Perl-1.20200211.tar.gz
-    provides:
-      Modern::Perl 1.20200211
-      odern::Perl 1.20200211
-    requirements:
-      ExtUtils::MakeMaker 0
-      IO::File 0
-      IO::Handle 0
-      feature 0
-      mro 0
-      perl 5.010
-      strict 0
-      warnings 0
   Module-Build-0.4231
     pathname: L/LE/LEONT/Module-Build-0.4231.tar.gz
     provides:
@@ -3501,15 +3466,6 @@ DISTRIBUTIONS
       Moose::Util::MetaRole 0
       namespace::autoclean 0.08
       perl 5.006
-  MooseX-RelatedClassRoles-0.004
-    pathname: H/HD/HDP/MooseX-RelatedClassRoles-0.004.tar.gz
-    provides:
-      MooseX::RelatedClassRoles 0.004
-    requirements:
-      Class::MOP 0.80
-      ExtUtils::MakeMaker 0
-      Moose 0.73
-      MooseX::Role::Parameterized 0.04
   MooseX-Role-Parameterized-1.11
     pathname: E/ET/ETHER/MooseX-Role-Parameterized-1.11.tar.gz
     provides:
@@ -4882,60 +4838,6 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       XSLoader 0
-      perl 5.006
-  Regexp-Common-2017060201
-    pathname: A/AB/ABIGAIL/Regexp-Common-2017060201.tar.gz
-    provides:
-      Regexp::Common 2017060201
-      Regexp::Common::CC 2017060201
-      Regexp::Common::Entry 2017060201
-      Regexp::Common::SEN 2017060201
-      Regexp::Common::URI 2017060201
-      Regexp::Common::URI::RFC1035 2017060201
-      Regexp::Common::URI::RFC1738 2017060201
-      Regexp::Common::URI::RFC1808 2017060201
-      Regexp::Common::URI::RFC2384 2017060201
-      Regexp::Common::URI::RFC2396 2017060201
-      Regexp::Common::URI::RFC2806 2017060201
-      Regexp::Common::URI::fax 2017060201
-      Regexp::Common::URI::file 2017060201
-      Regexp::Common::URI::ftp 2017060201
-      Regexp::Common::URI::gopher 2017060201
-      Regexp::Common::URI::http 2017060201
-      Regexp::Common::URI::news 2017060201
-      Regexp::Common::URI::pop 2017060201
-      Regexp::Common::URI::prospero 2017060201
-      Regexp::Common::URI::tel 2017060201
-      Regexp::Common::URI::telnet 2017060201
-      Regexp::Common::URI::tv 2017060201
-      Regexp::Common::URI::wais 2017060201
-      Regexp::Common::_support 2017060201
-      Regexp::Common::balanced 2017060201
-      Regexp::Common::comment 2017060201
-      Regexp::Common::delimited 2017060201
-      Regexp::Common::lingua 2017060201
-      Regexp::Common::list 2017060201
-      Regexp::Common::net 2017060201
-      Regexp::Common::number 2017060201
-      Regexp::Common::profanity 2017060201
-      Regexp::Common::whitespace 2017060201
-      Regexp::Common::zip 2017060201
-    requirements:
-      Config 0
-      ExtUtils::MakeMaker 0
-      perl 5.01
-      strict 0
-      vars 0
-      warnings 0
-  Regexp-Common-time-0.16
-    pathname: M/MA/MANWAR/Regexp-Common-time-0.16.tar.gz
-    provides:
-      Regexp::Common::time 0.16
-    requirements:
-      ExtUtils::MakeMaker 0
-      Modern::Perl 0
-      Regexp::Common 0
-      Test::More 0.40
       perl 5.006
   Role-Tiny-2.002004
     pathname: H/HA/HAARG/Role-Tiny-2.002004.tar.gz
