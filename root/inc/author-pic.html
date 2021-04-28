@@ -11,14 +11,16 @@
 <% END %>
 
 <!-- Display counts of plussers-->
-<p>
 <% IF plussers.authors.size %>
-<a href="/release/<% plussers.distribution %>/plussers"><% "%d PAUSE user(s)".pluralize(plussers.authors.size) %></a><br>
+<div>
+<a href="/release/<% plussers.distribution %>/plussers"><% "%d PAUSE user(s)".pluralize(plussers.authors.size) %></a>
+</div>
 <% END %>
 <% IF plussers.others %>
-<% "%d non-PAUSE user(s)".pluralize(plussers.others) %>.
+<div>
+<% "%d non-PAUSE user(s)".pluralize(plussers.others) %>
+</div>
 <% END %>
-</p>
 </div>
 <% END %>
 
