@@ -17,7 +17,17 @@ sub dir {
     my $path = join '/', @path;
     my $data = $self->request("/file/dir/$path")->transform(
         done => sub {
-            $_[0]->{dir};
+            my $dir = $_[0]->{dir};
+            for my $entry (@$dir) {
+                my $stat = $entry->{stat} ||= {};
+                for my $stat_entry ( map /^stat\.(.*)/ ? $1 : (),
+                    keys %$entry )
+                {
+                    $stat->{$stat_entry}
+                        = delete $entry->{"stat.$stat_entry"};
+                }
+            }
+            return $dir;
         }
     );
 }
