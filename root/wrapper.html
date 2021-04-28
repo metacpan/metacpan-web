@@ -143,20 +143,14 @@
                         <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <%- FOREACH identity IN ['GitHub', 'Twitter', 'Google'] %>
+                            <%- FOREACH identity IN ['GitHub', 'Twitter', 'Google', 'OpenID'] %>
                             <li>
-                                <a href="<% oauth_prefix %>&amp;choice=<% identity.lower %>" onclick="return logInPAUSE(this)">
-                                <i class="fa fa-<% identity.lower %> fa-fw"></i>
-                                <% identity %>
+                                <a href="/login/<% identity.lower %>">
+                                    <i class="fa fa-<% identity.lower %> fa-fw"></i>
+                                    <% identity %>
                                 </a>
                             </li>
                             <%- END %>
-                            <li>
-                                <a href="/login/openid">
-                                <i class="fa fa-openid fa-fw"></i>
-                                OpenID
-                                </a>
-                            </li>
                         </ul>
                     </li>
                 </ul>

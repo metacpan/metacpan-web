@@ -47,14 +47,10 @@ around render => sub {
 
     my $req = $c->req;
 
-    $vars->{api_public}  = $self->api_public;
-    $vars->{source_host} = $self->source_host;
-    $vars->{assets}      = $req->env->{'psgix.assets'} || [];
-    $vars->{req}         = $req;
-    $vars->{oauth_prefix}
-        = $self->api_public
-        . '/oauth2/authorize?client_id='
-        . $c->config->{consumer_key};
+    $vars->{api_public}         = $self->api_public;
+    $vars->{source_host}        = $self->source_host;
+    $vars->{assets}             = $req->env->{'psgix.assets'} || [];
+    $vars->{req}                = $req;
     $vars->{site_alert_message} = $c->config->{site_alert_message};
     $vars->{page_url}           = sub {
         @_ ? $req->uri_with(@_) : $req->uri->clone;

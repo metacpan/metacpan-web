@@ -3,7 +3,7 @@
     <% IF no_profile -%>
     <div class="alert alert-danger">
       <h4 class="alert-heading">Error</h4>
-      In order to change your profile you have to <a href="<% oauth_prefix %>&amp;choice=pause" onclick="return logInPAUSE(this)">connect your account to PAUSE</a>.
+      In order to change your profile you have to <a href="/login/pause">connect your account to PAUSE</a>.
     </div>
     <% ELSE -%>
     <form method="POST" action="" class="form-horizontal" role="form" accept-charset="utf-8">
