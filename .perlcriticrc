@@ -1,35 +1,56 @@
 # please alpha sort config items as you add them
-
-severity = 5
+only = 1
 verbose = 11
-theme = core
+program-extensions = .t
 
-[-ControlStructures::ProhibitPostfixControls]
-[-Documentation::RequirePodLinksIncludeText]
-[-Documentation::RequirePodSections]
-[-Modules::RequireVersionVar]
-[-RegularExpressions::RequireDotMatchAnything]
-[-RegularExpressions::RequireExtendedFormatting]
-[-RegularExpressions::RequireLineBoundaryMatching]
-[-Subroutines::ProhibitExplicitReturnUndef]
-[-Variables::ProhibitPunctuationVars]
+[BuiltinFunctions::ProhibitSleepViaSelect]
+
+[BuiltinFunctions::ProhibitStringyEval]
+
+[BuiltinFunctions::RequireGlobFunction]
+
+[ClassHierarchies::ProhibitOneArgBless]
 
 [CodeLayout::RequireTrailingCommas]
-severity = 4
+
+[ControlStructures::ProhibitMutatingListFunctions]
+
+[InputOutput::ProhibitBarewordFileHandles]
+
+[InputOutput::ProhibitInteractiveTest]
+
+[InputOutput::ProhibitTwoArgOpen]
+
+[InputOutput::RequireEncodingWithUTF8Layer]
+
+[Modules::ProhibitEvilModules]
+
+[Modules::RequireBarewordIncludes]
+
+[Modules::RequireFilenameMatchesPackage]
+
+[Subroutines::ProhibitNestedSubs]
+
+[Subroutines::ProhibitReturnSort]
+
+[Subroutines::ProhibitSubroutinePrototypes]
+
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = MetaCPAN::Moose
+
+[TestingAndDebugging::RequireUseWarnings]
+equivalent_modules = MetaCPAN::Moose
 
 [ValuesAndExpressions::ProhibitEmptyQuotes]
-severity = 4
 
 [ValuesAndExpressions::ProhibitInterpolationOfLiterals]
 allow_if_string_contains_single_quote = 1
 allow = qq{} qq[]
-severity = 4
+
+[ValuesAndExpressions::ProhibitLeadingZeros]
 
 [ValuesAndExpressions::ProhibitNoisyQuotes]
-severity = 4
 
-[TestingAndDebugging::RequireUseStrict]
-equivalent_modules = MetaCPAN::Moose Moose
+[Variables::ProhibitConditionalDeclarations]
 
-[TestingAndDebugging::RequireUseWarnings]
-equivalent_modules = MetaCPAN::Moose Moose
+[Variables::RequireLexicalLoopIterators]
