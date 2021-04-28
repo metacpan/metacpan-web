@@ -35,40 +35,39 @@ sub dependencies : Local : Args(0) : Does('Sortable') {
     $c->stash( {
         template => 'lab/dependencies.html',
         module   => $module,
-        data     => $data
+        data     => $data,
     } );
 }
 
-sub dashboard : Local : Args(0) {
+sub personal_dashboard : Path('dashboard') : Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash( { template => 'lab/dashboard.html' } );
+    if ( my $pauseid = $c->req->params->{'pauseid'} ) {
+        $c->res->redirect( $c->uri_for( '/lab/dashboard', uc $pauseid ),
+            301 );
+        $c->detach;
+    }
 
-    my $user = $c->model('API::User')->get_profile( $c->token )->get;
-    return unless $user;
+    my $user = $c->model('API::User')->get_profile( $c->token )->get || {};
+
+    $c->res->header( 'Vary', 'Cookie' );
+    $c->stash( { personal => 1 } );
+    $c->go( 'dashboard', [ $user->{pauseid} ] );
+}
+
+sub dashboard : Local : Args(1) {
+    my ( $self, $c, $pauseid ) = @_;
 
     my $report;
-    my $pauseid = $c->req->params->{'pauseid'};
     if ($pauseid) {
-        $user = { pauseid => $pauseid };
+        $report = $c->model('API::Lab')->fetch_latest_distros( 300, $pauseid )
+            ->get;
     }
-
-    # I'm not sure if the 300 limit actually corresponds to max distros.
-    # Setting it at 100 for OALDERS, I got less than 30 results back.
-
-    if ($user) {
-        $pauseid = $user->{pauseid};
-        if ($pauseid) {
-            $report = $c->model('API::Lab')
-                ->fetch_latest_distros( 300, $pauseid )->get;
-        }
-    }
-
-    $report->{user} = $user;
 
     $c->stash( {
-        pauseid => $pauseid,
-        report  => $report,
+        pauseid  => $pauseid,
+        report   => $report,
+        template => 'lab/dashboard.html',
     } );
 }
 
