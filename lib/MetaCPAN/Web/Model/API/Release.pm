@@ -40,20 +40,20 @@ sub coverage {
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/$author/$release");
+    $self->request("/release/$author/$release")->then( \&_with_distnameinfo );
 }
 
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
     $self->request("/release/latest_by_author/$pauseid")
-        ->then( $self->add_river );
+        ->then( \&_with_distnameinfo )->then( $self->add_river );
 }
 
 sub all_by_author {
     my ( $self, $pauseid, $page, $page_size ) = @_;
     $self->request( "/release/all_by_author/$pauseid",
         undef, { page => $page, page_size => $page_size } )
-        ->then( $self->add_river );
+        ->then( \&_with_distnameinfo )->then( $self->add_river );
 }
 
 sub recent {
@@ -66,7 +66,7 @@ sub recent {
             page_size => $page_size,
             type      => $type,
         }
-    )->then( $self->add_river );
+    )->then( \&_with_distnameinfo )->then( $self->add_river );
 }
 
 sub modules {
@@ -82,7 +82,8 @@ sub modules {
 
 sub find {
     my ( $self, $distribution ) = @_;
-    $self->request("/release/latest_by_distribution/$distribution");
+    $self->request("/release/latest_by_distribution/$distribution")
+        ->then( \&_with_distnameinfo );
 }
 
 # stolen from Module/requires
@@ -108,7 +109,7 @@ sub reverse_dependencies {
             $data->{took}     ||= 0;
             return $data;
         }
-    )->then( $self->add_river );
+    )->then( \&_with_distnameinfo )->then( $self->add_river );
 }
 
 sub interesting_files {
@@ -118,23 +119,30 @@ sub interesting_files {
 
 sub versions {
     my ( $self, $dist ) = @_;
-    $self->request("/release/versions/$dist")->then( sub {
+    $self->request("/release/versions/$dist")->then( \&_with_distnameinfo )
+        ->then( sub {
         my ($data) = @_;
-        my $releases = delete $data->{releases};
-        for my $release (@$releases) {
-            $release->{distname_version}
-                = CPAN::DistnameInfo->new( $release->{download_url} )
-                ->version;
-        }
-        $data->{versions} = $releases;
+        $data->{versions} = delete $data->{releases};
         Future->done($data);
-    } );
+        } );
 }
 
 sub topuploaders {
     my ( $self, $range ) = @_;
     my $param = $range ? { range => $range } : ();
     $self->request( '/release/top_uploaders', undef, $param );
+}
+
+sub _with_distnameinfo {
+    my ($data) = @_;
+    my $releases
+        = $data->{releases} ? $data->{releases} : [ $data->{release} || () ];
+    for my $release (@$releases) {
+        if ( my $url = $release->{download_url} ) {
+            $release->{distnameinfo} = CPAN::DistnameInfo->new($url);
+        }
+    }
+    Future->done($data);
 }
 
 __PACKAGE__->meta->make_immutable;
