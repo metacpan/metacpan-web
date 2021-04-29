@@ -20,34 +20,43 @@
 
 <% FOREACH group IN results; item = group.hits.0 %>
   <div class="module-result">
-  <big><strong>
-   <% INCLUDE "inc/link-to-file.html" file = item %>
-   <%- IF item.abstract; ' - '; item.abstract; END %>
-  </strong></big>
-  <% INCLUDE inc/river-gauge.html, distribution = item.distribution, river = group.river %>
-  <% INCLUDE inc/favorite.html release = item favorites = release.favorites %>
-  <br>
-  <% IF item.description %><p class="description"><% item.description.chunk(250).0 _ '...' %></p>
-  <% END %>
-  <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
-  -
-  <span class="relatize"><% datetime(item.date).to_http %></span>
-  <%- IF !single_dist %>
+    <h3>
+      <% INCLUDE "inc/link-to-file.html" file = item %>
+      <%- IF item.abstract; ' - '; item.abstract; END %>
+      <% INCLUDE inc/river-gauge.html, distribution = item.distribution, river = group.river %>
+      <% INCLUDE inc/favorite.html release = item favorites = release.favorites %>
+    </h3>
+    <% IF item.description %>
+    <p class="description"><% item.description.chunk(250).0 _ '...' %></p>
+    <% END %>
+    <a class="author" href="/author/<% item.author %>"><% item.author %></a><a href="/release/<% IF item.status == 'latest'; item.distribution; ELSE; item.author; '/'; item.release; END %>">/<% item.release %></a>
+    -
+    <span class="relatize"><% datetime(item.date).to_http %></span>
+    <%- IF !single_dist %>
     -
     <a href="/search?q=dist:<% item.distribution %>+<% search_query %>">Search in distribution</a>
-  <%- END %>
-  <!-- <% item.score %> -->
-<br>
-<% IF group.hits.size > 1 %>
-<ul class="inner-results">
-  <% FOREACH item IN group.hits; IF loop.first; NEXT; END; IF loop.index > 3; LAST; END %><li>
-   <% INCLUDE "inc/link-to-file.html" file = item %>
-  <% IF item.abstract; ' - '; item.abstract; END %></li><!-- <% item.score %> --><% END %>
-  <% IF group.total > 4 %><li><a href="/search?q=distribution:<% item.distribution %>+<% search_query %>"><% group.total - 4 %> more result<% IF group.total - 4 > 1; 's'; END %> from <% item.distribution %> »</a></li><% END %>
-</ul>
-<% END %>
+    <%- END -%>
+    <!-- <% item.score %> -->
+    <% IF group.hits.size > 1 %>
+    <ul class="inner-results">
+      <%- FOREACH item IN group.hits;
+        IF loop.first; NEXT; END;
+        IF loop.index > 3; LAST; END
+      -%>
+      <li>
+        <% INCLUDE "inc/link-to-file.html" file = item %>
+        <% IF item.abstract; ' - '; item.abstract; END %>
+      </li>
+      <!-- <% item.score %> -->
+      <% END %>
+      <% IF group.total > 4 %>
+      <li>
+        <a href="/search?q=distribution:<% item.distribution %>+<% search_query %>"><% group.total - 4 %> more result<% IF group.total - 4 > 1; 's'; END %> from <% item.distribution %> »</a>
+      </li>
+      <%- END -%>
+    </ul>
+    <% END %>
   </div>
-<br>
 <% END %>
 <% INCLUDE inc/pager.html size = page_size %>
 </div>
