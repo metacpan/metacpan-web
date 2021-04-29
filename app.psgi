@@ -203,4 +203,3 @@ builder {
 sub is_linux_container {
     return -e '/proc/1/cgroup';
 }
-
