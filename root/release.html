@@ -15,13 +15,6 @@
     <% PROCESS inc/release-info.html %>
     <li class="nav-header">Activity</li>
     <li><% INCLUDE inc/activity.html query = 'distribution=' _ release.distribution %></li>
-    <% IF release.metadata.x_help_wanted %>
-    <li>Help Wanted<ul>
-    <% FOREACH position IN release.metadata.x_help_wanted %>
-      <li><% position %></li>
-    <% END %>
-    </ul></li>
-    <% END %>
     <%- INCLUDE inc/release-tools.html %>
 </ul>
 

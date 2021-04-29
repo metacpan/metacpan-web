@@ -58,14 +58,7 @@
     </select>
 </li>
 <%- END %>
-<% IF release.metadata.x_help_wanted %>
-<li class="nav-header">Help Wanted</li>
-<ul>
-    <%- FOREACH position IN release.metadata.x_help_wanted %>
-    <li><% position %></li>
-    <%- END %>
-</ul>
-<%- END;
+<%-
 has_latest = 0;
 FOREACH version IN versions;
     IF version.status == 'latest';
