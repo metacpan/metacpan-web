@@ -8,4 +8,4 @@
 
 ## Reporting a Vulnerability
 
-Please report all vulnerabilities by sending an email to noc@metacpan.org 
+Please report all vulnerabilities by sending an email to noc@metacpan.org

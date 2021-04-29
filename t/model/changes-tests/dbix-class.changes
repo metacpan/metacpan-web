@@ -1,5 +1,5 @@
 Revision history for DBIx::Class
- 
+
 0.08250 2013-04-29 22:00 (UTC)
     * New Features / Changes
         - Rewrite from scratch the result constructor codepath - many bugfixes
@@ -40,7 +40,7 @@ Revision history for DBIx::Class
           is_nullable => 1 metadata do in fact sometimes fetch NULLs from
           the database (the check is currently very limited and is performed
           only on resultset collapse when the alternative is rather worse)
- 
+
     * Fixes
         - Fix _dbi_attrs_for_bind() being called befor DBI has been loaded
           (regression in 0.08210)
@@ -57,17 +57,17 @@ Revision history for DBIx::Class
         - Even more robust behavior of GenericSubQuery limit dialect
         - Make sure deployment_statements() and cursor_class() are called on
           a resolved storage subclass
- 
+
     * Misc
         - Fix tests failing due to unspecified resultset retrieval order
           (test suite now will pass with newest SQLite libs)
- 
+
 0.08210 2013-04-04 15:30 (UTC)
     * New Features / Changes
         - Officially deprecate the 'cols' and 'include_columns' resultset
           attributes
         - Remove ::Storage::DBI::sth() deprecated in 0.08191
- 
+
     * Fixes
         - Work around a *critical* bug with potential for data loss in
           DBD::SQLite - RT#79576

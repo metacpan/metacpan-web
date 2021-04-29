@@ -7,7 +7,7 @@
  *
  * @version
  * 3.0.83 (July 02 2010)
- * 
+ *
  * @copyright
  * Copyright (C) 2004-2010 Alex Gorbatchev.
  *
@@ -24,7 +24,7 @@
   function Brush()
   {
     //var r = SyntaxHighlighter.regexLib;
-    
+
     this.regexList = [
       // these classes/colors are totally arbitrary
       { regex: /^\{\{\$NEXT\}\}$/gm,        css: 'color3' },            // placeholder (oops)
