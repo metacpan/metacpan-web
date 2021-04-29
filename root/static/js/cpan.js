@@ -524,15 +524,6 @@ function set_page_size(selector, storage_name) {
     });
 }
 
-
-function logInPAUSE(a) {
-    if (!a.href.match(/pause/))
-        return true;
-    var id = prompt('Please enter your PAUSE ID:');
-    if (id) document.location.href = a.href + '&id=' + id;
-    return false;
-}
-
 function processUserData() {
 
     // Could do some fancy localStorage thing here
