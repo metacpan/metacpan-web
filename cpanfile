@@ -39,6 +39,7 @@ requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Selector::XPath';
 requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
+requires 'HTTP::Lite', '2.44'; # Optional dep of XML::TreePP, which is a dep of XML::FeedPP
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'IO::Async::Loop';
