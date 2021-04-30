@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 requires 'Capture::Tiny';
+requires 'Carton', '1.0.34';
 requires 'Catalyst', '5.90103';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Authentication::Store::Proxy', '0.0.1';
@@ -38,6 +39,7 @@ requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Selector::XPath';
 requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
+requires 'HTTP::Lite', '2.44'; # Optional dep of XML::TreePP, which is a dep of XML::FeedPP
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'IO::Async::Loop';

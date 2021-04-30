@@ -199,6 +199,35 @@ DISTRIBUTIONS
       Storable 0
       Test::Deep 0
       Test::More 0
+  CPAN-Common-Index-0.010
+    pathname: D/DA/DAGOLDEN/CPAN-Common-Index-0.010.tar.gz
+    provides:
+      CPAN::Common::Index 0.010
+      CPAN::Common::Index::LocalPackage 0.010
+      CPAN::Common::Index::MetaDB 0.010
+      CPAN::Common::Index::Mirror 0.010
+      CPAN::Common::Index::Mux::Ordered 0.010
+    requirements:
+      CPAN::DistnameInfo 0
+      CPAN::Meta::YAML 0
+      Carp 0
+      Class::Tiny 0
+      ExtUtils::MakeMaker 6.17
+      File::Basename 0
+      File::Copy 0
+      File::Fetch 0
+      File::Spec 0
+      File::Temp 0.19
+      File::stat 0
+      HTTP::Tiny 0
+      Module::Load 0
+      Search::Dict 1.07
+      Tie::Handle::SkipHeader 0
+      URI 0
+      parent 0
+      perl 5.008001
+      strict 0
+      warnings 0
   CPAN-DistnameInfo-0.12
     pathname: G/GB/GBARR/CPAN-DistnameInfo-0.12.tar.gz
     provides:
@@ -206,6 +235,20 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  CPAN-Meta-Check-0.014
+    pathname: L/LE/LEONT/CPAN-Meta-Check-0.014.tar.gz
+    provides:
+      CPAN::Meta::Check 0.014
+    requirements:
+      CPAN::Meta::Prereqs 2.132830
+      CPAN::Meta::Requirements 2.121
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Module::Metadata 1.000023
+      base 0
+      perl 5.006
+      strict 0
+      warnings 0
   Canary-Stability-2013
     pathname: M/ML/MLEHMANN/Canary-Stability-2013.tar.gz
     provides:
@@ -259,6 +302,47 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
+  Carton-v1.0.34
+    pathname: M/MI/MIYAGAWA/Carton-v1.0.34.tar.gz
+    provides:
+      Carton 1.000034
+      Carton::Builder undef
+      Carton::CLI undef
+      Carton::CPANfile undef
+      Carton::Dependency undef
+      Carton::Dist undef
+      Carton::Dist::Core undef
+      Carton::Environment undef
+      Carton::Error undef
+      Carton::Error::CPANfileNotFound undef
+      Carton::Error::CommandExit undef
+      Carton::Error::CommandNotFound undef
+      Carton::Error::SnapshotNotFound undef
+      Carton::Error::SnapshotParseError undef
+      Carton::Index undef
+      Carton::Mirror undef
+      Carton::Package undef
+      Carton::Packer undef
+      Carton::Snapshot undef
+      Carton::Snapshot::Emitter undef
+      Carton::Snapshot::Parser undef
+      Carton::Tree undef
+      Carton::Util undef
+    requirements:
+      CPAN::Meta 2.120921
+      CPAN::Meta::Requirements 2.121
+      Class::Tiny 1.001
+      ExtUtils::MakeMaker 0
+      Getopt::Long 2.39
+      JSON::PP 2.27300
+      Menlo::CLI::Compat 1.9018
+      Module::CPANfile 0.9031
+      Module::CoreList 0
+      Path::Tiny 0.033
+      Try::Tiny 0.09
+      parent 0.223
+      perl 5.008005
+      version 0.77
   Catalyst-Action-REST-1.21
     pathname: J/JJ/JJNAPIORK/Catalyst-Action-REST-1.21.tar.gz
     provides:
@@ -1485,25 +1569,27 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Sub::Exporter::Progressive 0.001011
       perl 5.006
-  Devel-Hide-0.0013
-    pathname: D/DC/DCANTRELL/Devel-Hide-0.0013.tar.gz
+  Devel-Hide-0.0014
+    pathname: D/DC/DCANTRELL/Devel-Hide-0.0014.tar.gz
     provides:
-      Devel::Hide 0.0013
+      Devel::Hide 0.0014
     requirements:
       ExtUtils::MakeMaker 0
       File::Temp 0
       perl 5.006001
-  Devel-OverloadInfo-0.005
-    pathname: I/IL/ILMARI/Devel-OverloadInfo-0.005.tar.gz
+  Devel-OverloadInfo-0.007
+    pathname: I/IL/ILMARI/Devel-OverloadInfo-0.007.tar.gz
     provides:
-      Devel::OverloadInfo 0.005
+      Devel::OverloadInfo 0.007
     requirements:
+      B 0
       Exporter 5.57
       ExtUtils::MakeMaker 0
       MRO::Compat 0
       Package::Stash 0.14
       Scalar::Util 0
-      Sub::Identify 0
+      Sub::Util 1.40
+      Text::ParseWords 0
       overload 0
       perl 5.006
       strict 0
@@ -1645,6 +1731,18 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  ExtUtils-MakeMaker-CPANfile-0.09
+    pathname: I/IS/ISHIGAKI/ExtUtils-MakeMaker-CPANfile-0.09.tar.gz
+    provides:
+      ExtUtils::MakeMaker::CPANfile 0.09
+    requirements:
+      CPAN::Meta::Converter 2.141170
+      Cwd 0
+      ExtUtils::MakeMaker 6.17
+      File::Path 0
+      Module::CPANfile 0
+      Test::More 0.88
+      version 0.76
   FFI-CheckLib-0.27
     pathname: P/PL/PLICEASE/FFI-CheckLib-0.27.tar.gz
     provides:
@@ -2101,6 +2199,22 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.36
       Socket 1.94
       Test::More 0
+  HTTP-Tinyish-0.17
+    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.17.tar.gz
+    provides:
+      HTTP::Tinyish 0.17
+      HTTP::Tinyish::Base undef
+      HTTP::Tinyish::Curl undef
+      HTTP::Tinyish::HTTPTiny undef
+      HTTP::Tinyish::LWP undef
+      HTTP::Tinyish::Wget undef
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Which 0
+      HTTP::Tiny 0.055
+      IPC::Run3 0
+      parent 0
+      perl 5.008001
   Hash-AsObject-0.13
     pathname: N/NK/NKUITSE/Hash-AsObject-0.13.tar.gz
     provides:
@@ -2664,12 +2778,12 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MIME-Types-2.19
-    pathname: M/MA/MARKOV/home/markov/local/perl-git/MIME-Types/public_html/mime-types/source/MIME-Types-219targz/MIME-Types-2.19.tar.gz
+  MIME-Types-2.20
+    pathname: M/MA/MARKOV/MIME-Types-2.20.tar.gz
     provides:
-      MIME::Type 2.19
-      MIME::Types 2.19
-      MojoX::MIME::Types 2.19
+      MIME::Type 2.20
+      MIME::Types 2.20
+      MojoX::MIME::Types 2.20
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -2683,6 +2797,59 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
+  Menlo-1.9019
+    pathname: M/MI/MIYAGAWA/Menlo-1.9019.tar.gz
+    provides:
+      Menlo 1.9019
+      Menlo::Builder::Static undef
+      Menlo::Dependency undef
+      Menlo::Index::MetaCPAN undef
+      Menlo::Index::MetaDB 1.9019
+      Menlo::Index::Mirror undef
+      Menlo::Util undef
+    requirements:
+      CPAN::Common::Index 0.006
+      CPAN::DistnameInfo 0
+      CPAN::Meta 2.132830
+      CPAN::Meta::Check 0
+      CPAN::Meta::Requirements 0
+      CPAN::Meta::YAML 0
+      Capture::Tiny 0
+      Class::Tiny 1.001
+      Exporter 0
+      ExtUtils::Config 0.003
+      ExtUtils::Helpers 0.020
+      ExtUtils::InstallPaths 0.002
+      ExtUtils::MakeMaker 0
+      File::Temp 0
+      File::Which 0
+      File::pushd 0
+      Getopt::Long 2.36
+      HTTP::Tiny 0.054
+      HTTP::Tinyish 0.04
+      JSON::PP 2
+      Module::CPANfile 0
+      Module::CoreList 0
+      Module::Metadata 0
+      Parse::CPAN::Meta 0
+      Parse::PMFile 0.26
+      String::ShellQuote 0
+      URI 0
+      Win32::ShellQuote 0
+      local::lib 0
+      parent 0
+      perl 5.008001
+      version 0
+  Menlo-Legacy-1.9022
+    pathname: M/MI/MIYAGAWA/Menlo-Legacy-1.9022.tar.gz
+    provides:
+      Menlo::CLI::Compat 1.9022
+      Menlo::Legacy 1.9022
+    requirements:
+      ExtUtils::MakeMaker 0
+      Menlo 1.9018
+      perl 5.008001
+      version 0.9905
   MetaCPAN-Moose-0.000003
     pathname: O/OA/OALDERS/MetaCPAN-Moose-0.000003.tar.gz
     provides:
@@ -2847,6 +3014,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-CPANfile-1.1004
+    pathname: M/MI/MIYAGAWA/Module-CPANfile-1.1004.tar.gz
+    provides:
+      Module::CPANfile 1.1004
+      Module::CPANfile::Environment undef
+      Module::CPANfile::Prereq undef
+      Module::CPANfile::Prereqs undef
+      Module::CPANfile::Requirement undef
+    requirements:
+      CPAN::Meta 2.12091
+      CPAN::Meta::Prereqs 2.12091
+      ExtUtils::MakeMaker 0
+      parent 0
   Module-Implementation-0.09
     pathname: D/DR/DROLSKY/Module-Implementation-0.09.tar.gz
     provides:
@@ -4228,6 +4408,18 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Parse-PMFile-0.43
+    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.43.tar.gz
+    provides:
+      Parse::PMFile 0.43
+    requirements:
+      Dumpvalue 0
+      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker::CPANfile 0.09
+      File::Spec 0
+      JSON::PP 2.00
+      Safe 0
+      version 0.83
   Path-Class-0.37
     pathname: K/KW/KWILLIAMS/Path-Class-0.37.tar.gz
     provides:
@@ -5026,6 +5218,12 @@ DISTRIBUTIONS
       Sub::Exporter 0.972
       strict 0
       warnings 0
+  String-ShellQuote-1.04
+    pathname: R/RO/ROSCH/String-ShellQuote-1.04.tar.gz
+    provides:
+      String::ShellQuote 1.04
+    requirements:
+      ExtUtils::MakeMaker 0
   Struct-Dumb-0.12
     pathname: P/PE/PEVANS/Struct-Dumb-0.12.tar.gz
     provides:
@@ -5045,15 +5243,15 @@ DISTRIBUTIONS
       Sub::Install 0.92
       strict 0
       warnings 0
-  Sub-Exporter-ForMethods-0.100052
-    pathname: R/RJ/RJBS/Sub-Exporter-ForMethods-0.100052.tar.gz
+  Sub-Exporter-ForMethods-0.100054
+    pathname: R/RJ/RJBS/Sub-Exporter-ForMethods-0.100054.tar.gz
     provides:
-      Sub::Exporter::ForMethods 0.100052
+      Sub::Exporter::ForMethods 0.100054
     requirements:
-      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker 6.78
       Scalar::Util 0
       Sub::Exporter 0.978
-      Sub::Name 0
+      Sub::Util 0
       strict 0
       warnings 0
   Sub-Exporter-Progressive-0.001013
@@ -5405,16 +5603,15 @@ DISTRIBUTIONS
       Test::SharedFork 0.29
       Time::HiRes 0
       perl 5.008001
-  Test-Vars-0.014
-    pathname: D/DR/DROLSKY/Test-Vars-0.014.tar.gz
+  Test-Vars-0.015
+    pathname: G/GF/GFUJI/Test-Vars-0.015.tar.gz
     provides:
-      Test::Vars 0.014
+      Test::Vars 0.015
     requirements:
       B 0
       ExtUtils::MakeMaker 6.59
       List::Util 1.33
       Module::Build::Tiny 0.035
-      Test::More 0.88
       parent 0
       perl 5.010000
   Test-WWW-Mechanize-1.54
@@ -5549,6 +5746,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.008001
+  Tie-Handle-Offset-0.004
+    pathname: D/DA/DAGOLDEN/Tie-Handle-Offset-0.004.tar.gz
+    provides:
+      Tie::Handle::Offset 0.004
+      Tie::Handle::SkipHeader 0.004
+    requirements:
+      ExtUtils::MakeMaker 6.17
+      Tie::Handle 0
+      perl 5.006
+      strict 0
   Tie-ToObject-0.03
     pathname: N/NU/NUFFIN/Tie-ToObject-0.03.tar.gz
     provides:
@@ -5967,6 +6174,12 @@ DISTRIBUTIONS
       Fcntl 0
       URI 1.10
       perl 5.008001
+  Win32-ShellQuote-0.003001
+    pathname: H/HA/HAARG/Win32-ShellQuote-0.003001.tar.gz
+    provides:
+      Win32::ShellQuote 0.003001
+    requirements:
+      perl 5.006
   With-Roles-0.001002
     pathname: H/HA/HAARG/With-Roles-0.001002.tar.gz
     provides:
@@ -6110,7 +6323,7 @@ DISTRIBUTIONS
       XML::TreePP 0.43
     requirements:
       ExtUtils::MakeMaker 0
-      HTTP::Lite 0
+      LWP 5.811
       Test::More 0
   XString-0.005
     pathname: A/AT/ATOOMIC/XString-0.005.tar.gz
@@ -6208,7 +6421,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6.07
+      HTTP::Status 6.18
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6
@@ -6225,6 +6438,13 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  local-lib-2.000024
+    pathname: H/HA/HAARG/local-lib-2.000024.tar.gz
+    provides:
+      lib::core::only undef
+      local::lib 2.000024
+    requirements:
+      perl 5.006
   namespace-autoclean-0.29
     pathname: E/ET/ETHER/namespace-autoclean-0.29.tar.gz
     provides:
