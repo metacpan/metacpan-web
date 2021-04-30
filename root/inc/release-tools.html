@@ -1,7 +1,7 @@
 <li class="nav-header">Tools</li>
 <li>
     <a href="<% release.download_url.replace('cpan\.cpantesters\.org', 'cpan.metacpan.org').replace('^http://', 'https://') %>">
-    <i class="fa fa-download fa-fw black"></i>Download (<span><% release.stat.size | format_bytes %>b</span>)</a>
+    <i class="fa fa-download fa-fw black"></i>Download (<span><% release.stat.size | format_bytes %>B</span>)</a>
 </li>
 <li>
     <a href="https://explorer.metacpan.org/?url=<% ("/" _ ( module ? ['module', module.author, module.release, module.path] : ['release', release.author, release.name] ).map(->(p){ p | uri }).join("/") ) %>">
