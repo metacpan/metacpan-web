@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 requires 'Capture::Tiny';
+requires 'Carton', '1.0.34';
 requires 'Catalyst', '5.90103';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::Authentication::Store::Proxy', '0.0.1';
