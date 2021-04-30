@@ -185,7 +185,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2101,6 +2100,17 @@ DISTRIBUTIONS
       HTTP::Date 0
       Module::Build::Tiny 0.035
       perl 5.008001
+  HTTP-Lite-2.44
+    pathname: N/NE/NEILB/HTTP-Lite-2.44.tar.gz
+    provides:
+      HTTP::Lite 2.44
+    requirements:
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      Socket 1.3
+      perl 5.005
+      strict 0
+      warnings 0
   HTTP-Message-6.29
     pathname: O/OA/OALDERS/HTTP-Message-6.29.tar.gz
     provides:
