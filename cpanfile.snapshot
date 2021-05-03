@@ -1115,15 +1115,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.31
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.31.tar.gz
+  DateTime-Locale-1.32
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.32.tar.gz
     provides:
-      DateTime::Locale 1.31
-      DateTime::Locale::Base 1.31
-      DateTime::Locale::Catalog 1.31
-      DateTime::Locale::Data 1.31
-      DateTime::Locale::FromData 1.31
-      DateTime::Locale::Util 1.31
+      DateTime::Locale 1.32
+      DateTime::Locale::Base 1.32
+      DateTime::Locale::Catalog 1.32
+      DateTime::Locale::Data 1.32
+      DateTime::Locale::FromData 1.32
+      DateTime::Locale::Util 1.32
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -3763,10 +3763,10 @@ DISTRIBUTIONS
       Net::CIDR::Lite::Span 0.22
     requirements:
       ExtUtils::MakeMaker 0
-  Net-DNS-1.30
-    pathname: N/NL/NLNETLABS/Net-DNS-1.30.tar.gz
+  Net-DNS-1.31
+    pathname: N/NL/NLNETLABS/Net-DNS-1.31.tar.gz
     provides:
-      Net::DNS 1.30
+      Net::DNS 1.31
       Net::DNS::Domain 1825
       Net::DNS::DomainName 1813
       Net::DNS::DomainName1035 1813
@@ -3846,7 +3846,7 @@ DISTRIBUTIONS
       Net::DNS::RR::SPF 1814
       Net::DNS::RR::SRV 1814
       Net::DNS::RR::SSHFP 1814
-      Net::DNS::RR::SVCB 1834
+      Net::DNS::RR::SVCB 1838
       Net::DNS::RR::TKEY 1814
       Net::DNS::RR::TLSA 1814
       Net::DNS::RR::TSIG 1827
