@@ -18,10 +18,6 @@ FOREACH dep IN deps.sort %>
 <%- END %>
     <li><hr /></li>
     <li>
-        <a href="http://deps.cpantesters.org/?module=<% release.distribution.replace('-', '::') %>">
-        <i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>
-    </li>
-    <li>
       <%- IF module -%>
         <a href="/requires/module/<% module.documentation or module.module.0.name %>">
       <%- ELSE -%>
