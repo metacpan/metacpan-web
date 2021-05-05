@@ -10,9 +10,9 @@ test_psgi app, sub {
         my $url = '/changes/release/RWSTAUNER/File-Spec-Native-1.003';
         my $res = $cb->( GET $url );
         is( $res->code, 200, "200 on $url" );
-        my $tx = tx( $res, { css => 1 } );
+        my $tx = tx($res);
         $tx->like(
-            'div.content pre#source',
+            '//div[contains-token(@class, "content")]//pre[@id="source"]',
             qr/^Revision history for File-Spec-Native/,
             'source view for plain text change log'
         );
