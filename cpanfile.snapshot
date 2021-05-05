@@ -1992,16 +1992,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       version 0
-  HTML-Selector-XPath-0.25
-    pathname: C/CO/CORION/HTML-Selector-XPath-0.25.tar.gz
-    provides:
-      HTML::Selector::XPath 0.25
-    requirements:
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      perl 5.008001
-      strict 0
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
     provides:
