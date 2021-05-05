@@ -1,0 +1,20 @@
+---
+name: Staging Container
+on: [workflow_dispatch]
+jobs:
+  docker:
+    runs-on: ubuntu-20.04
+    name: Docker Push
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker build
+        run: docker build . -t metacpan/metacpan-web:staging
+      - name: run Perl tests
+        run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
+      - name: push build to Docker hub
+        run: >
+          echo "${{ secrets.DOCKER_HUB_TOKEN }}" |
+          docker login
+          -u ${{ secrets.DOCKER_HUB_USER }}
+          --password-stdin
+          && docker push metacpan/metacpan-web:staging
