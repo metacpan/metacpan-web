@@ -7,28 +7,6 @@ use URI ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-has consumer_key    => ( is => 'ro' );
-has consumer_secret => ( is => 'ro' );
-has openid_url      => ( is => 'ro' );
-has oauth_url       => ( is => 'ro' );
-
-sub COMPONENT {
-    my ( $class, $app, $args ) = @_;
-    my $config = $class->merge_config_hashes(
-        {
-            consumer_key    => $app->config->{consumer_key},
-            consumer_secret => $app->config->{consumer_secret},
-            openid_url      =>
-                ( $app->config->{api_public} || $app->config->{api} )
-                . '/login/openid',
-            oauth_url => ( $app->config->{api_public} || $app->config->{api} )
-                . '/oauth2/authorize',
-        },
-        $args,
-    );
-    return $class->SUPER::COMPONENT( $app, $config );
-}
-
 sub login_root : Chained('/') : PathPart('login') : CaptureArgs(0) { }
 
 sub index : Chained('login_root') : PathPart('') : Args(0) {
@@ -40,13 +18,7 @@ sub index : Chained('login_root') : PathPart('') : Args(0) {
     my $req = $c->req;
 
     if ( my $code = $req->parameters->{code} ) {
-        my $data = $c->model('API::User')->login(
-            {
-                client_id     => $self->consumer_key,
-                client_secret => $self->consumer_secret,
-                code          => $code,
-            },
-        )->get;
+        my $data = $c->model('API::User')->login($code);
         $c->req->session->set( token => $data->{access_token} );
         $c->authenticate( { token => $data->{access_token} } );
         my $state = $c->req->params->{state} || q{};
@@ -67,9 +39,10 @@ sub openid : Chained('login_root') : PathPart : Args(0) {
     # Never cache at CDN
     $c->cdn_never_cache(1);
 
+    my $model = $c->model('API::User');
     $c->stash( {
-        consumer_key => $self->consumer_key,
-        openid_url   => $self->openid_url,
+        consumer_key => $model->consumer_key,
+        openid_url   => $model->openid_url,
     } );
 }
 
@@ -79,18 +52,20 @@ sub pause : Chained('login_root') : PathPart : Args(0) {
     # Never cache at CDN
     $c->cdn_never_cache(1);
 
+    my $model = $c->model('API::User');
     $c->stash( {
-        oauth_url    => $self->oauth_url,
-        consumer_key => $self->consumer_key,
+        oauth_url    => $model->oauth_url,
+        consumer_key => $model->consumer_key,
     } );
 }
 
 sub login : Chained('login_root') : PathPart('') : Args(1) {
     my ( $self, $c, $choice ) = @_;
 
-    my $url = URI->new( $self->oauth_url );
+    my $model = $c->model('API::User');
+    my $url   = URI->new( $model->oauth_url );
     $url->query_form( {
-        client_id => $self->consumer_key,
+        client_id => $model->consumer_key,
         choice    => $choice,
     } );
 

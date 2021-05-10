@@ -4,9 +4,46 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
+has api_public      => ( is => 'ro' );
+has consumer_key    => ( is => 'ro' );
+has consumer_secret => ( is => 'ro' );
+
+sub COMPONENT {
+    my ( $class, $app, $args ) = @_;
+    $args = $class->merge_config_hashes( $class->config, $args );
+    $args = $class->merge_config_hashes(
+        {
+            api             => $app->config->{api},
+            consumer_key    => $app->config->{consumer_key},
+            consumer_secret => $app->config->{consumer_secret},
+        },
+        $args,
+    );
+    $args->{api_public} ||= $args->{api};
+    return $class->SUPER::COMPONENT( $app, $args );
+}
+
+sub openid_url {
+    my ($self) = @_;
+    return $self->api_public . '/login/openid';
+}
+
+sub oauth_url {
+    my ($self) = @_;
+    return $self->api_public . '/oauth2/authorize';
+}
+
 sub login {
-    my ( $self, $auth ) = @_;
-    return $self->request( '/oauth2/access_token', undef, $auth );
+    my ( $self, $code ) = @_;
+    return $self->request(
+        '/oauth2/access_token',
+        undef,
+        {
+            client_id     => $self->consumer_key,
+            client_secret => $self->consumer_secret,
+            code          => $code,
+        },
+    );
 }
 
 sub get {
