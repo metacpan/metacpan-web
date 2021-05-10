@@ -72,12 +72,10 @@ test_psgi app, sub {
         is( $user_req, undef, '... and we did not try to authenticate' );
 
         $token = 'foobar';
-        {
-            local $TODO = 'bad tokens are not treated as invalid';
-            ok( $res = $cb->( GET '/account/profile' ),
-                'GET /account/profile with token but user does not exist' );
-            is( $res->code, 403, '... and the user cannot get in' );
-        }
+
+        ok( $res = $cb->( GET '/account/profile' ),
+            'GET /account/profile with token but user does not exist' );
+        is( $res->code, 403, '... and the user cannot get in' );
 
         is( $user_req->uri->query_param('access_token'),
             'foobar',

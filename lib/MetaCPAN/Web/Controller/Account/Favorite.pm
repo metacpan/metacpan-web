@@ -56,7 +56,7 @@ sub list_as_json : Local : Args(0) {
 sub faves {
     my ( $self, $c, $size ) = @_;
     my $user = $c->user;
-    return $c->model('API::Favorite')->by_user( $user->id, $size );
+    return $c->model('API::Favorite')->by_user( $user && $user->id, $size );
 }
 
 __PACKAGE__->meta->make_immutable;

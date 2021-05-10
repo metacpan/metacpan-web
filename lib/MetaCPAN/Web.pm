@@ -29,15 +29,15 @@ __PACKAGE__->config(
     disable_component_resolution_regex_fallback => 1,
     encoding                                    => 'UTF-8',
     'Plugin::Authentication'                    => {
-        default => {
+        use_session => 0,
+        default     => {
+            class      => '+MetaCPAN::Web::Authentication::Realm',
             credential => {
-                class         => 'Password',
-                password_type => 'none',
+                class => 'NoPassword',
             },
             store => {
-                class      => 'Proxy',
-                user_class => 'MetaCPAN::Web::Authentication::User',
-            }
+                class => '+MetaCPAN::Web::Authentication::Store',
+            },
         },
     }
 );

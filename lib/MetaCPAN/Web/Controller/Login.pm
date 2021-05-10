@@ -18,9 +18,7 @@ sub index : Chained('login_root') : PathPart('') : Args(0) {
     my $req = $c->req;
 
     if ( my $code = $req->parameters->{code} ) {
-        my $data = $c->model('API::User')->login($code);
-        $c->req->session->set( token => $data->{access_token} );
-        $c->authenticate( { token => $data->{access_token} } );
+        $c->authenticate($code);
         my $state = $c->req->params->{state} || q{};
         $c->res->redirect( $c->uri_for("/$state") );
     }

@@ -410,19 +410,6 @@ DISTRIBUTIONS
       HTTP::Request::AsCGI 0
       MRO::Compat 0
       Test::More 0.88
-  Catalyst-Authentication-Store-Proxy-0.0.1
-    pathname: P/PE/PERLER/Catalyst-Authentication-Store-Proxy-0.0.1.tar.gz
-    provides:
-      Catalyst::Authentication::Store::Proxy v0.0.1
-    requirements:
-      Catalyst::Utils 0
-      File::Find 0
-      File::Temp 0
-      Module::Build 0.3601
-      Moose 0
-      Test::More 0.88
-      strict 0
-      warnings 0
   Catalyst-Plugin-Authentication-0.10023
     pathname: B/BO/BOBTFISH/Catalyst-Plugin-Authentication-0.10023.tar.gz
     provides:
@@ -2251,12 +2238,6 @@ DISTRIBUTIONS
       IPC::Run3 0
       parent 0
       perl 5.008001
-  Hash-AsObject-0.13
-    pathname: N/NK/NKUITSE/Hash-AsObject-0.13.tar.gz
-    provides:
-      Hash::AsObject 0.13
-    requirements:
-      ExtUtils::MakeMaker 0
   Hash-Merge-Simple-0.051
     pathname: R/RO/ROKR/Hash-Merge-Simple-0.051.tar.gz
     provides:
@@ -5966,6 +5947,18 @@ DISTRIBUTIONS
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
+      perl 5.006001
+  Types-LoadableClass-0.003
+    pathname: T/TO/TOBYINK/Types-LoadableClass-0.003.tar.gz
+    provides:
+      Types::LoadableClass 0.003
+    requirements:
+      Class::Load 0
+      ExtUtils::MakeMaker 6.17
+      Module::Runtime 0
+      Type::Library 0.026
+      Type::Utils 0.026
+      Types::Standard 0.026
       perl 5.006001
   Types-Path-Tiny-0.006
     pathname: D/DA/DAGOLDEN/Types-Path-Tiny-0.006.tar.gz

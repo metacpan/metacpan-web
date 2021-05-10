@@ -11,6 +11,7 @@ BEGIN {
         Types::Standard
         Types::Common::Numeric
         Types::Common::String
+        Types::LoadableClass
         Types::URI
     );
 }

@@ -7,6 +7,9 @@ has public_key => ( is => 'ro', required => 1 );
 
 sub index : Path('') : Args(0) {
     my ( $self, $c ) = @_;
+    my $user = $c->user
+        or $c->detach('/forbidden');
+
     if ( $c->req->method eq 'POST' ) {
         my $params = $c->req->params;
         my $res    = $c->model('API::User')

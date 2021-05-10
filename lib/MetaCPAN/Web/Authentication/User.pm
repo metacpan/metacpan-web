@@ -3,49 +3,61 @@ package MetaCPAN::Web::Authentication::User;
 use Moose;
 extends 'Catalyst::Authentication::User';
 
-use Hash::AsObject;
-
-has obj => ( is => 'rw', isa => 'Hash::AsObject' );
-
-has pause_id => ( is => 'ro', lazy => 1, builder => '_build_pause_id' );
-
-sub _build_pause_id {
-    my $self = shift;
-    my ($pause) = grep { $_->{name} eq 'pause' } @{ $self->identity || [] };
-    return $pause ? $pause->{key} : undef;
-}
-
-sub get_object { shift->obj }
-
-sub store {'Catalyst::Authentication::Store::Proxy'}
-
-sub for_session {
-    my $self    = shift;
-    my ($token) = map { $_->{token} }
-        grep { $_->{client} eq 'metacpan' } @{ $self->obj->{identity} };
-    return $token;
-}
+has token      => ( is => 'ro' );
+has raw_data   => ( is => 'ro' );
+has user_model => ( is => 'ro' );
 
 sub from_session {
-    my ( $self, $c, $id ) = @_;
-    my $user = $c->model('API::User')->get($id)->get;
-    $self->obj( Hash::AsObject->new($user) ) if ($user);
-    return $user ? $self : undef;
+    my ( $class, $c, $token ) = @_;
+    my $data = $c->model('API::User')->get($token)->get;
+    return undef
+        if !$data->{id};
+    $class->new(
+        $c,
+        {
+            raw_data => $data,
+            token    => $token,
+        }
+    );
 }
 
 sub find_user {
-    my ( $self, $auth, $c ) = @_;
-    my $obj = Hash::AsObject->new(
-        $c->model('API::User')->get( $auth->{token} )->get );
-    $self->obj($obj);
-    return $self;
+    my ( $class, $auth, $c ) = @_;
+    my $data = $c->model('API::User')->login($auth)->get;
+    return
+        unless $data->{access_token};
+    $class->from_session( $c, $data->{access_token} );
 }
 
-sub supports {
-    my ( $self, @feature ) = @_;
-    return 1 if ( grep { $_ eq 'session' } @feature );
+sub BUILDARGS {
+    my ( $self, $c, $args ) = @_;
+    return {
+        user_model => $c->model('API::User'),
+        %{ $args->{raw_data} },
+        %$args,
+    };
 }
 
-__PACKAGE__->meta->make_immutable( inline_constructor => 0 );
+sub for_session { $_[0]->token }
+
+has id             => ( is => 'ro' );
+has looks_human    => ( is => 'ro' );
+has passed_captcha => ( is => 'ro' );
+has access_token   => ( is => 'ro' );
+has identity       => ( is => 'ro' );
+has pause_id       => (
+    is      => 'ro',
+    lazy    => 1,
+    builder => '_build_pause_id',
+);
+
+sub _build_pause_id {
+    my $self    = shift;
+    my $ident   = $self->identity;
+    my ($pause) = grep { $_->{name} eq 'pause' } @$ident;
+    $pause && $pause->{key};
+}
+
+__PACKAGE__->meta->make_immutable;
 
 1;
