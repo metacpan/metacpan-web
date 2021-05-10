@@ -12,8 +12,7 @@ sub index : Path('') : Args(0) {
 
     if ( $c->req->method eq 'POST' ) {
         my $params = $c->req->params;
-        my $res    = $c->model('API::User')
-            ->turing( $c->token, $params->{'g-recaptcha-response'} )->get;
+        my $res    = $user->turing( $params->{'g-recaptcha-response'} )->get;
         $c->stash( {
             success => $res->{looks_human},
             error   => $res->{error},

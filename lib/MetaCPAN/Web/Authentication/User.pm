@@ -58,6 +58,22 @@ sub _build_pause_id {
     $pause && $pause->{key};
 }
 
+for my $method ( qw(
+    delete_identity
+    update_profile
+    get_profile
+    add_favorite
+    remove_favorite
+    turing
+) )
+{
+    no strict 'refs';
+    *$method = sub {
+        my $self = shift;
+        $self->user_model->$method( $self->token, @_ );
+    };
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;

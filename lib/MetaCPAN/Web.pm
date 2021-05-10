@@ -42,10 +42,6 @@ __PACKAGE__->config(
     }
 );
 
-sub token {
-    shift->request->session->get('token');
-}
-
 __PACKAGE__->log( Log::Log4perl::Catalyst->new( undef, autoflush => 1 ) );
 
 # Squash warnings when not in a terminal (like when running under Docker)
