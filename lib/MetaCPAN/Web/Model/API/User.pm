@@ -4,6 +4,11 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
+sub login {
+    my ( $self, $auth ) = @_;
+    return $self->request( '/oauth2/access_token', undef, $auth );
+}
+
 sub get {
     my ( $self, $token ) = @_;
     $self->request( '/user', undef, { access_token => $token } );

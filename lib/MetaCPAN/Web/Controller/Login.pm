@@ -40,9 +40,7 @@ sub index : Chained('login_root') : PathPart('') : Args(0) {
     my $req = $c->req;
 
     if ( my $code = $req->parameters->{code} ) {
-        my $data = $c->model('API')->request(
-            '/oauth2/access_token',
-            undef,
+        my $data = $c->model('API::User')->login(
             {
                 client_id     => $self->consumer_key,
                 client_secret => $self->consumer_secret,
