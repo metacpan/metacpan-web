@@ -61,7 +61,7 @@ sub identities : Local : Args(0) {
     if ( $c->req->method eq 'POST'
         && ( my $delete = $c->req->params->{delete} ) )
     {
-        $c->model('API::User')->delete_identity( $delete, $c->token )->get;
+        $c->model('API::User')->delete_identity( $c->token, $delete )->get;
         $c->res->redirect('/account/identities');
     }
 }
@@ -135,7 +135,7 @@ sub profile : Local : Args(0) {
         return;
     }
 
-    my $res = $c->model('API::User')->update_profile( $data, $c->token )->get;
+    my $res = $c->model('API::User')->update_profile( $c->token, $data )->get;
     if ( $res->{error} ) {
         $c->stash( { author => $data, errors => $res->{errors} } );
     }

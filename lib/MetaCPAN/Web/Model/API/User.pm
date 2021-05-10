@@ -10,7 +10,7 @@ sub get {
 }
 
 sub delete_identity {
-    my ( $self, $identity, $token ) = @_;
+    my ( $self, $token, $identity ) = @_;
     $self->request(
         "/user/identity/$identity", undef,
         { access_token => $token }, 'DELETE'
@@ -18,7 +18,7 @@ sub delete_identity {
 }
 
 sub update_profile {
-    my ( $self, $data, $token ) = @_;
+    my ( $self, $token, $data ) = @_;
     $self->request( '/user/profile', $data,
         { access_token => $token }, 'PUT' );
 }
@@ -29,18 +29,18 @@ sub get_profile {
 }
 
 sub add_favorite {
-    my ( $self, $data, $token ) = @_;
+    my ( $self, $token, $data ) = @_;
     $self->request( '/user/favorite', $data, { access_token => $token } );
 }
 
 sub remove_favorite {
-    my ( $self, $data, $token ) = @_;
+    my ( $self, $token, $data ) = @_;
     $self->request( '/user/favorite/' . $data->{distribution},
         undef, { access_token => $token }, 'DELETE' );
 }
 
 sub turing {
-    my ( $self, $answer, $token ) = @_;
+    my ( $self, $token, $answer ) = @_;
     $self->request(
         '/user/turing',
         { answer       => $answer },
