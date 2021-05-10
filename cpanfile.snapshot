@@ -148,19 +148,19 @@ DISTRIBUTIONS
     requirements:
       B 0
       ExtUtils::MakeMaker 0
-  CGI-4.51
-    pathname: L/LE/LEEJO/CGI-4.51.tar.gz
+  CGI-4.52
+    pathname: L/LE/LEEJO/CGI-4.52.tar.gz
     provides:
-      CGI 4.51
-      CGI::Carp 4.51
-      CGI::Cookie 4.51
-      CGI::File::Temp 4.51
+      CGI 4.52
+      CGI::Carp 4.52
+      CGI::Cookie 4.52
+      CGI::File::Temp 4.52
       CGI::HTML::Functions undef
-      CGI::MultipartBuffer 4.51
-      CGI::Pretty 4.51
-      CGI::Push 4.51
-      CGI::Util 4.51
-      Fh 4.51
+      CGI::MultipartBuffer 4.52
+      CGI::Pretty 4.52
+      CGI::Push 4.52
+      CGI::Util 4.52
+      Fh 4.52
     requirements:
       Carp 0
       Config 0
@@ -293,15 +293,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       Test::Exception 0
       Test::More 0.18
-  Carp-Clan-6.08
-    pathname: E/ET/ETHER/Carp-Clan-6.08.tar.gz
-    provides:
-      Carp::Clan 6.08
-    requirements:
-      ExtUtils::MakeMaker 0
-      overload 0
-      perl 5.006
-      strict 0
   Carton-v1.0.34
     pathname: M/MI/MIYAGAWA/Carton-v1.0.34.tar.gz
     provides:
@@ -476,17 +467,15 @@ DISTRIBUTIONS
       Tie::RefHash 1.34
       namespace::clean 0.10
       perl 5.008
-  Catalyst-Plugin-Static-Simple-0.36
-    pathname: I/IL/ILMARI/Catalyst-Plugin-Static-Simple-0.36.tar.gz
+  Catalyst-Plugin-Static-Simple-0.37
+    pathname: I/IL/ILMARI/Catalyst-Plugin-Static-Simple-0.37.tar.gz
     provides:
-      Catalyst::Plugin::Static::Simple 0.36
+      Catalyst::Plugin::Static::Simple 0.37
     requirements:
       Catalyst::Runtime 5.80008
-      ExtUtils::MakeMaker 6.36
+      ExtUtils::MakeMaker 0
       MIME::Types 2.03
       Moose 0
-      MooseX::Types 0
-      Test::More 0
       namespace::autoclean 0
   Catalyst-Runtime-5.90128
     pathname: H/HA/HAARG/Catalyst-Runtime-5.90128.tar.gz
@@ -1090,11 +1079,11 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Format-Strptime-1.78
-    pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.78.tar.gz
+  DateTime-Format-Strptime-1.79
+    pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.79.tar.gz
     provides:
-      DateTime::Format::Strptime 1.78
-      DateTime::Format::Strptime::Types 1.78
+      DateTime::Format::Strptime 1.79
+      DateTime::Format::Strptime::Types 1.79
     requirements:
       Carp 0
       DateTime 1.00
@@ -1659,12 +1648,13 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Exception-Class-1.44
-    pathname: D/DR/DROLSKY/Exception-Class-1.44.tar.gz
+  Exception-Class-1.45
+    pathname: D/DR/DROLSKY/Exception-Class-1.45.tar.gz
     provides:
-      Exception::Class 1.44
-      Exception::Class::Base 1.44
+      Exception::Class 1.45
+      Exception::Class::Base 1.45
     requirements:
+      Carp 0
       Class::Data::Inheritable 0.02
       Devel::StackTrace 2.00
       ExtUtils::MakeMaker 0
@@ -1792,10 +1782,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  File-Which-1.24
-    pathname: P/PL/PLICEASE/File-Which-1.24.tar.gz
+  File-Which-1.27
+    pathname: P/PL/PLICEASE/File-Which-1.27.tar.gz
     provides:
-      File::Which 1.24
+      File::Which 1.27
     requirements:
       ExtUtils::MakeMaker 0
       base 0
@@ -3676,39 +3666,6 @@ DISTRIBUTIONS
       namespace::autoclean 0
       strict 0
       warnings 0
-  MooseX-Types-0.50
-    pathname: E/ET/ETHER/MooseX-Types-0.50.tar.gz
-    provides:
-      MooseX::Types 0.50
-      MooseX::Types::Base 0.50
-      MooseX::Types::CheckedUtilExports 0.50
-      MooseX::Types::Combine 0.50
-      MooseX::Types::Moose 0.50
-      MooseX::Types::TypeDecorator 0.50
-      MooseX::Types::UndefinedType 0.50
-      MooseX::Types::Util 0.50
-      MooseX::Types::Wrapper 0.50
-    requirements:
-      Carp 0
-      Carp::Clan 6.00
-      Exporter 0
-      Module::Build::Tiny 0.034
-      Module::Runtime 0
-      Moose 1.06
-      Moose::Exporter 0
-      Moose::Meta::TypeConstraint::Union 0
-      Moose::Util::TypeConstraints 0
-      Scalar::Util 1.19
-      Sub::Exporter 0
-      Sub::Exporter::ForMethods 0.100052
-      Sub::Install 0
-      Sub::Name 0
-      base 0
-      namespace::autoclean 0.16
-      overload 0
-      perl 5.008
-      strict 0
-      warnings 0
   Mozilla-CA-20200520
     pathname: A/AB/ABH/Mozilla-CA-20200520.tar.gz
     provides:
@@ -5233,17 +5190,6 @@ DISTRIBUTIONS
       Sub::Install 0.92
       strict 0
       warnings 0
-  Sub-Exporter-ForMethods-0.100054
-    pathname: R/RJ/RJBS/Sub-Exporter-ForMethods-0.100054.tar.gz
-    provides:
-      Sub::Exporter::ForMethods 0.100054
-    requirements:
-      ExtUtils::MakeMaker 6.78
-      Scalar::Util 0
-      Sub::Exporter 0.978
-      Sub::Util 0
-      strict 0
-      warnings 0
   Sub-Exporter-Progressive-0.001013
     pathname: F/FR/FREW/Sub-Exporter-Progressive-0.001013.tar.gz
     provides:
@@ -5865,50 +5811,50 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.012001
-    pathname: T/TO/TOBYINK/Type-Tiny-1.012001.tar.gz
+  Type-Tiny-1.012002
+    pathname: T/TO/TOBYINK/Type-Tiny-1.012002.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.012001
-      Devel::TypeTiny::Perl58Compat 1.012001
-      Error::TypeTiny 1.012001
-      Error::TypeTiny::Assertion 1.012001
-      Error::TypeTiny::Compilation 1.012001
-      Error::TypeTiny::WrongNumberOfParameters 1.012001
-      Eval::TypeTiny 1.012001
-      Reply::Plugin::TypeTiny 1.012001
-      Test::TypeTiny 1.012001
-      Type::Coercion 1.012001
-      Type::Coercion::FromMoose 1.012001
-      Type::Coercion::Union 1.012001
-      Type::Library 1.012001
-      Type::Params 1.012001
-      Type::Parser 1.012001
+      Devel::TypeTiny::Perl56Compat 1.012002
+      Devel::TypeTiny::Perl58Compat 1.012002
+      Error::TypeTiny 1.012002
+      Error::TypeTiny::Assertion 1.012002
+      Error::TypeTiny::Compilation 1.012002
+      Error::TypeTiny::WrongNumberOfParameters 1.012002
+      Eval::TypeTiny 1.012002
+      Reply::Plugin::TypeTiny 1.012002
+      Test::TypeTiny 1.012002
+      Type::Coercion 1.012002
+      Type::Coercion::FromMoose 1.012002
+      Type::Coercion::Union 1.012002
+      Type::Library 1.012002
+      Type::Params 1.012002
+      Type::Parser 1.012002
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.012001
-      Type::Tiny 1.012001
-      Type::Tiny::Class 1.012001
-      Type::Tiny::ConstrainedObject 1.012001
-      Type::Tiny::Duck 1.012001
-      Type::Tiny::Enum 1.012001
-      Type::Tiny::Intersection 1.012001
-      Type::Tiny::Role 1.012001
-      Type::Tiny::Union 1.012001
-      Type::Utils 1.012001
-      Types::Common::Numeric 1.012001
-      Types::Common::String 1.012001
-      Types::Standard 1.012001
-      Types::Standard::ArrayRef 1.012001
-      Types::Standard::CycleTuple 1.012001
-      Types::Standard::Dict 1.012001
-      Types::Standard::HashRef 1.012001
-      Types::Standard::Map 1.012001
-      Types::Standard::ScalarRef 1.012001
-      Types::Standard::StrMatch 1.012001
-      Types::Standard::Tied 1.012001
-      Types::Standard::Tuple 1.012001
-      Types::TypeTiny 1.012001
+      Type::Registry 1.012002
+      Type::Tiny 1.012002
+      Type::Tiny::Class 1.012002
+      Type::Tiny::ConstrainedObject 1.012002
+      Type::Tiny::Duck 1.012002
+      Type::Tiny::Enum 1.012002
+      Type::Tiny::Intersection 1.012002
+      Type::Tiny::Role 1.012002
+      Type::Tiny::Union 1.012002
+      Type::Utils 1.012002
+      Types::Common::Numeric 1.012002
+      Types::Common::String 1.012002
+      Types::Standard 1.012002
+      Types::Standard::ArrayRef 1.012002
+      Types::Standard::CycleTuple 1.012002
+      Types::Standard::Dict 1.012002
+      Types::Standard::HashRef 1.012002
+      Types::Standard::Map 1.012002
+      Types::Standard::ScalarRef 1.012002
+      Types::Standard::StrMatch 1.012002
+      Types::Standard::Tied 1.012002
+      Types::Standard::Tuple 1.012002
+      Types::TypeTiny 1.012002
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
@@ -6367,32 +6313,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.53
-    pathname: O/OA/OALDERS/libwww-perl-6.53.tar.gz
+  libwww-perl-6.54
+    pathname: O/OA/OALDERS/libwww-perl-6.54.tar.gz
     provides:
-      LWP 6.53
-      LWP::Authen::Basic 6.53
-      LWP::Authen::Digest 6.53
-      LWP::Authen::Ntlm 6.53
-      LWP::ConnCache 6.53
-      LWP::Debug 6.53
-      LWP::Debug::TraceHTTP 6.53
-      LWP::DebugFile 6.53
-      LWP::MemberMixin 6.53
-      LWP::Protocol 6.53
-      LWP::Protocol::cpan 6.53
-      LWP::Protocol::data 6.53
-      LWP::Protocol::file 6.53
-      LWP::Protocol::ftp 6.53
-      LWP::Protocol::gopher 6.53
-      LWP::Protocol::http 6.53
-      LWP::Protocol::loopback 6.53
-      LWP::Protocol::mailto 6.53
-      LWP::Protocol::nntp 6.53
-      LWP::Protocol::nogo 6.53
-      LWP::RobotUA 6.53
-      LWP::Simple 6.53
-      LWP::UserAgent 6.53
+      LWP 6.54
+      LWP::Authen::Basic 6.54
+      LWP::Authen::Digest 6.54
+      LWP::Authen::Ntlm 6.54
+      LWP::ConnCache 6.54
+      LWP::Debug 6.54
+      LWP::Debug::TraceHTTP 6.54
+      LWP::DebugFile 6.54
+      LWP::MemberMixin 6.54
+      LWP::Protocol 6.54
+      LWP::Protocol::cpan 6.54
+      LWP::Protocol::data 6.54
+      LWP::Protocol::file 6.54
+      LWP::Protocol::ftp 6.54
+      LWP::Protocol::gopher 6.54
+      LWP::Protocol::http 6.54
+      LWP::Protocol::loopback 6.54
+      LWP::Protocol::mailto 6.54
+      LWP::Protocol::nntp 6.54
+      LWP::Protocol::nogo 6.54
+      LWP::RobotUA 6.54
+      LWP::Simple 6.54
+      LWP::UserAgent 6.54
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
