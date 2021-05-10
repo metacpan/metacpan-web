@@ -34,7 +34,10 @@ __PACKAGE__->config(
                 class         => 'Password',
                 password_type => 'none',
             },
-            store => { class => 'Proxy', }
+            store => {
+                class      => 'Proxy',
+                user_class => 'MetaCPAN::Web::Authentication::User',
+            }
         },
     }
 );

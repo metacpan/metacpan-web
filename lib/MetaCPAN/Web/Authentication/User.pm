@@ -1,4 +1,4 @@
-package MetaCPAN::Web::User;
+package MetaCPAN::Web::Authentication::User;
 
 use Moose;
 extends 'Catalyst::Authentication::User';
@@ -17,7 +17,7 @@ sub _build_pause_id {
 
 sub get_object { shift->obj }
 
-sub store {'Catalyst::Authentication::Plugin::Store::Proxy'}
+sub store {'Catalyst::Authentication::Store::Proxy'}
 
 sub for_session {
     my $self    = shift;
