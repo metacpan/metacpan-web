@@ -1,6 +1,8 @@
 package MetaCPAN::Web::Authentication::User;
 
 use Moose;
+use MetaCPAN::Web::Types qw(HashRef ArrayToHash);
+
 extends 'Catalyst::Authentication::User';
 
 has token      => ( is => 'ro' );
@@ -44,8 +46,12 @@ has id             => ( is => 'ro' );
 has looks_human    => ( is => 'ro' );
 has passed_captcha => ( is => 'ro' );
 has access_token   => ( is => 'ro' );
-has identity       => ( is => 'ro' );
-has pause_id       => (
+has identity       => (
+    is     => 'ro',
+    isa    => HashRef->plus_coercions( ArrayToHash ['name'] ),
+    coerce => 1,
+);
+has pause_id => (
     is      => 'ro',
     lazy    => 1,
     builder => '_build_pause_id',

@@ -7,7 +7,7 @@
     </div>
     <table width="300">
 %%  for ['GitHub', 'PAUSE', 'Twitter', 'Google', 'OpenID'] -> $identity {
-%%  my $connected = !!$user.identity.indexed_by('name')[$identity.lc()];
+%%  my $connected = !!$user.identity[$identity.lc()];
     <tr>
         <td><big>[% $identity %]</big></td>
         <td>
