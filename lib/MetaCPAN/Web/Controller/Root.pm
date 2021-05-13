@@ -115,7 +115,7 @@ sub end : ActionClass('RenderView') {
 
     # for normal errors, try to render the internal_error page rather
     my @error = @{ $c->error };
-    if (@error && !$c->debug) {
+    if ( @error && !$c->debug ) {
         my %stash = %{ $c->stash };
 
         $c->forward('/internal_error');
