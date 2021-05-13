@@ -19,7 +19,7 @@ sub index : Path('') : Args(0) {
         } );
     }
     $c->stash( {
-        template      => 'account/turing.html',
+        template      => 'account/turing.tx',
         recaptcha_key => $self->public_key,
     } );
 

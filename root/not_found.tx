@@ -1,0 +1,3 @@
+%%  cascade base::error {
+%%    message => $message || 'The resource you requested could not be found.',
+%%  }

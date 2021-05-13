@@ -58,7 +58,7 @@ sub index : Chained('login_root') : PathPart('') : Args(0) {
         $c->stash( {
             success  => $req->parameters->{success},
             error    => $req->parameters->{error},
-            template => 'account/login.html',
+            template => 'account/login.tx',
         } );
     }
 }

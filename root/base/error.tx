@@ -1,0 +1,26 @@
+%%  cascade base::search {
+%%      title => $title || 'Error ' ~ $status_code ~ ' - ' ~ $status_message,
+%%  }
+%%  override content -> {
+<div class="content error-page">
+    <h1>[% $status_message %]</h1>
+
+    %%  if $message {
+    <p>[% $message %]</p>
+    %%  }
+
+    %% if $suggest {
+        <p class="suggestion">
+            [% $suggest.description %]:
+            <a href="[% $suggest.url %]">[% $suggest.link_text %]</a>
+        </p>
+    %%  }
+
+    %%  if $search_terms && $search_terms.size() {
+    %%      my $q = $search_terms.join(" ");
+        <p>
+            Search the CPAN for <a href="/search?q=[% $q | uri %]">[% $q %]</a>
+        </p>
+    %%  }
+</div>
+%%  }

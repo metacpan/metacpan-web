@@ -1,0 +1,18 @@
+<input id="[% $type %]" type="checkbox" class="notification-toggle-checkbox" />
+<div id="notification" class="well collapsed notify-[% $type %]">
+    <label class="remove-notification" for="[% $type %]" >
+      <i class="fa fa-fw fa-close black"></i>
+    </label>
+    <div id="notification-container">
+      <h2>[% $title %]</h2>
+      <div>
+        %%  block text -> { }
+        %%  if $email_contact {
+        If you're interested then please contact [% $email_contact %] via
+        <a href="mailto:[% $emails.join(',') %]?subject=[% $email_subject | uri_escape %]&amp;body=[% block email_body | uri_escape -> { } %]">email</a>.
+        <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+        %%  }
+      </div>
+  </div>
+</div>
+%%  }

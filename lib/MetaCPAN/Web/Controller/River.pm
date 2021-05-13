@@ -17,14 +17,12 @@ sub gauge : Chained('root') PathPart('gauge') Args(1) {
     $c->res->content_type('image/svg+xml');
     $c->stash( {
         distribution => $dist,
-        template     => 'river/gauge.svg',
+        template     => 'river/gauge.svg.tx',
     } );
 
     $c->cdn_max_age('1y');
     $c->browser_max_age('7d');
     $c->add_dist_key( $dist->{name} );
-
-    $c->detach( $c->view("Raw") );
 }
 
 __PACKAGE__->meta->make_immutable;

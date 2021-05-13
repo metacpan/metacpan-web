@@ -1,0 +1,34 @@
+%%  cascade base::error {
+%%      title => $title || 'Search for "' ~ $search_query ~ '"',
+%%  }
+%%  override left_nav -> {
+%%    if $suggest {
+%%      super;
+%%    }
+%%  }
+%%  override content -> {
+%%  if $suggest {
+    <div class="content no-results">
+        <div class="alert alert-danger">
+            Did you mean :
+            <a href="/search?q=[% $suggest | uri %]">[% $suggest %]</a>
+        </div>
+    </div>
+%%  }
+%%  else {
+  <div class="jumbotron">
+        <p class="nav-header" id="header-text-noresult">Something missing?
+            <a href="/about/missing_modules">Find out why</a>
+        </p>
+        <h2>No result.</h2>
+        <p> Sorry, we didn't find a match. Maybe look at <a href="/pod/Task::Kensho">Task::Kensho</a>,<br>
+        which is a list of recommended modules for Enlightened Perl development.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-large" href="/pod/Task::Kensho">
+            Learn more
+            </a>
+        </p>
+    </div>
+%%  }
+%%  }

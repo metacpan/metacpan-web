@@ -1,0 +1,25 @@
+<ul class="nav-list box-right hidden-phone dependencies">
+  <li class="nav-header">Dependencies</li>
+  %%  my $deps = $release.dependency.map( -> $dep {
+  %%    $dep.phase == 'runtime' && $dep.relationship == 'requires' && $dep.module != 'perl' ? $dep.module : ''
+  %%  }).grep().sort();
+  %%  for $deps -> $dep {
+  <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
+  %%  }
+  %%  if !$deps.size() && !$release.metadata {
+  <li><i class="ttip" title="no META file provided">unknown</i></li>
+  %%  }
+  %%  else if $release.metadata.dynamic_config {
+  <li><i class="ttip" title="dynamic_config enabled">[% $deps.size() ? "and possibly others" : "unknown" %]</i></li>
+  %%  }
+  %%  else if !$deps.size() {
+  <li><i>none</i></li>
+  %%  }
+  <li><hr /></li>
+  <li>
+    <a href="/requires/[% $module ? 'module/' ~ ($module.documentation || $module.module.0.name ) : 'distribution/' ~ $release.distribution %]"><i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
+  </li>
+  <li>
+    <a href="https://cpandeps.grinnz.com/?dist=[% $release.distribution | uri %][% if $permalinks || $release.status != 'latest' { %]&amp;dist_version=[% $release.version | uri %][% } %]"><i class="fa fa-asterisk fa-fw black"></i>Dependency graph</a>
+  </li>
+</ul>

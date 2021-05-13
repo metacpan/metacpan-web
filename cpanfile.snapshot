@@ -599,23 +599,18 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       JSON::MaybeXS 1.003000
       MRO::Compat 0
-  Catalyst-View-TT-Alloy-0.00007
-    pathname: D/DJ/DJZORT/Catalyst-View-TT-Alloy-0.00007.tar.gz
+  Catalyst-View-Xslate-0.00019
+    pathname: D/DM/DMAKI/Catalyst-View-Xslate-0.00019.tar.gz
     provides:
-      Catalyst::Helper::View::TT::Alloy 0.00007
-      Catalyst::View::TT::Alloy 0.00007
+      Catalyst::Helper::View::Xslate undef
+      Catalyst::View::Xslate 0.00019
     requirements:
-      Carp 0
-      Catalyst 5.7
-      Data::Dump 0
-      ExtUtils::MakeMaker 0
-      Path::Class 0
+      Catalyst 5.8
+      ExtUtils::MakeMaker 6.36
+      File::Find 0
+      Module::Build 0.38
       Scalar::Util 0
-      Template::Alloy 0
-      parent 0
-      perl 5.006
-      strict 0
-      warnings 0
+      Text::Xslate 0.1045
   CatalystX-Fastly-Role-Response-0.07
     pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.07.tar.gz
     provides:
@@ -943,6 +938,18 @@ DISTRIBUTIONS
       Symbol 0
       Test 0
       perl 5.006
+  Data-MessagePack-1.01
+    pathname: S/SY/SYOHEX/Data-MessagePack-1.01.tar.gz
+    provides:
+      Data::MessagePack 1.01
+      Data::MessagePack::Boolean undef
+      Data::MessagePack::PP undef
+    requirements:
+      ExtUtils::CBuilder 0
+      Math::BigInt 1.89
+      Module::Build 0.4005
+      Module::Build::XSUtil 0.19
+      perl 5.008001
   Data-OptList-0.110
     pathname: R/RJ/RJBS/Data-OptList-0.110.tar.gz
     provides:
@@ -2994,6 +3001,21 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Module-Build-XSUtil-0.19
+    pathname: H/HI/HIDEAKIO/Module-Build-XSUtil-0.19.tar.gz
+    provides:
+      Module::Build::XSUtil 0.19
+    requirements:
+      Devel::CheckCompiler 0
+      Devel::PPPort 0
+      Exporter 0
+      ExtUtils::CBuilder 0
+      File::Basename 0
+      File::Path 0
+      Module::Build 0.4005
+      XSLoader 0
+      parent 0
+      perl 5.008001
   Module-CPANfile-1.1004
     pathname: M/MI/MIYAGAWA/Module-CPANfile-1.1004.tar.gz
     provides:
@@ -3666,6 +3688,44 @@ DISTRIBUTIONS
       namespace::autoclean 0
       strict 0
       warnings 0
+  Mouse-v2.5.10
+    pathname: S/SK/SKAJI/Mouse-v2.5.10.tar.gz
+    provides:
+      Mouse v2.5.10
+      Mouse::Exporter undef
+      Mouse::Meta::Attribute undef
+      Mouse::Meta::Class undef
+      Mouse::Meta::Method undef
+      Mouse::Meta::Method::Accessor undef
+      Mouse::Meta::Method::Constructor undef
+      Mouse::Meta::Method::Delegation undef
+      Mouse::Meta::Method::Destructor undef
+      Mouse::Meta::Module undef
+      Mouse::Meta::Role undef
+      Mouse::Meta::Role::Application undef
+      Mouse::Meta::Role::Application::RoleSummation undef
+      Mouse::Meta::Role::Composite undef
+      Mouse::Meta::Role::Method undef
+      Mouse::Meta::TypeConstraint undef
+      Mouse::Object undef
+      Mouse::PurePerl undef
+      Mouse::Role v2.5.10
+      Mouse::Spec v2.5.10
+      Mouse::TypeRegistry undef
+      Mouse::Util v2.5.10
+      Mouse::Util::MetaRole undef
+      Mouse::Util::TypeConstraints undef
+      Squirrel undef
+      Squirrel::Role undef
+      Test::Mouse undef
+      ouse undef
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.4005
+      Module::Build::XSUtil 0.19
+      Scalar::Util 1.14
+      XSLoader 0.02
+      perl 5.008005
   Mozilla-CA-20200520
     pathname: A/AB/ABH/Mozilla-CA-20200520.tar.gz
     provides:
@@ -3934,13 +3994,6 @@ DISTRIBUTIONS
       POSIX 0
       Socket 0
       Time::HiRes 0
-  Number-Compare-0.03
-    pathname: R/RC/RCLAMP/Number-Compare-0.03.tar.gz
-    provides:
-      Number::Compare 0.03
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Number-Format-1.75
     pathname: W/WR/WRW/Number-Format-1.75.tar.gz
     provides:
@@ -4392,26 +4445,6 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Iterator-Rule-1.014
-    pathname: D/DA/DAGOLDEN/Path-Iterator-Rule-1.014.tar.gz
-    provides:
-      PIR 1.014
-      Path::Iterator::Rule 1.014
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      File::Basename 0
-      File::Spec 0
-      List::Util 0
-      Number::Compare 0.02
-      Scalar::Util 0
-      Text::Glob 0
-      Try::Tiny 0
-      if 0
-      perl 5.008001
-      strict 0
-      warnings 0
-      warnings::register 0
   Path-Tiny-0.118
     pathname: D/DA/DAGOLDEN/Path-Tiny-0.118.tar.gz
     provides:
@@ -5256,29 +5289,6 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       perl 5.006
       strict 0
-  Template-Alloy-1.020
-    pathname: R/RH/RHANDOM/Template-Alloy-1.020.tar.gz
-    provides:
-      Template::Alloy 1.020
-      Template::Alloy::Compile undef
-      Template::Alloy::Context undef
-      Template::Alloy::EvalPerlHandle undef
-      Template::Alloy::Exception undef
-      Template::Alloy::HTE undef
-      Template::Alloy::Iterator undef
-      Template::Alloy::Operator undef
-      Template::Alloy::Parse undef
-      Template::Alloy::Perl undef
-      Template::Alloy::Play undef
-      Template::Alloy::Stream undef
-      Template::Alloy::TT undef
-      Template::Alloy::Tmpl undef
-      Template::Alloy::VMethod undef
-      Template::Alloy::Velocity undef
-      Template::Alloy::_ContextStash undef
-    requirements:
-      Digest::MD5 1
-      ExtUtils::MakeMaker 0
   Term-Size-Any-0.002
     pathname: F/FE/FERREIRA/Term-Size-Any-0.002.tar.gz
     provides:
@@ -5630,15 +5640,6 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::MakeMaker 0
       perl 5.006
-  Text-Glob-0.11
-    pathname: R/RC/RCLAMP/Text-Glob-0.11.tar.gz
-    provides:
-      Text::Glob 0.11
-    requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      constant 0
-      perl 5.00503
   Text-Markdown-1.000031
     pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
     provides:
@@ -5681,6 +5682,42 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+      perl 5.008001
+  Text-Xslate-v3.5.8
+    pathname: S/SK/SKAJI/Text-Xslate-v3.5.8.tar.gz
+    provides:
+      Text::Xslate v3.5.8
+      Text::Xslate::Bridge undef
+      Text::Xslate::Bridge::Star undef
+      Text::Xslate::Compiler undef
+      Text::Xslate::Engine v3.5.8
+      Text::Xslate::HashWithDefault undef
+      Text::Xslate::PP v3.5.8
+      Text::Xslate::PP::Const undef
+      Text::Xslate::PP::Method undef
+      Text::Xslate::PP::Opcode v3.5.8
+      Text::Xslate::PP::State undef
+      Text::Xslate::PP::Type::Macro undef
+      Text::Xslate::PP::Type::Pair undef
+      Text::Xslate::PP::Type::Raw undef
+      Text::Xslate::Parser undef
+      Text::Xslate::Runner undef
+      Text::Xslate::Symbol undef
+      Text::Xslate::Syntax::Kolon undef
+      Text::Xslate::Syntax::Metakolon undef
+      Text::Xslate::Syntax::TTerse undef
+      Text::Xslate::Type::Raw undef
+      Text::Xslate::Util undef
+    requirements:
+      Data::MessagePack 0.38
+      Encode 2.26
+      ExtUtils::CBuilder 0
+      Module::Build 0.4005
+      Module::Build::XSUtil 0.19
+      Mouse v2.5.0
+      Scalar::Util 1.14
+      Storable 2.15
+      parent 0.221
       perl 5.008001
   Tie-Handle-Offset-0.004
     pathname: D/DA/DAGOLDEN/Tie-Handle-Offset-0.004.tar.gz

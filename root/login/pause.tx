@@ -1,0 +1,23 @@
+%%  cascade base
+%%  override content -> {
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="col-md-offset-3 col-md-6">
+            <p class="text-center">Connect to MetaCPAN using PAUSE</p>
+            <form action="[% $oauth_url %]">
+                <input type="hidden" name="client_id" value="[% $consumer_key %]">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        PAUSE ID
+                    </span>
+                    <input type="text" class="form-control" name="id" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Log in</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+%%  }
+

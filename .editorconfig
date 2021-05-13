@@ -20,6 +20,8 @@ insert_final_newline     = true
 # There's no reason to keep this, it just seems to be the overwhelming style currently.
 [*.html]
 indent_size  = 2
+[*.tx]
+indent_size  = 2
 
 [.travis.yml]
 indent_size = 2

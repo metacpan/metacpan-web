@@ -1,0 +1,347 @@
+%%  cascade base::account
+%%  override content -> {
+<div class="content account-settings">
+    %%  if $no_profile {
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">Error</h4>
+      In order to change your profile you have to <a href="/login/pause">connect your account to PAUSE</a>.
+    </div>
+    %%  }
+    %%  else {
+    <form method="POST" action="" class="form-horizontal" role="form" accept-charset="utf-8">
+        <input type="hidden" name="utf8" value="🐪" />
+        %%  if $errors {
+        <fieldset><legend style="color: #600">Errors</legend>
+            <ul>
+            %%  for $errors -> $error {
+                <li>[% $error.field %]: [% $error.message %]</li>
+            %%  }
+            </ul>
+        </fieldset>
+        %%  }
+        %%  else if $success {
+        <fieldset><legend style="color: #060">Success</legend>
+            <p>The profile has been updated.</p>
+        </fieldset>
+        %%  }
+        <fieldset><legend>General</legend>
+        <div class="row">
+            <div class="col-sm-8 col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">PAUSE ID</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" value="[% $author.pauseid %]" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Avatar</label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="form-control-static">
+                            <div><img class="author-avatar" src="[% gravatar_image($author, 130) %]" alt="Author image"></div>
+                            <div><a href="https://en.gravatar.com/emails/">Change Gravatar for [% $author.pauseid | lc %]@cpan.org</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Name</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="name" value="[% $author.name %]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">ASCII Name</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="asciiname" value="[% $author.asciiname %]" />
+                    </div>
+                </div>
+                <div class="email repeatable">
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Email</label>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" value="[% $author.email.0 %]" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="button" onclick="return addField('email')">add</button>
+                                </span>
+                            </div>
+                            %%  for $author.email -> $email {
+                                %%  if $~email.is_first { next }
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="email" value="[% $email %]" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="button" onclick="return removeDiv(this)">remove</button>
+                                </span>
+                            </div>
+                            %%  }
+                        </div>
+                    </div>
+                </div>
+                <div class="websites repeatable">
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label">Website</label>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="input-group">
+                                <input type="url" class="form-control" name="website" value="[% $author.website.0 %]" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="button" onclick="return addField('website')">add</button>
+                                </span>
+                            </div>
+                            %%  for $author.website -> $website {
+                                %%  if $~website.is_first { next }
+                            <div class="input-group">
+                                <input type="url" class="form-control" name="website" value="[% $website %]" />
+                                <span class="input-group-btn">
+                                    <button class="btn search-btn" type="button" href="" onclick="return removeDiv(this)">remove</a></button>
+                                </span>
+                            </div>
+                            %%  }
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Blog</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="url" class="form-control" name="blog.url" value="[% $author.blog.0.url %]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Feed</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="url" class="form-control" name="blog.feed" value="[% $author.blog.0.feed %]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4"></label>
+                    %%  my $donation = $author.donation.map(-> $d { $d.id }).grep.size();
+                    <div class="col-sm-8 col-md-6">
+                        <label class="checkbox">
+                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] onchange="$('#donations').slideToggle()" /> Accept donations
+                        </label>
+                    </div>
+                </div>
+                <div id="donations"[% if !$donation { %] style="display: none"[% } %]>
+                    %%  my $user_donations = $author.donation.indexed_by('name');
+                    %%  for ['PayPal', 'Wishlist', 'Flattr'] -> $system {
+                    %%      my $found = $user_donations[$system];
+                    <div class="form-group">
+                        <label class="col-sm-4 col-md-4 control-label [% $system.lc() %]">[% $system %]</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="hidden" name="donation.name" value="[% $system.lc() %]" />
+                            <input type="text" class="form-control" name="donation.id" value="[% $found.id %]" />
+                        </div>
+                    </div>
+                    %%  }
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Last update</label>
+                    <div class="col-sm-8 col-md-6">
+                        <p class="checkbox">
+                            <strong class="relatize">[% datetime($author.updated).to_http %]</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </fieldset>
+
+    <fieldset><legend>Location</legend>
+        <div class="row">
+            <div class="col-sm-8 col-md-10">
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Country</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="country" value="[% $author.country %]" />
+                        <span class="help-inline">(two letter ISO code)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Region</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="region" value="[% $author.region %]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">City</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" name="city" value="[% $author.city %]" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 col-md-4 control-label">Lat/long</label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="input-group">
+                        <input class="input-small form-control" type="text" placeholder="Latitude" name="latitude" value="[% $author.location.0 %]" />
+                        <input class="input-small form-control" type="text" placeholder="Longitude" name="longitude" value="[% $author.location.1 %]" />
+                        <span class="input-group-btn">
+                            <button class="btn search-btn" type="button" onclick="return fillLocation()">locate me</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset><legend>Profiles</legend>
+        <div class="row">
+        <div class="col-sm-8 col-md-10">
+            <div class="form-group profile">
+                <label class="col-sm-4 col-md-4"></label>
+                <div class="col-sm-8 col-md-6">
+                    <select class="form-control" onchange="return addProfile(this)">
+                        <option>Add Profile</option>
+                        %%  for $profiles.kv() -> $profile {
+                            %%  my $option_value = {
+                            %%      id => $profile.key,
+                            %%      name => $profile.value.name,
+                            %%      url => $profile.value.url_format,
+                            %%  };
+                        <option value="[% $option_value.json() %]">[% $profile.value.name %]</option>
+                        %%  }
+                        <option value="">Custom...</option>
+                    </select>
+                </div>
+            </div>
+            <div id="profiles" class="profiles">
+                <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
+                    <label class="col-sm-4 col-md-4 control-label">metacpan</label>
+                    <div class="col-sm-8 col-md-6">
+                        <input type="text" class="form-control" value="[% $author.user %]" disabled="disabled" />
+                    </div>
+                </div>
+                %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
+                    %%  my $known = $profiles[$profile.name];
+                <div class="form-group [% if $known { %]profile profile-[% $profile.name %][% } %]">
+                    <label class="col-sm-4 col-md-4 control-label">
+                        %%  if $known {
+                        [% $known.name %]
+                        <input type="hidden" name="profile.name" value="[% $profile.name %]" />
+                        %%  }
+                        %%  else {
+                        <input class="input-small" type="text" class="form-control" name="profile.name" value="[% $profile.name %]">
+                        %%  }
+                    </label>
+                    <div class="col-sm-8 col-md-6">
+                        <div class="input-group">
+                            <input class="small form-control" type="text" class="form-control" name="profile.id" value="[% $profile.id %]" />
+                            <span class="input-group-btn">
+                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"></i> remove</a>
+                            %%  if $known {
+                            <a href="" class="btn search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square-o"></i> check</a>
+                            </span>
+                            %%  }
+                        </div>
+                    </div>
+                </div>
+                %%  }
+            </div>
+        </div>
+        </div>
+    </fieldset>
+
+    <fieldset><legend>Extra</legend>
+        <p>Any additional data you want to add to your profiles goes in here (JSON format).</p>
+        <textarea name="extra" class="form-control" rows="10" onkeyup="validateJSON(this)">[% $author.extra.json_pretty() %]</textarea><div class="valid">invalid</div>
+    </fieldset>
+    <br />
+    <input type="submit" value="Save Profile" class="btn btn-large search-btn" />
+    </form>
+    %%  }
+</div>
+
+<script>
+
+function addProfile(select) {
+    var value = select.value;
+    var profile = value ? JSON.parse(value) : null;
+    select.selectedIndex = 0;
+    var container = $('#profiles');
+    var html = '<div style="display: none" class="form-group'
+    if (value) {
+        html += ' profile profile-' + profile.id;
+    }
+    html += '"><label class="col-sm-4 col-md-4 control-label">';
+    if(value) {
+        html += profile.name
+        + '<input type="hidden" name="profile.name" value="' + profile.id  + '" /> ';
+    } else {
+        html += '<input placeholder="Profile name" class="input-small" type="text" class="form-control" name="profile.name" /> ';
+    }
+    html += '</label>'
+    html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
+        + '<input type="text" class="form-control" name="profile.id" /> '
+        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"></i> remove</a> ';
+    if (value) {
+        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square-o"></i> check</a>';
+    }
+
+    html += '</span></div></div></div>';
+
+      container.append(html);
+      var add = container.children().last();
+      add.slideDown();
+}
+
+function rewriteURL(link) {
+    link = $(link);
+    var url = link.attr('tmpl');
+    var input = link.parent().prev();
+    link.attr('href', url.replace('%s', input.val()));
+    return true;
+}
+
+function removeDiv(link) {
+    $(link).parents('div').first().slideUp("normal", function(){$(this).remove()});
+    return false;
+}
+
+function removeLabel(link) {
+    $(link).parents('.controls').first().slideUp("normal", function(){$(this).remove()});
+    return false;
+}
+
+function validateJSON(text) {
+    var valid = $('.valid');
+    try {
+        text.value && JSON.parse(text.value);
+        valid.removeClass('invalid');
+    } catch(err) {
+        valid.addClass('invalid');
+    }
+}
+
+function addField(id) {
+    var input = $('input[name="' + id + '"]').last();
+    var container = input.parent().parent();
+    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button type="button" class="btn search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
+    var add = container.children().last();
+    add.slideDown();
+    return false;
+}
+
+function fillLocation() {
+    $('#busy').show();
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        $('#busy').hide();
+        $('input[name="latitude"]').val(pos.coords.latitude);
+        $('input[name="longitude"]').val(pos.coords.longitude);
+    }, function(){
+        $('#busy').hide();
+    });
+    return false;
+}
+document.addEventListener('DOMContentLoaded', function () {
+    $(window).bind("resize", formFixer);
+    formFixer();
+});
+
+function formFixer( e ) {
+    if($(window).width()<=480){
+        $('form').removeClass('form-horizontal');
+    }
+    else{
+        $('form').addClass('form-horizontal');
+    }
+}
+</script>
+%%  }

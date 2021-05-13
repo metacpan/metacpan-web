@@ -1,0 +1,28 @@
+<select onchange="document.location.href=[%
+block navigate -> {
+  $module
+    ? "'/pod/release/'+this.value+'/" ~ $module.path ~ "'"
+    : "'/release/'+this.value";
+}
+%]" class="[% $class %]">
+%%  if $head {
+  <option disabled [% if $active != 'selected' { 'selected' } %]>[% $head %]</option>
+%%  }
+%%  my $versions_bp = $versions.sort(-> $a, $b { ($a.status == 'backpan') cmp ($b.status == 'backpan') });
+%%  for $versions_bp -> $version {
+%%    if $version.status == 'backpan' && $~version.peek_prev.status != 'backpan' {
+<optgroup label="BackPAN">'
+%%    }
+<option
+  [% $release.author == $version.author && $release.name == $version.name ? ($active || "selected") : "" %]
+  value="[% $version.author %]/[% $version.name %]"
+>
+  [%- $version.distnameinfo.version ~ ($version.maturity == 'developer' ? ' DEV' : '') %]
+  ([% $version.author %] on [% datetime($version.date).to_ymd %])
+  [%- if $mark_unauthorized_releases && !$version.authorized { %] UNAUTHORIZED[% } -%]
+</option>
+%%    if $version.status == 'backpan' && $~version.is_last {
+</optgroup>
+%%    }
+%%  }
+</select>

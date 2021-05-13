@@ -1,0 +1,7 @@
+<a href="/[%
+    'source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path;
+    if $file.module_name {
+        '#P' ~ $file.module_name;
+    }
+%]">[% $linktext || $file.module_name || $file.path %]</a>
+[%- -%]

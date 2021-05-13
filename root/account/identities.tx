@@ -1,0 +1,28 @@
+%%  cascade base::account
+%%  override content -> {
+<div class="content account-settings">
+    <div class="alert alert-warning">
+      <h4><strong>Information</strong></h4>
+      Identities you are connected to allow you to log into MetaCPAN. MetaCPAN also drags in some information from them to help you with filling in your <a href="/account/profile">profile</a>. This information is not exposed to anyone unless you explicitly publish it.
+    </div>
+    <table width="300">
+%%  for ['GitHub', 'PAUSE', 'Twitter', 'Google', 'OpenID'] -> $identity {
+%%  my $connected = !!$user.identity.indexed_by('name')[$identity.lc()];
+    <tr>
+        <td><big>[% $identity %]</big></td>
+        <td>
+            %%  if $connected {
+                <form method="POST">
+                    <input type="hidden" name="delete" value="[% $identity.lc() %]" />
+                    <button type="submit" class="btn btn-block btn-danger"><span class="fa fa-times"></span> Disconnect</button>
+                </form>
+            %%  }
+            %%  else {
+                <a class="btn btn-block btn-success" href="/login/[% $identity.lc() %]"><span class="fa fa-external-link"></span> Connect</a>
+            %%  }
+        </td>
+    </tr>
+%%  }
+</table>
+</div>
+%%  }

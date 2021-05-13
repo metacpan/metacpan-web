@@ -1,0 +1,66 @@
+%%  cascade base::tools
+%%  override content -> {
+<div class="content">
+
+<h2>[% $personal ? 'Personal' : $pauseid %] Dashboard</h2>
+
+%%  if $report {
+  %%  if $report.distros.size() {
+    <h3>Distributions</h3>
+    <table class="table-bordered table-striped tablesorter dashboard-dist-table">
+    <thead>
+    <tr>
+       <th class="no-sort" colspan="4"></th>
+       <th class="no-sort" colspan="4">Missing</th>
+       <th class="no-sort" colspan="4">Tests</th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th class="no-sort">Version</th>
+      <th>Issues</th>
+      <th>Repo</th>
+      <th>License</th>
+      <th>Abstract</th>
+      <th>Unauthorized</th>
+      <th>pass</th>
+      <th>fail</th>
+      <th>na</th>
+      <th>pass/total</th>
+    </tr>
+    </thead>
+    <tbody>
+    %%  for $report.distros.kv() -> $d {
+    <tr>
+      <td><a href="/release/[% $d.key %]">[% $d.key %]</a></td>
+      <td class="date relatize" sort="[% $d.value.date %]">[% $d.value.date %]</td>
+      <td>[% $d.value.version %]</td>
+      <td>[% $d.value.bugs %]</td>
+      <td class="missing"[% if $d.value.repo { %] title="missing link to public VCS in META files">R[% } else { %]>[% } %]</td>
+      <td class="missing"[% if $d.value.license { %] title="missing license information in META files">L[% } else { %]>[% } %]</td>
+      <td class="missing"[% if $d.value.abstract { %] title="Abstract is missing">A[% } else { %]>[% } %]</td>
+      <td class="missing"[% if $d.value.unauthorized { %] title="Unauthorized module">U[% } else { %]>[% } %]</td>
+      %%  my $tests = $d.value.test;
+      <td class="tests-pass">[% $tests.pass %]</td>
+      <td class="tests-fail">[% $tests.fail %]</td>
+      <td class="tests-na">[% $tests.na %]</td>
+      <td class="test-ratio [% if $tests.ratio > 95 { %]test-ratio-good[% } else if $tests.ratio < 80 { %]test-ratio-bad[% } %]">[% if length($tests.ratio) { %][% $tests.ratio %]%[% } %]</td>
+    </tr>
+    %%  }
+    </tbody>
+    </table>
+    <ul>
+      <li>Repo R - missing link to public VCS in META files <a href="https://perlmaven.com/how-to-add-link-to-version-control-system-of-a-cpan-distributions">ways to fix it</a>.</li>
+      <li>License L - missing license information in META files <a href="https://perlmaven.com/how-to-add-the-license-field-to-meta-files-on-cpan">ways to fix it</a>.</li>
+      <li>Abstract A - the <b>=head1 NAME</b> field is missing. <a href="http://blogs.perl.org/users/neilb/2014/07/give-your-modules-a-good-abstract.html">How to write good abstract</a>.</li>
+      <li>Unauthorized U - One or more of the modules in this distribution are 'owned' by another CPAN author and you don't have co-maintainer rights.</li>
+      <li>Bugs - number of open bugs/tickets/issues.</li>
+    </ul>
+    %%  }
+%%  }
+%%  else {
+The dashboard is only available to people who have logged in to MetaCPAN.
+%%  }
+
+</div>
+%%  }

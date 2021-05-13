@@ -1,0 +1,15 @@
+%%# Unlike an <img>, an <object> grafts the SVG document into the DOM, which
+%%# means browsers will display the <title> elements of the SVG.  Yay!
+%%  if $river {
+<span class="river-gauge-gauge">
+  %% include "river/gauge.svg.tx" { embed => 1, river => $river }
+</span>
+%%  }
+%%  else {
+<object data="/river/gauge/[% $distribution | uri %]"
+  type="image/svg+xml"
+  width="24px"
+  height="15px"
+  alt="river gauge for [% $distribution %]"
+  class="river-gauge-gauge"></object>
+%%  }

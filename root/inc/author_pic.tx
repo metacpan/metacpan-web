@@ -1,0 +1,9 @@
+<div class="author-pic">
+<a href="/author/[% $author.pauseid %]">
+  <img src="[% gravatar_image($author, 130) %]" alt="Author image">
+</a>
+<strong>
+  <a rel="author" href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a>
+</strong>
+<span title="[% $author.asciiname %]">[% $author.name %]</span>
+</div>

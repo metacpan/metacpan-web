@@ -1,0 +1,10 @@
+%%  cascade base {
+%%      title     => $title || 'Author module permissions for ' ~ $search_term,
+%%  }
+%%  override content -> {
+
+<h1>Author Module Permissions for [% $search_term %]</h1>
+
+%% include inc::permission
+
+%%  }

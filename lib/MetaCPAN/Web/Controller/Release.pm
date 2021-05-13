@@ -30,7 +30,7 @@ sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
     my ( $self, $c ) = @_;
     my $dist = $c->stash->{distribution};
     $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
-    $c->stash( { template => 'plussers.html' } );
+    $c->stash( { template => 'plussers.tx' } );
 }
 
 sub by_author_and_release : Chained('root') PathPart('') Args(2) {
@@ -91,7 +91,7 @@ sub view : Private {
         %$categories,
         changes => \@changes,
 
-        template => 'release.html',
+        template => 'release.tx',
 
         # TODO: Put this in a more general place.
         # Maybe make a hash for feature flags?

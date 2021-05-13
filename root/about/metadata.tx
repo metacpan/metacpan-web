@@ -1,0 +1,90 @@
+%%  cascade base::about::markdown {
+%%      title => $title || 'MetaCPAN Metadata',
+%%  }
+%%  override about -> {
+## Metadata
+
+MetaCPAN uses the [CPAN::Meta spec](/pod/CPAN::Meta::Spec) for much of the
+information about a distribution.  It also supports some custom meta fields.
+
+### Contributors
+
+Distributions can provide a list of contributors using the `x_contributors`
+field in the `META.json` or `META.yml` file.  The list will be presented below
+the releaser and authors on the right sidebar.  If possible, the list should
+include an email address either linked to the user on MetaCPAN or listed in
+PAUSE.
+
+In `META.yml`:
+
+    ...
+    x_contributors:
+      - The First Contributor <contrib1@cpan.org>
+      - The Second Contributor <second_contrib@cpan.org>
+      - Yet Another Contributor <yacontrib@cpan.org>
+    ...
+
+In `META.json`:
+
+    ...
+    "x_contributors" : [
+      "The First Contributor <contrib1@cpan.org>",
+      "The Second Contributor <second_contrib@cpan.org>",
+      "Yet Another Contributor <yacontrib@cpan.org>"
+    ],
+    ...
+
+[Dist::Zilla](/pod/Dist::Zilla) users can automate adding this using the
+[Dist::Zilla::Plugin::Git::Contributors](/pod/Dist::Zilla::Plugin::Git::Contributors)
+plugin.
+
+### IRC
+
+A link to an IRC channel can be provided using the `x_IRC` (or `IRC` in
+`META.yml`) resource field.  This link should use the irc:// protocol.
+MetaCPAN will automatically transform this into a web chat link to use on the
+left sidebar.  Alternatively, `x_IRC` can be specified as a hash using `url`
+and `web` keys.  The `url` key is intended to contain an irc:// link, while the
+`web` key should have a link to join the chat room directly in the browser.
+If no web link is provided, it will be generated for you.
+
+In `META.yml`:
+
+    ...
+    resources:
+      ...
+      x_IRC: irc://irc.perl.org/#metacpan
+    ...
+
+In `META.json`:
+
+    ...
+    "resources" : {
+      ...
+      "x_IRC" : "irc://irc.perl.org/#metacpan"
+    },
+    ...
+
+Or:
+
+    ...
+    "resources" : {
+      ...
+      "x_IRC" : {
+        "url" : "irc://irc.perl.org/#metacpan",
+        "web" : "https://chat.mibbit.com/?channel=%23metacpan&server=irc.perl.org"
+      }
+    },
+    ...
+
+## Files
+
+### Change Logs
+
+MetaCPAN will look for change logs in the following files: `CHANGES`, `Changes`,
+`ChangeLog`, `Changelog`, `CHANGELOG`, and `NEWS`.  These will be shown when
+using the Changes link on the sidebar.  If the change log follows the
+[CPAN::Changes::Spec](/pod/CPAN::Changes::Spec), the release page will include
+the entries for the release.
+
+%%  }

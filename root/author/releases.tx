@@ -1,0 +1,7 @@
+%%  cascade base {
+%%      title => $title || "All releases by " ~ $author.pauseid,
+%%  }
+%%  override content -> {
+%%  include inc::release_table { header => 1, tablesorter => 0 }
+%%  include inc::pager
+%%  }

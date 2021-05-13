@@ -161,7 +161,7 @@ sub view : Private {
         documented_module => $documented_module,
         module            => $data,
         pod               => $pod_html,
-        template          => 'pod.html',
+        template          => 'pod.tx',
     } );
 
     unless ( $pod->{raw} ) {

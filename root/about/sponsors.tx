@@ -1,0 +1,379 @@
+%%  cascade base::about {
+%%      title => $title || 'Sponsors',
+%%  }
+%%  override content -> {
+<div class="content about about-sponsor">
+    <div class="sponsor">
+        <table>
+            <tr>
+                <td width="15%">
+                    <a href="https://www.fastly.com/" target="_blank" rel="noopener">
+                        <img src="/static/images/sponsors/fastly_logo.png" width=110 height=51>
+                    </a>
+                </td>
+                <td>
+                    <p><a href="https://www.fastly.com/">Fastly</a> provides us CDN services, so we are faster around the world.</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
+                        <img src="/static/images/sponsors/bytemark_logo.png" width=179 height=14>
+                    </a>
+                </td>
+                <td>
+                    <p>Hosting is generously sponsored by <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">Bytemark Hosting</a>.</p>
+                    <p>Bytemark Hosting is the UK's "geek hosting outfit of choice" because its programmer &amp; network-engineer team have built it that way since 2002, with their own tools, software and technical expertise. They understand web applications and network infrastructure equally, and host names such as Bostik, dopplr.com and Britain's largest mystery shopping company, Retail Eyes. Their hosting starts at only £15 per month and runs to multi-site managed setups for customers with the fussiest demands of reliability and failover.</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="https://www.liquidweb.com/" target="_blank" rel="noopener">
+                        <img src="/static/images/sponsors/liquidweb_color.png" width=170 height=50>
+                    </a>
+                </td>
+                <td>
+                    <p>Hosting is also generously sponsored by <a href="https://www.liquidweb.com/" target="_blank" rel="noopener">Liquid Web Inc.</a></p>
+                    <p><a href="https://www.liquidweb.com/" target="_blank" rel="noopener">Liquid Web Inc.</a> is a privately held, managed web hosting company founded in 1997. The company owns and operates three data center facilities located in Lansing, Michigan in addition to having a software development office and a data center in metropolitan Phoenix, Arizona. In 2014, the company also launched development space in Ann Arbor, Michigan as well as extending hosting operations to Europe (attaining space in Amsterdam, NL). It has established itself as a leader in the professional web hosting market with an unwavering dedication to providing the best hosting products customer service available. With a client-base that spans beyond 120 countries, the company has assembled a world class Heroic Support staff and a proactive Sonar Server Monitoring team, professionally educated and easily accessible 24 hours a day, 7 days a week. The rapidly expanding web host has been recognized amongst INC Magazine's 5000 Fastest Growing Companies for eight consecutive years, beginning in 2007.</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="https://control.my.id/" target="_blank" rel="noopener">
+                        <img src="/static/images/sponsors/control-my-id.png" width=170>
+                    </a>
+                    <a href="https://www.yellowbot.com/" target="_blank" rel="noopener">
+                        <img src="/static/images/sponsors/yellowbot-small.png" width="170">
+                    </a>
+                </td>
+                <td>
+                    <p>Hosting is also generously sponsored by <a href="https://control.my.id/" target="_blank" rel="noopener">Control.My.ID</a> and <a href="https://www.yellowbot.com/" target="_blank" rel="noopener">YellowBot</a></p>
+                    <p><a href="https://control.my.id/" target="_blank" rel="noopener">Control.My.ID</a> is a privacy platform bringing transparency and control to consumers and providing regulatory compliance to enterprises and <a href="https://www.yellowbot.com/" target="_blank" rel="noopener">YellowBot</a> is a business search directory with more content and information about every business than any platform.</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="https://dyn.com"><img src="/static/images/sponsors/dyn.png" width="150" height="47" align="left"></a></td>
+                <td><p><a href="https://dyn.com">Dyn</a> provides MetaCPAN with free DNS hosting.</p>
+                    <p>
+                    Founded in 1998 as DynDNS.org, Dyn is the Infrastructure
+                    as a Service (IaaS) leader, powering DNS and email
+                    delivery for enterprise, small business and personal
+                    users. The company’s DNS offerings range from simple DNS
+                    management to a robust enterprise class DNS solution built
+                    on a 17-location, globally diverse IP Anycast network with
+                    advanced Load Balancing, Geographic Traffic Management and
+                    CDN control features. The company’s email products provide
+                    inbound and outbound delivery solutions, highlighted by a
+                    comprehensive enterprise-class MTA service focused on
+                    maximum email deliverability and inbox monitoring. Dyn is
+                    committed to customer relationships and engineering
+                    excellence. Uptime is the Bottom Line. <a
+                    href="https://dyn.com">dyn.com</a> - <a
+                    href="https://twitter.com/DynInc">@DynInc</a>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/"><img src="/static/images/sponsors/github_logo.png" align="left"></a></td>
+                <td>
+                    <p><a href="https://github.com/">GitHub</a> supports MetaCPAN by donating free private repositories.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://travis-ci.com"><img src="/static/images/sponsors/travis-ci.png" align="left" class="img-responsive"></a></td>
+                <td>
+                    <p><a href="https://travis-ci.com">Travis CI</a> supports MetaCPAN by donating extra concurrent jobs.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.panopta.com/"><img src="/static/images/sponsors/panopta.png" align="left"></a></td>
+                <td>
+
+                    <p><a href="https://www.panopta.com/">Panopta</a> supports
+                    MetaCPAN with a hosted server monitoring solution.</p>
+
+                    <p>
+
+                        Panopta provides website &amp; server monitoring for
+                        developers, IT managers, SaaS companies and Hosting
+                        Providers. With over 40 monitoring nodes around the
+                        globe, Panopta provides high precision monitoring which
+                        checks every 60 seconds and from around the world.
+                        Panopta's industry leading approach eliminates false
+                        alerts and can notify you in a number of different ways
+                        (email, voice, SMS and more). Panopta also allows you
+                        to get even deeper insight with our cross platform
+                        monitoring agent used for resource/application
+                        monitoring and our behind-the-firewall virtual
+                        monitoring appliance for private infrastructure. A
+                        fully comprehensive monitoring solution which scales
+                        with your business and your needs. <a
+                        href="http://www.panopta.com">Click here</a> to get
+                        more information or to signup for a free 30 day trial.
+
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://idonethis.com/"><img src="/static/images/sponsors/idonethis.png" align="left"></a></td>
+                <td>
+                    <p>
+                    <a href="https://idonethis.com/">iDoneThis</a> supports
+                    MetaCPAN by donating a team account for project management.
+                    </p>
+
+                    <p>Progress, Every Day<p>
+
+                    <p>
+                    Reply to an evening email reminder with what you did that
+                    day. The next day, get a digest with what everyone on the
+                    team got done.
+                    </p>
+
+                    <p>
+                    It's that simple. No hassle, no micromanagement. Get stuff
+                    done, and celebrate it with your team.
+                    </p>
+
+                </td>
+            </tr>
+            <tr>
+                <td><a href="http://act.qa-hackathon.org/qa2014/"><img src="/static/images/sponsors/qah-2014.png" align="left"></a></td>
+                <td>
+                    <p>
+
+                      The <a href="http://act.qa-hackathon.org/qa2014/">QA
+                      Hackathon</a> has sponsored the attendance of MetaCPAN
+                      hackers in Amsterdan (2011), Paris (2012), Lyon
+                      (2014), Berlin (2015) and Rugby (2016).  Attendance at these events has helped move
+                      MetaCPAN development forward and has also allowed us to
+                      work more closely with other CPAN-minded developers.  <a
+                      href="http://act.qa-hackathon.org/qa2014/donate.html">You
+                      can help to sponsor the QA Hackathon</a>.  Donations of
+                      any and all sizes are welcome.
+
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="https://www.easyname.com/en"><img src="/static/images/sponsors/easyname.png" align="left"></a></td>
+                <td style="vertical-align: middle;">
+                  <p>
+                    <a href="https://www.easyname.com/en">easyname.com</a> is the first official sponsor of the MetaCPAN hackathon.
+                  </p>
+                  <p>
+                    easyname is an international domain and webhosting
+                    provider. easyname has positioned itself as an honest
+                    provider tailored towards professionals and domainers. They
+                    do not practice deceptive marketing tactics and sneaky
+                    upsells. They are proud long time supporters of CPAN.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://cpanel.com/"><img src="/static/images/sponsors/cpanel.png" width="180"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+cPanel is a web-based control panel for managing a web hosting account. It provides a simple yet powerful interface for managing email accounts, security, domains, databases, and more. cPanel was originally written (in Perl!) by Nick Koston in 1997. cPanel (the company) now employees over 200 people, and Nick is their CEO. They've been using Perl for nearly 20 years now, and have long been supporters of Perl and its community. You may recognise some of their developers who are CPAN authors: Todd Rinaldo (<a href="https://metacpan.org/author/TODDR">TODDR</a>), Xan Hilmisdóttir (<a href="https://metacpan.org/author/XAN">XAN</a>), and others. Their CEO, Nick, still develops in Perl today.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://www.fastmail.com/"><img src="/static/images/sponsors/fastmail.png" style="border-radius: 4px; padding-left: 6px;" width="180"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+<a href="https://www.fastmail.com/c/metacpan">Fastmail</a> is a commercial hosted email service founded in 1999, which has established a reputation for technical leadership in the hosted email space, with a focus on security, privacy, and reliability. It is run by Fastmail Pty Ltd, an Australian company based in Melbourne. From their early days they've been users and supporters of Perl, and several of their developers are CPAN authors: <a href="https://metacpan.org/author/BRONG">BRONG</a>, <a href="https://metacpan.org/author/ROBN">ROBN</a>, <a href="https://metacpan.org/author/RJBS">RJBS</a>, <a href="https://metacpan.org/author/WOLFSAGE">WOLFSAGE</a> and <a href="https://metacpan.org/author/ROBM">ROBM</a> (one of the founders). In late 2015 they acquired pobox.com, another hosted mail company and longtime user and supporter of Perl.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://www.activestate.com/">ActiveState</a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+Since 1997, <a href="https://www.activestate.com">ActiveState</a> has been providing software application development and management solutions, especially around Perl. <a href="https://www.activestate.com/activeperl">ActivePerl</a> (the original "Perl for Windows" distro), <a href="https://www.activestate.com/perl-dev-kit">Perl Dev Kit</a>, and polyglot <a href="https://www.activestate.com/developer-tools/komodo/komodo-ide">Komodo IDE</a> are some of the flagship products that have made them renowned by Perl developers around the world. More than two million developers and 97% of Fortune 1000 companies use ActiveState's solutions to develop, distribute, and manage their software applications. Global customers like Bank of America, CA, Cisco, HP, Lockheed Martin and Siemens rely on ActiveState for faster development, ensuring IT governance and compliance, and accelerating time to market.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://perl.careers/"><img src="/static/images/sponsors/perl-careers.png" alt="Find Perl Jobs and Perl Developers with Perl Careers" width="180"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+                    Find Perl Jobs and Perl Developers with Perl Careers.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://www.elastic.co/"><img src="/static/images/sponsors/elastic.svg" width="180"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+<a href="https://www.elastic.co">Elastic</a> is the company behind the <a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a> open source search and analytics engine, along with <a href="https://www.elastic.co/products/logstash">Logstash</a>, <a href="https://www.elastic.co/products/kibana">Kibana</a> (which lets you visualize your Elasticsearch data), and <a href="https://www.elastic.co/products/beats">Beats</a> (lightweight agents for sending data to Logstash or Elasticsearch).
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://www.servercentral.com/"><img src="/static/images/sponsors/servercentral.png" width="180"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+<a href="https://www.servercentral.com">ServerCentral</a> is a managed datacenter services provider offering fully managed cloud, network, and server infrastructure for startups and Fortune 500s worldwide. ServerCentral uses Perl for inventory management, deployment systems, and numerous devops related projects.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://www.perl-services.de/">Perl Services</a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+<a href="https://www.perl-services.de">Perl Services</a> is the contracting company of Renée Bäcker, a CPAN author (<a href="https://metacpan.org/author/RENEEB">RENEEB</a>) since 2004.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="https://StickerYou.com" target="_blank" rel="noopener">StickerYou.com</a></td>
+                <td>
+                  <p>
+
+  As a valued partner and proud supporter of MetaCPAN, StickerYou is happy to
+  offer a 10% discount on all <a
+  href="https://www.stickeryou.com/products/custom-stickers/335/"
+  target="_blank" rel="noopener">Custom Stickers</a>, <a
+  href="https://www.stickeryou.com/products/business-labels/655"
+  target="_blank" rel="noopener">Business Labels</a>, Roll Labels, Vinyl Lettering or Custom
+  Decals.  <a href="https://StickerYou.com" target="_blank" rel="noopener">StickerYou.com</a>
+  is your one-stop shop to make your business stick.  Use code
+  <strong>METACPAN10</strong> at checkout to apply your discount.
+
+                  </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  <a href="https://advancesystemsinc.com/" rel="nofollow noopener" target="_blank"><img src="/static/images/sponsors/advance-systems.jpg" align="left"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+                    Advance Systems is a premier provider of workforce software solutions and supports MetaCPAN.
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                  <a href="https://dealspotr.com/" rel="nofollow noopener" target="_blank"><img src="/static/images/sponsors/dealspotr.png" width="158" align="left"></a>
+                </td>
+                <td style="vertical-align: middle;">
+                  <p>
+
+Dealspotr is an innovative shopping ecosystem that connects emerging brands,
+digital influencers, and tech-savvy shoppers around today's best deals. The
+platform utilizes crowdsourcing to provide one of the internet's <a
+href="https://dealspotr.com/" rel="nofollow noopener" target="_blank">largest and most accurate
+database of coupons and offer codes</a>, with over 5 million community-edited
+deals. Dealspotr is an active contributor to the open source community and is
+an enthusiastic supporter of MetaCPAN's efforts to serve the Perl developer
+community.
+
+                  </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td><a href="https://www.booking.com/"><img src="/static/images/sponsors/booking.png" width=158 align="left"></a></td>
+                <td style="vertical-align: middle;">
+                    <p><a href="https://www.booking.com/">Booking.com</a> formerly provided a server for testing and content backup.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.enlightenedperl.org/"><img src="/static/images/sponsors/epo.png" align="left"></a></td>
+                <td>
+                    <p><a href="https://www.enlightenedperl.org/">Enlightened Perl Organisation</a>
+                        kindly sponsored our logo competition. It's a nice logo, isn't it?</p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="http://www.perlfoundation.org/"><img src="/static/images/sponsors/perl_logo.png" align="left"></a></td>
+                <td>
+                    <p>
+
+                        <a href="http://www.perlfoundation.org/">The Perl
+                        Foundation</a> (TPF) supported MetaCPAN by kindly
+                        covering the cost when we needed more disk space.  In
+                        addition to this, TPF very kindly sponsored MetaCPAN's
+                        participation in the Outreach Program for Women in the
+                        summer of 2014.
+
+                        </p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://speedchilli.com"><img src="/static/images/sponsors/speedchilli.png" width=150 height=32 align="left"></a></td>
+                <td>
+                    <p><a href="https://speedchilli.com">speedchilli</a> provided MetaCPAN with free hardware and bandwidth from 2010 to 2012.</p>
+                    <p><i>"We are a web solutions company providing hosting and open source consultancy. We provide reliable, cost effective hosting for customers who require anything from a single dedicated server to a fully managed hosting solution. Being a business based around open source we feel it is important to give back to the community and are very happy to support the metacpan.org project."</i> - Stewart Hunt</p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://kritika.io"><img src="/static/images/sponsors/kritika.svg" class="image-responsive"></a></td>
+                <td>
+                    <p>
+                        <a href="https://kritika.io">Kritika.IO</a> sponsored
+                        <a href="/about/meta_hack">meta::hack v2</a> in 2017.
+                    </p>
+                    <p>
+                        <a href="https://kritika.io">Kritika.IO</a> automates your Perl code
+                        review by adding it to your continuous integration. Find code style
+                        violations, catch bugs, detect duplications, keep complexity to a
+                        minimum, control test coverage and more! Enforce best practices and
+                        keep improving your code. Reduce technical debt and deliver features
+                        faster.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.google.com">Google</a></td>
+                <td>
+
+                    <p>MetaCPAN.org (the search site) probably would not exist
+                    if it weren't for Google.  This site was originally built
+                    as a layer on top of the MetaCPAN API by <a
+                    href="/author/PERLER">Moritz Onken</a>
+                    as part of his Google Summer of Code (GSoC) project.  In
+                    2014 GSoC also sponsored Talina Shrotriya's work on
+                    MetaCPAN. We're not actually sure if we're allowed to use
+                    the Google logo here, so we are erring on the side of
+                    caution.</p>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <center><strong>If you are interested in sponsoring MetaCPAN, please don't hesitate to contact us at <a href="mailto:noc@metacpan.org">noc@metacpan.org</a>.</strong></center>
+</div>
+
+%%  }
+

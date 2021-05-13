@@ -1,0 +1,6 @@
+%%  cascade inc::version_select {
+%%    head => 'Diff with version',
+%%  }
+%%  override navigate -> {
+'/diff/file/?target=[% uri_escape($release.author ~ '/' ~ $release.name ~ '/' ~ $module.path) %]&amp;source=' + encodeURIComponent(this.value)[% $module ? " + '" ~ uri_escape('/' ~ $module.path) ~ "'" : '' %]
+%%  }

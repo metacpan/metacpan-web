@@ -7,7 +7,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub tools : Path : Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( template => 'tools.html' );
+    $c->stash( {
+        template => 'tools.tx',
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -1,0 +1,7 @@
+<div>
+    <form action="/search">
+        <input type="search" class="form-control tool-bar-form" placeholder="Search" name="q">
+        <input type="submit" class="hidden">
+    </form>
+</div>
+

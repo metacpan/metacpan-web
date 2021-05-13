@@ -25,6 +25,7 @@ __PACKAGE__->response_class_traits( [ qw(
 
 __PACKAGE__->config(
     name                                        => 'MetaCPAN::Web',
+    default_view                                => 'Xslate',
     disable_component_resolution_regex_fallback => 1,
     encoding                                    => 'UTF-8',
     'Plugin::Authentication'                    => {

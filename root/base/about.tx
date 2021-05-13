@@ -1,0 +1,23 @@
+%%  cascade base {
+%%      title => $title || 'MetaCPAN About'
+%%  }
+%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_content -> {
+[%-
+for [
+  [ '/about',                 'About MetaCPAN' ],
+  [ '/about/contact',         'Contact' ],
+  [ '/about/development',     'Development' ],
+  [ '/about/faq',             'FAQ' ],
+  [ '/about/sponsors',        'Sponsors' ],
+  [ '/about/contributors',    'Contributors' ],
+  [ '/about/meta_hack',       'meta::hack' ],
+  [ '/about/missing_modules', 'Missing Modules' ],
+  [ '/about/metadata',        'Distribution Metadata' ],
+] -> $l {
+%]
+<li class="[% if $current[$l.0] { 'active' } %]">
+    <a href="[% $l.0 %]">[% $l.1 %]</a>
+</li>
+%%  }
+%%  }

@@ -1,0 +1,33 @@
+%% if $contributors.size() {
+<div id="contributors">
+  <div class="contributors-header">and [% $contributors.size() %] contributors</div>
+  <div align="right">
+    <button class="btn-link"
+      onclick="$(this).hide(); $('#contributors ul').slideDown(); return false;"
+    >show them</button>
+  </div>
+  <ul class="nav nav-list box-right" style="display: none">
+  %%  for $contributors -> $contributor {
+    <li class="contributor"
+      %%  if $contributor.pauseid {
+      data-cpan-author="[% $contributor.pauseid %]"
+      %%  }
+      %%  if $contributor.email.size() {
+      data-contrib-email="[% $contributor.email.join(' ') %]"
+      %%  }
+    >
+    %%  if $contributor.pauseid {
+      <a href="/author/[% $contributor.pauseid %]" class="cpan-author">
+    %%  }
+    %%  if $contributor.pauseid || $contributor.email.size() {
+      <img class="gravatar" width="20" height="20" src="[% gravatar_image($contributor, 20) %]" />
+    %%  }
+      [% $contributor.name %]
+    %%  if $contributor.pauseid {
+      </a>
+    %%  }
+    </li>
+  %%  }
+  </ul>
+</div>
+%%  }

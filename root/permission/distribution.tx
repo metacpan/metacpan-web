@@ -1,0 +1,30 @@
+%%  cascade base {
+%%      title     => $title || 'Module permissions for ' ~ $search_term,
+%%  }
+%%  override content -> {
+
+<h1>Module Permissions for [% $search_term %]</h1>
+
+<table class="table table-striped" style="width: auto; min-width: 33%">
+  <tr>
+    <th>Authorized Releasers ([% $releaser.size() %])</th>
+  </tr>
+  %%  for $releaser -> $author {
+    <tr>
+      <td>
+        <a href="/author/[% $author %]">[% $author %]</a>
+      </td>
+    </tr>
+  %%  }
+  %%  else {
+    <tr>
+      <td>
+        <i>No owner[% if $comaint_count { %] or co-maintainer[% } %] has permissions for all modules in this distribution.</i>
+      </td>
+    </tr>
+  %%  }
+</table>
+
+%% include inc::permission
+
+%%  }

@@ -1,0 +1,4 @@
+%%  if $notification {
+  %%  my $note_tmpl = sprintf('inc/notification/%s.tx', $notification.type.lc());
+  %%  include $note_tmpl { $notification };
+%%  }

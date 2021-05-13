@@ -1,0 +1,37 @@
+%%  cascade base::tools
+%%  override content -> {
+<div class="content">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>List all dependencies of a distribution</h2>
+      <div class="row">
+        <div class="col-lg-6">
+          <form class="form-horizontal">
+            <div class="input-group">
+              <input type="text" name="module" class="form-control">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      %%  if $module {
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Module: <b>[% $module %]</b></h3>
+
+          %%  for $data -> $d {
+          <div>
+            [% if $d.orig { %]<b>[% } %]
+            [% $d.dist %] [% $d.date %] [% $d.license.join(', ') %]
+            [% if $d.orig { %]</b>[% } %]
+          </div>
+          %%  }
+        </div>
+      </div>
+      %%  }
+    </div>
+  </div>
+</div>
+%%  }

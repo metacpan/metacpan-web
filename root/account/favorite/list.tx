@@ -1,0 +1,10 @@
+%%  cascade base::account
+%%  override content -> {
+<div class="content">
+    %%  include inc::favorite_table {
+        %%  favorites => $faves,
+        %%  author => 1,
+        %%  tablesorter => 1,
+    %%  }
+</div>
+%%  }
