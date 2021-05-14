@@ -40,8 +40,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 export METACPAN_WEB_PORT=5001
-export PLACK_ENV=development
 export COLUMNS="$(tput cols)"
+[ -z "$PLACK_ENV" ] && PLACK_ENV=development
+export PLACK_ENV
 
 suffix="$METACPAN_WEB_CONFIG_LOCAL_SUFFIX"
 [ -z "$suffix" ] && suffix="local"
