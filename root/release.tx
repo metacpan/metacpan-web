@@ -13,7 +13,7 @@
   %%  }
 </ul>
 %%  }
-<div id="last-changes" class="well collapsed">
+<div id="last-changes" class="well">
   <div id="last-changes-container">
     %%  for $changes -> $rel {
     <h2 id="whatsnew">Changes for version [% $rel.version %][% if $rel.date && datetime($rel.date) { %] - [% datetime($rel.date).to_ymd() } if $rel.trial { %] (TRIAL RELEASE)[% } %]</h2>
