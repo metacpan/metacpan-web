@@ -389,9 +389,14 @@ $(document).ready(function() {
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
 
-    var changes = $('#last-changes-container');
-    if (changes.prop('scrollHeight') > changes.height()) {
-        $("#last-changes-toggle").show();
+    var changes = $('#last-changes');
+    var changes_inner = $('#last-changes-container');
+    var changes_toggle = $("#last-changes-toggle");
+    changes.addClass(['collapsable', 'collapsed']);
+    var changes_content_height = Math.round(changes_inner.prop('scrollHeight'));
+    var changes_ui_height = Math.round(changes_inner.height() + changes_toggle.height());
+    if (changes_content_height <= changes_ui_height) {
+        changes.removeClass(['collapsable', 'collapsed']);
     }
 
     var pod2html_form = $('#metacpan-pod-renderer-form');

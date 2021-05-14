@@ -52,13 +52,6 @@
         margin-bottom: 0px;
     }
 
-    .group-header {
-        margin-bottom: 1em;
-        &:last-child {
-            margin-bottom: 0em;
-        }
-    }
-
     ul, ul ul ul {
         list-style: disc;
     }
@@ -66,14 +59,21 @@
         list-style: circle;
     }
 
-    .show-more { display: none }
-    .hide-more { display: inline }
-    &.collapsed {
-        .show-more { display: inline }
-        .hide-more { display: none }
-        #last-changes-container {
-            overflow: hidden;
-            max-height: 20em;
+    &.collapsable {
+        #last-changes-toggle {
+            display: inline-block;
+        }
+
+        .show-more { display: none }
+        .hide-more { display: inline }
+        &.collapsed {
+            .show-more { display: inline }
+            .hide-more { display: none }
+
+            #last-changes-container {
+                overflow: hidden;
+                max-height: 20.02em;
+            }
         }
     }
 
