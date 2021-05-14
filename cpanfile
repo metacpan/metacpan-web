@@ -19,7 +19,6 @@ requires 'Config::General';
 requires 'Config::ZOMG', '1.000000';
 requires 'Cpanel::JSON::XS';
 requires 'CPAN::DistnameInfo', '0.12';
-requires 'CPAN::Meta', '2.141520'; # Avoid issues with List::Util dep under carton install.
 requires 'Data::Pageset';
 requires 'DateTime', '1.24';
 requires 'DateTime::Format::HTTP';
@@ -38,7 +37,6 @@ requires 'HTML::Escape';
 requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
-requires 'HTTP::Lite', '2.44'; # Optional dep of XML::TreePP, which is a dep of XML::FeedPP
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
 requires 'IO::Async::Loop';
@@ -90,7 +88,17 @@ requires 'URI::Escape';
 requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::FeedPP';
-requires 'YAML', '1.15'; # fix dep chain issue
+
+# transitive deps
+# Not used directly, but they need to be explicitly listed to ensure they are
+# in our cpanfile.snapshot at appropriate versions. Either for older perl
+# versions, or unpredictable dynamic deps.
+requires 'CPAN::Meta', '2.141520';
+requires 'Devel::PPPort', '3.62';   # for older perls
+requires 'HTTP::Lite', '2.44';      # Unpredictably depended on by XML::TreePP, which is a dep of XML::FeedPP
+requires 'Pod::Parser', '1.63';     # for newer perls
+requires 'version', '0.9929';       # for older perls
+requires 'YAML', '1.15';
 
 # Test dependencies
 requires 'aliased', '0.34';

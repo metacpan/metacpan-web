@@ -1590,6 +1590,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Devel-PPPort-3.62
+    pathname: A/AT/ATOOMIC/Devel-PPPort-3.62.tar.gz
+    provides:
+      Devel::PPPort 3.62
+    requirements:
+      ExtUtils::MakeMaker 0
+      FindBin 0
   Devel-StackTrace-2.04
     pathname: D/DR/DROLSKY/Devel-StackTrace-2.04.tar.gz
     provides:
@@ -4952,6 +4959,28 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  Pod-Parser-1.63
+    pathname: M/MA/MAREKR/Pod-Parser-1.63.tar.gz
+    provides:
+      Pod::Cache 1.63
+      Pod::Cache::Item 1.63
+      Pod::Find 1.63
+      Pod::Hyperlink 1.63
+      Pod::InputObjects 1.63
+      Pod::InputSource 1.63
+      Pod::InteriorSequence 1.63
+      Pod::List 1.63
+      Pod::Paragraph 1.63
+      Pod::ParseTree 1.63
+      Pod::ParseUtils 1.63
+      Pod::Parser 1.63
+      Pod::PlainText 2.07
+      Pod::Select 1.63
+    requirements:
+      Cwd 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      Test::More 0.6
   Pod-Spell-1.20
     pathname: D/DO/DOLMEN/Pod-Spell-1.20.tar.gz
     provides:
@@ -6440,3 +6469,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Package::Stash 0.23
       perl 5.008001
+  version-0.9929
+    pathname: L/LE/LEONT/version-0.9929.tar.gz
+    provides:
+      version 0.9929
+      version::regex 0.9929
+      version::vpp 0.9929
+      version::vxs 0.9929
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.006002
