@@ -48,11 +48,12 @@ sub personal_dashboard : Path('dashboard') : Args(0) {
         $c->detach;
     }
 
-    my $user = $c->model('API::User')->get_profile( $c->token )->get || {};
+    my $user     = $c->user;
+    my $pause_id = $user && $user->pause_id;
 
     $c->res->header( 'Vary', 'Cookie' );
     $c->stash( { personal => 1 } );
-    $c->go( 'dashboard', [ $user->{pauseid} ] );
+    $c->go( 'dashboard', [ $pause_id || () ] );
 }
 
 sub dashboard : Local : Args(1) {

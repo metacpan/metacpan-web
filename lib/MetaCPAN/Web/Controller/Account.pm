@@ -10,18 +10,15 @@ sub auto : Private {
 
     $c->res->header( 'Vary', 'Cookie' );
 
-    if ( my $token = $c->token ) {
-        $c->authenticate( { token => $token } );
-    }
     my $attrib = $c->action->attributes;
     my $auth   = $attrib->{Auth} && $attrib->{Auth}[0] // 1;
-    if ( $c->user_exists ) {
+    if ( my $user = $c->user ) {
         $c->cdn_never_cache(1);
 
-        if ( my $user_id = $c->user && $c->user->id ) {
+        if ( my $user_id = $user->id ) {
             $c->add_surrogate_key("user/$user_id");
         }
-        $c->stash( { user => $c->user } );
+        $c->stash( { user => $user } );
     }
     elsif ($auth) {
         $c->forward('/forbidden');
@@ -33,9 +30,8 @@ sub auto : Private {
 sub login_status : Local : Args(0) : Auth(0) {
     my ( $self, $c ) = @_;
     $c->stash( { current_view => 'JSON' } );
-    delete $c->stash->{user};
 
-    if ( $c->user_exists ) {
+    if ( $c->user ) {
         $c->stash->{json}{logged_in} = \1;
         $c->forward('/account/favorite/list_as_json');
     }
@@ -48,7 +44,7 @@ sub login_status : Local : Args(0) : Auth(0) {
 sub logout : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
-    $c->req->session->expire;
+    $c->logout;
     $c->res->redirect(q{/});
 }
 
@@ -61,14 +57,15 @@ sub identities : Local : Args(0) {
     if ( $c->req->method eq 'POST'
         && ( my $delete = $c->req->params->{delete} ) )
     {
-        $c->model('API::User')->delete_identity( $delete, $c->token )->get;
+        $c->user->delete_identity($delete)->get;
         $c->res->redirect('/account/identities');
     }
 }
 
 sub profile : Local : Args(0) {
     my ( $self, $c ) = @_;
-    my $author = $c->model('API::User')->get_profile( $c->token )->get;
+    my $user   = $c->user;
+    my $author = $user->get_profile->get;
     $c->stash( {
         ( $author->{error} ? ( no_profile => 1 ) : ( author => $author ) ),
         profiles => $c->model('API::Author')->profile_data,
@@ -135,7 +132,7 @@ sub profile : Local : Args(0) {
         return;
     }
 
-    my $res = $c->model('API::User')->update_profile( $data, $c->token )->get;
+    my $res = $user->update_profile($data)->get;
     if ( $res->{error} ) {
         $c->stash( { author => $data, errors => $res->{errors} } );
     }

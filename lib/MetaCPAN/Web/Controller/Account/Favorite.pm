@@ -6,14 +6,16 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 sub add : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
-    my $model = $c->model('API::User');
-    my $data  = $c->req->params;
+    my $user = $c->user;
+    $c->detach('/forbidden') unless $user;
+
+    my $data = $c->req->params;
     my $res;
     if ( $data->{remove} ) {
-        $res = $model->remove_favorite( $data, $c->token )->get;
+        $res = $user->remove_favorite($data)->get;
     }
     else {
-        $res = $model->add_favorite( $data, $c->token )->get;
+        $res = $user->add_favorite($data)->get;
     }
 
     # We need to purge if the rating has changes until the fav count
@@ -56,7 +58,7 @@ sub list_as_json : Local : Args(0) {
 sub faves {
     my ( $self, $c, $size ) = @_;
     my $user = $c->user;
-    return $c->model('API::Favorite')->by_user( $user->id, $size );
+    return $c->model('API::Favorite')->by_user( $user && $user->id, $size );
 }
 
 __PACKAGE__->meta->make_immutable;

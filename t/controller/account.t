@@ -3,30 +3,63 @@ use warnings;
 use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
 use Test::More;
 use Test::Deep qw( cmp_deeply );
-use Cpanel::JSON::XS qw( decode_json );
+use Cpanel::JSON::XS qw( decode_json encode_json );
+use HTTP::Date qw(time2str);
+use HTTP::Cookies  ();
+use Plack::Session ();
 
-my ( $res_body, $api_req );
+my $api_res;
+my $api_req;
+
+my $profile_req;
+
+my $login_req;
+my $login_res;
+
+my $user_req;
+my $user_res;
+
+my $JSON = Cpanel::JSON::XS->new->allow_nonref->utf8;
+
 override_api_response( sub {
     my ( undef, $req ) = @_;
 
+    my $res;
+
     if ( $req->method eq 'PUT' ) {
-        $api_req  = $req;
-        $res_body = $req->content;
+        $profile_req = decode_json( $req->content );
+        $res         = $profile_req;
     }
-    return [ 200, [ "Content-Type" => "application/json" ], [$res_body] ];
+    elsif ( $req->uri->path eq '/oauth2/access_token' ) {
+        $login_req = $req;
+        $res       = $login_res;
+    }
+    elsif ( $req->url->path eq '/user' ) {
+        $user_req = $req;
+        $res      = $user_res;
+    }
+    else {
+        $res = $api_res;
+    }
+
+    return [
+        200,
+        [ "Content-Type" => "application/json" ],
+        [ $JSON->encode( $res // {} ) ]
+    ];
 } );
+
+no warnings 'once', 'redefine';
+my $token;
+local *Plack::Session::get = sub {
+    return $token
+        if $_[1] eq 'token';
+    return undef;
+};
 
 test_psgi app, sub {
     my $cb = shift;
 
-    my ( $token, $user_exists );
-    my $authenticate_args;
-
-    no warnings 'once', 'redefine';
-    *MetaCPAN::Web::token = sub { return $token; };
-    *MetaCPAN::Web::authenticate
-        = sub { ( undef, $authenticate_args ) = @_; };
-    *MetaCPAN::Web::user_exists = sub { return $user_exists; };
     subtest 'auto' => sub {
         ok(
             my $res = $cb->( GET '/account/profile' ),
@@ -36,23 +69,27 @@ test_psgi app, sub {
         is( $res->header('Cache-Control'),
             'private',
             '... and the private Cache-Control header for proxies is there' );
-        is( $authenticate_args, undef,
-            '... and we did not try to authenticate' );
+        is( $user_req, undef, '... and we did not try to authenticate' );
 
-        undef $authenticate_args;
         $token = 'foobar';
+
         ok( $res = $cb->( GET '/account/profile' ),
             'GET /account/profile with token but user does not exist' );
         is( $res->code, 403, '... and the user cannot get in' );
-        is( $authenticate_args->{token},
+
+        is( $user_req->uri->query_param('access_token'),
             'foobar',
             '... and we tried authenticating with the right token' );
     };
 
     # (we're always authenticated from now on)
+    $user_res = {
+        looks_human => \1,
+        id          => '5',
+    };
+
     subtest 'GET profile' => sub {
-        $user_exists = 1;
-        $res_body    = q({"error":"broken"});
+        $api_res = { error => "broken" };
 
         ok(
             my $res = $cb->( GET '/account/profile' ),
@@ -66,8 +103,16 @@ test_psgi app, sub {
             '... and needs to connect to PAUSE'
         );
 
-        $res_body
-            = q({"asciiname":"foo","email":["foobar@cpan.org"],"name":"foo","pauseid":"FOO","updated":"2017-02-15T22:18:19","user":"12345678901234567890","website":[]});
+        $api_res = {
+            asciiname => 'foo',
+            email     => ['foobar@cpan.org'],
+            name      => 'foo',
+            pauseid   => 'FOO',
+            updated   => '2017-02-15T22:18:19',
+            user      => '12345678901234567890',
+            website   => [],
+        };
+
         ok(
             $res = $cb->( GET '/account/profile' ),
             'GET /account/profile happy case'
@@ -117,13 +162,14 @@ test_psgi app, sub {
             $tx->is( '//legend[@style="color: #600"]',
                 "Errors", 'shows errors', );
         };
+
         ok(
             my $res = $cb->( POST '/account/profile', $form ),
             'POST /account/profile with all fields'
         );
 
         cmp_deeply(
-            decode_json( $api_req->content ),
+            $profile_req,
             {
                 'email' => [ 'foo@example.org', 'bar@example.org' ],
                 'blog'  => [ {
@@ -160,6 +206,7 @@ test_psgi app, sub {
             '... and the API PUT request contains the right stuff'
         );
         my $tx = tx($res);
+
         $tx->is(
             '//input[@name="name"]/@value',
             "\x{532}\x{561}\x{580}\x{565}\x{582}",
@@ -180,7 +227,7 @@ test_psgi app, sub {
             'POST /account/profile with no fields'
         );
         cmp_deeply(
-            decode_json( $api_req->content ),
+            $profile_req,
             {
                 'updated'   => '2017-02-15T22:18:19',
                 'user'      => '12345678901234567890',
@@ -206,14 +253,26 @@ test_psgi app, sub {
         ok( my $res = $cb->( GET '/account/logout' ), 'GET /account/logout' );
         is( $res->code, 403, '... and the response is 403' );
 
-        my $expired;
-        *Plack::Session::expire = sub { ++$expired };
-
         ok( $res = $cb->( POST '/account/logout' ), 'POST /account/logout' );
         is( $res->code, 302, '... and the response is a redirect' );
         is( $res->header('location'),
             '/', '... and we get redirected to the index' );
-        ok( $expired, '... and the session was expired' );
+
+        # prepare a cookie jar with a fake metacpan_secure entry
+        my $jar      = HTTP::Cookies->new;
+        my $fake_res = HTTP::Response->new(
+            200, '',
+            [
+                'Set-Cookie' => 'metacpan_secure=12345; path=/; expires='
+                    . time2str( 5000 + time ),
+            ]
+        );
+        $fake_res->request( GET 'http://localhost/' );
+        $jar->extract_cookies($fake_res);
+
+        $jar->extract_cookies($res);
+        ok !$jar->get_cookies('http://localhost/')->{metacpan_secure},
+            '... and the session was expired';
     };
 
 TODO: {
