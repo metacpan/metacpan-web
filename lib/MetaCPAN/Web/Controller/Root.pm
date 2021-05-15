@@ -67,6 +67,7 @@ sub internal_error : Private {
 
     $c->stash( {
         template => 'internal_error.tx',
+        json     => { error => 500, message => 'Internal Error' },
     } );
     $c->response->status(500);
 }
@@ -77,6 +78,7 @@ sub forbidden : Private {
 
     $c->stash( {
         template => 'forbidden.tx',
+        json     => { error => 403, message => 'Forbidden' },
     } );
     $c->response->status(403);
 }
