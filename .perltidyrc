@@ -1,7 +1,17 @@
--pbp
--nst
-
+--maximum-line-length=78
+--indent-columns=4
+--continuation-indentation=4
+--standard-error-output
+--vertical-tightness=2
+--closing-token-indentation=0
+--paren-tightness=1
+--brace-tightness=1
+--square-bracket-tightness=1
+--block-brace-tightness=1
+--nospace-for-semicolon
+--nooutdent-long-quotes
+--want-break-before="% + - * / x != == >= <= =~ !~ < > | & = **= += *= &= <<= &&= -= /= |= >>= ||= //= .= %= ^= x="
 # Break a line after opening/before closing token.
--vt=0
--vtc=0
--wn
+--vertical-tightness=0
+--vertical-tightness-closing=0
+--weld-nested-containers
