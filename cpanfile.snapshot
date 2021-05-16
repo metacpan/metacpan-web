@@ -5065,6 +5065,20 @@ DISTRIBUTIONS
     requirements:
       Exporter 5.57
       perl 5.006
+  Router-Simple-0.17
+    pathname: T/TO/TOKUHIROM/Router-Simple-0.17.tar.gz
+    provides:
+      Router::Simple 0.17
+      Router::Simple::Declare undef
+      Router::Simple::Route undef
+      Router::Simple::SubMapper undef
+    requirements:
+      Class::Accessor::Lite 0.05
+      List::Util 0
+      Module::Build 0.38
+      Scalar::Util 0
+      parent 0
+      perl 5.008_001
   Safe-Isa-1.000010
     pathname: E/ET/ETHER/Safe-Isa-1.000010.tar.gz
     provides:
