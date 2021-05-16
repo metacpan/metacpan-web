@@ -4,6 +4,7 @@
 %%    title             => $title ||
 %%      ($module.documentation || $module.module.0.name ) ~
 %%      ($module.abstract ? ' - ' ~ $module.abstract : ''),
+%%    page_class  => $page_class || 'page-pod',
 %%  }
 %%  override left_nav_lead -> {
   <li>
