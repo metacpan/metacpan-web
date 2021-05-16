@@ -53,7 +53,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
-            %% if ! $req.uri.path == "/" {
+            %% if ! $current['/'] {
                 <li class="visible-xs">
                 <a href="#" data-toggle="slidepanel" data-target=".slidepanel">
                   <i class="fa fa-bars icon-slidepanel"></i>
