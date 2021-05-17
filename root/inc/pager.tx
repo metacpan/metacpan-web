@@ -8,7 +8,7 @@
 
     %%  for $pageset.pages_in_set -> $page_num {
     <li [% if $page_num == $pageset.current_page { %] class="active"[% } %]>
-      <a href="[% $page_url({ p => $pageset.current_page }) %]">[% $page_num %]</a>
+      <a href="[% $page_url({ p => $page_num }) %]">[% $page_num %]</a>
     </li>
     %%  }
 
