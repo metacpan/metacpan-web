@@ -129,7 +129,7 @@
       </a>
     </li>
     <li>
-      <a href="/permission/distribution/[% $release.distribution %]">
+      <a href="/dist/[% $release.distribution %]/permissions">
         <i class="fa fa-key fa-fw black"></i>Permissions
       </a>
     </li>

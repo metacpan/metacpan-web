@@ -32,8 +32,13 @@ sub _formatter {
     }
 }
 
-sub _routes {
-}
+#<<<
+sub _routes { (
+    [ '/permission/author/:author',         '/author/:author/permissions' ],
+    [ '/permission/distribution/:dist',     '/dist/:dist/permissions' ],
+    [ '/permission/module/:module',         '/module/:module/permissions' ],
+) }
+#>>>
 
 sub prepare_app {
     my $self = shift;
