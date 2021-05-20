@@ -17,7 +17,7 @@
   %%  }
   <li><hr /></li>
   <li>
-    <a href="/requires/[% $module ? 'module/' ~ ($module.documentation || $module.module.0.name ) : 'distribution/' ~ $release.distribution %]"><i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
+    <a href="[% $module ? '/module/' ~ ($module.documentation || $module.module.0.name ) : '/dist/' ~ $release.distribution %]/requires"><i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
   </li>
   <li>
     <a href="http://deps.cpantesters.org/?module=[% $module.documentation || $module.module.0.name || $release.main_module %]"><i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>

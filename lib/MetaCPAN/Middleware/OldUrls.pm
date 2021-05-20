@@ -87,6 +87,9 @@ sub _routes { (
     [ '/contributing-to/:author/:release',  '/release/:author/:release/contribute' ],
 
     [ '/river/gauge/:dist', '/dist/:dist/river.svg' ],
+
+    [ '/requires/distribution/:dist',   '/dist/:dist/requires' ],
+    [ '/requires/module/:module',       '/module/:module/requires' ],
 ) }
 #>>>
 

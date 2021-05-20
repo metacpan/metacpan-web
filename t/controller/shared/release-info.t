@@ -185,10 +185,10 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
-            my $revdep = $type eq 'module' ? 'module' : 'distribution';
+            my $revdep = $type eq 'module' ? 'module' : 'dist';
             ok(
                 $tx->find_value(
-                    "//a[starts-with(\@href, \"/requires/$revdep/$name\")]"),
+                    "//a[starts-with(\@href, \"/$revdep/$name/requires\")]"),
                 "reverse deps link uses $revdep name"
             );
 
