@@ -84,6 +84,9 @@ sub prepare_app {
                             = $match->{splat}[$i];
                     }
                 }
+                if ( defined $match->{author} ) {
+                    $match->{author} = uc $match->{author};
+                }
                 $match->{url} = $formatter->($match);
                 if ( my $q = $match->{query} ) {
                     my $url = URI->new( $match->{url} );
