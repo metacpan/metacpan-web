@@ -1,4 +1,4 @@
 <div class="activity-graph">
-    <img src="/activity?res=month[% if $query { '&' ~ $query } %]" width="170" height="22" />
+    <img src="[% $url %]?res=month" width="170" height="22" />
     <div align="right"><small class="comment">24 month</small></div>
 </div>

@@ -41,7 +41,7 @@ sub distribution : Local : Args(1) : Does('Sortable') {
 
     $c->stash( {
         %{$data},
-        type_of_required => 'distribution',
+        type_of_required => 'dist',
         required         => $distribution,
         pageset          => $pageset,
         template         => 'requires.tx',

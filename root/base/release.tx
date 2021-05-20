@@ -116,7 +116,9 @@
     %%  }
     <li class="nav-header">Activity</li>
     <li>
-      %%  include inc::activity { query => 'distribution=' ~ $release.distribution };
+      %%  include inc::activity {
+      %%    url => '/dist/' ~ $release.distribution ~ '/activity.svg',
+      %%  }
     </li>
     <li class="nav-header">Tools</li>
     <li>

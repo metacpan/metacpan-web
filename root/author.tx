@@ -77,7 +77,11 @@
         %%  }
     %%  } }
     <li class="nav-header">Activity</li>
-    <li>[% include inc::activity { query => 'author=' ~ $author.pauseid } %]</li>
+    <li>
+      %%  include inc::activity {
+      %%    url => '/author/' ~ $author.pauseid ~ '/activity.svg',
+      %%  }
+    </li>
     %%  if $latest.date {
     <li class="nav-header">Latest Release</li>
     <li>

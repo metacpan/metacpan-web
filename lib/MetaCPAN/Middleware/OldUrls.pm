@@ -43,6 +43,26 @@ my $feed_type = sub {
     return 1;
 };
 
+my $activity_type = sub {
+    my $type = shift;
+    sub {
+        my ( $env, $match ) = @_;
+        my $q = Plack::Request->new($env)->query_parameters;
+        if ( !$type ) {
+        }
+        elsif ( $q->{$type} ) {
+            $match->{$type} = $q->{$type};
+        }
+        else {
+            return 0;
+        }
+        if ( $q->{res} ) {
+            $match->{query}{res} = $q->{res};
+        }
+        return 1;
+    };
+};
+
 #<<<
 sub _routes { (
     [ '/permission/author/:author',         '/author/:author/permissions' ],
@@ -53,6 +73,12 @@ sub _routes { (
     [ '/feed/news',               '/news.:type',                    $feed_type ],
     [ '/feed/author/:author',     '/author/:author/activity.:type', $feed_type ],
     [ '/feed/distribution/:dist', '/dist/:dist/releases.:type',     $feed_type ],
+
+    [ '/activity', '/author/:author/activity.svg',      $activity_type->('author') ],
+    [ '/activity', '/dist/:distribution/activity.svg',  $activity_type->('distribution') ],
+    [ '/activity', '/module/:module/activity.svg',      $activity_type->('module') ],
+    [ '/activity', '/activity/distributions.svg',       $activity_type->('new_dists') ],
+    [ '/activity', '/activity/releases.svg',            $activity_type->() ],
 ) }
 #>>>
 
