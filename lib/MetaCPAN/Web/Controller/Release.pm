@@ -7,17 +7,14 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub root : Chained('/') PathPart('release') CaptureArgs(0) {
-    my ( $self, $c ) = @_;
+sub bare : Chained('/') PathPart('release') CaptureArgs(0) { }
 
-    $c->stash->{current_model_instance}
-        = $c->model( 'ReleaseInfo', full_details => 1 );
-}
-
-sub by_distribution : Chained('root') PathPart('') Args(1) {
+sub distribution_view : Chained('bare') PathPart('') Args(1) {
     my ( $self, $c, $distribution ) = @_;
 
-    $c->stash( release_info => $c->model->find($distribution) );
+    $c->stash( release_info =>
+            $c->model( 'ReleaseInfo', full_details => 1 )->find($distribution)
+    );
     $c->forward('view');
 }
 
@@ -33,19 +30,42 @@ sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
     $c->stash( { template => 'plussers.tx' } );
 }
 
-sub by_author_and_release : Chained('root') PathPart('') Args(2) {
+sub root : Chained('bare') PathPart('') CaptureArgs(2) {
     my ( $self, $c, $author, $release ) = @_;
 
     # force consistent casing in URLs
     if ( $author ne uc($author) ) {
+
+        $c->browser_max_age('1y');
+        $c->cdn_max_age('1y');
+
+        my @captures = @{ $c->req->captures };
+        $captures[0] = uc $author;
+
         $c->res->redirect(
-            $c->uri_for_action( $c->action, uc($author), $release ), 301 );
-        $c->detach();
+            $c->uri_for(
+                $c->action,               \@captures,
+                @{ $c->req->final_args }, $c->req->params,
+            ),
+            301
+        );
+        $c->detach;
     }
+
+    $c->stash( {
+        author_name  => $author,
+        release_name => $release,
+    } );
+}
+
+sub release_view : Chained('root') PathPart('') Args(0) {
+    my ( $self,   $c )       = @_;
+    my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
 
     $c->stash(
         permalinks   => 1,
-        release_info => $c->model->get( $author, $release ),
+        release_info => $c->model( 'ReleaseInfo', full_details => 1 )
+            ->get( $author, $release ),
     );
     $c->forward('view');
 }
