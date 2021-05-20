@@ -6,11 +6,11 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 test_psgi app, sub {
     my $cb = shift;
 
-    ok( my $res = $cb->( GET '/contributing-to/DOESNTEXIST' ),
-        'GET /contributing-to/DOESNTEXIST' );
+    ok( my $res = $cb->( GET '/dist/DOESNTEXIST/contribute' ),
+        'GET /dist/DOESNTEXIST/contribute' );
     is( $res->code, 404, 'code 404' );
-    ok( $res = $cb->( GET '/contributing-to/Moose' ),
-        'GET /contributing-to/Moose' );
+    ok( $res = $cb->( GET '/dist/Moose/contribute' ),
+        'GET /dist/Moose/contribute' );
     is( $res->code, 200, 'code 200' );
 
     my $tx = tx($res);
@@ -28,9 +28,9 @@ test_psgi app, sub {
 
     ok(
         $res = $cb->(
-            GET '/contributing-to/Acme-Test-MetaCPAN-NoContributingDoc'
+            GET '/dist/Acme-Test-MetaCPAN-NoContributingDoc/contribute'
         ),
-        'GET /contributing-to/Acme-Test-MetaCPAN-NoContributingDoc'
+        'GET /dist/Acme-Test-MetaCPAN-NoContributingDoc/contribute'
     );
     is( $res->code, 404, 'code 404' );
 

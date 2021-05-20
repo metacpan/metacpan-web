@@ -7,10 +7,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use List::Util ();
 
-sub index : Chained('/') : PathPart('contributing-to') : CaptureArgs(0) { }
-
-sub dist : Chained('index') : PathPart('') : Args(1) {
-    my ( $self, $c, $dist ) = @_;
+sub dist : Chained('/dist/root') PathPart('contribute') Args(0) {
+    my ( $self, $c ) = @_;
+    my $dist = $c->stash->{distribution_name};
 
     my $release = $c->model('API::Release')->find($dist)->get->{release};
     if ( $release && $release->{author} && $release->{name} ) {
@@ -19,15 +18,9 @@ sub dist : Chained('index') : PathPart('') : Args(1) {
     $c->detach('/not_found');
 }
 
-sub release : Chained('index') : PathPart('') : Args(2) {
-    my ( $self, $c, $author, $release ) = @_;
-
-    # force consistent casing in URLs
-    if ( $author ne uc($author) ) {
-        $c->res->redirect(
-            $c->uri_for( $c->action, [ uc($author), $release ] ), 301 );
-        $c->detach();
-    }
+sub release : Chained('/release/root') PathPart('contribute') Args(0) {
+    my ( $self,   $c )       = @_;
+    my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
 
     $c->forward( 'get', [ $author, $release ] );
 }

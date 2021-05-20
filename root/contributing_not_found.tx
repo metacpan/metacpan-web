@@ -29,7 +29,7 @@ For larger dists, you can also add a `Contributing.pod` to further
 elaborate on your contributing process; see
 [Moose::Manual::Contributing][moose] as an example.
 
-[moose]: /contributing-to/Moose
+[moose]: /dist/Moose/contribute
 
 #### For module users
 

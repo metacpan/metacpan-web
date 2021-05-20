@@ -82,6 +82,9 @@ sub _routes { (
 
     [ '/changes/distribution/:dist',        '/dist/:dist/changes' ],
     [ '/changes/release/:author/:release',  '/release/:author/:release/changes' ],
+
+    [ '/contributing-to/:dist',             '/dist/:dist/contribute' ],
+    [ '/contributing-to/:author/:release',  '/release/:author/:release/contribute' ],
 ) }
 #>>>
 
