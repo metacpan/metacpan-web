@@ -79,6 +79,9 @@ sub _routes { (
     [ '/activity', '/module/:module/activity.svg',      $activity_type->('module') ],
     [ '/activity', '/activity/distributions.svg',       $activity_type->('new_dists') ],
     [ '/activity', '/activity/releases.svg',            $activity_type->() ],
+
+    [ '/changes/distribution/:dist',        '/dist/:dist/changes' ],
+    [ '/changes/release/:author/:release',  '/release/:author/:release/changes' ],
 ) }
 #>>>
 

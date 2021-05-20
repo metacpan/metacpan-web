@@ -5,21 +5,16 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub distribution : Local Args(1) {
-    my ( $self, $c, $distribution ) = @_;
+sub distribution : Chained('/dist/root') PathPart('changes') Args(0) {
+    my ( $self, $c ) = @_;
+    my $dist = $c->stash->{distribution_name};
 
-    $c->forward( 'get', [$distribution] );
+    $c->forward( 'get', [$dist] );
 }
 
-sub release : Local Args(2) {
-    my ( $self, $c, $author, $release ) = @_;
-
-    # force consistent casing in URLs
-    if ( $author ne uc($author) ) {
-        $c->res->redirect(
-            $c->uri_for( $c->action, [ uc($author), $release ] ), 301 );
-        $c->detach();
-    }
+sub release : Chained('/release/root') PathPart('changes') Args(0) {
+    my ( $self,   $c )       = @_;
+    my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
 
     $c->forward( 'get', [ $author, $release ] );
 }
