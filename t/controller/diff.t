@@ -6,9 +6,9 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 test_psgi app, sub {
     my $cb = shift;
 
-    my $mod_diff = '/diff/file/?target=ETHER/Moose-2.1605/lib/Moose.pm'
-        . '&source=ETHER/Moose-2.1604/lib/Moose.pm';
-    my $rel_diff = '/diff/release/ETHER/Moose-2.1604/ETHER/Moose-2.1605';
+    my $mod_diff
+        = '/release/ETHER/Moose-2.1605/diff/ETHER/Moose-2.1604/lib/Moose.pm';
+    my $rel_diff = '/release/ETHER/Moose-2.1605/diff/ETHER/Moose-2.1604';
 
     ok( my $res = $cb->( GET $mod_diff ), 'GET module diff' );
     is( $res->code, 200, 'code 200' );

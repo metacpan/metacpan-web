@@ -99,6 +99,28 @@ sub _routes { (
     [ '/source/:author/:release/:*file', '/release/:author/:release/source/:file' ],
 
     [ '/raw/:author/:release/:*file',   '/release/:author/:release/raw/:file' ],
+
+    [ '/diff/release/:before_author/:before_release/:after_author/:after_release',
+        '/release/:after_author/:after_release/diff/:before_author/:before_release' ],
+    [
+        '/diff/file',
+        '/release/:after_author/:after_release/diff/:before_author/:before_release/:path',
+        sub {
+            my ($env, $match) = @_;
+            my $q = Plack::Request->new($env)->query_parameters;
+            (
+                $match->{before_author},
+                $match->{before_release},
+            ) = split m{/}, $q->{source};
+            (
+                $match->{after_author},
+                $match->{after_release},
+                $match->{path},
+            ) = split m{/}, $q->{target}, 3;
+            $match->{path} //= '';
+            return 1;
+        },
+    ],
 ) }
 #>>>
 

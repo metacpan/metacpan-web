@@ -11,13 +11,13 @@
   <li class="nav-header">Tools</li>
     %%  if $diff.source.file {
       <li>
-        <a href="?source=[% $diff.source.author %]/[% $diff.source.release %]&target=[% $diff.target.author %]/[% $diff.target.release %]">
+        <a href="/release/[% $diff.source.author %]/[% $diff.source.release %]/diff/[% $diff.target.author %]/[% $diff.target.release %]">
           Diff full distribution
         </a>
       </li>
     %%  }
     <li>
-      <a href="?target=[% $diff.source.path %]&amp;source=[% $diff.target.path %]">
+      <a href="/release/[% $diff.source.author %]/[% $diff.source.release %]/diff/[% $diff.target.author %]/[% $diff.target.release %][% if $diff.source.file { '/' ~ $diff.source.file } %]">
         Reverse diff
       </a>
     </li>
