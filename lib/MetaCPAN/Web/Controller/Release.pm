@@ -7,14 +7,7 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub bare : Chained('/') PathPart('release') CaptureArgs(0) { }
-
-sub index : Chained('/') PathPart('release') CaptureArgs(1) {
-    my ( $self, $c, $distribution ) = @_;
-    $c->stash( distribution => $distribution );
-}
-
-sub root : Chained('bare') PathPart('') CaptureArgs(2) {
+sub root : Chained('/') PathPart('release') CaptureArgs(2) {
     my ( $self, $c, $author, $release ) = @_;
 
     # force consistent casing in URLs
