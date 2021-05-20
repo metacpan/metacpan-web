@@ -44,7 +44,7 @@
   : $file.mime.match("x-c")     ? 'silk-page-white-c'
                                 : 'silk-page-white'
 %]" title="[% $file.path %]">[% $file.name %]</a></td>
-  <td class="documentation"><strong><a href="/pod/release/[% $author %]/[% $release %]/[% $file.path %]" title="[% $file.path %]" class="ellipsis">[% $file.slop ? $file.documentation ? $file.documentation : $file.name : "" %]</a></strong></td>
+  <td class="documentation"><strong><a href="/release/[% $author %]/[% $release %]/view/[% $file.path %]" title="[% $file.path %]" class="ellipsis">[% $file.slop ? $file.documentation ? $file.documentation : $file.name : "" %]</a></strong></td>
   <!-- [% $file | dump %] -->
   <td class="size" sort="[% $file.directory ? 0 : $file.stat.size %]">[% $file.directory ? '' : format_bytes($file.stat.size) %]</td>
   %%  my $date = datetime($file.stat.mtime).to_http;

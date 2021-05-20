@@ -121,6 +121,9 @@ sub _routes { (
             return 1;
         },
     ],
+
+    [ '/pod/release/:author/:release/:*file',   '/release/:author/:release/view/:file' ],
+    [ '/pod/distribution/:dist/:*file',         '/dist/:dist/view/:file' ],
 ) }
 #>>>
 

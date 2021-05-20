@@ -25,7 +25,7 @@
   %%  }
   %%  else if $file.slop {
   <li>
-    <a href="/pod/release/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
   </li>
   %%  }
   <li>

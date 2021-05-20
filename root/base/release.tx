@@ -188,7 +188,7 @@
     %%  }
     <li class="nav-header">Permalinks</li>
     <li>
-      <a href="/[% $module ? 'pod/release' : 'release' %]/[% $release.author %]/[% $release.name %][% if $module { '/' ~ $module.path } %]">This version</a>
+      <a href="/release/[% $release.author %]/[% $release.name %][% if $module { '/view/' ~ $module.path } %]">This version</a>
     </li>
     %%  if $canonical {
       %%  my $has_latest = $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum();

@@ -34,63 +34,6 @@ sub find : Path : Args(1) {
     $c->forward( 'view', [@path] );
 }
 
-# /pod/release/$AUTHOR/$release/@path
-sub release : Local : Args {
-    my ( $self, $c, $author, $release, @path ) = @_;
-
-    if ( !@path ) {
-        $c->detach('/not_found');
-    }
-    $c->browser_max_age('1d');
-
-    # force consistent casing in URLs
-    if ( $author ne uc $author ) {
-        $c->res->redirect(
-            $c->uri_for( $c->action, uc $author, $release, @path ), 301 );
-        $c->detach();
-    }
-
-    my $pod_file
-        = $c->model('API::Module')->get( $author, $release, @path )->get;
-    my $release_data
-        = $c->model('ReleaseInfo')->get( $author, $release, $pod_file )
-        ->else_done( {} );
-    $c->stash( {
-        pod_file => $pod_file,
-        %{ $release_data->get },
-        permalinks => 1,
-    } );
-
-    $c->forward( 'view', [ $author, $release, @path ] );
-}
-
-# /pod/distribution/$name/@path
-sub distribution : Local : Args {
-    my ( $self, $c, $dist, @path ) = @_;
-
-    $c->browser_max_age('1h');
-
-    $c->detach('/not_found')
-        if !defined $dist || !@path;
-
-# TODO: Could we do this with one query?
-# filter => { path => join('/', @path), distribution => $dist, status => latest }
-
-    # Get latest "author/release" of dist so we can use it to find the file.
-    # TODO: Pass size param so we can disambiguate?
-    my $release_data = try {
-        $c->model('ReleaseInfo')->find($dist)->get;
-    } or $c->detach('/not_found');
-
-    unshift @path, @{ $release_data->{release} }{qw( author name )};
-
-    $c->stash( {
-        %$release_data, pod_file => $c->model('API::Module')->get(@path)->get,
-    } );
-
-    $c->forward( 'view', [@path] );
-}
-
 sub view : Private {
     my ( $self, $c, @path ) = @_;
 
@@ -144,7 +87,7 @@ sub view : Private {
             && $documented_module->{authorized}
             && $documented_module->{indexed} )
         ? "/pod/$documentation"
-        : "/pod/distribution/$release->{distribution}/$data->{path}";
+        : "/dist/$release->{distribution}/view/$data->{path}";
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');

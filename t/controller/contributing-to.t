@@ -21,7 +21,7 @@ test_psgi app, sub {
     );
     ok(
         $tx->find_value(
-            '//a[@href="/pod/distribution/Moose/lib/Moose/Manual/Contributing.pod"]'
+            '//a[@href="/dist/Moose/view/lib/Moose/Manual/Contributing.pod"]'
         ),
         'contains permalink to Contributing doc'
     );

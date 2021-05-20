@@ -51,7 +51,7 @@ sub get : Private {
     elsif ( $file->{documentation} ) {
 
         # Is there a better way to reuse the pod view?
-        $c->forward( '/pod/release', [ @$file{qw( author release path )} ] );
+        $c->forward( '/view/release', [ $file->{path} ] );
     }
     else {
         $c->stash( { file => $file } );
