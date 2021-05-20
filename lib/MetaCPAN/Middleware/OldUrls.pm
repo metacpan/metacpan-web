@@ -97,6 +97,8 @@ sub _routes { (
     [ '/release/:dist/source/:*file',   '/dist/:dist/source/:file' ],
     [ '/source/:module',                '/module/:module/source' ],
     [ '/source/:author/:release/:*file', '/release/:author/:release/source/:file' ],
+
+    [ '/raw/:author/:release/:*file',   '/release/:author/:release/raw/:file' ],
 ) }
 #>>>
 
