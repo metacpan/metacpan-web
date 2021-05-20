@@ -90,6 +90,9 @@ sub _routes { (
 
     [ '/requires/distribution/:dist',   '/dist/:dist/requires' ],
     [ '/requires/module/:module',       '/module/:module/requires' ],
+
+    [ '/release/:dist',                 '/dist/:dist' ],
+    [ '/release/:dist/plussers',        '/dist/:dist/plussers' ],
 ) }
 #>>>
 

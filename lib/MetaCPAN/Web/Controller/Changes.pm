@@ -34,7 +34,9 @@ sub get : Private {
             description => 'Try the release info page',
 
             # Is there a more Catalyst way to do this?
-            url       => $c->uri_for( '/release/' . $release ),
+            url => $c->uri_for(
+                ( @args == 1 ? '/dist/' : '/release/' ) . $release
+            ),
             link_text => $release,
         };
 

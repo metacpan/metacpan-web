@@ -15,7 +15,7 @@
   %%  for $leaders -> $leader {
     <tr>
       <td class="number[% if $~leader.index < 5 { " strong" } %]">[% $~leader.index + 1 %]</td>
-      <td class="name"><a href="/release/[% $leader.key %]">[% $leader.key %]</a></td>
+      <td class="name"><a href="/dist/[% $leader.key %]">[% $leader.key %]</a></td>
       <td class="number">[% $leader.doc_count %] ++</td>
     </tr>
   %%  }

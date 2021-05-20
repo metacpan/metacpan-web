@@ -11,7 +11,7 @@
 </div>
 <!-- Display counts of plussers-->
 <div>
-    <a href="/release/[% $plussers.distribution %]/plussers">[% pluralize("%d PAUSE user(s)", $plussers.authors.size()) %]</a>
+    <a href="/dist/[% $plussers.distribution %]/plussers">[% pluralize("%d PAUSE user(s)", $plussers.authors.size()) %]</a>
 </div>
 %%  }
 %%  if $plussers.others {

@@ -86,7 +86,7 @@
     <li class="nav-header">Latest Release</li>
     <li>
         <div>
-            <a href="/release/[% if $latest.status == 'latest' { $latest.distribution } else { $latest.author ~ '/' ~ $latest.name } %]" class="ellipsis" title="[% $latest.name %]">
+            <a href="[% if $latest.status == 'latest' { '/dist/' ~ $latest.distribution } else { '/release/' ~ $latest.author ~ '/' ~ $latest.name } %]" class="ellipsis" title="[% $latest.name %]">
             [% $latest.name %]
             </a>
         </div>

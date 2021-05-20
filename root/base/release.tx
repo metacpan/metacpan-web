@@ -2,7 +2,7 @@
 %%    title     => $title     || $release.name ~ ' - ' ~ $release.abstract,
 %%    rss       => $rss       || '/dist/' ~ $release.distribution ~ '/releases.rss',
 %%    rss_title => $rss_title || 'Recent CPAN Uploads of ' ~ $release.distribution ~ ' - MetaCPAN',
-%%    canonical => $canonical || '/release/' ~ $release.distribution,
+%%    canonical => $canonical || '/dist/' ~ $release.distribution,
 %%    meta_description => $meta_description || $release.abstract,
 %%    twitter_card_inc => $twitter_card_inc || 'inc/twitter/release.tx',
 %%  }
@@ -16,7 +16,7 @@
     <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $module ? '' : 'extend' };
     %%  if $module {
-    <a data-keyboard-shortcut="g d" class="release-name" href="/release/[% if $permalinks || $release.status != 'latest' { $module.author ~ '/' ~ $module.release } else { $release.distribution } %]">[% $release.name %]</a>
+    <a data-keyboard-shortcut="g d" class="release-name" href="/[% if $permalinks || $release.status != 'latest' { '/release/' ~ $module.author ~ '/' ~ $module.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
     %%  }
     %%  else {
     <span class="release-name">[% $release.name %]</span>
@@ -26,7 +26,7 @@
     %%  }
   </div>
   %%  if $release.status != 'latest' && $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum() {
-    <a class="latest" href="[% if $module { %]/pod/[% $module.documentation %][% } else { %]/release/[% $release.distribution %][% } %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
+    <a class="latest" href="[% if $module { '/pod/' ~ $module.documentation } else { '/dist/' ~ $release.distribution } %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
   %%  }
   %%  include inc::river_gauge { river => $distribution.river, distribution => $release.distribution };
   %%  include inc::favorite;

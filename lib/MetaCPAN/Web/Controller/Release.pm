@@ -9,25 +9,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub bare : Chained('/') PathPart('release') CaptureArgs(0) { }
 
-sub distribution_view : Chained('bare') PathPart('') Args(1) {
-    my ( $self, $c, $distribution ) = @_;
-
-    $c->stash( release_info =>
-            $c->model( 'ReleaseInfo', full_details => 1 )->find($distribution)
-    );
-    $c->forward('view');
-}
-
 sub index : Chained('/') PathPart('release') CaptureArgs(1) {
     my ( $self, $c, $distribution ) = @_;
     $c->stash( distribution => $distribution );
-}
-
-sub plusser_display : Chained('index') PathPart('plussers') Args(0) {
-    my ( $self, $c ) = @_;
-    my $dist = $c->stash->{distribution};
-    $c->stash( $c->model('API::Favorite')->find_plussers($dist)->get );
-    $c->stash( { template => 'plussers.tx' } );
 }
 
 sub root : Chained('bare') PathPart('') CaptureArgs(2) {

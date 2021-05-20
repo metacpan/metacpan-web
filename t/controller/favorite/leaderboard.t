@@ -18,7 +18,7 @@ test_psgi app, sub {
                 my $anchor = shift;
                 $anchor->is(
                     './@href',
-                    '/release/' . $anchor->node->textContent,
+                    '/dist/' . $anchor->node->textContent,
                     'href points to release'
                 );
             },

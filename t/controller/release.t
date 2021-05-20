@@ -5,8 +5,7 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET '/release/DOESNTEXIST' ),
-        'GET /release/DOESNTEXIST' );
+    ok( my $res = $cb->( GET '/dist/DOESNTEXIST' ), 'GET /dist/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
     ok( $res = $cb->( GET '/release/AUTHORDOESNTEXIST/DOESNTEXIST' ),
@@ -17,12 +16,12 @@ test_psgi app, sub {
         'GET /release/PERLER/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
-    ok( $res = $cb->( GET '/release/Moose' ), 'GET /release/Moose' );
+    ok( $res = $cb->( GET '/dist/Moose' ), 'GET /dist/Moose' );
     is( $res->code, 200, 'code 200' );
 
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/Moose/, 'title includes Moose' );
-    ok( $tx->find_value('//a[@href="/release/Moose"]'),
+    ok( $tx->find_value('//a[@href="/dist/Moose"]'),
         'contains permalink to resource' );
 
     # Moose 2.1201 has no more Examples and breaks this test,
