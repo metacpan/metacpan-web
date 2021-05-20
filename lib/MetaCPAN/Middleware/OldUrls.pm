@@ -93,6 +93,10 @@ sub _routes { (
 
     [ '/release/:dist',                 '/dist/:dist' ],
     [ '/release/:dist/plussers',        '/dist/:dist/plussers' ],
+
+    [ '/release/:dist/source/:*file',   '/dist/:dist/source/:file' ],
+    [ '/source/:module',                '/module/:module/source' ],
+    [ '/source/:author/:release/:*file', '/release/:author/:release/source/:file' ],
 ) }
 #>>>
 

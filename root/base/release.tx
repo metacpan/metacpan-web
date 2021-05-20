@@ -42,10 +42,7 @@
     <li class="nav-header"><span class="relatize">[% datetime($release.date).to_http %]</span></li>
     %%  include inc::release_status { maturity => $release.maturity, banner_class => 'release-banner' }
     %%  block left_nav_lead -> {
-    %%    my $source_base = $permalinks || $release.status != 'latest'
-    %%      ? '/source/' ~ $release.author ~ '/' ~ $release.name
-    %%      : '/release/' ~ $release.distribution ~ '/source';
-    <li><a href="[% $source_base %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="[% $source_base %]?raw=1">raw</a>)</li>
+    <li><a href="[% $release_base %]/source"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="[% $source_base %]/source?raw=1">raw</a>)</li>
     %%  }
     <li>
       <a data-keyboard-shortcut="g c" href="[% $release_base %]/changes"><i class="fa fa-fw fa-cogs black"></i>Changes</a>

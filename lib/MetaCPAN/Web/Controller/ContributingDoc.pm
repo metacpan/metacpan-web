@@ -53,14 +53,13 @@ sub get : Private {
         $c->response->status(404);
     }
     else {
-        my @path = split m{/}, $file->{path};
         if ( $file->{pod_lines} && @{ $file->{pod_lines} } ) {
             $c->forward( "/pod/release",
                 [ $file->{author}, $file->{release}, @path ] );
         }
         else {
-            $c->forward( "/source/index",
-                [ $file->{author}, $file->{release}, @path ] );
+            $c->forward( "/source/view",
+                [ $file->{author}, $file->{release}, $file->{path} ] );
         }
     }
 }

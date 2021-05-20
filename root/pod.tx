@@ -15,23 +15,23 @@
     Module version: [% $documented_module.version %]
   </li>
   %%  }
-  %%  my $source_base = $permalinks || $release.status != 'latest'
-  %%    ? '/source/' ~ $release.author ~ '/' ~ $release.name
-  %%    : '/release/' ~ $release.distribution ~ '/source';
+  %%  my $release_base = $permalinks || $release.status != 'latest'
+  %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
+  %%    : '/dist/' ~ $release.distribution;
   <li>
-    <a data-keyboard-shortcut="g s" href="[% $source_base %]/[% $module.path %]"><i class="fa fa-fw fa-file-code black"></i>Source</a>
-    (<a href="[% $source_base %]/[% $module.path %]?raw=1">raw</a>)
+    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $module.path %]"><i class="fa fa-fw fa-file-code black"></i>Source</a>
+    (<a href="[% $release_base %]/source/[% $module.path %]?raw=1">raw</a>)
   </li>
   %%  if $module.pod_path {
   <li>
-    <a data-keyboard-shortcut="g p" href="[% $source_base %]/[% $module.pod_path %]"><i class="fa fa-fw fa-file-code black"></i>Pod Source</a>
-    (<a href="[% $source_base %]/[% $module.pod_path %]?raw=1">raw</a>)
+    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $module.pod_path %]"><i class="fa fa-fw fa-file-code black"></i>Pod Source</a>
+    (<a href="[% $release_base %]/source/[% $module.pod_path %]?raw=1">raw</a>)
   </li>
   %%  }
   <li>
     %%  my $parent_path = $module.path.replace(rx('/[^/]*'),'');
-    <a data-keyboard-shortcut="g b" href="[% $source_base %]/[% $parent_path %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
-    (<a href="[% $source_base %]/[% $parent_path %]?raw=1">raw</a>)
+    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source/[% $parent_path %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+    (<a href="[% $release_base %]/source/[% $parent_path %]?raw=1">raw</a>)
   </li>
 %%  }
 %%  override page_content -> {
@@ -46,7 +46,7 @@
   %%  else {
   <p class="pod-error">
     No POD found for <code>[% $module.name %]</code>.
-    Time to <a href="/source/[% $module.author %]/[% $module.release %]/[% $module.path %]">read the source</a>?
+    Time to <a href="[% $release_base %]/source/[% $module.path %]">read the source</a>?
   </p>
   %%  }
 </div>

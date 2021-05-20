@@ -54,15 +54,6 @@ sub release_view : Chained('root') PathPart('') Args(0) {
     $c->forward('view');
 }
 
-sub source : Chained('index') PathPart('source') Args {
-    my ( $self, $c, @path ) = @_;
-    my $dist    = $c->stash->{distribution};
-    my $release = $c->model('API::Release')->find($dist)->get->{release}
-        or $c->detach('/not_found');
-    $c->forward( '/source/index',
-        [ $release->{author}, $release->{name}, @path ] );
-}
-
 sub view : Private {
     my ( $self, $c ) = @_;
 

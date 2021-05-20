@@ -5,10 +5,10 @@
 %%  }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
-  <a data-keyboard-shortcut="g s" href="/source/[% $file.author ~ '/' ~ $file.release %]">[% $file.author %] / [% $file.release %]</a>
+  <a data-keyboard-shortcut="g s" href="/release/[% $file.author ~ '/' ~ $file.release %]/source">[% $file.author %] / [% $file.release %]</a>
   %%  my $parts = $file.path.split('/');
   %%  for $parts -> $part {
-    / [% if $~part.is_last { $part } else { %]<a href="/source/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $parts.slice(0, $~part).join('/') %]">[% $part %]</a>[% } %]
+    / [% if $~part.is_last { $part } else { %]<a href="/release/[% $file.author ~ '/' ~ $file.release %]/source/[% $parts.slice(0, $~part).join('/') %]">[% $part %]</a>[% } %]
   %%  }
 </div>
 %%  }
@@ -33,7 +33,7 @@
   </li>
   <li>&nbsp;</li>
   <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-file-text fa-fw black"></i>Raw code</a></li>
-  <li><a href="/source/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
+  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
   <li>
     <a href="/raw/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
   </li>

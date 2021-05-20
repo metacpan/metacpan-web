@@ -3,10 +3,12 @@
 %%  }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
-  <a href="/source/[% $author %]/[% $release %]">[% $author %] / [% $release %]</a>
+  <a href="/release/[% $author %]/[% $release %]/source">[% $author %] / [% $release %]</a>
+
+
   %%  for $directory -> $part {
-    %%  my $link = $base ~ '/' ~ $directory.slice(0, $~part).join('/')
-    / [% if $~part.is_last { $part } else { %]<a href="/source/[% $link %]">[% $part %]</a>[% } %]
+    %%  my $link = $directory.slice(0, $~part).join('/')
+    / [% if $~part.is_last { $part } else { %]<a href="/release/[% $author %]/[% $release %]/source/[% $link %]">[% $part %]</a>[% } %]
   %%  }
 </div>
 %%  }
@@ -36,7 +38,7 @@
 <tbody>
 %% for $files -> $file {
 <tr>
-  <td class="name" sort="[% ( $file.directory == 1 ? "!" : '' ) ~ $file.name %]"><a href="/source/[% $author %]/[% $release %]/[% $file.path %]" class="[%
+  <td class="name" sort="[% ( $file.directory == 1 ? "!" : '' ) ~ $file.name %]"><a href="/release/[% $author %]/[% $release %]/source/[% $file.path %]" class="[%
     $file.directory             ? 'silk-folder'
   : $file.mime.match("perl")    ? 'silk-page-white-code'
   : $file.mime.match("x-c")     ? 'silk-page-white-c'
