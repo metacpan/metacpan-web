@@ -13,12 +13,18 @@ use Path::Tiny qw( path );
 use Text::MultiMarkdown qw( markdown );
 use XML::FeedPP ();
 
-sub feed_index : PathPart('feed') : Chained('/') : CaptureArgs(0) {
+sub recent_rss : Path('/recent.rss') Args(0) {
     my ( $self, $c ) = @_;
+    $c->detach( 'recent', ['rss'] );
 }
 
-sub recent : Chained('feed_index') PathPart Args(0) {
+sub recent_atom : Path('/recent.atom') Args(0) {
     my ( $self, $c ) = @_;
+    $c->detach( 'recent', ['atom'] );
+}
+
+sub recent : Private {
+    my ( $self, $c, $type ) = @_;
 
     # Set surrogate key and ttl from here as well
     $c->forward('/recent/index');
@@ -47,15 +53,25 @@ sub recent : Chained('feed_index') PathPart Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
-        format  => $c->req->params->{'type'},
+        format  => $type,
         entries => $c->stash->{recent},
         host    => URI->new( $c->config->{web_host} ),
         title   => 'Recent CPAN uploads - MetaCPAN',
     );
 }
 
-sub news : Local : Args(0) {
+sub news_rss : Path('/news.rss') Args(0) {
     my ( $self, $c ) = @_;
+    $c->detach( 'news', ['rss'] );
+}
+
+sub news_atom : Path('/news.atom') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->detach( 'news', ['atom'] );
+}
+
+sub news : Private {
+    my ( $self, $c, $type ) = @_;
 
     $c->add_surrogate_key('NEWS');
     $c->browser_max_age('1h');
@@ -92,37 +108,28 @@ sub news : Local : Args(0) {
     }
 
     $c->stash->{feed} = $self->build_feed(
-        format  => $c->req->params->{'type'},
+        format  => $type,
         entries => \@entries,
         host    => $c->config->{web_host},
         title   => 'Recent MetaCPAN News',
     );
 }
 
-sub author : Local : Args(1) {
-    my ( $self, $c, $author ) = @_;
+sub author_rss : Chained('/author/root') PathPart('activity.rss') Args(0) {
+    $_[1]->detach( 'author', ['rss'] );
+}
 
-    # Redirect to this same action with uppercase author.
-    if ( $author ne uc($author) ) {
+sub author_atom : Chained('/author/root') PathPart('activity.atom') Args(0) {
+    $_[1]->detach( 'author', ['atom'] );
+}
 
-        $c->browser_max_age('7d');
-        $c->cdn_max_age('1y');
-        $c->add_surrogate_key('REDIRECT_FEED');
+sub author : Private {
+    my ( $self, $c, $type ) = @_;
 
-        $c->res->redirect(
-
-            # NOTE: We're using Args here instead of CaptureArgs :-(.
-            $c->uri_for(
-                $c->action,  $c->req->captures,
-                uc($author), $c->req->params
-            ),
-            301,    # Permanent
-        );
-    }
+    my $author = $c->stash->{pauseid};
 
     $c->browser_max_age('1h');
     $c->cdn_max_age('1y');
-    $c->add_author_key($author);
 
     my $author_info = $c->model('API::Author')->get($author)->get;
 
@@ -141,7 +148,7 @@ sub author : Local : Args(1) {
     my $faves = $c->model('API::Favorite')->by_user($user)->get;
 
     $c->stash->{feed} = $self->build_feed(
-        format  => $c->req->params->{'type'},
+        format  => $type,
         host    => $c->config->{web_host},
         title   => "Recent CPAN activity of $author - MetaCPAN",
         entries => [
@@ -152,19 +159,28 @@ sub author : Local : Args(1) {
     );
 }
 
-sub distribution : Local : Args(1) {
-    my ( $self, $c, $distribution ) = @_;
+sub dist_rss : Chained('/dist/root') PathPart('releases.rss') Args(0) {
+    $_[1]->detach( 'dist', ['rss'] );
+}
+
+sub dist_atom : Chained('/dist/root') PathPart('releases.atom') Args(0) {
+    $_[1]->detach( 'dist', ['atom'] );
+}
+
+sub dist : Private {
+    my ( $self, $c ) = @_;
+    my $dist = $c->stash->{distribution_name};
 
     $c->browser_max_age('1h');
     $c->cdn_max_age('1y');
-    $c->add_dist_key($distribution);
+    $c->add_dist_key($dist);
 
-    my $data = $c->model('API::Release')->versions($distribution)->get;
+    my $data = $c->model('API::Release')->versions($dist)->get;
 
     $c->stash->{feed} = $self->build_feed(
         format  => $c->req->params->{'type'},
         host    => $c->config->{web_host},
-        title   => "Recent CPAN uploads of $distribution - MetaCPAN",
+        title   => "Recent CPAN uploads of $dist - MetaCPAN",
         entries => $data->{versions},
     );
 }

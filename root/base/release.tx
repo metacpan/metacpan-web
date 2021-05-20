@@ -1,6 +1,6 @@
 %%  cascade base {
 %%    title     => $title     || $release.name ~ ' - ' ~ $release.abstract,
-%%    rss       => $rss       || 'distribution/' ~ $release.distribution,
+%%    rss       => $rss       || '/dist/' ~ $release.distribution ~ '/releases.rss',
 %%    rss_title => $rss_title || 'Recent CPAN Uploads of ' ~ $release.distribution ~ ' - MetaCPAN',
 %%    canonical => $canonical || '/release/' ~ $release.distribution,
 %%    meta_description => $meta_description || $release.abstract,
@@ -134,7 +134,7 @@
       </a>
     </li>
     <li>
-      <a href="/feed/distribution/[% $release.distribution %]">
+      <a href="/dist/[% $release.distribution %]/releases.rss">
         <i class="fa fa-rss-square fa-fw black"></i>Subscribe to distribution
       </a>
     </li>

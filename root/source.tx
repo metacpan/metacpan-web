@@ -1,6 +1,6 @@
 %%  cascade base {
 %%      title       => $title || $file.path,
-%%      rss         => $rss || 'distribution/' ~ $file.distribution,
+%%      rss         => $rss || '/dist/' ~ $file.distribution ~ '/releases.rss',
 %%      rss_title   => $rss_title || 'Recent CPAN Uploads of ' ~ $file.distribution ~ ' - MetaCPAN',
 %%  }
 %%  override breadcrumbs -> {

@@ -1,6 +1,6 @@
 %%  cascade base {
 %%      canonical   => $canonical || '/',
-%%      rss         => $rss || 'recent',
+%%      rss         => $rss || '/recent.rss',
 %%      rss_title   => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%  }
 %%  override left_nav -> { }

@@ -1,5 +1,5 @@
 %%  cascade base {
-%%      rss       => $rss || 'recent',
+%%      rss       => $rss || '/recent.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%      title     => $title || 'Recent',
 %%  }

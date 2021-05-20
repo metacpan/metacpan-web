@@ -32,11 +32,27 @@ sub _formatter {
     }
 }
 
+my $feed_type = sub {
+    my ( $env, $match ) = @_;
+    my $type
+        = lc( Plack::Request->new($env)->query_parameters->{type} || 'rdf' );
+    $match->{type}
+        = $type eq 'rss' || $type eq 'rdf' ? 'rss'
+        : $type eq 'atom'                  ? 'atom'
+        :                                    return 0;
+    return 1;
+};
+
 #<<<
 sub _routes { (
     [ '/permission/author/:author',         '/author/:author/permissions' ],
     [ '/permission/distribution/:dist',     '/dist/:dist/permissions' ],
     [ '/permission/module/:module',         '/module/:module/permissions' ],
+
+    [ '/feed/recent',             '/recent.:type',                  $feed_type ],
+    [ '/feed/news',               '/news.:type',                    $feed_type ],
+    [ '/feed/author/:author',     '/author/:author/activity.:type', $feed_type ],
+    [ '/feed/distribution/:dist', '/dist/:dist/releases.:type',     $feed_type ],
 ) }
 #>>>
 
