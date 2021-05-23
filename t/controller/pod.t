@@ -44,15 +44,11 @@ test_psgi app, sub {
     my $tx2 = tx($res);
     ok( $tx->find_value('//div[contains(@class, "content")]'),
         'page has content' );
-
-TODO: {
-        local $TODO = 'Very flaky content check';
-        is(
-            $tx2->find_value('//div[contains(@class, "content")]'),
-            $tx->find_value('//div[contains(@class, "content")]'),
-            'content of both urls is exactly the same'
-        );
-    }
+    is(
+        $tx2->find_value('//div[contains(@class, "content")]'),
+        $tx->find_value('//div[contains(@class, "content")]'),
+        'content of both urls is exactly the same'
+    );
 
     # Request with lowercase author redirects to uppercase author.
     ( my $lc_this = $this )
