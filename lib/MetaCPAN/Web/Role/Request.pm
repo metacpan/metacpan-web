@@ -8,6 +8,8 @@ use Try::Tiny qw( catch try );
 
 use namespace::autoclean;
 
+has final_args => ( is => 'rw' );
+
 sub page {
     my $self = shift;
     my $page = $self->param('p');

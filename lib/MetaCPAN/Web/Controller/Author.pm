@@ -17,19 +17,18 @@ sub root : Chained('/') PathPart('author') CaptureArgs(1) {
     # force consistent casing in URLs
     if ( $id ne uc($id) ) {
 
-        # NOTE: This only works as long as we only use CaptureArgs
-        # and end the chain with PathPart('') and Args(0)
-        # (recommended by mst on #catalyst). If we deviate from that
-        # we may have to just do substitution on $req->uri
-        # because $c->req->args won't be what we expect.
-        # Just forget that Args exists (jedi hand wave).
+        $c->browser_max_age('1y');
+        $c->cdn_max_age('1y');
 
-        my $captures = $c->req->captures;
-        $captures->[0] = uc $captures->[0];
+        my @captures = @{ $c->req->captures };
+        $captures[0] = uc $id;
 
         $c->res->redirect(
-            $c->uri_for( $c->action, $captures, $c->req->params ),
-            301,    # Permanent
+            $c->uri_for(
+                $c->action,               \@captures,
+                @{ $c->req->final_args }, $c->req->params,
+            ),
+            301
         );
         $c->detach;
     }
