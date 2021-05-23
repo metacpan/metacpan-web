@@ -90,14 +90,19 @@ foreach my $ctype ( 'text/plain', 'application/json' ) {
     # it should go through the same process as any other content type
     subtest "check raw responses from the api (content-type: $ctype)" => sub {
 
+        my $lax_perl_char = do {
+            no warnings qw(portable);
+            "\x{FFFF_FFFF}";
+        };
+
         # test that a raw, non-utf8 response is unchanged
         foreach my $bad (
             [
-                encode( utf8 => "foo\x{FFFF_FFFF}bar" ),
+                encode( utf8 => "foo${lax_perl_char}bar" ),
                 'encoded lax perl utf8 chars'
             ],
             [
-                encode( utf8 => "=encoding  utf8\n\nfoo\x{FFFF_FFFF}bar" ),
+                encode( utf8 => "=encoding  utf8\n\nfoo${lax_perl_char}bar" ),
                 '=encoding utf8 with bad chars'
             ],
             [ "\225 cp1252 bullet", 'invalid utf-8 bytes' ],
