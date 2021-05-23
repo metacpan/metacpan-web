@@ -5,6 +5,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub add : Local : Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash( { current_view => 'JSON' } );
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     my $user = $c->user;
     $c->detach('/forbidden') unless $user;
@@ -33,7 +34,6 @@ sub add : Local : Args(0) {
     else {
         $c->res->code(400) if ( $res->{error} );
         $c->stash->{json}{success} = $res->{error} ? \0 : \1;
-        $c->stash( { current_view => 'JSON' } );
     }
 }
 
@@ -44,6 +44,7 @@ sub list : Local : Args(0) {
 
 sub list_as_json : Local : Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash( { current_view => 'JSON' } );
 
     $c->stash->{json}{faves} = $self->faves( $c, 1_000 )->get;
 
@@ -51,8 +52,6 @@ sub list_as_json : Local : Args(0) {
 
     # Make sure the user re-requests from Fastly each time
     $c->browser_never_cache(1);
-
-    $c->stash( { current_view => 'JSON' } );
 }
 
 sub faves {

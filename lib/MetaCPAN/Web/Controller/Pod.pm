@@ -10,11 +10,6 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub begin : Private {
-    my ( $self, $c ) = @_;
-    $c->stash( { page_class => 'page-pod' } );
-}
-
 # /pod/$name
 sub find : Path : Args(1) {
     my ( $self, $c, @path ) = @_;

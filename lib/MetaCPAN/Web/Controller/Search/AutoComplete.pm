@@ -9,6 +9,7 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub index : Path : Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash( { current_view => 'JSON' } );
     my $query       = join( q{ }, $c->req->param('q') );
     my $module_data = $c->model('API::Module')->autocomplete($query);
     my $author_data = $c->model('API::Author')->search($query);
@@ -28,8 +29,7 @@ sub index : Path : Args(0) {
     );
 
     $c->stash( {
-        current_view => 'JSON',
-        json         => { suggestions => \@results },
+        json => { suggestions => \@results },
     } );
 }
 

@@ -126,6 +126,8 @@ sub tx {
 sub test_cache_headers {
     my ( $res, $conf ) = @_;
 
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
     is(
         $res->header('Cache-Control'),
         $conf->{cache_control},

@@ -21,17 +21,6 @@ MetaCPAN::Web::Controller::Root - Root Controller for MetaCPAN::Web
 
 =head1 METHODS
 
-=head2 begin
-
-The begin block runs for all urls.
-
-=cut
-
-sub begin : Private {
-    my ( $self, $c ) = @_;
-    $c->stash( { page_class => 'page-metacpan' } );
-}
-
 =head2 index
 
 The root page (/)
@@ -78,6 +67,7 @@ sub internal_error : Private {
 
     $c->stash( {
         template => 'internal_error.tx',
+        json     => { error => 500, message => 'Internal Error' },
     } );
     $c->response->status(500);
 }
@@ -88,6 +78,7 @@ sub forbidden : Private {
 
     $c->stash( {
         template => 'forbidden.tx',
+        json     => { error => 403, message => 'Forbidden' },
     } );
     $c->response->status(403);
 }

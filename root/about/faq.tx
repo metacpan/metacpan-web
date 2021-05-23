@@ -126,7 +126,7 @@ Every CPAN module author has an account on [PAUSE](https://pause.perl.org/pause/
 That account has some profile data in it (full name, ascii name, e-mail, and homepage).
 Authors can edit those at [Edit Account Info](https://pause.perl.org/pause/authenquery?ACTION=edit_cred).
 This information is collected and distributed by PAUSE via the
-[00whois.xml](http://www.cpan.org/authors/00whois.xml) file.
+[00whois.xml](https://www.cpan.org/authors/00whois.xml) file.
 
 In addition PAUSE users can upload a file called author.json or author-1.0.json to the root
 of their PAUSE account with other information.
@@ -158,13 +158,13 @@ The PAUSE account information need to be updated manually via
 CPAN Distributions can be marked by their authors (or by the CPAN admins when the author is not available)
 to be "up for adoption". This can be done by adding one of the following PAUSE accounts
 as co-maintainers: ADOPTME, HANDOFF, or NEEDHELP. For a more detailed explanation
-read the post [Marking modules as 'available for adoption'](http://neilb.org/2013/08/07/adoptme.html).
+read the post [Marking modules as 'available for adoption'](https://neilb.org/2013/08/07/adoptme.html).
 
 
 ### How to become the maintainer or co-maintainer of a CPAN distribution?
 
-See the description how to [adopt a CPAN module](http://neilb.org/2013/07/24/adopt-a-module.html)
-and check out the [CPAN adoption request template](http://neilb.org/2014/01/31/adoption-request.html).
+See the description how to [adopt a CPAN module](https://neilb.org/2013/07/24/adopt-a-module.html)
+and check out the [CPAN adoption request template](https://neilb.org/2014/01/31/adoption-request.html).
 
 See also the list of [CPAN Adoption Candidates](https://neilb.org/adoption/).
 
