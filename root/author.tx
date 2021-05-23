@@ -8,7 +8,8 @@
     <li class="hidden-phone">[% include inc::author_pic %]</li>
     <li class="nav-header">Email</li>
     <li>
-        <a href="mailto:[% $author.email.0 %]" class="ellipsis" title="[% $author.email.0 %]">[% $author.email.0 %]</a>
+        %%  my $email = [].merge($author.email).0;
+        <a href="mailto:[% $email %]" class="ellipsis" title="[% $email %]">[% $email %]</a>
     </li>
     %%  if $author.website.size() {
     <li class="nav-header">Website</li>
