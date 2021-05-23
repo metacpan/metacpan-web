@@ -7,83 +7,83 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.38
-    pathname: P/PL/PLICEASE/Alien-Build-2.38.tar.gz
+  Alien-Build-2.40
+    pathname: P/PL/PLICEASE/Alien-Build-2.40.tar.gz
     provides:
-      Alien::Base 2.38
-      Alien::Base::PkgConfig 2.38
-      Alien::Base::Wrapper 2.38
-      Alien::Build 2.38
-      Alien::Build::CommandSequence 2.38
-      Alien::Build::Helper 2.38
-      Alien::Build::Interpolate 2.38
-      Alien::Build::Interpolate::Default 2.38
-      Alien::Build::Interpolate::Helper 2.38
-      Alien::Build::Log 2.38
-      Alien::Build::Log::Abbreviate 2.38
-      Alien::Build::Log::Default 2.38
-      Alien::Build::MM 2.38
-      Alien::Build::Meta 2.38
-      Alien::Build::Plugin 2.38
-      Alien::Build::Plugin::Build::Autoconf 2.38
-      Alien::Build::Plugin::Build::CMake 2.38
-      Alien::Build::Plugin::Build::Copy 2.38
-      Alien::Build::Plugin::Build::MSYS 2.38
-      Alien::Build::Plugin::Build::Make 2.38
-      Alien::Build::Plugin::Build::SearchDep 2.38
-      Alien::Build::Plugin::Core::CleanInstall 2.38
-      Alien::Build::Plugin::Core::Download 2.38
-      Alien::Build::Plugin::Core::FFI 2.38
-      Alien::Build::Plugin::Core::Gather 2.38
-      Alien::Build::Plugin::Core::Legacy 2.38
-      Alien::Build::Plugin::Core::Override 2.38
-      Alien::Build::Plugin::Core::Setup 2.38
-      Alien::Build::Plugin::Core::Tail 2.38
-      Alien::Build::Plugin::Decode::DirListing 2.38
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.38
-      Alien::Build::Plugin::Decode::HTML 2.38
-      Alien::Build::Plugin::Decode::Mojo 2.38
-      Alien::Build::Plugin::Download::Negotiate 2.38
-      Alien::Build::Plugin::Extract::ArchiveTar 2.38
-      Alien::Build::Plugin::Extract::ArchiveZip 2.38
-      Alien::Build::Plugin::Extract::CommandLine 2.38
-      Alien::Build::Plugin::Extract::Directory 2.38
-      Alien::Build::Plugin::Extract::Negotiate 2.38
-      Alien::Build::Plugin::Fetch::CurlCommand 2.38
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.38
-      Alien::Build::Plugin::Fetch::LWP 2.38
-      Alien::Build::Plugin::Fetch::Local 2.38
-      Alien::Build::Plugin::Fetch::LocalDir 2.38
-      Alien::Build::Plugin::Fetch::NetFTP 2.38
-      Alien::Build::Plugin::Fetch::Wget 2.38
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.38
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.38
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.38
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.38
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.38
-      Alien::Build::Plugin::PkgConfig::PP 2.38
-      Alien::Build::Plugin::Prefer::BadVersion 2.38
-      Alien::Build::Plugin::Prefer::GoodVersion 2.38
-      Alien::Build::Plugin::Prefer::SortVersions 2.38
-      Alien::Build::Plugin::Probe::CBuilder 2.38
-      Alien::Build::Plugin::Probe::CommandLine 2.38
-      Alien::Build::Plugin::Probe::Vcpkg 2.38
-      Alien::Build::Plugin::Test::Mock 2.38
-      Alien::Build::PluginMeta 2.38
-      Alien::Build::Temp 2.38
-      Alien::Build::TempDir 2.38
-      Alien::Build::Util 2.38
-      Alien::Build::Version::Basic 2.38
-      Alien::Build::rc 2.38
-      Alien::Role 2.38
-      Test::Alien 2.38
-      Test::Alien::Build 2.38
-      Test::Alien::CanCompile 2.38
-      Test::Alien::CanPlatypus 2.38
-      Test::Alien::Diag 2.38
-      Test::Alien::Run 2.38
-      Test::Alien::Synthetic 2.38
-      alienfile 2.38
+      Alien::Base 2.40
+      Alien::Base::PkgConfig 2.40
+      Alien::Base::Wrapper 2.40
+      Alien::Build 2.40
+      Alien::Build::CommandSequence 2.40
+      Alien::Build::Helper 2.40
+      Alien::Build::Interpolate 2.40
+      Alien::Build::Interpolate::Default 2.40
+      Alien::Build::Interpolate::Helper 2.40
+      Alien::Build::Log 2.40
+      Alien::Build::Log::Abbreviate 2.40
+      Alien::Build::Log::Default 2.40
+      Alien::Build::MM 2.40
+      Alien::Build::Meta 2.40
+      Alien::Build::Plugin 2.40
+      Alien::Build::Plugin::Build::Autoconf 2.40
+      Alien::Build::Plugin::Build::CMake 2.40
+      Alien::Build::Plugin::Build::Copy 2.40
+      Alien::Build::Plugin::Build::MSYS 2.40
+      Alien::Build::Plugin::Build::Make 2.40
+      Alien::Build::Plugin::Build::SearchDep 2.40
+      Alien::Build::Plugin::Core::CleanInstall 2.40
+      Alien::Build::Plugin::Core::Download 2.40
+      Alien::Build::Plugin::Core::FFI 2.40
+      Alien::Build::Plugin::Core::Gather 2.40
+      Alien::Build::Plugin::Core::Legacy 2.40
+      Alien::Build::Plugin::Core::Override 2.40
+      Alien::Build::Plugin::Core::Setup 2.40
+      Alien::Build::Plugin::Core::Tail 2.40
+      Alien::Build::Plugin::Decode::DirListing 2.40
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.40
+      Alien::Build::Plugin::Decode::HTML 2.40
+      Alien::Build::Plugin::Decode::Mojo 2.40
+      Alien::Build::Plugin::Download::Negotiate 2.40
+      Alien::Build::Plugin::Extract::ArchiveTar 2.40
+      Alien::Build::Plugin::Extract::ArchiveZip 2.40
+      Alien::Build::Plugin::Extract::CommandLine 2.40
+      Alien::Build::Plugin::Extract::Directory 2.40
+      Alien::Build::Plugin::Extract::Negotiate 2.40
+      Alien::Build::Plugin::Fetch::CurlCommand 2.40
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.40
+      Alien::Build::Plugin::Fetch::LWP 2.40
+      Alien::Build::Plugin::Fetch::Local 2.40
+      Alien::Build::Plugin::Fetch::LocalDir 2.40
+      Alien::Build::Plugin::Fetch::NetFTP 2.40
+      Alien::Build::Plugin::Fetch::Wget 2.40
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.40
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.40
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.40
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.40
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.40
+      Alien::Build::Plugin::PkgConfig::PP 2.40
+      Alien::Build::Plugin::Prefer::BadVersion 2.40
+      Alien::Build::Plugin::Prefer::GoodVersion 2.40
+      Alien::Build::Plugin::Prefer::SortVersions 2.40
+      Alien::Build::Plugin::Probe::CBuilder 2.40
+      Alien::Build::Plugin::Probe::CommandLine 2.40
+      Alien::Build::Plugin::Probe::Vcpkg 2.40
+      Alien::Build::Plugin::Test::Mock 2.40
+      Alien::Build::PluginMeta 2.40
+      Alien::Build::Temp 2.40
+      Alien::Build::TempDir 2.40
+      Alien::Build::Util 2.40
+      Alien::Build::Version::Basic 2.40
+      Alien::Build::rc 2.40
+      Alien::Role 2.40
+      Test::Alien 2.40
+      Test::Alien::Build 2.40
+      Test::Alien::CanCompile 2.40
+      Test::Alien::CanPlatypus 2.40
+      Test::Alien::Diag 2.40
+      Test::Alien::Run 2.40
+      Test::Alien::Synthetic 2.40
+      alienfile 2.40
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -185,6 +185,7 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
+      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -1691,16 +1692,6 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Exporter-Lite-0.08
-    pathname: N/NE/NEILB/Exporter-Lite-0.08.tar.gz
-    provides:
-      Exporter::Lite 0.08
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.3
-      perl 5.006
-      strict 0
-      warnings 0
   Exporter-Tiny-1.002002
     pathname: T/TO/TOBYINK/Exporter-Tiny-1.002002.tar.gz
     provides:
@@ -1760,12 +1751,13 @@ DISTRIBUTIONS
       Module::CPANfile 0
       Test::More 0.88
       version 0.76
-  FFI-CheckLib-0.27
-    pathname: P/PL/PLICEASE/FFI-CheckLib-0.27.tar.gz
+  FFI-CheckLib-0.28
+    pathname: P/PL/PLICEASE/FFI-CheckLib-0.28.tar.gz
     provides:
-      FFI::CheckLib 0.27
+      FFI::CheckLib 0.28
     requirements:
       ExtUtils::MakeMaker 0
+      List::Util 1.33
       perl 5.006
   File-Listing-6.14
     pathname: P/PL/PLICEASE/File-Listing-6.14.tar.gz
@@ -2118,19 +2110,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.29
-    pathname: O/OA/OALDERS/HTTP-Message-6.29.tar.gz
+  HTTP-Message-6.32
+    pathname: O/OA/OALDERS/HTTP-Message-6.32.tar.gz
     provides:
-      HTTP::Config 6.29
-      HTTP::Headers 6.29
-      HTTP::Headers::Auth 6.29
-      HTTP::Headers::ETag 6.29
-      HTTP::Headers::Util 6.29
-      HTTP::Message 6.29
-      HTTP::Request 6.29
-      HTTP::Request::Common 6.29
-      HTTP::Response 6.29
-      HTTP::Status 6.29
+      HTTP::Config 6.32
+      HTTP::Headers 6.32
+      HTTP::Headers::Auth 6.32
+      HTTP::Headers::ETag 6.32
+      HTTP::Headers::Util 6.32
+      HTTP::Message 6.32
+      HTTP::Request 6.32
+      HTTP::Request::Common 6.32
+      HTTP::Response 6.32
+      HTTP::Status 6.32
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -2138,6 +2130,7 @@ DISTRIBUTIONS
       Encode::Locale 1
       Exporter 5.57
       ExtUtils::MakeMaker 0
+      File::Spec 0
       HTTP::Date 6
       IO::Compress::Bzip2 2.021
       IO::Compress::Deflate 0
@@ -2329,17 +2322,17 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.070
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.070.tar.gz
+  IO-Socket-SSL-2.071
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.071.tar.gz
     provides:
-      IO::Socket::SSL 2.070
+      IO::Socket::SSL 2.071
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.070
-      IO::Socket::SSL::OCSP_Resolver 2.070
+      IO::Socket::SSL::OCSP_Cache 2.071
+      IO::Socket::SSL::OCSP_Resolver 2.071
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.070
-      IO::Socket::SSL::SSL_HANDLE 2.070
-      IO::Socket::SSL::Session_Cache 2.070
+      IO::Socket::SSL::SSL_Context 2.071
+      IO::Socket::SSL::SSL_HANDLE 2.071
+      IO::Socket::SSL::Session_Cache 2.071
       IO::Socket::SSL::Utils 2.014
     requirements:
       ExtUtils::MakeMaker 0
@@ -5418,10 +5411,10 @@ DISTRIBUTIONS
       List::Util 1.09
       Scalar::Util 1.09
       Test::Builder 0
-  Test-Differences-0.67
-    pathname: D/DC/DCANTRELL/Test-Differences-0.67.tar.gz
+  Test-Differences-0.68
+    pathname: D/DC/DCANTRELL/Test-Differences-0.68.tar.gz
     provides:
-      Test::Differences 0.67
+      Test::Differences 0.68
     requirements:
       Capture::Tiny 0.24
       Data::Dumper 2.126
@@ -5791,13 +5784,13 @@ DISTRIBUTIONS
       Test::More 0
       Test::use::ok 0
       Tie::RefHash 0
-  Time-Duration-Parse-0.15
-    pathname: N/NE/NEILB/Time-Duration-Parse-0.15.tar.gz
+  Time-Duration-Parse-0.16
+    pathname: N/NE/NEILB/Time-Duration-Parse-0.16.tar.gz
     provides:
-      Time::Duration::Parse 0.15
+      Time::Duration::Parse 0.16
     requirements:
       Carp 0
-      Exporter::Lite 0
+      Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.006
       strict 0
@@ -5900,50 +5893,50 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.012002
-    pathname: T/TO/TOBYINK/Type-Tiny-1.012002.tar.gz
+  Type-Tiny-1.012003
+    pathname: T/TO/TOBYINK/Type-Tiny-1.012003.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.012002
-      Devel::TypeTiny::Perl58Compat 1.012002
-      Error::TypeTiny 1.012002
-      Error::TypeTiny::Assertion 1.012002
-      Error::TypeTiny::Compilation 1.012002
-      Error::TypeTiny::WrongNumberOfParameters 1.012002
-      Eval::TypeTiny 1.012002
-      Reply::Plugin::TypeTiny 1.012002
-      Test::TypeTiny 1.012002
-      Type::Coercion 1.012002
-      Type::Coercion::FromMoose 1.012002
-      Type::Coercion::Union 1.012002
-      Type::Library 1.012002
-      Type::Params 1.012002
-      Type::Parser 1.012002
+      Devel::TypeTiny::Perl56Compat 1.012003
+      Devel::TypeTiny::Perl58Compat 1.012003
+      Error::TypeTiny 1.012003
+      Error::TypeTiny::Assertion 1.012003
+      Error::TypeTiny::Compilation 1.012003
+      Error::TypeTiny::WrongNumberOfParameters 1.012003
+      Eval::TypeTiny 1.012003
+      Reply::Plugin::TypeTiny 1.012003
+      Test::TypeTiny 1.012003
+      Type::Coercion 1.012003
+      Type::Coercion::FromMoose 1.012003
+      Type::Coercion::Union 1.012003
+      Type::Library 1.012003
+      Type::Params 1.012003
+      Type::Parser 1.012003
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.012002
-      Type::Tiny 1.012002
-      Type::Tiny::Class 1.012002
-      Type::Tiny::ConstrainedObject 1.012002
-      Type::Tiny::Duck 1.012002
-      Type::Tiny::Enum 1.012002
-      Type::Tiny::Intersection 1.012002
-      Type::Tiny::Role 1.012002
-      Type::Tiny::Union 1.012002
-      Type::Utils 1.012002
-      Types::Common::Numeric 1.012002
-      Types::Common::String 1.012002
-      Types::Standard 1.012002
-      Types::Standard::ArrayRef 1.012002
-      Types::Standard::CycleTuple 1.012002
-      Types::Standard::Dict 1.012002
-      Types::Standard::HashRef 1.012002
-      Types::Standard::Map 1.012002
-      Types::Standard::ScalarRef 1.012002
-      Types::Standard::StrMatch 1.012002
-      Types::Standard::Tied 1.012002
-      Types::Standard::Tuple 1.012002
-      Types::TypeTiny 1.012002
+      Type::Registry 1.012003
+      Type::Tiny 1.012003
+      Type::Tiny::Class 1.012003
+      Type::Tiny::ConstrainedObject 1.012003
+      Type::Tiny::Duck 1.012003
+      Type::Tiny::Enum 1.012003
+      Type::Tiny::Intersection 1.012003
+      Type::Tiny::Role 1.012003
+      Type::Tiny::Union 1.012003
+      Type::Utils 1.012003
+      Types::Common::Numeric 1.012003
+      Types::Common::String 1.012003
+      Types::Standard 1.012003
+      Types::Standard::ArrayRef 1.012003
+      Types::Standard::CycleTuple 1.012003
+      Types::Standard::Dict 1.012003
+      Types::Standard::HashRef 1.012003
+      Types::Standard::Map 1.012003
+      Types::Standard::ScalarRef 1.012003
+      Types::Standard::StrMatch 1.012003
+      Types::Standard::Tied 1.012003
+      Types::Standard::Tuple 1.012003
+      Types::TypeTiny 1.012003
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
