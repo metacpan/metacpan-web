@@ -15,7 +15,7 @@
   <li class="nav-header">Tools</li>
   <li><a data-keyboard-shortcut="g d" href="/release/[% $author %]/[% $release %]"><i class="fa fa-fw fa-info-circle black"></i>Release Info</a></li>
   <li><a data-keyboard-shortcut="g a" href="/author/[% $author %]"><i class="fa fa-user fa-fw black"></i>Author</a></li>
-  <li><a href="[% $source_host %]/source/[% [$author, $release].merge($directory).join('/') %]"><i class="fa fa-file-text-o fa-fw black"></i>Raw browser</a></li>
+  <li><a href="[% $source_host %]/source/[% [$author, $release].merge($directory).join('/') %]"><i class="fa fa-file-text fa-fw black"></i>Raw browser</a></li>
   <li class="nav-header">Info</li>
   %%  my $folder_count = $files.map(-> $f { $f.directory ? 1 : 0 }).sum();
   %%  my $file_count = $files.size() - $folder_count;

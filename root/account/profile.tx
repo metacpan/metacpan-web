@@ -225,9 +225,9 @@
                         <div class="input-group">
                             <input class="small form-control" type="text" class="form-control" name="profile.id" value="[% $profile.id %]" />
                             <span class="input-group-btn">
-                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"></i> remove</a>
+                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash"></i> remove</a>
                             %%  if $known {
-                            <a href="" class="btn search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square-o"></i> check</a>
+                            <a href="" class="btn search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square"></i> check</a>
                             </span>
                             %%  }
                         </div>
@@ -270,9 +270,9 @@ function addProfile(select) {
     html += '</label>'
     html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
         + '<input type="text" class="form-control" name="profile.id" /> '
-        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-o"></i> remove</a> ';
+        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash"></i> remove</a> ';
     if (value) {
-        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square-o"></i> check</a>';
+        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square"></i> check</a>';
     }
 
     html += '</span></div></div></div>';
