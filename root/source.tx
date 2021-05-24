@@ -32,7 +32,7 @@
     <a data-keyboard-shortcut="g a" href="/author/[% $file.author %]"><i class="fa fa-user fa-fw black"></i>Author</a>
   </li>
   <li>&nbsp;</li>
-  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-file-text-o fa-fw black"></i>Raw code</a></li>
+  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-file-text fa-fw black"></i>Raw code</a></li>
   <li><a href="/source/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
   <li>
     <a href="/raw/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>

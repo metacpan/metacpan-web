@@ -19,12 +19,12 @@
   %%    ? '/source/' ~ $release.author ~ '/' ~ $release.name
   %%    : '/release/' ~ $release.distribution ~ '/source';
   <li>
-    <a data-keyboard-shortcut="g s" href="[% $source_base %]/[% $module.path %]"><i class="fa fa-fw fa-file-code-o black"></i>Source</a>
+    <a data-keyboard-shortcut="g s" href="[% $source_base %]/[% $module.path %]"><i class="fa fa-fw fa-file-code black"></i>Source</a>
     (<a href="[% $source_base %]/[% $module.path %]?raw=1">raw</a>)
   </li>
   %%  if $module.pod_path {
   <li>
-    <a data-keyboard-shortcut="g p" href="[% $source_base %]/[% $module.pod_path %]"><i class="fa fa-fw fa-file-code-o black"></i>Pod Source</a>
+    <a data-keyboard-shortcut="g p" href="[% $source_base %]/[% $module.pod_path %]"><i class="fa fa-fw fa-file-code black"></i>Pod Source</a>
     (<a href="[% $source_base %]/[% $module.pod_path %]?raw=1">raw</a>)
   </li>
   %%  }
