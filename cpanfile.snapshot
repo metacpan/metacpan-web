@@ -185,6 +185,7 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
+      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2718,10 +2719,10 @@ DISTRIBUTIONS
       File::Spec 0.82
       Test::More 0.45
       perl 5.006
-  Log-Log4perl-Layout-JSON-0.56
-    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.56.tar.gz
+  Log-Log4perl-Layout-JSON-0.58
+    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.58.tar.gz
     provides:
-      Log::Log4perl::Layout::JSON 0.56
+      Log::Log4perl::Layout::JSON 0.58
     requirements:
       Carp 0
       Class::Tiny 0
@@ -2731,8 +2732,9 @@ DISTRIBUTIONS
       Log::Log4perl::Layout 0
       Log::Log4perl::Layout::PatternLayout 0
       Log::Log4perl::Level 0
+      Scalar::Util 0
       parent 0
-      perl 5.008
+      perl 5.010
       strict 0
       warnings 0
   MCE-1.874
@@ -2787,12 +2789,12 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MIME-Types-2.20
-    pathname: M/MA/MARKOV/MIME-Types-2.20.tar.gz
+  MIME-Types-2.21
+    pathname: M/MA/MARKOV/MIME-Types-2.21.tar.gz
     provides:
-      MIME::Type 2.20
-      MIME::Types 2.20
-      MojoX::MIME::Types 2.20
+      MIME::Type 2.21
+      MIME::Types 2.21
+      MojoX::MIME::Types 2.21
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -5513,10 +5515,10 @@ DISTRIBUTIONS
       Test::Harness 3.35
       Test::More 1.302047
       Test::Warn 0.30
-  Test-Needs-0.002006
-    pathname: H/HA/HAARG/Test-Needs-0.002006.tar.gz
+  Test-Needs-0.002009
+    pathname: H/HA/HAARG/Test-Needs-0.002009.tar.gz
     provides:
-      Test::Needs 0.002006
+      Test::Needs 0.002009
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
