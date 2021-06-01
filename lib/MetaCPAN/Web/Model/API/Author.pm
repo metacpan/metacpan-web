@@ -136,6 +136,10 @@ my $profile_data = {
         name       => 'Identi.ca',
         url_format => 'https://identi.ca/%s',
     },
+    instagram => {
+        name       => 'Instagram',
+        url_format => 'https://www.instagram.com/%s/',
+    },
     lastfm => {
         name       => 'LastFM',
         url_format => 'https://www.last.fm/user/%s',
