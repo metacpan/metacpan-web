@@ -148,19 +148,19 @@ DISTRIBUTIONS
     requirements:
       B 0
       ExtUtils::MakeMaker 0
-  CGI-4.52
-    pathname: L/LE/LEEJO/CGI-4.52.tar.gz
+  CGI-4.53
+    pathname: L/LE/LEEJO/CGI-4.53.tar.gz
     provides:
-      CGI 4.52
-      CGI::Carp 4.52
-      CGI::Cookie 4.52
-      CGI::File::Temp 4.52
+      CGI 4.53
+      CGI::Carp 4.53
+      CGI::Cookie 4.53
+      CGI::File::Temp 4.53
       CGI::HTML::Functions undef
-      CGI::MultipartBuffer 4.52
-      CGI::Pretty 4.52
-      CGI::Push 4.52
-      CGI::Util 4.52
-      Fh 4.52
+      CGI::MultipartBuffer 4.53
+      CGI::Pretty 4.53
+      CGI::Push 4.53
+      CGI::Util 4.53
+      Fh 4.53
     requirements:
       Carp 0
       Config 0
