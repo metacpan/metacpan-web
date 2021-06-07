@@ -16,7 +16,7 @@
     <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $module ? '' : 'extend' };
     %%  if $module {
-    <a data-keyboard-shortcut="g d" class="release-name" href="/[% if $permalinks || $release.status != 'latest' { '/release/' ~ $module.author ~ '/' ~ $module.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
+    <a data-keyboard-shortcut="g d" class="release-name" href="[% if $permalinks || $release.status != 'latest' { '/release/' ~ $module.author ~ '/' ~ $module.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
     %%  }
     %%  else {
     <span class="release-name">[% $release.name %]</span>
