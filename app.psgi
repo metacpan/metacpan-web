@@ -133,6 +133,10 @@ builder {
         );
     }
 
+    enable 'FixMissingBodyInRedirect';
+
+    enable '+MetaCPAN::Middleware::OldUrls';
+
     enable '+MetaCPAN::Middleware::Static' => (
         root     => $root_dir,
         dev_mode => $dev_mode,

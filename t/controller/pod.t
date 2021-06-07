@@ -10,7 +10,8 @@ test_psgi app, sub {
     is( $res->code, 404, 'code 404' );
 
     subtest 'coverage' => sub {
-        my $res = $cb->( GET '/pod/release/ETHER/Moose-2.2010/lib/Moose.pm' );
+        my $res
+            = $cb->( GET '/release/ETHER/Moose-2.2010/view/lib/Moose.pm' );
         is( $res->code, 200, 'found older Moose pod' );
         like( $res->content, qr{92\.19% Coverage}, 'coverage in sidebar' );
     };
@@ -51,8 +52,7 @@ test_psgi app, sub {
     );
 
     # Request with lowercase author redirects to uppercase author.
-    ( my $lc_this = $this )
-        =~ s{(/pod/release/)([^/]+)}{$1\L$2};    # lc author name
+    ( my $lc_this = $this ) =~ s{(/release/)([^/]+)}{$1\L$2}; # lc author name
     ok( $res = $cb->( GET $lc_this ), "GET $lc_this" );
     is( $res->code, 301, '301 on lowercase author name' );
     my $location = $res->headers->header('location') =~ s{^http://[^/]+}{}r;

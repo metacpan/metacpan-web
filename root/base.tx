@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
         %%  if $rss {
-        <link rel="alternate" type="application/rss+xml" title="[% $rss_title || 'RSS'; %]" href="/feed/[% $rss %]" />
+        <link rel="alternate" type="application/rss+xml" title="[% $rss_title || 'RSS'; %]" href="[% $rss %]" />
         %%  }
         %%  for $assets.grep(rx('\.css$')) -> $css {
         <link href="[% $css %]" rel="stylesheet" type="text/css">

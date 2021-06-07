@@ -5,29 +5,17 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-# NOTE: We may (be able to) put these redirects into nginx
-# but it's nice to have them here (additionally) for development.
+sub root : Chained('/') PathPart('module') CaptureArgs(1) {
+    my ( $self, $c, $module ) = @_;
+    $c->stash( { module_name => $module } );
+}
 
-sub redirect_to_pod : Path : Args {
-    my ( $self, $c, @path ) = @_;
-
-    # Forward old '/module/' links to the new '/pod/' controller.
+sub pod : Chained('root') PathPart('') Args(0) {
+    my ( $self, $c ) = @_;
+    my $module = $c->stash->{module_name};
     $c->cdn_max_age('1y');
-
-    # /module/AUTHOR/Release-0.0/lib/Foo/Bar.pm
-    if ( @path > 1 ) {
-
-        # Force the author arg to uppercase to avoid another redirect.
-        $c->res->redirect(
-            $c->uri_for( '/pod/release', uc( shift @path ), @path ), 301 );
-    }
-
-    # /module/Foo::Bar
-    else {
-        $c->res->redirect( $c->uri_for( '/pod', @path ), 301 );
-    }
-
-    $c->detach();
+    $c->res->redirect( $c->uri_for( '/pod', $module ), 301 );
+    $c->detach;
 }
 
 __PACKAGE__->meta->make_immutable;

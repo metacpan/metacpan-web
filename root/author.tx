@@ -1,6 +1,6 @@
 %%  cascade base {
 %%      title     => $title     || $author.name ~ ' (' ~ $author.pauseid ~ ')',
-%%      rss       => $rss       || 'author/' ~ $author.pauseid,
+%%      rss       => $rss       || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%      twitter_card_inc => $twitter_card_inc || 'inc/twitter/author.tx',
 %%  }
@@ -77,12 +77,16 @@
         %%  }
     %%  } }
     <li class="nav-header">Activity</li>
-    <li>[% include inc::activity { query => 'author=' ~ $author.pauseid } %]</li>
+    <li>
+      %%  include inc::activity {
+      %%    url => '/author/' ~ $author.pauseid ~ '/activity.svg',
+      %%  }
+    </li>
     %%  if $latest.date {
     <li class="nav-header">Latest Release</li>
     <li>
         <div>
-            <a href="/release/[% if $latest.status == 'latest' { $latest.distribution } else { $latest.author ~ '/' ~ $latest.name } %]" class="ellipsis" title="[% $latest.name %]">
+            <a href="[% if $latest.status == 'latest' { '/dist/' ~ $latest.distribution } else { '/release/' ~ $latest.author ~ '/' ~ $latest.name } %]" class="ellipsis" title="[% $latest.name %]">
             [% $latest.name %]
             </a>
         </div>
@@ -125,7 +129,7 @@
         <a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
     </li>
     <li>
-        <a href="/permission/author/[% $author.pauseid %]">Module permissions</a>
+        <a href="/author/[% $author.pauseid %]/permissions">Module permissions</a>
     </li>
     <li>
         <a href="[% $author.links.backpan_directory %]" title="See all releases ever done by [% $author.pauseid %], not just those currently on CPAN.">BackPAN directory</a> ([% $author.release_count['backpan-only'] %])
@@ -135,7 +139,7 @@
 <div class="content">
     <div id="feed_subscription" class="page-header">
         <p>[% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by <span class="author-name">[% $author.name %]</span> ([% $author.pauseid %])</p>
-        <a href="/feed/author/[% $author.pauseid %]"><i class="fa fa-rss fa-2x black"></i></a>
+        <a href="/author/[% $author.pauseid %]/activity.rss"><i class="fa fa-rss fa-2x black"></i></a>
     </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {

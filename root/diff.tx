@@ -2,22 +2,22 @@
 %%  }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
-  Diff <a href="/[% $diff.source.file ? 'source' : 'release' %]/[% $diff.source.path %]">[% $diff.source.author %] / [% $diff.source.release %]</a>
+  Diff <a href="/release/[% $diff.source.author %]/[% $diff.source.release %][% if $diff.source.file { '/source/' ~ $diff.source.file } %]">[% $diff.source.author %] / [% $diff.source.release %]</a>
   &nbsp;/&nbsp;
-  <a href="/[% $diff.target.file ? 'source' : 'release' %]/[% $diff.target.path %]">[% $diff.target.author %] / [% $diff.target.release %]</a>
+  <a href="/release/[% $diff.target.author %]/[% $diff.target.release %][% if $diff.target.file { '/source/' ~ $diff.target.file } %]">[% $diff.target.author %] / [% $diff.target.release %]</a>
 </div>
 %%  }
 %%  override left_nav_content -> {
   <li class="nav-header">Tools</li>
     %%  if $diff.source.file {
       <li>
-        <a href="?source=[% $diff.source.author %]/[% $diff.source.release %]&target=[% $diff.target.author %]/[% $diff.target.release %]">
+        <a href="/release/[% $diff.source.author %]/[% $diff.source.release %]/diff/[% $diff.target.author %]/[% $diff.target.release %]">
           Diff full distribution
         </a>
       </li>
     %%  }
     <li>
-      <a href="?target=[% $diff.source.path %]&amp;source=[% $diff.target.path %]">
+      <a href="/release/[% $diff.source.author %]/[% $diff.source.release %]/diff/[% $diff.target.author %]/[% $diff.target.release %][% if $diff.source.file { '/' ~ $diff.source.file } %]">
         Reverse diff
       </a>
     </li>
@@ -60,7 +60,7 @@
         <a name="[% $file.file %]"></a>
         <div class="diff-container">
             <div class="diff-header">
-                <a href="/source/[% $diff.target.author %]/[% $diff.target.release %]/[% $file.file %]">[% $file.file %]</a>
+                <a href="/release/[% $diff.target.author %]/[% $diff.target.release %]/source/[% $file.file %]">[% $file.file %]</a>
             </div>
             <pre><code class="language-diff">[% $file.diff %]</code></pre>
         </div>

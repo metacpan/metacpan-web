@@ -20,16 +20,17 @@ __PACKAGE__->config(
     }
 );
 
-sub distribution : Local : Args(1) : Does('Sortable') {
-    my ( $self, $c, $distribution, $sort ) = @_;
+sub distribution : Chained('/dist/root') PathPart('requires') Args(0)
+    Does('Sortable') {
+    my ( $self, $c, $sort ) = @_;
+    my $dist = $c->stash->{distribution_name};
 
     my $page      = $c->req->page;
     my $page_size = $c->req->get_page_size(50);
 
     my $data
         = $c->model('API::Release')
-        ->reverse_dependencies( $distribution, $page, $page_size, $sort )
-        ->get;
+        ->reverse_dependencies( $dist, $page, $page_size, $sort )->get;
 
     my $pageset = Data::Pageset->new( {
         current_page     => $page,
@@ -41,15 +42,17 @@ sub distribution : Local : Args(1) : Does('Sortable') {
 
     $c->stash( {
         %{$data},
-        type_of_required => 'distribution',
-        required         => $distribution,
+        type_of_required => 'dist',
+        required         => $dist,
         pageset          => $pageset,
         template         => 'requires.tx',
     } );
 }
 
-sub module : Local : Args(1) : Does('Sortable') {
-    my ( $self, $c, $module, $sort ) = @_;
+sub module : Chained('/module/root') PathPart('requires') Args(0)
+    Does('Sortable') {
+    my ( $self, $c, $sort ) = @_;
+    my $module = $c->stash->{module_name};
 
     my $page      = $c->req->page;
     my $page_size = $c->req->get_page_size(50);

@@ -30,7 +30,7 @@
     %%  if $first.description {
     <p class="description">[% $first.description.substr(0, 250) ~ '...' %]</p>
     %%  }
-    <a class="author" href="/author/[% $first.author | uri %]">[% $first.author %]</a><a href="/release/[% if $first.status == 'latest' { $first.distribution } else { $first.author ~ '/' ~ $first.release } %]">/[% $first.release %]</a>
+    <a class="author" href="/author/[% $first.author | uri %]">[% $first.author %]</a><a href="[% if $first.status == 'latest' { '/dist/' ~ $first.distribution } else { '/release/' ~ $first.author ~ '/' ~ $first.release } %]">/[% $first.release %]</a>
     -
     <span class="relatize">[% datetime($first.date).to_http %]</span>
     %%  if !$single_dist {

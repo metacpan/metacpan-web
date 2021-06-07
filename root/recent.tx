@@ -1,13 +1,13 @@
 %%  cascade base::recent {
 %%      title     => $title || 'Recent',
-%%      rss       => $rss || 'recent?f=' ~ $filter,
+%%      rss       => $rss || '/recent.rss' ~ ( $filter ? '?f=' ~ $filter : ''),
 %%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%  }
 %%  override content -> {
 <div class="content">
   <div id="feed_subscription" class="page-header">
     <p>Recent Uploads</p>
-      <a href="/feed/recent"><i class="fa fa-rss fa-2x black"></i></a>
+      <a href="/recent.rss [% if $filter { '?f=' ~ $filter } %]"><i class="fa fa-rss fa-2x black"></i></a>
   </div>
 %%  include inc::release_table { releases => $recent, per_day => 1 }
 %%  include inc::pager

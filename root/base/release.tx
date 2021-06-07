@@ -1,8 +1,8 @@
 %%  cascade base {
 %%    title     => $title     || $release.name ~ ' - ' ~ $release.abstract,
-%%    rss       => $rss       || 'distribution/' ~ $release.distribution,
+%%    rss       => $rss       || '/dist/' ~ $release.distribution ~ '/releases.rss',
 %%    rss_title => $rss_title || 'Recent CPAN Uploads of ' ~ $release.distribution ~ ' - MetaCPAN',
-%%    canonical => $canonical || '/release/' ~ $release.distribution,
+%%    canonical => $canonical || '/dist/' ~ $release.distribution,
 %%    meta_description => $meta_description || $release.abstract,
 %%    twitter_card_inc => $twitter_card_inc || 'inc/twitter/release.tx',
 %%  }
@@ -16,7 +16,7 @@
     <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $module ? '' : 'extend' };
     %%  if $module {
-    <a data-keyboard-shortcut="g d" class="release-name" href="/release/[% if $permalinks || $release.status != 'latest' { $module.author ~ '/' ~ $module.release } else { $release.distribution } %]">[% $release.name %]</a>
+    <a data-keyboard-shortcut="g d" class="release-name" href="/[% if $permalinks || $release.status != 'latest' { '/release/' ~ $module.author ~ '/' ~ $module.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
     %%  }
     %%  else {
     <span class="release-name">[% $release.name %]</span>
@@ -26,7 +26,7 @@
     %%  }
   </div>
   %%  if $release.status != 'latest' && $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum() {
-    <a class="latest" href="[% if $module { %]/pod/[% $module.documentation %][% } else { %]/release/[% $release.distribution %][% } %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
+    <a class="latest" href="[% if $module { '/pod/' ~ $module.documentation } else { '/dist/' ~ $release.distribution } %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
   %%  }
   %%  include inc::river_gauge { river => $distribution.river, distribution => $release.distribution };
   %%  include inc::favorite;
@@ -36,16 +36,16 @@
 </div>
 %%  }
 %%  override left_nav_content -> {
+    %%  my $release_base = $permalinks || $release.status != 'latest'
+    %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
+    %%    : '/dist/' ~ $release.distribution;
     <li class="nav-header"><span class="relatize">[% datetime($release.date).to_http %]</span></li>
     %%  include inc::release_status { maturity => $release.maturity, banner_class => 'release-banner' }
     %%  block left_nav_lead -> {
-    %%    my $source_base = $permalinks || $release.status != 'latest'
-    %%      ? '/source/' ~ $release.author ~ '/' ~ $release.name
-    %%      : '/release/' ~ $release.distribution ~ '/source';
-    <li><a href="[% $source_base %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="[% $source_base %]?raw=1">raw</a>)</li>
+    <li><a href="[% $release_base %]/source"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="[% $source_base %]/source?raw=1">raw</a>)</li>
     %%  }
     <li>
-      <a data-keyboard-shortcut="g c" href="/changes/[% if $permalinks { 'release/' ~ $release.author ~ '/' ~ $release.name } else { 'distribution/' ~ $release.distribution } %]"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
+      <a data-keyboard-shortcut="g c" href="[% $release_base %]/changes"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
     </li>
     %%  if $release.resources.homepage.is_url() {
     <li>
@@ -53,7 +53,7 @@
     </li>
     %%  }
     <li>
-      <a class="nopopup" href="/contributing-to/[% $permalinks ? $release.author ~ '/' ~ $release.name : $release.distribution %]"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
+      <a class="nopopup" href="[% $release_base %]/contribute"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
     </li>
     %%  if $release.resources.repository {
     <li>
@@ -116,7 +116,9 @@
     %%  }
     <li class="nav-header">Activity</li>
     <li>
-      %%  include inc::activity { query => 'distribution=' ~ $release.distribution };
+      %%  include inc::activity {
+      %%    url => '/dist/' ~ $release.distribution ~ '/activity.svg',
+      %%  }
     </li>
     <li class="nav-header">Tools</li>
     <li>
@@ -129,12 +131,12 @@
       </a>
     </li>
     <li>
-      <a href="/permission/distribution/[% $release.distribution %]">
+      <a href="/dist/[% $release.distribution %]/permissions">
         <i class="fa fa-key fa-fw black"></i>Permissions
       </a>
     </li>
     <li>
-      <a href="/feed/distribution/[% $release.distribution %]">
+      <a href="/dist/[% $release.distribution %]/releases.rss">
         <i class="fa fa-rss-square fa-fw black"></i>Subscribe to distribution
       </a>
     </li>
@@ -186,7 +188,7 @@
     %%  }
     <li class="nav-header">Permalinks</li>
     <li>
-      <a href="/[% $module ? 'pod/release' : 'release' %]/[% $release.author %]/[% $release.name %][% if $module { '/' ~ $module.path } %]">This version</a>
+      <a href="/release/[% $release.author %]/[% $release.name %][% if $module { '/view/' ~ $module.path } %]">This version</a>
     </li>
     %%  if $canonical {
       %%  my $has_latest = $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum();

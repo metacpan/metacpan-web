@@ -6,7 +6,7 @@
 </span>
 %%  }
 %%  else {
-<object data="/river/gauge/[% $distribution | uri %]"
+<object data="/dist/[% $distribution | uri %]/river.svg"
   type="image/svg+xml"
   width="24px"
   height="15px"

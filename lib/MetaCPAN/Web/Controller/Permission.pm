@@ -6,8 +6,10 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub author : Local Args(1) {
-    my ( $self, $c, $pause_id ) = @_;
+sub author : Chained('/author/root') : PathPart('permissions') Args(0) {
+    my ( $self, $c ) = @_;
+
+    my $pause_id = $c->stash->{pauseid};
 
     my $perms = $c->model('API::Permission')->by_author($pause_id)->get;
     $c->stash( {
@@ -16,8 +18,9 @@ sub author : Local Args(1) {
     $c->forward('view');
 }
 
-sub distribution : Local Args(1) {
-    my ( $self, $c, $distribution ) = @_;
+sub distribution : Chained('/dist/root') : PathPart('permissions') Args(0) {
+    my ( $self, $c ) = @_;
+    my $distribution = $c->stash->{distribution_name};
 
     my $perms = $c->model('API::Permission')->by_dist($distribution)->get;
 
@@ -39,8 +42,9 @@ sub distribution : Local Args(1) {
     $c->forward('view');
 }
 
-sub module : Local Args(1) {
-    my ( $self, $c, $module ) = @_;
+sub module : Chained('/module/root') : PathPart('permissions') Args(0) {
+    my ( $self, $c ) = @_;
+    my $module = $c->stash->{module_name};
 
     my $perms = $c->model('API::Permission')->by_module($module)->get;
     $c->stash( {

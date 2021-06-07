@@ -5,7 +5,29 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub index : Path : Args {
+sub module : Chained('/module/root') PathPart('source') Args(0) {
+    my ( $self, $c ) = @_;
+    my $module = $c->stash->{module_name};
+
+    $c->forward( 'view', [$module] );
+}
+
+sub release : Chained('/release/root') PathPart('source') Args {
+    my ( $self, $c, @path ) = @_;
+    my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
+
+    $c->forward( 'view', [ $author, $release, @path ] );
+}
+
+sub dist : Chained('/dist/root') PathPart('source') Args {
+    my ( $self, $c, @path ) = @_;
+    my $dist    = $c->stash->{distribution_name};
+    my $release = $c->model('API::Release')->find($dist)->get->{release}
+        or $c->detach('/not_found');
+    $c->forward( 'view', [ $release->{author}, $release->{name}, @path ] );
+}
+
+sub view : Private {
     my ( $self, $c, @module ) = @_;
 
     if ( $c->req->params->{raw} ) {

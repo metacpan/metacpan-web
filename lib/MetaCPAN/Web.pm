@@ -53,6 +53,11 @@ if ( !Term::Size::Perl::chars() ) {
     *Term::Size::Perl::chars = sub { $ENV{COLUMNS} || 80 };
 }
 
+after prepare_action => sub {
+    my ($self) = @_;
+    $self->req->final_args( $self->req->args );
+};
+
 __PACKAGE__->setup;
 __PACKAGE__->meta->make_immutable;
 

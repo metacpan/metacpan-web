@@ -7,7 +7,7 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 test_psgi app, sub {
     my $cb = shift;
     {
-        my $url = '/changes/release/RWSTAUNER/File-Spec-Native-1.003';
+        my $url = '/release/RWSTAUNER/File-Spec-Native-1.003/changes';
         my $res = $cb->( GET $url );
         is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
@@ -19,7 +19,7 @@ test_psgi app, sub {
     }
 
     {
-        my $url = '/changes/release/SHAY/perl-5.22.2';
+        my $url = '/release/SHAY/perl-5.22.2/changes';
         my $res = $cb->( GET $url );
         is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
@@ -32,7 +32,7 @@ test_psgi app, sub {
 
     {
         my $missing = 'test-dist-name-that-does-not-exist-i-hope';
-        my $url     = "/changes/distribution/$missing";
+        my $url     = "/dist/$missing/changes";
         my $res     = $cb->( GET $url );
         is( $res->code, 404, "404 on $url" );
         my $tx = tx($res);

@@ -4,7 +4,7 @@ use Test::More;
 use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 
 my @tests
-    = qw(/activity /activity?author=PERLER /activity?distribution=Moose);
+    = qw(/activity/releases.svg /author/PERLER/activity.svg /dist/Moose/activity.svg);
 
 test_psgi app, sub {
     my $cb = shift;

@@ -1,5 +1,5 @@
 %%  cascade base {
-%%      rss       => $rss || 'recent',
+%%      rss       => $rss || '/recent.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%      title     => $title || 'Recent',
 %%  }
@@ -19,7 +19,9 @@
 %%  }
     <li class="nav-header">Activity</li>
     <li>
-        %%  include inc::activity { query => $filter || 'l' }
+        %%  include inc::activity {
+        %%    url => (($filter || 'l') == 'l' ? '/activity/releases.svg' : '/activity/distributions.svg'),
+        %%  }
     </li>
     <li class="nav-header">Recent Uploads</li>
     %%  sidebar_group($filter, [

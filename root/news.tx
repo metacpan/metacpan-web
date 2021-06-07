@@ -1,10 +1,10 @@
 %%  cascade base {
 %%      title     => $title || 'News',
-%%      rss       => $rss || 'news',
+%%      rss       => $rss || '/news.rss',
 %%      rss_title => $rss_title || 'Recent MetaCPAN News',
 %%  }
 %%  override content -> {
-<a class="news_feed" href="/feed/news"><i class="fa fa-rss fa-2x"></i></a>
+<a class="news_feed" href="/news.rss"><i class="fa fa-rss fa-2x"></i></a>
 <div class="content news anchors">
 %%  block news | markdown -> {
 %%      $news

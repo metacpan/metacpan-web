@@ -89,7 +89,7 @@ test_psgi app, sub {
             my $name = $test->{$type};
             $current = { desc => "$type $name", test => $test };
 
-            my $req_uri = $type eq 'module' ? "/pod/$name" : "/release/$name";
+            my $req_uri = $type eq 'module' ? "/pod/$name" : "/dist/$name";
 
             ok( my $res = $cb->( GET $req_uri ), "GET $req_uri" );
             is( $res->code, 200, 'code 200' );
@@ -185,10 +185,10 @@ test_psgi app, sub {
             # TODO: search
             # TODO: toggle table of contents (module only)
 
-            my $revdep = $type eq 'module' ? 'module' : 'distribution';
+            my $revdep = $type eq 'module' ? 'module' : 'dist';
             ok(
                 $tx->find_value(
-                    "//a[starts-with(\@href, \"/requires/$revdep/$name\")]"),
+                    "//a[starts-with(\@href, \"/$revdep/$name/requires\")]"),
                 "reverse deps link uses $revdep name"
             );
 

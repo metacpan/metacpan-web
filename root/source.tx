@@ -1,14 +1,14 @@
 %%  cascade base {
 %%      title       => $title || $file.path,
-%%      rss         => $rss || 'distribution/' ~ $file.distribution,
+%%      rss         => $rss || '/dist/' ~ $file.distribution ~ '/releases.rss',
 %%      rss_title   => $rss_title || 'Recent CPAN Uploads of ' ~ $file.distribution ~ ' - MetaCPAN',
 %%  }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
-  <a data-keyboard-shortcut="g s" href="/source/[% $file.author ~ '/' ~ $file.release %]">[% $file.author %] / [% $file.release %]</a>
+  <a data-keyboard-shortcut="g s" href="/release/[% $file.author ~ '/' ~ $file.release %]/source">[% $file.author %] / [% $file.release %]</a>
   %%  my $parts = $file.path.split('/');
   %%  for $parts -> $part {
-    / [% if $~part.is_last { $part } else { %]<a href="/source/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $parts.slice(0, $~part).join('/') %]">[% $part %]</a>[% } %]
+    / [% if $~part.is_last { $part } else { %]<a href="/release/[% $file.author ~ '/' ~ $file.release %]/source/[% $parts.slice(0, $~part).join('/') %]">[% $part %]</a>[% } %]
   %%  }
 </div>
 %%  }
@@ -25,7 +25,7 @@
   %%  }
   %%  else if $file.slop {
   <li>
-    <a href="/pod/release/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
   </li>
   %%  }
   <li>
@@ -33,9 +33,9 @@
   </li>
   <li>&nbsp;</li>
   <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-file-text fa-fw black"></i>Raw code</a></li>
-  <li><a href="/source/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
+  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
   <li>
-    <a href="/raw/[% $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ $file.path %]?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
   </li>
   %%  if $file.sloc {
   <li><button class="btn-link pod-toggle pod-hidden" onclick="togglePod()"><i class="fa fa-exchange fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>

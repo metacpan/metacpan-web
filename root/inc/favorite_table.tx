@@ -24,7 +24,7 @@
 <tr>
   <td>
     <strong>
-        <a href="/release/[% $favorite.distribution %]" class="ellipsis" title="[% $favorite.author ~ '/' ~ $favorite.distribution %]">[% $favorite.distribution %]</a>
+        <a href="/dist/[% $favorite.distribution %]" class="ellipsis" title="[% $favorite.author ~ '/' ~ $favorite.distribution %]">[% $favorite.distribution %]</a>
     </strong>
   </td>
   %%  if $author {
