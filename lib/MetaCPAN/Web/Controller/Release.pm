@@ -1,9 +1,9 @@
 package MetaCPAN::Web::Controller::Release;
 
 use Moose;
-use Future;
-
 use namespace::autoclean;
+use experimental 'postderef';
+use Future;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

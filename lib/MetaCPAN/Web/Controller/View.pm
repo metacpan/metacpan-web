@@ -2,6 +2,7 @@ package MetaCPAN::Web::Controller::View;
 
 use Moose;
 use namespace::autoclean;
+use experimental 'postderef';
 use Try::Tiny;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
