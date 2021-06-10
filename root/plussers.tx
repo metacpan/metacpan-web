@@ -6,7 +6,7 @@
 <div class="plusser-title">
 <h4> PAUSE users who ++ed <a href="/release/[% $plussers.distribution %]">[% $plussers.distribution %]</a></h4>
 <div class="plussers_disp">
-%%  for plussers.authors -> $plusser {
+%%  for $plussers.authors -> $plusser {
 
 <div class="plusser">
     <a href="/author/[% $plusser.pauseid %]">
