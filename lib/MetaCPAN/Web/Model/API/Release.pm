@@ -7,6 +7,7 @@ with 'MetaCPAN::Web::Role::RiverData';
 
 use CPAN::DistnameInfo;
 use Future ();
+use Ref::Util qw(is_arrayref);
 
 =head1 NAME
 
@@ -40,7 +41,8 @@ sub coverage {
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/$author/$release")->then( \&_with_distnameinfo );
+    $self->request("/release/$author/$release")->then( \&_with_distnameinfo )
+        ->then( \&_fix_dependency );
 }
 
 sub latest_by_author {
@@ -83,7 +85,7 @@ sub modules {
 sub find {
     my ( $self, $distribution ) = @_;
     $self->request("/release/latest_by_distribution/$distribution")
-        ->then( \&_with_distnameinfo );
+        ->then( \&_with_distnameinfo )->then( \&_fix_dependency );
 }
 
 # stolen from Module/requires
@@ -140,6 +142,20 @@ sub _with_distnameinfo {
     for my $release (@$releases) {
         if ( my $url = $release->{download_url} ) {
             $release->{distnameinfo} = CPAN::DistnameInfo->new($url);
+        }
+    }
+    Future->done($data);
+}
+
+sub _fix_dependency {
+    my ($data) = @_;
+    my $releases
+        = $data->{releases} ? $data->{releases} : [ $data->{release} || () ];
+    for my $release (@$releases) {
+        if ( $release->{dependency}
+            && !is_arrayref( $release->{dependency} ) )
+        {
+            $release->{dependency} = [ $release->{dependency} ];
         }
     }
     Future->done($data);
