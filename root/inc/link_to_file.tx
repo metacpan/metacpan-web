@@ -10,7 +10,7 @@ if $file.documentation || $file.pod_lines.size() || $file.module.map(-> $m { $m.
     if $file.documentation
         && $file.authorized
         && $file.indexed
-        && $file.module.map(-> $m { $m.authorized && $m.indexed }).sum() {
+        && $file.module.map(-> $m { $m.authorized && $m.indexed ? 1 : 0 }).sum() {
       # Use /pod/$name.
       '/pod/' ~ $file.documentation;
     }
