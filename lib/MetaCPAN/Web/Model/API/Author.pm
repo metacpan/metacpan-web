@@ -213,8 +213,8 @@ my $profile_data = {
         url_format => 'https://www.stumbleupon.com/stumbler/%s/',
     },
     substack => {
-	name       => 'Substack',
-	url_format => 'https://%s.substack.com/',
+        name       => 'Substack',
+        url_format => 'https://%s.substack.com/',
     },
     tumblr => {
         name       => 'Tumblr',
