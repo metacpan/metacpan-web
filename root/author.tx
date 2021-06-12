@@ -137,13 +137,13 @@
 %%  }
 %%  override content -> {
 <div class="content">
-    <div id="feed_subscription" class="page-header">
+    <div id="metacpan_feed_subscription" class="page-header">
         <p>[% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by <span class="author-name">[% $author.name %]</span> ([% $author.pauseid %])</p>
         <a href="/author/[% $author.pauseid %]/activity.rss"><i class="fa fa-rss fa-2x black"></i></a>
     </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {
-        %%  include inc::release_table { header => 1, tablesorter => 1, table_id => 'author_releases' }
+        %%  include inc::release_table { header => 1, tablesorter => 1, table_id => 'metacpan_author_releases' }
     %%  }
     %%  else {
     <div class="message">

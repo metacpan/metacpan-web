@@ -52,7 +52,7 @@
     [% $source | markdown | filter_html %]
   %%  }
   %%  else {
-<pre id="source" class="line-numbers pod-toggle[% if $file.sloc > 10 { " pod-hidden"; } %]" data-pod-lines="[%
+<pre id="metacpan_source" class="line-numbers pod-toggle[% if $file.sloc > 10 { " pod-hidden"; } %]" data-pod-lines="[%
   $file.pod_lines.map(-> $lines { $lines[0] ~ '-' ~ ($lines[0]+$lines[1]) }).join(', ');
 %]"><code class="language-[% $filetype %]">[% $source %]</code></pre>
   %%  }

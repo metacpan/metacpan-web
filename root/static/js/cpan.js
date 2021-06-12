@@ -37,7 +37,7 @@ $.extend({
 });
 
 function togglePanel(side, visible) {
-    var elements = $('#' + side + '-panel-toggle').add($('#' + side + '-panel'));
+    var elements = $('#metacpan_' + side + '-panel-toggle').add($('#metacpan_' + side + '-panel'));
     var className = 'panel-hide';
     if (typeof visible == "undefined") {
         visible = elements.first().hasClass(className);
@@ -91,17 +91,17 @@ $(document).ready(function() {
 
     $('.help-btn').each(function() {
         $(this).click(function(event) {
-            $('#keyboard-shortcuts').modal();
+            $('#metacpan_keyboard-shortcuts').modal();
             event.preventDefault();
         })
     });
 
     // Global keyboard shortcuts
     Mousetrap.bind('?', function() {
-        $('#keyboard-shortcuts').modal();
+        $('#metacpan_keyboard-shortcuts').modal();
     });
     Mousetrap.bind('s', function(e) {
-        $('#search-input').focus();
+        $('#metacpan_search-input').focus();
         e.preventDefault();
     });
 
@@ -144,7 +144,8 @@ $(document).ready(function() {
 
         var sortid;
         if (table.attr('id')) {
-            sortid = MetaCPAN.storage.getItem("tablesorter:" + table.attr('id'));
+            var storageid = table.attr('id').replace(/^metacpan_/, '');
+            sortid = MetaCPAN.storage.getItem("tablesorter:" + storageid);
         }
         if (!sortid && table.attr('data-default-sort')) {
             sortid = table.attr('data-default-sort');
@@ -192,7 +193,7 @@ $(document).ready(function() {
     $('.relatize').relatizeDate();
 
     // Search box: Feeling Lucky? Shift+Enter
-    $('#search-input').keydown(function(event) {
+    $('#metacpan_search-input').keydown(function(event) {
         if (event.keyCode == '13' && event.shiftKey) {
             event.preventDefault();
 
@@ -215,7 +216,7 @@ $(document).ready(function() {
     // #441 Allow more specific queries to send ("Ty", "Type::").
     // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
     // Please don't steal ctrl-pg up/down.
-    var search_input = $("#search-input");
+    var search_input = $("#metacpan_search-input");
     var input_group = search_input.parent('.input-group');
     var ac_width = (input_group.length ? input_group : search_input).outerWidth();
     search_input.autocomplete({
@@ -263,7 +264,7 @@ $(document).ready(function() {
     $('.autocomplete-suggestions').off('mouseover.autocomplete');
     $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
-    $('#search-input.autofocus').focus();
+    $('#metacpan_search-input.autofocus').focus();
 
     var items = $('.ellipsis');
     for (var i = 0; i < items.length; i++) {
@@ -302,7 +303,7 @@ $(document).ready(function() {
     }
     create_anchors($('.anchors'));
 
-    var module_source_href = $('#source-link').attr('href');
+    var module_source_href = $('#metacpan_source-link').attr('href');
     if (module_source_href) {
         $('.pod-errors-detail dt').each(function() {
             var $dt = $(this);
@@ -321,11 +322,12 @@ $(document).ready(function() {
 
     $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
+        var storageid = tableid.replace(/^metacpan_/, '');
         setTimeout(function() {
             var sortParam = $.getUrlVar('sort');
             if (sortParam != null) {
                 sortParam = sortParam.slice(2, sortParam.length - 2);
-                MetaCPAN.storage.setItem("tablesorter:" + tableid, sortParam);
+                MetaCPAN.storage.setItem("tablesorter:" + storageid, sortParam);
             }
         }, 1000);
     });
@@ -381,7 +383,7 @@ $(document).ready(function() {
     });
     var size = MetaCPAN.storage.getItem('search_size');
     if (size) {
-        $('#search-size').val(size);
+        $('#metacpan_search-size').val(size);
     }
 
     // TODO use a more specific locator for /author/PAUSID/release ?
@@ -389,9 +391,9 @@ $(document).ready(function() {
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
 
-    var changes = $('#last-changes');
-    var changes_inner = $('#last-changes-container');
-    var changes_toggle = $("#last-changes-toggle");
+    var changes = $('#metacpan_last-changes');
+    var changes_inner = $('#metacpan_last-changes-container');
+    var changes_toggle = $("#metacpan_last-changes-toggle");
     changes.addClass(['collapsable', 'collapsed']);
     var changes_content_height = Math.round(changes_inner.prop('scrollHeight'));
     var changes_ui_height = Math.round(changes_inner.height() + changes_toggle.height());

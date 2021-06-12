@@ -12,7 +12,7 @@ test_psgi app, sub {
         is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
         $tx->like(
-            '//div[contains-token(@class, "content")]//pre[@id="source"]',
+            '//div[contains-token(@class, "content")]//pre[@id="metacpan_source"]',
             qr/^Revision history for File-Spec-Native/,
             'source view for plain text change log'
         );

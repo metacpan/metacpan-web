@@ -13,8 +13,8 @@
   %%  }
 </ul>
 %%  }
-<div id="last-changes" class="well">
-  <div id="last-changes-container">
+<div id="metacpan_last-changes" class="well">
+  <div id="metacpan_last-changes-container">
     %%  for $changes -> $rel {
     <h2 id="whatsnew">Changes for version [% $rel.version %][% if $rel.date && datetime($rel.date) { %] - [% datetime($rel.date).to_ymd() } if $rel.trial { %] (TRIAL RELEASE)[% } %]</h2>
     <div class="change-entries">
@@ -22,7 +22,7 @@
     </div>
     %%  }
   </div>
-  <button id="last-changes-toggle" class="btn-link" onclick="$('#last-changes').toggleClass('collapsed'); return false;">[ <span class="hide-more">Show less</span><span class="show-more">Show more</span> ]</button>
+  <button id="metacpan_last-changes-toggle" class="btn-link" onclick="$('#metacpan_last-changes').toggleClass('collapsed'); return false;">[ <span class="hide-more">Show less</span><span class="show-more">Show more</span> ]</button>
 </div>
 %%  }
 

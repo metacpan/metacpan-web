@@ -1,4 +1,4 @@
-<div id="install-instructions-dialog" class="modal fade">
+<div id="metacpan_install-instructions-dialog" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
