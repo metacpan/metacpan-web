@@ -5,7 +5,7 @@
 %%  }
 %%  override content -> {
 <div class="content">
-  <div id="feed_subscription" class="page-header">
+  <div id="metacpan_feed_subscription" class="page-header">
     <p>Recent Uploads</p>
       <a href="/recent.rss[% if $filter { '?f=' ~ $filter } %]"><i class="fa fa-rss fa-2x black"></i></a>
   </div>

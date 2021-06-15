@@ -1,9 +1,9 @@
 <input id="[% $type %]" type="checkbox" class="notification-toggle-checkbox" />
-<div id="notification" class="well collapsed notify-[% $type %]">
+<div id="metacpan_notification" class="well collapsed notify-[% $type %]">
     <label class="remove-notification" for="[% $type %]" >
       <i class="fa fa-fw fa-close black"></i>
     </label>
-    <div id="notification-container">
+    <div id="metacpan_notification-container">
       <h2>[% $title %]</h2>
       <div>
         %%  block text -> { }

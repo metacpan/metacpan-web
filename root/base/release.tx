@@ -141,7 +141,7 @@
       </a>
     </li>
     <li>
-      <button class="btn btn-link" data-toggle="modal" data-target="#install-instructions-dialog">
+      <button class="btn btn-link" data-toggle="modal" data-target="#metacpan_install-instructions-dialog">
         <i class="fa fa-terminal fa-fw black"></i>Install Instructions
       </button>
     </li>
@@ -200,8 +200,8 @@
     %%  }
 %%  }
 %%  override content -> {
-<button id="right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
-<div id="right-panel" class="pull-right">
+<button id="metacpan_right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
+<div id="metacpan_right-panel" class="pull-right">
   <div class="box-right hidden-phone">
     %%  include inc::plussers { plussers => $plussers };
 

@@ -17,7 +17,7 @@
 %%  }
 %%  else {
   <div class="jumbotron">
-        <p class="nav-header" id="header-text-noresult">Something missing?
+        <p class="nav-header" id="metacpan_header-text-noresult">Something missing?
             <a href="/about/missing_modules">Find out why</a>
         </p>
         <h2>No result.</h2>

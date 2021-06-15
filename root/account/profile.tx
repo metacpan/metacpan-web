@@ -115,11 +115,11 @@
                     %%  my $donation = $author.donation.map(-> $d { $d.id }).grep.size();
                     <div class="col-sm-8 col-md-6">
                         <label class="checkbox">
-                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] onchange="$('#donations').slideToggle()" /> Accept donations
+                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] onchange="$('#metacpan_donations').slideToggle()" /> Accept donations
                         </label>
                     </div>
                 </div>
-                <div id="donations"[% if !$donation { %] style="display: none"[% } %]>
+                <div id="metacpan_donations"[% if !$donation { %] style="display: none"[% } %]>
                     %%  my $user_donations = $author.donation.indexed_by('name');
                     %%  for ['PayPal', 'Wishlist', 'Flattr'] -> $system {
                     %%      my $found = $user_donations[$system];
@@ -202,7 +202,7 @@
                     </select>
                 </div>
             </div>
-            <div id="profiles" class="profiles">
+            <div id="metacpan_profiles" class="profiles">
                 <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
                     <label class="col-sm-4 col-md-4 control-label">metacpan</label>
                     <div class="col-sm-8 col-md-6">
@@ -255,7 +255,7 @@ function addProfile(select) {
     var value = select.value;
     var profile = value ? JSON.parse(value) : null;
     select.selectedIndex = 0;
-    var container = $('#profiles');
+    var container = $('#metacpan_profiles');
     var html = '<div style="display: none" class="form-group'
     if (value) {
         html += ' profile profile-' + profile.id;
@@ -320,13 +320,10 @@ function addField(id) {
 }
 
 function fillLocation() {
-    $('#busy').show();
     navigator.geolocation.getCurrentPosition(function(pos) {
-        $('#busy').hide();
         $('input[name="latitude"]').val(pos.coords.latitude);
         $('input[name="longitude"]').val(pos.coords.longitude);
     }, function(){
-        $('#busy').hide();
     });
     return false;
 }

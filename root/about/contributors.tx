@@ -23,7 +23,7 @@
       var done = 0;
       return {
         render: function() {
-          $('#author-result-loading').hide();
+          $('#metacpan_author-result-loading').hide();
           $('.author-results').html('<ul class="authors">');
           var el = $('ul.authors');
           var rows = [];
@@ -46,7 +46,7 @@
               +'('+ row.contributions +' '+ (row.contributions === 1 ? 'commit' : 'commits') +')</li>'
             );
           })
-          $('#author-count').html('Number of contributors: ' + rows.length);
+          $('#metacpan_author-count').html('Number of contributors: ' + rows.length);
         },
 
         fetch: function(url) {
@@ -96,8 +96,8 @@
 </script>
 
 <div class="content about">
-  <i class="fa fa-spinner fa-spin" id="author-result-loading"></i>
-  <div id="author-count"></div>
+  <i class="fa fa-spinner fa-spin" id="metacpan_author-result-loading"></i>
+  <div id="metacpan_author-count"></div>
   <div class="author-results"></div>
 </div>
 

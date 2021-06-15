@@ -24,7 +24,8 @@ test_psgi app, sub {
 
     ok(
         $tx->find_value(
-            '//table[@id="author_favorites"]//tbody/tr[1]/td[1]//a/@href'),
+            '//table[@id="metacpan_author_favorites"]//tbody/tr[1]/td[1]//a/@href'
+        ),
         'found a favorite'
     );
 

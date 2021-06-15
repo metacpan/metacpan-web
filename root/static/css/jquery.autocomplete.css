@@ -51,6 +51,6 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
     show them under "Authors"
     GH #1707, Dan McCormick
 */
-#autocomplete-direct-results:before {
+#metacpan_autocomplete-direct-results:before {
   content: 'Authors'
 }

@@ -7,7 +7,7 @@
   %%    $per_day && $day != datetime($~favorite.peek_next.date).strftime("%F");
 
   %%  if $day_start {
-<table id="author_favorites"
+<table id="metacpan_author_favorites"
   %%  if $tablesorter {
   data-default-sort="[% $default_sort || '0,0' %]"
   %%  }
