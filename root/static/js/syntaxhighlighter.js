@@ -99,7 +99,7 @@ $(function () {
     };
 
 
-    var source = $("#source");
+    var source = $("#metacpan_source");
     if (source.length) {
         var lineMatch;
         var packageMatch;
