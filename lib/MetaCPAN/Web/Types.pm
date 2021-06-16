@@ -12,6 +12,7 @@ BEGIN {
         Types::Common::Numeric
         Types::Common::String
         Types::LoadableClass
+        Types::Path::Tiny
         Types::URI
     );
 }

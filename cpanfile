@@ -80,6 +80,7 @@ requires 'Type::Library';
 requires 'Types::Common::Numeric';
 requires 'Types::Common::String';
 requires 'Types::LoadableClass';
+requires 'Types::Path::Tiny';
 requires 'Types::Standard';
 requires 'Types::URI';
 requires 'Type::Utils';
