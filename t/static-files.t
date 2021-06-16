@@ -12,46 +12,6 @@ use Digest::SHA ();
 # for users to use the old files, then updating the hash can be done instead.
 
 my %files = (
-    'root/static/fonts/FontAwesome.otf' =>
-        '6270a4a561a69fef5f5cc18cdf9efc256ec2ccbe',
-    'root/static/fonts/fa-brands-400.eot' =>
-        '7ed86fe71d4dc31d5edf492f7472d6fb88c3c3c9',
-    'root/static/fonts/fa-brands-400.svg' =>
-        '3e9abaae5dc647f4019a4dcdde1b51f14c2054e8',
-    'root/static/fonts/fa-brands-400.ttf' =>
-        'c5a1a93f668d15f55deac38b4728f8d901bd4748',
-    'root/static/fonts/fa-brands-400.woff' =>
-        '6900998c1d878e73b2f9ac3a9a9746365d49a54f',
-    'root/static/fonts/fa-brands-400.woff2' =>
-        '5fe986cda635681b4b6bbd6111df2f26d7fca286',
-    'root/static/fonts/fa-regular-400.eot' =>
-        '1115185386ada5846eecc4e2e1f076ca7617e0cd',
-    'root/static/fonts/fa-regular-400.svg' =>
-        'dd1b42f8776d9b48adda30b0069aa0e5f18989d3',
-    'root/static/fonts/fa-regular-400.ttf' =>
-        '5d5375ce3ae5b500df039da009ccdaca29d52fc0',
-    'root/static/fonts/fa-regular-400.woff' =>
-        '7626840dab0e2ae37b2d16572a6f183a71a0dd73',
-    'root/static/fonts/fa-regular-400.woff2' =>
-        'be142af0f56062f6e864de121b98054c7b5954fd',
-    'root/static/fonts/fa-solid-900.eot' =>
-        '340ee70e87850176047733192ea8109dd6380082',
-    'root/static/fonts/fa-solid-900.svg' =>
-        '55a9f6dd285c88c6c9847fee0d5ce127c4c61c52',
-    'root/static/fonts/fa-solid-900.ttf' =>
-        '40d9789010f6137e543e4d97025b867707d2f425',
-    'root/static/fonts/fa-solid-900.woff' =>
-        '43dae5c2482bfb5d04d896529600eb621181103a',
-    'root/static/fonts/fa-solid-900.woff2' =>
-        'b2879f9e1d0985a96842bf7f55a2b2cc4c636d04',
-    'root/static/fonts/fontawesome-webfont.eot' =>
-        '0183979056f0b87616cd99d5c54a48f3b771eee6',
-    'root/static/fonts/fontawesome-webfont.svg' =>
-        'cd980eab6db5fa57db670cb2e4278e67e1a4d6c9',
-    'root/static/fonts/fontawesome-webfont.ttf' =>
-        '6225ccc4ec94d060f19efab97ca42d842845b949',
-    'root/static/fonts/fontawesome-webfont.woff' =>
-        '7d65e0227d0d7cdc1718119cd2a7dce0638f151c',
     'root/static/icons/apple-touch-icon.png' =>
         'b0697c267731b7ee53e8e7a3bbd9f6476c0ba29a',
     'root/static/icons/asc.gif' => '05fa1fbc4b6541c3e8176d235766fa0e411e9931',
