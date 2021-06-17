@@ -1,12 +1,18 @@
 package MetaCPAN::Web::View::Xslate;
 use Moose;
 extends qw(Catalyst::View::Xslate);
+use File::Path ();
+use MetaCPAN::Web::Types qw(AbsPath);
 
 has '+syntax'      => ( default => 'Metakolon' );
 has '+encode_body' => ( default => 0 );
 has '+preload'     => ( default => 0 );
 has '+cache'       => ( default => 0 );
-has '+module'      => (
+has '+cache_dir'   => (
+    isa    => AbsPath,
+    coerce => 1,
+);
+has '+module' => (
     default =>
         sub { [ 'Text::Xslate::Bridge::Star',
         'MetaCPAN::Web::View::Xslate::Bridge', ] }
@@ -33,6 +39,16 @@ sub COMPONENT {
     );
     return $class->SUPER::COMPONENT( $app, $args );
 }
+
+around preload_templates => sub {
+    my ( $orig, $self ) = ( shift, shift );
+
+    if ( my $cache_dir = $self->xslate->{cache_dir} ) {
+        File::Path::rmtree($cache_dir);
+    }
+
+    $self->$orig(@_);
+};
 
 has '+expose_methods' => (
     default =>
