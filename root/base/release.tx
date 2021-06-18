@@ -84,6 +84,13 @@
     <li>
       <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
     </li>
+    %% if defined $distribution.river.bus_factor {
+    <li>
+      <div class="ttip" data-toggle="tooltip" data-placement="right" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years">
+      <i class="fa fa-bus black"></i>Bus factor: [% $distribution.river.bus_factor %]
+      </div>
+    </li>
+    %% }
     %%  if $coverage.url {
     <li>
       <i class="fa fa-fw fa-pie-chart black"></i><a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
