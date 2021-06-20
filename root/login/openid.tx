@@ -8,7 +8,7 @@
                 <input type="hidden" name="client_id" value="[% $consumer_key %]">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-openid fa-fw"></i>
+                        <i class="fab fa-openid fa-fw"></i>
                     </span>
                     <input type="text" class="form-control" name="openid_identifier">
                     <span class="input-group-btn">
