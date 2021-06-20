@@ -49,7 +49,7 @@
     </li>
     %%  if $release.resources.homepage.is_url() {
     <li>
-      <a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]"><i class="fa fa-fw fa-external-link black"></i>Homepage</a>
+      <a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]"><i class="fa fa-fw fa-external-link-alt black"></i>Homepage</a>
     </li>
     %%  }
     <li>
@@ -58,13 +58,13 @@
     %%  if $release.resources.repository {
     <li>
       %%  if $release.resources.repository.web.is_url() {
-        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $release.resources.repository.web %]"><i class="fa fa-fw fa-code-fork black"></i>Repository</a>
+        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $release.resources.repository.web %]"><i class="fa fa-fw fa-code-branch black"></i>Repository</a>
       %%  }
       %%  if $release.resources.repository.web.is_url() && $release.resources.repository.url.is_url() {
         (<a rel="noopener nofollow" href="[% $release.resources.repository.url %]">[% $release.resources.repository.type %] clone</a>)
       %%  }
       %%  else if $release.resources.repository.url.is_url() {
-        <a rel="noopener nofollow" href="[% $release.resources.repository.url %]"><i class="fa fa-fw fa-code-fork black"></i>Clone [% $release.resources.repository.type %] repository</a>
+        <a rel="noopener nofollow" href="[% $release.resources.repository.url %]"><i class="fa fa-fw fa-code-branch black"></i>Clone [% $release.resources.repository.type %] repository</a>
       %%  }
     </li>
     %%  }
@@ -82,11 +82,11 @@
         %%  }
     </li>
     <li>
-      <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]"><i class="fa fa-fw fa-line-chart black"></i>Kwalitee</a>
+      <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]"><i class="fa fa-fw fa-chart-line black"></i>Kwalitee</a>
     </li>
     %%  if $coverage.url {
     <li>
-      <i class="fa fa-fw fa-pie-chart black"></i><a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
+      <i class="fa fa-fw fa-chart-pie black"></i><a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
     </li>
     %%  }
     %%  if $release.license {

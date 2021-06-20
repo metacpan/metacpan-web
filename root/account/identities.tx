@@ -18,7 +18,7 @@
                 </form>
             %%  }
             %%  else {
-                <a class="btn btn-block btn-success" href="/login/[% $identity.lc() %]"><span class="fa fa-external-link"></span> Connect</a>
+                <a class="btn btn-block btn-success" href="/login/[% $identity.lc() %]"><span class="fa fa-external-link-alt"></span> Connect</a>
             %%  }
         </td>
     </tr>

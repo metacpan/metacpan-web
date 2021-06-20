@@ -1,7 +1,7 @@
 <input id="[% $type %]" type="checkbox" class="notification-toggle-checkbox" />
 <div id="metacpan_notification" class="well collapsed notify-[% $type %]">
     <label class="remove-notification" for="[% $type %]" >
-      <i class="fa fa-fw fa-close black"></i>
+      <i class="fa fa-fw fa-times black"></i>
     </label>
     <div id="metacpan_notification-container">
       <h2>[% $title %]</h2>
