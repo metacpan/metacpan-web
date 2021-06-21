@@ -5270,17 +5270,18 @@ DISTRIBUTIONS
       Struct::Dumb 0.12
     requirements:
       Module::Build 0.4004
-  Sub-Exporter-0.987
-    pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
+  Sub-Exporter-0.988
+    pathname: R/RJ/RJBS/Sub-Exporter-0.988.tar.gz
     provides:
-      Sub::Exporter 0.987
-      Sub::Exporter::Util 0.987
+      Sub::Exporter 0.988
+      Sub::Exporter::Util 0.988
     requirements:
       Carp 0
       Data::OptList 0.100
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 6.78
       Params::Util 0.14
       Sub::Install 0.92
+      perl 5.008000
       strict 0
       warnings 0
   Sub-Exporter-Progressive-0.001013
@@ -6422,32 +6423,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.54
-    pathname: O/OA/OALDERS/libwww-perl-6.54.tar.gz
+  libwww-perl-6.55
+    pathname: O/OA/OALDERS/libwww-perl-6.55.tar.gz
     provides:
-      LWP 6.54
-      LWP::Authen::Basic 6.54
-      LWP::Authen::Digest 6.54
-      LWP::Authen::Ntlm 6.54
-      LWP::ConnCache 6.54
-      LWP::Debug 6.54
-      LWP::Debug::TraceHTTP 6.54
-      LWP::DebugFile 6.54
-      LWP::MemberMixin 6.54
-      LWP::Protocol 6.54
-      LWP::Protocol::cpan 6.54
-      LWP::Protocol::data 6.54
-      LWP::Protocol::file 6.54
-      LWP::Protocol::ftp 6.54
-      LWP::Protocol::gopher 6.54
-      LWP::Protocol::http 6.54
-      LWP::Protocol::loopback 6.54
-      LWP::Protocol::mailto 6.54
-      LWP::Protocol::nntp 6.54
-      LWP::Protocol::nogo 6.54
-      LWP::RobotUA 6.54
-      LWP::Simple 6.54
-      LWP::UserAgent 6.54
+      LWP 6.55
+      LWP::Authen::Basic 6.55
+      LWP::Authen::Digest 6.55
+      LWP::Authen::Ntlm 6.55
+      LWP::ConnCache 6.55
+      LWP::Debug 6.55
+      LWP::Debug::TraceHTTP 6.55
+      LWP::DebugFile 6.55
+      LWP::MemberMixin 6.55
+      LWP::Protocol 6.55
+      LWP::Protocol::cpan 6.55
+      LWP::Protocol::data 6.55
+      LWP::Protocol::file 6.55
+      LWP::Protocol::ftp 6.55
+      LWP::Protocol::gopher 6.55
+      LWP::Protocol::http 6.55
+      LWP::Protocol::loopback 6.55
+      LWP::Protocol::mailto 6.55
+      LWP::Protocol::nntp 6.55
+      LWP::Protocol::nogo 6.55
+      LWP::RobotUA 6.55
+      LWP::Simple 6.55
+      LWP::UserAgent 6.55
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
