@@ -2,7 +2,7 @@
 block navigate -> {
   "'/release/'+this.value";
   if $module {
-    "+'/" ~ $module.path ~ "'";
+    "+'/view/" ~ $module.path ~ "'";
   }
 }
 %]" class="[% $class %]">
