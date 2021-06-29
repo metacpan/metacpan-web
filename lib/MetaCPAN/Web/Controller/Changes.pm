@@ -52,7 +52,14 @@ sub get : Private {
     elsif ( $file->{documentation} ) {
 
         # Is there a better way to reuse the pod view?
-        $c->forward( '/view/release', [ $file->{path} ] );
+        $c->forward(
+            (
+                $c->{stash}->{distribution_name}
+                ? '/view/dist'
+                : '/view/release'
+            ),
+            [ $file->{path} ]
+        );
     }
     else {
         $c->stash( { file => $file } );
