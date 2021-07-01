@@ -48,6 +48,21 @@ Wildcards: ? matches a single character, * matches any number of characters
 
 See our [missing module](/about/missing_modules) page.
 
+## What does the river stage indicate?
+
+The river stage of a distribution is an indication of how much of CPAN depends on that distribution.
+Distributions in river stages 0-2 may not impact much of the ecosystem with breaking changes or failing tests,
+but distributions in river stages 4-5 must be updated with the utmost care.
+See [River of CPAN](http://neilb.org/2015/04/20/river-of-cpan.html).
+
+## What does the bus factor indicate?
+
+The bus factor of a distribution is a count of CPAN authors who have permissions to release that distribution
+who have made any releases to CPAN in the past two years (including other distributions).
+This is an indication of how many people are likely to be able to release critical fixes in a timely manner.
+Higher bus factors are crucial for distributions in a higher river stage, as more of CPAN depends on them.
+See [CPAN Bus Factor](https://www.olafalders.com/2021/06/30/cpan-bus-factor/).
+
 ## How can I get involved / who is involved?
 
 * [Contact us](/about/contact)
