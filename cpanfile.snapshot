@@ -2111,19 +2111,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.32
-    pathname: O/OA/OALDERS/HTTP-Message-6.32.tar.gz
+  HTTP-Message-6.33
+    pathname: O/OA/OALDERS/HTTP-Message-6.33.tar.gz
     provides:
-      HTTP::Config 6.32
-      HTTP::Headers 6.32
-      HTTP::Headers::Auth 6.32
-      HTTP::Headers::ETag 6.32
-      HTTP::Headers::Util 6.32
-      HTTP::Message 6.32
-      HTTP::Request 6.32
-      HTTP::Request::Common 6.32
-      HTTP::Response 6.32
-      HTTP::Status 6.32
+      HTTP::Config 6.33
+      HTTP::Headers 6.33
+      HTTP::Headers::Auth 6.33
+      HTTP::Headers::ETag 6.33
+      HTTP::Headers::Util 6.33
+      HTTP::Message 6.33
+      HTTP::Request 6.33
+      HTTP::Request::Common 6.33
+      HTTP::Response 6.33
+      HTTP::Status 6.33
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
