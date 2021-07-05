@@ -86,7 +86,7 @@
     </li>
     %% if defined $distribution.river.bus_factor {
     <li>
-      <div class="ttip" data-toggle="tooltip" data-placement="right" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years">
+      <div class="ttip" data-toggle="tooltip" data-placement="right" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
       <i class="fa fa-fw fa-bus black"></i>Bus factor: [% $distribution.river.bus_factor %]
       </div>
     </li>
