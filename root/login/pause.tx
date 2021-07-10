@@ -6,6 +6,7 @@
             <p class="text-center">Connect to MetaCPAN using PAUSE</p>
             <form action="[% $oauth_url %]">
                 <input type="hidden" name="client_id" value="[% $consumer_key %]">
+                <input type="hidden" name="choice" value="pause">
                 <div class="input-group">
                     <span class="input-group-addon">
                         PAUSE ID
