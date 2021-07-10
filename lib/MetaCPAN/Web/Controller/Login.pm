@@ -31,19 +31,6 @@ sub index : Chained('login_root') : PathPart('') : Args(0) {
     }
 }
 
-sub openid : Chained('login_root') : PathPart : Args(0) {
-    my ( $self, $c ) = @_;
-
-    # Never cache at CDN
-    $c->cdn_never_cache(1);
-
-    my $model = $c->model('API::User');
-    $c->stash( {
-        consumer_key => $model->consumer_key,
-        openid_url   => $model->openid_url,
-    } );
-}
-
 sub pause : Chained('login_root') : PathPart : Args(0) {
     my ( $self, $c ) = @_;
 

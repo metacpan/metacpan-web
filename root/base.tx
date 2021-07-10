@@ -146,7 +146,7 @@
                         <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            %%  for ['GitHub', 'Twitter', 'Google', 'OpenID'] -> $identity {
+                            %%  for ['GitHub', 'Twitter', 'Google'] -> $identity {
                             <li>
                                 <a href="/login/[% $identity.lc() %]">
                                     <i class="fab fa-[% $identity.lc() %] fa-fw"></i>
