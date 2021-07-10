@@ -23,11 +23,6 @@ sub COMPONENT {
     return $class->SUPER::COMPONENT( $app, $args );
 }
 
-sub openid_url {
-    my ($self) = @_;
-    return $self->api_public . '/login/openid';
-}
-
 sub oauth_url {
     my ($self) = @_;
     return $self->api_public . '/oauth2/authorize';
