@@ -186,7 +186,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -1605,10 +1604,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Devel-PPPort-3.62
-    pathname: A/AT/ATOOMIC/Devel-PPPort-3.62.tar.gz
+  Devel-PPPort-3.63
+    pathname: A/AT/ATOOMIC/Devel-PPPort-3.63.tar.gz
     provides:
-      Devel::PPPort 3.62
+      Devel::PPPort 3.63
     requirements:
       ExtUtils::MakeMaker 0
       FindBin 0
