@@ -559,19 +559,27 @@ form#metacpan_logout {
         font-weight: bold;
     }
 
-    &.maturity-developer .release-banner {
+}
+
+.release-banner {
+    padding: 0px 4px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #fff;
+
+    &.maturity-developer {
         color: #fff;
         background-color: #D9534F;
-        padding: 0px 4px;
-        border-radius: 4px;
-        display: inline-block;
-        margin-top: 5px;
-        margin-bottom: 10px;
+        border-style: none;
     }
+}
 
-    &.maturity-developer .release-banner-source {
-        &:extend(.dist-release.maturity-developer .release-banner all);
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
+.nav-list li.nav-header + li.release-banner,
+.nav-list li.release-banner + li.nav-header {
+    margin-top: 5px;
 }

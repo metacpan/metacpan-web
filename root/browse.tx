@@ -13,7 +13,7 @@
 </div>
 %%  }
 %%  override left_nav_content -> {
-  %%  include inc::release_status { maturity => $maturity, banner_class => 'release-banner-source' }
+  %%  include inc::release_status { maturity => $maturity }
   <li class="nav-header">Tools</li>
   <li><a data-keyboard-shortcut="g d" href="/release/[% $author %]/[% $release %]"><i class="fa fa-fw fa-info-circle black"></i>Release Info</a></li>
   <li><a data-keyboard-shortcut="g a" href="/author/[% $author %]"><i class="fa fa-user fa-fw black"></i>Author</a></li>
