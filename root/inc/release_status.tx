@@ -1,7 +1,5 @@
 %%  if $maturity == 'developer' {
-<li>
-  <span class="dist-release maturity-developer">
-    <b class="[% $banner_class %]">Development release</b>
-  </span>
+<li class="release-banner maturity-[% $maturity %]">
+  Development release
 </li>
 %%  }
