@@ -38,6 +38,7 @@ jobs:
             - name: Maybe update cpanfile.snapshot
               run: perl -Ilocal/lib/perl5 local/bin/carton
             - name: Create Pull Request
+              id: cpr
               uses: peter-evans/create-pull-request@v3.8.2
               with:
                   token: ${{ secrets.METACPAN_BOT_TOKEN }}
@@ -50,3 +51,9 @@ jobs:
                       [1]: https://github.com/peter-evans/create-pull-request
                   push-to-fork: metacpan-bot/metacpan-web
                   branch: update-cpanfile-snapshot
+            - name: Enable Pull Request Automerge
+              if: steps.cpr.outputs.pull-request-operation == 'created'
+              uses: peter-evans/enable-pull-request-automerge@v1
+              with:
+                  token: ${{ secrets.METACPAN_BOT_TOKEN }}
+                  pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
