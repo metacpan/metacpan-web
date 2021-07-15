@@ -186,6 +186,7 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
+      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -5666,10 +5667,10 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
-  Test-Warnings-0.030
-    pathname: E/ET/ETHER/Test-Warnings-0.030.tar.gz
+  Test-Warnings-0.031
+    pathname: E/ET/ETHER/Test-Warnings-0.031.tar.gz
     provides:
-      Test::Warnings 0.030
+      Test::Warnings 0.031
     requirements:
       Carp 0
       Exporter 0
