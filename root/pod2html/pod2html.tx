@@ -22,7 +22,7 @@
         </form>
         <div id="metacpan-pod-renderer-loading" class="alert alert-info" style="display: none"><i class="fa fa-spinner fa-spin"></i> Loading...</div>
         <div id="metacpan-pod-renderer-error" class="alert alert-danger" [% if !$pod_error { %]style="display: none"[% } %]>
-          Error rendering POD[% if $pod_error { ' - ' ~ pod_error } %]
+          Error rendering POD[% if $pod_error { ' - ' ~ $pod_error } %]
         </div>
       </div>
     </div>
