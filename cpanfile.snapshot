@@ -186,7 +186,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -3795,11 +3794,11 @@ DISTRIBUTIONS
       Net::CIDR::Lite::Span 0.22
     requirements:
       ExtUtils::MakeMaker 0
-  Net-DNS-1.31
-    pathname: N/NL/NLNETLABS/Net-DNS-1.31.tar.gz
+  Net-DNS-1.32
+    pathname: N/NL/NLNETLABS/Net-DNS-1.32.tar.gz
     provides:
-      Net::DNS 1.31
-      Net::DNS::Domain 1825
+      Net::DNS 1.32
+      Net::DNS::Domain 1841
       Net::DNS::DomainName 1813
       Net::DNS::DomainName1035 1813
       Net::DNS::DomainName2535 1813
@@ -3807,11 +3806,11 @@ DISTRIBUTIONS
       Net::DNS::Mailbox 1813
       Net::DNS::Mailbox1035 1813
       Net::DNS::Mailbox2535 1813
-      Net::DNS::Nameserver 1813
+      Net::DNS::Nameserver 1841
       Net::DNS::Packet 1818
-      Net::DNS::Parameters 1832
+      Net::DNS::Parameters 1841
       Net::DNS::Question 1812
-      Net::DNS::RR 1834
+      Net::DNS::RR 1841
       Net::DNS::RR::A 1814
       Net::DNS::RR::AAAA 1814
       Net::DNS::RR::AFSDB 1814
@@ -3878,11 +3877,11 @@ DISTRIBUTIONS
       Net::DNS::RR::SPF 1814
       Net::DNS::RR::SRV 1814
       Net::DNS::RR::SSHFP 1814
-      Net::DNS::RR::SVCB 1838
+      Net::DNS::RR::SVCB 1845
       Net::DNS::RR::TKEY 1814
       Net::DNS::RR::TLSA 1814
       Net::DNS::RR::TSIG 1827
-      Net::DNS::RR::TXT 1814
+      Net::DNS::RR::TXT 1840
       Net::DNS::RR::URI 1814
       Net::DNS::RR::X25 1814
       Net::DNS::RR::ZONEMD 1832
@@ -3890,16 +3889,16 @@ DISTRIBUTIONS
       Net::DNS::Resolver::Base 1818
       Net::DNS::Resolver::MSWin32 1812
       Net::DNS::Resolver::Recurse 1811
-      Net::DNS::Resolver::UNIX 1811
+      Net::DNS::Resolver::UNIX 1843
       Net::DNS::Resolver::android 1811
       Net::DNS::Resolver::cygwin 1811
       Net::DNS::Resolver::os2 1811
       Net::DNS::Resolver::os390 1811
-      Net::DNS::Text 1813
+      Net::DNS::Text 1841
       Net::DNS::Update 1814
-      Net::DNS::ZoneFile 1832
-      Net::DNS::ZoneFile::Generator 1832
-      Net::DNS::ZoneFile::Text 1832
+      Net::DNS::ZoneFile 1841
+      Net::DNS::ZoneFile::Generator 1841
+      Net::DNS::ZoneFile::Text 1841
     requirements:
       Carp 1.1
       Digest::HMAC 1.03
