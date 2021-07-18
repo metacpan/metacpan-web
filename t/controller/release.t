@@ -200,8 +200,9 @@ sub test_heading_order {
     my ($version) = ( reverse split /-/, $module );
 
     # Confirm that the headings in the content div are in the expected order.
-    my @headings = ( 'Documentation', 'Modules', 'Provides', 'Examples',
-        'Other files', );
+    my @headings = (
+        'Documentation', 'Modules', 'Provides', 'Examples', 'Other files',
+    );
     my @anchors = qw(docs modules provides examples other whatsnew);
     push @headings, 'Changes for version ' . $version;
     my $heading = 0;
