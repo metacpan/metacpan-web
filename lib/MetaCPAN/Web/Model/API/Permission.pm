@@ -62,8 +62,10 @@ sub _permissions_to_notification {
         my @notif;
         for my $perms ( @{ $perm_data->{permissions} || [] } ) {
             my $type;
-            my @perm_holders = ( $perms->{owner} || (),
-                @{ $perms->{co_maintainers} || [] } );
+            my @perm_holders = (
+                $perms->{owner} || (),
+                @{ $perms->{co_maintainers} || [] }
+            );
             for my $maint (@perm_holders) {
                 if ( exists $special{$maint} ) {
                     $type = $maint;
