@@ -58,9 +58,9 @@ has pause_id => (
 );
 
 sub _build_pause_id {
-    my $self    = shift;
-    my $ident   = $self->identity;
-    my ($pause) = grep { $_->{name} eq 'pause' } @$ident;
+    my $self  = shift;
+    my $ident = $self->identity;
+    my $pause = $ident->{pause};
     $pause && $pause->{key};
 }
 
