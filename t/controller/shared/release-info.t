@@ -47,6 +47,7 @@ test_psgi app, sub {
             module     => 'Text::Tabs',
             release    => 'Text-Tabs+Wrap',
             qs_dist    => 'Text-Tabs%2BWrap',
+            issues     => 0,
             home_page  => 0,
             repository => 0,
             reviews    => 0,
