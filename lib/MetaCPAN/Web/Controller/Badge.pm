@@ -8,13 +8,12 @@ use DateTime;
 
 sub dist : Chained('/dist/root') PathPart('badge.svg') Args(0) {
     my ( $self, $c ) = @_;
-    my $dist = $c->stash->{distribution_name};
 
-    $c->forward( 'badge', [ distribution => $dist ] );
+    $c->forward( 'badge' );
 }
 
 sub badge : Private {
-    my ( $self, $c, %args ) = @_;
+    my ( $self, $c ) = @_;
 
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );
