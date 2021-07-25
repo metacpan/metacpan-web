@@ -2887,18 +2887,18 @@ DISTRIBUTIONS
       Moose::Role 0
       MooseX::Fastly::Role 0.01
       Net::Fastly 1.05
-  Metrics-Any-0.06
-    pathname: P/PE/PEVANS/Metrics-Any-0.06.tar.gz
+  Metrics-Any-0.07
+    pathname: P/PE/PEVANS/Metrics-Any-0.07.tar.gz
     provides:
-      Metrics::Any 0.06
-      Metrics::Any::Adapter 0.06
-      Metrics::Any::Adapter::File 0.06
-      Metrics::Any::Adapter::Null 0.06
-      Metrics::Any::Adapter::Stderr 0.06
-      Metrics::Any::Adapter::Tee 0.06
-      Metrics::Any::Adapter::Test 0.06
-      Metrics::Any::AdapterBase::Stored 0.06
-      Metrics::Any::Collector 0.06
+      Metrics::Any 0.07
+      Metrics::Any::Adapter 0.07
+      Metrics::Any::Adapter::File 0.07
+      Metrics::Any::Adapter::Null 0.07
+      Metrics::Any::Adapter::Stderr 0.07
+      Metrics::Any::Adapter::Tee 0.07
+      Metrics::Any::Adapter::Test 0.07
+      Metrics::Any::AdapterBase::Stored 0.07
+      Metrics::Any::Collector 0.07
     requirements:
       List::Util 1.29
       Module::Build 0.4004
