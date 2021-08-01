@@ -1,0 +1,11 @@
+name: Maybe Enable Auto-Merge
+on:
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  enable-auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'metacpan-bot' && contains(github.event.pull_request.labels.*.name, 'dependencies')
+    steps:
+    - uses: alexwilson/enable-github-automerge-action@1.0.0
