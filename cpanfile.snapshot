@@ -669,10 +669,10 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  Class-Data-Inheritable-0.08
-    pathname: T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz
+  Class-Data-Inheritable-0.09
+    pathname: R/RS/RSHERER/Class-Data-Inheritable-0.09.tar.gz
     provides:
-      Class::Data::Inheritable 0.08
+      Class::Data::Inheritable 0.09
     requirements:
       ExtUtils::MakeMaker 0
   Class-Inspector-1.36
@@ -5537,16 +5537,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  Test-NoWarnings-1.04
-    pathname: A/AD/ADAMK/Test-NoWarnings-1.04.tar.gz
+  Test-NoWarnings-1.06
+    pathname: H/HA/HAARG/Test-NoWarnings-1.06.tar.gz
     provides:
-      Test::NoWarnings 1.04
-      Test::NoWarnings::Warning 1.04
+      Test::NoWarnings 1.06
+      Test::NoWarnings::Warning 1.06
     requirements:
       ExtUtils::MakeMaker 0
       Test::Builder 0.86
-      Test::More 0.47
-      Test::Tester 0.107
       perl 5.006
   Test-Perl-Critic-1.04
     pathname: P/PE/PETDANCE/Test-Perl-Critic-1.04.tar.gz
@@ -5909,50 +5907,50 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.012003
-    pathname: T/TO/TOBYINK/Type-Tiny-1.012003.tar.gz
+  Type-Tiny-1.012004
+    pathname: T/TO/TOBYINK/Type-Tiny-1.012004.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.012003
-      Devel::TypeTiny::Perl58Compat 1.012003
-      Error::TypeTiny 1.012003
-      Error::TypeTiny::Assertion 1.012003
-      Error::TypeTiny::Compilation 1.012003
-      Error::TypeTiny::WrongNumberOfParameters 1.012003
-      Eval::TypeTiny 1.012003
-      Reply::Plugin::TypeTiny 1.012003
-      Test::TypeTiny 1.012003
-      Type::Coercion 1.012003
-      Type::Coercion::FromMoose 1.012003
-      Type::Coercion::Union 1.012003
-      Type::Library 1.012003
-      Type::Params 1.012003
-      Type::Parser 1.012003
+      Devel::TypeTiny::Perl56Compat 1.012004
+      Devel::TypeTiny::Perl58Compat 1.012004
+      Error::TypeTiny 1.012004
+      Error::TypeTiny::Assertion 1.012004
+      Error::TypeTiny::Compilation 1.012004
+      Error::TypeTiny::WrongNumberOfParameters 1.012004
+      Eval::TypeTiny 1.012004
+      Reply::Plugin::TypeTiny 1.012004
+      Test::TypeTiny 1.012004
+      Type::Coercion 1.012004
+      Type::Coercion::FromMoose 1.012004
+      Type::Coercion::Union 1.012004
+      Type::Library 1.012004
+      Type::Params 1.012004
+      Type::Parser 1.012004
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.012003
-      Type::Tiny 1.012003
-      Type::Tiny::Class 1.012003
-      Type::Tiny::ConstrainedObject 1.012003
-      Type::Tiny::Duck 1.012003
-      Type::Tiny::Enum 1.012003
-      Type::Tiny::Intersection 1.012003
-      Type::Tiny::Role 1.012003
-      Type::Tiny::Union 1.012003
-      Type::Utils 1.012003
-      Types::Common::Numeric 1.012003
-      Types::Common::String 1.012003
-      Types::Standard 1.012003
-      Types::Standard::ArrayRef 1.012003
-      Types::Standard::CycleTuple 1.012003
-      Types::Standard::Dict 1.012003
-      Types::Standard::HashRef 1.012003
-      Types::Standard::Map 1.012003
-      Types::Standard::ScalarRef 1.012003
-      Types::Standard::StrMatch 1.012003
-      Types::Standard::Tied 1.012003
-      Types::Standard::Tuple 1.012003
-      Types::TypeTiny 1.012003
+      Type::Registry 1.012004
+      Type::Tiny 1.012004
+      Type::Tiny::Class 1.012004
+      Type::Tiny::ConstrainedObject 1.012004
+      Type::Tiny::Duck 1.012004
+      Type::Tiny::Enum 1.012004
+      Type::Tiny::Intersection 1.012004
+      Type::Tiny::Role 1.012004
+      Type::Tiny::Union 1.012004
+      Type::Utils 1.012004
+      Types::Common::Numeric 1.012004
+      Types::Common::String 1.012004
+      Types::Standard 1.012004
+      Types::Standard::ArrayRef 1.012004
+      Types::Standard::CycleTuple 1.012004
+      Types::Standard::Dict 1.012004
+      Types::Standard::HashRef 1.012004
+      Types::Standard::Map 1.012004
+      Types::Standard::ScalarRef 1.012004
+      Types::Standard::StrMatch 1.012004
+      Types::Standard::Tied 1.012004
+      Types::Standard::Tuple 1.012004
+      Types::TypeTiny 1.012004
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
