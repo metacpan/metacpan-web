@@ -2200,10 +2200,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.36
       Socket 1.94
       Test::More 0
-  HTTP-Tiny-0.076
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.076.tar.gz
+  HTTP-Tiny-0.078
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.078.tar.gz
     provides:
-      HTTP::Tiny 0.076
+      HTTP::Tiny 0.078
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -2248,45 +2248,46 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  IO-Async-0.78
-    pathname: P/PE/PEVANS/IO-Async-0.78.tar.gz
+  IO-Async-0.79
+    pathname: P/PE/PEVANS/IO-Async-0.79.tar.gz
     provides:
       Future::IO::Impl::IOAsync undef
-      IO::Async 0.78
-      IO::Async::Channel 0.78
-      IO::Async::Debug 0.78
-      IO::Async::File 0.78
-      IO::Async::FileStream 0.78
-      IO::Async::Function 0.78
-      IO::Async::Future 0.78
-      IO::Async::Handle 0.78
-      IO::Async::Internals::ChildManager 0.78
-      IO::Async::Listener 0.78
-      IO::Async::Loop 0.78
-      IO::Async::Loop::Poll 0.78
-      IO::Async::Loop::Select 0.78
-      IO::Async::LoopTests 0.78
+      IO::Async 0.79
+      IO::Async::Channel 0.79
+      IO::Async::Debug 0.79
+      IO::Async::File 0.79
+      IO::Async::FileStream 0.79
+      IO::Async::Function 0.79
+      IO::Async::Future 0.79
+      IO::Async::Handle 0.79
+      IO::Async::Internals::ChildManager 0.79
+      IO::Async::Internals::FunctionWorker 0.79
+      IO::Async::Listener 0.79
+      IO::Async::Loop 0.79
+      IO::Async::Loop::Poll 0.79
+      IO::Async::Loop::Select 0.79
+      IO::Async::LoopTests 0.79
       IO::Async::Metrics undef
-      IO::Async::Notifier 0.78
-      IO::Async::OS 0.78
-      IO::Async::OS::MSWin32 0.78
-      IO::Async::OS::cygwin 0.78
-      IO::Async::OS::linux 0.78
-      IO::Async::PID 0.78
-      IO::Async::Process 0.78
-      IO::Async::Protocol 0.78
-      IO::Async::Protocol::LineStream 0.78
-      IO::Async::Protocol::Stream 0.78
-      IO::Async::Resolver 0.78
-      IO::Async::Routine 0.78
-      IO::Async::Signal 0.78
-      IO::Async::Socket 0.78
-      IO::Async::Stream 0.78
-      IO::Async::Test 0.78
-      IO::Async::Timer 0.78
-      IO::Async::Timer::Absolute 0.78
-      IO::Async::Timer::Countdown 0.78
-      IO::Async::Timer::Periodic 0.78
+      IO::Async::Notifier 0.79
+      IO::Async::OS 0.79
+      IO::Async::OS::MSWin32 0.79
+      IO::Async::OS::cygwin 0.79
+      IO::Async::OS::linux 0.79
+      IO::Async::PID 0.79
+      IO::Async::Process 0.79
+      IO::Async::Protocol 0.79
+      IO::Async::Protocol::LineStream 0.79
+      IO::Async::Protocol::Stream 0.79
+      IO::Async::Resolver 0.79
+      IO::Async::Routine 0.79
+      IO::Async::Signal 0.79
+      IO::Async::Socket 0.79
+      IO::Async::Stream 0.79
+      IO::Async::Test 0.79
+      IO::Async::Timer 0.79
+      IO::Async::Timer::Absolute 0.79
+      IO::Async::Timer::Countdown 0.79
+      IO::Async::Timer::Periodic 0.79
     requirements:
       Exporter 5.57
       File::stat 0
@@ -2576,43 +2577,28 @@ DISTRIBUTIONS
       if 0
       perl 5.006
       utf8 0
-  Log-Any-1.709
-    pathname: P/PR/PREACTION/Log-Any-1.709.tar.gz
+  Log-Any-1.710
+    pathname: P/PR/PREACTION/Log-Any-1.710.tar.gz
     provides:
-      Log::Any 1.709
-      Log::Any::Adapter 1.709
-      Log::Any::Adapter::Base 1.709
-      Log::Any::Adapter::Capture 1.709
-      Log::Any::Adapter::File 1.709
-      Log::Any::Adapter::Multiplex 1.709
-      Log::Any::Adapter::Null 1.709
-      Log::Any::Adapter::Stderr 1.709
-      Log::Any::Adapter::Stdout 1.709
-      Log::Any::Adapter::Syslog 1.709
-      Log::Any::Adapter::Test 1.709
-      Log::Any::Adapter::Util 1.709
-      Log::Any::Manager 1.709
-      Log::Any::Proxy 1.709
-      Log::Any::Proxy::Null 1.709
-      Log::Any::Proxy::Test 1.709
-      Log::Any::Test 1.709
+      Log::Any 1.710
+      Log::Any::Adapter 1.710
+      Log::Any::Adapter::Base 1.710
+      Log::Any::Adapter::Capture 1.710
+      Log::Any::Adapter::File 1.710
+      Log::Any::Adapter::Multiplex 1.710
+      Log::Any::Adapter::Null 1.710
+      Log::Any::Adapter::Stderr 1.710
+      Log::Any::Adapter::Stdout 1.710
+      Log::Any::Adapter::Syslog 1.710
+      Log::Any::Adapter::Test 1.710
+      Log::Any::Adapter::Util 1.710
+      Log::Any::Manager 1.710
+      Log::Any::Proxy 1.710
+      Log::Any::Proxy::Null 1.710
+      Log::Any::Proxy::Test 1.710
+      Log::Any::Test 1.710
     requirements:
-      B 0
-      Carp 0
-      Data::Dumper 0
-      Exporter 0
       ExtUtils::MakeMaker 0
-      Fcntl 0
-      File::Basename 0
-      FindBin 0
-      IO::File 0
-      List::Util 0
-      Storable 0
-      Sys::Syslog 0
-      Test::Builder 0
-      constant 0
-      strict 0
-      warnings 0
   Log-Dispatch-2.70
     pathname: D/DR/DROLSKY/Log-Dispatch-2.70.tar.gz
     provides:
@@ -6180,12 +6166,12 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  WWW-Mechanize-2.03
-    pathname: O/OA/OALDERS/WWW-Mechanize-2.03.tar.gz
+  WWW-Mechanize-2.04
+    pathname: O/OA/OALDERS/WWW-Mechanize-2.04.tar.gz
     provides:
-      WWW::Mechanize 2.03
-      WWW::Mechanize::Image 2.03
-      WWW::Mechanize::Link 2.03
+      WWW::Mechanize 2.04
+      WWW::Mechanize::Image 2.04
+      WWW::Mechanize::Link 2.04
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
