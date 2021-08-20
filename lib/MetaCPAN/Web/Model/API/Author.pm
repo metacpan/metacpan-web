@@ -164,6 +164,10 @@ my $profile_data = {
         name       => 'Open Hub',
         url_format => 'https://www.openhub.net/accounts/%s',
     },
+    orcid => {
+        name       => 'ORCID iD',
+        url_format => 'https://orcid.org/%s',
+    },
     perlmonks => {
         name       => 'PerlMonks',
         url_format => 'https://www.perlmonks.org/?node=%s',
