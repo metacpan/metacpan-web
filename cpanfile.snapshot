@@ -186,7 +186,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2311,18 +2310,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.071
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.071.tar.gz
+  IO-Socket-SSL-2.072
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.072.tar.gz
     provides:
-      IO::Socket::SSL 2.071
+      IO::Socket::SSL 2.072
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.071
-      IO::Socket::SSL::OCSP_Resolver 2.071
+      IO::Socket::SSL::OCSP_Cache 2.072
+      IO::Socket::SSL::OCSP_Resolver 2.072
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.071
-      IO::Socket::SSL::SSL_HANDLE 2.071
-      IO::Socket::SSL::Session_Cache 2.071
-      IO::Socket::SSL::Utils 2.014
+      IO::Socket::SSL::SSL_Context 2.072
+      IO::Socket::SSL::SSL_HANDLE 2.072
+      IO::Socket::SSL::Session_Cache 2.072
+      IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
       Mozilla::CA 0
@@ -6395,32 +6394,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.55
-    pathname: O/OA/OALDERS/libwww-perl-6.55.tar.gz
+  libwww-perl-6.56
+    pathname: O/OA/OALDERS/libwww-perl-6.56.tar.gz
     provides:
-      LWP 6.55
-      LWP::Authen::Basic 6.55
-      LWP::Authen::Digest 6.55
-      LWP::Authen::Ntlm 6.55
-      LWP::ConnCache 6.55
-      LWP::Debug 6.55
-      LWP::Debug::TraceHTTP 6.55
-      LWP::DebugFile 6.55
-      LWP::MemberMixin 6.55
-      LWP::Protocol 6.55
-      LWP::Protocol::cpan 6.55
-      LWP::Protocol::data 6.55
-      LWP::Protocol::file 6.55
-      LWP::Protocol::ftp 6.55
-      LWP::Protocol::gopher 6.55
-      LWP::Protocol::http 6.55
-      LWP::Protocol::loopback 6.55
-      LWP::Protocol::mailto 6.55
-      LWP::Protocol::nntp 6.55
-      LWP::Protocol::nogo 6.55
-      LWP::RobotUA 6.55
-      LWP::Simple 6.55
-      LWP::UserAgent 6.55
+      LWP 6.56
+      LWP::Authen::Basic 6.56
+      LWP::Authen::Digest 6.56
+      LWP::Authen::Ntlm 6.56
+      LWP::ConnCache 6.56
+      LWP::Debug 6.56
+      LWP::Debug::TraceHTTP 6.56
+      LWP::DebugFile 6.56
+      LWP::MemberMixin 6.56
+      LWP::Protocol 6.56
+      LWP::Protocol::cpan 6.56
+      LWP::Protocol::data 6.56
+      LWP::Protocol::file 6.56
+      LWP::Protocol::ftp 6.56
+      LWP::Protocol::gopher 6.56
+      LWP::Protocol::http 6.56
+      LWP::Protocol::loopback 6.56
+      LWP::Protocol::mailto 6.56
+      LWP::Protocol::nntp 6.56
+      LWP::Protocol::nogo 6.56
+      LWP::RobotUA 6.56
+      LWP::Simple 6.56
+      LWP::UserAgent 6.56
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
