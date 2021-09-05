@@ -2527,36 +2527,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.67
-    pathname: S/SB/SBECK/Locale-Codes-3.67.tar.gz
+  Locale-Codes-3.68
+    pathname: S/SB/SBECK/Locale-Codes-3.68.tar.gz
     provides:
-      Locale::Codes 3.67
-      Locale::Codes::Constants 3.67
-      Locale::Codes::Country 3.67
-      Locale::Codes::Country_Codes 3.67
-      Locale::Codes::Country_Retired 3.67
-      Locale::Codes::Currency 3.67
-      Locale::Codes::Currency_Codes 3.67
-      Locale::Codes::Currency_Retired 3.67
-      Locale::Codes::LangExt 3.67
-      Locale::Codes::LangExt_Codes 3.67
-      Locale::Codes::LangExt_Retired 3.67
-      Locale::Codes::LangFam 3.67
-      Locale::Codes::LangFam_Codes 3.67
-      Locale::Codes::LangFam_Retired 3.67
-      Locale::Codes::LangVar 3.67
-      Locale::Codes::LangVar_Codes 3.67
-      Locale::Codes::LangVar_Retired 3.67
-      Locale::Codes::Language 3.67
-      Locale::Codes::Language_Codes 3.67
-      Locale::Codes::Language_Retired 3.67
-      Locale::Codes::Script 3.67
-      Locale::Codes::Script_Codes 3.67
-      Locale::Codes::Script_Retired 3.67
-      Locale::Country 3.67
-      Locale::Currency 3.67
-      Locale::Language 3.67
-      Locale::Script 3.67
+      Locale::Codes 3.68
+      Locale::Codes::Constants 3.68
+      Locale::Codes::Country 3.68
+      Locale::Codes::Country_Codes 3.68
+      Locale::Codes::Country_Retired 3.68
+      Locale::Codes::Currency 3.68
+      Locale::Codes::Currency_Codes 3.68
+      Locale::Codes::Currency_Retired 3.68
+      Locale::Codes::LangExt 3.68
+      Locale::Codes::LangExt_Codes 3.68
+      Locale::Codes::LangExt_Retired 3.68
+      Locale::Codes::LangFam 3.68
+      Locale::Codes::LangFam_Codes 3.68
+      Locale::Codes::LangFam_Retired 3.68
+      Locale::Codes::LangVar 3.68
+      Locale::Codes::LangVar_Codes 3.68
+      Locale::Codes::LangVar_Retired 3.68
+      Locale::Codes::Language 3.68
+      Locale::Codes::Language_Codes 3.68
+      Locale::Codes::Language_Retired 3.68
+      Locale::Codes::Script 3.68
+      Locale::Codes::Script_Codes 3.68
+      Locale::Codes::Script_Retired 3.68
+      Locale::Country 3.68
+      Locale::Currency 3.68
+      Locale::Language 3.68
+      Locale::Script 3.68
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
