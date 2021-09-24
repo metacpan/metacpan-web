@@ -37,6 +37,6 @@
         <button class="btn search-btn help-btn">?</button>
     </div>
   </form>
-  <p class="helper_blurb">Just getting started with perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</p>
+  <p class="helper_blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</p>
 </div>
 %%  }
