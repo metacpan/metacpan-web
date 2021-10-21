@@ -41,7 +41,7 @@
     %%    : '/dist/' ~ $release.distribution;
     <li class="nav-header">
       <div class="ttip" data-toggle="tooltip" data-placement="right" title="The date that this version of [% $release.distribution %] was released.">
-      <span class="xxrelatize">[% datetime($release.date).to_http %]</span>
+      <span class="relatize">[% datetime($release.date).to_http %]</span>
     </li>
     %%  include inc::release_status { maturity => $release.maturity }
     %%  block left_nav_lead -> {
