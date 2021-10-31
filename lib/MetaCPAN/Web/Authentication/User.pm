@@ -46,7 +46,7 @@ has id             => ( is => 'ro' );
 has looks_human    => ( is => 'ro' );
 has passed_captcha => ( is => 'ro' );
 has access_token   => ( is => 'ro' );
-has identity       => (
+has identity => (
     is     => 'ro',
     isa    => HashRef->plus_coercions( ArrayToHash ['name'] ),
     coerce => 1,

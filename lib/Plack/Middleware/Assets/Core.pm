@@ -21,7 +21,7 @@ sub clone {
 has app => ( is => 'ro', required => 1 );
 has wrapped => ( is => 'lazy', init_arg => 0, reader => 'to_app' );
 
-has files     => ( is => 'ro', required => 1 );
+has files => ( is => 'ro', required => 1 );
 has read_file => (
     is      => 'ro',
     default => sub {

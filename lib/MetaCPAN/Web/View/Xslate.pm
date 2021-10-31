@@ -8,7 +8,7 @@ has '+syntax'      => ( default => 'Metakolon' );
 has '+encode_body' => ( default => 0 );
 has '+preload'     => ( default => 0 );
 has '+cache'       => ( default => 0 );
-has '+cache_dir'   => (
+has '+cache_dir' => (
     isa    => AbsPath,
     coerce => 1,
 );
