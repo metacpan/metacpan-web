@@ -7,83 +7,83 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.44
-    pathname: P/PL/PLICEASE/Alien-Build-2.44.tar.gz
+  Alien-Build-2.45
+    pathname: P/PL/PLICEASE/Alien-Build-2.45.tar.gz
     provides:
-      Alien::Base 2.44
-      Alien::Base::PkgConfig 2.44
-      Alien::Base::Wrapper 2.44
-      Alien::Build 2.44
-      Alien::Build::CommandSequence 2.44
-      Alien::Build::Helper 2.44
-      Alien::Build::Interpolate 2.44
-      Alien::Build::Interpolate::Default 2.44
-      Alien::Build::Interpolate::Helper 2.44
-      Alien::Build::Log 2.44
-      Alien::Build::Log::Abbreviate 2.44
-      Alien::Build::Log::Default 2.44
-      Alien::Build::MM 2.44
-      Alien::Build::Meta 2.44
-      Alien::Build::Plugin 2.44
-      Alien::Build::Plugin::Build::Autoconf 2.44
-      Alien::Build::Plugin::Build::CMake 2.44
-      Alien::Build::Plugin::Build::Copy 2.44
-      Alien::Build::Plugin::Build::MSYS 2.44
-      Alien::Build::Plugin::Build::Make 2.44
-      Alien::Build::Plugin::Build::SearchDep 2.44
-      Alien::Build::Plugin::Core::CleanInstall 2.44
-      Alien::Build::Plugin::Core::Download 2.44
-      Alien::Build::Plugin::Core::FFI 2.44
-      Alien::Build::Plugin::Core::Gather 2.44
-      Alien::Build::Plugin::Core::Legacy 2.44
-      Alien::Build::Plugin::Core::Override 2.44
-      Alien::Build::Plugin::Core::Setup 2.44
-      Alien::Build::Plugin::Core::Tail 2.44
-      Alien::Build::Plugin::Decode::DirListing 2.44
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.44
-      Alien::Build::Plugin::Decode::HTML 2.44
-      Alien::Build::Plugin::Decode::Mojo 2.44
-      Alien::Build::Plugin::Download::Negotiate 2.44
-      Alien::Build::Plugin::Extract::ArchiveTar 2.44
-      Alien::Build::Plugin::Extract::ArchiveZip 2.44
-      Alien::Build::Plugin::Extract::CommandLine 2.44
-      Alien::Build::Plugin::Extract::Directory 2.44
-      Alien::Build::Plugin::Extract::Negotiate 2.44
-      Alien::Build::Plugin::Fetch::CurlCommand 2.44
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.44
-      Alien::Build::Plugin::Fetch::LWP 2.44
-      Alien::Build::Plugin::Fetch::Local 2.44
-      Alien::Build::Plugin::Fetch::LocalDir 2.44
-      Alien::Build::Plugin::Fetch::NetFTP 2.44
-      Alien::Build::Plugin::Fetch::Wget 2.44
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.44
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.44
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.44
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.44
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.44
-      Alien::Build::Plugin::PkgConfig::PP 2.44
-      Alien::Build::Plugin::Prefer::BadVersion 2.44
-      Alien::Build::Plugin::Prefer::GoodVersion 2.44
-      Alien::Build::Plugin::Prefer::SortVersions 2.44
-      Alien::Build::Plugin::Probe::CBuilder 2.44
-      Alien::Build::Plugin::Probe::CommandLine 2.44
-      Alien::Build::Plugin::Probe::Vcpkg 2.44
-      Alien::Build::Plugin::Test::Mock 2.44
-      Alien::Build::PluginMeta 2.44
-      Alien::Build::Temp 2.44
-      Alien::Build::TempDir 2.44
-      Alien::Build::Util 2.44
-      Alien::Build::Version::Basic 2.44
-      Alien::Build::rc 2.44
-      Alien::Role 2.44
-      Test::Alien 2.44
-      Test::Alien::Build 2.44
-      Test::Alien::CanCompile 2.44
-      Test::Alien::CanPlatypus 2.44
-      Test::Alien::Diag 2.44
-      Test::Alien::Run 2.44
-      Test::Alien::Synthetic 2.44
-      alienfile 2.44
+      Alien::Base 2.45
+      Alien::Base::PkgConfig 2.45
+      Alien::Base::Wrapper 2.45
+      Alien::Build 2.45
+      Alien::Build::CommandSequence 2.45
+      Alien::Build::Helper 2.45
+      Alien::Build::Interpolate 2.45
+      Alien::Build::Interpolate::Default 2.45
+      Alien::Build::Interpolate::Helper 2.45
+      Alien::Build::Log 2.45
+      Alien::Build::Log::Abbreviate 2.45
+      Alien::Build::Log::Default 2.45
+      Alien::Build::MM 2.45
+      Alien::Build::Meta 2.45
+      Alien::Build::Plugin 2.45
+      Alien::Build::Plugin::Build::Autoconf 2.45
+      Alien::Build::Plugin::Build::CMake 2.45
+      Alien::Build::Plugin::Build::Copy 2.45
+      Alien::Build::Plugin::Build::MSYS 2.45
+      Alien::Build::Plugin::Build::Make 2.45
+      Alien::Build::Plugin::Build::SearchDep 2.45
+      Alien::Build::Plugin::Core::CleanInstall 2.45
+      Alien::Build::Plugin::Core::Download 2.45
+      Alien::Build::Plugin::Core::FFI 2.45
+      Alien::Build::Plugin::Core::Gather 2.45
+      Alien::Build::Plugin::Core::Legacy 2.45
+      Alien::Build::Plugin::Core::Override 2.45
+      Alien::Build::Plugin::Core::Setup 2.45
+      Alien::Build::Plugin::Core::Tail 2.45
+      Alien::Build::Plugin::Decode::DirListing 2.45
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.45
+      Alien::Build::Plugin::Decode::HTML 2.45
+      Alien::Build::Plugin::Decode::Mojo 2.45
+      Alien::Build::Plugin::Download::Negotiate 2.45
+      Alien::Build::Plugin::Extract::ArchiveTar 2.45
+      Alien::Build::Plugin::Extract::ArchiveZip 2.45
+      Alien::Build::Plugin::Extract::CommandLine 2.45
+      Alien::Build::Plugin::Extract::Directory 2.45
+      Alien::Build::Plugin::Extract::Negotiate 2.45
+      Alien::Build::Plugin::Fetch::CurlCommand 2.45
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.45
+      Alien::Build::Plugin::Fetch::LWP 2.45
+      Alien::Build::Plugin::Fetch::Local 2.45
+      Alien::Build::Plugin::Fetch::LocalDir 2.45
+      Alien::Build::Plugin::Fetch::NetFTP 2.45
+      Alien::Build::Plugin::Fetch::Wget 2.45
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.45
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.45
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.45
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.45
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.45
+      Alien::Build::Plugin::PkgConfig::PP 2.45
+      Alien::Build::Plugin::Prefer::BadVersion 2.45
+      Alien::Build::Plugin::Prefer::GoodVersion 2.45
+      Alien::Build::Plugin::Prefer::SortVersions 2.45
+      Alien::Build::Plugin::Probe::CBuilder 2.45
+      Alien::Build::Plugin::Probe::CommandLine 2.45
+      Alien::Build::Plugin::Probe::Vcpkg 2.45
+      Alien::Build::Plugin::Test::Mock 2.45
+      Alien::Build::PluginMeta 2.45
+      Alien::Build::Temp 2.45
+      Alien::Build::TempDir 2.45
+      Alien::Build::Util 2.45
+      Alien::Build::Version::Basic 2.45
+      Alien::Build::rc 2.45
+      Alien::Role 2.45
+      Test::Alien 2.45
+      Test::Alien::Build 2.45
+      Test::Alien::CanCompile 2.45
+      Test::Alien::CanPlatypus 2.45
+      Test::Alien::Diag 2.45
+      Test::Alien::Run 2.45
+      Test::Alien::Synthetic 2.45
+      alienfile 2.45
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -142,10 +142,10 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
-  B-Keywords-1.22
-    pathname: R/RU/RURBAN/B-Keywords-1.22.tar.gz
+  B-Keywords-1.23
+    pathname: R/RU/RURBAN/B-Keywords-1.23.tar.gz
     provides:
-      B::Keywords 1.22
+      B::Keywords 1.23
     requirements:
       B 0
       ExtUtils::MakeMaker 0
@@ -1113,15 +1113,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.32
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.32.tar.gz
+  DateTime-Locale-1.33
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.33.tar.gz
     provides:
-      DateTime::Locale 1.32
-      DateTime::Locale::Base 1.32
-      DateTime::Locale::Catalog 1.32
-      DateTime::Locale::Data 1.32
-      DateTime::Locale::FromData 1.32
-      DateTime::Locale::Util 1.32
+      DateTime::Locale 1.33
+      DateTime::Locale::Base 1.33
+      DateTime::Locale::Catalog 1.33
+      DateTime::Locale::Data 1.33
+      DateTime::Locale::FromData 1.33
+      DateTime::Locale::Util 1.33
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -1856,12 +1856,12 @@ DISTRIBUTIONS
       Server::Starter 0
       Stream::Buffered 0
       perl 5.008001
-  Getopt-Long-Descriptive-0.109
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.109.tar.gz
+  Getopt-Long-Descriptive-0.110
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.110.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.109
-      Getopt::Long::Descriptive::Opts 0.109
-      Getopt::Long::Descriptive::Usage 0.109
+      Getopt::Long::Descriptive 0.110
+      Getopt::Long::Descriptive::Opts 0.110
+      Getopt::Long::Descriptive::Usage 0.110
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -1873,7 +1873,7 @@ DISTRIBUTIONS
       Sub::Exporter 0.972
       Sub::Exporter::Util 0
       overload 0
-      perl 5.010001
+      perl 5.012
       strict 0
       warnings 0
   Gravatar-URL-1.07
@@ -2178,10 +2178,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.36
       Socket 1.94
       Test::More 0
-  HTTP-Tiny-0.078
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.078.tar.gz
+  HTTP-Tiny-0.080
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.080.tar.gz
     provides:
-      HTTP::Tiny 0.078
+      HTTP::Tiny 0.080
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -2754,12 +2754,12 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MIME-Types-2.21
-    pathname: M/MA/MARKOV/MIME-Types-2.21.tar.gz
+  MIME-Types-2.22
+    pathname: M/MA/MARKOV/MIME-Types-2.22.tar.gz
     provides:
-      MIME::Type 2.21
-      MIME::Types 2.21
-      MojoX::MIME::Types 2.21
+      MIME::Type 2.22
+      MIME::Types 2.22
+      MojoX::MIME::Types 2.22
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -3093,446 +3093,446 @@ DISTRIBUTIONS
       Sub::Defer 2.006006
       Sub::Quote 2.006006
       perl 5.006
-  Moose-2.2015
-    pathname: E/ET/ETHER/Moose-2.2015.tar.gz
+  Moose-2.2201
+    pathname: E/ET/ETHER/Moose-2.2201.tar.gz
     provides:
-      Class::MOP 2.2015
-      Class::MOP::Attribute 2.2015
-      Class::MOP::Class 2.2015
-      Class::MOP::Class::Immutable::Trait 2.2015
-      Class::MOP::Deprecated 2.2015
-      Class::MOP::Instance 2.2015
-      Class::MOP::Method 2.2015
-      Class::MOP::Method::Accessor 2.2015
-      Class::MOP::Method::Constructor 2.2015
-      Class::MOP::Method::Generated 2.2015
-      Class::MOP::Method::Inlined 2.2015
-      Class::MOP::Method::Meta 2.2015
-      Class::MOP::Method::Wrapped 2.2015
-      Class::MOP::MiniTrait 2.2015
-      Class::MOP::Mixin 2.2015
-      Class::MOP::Mixin::AttributeCore 2.2015
-      Class::MOP::Mixin::HasAttributes 2.2015
-      Class::MOP::Mixin::HasMethods 2.2015
-      Class::MOP::Mixin::HasOverloads 2.2015
-      Class::MOP::Module 2.2015
-      Class::MOP::Object 2.2015
-      Class::MOP::Overload 2.2015
-      Class::MOP::Package 2.2015
-      Moose 2.2015
-      Moose::Cookbook 2.2015
-      Moose::Cookbook::Basics::BankAccount_MethodModifiersAndSubclassing 2.2015
-      Moose::Cookbook::Basics::BinaryTree_AttributeFeatures 2.2015
-      Moose::Cookbook::Basics::BinaryTree_BuilderAndLazyBuild 2.2015
-      Moose::Cookbook::Basics::Company_Subtypes 2.2015
-      Moose::Cookbook::Basics::DateTime_ExtendingNonMooseParent 2.2015
-      Moose::Cookbook::Basics::Document_AugmentAndInner 2.2015
-      Moose::Cookbook::Basics::Genome_OverloadingSubtypesAndCoercion 2.2015
-      Moose::Cookbook::Basics::HTTP_SubtypesAndCoercion 2.2015
-      Moose::Cookbook::Basics::Immutable 2.2015
-      Moose::Cookbook::Basics::Person_BUILDARGSAndBUILD 2.2015
-      Moose::Cookbook::Basics::Point_AttributesAndSubclassing 2.2015
-      Moose::Cookbook::Extending::Debugging_BaseClassRole 2.2015
-      Moose::Cookbook::Extending::ExtensionOverview 2.2015
-      Moose::Cookbook::Extending::Mooseish_MooseSugar 2.2015
-      Moose::Cookbook::Legacy::Debugging_BaseClassReplacement 2.2015
-      Moose::Cookbook::Legacy::Labeled_AttributeMetaclass 2.2015
-      Moose::Cookbook::Legacy::Table_ClassMetaclass 2.2015
-      Moose::Cookbook::Meta::GlobRef_InstanceMetaclass 2.2015
-      Moose::Cookbook::Meta::Labeled_AttributeTrait 2.2015
-      Moose::Cookbook::Meta::PrivateOrPublic_MethodMetaclass 2.2015
-      Moose::Cookbook::Meta::Table_MetaclassTrait 2.2015
-      Moose::Cookbook::Meta::WhyMeta 2.2015
-      Moose::Cookbook::Roles::ApplicationToInstance 2.2015
-      Moose::Cookbook::Roles::Comparable_CodeReuse 2.2015
-      Moose::Cookbook::Roles::Restartable_AdvancedComposition 2.2015
-      Moose::Cookbook::Snack::Keywords 2.2015
-      Moose::Cookbook::Snack::Types 2.2015
-      Moose::Cookbook::Style 2.2015
-      Moose::Deprecated 2.2015
-      Moose::Exception 2.2015
-      Moose::Exception::AccessorMustReadWrite 2.2015
-      Moose::Exception::AddParameterizableTypeTakesParameterizableType 2.2015
-      Moose::Exception::AddRoleTakesAMooseMetaRoleInstance 2.2015
-      Moose::Exception::AddRoleToARoleTakesAMooseMetaRole 2.2015
-      Moose::Exception::ApplyTakesABlessedInstance 2.2015
-      Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass 2.2015
-      Moose::Exception::AttributeConflictInRoles 2.2015
-      Moose::Exception::AttributeConflictInSummation 2.2015
-      Moose::Exception::AttributeExtensionIsNotSupportedInRoles 2.2015
-      Moose::Exception::AttributeIsRequired 2.2015
-      Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass 2.2015
-      Moose::Exception::AttributeNamesDoNotMatch 2.2015
-      Moose::Exception::AttributeValueIsNotAnObject 2.2015
-      Moose::Exception::AttributeValueIsNotDefined 2.2015
-      Moose::Exception::AutoDeRefNeedsArrayRefOrHashRef 2.2015
-      Moose::Exception::BadOptionFormat 2.2015
-      Moose::Exception::BothBuilderAndDefaultAreNotAllowed 2.2015
-      Moose::Exception::BuilderDoesNotExist 2.2015
-      Moose::Exception::BuilderMethodNotSupportedForAttribute 2.2015
-      Moose::Exception::BuilderMethodNotSupportedForInlineAttribute 2.2015
-      Moose::Exception::BuilderMustBeAMethodName 2.2015
-      Moose::Exception::CallingMethodOnAnImmutableInstance 2.2015
-      Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance 2.2015
-      Moose::Exception::CanExtendOnlyClasses 2.2015
-      Moose::Exception::CanOnlyConsumeRole 2.2015
-      Moose::Exception::CanOnlyWrapBlessedCode 2.2015
-      Moose::Exception::CanReblessOnlyIntoASubclass 2.2015
-      Moose::Exception::CanReblessOnlyIntoASuperclass 2.2015
-      Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion 2.2015
-      Moose::Exception::CannotAddAsAnAttributeToARole 2.2015
-      Moose::Exception::CannotApplyBaseClassRolesToRole 2.2015
-      Moose::Exception::CannotAssignValueToReadOnlyAccessor 2.2015
-      Moose::Exception::CannotAugmentIfLocalMethodPresent 2.2015
-      Moose::Exception::CannotAugmentNoSuperMethod 2.2015
-      Moose::Exception::CannotAutoDerefWithoutIsa 2.2015
-      Moose::Exception::CannotAutoDereferenceTypeConstraint 2.2015
-      Moose::Exception::CannotCalculateNativeType 2.2015
-      Moose::Exception::CannotCallAnAbstractBaseMethod 2.2015
-      Moose::Exception::CannotCallAnAbstractMethod 2.2015
-      Moose::Exception::CannotCoerceAWeakRef 2.2015
-      Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion 2.2015
-      Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter 2.2015
-      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent 2.2015
-      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass 2.2015
-      Moose::Exception::CannotDelegateLocalMethodIsPresent 2.2015
-      Moose::Exception::CannotDelegateWithoutIsa 2.2015
-      Moose::Exception::CannotFindDelegateMetaclass 2.2015
-      Moose::Exception::CannotFindType 2.2015
-      Moose::Exception::CannotFindTypeGivenToMatchOnType 2.2015
-      Moose::Exception::CannotFixMetaclassCompatibility 2.2015
-      Moose::Exception::CannotGenerateInlineConstraint 2.2015
-      Moose::Exception::CannotInitializeMooseMetaRoleComposite 2.2015
-      Moose::Exception::CannotInlineTypeConstraintCheck 2.2015
-      Moose::Exception::CannotLocatePackageInINC 2.2015
-      Moose::Exception::CannotMakeMetaclassCompatible 2.2015
-      Moose::Exception::CannotOverrideALocalMethod 2.2015
-      Moose::Exception::CannotOverrideBodyOfMetaMethods 2.2015
-      Moose::Exception::CannotOverrideLocalMethodIsPresent 2.2015
-      Moose::Exception::CannotOverrideNoSuperMethod 2.2015
-      Moose::Exception::CannotRegisterUnnamedTypeConstraint 2.2015
-      Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously 2.2015
-      Moose::Exception::CircularReferenceInAlso 2.2015
-      Moose::Exception::ClassDoesNotHaveInitMeta 2.2015
-      Moose::Exception::ClassDoesTheExcludedRole 2.2015
-      Moose::Exception::ClassNamesDoNotMatch 2.2015
-      Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass 2.2015
-      Moose::Exception::CodeBlockMustBeACodeRef 2.2015
-      Moose::Exception::CoercingWithoutCoercions 2.2015
-      Moose::Exception::CoercionAlreadyExists 2.2015
-      Moose::Exception::CoercionNeedsTypeConstraint 2.2015
-      Moose::Exception::ConflictDetectedInCheckRoleExclusions 2.2015
-      Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass 2.2015
-      Moose::Exception::ConstructClassInstanceTakesPackageName 2.2015
-      Moose::Exception::CouldNotCreateMethod 2.2015
-      Moose::Exception::CouldNotCreateWriter 2.2015
-      Moose::Exception::CouldNotEvalConstructor 2.2015
-      Moose::Exception::CouldNotEvalDestructor 2.2015
-      Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom 2.2015
-      Moose::Exception::CouldNotGenerateInlineAttributeMethod 2.2015
-      Moose::Exception::CouldNotLocateTypeConstraintForUnion 2.2015
-      Moose::Exception::CouldNotParseType 2.2015
-      Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes 2.2015
-      Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses 2.2015
-      Moose::Exception::CreateMOPClassTakesHashRefOfMethods 2.2015
-      Moose::Exception::CreateTakesArrayRefOfRoles 2.2015
-      Moose::Exception::CreateTakesHashRefOfAttributes 2.2015
-      Moose::Exception::CreateTakesHashRefOfMethods 2.2015
-      Moose::Exception::DefaultToMatchOnTypeMustBeCodeRef 2.2015
-      Moose::Exception::DelegationToAClassWhichIsNotLoaded 2.2015
-      Moose::Exception::DelegationToARoleWhichIsNotLoaded 2.2015
-      Moose::Exception::DelegationToATypeWhichIsNotAClass 2.2015
-      Moose::Exception::DoesRequiresRoleName 2.2015
-      Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs 2.2015
-      Moose::Exception::EnumValuesMustBeString 2.2015
-      Moose::Exception::ExtendsMissingArgs 2.2015
-      Moose::Exception::HandlesMustBeAHashRef 2.2015
-      Moose::Exception::IllegalInheritedOptions 2.2015
-      Moose::Exception::IllegalMethodTypeToAddMethodModifier 2.2015
-      Moose::Exception::IncompatibleMetaclassOfSuperclass 2.2015
-      Moose::Exception::InitMetaRequiresClass 2.2015
-      Moose::Exception::InitializeTakesUnBlessedPackageName 2.2015
-      Moose::Exception::InstanceBlessedIntoWrongClass 2.2015
-      Moose::Exception::InstanceMustBeABlessedReference 2.2015
-      Moose::Exception::InvalidArgPassedToMooseUtilMetaRole 2.2015
-      Moose::Exception::InvalidArgumentToMethod 2.2015
-      Moose::Exception::InvalidArgumentsToTraitAliases 2.2015
-      Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint 2.2015
-      Moose::Exception::InvalidHandleValue 2.2015
-      Moose::Exception::InvalidHasProvidedInARole 2.2015
-      Moose::Exception::InvalidNameForType 2.2015
-      Moose::Exception::InvalidOverloadOperator 2.2015
-      Moose::Exception::InvalidRoleApplication 2.2015
-      Moose::Exception::InvalidTypeConstraint 2.2015
-      Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint 2.2015
-      Moose::Exception::InvalidValueForIs 2.2015
-      Moose::Exception::IsaDoesNotDoTheRole 2.2015
-      Moose::Exception::IsaLacksDoesMethod 2.2015
-      Moose::Exception::LazyAttributeNeedsADefault 2.2015
-      Moose::Exception::Legacy 2.2015
-      Moose::Exception::MOPAttributeNewNeedsAttributeName 2.2015
-      Moose::Exception::MatchActionMustBeACodeRef 2.2015
-      Moose::Exception::MessageParameterMustBeCodeRef 2.2015
-      Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass 2.2015
-      Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass 2.2015
-      Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass 2.2015
-      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass 2.2015
-      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole 2.2015
-      Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass 2.2015
-      Moose::Exception::MetaclassNotLoaded 2.2015
-      Moose::Exception::MetaclassTypeIncompatible 2.2015
-      Moose::Exception::MethodExpectedAMetaclassObject 2.2015
-      Moose::Exception::MethodExpectsFewerArgs 2.2015
-      Moose::Exception::MethodExpectsMoreArgs 2.2015
-      Moose::Exception::MethodModifierNeedsMethodName 2.2015
-      Moose::Exception::MethodNameConflictInRoles 2.2015
-      Moose::Exception::MethodNameNotFoundInInheritanceHierarchy 2.2015
-      Moose::Exception::MethodNameNotGiven 2.2015
-      Moose::Exception::MustDefineAMethodName 2.2015
-      Moose::Exception::MustDefineAnAttributeName 2.2015
-      Moose::Exception::MustDefineAnOverloadOperator 2.2015
-      Moose::Exception::MustHaveAtLeastOneValueToEnumerate 2.2015
-      Moose::Exception::MustPassAHashOfOptions 2.2015
-      Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass 2.2015
-      Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance 2.2015
-      Moose::Exception::MustPassEvenNumberOfArguments 2.2015
-      Moose::Exception::MustPassEvenNumberOfAttributeOptions 2.2015
-      Moose::Exception::MustProvideANameForTheAttribute 2.2015
-      Moose::Exception::MustSpecifyAtleastOneMethod 2.2015
-      Moose::Exception::MustSpecifyAtleastOneRole 2.2015
-      Moose::Exception::MustSpecifyAtleastOneRoleToApplicant 2.2015
-      Moose::Exception::MustSupplyAClassMOPAttributeInstance 2.2015
-      Moose::Exception::MustSupplyADelegateToMethod 2.2015
-      Moose::Exception::MustSupplyAMetaclass 2.2015
-      Moose::Exception::MustSupplyAMooseMetaAttributeInstance 2.2015
-      Moose::Exception::MustSupplyAnAccessorTypeToConstructWith 2.2015
-      Moose::Exception::MustSupplyAnAttributeToConstructWith 2.2015
-      Moose::Exception::MustSupplyArrayRefAsCurriedArguments 2.2015
-      Moose::Exception::MustSupplyPackageNameAndName 2.2015
-      Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion 2.2015
-      Moose::Exception::NeitherAttributeNorAttributeNameIsGiven 2.2015
-      Moose::Exception::NeitherClassNorClassNameIsGiven 2.2015
-      Moose::Exception::NeitherRoleNorRoleNameIsGiven 2.2015
-      Moose::Exception::NeitherTypeNorTypeNameIsGiven 2.2015
-      Moose::Exception::NoAttributeFoundInSuperClass 2.2015
-      Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass 2.2015
-      Moose::Exception::NoCasesMatched 2.2015
-      Moose::Exception::NoConstraintCheckForTypeConstraint 2.2015
-      Moose::Exception::NoDestructorClassSpecified 2.2015
-      Moose::Exception::NoImmutableTraitSpecifiedForClass 2.2015
-      Moose::Exception::NoParentGivenToSubtype 2.2015
-      Moose::Exception::OnlyInstancesCanBeCloned 2.2015
-      Moose::Exception::OperatorIsRequired 2.2015
-      Moose::Exception::OverloadConflictInSummation 2.2015
-      Moose::Exception::OverloadRequiresAMetaClass 2.2015
-      Moose::Exception::OverloadRequiresAMetaMethod 2.2015
-      Moose::Exception::OverloadRequiresAMetaOverload 2.2015
-      Moose::Exception::OverloadRequiresAMethodNameOrCoderef 2.2015
-      Moose::Exception::OverloadRequiresAnOperator 2.2015
-      Moose::Exception::OverloadRequiresNamesForCoderef 2.2015
-      Moose::Exception::OverrideConflictInComposition 2.2015
-      Moose::Exception::OverrideConflictInSummation 2.2015
-      Moose::Exception::PackageDoesNotUseMooseExporter 2.2015
-      Moose::Exception::PackageNameAndNameParamsNotGivenToWrap 2.2015
-      Moose::Exception::PackagesAndModulesAreNotCachable 2.2015
-      Moose::Exception::ParameterIsNotSubtypeOfParent 2.2015
-      Moose::Exception::ReferencesAreNotAllowedAsDefault 2.2015
-      Moose::Exception::RequiredAttributeLacksInitialization 2.2015
-      Moose::Exception::RequiredAttributeNeedsADefault 2.2015
-      Moose::Exception::RequiredMethodsImportedByClass 2.2015
-      Moose::Exception::RequiredMethodsNotImplementedByClass 2.2015
-      Moose::Exception::Role::Attribute 2.2015
-      Moose::Exception::Role::AttributeName 2.2015
-      Moose::Exception::Role::Class 2.2015
-      Moose::Exception::Role::EitherAttributeOrAttributeName 2.2015
-      Moose::Exception::Role::Instance 2.2015
-      Moose::Exception::Role::InstanceClass 2.2015
-      Moose::Exception::Role::InvalidAttributeOptions 2.2015
-      Moose::Exception::Role::Method 2.2015
-      Moose::Exception::Role::ParamsHash 2.2015
-      Moose::Exception::Role::Role 2.2015
-      Moose::Exception::Role::RoleForCreate 2.2015
-      Moose::Exception::Role::RoleForCreateMOPClass 2.2015
-      Moose::Exception::Role::TypeConstraint 2.2015
-      Moose::Exception::RoleDoesTheExcludedRole 2.2015
-      Moose::Exception::RoleExclusionConflict 2.2015
-      Moose::Exception::RoleNameRequired 2.2015
-      Moose::Exception::RoleNameRequiredForMooseMetaRole 2.2015
-      Moose::Exception::RolesDoNotSupportAugment 2.2015
-      Moose::Exception::RolesDoNotSupportExtends 2.2015
-      Moose::Exception::RolesDoNotSupportInner 2.2015
-      Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers 2.2015
-      Moose::Exception::RolesInCreateTakesAnArrayRef 2.2015
-      Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole 2.2015
-      Moose::Exception::SingleParamsToNewMustBeHashRef 2.2015
-      Moose::Exception::TriggerMustBeACodeRef 2.2015
-      Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType 2.2015
-      Moose::Exception::TypeConstraintIsAlreadyCreated 2.2015
-      Moose::Exception::TypeParameterMustBeMooseMetaType 2.2015
-      Moose::Exception::UnableToCanonicalizeHandles 2.2015
-      Moose::Exception::UnableToCanonicalizeNonRolePackage 2.2015
-      Moose::Exception::UnableToRecognizeDelegateMetaclass 2.2015
-      Moose::Exception::UndefinedHashKeysPassedToMethod 2.2015
-      Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs 2.2015
-      Moose::Exception::UnionTakesAtleastTwoTypeNames 2.2015
-      Moose::Exception::ValidationFailedForInlineTypeConstraint 2.2015
-      Moose::Exception::ValidationFailedForTypeConstraint 2.2015
-      Moose::Exception::WrapTakesACodeRefToBless 2.2015
-      Moose::Exception::WrongTypeConstraintGiven 2.2015
-      Moose::Exporter 2.2015
-      Moose::Intro 2.2015
-      Moose::Manual 2.2015
-      Moose::Manual::Attributes 2.2015
-      Moose::Manual::BestPractices 2.2015
-      Moose::Manual::Classes 2.2015
-      Moose::Manual::Concepts 2.2015
-      Moose::Manual::Construction 2.2015
-      Moose::Manual::Contributing 2.2015
-      Moose::Manual::Delegation 2.2015
-      Moose::Manual::Delta 2.2015
-      Moose::Manual::Exceptions 2.2015
-      Moose::Manual::Exceptions::Manifest 2.2015
-      Moose::Manual::FAQ 2.2015
-      Moose::Manual::MOP 2.2015
-      Moose::Manual::MethodModifiers 2.2015
-      Moose::Manual::MooseX 2.2015
-      Moose::Manual::Resources 2.2015
-      Moose::Manual::Roles 2.2015
-      Moose::Manual::Support 2.2015
-      Moose::Manual::Types 2.2015
-      Moose::Manual::Unsweetened 2.2015
-      Moose::Meta::Attribute 2.2015
-      Moose::Meta::Attribute::Native 2.2015
-      Moose::Meta::Attribute::Native::Trait 2.2015
-      Moose::Meta::Attribute::Native::Trait::Array 2.2015
-      Moose::Meta::Attribute::Native::Trait::Bool 2.2015
-      Moose::Meta::Attribute::Native::Trait::Code 2.2015
-      Moose::Meta::Attribute::Native::Trait::Counter 2.2015
-      Moose::Meta::Attribute::Native::Trait::Hash 2.2015
-      Moose::Meta::Attribute::Native::Trait::Number 2.2015
-      Moose::Meta::Attribute::Native::Trait::String 2.2015
-      Moose::Meta::Class 2.2015
-      Moose::Meta::Class::Immutable::Trait 2.2015
-      Moose::Meta::Instance 2.2015
-      Moose::Meta::Method 2.2015
-      Moose::Meta::Method::Accessor 2.2015
-      Moose::Meta::Method::Accessor::Native 2.2015
-      Moose::Meta::Method::Accessor::Native::Array 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::Writer 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::accessor 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::clear 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::count 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::delete 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::elements 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::first 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::first_index 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::get 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::grep 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::insert 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::is_empty 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::join 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::map 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::natatime 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::pop 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::push 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::reduce 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::set 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::shallow_clone 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::shift 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::shuffle 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::sort 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::sort_in_place 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::splice 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::uniq 2.2015
-      Moose::Meta::Method::Accessor::Native::Array::unshift 2.2015
-      Moose::Meta::Method::Accessor::Native::Bool::not 2.2015
-      Moose::Meta::Method::Accessor::Native::Bool::set 2.2015
-      Moose::Meta::Method::Accessor::Native::Bool::toggle 2.2015
-      Moose::Meta::Method::Accessor::Native::Bool::unset 2.2015
-      Moose::Meta::Method::Accessor::Native::Code::execute 2.2015
-      Moose::Meta::Method::Accessor::Native::Code::execute_method 2.2015
-      Moose::Meta::Method::Accessor::Native::Collection 2.2015
-      Moose::Meta::Method::Accessor::Native::Counter::Writer 2.2015
-      Moose::Meta::Method::Accessor::Native::Counter::dec 2.2015
-      Moose::Meta::Method::Accessor::Native::Counter::inc 2.2015
-      Moose::Meta::Method::Accessor::Native::Counter::reset 2.2015
-      Moose::Meta::Method::Accessor::Native::Counter::set 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::Writer 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::accessor 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::clear 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::count 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::defined 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::delete 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::elements 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::exists 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::get 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::is_empty 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::keys 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::kv 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::set 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone 2.2015
-      Moose::Meta::Method::Accessor::Native::Hash::values 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::abs 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::add 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::div 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::mod 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::mul 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::set 2.2015
-      Moose::Meta::Method::Accessor::Native::Number::sub 2.2015
-      Moose::Meta::Method::Accessor::Native::Reader 2.2015
-      Moose::Meta::Method::Accessor::Native::String::append 2.2015
-      Moose::Meta::Method::Accessor::Native::String::chomp 2.2015
-      Moose::Meta::Method::Accessor::Native::String::chop 2.2015
-      Moose::Meta::Method::Accessor::Native::String::clear 2.2015
-      Moose::Meta::Method::Accessor::Native::String::inc 2.2015
-      Moose::Meta::Method::Accessor::Native::String::length 2.2015
-      Moose::Meta::Method::Accessor::Native::String::match 2.2015
-      Moose::Meta::Method::Accessor::Native::String::prepend 2.2015
-      Moose::Meta::Method::Accessor::Native::String::replace 2.2015
-      Moose::Meta::Method::Accessor::Native::String::substr 2.2015
-      Moose::Meta::Method::Accessor::Native::Writer 2.2015
-      Moose::Meta::Method::Augmented 2.2015
-      Moose::Meta::Method::Constructor 2.2015
-      Moose::Meta::Method::Delegation 2.2015
-      Moose::Meta::Method::Destructor 2.2015
-      Moose::Meta::Method::Meta 2.2015
-      Moose::Meta::Method::Overridden 2.2015
-      Moose::Meta::Mixin::AttributeCore 2.2015
-      Moose::Meta::Object::Trait 2.2015
-      Moose::Meta::Role 2.2015
-      Moose::Meta::Role::Application 2.2015
-      Moose::Meta::Role::Application::RoleSummation 2.2015
-      Moose::Meta::Role::Application::ToClass 2.2015
-      Moose::Meta::Role::Application::ToInstance 2.2015
-      Moose::Meta::Role::Application::ToRole 2.2015
-      Moose::Meta::Role::Attribute 2.2015
-      Moose::Meta::Role::Composite 2.2015
-      Moose::Meta::Role::Method 2.2015
-      Moose::Meta::Role::Method::Conflicting 2.2015
-      Moose::Meta::Role::Method::Required 2.2015
-      Moose::Meta::TypeCoercion 2.2015
-      Moose::Meta::TypeCoercion::Union 2.2015
-      Moose::Meta::TypeConstraint 2.2015
-      Moose::Meta::TypeConstraint::Class 2.2015
-      Moose::Meta::TypeConstraint::DuckType 2.2015
-      Moose::Meta::TypeConstraint::Enum 2.2015
-      Moose::Meta::TypeConstraint::Parameterizable 2.2015
-      Moose::Meta::TypeConstraint::Parameterized 2.2015
-      Moose::Meta::TypeConstraint::Registry 2.2015
-      Moose::Meta::TypeConstraint::Role 2.2015
-      Moose::Meta::TypeConstraint::Union 2.2015
-      Moose::Object 2.2015
-      Moose::Role 2.2015
-      Moose::Spec::Role 2.2015
-      Moose::Unsweetened 2.2015
-      Moose::Util 2.2015
-      Moose::Util::MetaRole 2.2015
-      Moose::Util::TypeConstraints 2.2015
-      Moose::Util::TypeConstraints::Builtins 2.2015
-      Test::Moose 2.2015
-      metaclass 2.2015
-      oose 2.2015
+      Class::MOP 2.2201
+      Class::MOP::Attribute 2.2201
+      Class::MOP::Class 2.2201
+      Class::MOP::Class::Immutable::Trait 2.2201
+      Class::MOP::Deprecated 2.2201
+      Class::MOP::Instance 2.2201
+      Class::MOP::Method 2.2201
+      Class::MOP::Method::Accessor 2.2201
+      Class::MOP::Method::Constructor 2.2201
+      Class::MOP::Method::Generated 2.2201
+      Class::MOP::Method::Inlined 2.2201
+      Class::MOP::Method::Meta 2.2201
+      Class::MOP::Method::Wrapped 2.2201
+      Class::MOP::MiniTrait 2.2201
+      Class::MOP::Mixin 2.2201
+      Class::MOP::Mixin::AttributeCore 2.2201
+      Class::MOP::Mixin::HasAttributes 2.2201
+      Class::MOP::Mixin::HasMethods 2.2201
+      Class::MOP::Mixin::HasOverloads 2.2201
+      Class::MOP::Module 2.2201
+      Class::MOP::Object 2.2201
+      Class::MOP::Overload 2.2201
+      Class::MOP::Package 2.2201
+      Moose 2.2201
+      Moose::Cookbook 2.2201
+      Moose::Cookbook::Basics::BankAccount_MethodModifiersAndSubclassing 2.2201
+      Moose::Cookbook::Basics::BinaryTree_AttributeFeatures 2.2201
+      Moose::Cookbook::Basics::BinaryTree_BuilderAndLazyBuild 2.2201
+      Moose::Cookbook::Basics::Company_Subtypes 2.2201
+      Moose::Cookbook::Basics::DateTime_ExtendingNonMooseParent 2.2201
+      Moose::Cookbook::Basics::Document_AugmentAndInner 2.2201
+      Moose::Cookbook::Basics::Genome_OverloadingSubtypesAndCoercion 2.2201
+      Moose::Cookbook::Basics::HTTP_SubtypesAndCoercion 2.2201
+      Moose::Cookbook::Basics::Immutable 2.2201
+      Moose::Cookbook::Basics::Person_BUILDARGSAndBUILD 2.2201
+      Moose::Cookbook::Basics::Point_AttributesAndSubclassing 2.2201
+      Moose::Cookbook::Extending::Debugging_BaseClassRole 2.2201
+      Moose::Cookbook::Extending::ExtensionOverview 2.2201
+      Moose::Cookbook::Extending::Mooseish_MooseSugar 2.2201
+      Moose::Cookbook::Legacy::Debugging_BaseClassReplacement 2.2201
+      Moose::Cookbook::Legacy::Labeled_AttributeMetaclass 2.2201
+      Moose::Cookbook::Legacy::Table_ClassMetaclass 2.2201
+      Moose::Cookbook::Meta::GlobRef_InstanceMetaclass 2.2201
+      Moose::Cookbook::Meta::Labeled_AttributeTrait 2.2201
+      Moose::Cookbook::Meta::PrivateOrPublic_MethodMetaclass 2.2201
+      Moose::Cookbook::Meta::Table_MetaclassTrait 2.2201
+      Moose::Cookbook::Meta::WhyMeta 2.2201
+      Moose::Cookbook::Roles::ApplicationToInstance 2.2201
+      Moose::Cookbook::Roles::Comparable_CodeReuse 2.2201
+      Moose::Cookbook::Roles::Restartable_AdvancedComposition 2.2201
+      Moose::Cookbook::Snack::Keywords 2.2201
+      Moose::Cookbook::Snack::Types 2.2201
+      Moose::Cookbook::Style 2.2201
+      Moose::Deprecated 2.2201
+      Moose::Exception 2.2201
+      Moose::Exception::AccessorMustReadWrite 2.2201
+      Moose::Exception::AddParameterizableTypeTakesParameterizableType 2.2201
+      Moose::Exception::AddRoleTakesAMooseMetaRoleInstance 2.2201
+      Moose::Exception::AddRoleToARoleTakesAMooseMetaRole 2.2201
+      Moose::Exception::ApplyTakesABlessedInstance 2.2201
+      Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass 2.2201
+      Moose::Exception::AttributeConflictInRoles 2.2201
+      Moose::Exception::AttributeConflictInSummation 2.2201
+      Moose::Exception::AttributeExtensionIsNotSupportedInRoles 2.2201
+      Moose::Exception::AttributeIsRequired 2.2201
+      Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass 2.2201
+      Moose::Exception::AttributeNamesDoNotMatch 2.2201
+      Moose::Exception::AttributeValueIsNotAnObject 2.2201
+      Moose::Exception::AttributeValueIsNotDefined 2.2201
+      Moose::Exception::AutoDeRefNeedsArrayRefOrHashRef 2.2201
+      Moose::Exception::BadOptionFormat 2.2201
+      Moose::Exception::BothBuilderAndDefaultAreNotAllowed 2.2201
+      Moose::Exception::BuilderDoesNotExist 2.2201
+      Moose::Exception::BuilderMethodNotSupportedForAttribute 2.2201
+      Moose::Exception::BuilderMethodNotSupportedForInlineAttribute 2.2201
+      Moose::Exception::BuilderMustBeAMethodName 2.2201
+      Moose::Exception::CallingMethodOnAnImmutableInstance 2.2201
+      Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance 2.2201
+      Moose::Exception::CanExtendOnlyClasses 2.2201
+      Moose::Exception::CanOnlyConsumeRole 2.2201
+      Moose::Exception::CanOnlyWrapBlessedCode 2.2201
+      Moose::Exception::CanReblessOnlyIntoASubclass 2.2201
+      Moose::Exception::CanReblessOnlyIntoASuperclass 2.2201
+      Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion 2.2201
+      Moose::Exception::CannotAddAsAnAttributeToARole 2.2201
+      Moose::Exception::CannotApplyBaseClassRolesToRole 2.2201
+      Moose::Exception::CannotAssignValueToReadOnlyAccessor 2.2201
+      Moose::Exception::CannotAugmentIfLocalMethodPresent 2.2201
+      Moose::Exception::CannotAugmentNoSuperMethod 2.2201
+      Moose::Exception::CannotAutoDerefWithoutIsa 2.2201
+      Moose::Exception::CannotAutoDereferenceTypeConstraint 2.2201
+      Moose::Exception::CannotCalculateNativeType 2.2201
+      Moose::Exception::CannotCallAnAbstractBaseMethod 2.2201
+      Moose::Exception::CannotCallAnAbstractMethod 2.2201
+      Moose::Exception::CannotCoerceAWeakRef 2.2201
+      Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion 2.2201
+      Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter 2.2201
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent 2.2201
+      Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass 2.2201
+      Moose::Exception::CannotDelegateLocalMethodIsPresent 2.2201
+      Moose::Exception::CannotDelegateWithoutIsa 2.2201
+      Moose::Exception::CannotFindDelegateMetaclass 2.2201
+      Moose::Exception::CannotFindType 2.2201
+      Moose::Exception::CannotFindTypeGivenToMatchOnType 2.2201
+      Moose::Exception::CannotFixMetaclassCompatibility 2.2201
+      Moose::Exception::CannotGenerateInlineConstraint 2.2201
+      Moose::Exception::CannotInitializeMooseMetaRoleComposite 2.2201
+      Moose::Exception::CannotInlineTypeConstraintCheck 2.2201
+      Moose::Exception::CannotLocatePackageInINC 2.2201
+      Moose::Exception::CannotMakeMetaclassCompatible 2.2201
+      Moose::Exception::CannotOverrideALocalMethod 2.2201
+      Moose::Exception::CannotOverrideBodyOfMetaMethods 2.2201
+      Moose::Exception::CannotOverrideLocalMethodIsPresent 2.2201
+      Moose::Exception::CannotOverrideNoSuperMethod 2.2201
+      Moose::Exception::CannotRegisterUnnamedTypeConstraint 2.2201
+      Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously 2.2201
+      Moose::Exception::CircularReferenceInAlso 2.2201
+      Moose::Exception::ClassDoesNotHaveInitMeta 2.2201
+      Moose::Exception::ClassDoesTheExcludedRole 2.2201
+      Moose::Exception::ClassNamesDoNotMatch 2.2201
+      Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass 2.2201
+      Moose::Exception::CodeBlockMustBeACodeRef 2.2201
+      Moose::Exception::CoercingWithoutCoercions 2.2201
+      Moose::Exception::CoercionAlreadyExists 2.2201
+      Moose::Exception::CoercionNeedsTypeConstraint 2.2201
+      Moose::Exception::ConflictDetectedInCheckRoleExclusions 2.2201
+      Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass 2.2201
+      Moose::Exception::ConstructClassInstanceTakesPackageName 2.2201
+      Moose::Exception::CouldNotCreateMethod 2.2201
+      Moose::Exception::CouldNotCreateWriter 2.2201
+      Moose::Exception::CouldNotEvalConstructor 2.2201
+      Moose::Exception::CouldNotEvalDestructor 2.2201
+      Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom 2.2201
+      Moose::Exception::CouldNotGenerateInlineAttributeMethod 2.2201
+      Moose::Exception::CouldNotLocateTypeConstraintForUnion 2.2201
+      Moose::Exception::CouldNotParseType 2.2201
+      Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes 2.2201
+      Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses 2.2201
+      Moose::Exception::CreateMOPClassTakesHashRefOfMethods 2.2201
+      Moose::Exception::CreateTakesArrayRefOfRoles 2.2201
+      Moose::Exception::CreateTakesHashRefOfAttributes 2.2201
+      Moose::Exception::CreateTakesHashRefOfMethods 2.2201
+      Moose::Exception::DefaultToMatchOnTypeMustBeCodeRef 2.2201
+      Moose::Exception::DelegationToAClassWhichIsNotLoaded 2.2201
+      Moose::Exception::DelegationToARoleWhichIsNotLoaded 2.2201
+      Moose::Exception::DelegationToATypeWhichIsNotAClass 2.2201
+      Moose::Exception::DoesRequiresRoleName 2.2201
+      Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs 2.2201
+      Moose::Exception::EnumValuesMustBeString 2.2201
+      Moose::Exception::ExtendsMissingArgs 2.2201
+      Moose::Exception::HandlesMustBeAHashRef 2.2201
+      Moose::Exception::IllegalInheritedOptions 2.2201
+      Moose::Exception::IllegalMethodTypeToAddMethodModifier 2.2201
+      Moose::Exception::IncompatibleMetaclassOfSuperclass 2.2201
+      Moose::Exception::InitMetaRequiresClass 2.2201
+      Moose::Exception::InitializeTakesUnBlessedPackageName 2.2201
+      Moose::Exception::InstanceBlessedIntoWrongClass 2.2201
+      Moose::Exception::InstanceMustBeABlessedReference 2.2201
+      Moose::Exception::InvalidArgPassedToMooseUtilMetaRole 2.2201
+      Moose::Exception::InvalidArgumentToMethod 2.2201
+      Moose::Exception::InvalidArgumentsToTraitAliases 2.2201
+      Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint 2.2201
+      Moose::Exception::InvalidHandleValue 2.2201
+      Moose::Exception::InvalidHasProvidedInARole 2.2201
+      Moose::Exception::InvalidNameForType 2.2201
+      Moose::Exception::InvalidOverloadOperator 2.2201
+      Moose::Exception::InvalidRoleApplication 2.2201
+      Moose::Exception::InvalidTypeConstraint 2.2201
+      Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint 2.2201
+      Moose::Exception::InvalidValueForIs 2.2201
+      Moose::Exception::IsaDoesNotDoTheRole 2.2201
+      Moose::Exception::IsaLacksDoesMethod 2.2201
+      Moose::Exception::LazyAttributeNeedsADefault 2.2201
+      Moose::Exception::Legacy 2.2201
+      Moose::Exception::MOPAttributeNewNeedsAttributeName 2.2201
+      Moose::Exception::MatchActionMustBeACodeRef 2.2201
+      Moose::Exception::MessageParameterMustBeCodeRef 2.2201
+      Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass 2.2201
+      Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass 2.2201
+      Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass 2.2201
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass 2.2201
+      Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole 2.2201
+      Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass 2.2201
+      Moose::Exception::MetaclassNotLoaded 2.2201
+      Moose::Exception::MetaclassTypeIncompatible 2.2201
+      Moose::Exception::MethodExpectedAMetaclassObject 2.2201
+      Moose::Exception::MethodExpectsFewerArgs 2.2201
+      Moose::Exception::MethodExpectsMoreArgs 2.2201
+      Moose::Exception::MethodModifierNeedsMethodName 2.2201
+      Moose::Exception::MethodNameConflictInRoles 2.2201
+      Moose::Exception::MethodNameNotFoundInInheritanceHierarchy 2.2201
+      Moose::Exception::MethodNameNotGiven 2.2201
+      Moose::Exception::MustDefineAMethodName 2.2201
+      Moose::Exception::MustDefineAnAttributeName 2.2201
+      Moose::Exception::MustDefineAnOverloadOperator 2.2201
+      Moose::Exception::MustHaveAtLeastOneValueToEnumerate 2.2201
+      Moose::Exception::MustPassAHashOfOptions 2.2201
+      Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass 2.2201
+      Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance 2.2201
+      Moose::Exception::MustPassEvenNumberOfArguments 2.2201
+      Moose::Exception::MustPassEvenNumberOfAttributeOptions 2.2201
+      Moose::Exception::MustProvideANameForTheAttribute 2.2201
+      Moose::Exception::MustSpecifyAtleastOneMethod 2.2201
+      Moose::Exception::MustSpecifyAtleastOneRole 2.2201
+      Moose::Exception::MustSpecifyAtleastOneRoleToApplicant 2.2201
+      Moose::Exception::MustSupplyAClassMOPAttributeInstance 2.2201
+      Moose::Exception::MustSupplyADelegateToMethod 2.2201
+      Moose::Exception::MustSupplyAMetaclass 2.2201
+      Moose::Exception::MustSupplyAMooseMetaAttributeInstance 2.2201
+      Moose::Exception::MustSupplyAnAccessorTypeToConstructWith 2.2201
+      Moose::Exception::MustSupplyAnAttributeToConstructWith 2.2201
+      Moose::Exception::MustSupplyArrayRefAsCurriedArguments 2.2201
+      Moose::Exception::MustSupplyPackageNameAndName 2.2201
+      Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion 2.2201
+      Moose::Exception::NeitherAttributeNorAttributeNameIsGiven 2.2201
+      Moose::Exception::NeitherClassNorClassNameIsGiven 2.2201
+      Moose::Exception::NeitherRoleNorRoleNameIsGiven 2.2201
+      Moose::Exception::NeitherTypeNorTypeNameIsGiven 2.2201
+      Moose::Exception::NoAttributeFoundInSuperClass 2.2201
+      Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass 2.2201
+      Moose::Exception::NoCasesMatched 2.2201
+      Moose::Exception::NoConstraintCheckForTypeConstraint 2.2201
+      Moose::Exception::NoDestructorClassSpecified 2.2201
+      Moose::Exception::NoImmutableTraitSpecifiedForClass 2.2201
+      Moose::Exception::NoParentGivenToSubtype 2.2201
+      Moose::Exception::OnlyInstancesCanBeCloned 2.2201
+      Moose::Exception::OperatorIsRequired 2.2201
+      Moose::Exception::OverloadConflictInSummation 2.2201
+      Moose::Exception::OverloadRequiresAMetaClass 2.2201
+      Moose::Exception::OverloadRequiresAMetaMethod 2.2201
+      Moose::Exception::OverloadRequiresAMetaOverload 2.2201
+      Moose::Exception::OverloadRequiresAMethodNameOrCoderef 2.2201
+      Moose::Exception::OverloadRequiresAnOperator 2.2201
+      Moose::Exception::OverloadRequiresNamesForCoderef 2.2201
+      Moose::Exception::OverrideConflictInComposition 2.2201
+      Moose::Exception::OverrideConflictInSummation 2.2201
+      Moose::Exception::PackageDoesNotUseMooseExporter 2.2201
+      Moose::Exception::PackageNameAndNameParamsNotGivenToWrap 2.2201
+      Moose::Exception::PackagesAndModulesAreNotCachable 2.2201
+      Moose::Exception::ParameterIsNotSubtypeOfParent 2.2201
+      Moose::Exception::ReferencesAreNotAllowedAsDefault 2.2201
+      Moose::Exception::RequiredAttributeLacksInitialization 2.2201
+      Moose::Exception::RequiredAttributeNeedsADefault 2.2201
+      Moose::Exception::RequiredMethodsImportedByClass 2.2201
+      Moose::Exception::RequiredMethodsNotImplementedByClass 2.2201
+      Moose::Exception::Role::Attribute 2.2201
+      Moose::Exception::Role::AttributeName 2.2201
+      Moose::Exception::Role::Class 2.2201
+      Moose::Exception::Role::EitherAttributeOrAttributeName 2.2201
+      Moose::Exception::Role::Instance 2.2201
+      Moose::Exception::Role::InstanceClass 2.2201
+      Moose::Exception::Role::InvalidAttributeOptions 2.2201
+      Moose::Exception::Role::Method 2.2201
+      Moose::Exception::Role::ParamsHash 2.2201
+      Moose::Exception::Role::Role 2.2201
+      Moose::Exception::Role::RoleForCreate 2.2201
+      Moose::Exception::Role::RoleForCreateMOPClass 2.2201
+      Moose::Exception::Role::TypeConstraint 2.2201
+      Moose::Exception::RoleDoesTheExcludedRole 2.2201
+      Moose::Exception::RoleExclusionConflict 2.2201
+      Moose::Exception::RoleNameRequired 2.2201
+      Moose::Exception::RoleNameRequiredForMooseMetaRole 2.2201
+      Moose::Exception::RolesDoNotSupportAugment 2.2201
+      Moose::Exception::RolesDoNotSupportExtends 2.2201
+      Moose::Exception::RolesDoNotSupportInner 2.2201
+      Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers 2.2201
+      Moose::Exception::RolesInCreateTakesAnArrayRef 2.2201
+      Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole 2.2201
+      Moose::Exception::SingleParamsToNewMustBeHashRef 2.2201
+      Moose::Exception::TriggerMustBeACodeRef 2.2201
+      Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType 2.2201
+      Moose::Exception::TypeConstraintIsAlreadyCreated 2.2201
+      Moose::Exception::TypeParameterMustBeMooseMetaType 2.2201
+      Moose::Exception::UnableToCanonicalizeHandles 2.2201
+      Moose::Exception::UnableToCanonicalizeNonRolePackage 2.2201
+      Moose::Exception::UnableToRecognizeDelegateMetaclass 2.2201
+      Moose::Exception::UndefinedHashKeysPassedToMethod 2.2201
+      Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs 2.2201
+      Moose::Exception::UnionTakesAtleastTwoTypeNames 2.2201
+      Moose::Exception::ValidationFailedForInlineTypeConstraint 2.2201
+      Moose::Exception::ValidationFailedForTypeConstraint 2.2201
+      Moose::Exception::WrapTakesACodeRefToBless 2.2201
+      Moose::Exception::WrongTypeConstraintGiven 2.2201
+      Moose::Exporter 2.2201
+      Moose::Intro 2.2201
+      Moose::Manual 2.2201
+      Moose::Manual::Attributes 2.2201
+      Moose::Manual::BestPractices 2.2201
+      Moose::Manual::Classes 2.2201
+      Moose::Manual::Concepts 2.2201
+      Moose::Manual::Construction 2.2201
+      Moose::Manual::Contributing 2.2201
+      Moose::Manual::Delegation 2.2201
+      Moose::Manual::Delta 2.2201
+      Moose::Manual::Exceptions 2.2201
+      Moose::Manual::Exceptions::Manifest 2.2201
+      Moose::Manual::FAQ 2.2201
+      Moose::Manual::MOP 2.2201
+      Moose::Manual::MethodModifiers 2.2201
+      Moose::Manual::MooseX 2.2201
+      Moose::Manual::Resources 2.2201
+      Moose::Manual::Roles 2.2201
+      Moose::Manual::Support 2.2201
+      Moose::Manual::Types 2.2201
+      Moose::Manual::Unsweetened 2.2201
+      Moose::Meta::Attribute 2.2201
+      Moose::Meta::Attribute::Native 2.2201
+      Moose::Meta::Attribute::Native::Trait 2.2201
+      Moose::Meta::Attribute::Native::Trait::Array 2.2201
+      Moose::Meta::Attribute::Native::Trait::Bool 2.2201
+      Moose::Meta::Attribute::Native::Trait::Code 2.2201
+      Moose::Meta::Attribute::Native::Trait::Counter 2.2201
+      Moose::Meta::Attribute::Native::Trait::Hash 2.2201
+      Moose::Meta::Attribute::Native::Trait::Number 2.2201
+      Moose::Meta::Attribute::Native::Trait::String 2.2201
+      Moose::Meta::Class 2.2201
+      Moose::Meta::Class::Immutable::Trait 2.2201
+      Moose::Meta::Instance 2.2201
+      Moose::Meta::Method 2.2201
+      Moose::Meta::Method::Accessor 2.2201
+      Moose::Meta::Method::Accessor::Native 2.2201
+      Moose::Meta::Method::Accessor::Native::Array 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::Writer 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::accessor 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::clear 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::count 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::delete 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::elements 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::first 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::first_index 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::get 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::grep 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::insert 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::is_empty 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::join 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::map 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::natatime 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::pop 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::push 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::reduce 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::set 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::shallow_clone 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::shift 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::shuffle 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::sort 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::sort_in_place 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::splice 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::uniq 2.2201
+      Moose::Meta::Method::Accessor::Native::Array::unshift 2.2201
+      Moose::Meta::Method::Accessor::Native::Bool::not 2.2201
+      Moose::Meta::Method::Accessor::Native::Bool::set 2.2201
+      Moose::Meta::Method::Accessor::Native::Bool::toggle 2.2201
+      Moose::Meta::Method::Accessor::Native::Bool::unset 2.2201
+      Moose::Meta::Method::Accessor::Native::Code::execute 2.2201
+      Moose::Meta::Method::Accessor::Native::Code::execute_method 2.2201
+      Moose::Meta::Method::Accessor::Native::Collection 2.2201
+      Moose::Meta::Method::Accessor::Native::Counter::Writer 2.2201
+      Moose::Meta::Method::Accessor::Native::Counter::dec 2.2201
+      Moose::Meta::Method::Accessor::Native::Counter::inc 2.2201
+      Moose::Meta::Method::Accessor::Native::Counter::reset 2.2201
+      Moose::Meta::Method::Accessor::Native::Counter::set 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::Writer 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::accessor 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::clear 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::count 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::defined 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::delete 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::elements 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::exists 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::get 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::is_empty 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::keys 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::kv 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::set 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::shallow_clone 2.2201
+      Moose::Meta::Method::Accessor::Native::Hash::values 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::abs 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::add 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::div 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::mod 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::mul 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::set 2.2201
+      Moose::Meta::Method::Accessor::Native::Number::sub 2.2201
+      Moose::Meta::Method::Accessor::Native::Reader 2.2201
+      Moose::Meta::Method::Accessor::Native::String::append 2.2201
+      Moose::Meta::Method::Accessor::Native::String::chomp 2.2201
+      Moose::Meta::Method::Accessor::Native::String::chop 2.2201
+      Moose::Meta::Method::Accessor::Native::String::clear 2.2201
+      Moose::Meta::Method::Accessor::Native::String::inc 2.2201
+      Moose::Meta::Method::Accessor::Native::String::length 2.2201
+      Moose::Meta::Method::Accessor::Native::String::match 2.2201
+      Moose::Meta::Method::Accessor::Native::String::prepend 2.2201
+      Moose::Meta::Method::Accessor::Native::String::replace 2.2201
+      Moose::Meta::Method::Accessor::Native::String::substr 2.2201
+      Moose::Meta::Method::Accessor::Native::Writer 2.2201
+      Moose::Meta::Method::Augmented 2.2201
+      Moose::Meta::Method::Constructor 2.2201
+      Moose::Meta::Method::Delegation 2.2201
+      Moose::Meta::Method::Destructor 2.2201
+      Moose::Meta::Method::Meta 2.2201
+      Moose::Meta::Method::Overridden 2.2201
+      Moose::Meta::Mixin::AttributeCore 2.2201
+      Moose::Meta::Object::Trait 2.2201
+      Moose::Meta::Role 2.2201
+      Moose::Meta::Role::Application 2.2201
+      Moose::Meta::Role::Application::RoleSummation 2.2201
+      Moose::Meta::Role::Application::ToClass 2.2201
+      Moose::Meta::Role::Application::ToInstance 2.2201
+      Moose::Meta::Role::Application::ToRole 2.2201
+      Moose::Meta::Role::Attribute 2.2201
+      Moose::Meta::Role::Composite 2.2201
+      Moose::Meta::Role::Method 2.2201
+      Moose::Meta::Role::Method::Conflicting 2.2201
+      Moose::Meta::Role::Method::Required 2.2201
+      Moose::Meta::TypeCoercion 2.2201
+      Moose::Meta::TypeCoercion::Union 2.2201
+      Moose::Meta::TypeConstraint 2.2201
+      Moose::Meta::TypeConstraint::Class 2.2201
+      Moose::Meta::TypeConstraint::DuckType 2.2201
+      Moose::Meta::TypeConstraint::Enum 2.2201
+      Moose::Meta::TypeConstraint::Parameterizable 2.2201
+      Moose::Meta::TypeConstraint::Parameterized 2.2201
+      Moose::Meta::TypeConstraint::Registry 2.2201
+      Moose::Meta::TypeConstraint::Role 2.2201
+      Moose::Meta::TypeConstraint::Union 2.2201
+      Moose::Object 2.2201
+      Moose::Role 2.2201
+      Moose::Spec::Role 2.2201
+      Moose::Unsweetened 2.2201
+      Moose::Util 2.2201
+      Moose::Util::MetaRole 2.2201
+      Moose::Util::TypeConstraints 2.2201
+      Moose::Util::TypeConstraints::Builtins 2.2201
+      Test::Moose 2.2201
+      metaclass 2.2201
+      oose 2.2201
     requirements:
       Carp 1.22
       Class::Load 0.09
@@ -3554,7 +3554,7 @@ DISTRIBUTIONS
       Params::Util 1.00
       Scalar::Util 1.19
       Sub::Exporter 0.980
-      Sub::Name 0.20
+      Sub::Util 1.40
       Try::Tiny 0.17
       parent 0.223
       strict 1.03
@@ -4433,11 +4433,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.118
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.118.tar.gz
+  Path-Tiny-0.120
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.120.tar.gz
     provides:
-      Path::Tiny 0.118
-      Path::Tiny::Error 0.118
+      Path::Tiny 0.120
+      Path::Tiny::Error 0.120
     requirements:
       Carp 0
       Cwd 0
@@ -5706,19 +5706,18 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.008001
-  Text-Xslate-v3.5.8
-    pathname: S/SK/SKAJI/Text-Xslate-v3.5.8.tar.gz
+  Text-Xslate-v3.5.9
+    pathname: S/SK/SKAJI/Text-Xslate-v3.5.9.tar.gz
     provides:
-      Text::Xslate v3.5.8
+      Text::Xslate v3.5.9
       Text::Xslate::Bridge undef
       Text::Xslate::Bridge::Star undef
       Text::Xslate::Compiler undef
-      Text::Xslate::Engine v3.5.8
+      Text::Xslate::Engine v3.5.9
       Text::Xslate::HashWithDefault undef
-      Text::Xslate::PP v3.5.8
-      Text::Xslate::PP::Const undef
+      Text::Xslate::PP v3.5.9
       Text::Xslate::PP::Method undef
-      Text::Xslate::PP::Opcode v3.5.8
+      Text::Xslate::PP::Opcode v3.5.9
       Text::Xslate::PP::State undef
       Text::Xslate::PP::Type::Macro undef
       Text::Xslate::PP::Type::Pair undef
@@ -5999,53 +5998,53 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  URI-5.09
-    pathname: O/OA/OALDERS/URI-5.09.tar.gz
+  URI-5.10
+    pathname: O/OA/OALDERS/URI-5.10.tar.gz
     provides:
-      URI 5.09
-      URI::Escape 5.09
-      URI::Heuristic 5.09
-      URI::IRI 5.09
-      URI::QueryParam 5.09
-      URI::Split 5.09
-      URI::URL 5.09
-      URI::WithBase 5.09
-      URI::data 5.09
-      URI::file 5.09
-      URI::file::Base 5.09
-      URI::file::FAT 5.09
-      URI::file::Mac 5.09
-      URI::file::OS2 5.09
-      URI::file::QNX 5.09
-      URI::file::Unix 5.09
-      URI::file::Win32 5.09
-      URI::ftp 5.09
-      URI::gopher 5.09
-      URI::http 5.09
-      URI::https 5.09
-      URI::ldap 5.09
-      URI::ldapi 5.09
-      URI::ldaps 5.09
-      URI::mailto 5.09
-      URI::mms 5.09
-      URI::news 5.09
-      URI::nntp 5.09
-      URI::nntps 5.09
-      URI::pop 5.09
-      URI::rlogin 5.09
-      URI::rsync 5.09
-      URI::rtsp 5.09
-      URI::rtspu 5.09
-      URI::sftp 5.09
-      URI::sip 5.09
-      URI::sips 5.09
-      URI::snews 5.09
-      URI::ssh 5.09
-      URI::telnet 5.09
-      URI::tn3270 5.09
-      URI::urn 5.09
-      URI::urn::isbn 5.09
-      URI::urn::oid 5.09
+      URI 5.10
+      URI::Escape 5.10
+      URI::Heuristic 5.10
+      URI::IRI 5.10
+      URI::QueryParam 5.10
+      URI::Split 5.10
+      URI::URL 5.10
+      URI::WithBase 5.10
+      URI::data 5.10
+      URI::file 5.10
+      URI::file::Base 5.10
+      URI::file::FAT 5.10
+      URI::file::Mac 5.10
+      URI::file::OS2 5.10
+      URI::file::QNX 5.10
+      URI::file::Unix 5.10
+      URI::file::Win32 5.10
+      URI::ftp 5.10
+      URI::gopher 5.10
+      URI::http 5.10
+      URI::https 5.10
+      URI::ldap 5.10
+      URI::ldapi 5.10
+      URI::ldaps 5.10
+      URI::mailto 5.10
+      URI::mms 5.10
+      URI::news 5.10
+      URI::nntp 5.10
+      URI::nntps 5.10
+      URI::pop 5.10
+      URI::rlogin 5.10
+      URI::rsync 5.10
+      URI::rtsp 5.10
+      URI::rtspu 5.10
+      URI::sftp 5.10
+      URI::sip 5.10
+      URI::sips 5.10
+      URI::snews 5.10
+      URI::ssh 5.10
+      URI::telnet 5.10
+      URI::tn3270 5.10
+      URI::urn 5.10
+      URI::urn::isbn 5.10
+      URI::urn::oid 5.10
     requirements:
       Carp 0
       Cwd 0
@@ -6143,12 +6142,12 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  WWW-Mechanize-2.05
-    pathname: O/OA/OALDERS/WWW-Mechanize-2.05.tar.gz
+  WWW-Mechanize-2.06
+    pathname: O/OA/OALDERS/WWW-Mechanize-2.06.tar.gz
     provides:
-      WWW::Mechanize 2.05
-      WWW::Mechanize::Image 2.05
-      WWW::Mechanize::Link 2.05
+      WWW::Mechanize 2.06
+      WWW::Mechanize::Image 2.06
+      WWW::Mechanize::Link 2.06
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -6385,32 +6384,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.57
-    pathname: O/OA/OALDERS/libwww-perl-6.57.tar.gz
+  libwww-perl-6.58
+    pathname: O/OA/OALDERS/libwww-perl-6.58.tar.gz
     provides:
-      LWP 6.57
-      LWP::Authen::Basic 6.57
-      LWP::Authen::Digest 6.57
-      LWP::Authen::Ntlm 6.57
-      LWP::ConnCache 6.57
-      LWP::Debug 6.57
-      LWP::Debug::TraceHTTP 6.57
-      LWP::DebugFile 6.57
-      LWP::MemberMixin 6.57
-      LWP::Protocol 6.57
-      LWP::Protocol::cpan 6.57
-      LWP::Protocol::data 6.57
-      LWP::Protocol::file 6.57
-      LWP::Protocol::ftp 6.57
-      LWP::Protocol::gopher 6.57
-      LWP::Protocol::http 6.57
-      LWP::Protocol::loopback 6.57
-      LWP::Protocol::mailto 6.57
-      LWP::Protocol::nntp 6.57
-      LWP::Protocol::nogo 6.57
-      LWP::RobotUA 6.57
-      LWP::Simple 6.57
-      LWP::UserAgent 6.57
+      LWP 6.58
+      LWP::Authen::Basic 6.58
+      LWP::Authen::Digest 6.58
+      LWP::Authen::Ntlm 6.58
+      LWP::ConnCache 6.58
+      LWP::Debug 6.58
+      LWP::Debug::TraceHTTP 6.58
+      LWP::DebugFile 6.58
+      LWP::MemberMixin 6.58
+      LWP::Protocol 6.58
+      LWP::Protocol::cpan 6.58
+      LWP::Protocol::data 6.58
+      LWP::Protocol::file 6.58
+      LWP::Protocol::ftp 6.58
+      LWP::Protocol::gopher 6.58
+      LWP::Protocol::http 6.58
+      LWP::Protocol::loopback 6.58
+      LWP::Protocol::mailto 6.58
+      LWP::Protocol::nntp 6.58
+      LWP::Protocol::nogo 6.58
+      LWP::RobotUA 6.58
+      LWP::Simple 6.58
+      LWP::UserAgent 6.58
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
@@ -6442,7 +6441,7 @@ DISTRIBUTIONS
       URI 1.10
       URI::Escape 0
       WWW::RobotRules 6
-      base 0
+      parent 0.217
       perl 5.008001
       strict 0
       warnings 0
