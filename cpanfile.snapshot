@@ -186,7 +186,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2089,19 +2088,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.33
-    pathname: O/OA/OALDERS/HTTP-Message-6.33.tar.gz
+  HTTP-Message-6.35
+    pathname: O/OA/OALDERS/HTTP-Message-6.35.tar.gz
     provides:
-      HTTP::Config 6.33
-      HTTP::Headers 6.33
-      HTTP::Headers::Auth 6.33
-      HTTP::Headers::ETag 6.33
-      HTTP::Headers::Util 6.33
-      HTTP::Message 6.33
-      HTTP::Request 6.33
-      HTTP::Request::Common 6.33
-      HTTP::Response 6.33
-      HTTP::Status 6.33
+      HTTP::Config 6.35
+      HTTP::Headers 6.35
+      HTTP::Headers::Auth 6.35
+      HTTP::Headers::ETag 6.35
+      HTTP::Headers::Util 6.35
+      HTTP::Message 6.35
+      HTTP::Request 6.35
+      HTTP::Request::Common 6.35
+      HTTP::Response 6.35
+      HTTP::Status 6.35
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -2226,46 +2225,46 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  IO-Async-0.79
-    pathname: P/PE/PEVANS/IO-Async-0.79.tar.gz
+  IO-Async-0.800
+    pathname: P/PE/PEVANS/IO-Async-0.800.tar.gz
     provides:
       Future::IO::Impl::IOAsync undef
-      IO::Async 0.79
-      IO::Async::Channel 0.79
-      IO::Async::Debug 0.79
-      IO::Async::File 0.79
-      IO::Async::FileStream 0.79
-      IO::Async::Function 0.79
-      IO::Async::Future 0.79
-      IO::Async::Handle 0.79
-      IO::Async::Internals::ChildManager 0.79
-      IO::Async::Internals::FunctionWorker 0.79
-      IO::Async::Listener 0.79
-      IO::Async::Loop 0.79
-      IO::Async::Loop::Poll 0.79
-      IO::Async::Loop::Select 0.79
-      IO::Async::LoopTests 0.79
+      IO::Async 0.800
+      IO::Async::Channel 0.800
+      IO::Async::Debug 0.800
+      IO::Async::File 0.800
+      IO::Async::FileStream 0.800
+      IO::Async::Function 0.800
+      IO::Async::Future 0.800
+      IO::Async::Handle 0.800
+      IO::Async::Internals::ChildManager 0.800
+      IO::Async::Internals::FunctionWorker 0.800
+      IO::Async::Listener 0.800
+      IO::Async::Loop 0.800
+      IO::Async::Loop::Poll 0.800
+      IO::Async::Loop::Select 0.800
+      IO::Async::LoopTests 0.800
       IO::Async::Metrics undef
-      IO::Async::Notifier 0.79
-      IO::Async::OS 0.79
-      IO::Async::OS::MSWin32 0.79
-      IO::Async::OS::cygwin 0.79
-      IO::Async::OS::linux 0.79
-      IO::Async::PID 0.79
-      IO::Async::Process 0.79
-      IO::Async::Protocol 0.79
-      IO::Async::Protocol::LineStream 0.79
-      IO::Async::Protocol::Stream 0.79
-      IO::Async::Resolver 0.79
-      IO::Async::Routine 0.79
-      IO::Async::Signal 0.79
-      IO::Async::Socket 0.79
-      IO::Async::Stream 0.79
-      IO::Async::Test 0.79
-      IO::Async::Timer 0.79
-      IO::Async::Timer::Absolute 0.79
-      IO::Async::Timer::Countdown 0.79
-      IO::Async::Timer::Periodic 0.79
+      IO::Async::Notifier 0.800
+      IO::Async::OS 0.800
+      IO::Async::OS::MSWin32 0.800
+      IO::Async::OS::cygwin 0.800
+      IO::Async::OS::linux 0.800
+      IO::Async::PID 0.800
+      IO::Async::Process 0.800
+      IO::Async::Protocol 0.800
+      IO::Async::Protocol::LineStream 0.800
+      IO::Async::Protocol::Stream 0.800
+      IO::Async::Resolver 0.800
+      IO::Async::Routine 0.800
+      IO::Async::Signal 0.800
+      IO::Async::Socket 0.800
+      IO::Async::Stream 0.800
+      IO::Async::Test 0.800
+      IO::Async::Timer 0.800
+      IO::Async::Timer::Absolute 0.800
+      IO::Async::Timer::Countdown 0.800
+      IO::Async::Timer::Periodic 0.800
     requirements:
       Exporter 5.57
       File::stat 0
