@@ -186,6 +186,7 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
+      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2701,39 +2702,39 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.874
-    pathname: M/MA/MARIOROY/MCE-1.874.tar.gz
+  MCE-1.875
+    pathname: M/MA/MARIOROY/MCE-1.875.tar.gz
     provides:
-      MCE 1.874
-      MCE::Candy 1.874
-      MCE::Channel 1.874
-      MCE::Channel::Mutex 1.874
-      MCE::Channel::Simple 1.874
-      MCE::Channel::Threads 1.874
-      MCE::Child 1.874
-      MCE::Core::Input::Generator 1.874
-      MCE::Core::Input::Handle 1.874
-      MCE::Core::Input::Iterator 1.874
-      MCE::Core::Input::Request 1.874
-      MCE::Core::Input::Sequence 1.874
-      MCE::Core::Manager 1.874
-      MCE::Core::Validation 1.874
-      MCE::Core::Worker 1.874
-      MCE::Flow 1.874
-      MCE::Grep 1.874
-      MCE::Loop 1.874
-      MCE::Map 1.874
-      MCE::Mutex 1.874
-      MCE::Mutex::Channel 1.874
-      MCE::Mutex::Channel2 1.874
-      MCE::Mutex::Flock 1.874
-      MCE::Queue 1.874
-      MCE::Relay 1.874
-      MCE::Signal 1.874
-      MCE::Step 1.874
-      MCE::Stream 1.874
-      MCE::Subs 1.874
-      MCE::Util 1.874
+      MCE 1.875
+      MCE::Candy 1.875
+      MCE::Channel 1.875
+      MCE::Channel::Mutex 1.875
+      MCE::Channel::Simple 1.875
+      MCE::Channel::Threads 1.875
+      MCE::Child 1.875
+      MCE::Core::Input::Generator 1.875
+      MCE::Core::Input::Handle 1.875
+      MCE::Core::Input::Iterator 1.875
+      MCE::Core::Input::Request 1.875
+      MCE::Core::Input::Sequence 1.875
+      MCE::Core::Manager 1.875
+      MCE::Core::Validation 1.875
+      MCE::Core::Worker 1.875
+      MCE::Flow 1.875
+      MCE::Grep 1.875
+      MCE::Loop 1.875
+      MCE::Map 1.875
+      MCE::Mutex 1.875
+      MCE::Mutex::Channel 1.875
+      MCE::Mutex::Channel2 1.875
+      MCE::Mutex::Flock 1.875
+      MCE::Queue 1.875
+      MCE::Relay 1.875
+      MCE::Signal 1.875
+      MCE::Step 1.875
+      MCE::Stream 1.875
+      MCE::Subs 1.875
+      MCE::Util 1.875
     requirements:
       Carp 0
       Errno 0
@@ -4125,21 +4126,21 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
-  PPIx-QuoteLike-0.018
-    pathname: W/WY/WYANT/PPIx-QuoteLike-0.018.tar.gz
+  PPIx-QuoteLike-0.019
+    pathname: W/WY/WYANT/PPIx-QuoteLike-0.019.tar.gz
     provides:
-      PPIx::QuoteLike 0.018
-      PPIx::QuoteLike::Constant 0.018
-      PPIx::QuoteLike::Dumper 0.018
-      PPIx::QuoteLike::Token 0.018
-      PPIx::QuoteLike::Token::Control 0.018
-      PPIx::QuoteLike::Token::Delimiter 0.018
-      PPIx::QuoteLike::Token::Interpolation 0.018
-      PPIx::QuoteLike::Token::String 0.018
-      PPIx::QuoteLike::Token::Structure 0.018
-      PPIx::QuoteLike::Token::Unknown 0.018
-      PPIx::QuoteLike::Token::Whitespace 0.018
-      PPIx::QuoteLike::Utils 0.018
+      PPIx::QuoteLike 0.019
+      PPIx::QuoteLike::Constant 0.019
+      PPIx::QuoteLike::Dumper 0.019
+      PPIx::QuoteLike::Token 0.019
+      PPIx::QuoteLike::Token::Control 0.019
+      PPIx::QuoteLike::Token::Delimiter 0.019
+      PPIx::QuoteLike::Token::Interpolation 0.019
+      PPIx::QuoteLike::Token::String 0.019
+      PPIx::QuoteLike::Token::Structure 0.019
+      PPIx::QuoteLike::Token::Unknown 0.019
+      PPIx::QuoteLike::Token::Whitespace 0.019
+      PPIx::QuoteLike::Utils 0.019
     requirements:
       Carp 0
       Encode 0
