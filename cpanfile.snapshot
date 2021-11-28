@@ -186,7 +186,6 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
-      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -742,44 +741,44 @@ DISTRIBUTIONS
       Clone 0.45
     requirements:
       ExtUtils::MakeMaker 0
-  Code-TidyAll-0.78
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.78.tar.gz
+  Code-TidyAll-0.80
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.80.tar.gz
     provides:
-      Code::TidyAll 0.78
-      Code::TidyAll::Cache 0.78
-      Code::TidyAll::CacheModel 0.78
-      Code::TidyAll::CacheModel::Shared 0.78
-      Code::TidyAll::Config::INI::Reader 0.78
-      Code::TidyAll::Git::Precommit 0.78
-      Code::TidyAll::Git::Prereceive 0.78
-      Code::TidyAll::Git::Util 0.78
-      Code::TidyAll::Plugin 0.78
-      Code::TidyAll::Plugin::CSSUnminifier 0.78
-      Code::TidyAll::Plugin::GenericTransformer 0.78
-      Code::TidyAll::Plugin::GenericValidator 0.78
-      Code::TidyAll::Plugin::JSBeautify 0.78
-      Code::TidyAll::Plugin::JSHint 0.78
-      Code::TidyAll::Plugin::JSLint 0.78
-      Code::TidyAll::Plugin::JSON 0.78
-      Code::TidyAll::Plugin::MasonTidy 0.78
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.78
-      Code::TidyAll::Plugin::PerlCritic 0.78
-      Code::TidyAll::Plugin::PerlTidy 0.78
-      Code::TidyAll::Plugin::PerlTidySweet 0.78
-      Code::TidyAll::Plugin::PodChecker 0.78
-      Code::TidyAll::Plugin::PodSpell 0.78
-      Code::TidyAll::Plugin::PodTidy 0.78
-      Code::TidyAll::Plugin::SortLines 0.78
-      Code::TidyAll::Result 0.78
-      Code::TidyAll::Role::GenericExecutable 0.78
-      Code::TidyAll::Role::HasIgnore 0.78
-      Code::TidyAll::Role::RunsCommand 0.78
-      Code::TidyAll::Role::Tempdir 0.78
-      Code::TidyAll::SVN::Precommit 0.78
-      Code::TidyAll::SVN::Util 0.78
-      Code::TidyAll::Util::Zglob 0.78
-      Code::TidyAll::Zglob 0.78
-      Test::Code::TidyAll 0.78
+      Code::TidyAll 0.80
+      Code::TidyAll::Cache 0.80
+      Code::TidyAll::CacheModel 0.80
+      Code::TidyAll::CacheModel::Shared 0.80
+      Code::TidyAll::Config::INI::Reader 0.80
+      Code::TidyAll::Git::Precommit 0.80
+      Code::TidyAll::Git::Prereceive 0.80
+      Code::TidyAll::Git::Util 0.80
+      Code::TidyAll::Plugin 0.80
+      Code::TidyAll::Plugin::CSSUnminifier 0.80
+      Code::TidyAll::Plugin::GenericTransformer 0.80
+      Code::TidyAll::Plugin::GenericValidator 0.80
+      Code::TidyAll::Plugin::JSBeautify 0.80
+      Code::TidyAll::Plugin::JSHint 0.80
+      Code::TidyAll::Plugin::JSLint 0.80
+      Code::TidyAll::Plugin::JSON 0.80
+      Code::TidyAll::Plugin::MasonTidy 0.80
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.80
+      Code::TidyAll::Plugin::PerlCritic 0.80
+      Code::TidyAll::Plugin::PerlTidy 0.80
+      Code::TidyAll::Plugin::PerlTidySweet 0.80
+      Code::TidyAll::Plugin::PodChecker 0.80
+      Code::TidyAll::Plugin::PodSpell 0.80
+      Code::TidyAll::Plugin::PodTidy 0.80
+      Code::TidyAll::Plugin::SortLines 0.80
+      Code::TidyAll::Result 0.80
+      Code::TidyAll::Role::GenericExecutable 0.80
+      Code::TidyAll::Role::HasIgnore 0.80
+      Code::TidyAll::Role::RunsCommand 0.80
+      Code::TidyAll::Role::Tempdir 0.80
+      Code::TidyAll::SVN::Precommit 0.80
+      Code::TidyAll::SVN::Util 0.80
+      Code::TidyAll::Util::Zglob 0.80
+      Code::TidyAll::Zglob 0.80
+      Test::Code::TidyAll 0.80
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0
@@ -5858,10 +5857,10 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  Try-Tiny-0.30
-    pathname: E/ET/ETHER/Try-Tiny-0.30.tar.gz
+  Try-Tiny-0.31
+    pathname: E/ET/ETHER/Try-Tiny-0.31.tar.gz
     provides:
-      Try::Tiny 0.30
+      Try::Tiny 0.31
     requirements:
       Carp 0
       Exporter 5.57
