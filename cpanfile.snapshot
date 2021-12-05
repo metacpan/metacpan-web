@@ -7,83 +7,83 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.45
-    pathname: P/PL/PLICEASE/Alien-Build-2.45.tar.gz
+  Alien-Build-2.46
+    pathname: P/PL/PLICEASE/Alien-Build-2.46.tar.gz
     provides:
-      Alien::Base 2.45
-      Alien::Base::PkgConfig 2.45
-      Alien::Base::Wrapper 2.45
-      Alien::Build 2.45
-      Alien::Build::CommandSequence 2.45
-      Alien::Build::Helper 2.45
-      Alien::Build::Interpolate 2.45
-      Alien::Build::Interpolate::Default 2.45
-      Alien::Build::Interpolate::Helper 2.45
-      Alien::Build::Log 2.45
-      Alien::Build::Log::Abbreviate 2.45
-      Alien::Build::Log::Default 2.45
-      Alien::Build::MM 2.45
-      Alien::Build::Meta 2.45
-      Alien::Build::Plugin 2.45
-      Alien::Build::Plugin::Build::Autoconf 2.45
-      Alien::Build::Plugin::Build::CMake 2.45
-      Alien::Build::Plugin::Build::Copy 2.45
-      Alien::Build::Plugin::Build::MSYS 2.45
-      Alien::Build::Plugin::Build::Make 2.45
-      Alien::Build::Plugin::Build::SearchDep 2.45
-      Alien::Build::Plugin::Core::CleanInstall 2.45
-      Alien::Build::Plugin::Core::Download 2.45
-      Alien::Build::Plugin::Core::FFI 2.45
-      Alien::Build::Plugin::Core::Gather 2.45
-      Alien::Build::Plugin::Core::Legacy 2.45
-      Alien::Build::Plugin::Core::Override 2.45
-      Alien::Build::Plugin::Core::Setup 2.45
-      Alien::Build::Plugin::Core::Tail 2.45
-      Alien::Build::Plugin::Decode::DirListing 2.45
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.45
-      Alien::Build::Plugin::Decode::HTML 2.45
-      Alien::Build::Plugin::Decode::Mojo 2.45
-      Alien::Build::Plugin::Download::Negotiate 2.45
-      Alien::Build::Plugin::Extract::ArchiveTar 2.45
-      Alien::Build::Plugin::Extract::ArchiveZip 2.45
-      Alien::Build::Plugin::Extract::CommandLine 2.45
-      Alien::Build::Plugin::Extract::Directory 2.45
-      Alien::Build::Plugin::Extract::Negotiate 2.45
-      Alien::Build::Plugin::Fetch::CurlCommand 2.45
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.45
-      Alien::Build::Plugin::Fetch::LWP 2.45
-      Alien::Build::Plugin::Fetch::Local 2.45
-      Alien::Build::Plugin::Fetch::LocalDir 2.45
-      Alien::Build::Plugin::Fetch::NetFTP 2.45
-      Alien::Build::Plugin::Fetch::Wget 2.45
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.45
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.45
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.45
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.45
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.45
-      Alien::Build::Plugin::PkgConfig::PP 2.45
-      Alien::Build::Plugin::Prefer::BadVersion 2.45
-      Alien::Build::Plugin::Prefer::GoodVersion 2.45
-      Alien::Build::Plugin::Prefer::SortVersions 2.45
-      Alien::Build::Plugin::Probe::CBuilder 2.45
-      Alien::Build::Plugin::Probe::CommandLine 2.45
-      Alien::Build::Plugin::Probe::Vcpkg 2.45
-      Alien::Build::Plugin::Test::Mock 2.45
-      Alien::Build::PluginMeta 2.45
-      Alien::Build::Temp 2.45
-      Alien::Build::TempDir 2.45
-      Alien::Build::Util 2.45
-      Alien::Build::Version::Basic 2.45
-      Alien::Build::rc 2.45
-      Alien::Role 2.45
-      Test::Alien 2.45
-      Test::Alien::Build 2.45
-      Test::Alien::CanCompile 2.45
-      Test::Alien::CanPlatypus 2.45
-      Test::Alien::Diag 2.45
-      Test::Alien::Run 2.45
-      Test::Alien::Synthetic 2.45
-      alienfile 2.45
+      Alien::Base 2.46
+      Alien::Base::PkgConfig 2.46
+      Alien::Base::Wrapper 2.46
+      Alien::Build 2.46
+      Alien::Build::CommandSequence 2.46
+      Alien::Build::Helper 2.46
+      Alien::Build::Interpolate 2.46
+      Alien::Build::Interpolate::Default 2.46
+      Alien::Build::Interpolate::Helper 2.46
+      Alien::Build::Log 2.46
+      Alien::Build::Log::Abbreviate 2.46
+      Alien::Build::Log::Default 2.46
+      Alien::Build::MM 2.46
+      Alien::Build::Meta 2.46
+      Alien::Build::Plugin 2.46
+      Alien::Build::Plugin::Build::Autoconf 2.46
+      Alien::Build::Plugin::Build::CMake 2.46
+      Alien::Build::Plugin::Build::Copy 2.46
+      Alien::Build::Plugin::Build::MSYS 2.46
+      Alien::Build::Plugin::Build::Make 2.46
+      Alien::Build::Plugin::Build::SearchDep 2.46
+      Alien::Build::Plugin::Core::CleanInstall 2.46
+      Alien::Build::Plugin::Core::Download 2.46
+      Alien::Build::Plugin::Core::FFI 2.46
+      Alien::Build::Plugin::Core::Gather 2.46
+      Alien::Build::Plugin::Core::Legacy 2.46
+      Alien::Build::Plugin::Core::Override 2.46
+      Alien::Build::Plugin::Core::Setup 2.46
+      Alien::Build::Plugin::Core::Tail 2.46
+      Alien::Build::Plugin::Decode::DirListing 2.46
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.46
+      Alien::Build::Plugin::Decode::HTML 2.46
+      Alien::Build::Plugin::Decode::Mojo 2.46
+      Alien::Build::Plugin::Download::Negotiate 2.46
+      Alien::Build::Plugin::Extract::ArchiveTar 2.46
+      Alien::Build::Plugin::Extract::ArchiveZip 2.46
+      Alien::Build::Plugin::Extract::CommandLine 2.46
+      Alien::Build::Plugin::Extract::Directory 2.46
+      Alien::Build::Plugin::Extract::Negotiate 2.46
+      Alien::Build::Plugin::Fetch::CurlCommand 2.46
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.46
+      Alien::Build::Plugin::Fetch::LWP 2.46
+      Alien::Build::Plugin::Fetch::Local 2.46
+      Alien::Build::Plugin::Fetch::LocalDir 2.46
+      Alien::Build::Plugin::Fetch::NetFTP 2.46
+      Alien::Build::Plugin::Fetch::Wget 2.46
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.46
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.46
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.46
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.46
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.46
+      Alien::Build::Plugin::PkgConfig::PP 2.46
+      Alien::Build::Plugin::Prefer::BadVersion 2.46
+      Alien::Build::Plugin::Prefer::GoodVersion 2.46
+      Alien::Build::Plugin::Prefer::SortVersions 2.46
+      Alien::Build::Plugin::Probe::CBuilder 2.46
+      Alien::Build::Plugin::Probe::CommandLine 2.46
+      Alien::Build::Plugin::Probe::Vcpkg 2.46
+      Alien::Build::Plugin::Test::Mock 2.46
+      Alien::Build::PluginMeta 2.46
+      Alien::Build::Temp 2.46
+      Alien::Build::TempDir 2.46
+      Alien::Build::Util 2.46
+      Alien::Build::Version::Basic 2.46
+      Alien::Build::rc 2.46
+      Alien::Role 2.46
+      Test::Alien 2.46
+      Test::Alien::Build 2.46
+      Test::Alien::CanCompile 2.46
+      Test::Alien::CanPlatypus 2.46
+      Test::Alien::Diag 2.46
+      Test::Alien::Run 2.46
+      Test::Alien::Synthetic 2.46
+      alienfile 2.46
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -2518,36 +2518,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.68
-    pathname: S/SB/SBECK/Locale-Codes-3.68.tar.gz
+  Locale-Codes-3.69
+    pathname: S/SB/SBECK/Locale-Codes-3.69.tar.gz
     provides:
-      Locale::Codes 3.68
-      Locale::Codes::Constants 3.68
-      Locale::Codes::Country 3.68
-      Locale::Codes::Country_Codes 3.68
-      Locale::Codes::Country_Retired 3.68
-      Locale::Codes::Currency 3.68
-      Locale::Codes::Currency_Codes 3.68
-      Locale::Codes::Currency_Retired 3.68
-      Locale::Codes::LangExt 3.68
-      Locale::Codes::LangExt_Codes 3.68
-      Locale::Codes::LangExt_Retired 3.68
-      Locale::Codes::LangFam 3.68
-      Locale::Codes::LangFam_Codes 3.68
-      Locale::Codes::LangFam_Retired 3.68
-      Locale::Codes::LangVar 3.68
-      Locale::Codes::LangVar_Codes 3.68
-      Locale::Codes::LangVar_Retired 3.68
-      Locale::Codes::Language 3.68
-      Locale::Codes::Language_Codes 3.68
-      Locale::Codes::Language_Retired 3.68
-      Locale::Codes::Script 3.68
-      Locale::Codes::Script_Codes 3.68
-      Locale::Codes::Script_Retired 3.68
-      Locale::Country 3.68
-      Locale::Currency 3.68
-      Locale::Language 3.68
-      Locale::Script 3.68
+      Locale::Codes 3.69
+      Locale::Codes::Constants 3.69
+      Locale::Codes::Country 3.69
+      Locale::Codes::Country_Codes 3.69
+      Locale::Codes::Country_Retired 3.69
+      Locale::Codes::Currency 3.69
+      Locale::Codes::Currency_Codes 3.69
+      Locale::Codes::Currency_Retired 3.69
+      Locale::Codes::LangExt 3.69
+      Locale::Codes::LangExt_Codes 3.69
+      Locale::Codes::LangExt_Retired 3.69
+      Locale::Codes::LangFam 3.69
+      Locale::Codes::LangFam_Codes 3.69
+      Locale::Codes::LangFam_Retired 3.69
+      Locale::Codes::LangVar 3.69
+      Locale::Codes::LangVar_Codes 3.69
+      Locale::Codes::LangVar_Retired 3.69
+      Locale::Codes::Language 3.69
+      Locale::Codes::Language_Codes 3.69
+      Locale::Codes::Language_Retired 3.69
+      Locale::Codes::Script 3.69
+      Locale::Codes::Script_Codes 3.69
+      Locale::Codes::Script_Retired 3.69
+      Locale::Country 3.69
+      Locale::Currency 3.69
+      Locale::Language 3.69
+      Locale::Script 3.69
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -2701,39 +2701,39 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.875
-    pathname: M/MA/MARIOROY/MCE-1.875.tar.gz
+  MCE-1.876
+    pathname: M/MA/MARIOROY/MCE-1.876.tar.gz
     provides:
-      MCE 1.875
-      MCE::Candy 1.875
-      MCE::Channel 1.875
-      MCE::Channel::Mutex 1.875
-      MCE::Channel::Simple 1.875
-      MCE::Channel::Threads 1.875
-      MCE::Child 1.875
-      MCE::Core::Input::Generator 1.875
-      MCE::Core::Input::Handle 1.875
-      MCE::Core::Input::Iterator 1.875
-      MCE::Core::Input::Request 1.875
-      MCE::Core::Input::Sequence 1.875
-      MCE::Core::Manager 1.875
-      MCE::Core::Validation 1.875
-      MCE::Core::Worker 1.875
-      MCE::Flow 1.875
-      MCE::Grep 1.875
-      MCE::Loop 1.875
-      MCE::Map 1.875
-      MCE::Mutex 1.875
-      MCE::Mutex::Channel 1.875
-      MCE::Mutex::Channel2 1.875
-      MCE::Mutex::Flock 1.875
-      MCE::Queue 1.875
-      MCE::Relay 1.875
-      MCE::Signal 1.875
-      MCE::Step 1.875
-      MCE::Stream 1.875
-      MCE::Subs 1.875
-      MCE::Util 1.875
+      MCE 1.876
+      MCE::Candy 1.876
+      MCE::Channel 1.876
+      MCE::Channel::Mutex 1.876
+      MCE::Channel::Simple 1.876
+      MCE::Channel::Threads 1.876
+      MCE::Child 1.876
+      MCE::Core::Input::Generator 1.876
+      MCE::Core::Input::Handle 1.876
+      MCE::Core::Input::Iterator 1.876
+      MCE::Core::Input::Request 1.876
+      MCE::Core::Input::Sequence 1.876
+      MCE::Core::Manager 1.876
+      MCE::Core::Validation 1.876
+      MCE::Core::Worker 1.876
+      MCE::Flow 1.876
+      MCE::Grep 1.876
+      MCE::Loop 1.876
+      MCE::Map 1.876
+      MCE::Mutex 1.876
+      MCE::Mutex::Channel 1.876
+      MCE::Mutex::Channel2 1.876
+      MCE::Mutex::Flock 1.876
+      MCE::Queue 1.876
+      MCE::Relay 1.876
+      MCE::Signal 1.876
+      MCE::Step 1.876
+      MCE::Stream 1.876
+      MCE::Subs 1.876
+      MCE::Util 1.876
     requirements:
       Carp 0
       Errno 0
@@ -4159,74 +4159,74 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
-  PPIx-Regexp-0.081
-    pathname: W/WY/WYANT/PPIx-Regexp-0.081.tar.gz
+  PPIx-Regexp-0.082
+    pathname: W/WY/WYANT/PPIx-Regexp-0.082.tar.gz
     provides:
-      PPIx::Regexp 0.081
-      PPIx::Regexp::Constant 0.081
-      PPIx::Regexp::Dumper 0.081
-      PPIx::Regexp::Element 0.081
-      PPIx::Regexp::Lexer 0.081
-      PPIx::Regexp::Node 0.081
-      PPIx::Regexp::Node::Range 0.081
-      PPIx::Regexp::Node::Unknown 0.081
-      PPIx::Regexp::Structure 0.081
-      PPIx::Regexp::Structure::Assertion 0.081
-      PPIx::Regexp::Structure::Atomic_Script_Run 0.081
-      PPIx::Regexp::Structure::BranchReset 0.081
-      PPIx::Regexp::Structure::Capture 0.081
-      PPIx::Regexp::Structure::CharClass 0.081
-      PPIx::Regexp::Structure::Code 0.081
-      PPIx::Regexp::Structure::Main 0.081
-      PPIx::Regexp::Structure::Modifier 0.081
-      PPIx::Regexp::Structure::NamedCapture 0.081
-      PPIx::Regexp::Structure::Quantifier 0.081
-      PPIx::Regexp::Structure::RegexSet 0.081
-      PPIx::Regexp::Structure::Regexp 0.081
-      PPIx::Regexp::Structure::Replacement 0.081
-      PPIx::Regexp::Structure::Script_Run 0.081
-      PPIx::Regexp::Structure::Subexpression 0.081
-      PPIx::Regexp::Structure::Switch 0.081
-      PPIx::Regexp::Structure::Unknown 0.081
-      PPIx::Regexp::Support 0.081
-      PPIx::Regexp::Token 0.081
-      PPIx::Regexp::Token::Assertion 0.081
-      PPIx::Regexp::Token::Backreference 0.081
-      PPIx::Regexp::Token::Backtrack 0.081
-      PPIx::Regexp::Token::CharClass 0.081
-      PPIx::Regexp::Token::CharClass::POSIX 0.081
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.081
-      PPIx::Regexp::Token::CharClass::Simple 0.081
-      PPIx::Regexp::Token::Code 0.081
-      PPIx::Regexp::Token::Comment 0.081
-      PPIx::Regexp::Token::Condition 0.081
-      PPIx::Regexp::Token::Control 0.081
-      PPIx::Regexp::Token::Delimiter 0.081
-      PPIx::Regexp::Token::Greediness 0.081
-      PPIx::Regexp::Token::GroupType 0.081
-      PPIx::Regexp::Token::GroupType::Assertion 0.081
-      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.081
-      PPIx::Regexp::Token::GroupType::BranchReset 0.081
-      PPIx::Regexp::Token::GroupType::Code 0.081
-      PPIx::Regexp::Token::GroupType::Modifier 0.081
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.081
-      PPIx::Regexp::Token::GroupType::Script_Run 0.081
-      PPIx::Regexp::Token::GroupType::Subexpression 0.081
-      PPIx::Regexp::Token::GroupType::Switch 0.081
-      PPIx::Regexp::Token::Interpolation 0.081
-      PPIx::Regexp::Token::Literal 0.081
-      PPIx::Regexp::Token::Modifier 0.081
-      PPIx::Regexp::Token::NoOp 0.081
-      PPIx::Regexp::Token::Operator 0.081
-      PPIx::Regexp::Token::Quantifier 0.081
-      PPIx::Regexp::Token::Recursion 0.081
-      PPIx::Regexp::Token::Reference 0.081
-      PPIx::Regexp::Token::Structure 0.081
-      PPIx::Regexp::Token::Unknown 0.081
-      PPIx::Regexp::Token::Unmatched 0.081
-      PPIx::Regexp::Token::Whitespace 0.081
-      PPIx::Regexp::Tokenizer 0.081
-      PPIx::Regexp::Util 0.081
+      PPIx::Regexp 0.082
+      PPIx::Regexp::Constant 0.082
+      PPIx::Regexp::Dumper 0.082
+      PPIx::Regexp::Element 0.082
+      PPIx::Regexp::Lexer 0.082
+      PPIx::Regexp::Node 0.082
+      PPIx::Regexp::Node::Range 0.082
+      PPIx::Regexp::Node::Unknown 0.082
+      PPIx::Regexp::Structure 0.082
+      PPIx::Regexp::Structure::Assertion 0.082
+      PPIx::Regexp::Structure::Atomic_Script_Run 0.082
+      PPIx::Regexp::Structure::BranchReset 0.082
+      PPIx::Regexp::Structure::Capture 0.082
+      PPIx::Regexp::Structure::CharClass 0.082
+      PPIx::Regexp::Structure::Code 0.082
+      PPIx::Regexp::Structure::Main 0.082
+      PPIx::Regexp::Structure::Modifier 0.082
+      PPIx::Regexp::Structure::NamedCapture 0.082
+      PPIx::Regexp::Structure::Quantifier 0.082
+      PPIx::Regexp::Structure::RegexSet 0.082
+      PPIx::Regexp::Structure::Regexp 0.082
+      PPIx::Regexp::Structure::Replacement 0.082
+      PPIx::Regexp::Structure::Script_Run 0.082
+      PPIx::Regexp::Structure::Subexpression 0.082
+      PPIx::Regexp::Structure::Switch 0.082
+      PPIx::Regexp::Structure::Unknown 0.082
+      PPIx::Regexp::Support 0.082
+      PPIx::Regexp::Token 0.082
+      PPIx::Regexp::Token::Assertion 0.082
+      PPIx::Regexp::Token::Backreference 0.082
+      PPIx::Regexp::Token::Backtrack 0.082
+      PPIx::Regexp::Token::CharClass 0.082
+      PPIx::Regexp::Token::CharClass::POSIX 0.082
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.082
+      PPIx::Regexp::Token::CharClass::Simple 0.082
+      PPIx::Regexp::Token::Code 0.082
+      PPIx::Regexp::Token::Comment 0.082
+      PPIx::Regexp::Token::Condition 0.082
+      PPIx::Regexp::Token::Control 0.082
+      PPIx::Regexp::Token::Delimiter 0.082
+      PPIx::Regexp::Token::Greediness 0.082
+      PPIx::Regexp::Token::GroupType 0.082
+      PPIx::Regexp::Token::GroupType::Assertion 0.082
+      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.082
+      PPIx::Regexp::Token::GroupType::BranchReset 0.082
+      PPIx::Regexp::Token::GroupType::Code 0.082
+      PPIx::Regexp::Token::GroupType::Modifier 0.082
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.082
+      PPIx::Regexp::Token::GroupType::Script_Run 0.082
+      PPIx::Regexp::Token::GroupType::Subexpression 0.082
+      PPIx::Regexp::Token::GroupType::Switch 0.082
+      PPIx::Regexp::Token::Interpolation 0.082
+      PPIx::Regexp::Token::Literal 0.082
+      PPIx::Regexp::Token::Modifier 0.082
+      PPIx::Regexp::Token::NoOp 0.082
+      PPIx::Regexp::Token::Operator 0.082
+      PPIx::Regexp::Token::Quantifier 0.082
+      PPIx::Regexp::Token::Recursion 0.082
+      PPIx::Regexp::Token::Reference 0.082
+      PPIx::Regexp::Token::Structure 0.082
+      PPIx::Regexp::Token::Unknown 0.082
+      PPIx::Regexp::Token::Unmatched 0.082
+      PPIx::Regexp::Token::Whitespace 0.082
+      PPIx::Regexp::Tokenizer 0.082
+      PPIx::Regexp::Util 0.082
     requirements:
       Carp 0
       Encode 0
@@ -6383,32 +6383,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.58
-    pathname: O/OA/OALDERS/libwww-perl-6.58.tar.gz
+  libwww-perl-6.59
+    pathname: O/OA/OALDERS/libwww-perl-6.59.tar.gz
     provides:
-      LWP 6.58
-      LWP::Authen::Basic 6.58
-      LWP::Authen::Digest 6.58
-      LWP::Authen::Ntlm 6.58
-      LWP::ConnCache 6.58
-      LWP::Debug 6.58
-      LWP::Debug::TraceHTTP 6.58
-      LWP::DebugFile 6.58
-      LWP::MemberMixin 6.58
-      LWP::Protocol 6.58
-      LWP::Protocol::cpan 6.58
-      LWP::Protocol::data 6.58
-      LWP::Protocol::file 6.58
-      LWP::Protocol::ftp 6.58
-      LWP::Protocol::gopher 6.58
-      LWP::Protocol::http 6.58
-      LWP::Protocol::loopback 6.58
-      LWP::Protocol::mailto 6.58
-      LWP::Protocol::nntp 6.58
-      LWP::Protocol::nogo 6.58
-      LWP::RobotUA 6.58
-      LWP::Simple 6.58
-      LWP::UserAgent 6.58
+      LWP 6.59
+      LWP::Authen::Basic 6.59
+      LWP::Authen::Digest 6.59
+      LWP::Authen::Ntlm 6.59
+      LWP::ConnCache 6.59
+      LWP::Debug 6.59
+      LWP::Debug::TraceHTTP 6.59
+      LWP::DebugFile 6.59
+      LWP::MemberMixin 6.59
+      LWP::Protocol 6.59
+      LWP::Protocol::cpan 6.59
+      LWP::Protocol::data 6.59
+      LWP::Protocol::file 6.59
+      LWP::Protocol::ftp 6.59
+      LWP::Protocol::gopher 6.59
+      LWP::Protocol::http 6.59
+      LWP::Protocol::loopback 6.59
+      LWP::Protocol::mailto 6.59
+      LWP::Protocol::nntp 6.59
+      LWP::Protocol::nogo 6.59
+      LWP::RobotUA 6.59
+      LWP::Simple 6.59
+      LWP::UserAgent 6.59
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
