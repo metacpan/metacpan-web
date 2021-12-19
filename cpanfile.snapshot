@@ -186,6 +186,7 @@ DISTRIBUTIONS
       CGI::Simple::Standard 1.25
       CGI::Simple::Util 1.25
     requirements:
+      ExtUtils::MakeMaker 0
       File::Temp 0
       IO::Scalar 0
       Test::Exception 0
@@ -2225,46 +2226,46 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  IO-Async-0.800
-    pathname: P/PE/PEVANS/IO-Async-0.800.tar.gz
+  IO-Async-0.801
+    pathname: P/PE/PEVANS/IO-Async-0.801.tar.gz
     provides:
       Future::IO::Impl::IOAsync undef
-      IO::Async 0.800
-      IO::Async::Channel 0.800
-      IO::Async::Debug 0.800
-      IO::Async::File 0.800
-      IO::Async::FileStream 0.800
-      IO::Async::Function 0.800
-      IO::Async::Future 0.800
-      IO::Async::Handle 0.800
-      IO::Async::Internals::ChildManager 0.800
-      IO::Async::Internals::FunctionWorker 0.800
-      IO::Async::Listener 0.800
-      IO::Async::Loop 0.800
-      IO::Async::Loop::Poll 0.800
-      IO::Async::Loop::Select 0.800
-      IO::Async::LoopTests 0.800
+      IO::Async 0.801
+      IO::Async::Channel 0.801
+      IO::Async::Debug 0.801
+      IO::Async::File 0.801
+      IO::Async::FileStream 0.801
+      IO::Async::Function 0.801
+      IO::Async::Future 0.801
+      IO::Async::Handle 0.801
+      IO::Async::Internals::ChildManager 0.801
+      IO::Async::Internals::FunctionWorker 0.801
+      IO::Async::Listener 0.801
+      IO::Async::Loop 0.801
+      IO::Async::Loop::Poll 0.801
+      IO::Async::Loop::Select 0.801
+      IO::Async::LoopTests 0.801
       IO::Async::Metrics undef
-      IO::Async::Notifier 0.800
-      IO::Async::OS 0.800
-      IO::Async::OS::MSWin32 0.800
-      IO::Async::OS::cygwin 0.800
-      IO::Async::OS::linux 0.800
-      IO::Async::PID 0.800
-      IO::Async::Process 0.800
-      IO::Async::Protocol 0.800
-      IO::Async::Protocol::LineStream 0.800
-      IO::Async::Protocol::Stream 0.800
-      IO::Async::Resolver 0.800
-      IO::Async::Routine 0.800
-      IO::Async::Signal 0.800
-      IO::Async::Socket 0.800
-      IO::Async::Stream 0.800
-      IO::Async::Test 0.800
-      IO::Async::Timer 0.800
-      IO::Async::Timer::Absolute 0.800
-      IO::Async::Timer::Countdown 0.800
-      IO::Async::Timer::Periodic 0.800
+      IO::Async::Notifier 0.801
+      IO::Async::OS 0.801
+      IO::Async::OS::MSWin32 0.801
+      IO::Async::OS::cygwin 0.801
+      IO::Async::OS::linux 0.801
+      IO::Async::PID 0.801
+      IO::Async::Process 0.801
+      IO::Async::Protocol 0.801
+      IO::Async::Protocol::LineStream 0.801
+      IO::Async::Protocol::Stream 0.801
+      IO::Async::Resolver 0.801
+      IO::Async::Routine 0.801
+      IO::Async::Signal 0.801
+      IO::Async::Socket 0.801
+      IO::Async::Stream 0.801
+      IO::Async::Test 0.801
+      IO::Async::Timer 0.801
+      IO::Async::Timer::Absolute 0.801
+      IO::Async::Timer::Countdown 0.801
+      IO::Async::Timer::Periodic 0.801
     requirements:
       Exporter 5.57
       File::stat 0
@@ -2388,11 +2389,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-4.03
-    pathname: I/IS/ISHIGAKI/JSON-4.03.tar.gz
+  JSON-4.04
+    pathname: I/IS/ISHIGAKI/JSON-4.04.tar.gz
     provides:
-      JSON 4.03
-      JSON::Backend::PP 4.03
+      JSON 4.04
+      JSON::Backend::PP 4.04
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -3757,111 +3758,111 @@ DISTRIBUTIONS
       Net::CIDR::Lite::Span 0.22
     requirements:
       ExtUtils::MakeMaker 0
-  Net-DNS-1.32
-    pathname: N/NL/NLNETLABS/Net-DNS-1.32.tar.gz
+  Net-DNS-1.33
+    pathname: N/NL/NLNETLABS/Net-DNS-1.33.tar.gz
     provides:
-      Net::DNS 1.32
-      Net::DNS::Domain 1841
-      Net::DNS::DomainName 1813
-      Net::DNS::DomainName1035 1813
-      Net::DNS::DomainName2535 1813
-      Net::DNS::Header 1812
-      Net::DNS::Mailbox 1813
-      Net::DNS::Mailbox1035 1813
-      Net::DNS::Mailbox2535 1813
-      Net::DNS::Nameserver 1841
-      Net::DNS::Packet 1818
-      Net::DNS::Parameters 1841
-      Net::DNS::Question 1812
-      Net::DNS::RR 1841
-      Net::DNS::RR::A 1814
-      Net::DNS::RR::AAAA 1814
-      Net::DNS::RR::AFSDB 1814
-      Net::DNS::RR::AMTRELAY 1814
-      Net::DNS::RR::APL 1814
-      Net::DNS::RR::APL::Item 1814
-      Net::DNS::RR::CAA 1814
-      Net::DNS::RR::CDNSKEY 1814
-      Net::DNS::RR::CDS 1814
-      Net::DNS::RR::CERT 1814
-      Net::DNS::RR::CNAME 1814
-      Net::DNS::RR::CSYNC 1814
-      Net::DNS::RR::DHCID 1814
-      Net::DNS::RR::DNAME 1814
-      Net::DNS::RR::DNSKEY 1814
-      Net::DNS::RR::DS 1814
-      Net::DNS::RR::EUI48 1814
-      Net::DNS::RR::EUI64 1814
-      Net::DNS::RR::GPOS 1814
-      Net::DNS::RR::HINFO 1814
-      Net::DNS::RR::HIP 1814
-      Net::DNS::RR::HTTPS 1814
-      Net::DNS::RR::IPSECKEY 1814
-      Net::DNS::RR::ISDN 1814
-      Net::DNS::RR::KEY 1814
-      Net::DNS::RR::KX 1814
-      Net::DNS::RR::L32 1814
-      Net::DNS::RR::L64 1814
-      Net::DNS::RR::LOC 1814
-      Net::DNS::RR::LP 1814
-      Net::DNS::RR::MB 1814
-      Net::DNS::RR::MG 1814
-      Net::DNS::RR::MINFO 1814
-      Net::DNS::RR::MR 1814
-      Net::DNS::RR::MX 1814
-      Net::DNS::RR::NAPTR 1814
-      Net::DNS::RR::NID 1814
-      Net::DNS::RR::NS 1814
-      Net::DNS::RR::NSEC 1812
-      Net::DNS::RR::NSEC3 1814
-      Net::DNS::RR::NSEC3PARAM 1814
-      Net::DNS::RR::NULL 1814
-      Net::DNS::RR::OPENPGPKEY 1814
-      Net::DNS::RR::OPT 1823
-      Net::DNS::RR::OPT::CHAIN 1823
-      Net::DNS::RR::OPT::CLIENT_SUBNET 1823
-      Net::DNS::RR::OPT::COOKIE 1823
-      Net::DNS::RR::OPT::DAU 1823
-      Net::DNS::RR::OPT::DHU 1823
-      Net::DNS::RR::OPT::EXPIRE 1823
-      Net::DNS::RR::OPT::EXTENDED_ERROR 1823
-      Net::DNS::RR::OPT::KEY_TAG 1823
-      Net::DNS::RR::OPT::N3U 1823
-      Net::DNS::RR::OPT::PADDING 1823
-      Net::DNS::RR::OPT::TCP_KEEPALIVE 1823
-      Net::DNS::RR::PTR 1814
-      Net::DNS::RR::PX 1814
-      Net::DNS::RR::RP 1814
-      Net::DNS::RR::RRSIG 1819
-      Net::DNS::RR::RT 1814
-      Net::DNS::RR::SIG 1819
-      Net::DNS::RR::SMIMEA 1814
-      Net::DNS::RR::SOA 1819
-      Net::DNS::RR::SPF 1814
-      Net::DNS::RR::SRV 1814
-      Net::DNS::RR::SSHFP 1814
-      Net::DNS::RR::SVCB 1845
-      Net::DNS::RR::TKEY 1814
-      Net::DNS::RR::TLSA 1814
-      Net::DNS::RR::TSIG 1827
-      Net::DNS::RR::TXT 1840
-      Net::DNS::RR::URI 1814
-      Net::DNS::RR::X25 1814
-      Net::DNS::RR::ZONEMD 1832
-      Net::DNS::Resolver 1818
-      Net::DNS::Resolver::Base 1818
-      Net::DNS::Resolver::MSWin32 1812
-      Net::DNS::Resolver::Recurse 1811
-      Net::DNS::Resolver::UNIX 1843
-      Net::DNS::Resolver::android 1811
-      Net::DNS::Resolver::cygwin 1811
-      Net::DNS::Resolver::os2 1811
-      Net::DNS::Resolver::os390 1811
-      Net::DNS::Text 1841
-      Net::DNS::Update 1814
-      Net::DNS::ZoneFile 1841
-      Net::DNS::ZoneFile::Generator 1841
-      Net::DNS::ZoneFile::Text 1841
+      Net::DNS 1.33
+      Net::DNS::Domain 1855
+      Net::DNS::DomainName 1855
+      Net::DNS::DomainName1035 1855
+      Net::DNS::DomainName2535 1855
+      Net::DNS::Header 1855
+      Net::DNS::Mailbox 1855
+      Net::DNS::Mailbox1035 1855
+      Net::DNS::Mailbox2535 1855
+      Net::DNS::Nameserver 1860
+      Net::DNS::Packet 1855
+      Net::DNS::Parameters 1855
+      Net::DNS::Question 1855
+      Net::DNS::RR 1856
+      Net::DNS::RR::A 1857
+      Net::DNS::RR::AAAA 1857
+      Net::DNS::RR::AFSDB 1857
+      Net::DNS::RR::AMTRELAY 1855
+      Net::DNS::RR::APL 1857
+      Net::DNS::RR::APL::Item 1857
+      Net::DNS::RR::CAA 1857
+      Net::DNS::RR::CDNSKEY 1857
+      Net::DNS::RR::CDS 1857
+      Net::DNS::RR::CERT 1856
+      Net::DNS::RR::CNAME 1857
+      Net::DNS::RR::CSYNC 1857
+      Net::DNS::RR::DHCID 1857
+      Net::DNS::RR::DNAME 1857
+      Net::DNS::RR::DNSKEY 1856
+      Net::DNS::RR::DS 1856
+      Net::DNS::RR::EUI48 1857
+      Net::DNS::RR::EUI64 1857
+      Net::DNS::RR::GPOS 1857
+      Net::DNS::RR::HINFO 1857
+      Net::DNS::RR::HIP 1857
+      Net::DNS::RR::HTTPS 1857
+      Net::DNS::RR::IPSECKEY 1857
+      Net::DNS::RR::ISDN 1857
+      Net::DNS::RR::KEY 1857
+      Net::DNS::RR::KX 1857
+      Net::DNS::RR::L32 1857
+      Net::DNS::RR::L64 1857
+      Net::DNS::RR::LOC 1857
+      Net::DNS::RR::LP 1857
+      Net::DNS::RR::MB 1857
+      Net::DNS::RR::MG 1857
+      Net::DNS::RR::MINFO 1857
+      Net::DNS::RR::MR 1857
+      Net::DNS::RR::MX 1857
+      Net::DNS::RR::NAPTR 1857
+      Net::DNS::RR::NID 1857
+      Net::DNS::RR::NS 1857
+      Net::DNS::RR::NSEC 1857
+      Net::DNS::RR::NSEC3 1857
+      Net::DNS::RR::NSEC3PARAM 1857
+      Net::DNS::RR::NULL 1857
+      Net::DNS::RR::OPENPGPKEY 1857
+      Net::DNS::RR::OPT 1857
+      Net::DNS::RR::OPT::CHAIN 1857
+      Net::DNS::RR::OPT::CLIENT_SUBNET 1857
+      Net::DNS::RR::OPT::COOKIE 1857
+      Net::DNS::RR::OPT::DAU 1857
+      Net::DNS::RR::OPT::DHU 1857
+      Net::DNS::RR::OPT::EXPIRE 1857
+      Net::DNS::RR::OPT::EXTENDED_ERROR 1857
+      Net::DNS::RR::OPT::KEY_TAG 1857
+      Net::DNS::RR::OPT::N3U 1857
+      Net::DNS::RR::OPT::PADDING 1857
+      Net::DNS::RR::OPT::TCP_KEEPALIVE 1857
+      Net::DNS::RR::PTR 1857
+      Net::DNS::RR::PX 1857
+      Net::DNS::RR::RP 1857
+      Net::DNS::RR::RRSIG 1856
+      Net::DNS::RR::RT 1857
+      Net::DNS::RR::SIG 1856
+      Net::DNS::RR::SMIMEA 1857
+      Net::DNS::RR::SOA 1857
+      Net::DNS::RR::SPF 1857
+      Net::DNS::RR::SRV 1857
+      Net::DNS::RR::SSHFP 1857
+      Net::DNS::RR::SVCB 1857
+      Net::DNS::RR::TKEY 1857
+      Net::DNS::RR::TLSA 1857
+      Net::DNS::RR::TSIG 1856
+      Net::DNS::RR::TXT 1857
+      Net::DNS::RR::URI 1857
+      Net::DNS::RR::X25 1857
+      Net::DNS::RR::ZONEMD 1857
+      Net::DNS::Resolver 1855
+      Net::DNS::Resolver::Base 1855
+      Net::DNS::Resolver::MSWin32 1856
+      Net::DNS::Resolver::Recurse 1856
+      Net::DNS::Resolver::UNIX 1856
+      Net::DNS::Resolver::android 1856
+      Net::DNS::Resolver::cygwin 1856
+      Net::DNS::Resolver::os2 1856
+      Net::DNS::Resolver::os390 1856
+      Net::DNS::Text 1855
+      Net::DNS::Update 1855
+      Net::DNS::ZoneFile 1855
+      Net::DNS::ZoneFile::Generator 1855
+      Net::DNS::ZoneFile::Text 1855
     requirements:
       Carp 1.1
       Digest::HMAC 1.03
@@ -6383,32 +6384,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.59
-    pathname: O/OA/OALDERS/libwww-perl-6.59.tar.gz
+  libwww-perl-6.60
+    pathname: O/OA/OALDERS/libwww-perl-6.60.tar.gz
     provides:
-      LWP 6.59
-      LWP::Authen::Basic 6.59
-      LWP::Authen::Digest 6.59
-      LWP::Authen::Ntlm 6.59
-      LWP::ConnCache 6.59
-      LWP::Debug 6.59
-      LWP::Debug::TraceHTTP 6.59
-      LWP::DebugFile 6.59
-      LWP::MemberMixin 6.59
-      LWP::Protocol 6.59
-      LWP::Protocol::cpan 6.59
-      LWP::Protocol::data 6.59
-      LWP::Protocol::file 6.59
-      LWP::Protocol::ftp 6.59
-      LWP::Protocol::gopher 6.59
-      LWP::Protocol::http 6.59
-      LWP::Protocol::loopback 6.59
-      LWP::Protocol::mailto 6.59
-      LWP::Protocol::nntp 6.59
-      LWP::Protocol::nogo 6.59
-      LWP::RobotUA 6.59
-      LWP::Simple 6.59
-      LWP::UserAgent 6.59
+      LWP 6.60
+      LWP::Authen::Basic 6.60
+      LWP::Authen::Digest 6.60
+      LWP::Authen::Ntlm 6.60
+      LWP::ConnCache 6.60
+      LWP::Debug 6.60
+      LWP::Debug::TraceHTTP 6.60
+      LWP::DebugFile 6.60
+      LWP::MemberMixin 6.60
+      LWP::Protocol 6.60
+      LWP::Protocol::cpan 6.60
+      LWP::Protocol::data 6.60
+      LWP::Protocol::file 6.60
+      LWP::Protocol::ftp 6.60
+      LWP::Protocol::gopher 6.60
+      LWP::Protocol::http 6.60
+      LWP::Protocol::loopback 6.60
+      LWP::Protocol::mailto 6.60
+      LWP::Protocol::nntp 6.60
+      LWP::Protocol::nogo 6.60
+      LWP::RobotUA 6.60
+      LWP::Simple 6.60
+      LWP::UserAgent 6.60
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
