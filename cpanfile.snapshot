@@ -1002,19 +1002,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.54
-    pathname: D/DR/DROLSKY/DateTime-1.54.tar.gz
+  DateTime-1.55
+    pathname: D/DR/DROLSKY/DateTime-1.55.tar.gz
     provides:
-      DateTime 1.54
-      DateTime::Duration 1.54
-      DateTime::Helpers 1.54
-      DateTime::Infinite 1.54
-      DateTime::Infinite::Future 1.54
-      DateTime::Infinite::Past 1.54
-      DateTime::LeapSecond 1.54
-      DateTime::PP 1.54
-      DateTime::PPExtra 1.54
-      DateTime::Types 1.54
+      DateTime 1.55
+      DateTime::Duration 1.55
+      DateTime::Helpers 1.55
+      DateTime::Infinite 1.55
+      DateTime::Infinite::Future 1.55
+      DateTime::Infinite::Past 1.55
+      DateTime::LeapSecond 1.55
+      DateTime::PP 1.55
+      DateTime::PPExtra 1.55
+      DateTime::Types 1.55
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -2302,17 +2302,17 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.072
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.072.tar.gz
+  IO-Socket-SSL-2.073
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.073.tar.gz
     provides:
-      IO::Socket::SSL 2.072
+      IO::Socket::SSL 2.073
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.072
-      IO::Socket::SSL::OCSP_Resolver 2.072
+      IO::Socket::SSL::OCSP_Cache 2.073
+      IO::Socket::SSL::OCSP_Resolver 2.073
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.072
-      IO::Socket::SSL::SSL_HANDLE 2.072
-      IO::Socket::SSL::Session_Cache 2.072
+      IO::Socket::SSL::SSL_Context 2.073
+      IO::Socket::SSL::SSL_HANDLE 2.073
+      IO::Socket::SSL::Session_Cache 2.073
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
