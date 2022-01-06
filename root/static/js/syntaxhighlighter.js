@@ -50,13 +50,12 @@ $(function () {
     */
     function processPackages(code)
     {
-        var destination = document.location.href.match(/\/source\//) ? 'source' : 'pod',
-            // This regexp is not great, but its good enough so far:
-            // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
-            // Space should only be allowed after qw, but it probably doesn't hurt to match it.
-            // This is a lax re for html entity, but probably good enough.
-            strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_\:]+)(.*)/
-            ;
+        var target_pattern = this.params.package_target_type == 'source' ? '/module/%s/source' : '/pod/%s';
+        // This regexp is not great, but its good enough so far:
+        // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
+        // Space should only be allowed after qw, but it probably doesn't hurt to match it.
+        // This is a lax re for html entity, but probably good enough.
+        var strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_\:]+)(.*)/;
 
         // Wow, this regexp is hairy.
         // We have to specifically match the "qw" followed by a non-letter or an html entity followed by a closing tag,
@@ -69,9 +68,7 @@ $(function () {
         // See also the above comment about scanning the plain string and linkifying later.
         code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
         {
-            var match = null,
-                mcpan_url
-                ;
+            var match = null;
 
             if ( match = strip_delimiters.exec(pkg) )
             {
@@ -79,13 +76,15 @@ $(function () {
                 pkg    = match[2];
                 suffix = match[3] + suffix;
             }
+            var mcpan_url = target_pattern.replace(/%s/, pkg);
+            var mcpan_link = '<a href="' + mcpan_url + '">' + pkg + '</a>';
 
-            mcpan_url = '<a href="/' + destination + '/' + pkg + '">' + pkg + '</a>';
-            return prefix + mcpan_url + suffix;
+            return prefix + mcpan_link + suffix;
         });
 
+        var replace_pattern = '$1<a href="' + target_pattern.replace('%s', '$3') + '">$3</a>$4';
         // Link our dependencies
-        return code.replace(/(<code class="p(?:er)?l keyword">(use|package|require)<\/code> <code class="p(?:er)?l plain">)([A-Z_a-z][0-9A-Z_a-z]*(?:::[0-9A-Z_a-z]+)*)(.*?<\/code>)/g, '$1<a href="/' + destination + '/$3">$3</a>$4');
+        return code.replace(/(<code class="p(?:er)?l keyword">(use|package|require)<\/code> <code class="p(?:er)?l plain">)([A-Z_a-z][0-9A-Z_a-z]*(?:::[0-9A-Z_a-z]+)*)(.*?<\/code>)/g, replace_pattern);
     };
 
     var getCodeLinesHtml = SyntaxHighlighter.Highlighter.prototype.getCodeLinesHtml;
@@ -95,7 +94,7 @@ $(function () {
       html = html.replace(/^ /, "&#32;");
       html = html.replace(/^\t/, "&#9;");
       html = getCodeLinesHtml.call(this, html, lineNumbers);
-      return processPackages(html);
+      return processPackages.call(this, html);
     };
 
 
@@ -172,6 +171,8 @@ $(function () {
         if (lines) {
             config.highlight = parseLines(lines);
         }
+
+        config.package_target_type = source.length ? 'source' : 'pod';
 
         // highlighter strips leading blank lines, throwing off line numbers.
         // add a blank line for the highlighter to strip
