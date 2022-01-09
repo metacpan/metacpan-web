@@ -178,20 +178,15 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  CGI-Simple-1.25
-    pathname: M/MA/MANWAR/CGI-Simple-1.25.tar.gz
+  CGI-Simple-1.27
+    pathname: M/MA/MANWAR/CGI-Simple-1.27.tar.gz
     provides:
-      CGI::Simple 1.25
-      CGI::Simple::Cookie 1.25
-      CGI::Simple::Standard 1.25
-      CGI::Simple::Util 1.25
+      CGI::Simple 1.27
+      CGI::Simple::Cookie 1.27
+      CGI::Simple::Standard 1.27
+      CGI::Simple::Util 1.27
     requirements:
       ExtUtils::MakeMaker 0
-      File::Temp 0
-      IO::Scalar 0
-      Test::Exception 0
-      Test::More 0
-      Test::NoWarnings 0
   CGI-Struct-1.21
     pathname: F/FU/FULLERMD/CGI-Struct-1.21.tar.gz
     provides:
@@ -878,15 +873,16 @@ DISTRIBUTIONS
       Mixin::Linewise::Writers 0
       strict 0
       warnings 0
-  Config-Tiny-2.27
-    pathname: R/RS/RSAVAGE/Config-Tiny-2.27.tgz
+  Config-Tiny-2.28
+    pathname: R/RS/RSAVAGE/Config-Tiny-2.28.tgz
     provides:
-      Config::Tiny 2.27
+      Config::Tiny 2.28
     requirements:
       ExtUtils::MakeMaker 0
-      File::Spec 3.3
+      File::Spec 3.30
       File::Temp 0.22
       Test::More 0.47
+      perl 5.008001
       strict 0
       utf8 0
   Config-ZOMG-1.000000
@@ -2089,19 +2085,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.35
-    pathname: O/OA/OALDERS/HTTP-Message-6.35.tar.gz
+  HTTP-Message-6.36
+    pathname: O/OA/OALDERS/HTTP-Message-6.36.tar.gz
     provides:
-      HTTP::Config 6.35
-      HTTP::Headers 6.35
-      HTTP::Headers::Auth 6.35
-      HTTP::Headers::ETag 6.35
-      HTTP::Headers::Util 6.35
-      HTTP::Message 6.35
-      HTTP::Request 6.35
-      HTTP::Request::Common 6.35
-      HTTP::Response 6.35
-      HTTP::Status 6.35
+      HTTP::Config 6.36
+      HTTP::Headers 6.36
+      HTTP::Headers::Auth 6.36
+      HTTP::Headers::ETag 6.36
+      HTTP::Headers::Util 6.36
+      HTTP::Message 6.36
+      HTTP::Request 6.36
+      HTTP::Request::Common 6.36
+      HTTP::Response 6.36
+      HTTP::Status 6.36
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -2302,17 +2298,17 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.073
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.073.tar.gz
+  IO-Socket-SSL-2.074
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.074.tar.gz
     provides:
-      IO::Socket::SSL 2.073
+      IO::Socket::SSL 2.074
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.073
-      IO::Socket::SSL::OCSP_Resolver 2.073
+      IO::Socket::SSL::OCSP_Cache 2.074
+      IO::Socket::SSL::OCSP_Resolver 2.074
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.073
-      IO::Socket::SSL::SSL_HANDLE 2.073
-      IO::Socket::SSL::Session_Cache 2.073
+      IO::Socket::SSL::SSL_Context 2.074
+      IO::Socket::SSL::SSL_HANDLE 2.074
+      IO::Socket::SSL::Session_Cache 2.074
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2325,30 +2321,6 @@ DISTRIBUTIONS
       IO::String 1.08
     requirements:
       ExtUtils::MakeMaker 0
-  IO-Stringy-2.113
-    pathname: C/CA/CAPOEIRAB/IO-Stringy-2.113.tar.gz
-    provides:
-      IO::AtomicFile 2.113
-      IO::InnerFile 2.113
-      IO::Lines 2.113
-      IO::Scalar 2.113
-      IO::ScalarArray 2.113
-      IO::Stringy 2.113
-      IO::Wrap 2.113
-      IO::WrapTie 2.113
-    requirements:
-      Carp 0
-      Exporter 5.57
-      ExtUtils::MakeMaker 0
-      File::Spec 0
-      FileHandle 0
-      IO::File 0
-      IO::Handle 0
-      Symbol 0
-      overload 0
-      parent 0
-      strict 0
-      warnings 0
   IPC-Run3-0.048
     pathname: R/RJ/RJBS/IPC-Run3-0.048.tar.gz
     provides:
@@ -2766,10 +2738,10 @@ DISTRIBUTIONS
       File::Spec 0
       List::Util 0
       Test::More 0.47
-  MRO-Compat-0.13
-    pathname: H/HA/HAARG/MRO-Compat-0.13.tar.gz
+  MRO-Compat-0.15
+    pathname: H/HA/HAARG/MRO-Compat-0.15.tar.gz
     provides:
-      MRO::Compat 0.13
+      MRO::Compat 0.15
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
@@ -4736,10 +4708,10 @@ DISTRIBUTIONS
       Perl::Tidy::VerticalAligner::Line 20211029
     requirements:
       ExtUtils::MakeMaker 0
-  PerlIO-utf8_strict-0.008
-    pathname: L/LE/LEONT/PerlIO-utf8_strict-0.008.tar.gz
+  PerlIO-utf8_strict-0.009
+    pathname: L/LE/LEONT/PerlIO-utf8_strict-0.009.tar.gz
     provides:
-      PerlIO::utf8_strict 0.008
+      PerlIO::utf8_strict 0.009
     requirements:
       ExtUtils::MakeMaker 0
       XSLoader 0
@@ -5391,10 +5363,10 @@ DISTRIBUTIONS
       List::Util 1.09
       Scalar::Util 1.09
       Test::Builder 0
-  Test-Differences-0.68
-    pathname: D/DC/DCANTRELL/Test-Differences-0.68.tar.gz
+  Test-Differences-0.69
+    pathname: D/DC/DCANTRELL/Test-Differences-0.69.tar.gz
     provides:
-      Test::Differences 0.68
+      Test::Differences 0.69
     requirements:
       Capture::Tiny 0.24
       Data::Dumper 2.126
@@ -5500,15 +5472,6 @@ DISTRIBUTIONS
       Test::Needs 0.002009
     requirements:
       ExtUtils::MakeMaker 0
-      perl 5.006
-  Test-NoWarnings-1.06
-    pathname: H/HA/HAARG/Test-NoWarnings-1.06.tar.gz
-    provides:
-      Test::NoWarnings 1.06
-      Test::NoWarnings::Warning 1.06
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Builder 0.86
       perl 5.006
   Test-Perl-Critic-1.04
     pathname: P/PE/PETDANCE/Test-Perl-Critic-1.04.tar.gz
