@@ -681,8 +681,8 @@ my %files = (
         '16b8e4557ee882a3dd157170e08d1ededa18812a',
     'root/static/images/sponsors/booking.png' =>
         'fbbdfe51514e6717796cd14bd627a49391252f93',
-    'root/static/images/sponsors/bytemark_logo.png' =>
-        '498ce22fc52f800891b621a1504ddea3d54fdcc9',
+    'root/static/images/sponsors/bytemark_logo.svg' =>
+        '52a7ea5efe9ae9aaf6a20da37a1c6052e882411a',
     'root/static/images/sponsors/control-my-id.png' =>
         'd9b2485a500502f3b648c1f01783450cb63ca2f9',
     'root/static/images/sponsors/cpanel.png' =>
@@ -697,8 +697,8 @@ my %files = (
         '292b9ab76da7035cf192f8c651a090c4bd4bc2ab',
     'root/static/images/sponsors/epo.png' =>
         '1a34a7c495728a194fc272d3a2069df2ef90f9e0',
-    'root/static/images/sponsors/fastly_logo.png' =>
-        '9eac83cb298c0bd475f291dde968a820d8f54584',
+    'root/static/images/sponsors/fastly_logo.svg' =>
+        'a9f2f7876e47d1d0d374551135b56a5b86b89886',
     'root/static/images/sponsors/fastmail.png' =>
         'a3365d759be66a8a86dac12b3cf426a242200c03',
     'root/static/images/sponsors/github_logo.png' =>
@@ -707,8 +707,8 @@ my %files = (
         '0698d65b033849f1a368c8f68fcc01d281c9eae8',
     'root/static/images/sponsors/kritika.svg' =>
         '887d712f253b63e53319ad37cfcf3fdbd36e8a36',
-    'root/static/images/sponsors/liquidweb_color.png' =>
-        'b77446398da31c8785fdb20ca1349be469523f89',
+    'root/static/images/sponsors/liquidweb_logo.png' =>
+        '33b581ea9ffb2e91983540362b9f355d6cdad7dc',
     'root/static/images/sponsors/panopta.png' =>
         '7f77555505dfcb1a2c3b47bec95062fe2dd7a5da',
     'root/static/images/sponsors/perl-careers.png' =>

@@ -8,7 +8,7 @@
             <tr>
                 <td width="15%">
                     <a href="https://www.fastly.com/" target="_blank" rel="noopener">
-                        <img src="/static/images/sponsors/fastly_logo.png" width=110 height=51>
+                        <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51>
                     </a>
                 </td>
                 <td>
@@ -19,7 +19,7 @@
             <tr>
                 <td>
                     <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
-                        <img src="/static/images/sponsors/bytemark_logo.png" width=179 height=14>
+                        <img src="/static/images/sponsors/bytemark_logo.svg" width=179 height=40>
                     </a>
                 </td>
                 <td>
@@ -31,7 +31,7 @@
             <tr>
                 <td>
                     <a href="https://www.liquidweb.com/" target="_blank" rel="noopener">
-                        <img src="/static/images/sponsors/liquidweb_color.png" width=170 height=50>
+                        <img src="/static/images/sponsors/liquidweb_logo.png" width=170 height=50>
                     </a>
                 </td>
                 <td>
