@@ -227,7 +227,7 @@
             <div class="row" style="padding: 50px 15px 30px">
               <div class="col-xs-9 col-md-3" style="padding:25px">
                 <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/bytemark_logo.png" alt="Bytemark logo">
+                  <img width="170" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
                 </a>
               </div>
               <div class="col-xs-9 col-md-3" style="padding:15px">

@@ -681,8 +681,8 @@ my %files = (
         '16b8e4557ee882a3dd157170e08d1ededa18812a',
     'root/static/images/sponsors/booking.png' =>
         'fbbdfe51514e6717796cd14bd627a49391252f93',
-    'root/static/images/sponsors/bytemark_logo.png' =>
-        '498ce22fc52f800891b621a1504ddea3d54fdcc9',
+    'root/static/images/sponsors/bytemark_logo.svg' =>
+        '52a7ea5efe9ae9aaf6a20da37a1c6052e882411a',
     'root/static/images/sponsors/control-my-id.png' =>
         'd9b2485a500502f3b648c1f01783450cb63ca2f9',
     'root/static/images/sponsors/cpanel.png' =>
