@@ -3,7 +3,11 @@
 <div class="content account-settings">
     <div class="alert alert-warning">
       <h4><strong>Information</strong></h4>
-      Identities you are connected to allow you to log into MetaCPAN. MetaCPAN also drags in some information from them to help you with filling in your <a href="/account/profile">profile</a>. This information is not exposed to anyone unless you explicitly publish it.
+      Below are the identities which you may use to log in to MetaCPAN. (Note
+      that PAUSE is used to verify your identity and cannot be used for logging
+      in). MetaCPAN may also use some information from the sources to help you
+      with filling in your <a href="/account/profile">profile</a>. This
+      information is not exposed to anyone unless you explicitly publish it.
     </div>
     <table width="300">
 %%  for ['GitHub', 'PAUSE', 'Twitter', 'Google'] -> $identity {
