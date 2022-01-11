@@ -697,8 +697,8 @@ my %files = (
         '292b9ab76da7035cf192f8c651a090c4bd4bc2ab',
     'root/static/images/sponsors/epo.png' =>
         '1a34a7c495728a194fc272d3a2069df2ef90f9e0',
-    'root/static/images/sponsors/fastly_logo.png' =>
-        '9eac83cb298c0bd475f291dde968a820d8f54584',
+    'root/static/images/sponsors/fastly_logo.svg' =>
+        'a9f2f7876e47d1d0d374551135b56a5b86b89886',
     'root/static/images/sponsors/fastmail.png' =>
         'a3365d759be66a8a86dac12b3cf426a242200c03',
     'root/static/images/sponsors/github_logo.png' =>

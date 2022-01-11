@@ -242,7 +242,7 @@
               </div>
               <div class="col-xs-9 col-md-3" style="padding:15px">
                 <a href="https://www.fastly.com/" target="_blank" rel="noopener">
-                  <img src="/static/images/sponsors/fastly_logo.png" width=110 height=51 alt="Fastly logo">
+                  <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51 alt="Fastly logo">
                 </a>
               </div>
             </div>
