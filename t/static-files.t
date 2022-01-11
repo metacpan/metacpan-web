@@ -707,8 +707,8 @@ my %files = (
         '0698d65b033849f1a368c8f68fcc01d281c9eae8',
     'root/static/images/sponsors/kritika.svg' =>
         '887d712f253b63e53319ad37cfcf3fdbd36e8a36',
-    'root/static/images/sponsors/liquidweb_color.png' =>
-        'b77446398da31c8785fdb20ca1349be469523f89',
+    'root/static/images/sponsors/liquidweb_logo.png' =>
+        '33b581ea9ffb2e91983540362b9f355d6cdad7dc',
     'root/static/images/sponsors/panopta.png' =>
         '7f77555505dfcb1a2c3b47bec95062fe2dd7a5da',
     'root/static/images/sponsors/perl-careers.png' =>
