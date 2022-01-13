@@ -49,7 +49,7 @@ use lib "$root_dir/lib";
 use MetaCPAN::Web;
 
 # do not use the read only mount point when running from a docker container
-my $tempdir = is_linux_container() ? "/var/tmp" : "$root_dir/var/tmp";
+my $tempdir = is_linux_container() ? '/var/tmp' : "$root_dir/var/tmp";
 
 STDERR->autoflush;
 
@@ -95,9 +95,9 @@ builder {
                         "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.metacpan.org *.google-analytics.com *.google.com www.gstatic.com",
 
                         ),
-                        'X-Frame-Options'        => "SAMEORIGIN",
-                        'X-XSS-Protection'       => "1; mode=block",
-                        'X-Content-Type-Options' => "nosniff",
+                        'X-Frame-Options'        => 'SAMEORIGIN',
+                        'X-XSS-Protection'       => '1; mode=block',
+                        'X-Content-Type-Options' => 'nosniff',
                         ;
                 },
             );
@@ -112,11 +112,11 @@ builder {
             $env->{'MetaCPAN::Web.request_id'} = $request_id;
 
             Log::Log4perl::MDC->remove;
-            Log::Log4perl::MDC->put( "request_id", $request_id );
-            Log::Log4perl::MDC->put( "ip",         $env->{REMOTE_ADDR} );
-            Log::Log4perl::MDC->put( "method",     $env->{REMOTE_METHOD} );
-            Log::Log4perl::MDC->put( "url",        $env->{REQUEST_URI} );
-            Log::Log4perl::MDC->put( "referer",    $env->{HTTP_REFERER} );
+            Log::Log4perl::MDC->put( 'request_id', $request_id );
+            Log::Log4perl::MDC->put( 'ip',         $env->{REMOTE_ADDR} );
+            Log::Log4perl::MDC->put( 'method',     $env->{REMOTE_METHOD} );
+            Log::Log4perl::MDC->put( 'url',        $env->{REQUEST_URI} );
+            Log::Log4perl::MDC->put( 'referer',    $env->{HTTP_REFERER} );
             $app->($env);
         };
     };

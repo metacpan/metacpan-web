@@ -58,11 +58,11 @@ test_psgi app, sub {
         sub {
             my ( $res, $tx ) = @_;
             $tx->ok(
-                q!grep(//item/description, "PERLER \+\+ed (\S+) from ([A-Z]+)")!,
+                'grep(//item/description, "PERLER \+\+ed (\S+) from ([A-Z]+)")',
                 'found favorites in author feed',
             );
             $tx->ok(
-                q!grep(//item/title, "PERLER has released (.+)")!,
+                'grep(//item/title, "PERLER has released (.+)")',
                 'found releases in author feed',
             );
             test_cache_headers(
@@ -139,7 +139,7 @@ sub test_redirect {
         $redir,
         {
             cache_control     => 'max-age=31556952',
-            surrogate_key     => "content_type=text/html content_type=text",
+            surrogate_key     => 'content_type=text/html content_type=text',
             surrogate_control => 'max-age=31556952, stale-if-error=2592000',
         }
     );
@@ -217,7 +217,7 @@ subtest 'get correct author release data format' => sub {
 my $how_many = 0;
 override_api_response(
     if => sub { !$how_many++ },    # fail only once
-    sub { Future->fail("Error"); },
+    sub { Future->fail('Error'); },
 );
 test_psgi app, sub {
     my $cb = shift;

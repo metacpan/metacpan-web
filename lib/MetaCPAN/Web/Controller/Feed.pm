@@ -205,7 +205,7 @@ sub build_entry {
 
     my $link = $args{host}->clone;
     $link->path( $entry->{link}
-            || join( q{/}, 'release', $entry->{author}, $entry->{name} ) );
+            || join( '/', 'release', $entry->{author}, $entry->{name} ) );
     $link->fragment( $entry->{fragment} ) if $entry->{fragment};    # for news
     $e->link( $link->as_string );
 
@@ -242,7 +242,7 @@ sub build_feed {
         = $params{format} eq 'rdf'  ? 'RDF'
         : $params{format} eq 'rss'  ? 'RSS'
         : $params{format} eq 'atom' ? 'Atom::Atom10'
-        :                             die "invalid format";
+        :                             die 'invalid format';
 
     my $feed_class = "XML::FeedPP::$format";
 
@@ -265,7 +265,7 @@ sub _format_release_entries {
     my @release_data;
     foreach my $item ( @{$releases} ) {
         $item->{link}
-            = join( q{/}, 'release', $item->{author}, $item->{name} );
+            = join( '/', 'release', $item->{author}, $item->{name} );
         $item->{name} = "$item->{author} has released $item->{name}";
         push( @release_data, $item );
     }
@@ -279,7 +279,7 @@ sub _format_favorite_entries {
         $fav->{abstract}
             = "$author ++ed $fav->{distribution} from $fav->{author}";
         $fav->{author} = $author;
-        $fav->{link}   = join( q{/}, 'release', $fav->{distribution} );
+        $fav->{link}   = join( '/', 'release', $fav->{distribution} );
         $fav->{name}   = "$author ++ed $fav->{distribution}";
         push( @fav_data, $fav );
     }

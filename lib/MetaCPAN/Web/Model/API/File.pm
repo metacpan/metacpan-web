@@ -4,12 +4,12 @@ extends 'MetaCPAN::Web::Model::API';
 
 sub get {
     my ( $self, @path ) = @_;
-    $self->request( '/file/' . join( q{/}, @path ) );
+    $self->request( '/file/' . join( '/', @path ) );
 }
 
 sub source {
     my ( $self, @path ) = @_;
-    $self->request( '/source/' . join( q{/}, @path ), undef, { raw => 1 } );
+    $self->request( '/source/' . join( '/', @path ), undef, { raw => 1 } );
 }
 
 sub dir {

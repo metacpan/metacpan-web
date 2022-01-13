@@ -143,7 +143,7 @@ sub request {
                     $content = substr( $content, 0, 37 ) . '...';
                 }
                 $logger->debug(
-                    sprintf q[API: "%s %s %s" %s %s%s],
+                    sprintf 'API: "%s %s %s" %s %s%s',
                     $request->method,
                     $url->path_query,
                     $response->protocol // 'TEST',

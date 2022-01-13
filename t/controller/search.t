@@ -97,7 +97,7 @@ test_psgi app, sub {
         qq!//$xpath{search_results}//$xpath{module_result}/a[\@class="author"]!,
         sub {
             my $node = shift;
-            $node->is( q{.}, uc($author), 'dist owned by queried author' )
+            $node->is( '.', uc($author), 'dist owned by queried author' )
                 or diag explain $node;
         },
         'all dists owned by queried author'

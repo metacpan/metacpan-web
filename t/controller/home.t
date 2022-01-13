@@ -5,7 +5,7 @@ use MetaCPAN::Web::Test qw( app GET test_cache_headers test_psgi );
 
 test_psgi app, sub {
     my $cb = shift;
-    ok( my $res = $cb->( GET q{/} ), 'GET /' );
+    ok( my $res = $cb->( GET '/' ), 'GET /' );
     is( $res->code, 200, 'code 200' );
     test_cache_headers(
         $res,

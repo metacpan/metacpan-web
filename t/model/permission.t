@@ -154,11 +154,11 @@ subtest 'notification_type' => sub {
             $this_api_data = { permissions => [ $api_data, ], };
         }
         else {
-            die "unexpected API call";
+            die 'unexpected API call';
         }
         return [
             200,
-            [ "Content-Type" => "application/json" ],
+            [ 'Content-Type' => 'application/json' ],
             [ encode_json $this_api_data ],
         ];
     } );

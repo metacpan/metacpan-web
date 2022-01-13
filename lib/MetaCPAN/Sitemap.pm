@@ -97,7 +97,7 @@ END_XML_HEADER
                 my $link_field = $hit->{fields}{ $self->field_name };
                 $link_field = $link_field->[0] if ref $link_field;
                 my $url = $self->url_prefix . $link_field;
-                $fh->print( "    <url><loc>"
+                $fh->print( '    <url><loc>'
                         . encode_entities_numeric($url)
                         . "</loc></url>\n" );
             }

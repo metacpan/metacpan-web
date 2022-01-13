@@ -45,7 +45,7 @@ sub logout : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     $c->logout;
-    $c->res->redirect(q{/});
+    $c->res->redirect('/');
 }
 
 sub settings : Local : Args(0) {
@@ -123,7 +123,7 @@ sub profile : Local : Args(0) {
     push @form_errors,
         {
         field   => 'asciiname',
-        message => "ASCII name must only have ASCII characters",
+        message => 'ASCII name must only have ASCII characters',
         }
         if defined $data->{asciiname}
         and $data->{asciiname} =~ /[^\x20-\x7F]/;

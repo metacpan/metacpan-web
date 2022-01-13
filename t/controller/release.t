@@ -213,7 +213,7 @@ sub test_heading_order {
     $tx->ok(
         "$xpath_prefix/h2",
         sub {
-            $_->is( q{.}, $headings[$heading],
+            $_->is( '.', $headings[$heading],
                 "heading $headings[$heading] in expected location" );
             $heading++;
         },

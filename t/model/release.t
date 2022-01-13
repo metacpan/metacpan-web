@@ -30,7 +30,7 @@ subtest modules => sub {
         # this is a hack for the later sort check:
         # 1. fix to both 'undefined value' warnings
         # 2. make sure to push the empty values (undefined) to the end
-        $file->{"documentation"} //= "Z" x 50;
+        $file->{'documentation'} //= 'Z' x 50;
 
         # Ensure we get a boolean so that conditions work as expected.
         is_bool( $file->{$_}, "'$_' is a boolean" )

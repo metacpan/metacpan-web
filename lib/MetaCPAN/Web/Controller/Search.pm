@@ -19,7 +19,7 @@ sub index : Path : Args(0) {
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
     unless ( $req->param('q') ) {
-        $c->res->redirect(q{/});
+        $c->res->redirect('/');
         $c->detach;
     }
 
@@ -29,7 +29,7 @@ sub index : Path : Args(0) {
     if ( $query eq '{searchTerms}' ) {
 
         # url is being used directly from opensearch plugin
-        $c->res->redirect(q{/});
+        $c->res->redirect('/');
         $c->detach;
     }
 
