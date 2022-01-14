@@ -65,7 +65,7 @@ sub view : Private {
 
     $c->detach('/not_found') unless ( $data->{name} );
 
-    my $pod_path = '/pod/' . ( $assoc_pod || join( q{/}, @path ) );
+    my $pod_path = '/pod/' . ( $assoc_pod || join( '/', @path ) );
 
     my $pod = $c->model('API')->request(
         $pod_path,

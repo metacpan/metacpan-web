@@ -72,7 +72,7 @@ sub wrap {
 
     builder {
         if ( !$dev_mode ) {
-            die "no lessc available!"
+            die 'no lessc available!'
                 if !defined $lessc;
 
             enable 'Assets::FileCached' => (

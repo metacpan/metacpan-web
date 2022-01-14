@@ -8,7 +8,7 @@ extends 'MetaCPAN::Web::Model::API';
 
 sub releases {
     my ( $self, @path ) = @_;
-    return $self->request( '/diff/release/' . join( q{/}, @path ) )
+    return $self->request( '/diff/release/' . join( '/', @path ) )
         ->then( \&_clean );
 }
 

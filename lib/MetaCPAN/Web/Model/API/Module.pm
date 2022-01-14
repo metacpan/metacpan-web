@@ -26,12 +26,12 @@ it under the same terms as Perl itself.
 
 sub find {
     my ( $self, @path ) = @_;
-    $self->request( '/module/' . join( q{/}, @path ) );
+    $self->request( '/module/' . join( '/', @path ) );
 }
 
 sub autocomplete {
     my ( $self, $query ) = @_;
-    $self->request( "/search/autocomplete/suggest",
+    $self->request( '/search/autocomplete/suggest',
         undef, { q => $query, size => 50 } )->transform(
         done => sub {
             my $data = shift;
@@ -42,14 +42,14 @@ sub autocomplete {
 
 sub search_web {
     my ( $self, $query, $from, $page_size ) = @_;
-    $self->request( "/search/web", undef,
+    $self->request( '/search/web', undef,
         { q => $query, size => $page_size // 20, from => $from // 0 } )
         ->then( $self->add_river( sub { @{ $_[0]{results} || [] } } ) );
 }
 
 sub first {
     my ( $self, $query ) = @_;
-    $self->request( "/search/first", undef, { q => $query } )->transform(
+    $self->request( '/search/first', undef, { q => $query } )->transform(
         done => sub {
             my $data = shift;
             return unless $data;

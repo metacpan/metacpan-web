@@ -106,7 +106,7 @@ sub filter_html {
                         return '';
                     }
                     elsif ($data) {
-                        my $base = "https://st.aticpan.org/source/";
+                        my $base = 'https://st.aticpan.org/source/';
                         if ( $val =~ s{^/}{} ) {
                             $base .= "$data->{author}/$data->{release}/";
                         }

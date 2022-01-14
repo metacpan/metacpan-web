@@ -44,7 +44,7 @@ override_api_response( sub {
 
     return [
         200,
-        [ "Content-Type" => "application/json" ],
+        [ 'Content-Type' => 'application/json' ],
         [ $JSON->encode( $res // {} ) ]
     ];
 } );
@@ -89,7 +89,7 @@ test_psgi app, sub {
     };
 
     subtest 'GET profile' => sub {
-        $api_res = { error => "broken" };
+        $api_res = { error => 'broken' };
 
         ok(
             my $res = $cb->( GET '/account/profile' ),
@@ -160,7 +160,7 @@ test_psgi app, sub {
             );
             my $tx = tx($res);
             $tx->is( '//legend[@style="color: #600"]',
-                "Errors", 'shows errors', );
+                'Errors', 'shows errors', );
         };
 
         ok(

@@ -8,7 +8,7 @@ use Future ();
 
 sub get {
     my ( $self, @path ) = @_;
-    $self->request( '/changes/' . join( q{/}, @path ) );
+    $self->request( '/changes/' . join( '/', @path ) );
 }
 
 sub release_changes {

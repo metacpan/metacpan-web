@@ -51,10 +51,10 @@ sub get : Private {
                 author_name  => $author,
                 release_name => $release,
             );
-            $c->forward( "/view/release", [ $file->{path} ] );
+            $c->forward( '/view/release', [ $file->{path} ] );
         }
         else {
-            $c->forward( "/source/view",
+            $c->forward( '/source/view',
                 [ $file->{author}, $file->{release}, $file->{path} ] );
         }
     }

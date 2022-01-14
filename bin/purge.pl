@@ -32,11 +32,11 @@ use Getopt::Long::Descriptive;
 
 my ( $opt, $usage ) = describe_options(
     'purge.pl %o',
-    [ 'all',      "purge all", ],
-    [ 'key|k=s@', "key(s) to purge", ],
+    [ 'all',      'purge all', ],
+    [ 'key|k=s@', 'key(s) to purge', ],
     [ 'list|l',   'list available cache keys' ],
     [],
-    [ 'help', "print usage message and exit" ],
+    [ 'help', 'print usage message and exit' ],
 );
 
 print( $usage->text ), exit if $opt->help;

@@ -32,7 +32,7 @@ sub echo_json_ok {
 
         note "received: $res_json";
 
-        is_deeply $obj, { echo => $exp }, "json passed through unchanged";
+        is_deeply $obj, { echo => $exp }, 'json passed through unchanged';
     };
 }
 

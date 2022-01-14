@@ -26,7 +26,7 @@ test_psgi app, sub {
     my $cb = shift;
 
     subtest 'verify cookie handling' => sub {
-        my $url = q[/testsession];
+        my $url = '/testsession';
 
         my $cookie = get_cookie( $cb, $url );
 
@@ -35,18 +35,18 @@ test_psgi app, sub {
         isnt $cookie, $biscuit, 'cookie has been baked';
 
         is get_cookie( $cb, $url, $biscuit ), undef,
-            q[cookie not set if unchanged];
+            'cookie not set if unchanged';
 
         my $erase = get_cookie( $cb, "$url?no-flavor=1", $biscuit );
-        ok + ( $erase && $erase !~ /:/ ), q[cookie unset];
+        ok + ( $erase && $erase !~ /:/ ), 'cookie unset';
 
         my $spoiled = $biscuit;
         $spoiled =~ s/:([^:])/:=/;    # Chew cookie.
-        isnt get_cookie( $cb, $url, $spoiled ), $spoiled, q[cookie went bad];
+        isnt get_cookie( $cb, $url, $spoiled ), $spoiled, 'cookie went bad';
 
         $spoiled = $biscuit;
         $spoiled =~ s/(.)$/=/;        # Chew signature.
-        isnt get_cookie( $cb, $url, $spoiled ), $spoiled, q[siggy went bad];
+        isnt get_cookie( $cb, $url, $spoiled ), $spoiled, 'siggy went bad';
     };
 
 };
