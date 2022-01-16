@@ -178,13 +178,13 @@ DISTRIBUTIONS
       strict 0
       utf8 0
       warnings 0
-  CGI-Simple-1.27
-    pathname: M/MA/MANWAR/CGI-Simple-1.27.tar.gz
+  CGI-Simple-1.280
+    pathname: M/MA/MANWAR/CGI-Simple-1.280.tar.gz
     provides:
-      CGI::Simple 1.27
-      CGI::Simple::Cookie 1.27
-      CGI::Simple::Standard 1.27
-      CGI::Simple::Util 1.27
+      CGI::Simple 1.280
+      CGI::Simple::Cookie 1.280
+      CGI::Simple::Standard 1.280
+      CGI::Simple::Util 1.280
     requirements:
       ExtUtils::MakeMaker 0
   CGI-Struct-1.21
@@ -2361,11 +2361,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-4.04
-    pathname: I/IS/ISHIGAKI/JSON-4.04.tar.gz
+  JSON-4.05
+    pathname: I/IS/ISHIGAKI/JSON-4.05.tar.gz
     provides:
-      JSON 4.04
-      JSON::Backend::PP 4.04
+      JSON 4.05
+      JSON::Backend::PP 4.05
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -3911,14 +3911,18 @@ DISTRIBUTIONS
       perl 5.006002
       strict 0
       warnings 0
-  Net-SSLeay-1.90
-    pathname: C/CH/CHRISN/Net-SSLeay-1.90.tar.gz
+  Net-SSLeay-1.92
+    pathname: C/CH/CHRISN/Net-SSLeay-1.92.tar.gz
     provides:
-      Net::SSLeay 1.90
-      Net::SSLeay::Handle 1.90
+      Net::SSLeay 1.92
+      Net::SSLeay::Handle 1.92
     requirements:
+      English 0
       ExtUtils::MakeMaker 0
+      File::Spec::Functions 0
       MIME::Base64 0
+      Text::Wrap 0
+      constant 0
       perl 5.008001
   Net-Server-2.010
     pathname: R/RH/RHANDOM/Net-Server-2.010.tar.gz
