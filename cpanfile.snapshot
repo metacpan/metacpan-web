@@ -3893,13 +3893,13 @@ DISTRIBUTIONS
       URI 0
       URI::Escape 0
       YAML 0
-  Net-HTTP-6.21
-    pathname: O/OA/OALDERS/Net-HTTP-6.21.tar.gz
+  Net-HTTP-6.22
+    pathname: O/OA/OALDERS/Net-HTTP-6.22.tar.gz
     provides:
-      Net::HTTP 6.21
-      Net::HTTP::Methods 6.21
-      Net::HTTP::NB 6.21
-      Net::HTTPS 6.21
+      Net::HTTP 6.22
+      Net::HTTP::Methods 6.22
+      Net::HTTP::NB 6.22
+      Net::HTTPS 6.22
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -4409,11 +4409,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.120
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.120.tar.gz
+  Path-Tiny-0.122
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.122.tar.gz
     provides:
-      Path::Tiny 0.120
-      Path::Tiny::Error 0.120
+      Path::Tiny 0.122
+      Path::Tiny::Error 0.122
     requirements:
       Carp 0
       Cwd 0
@@ -6351,32 +6351,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.60
-    pathname: O/OA/OALDERS/libwww-perl-6.60.tar.gz
+  libwww-perl-6.61
+    pathname: O/OA/OALDERS/libwww-perl-6.61.tar.gz
     provides:
-      LWP 6.60
-      LWP::Authen::Basic 6.60
-      LWP::Authen::Digest 6.60
-      LWP::Authen::Ntlm 6.60
-      LWP::ConnCache 6.60
-      LWP::Debug 6.60
-      LWP::Debug::TraceHTTP 6.60
-      LWP::DebugFile 6.60
-      LWP::MemberMixin 6.60
-      LWP::Protocol 6.60
-      LWP::Protocol::cpan 6.60
-      LWP::Protocol::data 6.60
-      LWP::Protocol::file 6.60
-      LWP::Protocol::ftp 6.60
-      LWP::Protocol::gopher 6.60
-      LWP::Protocol::http 6.60
-      LWP::Protocol::loopback 6.60
-      LWP::Protocol::mailto 6.60
-      LWP::Protocol::nntp 6.60
-      LWP::Protocol::nogo 6.60
-      LWP::RobotUA 6.60
-      LWP::Simple 6.60
-      LWP::UserAgent 6.60
+      LWP 6.61
+      LWP::Authen::Basic 6.61
+      LWP::Authen::Digest 6.61
+      LWP::Authen::Ntlm 6.61
+      LWP::ConnCache 6.61
+      LWP::Debug 6.61
+      LWP::Debug::TraceHTTP 6.61
+      LWP::DebugFile 6.61
+      LWP::MemberMixin 6.61
+      LWP::Protocol 6.61
+      LWP::Protocol::cpan 6.61
+      LWP::Protocol::data 6.61
+      LWP::Protocol::file 6.61
+      LWP::Protocol::ftp 6.61
+      LWP::Protocol::gopher 6.61
+      LWP::Protocol::http 6.61
+      LWP::Protocol::loopback 6.61
+      LWP::Protocol::mailto 6.61
+      LWP::Protocol::nntp 6.61
+      LWP::Protocol::nogo 6.61
+      LWP::RobotUA 6.61
+      LWP::Simple 6.61
+      LWP::UserAgent 6.61
       libwww::perl undef
     requirements:
       CPAN::Meta::Requirements 2.120620
@@ -6386,6 +6386,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Copy 0
       File::Listing 6
+      File::Temp 0
       Getopt::Long 0
       HTML::Entities 0
       HTML::HeadParser 0
