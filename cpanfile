@@ -68,7 +68,6 @@ requires 'Plack::Session';
 requires 'Plack::Test';
 requires 'Ref::Util', '>= 0.008';
 requires 'Router::Simple';
-requires 'Starman', '>= 0.4008';
 requires 'Term::Size::Any';
 requires 'Text::MultiMarkdown';
 requires 'Text::Pluralize';
