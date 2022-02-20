@@ -737,44 +737,44 @@ DISTRIBUTIONS
       Clone 0.45
     requirements:
       ExtUtils::MakeMaker 0
-  Code-TidyAll-0.80
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.80.tar.gz
+  Code-TidyAll-0.81
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.81.tar.gz
     provides:
-      Code::TidyAll 0.80
-      Code::TidyAll::Cache 0.80
-      Code::TidyAll::CacheModel 0.80
-      Code::TidyAll::CacheModel::Shared 0.80
-      Code::TidyAll::Config::INI::Reader 0.80
-      Code::TidyAll::Git::Precommit 0.80
-      Code::TidyAll::Git::Prereceive 0.80
-      Code::TidyAll::Git::Util 0.80
-      Code::TidyAll::Plugin 0.80
-      Code::TidyAll::Plugin::CSSUnminifier 0.80
-      Code::TidyAll::Plugin::GenericTransformer 0.80
-      Code::TidyAll::Plugin::GenericValidator 0.80
-      Code::TidyAll::Plugin::JSBeautify 0.80
-      Code::TidyAll::Plugin::JSHint 0.80
-      Code::TidyAll::Plugin::JSLint 0.80
-      Code::TidyAll::Plugin::JSON 0.80
-      Code::TidyAll::Plugin::MasonTidy 0.80
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.80
-      Code::TidyAll::Plugin::PerlCritic 0.80
-      Code::TidyAll::Plugin::PerlTidy 0.80
-      Code::TidyAll::Plugin::PerlTidySweet 0.80
-      Code::TidyAll::Plugin::PodChecker 0.80
-      Code::TidyAll::Plugin::PodSpell 0.80
-      Code::TidyAll::Plugin::PodTidy 0.80
-      Code::TidyAll::Plugin::SortLines 0.80
-      Code::TidyAll::Result 0.80
-      Code::TidyAll::Role::GenericExecutable 0.80
-      Code::TidyAll::Role::HasIgnore 0.80
-      Code::TidyAll::Role::RunsCommand 0.80
-      Code::TidyAll::Role::Tempdir 0.80
-      Code::TidyAll::SVN::Precommit 0.80
-      Code::TidyAll::SVN::Util 0.80
-      Code::TidyAll::Util::Zglob 0.80
-      Code::TidyAll::Zglob 0.80
-      Test::Code::TidyAll 0.80
+      Code::TidyAll 0.81
+      Code::TidyAll::Cache 0.81
+      Code::TidyAll::CacheModel 0.81
+      Code::TidyAll::CacheModel::Shared 0.81
+      Code::TidyAll::Config::INI::Reader 0.81
+      Code::TidyAll::Git::Precommit 0.81
+      Code::TidyAll::Git::Prereceive 0.81
+      Code::TidyAll::Git::Util 0.81
+      Code::TidyAll::Plugin 0.81
+      Code::TidyAll::Plugin::CSSUnminifier 0.81
+      Code::TidyAll::Plugin::GenericTransformer 0.81
+      Code::TidyAll::Plugin::GenericValidator 0.81
+      Code::TidyAll::Plugin::JSBeautify 0.81
+      Code::TidyAll::Plugin::JSHint 0.81
+      Code::TidyAll::Plugin::JSLint 0.81
+      Code::TidyAll::Plugin::JSON 0.81
+      Code::TidyAll::Plugin::MasonTidy 0.81
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.81
+      Code::TidyAll::Plugin::PerlCritic 0.81
+      Code::TidyAll::Plugin::PerlTidy 0.81
+      Code::TidyAll::Plugin::PerlTidySweet 0.81
+      Code::TidyAll::Plugin::PodChecker 0.81
+      Code::TidyAll::Plugin::PodSpell 0.81
+      Code::TidyAll::Plugin::PodTidy 0.81
+      Code::TidyAll::Plugin::SortLines 0.81
+      Code::TidyAll::Result 0.81
+      Code::TidyAll::Role::GenericExecutable 0.81
+      Code::TidyAll::Role::HasIgnore 0.81
+      Code::TidyAll::Role::RunsCommand 0.81
+      Code::TidyAll::Role::Tempdir 0.81
+      Code::TidyAll::SVN::Precommit 0.81
+      Code::TidyAll::SVN::Util 0.81
+      Code::TidyAll::Util::Zglob 0.81
+      Code::TidyAll::Zglob 0.81
+      Test::Code::TidyAll 0.81
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0
@@ -2666,39 +2666,42 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.876
-    pathname: M/MA/MARIOROY/MCE-1.876.tar.gz
+  MCE-1.878
+    pathname: M/MA/MARIOROY/MCE-1.878.tar.gz
     provides:
-      MCE 1.876
-      MCE::Candy 1.876
-      MCE::Channel 1.876
-      MCE::Channel::Mutex 1.876
-      MCE::Channel::Simple 1.876
-      MCE::Channel::Threads 1.876
-      MCE::Child 1.876
-      MCE::Core::Input::Generator 1.876
-      MCE::Core::Input::Handle 1.876
-      MCE::Core::Input::Iterator 1.876
-      MCE::Core::Input::Request 1.876
-      MCE::Core::Input::Sequence 1.876
-      MCE::Core::Manager 1.876
-      MCE::Core::Validation 1.876
-      MCE::Core::Worker 1.876
-      MCE::Flow 1.876
-      MCE::Grep 1.876
-      MCE::Loop 1.876
-      MCE::Map 1.876
-      MCE::Mutex 1.876
-      MCE::Mutex::Channel 1.876
-      MCE::Mutex::Channel2 1.876
-      MCE::Mutex::Flock 1.876
-      MCE::Queue 1.876
-      MCE::Relay 1.876
-      MCE::Signal 1.876
-      MCE::Step 1.876
-      MCE::Stream 1.876
-      MCE::Subs 1.876
-      MCE::Util 1.876
+      MCE 1.878
+      MCE::Candy 1.878
+      MCE::Channel 1.878
+      MCE::Channel::Mutex 1.878
+      MCE::Channel::MutexFast 1.878
+      MCE::Channel::Simple 1.878
+      MCE::Channel::SimpleFast 1.878
+      MCE::Channel::Threads 1.878
+      MCE::Channel::ThreadsFast 1.878
+      MCE::Child 1.878
+      MCE::Core::Input::Generator 1.878
+      MCE::Core::Input::Handle 1.878
+      MCE::Core::Input::Iterator 1.878
+      MCE::Core::Input::Request 1.878
+      MCE::Core::Input::Sequence 1.878
+      MCE::Core::Manager 1.878
+      MCE::Core::Validation 1.878
+      MCE::Core::Worker 1.878
+      MCE::Flow 1.878
+      MCE::Grep 1.878
+      MCE::Loop 1.878
+      MCE::Map 1.878
+      MCE::Mutex 1.878
+      MCE::Mutex::Channel 1.878
+      MCE::Mutex::Channel2 1.878
+      MCE::Mutex::Flock 1.878
+      MCE::Queue 1.878
+      MCE::Relay 1.878
+      MCE::Signal 1.878
+      MCE::Step 1.878
+      MCE::Stream 1.878
+      MCE::Subs 1.878
+      MCE::Util 1.878
     requirements:
       Carp 0
       Errno 0
@@ -4647,27 +4650,27 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20211029
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20211029.tar.gz
+  Perl-Tidy-20220217
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20220217.tar.gz
     provides:
-      Perl::Tidy 20211029
-      Perl::Tidy::Debugger 20211029
-      Perl::Tidy::DevNull 20211029
-      Perl::Tidy::Diagnostics 20211029
-      Perl::Tidy::FileWriter 20211029
-      Perl::Tidy::Formatter 20211029
-      Perl::Tidy::HtmlWriter 20211029
-      Perl::Tidy::IOScalar 20211029
-      Perl::Tidy::IOScalarArray 20211029
-      Perl::Tidy::IndentationItem 20211029
-      Perl::Tidy::LineBuffer 20211029
-      Perl::Tidy::LineSink 20211029
-      Perl::Tidy::LineSource 20211029
-      Perl::Tidy::Logger 20211029
-      Perl::Tidy::Tokenizer 20211029
-      Perl::Tidy::VerticalAligner 20211029
-      Perl::Tidy::VerticalAligner::Alignment 20211029
-      Perl::Tidy::VerticalAligner::Line 20211029
+      Perl::Tidy 20220217
+      Perl::Tidy::Debugger 20220217
+      Perl::Tidy::DevNull 20220217
+      Perl::Tidy::Diagnostics 20220217
+      Perl::Tidy::FileWriter 20220217
+      Perl::Tidy::Formatter 20220217
+      Perl::Tidy::HtmlWriter 20220217
+      Perl::Tidy::IOScalar 20220217
+      Perl::Tidy::IOScalarArray 20220217
+      Perl::Tidy::IndentationItem 20220217
+      Perl::Tidy::LineBuffer 20220217
+      Perl::Tidy::LineSink 20220217
+      Perl::Tidy::LineSource 20220217
+      Perl::Tidy::Logger 20220217
+      Perl::Tidy::Tokenizer 20220217
+      Perl::Tidy::VerticalAligner 20220217
+      Perl::Tidy::VerticalAligner::Alignment 20220217
+      Perl::Tidy::VerticalAligner::Line 20220217
     requirements:
       ExtUtils::MakeMaker 0
   PerlIO-utf8_strict-0.009
@@ -4986,13 +4989,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Scalar-List-Utils-1.60
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.60.tar.gz
+  Scalar-List-Utils-1.61
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.61.tar.gz
     provides:
-      List::Util 1.60
-      List::Util::XS 1.60
-      Scalar::Util 1.60
-      Sub::Util 1.60
+      List::Util 1.61
+      List::Util::XS 1.61
+      Scalar::Util 1.61
+      Sub::Util 1.61
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
