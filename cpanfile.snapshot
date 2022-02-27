@@ -124,12 +124,12 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  B-Hooks-EndOfScope-0.25
-    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.25.tar.gz
+  B-Hooks-EndOfScope-0.26
+    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.26.tar.gz
     provides:
-      B::Hooks::EndOfScope 0.25
-      B::Hooks::EndOfScope::PP 0.25
-      B::Hooks::EndOfScope::XS 0.25
+      B::Hooks::EndOfScope 0.26
+      B::Hooks::EndOfScope::PP 0.26
+      B::Hooks::EndOfScope::XS 0.26
     requirements:
       ExtUtils::MakeMaker 0
       Hash::Util::FieldHash 0
@@ -142,10 +142,10 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
-  B-Keywords-1.23
-    pathname: R/RU/RURBAN/B-Keywords-1.23.tar.gz
+  B-Keywords-1.24
+    pathname: R/RU/RURBAN/B-Keywords-1.24.tar.gz
     provides:
-      B::Keywords 1.23
+      B::Keywords 1.24
     requirements:
       B 0
       ExtUtils::MakeMaker 0
@@ -4220,11 +4220,11 @@ DISTRIBUTIONS
       Sub::Name 0
       strict 0
       warnings 0
-  Package-Stash-0.39
-    pathname: E/ET/ETHER/Package-Stash-0.39.tar.gz
+  Package-Stash-0.40
+    pathname: E/ET/ETHER/Package-Stash-0.40.tar.gz
     provides:
-      Package::Stash 0.39
-      Package::Stash::PP 0.39
+      Package::Stash 0.40
+      Package::Stash::PP 0.40
     requirements:
       B 0
       Carp 0
