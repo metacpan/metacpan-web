@@ -998,19 +998,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.55
-    pathname: D/DR/DROLSKY/DateTime-1.55.tar.gz
+  DateTime-1.57
+    pathname: D/DR/DROLSKY/DateTime-1.57.tar.gz
     provides:
-      DateTime 1.55
-      DateTime::Duration 1.55
-      DateTime::Helpers 1.55
-      DateTime::Infinite 1.55
-      DateTime::Infinite::Future 1.55
-      DateTime::Infinite::Past 1.55
-      DateTime::LeapSecond 1.55
-      DateTime::PP 1.55
-      DateTime::PPExtra 1.55
-      DateTime::Types 1.55
+      DateTime 1.57
+      DateTime::Duration 1.57
+      DateTime::Helpers 1.57
+      DateTime::Infinite 1.57
+      DateTime::Infinite::Future 1.57
+      DateTime::Infinite::Past 1.57
+      DateTime::LeapSecond 1.57
+      DateTime::PP 1.57
+      DateTime::PPExtra 1.57
+      DateTime::Types 1.57
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -1026,6 +1026,7 @@ DISTRIBUTIONS
       Specio::Library::Builtins 0
       Specio::Library::Numeric 0
       Specio::Library::String 0
+      Specio::Subs 0
       Try::Tiny 0
       XSLoader 0
       base 0
@@ -1579,10 +1580,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Devel-PPPort-3.64
-    pathname: A/AT/ATOOMIC/Devel-PPPort-3.64.tar.gz
+  Devel-PPPort-3.66
+    pathname: A/AT/ATOOMIC/Devel-PPPort-3.66.tar.gz
     provides:
-      Devel::PPPort 3.64
+      Devel::PPPort 3.66
     requirements:
       ExtUtils::MakeMaker 0
       FindBin 0
@@ -2483,36 +2484,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.69
-    pathname: S/SB/SBECK/Locale-Codes-3.69.tar.gz
+  Locale-Codes-3.70
+    pathname: S/SB/SBECK/Locale-Codes-3.70.tar.gz
     provides:
-      Locale::Codes 3.69
-      Locale::Codes::Constants 3.69
-      Locale::Codes::Country 3.69
-      Locale::Codes::Country_Codes 3.69
-      Locale::Codes::Country_Retired 3.69
-      Locale::Codes::Currency 3.69
-      Locale::Codes::Currency_Codes 3.69
-      Locale::Codes::Currency_Retired 3.69
-      Locale::Codes::LangExt 3.69
-      Locale::Codes::LangExt_Codes 3.69
-      Locale::Codes::LangExt_Retired 3.69
-      Locale::Codes::LangFam 3.69
-      Locale::Codes::LangFam_Codes 3.69
-      Locale::Codes::LangFam_Retired 3.69
-      Locale::Codes::LangVar 3.69
-      Locale::Codes::LangVar_Codes 3.69
-      Locale::Codes::LangVar_Retired 3.69
-      Locale::Codes::Language 3.69
-      Locale::Codes::Language_Codes 3.69
-      Locale::Codes::Language_Retired 3.69
-      Locale::Codes::Script 3.69
-      Locale::Codes::Script_Codes 3.69
-      Locale::Codes::Script_Retired 3.69
-      Locale::Country 3.69
-      Locale::Currency 3.69
-      Locale::Language 3.69
-      Locale::Script 3.69
+      Locale::Codes 3.70
+      Locale::Codes::Constants 3.70
+      Locale::Codes::Country 3.70
+      Locale::Codes::Country_Codes 3.70
+      Locale::Codes::Country_Retired 3.70
+      Locale::Codes::Currency 3.70
+      Locale::Codes::Currency_Codes 3.70
+      Locale::Codes::Currency_Retired 3.70
+      Locale::Codes::LangExt 3.70
+      Locale::Codes::LangExt_Codes 3.70
+      Locale::Codes::LangExt_Retired 3.70
+      Locale::Codes::LangFam 3.70
+      Locale::Codes::LangFam_Codes 3.70
+      Locale::Codes::LangFam_Retired 3.70
+      Locale::Codes::LangVar 3.70
+      Locale::Codes::LangVar_Codes 3.70
+      Locale::Codes::LangVar_Retired 3.70
+      Locale::Codes::Language 3.70
+      Locale::Codes::Language_Codes 3.70
+      Locale::Codes::Language_Retired 3.70
+      Locale::Codes::Script 3.70
+      Locale::Codes::Script_Codes 3.70
+      Locale::Codes::Script_Retired 3.70
+      Locale::Country 3.70
+      Locale::Currency 3.70
+      Locale::Language 3.70
+      Locale::Script 3.70
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
