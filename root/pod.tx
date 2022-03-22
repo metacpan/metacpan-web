@@ -29,8 +29,8 @@
   </li>
   %%  }
   <li>
-    %%  my $parent_path = $module.path.replace(rx('[^/]+$'),'');
-    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+    %%  my $parent_path = $module.path.replace(rx('/?[^/]+$'),'');
+    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
     (<a href="[% $release_base %]/source[% $parent_path %]?raw=1">raw</a>)
   </li>
 %%  }
