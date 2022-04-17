@@ -738,44 +738,44 @@ DISTRIBUTIONS
       Clone 0.45
     requirements:
       ExtUtils::MakeMaker 0
-  Code-TidyAll-0.81
-    pathname: D/DR/DROLSKY/Code-TidyAll-0.81.tar.gz
+  Code-TidyAll-0.82
+    pathname: D/DR/DROLSKY/Code-TidyAll-0.82.tar.gz
     provides:
-      Code::TidyAll 0.81
-      Code::TidyAll::Cache 0.81
-      Code::TidyAll::CacheModel 0.81
-      Code::TidyAll::CacheModel::Shared 0.81
-      Code::TidyAll::Config::INI::Reader 0.81
-      Code::TidyAll::Git::Precommit 0.81
-      Code::TidyAll::Git::Prereceive 0.81
-      Code::TidyAll::Git::Util 0.81
-      Code::TidyAll::Plugin 0.81
-      Code::TidyAll::Plugin::CSSUnminifier 0.81
-      Code::TidyAll::Plugin::GenericTransformer 0.81
-      Code::TidyAll::Plugin::GenericValidator 0.81
-      Code::TidyAll::Plugin::JSBeautify 0.81
-      Code::TidyAll::Plugin::JSHint 0.81
-      Code::TidyAll::Plugin::JSLint 0.81
-      Code::TidyAll::Plugin::JSON 0.81
-      Code::TidyAll::Plugin::MasonTidy 0.81
-      Code::TidyAll::Plugin::PHPCodeSniffer 0.81
-      Code::TidyAll::Plugin::PerlCritic 0.81
-      Code::TidyAll::Plugin::PerlTidy 0.81
-      Code::TidyAll::Plugin::PerlTidySweet 0.81
-      Code::TidyAll::Plugin::PodChecker 0.81
-      Code::TidyAll::Plugin::PodSpell 0.81
-      Code::TidyAll::Plugin::PodTidy 0.81
-      Code::TidyAll::Plugin::SortLines 0.81
-      Code::TidyAll::Result 0.81
-      Code::TidyAll::Role::GenericExecutable 0.81
-      Code::TidyAll::Role::HasIgnore 0.81
-      Code::TidyAll::Role::RunsCommand 0.81
-      Code::TidyAll::Role::Tempdir 0.81
-      Code::TidyAll::SVN::Precommit 0.81
-      Code::TidyAll::SVN::Util 0.81
-      Code::TidyAll::Util::Zglob 0.81
-      Code::TidyAll::Zglob 0.81
-      Test::Code::TidyAll 0.81
+      Code::TidyAll 0.82
+      Code::TidyAll::Cache 0.82
+      Code::TidyAll::CacheModel 0.82
+      Code::TidyAll::CacheModel::Shared 0.82
+      Code::TidyAll::Config::INI::Reader 0.82
+      Code::TidyAll::Git::Precommit 0.82
+      Code::TidyAll::Git::Prereceive 0.82
+      Code::TidyAll::Git::Util 0.82
+      Code::TidyAll::Plugin 0.82
+      Code::TidyAll::Plugin::CSSUnminifier 0.82
+      Code::TidyAll::Plugin::GenericTransformer 0.82
+      Code::TidyAll::Plugin::GenericValidator 0.82
+      Code::TidyAll::Plugin::JSBeautify 0.82
+      Code::TidyAll::Plugin::JSHint 0.82
+      Code::TidyAll::Plugin::JSLint 0.82
+      Code::TidyAll::Plugin::JSON 0.82
+      Code::TidyAll::Plugin::MasonTidy 0.82
+      Code::TidyAll::Plugin::PHPCodeSniffer 0.82
+      Code::TidyAll::Plugin::PerlCritic 0.82
+      Code::TidyAll::Plugin::PerlTidy 0.82
+      Code::TidyAll::Plugin::PerlTidySweet 0.82
+      Code::TidyAll::Plugin::PodChecker 0.82
+      Code::TidyAll::Plugin::PodSpell 0.82
+      Code::TidyAll::Plugin::PodTidy 0.82
+      Code::TidyAll::Plugin::SortLines 0.82
+      Code::TidyAll::Result 0.82
+      Code::TidyAll::Role::GenericExecutable 0.82
+      Code::TidyAll::Role::HasIgnore 0.82
+      Code::TidyAll::Role::RunsCommand 0.82
+      Code::TidyAll::Role::Tempdir 0.82
+      Code::TidyAll::SVN::Precommit 0.82
+      Code::TidyAll::SVN::Util 0.82
+      Code::TidyAll::Util::Zglob 0.82
+      Code::TidyAll::Zglob 0.82
+      Test::Code::TidyAll 0.82
     requirements:
       Capture::Tiny 0
       Config::INI::Reader 0
@@ -1736,22 +1736,19 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       List::Util 1.33
       perl 5.006
-  File-Listing-6.14
-    pathname: P/PL/PLICEASE/File-Listing-6.14.tar.gz
+  File-Listing-6.15
+    pathname: P/PL/PLICEASE/File-Listing-6.15.tar.gz
     provides:
-      File::Listing 6.14
-      File::Listing::apache 6.14
-      File::Listing::dosftp 6.14
-      File::Listing::netware 6.14
-      File::Listing::unix 6.14
-      File::Listing::vms 6.14
+      File::Listing 6.15
+      File::Listing::apache 6.15
+      File::Listing::dosftp 6.15
+      File::Listing::netware 6.15
+      File::Listing::unix 6.15
+      File::Listing::vms 6.15
     requirements:
-      Carp 0
-      Exporter 0
+      Exporter 5.57
       ExtUtils::MakeMaker 0
       HTTP::Date 0
-      Time::Local 0
-      base 0
       perl 5.006
   File-ShareDir-1.118
     pathname: R/RE/REHSACK/File-ShareDir-1.118.tar.gz
@@ -4065,21 +4062,21 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
-  PPIx-QuoteLike-0.021
-    pathname: W/WY/WYANT/PPIx-QuoteLike-0.021.tar.gz
+  PPIx-QuoteLike-0.022
+    pathname: W/WY/WYANT/PPIx-QuoteLike-0.022.tar.gz
     provides:
-      PPIx::QuoteLike 0.021
-      PPIx::QuoteLike::Constant 0.021
-      PPIx::QuoteLike::Dumper 0.021
-      PPIx::QuoteLike::Token 0.021
-      PPIx::QuoteLike::Token::Control 0.021
-      PPIx::QuoteLike::Token::Delimiter 0.021
-      PPIx::QuoteLike::Token::Interpolation 0.021
-      PPIx::QuoteLike::Token::String 0.021
-      PPIx::QuoteLike::Token::Structure 0.021
-      PPIx::QuoteLike::Token::Unknown 0.021
-      PPIx::QuoteLike::Token::Whitespace 0.021
-      PPIx::QuoteLike::Utils 0.021
+      PPIx::QuoteLike 0.022
+      PPIx::QuoteLike::Constant 0.022
+      PPIx::QuoteLike::Dumper 0.022
+      PPIx::QuoteLike::Token 0.022
+      PPIx::QuoteLike::Token::Control 0.022
+      PPIx::QuoteLike::Token::Delimiter 0.022
+      PPIx::QuoteLike::Token::Interpolation 0.022
+      PPIx::QuoteLike::Token::String 0.022
+      PPIx::QuoteLike::Token::Structure 0.022
+      PPIx::QuoteLike::Token::Unknown 0.022
+      PPIx::QuoteLike::Token::Whitespace 0.022
+      PPIx::QuoteLike::Utils 0.022
     requirements:
       Carp 0
       Encode 0
@@ -4098,74 +4095,74 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
-  PPIx-Regexp-0.084
-    pathname: W/WY/WYANT/PPIx-Regexp-0.084.tar.gz
+  PPIx-Regexp-0.085
+    pathname: W/WY/WYANT/PPIx-Regexp-0.085.tar.gz
     provides:
-      PPIx::Regexp 0.084
-      PPIx::Regexp::Constant 0.084
-      PPIx::Regexp::Dumper 0.084
-      PPIx::Regexp::Element 0.084
-      PPIx::Regexp::Lexer 0.084
-      PPIx::Regexp::Node 0.084
-      PPIx::Regexp::Node::Range 0.084
-      PPIx::Regexp::Node::Unknown 0.084
-      PPIx::Regexp::Structure 0.084
-      PPIx::Regexp::Structure::Assertion 0.084
-      PPIx::Regexp::Structure::Atomic_Script_Run 0.084
-      PPIx::Regexp::Structure::BranchReset 0.084
-      PPIx::Regexp::Structure::Capture 0.084
-      PPIx::Regexp::Structure::CharClass 0.084
-      PPIx::Regexp::Structure::Code 0.084
-      PPIx::Regexp::Structure::Main 0.084
-      PPIx::Regexp::Structure::Modifier 0.084
-      PPIx::Regexp::Structure::NamedCapture 0.084
-      PPIx::Regexp::Structure::Quantifier 0.084
-      PPIx::Regexp::Structure::RegexSet 0.084
-      PPIx::Regexp::Structure::Regexp 0.084
-      PPIx::Regexp::Structure::Replacement 0.084
-      PPIx::Regexp::Structure::Script_Run 0.084
-      PPIx::Regexp::Structure::Subexpression 0.084
-      PPIx::Regexp::Structure::Switch 0.084
-      PPIx::Regexp::Structure::Unknown 0.084
-      PPIx::Regexp::Support 0.084
-      PPIx::Regexp::Token 0.084
-      PPIx::Regexp::Token::Assertion 0.084
-      PPIx::Regexp::Token::Backreference 0.084
-      PPIx::Regexp::Token::Backtrack 0.084
-      PPIx::Regexp::Token::CharClass 0.084
-      PPIx::Regexp::Token::CharClass::POSIX 0.084
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.084
-      PPIx::Regexp::Token::CharClass::Simple 0.084
-      PPIx::Regexp::Token::Code 0.084
-      PPIx::Regexp::Token::Comment 0.084
-      PPIx::Regexp::Token::Condition 0.084
-      PPIx::Regexp::Token::Control 0.084
-      PPIx::Regexp::Token::Delimiter 0.084
-      PPIx::Regexp::Token::Greediness 0.084
-      PPIx::Regexp::Token::GroupType 0.084
-      PPIx::Regexp::Token::GroupType::Assertion 0.084
-      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.084
-      PPIx::Regexp::Token::GroupType::BranchReset 0.084
-      PPIx::Regexp::Token::GroupType::Code 0.084
-      PPIx::Regexp::Token::GroupType::Modifier 0.084
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.084
-      PPIx::Regexp::Token::GroupType::Script_Run 0.084
-      PPIx::Regexp::Token::GroupType::Subexpression 0.084
-      PPIx::Regexp::Token::GroupType::Switch 0.084
-      PPIx::Regexp::Token::Interpolation 0.084
-      PPIx::Regexp::Token::Literal 0.084
-      PPIx::Regexp::Token::Modifier 0.084
-      PPIx::Regexp::Token::NoOp 0.084
-      PPIx::Regexp::Token::Operator 0.084
-      PPIx::Regexp::Token::Quantifier 0.084
-      PPIx::Regexp::Token::Recursion 0.084
-      PPIx::Regexp::Token::Reference 0.084
-      PPIx::Regexp::Token::Structure 0.084
-      PPIx::Regexp::Token::Unknown 0.084
-      PPIx::Regexp::Token::Unmatched 0.084
-      PPIx::Regexp::Token::Whitespace 0.084
-      PPIx::Regexp::Tokenizer 0.084
-      PPIx::Regexp::Util 0.084
+      PPIx::Regexp 0.085
+      PPIx::Regexp::Constant 0.085
+      PPIx::Regexp::Dumper 0.085
+      PPIx::Regexp::Element 0.085
+      PPIx::Regexp::Lexer 0.085
+      PPIx::Regexp::Node 0.085
+      PPIx::Regexp::Node::Range 0.085
+      PPIx::Regexp::Node::Unknown 0.085
+      PPIx::Regexp::Structure 0.085
+      PPIx::Regexp::Structure::Assertion 0.085
+      PPIx::Regexp::Structure::Atomic_Script_Run 0.085
+      PPIx::Regexp::Structure::BranchReset 0.085
+      PPIx::Regexp::Structure::Capture 0.085
+      PPIx::Regexp::Structure::CharClass 0.085
+      PPIx::Regexp::Structure::Code 0.085
+      PPIx::Regexp::Structure::Main 0.085
+      PPIx::Regexp::Structure::Modifier 0.085
+      PPIx::Regexp::Structure::NamedCapture 0.085
+      PPIx::Regexp::Structure::Quantifier 0.085
+      PPIx::Regexp::Structure::RegexSet 0.085
+      PPIx::Regexp::Structure::Regexp 0.085
+      PPIx::Regexp::Structure::Replacement 0.085
+      PPIx::Regexp::Structure::Script_Run 0.085
+      PPIx::Regexp::Structure::Subexpression 0.085
+      PPIx::Regexp::Structure::Switch 0.085
+      PPIx::Regexp::Structure::Unknown 0.085
+      PPIx::Regexp::Support 0.085
+      PPIx::Regexp::Token 0.085
+      PPIx::Regexp::Token::Assertion 0.085
+      PPIx::Regexp::Token::Backreference 0.085
+      PPIx::Regexp::Token::Backtrack 0.085
+      PPIx::Regexp::Token::CharClass 0.085
+      PPIx::Regexp::Token::CharClass::POSIX 0.085
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.085
+      PPIx::Regexp::Token::CharClass::Simple 0.085
+      PPIx::Regexp::Token::Code 0.085
+      PPIx::Regexp::Token::Comment 0.085
+      PPIx::Regexp::Token::Condition 0.085
+      PPIx::Regexp::Token::Control 0.085
+      PPIx::Regexp::Token::Delimiter 0.085
+      PPIx::Regexp::Token::Greediness 0.085
+      PPIx::Regexp::Token::GroupType 0.085
+      PPIx::Regexp::Token::GroupType::Assertion 0.085
+      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.085
+      PPIx::Regexp::Token::GroupType::BranchReset 0.085
+      PPIx::Regexp::Token::GroupType::Code 0.085
+      PPIx::Regexp::Token::GroupType::Modifier 0.085
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.085
+      PPIx::Regexp::Token::GroupType::Script_Run 0.085
+      PPIx::Regexp::Token::GroupType::Subexpression 0.085
+      PPIx::Regexp::Token::GroupType::Switch 0.085
+      PPIx::Regexp::Token::Interpolation 0.085
+      PPIx::Regexp::Token::Literal 0.085
+      PPIx::Regexp::Token::Modifier 0.085
+      PPIx::Regexp::Token::NoOp 0.085
+      PPIx::Regexp::Token::Operator 0.085
+      PPIx::Regexp::Token::Quantifier 0.085
+      PPIx::Regexp::Token::Recursion 0.085
+      PPIx::Regexp::Token::Reference 0.085
+      PPIx::Regexp::Token::Structure 0.085
+      PPIx::Regexp::Token::Unknown 0.085
+      PPIx::Regexp::Token::Unmatched 0.085
+      PPIx::Regexp::Token::Whitespace 0.085
+      PPIx::Regexp::Tokenizer 0.085
+      PPIx::Regexp::Util 0.085
     requirements:
       Carp 0
       Encode 0
@@ -6044,10 +6041,10 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build 0.4005
       perl 5.008001
-  WWW-Form-UrlEncoded-XS-0.26
-    pathname: K/KA/KAZEBURO/WWW-Form-UrlEncoded-XS-0.26.tar.gz
+  WWW-Form-UrlEncoded-XS-0.27
+    pathname: K/KA/KAZEBURO/WWW-Form-UrlEncoded-XS-0.27.tar.gz
     provides:
-      WWW::Form::UrlEncoded::XS 0.26
+      WWW::Form::UrlEncoded::XS 0.27
     requirements:
       Exporter 0
       Module::Build::Tiny 0.035
