@@ -999,19 +999,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.57
-    pathname: D/DR/DROLSKY/DateTime-1.57.tar.gz
+  DateTime-1.58
+    pathname: D/DR/DROLSKY/DateTime-1.58.tar.gz
     provides:
-      DateTime 1.57
-      DateTime::Duration 1.57
-      DateTime::Helpers 1.57
-      DateTime::Infinite 1.57
-      DateTime::Infinite::Future 1.57
-      DateTime::Infinite::Past 1.57
-      DateTime::LeapSecond 1.57
-      DateTime::PP 1.57
-      DateTime::PPExtra 1.57
-      DateTime::Types 1.57
+      DateTime 1.58
+      DateTime::Duration 1.58
+      DateTime::Helpers 1.58
+      DateTime::Infinite 1.58
+      DateTime::Infinite::Future 1.58
+      DateTime::Infinite::Past 1.58
+      DateTime::LeapSecond 1.58
+      DateTime::PP 1.58
+      DateTime::PPExtra 1.58
+      DateTime::Types 1.58
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -1111,15 +1111,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.34
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.34.tar.gz
+  DateTime-Locale-1.35
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.35.tar.gz
     provides:
-      DateTime::Locale 1.34
-      DateTime::Locale::Base 1.34
-      DateTime::Locale::Catalog 1.34
-      DateTime::Locale::Data 1.34
-      DateTime::Locale::FromData 1.34
-      DateTime::Locale::Util 1.34
+      DateTime::Locale 1.35
+      DateTime::Locale::Base 1.35
+      DateTime::Locale::Catalog 1.35
+      DateTime::Locale::Data 1.35
+      DateTime::Locale::FromData 1.35
+      DateTime::Locale::Util 1.35
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -3950,100 +3950,100 @@ DISTRIBUTIONS
       POSIX 0
       Time::Local 0
       perl 5.008001
-  PPI-1.272
-    pathname: O/OA/OALDERS/PPI-1.272.tar.gz
+  PPI-1.273
+    pathname: O/OA/OALDERS/PPI-1.273.tar.gz
     provides:
-      PPI 1.272
-      PPI::Cache 1.272
-      PPI::Document 1.272
-      PPI::Document::File 1.272
-      PPI::Document::Fragment 1.272
-      PPI::Document::Normalized 1.272
-      PPI::Dumper 1.272
-      PPI::Element 1.272
-      PPI::Exception 1.272
-      PPI::Exception::ParserRejection 1.272
-      PPI::Find 1.272
-      PPI::Lexer 1.272
-      PPI::Node 1.272
-      PPI::Normal 1.272
-      PPI::Normal::Standard 1.272
-      PPI::Singletons 1.272
-      PPI::Statement 1.272
-      PPI::Statement::Break 1.272
-      PPI::Statement::Compound 1.272
-      PPI::Statement::Data 1.272
-      PPI::Statement::End 1.272
-      PPI::Statement::Expression 1.272
-      PPI::Statement::Given 1.272
-      PPI::Statement::Include 1.272
-      PPI::Statement::Include::Perl6 1.272
-      PPI::Statement::Null 1.272
-      PPI::Statement::Package 1.272
-      PPI::Statement::Scheduled 1.272
-      PPI::Statement::Sub 1.272
-      PPI::Statement::Unknown 1.272
-      PPI::Statement::UnmatchedBrace 1.272
-      PPI::Statement::Variable 1.272
-      PPI::Statement::When 1.272
-      PPI::Structure 1.272
-      PPI::Structure::Block 1.272
-      PPI::Structure::Condition 1.272
-      PPI::Structure::Constructor 1.272
-      PPI::Structure::For 1.272
-      PPI::Structure::Given 1.272
-      PPI::Structure::List 1.272
-      PPI::Structure::Subscript 1.272
-      PPI::Structure::Unknown 1.272
-      PPI::Structure::When 1.272
-      PPI::Token 1.272
-      PPI::Token::ArrayIndex 1.272
-      PPI::Token::Attribute 1.272
-      PPI::Token::BOM 1.272
-      PPI::Token::Cast 1.272
-      PPI::Token::Comment 1.272
-      PPI::Token::DashedWord 1.272
-      PPI::Token::Data 1.272
-      PPI::Token::End 1.272
-      PPI::Token::HereDoc 1.272
-      PPI::Token::Label 1.272
-      PPI::Token::Magic 1.272
-      PPI::Token::Number 1.272
-      PPI::Token::Number::Binary 1.272
-      PPI::Token::Number::Exp 1.272
-      PPI::Token::Number::Float 1.272
-      PPI::Token::Number::Hex 1.272
-      PPI::Token::Number::Octal 1.272
-      PPI::Token::Number::Version 1.272
-      PPI::Token::Operator 1.272
-      PPI::Token::Pod 1.272
-      PPI::Token::Prototype 1.272
-      PPI::Token::Quote 1.272
-      PPI::Token::Quote::Double 1.272
-      PPI::Token::Quote::Interpolate 1.272
-      PPI::Token::Quote::Literal 1.272
-      PPI::Token::Quote::Single 1.272
-      PPI::Token::QuoteLike 1.272
-      PPI::Token::QuoteLike::Backtick 1.272
-      PPI::Token::QuoteLike::Command 1.272
-      PPI::Token::QuoteLike::Readline 1.272
-      PPI::Token::QuoteLike::Regexp 1.272
-      PPI::Token::QuoteLike::Words 1.272
-      PPI::Token::Regexp 1.272
-      PPI::Token::Regexp::Match 1.272
-      PPI::Token::Regexp::Substitute 1.272
-      PPI::Token::Regexp::Transliterate 1.272
-      PPI::Token::Separator 1.272
-      PPI::Token::Structure 1.272
-      PPI::Token::Symbol 1.272
-      PPI::Token::Unknown 1.272
-      PPI::Token::Whitespace 1.272
-      PPI::Token::Word 1.272
-      PPI::Tokenizer 1.272
-      PPI::Transform 1.272
-      PPI::Transform::UpdateCopyright 1.272
-      PPI::Util 1.272
-      PPI::XSAccessor 1.272
+      PPI 1.273
+      PPI::Cache 1.273
+      PPI::Document 1.273
+      PPI::Document::File 1.273
+      PPI::Document::Fragment 1.273
+      PPI::Document::Normalized 1.273
+      PPI::Dumper 1.273
+      PPI::Element 1.273
+      PPI::Exception 1.273
+      PPI::Exception::ParserRejection 1.273
+      PPI::Find 1.273
+      PPI::Lexer 1.273
+      PPI::Node 1.273
+      PPI::Normal 1.273
+      PPI::Normal::Standard 1.273
+      PPI::Singletons 1.273
+      PPI::Statement 1.273
+      PPI::Statement::Break 1.273
+      PPI::Statement::Compound 1.273
+      PPI::Statement::Data 1.273
+      PPI::Statement::End 1.273
+      PPI::Statement::Expression 1.273
+      PPI::Statement::Given 1.273
+      PPI::Statement::Include 1.273
+      PPI::Statement::Include::Perl6 1.273
+      PPI::Statement::Null 1.273
+      PPI::Statement::Package 1.273
+      PPI::Statement::Scheduled 1.273
+      PPI::Statement::Sub 1.273
+      PPI::Statement::Unknown 1.273
+      PPI::Statement::UnmatchedBrace 1.273
+      PPI::Statement::Variable 1.273
+      PPI::Statement::When 1.273
+      PPI::Structure 1.273
+      PPI::Structure::Block 1.273
+      PPI::Structure::Condition 1.273
+      PPI::Structure::Constructor 1.273
+      PPI::Structure::For 1.273
+      PPI::Structure::Given 1.273
+      PPI::Structure::List 1.273
+      PPI::Structure::Subscript 1.273
+      PPI::Structure::Unknown 1.273
+      PPI::Structure::When 1.273
+      PPI::Token 1.273
+      PPI::Token::ArrayIndex 1.273
+      PPI::Token::Attribute 1.273
+      PPI::Token::BOM 1.273
+      PPI::Token::Cast 1.273
+      PPI::Token::Comment 1.273
+      PPI::Token::DashedWord 1.273
+      PPI::Token::Data 1.273
+      PPI::Token::End 1.273
+      PPI::Token::HereDoc 1.273
+      PPI::Token::Label 1.273
+      PPI::Token::Magic 1.273
+      PPI::Token::Number 1.273
+      PPI::Token::Number::Binary 1.273
+      PPI::Token::Number::Exp 1.273
+      PPI::Token::Number::Float 1.273
+      PPI::Token::Number::Hex 1.273
+      PPI::Token::Number::Octal 1.273
+      PPI::Token::Number::Version 1.273
+      PPI::Token::Operator 1.273
+      PPI::Token::Pod 1.273
+      PPI::Token::Prototype 1.273
+      PPI::Token::Quote 1.273
+      PPI::Token::Quote::Double 1.273
+      PPI::Token::Quote::Interpolate 1.273
+      PPI::Token::Quote::Literal 1.273
+      PPI::Token::Quote::Single 1.273
+      PPI::Token::QuoteLike 1.273
+      PPI::Token::QuoteLike::Backtick 1.273
+      PPI::Token::QuoteLike::Command 1.273
+      PPI::Token::QuoteLike::Readline 1.273
+      PPI::Token::QuoteLike::Regexp 1.273
+      PPI::Token::QuoteLike::Words 1.273
+      PPI::Token::Regexp 1.273
+      PPI::Token::Regexp::Match 1.273
+      PPI::Token::Regexp::Substitute 1.273
+      PPI::Token::Regexp::Transliterate 1.273
+      PPI::Token::Separator 1.273
+      PPI::Token::Structure 1.273
+      PPI::Token::Symbol 1.273
+      PPI::Token::Unknown 1.273
+      PPI::Token::Whitespace 1.273
+      PPI::Token::Word 1.273
+      PPI::Tokenizer 1.273
+      PPI::Transform 1.273
+      PPI::Transform::UpdateCopyright 1.273
+      PPI::Util 1.273
+      PPI::XSAccessor 1.273
     requirements:
       Carp 0
       Clone 0.30
@@ -6353,11 +6353,11 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  local-lib-2.000028
-    pathname: H/HA/HAARG/local-lib-2.000028.tar.gz
+  local-lib-2.000029
+    pathname: H/HA/HAARG/local-lib-2.000029.tar.gz
     provides:
       lib::core::only undef
-      local::lib 2.000028
+      local::lib 2.000029
     requirements:
       perl 5.006
   namespace-autoclean-0.29
