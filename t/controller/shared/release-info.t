@@ -151,9 +151,6 @@ test_psgi app, sub {
             optional_test repository => sub {
                 ok( $tx->find_value('//a[text()="Repository"]/@href'),
                     'link for resources.repository.web' );
-
-                ok( $tx->find_value('//a[text()="git clone"]/@href'),
-                    'link for resources.repository.url' );
             };
 
             optional_test issues => sub {

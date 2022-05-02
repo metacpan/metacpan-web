@@ -58,16 +58,16 @@
     <li>
       <a class="nopopup" href="[% $release_base %]/contribute"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
     </li>
-    %%  if $release.resources.repository {
+    %%  if $repository && $repository.web || $repository.url {
     <li>
-      %%  if $release.resources.repository.web.is_url() {
-        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $release.resources.repository.web %]"><i class="fa fa-fw fa-code-branch black"></i>Repository</a>
+      %%  if $repository.web.is_url() {
+        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $repository.web %]"><i class="fa fa-fw fa-code-branch black"></i>Repository</a>
+        %%  if $repository.url.is_url() && $repository.url != ($repository.web ~ '.git') {
+          (<a rel="noopener nofollow" href="[% $repository.url %]">[% $repository.type %] clone</a>)
+        %%  }
       %%  }
-      %%  if $release.resources.repository.web.is_url() && $release.resources.repository.url.is_url() {
-        (<a rel="noopener nofollow" href="[% $release.resources.repository.url %]">[% $release.resources.repository.type %] clone</a>)
-      %%  }
-      %%  else if $release.resources.repository.url.is_url() {
-        <a rel="noopener nofollow" href="[% $release.resources.repository.url %]"><i class="fa fa-fw fa-code-branch black"></i>Clone [% $release.resources.repository.type %] repository</a>
+      %%  else if $repository.url.is_url() {
+        <a rel="noopener nofollow" href="[% $repository.url %]"><i class="fa fa-fw fa-code-branch black"></i>Clone [% $repository.type %] repository</a>
       %%  }
     </li>
     %%  }
