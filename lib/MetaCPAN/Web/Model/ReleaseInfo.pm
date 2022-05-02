@@ -151,6 +151,8 @@ sub normalize {
                 $data->{release}{release},
                 $data->{distribution}{distribution}
             ),
+            repository =>
+                $self->groom_repository( $data->{release}{release} ),
             plussers => $data->{plussers}{plussers},
             (
                 $self->full_details
@@ -163,6 +165,51 @@ sub normalize {
             ),
         } );
     };
+}
+
+sub groom_repository {
+    my ( $self, $release ) = @_;
+    my $repo = $release->{resources}{repository}
+        or return {};
+
+    $repo = {%$repo};
+
+    for my $type (qw(url web)) {
+        my $url = $repo->{$type}
+            or next;
+
+        if (
+            $url =~ m{
+            \A
+            (?:ssh|https?|git)://
+            (?:git\@)?(?:www\.)?github\.com/
+            ([^/]+/[^/]+)
+            (?: /tree (?: /([^/]+)? (?:/(.*))? )? )?
+        }x
+            )
+        {
+            my ( $slug, $branch, $path ) = ( $1, $2, $3 );
+            $slug =~ s/\.git\z//;
+            $url = "https://github.com/$slug";
+
+            $repo->{type} ||= 'git';
+            $repo->{web}  ||= $url;
+            $repo->{url}  ||= "$url.git";
+
+            if ( $type eq 'url' ) {
+                $url .= '.git';
+            }
+            elsif ($branch) {
+                $url .= "/tree/$branch";
+                if ($path) {
+                    $url .= "/$path";
+                }
+            }
+        }
+        $repo->{$type} = $url;
+    }
+
+    return $repo;
 }
 
 sub groom_irc {
