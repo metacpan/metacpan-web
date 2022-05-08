@@ -304,10 +304,10 @@ DISTRIBUTIONS
       Scalar::Util 0
       Test::Exception 0
       Test::More 0.18
-  Carton-v1.0.34
-    pathname: M/MI/MIYAGAWA/Carton-v1.0.34.tar.gz
+  Carton-v1.0.35
+    pathname: M/MI/MIYAGAWA/Carton-v1.0.35.tar.gz
     provides:
-      Carton 1.000034
+      Carton 1.000035
       Carton::Builder undef
       Carton::CLI undef
       Carton::CPANfile undef
@@ -847,7 +847,6 @@ DISTRIBUTIONS
       Config::Any::XML undef
       Config::Any::YAML undef
     requirements:
-      Config::General 2.47
       Module::Pluggable::Object 3.6
   Config-General-2.65
     pathname: T/TL/TLINDEN/Config-General-2.65.tar.gz
@@ -907,10 +906,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.27
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.27.tar.gz
+  Cpanel-JSON-XS-4.28
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.28.tar.gz
     provides:
-      Cpanel::JSON::XS 4.27
+      Cpanel::JSON::XS 4.28
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -3950,100 +3949,100 @@ DISTRIBUTIONS
       POSIX 0
       Time::Local 0
       perl 5.008001
-  PPI-1.273
-    pathname: O/OA/OALDERS/PPI-1.273.tar.gz
+  PPI-1.274
+    pathname: O/OA/OALDERS/PPI-1.274.tar.gz
     provides:
-      PPI 1.273
-      PPI::Cache 1.273
-      PPI::Document 1.273
-      PPI::Document::File 1.273
-      PPI::Document::Fragment 1.273
-      PPI::Document::Normalized 1.273
-      PPI::Dumper 1.273
-      PPI::Element 1.273
-      PPI::Exception 1.273
-      PPI::Exception::ParserRejection 1.273
-      PPI::Find 1.273
-      PPI::Lexer 1.273
-      PPI::Node 1.273
-      PPI::Normal 1.273
-      PPI::Normal::Standard 1.273
-      PPI::Singletons 1.273
-      PPI::Statement 1.273
-      PPI::Statement::Break 1.273
-      PPI::Statement::Compound 1.273
-      PPI::Statement::Data 1.273
-      PPI::Statement::End 1.273
-      PPI::Statement::Expression 1.273
-      PPI::Statement::Given 1.273
-      PPI::Statement::Include 1.273
-      PPI::Statement::Include::Perl6 1.273
-      PPI::Statement::Null 1.273
-      PPI::Statement::Package 1.273
-      PPI::Statement::Scheduled 1.273
-      PPI::Statement::Sub 1.273
-      PPI::Statement::Unknown 1.273
-      PPI::Statement::UnmatchedBrace 1.273
-      PPI::Statement::Variable 1.273
-      PPI::Statement::When 1.273
-      PPI::Structure 1.273
-      PPI::Structure::Block 1.273
-      PPI::Structure::Condition 1.273
-      PPI::Structure::Constructor 1.273
-      PPI::Structure::For 1.273
-      PPI::Structure::Given 1.273
-      PPI::Structure::List 1.273
-      PPI::Structure::Subscript 1.273
-      PPI::Structure::Unknown 1.273
-      PPI::Structure::When 1.273
-      PPI::Token 1.273
-      PPI::Token::ArrayIndex 1.273
-      PPI::Token::Attribute 1.273
-      PPI::Token::BOM 1.273
-      PPI::Token::Cast 1.273
-      PPI::Token::Comment 1.273
-      PPI::Token::DashedWord 1.273
-      PPI::Token::Data 1.273
-      PPI::Token::End 1.273
-      PPI::Token::HereDoc 1.273
-      PPI::Token::Label 1.273
-      PPI::Token::Magic 1.273
-      PPI::Token::Number 1.273
-      PPI::Token::Number::Binary 1.273
-      PPI::Token::Number::Exp 1.273
-      PPI::Token::Number::Float 1.273
-      PPI::Token::Number::Hex 1.273
-      PPI::Token::Number::Octal 1.273
-      PPI::Token::Number::Version 1.273
-      PPI::Token::Operator 1.273
-      PPI::Token::Pod 1.273
-      PPI::Token::Prototype 1.273
-      PPI::Token::Quote 1.273
-      PPI::Token::Quote::Double 1.273
-      PPI::Token::Quote::Interpolate 1.273
-      PPI::Token::Quote::Literal 1.273
-      PPI::Token::Quote::Single 1.273
-      PPI::Token::QuoteLike 1.273
-      PPI::Token::QuoteLike::Backtick 1.273
-      PPI::Token::QuoteLike::Command 1.273
-      PPI::Token::QuoteLike::Readline 1.273
-      PPI::Token::QuoteLike::Regexp 1.273
-      PPI::Token::QuoteLike::Words 1.273
-      PPI::Token::Regexp 1.273
-      PPI::Token::Regexp::Match 1.273
-      PPI::Token::Regexp::Substitute 1.273
-      PPI::Token::Regexp::Transliterate 1.273
-      PPI::Token::Separator 1.273
-      PPI::Token::Structure 1.273
-      PPI::Token::Symbol 1.273
-      PPI::Token::Unknown 1.273
-      PPI::Token::Whitespace 1.273
-      PPI::Token::Word 1.273
-      PPI::Tokenizer 1.273
-      PPI::Transform 1.273
-      PPI::Transform::UpdateCopyright 1.273
-      PPI::Util 1.273
-      PPI::XSAccessor 1.273
+      PPI 1.274
+      PPI::Cache 1.274
+      PPI::Document 1.274
+      PPI::Document::File 1.274
+      PPI::Document::Fragment 1.274
+      PPI::Document::Normalized 1.274
+      PPI::Dumper 1.274
+      PPI::Element 1.274
+      PPI::Exception 1.274
+      PPI::Exception::ParserRejection 1.274
+      PPI::Find 1.274
+      PPI::Lexer 1.274
+      PPI::Node 1.274
+      PPI::Normal 1.274
+      PPI::Normal::Standard 1.274
+      PPI::Singletons 1.274
+      PPI::Statement 1.274
+      PPI::Statement::Break 1.274
+      PPI::Statement::Compound 1.274
+      PPI::Statement::Data 1.274
+      PPI::Statement::End 1.274
+      PPI::Statement::Expression 1.274
+      PPI::Statement::Given 1.274
+      PPI::Statement::Include 1.274
+      PPI::Statement::Include::Perl6 1.274
+      PPI::Statement::Null 1.274
+      PPI::Statement::Package 1.274
+      PPI::Statement::Scheduled 1.274
+      PPI::Statement::Sub 1.274
+      PPI::Statement::Unknown 1.274
+      PPI::Statement::UnmatchedBrace 1.274
+      PPI::Statement::Variable 1.274
+      PPI::Statement::When 1.274
+      PPI::Structure 1.274
+      PPI::Structure::Block 1.274
+      PPI::Structure::Condition 1.274
+      PPI::Structure::Constructor 1.274
+      PPI::Structure::For 1.274
+      PPI::Structure::Given 1.274
+      PPI::Structure::List 1.274
+      PPI::Structure::Subscript 1.274
+      PPI::Structure::Unknown 1.274
+      PPI::Structure::When 1.274
+      PPI::Token 1.274
+      PPI::Token::ArrayIndex 1.274
+      PPI::Token::Attribute 1.274
+      PPI::Token::BOM 1.274
+      PPI::Token::Cast 1.274
+      PPI::Token::Comment 1.274
+      PPI::Token::DashedWord 1.274
+      PPI::Token::Data 1.274
+      PPI::Token::End 1.274
+      PPI::Token::HereDoc 1.274
+      PPI::Token::Label 1.274
+      PPI::Token::Magic 1.274
+      PPI::Token::Number 1.274
+      PPI::Token::Number::Binary 1.274
+      PPI::Token::Number::Exp 1.274
+      PPI::Token::Number::Float 1.274
+      PPI::Token::Number::Hex 1.274
+      PPI::Token::Number::Octal 1.274
+      PPI::Token::Number::Version 1.274
+      PPI::Token::Operator 1.274
+      PPI::Token::Pod 1.274
+      PPI::Token::Prototype 1.274
+      PPI::Token::Quote 1.274
+      PPI::Token::Quote::Double 1.274
+      PPI::Token::Quote::Interpolate 1.274
+      PPI::Token::Quote::Literal 1.274
+      PPI::Token::Quote::Single 1.274
+      PPI::Token::QuoteLike 1.274
+      PPI::Token::QuoteLike::Backtick 1.274
+      PPI::Token::QuoteLike::Command 1.274
+      PPI::Token::QuoteLike::Readline 1.274
+      PPI::Token::QuoteLike::Regexp 1.274
+      PPI::Token::QuoteLike::Words 1.274
+      PPI::Token::Regexp 1.274
+      PPI::Token::Regexp::Match 1.274
+      PPI::Token::Regexp::Substitute 1.274
+      PPI::Token::Regexp::Transliterate 1.274
+      PPI::Token::Separator 1.274
+      PPI::Token::Structure 1.274
+      PPI::Token::Symbol 1.274
+      PPI::Token::Unknown 1.274
+      PPI::Token::Whitespace 1.274
+      PPI::Token::Word 1.274
+      PPI::Tokenizer 1.274
+      PPI::Transform 1.274
+      PPI::Transform::UpdateCopyright 1.274
+      PPI::Util 1.274
+      PPI::XSAccessor 1.274
     requirements:
       Carp 0
       Clone 0.30
