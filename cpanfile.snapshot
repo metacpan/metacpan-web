@@ -847,6 +847,7 @@ DISTRIBUTIONS
       Config::Any::XML undef
       Config::Any::YAML undef
     requirements:
+      Config::General 2.47
       Module::Pluggable::Object 3.6
   Config-General-2.65
     pathname: T/TL/TLINDEN/Config-General-2.65.tar.gz
@@ -6291,33 +6292,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.64
-    pathname: O/OA/OALDERS/libwww-perl-6.64.tar.gz
+  libwww-perl-6.65
+    pathname: O/OA/OALDERS/libwww-perl-6.65.tar.gz
     provides:
-      LWP 6.64
-      LWP::Authen::Basic 6.64
-      LWP::Authen::Digest 6.64
-      LWP::Authen::Ntlm 6.64
-      LWP::ConnCache 6.64
-      LWP::Debug 6.64
-      LWP::Debug::TraceHTTP 6.64
-      LWP::DebugFile 6.64
-      LWP::MemberMixin 6.64
-      LWP::Protocol 6.64
-      LWP::Protocol::cpan 6.64
-      LWP::Protocol::data 6.64
-      LWP::Protocol::file 6.64
-      LWP::Protocol::ftp 6.64
-      LWP::Protocol::gopher 6.64
-      LWP::Protocol::http 6.64
-      LWP::Protocol::loopback 6.64
-      LWP::Protocol::mailto 6.64
-      LWP::Protocol::nntp 6.64
-      LWP::Protocol::nogo 6.64
-      LWP::RobotUA 6.64
-      LWP::Simple 6.64
-      LWP::UserAgent 6.64
-      libwww::perl undef
+      LWP 6.65
+      LWP::Authen::Basic 6.65
+      LWP::Authen::Digest 6.65
+      LWP::Authen::Ntlm 6.65
+      LWP::ConnCache 6.65
+      LWP::Debug 6.65
+      LWP::Debug::TraceHTTP 6.65
+      LWP::DebugFile 6.65
+      LWP::MemberMixin 6.65
+      LWP::Protocol 6.65
+      LWP::Protocol::cpan 6.65
+      LWP::Protocol::data 6.65
+      LWP::Protocol::file 6.65
+      LWP::Protocol::ftp 6.65
+      LWP::Protocol::gopher 6.65
+      LWP::Protocol::http 6.65
+      LWP::Protocol::loopback 6.65
+      LWP::Protocol::mailto 6.65
+      LWP::Protocol::nntp 6.65
+      LWP::Protocol::nogo 6.65
+      LWP::RobotUA 6.65
+      LWP::Simple 6.65
+      LWP::UserAgent 6.65
     requirements:
       CPAN::Meta::Requirements 2.120620
       Digest::MD5 0
