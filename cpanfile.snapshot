@@ -2352,11 +2352,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-4.05
-    pathname: I/IS/ISHIGAKI/JSON-4.05.tar.gz
+  JSON-4.06
+    pathname: I/IS/ISHIGAKI/JSON-4.06.tar.gz
     provides:
-      JSON 4.05
-      JSON::Backend::PP 4.05
+      JSON 4.06
+      JSON::Backend::PP 4.06
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -4874,23 +4874,23 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Pod-Parser-1.63
-    pathname: M/MA/MAREKR/Pod-Parser-1.63.tar.gz
+  Pod-Parser-1.65
+    pathname: M/MA/MAREKR/Pod-Parser-1.65.tar.gz
     provides:
-      Pod::Cache 1.63
-      Pod::Cache::Item 1.63
-      Pod::Find 1.63
-      Pod::Hyperlink 1.63
-      Pod::InputObjects 1.63
-      Pod::InputSource 1.63
-      Pod::InteriorSequence 1.63
-      Pod::List 1.63
-      Pod::Paragraph 1.63
-      Pod::ParseTree 1.63
-      Pod::ParseUtils 1.63
-      Pod::Parser 1.63
+      Pod::Cache 1.65
+      Pod::Cache::Item 1.65
+      Pod::Find 1.65
+      Pod::Hyperlink 1.65
+      Pod::InputObjects 1.65
+      Pod::InputSource 1.65
+      Pod::InteriorSequence 1.65
+      Pod::List 1.65
+      Pod::Paragraph 1.65
+      Pod::ParseTree 1.65
+      Pod::ParseUtils 1.65
+      Pod::Parser 1.65
       Pod::PlainText 2.07
-      Pod::Select 1.63
+      Pod::Select 1.65
     requirements:
       Cwd 0
       ExtUtils::MakeMaker 0
@@ -6292,32 +6292,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.65
-    pathname: O/OA/OALDERS/libwww-perl-6.65.tar.gz
+  libwww-perl-6.66
+    pathname: O/OA/OALDERS/libwww-perl-6.66.tar.gz
     provides:
-      LWP 6.65
-      LWP::Authen::Basic 6.65
-      LWP::Authen::Digest 6.65
-      LWP::Authen::Ntlm 6.65
-      LWP::ConnCache 6.65
-      LWP::Debug 6.65
-      LWP::Debug::TraceHTTP 6.65
-      LWP::DebugFile 6.65
-      LWP::MemberMixin 6.65
-      LWP::Protocol 6.65
-      LWP::Protocol::cpan 6.65
-      LWP::Protocol::data 6.65
-      LWP::Protocol::file 6.65
-      LWP::Protocol::ftp 6.65
-      LWP::Protocol::gopher 6.65
-      LWP::Protocol::http 6.65
-      LWP::Protocol::loopback 6.65
-      LWP::Protocol::mailto 6.65
-      LWP::Protocol::nntp 6.65
-      LWP::Protocol::nogo 6.65
-      LWP::RobotUA 6.65
-      LWP::Simple 6.65
-      LWP::UserAgent 6.65
+      LWP 6.66
+      LWP::Authen::Basic 6.66
+      LWP::Authen::Digest 6.66
+      LWP::Authen::Ntlm 6.66
+      LWP::ConnCache 6.66
+      LWP::Debug 6.66
+      LWP::Debug::TraceHTTP 6.66
+      LWP::DebugFile 6.66
+      LWP::MemberMixin 6.66
+      LWP::Protocol 6.66
+      LWP::Protocol::cpan 6.66
+      LWP::Protocol::data 6.66
+      LWP::Protocol::file 6.66
+      LWP::Protocol::ftp 6.66
+      LWP::Protocol::gopher 6.66
+      LWP::Protocol::http 6.66
+      LWP::Protocol::loopback 6.66
+      LWP::Protocol::mailto 6.66
+      LWP::Protocol::nntp 6.66
+      LWP::Protocol::nogo 6.66
+      LWP::RobotUA 6.66
+      LWP::Simple 6.66
+      LWP::UserAgent 6.66
     requirements:
       CPAN::Meta::Requirements 2.120620
       Digest::MD5 0
