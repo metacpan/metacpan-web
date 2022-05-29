@@ -907,10 +907,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.28
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.28.tar.gz
+  Cpanel-JSON-XS-4.29
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.29.tar.gz
     provides:
-      Cpanel::JSON::XS 4.28
+      Cpanel::JSON::XS 4.29
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -2266,11 +2266,11 @@ DISTRIBUTIONS
       Struct::Dumb 0
       Time::HiRes 0
       perl 5.008004
-  IO-Async-SSL-0.22
-    pathname: P/PE/PEVANS/IO-Async-SSL-0.22.tar.gz
+  IO-Async-SSL-0.23
+    pathname: P/PE/PEVANS/IO-Async-SSL-0.23.tar.gz
     provides:
-      IO::Async::SSL 0.22
-      IO::Async::SSLStream 0.22
+      IO::Async::SSL 0.23
+      IO::Async::SSLStream 0.23
     requirements:
       Future 0.33
       IO::Async::Handle 0.29
@@ -2665,42 +2665,42 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.878
-    pathname: M/MA/MARIOROY/MCE-1.878.tar.gz
+  MCE-1.879
+    pathname: M/MA/MARIOROY/MCE-1.879.tar.gz
     provides:
-      MCE 1.878
-      MCE::Candy 1.878
-      MCE::Channel 1.878
-      MCE::Channel::Mutex 1.878
-      MCE::Channel::MutexFast 1.878
-      MCE::Channel::Simple 1.878
-      MCE::Channel::SimpleFast 1.878
-      MCE::Channel::Threads 1.878
-      MCE::Channel::ThreadsFast 1.878
-      MCE::Child 1.878
-      MCE::Core::Input::Generator 1.878
-      MCE::Core::Input::Handle 1.878
-      MCE::Core::Input::Iterator 1.878
-      MCE::Core::Input::Request 1.878
-      MCE::Core::Input::Sequence 1.878
-      MCE::Core::Manager 1.878
-      MCE::Core::Validation 1.878
-      MCE::Core::Worker 1.878
-      MCE::Flow 1.878
-      MCE::Grep 1.878
-      MCE::Loop 1.878
-      MCE::Map 1.878
-      MCE::Mutex 1.878
-      MCE::Mutex::Channel 1.878
-      MCE::Mutex::Channel2 1.878
-      MCE::Mutex::Flock 1.878
-      MCE::Queue 1.878
-      MCE::Relay 1.878
-      MCE::Signal 1.878
-      MCE::Step 1.878
-      MCE::Stream 1.878
-      MCE::Subs 1.878
-      MCE::Util 1.878
+      MCE 1.879
+      MCE::Candy 1.879
+      MCE::Channel 1.879
+      MCE::Channel::Mutex 1.879
+      MCE::Channel::MutexFast 1.879
+      MCE::Channel::Simple 1.879
+      MCE::Channel::SimpleFast 1.879
+      MCE::Channel::Threads 1.879
+      MCE::Channel::ThreadsFast 1.879
+      MCE::Child 1.879
+      MCE::Core::Input::Generator 1.879
+      MCE::Core::Input::Handle 1.879
+      MCE::Core::Input::Iterator 1.879
+      MCE::Core::Input::Request 1.879
+      MCE::Core::Input::Sequence 1.879
+      MCE::Core::Manager 1.879
+      MCE::Core::Validation 1.879
+      MCE::Core::Worker 1.879
+      MCE::Flow 1.879
+      MCE::Grep 1.879
+      MCE::Loop 1.879
+      MCE::Map 1.879
+      MCE::Mutex 1.879
+      MCE::Mutex::Channel 1.879
+      MCE::Mutex::Channel2 1.879
+      MCE::Mutex::Flock 1.879
+      MCE::Queue 1.879
+      MCE::Relay 1.879
+      MCE::Signal 1.879
+      MCE::Step 1.879
+      MCE::Stream 1.879
+      MCE::Subs 1.879
+      MCE::Util 1.879
     requirements:
       Carp 0
       Errno 0
