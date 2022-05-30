@@ -119,7 +119,7 @@
     border-color: darken(@background, 12.7%);
     border-width: 1px 0;
     width: @width;
-    line-height: @height - ( @border-margin * 2 ) - 1;
+    line-height: ( @height - ( @border-margin * 2 ) - 1 );
   }
 
   /* right clipping triangle */
@@ -134,14 +134,14 @@
     /* how far past to cover (to hide shadow) */
     @right-overhang: 2px;
 
-    @triangle-height: @height + 2 * @right-overhang / tan(@ribbon-angle);
-    @triangle-width: @triangle-height / 2 * tan(@ribbon-angle);
+    @triangle-height: ( @height + 2 * @right-overhang / tan(@ribbon-angle) );
+    @triangle-width: ( @triangle-height / 2 * tan(@ribbon-angle) );
 
-    top: (@height - @triangle-height) / 2;
-    left: @width - @triangle-width + @right-overhang;
-    border-top: @triangle-height / 2 solid transparent;
+    top: ( (@height - @triangle-height) / 2 );
+    left: ( @width - @triangle-width + @right-overhang );
+    border-top: ( @triangle-height / 2 ) solid transparent;
     border-right: @triangle-width solid #fff;
-    border-bottom: @triangle-height / 2 solid transparent;
+    border-bottom: ( @triangle-height / 2 ) solid transparent;
 
     /* force antialiasing */
     transform: scale(0.9999);
