@@ -150,35 +150,6 @@ DISTRIBUTIONS
     requirements:
       B 0
       ExtUtils::MakeMaker 0
-  CGI-4.54
-    pathname: L/LE/LEEJO/CGI-4.54.tar.gz
-    provides:
-      CGI 4.54
-      CGI::Carp 4.54
-      CGI::Cookie 4.54
-      CGI::File::Temp 4.54
-      CGI::HTML::Functions undef
-      CGI::MultipartBuffer 4.54
-      CGI::Pretty 4.54
-      CGI::Push 4.54
-      CGI::Util 4.54
-      Fh 4.54
-    requirements:
-      Carp 0
-      Config 0
-      Encode 0
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      File::Spec 0.82
-      File::Temp 0.17
-      HTML::Entities 3.69
-      if 0
-      overload 0
-      parent 0.225
-      perl 5.008001
-      strict 0
-      utf8 0
-      warnings 0
   CGI-Simple-1.280
     pathname: M/MA/MANWAR/CGI-Simple-1.280.tar.gz
     provides:
@@ -294,16 +265,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Carp-Assert-More-2.0.1
-    pathname: P/PE/PETDANCE/Carp-Assert-More-2.0.1.tar.gz
-    provides:
-      Carp::Assert::More 2.000001
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
-      Scalar::Util 0
-      Test::Exception 0
-      Test::More 0.18
   Carton-v1.0.35
     pathname: M/MI/MIYAGAWA/Carton-v1.0.35.tar.gz
     provides:
@@ -438,18 +399,18 @@ DISTRIBUTIONS
       Data::Visitor 0.24
       ExtUtils::MakeMaker 0
       MRO::Compat 0.09
-  Catalyst-Plugin-Session-0.41
-    pathname: J/JJ/JJNAPIORK/Catalyst-Plugin-Session-0.41.tar.gz
+  Catalyst-Plugin-Session-0.43
+    pathname: H/HA/HAARG/Catalyst-Plugin-Session-0.43.tar.gz
     provides:
-      Catalyst::Plugin::Session 0.41
-      Catalyst::Plugin::Session::State undef
-      Catalyst::Plugin::Session::Store undef
-      Catalyst::Plugin::Session::Store::Dummy undef
-      Catalyst::Plugin::Session::Test::Store 123
+      Catalyst::Plugin::Session 0.43
+      Catalyst::Plugin::Session::State 0.43
+      Catalyst::Plugin::Session::Store 0.43
+      Catalyst::Plugin::Session::Store::Dummy 0.43
+      Catalyst::Plugin::Session::Test::Store 0.43
     requirements:
       Catalyst::Runtime 5.71001
       Digest 0
-      ExtUtils::MakeMaker 6.59
+      ExtUtils::MakeMaker 0
       File::Spec 0
       File::Temp 0
       HTML::Entities 0
@@ -458,11 +419,7 @@ DISTRIBUTIONS
       Moose 0.76
       MooseX::Emulate::Class::Accessor::Fast 0.00801
       Object::Signature 0
-      Test::Deep 0
-      Test::Exception 0
       Test::More 0.88
-      Test::WWW::Mechanize::PSGI 0
-      Tie::RefHash 1.34
       namespace::clean 0.10
       perl 5.008
   Catalyst-Plugin-Static-Simple-0.37
@@ -1910,29 +1867,6 @@ DISTRIBUTIONS
       XSLoader 0
       parent 0
       perl 5.008008
-  HTML-Form-6.07
-    pathname: O/OA/OALDERS/HTML-Form-6.07.tar.gz
-    provides:
-      HTML::Form 6.07
-      HTML::Form::FileInput 6.07
-      HTML::Form::IgnoreInput 6.07
-      HTML::Form::ImageInput 6.07
-      HTML::Form::Input 6.07
-      HTML::Form::KeygenInput 6.07
-      HTML::Form::ListInput 6.07
-      HTML::Form::SubmitInput 6.07
-      HTML::Form::TextInput 6.07
-    requirements:
-      Carp 0
-      Encode 2
-      ExtUtils::MakeMaker 0
-      HTML::TokeParser 0
-      HTTP::Request 6
-      HTTP::Request::Common 6.03
-      URI 1.10
-      perl 5.008001
-      strict 0
-      vars 0
   HTML-Parser-3.78
     pathname: O/OA/OALDERS/HTML-Parser-3.78.tar.gz
     provides:
@@ -2154,17 +2088,6 @@ DISTRIBUTIONS
       IO::File 0
       Test::More 0
       URI::Escape 0
-  HTTP-Server-Simple-0.52
-    pathname: B/BP/BPS/HTTP-Server-Simple-0.52.tar.gz
-    provides:
-      HTTP::Server::Simple 0.52
-      HTTP::Server::Simple::CGI undef
-      HTTP::Server::Simple::CGI::Environment undef
-    requirements:
-      CGI 0
-      ExtUtils::MakeMaker 6.36
-      Socket 1.94
-      Test::More 0
   HTTP-Tiny-0.080
     pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.080.tar.gz
     provides:
@@ -2482,36 +2405,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.70
-    pathname: S/SB/SBECK/Locale-Codes-3.70.tar.gz
+  Locale-Codes-3.71
+    pathname: S/SB/SBECK/Locale-Codes-3.71.tar.gz
     provides:
-      Locale::Codes 3.70
-      Locale::Codes::Constants 3.70
-      Locale::Codes::Country 3.70
-      Locale::Codes::Country_Codes 3.70
-      Locale::Codes::Country_Retired 3.70
-      Locale::Codes::Currency 3.70
-      Locale::Codes::Currency_Codes 3.70
-      Locale::Codes::Currency_Retired 3.70
-      Locale::Codes::LangExt 3.70
-      Locale::Codes::LangExt_Codes 3.70
-      Locale::Codes::LangExt_Retired 3.70
-      Locale::Codes::LangFam 3.70
-      Locale::Codes::LangFam_Codes 3.70
-      Locale::Codes::LangFam_Retired 3.70
-      Locale::Codes::LangVar 3.70
-      Locale::Codes::LangVar_Codes 3.70
-      Locale::Codes::LangVar_Retired 3.70
-      Locale::Codes::Language 3.70
-      Locale::Codes::Language_Codes 3.70
-      Locale::Codes::Language_Retired 3.70
-      Locale::Codes::Script 3.70
-      Locale::Codes::Script_Codes 3.70
-      Locale::Codes::Script_Retired 3.70
-      Locale::Country 3.70
-      Locale::Currency 3.70
-      Locale::Language 3.70
-      Locale::Script 3.70
+      Locale::Codes 3.71
+      Locale::Codes::Constants 3.71
+      Locale::Codes::Country 3.71
+      Locale::Codes::Country_Codes 3.71
+      Locale::Codes::Country_Retired 3.71
+      Locale::Codes::Currency 3.71
+      Locale::Codes::Currency_Codes 3.71
+      Locale::Codes::Currency_Retired 3.71
+      Locale::Codes::LangExt 3.71
+      Locale::Codes::LangExt_Codes 3.71
+      Locale::Codes::LangExt_Retired 3.71
+      Locale::Codes::LangFam 3.71
+      Locale::Codes::LangFam_Codes 3.71
+      Locale::Codes::LangFam_Retired 3.71
+      Locale::Codes::LangVar 3.71
+      Locale::Codes::LangVar_Codes 3.71
+      Locale::Codes::LangVar_Retired 3.71
+      Locale::Codes::Language 3.71
+      Locale::Codes::Language_Codes 3.71
+      Locale::Codes::Language_Retired 3.71
+      Locale::Codes::Script 3.71
+      Locale::Codes::Script_Codes 3.71
+      Locale::Codes::Script_Retired 3.71
+      Locale::Country 3.71
+      Locale::Currency 3.71
+      Locale::Language 3.71
+      Locale::Script 3.71
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -2587,11 +2510,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Log-Log4perl-1.54
-    pathname: E/ET/ETJ/Log-Log4perl-1.54.tar.gz
+  Log-Log4perl-1.55
+    pathname: E/ET/ETJ/Log-Log4perl-1.55.tar.gz
     provides:
       L4pResurrectable 0.01
-      Log::Log4perl 1.54
+      Log::Log4perl 1.55
       Log::Log4perl::Appender undef
       Log::Log4perl::Appender::Buffer 1.53
       Log::Log4perl::Appender::DBI undef
@@ -2645,7 +2568,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Path 2.07
       File::Spec 0.82
-      Test::More 0.45
       perl 5.006
   Log-Log4perl-Layout-JSON-0.59
     pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.59.tar.gz
@@ -3724,10 +3646,10 @@ DISTRIBUTIONS
       Net::CIDR::Lite::Span 0.22
     requirements:
       ExtUtils::MakeMaker 0
-  Net-DNS-1.33
-    pathname: N/NL/NLNETLABS/Net-DNS-1.33.tar.gz
+  Net-DNS-1.34
+    pathname: N/NL/NLNETLABS/Net-DNS-1.34.tar.gz
     provides:
-      Net::DNS 1.33
+      Net::DNS 1.34
       Net::DNS::Domain 1855
       Net::DNS::DomainName 1855
       Net::DNS::DomainName1035 1855
@@ -3737,10 +3659,10 @@ DISTRIBUTIONS
       Net::DNS::Mailbox1035 1855
       Net::DNS::Mailbox2535 1855
       Net::DNS::Nameserver 1860
-      Net::DNS::Packet 1855
-      Net::DNS::Parameters 1855
+      Net::DNS::Packet 1865
+      Net::DNS::Parameters 1865
       Net::DNS::Question 1855
-      Net::DNS::RR 1856
+      Net::DNS::RR 1864
       Net::DNS::RR::A 1857
       Net::DNS::RR::AAAA 1857
       Net::DNS::RR::AFSDB 1857
@@ -3784,18 +3706,18 @@ DISTRIBUTIONS
       Net::DNS::RR::NSEC3PARAM 1857
       Net::DNS::RR::NULL 1857
       Net::DNS::RR::OPENPGPKEY 1857
-      Net::DNS::RR::OPT 1857
-      Net::DNS::RR::OPT::CHAIN 1857
-      Net::DNS::RR::OPT::CLIENT_SUBNET 1857
-      Net::DNS::RR::OPT::COOKIE 1857
-      Net::DNS::RR::OPT::DAU 1857
-      Net::DNS::RR::OPT::DHU 1857
-      Net::DNS::RR::OPT::EXPIRE 1857
-      Net::DNS::RR::OPT::EXTENDED_ERROR 1857
-      Net::DNS::RR::OPT::KEY_TAG 1857
-      Net::DNS::RR::OPT::N3U 1857
-      Net::DNS::RR::OPT::PADDING 1857
-      Net::DNS::RR::OPT::TCP_KEEPALIVE 1857
+      Net::DNS::RR::OPT 1864
+      Net::DNS::RR::OPT::CHAIN 1864
+      Net::DNS::RR::OPT::CLIENT_SUBNET 1864
+      Net::DNS::RR::OPT::COOKIE 1864
+      Net::DNS::RR::OPT::DAU 1864
+      Net::DNS::RR::OPT::DHU 1864
+      Net::DNS::RR::OPT::EXPIRE 1864
+      Net::DNS::RR::OPT::EXTENDED_ERROR 1864
+      Net::DNS::RR::OPT::KEY_TAG 1864
+      Net::DNS::RR::OPT::N3U 1864
+      Net::DNS::RR::OPT::PADDING 1864
+      Net::DNS::RR::OPT::TCP_KEEPALIVE 1864
       Net::DNS::RR::PTR 1857
       Net::DNS::RR::PX 1857
       Net::DNS::RR::RP 1857
@@ -3816,7 +3738,7 @@ DISTRIBUTIONS
       Net::DNS::RR::X25 1857
       Net::DNS::RR::ZONEMD 1857
       Net::DNS::Resolver 1855
-      Net::DNS::Resolver::Base 1855
+      Net::DNS::Resolver::Base 1864
       Net::DNS::Resolver::MSWin32 1856
       Net::DNS::Resolver::Recurse 1856
       Net::DNS::Resolver::UNIX 1856
@@ -3847,7 +3769,7 @@ DISTRIBUTIONS
       PerlIO 1.05
       Scalar::Util 1.25
       Time::Local 1.19
-      perl 5.008008
+      perl 5.008009
   Net-Fastly-1.12
     pathname: F/FA/FASTLY/Net-Fastly-1.12.tar.gz
     provides:
@@ -5353,14 +5275,6 @@ DISTRIBUTIONS
       Scalar::Util 0
       Test::Builder::Tester 0
       Test::More 0
-  Test-LongString-0.17
-    pathname: R/RG/RGARCIA/Test-LongString-0.17.tar.gz
-    provides:
-      Test::LongString 0.17
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Builder 0.12
-      Test::Builder::Tester 1.04
   Test-Metrics-Any-0.01
     pathname: P/PE/PEVANS/Test-Metrics-Any-0.01.tar.gz
     provides:
@@ -5490,41 +5404,6 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       parent 0
       perl 5.010000
-  Test-WWW-Mechanize-1.58
-    pathname: P/PE/PETDANCE/Test-WWW-Mechanize-1.58.tar.gz
-    provides:
-      Test::WWW::Mechanize 1.58
-    requirements:
-      Carp 0
-      Carp::Assert::More 1.16
-      ExtUtils::MakeMaker 0
-      HTML::Form 0
-      HTML::TokeParser 0
-      HTTP::Message 6.29
-      HTTP::Server::Simple 0.42
-      HTTP::Server::Simple::CGI 0
-      LWP 6.02
-      Test::Builder::Tester 1.09
-      Test::LongString 0.15
-      Test::More 0.96
-      URI::file 0
-      WWW::Mechanize 1.68
-      parent 0
-      perl 5.01
-  Test-WWW-Mechanize-PSGI-0.39
-    pathname: O/OA/OALDERS/Test-WWW-Mechanize-PSGI-0.39.tar.gz
-    provides:
-      Test::WWW::Mechanize::PSGI 0.39
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
-      HTTP::Message::PSGI 0
-      Test::WWW::Mechanize 0
-      Try::Tiny 0
-      base 0
-      perl 5.006
-      strict 0
-      warnings 0
   Test-Warn-0.36
     pathname: B/BI/BIGJ/Test-Warn-0.36.tar.gz
     provides:
@@ -6050,33 +5929,6 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  WWW-Mechanize-2.07
-    pathname: O/OA/OALDERS/WWW-Mechanize-2.07.tar.gz
-    provides:
-      WWW::Mechanize 2.07
-      WWW::Mechanize::Image 2.07
-      WWW::Mechanize::Link 2.07
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 0
-      Getopt::Long 0
-      HTML::Form 1.00
-      HTML::HeadParser 0
-      HTML::TokeParser 0
-      HTML::TreeBuilder 5
-      HTTP::Cookies 0
-      HTTP::Request 1.30
-      HTTP::Request::Common 0
-      LWP::UserAgent 6.45
-      Pod::Usage 0
-      Scalar::Util 1.14
-      Tie::RefHash 0
-      URI::URL 0
-      URI::file 0
-      base 0
-      perl 5.006
-      strict 0
-      warnings 0
   WWW-RobotRules-6.02
     pathname: G/GA/GAAS/WWW-RobotRules-6.02.tar.gz
     provides:
