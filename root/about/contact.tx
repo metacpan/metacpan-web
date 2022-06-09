@@ -12,21 +12,31 @@ This is the best place to discuss new ideas and get involved. Join us on [#metac
 
 ## Email
 
-Subscribing to our mailing list is as easy as sending an (empty) email to [metacpan-join@lists.scsys.co.uk](mailto:metacpan-join@lists.scsys.co.uk) or via the website at [http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/metacpan](http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/metacpan).
+The MetaCPAN team is available directly via email at
+[noc@metacpan.org](mailto:noc@metacpan.org). This address is for issues
+directly related to MetaCPAN (like sponsorship inquiries). If you need
+technical help with something other than MetaCPAN (like installing a module),
+we encourage you to ask a question on:
 
-The MetaCPAN team is also available directly via email at [noc@metacpan.org](mailto:noc@metacpan.org).
+* [StackOverflow](https://stackoverflow.com/questions/tagged/perl)
+* [/r/perl](https://www.reddit.com/r/perl)
+* IRC
+* open a ticket in the appropriate issue tracker.
+
+If you do email us with a question not directly related to MetaCPAN, we will
+redirect you to the previously mentioned resources. It's not that we don't want
+to help, but there are better ways for you to get this help.
 
 # Source Code
 
 MetaCPAN consists of two projects:
 
-## Front-end
+## Front End
 
 This is what you are looking at right now. The source code is on [github](https://github.com/metacpan/metacpan-web).
 
-## Back-end
+## Back End
 
-The front-end is a slim wrapper around the back-end. It provides a REST API to data around CPAN and its ecosystem. The code is also on [github](https://github.com/metacpan/metacpan-api).
-
+The front end is a slim wrapper around the back end. It provides a REST API to data around CPAN and its ecosystem. The code is also on [github](https://github.com/metacpan/metacpan-api).
 
 %% }
