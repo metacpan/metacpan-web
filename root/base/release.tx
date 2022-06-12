@@ -119,9 +119,9 @@
       </ul>
     </li>
     %%  }
-    %%  if $irc.web {
-    <li class="irc-chat">
-      <div><a rel="noopener nofollow" target="_blank" href="[% $irc.web %]">Questions? Chat with us!</a></div>
+    %%  if $chat.web {
+    <li class="chat-banner">
+      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Questions? Chat with us!</a></div>
     </li>
     %%  }
     <li class="nav-header">Activity</li>
