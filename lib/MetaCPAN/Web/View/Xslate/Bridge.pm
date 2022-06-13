@@ -194,7 +194,7 @@ sub is_url {
     my ($url) = @_;
     return $url
         && $url
-        =~ /^(?:bzr|https?|git\+ssh|svn|ssh|svn\+ssh|mailto|git|irc):/;
+        =~ /^(?:bzr|https?|git\+ssh|svn|ssh|svn\+ssh|mailto|git|ircs?):/;
 }
 
 sub shuffle {

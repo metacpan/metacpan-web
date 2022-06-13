@@ -146,7 +146,7 @@ sub normalize {
             distribution => $data->{distribution}{distribution},
             author       => $data->{author}{author},
             contributors => $data->{contributors}{contributors},
-            irc          => $self->groom_irc( $data->{release}{release} ),
+            chat         => $self->groom_chat( $data->{release}{release} ),
             issues       => $self->normalize_issues(
                 $data->{release}{release},
                 $data->{distribution}{distribution}
@@ -212,17 +212,25 @@ sub groom_repository {
     return $repo;
 }
 
-sub groom_irc {
+sub groom_chat {
     my ( $self, $release ) = @_;
 
-    my $irc = $release->{metadata}{resources}{x_IRC}
-        or return {};
-    my $irc_info = ref $irc ? {%$irc} : { url => $irc };
+    my $resources = $release->{metadata}{resources};
 
-    if ( !$irc_info->{web} && $irc_info->{url} ) {
-        my $url    = URI->new( $irc_info->{url} );
+    my $chat = $resources->{x_chat} || $resources->{x_IRC}
+        or return {};
+
+    my $chat_info = ref $chat ? {%$chat} : { url => $chat };
+
+    if ( !$chat_info->{web} && $chat_info->{url} ) {
+        my $url    = URI->new( $chat_info->{url} );
         my $scheme = $url->scheme;
-        if ( $scheme && ( $scheme eq 'irc' || $scheme eq 'ircs' ) ) {
+        if ( !$scheme ) {
+        }
+        elsif ( $scheme eq 'http' || $scheme eq 'https' ) {
+            $chat_info->{web} = $url->canonical->as_string;
+        }
+        elsif ( $scheme eq 'irc' || $scheme eq 'ircs' ) {
             my $ssl  = $scheme eq 'ircs';
             my $host = $url->authority;
             my $port;
@@ -242,22 +250,28 @@ sub groom_irc {
                 = $path || $url->fragment || $url->query_param('channel');
             $channel =~ s/^(?![#~!+])/#/;
 
-            my $link
-                = 'irc://'
-                . $host
-                . (
-                  $ssl  ? q{:+} . ( $port || 6697 )
-                : $port ? ":$port"
-                :         q{}
-                )
-                . '/'
-                . $channel
-                . '?nick=mc-guest-?';
-            $irc_info->{web} = 'https://kiwiirc.com/nextclient/#' . $link;
+            if ( $host eq 'libera.chat' || $host eq 'irc.libera.chat' ) {
+                $chat_info->{web} = 'https://web.libera.chat/#' . $channel;
+            }
+            else {
+                my $link
+                    = 'irc://'
+                    . $host
+                    . (
+                      $ssl  ? q{:+} . ( $port || 6697 )
+                    : $port ? ":$port"
+                    :         q{}
+                    )
+                    . '/'
+                    . $channel
+                    . '?nick=mc-guest-?';
+                $chat_info->{web}
+                    = 'https://kiwiirc.com/nextclient/#' . $link;
+            }
         }
     }
 
-    return $irc_info;
+    return $chat_info;
 }
 
 # Normalize issue info into a simple hashref.

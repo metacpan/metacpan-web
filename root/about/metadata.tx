@@ -38,22 +38,27 @@ In `META.json`:
 [Dist::Zilla::Plugin::Git::Contributors](/pod/Dist::Zilla::Plugin::Git::Contributors)
 plugin.
 
-### IRC
+### Chat
 
-A link to an IRC channel can be provided using the `x_IRC` (or `IRC` in
-`META.yml`) resource field.  This link should use the irc:// protocol.
-MetaCPAN will automatically transform this into a web chat link to use on the
-left sidebar.  Alternatively, `x_IRC` can be specified as a hash using `url`
-and `web` keys.  The `url` key is intended to contain an irc:// link, while the
-`web` key should have a link to join the chat room directly in the browser.
-If no web link is provided, it will be generated for you.
+A link to an chat channel can be provided using the `x_chat` or `x_IRC` (or
+`IRC` in `META.yml`) resource field. This can be either in the form of a single
+URL, or a hash containing the `url` and `web` keys. Using a single URL is
+taken as equivalent to specifying a `url` key. This should be a link directly
+to the chat channel, such as using an `irc://` link for IRC channels, or
+whatever form is appropriate for other chat systems. The `web` link should be
+a link that will open the chat channel directly in a browser.
+
+For `irc://` URLs, a web link will be automatically be generated if not
+provided. This will link to a web IRC client.
+
+The web link will be shown in the left sidebar.
 
 In `META.yml`:
 
     ...
     resources:
       ...
-      x_IRC: irc://irc.perl.org/#metacpan
+      IRC: irc://irc.perl.org/#metacpan
     ...
 
 In `META.json`:
@@ -61,7 +66,7 @@ In `META.json`:
     ...
     "resources" : {
       ...
-      "x_IRC" : "irc://irc.perl.org/#metacpan"
+      "x_chat" : "irc://irc.perl.org/#metacpan"
     },
     ...
 
@@ -70,7 +75,7 @@ Or:
     ...
     "resources" : {
       ...
-      "x_IRC" : {
+      "x_chat" : {
         "url" : "irc://irc.perl.org/#metacpan",
         "web" : "https://chat.mibbit.com/?channel=%23metacpan&server=irc.perl.org"
       }
