@@ -4,7 +4,7 @@ use Moose;
 
 use Future;
 use MetaCPAN::Web::RenderUtil qw( filter_html );
-use Try::Tiny qw( try );
+use Try::Tiny                 qw( try );
 
 use namespace::autoclean;
 

@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Test::More;
 use MetaCPAN::Web::Test qw( override_api_response );
-use Encode qw( encode is_utf8 );
+use Encode              qw( encode is_utf8 );
 
 my ( $res_body, $content_type ) = ( q{}, 'text/plain' );
 

@@ -5,7 +5,7 @@ use parent qw(Plack::Middleware::Session::Cookie);
 use Plack::Util;
 use MIME::Base64     ();
 use Cpanel::JSON::XS ();
-use Try::Tiny qw( catch try );
+use Try::Tiny        qw( catch try );
 
 my $json = Cpanel::JSON::XS->new->canonical(1);
 

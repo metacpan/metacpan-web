@@ -3,8 +3,8 @@ package MetaCPAN::Web::Model::API::Author;
 use Moose;
 use namespace::autoclean;
 
-use Future ();
-use Ref::Util qw( is_arrayref );
+use Future      ();
+use Ref::Util   qw( is_arrayref );
 use URI::Escape qw( uri_escape );
 
 extends 'MetaCPAN::Web::Model::API';

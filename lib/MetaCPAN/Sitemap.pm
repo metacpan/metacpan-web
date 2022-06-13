@@ -7,7 +7,7 @@ use IO::Async::SSL;
 use Net::Async::HTTP;
 use Cpanel::JSON::XS   ();
 use IO::Compress::Gzip ();
-use HTML::Entities qw( encode_entities_numeric );
+use HTML::Entities     qw( encode_entities_numeric );
 use Future;
 
 use Moo;
