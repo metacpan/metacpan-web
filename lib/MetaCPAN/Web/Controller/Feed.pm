@@ -5,13 +5,13 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use DateTime::Format::ISO8601 ();
-use HTML::Escape qw( escape_html );
-use MetaCPAN::Web::Types qw( ArrayRef Enum HashRef Str Undef Uri );
+use DateTime::Format::ISO8601  ();
+use HTML::Escape               qw( escape_html );
+use MetaCPAN::Web::Types       qw( ArrayRef Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
-use Path::Tiny qw( path );
-use Text::MultiMarkdown qw( markdown );
-use XML::FeedPP ();
+use Path::Tiny                 qw( path );
+use Text::MultiMarkdown        qw( markdown );
+use XML::FeedPP                ();
 
 sub recent_rss : Path('/recent.rss') Args(0) {
     my ( $self, $c ) = @_;

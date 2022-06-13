@@ -3,8 +3,8 @@ use warnings;
 use lib 't/lib';
 use Test::More;
 use HTTP::Request::Common qw( POST );
-use MetaCPAN::Web::Test qw( app test_psgi );
-use Cpanel::JSON::XS qw( decode_json );
+use MetaCPAN::Web::Test   qw( app test_psgi );
+use Cpanel::JSON::XS      qw( decode_json );
 
 sub post_json {
     POST(

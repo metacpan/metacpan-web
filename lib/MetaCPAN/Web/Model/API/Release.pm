@@ -6,7 +6,7 @@ extends 'MetaCPAN::Web::Model::API';
 with 'MetaCPAN::Web::Role::RiverData';
 
 use CPAN::DistnameInfo;
-use Future ();
+use Future    ();
 use Ref::Util qw(is_arrayref);
 
 =head1 NAME

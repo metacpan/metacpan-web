@@ -3,8 +3,8 @@ use Moose;
 extends 'MetaCPAN::Web::Model::API';
 
 use MetaCPAN::Web::Model::API::Changes::Parser ();
-use Ref::Util qw( is_arrayref );
-use Future ();
+use Ref::Util                                  qw( is_arrayref );
+use Future                                     ();
 
 sub get {
     my ( $self, @path ) = @_;

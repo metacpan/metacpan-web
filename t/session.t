@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use MetaCPAN::Web::Test qw( app test_psgi );
-use URI::Escape ();
+use URI::Escape         ();
 
 {
     package    ## no critic (Package)

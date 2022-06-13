@@ -3,7 +3,7 @@ use warnings;
 
 use MetaCPAN::Web                   ();
 use MetaCPAN::Web::Controller::Feed ();
-use MetaCPAN::Web::Test qw(
+use MetaCPAN::Web::Test             qw(
     app
     GET
     override_api_response
@@ -13,7 +13,7 @@ use MetaCPAN::Web::Test qw(
 );
 use Test::More;
 use Test::Warnings ();
-use Try::Tiny qw( catch try );
+use Try::Tiny      qw( catch try );
 
 sub get_feed_ok {
     my ( $cb, $test, $extra ) = @_;

@@ -2,7 +2,7 @@ package MetaCPAN::Middleware::OldUrls;
 use strict;
 use warnings;
 
-use parent qw(Plack::Middleware);
+use parent                qw(Plack::Middleware);
 use Plack::Util::Accessor qw(router);
 
 use Plack::Request;
