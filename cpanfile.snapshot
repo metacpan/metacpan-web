@@ -864,10 +864,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.29
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.29.tar.gz
+  Cpanel-JSON-XS-4.30
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.30.tar.gz
     provides:
-      Cpanel::JSON::XS 4.29
+      Cpanel::JSON::XS 4.30
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -2018,19 +2018,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.36
-    pathname: O/OA/OALDERS/HTTP-Message-6.36.tar.gz
+  HTTP-Message-6.37
+    pathname: O/OA/OALDERS/HTTP-Message-6.37.tar.gz
     provides:
-      HTTP::Config 6.36
-      HTTP::Headers 6.36
-      HTTP::Headers::Auth 6.36
-      HTTP::Headers::ETag 6.36
-      HTTP::Headers::Util 6.36
-      HTTP::Message 6.36
-      HTTP::Request 6.36
-      HTTP::Request::Common 6.36
-      HTTP::Response 6.36
-      HTTP::Status 6.36
+      HTTP::Config 6.37
+      HTTP::Headers 6.37
+      HTTP::Headers::Auth 6.37
+      HTTP::Headers::ETag 6.37
+      HTTP::Headers::Util 6.37
+      HTTP::Message 6.37
+      HTTP::Request 6.37
+      HTTP::Request::Common 6.37
+      HTTP::Response 6.37
+      HTTP::Status 6.37
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
@@ -4159,10 +4159,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Package-Stash-XS-0.29
-    pathname: E/ET/ETHER/Package-Stash-XS-0.29.tar.gz
+  Package-Stash-XS-0.30
+    pathname: E/ET/ETHER/Package-Stash-XS-0.30.tar.gz
     provides:
-      Package::Stash::XS 0.29
+      Package::Stash::XS 0.30
     requirements:
       ExtUtils::MakeMaker 0
       XSLoader 0
@@ -5429,10 +5429,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Test-XPath-0.19
-    pathname: M/MA/MANWAR/Test-XPath-0.19.tar.gz
+  Test-XPath-0.20
+    pathname: M/MA/MANWAR/Test-XPath-0.20.tar.gz
     provides:
-      Test::XPath 0.19
+      Test::XPath 0.20
     requirements:
       ExtUtils::MakeMaker 0
       Test::Builder 0.70
@@ -6145,32 +6145,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.66
-    pathname: O/OA/OALDERS/libwww-perl-6.66.tar.gz
+  libwww-perl-6.67
+    pathname: O/OA/OALDERS/libwww-perl-6.67.tar.gz
     provides:
-      LWP 6.66
-      LWP::Authen::Basic 6.66
-      LWP::Authen::Digest 6.66
-      LWP::Authen::Ntlm 6.66
-      LWP::ConnCache 6.66
-      LWP::Debug 6.66
-      LWP::Debug::TraceHTTP 6.66
-      LWP::DebugFile 6.66
-      LWP::MemberMixin 6.66
-      LWP::Protocol 6.66
-      LWP::Protocol::cpan 6.66
-      LWP::Protocol::data 6.66
-      LWP::Protocol::file 6.66
-      LWP::Protocol::ftp 6.66
-      LWP::Protocol::gopher 6.66
-      LWP::Protocol::http 6.66
-      LWP::Protocol::loopback 6.66
-      LWP::Protocol::mailto 6.66
-      LWP::Protocol::nntp 6.66
-      LWP::Protocol::nogo 6.66
-      LWP::RobotUA 6.66
-      LWP::Simple 6.66
-      LWP::UserAgent 6.66
+      LWP 6.67
+      LWP::Authen::Basic 6.67
+      LWP::Authen::Digest 6.67
+      LWP::Authen::Ntlm 6.67
+      LWP::ConnCache 6.67
+      LWP::Debug 6.67
+      LWP::Debug::TraceHTTP 6.67
+      LWP::DebugFile 6.67
+      LWP::MemberMixin 6.67
+      LWP::Protocol 6.67
+      LWP::Protocol::cpan 6.67
+      LWP::Protocol::data 6.67
+      LWP::Protocol::file 6.67
+      LWP::Protocol::ftp 6.67
+      LWP::Protocol::gopher 6.67
+      LWP::Protocol::http 6.67
+      LWP::Protocol::loopback 6.67
+      LWP::Protocol::mailto 6.67
+      LWP::Protocol::nntp 6.67
+      LWP::Protocol::nogo 6.67
+      LWP::RobotUA 6.67
+      LWP::Simple 6.67
+      LWP::UserAgent 6.67
     requirements:
       CPAN::Meta::Requirements 2.120620
       Digest::MD5 0
