@@ -7,84 +7,84 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.48
-    pathname: P/PL/PLICEASE/Alien-Build-2.48.tar.gz
+  Alien-Build-2.50
+    pathname: P/PL/PLICEASE/Alien-Build-2.50.tar.gz
     provides:
-      Alien::Base 2.48
-      Alien::Base::PkgConfig 2.48
-      Alien::Base::Wrapper 2.48
-      Alien::Build 2.48
-      Alien::Build::CommandSequence 2.48
-      Alien::Build::Helper 2.48
-      Alien::Build::Interpolate 2.48
-      Alien::Build::Interpolate::Default 2.48
-      Alien::Build::Interpolate::Helper 2.48
-      Alien::Build::Log 2.48
-      Alien::Build::Log::Abbreviate 2.48
-      Alien::Build::Log::Default 2.48
-      Alien::Build::MM 2.48
-      Alien::Build::Meta 2.48
-      Alien::Build::Plugin 2.48
-      Alien::Build::Plugin::Build::Autoconf 2.48
-      Alien::Build::Plugin::Build::CMake 2.48
-      Alien::Build::Plugin::Build::Copy 2.48
-      Alien::Build::Plugin::Build::MSYS 2.48
-      Alien::Build::Plugin::Build::Make 2.48
-      Alien::Build::Plugin::Build::SearchDep 2.48
-      Alien::Build::Plugin::Core::CleanInstall 2.48
-      Alien::Build::Plugin::Core::Download 2.48
-      Alien::Build::Plugin::Core::FFI 2.48
-      Alien::Build::Plugin::Core::Gather 2.48
-      Alien::Build::Plugin::Core::Legacy 2.48
-      Alien::Build::Plugin::Core::Override 2.48
-      Alien::Build::Plugin::Core::Setup 2.48
-      Alien::Build::Plugin::Core::Tail 2.48
-      Alien::Build::Plugin::Decode::DirListing 2.48
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.48
-      Alien::Build::Plugin::Decode::HTML 2.48
-      Alien::Build::Plugin::Decode::Mojo 2.48
-      Alien::Build::Plugin::Download::Negotiate 2.48
-      Alien::Build::Plugin::Extract::ArchiveTar 2.48
-      Alien::Build::Plugin::Extract::ArchiveZip 2.48
-      Alien::Build::Plugin::Extract::CommandLine 2.48
-      Alien::Build::Plugin::Extract::Directory 2.48
-      Alien::Build::Plugin::Extract::Negotiate 2.48
-      Alien::Build::Plugin::Fetch::CurlCommand 2.48
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.48
-      Alien::Build::Plugin::Fetch::LWP 2.48
-      Alien::Build::Plugin::Fetch::Local 2.48
-      Alien::Build::Plugin::Fetch::LocalDir 2.48
-      Alien::Build::Plugin::Fetch::NetFTP 2.48
-      Alien::Build::Plugin::Fetch::Wget 2.48
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.48
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.48
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.48
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.48
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.48
-      Alien::Build::Plugin::PkgConfig::PP 2.48
-      Alien::Build::Plugin::Prefer::BadVersion 2.48
-      Alien::Build::Plugin::Prefer::GoodVersion 2.48
-      Alien::Build::Plugin::Prefer::SortVersions 2.48
-      Alien::Build::Plugin::Probe::CBuilder 2.48
-      Alien::Build::Plugin::Probe::CommandLine 2.48
-      Alien::Build::Plugin::Probe::Vcpkg 2.48
-      Alien::Build::Plugin::Test::Mock 2.48
-      Alien::Build::PluginMeta 2.48
-      Alien::Build::Temp 2.48
-      Alien::Build::TempDir 2.48
-      Alien::Build::Util 2.48
-      Alien::Build::Version::Basic 2.48
-      Alien::Build::rc 2.48
-      Alien::Role 2.48
-      Alien::Util 2.48
-      Test::Alien 2.48
-      Test::Alien::Build 2.48
-      Test::Alien::CanCompile 2.48
-      Test::Alien::CanPlatypus 2.48
-      Test::Alien::Diag 2.48
-      Test::Alien::Run 2.48
-      Test::Alien::Synthetic 2.48
-      alienfile 2.48
+      Alien::Base 2.50
+      Alien::Base::PkgConfig 2.50
+      Alien::Base::Wrapper 2.50
+      Alien::Build 2.50
+      Alien::Build::CommandSequence 2.50
+      Alien::Build::Helper 2.50
+      Alien::Build::Interpolate 2.50
+      Alien::Build::Interpolate::Default 2.50
+      Alien::Build::Interpolate::Helper 2.50
+      Alien::Build::Log 2.50
+      Alien::Build::Log::Abbreviate 2.50
+      Alien::Build::Log::Default 2.50
+      Alien::Build::MM 2.50
+      Alien::Build::Meta 2.50
+      Alien::Build::Plugin 2.50
+      Alien::Build::Plugin::Build::Autoconf 2.50
+      Alien::Build::Plugin::Build::CMake 2.50
+      Alien::Build::Plugin::Build::Copy 2.50
+      Alien::Build::Plugin::Build::MSYS 2.50
+      Alien::Build::Plugin::Build::Make 2.50
+      Alien::Build::Plugin::Build::SearchDep 2.50
+      Alien::Build::Plugin::Core::CleanInstall 2.50
+      Alien::Build::Plugin::Core::Download 2.50
+      Alien::Build::Plugin::Core::FFI 2.50
+      Alien::Build::Plugin::Core::Gather 2.50
+      Alien::Build::Plugin::Core::Legacy 2.50
+      Alien::Build::Plugin::Core::Override 2.50
+      Alien::Build::Plugin::Core::Setup 2.50
+      Alien::Build::Plugin::Core::Tail 2.50
+      Alien::Build::Plugin::Decode::DirListing 2.50
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.50
+      Alien::Build::Plugin::Decode::HTML 2.50
+      Alien::Build::Plugin::Decode::Mojo 2.50
+      Alien::Build::Plugin::Download::Negotiate 2.50
+      Alien::Build::Plugin::Extract::ArchiveTar 2.50
+      Alien::Build::Plugin::Extract::ArchiveZip 2.50
+      Alien::Build::Plugin::Extract::CommandLine 2.50
+      Alien::Build::Plugin::Extract::Directory 2.50
+      Alien::Build::Plugin::Extract::Negotiate 2.50
+      Alien::Build::Plugin::Fetch::CurlCommand 2.50
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.50
+      Alien::Build::Plugin::Fetch::LWP 2.50
+      Alien::Build::Plugin::Fetch::Local 2.50
+      Alien::Build::Plugin::Fetch::LocalDir 2.50
+      Alien::Build::Plugin::Fetch::NetFTP 2.50
+      Alien::Build::Plugin::Fetch::Wget 2.50
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.50
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.50
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.50
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.50
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.50
+      Alien::Build::Plugin::PkgConfig::PP 2.50
+      Alien::Build::Plugin::Prefer::BadVersion 2.50
+      Alien::Build::Plugin::Prefer::GoodVersion 2.50
+      Alien::Build::Plugin::Prefer::SortVersions 2.50
+      Alien::Build::Plugin::Probe::CBuilder 2.50
+      Alien::Build::Plugin::Probe::CommandLine 2.50
+      Alien::Build::Plugin::Probe::Vcpkg 2.50
+      Alien::Build::Plugin::Test::Mock 2.50
+      Alien::Build::PluginMeta 2.50
+      Alien::Build::Temp 2.50
+      Alien::Build::TempDir 2.50
+      Alien::Build::Util 2.50
+      Alien::Build::Version::Basic 2.50
+      Alien::Build::rc 2.50
+      Alien::Role 2.50
+      Alien::Util 2.50
+      Test::Alien 2.50
+      Test::Alien::Build 2.50
+      Test::Alien::CanCompile 2.50
+      Test::Alien::CanPlatypus 2.50
+      Test::Alien::Diag 2.50
+      Test::Alien::Run 2.50
+      Test::Alien::Synthetic 2.50
+      alienfile 2.50
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -2104,10 +2104,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  HTTP-Tinyish-0.17
-    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.17.tar.gz
+  HTTP-Tinyish-0.18
+    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.18.tar.gz
     provides:
-      HTTP::Tinyish 0.17
+      HTTP::Tinyish 0.18
       HTTP::Tinyish::Base undef
       HTTP::Tinyish::Curl undef
       HTTP::Tinyish::HTTPTiny undef
@@ -2275,11 +2275,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-4.06
-    pathname: I/IS/ISHIGAKI/JSON-4.06.tar.gz
+  JSON-4.07
+    pathname: I/IS/ISHIGAKI/JSON-4.07.tar.gz
     provides:
-      JSON 4.06
-      JSON::Backend::PP 4.06
+      JSON 4.07
+      JSON::Backend::PP 4.07
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -5017,10 +5017,10 @@ DISTRIBUTIONS
       strict 0
       version 0.83
       warnings 0
-  Specio-Library-Path-Tiny-0.04
-    pathname: D/DR/DROLSKY/Specio-Library-Path-Tiny-0.04.tar.gz
+  Specio-Library-Path-Tiny-0.05
+    pathname: D/DR/DROLSKY/Specio-Library-Path-Tiny-0.05.tar.gz
     provides:
-      Specio::Library::Path::Tiny 0.04
+      Specio::Library::Path::Tiny 0.05
     requirements:
       ExtUtils::MakeMaker 0
       Path::Tiny 0.087
