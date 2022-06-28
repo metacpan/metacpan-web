@@ -225,26 +225,33 @@
             </div>
 
             <div class="row" style="padding: 50px 15px 30px">
-              <div class="col-xs-9 col-md-3" style="padding:25px">
+              <div class="col-xs-9 col-md-2 col-md-offset-1" style="padding-top:0px">
                 <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
                   <img width="170" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
                 </a>
               </div>
-              <div class="col-xs-9 col-md-3" style="padding:15px">
+              <div class="col-xs-9 col-md-2" style="padding:0px">
                 <a target="_blank" href="https://www.liquidweb.com/" rel="noopener">
                   <img width="170" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
                 </a>
               </div>
-              <div class="col-xs-9 col-md-3" style="padding:15px">
+              <div class="col-xs-9 col-md-2" style="padding-top:8px">
                 <a target="_blank" href="https://www.yellowbot.com/" rel="noopener">
                   <img width="170" src="/static/images/sponsors/yellowbot-small.png" alt="YellowBot logo">
                 </a>
               </div>
-              <div class="col-xs-9 col-md-3" style="padding:15px">
+              <div class="col-xs-9 col-md-2" style="padding-top:5px">
                 <a href="https://www.fastly.com/" target="_blank" rel="noopener">
                   <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51 alt="Fastly logo">
                 </a>
               </div>
+              <div class="col-xs-9 col-md-2" style="padding-top:12px">
+                <a href="https://deriv.com/careers/" target="_blank" rel="noopener">
+                  <img width="170" src="/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg" alt="Deriv logo">
+                </a>
+              </div>
+            </div>
+            <div class="row" style="padding: 50px 15px 30px">
             </div>
             %%  if !$suppress_stickeryou {
             <div class="row">
