@@ -37,15 +37,6 @@
         <button class="btn search-btn help-btn">?</button>
     </div>
   </form>
-  <div>
-    <div class="row">
-       <div class="alert alert-info">
-         <p>
-            <strong>The Perl &amp; Raku Conference</strong> North America <a target="_blank" rel="noopener" href="https://perlconference.us/" title="Join the Conference">June 22-24 2022</a>
-          </p>
-       </div>
-    </div>
-  </div>
   <p class="helper_blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</p>
 </div>
 %%  }
