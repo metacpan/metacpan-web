@@ -1719,10 +1719,10 @@ DISTRIBUTIONS
       File::Spec 0.80
       perl 5.008001
       warnings 0
-  File-ShareDir-Install-0.13
-    pathname: E/ET/ETHER/File-ShareDir-Install-0.13.tar.gz
+  File-ShareDir-Install-0.14
+    pathname: E/ET/ETHER/File-ShareDir-Install-0.14.tar.gz
     provides:
-      File::ShareDir::Install 0.13
+      File::ShareDir::Install 0.14
     requirements:
       Carp 0
       Exporter 0
@@ -5658,50 +5658,50 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.012005
-    pathname: T/TO/TOBYINK/Type-Tiny-1.012005.tar.gz
+  Type-Tiny-1.014000
+    pathname: T/TO/TOBYINK/Type-Tiny-1.014000.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.012005
-      Devel::TypeTiny::Perl58Compat 1.012005
-      Error::TypeTiny 1.012005
-      Error::TypeTiny::Assertion 1.012005
-      Error::TypeTiny::Compilation 1.012005
-      Error::TypeTiny::WrongNumberOfParameters 1.012005
-      Eval::TypeTiny 1.012005
-      Reply::Plugin::TypeTiny 1.012005
-      Test::TypeTiny 1.012005
-      Type::Coercion 1.012005
-      Type::Coercion::FromMoose 1.012005
-      Type::Coercion::Union 1.012005
-      Type::Library 1.012005
-      Type::Params 1.012005
-      Type::Parser 1.012005
+      Devel::TypeTiny::Perl56Compat 1.014000
+      Devel::TypeTiny::Perl58Compat 1.014000
+      Error::TypeTiny 1.014000
+      Error::TypeTiny::Assertion 1.014000
+      Error::TypeTiny::Compilation 1.014000
+      Error::TypeTiny::WrongNumberOfParameters 1.014000
+      Eval::TypeTiny 1.014000
+      Reply::Plugin::TypeTiny 1.014000
+      Test::TypeTiny 1.014000
+      Type::Coercion 1.014000
+      Type::Coercion::FromMoose 1.014000
+      Type::Coercion::Union 1.014000
+      Type::Library 1.014000
+      Type::Params 1.014000
+      Type::Parser 1.014000
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.012005
-      Type::Tiny 1.012005
-      Type::Tiny::Class 1.012005
-      Type::Tiny::ConstrainedObject 1.012005
-      Type::Tiny::Duck 1.012005
-      Type::Tiny::Enum 1.012005
-      Type::Tiny::Intersection 1.012005
-      Type::Tiny::Role 1.012005
-      Type::Tiny::Union 1.012005
-      Type::Utils 1.012005
-      Types::Common::Numeric 1.012005
-      Types::Common::String 1.012005
-      Types::Standard 1.012005
-      Types::Standard::ArrayRef 1.012005
-      Types::Standard::CycleTuple 1.012005
-      Types::Standard::Dict 1.012005
-      Types::Standard::HashRef 1.012005
-      Types::Standard::Map 1.012005
-      Types::Standard::ScalarRef 1.012005
-      Types::Standard::StrMatch 1.012005
-      Types::Standard::Tied 1.012005
-      Types::Standard::Tuple 1.012005
-      Types::TypeTiny 1.012005
+      Type::Registry 1.014000
+      Type::Tiny 1.014000
+      Type::Tiny::Class 1.014000
+      Type::Tiny::ConstrainedObject 1.014000
+      Type::Tiny::Duck 1.014000
+      Type::Tiny::Enum 1.014000
+      Type::Tiny::Intersection 1.014000
+      Type::Tiny::Role 1.014000
+      Type::Tiny::Union 1.014000
+      Type::Utils 1.014000
+      Types::Common::Numeric 1.014000
+      Types::Common::String 1.014000
+      Types::Standard 1.014000
+      Types::Standard::ArrayRef 1.014000
+      Types::Standard::CycleTuple 1.014000
+      Types::Standard::Dict 1.014000
+      Types::Standard::HashRef 1.014000
+      Types::Standard::Map 1.014000
+      Types::Standard::ScalarRef 1.014000
+      Types::Standard::StrMatch 1.014000
+      Types::Standard::Tied 1.014000
+      Types::Standard::Tuple 1.014000
+      Types::TypeTiny 1.014000
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
