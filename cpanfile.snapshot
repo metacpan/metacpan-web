@@ -5786,53 +5786,53 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  URI-5.10
-    pathname: O/OA/OALDERS/URI-5.10.tar.gz
+  URI-5.11
+    pathname: O/OA/OALDERS/URI-5.11.tar.gz
     provides:
-      URI 5.10
-      URI::Escape 5.10
-      URI::Heuristic 5.10
-      URI::IRI 5.10
-      URI::QueryParam 5.10
-      URI::Split 5.10
-      URI::URL 5.10
-      URI::WithBase 5.10
-      URI::data 5.10
-      URI::file 5.10
-      URI::file::Base 5.10
-      URI::file::FAT 5.10
-      URI::file::Mac 5.10
-      URI::file::OS2 5.10
-      URI::file::QNX 5.10
-      URI::file::Unix 5.10
-      URI::file::Win32 5.10
-      URI::ftp 5.10
-      URI::gopher 5.10
-      URI::http 5.10
-      URI::https 5.10
-      URI::ldap 5.10
-      URI::ldapi 5.10
-      URI::ldaps 5.10
-      URI::mailto 5.10
-      URI::mms 5.10
-      URI::news 5.10
-      URI::nntp 5.10
-      URI::nntps 5.10
-      URI::pop 5.10
-      URI::rlogin 5.10
-      URI::rsync 5.10
-      URI::rtsp 5.10
-      URI::rtspu 5.10
-      URI::sftp 5.10
-      URI::sip 5.10
-      URI::sips 5.10
-      URI::snews 5.10
-      URI::ssh 5.10
-      URI::telnet 5.10
-      URI::tn3270 5.10
-      URI::urn 5.10
-      URI::urn::isbn 5.10
-      URI::urn::oid 5.10
+      URI 5.11
+      URI::Escape 5.11
+      URI::Heuristic 5.11
+      URI::IRI 5.11
+      URI::QueryParam 5.11
+      URI::Split 5.11
+      URI::URL 5.11
+      URI::WithBase 5.11
+      URI::data 5.11
+      URI::file 5.11
+      URI::file::Base 5.11
+      URI::file::FAT 5.11
+      URI::file::Mac 5.11
+      URI::file::OS2 5.11
+      URI::file::QNX 5.11
+      URI::file::Unix 5.11
+      URI::file::Win32 5.11
+      URI::ftp 5.11
+      URI::gopher 5.11
+      URI::http 5.11
+      URI::https 5.11
+      URI::ldap 5.11
+      URI::ldapi 5.11
+      URI::ldaps 5.11
+      URI::mailto 5.11
+      URI::mms 5.11
+      URI::news 5.11
+      URI::nntp 5.11
+      URI::nntps 5.11
+      URI::pop 5.11
+      URI::rlogin 5.11
+      URI::rsync 5.11
+      URI::rtsp 5.11
+      URI::rtspu 5.11
+      URI::sftp 5.11
+      URI::sip 5.11
+      URI::sips 5.11
+      URI::snews 5.11
+      URI::ssh 5.11
+      URI::telnet 5.11
+      URI::tn3270 5.11
+      URI::urn 5.11
+      URI::urn::isbn 5.11
+      URI::urn::oid 5.11
     requirements:
       Carp 0
       Cwd 0
