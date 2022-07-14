@@ -44,6 +44,9 @@
   <p class="pod-error">Error rendering POD for <code>[% $module.name %]</code> - [% $pod_error %]</p>
   %%  }
   %%  else {
+  %%    my $release_base = $permalinks || $release.status != 'latest'
+  %%      ? '/release/' ~ $release.author ~ '/' ~ $release.name
+  %%      : '/dist/' ~ $release.distribution;
   <p class="pod-error">
     No POD found for <code>[% $module.name %]</code>.
     Time to <a href="[% $release_base %]/source/[% $module.path %]">read the source</a>?
