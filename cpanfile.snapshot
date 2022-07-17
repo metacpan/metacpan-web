@@ -5658,50 +5658,53 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.014000
-    pathname: T/TO/TOBYINK/Type-Tiny-1.014000.tar.gz
+  Type-Tiny-1.016000
+    pathname: T/TO/TOBYINK/Type-Tiny-1.016000.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.014000
-      Devel::TypeTiny::Perl58Compat 1.014000
-      Error::TypeTiny 1.014000
-      Error::TypeTiny::Assertion 1.014000
-      Error::TypeTiny::Compilation 1.014000
-      Error::TypeTiny::WrongNumberOfParameters 1.014000
-      Eval::TypeTiny 1.014000
-      Reply::Plugin::TypeTiny 1.014000
-      Test::TypeTiny 1.014000
-      Type::Coercion 1.014000
-      Type::Coercion::FromMoose 1.014000
-      Type::Coercion::Union 1.014000
-      Type::Library 1.014000
-      Type::Params 1.014000
-      Type::Parser 1.014000
+      Devel::TypeTiny::Perl56Compat 1.016000
+      Devel::TypeTiny::Perl58Compat 1.016000
+      Error::TypeTiny 1.016000
+      Error::TypeTiny::Assertion 1.016000
+      Error::TypeTiny::Compilation 1.016000
+      Error::TypeTiny::WrongNumberOfParameters 1.016000
+      Eval::TypeTiny 1.016000
+      Reply::Plugin::TypeTiny 1.016000
+      Test::TypeTiny 1.016000
+      Type::Coercion 1.016000
+      Type::Coercion::FromMoose 1.016000
+      Type::Coercion::Union 1.016000
+      Type::Library 1.016000
+      Type::Params 1.016000
+      Type::Params::Coderef 1.016000
+      Type::Params::Parameter 1.016000
+      Type::Params::Signature 1.016000
+      Type::Parser 1.016000
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.014000
-      Type::Tiny 1.014000
-      Type::Tiny::Class 1.014000
-      Type::Tiny::ConstrainedObject 1.014000
-      Type::Tiny::Duck 1.014000
-      Type::Tiny::Enum 1.014000
-      Type::Tiny::Intersection 1.014000
-      Type::Tiny::Role 1.014000
-      Type::Tiny::Union 1.014000
-      Type::Utils 1.014000
-      Types::Common::Numeric 1.014000
-      Types::Common::String 1.014000
-      Types::Standard 1.014000
-      Types::Standard::ArrayRef 1.014000
-      Types::Standard::CycleTuple 1.014000
-      Types::Standard::Dict 1.014000
-      Types::Standard::HashRef 1.014000
-      Types::Standard::Map 1.014000
-      Types::Standard::ScalarRef 1.014000
-      Types::Standard::StrMatch 1.014000
-      Types::Standard::Tied 1.014000
-      Types::Standard::Tuple 1.014000
-      Types::TypeTiny 1.014000
+      Type::Registry 1.016000
+      Type::Tiny 1.016000
+      Type::Tiny::Class 1.016000
+      Type::Tiny::ConstrainedObject 1.016000
+      Type::Tiny::Duck 1.016000
+      Type::Tiny::Enum 1.016000
+      Type::Tiny::Intersection 1.016000
+      Type::Tiny::Role 1.016000
+      Type::Tiny::Union 1.016000
+      Type::Utils 1.016000
+      Types::Common::Numeric 1.016000
+      Types::Common::String 1.016000
+      Types::Standard 1.016000
+      Types::Standard::ArrayRef 1.016000
+      Types::Standard::CycleTuple 1.016000
+      Types::Standard::Dict 1.016000
+      Types::Standard::HashRef 1.016000
+      Types::Standard::Map 1.016000
+      Types::Standard::ScalarRef 1.016000
+      Types::Standard::StrMatch 1.016000
+      Types::Standard::Tied 1.016000
+      Types::Standard::Tuple 1.016000
+      Types::TypeTiny 1.016000
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
@@ -5786,53 +5789,53 @@ DISTRIBUTIONS
       strict 0
       warnings 0
       warnings::register 0
-  URI-5.10
-    pathname: O/OA/OALDERS/URI-5.10.tar.gz
+  URI-5.12
+    pathname: O/OA/OALDERS/URI-5.12.tar.gz
     provides:
-      URI 5.10
-      URI::Escape 5.10
-      URI::Heuristic 5.10
-      URI::IRI 5.10
-      URI::QueryParam 5.10
-      URI::Split 5.10
-      URI::URL 5.10
-      URI::WithBase 5.10
-      URI::data 5.10
-      URI::file 5.10
-      URI::file::Base 5.10
-      URI::file::FAT 5.10
-      URI::file::Mac 5.10
-      URI::file::OS2 5.10
-      URI::file::QNX 5.10
-      URI::file::Unix 5.10
-      URI::file::Win32 5.10
-      URI::ftp 5.10
-      URI::gopher 5.10
-      URI::http 5.10
-      URI::https 5.10
-      URI::ldap 5.10
-      URI::ldapi 5.10
-      URI::ldaps 5.10
-      URI::mailto 5.10
-      URI::mms 5.10
-      URI::news 5.10
-      URI::nntp 5.10
-      URI::nntps 5.10
-      URI::pop 5.10
-      URI::rlogin 5.10
-      URI::rsync 5.10
-      URI::rtsp 5.10
-      URI::rtspu 5.10
-      URI::sftp 5.10
-      URI::sip 5.10
-      URI::sips 5.10
-      URI::snews 5.10
-      URI::ssh 5.10
-      URI::telnet 5.10
-      URI::tn3270 5.10
-      URI::urn 5.10
-      URI::urn::isbn 5.10
-      URI::urn::oid 5.10
+      URI 5.12
+      URI::Escape 5.12
+      URI::Heuristic 5.12
+      URI::IRI 5.12
+      URI::QueryParam 5.12
+      URI::Split 5.12
+      URI::URL 5.12
+      URI::WithBase 5.12
+      URI::data 5.12
+      URI::file 5.12
+      URI::file::Base 5.12
+      URI::file::FAT 5.12
+      URI::file::Mac 5.12
+      URI::file::OS2 5.12
+      URI::file::QNX 5.12
+      URI::file::Unix 5.12
+      URI::file::Win32 5.12
+      URI::ftp 5.12
+      URI::gopher 5.12
+      URI::http 5.12
+      URI::https 5.12
+      URI::ldap 5.12
+      URI::ldapi 5.12
+      URI::ldaps 5.12
+      URI::mailto 5.12
+      URI::mms 5.12
+      URI::news 5.12
+      URI::nntp 5.12
+      URI::nntps 5.12
+      URI::pop 5.12
+      URI::rlogin 5.12
+      URI::rsync 5.12
+      URI::rtsp 5.12
+      URI::rtspu 5.12
+      URI::sftp 5.12
+      URI::sip 5.12
+      URI::sips 5.12
+      URI::snews 5.12
+      URI::ssh 5.12
+      URI::telnet 5.12
+      URI::tn3270 5.12
+      URI::urn 5.12
+      URI::urn::isbn 5.12
+      URI::urn::oid 5.12
     requirements:
       Carp 0
       Cwd 0
@@ -6091,7 +6094,7 @@ DISTRIBUTIONS
       XML::TreePP 0.43
     requirements:
       ExtUtils::MakeMaker 0
-      LWP 5.811
+      HTTP::Lite 0
       Test::More 0
   XString-0.005
     pathname: A/AT/ATOOMIC/XString-0.005.tar.gz
