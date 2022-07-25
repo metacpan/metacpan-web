@@ -253,19 +253,6 @@
             </div>
             <div class="row" style="padding: 50px 15px 30px">
             </div>
-            %%  if !$suppress_stickeryou {
-            <div class="row">
-              <div class="col-xs-18 col-xs-offset-3 col-md-6" style="padding-bottom: 20px">
-                As a valued partner and proud supporter of MetaCPAN, StickerYou
-                is happy to offer a 10% discount on all Custom Stickers,
-                Business Labels, Roll Labels, Vinyl Lettering or Custom Decals.
-                <a href="http://StickerYou.com" target="_blank"
-                rel="noopener">StickerYou.com</a> is your one-stop shop to make
-            your business stick. Use code <strong>METACPAN10</strong> at
-            checkout to apply your discount.
-              </div>
-            </div>
-            %%  }
         </div>
         <div class="modal fade" tabindex="-1" role="dialog" id="metacpan_keyboard-shortcuts">
           <div class="modal-dialog">

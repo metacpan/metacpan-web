@@ -120,9 +120,8 @@ sub content : Private {
     }
     $c->res->last_modified( $file->{date} );
     $c->stash( {
-        file                => $file,
-        template            => 'source.tx',
-        suppress_stickeryou => 1,
+        file     => $file,
+        template => 'source.tx',
     } );
 }
 
