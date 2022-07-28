@@ -3,9 +3,29 @@
 %%      rss       => $rss || '/news.rss',
 %%      rss_title => $rss_title || 'Recent MetaCPAN News',
 %%  }
+
+%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_content -> {
+[%-
+for [
+  [ '/about',                 'About MetaCPAN' ],
+  [ 'https://grep.metacpan.org/', 'grep::cpan'],
+  [ '/recent',         'Recent' ],
+  [ '/news',         'News' ],
+  [ '/about/faq',             'FAQ' ],
+  [ '/tools',             'Tools' ],
+  [ 'https://github.com/metacpan/metacpan-api/blob/master/docs/API-docs.md', 'API' ],
+  [ '/about/contact',         'Contact' ],
+] -> $l {
+%]
+<li class="[% if $current[$l.0] { 'active' } %]">
+    <a href="[% $l.0 %]">[% $l.1 %]</a>
+</li>
+%%  }
+%%  }
 %%  override content -> {
-<a class="news_feed" href="/news.rss"><i class="fa fa-rss fa-2x"></i></a>
 <div class="content news anchors">
+  <a class="news_feed" href="/news.rss"><i class="fa fa-rss fa-2x"></i></a>
 %%  block news | markdown -> {
 %%      $news
 %%  }

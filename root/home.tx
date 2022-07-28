@@ -13,7 +13,7 @@
     "@type": "WebSite",
     "name": "MetaCPAN",
     "url": "/",
-    "image": "/static/icons/metacpan-icon-large.png",
+    "image": "/static/images/dots.svg",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "/search?q={query}",
@@ -23,20 +23,24 @@
   }
 ]
 </script>
-<div align="center" class="home">
-  <a href="/" class="big-logo" alt="meta::cpan"></a>
-  <h4>A search engine for <a href="https://www.cpan.org">CPAN</a></h4>
-  <form action="/search">
-    <input type="hidden" name="size" id="metacpan_search-size" value="20">
-    <div class="form-group">
-        <input type="text" name="q" size="41" autofocus="autofocus" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control home-search-input">
+<div class="home">
+  <div class="home-hero">
+    <div class="hero-logo">
+      <img src="/static/images/logo-long.png" alt="MetaCPAN" />
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn search-btn">Search the CPAN</button>
-        <button type="submit" class="btn search-btn" name="lucky" value="1" title="Hint: Press shift and enter if you are feeling lucky">I'm Feeling Lucky</button>
-        <button class="btn search-btn help-btn">?</button>
-    </div>
-  </form>
-  <p class="helper_blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</p>
+    <form action="/search" class="search-form form-horizontal">
+       <input type="hidden" name="size" id="metacpan_search-size" value="20">
+      <div class="form-group">
+          <div class="search-group">
+            <i class="fa fa-search"></i>
+            <input type="text" name="q" placeholder="Search the CPAN" size="41" autofocus="autofocus" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control home-search-input">
+          </div>
+      </div>
+      <a href="#" class="keyboard-shortcuts">Keyboard Shortcuts</a>
+    </form>
+
+    <span class="helper-blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</span>
+  </div>
+
 </div>
 %%  }

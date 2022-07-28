@@ -10,8 +10,18 @@
     .box-shadow(2px 2px 5px #ccc);
 }
 
+.author-item {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+
+    i {
+        padding-right: 5px;
+    }
+}
+
 .author-pic {
-    text-align: center;
+    margin-bottom: 10px;
 
     span, strong {
         display: block;
@@ -56,6 +66,14 @@
     }
 }
 
+.user-profiles {
+    margin: 5px 0 20px 0;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
 @media (max-width: 480px) {
     .author-pic {
         > a {
@@ -68,6 +86,8 @@
 }
 
 #metacpan_feed_subscription {
+    padding-top: 40px;
+
     &.page-header {
         margin: 0 0 5px;
         font-weight: bold;

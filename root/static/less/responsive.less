@@ -95,7 +95,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: @screen-sm-max) {
     .navbar {
         position: fixed;
         right: 0;
@@ -105,29 +105,13 @@
         margin-bottom: 0;
     }
 
-    .navbar-default {
-        height: 29px;
-    }
-
-    body {
-        padding-top: 40px;
-    }
-
     .row {
         margin-right: 0px;
         margin-left: 0px;
     }
 
-    .container-fluid {
-        padding: 0 5px 5px 5px;
-    }
-
     .navbar-inner, .navbar-inner .container-fluid {
         padding: 0px;
-    }
-
-    .navbar-nav.navbar-right:last-child {
-        margin-right: 0px;
     }
 
     .home {
@@ -135,7 +119,6 @@
     }
 
     body .home #metacpan_search-input {
-        width: 93%;
         font-size: 1.4em;
     }
 
@@ -149,8 +132,7 @@
 @import "bootstrap-slidepanel.less";
 
     .slidepanel {
-        margin-top: 32px;
-        background-color: #fff;
+        margin-top: 80px;
         padding: 10px;
         border-right: 1px solid #e5e5e5;
         line-height: 25px;
@@ -174,18 +156,14 @@
         }
     }
 
-    .nav-stacked > li {
-        line-height: 8px;
-    }
-
-    .nav-pills > li.active > a {
+   .nav-pills > li.active > a {
         width: 95%;
     }
 
     .content {
         margin-left: 0px;
         border-left-width: 0px;
-        padding: 0px;
+        padding: 0 20px 20px 20px;
     }
 
     .table td, .table th {

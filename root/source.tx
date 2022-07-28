@@ -16,29 +16,29 @@
   %%  include inc::release_status { maturity => $maturity }
   <li class="nav-header">Tools</li>
   <li>
-    <a data-keyboard-shortcut="g d" href="/release/[% $file.author %]/[% $file.release %]"><i class="fa fa-info-circle fa-fw black"></i>Release Info</a>
+    <a data-keyboard-shortcut="g d" href="/release/[% $file.author %]/[% $file.release %]">Release Info</a>
   </li>
   %%  if $file.documentation {
   <li>
-    <a href="/pod/[% $file.documentation %]"><i class="fa fa-book fa-fw black"></i>Module Documentation</a>
+    <a href="/pod/[% $file.documentation %]">Module Documentation</a>
   </li>
   %%  }
   %%  else if $file.slop {
   <li>
-    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]"><i class="fa fa-book fa-fw black"></i>Documentation View</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]">Documentation View</a>
   </li>
   %%  }
   <li>
-    <a data-keyboard-shortcut="g a" href="/author/[% $file.author %]"><i class="fa fa-user fa-fw black"></i>Author</a>
+    <a data-keyboard-shortcut="g a" href="/author/[% $file.author %]">Author</a>
   </li>
   <li>&nbsp;</li>
-  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]"><i class="fa fa-file-alt fa-fw black"></i>Raw code</a></li>
-  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ $file.path %]"><i class="fa fa-link fa-fw black"></i>Permalink</a></li>
+  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">Raw code</a></li>
+  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ $file.path %]">Permalink</a></li>
   <li>
-    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ $file.path %]?download=1"><i class="fa fa-download fa-fw black"></i>Download</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ $file.path %]?download=1">Download</a>
   </li>
   %%  if $file.sloc {
-  <li><button class="btn-link pod-toggle pod-hidden" onclick="togglePod()"><i class="fa fa-exchange-alt fa-fw black"></i><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>
+  <li><button class="btn-link pod-toggle pod-hidden" onclick="togglePod()"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>
   %%  }
   <li class="nav-header">Info</li>
   <li>[% $file.sloc %] lines of code</li>

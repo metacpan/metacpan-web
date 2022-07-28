@@ -61,7 +61,7 @@
                             <div class="input-group">
                                 <input type="email" class="form-control" name="email" value="[% $author.email.0 %]" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" type="button" onclick="return addField('email')">add</button>
+                                    <button class="btn btn-primary search-btn" type="button" onclick="return addField('email')">add</button>
                                 </span>
                             </div>
                             %%  for $author.email -> $email {
@@ -69,7 +69,7 @@
                             <div class="input-group">
                                 <input type="email" class="form-control" name="email" value="[% $email %]" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" type="button" onclick="return removeDiv(this)">remove</button>
+                                    <button class="btn btn-primary search-btn" type="button" onclick="return removeDiv(this)">remove</button>
                                 </span>
                             </div>
                             %%  }
@@ -83,7 +83,7 @@
                             <div class="input-group">
                                 <input type="url" class="form-control" name="website" value="[% $author.website.0 %]" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" type="button" onclick="return addField('website')">add</button>
+                                    <button class="btn btn-primary search-btn" type="button" onclick="return addField('website')">add</button>
                                 </span>
                             </div>
                             %%  for $author.website -> $website {
@@ -91,7 +91,7 @@
                             <div class="input-group">
                                 <input type="url" class="form-control" name="website" value="[% $website %]" />
                                 <span class="input-group-btn">
-                                    <button class="btn search-btn" type="button" href="" onclick="return removeDiv(this)">remove</a></button>
+                                    <button class="btn btn-primary search-btn" type="button" href="" onclick="return removeDiv(this)">remove</a></button>
                                 </span>
                             </div>
                             %%  }
@@ -173,7 +173,7 @@
                         <input class="input-small form-control" type="text" placeholder="Latitude" name="latitude" value="[% $author.location.0 %]" />
                         <input class="input-small form-control" type="text" placeholder="Longitude" name="longitude" value="[% $author.location.1 %]" />
                         <span class="input-group-btn">
-                            <button class="btn search-btn" type="button" onclick="return fillLocation()">locate me</button>
+                            <button class="btn btn-primary search-btn" type="button" onclick="return fillLocation()">locate me</button>
                         </span>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                             <span class="input-group-btn">
                             <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-alt"></i> remove</a>
                             %%  if $known {
-                            <a href="" class="btn search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square"></i> check</a>
+                            <a href="" class="btn btn-primary search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square"></i> check</a>
                             </span>
                             %%  }
                         </div>
@@ -244,7 +244,7 @@
         <textarea name="extra" class="form-control" rows="10" onkeyup="validateJSON(this)">[% $author.extra.json_pretty() %]</textarea><div class="valid">invalid</div>
     </fieldset>
     <br />
-    <input type="submit" value="Save Profile" class="btn btn-large search-btn" />
+    <input type="submit" value="Save Profile" class="btn btn-primary btn-large search-btn" />
     </form>
     %%  }
 </div>
@@ -272,7 +272,7 @@ function addProfile(select) {
         + '<input type="text" class="form-control" name="profile.id" /> '
         + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-alt"></i> remove</a> ';
     if (value) {
-        html += '<a href="" class="btn search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square"></i> check</a>';
+        html += '<a href="" class="btn btn-primary search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square"></i> check</a>';
     }
 
     html += '</span></div></div></div>';
@@ -313,7 +313,7 @@ function validateJSON(text) {
 function addField(id) {
     var input = $('input[name="' + id + '"]').last();
     var container = input.parent().parent();
-    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button type="button" class="btn search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
+    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button type="button" class="btn btn-primary search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
     var add = container.children().last();
     add.slideDown();
     return false;

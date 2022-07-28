@@ -1,25 +1,61 @@
+.page-home .nav-list-container {
+    display: none;
+}
+
+.page-home .page-content {
+    align-items: center;
+    display: flex;
+    grid-template-areas: 'content';
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+.page-home .menu-items {
+    visibility: hidden;
+}
+
 .home {
-    padding: 40px 0 50px;
+    display: grid;
+
+    .home-hero {
+      display: grid;
+      margin: auto;
+      max-width: 800px;
+      padding: 20px;
+      place-content: center;
+    }
+
+    .hero-logo {
+        margin-bottom: 40px;
+
+        img {
+          display: grid;
+          margin: auto;
+          max-width: 400px;
+          width: 80%;
+        }
+    }
 
     .btn {
         font-size: 1.2em;
     }
 
-    .helper_blurb {
+    .helper-blurb {
+        background-color: #F2F4F4;
+        border-radius: 5px;
+        box-shadow: 0 1px 13px 0 rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
         font-weight: bold;
-        width: 480px;
+        margin-top: 20px;
+        padding: 20px;
+        text-align: center;
     }
 
     #metacpan_search-input {
-        width: 400px;
-        margin: 0px;
-        height: 30px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
         font-size: 1.4em;
-    }
-
-    .home-hint {
-        color: @headings-small-color;
-        margin-bottom: 5px;
+        padding-left: 50px;
+        height: 60px;
+        width: 100%;
     }
 
     .form-group {
@@ -38,6 +74,7 @@
     }
 
     form {
+        display: grid;
         margin-bottom: 20px;
     }
 
@@ -47,19 +84,17 @@
         font-size: 120%;
     }
 
-    .sponsor-grid {
-        margin: 10px;
-
-        img {
-            height: 30px;
-        }
-
-        a {
-            display: block;
-            margin: 10px 0;
-            line-height: 30px;
-        }
+    .keyboard-shortcuts {
+        justify-self: end;
+        margin-top: 10px;
     }
+}
+
+ .sponsor-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    place-content: center;
 }
 
 .metahack-platinum {
