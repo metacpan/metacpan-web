@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     $(".ttip").tooltip();
 
-    $('.help-btn').each(function() {
+    $('.keyboard-shortcuts').each(function() {
         $(this).click(function(event) {
             $('#metacpan_keyboard-shortcuts').modal();
             event.preventDefault();
@@ -191,25 +191,6 @@ $(document).ready(function() {
     });
 
     $('.relatize').relatizeDate();
-
-    // Search box: Feeling Lucky? Shift+Enter
-    $('#metacpan_search-input').keydown(function(event) {
-        if (event.keyCode == '13' && event.shiftKey) {
-            event.preventDefault();
-
-            /* To make this a lucky search we have to create a new
-             * <input> element to pass along lucky=1.
-             */
-            var luckyField = document.createElement("input");
-            luckyField.type = 'hidden';
-            luckyField.name = 'lucky';
-            luckyField.value = '1';
-
-            var form = event.target.form;
-            form.appendChild(luckyField);
-            form.submit();
-        }
-    });
 
     // Autocomplete issues:
     // #345/#396 Up/down keys should put selected value in text box for further editing.

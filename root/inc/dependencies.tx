@@ -1,4 +1,4 @@
-<ul class="nav-list box-right hidden-phone dependencies">
+<ul class="hidden-phone dependencies">
   <li class="nav-header">Dependencies</li>
   %%  my $deps = $release.dependency.map( -> $dep {
   %%    $dep.phase == 'runtime' && $dep.relationship == 'requires' && $dep.module != 'perl' ? $dep.module : ''
@@ -17,12 +17,12 @@
   %%  }
   <li><hr /></li>
   <li>
-    <a href="[% $module ? '/module/' ~ ($module.documentation || $module.module.0.name ) : '/dist/' ~ $release.distribution %]/requires"><i class="fa fa-share fa-fw black"></i>Reverse dependencies</a>
+    <a href="[% $module ? '/module/' ~ ($module.documentation || $module.module.0.name ) : '/dist/' ~ $release.distribution %]/requires">Reverse dependencies</a>
   </li>
   <li>
-    <a href="http://deps.cpantesters.org/?module=[% $module.documentation || $module.module.0.name || $release.main_module %]"><i class="fa fa-retweet fa-fw black"></i>CPAN Testers List</a>
+    <a href="http://deps.cpantesters.org/?module=[% $module.documentation || $module.module.0.name || $release.main_module %]">CPAN Testers List</a>
   </li>
   <li>
-    <a href="https://cpandeps.grinnz.com/?dist=[% $release.distribution | uri %][% if $permalinks || $release.status != 'latest' { %]&amp;dist_version=[% $release.version | uri %][% } %]"><i class="fa fa-asterisk fa-fw black"></i>Dependency graph</a>
+    <a href="https://cpandeps.grinnz.com/?dist=[% $release.distribution | uri %][% if $permalinks || $release.status != 'latest' { %]&amp;dist_version=[% $release.version | uri %][% } %]">Dependency graph</a>
   </li>
 </ul>

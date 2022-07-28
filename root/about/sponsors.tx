@@ -6,7 +6,7 @@
     <div class="sponsor">
         <table>
             <tr>
-                <td width="15%">
+                <td>
                     <a href="https://www.fastly.com/" target="_blank" rel="noopener">
                         <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51>
                     </a>
@@ -177,7 +177,7 @@
 
             <tr>
                 <td>
-                  <a href="https://cpanel.com/"><img src="/static/images/sponsors/cpanel.png" width="180"></a>
+                  <a href="https://cpanel.com/"><img src="/static/images/sponsors/cpanel.png" width="100"></a>
                 </td>
                 <td style="vertical-align: middle;">
                   <p>

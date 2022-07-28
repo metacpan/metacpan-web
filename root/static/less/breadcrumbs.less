@@ -1,7 +1,14 @@
 .breadcrumbs {
+    column-gap: 5px;
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 5px;
+    display: flex;
+    grid-area: breadcrumbs;
+    flex-wrap: wrap;
+    justify-self: center;
+    max-width: 900px;
+    padding: 20px 20px 0 20px;
+    width: 100%;
 
     a.latest i {
         margin: 2px 5px 2px 0;
@@ -51,4 +58,10 @@
     }
 
     margin-bottom: 0.7em;
+}
+
+@media only screen and (min-width: @screen-sm-max) {
+  .breadcrumbs {
+    padding: 40px 40px 20px 40px;
+  }
 }

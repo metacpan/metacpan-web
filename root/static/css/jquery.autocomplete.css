@@ -2,27 +2,27 @@
   padding: 0px;
   border: 1px solid #ccc;
   background-color: white;
-  z-index: 99999; 
-  cursor: default; 
-  overflow-x: hidden; 
-  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
-  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
-  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
+  z-index: 99999;
+  cursor: default;
+  overflow-x: hidden;
+  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
   font-family: arial, sans-serif;
-  font-size: 18px;  
+  font-size: 18px;
  }
 
- .autocomplete-suggestions strong { 
-  font-weight: bold; 
-  color: #000000; 
+ .autocomplete-suggestions strong {
+  font-weight: bold;
+  color: #000000;
 }
 
-.autocomplete-suggestion { 
+.autocomplete-suggestion {
   margin: 0px;
   padding: 2px 5px;
-  display: block; 
-  white-space: nowrap; 
-  overflow: hidden; 
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .autocomplete-suggestion-description {
@@ -30,8 +30,8 @@
   margin-left: 10px;
 }
 
-div.autocomplete-suggestions div:nth-child(2n+2) { 
-  background: #f9f9f9; 
+div.autocomplete-suggestions div:nth-child(2n+2) {
+  background: #f9f9f9;
 }
 
 /* The !important is required to override the alternating row background. */
@@ -43,7 +43,7 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
 }
 /* Use two classs (and place after) to increase priority over the above hover style. */
 .autocomplete-suggestion.autocomplete-selected {
-  background: #BAD3EA !important; 
+  background: #BAD3EA !important;
 }
 
 /*

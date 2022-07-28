@@ -48,119 +48,115 @@
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-            %% if ! $current['/'] {
-                <li class="visible-xs">
-                <a href="#" data-toggle="slidepanel" data-target=".slidepanel">
-                  <i class="fa fa-bars icon-slidepanel"></i>
-                </a>
-                </li>
-            %% }
-                [%-
-                    my $menu = [
-                        {
-                            title   => "Home",
-                            path    => ["/", "/search"],
-                            image   => "/static/icons/metacpan-icon.png",
-                            alt     => "MetaCPAN icon",
-                        },
-                        {
-                            title   => "grep::cpan",
-                            path    => ["https://grep.metacpan.org/"],
-                            icon    => "fa fa-search",
-                        },
-                        {
-                            title   => "Recent",
-                            path    => ["/recent"],
-                            icon    => "fa fa-history",
-                        },
-                        {
-                            title   => "About",
-                            path    => ["/about"],
-                            class   => 'hidden-xs',
-                            icon    => "fa fa-info",
-                        },
-                        {
-                            title   => "FAQ",
-                            path    => ["/about/faq"],
-                            class   => 'hidden-xs',
-                            icon    => "fa fa-question",
-                        },
-                        {
-                            title   => "GitHub Issues",
-                            path    => ["https://github.com/metacpan/metacpan-web/issues"],
-                            class   => 'hidden-xs',
-                            icon    => "fab fa-github-alt",
-                        },
-                        {
-                            title   => "News",
-                            path    => ["/news"],
-                            class   => 'hidden-xs',
-                            icon    => "fa fa-newspaper",
-                        },
-                        {
-                            title   => "Tools",
-                            path    => ["/tools"],
-                            class   => 'hidden-xs',
-                            icon    => "fa fa-wrench",
-                        },
-                        {
-                            title   => "API",
-                            path    => ["https://fastapi.metacpan.org/"],
-                            class   => 'hidden-xs',
-                            icon    => "fa fa-database",
-                        },
-                    ];
-                    -%]
-                    %%  for $menu -> $item {
-                    %%      my $active = $item.path.map(-> $p { $current[$p] ? 'active' : '' }).join('');
-                    <li class="[% $active || $item.class %]">
-                        <a href="[% $item.path.0 %]">
-                            [%- if $item.icon { %]<i class="[% $item.icon %]"></i>[% } %]
-                            [%- if $item.image { %]<img src="[% $item.image %]" [%- if $item.alt { %] alt="[% $item.alt %]"[% } %]/>[% } -%]
-                            [% $item.title -%]
-                        </a>
-                    </li>
-                    %% }
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form action="/account/logout" method="POST" id="metacpan-logout"></form>
-                    <li class="dropdown logged_in" style="display: none;">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Account
-                        <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/account/identities">Identities</a></li>
-                            <li><a href="/account/profile">Profile</a></li>
-                            <li><a href="/account/favorite/list">Favorites</a></li>
-                            <li>
-                                <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown logged_out" style="display: none;">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Sign in
-                        <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            %%  for ['GitHub', 'Twitter', 'Google'] -> $identity {
-                            <li>
-                                <a href="/login/[% $identity.lc() %]">
-                                    <i class="fab fa-[% $identity.lc() %] fa-fw"></i>
-                                    [% $identity %]
-                                </a>
-                            </li>
-                            %%  }
-                        </ul>
-                    </li>
-                </ul>
+            <div class="header-logo-large hidden-xs">
+              <a href="/" tabindex="0">
+                <img src="/static/images/logo-long.png" alt="MetaCPAN" />
+              </a>
             </div>
+            <div class="header-logo-icon visible-xs">
+              <a href="/">
+                <img src="/static/images/dots.svg" alt="MetaCPAN" />
+              </a>
+            </div>
+            <ul class="nav navbar-nav menu-items hidden-xs hidden-sm">
+            [%-
+                my $menu = [
+                    {
+                        title   => "About",
+                        path    => ["/about"],
+                    },
+                    {
+                        title   => "grep::cpan",
+                        path    => ["https://grep.metacpan.org/"],
+                    },
+                    {
+                        title   => "Recent",
+                        path    => ["/recent"],
+                    },
+                    {
+                        title   => "News",
+                        path    => ["/news"],
+                    },
+                    {
+                        title   => "FAQ",
+                        path    => ["/about/faq"],
+                    },
+                    {
+                        title   => "Tools",
+                        path    => ["/tools"],
+                    },
+                    {
+                        title   => "API",
+                        path    => ["https://fastapi.metacpan.org/"],
+                    },
+                ];
+            -%]
+            %%  for $menu -> $item {
+            %%      my $active = $item.path.map(-> $p { $current[$p] ? 'active' : '' }).join('');
+              <li class="[% $active || $item.class %]">
+                  <a href="[% $item.path.0 %]">
+                      [%- if $item.icon { %]<i class="[% $item.icon %]"></i>[% } %]
+                      [%- if $item.image { %]<img src="[% $item.image %]" [%- if $item.alt { %] alt="[% $item.alt %]"[% } %]/>[% } -%]
+                      [% $item.title -%]
+                  </a>
+              </li>
+            %% }
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <button type="button" class="searchbar-btn visible-xs visible-sm">
+                    <i class="fa fa-search"></i>
+                </button>
+                <form action="/search" class="searchbar-form visible-md visible-lg search-form form-horizontal">
+                   <input type="hidden" name="size" id="metacpan_search-size" value="20">
+                  <div class="form-group">
+                      <div class="search-group">
+                        <i class="fa fa-search"></i>
+                        <input type="text" name="q" size="41" autofocus="autofocus" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control">
+                      </div>
+                  </div>
+                </form>
+                <form action="/account/logout" method="POST" id="metacpan-logout"></form>
+                <li class="dropdown logged_in" style="display: none;">
+                    <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/account/identities">Identities</a></li>
+                        <li><a href="/account/profile">Profile</a></li>
+                        <li><a href="/account/favorite/list">Favorites</a></li>
+                        <li>
+                            <a href="#" type="button" onclick="$('#metacpan-logout').submit(); return false">
+                              Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown logged_out" style="display: none;">
+                    <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        %%  for ['GitHub', 'Twitter', 'Google'] -> $identity {
+                        <li>
+                            <a href="/login/[% $identity.lc() %]">
+                                <i class="fab fa-[% $identity.lc() %] fa-fw"></i>
+                                [% $identity %]
+                            </a>
+                        </li>
+                        %%  }
+                    </ul>
+                </li>
+                %% if ! $current['/'] {
+                    <li class="visible-xs visible-sm">
+                      <button data-toggle="slidepanel" data-target=".slidepanel">
+                        <i class="fa fa-bars icon-slidepanel"></i>
+                      </button>
+                    </li>
+                %% }
+            </ul>
         </nav>
 
-        <div class="container-fluid [% $page_class %]">
+        <div class="page-content [% $page_class %]">
 
         %%  if $site_alert_message {
             <div class="row">
@@ -171,110 +167,91 @@
         %%  }
 
         %%  block full_content -> {
-        %%  block search_bar -> {
-            <div class="row hidden-phone">
-                <div class="head-small-logo col-md-3">
-                    <a href="/" class="small-logo"></a>
-                </div>
-                <div class="col-md-9">
-                    <form action="/search" class="search-form form-horizontal">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" name="q" size="41" id="metacpan_search-input" class="form-control" value="[% $search_query %]">
-                                <span class="input-group-btn">
-                                    <button class="btn search-btn" type="submit">Search</button>
-                                    <button class="btn search-btn help-btn">?</button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                  %%  block left_nav -> {
+                    <div class="nav-list-container slidepanel">
+                      <ul class="nav-list [% block left_nav_classes -> { } %]">
+                          %% block left_nav_content -> {}
+                      </ul>
+                    </div>
+                  %%  }
+                  %%  block breadcrumbs -> { }
+                  %%  block content -> { }
         %%  }
-
-            <div class="row">
-                <div class="main-content col-md-12">
-                    %%  block breadcrumbs -> { }
-                    %%  block left_nav -> {
-                    <ul class="nav-list slidepanel [% block left_nav_classes -> { } %]">
-                        <li class="visible-xs">
-                            %% include mobile::toolbar_search_form
-                        </li>
-                        %% block left_nav_content -> {}
-                    </ul>
-                    %%  }
-                    %%  block content -> { }
+        </div>
+        <footer class="footer">
+            <div class="footer-container">
+              <div class="footer-social">
+                <div class="footer-link footer-logo">
+                  <a href="/">
+                    <img src="/static/images/logo-long-white.png" alt="MetaCPAN" />
+                  </a>
                 </div>
-            </div>
-        %%  }
-
-            <div class="row footer">
-                <div class="hidden-xs hidden-sm col-md-2">&nbsp;</div>
-                <div class="col-xs-2 col-sm-1 col-md-1" style="text-align: center">
-                    <a href="https://fastapi.metacpan.org">API</a>
+                <a class="footer-social-link" href="https://github.com/metacpan">
+                  <i class="fab fa-github-square"></i>
+                </a>
+                <a class="footer-social-link" href="https://twitter.com/metacpan">
+                  <i class="fab fa-twitter-square"></i>
+                </a>
+              </div>
+              <div class="footer-links">
+                <div class="footer-link">
+                    <a href="/about">About</a>
                 </div>
-                <div class="col-xs-5 col-sm-3 col-md-2" style="text-align: center">
-                    <a href="/about">About MetaCPAN</a>
+                <div class="footer-link">
+                    <a href="https://grep.metacpan.org">grep::cpan</a>
                 </div>
-                <div class="hidden-xs col-sm-3 col-md-2" style="text-align: center">
-                    <a href="https://github.com/metacpan/metacpan-web">Fork metacpan.org</a>
+                <div class="footer-link">
+                    <a href="/recent">Recent</a>
                 </div>
-                <div class="hidden-xs col-sm-1 col-md-1" style="text-align: center">
+                <div class="footer-link">
+                    <a href="/news">News</a>
+                </div>
+                <div class="footer-link">
+                    <a href="about/faq">FAQ</a>
+                </div>
+                <div class="footer-link">
+                    <a href="/tools">Tools</a>
+                </div>
+                <div class="footer-link">
+                    <a href="https://fastapi.metacpan.org/">API</a>
+                </div>
+                <div class="footer-link">
                     <a href="https://www.perl.org/">Perl.org</a>
                 </div>
-            </div>
-
-            <div class="row" style="padding: 50px 15px 30px">
-              <div class="col-xs-9 col-md-2 col-md-offset-2" style="padding-top:0px">
-                <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
-                </a>
               </div>
-              <div class="col-xs-9 col-md-2" style="padding:0px">
-                <a target="_blank" href="https://www.liquidweb.com/" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
+              <div class="footer-sponsors">
+                <a class="footer-sponsor-link" target="_blank" href="https://www.bytemark.co.uk/" rel="noopener">
+                  <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
                 </a>
-              </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:8px">
-                <a target="_blank" href="https://www.yellowbot.com/" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/yellowbot-small.png" alt="YellowBot logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener">
+                  <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
                 </a>
-              </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:5px">
-                <a href="https://www.fastly.com/" target="_blank" rel="noopener">
-                  <img src="/static/images/sponsors/fastly_logo.svg" width=110 height=51 alt="Fastly logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
+                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.webp" alt="Deriv logo">
                 </a>
-              </div>
-            </div>
-            <div>
-              <div class="col-xs-9 col-md-2 col-md-offset-2" style="padding-top:30px">
-                <a href="https://deriv.com/careers/" target="_blank" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg" alt="Deriv logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://www.yellowbot.com/" rel="noopener">
+                  <img class="footer-sponsor-yellowbot" src="/static/images/sponsors/yellowbot.png" alt="YellowBot logo">
                 </a>
-              </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:0px">
-                <a href="https://opencagedata.com" target="_blank" rel="noopener">
-                  <img width="170" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener">
+                  <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
                 </a>
-              </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:5px">
-                <a href="https://geocode.xyz" target="_blank" rel="noopener">
-                  <img height="80" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener">
+                  <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly logo">
                 </a>
-              </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:5px">
-                <a href="https://www.topbargains.com.au" target="_blank" rel="noopener">
-                  <img height="80" src="/static/images/sponsors/TopBargains_Australian_Coupons.png" alt="TobBargains Australia logo">
+                <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener">
+                  <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
+                </a>
+                <a class="footer-sponsor-link" target="_blank" href="https://www.topbargains.com.au" rel="noopener">
+                  <img class="footer-sponsor-topbargains" src="/static/images/sponsors/TopBargains_Australian_Coupons.png" alt="TobBargains Australia logo">
                 </a>
               </div>
             </div>
-            <div class="row" style="padding: 50px 15px 30px">
-            </div>
-        </div>
+        </footer>
         <div class="modal fade" tabindex="-1" role="dialog" id="metacpan_keyboard-shortcuts">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Keyboard Shortcuts</h4>
               </div>
               <div class="modal-body row">

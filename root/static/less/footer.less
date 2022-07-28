@@ -1,0 +1,122 @@
+.footer {
+  background-color: @gray-darker;
+  bottom: 0;
+  flex-shrink: 0;
+  padding: 30px;
+  width: 100%;
+}
+
+.footer-container {
+  display: grid;
+  column-gap: 20px;
+  grid-template-areas:
+    'links'
+    'sponsors'
+    'social';
+}
+
+.footer-links {
+  grid-area: links;
+}
+
+.footer-links,
+.footer-sponsors {
+  display: flex;
+  column-gap: 20px;
+  flex-wrap: wrap;
+  justify-self: center;
+  place-content: center;
+  row-gap: 5px;
+}
+
+.footer-link a {
+  color: @body-bg;
+  font-size: 1.1em;
+}
+
+.footer-social {
+  column-gap: 20px;
+  display: grid;
+  grid-area: social;
+  grid-template-areas:
+    'meta meta'
+    'github twitter';
+  justify-self: center;
+  margin-top: 20px;
+
+  .footer-social-link {
+    color: @body-bg;
+    font-size: 30px;
+
+    &:first-of-type {
+      justify-self: end;
+    }
+  }
+}
+
+.footer-sponsors {
+  grid-area: sponsors;
+  margin-top: 20px;
+
+  .footer-sponsor-link {
+    display: grid;
+    place-content: center;
+  }
+
+  .footer-sponsor-deriv {
+    width: 100px;
+  }
+
+  .footer-sponsor-bytemark{
+    width: 100px;
+  }
+
+  .footer-sponsor-liquidweb {
+    width: 130px;
+  }
+
+  .footer-sponsor-yellowbot {
+    width: 100px;
+  }
+
+  .footer-sponsor-fastly {
+    width: 70px;
+  }
+
+  .footer-sponsor-geocode {
+    width: 35px;
+  }
+
+  .footer-sponsor-topbargains {
+    width: 50px;
+  }
+
+  .footer-sponsor-opencage {
+    width: 100px;
+  }
+}
+
+.footer-logo {
+  grid-area: meta;
+
+  img {
+    width: 160px;
+  }
+}
+
+@media only screen and (min-width: @screen-sm-max) {
+  .footer-container {
+    grid-template-areas:
+      'social links'
+      'social sponsors';
+  }
+
+  .footer-links,
+  .footer-sponsors {
+    justify-self: start;
+  }
+
+  .footer-social {
+    margin-top: 0;
+  }
+}
