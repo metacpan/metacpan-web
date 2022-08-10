@@ -1,6 +1,5 @@
 ![test](https://github.com/metacpan/metacpan-web/workflows/test/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/metacpan/metacpan-web/badge.svg)](https://coveralls.io/r/metacpan/metacpan-web)
-[![Kritika Analysis Status](https://kritika.io/users/oalders/repos/4190324575950687/heads/master/status.svg)](https://kritika.io/users/oalders/repos/4190324575950687/heads/master/)
 
 <!-- vim-markdown-toc GFM -->
 
