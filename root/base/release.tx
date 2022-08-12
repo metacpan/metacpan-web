@@ -127,7 +127,7 @@
     %%  }
     %%  if $chat.web {
     <li class="chat-banner">
-      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Questions? Chat with us!</a></div>
+      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Chat with us!</a></div>
     </li>
     %%  }
     <li class="nav-header">Activity</li>

@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const searchBarInput = document.querySelector('.searchbar-form input[type="text"]');
   const searchBarHome = document.querySelector('.page-home .searchbar-form');
 
-  // Remove the searchbar from the navbar on the homepage because 
+  // Remove the searchbar from the navbar on the homepage because
   // it intereferes with the autocomplete-suggestions on the homepage search
   if (searchBarHome) {
     searchBarHome.remove();
