@@ -245,8 +245,6 @@ $(document).ready(function() {
     $('.autocomplete-suggestions').off('mouseover.autocomplete');
     $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
-    $('#metacpan_search-input.autofocus').focus();
-
     var items = $('.ellipsis');
     for (var i = 0; i < items.length; i++) {
         var element = items[i];
@@ -318,12 +316,12 @@ $(document).ready(function() {
     $('.dropdown-toggle').dropdown();
 
     function format_index(index) {
-        index.wrap('<div id="index-container"><div class="index-border"></div></div>');
+        index.wrap('<div id="index-container" class="pull-right"><div class="index-border"></div></div>');
         var container = index.parent().parent();
 
         var index_hidden = MetaCPAN.storage.getItem('hideTOC') == 1;
         index.before(
-            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]' + ' <button class="btn-link toggle-index-right"><i class="far fa-caret-square-right toggle-right"></i><i class="far fa-caret-square-left toggle-left"></i></button>' + '</div>');
+            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ] </div>');
 
         $('.toggle-index').on('click', function(e) {
             e.preventDefault();
@@ -331,15 +329,6 @@ $(document).ready(function() {
         });
         if (index_hidden) {
             container.addClass("hide-index");
-        }
-
-        $('.toggle-index-right').on('click', function(e) {
-            e.preventDefault();
-            MetaCPAN.storage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
-            container.toggleClass('pull-right');
-        });
-        if (MetaCPAN.storage.getItem('rightTOC') == 1) {
-            container.addClass("pull-right");
         }
     }
     var index = $("#index");
