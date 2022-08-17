@@ -8,7 +8,7 @@
 %%  }
 %%  override left_nav_lead -> {
   <li>
-    Distribution: [% $module.distribution %]</span>
+    Distribution: [% $module.distribution %]
   </li>
   %%  if $documented_module.version {
   <li>
