@@ -14,7 +14,7 @@
 %%  }
 %%  override left_nav_content -> {
   %%  include inc::release_status { maturity => $maturity }
-  <li class="nav-header">Tools</li>
+  <li class="nav-header no-margin-top">Tools</li>
   <li><a data-keyboard-shortcut="g d" href="/release/[% $author %]/[% $release %]">Release Info</a></li>
   <li><a data-keyboard-shortcut="g a" href="/author/[% $author %]">Author</a></li>
   <li><a href="[% $source_host %]/source/[% [$author, $release].merge($directory).join('/') %]">Raw browser</a></li>

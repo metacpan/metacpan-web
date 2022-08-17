@@ -39,13 +39,7 @@
     %%  my $release_base = $permalinks || $release.status != 'latest'
     %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
     %%    : '/dist/' ~ $release.distribution;
-    <div class="hidden-phone">
-      %%  include inc::author_pic { author => $author };
-      %%  include inc::contributors { contributors => $contributors };
-      %%  include inc::plussers { plussers => $plussers };
-      %%  include inc::dependencies { release => $release };
-    </div>
-    <li class="nav-header">
+    <li class="nav-header no-margin-top">
       <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released.">
       <span class="relatize">[% datetime($release.date).to_http %]</span>
     </li>
@@ -202,6 +196,9 @@
       </ul>
     </li>
     %%  }
+    <li>
+      %%  include inc::dependencies { release => $release };
+    </li>
     <li class="nav-header">Permalinks</li>
     <li>
       <a href="/release/[% $release.author %]/[% $release.name %][% if $module { '/view/' ~ $module.path } %]">This version</a>
@@ -214,6 +211,12 @@
     </li>
       %%  }
     %%  }
+    <li>
+      %%  include inc::plussers { plussers => $plussers };
+    </li>
+    <li>
+      %%  include inc::contributors { contributors => $contributors };
+    </li>
 %%  }
 %%  override content -> {
 
