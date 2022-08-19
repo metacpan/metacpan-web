@@ -112,16 +112,16 @@
     </thead>
     <tbody>
       <tr>
-        <td><em>module:</em> (e.g. <a href="/search?q=module%3APlugin">module:Plugin</a>)<td>
+        <td><em>module:</em> (e.g. <a href="/search?q=module%3APlugin">module:Plugin</a>)</td>
       </tr>
       <tr>
-        <td><em>distribution:</em> (e.g. <a href="/search?q=distribution%3ADancer+auth">distribution:Dancer auth</a>)<td>
+        <td><em>distribution:</em> (e.g. <a href="/search?q=distribution%3ADancer+auth">distribution:Dancer auth</a>)</td>
       </tr>
       <tr>
-        <td><em>author:</em> (e.g. <a href="/search?q=author%3ASONGMU+Redis">author:SONGMU Redis</a>)<td>
+        <td><em>author:</em> (e.g. <a href="/search?q=author%3ASONGMU+Redis">author:SONGMU Redis</a>)</td>
       </tr>
       <tr>
-        <td><em>version:</em> (e.g. <a href="/search?q=version%3A1.00">version:1.00</a>)<td>
+        <td><em>version:</em> (e.g. <a href="/search?q=version%3A1.00">version:1.00</a>)</td>
       </tr>
     </tbody>
   </table>
