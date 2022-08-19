@@ -319,14 +319,14 @@ community.
                 </td>
             </tr>
             <tr>
-                <td><a href="https://kritika.io"><img src="/static/images/sponsors/kritika.svg" class="image-responsive"></a></td>
+                <td><img src="/static/images/sponsors/kritika.svg" class="image-responsive"></td>
                 <td>
                     <p>
-                        <a href="https://kritika.io">Kritika.IO</a> sponsored
+                        Kritika.IO sponsored
                         <a href="/about/meta_hack">meta::hack v2</a> in 2017.
                     </p>
                     <p>
-                        <a href="https://kritika.io">Kritika.IO</a> automates your Perl code
+                        Kritika.IO automates your Perl code
                         review by adding it to your continuous integration. Find code style
                         violations, catch bugs, detect duplications, keep complexity to a
                         minimum, control test coverage and more! Enforce best practices and
