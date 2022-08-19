@@ -224,7 +224,7 @@
                 </div>
             </div>
 
-            <div class="row" style="padding: 50px 15px 30px">
+            <div class="row" style="padding: 50px 15px 10px">
               <div class="col-xs-9 col-md-2 col-md-offset-2" style="padding-top:0px">
                 <a href="https://www.bytemark.co.uk/r/metacpan.org/" target="_blank" rel="noopener">
                   <img width="170" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
@@ -246,13 +246,13 @@
                 </a>
               </div>
             </div>
-            <div>
-              <div class="col-xs-9 col-md-2 col-md-offset-4" style="padding-top:30px">
+            <div class="row" style="padding: 0px 15px 30px">
+              <div class="col-xs-12 col-md-4 col-md-offset-3" style="padding:30px 0px 30px 20px; margin-bot:20px;">
                 <a href="https://deriv.com/careers/" target="_blank" rel="noopener">
                   <img width="170" src="/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg" alt="Deriv logo">
                 </a>
               </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:0px">
+              <div class="col-xs-9 col-md-3">
                 <a href="https://www.topbargains.com.au" target="_blank" rel="noopener">
                   <img height="100" src="/static/images/sponsors/TopBargains_Australian_Coupons.png" alt="TobBargains Australia logo">
                 </a>
