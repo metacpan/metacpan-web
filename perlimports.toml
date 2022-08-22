@@ -1,0 +1,25 @@
+# Valid log levels are:
+# debug, info, notice, warning, error, critical, alert, emergency
+# critical, alert and emergency are not currently used.
+#
+# Please use boolean values in this config file. Negated options (--no-*) are
+# not permitted here. Explicitly set options to true or false.
+#
+# Some of these values deviate from the regular perlimports defaults. In
+# particular, you're encouraged to leave preserve_duplicates and
+# preserve_unused disabled.
+
+cache                           = false # setting this to true is currently discouraged
+ignore_modules                  = ["Catalyst::Runtime","Type::Library", "With::Roles"]
+ignore_modules_filename         = ""
+ignore_modules_pattern          = "" # regex like "^(Foo|Foo::Bar)"
+ignore_modules_pattern_filename = ""
+libs                            = ["lib", "t/lib"]
+log_filename                    = ""
+log_level                       = "warn"
+never_export_modules            = []
+never_export_modules_filename   = ""
+padding                         = true
+preserve_duplicates             = false
+preserve_unused                 = false
+tidy_whitespace                 = true

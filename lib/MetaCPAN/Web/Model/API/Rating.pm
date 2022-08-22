@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Model::API::Rating;
 use Moose;
 use namespace::autoclean;
-use Future;
+use Future ();
 
 extends 'MetaCPAN::Web::Model::API';
 

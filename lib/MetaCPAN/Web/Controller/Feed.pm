@@ -5,7 +5,6 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use DateTime::Format::ISO8601  ();
 use HTML::Escape               qw( escape_html );
 use MetaCPAN::Web::Types       qw( ArrayRef Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
@@ -244,7 +243,7 @@ sub build_feed {
         : $params{format} eq 'atom' ? 'Atom::Atom10'
         :                             die 'invalid format';
 
-    my $feed_class = "XML::FeedPP::$format";
+    my $feed_class = sprintf( '%s::%s', XML::FeedPP::, $format );
 
     my $feed = $feed_class->new;
     $feed->title( $params{title} );

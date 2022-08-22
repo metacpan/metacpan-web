@@ -3,9 +3,9 @@ use strict;
 use warnings;
 use parent qw(Text::Xslate::Bridge);
 
-use Text::Xslate::Util        qw(mark_raw);
+use Text::Xslate::Util        qw( mark_raw );
 use Number::Format            ();
-use Ref::Util                 qw(is_regexpref is_coderef);
+use Ref::Util                 qw( is_coderef is_regexpref );
 use Text::MultiMarkdown       ();
 use List::Util                ();
 use DateTime                  ();

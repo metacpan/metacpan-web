@@ -7,14 +7,14 @@ use warnings;
 
 # TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
 #
-use File::Basename;
-use Config::ZOMG ();
-use Log::Log4perl;
-use File::Spec;
-use File::Path ();
-use File::Find ();
-use Plack::Builder;
-use Digest::SHA;
+use File::Basename     ();
+use Config::ZOMG       ();
+use Log::Log4perl      ();
+use Log::Log4perl::MDC ();
+use File::Spec         ();
+use File::Path         ();
+use Plack::Builder     qw( builder enable );
+use Digest::SHA        ();
 
 my $root_dir;
 my $dev_mode;

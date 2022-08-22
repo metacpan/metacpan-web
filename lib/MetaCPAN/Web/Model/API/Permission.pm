@@ -1,12 +1,10 @@
 package MetaCPAN::Web::Model::API::Permission;
 
 use Moose;
-use Future;
+use Future     ();
 use List::Util qw( uniq );
 
 extends 'MetaCPAN::Web::Model::API';
-
-use MetaCPAN::Web::Model::API::Release ();
 
 =head1 NAME
 

@@ -1,6 +1,6 @@
 package MetaCPAN::Web::Role::RiverData;
 use Moose::Role;
-use Future;
+use Future     ();
 use List::Util qw( uniq );
 use namespace::autoclean;
 

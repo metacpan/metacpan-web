@@ -4,7 +4,8 @@ use warnings;
 
 use parent 'HTML::TreeBuilder';
 
-use MetaCPAN::Web::Test::HTML5::Element::SVG;
+use MetaCPAN::Web::Test::HTML5::Element::SVG ();    ## no perlimports
+
 use constant SVG_CLASS => 'MetaCPAN::Web::Test::HTML5::Element::SVG';
 
 my @svg_elements = qw(

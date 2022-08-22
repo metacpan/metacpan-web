@@ -2,7 +2,7 @@ package Plack::Middleware::Session::Cookie::MetaCPAN;
 use strict;
 use parent qw(Plack::Middleware::Session::Cookie);
 
-use Plack::Util;
+use Plack::Util      ();
 use MIME::Base64     ();
 use Cpanel::JSON::XS ();
 use Try::Tiny        qw( catch try );

@@ -10,7 +10,7 @@ use Catalyst qw/
     Authentication
     +MetaCPAN::Role::Fastly::Catalyst
     /, '-Log=warn,error,fatal';
-use Log::Log4perl::Catalyst;
+use Log::Log4perl::Catalyst ();
 
 extends 'Catalyst';
 

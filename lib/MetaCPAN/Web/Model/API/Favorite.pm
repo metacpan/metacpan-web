@@ -4,7 +4,7 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
-use Future;
+use Future ();
 
 sub by_dist {
     my ( $self, $dist ) = @_;

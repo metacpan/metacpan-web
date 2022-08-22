@@ -1,9 +1,7 @@
 package MetaCPAN::Web::Controller::Root;
 use Moose;
-use Log::Log4perl::MDC;
 use namespace::autoclean;
 use HTTP::Status ();
-use Try::Tiny;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
