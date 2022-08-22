@@ -1,6 +1,5 @@
 package Plack::Middleware::Assets::Core;
 use Moo::Role;
-use Plack::App::File;
 
 sub wrap {
     my ( $self, $app, @args ) = @_;

@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Role::Response;
 
 use Moose::Role;
-use DateTime::Format::HTTP;
+use DateTime::Format::HTTP    ();
 use DateTime::Format::ISO8601 ();
 
 =head2 last_modified

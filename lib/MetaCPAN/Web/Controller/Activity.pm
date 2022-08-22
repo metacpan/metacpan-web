@@ -4,8 +4,6 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use DateTime;
-
 sub author : Chained('/author/root') PathPart('activity.svg') Args(0) {
     my ( $self, $c ) = @_;
     my $author = $c->stash->{pauseid};

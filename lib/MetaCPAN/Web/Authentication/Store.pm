@@ -1,5 +1,5 @@
 package MetaCPAN::Web::Authentication::Store;
-use MetaCPAN::Web::Types qw(LoadableClass);
+use MetaCPAN::Web::Types qw( LoadableClass );
 use Moo;
 
 has user_class => (

@@ -1,11 +1,11 @@
 package MetaCPAN::Middleware::Static;
 use strict;
 use warnings;
-use Plack::Builder qw( builder enable mount );
-use Plack::App::File;
+use Plack::Builder           qw( builder enable mount );
+use Plack::App::File         ();
 use JavaScript::Minifier::XS ();
 use Cwd                      qw( cwd );
-use Plack::MIME;
+use Plack::MIME              ();
 
 Plack::MIME->add_type(
     '.eot'   => 'application/vnd.ms-fontobject',

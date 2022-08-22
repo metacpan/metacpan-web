@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Authentication::User;
 
 use Moose;
-use MetaCPAN::Web::Types qw(HashRef ArrayToHash);
+use MetaCPAN::Web::Types qw( ArrayToHash HashRef );
 
 extends 'Catalyst::Authentication::User';
 

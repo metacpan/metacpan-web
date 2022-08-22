@@ -1,7 +1,9 @@
 package MetaCPAN::Web::View::JSON;
 
 use Moose;
-use Cpanel::JSON::XS ();
+
+# Catalyst::View::JSON uses JSON::MaybeXS
+use Cpanel::JSON::XS ();    ## no perlimports
 
 extends 'Catalyst::View::JSON';
 

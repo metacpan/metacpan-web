@@ -2,9 +2,8 @@ package MetaCPAN::Web::Controller::Pod;
 
 use Moose;
 
-use Future;
+use Future                    ();
 use MetaCPAN::Web::RenderUtil qw( filter_html );
-use Try::Tiny                 qw( try );
 
 use namespace::autoclean;
 

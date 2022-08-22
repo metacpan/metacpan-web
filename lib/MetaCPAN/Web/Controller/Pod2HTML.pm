@@ -5,7 +5,7 @@ use Moose;
 use Encode                    qw( decode DIE_ON_ERR encode LEAVE_SRC );
 use HTML::TokeParser          ();
 use MetaCPAN::Web::RenderUtil qw( filter_html );
-use Future;
+use Future                    ();
 
 use namespace::autoclean;
 

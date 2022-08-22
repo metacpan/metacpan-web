@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Controller::Author;
 
 use Moose;
-use Data::Pageset;
+use Data::Pageset             ();
 use List::Util                ();
 use DateTime::Format::ISO8601 ();
 use namespace::autoclean;

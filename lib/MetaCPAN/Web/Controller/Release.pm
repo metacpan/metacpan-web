@@ -3,7 +3,7 @@ package MetaCPAN::Web::Controller::Release;
 use Moose;
 use namespace::autoclean;
 use experimental 'postderef';
-use Future;
+use Future ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

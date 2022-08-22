@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Account;
 
 use Moose;
-use DateTime ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

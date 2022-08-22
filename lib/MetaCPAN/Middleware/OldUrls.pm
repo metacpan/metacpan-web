@@ -2,13 +2,13 @@ package MetaCPAN::Middleware::OldUrls;
 use strict;
 use warnings;
 
-use parent                qw(Plack::Middleware);
-use Plack::Util::Accessor qw(router);
+use parent qw(Plack::Middleware);
 
-use Plack::Request;
-use Router::Simple;
-use Ref::Util qw(is_hashref is_coderef);
-use URI;
+use Plack::Request        ();
+use Router::Simple        ();
+use Plack::Util::Accessor qw( router );                  ## no perlimports
+use Ref::Util             qw( is_coderef is_hashref );
+use URI                   ();
 
 sub _formatter {
     my $format = shift;

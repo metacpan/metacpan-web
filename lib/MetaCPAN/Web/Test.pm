@@ -8,13 +8,12 @@ use warnings;
 use Plack::Test           qw( test_psgi );
 use HTTP::Request::Common qw( GET POST );
 use HTTP::Message::PSGI   ();
-use HTML::Tree;
 use Test::More import => [qw( is )];
-use Test::XPath;
-use Try::Tiny qw( catch try );
-use Encode    qw( decode_utf8 );
-use Future;
-use MetaCPAN::Web::Test::HTML5::TreeBuilder;
+use Test::XPath                             ();
+use Try::Tiny                               qw( catch try );
+use Encode                                  qw( decode_utf8 );
+use Future                                  ();
+use MetaCPAN::Web::Test::HTML5::TreeBuilder ();
 use base 'Exporter';
 our @EXPORT = qw(
     GET
