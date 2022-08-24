@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (
     // Development
     window.location.href === 'http://0.0.0.0:5001/' ||
+    window.location.href === 'http://localhost:5001/' ||
 
     // Staging
     window.location.href === 'https://web.stage.hc.metacpan.org/' ||
