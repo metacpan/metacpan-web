@@ -3,7 +3,7 @@ name: Staging Container
 on:
   push:
     branches:
-      'staging'
+      - staging
   workflow_dispatch:
 jobs:
   docker:
