@@ -3,7 +3,7 @@ name: Staging Container
 on:
   push:
     branches:
-      'staging'
+      - staging
   workflow_dispatch:
 jobs:
   docker:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: docker build
-        run: docker build . -t metacpan/metacpan-web:$(git log -1 --pretty=%h)
+        run: docker build . -t metacpan/metacpan-web:$GITHUB_SHA
       - name: run Perl tests
         run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
       - name: push build to Docker hub
