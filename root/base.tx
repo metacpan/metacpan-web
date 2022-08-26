@@ -111,7 +111,7 @@
                   <div class="form-group">
                       <div class="search-group">
                         <i class="fa fa-search"></i>
-                        <input type="text" name="q" size="41" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control">
+                        <input type="text" name="q" placeholder="Search the CPAN" size="41" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control">
                       </div>
                   </div>
                 </form>

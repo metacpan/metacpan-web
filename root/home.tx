@@ -33,7 +33,7 @@
       <div class="form-group">
           <div class="search-group">
             <i class="fa fa-search"></i>
-            <input type="text" name="q" placeholder="Search the CPAN" size="41" autofocus="autofocus" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control home-search-input">
+            <input type="text" name="q" placeholder="Search the CPAN" size="41" autofocus="autofocus" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control">
           </div>
       </div>
       <a href="#" class="keyboard-shortcuts">Keyboard Shortcuts</a>
