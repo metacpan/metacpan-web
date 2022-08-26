@@ -15,6 +15,11 @@ window.addEventListener('DOMContentLoaded', () => {
     searchBarForm.classList.remove('visible-lg');
     searchBarForm.classList.add('searchbar-open');
     searchBarInput.focus();
+
+    // Set the width of the autocomplete suggestions when searchbar button gets clicked
+    const autocompleteSuggestions = document.querySelector('.autocomplete-suggestions');
+    const searchBarFormWidth = `${searchBarForm.offsetWidth}px`;
+    autocompleteSuggestions.style.width = searchBarFormWidth;
   });
 
   const showSearchBar = () => {
