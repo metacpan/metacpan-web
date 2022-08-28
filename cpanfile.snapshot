@@ -1608,11 +1608,11 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Exporter-Tiny-1.002002
-    pathname: T/TO/TOBYINK/Exporter-Tiny-1.002002.tar.gz
+  Exporter-Tiny-1.004000
+    pathname: T/TO/TOBYINK/Exporter-Tiny-1.004000.tar.gz
     provides:
-      Exporter::Shiny 1.002002
-      Exporter::Tiny 1.002002
+      Exporter::Shiny 1.004000
+      Exporter::Tiny 1.004000
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
@@ -5049,10 +5049,10 @@ DISTRIBUTIONS
       String::ShellQuote 1.04
     requirements:
       ExtUtils::MakeMaker 0
-  Struct-Dumb-0.12
-    pathname: P/PE/PEVANS/Struct-Dumb-0.12.tar.gz
+  Struct-Dumb-0.13
+    pathname: P/PE/PEVANS/Struct-Dumb-0.13.tar.gz
     provides:
-      Struct::Dumb 0.12
+      Struct::Dumb 0.13
     requirements:
       Module::Build 0.4004
   Sub-Exporter-0.988
@@ -5640,53 +5640,53 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-1.016008
-    pathname: T/TO/TOBYINK/Type-Tiny-1.016008.tar.gz
+  Type-Tiny-1.016009
+    pathname: T/TO/TOBYINK/Type-Tiny-1.016009.tar.gz
     provides:
-      Devel::TypeTiny::Perl56Compat 1.016008
-      Devel::TypeTiny::Perl58Compat 1.016008
-      Error::TypeTiny 1.016008
-      Error::TypeTiny::Assertion 1.016008
-      Error::TypeTiny::Compilation 1.016008
-      Error::TypeTiny::WrongNumberOfParameters 1.016008
-      Eval::TypeTiny 1.016008
-      Eval::TypeTiny::CodeAccumulator 1.016008
-      Reply::Plugin::TypeTiny 1.016008
-      Test::TypeTiny 1.016008
-      Type::Coercion 1.016008
-      Type::Coercion::FromMoose 1.016008
-      Type::Coercion::Union 1.016008
-      Type::Library 1.016008
-      Type::Params 1.016008
-      Type::Params::Parameter 1.016008
-      Type::Params::Signature 1.016008
-      Type::Parser 1.016008
+      Devel::TypeTiny::Perl56Compat 1.016009
+      Devel::TypeTiny::Perl58Compat 1.016009
+      Error::TypeTiny 1.016009
+      Error::TypeTiny::Assertion 1.016009
+      Error::TypeTiny::Compilation 1.016009
+      Error::TypeTiny::WrongNumberOfParameters 1.016009
+      Eval::TypeTiny 1.016009
+      Eval::TypeTiny::CodeAccumulator 1.016009
+      Reply::Plugin::TypeTiny 1.016009
+      Test::TypeTiny 1.016009
+      Type::Coercion 1.016009
+      Type::Coercion::FromMoose 1.016009
+      Type::Coercion::Union 1.016009
+      Type::Library 1.016009
+      Type::Params 1.016009
+      Type::Params::Parameter 1.016009
+      Type::Params::Signature 1.016009
+      Type::Parser 1.016009
       Type::Parser::AstBuilder undef
       Type::Parser::Token undef
       Type::Parser::TokenStream undef
-      Type::Registry 1.016008
-      Type::Tiny 1.016008
-      Type::Tiny::Class 1.016008
-      Type::Tiny::ConstrainedObject 1.016008
-      Type::Tiny::Duck 1.016008
-      Type::Tiny::Enum 1.016008
-      Type::Tiny::Intersection 1.016008
-      Type::Tiny::Role 1.016008
-      Type::Tiny::Union 1.016008
-      Type::Utils 1.016008
-      Types::Common::Numeric 1.016008
-      Types::Common::String 1.016008
-      Types::Standard 1.016008
-      Types::Standard::ArrayRef 1.016008
-      Types::Standard::CycleTuple 1.016008
-      Types::Standard::Dict 1.016008
-      Types::Standard::HashRef 1.016008
-      Types::Standard::Map 1.016008
-      Types::Standard::ScalarRef 1.016008
-      Types::Standard::StrMatch 1.016008
-      Types::Standard::Tied 1.016008
-      Types::Standard::Tuple 1.016008
-      Types::TypeTiny 1.016008
+      Type::Registry 1.016009
+      Type::Tiny 1.016009
+      Type::Tiny::Class 1.016009
+      Type::Tiny::ConstrainedObject 1.016009
+      Type::Tiny::Duck 1.016009
+      Type::Tiny::Enum 1.016009
+      Type::Tiny::Intersection 1.016009
+      Type::Tiny::Role 1.016009
+      Type::Tiny::Union 1.016009
+      Type::Utils 1.016009
+      Types::Common::Numeric 1.016009
+      Types::Common::String 1.016009
+      Types::Standard 1.016009
+      Types::Standard::ArrayRef 1.016009
+      Types::Standard::CycleTuple 1.016009
+      Types::Standard::Dict 1.016009
+      Types::Standard::HashRef 1.016009
+      Types::Standard::Map 1.016009
+      Types::Standard::ScalarRef 1.016009
+      Types::Standard::StrMatch 1.016009
+      Types::Standard::Tied 1.016009
+      Types::Standard::Tuple 1.016009
+      Types::TypeTiny 1.016009
     requirements:
       Exporter::Tiny 1.000000
       ExtUtils::MakeMaker 6.17
