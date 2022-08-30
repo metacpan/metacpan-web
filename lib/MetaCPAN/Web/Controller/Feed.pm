@@ -212,7 +212,7 @@ sub build_entry {
     $e->pubDate( $entry->{date} );
     $e->title( $entry->{name} );
 
-    my $content = escape_html( $entry->{abstract} // '' );
+    my $content = escape_html( $entry->{abstract} // q{} );
 
     if ( my $changelog = $entry->{changes} ) {
         if ($content) {

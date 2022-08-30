@@ -14,8 +14,8 @@ sub releases {
 
 sub files {
     my ( $self, $source, $target ) = @_;
-    $source = file_info( $source // '' )->{id};
-    $target = file_info( $target // '' )->{id};
+    $source = file_info( $source // q{} )->{id};
+    $target = file_info( $target // q{} )->{id};
     return $self->request( '/diff/file/' . $source . '/' . $target )
         ->then( \&_clean );
 }

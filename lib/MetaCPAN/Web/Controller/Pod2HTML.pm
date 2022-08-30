@@ -37,10 +37,10 @@ sub pod2html : Path : Args(0) {
         } or $pod = decode( 'cp1252', $raw_pod );
     }
     else {
-        $pod = $c->req->parameters->{pod} // '';
+        $pod = $c->req->parameters->{pod} // q{};
     }
 
-    my $html = length $pod ? render_pod( $c, $pod )->get : '';
+    my $html = length $pod ? render_pod( $c, $pod )->get : q{};
 
     if ( $c->req->parameters->{raw} ) {
         $c->res->content_type('text/html');

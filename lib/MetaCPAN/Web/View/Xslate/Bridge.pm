@@ -144,7 +144,7 @@ sub gravatar_image {
     my $email
         = ( $author && $author->{pauseid} )
         ? $author->{pauseid} . '@cpan.org'
-        : '';
+        : q{};
     return Gravatar::URL::gravatar_url(
         https   => 1,
         base    => 'https://www.gravatar.com/avatar/',

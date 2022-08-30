@@ -117,7 +117,7 @@ sub _routes { (
                 $match->{after_release},
                 $match->{path},
             ) = split m{/}, $q->{target}, 3;
-            $match->{path} //= '';
+            $match->{path} //= q{};
             return 1;
         },
     ],
