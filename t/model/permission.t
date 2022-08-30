@@ -73,7 +73,7 @@ subtest 'notification_type' => sub {
         },
         {
             params => {
-                owner => ''
+                owner => q{}
             },
             expected => undef,
             message  => 'Null string as owner',

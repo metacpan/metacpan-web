@@ -149,11 +149,11 @@ sub request {
                     $response->protocol // 'TEST',
                     $response->code,
                     length ${ $response->content_ref },
-                    ( $content ? " '$content'" : '' )
+                    ( $content ? " '$content'" : q{} )
                 );
             }
             my $data = $response->decoded_content( charset => 'none' );
-            my $content_type = $response->header('content-type') || '';
+            my $content_type = $response->header('content-type') || q{};
 
             if ( $content_type =~ /^application\/json/ ) {
                 my $out;

@@ -217,10 +217,10 @@ test_psgi app, sub {
             'name'      => "\x{532}\x{561}\x{580}\x{565}\x{582}",
             'asciiname' => 'asciiname1',
             'utf8'      => "\x{1f42a}",
-            'city'      => '',
-            'region'    => '',
-            'country'   => '',
-            'extra'     => '',
+            'city'      => q{},
+            'region'    => q{},
+            'country'   => q{},
+            'extra'     => q{},
         ];
         ok(
             $res = $cb->( POST '/account/profile', $form ),
@@ -261,7 +261,7 @@ test_psgi app, sub {
         # prepare a cookie jar with a fake metacpan_secure entry
         my $jar      = HTTP::Cookies->new;
         my $fake_res = HTTP::Response->new(
-            200, '',
+            200, q{},
             [
                 'Set-Cookie' => 'metacpan_secure=12345; path=/; expires='
                     . time2str( 5000 + time ),

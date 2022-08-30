@@ -16,7 +16,7 @@ sub prepare_app {
 
         # Pass $_[0] since the json subs may have a ($) protoype.
         # Pass '' to base64 for a blank separator (instead of newlines).
-        MIME::Base64::encode( Cpanel::JSON::XS::encode_json( $_[0] ), q[] );
+        MIME::Base64::encode( Cpanel::JSON::XS::encode_json( $_[0] ), q{} );
     } ) unless $self->serializer;
 
     $self->deserializer( sub {

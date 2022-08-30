@@ -103,7 +103,7 @@ sub filter_html {
                     elsif ( $val =~ /^[0-9a-zA-Z.+-]+:/ ) {
 
                         # bad protocol
-                        return '';
+                        return q{};
                     }
                     elsif ($data) {
                         my $base = 'https://st.aticpan.org/source/';
