@@ -38,7 +38,7 @@ brew install carton
 If your `carton install` is having issues with SSL-related modules, you may need to use an `OPENSSL_PREFIX`. Something like:
 
 ```bash
-OPENSSL_PREFIX="/usr/local/Cellar/openssl@1.1/1.1.1q carton install"
+OPENSSL_PREFIX="/usr/local/Cellar/openssl@1.1/1.1.1q" carton install
 ```
 
 You may need to check `/usr/local/Cellar/openssl@1.1` to find the latest installed path on your system.
