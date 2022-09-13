@@ -1,4 +1,7 @@
 .navbar {
+    background-color: @gray-darker;
+    border-color: @gray-darker;
+    border-radius: 0;
     box-shadow: 0 1px 13px 0 rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
     height: 80px;
     margin-bottom: 0;
@@ -38,7 +41,7 @@
             > a, > a:hover {
                 background-color: transparent;
                 border-bottom: 2px solid #da2037;
-                color: @black;
+                color: @body-bg;
                 font-weight: bold;
             }
         }
@@ -47,6 +50,17 @@
     .dropdown:hover .caret,
     .open .caret {
         .opacity(100);
+    }
+}
+
+.navbar-default .menu-items {
+    li a {
+      color: @body-bg !important;
+    }
+
+    li a:hover {
+      background-color: transparent !important;
+      color: @body-bg !important;
     }
 }
 
@@ -95,6 +109,7 @@ nav {
     border: 0;
 
     .fa {
+      background-color: @body-bg;
       border: 1px solid @list-group-border;
       border-radius: 5px;
       color: @list-group-link-color;
