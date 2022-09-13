@@ -50,7 +50,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="header-logo-large hidden-xs">
               <a href="/" tabindex="0">
-                <img src="/static/images/logo-long.png" alt="MetaCPAN" />
+                <img src="/static/images/logo-long-white.png" alt="MetaCPAN" />
               </a>
             </div>
             <div class="header-logo-icon visible-xs">
@@ -183,7 +183,7 @@
               <div class="footer-social">
                 <div class="footer-link footer-logo">
                   <a href="/">
-                    <img src="/static/images/logo-long-white.png" alt="MetaCPAN" />
+                    <img src="/static/images/logo-long.png" alt="MetaCPAN" />
                   </a>
                 </div>
                 <a class="footer-social-link" href="https://github.com/metacpan">
@@ -227,7 +227,7 @@
                   <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
-                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.webp" alt="Deriv logo">
+                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv-horizontal-web-dark-100-removebg.png" alt="Deriv logo">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.yellowbot.com/" rel="noopener">
                   <img class="footer-sponsor-yellowbot" src="/static/images/sponsors/yellowbot.png" alt="YellowBot logo">
