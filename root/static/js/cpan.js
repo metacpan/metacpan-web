@@ -282,23 +282,6 @@ $(document).ready(function() {
     }
     create_anchors($('.anchors'));
 
-    var module_source_href = $('#metacpan_source-link').attr('href');
-    if (module_source_href) {
-        $('.pod-errors-detail dt').each(function() {
-            var $dt = $(this);
-            var link_text = $dt.text();
-            var capture = link_text.match(/Around line (\d+)/);
-            $dt.html(
-                $('<a />').attr('href', module_source_href + '#L' + capture[1])
-                .text(link_text)
-            );
-        });
-    }
-    $('.pod-errors').addClass('collapsed');
-    $('.pod-errors > p:first-child').click(function() {
-        $(this).parent().toggleClass('collapsed');
-    });
-
     $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
         var storageid = tableid.replace(/^metacpan_/, '');
