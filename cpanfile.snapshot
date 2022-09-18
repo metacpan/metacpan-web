@@ -1608,11 +1608,11 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Exporter-Tiny-1.004001
-    pathname: T/TO/TOBYINK/Exporter-Tiny-1.004001.tar.gz
+  Exporter-Tiny-1.004002
+    pathname: T/TO/TOBYINK/Exporter-Tiny-1.004002.tar.gz
     provides:
-      Exporter::Shiny 1.004001
-      Exporter::Tiny 1.004001
+      Exporter::Shiny 1.004002
+      Exporter::Tiny 1.004002
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
@@ -2265,10 +2265,10 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  JSON-MaybeXS-1.004003
-    pathname: E/ET/ETHER/JSON-MaybeXS-1.004003.tar.gz
+  JSON-MaybeXS-1.004004
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004004.tar.gz
     provides:
-      JSON::MaybeXS 1.004003
+      JSON::MaybeXS 1.004004
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -3966,21 +3966,21 @@ DISTRIBUTIONS
       overload 0
       perl 5.006
       strict 0
-  PPIx-QuoteLike-0.022
-    pathname: W/WY/WYANT/PPIx-QuoteLike-0.022.tar.gz
+  PPIx-QuoteLike-0.023
+    pathname: W/WY/WYANT/PPIx-QuoteLike-0.023.tar.gz
     provides:
-      PPIx::QuoteLike 0.022
-      PPIx::QuoteLike::Constant 0.022
-      PPIx::QuoteLike::Dumper 0.022
-      PPIx::QuoteLike::Token 0.022
-      PPIx::QuoteLike::Token::Control 0.022
-      PPIx::QuoteLike::Token::Delimiter 0.022
-      PPIx::QuoteLike::Token::Interpolation 0.022
-      PPIx::QuoteLike::Token::String 0.022
-      PPIx::QuoteLike::Token::Structure 0.022
-      PPIx::QuoteLike::Token::Unknown 0.022
-      PPIx::QuoteLike::Token::Whitespace 0.022
-      PPIx::QuoteLike::Utils 0.022
+      PPIx::QuoteLike 0.023
+      PPIx::QuoteLike::Constant 0.023
+      PPIx::QuoteLike::Dumper 0.023
+      PPIx::QuoteLike::Token 0.023
+      PPIx::QuoteLike::Token::Control 0.023
+      PPIx::QuoteLike::Token::Delimiter 0.023
+      PPIx::QuoteLike::Token::Interpolation 0.023
+      PPIx::QuoteLike::Token::String 0.023
+      PPIx::QuoteLike::Token::Structure 0.023
+      PPIx::QuoteLike::Token::Unknown 0.023
+      PPIx::QuoteLike::Token::Whitespace 0.023
+      PPIx::QuoteLike::Utils 0.023
     requirements:
       Carp 0
       Encode 0
