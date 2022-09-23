@@ -257,9 +257,9 @@
                   <img width="170" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
                 </a>
               </div>
-              <div class="col-xs-9 col-md-2" style="padding-top:0px">
+              <div class="col-xs-9 col-md-2" style="padding-top:5px">
                 <a href="https://geocode.xyz" target="_blank" rel="noopener">
-                  <img width="140" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
+                  <img height="80" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
                 </a>
               </div>
               <div class="col-xs-9 col-md-2" style="padding-top:5px">
