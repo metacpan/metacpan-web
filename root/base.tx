@@ -179,73 +179,73 @@
         %%  }
         </div>
         <footer class="footer">
-            <div class="footer-container">
-              <div class="footer-social">
-                <div class="footer-link footer-logo">
-                  <a href="/">
-                    <img src="/static/images/logo-long.png" alt="MetaCPAN" />
-                  </a>
-                </div>
-                <a class="footer-social-link" href="https://github.com/metacpan">
-                  <i class="fab fa-github-square"></i>
-                </a>
-                <a class="footer-social-link" href="https://twitter.com/metacpan">
-                  <i class="fab fa-twitter-square"></i>
+          <div class="footer-container">
+            <div class="footer-social">
+              <div class="footer-link footer-logo">
+                <a href="/">
+                  <img src="/static/images/logo-long.png" alt="MetaCPAN" />
                 </a>
               </div>
-              <div class="footer-links">
-                <div class="footer-link">
-                    <a href="/about">About</a>
-                </div>
-                <div class="footer-link">
-                    <a href="https://grep.metacpan.org">grep::cpan</a>
-                </div>
-                <div class="footer-link">
-                    <a href="/recent">Recent</a>
-                </div>
-                <div class="footer-link">
-                    <a href="/news">News</a>
-                </div>
-                <div class="footer-link">
-                    <a href="about/faq">FAQ</a>
-                </div>
-                <div class="footer-link">
-                    <a href="/tools">Tools</a>
-                </div>
-                <div class="footer-link">
-                    <a href="https://fastapi.metacpan.org/">API</a>
-                </div>
-                <div class="footer-link">
-                    <a href="https://www.perl.org/">Perl.org</a>
-                </div>
+              <a class="footer-social-link" href="https://github.com/metacpan">
+                <i class="fab fa-github-square"></i>
+              </a>
+              <a class="footer-social-link" href="https://twitter.com/metacpan">
+                <i class="fab fa-twitter-square"></i>
+              </a>
+            </div>
+            <div class="footer-links">
+              <div class="footer-link">
+                  <a href="/about">About</a>
               </div>
-              <div class="footer-sponsors">
-                <a class="footer-sponsor-link" target="_blank" href="https://www.bytemark.co.uk/" rel="noopener">
-                  <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener">
-                  <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
-                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv-horizontal-web-dark-100-removebg.png" alt="Deriv logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://www.yellowbot.com/" rel="noopener">
-                  <img class="footer-sponsor-yellowbot" src="/static/images/sponsors/yellowbot.png" alt="YellowBot logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener">
-                  <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener">
-                  <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener">
-                  <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
-                </a>
-                <a class="footer-sponsor-link" target="_blank" href="https://www.topbargains.com.au" rel="noopener">
-                  <img class="footer-sponsor-topbargains" src="/static/images/sponsors/TopBargains_Australian_Coupons.png" alt="TobBargains Australia logo">
-                </a>
+              <div class="footer-link">
+                  <a href="https://grep.metacpan.org">grep::cpan</a>
+              </div>
+              <div class="footer-link">
+                  <a href="/recent">Recent</a>
+              </div>
+              <div class="footer-link">
+                  <a href="/news">News</a>
+              </div>
+              <div class="footer-link">
+                  <a href="about/faq">FAQ</a>
+              </div>
+              <div class="footer-link">
+                  <a href="/tools">Tools</a>
+              </div>
+              <div class="footer-link">
+                  <a href="https://fastapi.metacpan.org/">API</a>
+              </div>
+              <div class="footer-link">
+                  <a href="https://www.perl.org/">Perl.org</a>
               </div>
             </div>
+            <div class="footer-sponsors">
+              <a class="footer-sponsor-link" target="_blank" href="https://www.bytemark.co.uk/" rel="noopener">
+                <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener">
+                <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
+                <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv-horizontal-web-dark-100-removebg.png" alt="Deriv logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener">
+                <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener">
+                <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://www.topbargains.com.au" rel="noopener">
+                <img class="footer-sponsor-topbargains" src="/static/images/sponsors/TopBargains_Australian_Coupons.png" alt="TobBargains Australia logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://www.yellowbot.com/" rel="noopener">
+                <img class="footer-sponsor-yellowbot" src="/static/images/sponsors/yellowbot_2.png" alt="YellowBot logo">
+              </a>
+              <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener">
+                <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
+              </a>
+            </div>
+          </div>
         </footer>
         <div class="modal fade" tabindex="-1" role="dialog" id="metacpan_keyboard-shortcuts">
           <div class="modal-dialog">

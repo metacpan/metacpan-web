@@ -26,12 +26,19 @@
   flex-wrap: wrap;
   justify-self: center;
   place-content: center;
-  row-gap: 5px;
 }
 
-.footer-link a {
-  color: @gray-base;
-  font-size: 1.1em;
+.footer-sponsors {
+  max-width: 500px;
+}
+
+.footer-link {
+  margin-bottom: 5px;
+
+  a {
+    color: @gray-base;
+    font-size: 1.1em;
+  }
 }
 
 .footer-social {
@@ -45,8 +52,13 @@
   margin-top: 30px;
 
   .footer-social-link {
-    color: @gray-base;
-    font-size: 30px;
+    color: #43424A;
+    display: flex;
+    font-size: 35px;
+
+    &:hover {
+      text-decoration: none;
+    }
 
     &:first-of-type {
       justify-self: end;
@@ -60,6 +72,7 @@
 
   .footer-sponsor-link {
     display: grid;
+    margin-bottom: 10px;
     place-content: center;
   }
 
@@ -76,7 +89,7 @@
   }
 
   .footer-sponsor-yellowbot {
-    width: 100px;
+    width: 110px;
   }
 
   .footer-sponsor-fastly {
@@ -97,7 +110,9 @@
 }
 
 .footer-logo {
+  align-self: end;
   grid-area: meta;
+  margin-bottom: 10px;
 
   img {
     width: 160px;
