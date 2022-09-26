@@ -2,6 +2,7 @@
 %%      canonical   => $canonical || '/',
 %%      rss         => $rss || '/recent.rss',
 %%      rss_title   => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
+%%      body_class  => 'page-home',
 %%  }
 %%  override left_nav -> { }
 %%  override search_bar -> { }

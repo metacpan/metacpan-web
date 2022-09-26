@@ -46,7 +46,7 @@
         %%      include $twitter_card_inc
         %%  }
     </head>
-    <body>
+    <body class="[% $body_class %]">
         <nav class="navbar navbar-default" role="navigation">
             <div class="header-logo-large hidden-xs">
               <a href="/" tabindex="0">
