@@ -427,7 +427,7 @@ form#metacpan_logout {
     'menu breadcrumbs'
     'menu content'
     'menu pagination';
-    grid-template-columns: @sidebar-width calc(100vw - @sidebar-width);
+    grid-template-columns: @sidebar-width ~"calc(100vw -" @sidebar-width ~")";
     grid-template-rows: min-content 1fr;
     line-height: 1.54em;
 }
