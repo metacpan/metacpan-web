@@ -8,7 +8,7 @@
 %%  }
 %%  override left_nav_lead -> {
   <li>
-    Distribution: [% $module.distribution %]</span>
+    Distribution: [% $module.distribution %]
   </li>
   %%  if $documented_module.version {
   <li>
@@ -19,18 +19,18 @@
   %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
   %%    : '/dist/' ~ $release.distribution;
   <li>
-    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $module.path %]"><i class="fa fa-fw fa-file-code black"></i>Source</a>
+    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $module.path %]">Source</a>
     (<a href="[% $release_base %]/source/[% $module.path %]?raw=1">raw</a>)
   </li>
   %%  if $module.pod_path {
   <li>
-    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $module.pod_path %]"><i class="fa fa-fw fa-file-code black"></i>Pod Source</a>
+    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $module.pod_path %]">Pod Source</a>
     (<a href="[% $release_base %]/source/[% $module.pod_path %]?raw=1">raw</a>)
   </li>
   %%  }
   <li>
     %%  my $parent_path = $module.path.replace(rx('/?[^/]+$'),'');
-    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]"><i class="fa fa-fw fa-folder-open black"></i>Browse</a>
+    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]">Browse</a>
     (<a href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]?raw=1">raw</a>)
   </li>
 %%  }

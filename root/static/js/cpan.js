@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     $(".ttip").tooltip();
 
-    $('.help-btn').each(function() {
+    $('.keyboard-shortcuts').each(function() {
         $(this).click(function(event) {
             $('#metacpan_keyboard-shortcuts').modal();
             event.preventDefault();
@@ -192,33 +192,14 @@ $(document).ready(function() {
 
     $('.relatize').relatizeDate();
 
-    // Search box: Feeling Lucky? Shift+Enter
-    $('#metacpan_search-input').keydown(function(event) {
-        if (event.keyCode == '13' && event.shiftKey) {
-            event.preventDefault();
-
-            /* To make this a lucky search we have to create a new
-             * <input> element to pass along lucky=1.
-             */
-            var luckyField = document.createElement("input");
-            luckyField.type = 'hidden';
-            luckyField.name = 'lucky';
-            luckyField.value = '1';
-
-            var form = event.target.form;
-            form.appendChild(luckyField);
-            form.submit();
-        }
-    });
-
     // Autocomplete issues:
     // #345/#396 Up/down keys should put selected value in text box for further editing.
     // #441 Allow more specific queries to send ("Ty", "Type::").
     // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
     // Please don't steal ctrl-pg up/down.
     var search_input = $("#metacpan_search-input");
-    var input_group = search_input.parent('.input-group');
-    var ac_width = (input_group.length ? input_group : search_input).outerWidth();
+    var ac_width = search_input.outerWidth();
+
     search_input.autocomplete({
         serviceUrl: '/search/autocomplete',
         // Wait for more typing rather than firing at every keystroke.
@@ -264,8 +245,6 @@ $(document).ready(function() {
     $('.autocomplete-suggestions').off('mouseover.autocomplete');
     $('.autocomplete-suggestions').off('mouseout.autocomplete');
 
-    $('#metacpan_search-input.autofocus').focus();
-
     var items = $('.ellipsis');
     for (var i = 0; i < items.length; i++) {
         var element = items[i];
@@ -303,23 +282,6 @@ $(document).ready(function() {
     }
     create_anchors($('.anchors'));
 
-    var module_source_href = $('#metacpan_source-link').attr('href');
-    if (module_source_href) {
-        $('.pod-errors-detail dt').each(function() {
-            var $dt = $(this);
-            var link_text = $dt.text();
-            var capture = link_text.match(/Around line (\d+)/);
-            $dt.html(
-                $('<a />').attr('href', module_source_href + '#L' + capture[1])
-                .text(link_text)
-            );
-        });
-    }
-    $('.pod-errors').addClass('collapsed');
-    $('.pod-errors > p:first-child').click(function() {
-        $(this).parent().toggleClass('collapsed');
-    });
-
     $('table.tablesorter th.header').on('click', function() {
         tableid = $(this).parents().eq(2).attr('id');
         var storageid = tableid.replace(/^metacpan_/, '');
@@ -337,12 +299,12 @@ $(document).ready(function() {
     $('.dropdown-toggle').dropdown();
 
     function format_index(index) {
-        index.wrap('<div id="index-container"><div class="index-border"></div></div>');
+        index.wrap('<div id="index-container" class="pull-right"><div class="index-border"></div></div>');
         var container = index.parent().parent();
 
         var index_hidden = MetaCPAN.storage.getItem('hideTOC') == 1;
         index.before(
-            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]' + ' <button class="btn-link toggle-index-right"><i class="far fa-caret-square-right toggle-right"></i><i class="far fa-caret-square-left toggle-left"></i></button>' + '</div>');
+            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ] </div>');
 
         $('.toggle-index').on('click', function(e) {
             e.preventDefault();
@@ -350,15 +312,6 @@ $(document).ready(function() {
         });
         if (index_hidden) {
             container.addClass("hide-index");
-        }
-
-        $('.toggle-index-right').on('click', function(e) {
-            e.preventDefault();
-            MetaCPAN.storage.setItem('rightTOC', container.hasClass('pull-right') ? 0 : 1);
-            container.toggleClass('pull-right');
-        });
-        if (MetaCPAN.storage.getItem('rightTOC') == 1) {
-            container.addClass("pull-right");
         }
     }
     var index = $("#index");

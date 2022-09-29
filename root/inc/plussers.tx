@@ -1,6 +1,6 @@
 %%  if $plussers.authors.size() or $plussers.others {
-<div class="plussers hidden-phone">
-<div><b>++ed by:</b></div>
+<div class="plussers">
+<div class="nav-header">++ed by:</div>
 %%  if $plussers.authors.size() {
 <div>
 %%# display the gravatar url for each pause plusser alongwith their author page as a link. %>

@@ -11,7 +11,7 @@
   %%  if $tablesorter {
   data-default-sort="[% $default_sort || '1,0' %]"
   %%  }
-  class="table table-condensed table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
+  class="content table table-condensed table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
   <thead>
     <tr>
       <th class="river-gauge"><span class="sr-only">River gauge</span></th>

@@ -39,74 +39,74 @@
     %%  my $release_base = $permalinks || $release.status != 'latest'
     %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
     %%    : '/dist/' ~ $release.distribution;
-    <li class="nav-header">
-      <div class="ttip" data-toggle="tooltip" data-placement="right" title="The date that this version of [% $release.distribution %] was released.">
+    <li class="nav-header no-margin-top">
+      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released.">
       <span class="relatize">[% datetime($release.date).to_http %]</span>
     </li>
     %%  include inc::release_status { maturity => $release.maturity }
     %%  block left_nav_lead -> {
-    <li><a href="[% $release_base %]/source"><i class="fa fa-fw fa-folder-open black"></i>Browse</a> (<a href="[% $release_base %]/source?raw=1">raw</a>)</li>
+    <li><a href="[% $release_base %]/source">Browse</a> (<a href="[% $release_base %]/source?raw=1">raw</a>)</li>
     %%  }
     <li>
-      <a data-keyboard-shortcut="g c" href="[% $release_base %]/changes"><i class="fa fa-fw fa-cogs black"></i>Changes</a>
+      <a data-keyboard-shortcut="g c" href="[% $release_base %]/changes">Changes</a>
     </li>
     %%  if $release.resources.homepage.is_url() {
     <li>
-      <a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]"><i class="fa fa-fw fa-external-link-alt black"></i>Homepage</a>
+      <a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]">Homepage</a>
     </li>
     %%  }
     <li>
-      <a class="nopopup" href="[% $release_base %]/contribute"><i class="fa fa-fw fa-plus-circle black"></i>How to Contribute</a>
+      <a class="nopopup" href="[% $release_base %]/contribute">How to Contribute</a>
     </li>
     %%  if $repository && $repository.web || $repository.url {
     <li>
       %%  if $repository.web.is_url() {
-        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $repository.web %]"><i class="fa fa-fw fa-code-branch black"></i>Repository</a>
+        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $repository.web %]">Repository</a>
         %%  if $repository.url.is_url() && $repository.url != ($repository.web ~ '.git') {
           (<a rel="noopener nofollow" href="[% $repository.url %]">[% $repository.type %] clone</a>)
         %%  }
       %%  }
       %%  else if $repository.url.is_url() {
-        <a rel="noopener nofollow" href="[% $repository.url %]"><i class="fa fa-fw fa-code-branch black"></i>Clone [% $repository.type %] repository</a>
+        <a rel="noopener nofollow" href="[% $repository.url %]">Clone [% $repository.type %] repository</a>
       %%  }
     </li>
     %%  }
     <li>
-      <a rel="noopener nofollow" data-keyboard-shortcut="g i" href="[% $issues.url %]"><i class="fa fa-fw fa-info-circle black"></i>Issues</a>
+      <a rel="noopener nofollow" data-keyboard-shortcut="g i" href="[% $issues.url %]">Issues</a>
       %%  if $issues.active != nil {
       ([% $issues.active %])
       %%  }
     </li>
     <li>
       %%  my $cpantesters_base = 'https://www.cpantesters.org/distro/' ~ $release.distribution.substr(0, 1) ~ '/' ~ $release.distribution ~ '.html?oncpan=1&distmat=1&version=' ~ uri_escape($release.distnameinfo.version)
-      <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix"><i class="fa fa-fw fa-check-circle black"></i>Testers</a>
+      <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix">Testers</a>
         %%  if $release.tests.size() {
         <span title="(pass / fail / na)">(<a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=2' %]" style="color: #090">[% $release.tests.pass %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=3' %]" style="color: #900">[% $release.tests.fail %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=4' %]">[% $release.tests.na %]</a>)</span>
         %%  }
     </li>
     <li>
-      <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]"><i class="fa fa-fw fa-chart-line black"></i>Kwalitee</a>
+      <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]">Kwalitee</a>
     </li>
     %% if defined $distribution.river.bus_factor {
     <li>
-      <div class="ttip" data-toggle="tooltip" data-placement="right" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
-      <i class="fa fa-fw fa-bus black"></i>Bus factor: [% $distribution.river.bus_factor %]
+      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
+      Bus factor: [% $distribution.river.bus_factor %]
       </div>
     </li>
     %% }
     %%  if $coverage.url {
     <li>
-      <i class="fa fa-fw fa-chart-pie black"></i><a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
+      <a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
     </li>
     %%  }
     %%  if $release.license {
     <li>
-      <i class="fa fa-fw fa-gavel black"></i>License: [% [].merge($release.license).join(', ') %]
+      License: [% [].merge($release.license).join(', ') %]
     </li>
     %%  }
     %%  if $release.metadata.prereqs.runtime.requires.perl {
     <li>
-      <i class="fa fa-fw fa-greater-than-equal black"></i>Perl: [% $release.metadata.prereqs.runtime.requires.perl | version %]
+      Perl: [% $release.metadata.prereqs.runtime.requires.perl | version %]
     </li>
     %%  }
     %%  if $release.metadata.x_help_wanted {
@@ -121,7 +121,7 @@
     %%  }
     %%  if $chat.web {
     <li class="chat-banner">
-      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Questions? Chat with us!</a></div>
+      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Chat with us!</a></div>
     </li>
     %%  }
     <li class="nav-header">Activity</li>
@@ -133,26 +133,26 @@
     <li class="nav-header">Tools</li>
     <li>
       <a itemprop="downloadUrl" href="[% $release.download_url %]">
-      <i class="fa fa-download fa-fw black"></i>Download (<span itemprop="fileSize">[% format_bytes($release.stat.size) %]B</span>)</a>
+      Download (<span itemprop="fileSize">[% format_bytes($release.stat.size) %]B</span>)</a>
     </li>
     <li>
       <a href="https://explorer.metacpan.org/?url=[% uri_escape( $module ? ('/module/' ~ $module.author ~ '/' ~ $module.release ~ '/' ~ $module.path) : ( '/release/' ~ $release.author ~ '/' ~ $release.name ) ) %]">
-        <i class="fa fa-list-alt fa-fw black"></i>MetaCPAN Explorer
+        MetaCPAN Explorer
       </a>
     </li>
     <li>
       <a href="/dist/[% $release.distribution %]/permissions">
-        <i class="fa fa-key fa-fw black"></i>Permissions
+        Permissions
       </a>
     </li>
     <li>
       <a href="/dist/[% $release.distribution %]/releases.rss">
-        <i class="fa fa-rss-square fa-fw black"></i>Subscribe to distribution
+        Subscribe to distribution
       </a>
     </li>
     <li>
       <button class="btn btn-link" data-toggle="modal" data-target="#metacpan_install-instructions-dialog">
-        <i class="fa fa-terminal fa-fw black"></i>Install Instructions
+        Install Instructions
       </button>
     </li>
     <li>
@@ -196,6 +196,9 @@
       </ul>
     </li>
     %%  }
+    <li>
+      %%  include inc::dependencies { release => $release };
+    </li>
     <li class="nav-header">Permalinks</li>
     <li>
       <a href="/release/[% $release.author %]/[% $release.name %][% if $module { '/view/' ~ $module.path } %]">This version</a>
@@ -208,18 +211,14 @@
     </li>
       %%  }
     %%  }
+    <li>
+      %%  include inc::plussers { plussers => $plussers };
+    </li>
+    <li>
+      %%  include inc::contributors { contributors => $contributors };
+    </li>
 %%  }
 %%  override content -> {
-<button id="metacpan_right-panel-toggle" class="btn-link" onclick="togglePanel('right'); return false;"><span class="panel-hidden">Show</span><span class="panel-visible">Hide</span> Right Panel</button>
-<div id="metacpan_right-panel" class="pull-right">
-  <div class="box-right hidden-phone">
-    %%  include inc::plussers { plussers => $plussers };
-
-    %%  include inc::author_pic { author => $author };
-    %%  include inc::contributors { contributors => $contributors };
-  </div>
-  %%  include inc::dependencies { release => $release };
-</div>
 
 <div class="content">
   %%  include inc::notification;

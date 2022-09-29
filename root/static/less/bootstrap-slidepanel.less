@@ -1,8 +1,10 @@
 .slidepanel {
+  background-color: #e9e9e9;
   display: none;
   position: fixed;
   top: 0px;
-  width: (@sidebar-width + 10px);
+  max-width: @sidebar-width;
+  width: 100%;
   -webkit-transition: -webkit-transform .4s;
   z-index: 1500;
   height: 100%;
@@ -26,10 +28,3 @@
   white-space:nowrap;
 }
 
-.icon-slidepanel {
-  font-size: 1.7em;
-  line-height: 0;
-  padding-top: 40%;
-  text-align: center;
-  width: 1em;
-}

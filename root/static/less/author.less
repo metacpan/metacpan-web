@@ -10,8 +10,18 @@
     .box-shadow(2px 2px 5px #ccc);
 }
 
+.author-item {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+
+    i {
+        padding-right: 5px;
+    }
+}
+
 .author-pic {
-    text-align: center;
+    margin-bottom: 10px;
 
     span, strong {
         display: block;
@@ -55,6 +65,14 @@
         display: block;
     }
 }
+
+.user-profiles {
+    margin: 5px 0 20px 0;
+
+    a {
+      text-decoration: none;
+    }
+  }
 
 @media (max-width: 480px) {
     .author-pic {

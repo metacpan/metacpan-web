@@ -52,9 +52,9 @@ sub wrap {
             js/shBrushCpp.js
             js/shBrushCPANChanges.js
             js/cpan.js
-            js/toolbar.js
             js/github.js
             js/dropdown.js
+            js/search.js
             modules/bootstrap-v3.4.1/js/dropdown.js
             modules/bootstrap-v3.4.1/js/collapse.js
             modules/bootstrap-v3.4.1/js/modal.js

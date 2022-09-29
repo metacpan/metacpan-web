@@ -3,6 +3,7 @@
 %%  }
 %%  override content -> {
 <div class="content search-results">
+  <h3 class="search-results-header">Search results for "[% $search_query %]"</h3>
 %% if $authors.total {
   <div class="author-results">
     <ul class="authors clearfix">

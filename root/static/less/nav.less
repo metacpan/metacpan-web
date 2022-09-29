@@ -1,17 +1,14 @@
 .navbar {
-    border-top: 2px solid lighten(@linkColor, 40%);
-    min-height: 32px;
-    .border-radius(0);
-
-    .dropdown.open {
-        .dropdown-toggle {
-            border-top: 2px solid lighten(@linkColor, 20%);
-            position: relative;
-            top: -2px;
-            margin-bottom: -2px;
-            color: @linkColor;
-        }
-    }
+    background-color: @gray-darker;
+    border-color: @gray-darker;
+    border-radius: 0;
+    box-shadow: 0 1px 13px 0 rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
+    height: 80px;
+    margin-bottom: 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 
     .nav {
         li.dropdown {
@@ -21,52 +18,31 @@
 
             &.open {
                 color: @black;
-                font-weight: bold;
-                border-top: 2px solid @linkColor;
-                margin-bottom: -5px;
                 position: relative;
-                top: -2px;
 
                 a.dropdown-toggle {
-                    background-color: #fff;
-                    @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
-                    .box-shadow(@shadow);
+                    background-color: transparent;
                     z-index: 9999;
                 }
                 .dropdown-menu {
-                    margin-top: -1px;
                     border: 1px solid #e9e9e9;
                 }
             }
         }
 
         > li > a {
-            text-shadow: none;
-            padding: 5px 10px 5px;
+            padding: 0;
             white-space: nowrap;
-            &:hover {
-                border-top: 2px solid lighten(@linkColor, 20%);
-                position: relative;
-                top: -2px;
-                margin-bottom: -2px;
-                color: @linkColor;
-            }
             > img {
                 vertical-align: text-bottom;
             }
         }
         .active {
             > a, > a:hover {
-                color: @black;
+                background-color: transparent;
+                border-bottom: 2px solid #da2037;
+                color: @body-bg;
                 font-weight: bold;
-                border-top: 2px solid @linkColor;
-                margin-bottom: -3px;
-                background-color: #fff;
-                @shadow: inset -1px 0px 0 #e9e9e9, inset 1px 0px 0 #e9e9e9;
-                .box-shadow(@shadow);
-                position: relative;
-                top: -2px;
-                height: 32px;
             }
         }
     }
@@ -77,21 +53,96 @@
     }
 }
 
+.navbar-default .menu-items {
+    li a {
+      color: @body-bg !important;
+    }
+
+    li a:hover {
+      background-color: transparent !important;
+      color: @body-bg !important;
+    }
+}
+
 .navbar-inner {
     @shadow: inset 0 -1px 0 #e9e9e9;
     .box-shadow(@shadow);
     border: 0;
 }
 
-.nav li.dropdown.open .caret,
-.nav li.dropdown.open.active .caret,
-.nav li.dropdown.open a:hover .caret,
-.navbar .nav .dropdown-toggle .caret,
-.navbar .nav .open.dropdown .caret {
-    border-top-color: @black;
-}
-
 ul.nav-pills.affix {
     top: 30px;
     /* Set the top position of pinned element */;
+}
+
+.navbar-right .fa-search {
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+nav {
+    align-items: center;
+    display: grid;
+    column-gap: 40px;
+    grid-template-areas: 'logo menu icons';
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px 40px;
+}
+
+.navbar-nav {
+    align-items: center;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-right {
+  gap: 0;
+  grid-area: icons;
+  justify-self: end;
+
+  button {
+    background-color: transparent;
+    border: 0;
+
+    .fa {
+      background-color: @body-bg;
+      border: 1px solid @list-group-border;
+      border-radius: 5px;
+      color: @list-group-link-color;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px;
+
+      &:hover {
+        background-color: #e9e9e9;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .logged_in .fa-user {
+    color: #da2037;
+  }
+}
+
+.header-logo-large,
+.header-logo-icon {
+  grid-area: logo;
+}
+
+.header-logo-large img {
+    width: 172px;
+}
+
+.header-logo-icon img {
+    width: 25px;
+}
+
+.menu-items {
+  grid-area: menu;
+  justify-self: center;
 }

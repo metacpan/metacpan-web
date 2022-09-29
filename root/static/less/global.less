@@ -1,4 +1,18 @@
 /* float:none prevents the span-x classes from breaking table-cell display */
+body {
+  background-color: @body-bg;
+  color: @text-color;
+  display: flex;
+  flex-direction: column;
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  height: 100%;
+  line-height: @line-height-base;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
 caption, th, td {
     text-align: left;
     font-weight: normal;
@@ -117,10 +131,6 @@ button.favorite, a.favorite {
     }
 }
 
-.user-profiles > a {
-    text-decoration: none;
-}
-
 .account-settings, .about {
     border-left: none;
 }
@@ -129,14 +139,9 @@ ul {
     list-style-type: none;
 }
 
-.activity-graph img {
-    width: @sidebar-width - 5px;
-}
-
 .activity-graph .comment {
     color: #999;
     font-size: 0.8em;
-    padding-right: 15px;
 }
 
 .ellipsis {
@@ -224,7 +229,7 @@ a.ellipsis:hover * {
   height: 16px;
   background-image: data-uri('../icons/grid.png');
   margin: 1px;
-  vertical-align: bottom;
+  vertical-align: text-bottom;
 }
 
 .rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
@@ -284,15 +289,8 @@ a.ellipsis:hover * {
 * see /release/Plack for example
 */
 #metacpan_contributors {
-    min-height: 40px;
-
     > ul {
-        padding-top: 0;
-    }
-
-    .contributors-header {
-        font-weight: bold;
-        text-align: center;
+        padding: 10px 0;
     }
 
     .contributor {
@@ -316,6 +314,10 @@ a.ellipsis:hover * {
             margin-left: -22px;
         }
     }
+}
+
+ul.dependencies {
+    padding: 0;
 }
 
 .smaller {
@@ -357,12 +359,6 @@ h1, .h1, h2, .h2, h3, .h3 {
     -webkit-overflow-scrolling: touch;
 }
 
-input#metacpan_search-input {
-    font-size: 16px;
-    padding: 4px 12px;
-    height: 30px;
-}
-
 .toolbar-search {
     margin-bottom: 2px;
 }
@@ -376,9 +372,6 @@ input#metacpan_search-input {
     &.form-horizontal .form-group {
         margin: 0;
     }
-
-    width: 450px;
-    display: inline-block;
 }
 
 .input-small {
@@ -428,17 +421,35 @@ form#metacpan_logout {
     padding-right: 5px;
 }
 
-.main-content {
-    margin-bottom: 60px;
-    margin-top: 20px;
+.page-content {
+    display: grid;
+    grid-template-areas:
+    'menu breadcrumbs'
+    'menu content'
+    'menu pagination';
+    grid-template-columns: @sidebar-width calc(100vw - @sidebar-width);
+    grid-template-rows: min-content 1fr;
     line-height: 1.54em;
+}
+
+@media (min-width: 0) and (max-width: @screen-sm-max) {
+    .page-content {
+        grid-template-areas:
+            'breadcrumbs'
+            'content';
+        grid-template-columns: 1fr;
+        margin-top: 80px;
+    }
+}
+
+.page-content {
+    flex-grow: 1;
 }
 
 .tool-bar-form {
     margin-top: 2px;
     margin-bottom: 10px;
     height: 30px;
-    width: (@sidebar-width - 10px);
 }
 
 .top-content {
@@ -473,67 +484,13 @@ form#metacpan_logout {
     .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
 }
 
-#metacpan_right-panel-toggle {
-  position: absolute;
-  top: -10px;
-  right: 0;
-  border: 1px solid #d7d7d7;
-  border-right: none;
-  border-radius: 5px 0 0 5px;
-  color: @textColor;
-
-  line-height: 20px;
-  white-space: nowrap;
-  width: 30px;
-  height: 30px;
-  padding: 5px;
-  text-align: left;
-  .transition(~"width 0.5s");
-  overflow: hidden;
-
-  &.panel-hide {
-    .panel-hidden {
-      display: inline;
-    }
-    .panel-visible {
-      display: none;
-    }
-  }
-  .panel-hidden {
-    display: none;
-  }
-
-  &:hover:before {
-    width: 0px;
-    opacity: 0;
-  }
-  &:before {
-    overflow: hidden;
-    .transition(~"width 0.5s, opacity 0.5s");
-    color: lighten(#000, 60%);
-    content: @fa-var-minus;
-    .fa;
-    text-align: center;
-    width: 30px;
-    padding-top: 3px;
-  }
-  &.panel-hide:before {
-    content: @fa-var-plus;
-  }
-  &:hover {
-    width: 8.8em;
-  }
-}
-
-#metacpan_right-panel.panel-hide {
-    display: none;
-}
-
 .content {
-    margin-left: @sidebar-width;
-    border-left: 1px solid #e9e9e9;
-    padding-left: 15px;
+    justify-self: center;
     line-height: 1.54em;
+    padding: 40px;
+    max-width: 1200px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .site-alert-message {
@@ -582,4 +539,8 @@ form#metacpan_logout {
 .nav-list li.nav-header + li.release-banner,
 .nav-list li.release-banner + li.nav-header {
     margin-top: 5px;
+}
+
+* {
+  scroll-margin-top: 80px;
 }

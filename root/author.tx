@@ -5,21 +5,44 @@
 %%      twitter_card_inc => $twitter_card_inc || 'inc/twitter/author.tx',
 %%  }
 %%  override left_nav_content -> {
-    <li class="hidden-phone">[% include inc::author_pic %]</li>
-    <li class="nav-header">Email</li>
     <li>
+      [% include inc::author_pic %]
+    </li>
+    <li class="author-item">
         %%  my $email = [].merge($author.email).0;
+        <i class="fas fa-envelope"></i>
         <a href="mailto:[% $email %]" class="ellipsis" title="[% $email %]">[% $email %]</a>
     </li>
+    %%  if $author.country || $author.city || $author.region {
+    %%  if $author.country {
+    <li class="author-item">
+        <i class="fas fa-map-marker-alt"></i>
+    %%  }
+        [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
+    </li>
+    %%  }
     %%  if $author.website.size() {
-    <li class="nav-header">Website</li>
     %%  for $author.website -> $website {
-    <li>
+    <li  class="author-item">
+        <i class="fas fa-link"></i>
         <a rel="me noopener nofollow" href="[% $website %]" title="[% $website %]" target="_blank">[% $website.decode_punycode() %]</a>
     </li>
     %%  } }
-    %%  if $author.profile.size() {
-    <li class="nav-header">Profiles</li>
+    %%  if $author.blog.size() {
+        %%  for $author.blog -> $blog {
+        <li  class="author-item">
+            <i class="fas fa-pager"></i>
+            %%  if $blog.feed {
+            <a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">
+            </a>
+            %%  }
+            <a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank" class="ellipsis">
+            [% $blog.url.replace(rx("^https?://"), '') %]
+            </a>
+        </li>
+        %%  }
+    %%  }
+     %%  if $author.profile.size() {
     <div class="user-profiles">
         %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
         %%  my $known = $profiles[$profile.name];
@@ -31,43 +54,19 @@
         %%  }
     </div>
     %%  }
-    %%  if $author.country || $author.city || $author.region {
-    <li class="nav-header">Location</li>
-    %%  if $author.country {
-    <img src="/static/images/flag/[% $author.country | lc %].png" alt="[% $author_country_name %]" title="[% $author_country_name %]" width=16 height=11> &nbsp;
-    %%  }
-    [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
-    %%  }
-    %%  if $author.blog.size() {
-    <li class="nav-header">Blog</li>
-    %%  for $author.blog -> $blog {
-    <li>
-        %%  if $blog.feed {
-        <a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">
-        <img src="/static/images/profile/feed.png" width=16 height=16 style="float: right">
-        </a>
-        %%  }
-        <a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank" class="ellipsis" style="width: 140px">
-        [% $blog.url.replace(rx("^https?://"), '') %]
-        </a>
-    </li>
-    %%  }
-    %%  }
     %%  for $author.donation -> $donate { if $donate.id {
         %%  if $donate.name == 'paypal' {
     <li class="author-donate">
-    <center>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-            <input type="hidden" name="cmd" value="_donations">
-            <input type="hidden" name="business" value="[% $donate.id %]">
-            <input type="hidden" name="lc" value="US">
-            <input type="hidden" name="item_name" value="Donation to CPAN Author [% $author.pauseid %] via MetaCPAN">
-            <input type="hidden" name="no_note" value="0">
-            <input type="hidden" name="currency_code" value="USD">
-            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
-        </form>
-    </center>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_donations">
+          <input type="hidden" name="business" value="[% $donate.id %]">
+          <input type="hidden" name="lc" value="US">
+          <input type="hidden" name="item_name" value="Donation to CPAN Author [% $author.pauseid %] via MetaCPAN">
+          <input type="hidden" name="no_note" value="0">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
+      </form>
     </li>
         %%  }
         %%  else if $donate.name == 'wishlist' {
@@ -99,20 +98,10 @@
     %%  }
     <li>
         <div>
-            <a href="/author/[% $author.pauseid %]/releases">All releases by this author</a>
+            <a href="/author/[% $author.pauseid %]/releases">All Releases</a>
         </div>
     </li>
     <li class="nav-header">Tools</li>
-    <li>
-        Search distributions:<br>
-    </li>
-    <li class="toolbar-search-form">
-        <form action="/search">
-            <input type="hidden" name="q" value="author:[% $author.pauseid %]">
-            <input type="text" name="q" class="form-control tool-bar-form">
-            <input type="submit" style="display: none">
-        </form>
-    </li>
     <li>
         <a href="[% $author.links.cpantesters_reports %]">CPANTesters Reports</a>
         <a href="[% $author.links.cpantesters_matrix %]" title="Matrix">
@@ -140,6 +129,13 @@
     <div id="metacpan_feed_subscription" class="page-header">
         <p>[% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by <span class="author-name">[% $author.name %]</span> ([% $author.pauseid %])</p>
         <a href="/author/[% $author.pauseid %]/activity.rss"><i class="fa fa-rss fa-2x black"></i></a>
+    </div>
+    <div class="toolbar-search-form">
+      <form action="/search">
+          <input type="hidden" name="q" value="author:[% $author.pauseid %]">
+          <input type="text" placeholder="Search distributions by [% $author.name %]" name="q" class="form-control tool-bar-form">
+          <input type="submit" style="display: none">
+      </form>
     </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {

@@ -1,12 +1,11 @@
 %% if $contributors.size() {
 <div id="metacpan_contributors">
-  <div class="contributors-header">and [% $contributors.size() %] contributors</div>
-  <div align="right">
+  <div>
     <button class="btn-link"
       onclick="$(this).hide(); $('#metacpan_contributors ul').slideDown(); return false;"
-    >show them</button>
+    >and [% $contributors.size() %] contributors</button>
   </div>
-  <ul class="nav nav-list box-right" style="display: none">
+  <ul style="display: none">
   %%  for $contributors -> $contributor {
     <li class="contributor"
       %%  if $contributor.pauseid {

@@ -2,10 +2,6 @@
     /* force inner element margins inside */
     padding-top: 0.1px;
 
-    dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td, ul, ol {
-        margin: 15px 10px;
-    }
-
     ol {
         list-style: decimal;
     }
@@ -25,6 +21,10 @@
 
     h1 {
         font-size: 1.5em;
+    }
+
+    h1:first-of-type {
+      margin-top: 0;
     }
 
     h2 {
@@ -58,15 +58,15 @@
         padding: 10px;
         overflow-x: auto;
     }
-    
+
     table {
         border-collapse:collapse;
     }
-    
+
     tr {
-      
+
     }
-    
+
     th {
         text-align:center;
         background:#fafafa;
@@ -74,12 +74,12 @@
         padding: 5px 10px;
         border:1px solid #ddd;
     }
-    
+
     td {
         padding:5px 10px;
         border:1px solid #ddd;
     }
-    
+
 }
 
 ul#index, #index ul {
@@ -99,6 +99,12 @@ ul#index, #index ul {
 }
 
 #index-container {
+    margin-left: 50px;
+
+    @media (min-width: 0) and (max-width: @screen-md-max) {
+        .responsive-invisibility();
+    }
+
     overflow-y: hidden;
 
     .index-header {
@@ -184,15 +190,6 @@ ul#index, #index ul {
 
     .pod-errors-detail {
         margin-top: 5px;
-    }
-
-    &.collapsed {
-        border-color: transparent;
-        background-color: transparent;
-
-        .pod-errors-detail {
-            display: none;
-        }
     }
 }
 

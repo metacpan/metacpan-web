@@ -21,4 +21,4 @@ jobs:
           docker login
           -u ${{ secrets.DOCKER_HUB_USER }}
           --password-stdin
-          && docker push metacpan/metacpan-web:staging
+          && docker push metacpan/metacpan-web:$GITHUB_SHA
