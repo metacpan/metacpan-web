@@ -319,6 +319,20 @@ community.
                 </td>
             </tr>
             <tr>
+                <td><a href="https://deriv.com/careers/" target="_blank" rel="noopener"><img src="/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg" width="170" align="left"></a></td>
+                <td>
+                    <p>
+                        <a href="https://deriv.com" target="_blank" rel="noopener">Deriv</a> is one of the world’s largest online brokers.
+                        <a href="https://deriv.com" target="_blank" rel="noopener">Deriv</a> offers CFDs and other derivatives on forex,
+                        indices, cryptocurrencies, commodities, and synthetics to millions of registered users across the globe.
+                    </p>
+                    <p>
+                        More than that, <a href="https://deriv.com" target="_blank" rel="noopener">Deriv</a> heavily relies on CPAN (and bring back a lot to it in return!)
+                        with its backend code being written in modern Perl and some great names being part of the company.
+                    </p>
+                </td>
+            </tr>
+            <tr>
                 <td><img src="/static/images/sponsors/kritika.svg" class="image-responsive"></td>
                 <td>
                     <p>
