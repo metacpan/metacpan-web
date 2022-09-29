@@ -37,7 +37,6 @@ sub wrap {
 
     my @js_files = map {"/static/$_"} (
         qw(
-            js/home.js
             js/jquery.min.js
             js/jquery.tablesorter.js
             js/jquery.relatize_date.js
