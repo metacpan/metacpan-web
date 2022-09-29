@@ -1,8 +1,9 @@
 ---
-name: Staging Container
+name: Build deployment container
 on:
   push:
     branches:
+      - prod
       - staging
   workflow_dispatch:
 jobs:
