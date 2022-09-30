@@ -5,5 +5,7 @@
 <strong>
   <a rel="author" href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a>
 </strong>
-<span title="[% $author.asciiname %]">[% $author.name %]</span>
+%%  if $author.has_display_name {
+<span>[% $author.display_name %]</span>
+%%  }
 </div>

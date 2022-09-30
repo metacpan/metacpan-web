@@ -28,6 +28,23 @@ it under the same terms as Perl itself.
 
 =cut
 
+sub _filter_authors {
+    my $data = shift;
+    my $authors
+        = exists $data->{authors} ? $data->{authors}
+        : exists $data->{author}  ? [ $data->{author} ]
+        :                           [];
+    for my $author (@$authors) {
+        $author->{display_name}
+            //= $author->{name}    =~ /\w/ ? $author->{name}
+            : $author->{asciiname} =~ /\w/ ? $author->{asciiname}
+            :                                $author->{pauseid};
+        $author->{has_display_name}
+            = $author->{display_name} ne $author->{pauseid};
+    }
+    return Future->done($data);
+}
+
 sub get {
     my ( $self, $author ) = @_;
 
@@ -37,11 +54,9 @@ sub get {
             return Future->done($data);
         }
         else {
-            return Future->done( {
-                author => $data,
-            } );
+            return Future->done( { author => $data } );
         }
-    } );
+    } )->then( \&_filter_authors );
 }
 
 sub get_multiple {
@@ -55,13 +70,13 @@ sub get_multiple {
             $data->{authors} = [ @authors{@authors} ];
             $data;
         }
-        );
+    )->then( \&_filter_authors );
 }
 
 sub search {
     my ( $self, $query, $from ) = @_;
     return $self->request( '/author/search', undef,
-        { q => $query, from => $from } );
+        { q => $query, from => $from } )->then( \&_filter_authors );
 }
 
 sub by_user {
@@ -78,9 +93,12 @@ sub by_user {
     }
     $ret->transform(
         done => sub {
-            return exists $_[0]->{authors} ? $_[0]->{authors} : [];
+            my $data = shift;
+            return { authors => [] }
+                if !exists $data->{authors};
+            $data;
         }
-    );
+    )->then( \&_filter_authors );
 }
 
 my $profile_data = {

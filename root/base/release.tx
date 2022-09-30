@@ -9,7 +9,7 @@
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
   <span>
-    <a data-keyboard-shortcut="g a" rel="author" href="/author/[% $release.author %]" title="[% $author.asciiname %]" class="author-name">[% $author.name %]</a>
+    <a data-keyboard-shortcut="g a" rel="author" href="/author/[% $release.author %]" class="author-name">[% $author.display_name %]</a>
   </span>
   <span>&nbsp;/&nbsp;</span>
   <div class="release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
