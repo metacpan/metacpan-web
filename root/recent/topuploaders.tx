@@ -13,7 +13,7 @@
     <strong class="pauseid">
         <a rel="author" href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a>
     </strong>
-    <span class="name" title="[% $author.asciiname %]">[% $author.name %]</span>
+    <span class="name">[% $author.display_name %]</span>
     <strong class="count">[% $author.releases %] release[% if $author.releases > 1 { %]s[% } %]</strong>
 </div>
 %%  }

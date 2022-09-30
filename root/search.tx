@@ -9,9 +9,9 @@
     <ul class="authors clearfix">
     %% for $authors.authors -> $author {
       <li>
-        <a href="/author/[% $author.id %]" title="Author page for [% $author.name %]">
+        <a href="/author/[% $author.id %]" title="Author page for [% $author.display_name %]">
           <img src="[% gravatar_image($author, 30) %]">
-          [% $author.name %] ([% $author.pauseid %])
+          [% $author.display_name %][% if $author.has_display_name { %] ([% $author.pauseid %])[% } %]
         </a>
       </li>
     %% }

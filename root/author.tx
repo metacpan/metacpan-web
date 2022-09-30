@@ -1,5 +1,6 @@
 %%  cascade base {
-%%      title     => $title     || $author.name ~ ' (' ~ $author.pauseid ~ ')',
+%%      title     => $title     ||
+%%          $author.display_name ~ ( $author.has_display_name ? ' (' ~ $author.pauseid ~ ')' : '' ),
 %%      rss       => $rss       || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%      twitter_card_inc => $twitter_card_inc || 'inc/twitter/author.tx',
@@ -127,7 +128,11 @@
 %%  override content -> {
 <div class="content">
     <div id="metacpan_feed_subscription" class="page-header">
-        <p>[% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by <span class="author-name">[% $author.name %]</span> ([% $author.pauseid %])</p>
+        <p>
+          [% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by
+          <span class="author-name">[% $author.display_name %]</span>
+          [% if $author.has_display_name { %] ([% $author.pauseid %])[% } %]
+        </p>
         <a href="/author/[% $author.pauseid %]/activity.rss"><i class="fa fa-rss fa-2x black"></i></a>
     </div>
     <div class="toolbar-search-form">
