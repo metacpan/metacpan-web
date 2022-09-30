@@ -46,7 +46,7 @@
     <div class="user-profiles">
         %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
         %%  my $known = $profiles[$profile.name];
-        %%  if $known {
+        %%  if $known && $profile.id {
         <a rel="me noopener nofollow" href="[% $known.url_format.sprintf($profile.id) %]" target="_blank" title="[% $known.name %] - [% $profile.id %]">
         <img src="[% $known.icon %]" width="16" height="16" alt="[% $known.name %]">
         </a>
