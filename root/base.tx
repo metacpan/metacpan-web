@@ -126,6 +126,7 @@
                 <li class="dropdown logged_in" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                       <img class="logged-in-gravatar" src="[% gravatar_image($author) %]">
+                      <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="/account/identities">Identities</a></li>
@@ -141,6 +142,7 @@
                 <li class="dropdown logged_out" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                      <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">
                         %%  for ['GitHub', 'Twitter', 'Google'] -> $identity {
