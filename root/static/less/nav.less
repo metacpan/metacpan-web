@@ -103,6 +103,7 @@ nav {
   gap: 0;
   grid-area: icons;
   justify-self: end;
+  margin: 0;
 
   button {
     background-color: transparent;
@@ -114,7 +115,7 @@ nav {
       border-radius: 5px;
       color: @list-group-link-color;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 14px;
       padding: 10px;
 
       &:hover {
@@ -145,4 +146,10 @@ nav {
 .menu-items {
   grid-area: menu;
   justify-self: center;
+}
+
+@media only screen and (min-width: @screen-xs-max) {
+  button .fa {
+    font-size: 18px !important;
+  }
 }
