@@ -504,6 +504,7 @@ function processUserData() {
 function showUserData(user_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'grid');
+    $('.logged_placeholder').css('display', 'none');
 
     // process users current favs
     $.each(user_data.faves, function(index, value) {
@@ -533,10 +534,12 @@ function getFavDataFromServer() {
             } else {
                 $('.logged_out').css('display', 'inline');
             }
+            $('.logged_placeholder').css('display', 'none');
         },
         error: function() {
             // Can't be logged in, should be getting 403
             $('.logged_out').css('display', 'inline');
+            $('.logged_placeholder').css('display', 'none');
         }
     });
     return true;

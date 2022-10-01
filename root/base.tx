@@ -153,6 +153,11 @@
                         %%  }
                     </ul>
                 </li>
+                <li class="dropdown logged_placeholder">
+                    <button>
+                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                    </button>
+                </li>
             </ul>
         </nav>
 
