@@ -147,9 +147,9 @@
                     </ul>
                 </li>
                 %% if ! $current['/'] {
-                    <li class="visible-xs visible-sm">
+                    <li class="icon-slidepanel visible-xs visible-sm">
                       <button data-toggle="slidepanel" data-target=".slidepanel">
-                        <i class="fa fa-bars icon-slidepanel"></i>
+                        <i class="fa fa-bars"></i>
                       </button>
                     </li>
                 %% }
