@@ -31,6 +31,7 @@
         }
 
         > li > a {
+            border-bottom: 2px solid transparent;
             padding: 0;
             white-space: nowrap;
             > img {
@@ -76,9 +77,6 @@ ul.nav-pills.affix {
 }
 
 .navbar-right .fa-search {
-  display: grid;
-  place-content: center;
-
   &:hover {
     cursor: pointer;
   }
@@ -109,24 +107,30 @@ nav {
     background-color: transparent;
     border: 0;
 
-    .fa {
-      background-color: @body-bg;
+    .button-fa-icon,
+    .logged-in-gravatar {
       border: 1px solid @list-group-border;
-      border-radius: 5px;
-      color: @list-group-link-color;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 14px;
+      display: grid;
+      height: 35px;
+      place-content: center;
+      width: 35px;
+    }
+
+    .button-fa-icon {
+      background-color: @body-bg;
+      color: @list-group-link-color;
       padding: 10px;
 
       &:hover {
         background-color: #e9e9e9;
-        border-radius: 4px;
       }
     }
   }
 
-  .logged_in .fa-user {
-    color: #da2037;
+  .logged_in {
+    place-content: center;
   }
 }
 
@@ -146,10 +150,4 @@ nav {
 .menu-items {
   grid-area: menu;
   justify-self: center;
-}
-
-@media only screen and (min-width: @screen-xs-max) {
-  button .fa {
-    font-size: 18px !important;
-  }
 }

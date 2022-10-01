@@ -503,7 +503,7 @@ function processUserData() {
 
 function showUserData(user_data) {
     // User is logged in, so show it
-    $('.logged_in').css('display', 'inline');
+    $('.logged_in').css('display', 'grid');
 
     // process users current favs
     $.each(user_data.faves, function(index, value) {
