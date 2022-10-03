@@ -2,11 +2,15 @@ package MetaCPAN::Web::RenderUtil;
 
 use strict;
 use warnings;
-use Sub::Exporter -setup => { exports => [qw(filter_html)], };
+use Exporter qw(import);
 
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
+
+our @EXPORT_OK = qw(
+    filter_html
+);
 
 sub filter_html {
     my ( $html, $data ) = @_;
