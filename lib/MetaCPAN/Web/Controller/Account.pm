@@ -4,6 +4,8 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+use JSON::MaybeXS ();
+
 sub auto : Private {
     my ( $self, $c ) = @_;
 
@@ -30,12 +32,14 @@ sub login_status : Local : Args(0) : Auth(0) {
     my ( $self, $c ) = @_;
     $c->stash( { current_view => 'JSON' } );
 
-    if ( $c->user ) {
-        $c->stash->{json}{logged_in} = \1;
+    my $output = $c->{stash}{json} ||= {};
+
+    if ( my $user = $c->user ) {
+        $output->{logged_in} = JSON::MaybeXS::true;
         $c->forward('/account/favorite/list_as_json');
     }
     else {
-        $c->stash->{json}{logged_in} = \0;
+        $c->stash->{json}{logged_in} = JSON::MaybeXS::false;
         $c->cdn_max_age('30d');
     }
 }
