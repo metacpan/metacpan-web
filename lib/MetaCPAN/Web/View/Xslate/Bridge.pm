@@ -10,9 +10,8 @@ use Text::MultiMarkdown       ();
 use List::Util                ();
 use DateTime                  ();
 use With::Roles               ();
-use Gravatar::URL             ();
 use Text::Pluralize           ();
-use MetaCPAN::Web::RenderUtil ();
+use MetaCPAN::Web::RenderUtil qw( gravatar_image );
 use overload                  ();
 
 my $num_formatter = Number::Format->new;
@@ -137,21 +136,6 @@ sub datetime {
             || $tz->isa('DateTime::TimeZone::Floating');
         return $datetime->with::roles('MetaCPAN::Web::Role::Date');
     }
-}
-
-sub gravatar_image {
-    my ( $author, $size ) = @_;
-    my $email
-        = ( $author && $author->{pauseid} )
-        ? $author->{pauseid} . '@cpan.org'
-        : q{};
-    return Gravatar::URL::gravatar_url(
-        https   => 1,
-        base    => 'https://www.gravatar.com/avatar/',
-        email   => $email,
-        size    => $size || 80,
-        default => 'identicon',
-    );
 }
 
 sub pluralize {

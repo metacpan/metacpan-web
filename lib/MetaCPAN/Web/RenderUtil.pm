@@ -7,9 +7,11 @@ use Exporter qw(import);
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
+use Gravatar::URL  ();
 
 our @EXPORT_OK = qw(
     filter_html
+    gravatar_image
 );
 
 sub filter_html {
@@ -131,6 +133,21 @@ sub filter_html {
         },
     );
     $hr->process($html);
+}
+
+sub gravatar_image {
+    my ( $author, $size ) = @_;
+    my $email
+        = ( $author && $author->{pauseid} )
+        ? $author->{pauseid} . '@cpan.org'
+        : q{};
+    return Gravatar::URL::gravatar_url(
+        https   => 1,
+        base    => 'https://www.gravatar.com/avatar/',
+        email   => $email,
+        size    => $size || 80,
+        default => 'identicon',
+    );
 }
 
 1;
