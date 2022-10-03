@@ -4,6 +4,9 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
+use MetaCPAN::Web::RenderUtil ();
+use JSON::MaybeXS             ();
+
 sub auto : Private {
     my ( $self, $c ) = @_;
 
@@ -30,12 +33,21 @@ sub login_status : Local : Args(0) : Auth(0) {
     my ( $self, $c ) = @_;
     $c->stash( { current_view => 'JSON' } );
 
-    if ( $c->user ) {
-        $c->stash->{json}{logged_in} = \1;
+    my $output = $c->{stash}{json} ||= {};
+
+    if ( my $user = $c->user ) {
+        $output->{logged_in} = JSON::MaybeXS::true;
+        if ( my $pause_id = $user->pause_id ) {
+
+            # this is not a complete author record, but enough for now
+            $output->{author} = { pauseid => $pause_id, };
+            $output->{avatar} = MetaCPAN::Web::RenderUtil::gravatar_image(
+                $output->{author}, 35 );
+        }
         $c->forward('/account/favorite/list_as_json');
     }
     else {
-        $c->stash->{json}{logged_in} = \0;
+        $c->stash->{json}{logged_in} = JSON::MaybeXS::false;
         $c->cdn_max_age('30d');
     }
 }

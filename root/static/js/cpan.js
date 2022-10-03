@@ -501,12 +501,12 @@ function processUserData() {
     getFavDataFromServer();
 }
 
-function showUserData(fav_data) {
+function showUserData(user_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'inline');
 
     // process users current favs
-    $.each(fav_data.faves, function(index, value) {
+    $.each(user_data.faves, function(index, value) {
         var distribution = value.distribution;
 
         // On the page... make it deltable and styled as 'active'
