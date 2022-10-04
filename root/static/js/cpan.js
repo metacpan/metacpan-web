@@ -484,10 +484,32 @@ function set_page_size(selector, storage_name) {
     });
 }
 
+// poor man's RFC-6570 formatter
+function format_string(input_string, replacements) {
+    const output_string = input_string.replace(
+        /\{(\/?)(\w+)\}/g,
+        (x, slash, placeholder) =>
+        replacements.hasOwnProperty(placeholder) ?
+        slash + replacements[placeholder] : ''
+    );
+    return output_string;
+}
+
 function showUserData(user_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'grid');
     $('.logged_placeholder').css('display', 'none');
+    if (user_data.avatar) {
+        const avatar = document.createElement('img');
+        avatar.classList.add('logged-in-avatar');
+
+        // could use srcset
+        avatar.src = format_string(user_data.avatar, {
+            size: Math.floor(35 * window.devicePixelRatio)
+        });
+        avatar.crossorigin = 'anonymous';
+        document.querySelector('.logged_in .logged-in-icon').replaceWith(avatar);
+    }
 
     // process users current favs
     $.each(user_data.faves, function(index, value) {
