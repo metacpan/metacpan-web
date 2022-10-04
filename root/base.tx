@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
+        <link rel="preload" as="fetch" href="/account/login_status" crossorigin="anonymous" />
         %%  if $rss {
         <link rel="alternate" type="application/rss+xml" title="[% $rss_title || 'RSS'; %]" href="[% $rss %]" />
         %%  }
@@ -125,9 +126,7 @@
                 <form action="/account/logout" method="POST" id="metacpan-logout"></form>
                 <li class="dropdown logged_in" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                      <!--Add the below back in once we have a way to store a logged in user's gravatar-->
-                      <!--<img class="logged-in-gravatar" src="[% gravatar_image() %]">-->
-                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                      <i class="fa fa-user button-fa-icon logged-in-icon" aria-hidden="true"></i>
                       <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">

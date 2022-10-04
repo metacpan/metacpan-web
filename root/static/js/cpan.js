@@ -484,27 +484,32 @@ function set_page_size(selector, storage_name) {
     });
 }
 
-function processUserData() {
-
-    // Could do some fancy localStorage thing here
-    // but as the user favs data is cached at fastly
-    // not worth the effort yet
-
-    // TODO: get this working to save hits and 403's
-    // if(document.cookie.match('metacpan_secure')) {
-    //   getFavDataFromServer();
-    // } else {
-    //   // Can't be logged in
-    //   $('.logged_out').css('display', 'inline');
-    // }
-
-    getFavDataFromServer();
+// poor man's RFC-6570 formatter
+function format_string(input_string, replacements) {
+    const output_string = input_string.replace(
+        /\{(\/?)(\w+)\}/g,
+        (x, slash, placeholder) =>
+        replacements.hasOwnProperty(placeholder) ?
+        slash + replacements[placeholder] : ''
+    );
+    return output_string;
 }
 
 function showUserData(user_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'grid');
     $('.logged_placeholder').css('display', 'none');
+    if (user_data.avatar) {
+        const avatar = document.createElement('img');
+        avatar.classList.add('logged-in-avatar');
+
+        // could use srcset
+        avatar.src = format_string(user_data.avatar, {
+            size: Math.floor(35 * window.devicePixelRatio)
+        });
+        avatar.crossorigin = 'anonymous';
+        document.querySelector('.logged_in .logged-in-icon').replaceWith(avatar);
+    }
 
     // process users current favs
     $.each(user_data.faves, function(index, value) {
@@ -524,24 +529,20 @@ function showUserData(user_data) {
 
 }
 
-function getFavDataFromServer() {
-    $.ajax({
-        type: 'GET',
-        url: '/account/login_status',
-        success: function(databack) {
-            if (databack.logged_in) {
-                showUserData(databack);
+function processUserData() {
+    fetch('/account/login_status')
+        .then(res => res.json())
+        .then(data => {
+            if (data.logged_in) {
+                showUserData(data);
             } else {
                 $('.logged_out').css('display', 'inline');
             }
             $('.logged_placeholder').css('display', 'none');
-        },
-        error: function() {
-            // Can't be logged in, should be getting 403
+        })
+        .catch(() => {
             $('.logged_out').css('display', 'inline');
-            $('.logged_placeholder').css('display', 'none');
-        }
-    });
+        });
     return true;
 }
 
