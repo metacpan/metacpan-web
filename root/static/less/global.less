@@ -493,6 +493,12 @@ form#metacpan_logout {
     width: 100%;
 }
 
+// Nested content classes create too much padding
+// especially on mobile devices
+.content .content {
+  padding: 0;
+}
+
 .site-alert-message {
     text-align: center;
     margin: 1px 15% 20px;
@@ -543,4 +549,16 @@ form#metacpan_logout {
 
 * {
   scroll-margin-top: 80px;
+}
+
+.no-sidebar .nav-list-container,
+.no-sidebar .icon-slidepanel {
+    display: none !important;
+}
+
+.no-sidebar .page-content {
+    align-items: center;
+    grid-template-areas: 'content';
+    grid-template-columns: 1fr;
+    justify-content: center;
 }

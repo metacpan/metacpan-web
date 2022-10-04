@@ -104,7 +104,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <button type="button" class="searchbar-btn visible-xs visible-sm">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search button-fa-icon"></i>
                 </button>
                 <form action="/search" class="searchbar-form visible-md visible-lg search-form form-horizontal">
                    <input type="hidden" name="size" id="metacpan_search-size" value="20">
@@ -115,10 +115,20 @@
                       </div>
                   </div>
                 </form>
+                %% if ! $current['/'] {
+                    <li class="icon-slidepanel visible-xs visible-sm">
+                      <button data-toggle="slidepanel" data-target=".slidepanel">
+                        <i class="fa fa-bars button-fa-icon"></i>
+                      </button>
+                    </li>
+                %% }
                 <form action="/account/logout" method="POST" id="metacpan-logout"></form>
                 <li class="dropdown logged_in" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <!--Add the below back in once we have a way to store a logged in user's gravatar-->
+                      <!--<img class="logged-in-gravatar" src="[% gravatar_image() %]">-->
+                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                      <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="/account/identities">Identities</a></li>
@@ -133,7 +143,8 @@
                 </li>
                 <li class="dropdown logged_out" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user" aria-hidden="true"></i>
+                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                      <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">
                         %%  for ['GitHub', 'Twitter', 'Google'] -> $identity {
@@ -146,13 +157,11 @@
                         %%  }
                     </ul>
                 </li>
-                %% if ! $current['/'] {
-                    <li class="visible-xs visible-sm">
-                      <button data-toggle="slidepanel" data-target=".slidepanel">
-                        <i class="fa fa-bars icon-slidepanel"></i>
-                      </button>
-                    </li>
-                %% }
+                <li class="dropdown logged_placeholder">
+                    <button>
+                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                    </button>
+                </li>
             </ul>
         </nav>
 
