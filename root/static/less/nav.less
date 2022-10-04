@@ -3,7 +3,6 @@
     border-color: @gray-darker;
     border-radius: 0;
     box-shadow: 0 1px 13px 0 ~"rgb(0 0 0 / 10%)", 0 1px 5px 0 ~"rgb(0 0 0 / 6%)";
-    height: 80px;
     margin-bottom: 0;
     position: sticky;
     top: 0;
@@ -88,7 +87,7 @@ nav {
     column-gap: 40px;
     grid-template-areas: 'logo menu icons';
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 20px 40px;
+    padding: 10px 40px;
 }
 
 .navbar-nav {
@@ -102,10 +101,12 @@ nav {
   grid-area: icons;
   justify-self: end;
   margin: 0;
+  overflow-y: hidden;
 
   button {
     background-color: transparent;
     border: 0;
+    padding: 0 6px;
 
     .button-fa-icon,
     .logged-in-avatar {
@@ -136,7 +137,7 @@ nav {
       padding: 5px;
       position: absolute;
       right: 0;
-      top: 25px;
+      top: 22px;
     }
   }
 
