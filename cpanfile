@@ -30,7 +30,6 @@ requires 'File::Path';
 requires 'Future';
 requires 'Gazelle';
 requires 'Getopt::Long::Descriptive';
-requires 'Gravatar::URL';
 requires 'HTML::Escape';
 requires 'HTML::Restrict', '2.2.2';
 requires 'HTML::Tree';
