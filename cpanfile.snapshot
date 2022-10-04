@@ -1822,23 +1822,6 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Gravatar-URL-1.07
-    pathname: M/MS/MSCHWERN/Gravatar-URL-1.07.tar.gz
-    provides:
-      Gravatar::URL 1.07
-      Libravatar::URL 1.07
-      Unicornify::URL 1.07
-    requirements:
-      Carp 0
-      Digest::MD5 0
-      Digest::SHA 0
-      Net::DNS 1.01
-      Test::MockRandom 1.01
-      Test::More 0.4
-      Test::Warn 0.11
-      URI::Escape 0
-      parent 0
-      perl v5.6.0
   Guard-1.023
     pathname: M/ML/MLEHMANN/Guard-1.023.tar.gz
     provides:
@@ -3625,130 +3608,6 @@ DISTRIBUTIONS
       Time::HiRes 0
       URI 0
       perl 5.010
-  Net-DNS-1.34
-    pathname: N/NL/NLNETLABS/Net-DNS-1.34.tar.gz
-    provides:
-      Net::DNS 1.34
-      Net::DNS::Domain 1855
-      Net::DNS::DomainName 1855
-      Net::DNS::DomainName1035 1855
-      Net::DNS::DomainName2535 1855
-      Net::DNS::Header 1855
-      Net::DNS::Mailbox 1855
-      Net::DNS::Mailbox1035 1855
-      Net::DNS::Mailbox2535 1855
-      Net::DNS::Nameserver 1860
-      Net::DNS::Packet 1865
-      Net::DNS::Parameters 1865
-      Net::DNS::Question 1855
-      Net::DNS::RR 1864
-      Net::DNS::RR::A 1857
-      Net::DNS::RR::AAAA 1857
-      Net::DNS::RR::AFSDB 1857
-      Net::DNS::RR::AMTRELAY 1855
-      Net::DNS::RR::APL 1857
-      Net::DNS::RR::APL::Item 1857
-      Net::DNS::RR::CAA 1857
-      Net::DNS::RR::CDNSKEY 1857
-      Net::DNS::RR::CDS 1857
-      Net::DNS::RR::CERT 1856
-      Net::DNS::RR::CNAME 1857
-      Net::DNS::RR::CSYNC 1857
-      Net::DNS::RR::DHCID 1857
-      Net::DNS::RR::DNAME 1857
-      Net::DNS::RR::DNSKEY 1856
-      Net::DNS::RR::DS 1856
-      Net::DNS::RR::EUI48 1857
-      Net::DNS::RR::EUI64 1857
-      Net::DNS::RR::GPOS 1857
-      Net::DNS::RR::HINFO 1857
-      Net::DNS::RR::HIP 1857
-      Net::DNS::RR::HTTPS 1857
-      Net::DNS::RR::IPSECKEY 1857
-      Net::DNS::RR::ISDN 1857
-      Net::DNS::RR::KEY 1857
-      Net::DNS::RR::KX 1857
-      Net::DNS::RR::L32 1857
-      Net::DNS::RR::L64 1857
-      Net::DNS::RR::LOC 1857
-      Net::DNS::RR::LP 1857
-      Net::DNS::RR::MB 1857
-      Net::DNS::RR::MG 1857
-      Net::DNS::RR::MINFO 1857
-      Net::DNS::RR::MR 1857
-      Net::DNS::RR::MX 1857
-      Net::DNS::RR::NAPTR 1857
-      Net::DNS::RR::NID 1857
-      Net::DNS::RR::NS 1857
-      Net::DNS::RR::NSEC 1857
-      Net::DNS::RR::NSEC3 1857
-      Net::DNS::RR::NSEC3PARAM 1857
-      Net::DNS::RR::NULL 1857
-      Net::DNS::RR::OPENPGPKEY 1857
-      Net::DNS::RR::OPT 1864
-      Net::DNS::RR::OPT::CHAIN 1864
-      Net::DNS::RR::OPT::CLIENT_SUBNET 1864
-      Net::DNS::RR::OPT::COOKIE 1864
-      Net::DNS::RR::OPT::DAU 1864
-      Net::DNS::RR::OPT::DHU 1864
-      Net::DNS::RR::OPT::EXPIRE 1864
-      Net::DNS::RR::OPT::EXTENDED_ERROR 1864
-      Net::DNS::RR::OPT::KEY_TAG 1864
-      Net::DNS::RR::OPT::N3U 1864
-      Net::DNS::RR::OPT::PADDING 1864
-      Net::DNS::RR::OPT::TCP_KEEPALIVE 1864
-      Net::DNS::RR::PTR 1857
-      Net::DNS::RR::PX 1857
-      Net::DNS::RR::RP 1857
-      Net::DNS::RR::RRSIG 1856
-      Net::DNS::RR::RT 1857
-      Net::DNS::RR::SIG 1856
-      Net::DNS::RR::SMIMEA 1857
-      Net::DNS::RR::SOA 1857
-      Net::DNS::RR::SPF 1857
-      Net::DNS::RR::SRV 1857
-      Net::DNS::RR::SSHFP 1857
-      Net::DNS::RR::SVCB 1857
-      Net::DNS::RR::TKEY 1857
-      Net::DNS::RR::TLSA 1857
-      Net::DNS::RR::TSIG 1856
-      Net::DNS::RR::TXT 1857
-      Net::DNS::RR::URI 1857
-      Net::DNS::RR::X25 1857
-      Net::DNS::RR::ZONEMD 1857
-      Net::DNS::Resolver 1855
-      Net::DNS::Resolver::Base 1864
-      Net::DNS::Resolver::MSWin32 1856
-      Net::DNS::Resolver::Recurse 1856
-      Net::DNS::Resolver::UNIX 1856
-      Net::DNS::Resolver::android 1856
-      Net::DNS::Resolver::cygwin 1856
-      Net::DNS::Resolver::os2 1856
-      Net::DNS::Resolver::os390 1856
-      Net::DNS::Text 1855
-      Net::DNS::Update 1855
-      Net::DNS::ZoneFile 1855
-      Net::DNS::ZoneFile::Generator 1855
-      Net::DNS::ZoneFile::Text 1855
-    requirements:
-      Carp 1.1
-      Digest::HMAC 1.03
-      Digest::MD5 2.13
-      Digest::SHA 5.23
-      Encode 2.26
-      Exporter 5.56
-      ExtUtils::MakeMaker 6.66
-      File::Spec 0.86
-      Getopt::Long 2.43
-      IO::File 1.08
-      IO::Select 1.14
-      IO::Socket 1.26
-      IO::Socket::IP 0.38
-      MIME::Base64 2.13
-      PerlIO 1.05
-      Scalar::Util 1.25
-      Time::Local 1.19
-      perl 5.008009
   Net-Fastly-1.12
     pathname: F/FA/FASTLY/Net-Fastly-1.12.tar.gz
     provides:
@@ -5248,15 +5107,6 @@ DISTRIBUTIONS
       UNIVERSAL::isa 1.20110614
       constant 0
       perl 5.008
-      strict 0
-      warnings 0
-  Test-MockRandom-1.01
-    pathname: D/DA/DAGOLDEN/Test-MockRandom-1.01.tar.gz
-    provides:
-      Test::MockRandom 1.01
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
       strict 0
       warnings 0
   Test-Most-0.38

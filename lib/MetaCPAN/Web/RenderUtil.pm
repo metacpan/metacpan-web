@@ -7,7 +7,7 @@ use Exporter qw(import);
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
-use Gravatar::URL  ();
+use Digest::MD5    ();
 
 our @EXPORT_OK = qw(
     filter_html
@@ -141,13 +141,9 @@ sub gravatar_image {
         = ( $author && $author->{pauseid} )
         ? $author->{pauseid} . '@cpan.org'
         : q{};
-    return Gravatar::URL::gravatar_url(
-        https   => 1,
-        base    => 'https://www.gravatar.com/avatar/',
-        email   => $email,
-        size    => $size || 80,
-        default => 'identicon',
-    );
+    my $grav_id = Digest::MD5::md5_hex( lc $email );
+    return sprintf 'https://www.gravatar.com/avatar/%s?d=identicon&s=%s',
+        $grav_id, $size // 80;
 }
 
 1;

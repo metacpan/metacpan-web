@@ -42,7 +42,7 @@ sub login_status : Local : Args(0) : Auth(0) {
             # this is not a complete author record, but enough for now
             $output->{author} = { pauseid => $pause_id, };
             $output->{avatar} = MetaCPAN::Web::RenderUtil::gravatar_image(
-                $output->{author}, 35 );
+                $output->{author}, '{size}' );
         }
         $c->forward('/account/favorite/list_as_json');
     }
