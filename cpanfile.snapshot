@@ -2269,14 +2269,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-4.09
-    pathname: I/IS/ISHIGAKI/JSON-4.09.tar.gz
-    provides:
-      JSON 4.09
-      JSON::Backend::PP 4.09
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   JSON-MaybeXS-1.004004
     pathname: E/ET/ETHER/JSON-MaybeXS-1.004004.tar.gz
     provides:
@@ -3633,13 +3625,6 @@ DISTRIBUTIONS
       Time::HiRes 0
       URI 0
       perl 5.010
-  Net-CIDR-Lite-0.22
-    pathname: S/ST/STIGTSP/Net-CIDR-Lite-0.22.tar.gz
-    provides:
-      Net::CIDR::Lite 0.22
-      Net::CIDR::Lite::Span 0.22
-    requirements:
-      ExtUtils::MakeMaker 0
   Net-DNS-1.34
     pathname: N/NL/NLNETLABS/Net-DNS-1.34.tar.gz
     provides:
@@ -4179,20 +4164,6 @@ DISTRIBUTIONS
       Test::Requires 0
       Test::SharedFork 0
       perl 5.008001
-  Parallel-Scoreboard-0.08
-    pathname: K/KA/KAZUHO/Parallel-Scoreboard-0.08.tar.gz
-    provides:
-      Parallel::Scoreboard 0.08
-      Parallel::Scoreboard::PSGI::App undef
-      Parallel::Scoreboard::PSGI::App::JSON undef
-    requirements:
-      Class::Accessor::Lite 0.05
-      ExtUtils::MakeMaker 6.36
-      File::Temp 0
-      HTML::Entities 0
-      JSON 0
-      Test::More 0
-      Test::Warn 0
   Params-Util-1.102
     pathname: R/RE/REHSACK/Params-Util-1.102.tar.gz
     provides:
@@ -4745,20 +4716,6 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  Plack-Middleware-ServerStatus-Lite-0.36
-    pathname: K/KA/KAZEBURO/Plack-Middleware-ServerStatus-Lite-0.36.tar.gz
-    provides:
-      Plack::Middleware::ServerStatus::Lite 0.36
-    requirements:
-      Getopt::Long 2.38
-      JSON 2.53
-      Module::Build 0.38
-      Net::CIDR::Lite 0
-      Parallel::Scoreboard 0.03
-      Plack::Middleware 0
-      Pod::Usage 0
-      Try::Tiny 0.09
-      parent 0
   Plack-Middleware-Session-0.33
     pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.33.tar.gz
     provides:

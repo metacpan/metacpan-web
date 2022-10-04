@@ -61,7 +61,6 @@ requires 'Path::Tiny', '0.076';
 requires 'Plack', '1.0039';
 requires 'Plack::Middleware::ReverseProxy';
 requires 'Plack::Middleware::Runtime';
-requires 'Plack::Middleware::ServerStatus::Lite';
 requires 'Plack::Middleware::Session', '0.22';
 requires 'Plack::Middleware::Session::Cookie';
 requires 'Plack::Session';
