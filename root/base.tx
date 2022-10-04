@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
+        <link rel="preload" as="fetch" href="/account/login_status" crossorigin="anonymous" />
         %%  if $rss {
         <link rel="alternate" type="application/rss+xml" title="[% $rss_title || 'RSS'; %]" href="[% $rss %]" />
         %%  }

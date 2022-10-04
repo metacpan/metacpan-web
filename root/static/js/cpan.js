@@ -484,23 +484,6 @@ function set_page_size(selector, storage_name) {
     });
 }
 
-function processUserData() {
-
-    // Could do some fancy localStorage thing here
-    // but as the user favs data is cached at fastly
-    // not worth the effort yet
-
-    // TODO: get this working to save hits and 403's
-    // if(document.cookie.match('metacpan_secure')) {
-    //   getFavDataFromServer();
-    // } else {
-    //   // Can't be logged in
-    //   $('.logged_out').css('display', 'inline');
-    // }
-
-    getFavDataFromServer();
-}
-
 function showUserData(user_data) {
     // User is logged in, so show it
     $('.logged_in').css('display', 'grid');
@@ -524,24 +507,20 @@ function showUserData(user_data) {
 
 }
 
-function getFavDataFromServer() {
-    $.ajax({
-        type: 'GET',
-        url: '/account/login_status',
-        success: function(databack) {
-            if (databack.logged_in) {
-                showUserData(databack);
+function processUserData() {
+    fetch('/account/login_status')
+        .then(res => res.json())
+        .then(data => {
+            if (data.logged_in) {
+                showUserData(data);
             } else {
                 $('.logged_out').css('display', 'inline');
             }
             $('.logged_placeholder').css('display', 'none');
-        },
-        error: function() {
-            // Can't be logged in, should be getting 403
+        })
+        .catch(() => {
             $('.logged_out').css('display', 'inline');
-            $('.logged_placeholder').css('display', 'none');
-        }
-    });
+        });
     return true;
 }
 
