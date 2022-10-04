@@ -122,17 +122,6 @@ builder {
     };
     enable 'Runtime';
 
-    unless ( $ENV{HARNESS_ACTIVE} or $0 =~ /\.t$/ ) {
-        my $scoreboard = "$tempdir/scoreboard";
-        File::Path::make_path($scoreboard);
-
-        enable 'ServerStatus::Lite' => (
-            path       => '/server-status',
-            allow      => ['127.0.0.1'],
-            scoreboard => $scoreboard,
-        );
-    }
-
     enable 'FixMissingBodyInRedirect';
 
     enable '+MetaCPAN::Middleware::OldUrls';
