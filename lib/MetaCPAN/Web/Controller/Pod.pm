@@ -3,7 +3,7 @@ package MetaCPAN::Web::Controller::Pod;
 use Moose;
 
 use Future                    ();
-use MetaCPAN::Web::RenderUtil qw( filter_html );
+use MetaCPAN::Web::RenderUtil qw( filter_html split_index );
 
 use namespace::autoclean;
 
@@ -77,7 +77,8 @@ sub view : Private {
     )->get;
     $c->detach('/not_found') if ( $pod->{code} || 0 ) > 399;
 
-    my $pod_html = filter_html( $pod->{raw}, $data );
+    my ( $pod_index, $pod_html ) = split_index( $pod->{raw} );
+    $_ = filter_html( $_, $data ) for $pod_index, $pod_html;
 
     my $release = $c->stash->{release};
 
@@ -98,6 +99,7 @@ sub view : Private {
         documented_module => $documented_module,
         module            => $data,
         pod               => $pod_html,
+        pod_index         => $pod_index,
         template          => 'pod.tx',
     } );
 

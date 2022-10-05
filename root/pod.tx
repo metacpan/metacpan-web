@@ -35,8 +35,13 @@
   </li>
 %%  }
 %%  override page_content -> {
+%%  if $pod_index {
+<nav class="toc pull-right">
+  <div class="toc-header"><strong>Contents</strong></div>
+%%    $pod_index | mark_raw;
+</nav>
+%%  }
 <div class="pod anchors">
-  <a name="___pod"></a>
   %%  if $pod {
   %%    $pod | mark_raw;
   %%  }

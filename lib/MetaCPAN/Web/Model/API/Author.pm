@@ -61,6 +61,8 @@ sub get {
 
 sub get_multiple {
     my ( $self, @authors ) = @_;
+    return Future->done( { took => 0, total => 0, authors => [] } )
+        if !@authors;
     return $self->request( '/author/by_ids', { id => [ map uc, @authors ] } )
         ->transform(
         done => sub {

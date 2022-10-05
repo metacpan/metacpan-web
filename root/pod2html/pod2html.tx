@@ -33,6 +33,6 @@
   </div>
 </div>
 <div class="content">
-    <div id="metacpan-pod-renderer-output" class="pod anchors" [% if !$pod_rendered { %]style="display: none"[% } %]>[% $pod_rendered | raw %]</div>
+    <div id="metacpan-pod-renderer-output" class="pod anchors" [% if !$pod_rendered { %]style="display: none"[% } %]><nav class="pod-index">[% $pod_index %]</nav>[% $pod_rendered | raw %]</div>
 </div>
 %%  }

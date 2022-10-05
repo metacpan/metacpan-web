@@ -1,5 +1,4 @@
 package MetaCPAN::Web::RenderUtil;
-
 use strict;
 use warnings;
 use Exporter qw(import);
@@ -12,6 +11,7 @@ use Digest::MD5    ();
 our @EXPORT_OK = qw(
     filter_html
     gravatar_image
+    split_index
 );
 
 sub filter_html {
@@ -41,6 +41,7 @@ sub filter_html {
             i       => [],
             li      => ['id'],
             ol      => [],
+            nav     => [],
             p       => [],
             pre     => [ {
                 class        => qr/^line-numbers$/,
@@ -59,7 +60,7 @@ sub filter_html {
             td     => [qw( colspan rowspan )],
             tr     => [],
             u      => [],
-            ul     => [ { id => qr/^index$/ } ],
+            ul     => [],
 
             #
             # SVG tags.
@@ -144,6 +145,14 @@ sub gravatar_image {
     my $grav_id = Digest::MD5::md5_hex( lc $email );
     return sprintf 'https://www.gravatar.com/avatar/%s?d=identicon&s=%s',
         $grav_id, $size // 80;
+}
+
+sub split_index {
+    my ($html) = @_;
+    $html =~ s{\A<ul id="index">(.*?^</ul>\n?)}{<nav><ul>$1</nav>}ms;
+    $html =~ s{\A<nav>(.*?)</nav>\n*}{}s;
+    my $pod_index = $1;
+    return ( $pod_index, $html );
 }
 
 1;

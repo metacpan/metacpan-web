@@ -4,7 +4,7 @@ use Moose;
 
 use Encode                    qw( decode DIE_ON_ERR encode LEAVE_SRC );
 use HTML::TokeParser          ();
-use MetaCPAN::Web::RenderUtil qw( filter_html );
+use MetaCPAN::Web::RenderUtil qw( filter_html split_index );
 use Future                    ();
 
 use namespace::autoclean;
@@ -13,6 +13,8 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub render_pod {
     my ( $c, $pod ) = @_;
+    return Future->done( {} )
+        if !length $pod;
     my $html = $c->model('API')->request(
         'pod_render',
         undef,
@@ -22,7 +24,12 @@ sub render_pod {
         },
         'POST'
     )->then( sub {
-        Future->done( filter_html( $_[0]->{raw} ) );
+        my ( $index, $pod ) = split_index( $_[0]->{raw} );
+        $_ = filter_html($_) for ( $index, $pod );
+        Future->done( {
+            pod       => $pod,
+            pod_index => $index,
+        } );
     } );
 }
 
@@ -40,17 +47,22 @@ sub pod2html : Path : Args(0) {
         $pod = $c->req->parameters->{pod} // q{};
     }
 
-    my $html = length $pod ? render_pod( $c, $pod )->get : q{};
+    my $pod_data = render_pod($pod)->get;
+    my $html     = $pod_data->{pod} // q{};
 
     if ( $c->req->parameters->{raw} ) {
         $c->res->content_type('text/html');
         $c->res->body($html);
         $c->detach;
     }
+    elsif ( $c->req->accepts('application/json') ) {
+        $c->stash( { current_view => 'JSON' } );
+    }
 
     $c->stash( {
         pod          => $pod,
         pod_rendered => $html,
+        pod_index    => $pod_data->{pod_index},
         ( length $html ? %{ pod_info($html) } : () ),
     } );
 }
