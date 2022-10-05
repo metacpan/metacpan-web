@@ -11,735 +11,380 @@ use Digest::SHA ();
 # normally use a new file name. If it's a minor change where it is acceptable
 # for users to use the old files, then updating the hash can be done instead.
 
-my %files = (
-    'root/static/icons/apple-touch-icon.png' =>
-        'b0697c267731b7ee53e8e7a3bbd9f6476c0ba29a',
-    'root/static/icons/asc.gif' => '05fa1fbc4b6541c3e8176d235766fa0e411e9931',
-    'root/static/icons/bg.gif'  => '307311e1752fa2c8dc63c91c684f2f1db3bc0a98',
-    'root/static/icons/box.png' => 'f423bac33e39d81888cdf716b988a3200e5dba8b',
-    'root/static/icons/busy.gif' =>
-        'f28f919102d9971f6f433465b37d3213f16f7c52',
-    'root/static/icons/desc.gif' =>
-        '4177aef38e79be4088aca7350ef215cc053c3c9a',
-    'root/static/icons/favicon-16.ico' =>
-        '9352147a2cb97acb161f21202e9bfec29b6faa30',
-    'root/static/icons/favicon.ico' =>
-        '2ef4ad41df53e9361604fc7e110d28949e972b8f',
-    'root/static/icons/folder.png' =>
-        '0a32f6efba1dd71fd2250e2de12261948c4316a8',
-    'root/static/icons/grid.png' =>
-        'a7f7eaa459a8decc892ad92e5e3a376b0f3d568f',
-    'root/static/icons/icon-rss.png' =>
-        '2a9659e15773869426894fe38acff4b797e17b65',
-    'root/static/icons/package.png' =>
-        'cbb30244c85540bedd8761b1394cb5162c98c6b6',
-    'root/static/icons/page_white.png' =>
-        'aa842d887b715e457517c3a6d5006189275e12fd',
-    'root/static/icons/page_white_c.png' =>
-        '99fff2092bff6da46ee47f0532de09c21bc821c4',
-    'root/static/icons/page_white_code.png' =>
-        'ca4e1d75b1288f162d5a99243fe031c96442f541',
-    'root/static/icons/rss_feed.png' =>
-        '11766cf1b41df71b6051824a94485f91a2283cff',
-    'root/static/icons/server.png' =>
-        '4d4c0a13206474e65e616e42c7505c6357d63030',
-    'root/static/icons/settings.png' =>
-        '93115fa16327db30c2fb7b7d580dd6c9499f82f5',
-    'root/static/images/flag/ad.png' =>
-        'e911cb9d9a42de8fb6e5b32000d706e0dfd15e0d',
-    'root/static/images/flag/ae.png' =>
-        '39538335bae98862327e5f0f2fb01417b7a917e4',
-    'root/static/images/flag/af.png' =>
-        '5b307e408905ffa3e3ea4544192f0530408c05aa',
-    'root/static/images/flag/ag.png' =>
-        '1a85e66186b9ba2b9fa4513e125ab8433802680f',
-    'root/static/images/flag/ai.png' =>
-        '6d0d3aa711e0fc67965771301ba40daba963047c',
-    'root/static/images/flag/al.png' =>
-        '98d08f282b0ad09de99d5bb46fdf239ada3f1803',
-    'root/static/images/flag/am.png' =>
-        'b8f6f60729242aabf0713f9202f508859e88ba38',
-    'root/static/images/flag/an.png' =>
-        '7a5893399cf9620a40796dda067ed38bf417a991',
-    'root/static/images/flag/ao.png' =>
-        'd1c3b3b2daf5d6b7b2d28c6d6ef0ec853d526dcc',
-    'root/static/images/flag/ar.png' =>
-        '9dca235e23e08eefda6961f75b013aa842cfefab',
-    'root/static/images/flag/as.png' =>
-        'b92a1e33457042ef85a7fe5d8b664144edab5fb9',
-    'root/static/images/flag/at.png' =>
-        'd1db90067b0ef65f154ee98c3b519d94a96b2a86',
-    'root/static/images/flag/au.png' =>
-        '0a429d27ec29a89a73ffaa2417a46e9891272073',
-    'root/static/images/flag/aw.png' =>
-        '482b104bb581f924d3c791db353a6191ee3ff213',
-    'root/static/images/flag/ax.png' =>
-        '95583809efd2067fec7f17088879747a614f8d4c',
-    'root/static/images/flag/az.png' =>
-        'e27724a4b1e0fdbeb0b0cd665929f484957f185c',
-    'root/static/images/flag/ba.png' =>
-        '784749e3a74a23d7d727b784d38014f85023b360',
-    'root/static/images/flag/bb.png' =>
-        '95f3ab56924277772631be80050038cdb86623d9',
-    'root/static/images/flag/bd.png' =>
-        '9706183c65453b65742fd8186c4b5b6ffb30a3b6',
-    'root/static/images/flag/be.png' =>
-        '00d39a4b367f56e5fab21ce6c9ba80c6bafecac4',
-    'root/static/images/flag/bf.png' =>
-        'f330216d23edc0c8a17496a18d3096625a2ebea7',
-    'root/static/images/flag/bg.png' =>
-        '5eae79249a224ab3ed1b3aeafae2e5e4099b3d37',
-    'root/static/images/flag/bh.png' =>
-        '3d9d74c3f627fceeb3fee278ee597ca3e7ffb049',
-    'root/static/images/flag/bi.png' =>
-        '2b1ed31abd59f973d7afc3e2591959a40b0067ad',
-    'root/static/images/flag/bj.png' =>
-        '28b63102ea24b59ea7a80eb5600da5d4a970123f',
-    'root/static/images/flag/bm.png' =>
-        '697ad5b4f9bc22bcea267e0d7a627c801dcbdac3',
-    'root/static/images/flag/bn.png' =>
-        '4b4b9ec1c7174ed64890f3adf9bd79a5aef7171d',
-    'root/static/images/flag/bo.png' =>
-        '1a3e81e40fd68d08a742ee4968824248e0632708',
-    'root/static/images/flag/br.png' =>
-        'a2cf9dbf05d87704f99045accf0d08e1425fb32f',
-    'root/static/images/flag/bs.png' =>
-        'ba0fd8d1e2d15a48e31d7375a626c5f5f79d6461',
-    'root/static/images/flag/bt.png' =>
-        'b72990713eea108215446f35c821cbd9a7b3be8f',
-    'root/static/images/flag/bv.png' =>
-        '2f9fe5a2a67940137caf58f8002133b18ee31f2a',
-    'root/static/images/flag/bw.png' =>
-        '281f414c3008840fbcc1f7b6e7c357499d6a83fc',
-    'root/static/images/flag/by.png' =>
-        '6d3de005757093466320d64cb5a3b54a027865b6',
-    'root/static/images/flag/bz.png' =>
-        '477a70be7b8a5869b64cbc75df17f55ad6f736ff',
-    'root/static/images/flag/ca.png' =>
-        '26ec0544aa2c524130b5d96795e739e9596304d2',
-    'root/static/images/flag/catalonia.png' =>
-        '3397f24cb7c8d84081c1f1d3122b5b90ebe866c9',
-    'root/static/images/flag/cc.png' =>
-        '6e7351c214679bc4e2b6f4f62f2352c2cb0c8e39',
-    'root/static/images/flag/cd.png' =>
-        'fe80616d2455fcfcc13f975171f792ca973a5616',
-    'root/static/images/flag/cf.png' =>
-        '4d76d63b0a09c37b02f201f5e4b3ba21795cf012',
-    'root/static/images/flag/cg.png' =>
-        '7995e34f7dfba4ca7b47d1d015a97338bf37e94b',
-    'root/static/images/flag/ch.png' =>
-        'ffecd34cb512b36341bd6c9683baa33c4deec3c9',
-    'root/static/images/flag/ci.png' =>
-        'f43df8f9bd028e3a6dd83f9cc8e47e98599892d8',
-    'root/static/images/flag/ck.png' =>
-        'd2c9a622bf8e1beca16464c2eaaa4e5d5a09e8d0',
-    'root/static/images/flag/cl.png' =>
-        '994cfce1d1f083d3b46a666286c614f59320ff21',
-    'root/static/images/flag/cm.png' =>
-        'e74bfb0bdf4fa4656bf1cbec9b34ceb23f8b369f',
-    'root/static/images/flag/cn.png' =>
-        '365bd1659bbcafdc82f35dcb001d3c0df0a83958',
-    'root/static/images/flag/co.png' =>
-        '6e691ea9d54ef2c32902bec2a28b71487d900362',
-    'root/static/images/flag/cr.png' =>
-        '4e4e66d500c55c4fd8e60756b7963558669d8856',
-    'root/static/images/flag/cs.png' =>
-        'b74d80e2c9f14c0c6c0be367edb790b2f947afed',
-    'root/static/images/flag/ct.png' =>
-        '3397f24cb7c8d84081c1f1d3122b5b90ebe866c9',
-    'root/static/images/flag/cu.png' =>
-        '6942ad8099b6a817ff9e4ec0deb868c44e6798c0',
-    'root/static/images/flag/cv.png' =>
-        '73e19e3328f5d5a577bc9e8ffea164487dfb2a5b',
-    'root/static/images/flag/cx.png' =>
-        '4cb5ed68bce93854f764936e2fe0e46c1a767b03',
-    'root/static/images/flag/cy.png' =>
-        '50da1a464b09a41defb32f03f5682f2f3f9d0d33',
-    'root/static/images/flag/cz.png' =>
-        'f4bc80d7669437587afdba1ea3ef808fdf0ccc3d',
-    'root/static/images/flag/de.png' =>
-        '2a6881281c20c770cc51fd8fad6b5dfc844f52e4',
-    'root/static/images/flag/dj.png' =>
-        '48e2520333dbd16bbe8cc4974cb27ddd375f0c52',
-    'root/static/images/flag/dk.png' =>
-        '4481b6addbfb1bd12531393b77aa059309888a86',
-    'root/static/images/flag/dm.png' =>
-        '7ddbb134472e983d6a9ae7aaa8e32e3d41e49987',
-    'root/static/images/flag/do.png' =>
-        'ce7b1e3a753f5c77f7c333527dbd598e4306476c',
-    'root/static/images/flag/dz.png' =>
-        '2e29e0d502bd9c88480e2d4fe5cadb0b9105e7c2',
-    'root/static/images/flag/ec.png' =>
-        '32999427d28f16c8d25c039aa753011c51ddd281',
-    'root/static/images/flag/ee.png' =>
-        'fc7192549dd41d7bceb120dc861c3d556fbf2b7a',
-    'root/static/images/flag/eg.png' =>
-        'dcc17424d9e7e321d6c1cbe0919604382e05ee51',
-    'root/static/images/flag/eh.png' =>
-        '8b2e0eb4f09e504949821535843cc957345c012c',
-    'root/static/images/flag/england.png' =>
-        '5245d907ee053876ac6b89a6b69cb36954f5029a',
-    'root/static/images/flag/er.png' =>
-        'ff8d1604f15900ee91e09ef6aee4b5589afe8ac6',
-    'root/static/images/flag/es.png' =>
-        '1277ea7d0884edd79781bdb4e5106e31cff1496b',
-    'root/static/images/flag/et.png' =>
-        'ef0188e3ab693b9afa0da41b1b107049f68af751',
-    'root/static/images/flag/europeanunion.png' =>
-        'c1b4ef64acf5d642bf04f8f04c15060aee19612d',
-    'root/static/images/flag/fam.png' =>
-        '75c15561ee643c386b772d9e28c5f6870ffc423b',
-    'root/static/images/flag/fi.png' =>
-        '064c6be220a1dcb2f9283e40dac327b35d0d02a8',
-    'root/static/images/flag/fj.png' =>
-        'cee28895318c27913ff7eec18aa02180b5e2a2d3',
-    'root/static/images/flag/fk.png' =>
-        '101462372662d05d2cc95241f0e5ad6641e64763',
-    'root/static/images/flag/fm.png' =>
-        '75cb037deec281fc4c42b4973f4f1b69e55966e3',
-    'root/static/images/flag/fo.png' =>
-        'f58bc026677f29fcff5d5f5d2fe733317368617a',
-    'root/static/images/flag/fr.png' =>
-        '4159c808e0bd65eae8c05cc6935f01905b7ce381',
-    'root/static/images/flag/ga.png' =>
-        '4e17d505b8f50cf4da8c36449258692cedf7c296',
-    'root/static/images/flag/gb.png' =>
-        '9f148c20a0fbd028623bcebae3c9a7fabff120e0',
-    'root/static/images/flag/gd.png' =>
-        '4617d801f7a8566ef087e13be5ed50d2a19d8ac3',
-    'root/static/images/flag/ge.png' =>
-        '00bbbc4d6c8fd24b9e8ff781845484ab176e6765',
-    'root/static/images/flag/gf.png' =>
-        '4159c808e0bd65eae8c05cc6935f01905b7ce381',
-    'root/static/images/flag/gh.png' =>
-        'f6cb942939dfd4e4cd320256718a8ff1d64d2ecc',
-    'root/static/images/flag/gi.png' =>
-        '080c054260c729d10bda2c4f0b725cdd7a2cbf14',
-    'root/static/images/flag/gl.png' =>
-        'b1e28fd662a53611a5e2f63fe7eb75beb0899540',
-    'root/static/images/flag/gm.png' =>
-        'f26f66c38d43040c6111d5b4c2efdbd277a56407',
-    'root/static/images/flag/gn.png' =>
-        '903e08874f13d9001e2bcd34eec5c01bad9cb82b',
-    'root/static/images/flag/gp.png' =>
-        '79d2dec35ffc2d61c3e804d8d63e0b94227d2e7b',
-    'root/static/images/flag/gq.png' =>
-        'b7ddbce0cd73d35129df6127be755c76f36b8620',
-    'root/static/images/flag/gr.png' =>
-        '675e6a2cbe99adfa941935afe2c9d89419387ace',
-    'root/static/images/flag/gs.png' =>
-        'e7da3ae3012cd741a7ed2df651c859c72286960d',
-    'root/static/images/flag/gt.png' =>
-        '723082c03f7f7428819f244fba317351fde9fe3a',
-    'root/static/images/flag/gu.png' =>
-        '64891149c599ab8360ba98e6ce31ec862f7b44b1',
-    'root/static/images/flag/gw.png' =>
-        'c8ad782350f41e18d2688d3878b062fe059df869',
-    'root/static/images/flag/gy.png' =>
-        '7989f78ee1aa0f196096a3e3591e6e4b59f43b63',
-    'root/static/images/flag/hk.png' =>
-        'b4c472e257902d3f174f6c7450bf19eb67926bc7',
-    'root/static/images/flag/hm.png' =>
-        '0a429d27ec29a89a73ffaa2417a46e9891272073',
-    'root/static/images/flag/hn.png' =>
-        '81c66133f8bb5629c22a55c33d1474fb4f415761',
-    'root/static/images/flag/hr.png' =>
-        'aa3d7a18af1a4a03be0f5ff67d0f017884bcc98f',
-    'root/static/images/flag/ht.png' =>
-        '8381b5ba9c0e061f90fa612ba06ee3c51c0cf62e',
-    'root/static/images/flag/hu.png' =>
-        '82aec320836283467b6e0dc3d7c0ea4a4854413e',
-    'root/static/images/flag/id.png' =>
-        '1cf5af73d8edeeec91c97d5bfc47380c72e52f23',
-    'root/static/images/flag/ie.png' =>
-        '43d06b937560bdb9279baa4ab10273f8266d302b',
-    'root/static/images/flag/il.png' =>
-        'e39e5ea8bd204cc57cc404ce45a2d04202b299e4',
-    'root/static/images/flag/in.png' =>
-        '6ae23391df19b943483983dcd669828b8fcbb2a9',
-    'root/static/images/flag/io.png' =>
-        '8a1eb8b224579be78eb02c7e1f9eec3f9b928ce3',
-    'root/static/images/flag/iq.png' =>
-        '27dbc875df93dc22d6aa2c347bcb13f213bf2643',
-    'root/static/images/flag/ir.png' =>
-        'c41900aba16df2c556a38aa2db2a6ce9c7a39f4f',
-    'root/static/images/flag/is.png' =>
-        'a31edf28c41d73435ed10e755b88f7724c911be1',
-    'root/static/images/flag/it.png' =>
-        '94d0ebb1aeccf465f1a5c64ab45beca7484210ca',
-    'root/static/images/flag/jm.png' =>
-        '6734a4afd7dbf66da9e78ad205108237c36dbfa4',
-    'root/static/images/flag/jo.png' =>
-        'e9f3339a3e94dcd850d31b5279e403e21b07889f',
-    'root/static/images/flag/jp.png' =>
-        'b48dd756851dde20d12c407002bd9c4f58ed4bee',
-    'root/static/images/flag/ke.png' =>
-        'f753dc44cc9bd23d499789baa99e1ac4cabfb6b6',
-    'root/static/images/flag/kg.png' =>
-        '5162acc630cf6b659a2ab2289a3a876647213ca7',
-    'root/static/images/flag/kh.png' =>
-        '02cda928fc3ee45ae892458916782c2e07c99028',
-    'root/static/images/flag/ki.png' =>
-        '7bdadfcf8217c89df47074866ca910c913dd2b52',
-    'root/static/images/flag/km.png' =>
-        '9817f10164c8cde1e4437c3760392913a09e52fb',
-    'root/static/images/flag/kn.png' =>
-        '69accb446ec1c0c72c9863309578df19a7e8298e',
-    'root/static/images/flag/kp.png' =>
-        '20673bdadf114fde3868a5c7c396c969eacbadf9',
-    'root/static/images/flag/kr.png' =>
-        'b0f1a94a466df6b9b53bb762a851fb76c76c4a6d',
-    'root/static/images/flag/kw.png' =>
-        'fab0aa5bce9c9f2215ad22a2b69d085188c9c6c3',
-    'root/static/images/flag/ky.png' =>
-        '979ffe300320a609f4b89f00cc58e29e62564d17',
-    'root/static/images/flag/kz.png' =>
-        '793297d5e1fef872122b40db3d009f56ae29e251',
-    'root/static/images/flag/la.png' =>
-        '1c8fb86b23cced071c7964c709a403af72106838',
-    'root/static/images/flag/lb.png' =>
-        'f7eab413b8ffd97f38e9d7d347c60b828db7b182',
-    'root/static/images/flag/lc.png' =>
-        '5eaf01dd0387e1ef768f55f537d9c0491be4c23c',
-    'root/static/images/flag/li.png' =>
-        '721637e46bdf66e70c4314790bc9cd02bc0e4b5e',
-    'root/static/images/flag/lk.png' =>
-        '3511d8cf40717c7cb5ab4c71f7a942ca8e24db34',
-    'root/static/images/flag/lr.png' =>
-        '54df7d1abbf8d8d4f317916dc3fec13cc96f3a16',
-    'root/static/images/flag/ls.png' =>
-        '6bd2e72d9a0d554798fb1ba43abbe64cb10cc80e',
-    'root/static/images/flag/lt.png' =>
-        '70b2c8fe0a75990c597ff9c3a32185c31de5c401',
-    'root/static/images/flag/lu.png' =>
-        '5af2f0378be0e00e697fe7b85a4724ebb25147da',
-    'root/static/images/flag/lv.png' =>
-        '9c6c095abef99834dd45f4483c5124d186327ee1',
-    'root/static/images/flag/ly.png' =>
-        'c091fb5623ce3c7a5121b48038131ec59c978343',
-    'root/static/images/flag/ma.png' =>
-        '22ee88eec9f3a1c854d306424469f761ff18072d',
-    'root/static/images/flag/mc.png' =>
-        '2f6486c55b91811abfccc2128b5d267ad7c5508d',
-    'root/static/images/flag/md.png' =>
-        'd107c091df2bc5a8d14f313b9b4e9d4a09cfd85f',
-    'root/static/images/flag/me.png' =>
-        'ff2e6eeb2025c6f6e691bfc575321ad26091f14a',
-    'root/static/images/flag/mg.png' =>
-        'dc84a1c029efef59b2547f62b28b02eadd5c6b73',
-    'root/static/images/flag/mh.png' =>
-        '174df935ab4a210e1ce0aa46811f4162c92cc34c',
-    'root/static/images/flag/mk.png' =>
-        'aa208debb1dcb2334f1ff773c554085b9c0ef298',
-    'root/static/images/flag/ml.png' =>
-        '06da4e5221f2dd8294e714e4ed02f1037359ff6e',
-    'root/static/images/flag/mm.png' =>
-        'dfa50da74c39c23c182b777a36e350230cfd8ec0',
-    'root/static/images/flag/mn.png' =>
-        'c2fedcfc32a483ef542b8b3c93141b851c257025',
-    'root/static/images/flag/mo.png' =>
-        '659cb2deb36bfc275f0acd63b5ead93f5a520ba0',
-    'root/static/images/flag/mp.png' =>
-        'c3eff110ae82c9fbcab6399f4221d862094db0ac',
-    'root/static/images/flag/mq.png' =>
-        '299aa6b9c5c6a0f554d4598c34081cb794dc427e',
-    'root/static/images/flag/mr.png' =>
-        '6036e30abe45df0d364ba1f25f080122b46665e5',
-    'root/static/images/flag/ms.png' =>
-        '06c3cc54a452f28139125a0d6aa84499c5a67872',
-    'root/static/images/flag/mt.png' =>
-        '3c53b90e83fcf3b5da06233f7e672e87862d0c0b',
-    'root/static/images/flag/mu.png' =>
-        '36ff160d256eff6487118fc6e9e34104b741df33',
-    'root/static/images/flag/mv.png' =>
-        '690d9e1cd9c26436b290a84a3273067713844112',
-    'root/static/images/flag/mw.png' =>
-        'e7a7822ebcc24e23850507869fd7fa0e2bf17e33',
-    'root/static/images/flag/mx.png' =>
-        '6320cb13cad2fbe0d492a49eac7c97e21f86816e',
-    'root/static/images/flag/my.png' =>
-        '7d06cfb6226f602329032ce34c6077ea8066fec7',
-    'root/static/images/flag/mz.png' =>
-        '99bd4e7b2457356a715ac1228d0acf19b6d8feee',
-    'root/static/images/flag/na.png' =>
-        '530fe2a2485a9078b47e669fe41aa81f051d3cd6',
-    'root/static/images/flag/nc.png' =>
-        '03f67268a5628f0fbaf52229ea3ea67586e868c6',
-    'root/static/images/flag/ne.png' =>
-        '456cbbd085faf3ec29d229167186ea3f6dc882e4',
-    'root/static/images/flag/nf.png' =>
-        '9b1124c29a0ab48229c90cdacf3775358945db9f',
-    'root/static/images/flag/ng.png' =>
-        '26a3daf83f3bf59f43b74a517fb52e01ba2bd9ac',
-    'root/static/images/flag/ni.png' =>
-        '8c14b7dda02c9aab049b41df4aa27ebee5e21865',
-    'root/static/images/flag/nl.png' =>
-        'ce1c5846aac2abed2af68974863a84949e7dae62',
-    'root/static/images/flag/no.png' =>
-        '2f9fe5a2a67940137caf58f8002133b18ee31f2a',
-    'root/static/images/flag/np.png' =>
-        '78577b348797f4c4b2b5f3f5fdfd407a93b4755f',
-    'root/static/images/flag/nr.png' =>
-        '4208f9ca953d4c44e33a273176efff4e204e39fe',
-    'root/static/images/flag/nu.png' =>
-        '0fd244ad9b38078bc4762d9d1594aee22c0cce74',
-    'root/static/images/flag/nz.png' =>
-        '8b061955517696287de8de68c8c15a2fe30909b5',
-    'root/static/images/flag/om.png' =>
-        '802389910ebae01acbee4008528bd0f13ded857c',
-    'root/static/images/flag/pa.png' =>
-        '4eb9c773b9a1de90fe6761930fc1650b71878128',
-    'root/static/images/flag/pe.png' =>
-        '051e2ea8b71b9c37a3972c5f2f622ce4e83a1e0b',
-    'root/static/images/flag/pf.png' =>
-        'b67e2f48aff2589df5561826f48fdcc8f14eac3d',
-    'root/static/images/flag/pg.png' =>
-        '1179c892b3f7fe3eaa991819a3a95127dce560eb',
-    'root/static/images/flag/ph.png' =>
-        '89b1b654759ab5563366f3a2642c63633ec363c5',
-    'root/static/images/flag/pk.png' =>
-        '7eb6ebc26684335837c4c4b56d647b087fd46bb5',
-    'root/static/images/flag/pl.png' =>
-        '2ea4d6d34e7a7a22fadb5d24fc45dd336d6edbb8',
-    'root/static/images/flag/pm.png' =>
-        'd8614baaa10ac630bb01be4a9b1cf86cbe846d27',
-    'root/static/images/flag/pn.png' =>
-        '81b98af7a808743cd359dd451dbd54555951ca8f',
-    'root/static/images/flag/pr.png' =>
-        'ae920f7c521d609322273518d9339d5addfb3c94',
-    'root/static/images/flag/ps.png' =>
-        '8e90096911a878844dbb375ac204e96ef31892b5',
-    'root/static/images/flag/pt.png' =>
-        'bb60679e5d988ec07de2226c14f136c3948048ab',
-    'root/static/images/flag/pw.png' =>
-        '7fd3c794af4b611d833fc622d05bbda3530e7130',
-    'root/static/images/flag/py.png' =>
-        'd38801ab648d2ef7ca8bc1ffeed02f0a1b6f1f10',
-    'root/static/images/flag/qa.png' =>
-        'd1d6b9522073684006bf6d692d9620b0949a27a9',
-    'root/static/images/flag/re.png' =>
-        '4159c808e0bd65eae8c05cc6935f01905b7ce381',
-    'root/static/images/flag/ro.png' =>
-        '736a9f0e74f44916c0731576d99fa06244a76b17',
-    'root/static/images/flag/rs.png' =>
-        '5d8c11c8a5b5ff90e474e3f430bfa95a448664e9',
-    'root/static/images/flag/ru.png' =>
-        '781c9738eb65ed1153bb9d27eb60a56bdd3d8911',
-    'root/static/images/flag/rw.png' =>
-        '1afe26fd7aee7efe3d6e8194dbd8dfd4e62ef2f9',
-    'root/static/images/flag/sa.png' =>
-        '75e0c6c4ef5fc1e4e0029baa43067463fac28f6c',
-    'root/static/images/flag/sb.png' =>
-        '4f5b732a2a23533d0cbf15538603219a7ebc89ea',
-    'root/static/images/flag/sc.png' =>
-        '2b1159c3e2a4a2102e10c6291f5dc119c9ba0cab',
-    'root/static/images/flag/scotland.png' =>
-        '024b77a928abbe8ae45d85a3b70627e7753d44dd',
-    'root/static/images/flag/sd.png' =>
-        '16688fde38bb12462f6cfe8bbe07826a51124577',
-    'root/static/images/flag/se.png' =>
-        '5daa2dcb4668a4022a1b47b45117e278b77fd400',
-    'root/static/images/flag/sg.png' =>
-        'feefe64f739aaab035b424f745cf3646722d7432',
-    'root/static/images/flag/sh.png' =>
-        '7db4e65f6be7b8f5151a056979376603198e0451',
-    'root/static/images/flag/si.png' =>
-        '6563b2a19031b91f34b824285fb35752adb1cd78',
-    'root/static/images/flag/sj.png' =>
-        '2f9fe5a2a67940137caf58f8002133b18ee31f2a',
-    'root/static/images/flag/sk.png' =>
-        'd63cd68bbbee2f97496a3f558d10456f5bc13ac9',
-    'root/static/images/flag/sl.png' =>
-        'cbcfbad4c341a1991ef62d87daaf585759c06190',
-    'root/static/images/flag/sm.png' =>
-        '8e675e11ae47508045decea9cab61a36b442574c',
-    'root/static/images/flag/sn.png' =>
-        '1b677e3919c9e37fcce7446cb975827a4e9c71d9',
-    'root/static/images/flag/so.png' =>
-        '5536648e1b25f1a943054ce0f3096d667a231fbb',
-    'root/static/images/flag/sr.png' =>
-        '09b84f50ad3e68729db5651504e3e6eb0fcc6aea',
-    'root/static/images/flag/st.png' =>
-        '5444fc4806f4493f613a9a1ad0adf7bf2a56485b',
-    'root/static/images/flag/sv.png' =>
-        '12a04abfd607b01b923afc8d120cc65f2869edfa',
-    'root/static/images/flag/sy.png' =>
-        'a01914aedf527240c5b143a07b67397a633679b5',
-    'root/static/images/flag/sz.png' =>
-        'f1995649de56451515b45563868f02151189ce7a',
-    'root/static/images/flag/tc.png' =>
-        'd4868a594bced0b24d5a062eedcb93d3efeaf90c',
-    'root/static/images/flag/td.png' =>
-        '988b3be29cf1a9c4eeee733082d2e14bf4b3cc66',
-    'root/static/images/flag/tf.png' =>
-        '4a3ab2b63a33b50d6dde32387eba39090d12492c',
-    'root/static/images/flag/tg.png' =>
-        'db37181efaa62e3185f8fda68e4b81b406d4223e',
-    'root/static/images/flag/th.png' =>
-        '8f89e069992c0b385dbf6e9db1dc30ec28042685',
-    'root/static/images/flag/tj.png' =>
-        '4c2242c46d32643078a92239eb4b5b9ec401b253',
-    'root/static/images/flag/tk.png' =>
-        '635719b49a4a1865ddd481dbdf4f1e330781eb8b',
-    'root/static/images/flag/tl.png' =>
-        'e6a2651119a7c9056a775074b93bdf0f29f8b668',
-    'root/static/images/flag/tm.png' =>
-        'eef1bf6c4e43a055da6fb6e71375a2ea7315f51b',
-    'root/static/images/flag/tn.png' =>
-        'd73c202e36bcb9b024011902170f17588db1380a',
-    'root/static/images/flag/to.png' =>
-        'cf3f7acfce003c55b27e2eddc5c64bb8846ca09b',
-    'root/static/images/flag/tr.png' =>
-        'baaf11e4f5e6103e11d1fc0e2261a98269a42505',
-    'root/static/images/flag/tt.png' =>
-        '683b179a0f643443917b0fd8952a2ec27d07efed',
-    'root/static/images/flag/tv.png' =>
-        '3dc4b5b82987f9989068b84112d323d31555bc5a',
-    'root/static/images/flag/tw.png' =>
-        '8744e67244f890b744e9f6bb178ee0cac5279438',
-    'root/static/images/flag/tz.png' =>
-        '108cc95d05b688df42b827f65bd4c79d98cb6713',
-    'root/static/images/flag/ua.png' =>
-        'e8cf9670257dd586ab8a49e91fddcd8986f6e811',
-    'root/static/images/flag/ug.png' =>
-        'c5bbefdf9353117a5fb398fb0bf72705c9a377c4',
-    'root/static/images/flag/uk.png' =>
-        'eab69d00308e3797039a6c6ea5bba3b2e16a8f09',
-    'root/static/images/flag/um.png' =>
-        'cd43121d7090d1e1be96f859181b22c360a76b35',
-    'root/static/images/flag/us.png' =>
-        '64c146a823c66cb830711c24fa7a2a42ac4de954',
-    'root/static/images/flag/uy.png' =>
-        '90f21f631f5cf3b52d1dcb8fff7a7081c92e9aa3',
-    'root/static/images/flag/uz.png' =>
-        '786d132479d93738fc3eb2e9b5d72dc7f95cd258',
-    'root/static/images/flag/va.png' =>
-        '4261d503e23a04c9bbc0728992475a658ae8cd25',
-    'root/static/images/flag/vc.png' =>
-        'ac2db6200373e22c9b08cded6d328221b2e34f38',
-    'root/static/images/flag/ve.png' =>
-        '31dded69754639977d86a8080ac6986eff54360a',
-    'root/static/images/flag/vg.png' =>
-        '0b054c34a40dc94d7c2144f47b7ec378a947e9f2',
-    'root/static/images/flag/vi.png' =>
-        '871c037f3a74fd5e0d426abefb254d010fd06733',
-    'root/static/images/flag/vn.png' =>
-        'd9b6ed835687644b66818efac5293068d00f9af8',
-    'root/static/images/flag/vu.png' =>
-        '4d0f005cea260e3fe5f2d04b07d65db5eefefae3',
-    'root/static/images/flag/wales.png' =>
-        '29cf6b6d031ab1b51b0ecba46dcb992956bd95d5',
-    'root/static/images/flag/wf.png' =>
-        '064b3e39dad3b20b2313f4aba50aa8c9c5e068ea',
-    'root/static/images/flag/ws.png' =>
-        'f6ea3e790bbe300d14785e9c2fa5b74b9261ae5f',
-    'root/static/images/flag/ye.png' =>
-        'e9c98327f1e5feb9598d589bf7c0810132721103',
-    'root/static/images/flag/yt.png' =>
-        '6ad2e72398d00b07c5bcd2f8fc40d05bf3e76cc6',
-    'root/static/images/flag/za.png' =>
-        'b983a95b5127f7ed81bfe3c904bd88cc399d4261',
-    'root/static/images/flag/zm.png' =>
-        'c3f93396b08dd00e70c3eea34c32995bb57a96a8',
-    'root/static/images/flag/zw.png' =>
-        '4bc2e6126a95b38933ca40389aabc5ca0d76ca03',
-    'root/static/images/gray.png' =>
-        '8c2ccfffd4eed6908e37032d7a73492451bb9b05',
-    'root/static/images/logo.png' =>
-        'd06d39e975d7292bb377e3cc9704442007d4239e',
-    'root/static/images/metacpan-logo.png' =>
-        'cdbe7ff70273c8950be51e7a1ce491783b5ec369',
-    'root/static/images/metacpan-logo@2x.png' =>
-        '645f68d19fc7c4df2587d0e6de56caf912cc8f7a',
-    'root/static/images/noise.png' =>
-        '726ea72bf9dffa7293fae9957dd6430dd661b6ab',
-    'root/static/images/profile/bitbucket.png' =>
-        '85e55afecc01c02fda7c08ea0000f3fe6c996104',
-    'root/static/images/profile/blinklist.png' =>
-        '59907af5778fd8082020b724a405956ef2713a5c',
-    'root/static/images/profile/brightkite.png' =>
-        '865636c3360bff50cd52fc34b6844e4e0e9acd74',
-    'root/static/images/profile/coderwall.png' =>
-        '1ccba126177dcbbdf7cc7fb24c8bb876fd3350a6',
-    'root/static/images/profile/couchsurfing.png' =>
-        '69344764309bcf9c9f5e873c3eda5741ec81cbfb',
-    'root/static/images/profile/design_float.png' =>
-        '8f46d9093cada523fb674717063cf2018d24af08',
-    'root/static/images/profile/dopplr.png' =>
-        '2dbed99d2f09ba268954a03b9a3425b4a14e3ef8',
-    'root/static/images/profile/dotshare.png' =>
-        '53456b1fe8e6f98b0d3eb6ebf8aaa165404cd417',
-    'root/static/images/profile/email.png' =>
-        '87d0c86253e979c396ab7e3acecc89581efd16e6',
-    'root/static/images/profile/facebook.png' =>
-        '65065c1a2a504cbeb4a6462ac2d3f26a0b4825da',
-    'root/static/images/profile/feed.png' =>
-        '7ff607f523277d6a5de3524baa9365e5c64f6fb3',
-    'root/static/images/profile/flickr.png' =>
-        'bb0e8cae6d057d324585aa2256d87248f232184e',
-    'root/static/images/profile/friendfeed.png' =>
-        '992d52f26d3d159cf2495f5a7241f67a224ea9aa',
-    'root/static/images/profile/furl.png' =>
-        'fcc7de7511f4d6b2dce33374cf845d1f6c0da23e',
-    'root/static/images/profile/gamespot.png' =>
-        '9c609efb00c434e78575dd65fb46ff100c6fbd0b',
-    'root/static/images/profile/geeklist.png' =>
-        '7aebb4ed3693c2fc39c17da4edbf06ad48d48d9c',
-    'root/static/images/profile/github-meets-cpan.png' =>
-        '82ea50c2b692fcfd63f4975cd72df684d83b28a8',
-    'root/static/images/profile/github.png' =>
-        'fcaac15a6ed9d86d211a46de7d450d084db31c35',
-    'root/static/images/profile/gitlab.png' =>
-        '844cbd9b8193fa2456cd4636a44b1251782adf1b',
-    'root/static/images/profile/gitorious.png' =>
-        '21dff75b978510ddfa6c33203ca8b266494ab2d0',
-    'root/static/images/profile/gittip.png' =>
-        'ea1e976ff12dc85fe8f3c196deff3f82b289de99',
-    'root/static/images/profile/hackernews.png' =>
-        'f7e6a1e78cf70e9a6ccd6b5b3eed3350fcb72b7d',
-    'root/static/images/profile/hackerrank.png' =>
-        '7cc60e03413a0b4000451a096e14511ca61ebb48',
-    'root/static/images/profile/hackthissite.png' =>
-        'b55daba74ec340398ba2264afe81c3e5e5633a7d',
-    'root/static/images/profile/identica.png' =>
-        'c20219860fb36018fc075e6d6ef817055fcc4100',
-    'root/static/images/profile/lastfm.png' =>
-        '5c8d66437824599a2a79fe1842bf739b9009e8ec',
-    'root/static/images/profile/linkedin.png' =>
-        'b78dd1872ced891a84456124cbc0a763f078329d',
-    'root/static/images/profile/magnolia.png' =>
-        '18dd9ac368cdc7d8b289aaed66aec983ccab1b28',
-    'root/static/images/profile/meetup.png' =>
-        'f8c660e7ddfb8d93b3d9fb91e3976ee860f5123b',
-    'root/static/images/profile/metacpan.png' =>
-        '1b893940fe0107f9e9da5c50a40320c26f25774a',
-    'root/static/images/profile/mixx.png' =>
-        'a22660e444f3059bbd0db0a5c41ce4a8cdedb1ec',
-    'root/static/images/profile/myspace.png' =>
-        '474cfd2775d0a86706d072649281fd4210eba917',
-    'root/static/images/profile/nerdability.png' =>
-        '14e8c3a7523c455e426f94ae30aeccdce84dd18b',
-    'root/static/images/profile/newsblur.png' =>
-        '248cde62f2b09e1972d2f2ec2d706468edc3676e',
-    'root/static/images/profile/newsvine.png' =>
-        '06e5135b062602d0a5bcac01b9d47b09df8fe9e6',
-    'root/static/images/profile/ohloh.png' =>
-        '7b734b00f54ea1f64fcb9c62c6093b2f45f0e755',
-    'root/static/images/profile/perlmonks.png' =>
-        'b3ef4db6f2c9e3a94103c986f93e8e6e2831f20d',
-    'root/static/images/profile/pinboard.png' =>
-        '6a9b7e49bdac9ba60b6c27543970c1a39c9c9bae',
-    'root/static/images/profile/playperl.png' =>
-        'bb259c28bd3b454ab6310e0c8f8fc2b6d93b4d51',
-    'root/static/images/profile/posterous.png' =>
-        '2b94126846adca0d494d86aded9d48d0b1d48018',
-    'root/static/images/profile/prepan.png' =>
-        '0e5490b976ed2a7bbdcc9a71dfe880ef7deca898',
-    'root/static/images/profile/reddit.png' =>
-        '5faff7433e8d0a0076aa6cba5852ec883b3c060d',
-    'root/static/images/profile/slideshare.png' =>
-        'dd0759e51cc800f84b5d8aee0de6c4e528f3600f',
-    'root/static/images/profile/sourceforge.png' =>
-        'fea06573ce569eb2cc44ecc562abd924c7bbcf87',
-    'root/static/images/profile/speakerdeck.png' =>
-        '7b2fc314fdb742b2a040931cf9b1b0bc17ca8839',
-    'root/static/images/profile/sphere.png' =>
-        '47b929c1a69439c75a45996f679d25e641b46bb6',
-    'root/static/images/profile/sphinn.png' =>
-        'a41f4f469d231b4c740dc923d28513ac9879ff25',
-    'root/static/images/profile/stackexchange.png' =>
-        '30e0c3ca49f528902a4328424822874e1191acd2',
-    'root/static/images/profile/stackoverflow.png' =>
-        '1833ddbc1bf625d3e64c2e3307bb5f5ca1edcac3',
-    'root/static/images/profile/stackoverflowcareers.png' =>
-        'baf53fe9e47423a0b83d1bab1247cbe8ad7cec8a',
-    'root/static/images/profile/steam.png' =>
-        '714f1bdbec3add94bb526d21b4ca6e175d6f7464',
-    'root/static/images/profile/stumbleupon.png' =>
-        '497f3c402882de7932d6ccdb76b08b32a19ae801',
-    'root/static/images/profile/technorati.png' =>
-        'aed08e542fba11451598925f18d08461ebac3371',
-    'root/static/images/profile/tripadvisor.png' =>
-        '9b7c62139ae30137cc9ce18de30b8c74e8b9c8c7',
-    'root/static/images/profile/tumblr.png' =>
-        'bd94b79c78da4f6edb101b5fd924280dca3ed6c7',
-    'root/static/images/profile/twitter.png' =>
-        '3aa31f73eb732dae56c50d36859c133c803d2ec5',
-    'root/static/images/profile/vimeo.png' =>
-        '9f85d80760d0a8815c2e2c1510f3d268571a98f7',
-    'root/static/images/profile/youtube.png' =>
-        'e4dd870616b964042c97e4ad821bb5d9035b6abf',
-    'root/static/images/small_logo.png' =>
-        '8019eee79d9fa1bab95e360d82551e3b7efa331a',
-    'root/static/images/sponsors/activestate.png' =>
-        '3c0a06c92711e067b0dcda30efce3b66af811aa0',
-    'root/static/images/sponsors/advance-systems.jpg' =>
-        '16b8e4557ee882a3dd157170e08d1ededa18812a',
-    'root/static/images/sponsors/booking.png' =>
-        'fbbdfe51514e6717796cd14bd627a49391252f93',
-    'root/static/images/sponsors/bytemark_logo.svg' =>
-        '52a7ea5efe9ae9aaf6a20da37a1c6052e882411a',
-    'root/static/images/sponsors/control-my-id.png' =>
-        'd9b2485a500502f3b648c1f01783450cb63ca2f9',
-    'root/static/images/sponsors/cpanel.png' =>
-        'f6b4e8fa588af67cc31c85580b71386818ca287d',
-    'root/static/images/sponsors/dealspotr.png' =>
-        'a6d9b6c110d6cfbdf9221bbc7b60b4d793dd6d5f',
-    'root/static/images/sponsors/dyn.png' =>
-        'c678847ed554215a8bd0f42d46c10cdd73c26467',
-    'root/static/images/sponsors/easyname.png' =>
-        '9d32914df2a28db81f435cdc44e903bb78e219a1',
-    'root/static/images/sponsors/elastic.svg' =>
-        '292b9ab76da7035cf192f8c651a090c4bd4bc2ab',
-    'root/static/images/sponsors/epo.png' =>
-        '1a34a7c495728a194fc272d3a2069df2ef90f9e0',
-    'root/static/images/sponsors/fastly_logo.svg' =>
-        'a9f2f7876e47d1d0d374551135b56a5b86b89886',
-    'root/static/images/sponsors/fastmail.png' =>
-        'a3365d759be66a8a86dac12b3cf426a242200c03',
-    'root/static/images/sponsors/github_logo.png' =>
-        'ff77edb3ea13567310837717da9d2cdea155682c',
-    'root/static/images/sponsors/idonethis.png' =>
-        '0698d65b033849f1a368c8f68fcc01d281c9eae8',
-    'root/static/images/sponsors/kritika.svg' =>
-        '887d712f253b63e53319ad37cfcf3fdbd36e8a36',
-    'root/static/images/sponsors/liquidweb_logo.png' =>
-        '33b581ea9ffb2e91983540362b9f355d6cdad7dc',
-    'root/static/images/sponsors/panopta.png' =>
-        '7f77555505dfcb1a2c3b47bec95062fe2dd7a5da',
-    'root/static/images/sponsors/perl-careers.png' =>
-        'd3cebb2b17b5b5c598d5d0d5766532467fc9e7c6',
-    'root/static/images/sponsors/perl-services.svg' =>
-        '1eacc5aedbbaeb388801652ecc48c76fce49d530',
-    'root/static/images/sponsors/perl_logo.png' =>
-        '5cdd9d7bda9936c0ab678063a93df341fd37acb1',
-    'root/static/images/sponsors/qah-2014.png' =>
-        'e691cd3eb125c4b9e157a083a1c0a5f14e5a692a',
-    'root/static/images/sponsors/servercentral.png' =>
-        '0d8560e505acdbe5f13293360c9f8c371db3ce47',
-    'root/static/images/sponsors/speedchilli.png' =>
-        '46cf961917ca8e3e953ea8a823409f9c7fa8fe44',
-    'root/static/images/sponsors/travis-ci.png' =>
-        '28b210ec069326d1914b54186854e278b874e08e',
-    'root/static/images/sponsors/vienna.pm.jpeg' =>
-        'd1756602e3883c084a901338b96d8a03b8b540b9',
-    'root/static/images/sponsors/yellowbot-small.png' =>
-        '25d2fa66dcbccadd9487cd5540f9b26485b873c2',
-    'root/static/images/sponsors/yellowbot.png' =>
-        '6e7962a5c1467d8e5b0cd2b5901b757b8f667165',
-    'root/static/images/stars-sprite-white.png' =>
-        'b4287ec3dd974b466fe888f16aab7e51fe0fb421',
-    'root/static/images/stars-sprite.png' =>
-        '93e1f0169c9b1cca1d798b72e6226432cabc1d72',
-    'root/static/images/stars-sprite@2x.png' =>
-        '2020892c7f07db904aa101306712381d9d3d14c1',
-    'root/static/images/t.gif' => 'eca87854262d8cb8d8be91b4f3f30aaaa323f269',
-);
+my %files = reverse map /(\S+)/g, <DATA>;
 
 for my $file ( sort keys %files ) {
     my $want_sha = $files{$file};
-    my $got_sha  = Digest::SHA->new('sha1')->addfile( $file, 'b' )->hexdigest;
-    is $got_sha, $want_sha, "static file $file has correct content";
+    my $got_sha
+        = eval { Digest::SHA->new('sha1')->addfile( $file, 'b' )->hexdigest }
+        or diag $@;
+    is $got_sha, $want_sha, "static file content is correct: $file";
 }
 
 done_testing;
+
+## generated with: shasum $(find root/static/icons root/static/images -type f | sort)
+
+__DATA__
+679be699079a90f586aa90dbc79aac14731a226c  root/static/icons/apple-touch-icon.png
+9352147a2cb97acb161f21202e9bfec29b6faa30  root/static/icons/favicon-16.ico
+2ef4ad41df53e9361604fc7e110d28949e972b8f  root/static/icons/favicon.ico
+3f8243315f8ad8a4101e1585695eb0ec169f5ade  root/static/icons/folder.png
+697355984fb0724f2cd358c2c3139fdb7ec9e56b  root/static/icons/grid.svg
+aa842d887b715e457517c3a6d5006189275e12fd  root/static/icons/page_white.png
+9d0aaf1b7b03783229d08e972fd5ca7e5113e2de  root/static/icons/page_white_c.png
+5cd510d1d1ae6126d23ecdba62fac129520a3af4  root/static/icons/page_white_code.png
+ae6004316edee42922981dcf90fe182666722b53  root/static/images/dots.svg
+b0cdcd8a2baf229cea555bb5a72e94a234057641  root/static/images/flag/ad.png
+9be5373eb09ae6dda325cf774dca5917c0141b4f  root/static/images/flag/ae.png
+9301bee0e54de0a85e6407a36c377bb178527ecf  root/static/images/flag/af.png
+88aa1b3dad76e6db3cf0022c9f0eb307bfb93363  root/static/images/flag/ag.png
+74bd5efd4fd024c8b66cb5664faf64430b674f1b  root/static/images/flag/ai.png
+46660f781e66632a383e83a56dc4fa1ad128d26f  root/static/images/flag/al.png
+b8f6f60729242aabf0713f9202f508859e88ba38  root/static/images/flag/am.png
+7a5893399cf9620a40796dda067ed38bf417a991  root/static/images/flag/an.png
+abb8b82f9c327a4974deb2338b000d8c1e307896  root/static/images/flag/ao.png
+23000bca35847ecfbd0b1cc0528d23a0a360f9fb  root/static/images/flag/ar.png
+e35b729883fb0f2a20ecd7ab06b0fd6829e367f5  root/static/images/flag/as.png
+3ad44815d577ca5a5eb6537630d5ebbfa45d2cdb  root/static/images/flag/at.png
+b1e3a3b54aa747331b6a468883f0f470aded8d32  root/static/images/flag/au.png
+72b80e6c39c68925eb514a4e2a0f72d4755acd17  root/static/images/flag/aw.png
+734624eac0deb3f5026b2eaf031baba8740174e7  root/static/images/flag/ax.png
+5ddf14ae26789de8744a3a7e7bd8863fc52ba3c8  root/static/images/flag/az.png
+b72dff7cbe8dab567624451efa880d3f7ddbc603  root/static/images/flag/ba.png
+dc03bd1ac890f80eedfc11419bac728517c58ea1  root/static/images/flag/bb.png
+1d85eba3fe4dbd8664fac1c2d1462573615b9b51  root/static/images/flag/bd.png
+87b1230ecf291723b2d62579cad7f508fce75574  root/static/images/flag/be.png
+df58bd656641c86f3a1d1ea4717f5118ec2fe805  root/static/images/flag/bf.png
+e59e50416f1ceaa32b3c4a1522c34ea4d763180e  root/static/images/flag/bg.png
+dc93040f172e2e94fc153bd1e87bfefc88d58d36  root/static/images/flag/bh.png
+7b65c16a3f62523003163415ebdc83a63e02d2e1  root/static/images/flag/bi.png
+a8635d513f045df5fb891dedfc09a1bb39f073bb  root/static/images/flag/bj.png
+e0cc80dae5afe31f4c25d90b47fadc7cfeabb142  root/static/images/flag/bm.png
+770fa4a50452a5260c8c48ac0997b22ad9d40d63  root/static/images/flag/bn.png
+1a3e81e40fd68d08a742ee4968824248e0632708  root/static/images/flag/bo.png
+6d55dd3b6a89bd0a8c26d0acea96351c62c2c7f6  root/static/images/flag/br.png
+f2505db9caa6fa2e5dd60203c12689efdd011124  root/static/images/flag/bs.png
+53fd260bb6a9a2b2159009c9f5ebf6d00e2821b1  root/static/images/flag/bt.png
+993f09a3f83b06dd0c60a1a1c1ab626616a80691  root/static/images/flag/bv.png
+d2a29fb9126a15792da586b0708414a73c3c1a5e  root/static/images/flag/bw.png
+3792e79af0b3ab9c5566fc56c5a4f2b4a956b208  root/static/images/flag/by.png
+3ba8ebbf222cdc49cfd98280a34cf53c9d63d8c3  root/static/images/flag/bz.png
+1426208899d9eba516726060932545d7585a31bb  root/static/images/flag/ca.png
+3380dddff08aad0be35dd33aaba0ca250d6a9a18  root/static/images/flag/catalonia.png
+6f5f6d75a6efc67d3a0a2d38ecfd37b4ebbfe2d2  root/static/images/flag/cc.png
+4bcc1e97f7c5b539b2369d19f5f15a64dfad3ad8  root/static/images/flag/cd.png
+2bec006ff5fb8b676b0d82b20300c35291301ea4  root/static/images/flag/cf.png
+f64b6c7ca573e9bafed888616148bb6c67105154  root/static/images/flag/cg.png
+a6d7f1ae89c02e4d63262d4905704a2002c6c0d7  root/static/images/flag/ch.png
+a704f6746f41f0f47fea20a176a335ac61622730  root/static/images/flag/ci.png
+fac8d638d7ea1c130f36354d5c3ad41ccc31c9cf  root/static/images/flag/ck.png
+19ea9982340c0315fed3e7b0c538a7d6beebc083  root/static/images/flag/cl.png
+cf1d530409d89b32ca558bd09ef464a445f3713d  root/static/images/flag/cm.png
+f5aef8de7c11eb0768698133b1688aa9bb77f88b  root/static/images/flag/cn.png
+d03b9541a206d1eca276ef6fb683dd8b3e61d311  root/static/images/flag/co.png
+d698f2e308304f5ac8e379f8ecada011cc9f257d  root/static/images/flag/cr.png
+070d2ba2174abd2b9eb29c12c96b443be4a6d3be  root/static/images/flag/cs.png
+3380dddff08aad0be35dd33aaba0ca250d6a9a18  root/static/images/flag/ct.png
+ae902012678979069c68cd5853c36d449d064d79  root/static/images/flag/cu.png
+e1eff2f478f8be92893fcb356313ba9bc8811edd  root/static/images/flag/cv.png
+5be99dbcbdeb4fe75352bfc990c333103432644d  root/static/images/flag/cx.png
+269865a9cafba4b45f548b313de25056bbf9561d  root/static/images/flag/cy.png
+96635c50c150934a920a82348ffc990e67b34dc4  root/static/images/flag/cz.png
+227f9f143acacd3fc4752c0e8e7a38bafd68771d  root/static/images/flag/de.png
+d0679a902c1ac8a07e480d82c8f5ea57be8143d6  root/static/images/flag/dj.png
+492be7aadaf42f433bbadfa3d1ef501fe15910c4  root/static/images/flag/dk.png
+010c7744286ff86c74d39b52d7d9664563f9d0af  root/static/images/flag/dm.png
+65b145cc2824786ec181f57d3c932b97ea61676a  root/static/images/flag/do.png
+5693dab8f6447aa35d8d3996c88f016ccf2308b6  root/static/images/flag/dz.png
+4d5d982c5afc4987d1bb4d6ea1e8bcaa02dd4117  root/static/images/flag/ec.png
+fc7192549dd41d7bceb120dc861c3d556fbf2b7a  root/static/images/flag/ee.png
+67c038bdf4878a010c5e02f1b0882379488fa2c8  root/static/images/flag/eg.png
+5b6e218cd18fd70cce7bcfc0b9f3382cadafb842  root/static/images/flag/eh.png
+9ca83612c71a0a125d785a0d0dd854339aa59be0  root/static/images/flag/england.png
+ce7ca10a35a6648781202693f521eb5d3a940d29  root/static/images/flag/er.png
+38591de6f587dbb2caa2ccfada3e243eb5a3cf15  root/static/images/flag/es.png
+569222c2f0902bc44fa2bd012564ae85d12e3ea6  root/static/images/flag/et.png
+bb0857be0eba184b7faafa6c2cd075743ee8af68  root/static/images/flag/europeanunion.png
+6addba050674961e2279cd997056a7418f2d798a  root/static/images/flag/fam.png
+257a4d8cb3e704cc691dae6216d1df0de332d84d  root/static/images/flag/fi.png
+757b23b361a4fafedc8b273373cdedfed57b03a9  root/static/images/flag/fj.png
+97f85fd5338a194b16cda40240be1d950761b8a6  root/static/images/flag/fk.png
+7c83f55c157600785105388ade44231d17da3cc6  root/static/images/flag/fm.png
+93f768e5e67afc4c6c4d21e4c4ec5e084c13fc5b  root/static/images/flag/fo.png
+ac676c76c3cefa4d24df13a1f0ae7b012f301cf0  root/static/images/flag/fr.png
+ff4bd0cb9802f2745722ec439cacb2d69c42e319  root/static/images/flag/ga.png
+2d2252727ee7df2697657f1f7d122494ee90a38f  root/static/images/flag/gb.png
+a7e1e82e5ed8f8d1a42dd0ac77729a5593d73da4  root/static/images/flag/gd.png
+2ea28f9d3fc9ea0bef18b97fbe01b60ce98bcde2  root/static/images/flag/ge.png
+ac676c76c3cefa4d24df13a1f0ae7b012f301cf0  root/static/images/flag/gf.png
+f6cb942939dfd4e4cd320256718a8ff1d64d2ecc  root/static/images/flag/gh.png
+37160eda114d33f15da5ce9ccad0c80d3229824b  root/static/images/flag/gi.png
+cfe2389d19c0b8b06140b8ec40bc1d3dfaef2a96  root/static/images/flag/gl.png
+e91a42ce8bf537814ad94fa747db4bbc06ba10ef  root/static/images/flag/gm.png
+c73440ac377ccc0cf4499c83bdf27f38ebe19f6f  root/static/images/flag/gn.png
+1ee748bbbd969ec3f881073d21b1ac4263237d76  root/static/images/flag/gp.png
+8cf71670916cc33e88f1dd9d714a7f4d8b748c25  root/static/images/flag/gq.png
+c01213416b3ed9cf25f6bab9cfd75ddb34343441  root/static/images/flag/gr.png
+2e6af3a823404c03a29b4b875f0a284c67d010e4  root/static/images/flag/gs.png
+723082c03f7f7428819f244fba317351fde9fe3a  root/static/images/flag/gt.png
+f22620c2b07727bb29345dcf14dfdff857498eb9  root/static/images/flag/gu.png
+eee25434a40e2020091d979a830492bb26d014d0  root/static/images/flag/gw.png
+400abfad1fa7b64f7b78b2bc0769de771cbf0621  root/static/images/flag/gy.png
+d448a174dd4b5b3eebb4c5ec9ff344b2857cafde  root/static/images/flag/hk.png
+b1e3a3b54aa747331b6a468883f0f470aded8d32  root/static/images/flag/hm.png
+0902195090b0bc4b01c85c466e4446b883d0199d  root/static/images/flag/hn.png
+bde348d7938a8a71c3f89416e7e00f997b39fea5  root/static/images/flag/hr.png
+8381b5ba9c0e061f90fa612ba06ee3c51c0cf62e  root/static/images/flag/ht.png
+7f32e88f7012c28c6f3309ee0be65181c98435df  root/static/images/flag/hu.png
+a93e453dd3d2ba59eb29c108447437be4e005f20  root/static/images/flag/id.png
+6c782302d871f065a70cc297262ab4977c06e947  root/static/images/flag/ie.png
+3f8f663abe29074cb3f7262f65ac853c4d318177  root/static/images/flag/il.png
+29378fc45ad0b4f37e2a31d8d3bb6fd2733cd750  root/static/images/flag/in.png
+18574bfa6e9ceeaef41b20a2aac7e4dd1163e07f  root/static/images/flag/io.png
+2f88bd1f61d8cf7da6d437128a517135dd6f23cf  root/static/images/flag/iq.png
+b22d713769c90c36204493ce3c5247c637acee68  root/static/images/flag/ir.png
+78aef4d57c9fd988642bf6ccf5e51e38c7d14476  root/static/images/flag/is.png
+e6968e1a37dc2059cad6766deaeacf7d61927826  root/static/images/flag/it.png
+14a77030943a095bd33bdeff4ffc92e3bf96a3cd  root/static/images/flag/jm.png
+077dcae8ee48930e83609e12bf533e235fb8c037  root/static/images/flag/jo.png
+b48dd756851dde20d12c407002bd9c4f58ed4bee  root/static/images/flag/jp.png
+cc6c12136699fec1844d369e3742ff366860b0e7  root/static/images/flag/ke.png
+54c60dbc073a195aae60d7ddd05885d2b684bbd5  root/static/images/flag/kg.png
+026198ed425398c001ddd3e681c08d50888612f1  root/static/images/flag/kh.png
+15c274882e733b55fdc264e4ba2480a6f471ba1a  root/static/images/flag/ki.png
+edb27a978fd1d66e8d0187a0e47fb50e754b1e55  root/static/images/flag/km.png
+c637a13fdc62d8e8974fba8d2abc9a2932a1ffc2  root/static/images/flag/kn.png
+882ba84d82ef766eb21b35e19d82af8b86ebbbc9  root/static/images/flag/kp.png
+f4338b9edce1df94d1a8caced13d9e7de33f5629  root/static/images/flag/kr.png
+7c9ba741b6ad0fb3f0e7842d675564e4b9f18db9  root/static/images/flag/kw.png
+536fec8f9dd626903eb20e733b93c88619e5048c  root/static/images/flag/ky.png
+9e859cae5d15f8cf3202fdaba8b156f37697e7f4  root/static/images/flag/kz.png
+3a6e1bb74bcc096bf0f9575224847fcb005e95ad  root/static/images/flag/la.png
+a3c603bf4795612cdcfdbd524457348f82f7b3e9  root/static/images/flag/lb.png
+61ed337c2b3c7aebff752f55ad4ad219fa1a78b4  root/static/images/flag/lc.png
+d4c34a6a2f431ce11dbbd0dec438fe8b1d2e71f8  root/static/images/flag/li.png
+c6b73abba26b602859599ba6d9ca7464dbcde5e8  root/static/images/flag/lk.png
+358cd0cc2dae5be69d55f41bf3581e4d8f9bcb2a  root/static/images/flag/lr.png
+135fd39cfaf0e8c3e3e116bb861a5a3398a71e9c  root/static/images/flag/ls.png
+3a5ef6b5bb3d5b0ab910700cd45f81bc537a2377  root/static/images/flag/lt.png
+b3c3664dbbdcd96331f4e463629bc66653e7995f  root/static/images/flag/lu.png
+c07f77c05f5ff79cc656a3419ce313938007d08d  root/static/images/flag/lv.png
+81401759c25db8931b5f53b8dbbf5e0806eda1dd  root/static/images/flag/ly.png
+138a8f6fa8b0779b410ac465af099c14849976db  root/static/images/flag/ma.png
+581fde2017f60bd6ae078888395cf4788307eff7  root/static/images/flag/mc.png
+7afb89a3ef3f75cf8c4f89b7521c13316b7d21f9  root/static/images/flag/md.png
+470743bac20f4282b8483450f17b875ae4ca227d  root/static/images/flag/me.png
+9d2a496b987b025da6f1e77cf82e5db24717d085  root/static/images/flag/mg.png
+0e3060d94e13993732f796ca6790c352cc5986bb  root/static/images/flag/mh.png
+a16c86993248c4f79fd3ce9aea53c01581b00cae  root/static/images/flag/mk.png
+758913c7093b77d4d7aad6c3b84ec2ab90a61131  root/static/images/flag/ml.png
+fd888c92b299018eedb20c41366e868dd9561f66  root/static/images/flag/mm.png
+a3a51ce109e5510cce1f71b60bc27dc12c670df4  root/static/images/flag/mn.png
+1fe878fe2d2b5852aa0db7185b8400aa80b61dcc  root/static/images/flag/mo.png
+4a74701182bbfcd8767f7377e940a22f572c109f  root/static/images/flag/mp.png
+7737641349533b595bcc807edb6877432d6cda3a  root/static/images/flag/mq.png
+fe648fb5ed419e74803f24c27728c1f034ba457a  root/static/images/flag/mr.png
+42bcde1064e218ee4417bf1d984b0b915b8ad794  root/static/images/flag/ms.png
+8dd994e8594466552b5928f2aef40cca81668292  root/static/images/flag/mt.png
+36ff160d256eff6487118fc6e9e34104b741df33  root/static/images/flag/mu.png
+4ab64ed6e406e7e22d75f2a1da8c2c23c4eced39  root/static/images/flag/mv.png
+328e68f89613ae681f89b2adf448a17a61893b46  root/static/images/flag/mw.png
+dafaf4482b573010f75c79b55c06219fbe44e501  root/static/images/flag/mx.png
+1dbfc17f31c5d73083e9686086eb72c402c10970  root/static/images/flag/my.png
+b277dfe0081ef9bf2a855a43f2a6a1c1060c71dc  root/static/images/flag/mz.png
+55ba43801ea8994332d07bb518331eefc40c7da5  root/static/images/flag/na.png
+88838d9df558c47575acf1ec3e03286119100228  root/static/images/flag/nc.png
+b1010219c9a606c73dd91135ef06c4102ef2c958  root/static/images/flag/ne.png
+430cfaee743e9d8d5d3c8336aa0369e0f44802d3  root/static/images/flag/nf.png
+cb02c41decc8e7e8d077c5b3ef878e50baf0c6ca  root/static/images/flag/ng.png
+0b68dd65207a2142d96be8fb856264d18aeb3d84  root/static/images/flag/ni.png
+eb0cf9b99ad87219d4067ff8fd68845cf663d62b  root/static/images/flag/nl.png
+993f09a3f83b06dd0c60a1a1c1ab626616a80691  root/static/images/flag/no.png
+1688dcfdfe149a937b6445b733055fe3b5a9e7c2  root/static/images/flag/np.png
+5f0f408d9126d6c4016a3193b2a0d6776b2ce0ee  root/static/images/flag/nr.png
+2145604d3a97ca96166985dabe3c26ef791eee30  root/static/images/flag/nu.png
+1c91c8a73b713f1a2334e745b3770c9addfa17c5  root/static/images/flag/nz.png
+b7569257098271b97dba23bc8be0b6da7f0d58d8  root/static/images/flag/om.png
+71544a40bd5a809275fbe93be55b1fa50bbe082c  root/static/images/flag/pa.png
+7408c6378663030f4e5fc12497a1720ad1184427  root/static/images/flag/pe.png
+d5caec866ed57385a592a88dd205b00be8fdcaa4  root/static/images/flag/pf.png
+64fd70e3bdc64907d4959fa7ca26f0bb6d0e8950  root/static/images/flag/pg.png
+e7b5bd5aee43e0bb8ccde469e8a546878fdc5bc6  root/static/images/flag/ph.png
+4455011813df28e7b3253851a48e5f12de5b454d  root/static/images/flag/pk.png
+2ea4d6d34e7a7a22fadb5d24fc45dd336d6edbb8  root/static/images/flag/pl.png
+5c00e726e5b6722054ea9e72c5e90af082506bc4  root/static/images/flag/pm.png
+00671b24ecf082184bdd37c6fa34fdca9dcb6e2a  root/static/images/flag/pn.png
+c78c58c4abdef5a72f76236e11fa84e1ee276578  root/static/images/flag/pr.png
+aeb64033b647b0645e7c0a2c29b87625e23bed8c  root/static/images/flag/ps.png
+4f42728dee7c4e4c25e144dc3037a509b5ea9b0b  root/static/images/flag/pt.png
+524a40d7e4a9da9363a232627560a598a19c264d  root/static/images/flag/pw.png
+74c5bc2fc5d2ca1b1c5abdc74ce88b9d9781f865  root/static/images/flag/py.png
+a234e6b821929016ebe2582f24852544c0ebadc3  root/static/images/flag/qa.png
+ac676c76c3cefa4d24df13a1f0ae7b012f301cf0  root/static/images/flag/re.png
+736a9f0e74f44916c0731576d99fa06244a76b17  root/static/images/flag/ro.png
+23a9e15642bd7a5a7860d281e0e68c6a0a6a81d8  root/static/images/flag/rs.png
+5dee6bec53ee330a32bc13aeb5ad66b2d95ae56d  root/static/images/flag/ru.png
+53c55248eddee3a19393ee21d873b67af7a754d7  root/static/images/flag/rw.png
+83c3f966b229ed2acf9c9feada2ac42649f4fe1b  root/static/images/flag/sa.png
+43b918fadfa3c5db0bb72d84bd3fc8e30f0df0ff  root/static/images/flag/sb.png
+92fe4e82fc8708a7fe67480b8915fc3f380fe5d0  root/static/images/flag/sc.png
+240d805dc5389252bca7a6474a75f9bf14920555  root/static/images/flag/scotland.png
+14fead6fb243455cfb8c20fe2f8a44d2d7ccb070  root/static/images/flag/sd.png
+ee2e7d3d4a7b85992ec91ac7e397d04d3a674bc3  root/static/images/flag/se.png
+cc689f2e0ca366cb3da863f62fe061af814e9405  root/static/images/flag/sg.png
+66d55e63f310329f8177e212876292db1d8f36da  root/static/images/flag/sh.png
+a5bdcaa3691134368e8a0789f06208c0d086e552  root/static/images/flag/si.png
+993f09a3f83b06dd0c60a1a1c1ab626616a80691  root/static/images/flag/sj.png
+d2a98eaf1eeb2891bf8ee4a57b5b82488960f254  root/static/images/flag/sk.png
+34ef0bc46f18707786ed802140522b0a08f94d41  root/static/images/flag/sl.png
+b49eb091ecefece8dd9763239c50f0b3ac30a48e  root/static/images/flag/sm.png
+e43feb8efd9cf9d0145a883745cbef4c5ee4f672  root/static/images/flag/sn.png
+9635b3ef055f746b8fe68e0ac96c09f09b40e652  root/static/images/flag/so.png
+bf49269e1802610baae3f67102fee7c76df9fd20  root/static/images/flag/sr.png
+5f27fa1d0ef54f8ebad9903e0067e39de4b3d7e7  root/static/images/flag/st.png
+d7722f5605a0058aab18a429e4b3fe76f7fbecbe  root/static/images/flag/sv.png
+cc7cf710eabf5723cb20d745185675f0546be594  root/static/images/flag/sy.png
+058592b5319e99e08b74df07623e2ac1efa91781  root/static/images/flag/sz.png
+8dd6fbed684107d54650cc066bf98a2dee777437  root/static/images/flag/tc.png
+e5ab5117cdcab6800e58e568ad2eaaeaa40aaadc  root/static/images/flag/td.png
+cc62061d1995b5f86ed8a16bf8734283ff508d4d  root/static/images/flag/tf.png
+11df441838d5f76773975cd8e5dfe7751f95f12b  root/static/images/flag/tg.png
+971bcf3bdb1ab0d22d5046035e4a6fe5ed8bb9c5  root/static/images/flag/th.png
+2c674b8a3ec336343bcbbef54edaf8775deb6816  root/static/images/flag/tj.png
+feaca8e3d4fc7d878e7ae1f5a9dca0957880d43d  root/static/images/flag/tk.png
+2d76cf0b54ae8d3c8515fae4ec47f2f852a6a3ca  root/static/images/flag/tl.png
+0877316905724f24b6aead16d3db71e97ae4003b  root/static/images/flag/tm.png
+046e210cef7cfcae885edd3566adb4453506753c  root/static/images/flag/tn.png
+cf3f7acfce003c55b27e2eddc5c64bb8846ca09b  root/static/images/flag/to.png
+0f8270dbfaf1fee0c890a37329f1fc934578ab74  root/static/images/flag/tr.png
+fbe9b484923116ad8a2bcf82cec699b91c30a663  root/static/images/flag/tt.png
+d003e55b5f1039fb5cd6245937d66930f60e9f93  root/static/images/flag/tv.png
+b7f6a3b5beecc817cf1910c6ba56aad020ae85ff  root/static/images/flag/tw.png
+4c10a01f694c09815a428afd841137827783ec28  root/static/images/flag/tz.png
+c25db33eec90ce647ef60a221f0edf9688d71860  root/static/images/flag/ua.png
+52ef3a14b469b96bd6a8b8c0dec9b7a0802bab4b  root/static/images/flag/ug.png
+4f2b922f60d83b31eeab38c767e9ff5d46a57b3b  root/static/images/flag/uk.png
+c71d7d21e036c957591291e36cbc41429c084065  root/static/images/flag/um.png
+1479802403c35c4fa52f8587d17012aa78798ac6  root/static/images/flag/us.png
+a780991f52d454a92264c548230b2e15c230ac10  root/static/images/flag/uy.png
+ae49f285bb64ae74fab6252b5e4bf82316a64cd9  root/static/images/flag/uz.png
+60287158752bbd32d66dd8fab19f5909bdb1d307  root/static/images/flag/va.png
+418473b225c06b52d6e8cb7f0f325098326f15be  root/static/images/flag/vc.png
+6a4d244485bb1cafc0aef43d554b75871c4e87f3  root/static/images/flag/ve.png
+76d5f8c7fd51dbc06b4ed53288b3dc15252c4ff4  root/static/images/flag/vg.png
+daab9de79fb184bc3849063dcf54071957a622ae  root/static/images/flag/vi.png
+4a31798471c992200ddf7f5c68461c00fa08978c  root/static/images/flag/vn.png
+2595aa1ffc0300639e9432aac85f7ad621ecb2b6  root/static/images/flag/vu.png
+e93a5be7d95233a9df3f96b642d4b153a0f69b4f  root/static/images/flag/wales.png
+98faebd2bfc945c7c118e932f6382aad8c110a20  root/static/images/flag/wf.png
+449ad612b4981ba130dd727edc0a8f98aa16df32  root/static/images/flag/ws.png
+48b9a9a905479f9d4dae8e8c2f61d118b501102e  root/static/images/flag/ye.png
+afe19553a9e2031f1fbe0dd3d6e2fc2423bb255a  root/static/images/flag/yt.png
+feea3187e982145186f283f92b499c09e7687dc2  root/static/images/flag/za.png
+a3c6a57541a2ffddd6b91ebbdb96befd4ad92652  root/static/images/flag/zm.png
+2976e751f3c7ba4ba941c5517802b32428e90e78  root/static/images/flag/zw.png
+8c2ccfffd4eed6908e37032d7a73492451bb9b05  root/static/images/gray.png
+48f5539cba2a4d90a1aaa918527ff5184c7f3c5a  root/static/images/logo-long-black.png
+eb6957c09d78af5edba45c89c21cd7727cc4b5c8  root/static/images/logo-long-white.png
+9e119cdc85fe724e58ed4c75795f6d0d585b8f3e  root/static/images/logo-long.png
+f9a285026ac55bb5dc1b4238cc2f64ddae05c0ff  root/static/images/logo.png
+cdbe7ff70273c8950be51e7a1ce491783b5ec369  root/static/images/metacpan-logo.png
+97054f75e50231dd26ab5d317ab96b2286311307  root/static/images/metacpan-logo@2x.png
+0cc5770d720c1f8604c92c97d1137a3eb4a6596c  root/static/images/profile/bitbucket.png
+a3186aa4864390fbc418806dc0785cc208557ede  root/static/images/profile/blinklist.png
+bb03c436933efae1464fa103d2aa0146f0e71cb2  root/static/images/profile/brightkite.png
+a5d3e94fbb974e2ef0154228a5dcb36b8a3e75f8  root/static/images/profile/coderwall.png
+69344764309bcf9c9f5e873c3eda5741ec81cbfb  root/static/images/profile/couchsurfing.png
+3dcfb1ba28b55eb470f8ebfe66e63580558f44df  root/static/images/profile/design_float.png
+2dbed99d2f09ba268954a03b9a3425b4a14e3ef8  root/static/images/profile/dopplr.png
+3f65db48f1971b2fc837c3168dea20e96b16946d  root/static/images/profile/dotshare.png
+87d0c86253e979c396ab7e3acecc89581efd16e6  root/static/images/profile/email.png
+65065c1a2a504cbeb4a6462ac2d3f26a0b4825da  root/static/images/profile/facebook.png
+4a9cf5fb039e7118d829c9adb7c7600531d8a5aa  root/static/images/profile/feed.png
+1d0dbc7cd409b41c1687ff503d223225fcae390d  root/static/images/profile/flickr.png
+992d52f26d3d159cf2495f5a7241f67a224ea9aa  root/static/images/profile/friendfeed.png
+0d8cf45c93988001f7465ff87be26d0b82f1bef8  root/static/images/profile/furl.png
+968957a97c6066602d4d359e6a0a4ae340156f15  root/static/images/profile/gamespot.png
+c9aad238ad66887c8498279293f4c779cc142887  root/static/images/profile/geeklist.png
+82ea50c2b692fcfd63f4975cd72df684d83b28a8  root/static/images/profile/github-meets-cpan.png
+7768618ea6b52b35ce13ba8866228fda77e86c5b  root/static/images/profile/github.png
+976db088e71f755f7e51b29496df6bd8de53c13b  root/static/images/profile/gitlab.png
+21dff75b978510ddfa6c33203ca8b266494ab2d0  root/static/images/profile/gitorious.png
+f6b88ec72f3611127356d6c59c17901cd09df584  root/static/images/profile/gittip.png
+6d1e4fa7af002dbe2185419863daa92ea4141d27  root/static/images/profile/hackernews.png
+9b86fef7a4fcf2e854152c183285fec2bb073bee  root/static/images/profile/hackerrank.png
+94671f8a3e0af14982bc9d35c776f8cbe57c3518  root/static/images/profile/hackthissite.png
+d91b6bb320532f8519d15199d13fd23433124b75  root/static/images/profile/identica.png
+12422a9c1b690e0820fcf5c35195b1087408a305  root/static/images/profile/instagram.png
+250c08fb7790c4771050f18eacdc5f3180be3e87  root/static/images/profile/lastfm.png
+d2305c39515daaf8c89d9bf3055690bfd41ddcbb  root/static/images/profile/linkedin.png
+9cb35d11f03337e0ba9661c2229267f9a23ef188  root/static/images/profile/magnolia.png
+7a56a8890ac6d6a2073383f98181a490de156cfa  root/static/images/profile/meetup.png
+796fb059f0bc0e282f86f49fa5da575525b3cc14  root/static/images/profile/metacpan.png
+a22660e444f3059bbd0db0a5c41ce4a8cdedb1ec  root/static/images/profile/mixx.png
+474cfd2775d0a86706d072649281fd4210eba917  root/static/images/profile/myspace.png
+b54de94e16f78f40c1b1dc5bd6469e3093fea15a  root/static/images/profile/nerdability.png
+0b8172a74b5ad4afa40f6246b9087de057232110  root/static/images/profile/newsblur.png
+cf600d1ce2ba84d54bc210ed4859b90a07d22f6a  root/static/images/profile/newsvine.png
+7b734b00f54ea1f64fcb9c62c6093b2f45f0e755  root/static/images/profile/ohloh.png
+3c3922920e78403c4e6c969cb9b7f7f185f552c0  root/static/images/profile/orcid.png
+4183a8a028543531a4a04a40917ac4cc1eb1d39e  root/static/images/profile/perlmonks.png
+a8caffce132bcfdaa0d87d6311ca7ba40be30e9d  root/static/images/profile/pinboard.png
+bbc03be0b7e878b0ac5b552ca1c2c4a568dcd744  root/static/images/profile/playperl.png
+723b1d505ba65d0d11c3e7e5f33158ae1349cc5b  root/static/images/profile/posterous.png
+0e5490b976ed2a7bbdcc9a71dfe880ef7deca898  root/static/images/profile/prepan.png
+f53a57193f209a34f70bb791750cb60df3a4cb30  root/static/images/profile/reddit.png
+9375111d1ec664e1c38203b419e4518f770076d6  root/static/images/profile/slideshare.png
+3911607f7c8558628bf3da1dac17c629f073a490  root/static/images/profile/sourceforge.png
+8776aea26dfdf439fe49708e2443af5fe80a413b  root/static/images/profile/speakerdeck.png
+47b929c1a69439c75a45996f679d25e641b46bb6  root/static/images/profile/sphere.png
+8124d18e33e0f8d4c34fda699049327994b6aa28  root/static/images/profile/sphinn.png
+0aa89b247473f38ca58b3f4f7671d8e5197164b1  root/static/images/profile/stackexchange.png
+b47eacd70f55c9affa2cddefd9ab670cc1ba9e9d  root/static/images/profile/stackoverflow.png
+09e6119a810d344a3a1999f178f19ccddbc9a803  root/static/images/profile/stackoverflowcareers.png
+714f1bdbec3add94bb526d21b4ca6e175d6f7464  root/static/images/profile/steam.png
+6b6151d6104f169ee7b534a19bc548c25ec1a2b8  root/static/images/profile/stumbleupon.png
+deb71618182162153d8452275db7d4ed87ab1550  root/static/images/profile/substack.png
+1b59c8976d02cbfb8c86955b6541572187fafcb6  root/static/images/profile/technorati.png
+f99eaa4bd2db23997d6a3ff722edd4ffc65571c9  root/static/images/profile/tripadvisor.png
+326411b5ed27cbed86fd4a0eac83f49579553420  root/static/images/profile/tumblr.png
+52ab835d12cf808924dbe5ac15f28115e23c405c  root/static/images/profile/twitter.png
+7022b109b09a2167e7d2acdf7d4544886fa1c83c  root/static/images/profile/vimeo.png
+f9f0e31b575d54daff57a3ff7a5df362cfc37f92  root/static/images/profile/youtube.png
+9e1d761a676c167e2db78dc010d09cb4c2a232e8  root/static/images/small_logo.png
+83d56a2f536ef6b7620ff5a3a8ff2f0bb0307500  root/static/images/sponsors/TopBargains_Australian_Coupons.png
+161cb712a2298eeb3940afc710caf7f9f9194bef  root/static/images/sponsors/activestate.png
+16b8e4557ee882a3dd157170e08d1ededa18812a  root/static/images/sponsors/advance-systems.jpg
+ee9ccebabfe78643470da003d83e6b61608979f6  root/static/images/sponsors/booking.png
+52a7ea5efe9ae9aaf6a20da37a1c6052e882411a  root/static/images/sponsors/bytemark_logo.svg
+12036785cf973c7340818e0837db942830dbf01e  root/static/images/sponsors/control-my-id.png
+8d0a1c548cae06f8d384c7619ee55baabcc27386  root/static/images/sponsors/cpanel.png
+0f8418f040c5504fa69386bafcf7046f11c37503  root/static/images/sponsors/dealspotr.png
+e08d05b3ac61f49694c04540eb4f7ee70a8e6894  root/static/images/sponsors/deriv-horizontal-web-dark-100-removebg.png
+ca16d4cefecab05b457f5ed88415d28f3cce3832  root/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg
+940396b51a065d9580f887d24fd7f5ebf1bd236a  root/static/images/sponsors/deriv.webp
+8c9059f6ef31a420bfb9f6efb4ce01278e5a5740  root/static/images/sponsors/dyn.png
+a588394fcb496ee492d289d4db0e1d3624a34528  root/static/images/sponsors/easyname.png
+292b9ab76da7035cf192f8c651a090c4bd4bc2ab  root/static/images/sponsors/elastic.svg
+5d76d29f7e9ce2d323cef2c451cd26300e10c770  root/static/images/sponsors/epo.png
+a9f2f7876e47d1d0d374551135b56a5b86b89886  root/static/images/sponsors/fastly_logo.svg
+d7c56f613b153d3378a98d0ab4640e0394374b2a  root/static/images/sponsors/fastmail.png
+4b8d0d2d653d76dc59b446bd706b034a007f581a  root/static/images/sponsors/geocodelogo.svg
+ff77edb3ea13567310837717da9d2cdea155682c  root/static/images/sponsors/github_logo.png
+ddc82658ac274d981a7e3159fc4ed452166f73a4  root/static/images/sponsors/idonethis.png
+887d712f253b63e53319ad37cfcf3fdbd36e8a36  root/static/images/sponsors/kritika.svg
+45ae7ac5577e16b082966d44053844948ae627bc  root/static/images/sponsors/liquidweb_logo.png
+2b7374c1c82ad51415dacd32d033b119fcfa9cba  root/static/images/sponsors/open-cage.svg
+7f77555505dfcb1a2c3b47bec95062fe2dd7a5da  root/static/images/sponsors/panopta.png
+fb43b99a721b83aeebf528977f3df7083a69289e  root/static/images/sponsors/perl-careers.png
+1eacc5aedbbaeb388801652ecc48c76fce49d530  root/static/images/sponsors/perl-services.svg
+5cdd9d7bda9936c0ab678063a93df341fd37acb1  root/static/images/sponsors/perl_logo.png
+e691cd3eb125c4b9e157a083a1c0a5f14e5a692a  root/static/images/sponsors/qah-2014.png
+bb659e08ba1966a9e6d90f9969ce89dd8c6a61b7  root/static/images/sponsors/servercentral.png
+f251ab8c5c58c9c87bbd2e6042d9b2574cd0bc8b  root/static/images/sponsors/speedchilli.png
+28b210ec069326d1914b54186854e278b874e08e  root/static/images/sponsors/travis-ci.png
+d1756602e3883c084a901338b96d8a03b8b540b9  root/static/images/sponsors/vienna.pm.jpeg
+6df4cc414faac9f34dcac688d4edc19757bc61f3  root/static/images/sponsors/yellowbot-small.png
+7d258eae0a03c68f57f87b385e5df233aa62fb57  root/static/images/sponsors/yellowbot.png
+f00590419c1aa7a25f90da433e939e89468da3a7  root/static/images/sponsors/yellowbot_2.png
