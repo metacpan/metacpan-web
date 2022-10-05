@@ -22,6 +22,3 @@ insert_final_newline     = true
 indent_size  = 2
 [*.tx]
 indent_size  = 2
-
-[.travis.yml]
-indent_size = 2
