@@ -1,3 +1,13 @@
+// For some reason in Safari, the .clearfix() styling
+// is causing the icons to be outside of the viewport.
+.nav {
+  &:before,
+  &:after {
+    content: "" !important;
+    display: block !important;
+  }
+}
+
 .navbar {
     background-color: @gray-darker;
     border-color: @gray-darker;
@@ -101,7 +111,6 @@ nav {
   grid-area: icons;
   justify-self: end;
   margin: 0;
-  overflow-y: hidden;
 
   button {
     background-color: transparent;
