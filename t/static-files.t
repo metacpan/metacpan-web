@@ -27,23 +27,13 @@ done_testing;
 
 __DATA__
 b0697c267731b7ee53e8e7a3bbd9f6476c0ba29a  root/static/icons/apple-touch-icon.png
-05fa1fbc4b6541c3e8176d235766fa0e411e9931  root/static/icons/asc.gif
-307311e1752fa2c8dc63c91c684f2f1db3bc0a98  root/static/icons/bg.gif
-f423bac33e39d81888cdf716b988a3200e5dba8b  root/static/icons/box.png
-f28f919102d9971f6f433465b37d3213f16f7c52  root/static/icons/busy.gif
-4177aef38e79be4088aca7350ef215cc053c3c9a  root/static/icons/desc.gif
 9352147a2cb97acb161f21202e9bfec29b6faa30  root/static/icons/favicon-16.ico
 2ef4ad41df53e9361604fc7e110d28949e972b8f  root/static/icons/favicon.ico
 0a32f6efba1dd71fd2250e2de12261948c4316a8  root/static/icons/folder.png
 697355984fb0724f2cd358c2c3139fdb7ec9e56b  root/static/icons/grid.svg
-2a9659e15773869426894fe38acff4b797e17b65  root/static/icons/icon-rss.png
-cbb30244c85540bedd8761b1394cb5162c98c6b6  root/static/icons/package.png
 aa842d887b715e457517c3a6d5006189275e12fd  root/static/icons/page_white.png
 99fff2092bff6da46ee47f0532de09c21bc821c4  root/static/icons/page_white_c.png
 ca4e1d75b1288f162d5a99243fe031c96442f541  root/static/icons/page_white_code.png
-11766cf1b41df71b6051824a94485f91a2283cff  root/static/icons/rss_feed.png
-4d4c0a13206474e65e616e42c7505c6357d63030  root/static/icons/server.png
-93115fa16327db30c2fb7b7d580dd6c9499f82f5  root/static/icons/settings.png
 e911cb9d9a42de8fb6e5b32000d706e0dfd15e0d  root/static/images/flag/ad.png
 39538335bae98862327e5f0f2fb01417b7a917e4  root/static/images/flag/ae.png
 5b307e408905ffa3e3ea4544192f0530408c05aa  root/static/images/flag/af.png
@@ -297,7 +287,6 @@ c3f93396b08dd00e70c3eea34c32995bb57a96a8  root/static/images/flag/zm.png
 d06d39e975d7292bb377e3cc9704442007d4239e  root/static/images/logo.png
 cdbe7ff70273c8950be51e7a1ce491783b5ec369  root/static/images/metacpan-logo.png
 645f68d19fc7c4df2587d0e6de56caf912cc8f7a  root/static/images/metacpan-logo@2x.png
-726ea72bf9dffa7293fae9957dd6430dd661b6ab  root/static/images/noise.png
 85e55afecc01c02fda7c08ea0000f3fe6c996104  root/static/images/profile/bitbucket.png
 59907af5778fd8082020b724a405956ef2713a5c  root/static/images/profile/blinklist.png
 865636c3360bff50cd52fc34b6844e4e0e9acd74  root/static/images/profile/brightkite.png
@@ -385,7 +374,3 @@ e691cd3eb125c4b9e157a083a1c0a5f14e5a692a  root/static/images/sponsors/qah-2014.p
 d1756602e3883c084a901338b96d8a03b8b540b9  root/static/images/sponsors/vienna.pm.jpeg
 25d2fa66dcbccadd9487cd5540f9b26485b873c2  root/static/images/sponsors/yellowbot-small.png
 6e7962a5c1467d8e5b0cd2b5901b757b8f667165  root/static/images/sponsors/yellowbot.png
-b4287ec3dd974b466fe888f16aab7e51fe0fb421  root/static/images/stars-sprite-white.png
-93e1f0169c9b1cca1d798b72e6226432cabc1d72  root/static/images/stars-sprite.png
-2020892c7f07db904aa101306712381d9d3d14c1  root/static/images/stars-sprite@2x.png
-eca87854262d8cb8d8be91b4f3f30aaaa323f269  root/static/images/t.gif
