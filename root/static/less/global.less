@@ -92,7 +92,7 @@ button.favorite, a.favorite {
     font-size: 0.9em;
     background-color: #fff;
     opacity: 0.5;
-    .border-radius(3px 3px);
+    border-radius: 3px 3px;
     border: solid 1px #666;
     color: #333;
     text-decoration: none;
@@ -112,8 +112,7 @@ button.favorite, a.favorite {
     }
 
     &.highlight {
-        background-color: #fca216;
-        #gradient .vertical(#ffc874, #fca216);
+        background: #fca216 linear-gradient(to bottom, #ffc874, #fca216);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
         border-color: #d39534;
@@ -121,8 +120,7 @@ button.favorite, a.favorite {
     }
 
     &:hover, &.active {
-        background-color: #36C;
-        #gradient .vertical(#69f, #36c);
+        background: #36C linear-gradient(to bottom, #69f, #36c);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
         border-color: #36C;
@@ -285,12 +283,6 @@ h1, .h1, h2, .h2, h3, .h3 {
     color: @black;
 }
 
-.border-radius(@radius) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-
 .collapse .navbar-collapse {
     clear: none;
 }
@@ -299,7 +291,6 @@ h1, .h1, h2, .h2, h3, .h3 {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 250px;
-    -webkit-overflow-scrolling: touch;
 }
 
 .toolbar-search {
