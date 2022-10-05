@@ -1,0 +1,15 @@
+<svg viewBox="0 0 160 160" width="16px" height="16px" xmlns="http://www.w3.org/2000/svg">
+    <path fill-opacity="0" style="stroke: #000; stroke-width: 10" d="
+        M 16,16
+        h 128
+        v 128
+        h -128
+        z
+        m 32,0      v 128
+        m 32,0      v -128
+        m 32,0      v 128
+        m 32,-32    h -128
+        m 0,-32     h 128
+        m 0,-32     h -128
+    "></path>
+</svg>

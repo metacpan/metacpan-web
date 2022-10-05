@@ -35,7 +35,7 @@ f28f919102d9971f6f433465b37d3213f16f7c52  root/static/icons/busy.gif
 9352147a2cb97acb161f21202e9bfec29b6faa30  root/static/icons/favicon-16.ico
 2ef4ad41df53e9361604fc7e110d28949e972b8f  root/static/icons/favicon.ico
 0a32f6efba1dd71fd2250e2de12261948c4316a8  root/static/icons/folder.png
-a7f7eaa459a8decc892ad92e5e3a376b0f3d568f  root/static/icons/grid.png
+697355984fb0724f2cd358c2c3139fdb7ec9e56b  root/static/icons/grid.svg
 2a9659e15773869426894fe38acff4b797e17b65  root/static/icons/icon-rss.png
 cbb30244c85540bedd8761b1394cb5162c98c6b6  root/static/icons/package.png
 aa842d887b715e457517c3a6d5006189275e12fd  root/static/icons/page_white.png
