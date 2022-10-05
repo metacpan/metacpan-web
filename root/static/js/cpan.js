@@ -319,14 +319,6 @@ $(document).ready(function() {
         format_index(index);
     }
 
-    ['right'].forEach(function(side) {
-        var panel = $('#' + side + "-panel");
-        if (panel.length) {
-            var panel_visible = MetaCPAN.storage.getItem("hide_" + side + "_panel") != 1;
-            togglePanel(side, panel_visible);
-        }
-    });
-
     $('a[href*="/search?"]').on('click', function() {
         var url = $(this).attr('href');
         var result = /size=(\d+)/.exec(url);

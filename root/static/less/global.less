@@ -92,7 +92,7 @@ button.favorite, a.favorite {
     font-size: 0.9em;
     background-color: #fff;
     opacity: 0.5;
-    .border-radius(3px 3px);
+    border-radius: 3px 3px;
     border: solid 1px #666;
     color: #333;
     text-decoration: none;
@@ -112,8 +112,7 @@ button.favorite, a.favorite {
     }
 
     &.highlight {
-        background-color: #fca216;
-        #gradient .vertical(#ffc874, #fca216);
+        background: #fca216 linear-gradient(to bottom, #ffc874, #fca216);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
         border-color: #d39534;
@@ -121,8 +120,7 @@ button.favorite, a.favorite {
     }
 
     &:hover, &.active {
-        background-color: #36C;
-        #gradient .vertical(#69f, #36c);
+        background: #36C linear-gradient(to bottom, #69f, #36c);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
         border-color: #36C;
@@ -166,10 +164,6 @@ a.ellipsis:hover * {
 .btn-link {
     padding: 0;
     border: none;
-}
-
-.olControlAttribution {
-    bottom: 0em !important;
 }
 
 .qtip-github {
@@ -232,59 +226,6 @@ a.ellipsis:hover * {
   vertical-align: text-bottom;
 }
 
-.rating-00, .rating-05, .rating-10, .rating-15, .rating-20, .rating-25, .rating-30, .rating-35, .rating-40, .rating-45, .rating-50 {
-    width: 69px;
-    height: 12px;
-    display: inline-block;
-    .img-retina('/static/images/stars-sprite.png', '/static/images/stars-sprite@2x.png', 139px, 25px);
-    vertical-align: bottom;
-    margin-bottom: 4px;
-}
-
-.rating-00 {
-    background-position: -70px 0px;
-}
-
-.rating-05 {
-    background-position: -56px -13px;
-}
-
-.rating-10 {
-    background-position: -56px 0px;
-}
-
-.rating-15 {
-    background-position: -42px -13px;
-}
-
-.rating-20 {
-    background-position: -42px 0px;
-}
-
-.rating-25 {
-    background-position: -28px -13px;
-}
-
-.rating-30 {
-    background-position: -28px 0px;
-}
-
-.rating-35 {
-    background-position: -14px -13px;
-}
-
-.rating-40 {
-    background-position: -14px 0px;
-}
-
-.rating-45 {
-    background-position: 0px -13px;
-}
-
-.rating-50 {
-    background-position: 0px 0px;
-}
-
 /* Contributors list on release pages
 * see /release/Plack for example
 */
@@ -342,12 +283,6 @@ h1, .h1, h2, .h2, h3, .h3 {
     color: @black;
 }
 
-.border-radius(@radius) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-
 .collapse .navbar-collapse {
     clear: none;
 }
@@ -356,7 +291,6 @@ h1, .h1, h2, .h2, h3, .h3 {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 250px;
-    -webkit-overflow-scrolling: touch;
 }
 
 .toolbar-search {
@@ -380,10 +314,6 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .suggest-author-label {
     font-style: italic;
-}
-
-form#metacpan_logout {
-    display: none;
 }
 
 .dropdown-menu form {
@@ -414,11 +344,6 @@ form#metacpan_logout {
 
 .container-top {
     padding: 0 10px 10px 10px;
-}
-
-.head-small-logo {
-    width: 200px;
-    padding-right: 5px;
 }
 
 .page-content {
@@ -464,26 +389,6 @@ form#metacpan_logout {
     padding-left: 5px;
 }
 
-.big-logo {
-    margin: 42px auto 44px auto;
-    display: block;
-    width: 326px;
-    height: 59px;
-    background-repeat: no-repeat;
-    .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
-}
-
-.small-logo {
-    position: relative;
-    margin: 1px 15px 5px 0;
-    float: left;
-    width: 180px;
-    height: 33px;
-    background-repeat: no-repeat;
-    background-position: 0px -59px;
-    .img-retina('/static/images/metacpan-logo.png', '/static/images/metacpan-logo@2x.png', 326px, 92px);
-}
-
 .content {
     justify-self: center;
     line-height: 1.54em;
@@ -521,7 +426,6 @@ form#metacpan_logout {
         color: #f00;
         font-weight: bold;
     }
-
 }
 
 .release-banner {
