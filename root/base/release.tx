@@ -12,7 +12,7 @@
     <a data-keyboard-shortcut="g a" rel="author" href="/author/[% $release.author %]" class="author-name">[% $author.display_name %]</a>
   </span>
   <span>&nbsp;/&nbsp;</span>
-  <div class="release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
+  <div class="release dist-release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
     <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $module ? '' : 'extend' };
     %%  if $module {
