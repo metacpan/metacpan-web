@@ -353,7 +353,6 @@ f99eaa4bd2db23997d6a3ff722edd4ffc65571c9  root/static/images/profile/tripadvisor
 7022b109b09a2167e7d2acdf7d4544886fa1c83c  root/static/images/profile/vimeo.png
 f9f0e31b575d54daff57a3ff7a5df362cfc37f92  root/static/images/profile/youtube.png
 9e1d761a676c167e2db78dc010d09cb4c2a232e8  root/static/images/small_logo.png
-83d56a2f536ef6b7620ff5a3a8ff2f0bb0307500  root/static/images/sponsors/TopBargains_Australian_Coupons.png
 161cb712a2298eeb3940afc710caf7f9f9194bef  root/static/images/sponsors/activestate.png
 16b8e4557ee882a3dd157170e08d1ededa18812a  root/static/images/sponsors/advance-systems.jpg
 ee9ccebabfe78643470da003d83e6b61608979f6  root/static/images/sponsors/booking.png
