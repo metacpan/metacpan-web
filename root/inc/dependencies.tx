@@ -16,6 +16,9 @@
   <li><i>none</i></li>
   %%  }
   <li>
+    <hr>
+  </li>
+  <li>
     <a href="[% $module ? '/module/' ~ ($module.documentation || $module.module.0.name ) : '/dist/' ~ $release.distribution %]/requires">Reverse dependencies</a>
   </li>
   <li>
