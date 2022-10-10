@@ -4,7 +4,7 @@ use Moose;
 use version qw();
 
 my @months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
-my %months = map +( $months[$_] => $_ ), 0 .. $#months;
+my %months = map +( $months[$_] => $_ + 1 ), 0 .. $#months;
 my $months = join '|', @months;
 
 our $W3CDTF_REGEX = qr{
