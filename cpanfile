@@ -95,7 +95,6 @@ requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
 requires 'Perl::Critic', '1.136';
 requires 'Perl::Tidy' => '20220613';
 requires 'Test::Code::TidyAll';
-requires 'Test::MockObject','1.09';
 requires 'Test::More', '0.96';
 requires 'Test::Needs';
 requires 'Test::Perl::Critic';
