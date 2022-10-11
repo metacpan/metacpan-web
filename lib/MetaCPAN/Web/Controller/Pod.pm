@@ -24,7 +24,7 @@ sub find : Path : Args(1) {
 
     my $release_info
         = $c->model('ReleaseInfo')
-        ->get( $pod_file->{author}, $pod_file->{release}, $pod_file )
+        ->get( $pod_file->{author}, $pod_file->{release} )
         ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
@@ -92,6 +92,10 @@ sub view : Private {
     $c->cdn_max_age('1y');
     $c->add_dist_key( $release->{distribution} );
     $c->add_author_key( $release->{author} );
+
+    if ( $data->{deprecated} ) {
+        $c->stash->{notification} ||= { type => 'MODULE_DEPRECATED' };
+    }
 
     $c->stash( {
         canonical         => $canonical,

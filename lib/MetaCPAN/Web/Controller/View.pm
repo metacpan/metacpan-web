@@ -46,8 +46,7 @@ sub release : Chained('/release/root') PathPart('view') Args {
     my $pod_file
         = $c->model('API::Module')->get( $author, $release, @path )->get;
     my $release_data
-        = $c->model('ReleaseInfo')->get( $author, $release, $pod_file )
-        ->else_done( {} );
+        = $c->model('ReleaseInfo')->get( $author, $release )->else_done( {} );
     $c->stash( {
         pod_file => $pod_file,
         %{ $release_data->get },
