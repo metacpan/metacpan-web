@@ -7,17 +7,17 @@
 %%    page_class  => $page_class || 'page-pod',
 %%  }
 %%  override left_nav_lead -> {
+%%  my $release_base = $permalinks || $release.status != 'latest'
+%%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
+%%    : '/dist/' ~ $release.distribution;
   <li>
-    Distribution: [% $module.distribution %]
+    Distribution: <a href="[% $release_base %]">[% $module.distribution %]</a>
   </li>
   %%  if $documented_module.version {
   <li>
     Module version: [% $documented_module.version %]
   </li>
   %%  }
-  %%  my $release_base = $permalinks || $release.status != 'latest'
-  %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
-  %%    : '/dist/' ~ $release.distribution;
   <li>
     <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $module.path %]">Source</a>
     (<a href="[% $release_base %]/source/[% $module.path %]?raw=1">raw</a>)
