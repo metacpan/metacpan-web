@@ -106,6 +106,22 @@ sub add_cache_headers {
     $c->res->last_modified( $file->{date} );
 }
 
+my %syntax_types = (
+    'text/x-script.perl'        => 'perl',
+    'text/x-script.perl-module' => 'perl',
+
+    # No separate pod brush as of 2011-08-04.
+    'text/x-pod'             => 'perl',
+    'text/yaml'              => 'yaml',
+    'application/json'       => 'javascript',
+    'application/javascript' => 'javascript',
+    'text/x-c'               => 'c',
+    'text/markdown'          => 'markdown',
+
+    # Are other changelog files likely to be in CPAN::Changes format?
+    'text/x-cpan-changelog' => 'cpanchanges',
+);
+
 sub content : Private {
     my ( $self, $c ) = @_;
 
@@ -115,8 +131,10 @@ sub content : Private {
 
     # could this be a method/function somewhere else?
     if ( !$file->{binary} ) {
-        my $filetype = $self->detect_filetype($file);
-        $c->stash( { source => $file->{content}, filetype => $filetype } );
+        $c->stash( {
+            source      => $file->{content},
+            syntax_type => $self->detect_filetype($file),
+        } );
     }
     $c->res->last_modified( $file->{date} );
     $c->stash( {
@@ -129,35 +147,8 @@ sub content : Private {
 sub detect_filetype {
     my ( $self, $file ) = @_;
 
-    if ( defined( $file->{path} ) ) {
-        local $_ = $file->{path};
-
-        # No separate pod brush as of 2011-08-04.
-        return 'perl' if /\. ( p[ml] | psgi | pod ) $/ix;
-
-        return 'perl' if /^ (cpan|alien)file $/ix;
-
-        return 'yaml' if /\. ya?ml $/ix;
-
-        return 'javascript' if /\. js(on)? $/ix;
-
-        return 'c' if /\. ( c | h | xs ) $/ix;
-
-        return 'markdown' if /\. md $/ix;
-
-        # Are other changelog files likely to be in CPAN::Changes format?
-        return 'cpanchanges' if /^ Changes $/ix;
-    }
-
-    # If no paths matched try mime type (which likely comes from the content).
-    if ( defined( $file->{mime} ) ) {
-        local $_ = $file->{mime};
-
-        return 'perl' if /perl/;
-    }
-
-    # Default to plain text.
-    return 'plain';
+    my $mime = $file->{mime} || 'text/plain';
+    $syntax_types{$mime}     || 'plain';
 }
 
 __PACKAGE__->meta->make_immutable;

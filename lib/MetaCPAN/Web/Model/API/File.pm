@@ -1,10 +1,12 @@
 package MetaCPAN::Web::Model::API::File;
 use Moose;
 extends 'MetaCPAN::Web::Model::API';
+with 'MetaCPAN::Web::Role::FileData';
 
 sub get {
     my ( $self, @path ) = @_;
-    $self->request( '/file/' . join( '/', @path ) );
+    $self->request( '/file/' . join( '/', @path ) )
+        ->then( $self->_groom_fileinfo );
 }
 
 sub source {
@@ -29,7 +31,7 @@ sub dir {
             }
             return $dir;
         }
-    );
+    )->then( $self->_groom_fileinfo('dir') );
 }
 
 __PACKAGE__->meta->make_immutable;

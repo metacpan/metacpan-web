@@ -86,7 +86,7 @@
   <ul>
     %%  for $examples -> $file {
     <li>
-      %%  if $file.path.match(rx('\.pod')) {
+      %%  if $file.mime == 'text/x-pod' {
       %%    include inc::link_to_file { file => $file, linktext => $file.path };
       %%  }
       %%  else {
