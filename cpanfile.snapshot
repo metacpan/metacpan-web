@@ -5093,23 +5093,6 @@ DISTRIBUTIONS
       Metrics::Any::Adapter::Test 0
       Module::Build 0.4004
       Test::Builder::Module 0
-  Test-MockObject-1.20200122
-    pathname: C/CH/CHROMATIC/Test-MockObject-1.20200122.tar.gz
-    provides:
-      Test::MockObject 1.20200122
-      Test::MockObject::Extends 1.20200122
-    requirements:
-      Carp 0
-      Devel::Peek 0
-      ExtUtils::MakeMaker 0
-      Scalar::Util 0
-      Test::Builder 0
-      UNIVERSAL::can 1.20110617
-      UNIVERSAL::isa 1.20110614
-      constant 0
-      perl 5.008
-      strict 0
-      warnings 0
   Test-Most-0.38
     pathname: O/OV/OVID/Test-Most-0.38.tar.gz
     provides:
@@ -5572,28 +5555,6 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  UNIVERSAL-can-1.20140328
-    pathname: C/CH/CHROMATIC/UNIVERSAL-can-1.20140328.tar.gz
-    provides:
-      UNIVERSAL::can 1.20140328
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      Scalar::Util 0
-      strict 0
-      vars 0
-      warnings 0
-      warnings::register 0
-  UNIVERSAL-isa-1.20171012
-    pathname: E/ET/ETHER/UNIVERSAL-isa-1.20171012.tar.gz
-    provides:
-      UNIVERSAL::isa 1.20171012
-    requirements:
-      ExtUtils::MakeMaker 0
-      Scalar::Util 0
-      perl 5.006002
-      strict 0
-      warnings 0
-      warnings::register 0
   URI-5.13
     pathname: O/OA/OALDERS/URI-5.13.tar.gz
     provides:
