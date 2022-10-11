@@ -35,12 +35,17 @@ sub _filter_authors {
         : exists $data->{author}  ? [ $data->{author} ]
         :                           [];
     for my $author (@$authors) {
-        $author->{display_name}
-            //= $author->{name}    =~ /\w/ ? $author->{name}
-            : $author->{asciiname} =~ /\w/ ? $author->{asciiname}
-            :                                $author->{pauseid};
-        $author->{has_display_name}
-            = $author->{display_name} ne $author->{pauseid};
+        my $display_name
+            = defined $author->{display_name}        ? $author->{display_name}
+            : ( $author->{name} // '' ) =~ /\w/      ? $author->{name}
+            : ( $author->{asciiname} // '' ) =~ /\w/ ? $author->{asciiname}
+            : defined $author->{pauseid}             ? $author->{pauseid}
+            :                                          undef;
+        if ( defined $display_name ) {
+            $author->{display_name} = $display_name;
+            $author->{has_display_name}
+                = $author->{display_name} ne ( $author->{pauseid} // '' );
+        }
     }
     return Future->done($data);
 }
