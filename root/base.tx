@@ -51,7 +51,7 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="header-logo-large hidden-xs">
               <a href="/" tabindex="0">
-                <img src="/static/images/logo-long-white.png" alt="MetaCPAN" />
+                <img src="/static/images/metacpan-logo-white.svg" alt="MetaCPAN" />
               </a>
             </div>
             <div class="header-logo-icon visible-xs">
