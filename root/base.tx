@@ -51,12 +51,16 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="header-logo-large hidden-xs">
               <a href="/" tabindex="0">
-                <img src="/static/images/metacpan-logo-white.svg" alt="MetaCPAN" />
+                <svg class="logo" aria-label="MetaCPAN">
+                  <use class="logo" href="/static/images/metacpan-logo.svg#logo" />
+                </svg>
               </a>
             </div>
             <div class="header-logo-icon visible-xs">
               <a href="/">
-                <img src="/static/images/dots.svg" alt="MetaCPAN" />
+                <svg class="logo" aria-label="MetaCPAN">
+                  <use class="logo" href="/static/images/metacpan-logo.svg#dots" />
+                </svg>
               </a>
             </div>
             <ul class="nav navbar-nav menu-items hidden-xs hidden-sm">
@@ -191,7 +195,7 @@
             <div class="footer-social">
               <div class="footer-link footer-logo">
                 <a href="/">
-                  <img src="/static/images/logo-long.png" alt="MetaCPAN" />
+                  <img src="/static/images/metacpan-logo.svg" alt="MetaCPAN" />
                 </a>
               </div>
               <a class="footer-social-link" href="https://github.com/metacpan">

@@ -27,10 +27,10 @@
 <div class="home">
   <div class="home-hero">
     <div class="hero-logo">
-      <img src="/static/images/logo-long.png" alt="MetaCPAN" />
+      <img src="/static/images/metacpan-logo.svg" alt="MetaCPAN" />
     </div>
     <form action="/search" class="search-form form-horizontal">
-       <input type="hidden" name="size" id="metacpan_search-size" value="20">
+      <input type="hidden" name="size" id="metacpan_search-size" value="20">
       <div class="form-group">
           <div class="search-group">
             <i class="fa fa-search"></i>

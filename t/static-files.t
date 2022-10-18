@@ -34,7 +34,7 @@ __DATA__
 aa842d887b715e457517c3a6d5006189275e12fd  root/static/icons/page_white.png
 9d0aaf1b7b03783229d08e972fd5ca7e5113e2de  root/static/icons/page_white_c.png
 5cd510d1d1ae6126d23ecdba62fac129520a3af4  root/static/icons/page_white_code.png
-ae6004316edee42922981dcf90fe182666722b53  root/static/images/dots.svg
+c6eb68299d78fecc8b74b05ee11942c034992da5  root/static/images/dots.svg
 b0cdcd8a2baf229cea555bb5a72e94a234057641  root/static/images/flag/ad.png
 9be5373eb09ae6dda325cf774dca5917c0141b4f  root/static/images/flag/ae.png
 9301bee0e54de0a85e6407a36c377bb178527ecf  root/static/images/flag/af.png
@@ -285,12 +285,7 @@ feea3187e982145186f283f92b499c09e7687dc2  root/static/images/flag/za.png
 a3c6a57541a2ffddd6b91ebbdb96befd4ad92652  root/static/images/flag/zm.png
 2976e751f3c7ba4ba941c5517802b32428e90e78  root/static/images/flag/zw.png
 8c2ccfffd4eed6908e37032d7a73492451bb9b05  root/static/images/gray.png
-48f5539cba2a4d90a1aaa918527ff5184c7f3c5a  root/static/images/logo-long-black.png
-eb6957c09d78af5edba45c89c21cd7727cc4b5c8  root/static/images/logo-long-white.png
-9e119cdc85fe724e58ed4c75795f6d0d585b8f3e  root/static/images/logo-long.png
-f9a285026ac55bb5dc1b4238cc2f64ddae05c0ff  root/static/images/logo.png
-cdbe7ff70273c8950be51e7a1ce491783b5ec369  root/static/images/metacpan-logo.png
-97054f75e50231dd26ab5d317ab96b2286311307  root/static/images/metacpan-logo@2x.png
+b7bf154dd5c44f62e8762327d34c56d1541e4039  root/static/images/metacpan-logo.svg
 0cc5770d720c1f8604c92c97d1137a3eb4a6596c  root/static/images/profile/bitbucket.png
 a3186aa4864390fbc418806dc0785cc208557ede  root/static/images/profile/blinklist.png
 bb03c436933efae1464fa103d2aa0146f0e71cb2  root/static/images/profile/brightkite.png
@@ -352,7 +347,6 @@ f99eaa4bd2db23997d6a3ff722edd4ffc65571c9  root/static/images/profile/tripadvisor
 52ab835d12cf808924dbe5ac15f28115e23c405c  root/static/images/profile/twitter.png
 7022b109b09a2167e7d2acdf7d4544886fa1c83c  root/static/images/profile/vimeo.png
 f9f0e31b575d54daff57a3ff7a5df362cfc37f92  root/static/images/profile/youtube.png
-9e1d761a676c167e2db78dc010d09cb4c2a232e8  root/static/images/small_logo.png
 161cb712a2298eeb3940afc710caf7f9f9194bef  root/static/images/sponsors/activestate.png
 16b8e4557ee882a3dd157170e08d1ededa18812a  root/static/images/sponsors/advance-systems.jpg
 ee9ccebabfe78643470da003d83e6b61608979f6  root/static/images/sponsors/booking.png
