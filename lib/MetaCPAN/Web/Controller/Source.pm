@@ -29,49 +29,49 @@ sub dist : Chained('/dist/root') PathPart('source') Args {
 }
 
 sub view : Private {
-    my ( $self, $c, @module ) = @_;
+    my ( $self, $c, @path ) = @_;
 
     if ( $c->req->params->{raw} ) {
-        $c->detach( 'raw', \@module );
+        $c->detach( 'raw', \@path );
     }
 
-    my ( $source, $module );
-    if ( @module == 1 ) {
-        $module = $c->model('API::Module')->find(@module)->get;
-        @module = @{$module}{qw(author release path)};
-        if ( 3 == grep defined, @module ) {
-            $source = $c->model('API::Module')->source(@module)->get;
+    my ( $source, $file );
+    if ( @path == 1 ) {
+        $file = $c->model('API::Module')->find(@path)->get;
+        @path = @{$file}{qw(author release path)};
+        if ( 3 == grep defined, @path ) {
+            $source = $c->model('API::File')->source(@path)->get;
         }
     }
     else {
-        ( $source, $module ) = map { $_->get } (
-            $c->model('API::Module')->source(@module),
-            $c->model('API::Module')->get(@module),
+        ( $source, $file ) = map { $_->get } (
+            $c->model('API::File')->source(@path),
+            $c->model('API::File')->get(@path),
         );
     }
 
     $c->detach('/not_found')
-        if grep +( $_->{code} || 0 ) > 399, $source, $module;
+        if grep +( $_->{code} || 0 ) > 399, $source, $file;
 
-    if ( $module->{directory} ) {
-        my $files = $c->model('API::File')->dir(@module)->get;
+    if ( $file->{directory} ) {
+        my $files = $c->model('API::File')->dir(@path)->get;
 
-        $self->add_cache_headers( $c, $module );
+        $self->add_cache_headers( $c, $file );
 
         $c->stash( {
             files     => $files,
-            author    => shift @module,
-            release   => shift @module,
-            directory => \@module,
-            maturity  => $module->{maturity},
+            author    => shift @path,
+            release   => shift @path,
+            directory => \@path,
+            maturity  => $file->{maturity},
             template  => 'browse.tx',
         } );
     }
     elsif ( exists $source->{raw} ) {
-        $module->{content} = $source->{raw};
+        $file->{content} = $source->{raw};
         $c->stash( {
-            file     => $module,
-            maturity => $module->{maturity},
+            file     => $file,
+            maturity => $file->{maturity},
         } );
         $c->forward('content');
     }
@@ -81,15 +81,15 @@ sub view : Private {
 }
 
 sub raw : Private {
-    my ( $self, $c, @module ) = @_;
+    my ( $self, $c, @path ) = @_;
 
-    if ( @module == 1 ) {
-        my $module = $c->model('API::Module')->find(@module)->get;
-        @module = @{$module}{qw(author release path)};
+    if ( @path == 1 ) {
+        my $module = $c->model('API::Module')->find(@path)->get;
+        @path = @{$module}{qw(author release path)};
     }
 
     $c->res->redirect(
-        $c->view->api_public . '/source/' . join( '/', @module ) );
+        $c->view->api_public . '/source/' . join( '/', @path ) );
     $c->detach;
 }
 

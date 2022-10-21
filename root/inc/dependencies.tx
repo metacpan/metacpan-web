@@ -18,11 +18,12 @@
   <li>
     <hr>
   </li>
+  %%  my $module_name = $file.documentation || $file.module.0.name;
   <li>
-    <a href="[% $module ? '/module/' ~ ($module.documentation || $module.module.0.name ) : '/dist/' ~ $release.distribution %]/requires">Reverse dependencies</a>
+    <a href="[% $module_name ? '/module/' ~ $module_name : '/dist/' ~ $release.distribution %]/requires">Reverse dependencies</a>
   </li>
   <li>
-    <a href="http://deps.cpantesters.org/?module=[% $module.documentation || $module.module.0.name || $release.main_module %]">CPAN Testers List</a>
+    <a href="http://deps.cpantesters.org/?module=[% uri_escape($module_name || $release.main_module) %]">CPAN Testers List</a>
   </li>
   <li>
     <a href="https://cpandeps.grinnz.com/?dist=[% $release.distribution | uri %][% if $permalinks || $release.status != 'latest' { %]&amp;dist_version=[% $release.version | uri %][% } %]">Dependency graph</a>

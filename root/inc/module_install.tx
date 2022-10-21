@@ -6,7 +6,7 @@
         <h4 class="modal-title">Module Install Instructions</h4>
       </div>
       <div class="modal-body">
-        %%  my $name = $release.main_module || $module.documentation || $module.module.0.name || $module.package;
+        %%  my $name = $release.main_module || $file.documentation || $file.module.0.name || $file.package;
         <p>To install [% $name %], copy and paste the appropriate command in to your terminal.</p>
         <p><a href="/dist/App-cpanminus/view/bin/cpanm">cpanm</a></p>
         <pre><code>cpanm [% $name || ($release.author ~ '/' ~ $release.archive) %]</code></pre>

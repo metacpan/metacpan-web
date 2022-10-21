@@ -14,9 +14,9 @@
   <span>&nbsp;/&nbsp;</span>
   <div class="release dist-release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
     <span class="dropdown"><b class="caret"></b></span>
-    %%  include inc::version_select { class => $module ? '' : 'extend' };
-    %%  if $module {
-    <a data-keyboard-shortcut="g d" class="release-name" href="[% if $permalinks || $release.status != 'latest' { '/release/' ~ $module.author ~ '/' ~ $module.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
+    %%  include inc::version_select { class => $file ? '' : 'extend' };
+    %%  if $file {
+    <a data-keyboard-shortcut="g d" class="release-name" href="[% if $permalinks || $release.status != 'latest' { '/release/' ~ $file.author ~ '/' ~ $file.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
     %%  }
     %%  else {
     <span class="release-name">[% $release.name %]</span>
@@ -26,12 +26,22 @@
     %%  }
   </div>
   %%  if $release.status != 'latest' && $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum() {
-    <a class="latest" href="[% if $module { '/pod/' ~ $module.documentation } else { '/dist/' ~ $release.distribution } %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
+    <a class="latest" href="[%
+      if $file && $file.documentation {
+        '/pod/' ~ $file.documentation
+      }
+      else {
+        '/dist/' ~ $release.distribution;
+        if $file {
+          '/view/' ~ $file.path;
+        }
+      }
+    %]" title="[% if $release.maturity == 'developer' { 'dev release, ' } %]go to latest"><span class="fa fa-step-forward"></span></a>
   %%  }
   %%  include inc::river_gauge { river => $distribution.river, distribution => $release.distribution };
   %%  include inc::favorite;
-  %%  if $module {
-  &nbsp;/&nbsp;<span>[% $module.documentation || $module.module[0].name %]</span>
+  %%  if $file {
+   / <span>[% $file.documentation || $file.module[0].name || $file.path %]</span>
   %%  }
 </div>
 %%  }
@@ -136,7 +146,7 @@
       Download (<span itemprop="fileSize">[% format_bytes($release.stat.size) %]B</span>)</a>
     </li>
     <li>
-      <a href="https://explorer.metacpan.org/?url=[% uri_escape( $module ? ('/module/' ~ $module.author ~ '/' ~ $module.release ~ '/' ~ $module.path) : ( '/release/' ~ $release.author ~ '/' ~ $release.name ) ) %]">
+      <a href="https://explorer.metacpan.org/?url=[% uri_escape( $file ? ('/module/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path) : ( '/release/' ~ $release.author ~ '/' ~ $release.name ) ) %]">
         MetaCPAN Explorer
       </a>
     </li>
@@ -201,7 +211,7 @@
     </li>
     <li class="nav-header">Permalinks</li>
     <li>
-      <a href="/release/[% $release.author %]/[% $release.name %][% if $module { '/view/' ~ $module.path } %]">This version</a>
+      <a href="/release/[% $release.author %]/[% $release.name %][% if $file { '/view/' ~ $file.path } %]">This version</a>
     </li>
     %%  if $canonical {
       %%  my $has_latest = $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum();

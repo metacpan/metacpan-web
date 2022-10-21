@@ -16,7 +16,7 @@ sub find : Path : Args(1) {
     $c->browser_max_age('1h');
 
     # TODO: Pass size param so we can disambiguate?
-    my $pod_file = $c->stash->{pod_file}
+    my $pod_file = $c->stash->{file}
         = $c->model('API::Module')->find(@path)->get;
 
     $c->detach('/not_found')
@@ -36,7 +36,7 @@ sub find : Path : Args(1) {
 sub view : Private {
     my ( $self, $c, @path ) = @_;
 
-    my $data       = $c->stash->{pod_file};
+    my $data       = $c->stash->{file};
     my $permalinks = $c->stash->{permalinks};
 
     if ( $data->{directory} ) {
@@ -100,7 +100,6 @@ sub view : Private {
     $c->stash( {
         canonical         => $canonical,
         documented_module => $documented_module,
-        module            => $data,
         pod               => $pod_html,
         template          => 'pod.tx',
     } );

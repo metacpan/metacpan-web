@@ -2,5 +2,5 @@
 %%    head => 'Diff with version',
 %%  }
 %%  override navigate -> {
-'/release/[% $release.author %]/[% $release.name %]/diff/' + encodeURIComponent(this.value)[% if $module { %] + '/[% $module.path %]'[% } %]
+'/release/[% $release.author %]/[% $release.name %]/diff/' + encodeURIComponent(this.value)[% if $file { %] + '/[% $file.path %]'[% } %]
 %%  }

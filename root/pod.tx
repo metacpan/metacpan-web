@@ -1,9 +1,9 @@
 %%  cascade base::release {
 %%    twitter_card_inc  => $twitter_card_inc || 'inc/twitter/module.tx',
-%%    meta_description  => $meta_description || $module.abstract,
+%%    meta_description  => $meta_description || $file.abstract,
 %%    title             => $title ||
-%%      ($module.documentation || $module.module.0.name ) ~
-%%      ($module.abstract ? ' - ' ~ $module.abstract : ''),
+%%      ($file.documentation || $file.module.0.name ) ~
+%%      ($file.abstract ? ' - ' ~ $file.abstract : ''),
 %%    page_class  => $page_class || 'page-pod',
 %%  }
 %%  override left_nav_lead -> {
@@ -11,7 +11,7 @@
 %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
 %%    : '/dist/' ~ $release.distribution;
   <li>
-    Distribution: <a href="[% $release_base %]">[% $module.distribution %]</a>
+    Distribution: <a href="[% $release_base %]">[% $file.distribution %]</a>
   </li>
   %%  if $documented_module.version {
   <li>
@@ -19,17 +19,17 @@
   </li>
   %%  }
   <li>
-    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $module.path %]">Source</a>
-    (<a href="[% $release_base %]/source/[% $module.path %]?raw=1">raw</a>)
+    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $file.path %]">Source</a>
+    (<a href="[% $release_base %]/source/[% $file.path %]?raw=1">raw</a>)
   </li>
-  %%  if $module.pod_path {
+  %%  if $file.pod_path {
   <li>
-    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $module.pod_path %]">Pod Source</a>
-    (<a href="[% $release_base %]/source/[% $module.pod_path %]?raw=1">raw</a>)
+    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $file.pod_path %]">Pod Source</a>
+    (<a href="[% $release_base %]/source/[% $file.pod_path %]?raw=1">raw</a>)
   </li>
   %%  }
   <li>
-    %%  my $parent_path = $module.path.replace(rx('/?[^/]+$'),'');
+    %%  my $parent_path = $file.path.replace(rx('/?[^/]+$'),'');
     <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]">Browse</a>
     (<a href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]?raw=1">raw</a>)
   </li>
@@ -41,15 +41,15 @@
   %%    $pod | mark_raw;
   %%  }
   %%  else if $pod_error {
-  <p class="pod-error">Error rendering POD for <code>[% $module.name %]</code> - [% $pod_error %]</p>
+  <p class="pod-error">Error rendering POD for <code>[% $file.name %]</code> - [% $pod_error %]</p>
   %%  }
   %%  else {
   %%    my $release_base = $permalinks || $release.status != 'latest'
   %%      ? '/release/' ~ $release.author ~ '/' ~ $release.name
   %%      : '/dist/' ~ $release.distribution;
   <p class="pod-error">
-    No POD found for <code>[% $module.name %]</code>.
-    Time to <a href="[% $release_base %]/source/[% $module.path %]">read the source</a>?
+    No POD found for <code>[% $file.name %]</code>.
+    Time to <a href="[% $release_base %]/source/[% $file.path %]">read the source</a>?
   </p>
   %%  }
 </div>

@@ -1,8 +1,8 @@
 <select onchange="document.location.href=[%
 block navigate -> {
   "'/release/'+this.value";
-  if $module {
-    "+'/view/" ~ $module.path ~ "'";
+  if $file {
+    "+'/view/" ~ $file.path ~ "'";
   }
 }
 %]" class="[% $class %]">

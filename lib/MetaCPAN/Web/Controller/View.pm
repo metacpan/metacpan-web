@@ -28,7 +28,7 @@ sub dist : Chained('/dist/root') PathPart('view') Args {
     unshift @path, @{ $release_data->{release} }{qw( author name )};
 
     $c->stash( {
-        %$release_data, pod_file => $c->model('API::Module')->get(@path)->get,
+        %$release_data, file => $c->model('API::File')->get(@path)->get,
     } );
 
     $c->forward( '/pod/view', [@path] );
@@ -43,12 +43,11 @@ sub release : Chained('/release/root') PathPart('view') Args {
     }
     $c->browser_max_age('1d');
 
-    my $pod_file
-        = $c->model('API::Module')->get( $author, $release, @path )->get;
+    my $file = $c->model('API::File')->get( $author, $release, @path )->get;
     my $release_data
         = $c->model('ReleaseInfo')->get( $author, $release )->else_done( {} );
     $c->stash( {
-        pod_file => $pod_file,
+        file => $file,
         %{ $release_data->get },
         permalinks => 1,
     } );
