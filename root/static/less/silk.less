@@ -1,23 +1,17 @@
-.silk-folder {
-    padding-left: 20px;
-    background-repeat: no-repeat !important;
-    background: url(/static/icons/folder.png);
-}
-
-.silk-page-white-code {
-    padding-left: 20px;
-    background-repeat: no-repeat !important;;
-    background: url(/static/icons/page_white_code.png);
-}
-
-.silk-page-white {
+.file-table-entry {
     padding-left: 20px;
     background-repeat: no-repeat !important;
     background: url(/static/icons/page_white.png);
-}
 
-.silk-page-white-c {
-    padding-left: 20px;
-    background-repeat: no-repeat !important;
-    background: url(/static/icons/page_white_c.png);
+    &[data-directory] {
+        background: url(/static/icons/folder.png);
+    }
+
+    &[data-mime-type="text/x-script.perl"],
+    &[data-mime-type="text/x-script.perl-module"] {
+        background: url(/static/icons/page_white_code.png);
+    }
+    &[data-mime-type="text/x-c"] {
+        background: url(/static/icons/page_white_c.png);
+    }
 }
