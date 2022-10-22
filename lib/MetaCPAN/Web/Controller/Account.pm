@@ -40,10 +40,25 @@ sub login_status : Local : Args(0) : Auth(0) {
         if ( my $pause_id = $user->pause_id ) {
 
             # this is not a complete author record, but enough for now
-            $output->{author} = { pauseid => $pause_id, };
+            $output->{author} = { pauseid => $pause_id };
             $output->{avatar} = MetaCPAN::Web::RenderUtil::gravatar_image(
                 $output->{author}, '{size}' );
         }
+        elsif ( my $gh_user = $user->identity->{github} ) {
+
+            # the extra info includes an avatar URL but we don't want to use
+            # it because it may be out of date
+            if ( $gh_user->{extra} and my $login = $gh_user->{extra}{login} )
+            {
+                $output->{avatar} = "https://github.com/$login.png";
+            }
+            elsif ( my $key = $gh_user->{key} ) {
+                $output->{avatar}
+                    = "https://avatars.githubusercontent.com/u/$key";
+            }
+        }
+
+        # our other login providers don't give access to an avatar
         $c->forward('/account/favorite/list_as_json');
     }
     else {
