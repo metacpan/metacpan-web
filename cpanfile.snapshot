@@ -706,10 +706,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Clone-0.45
-    pathname: A/AT/ATOOMIC/Clone-0.45.tar.gz
+  Clone-0.46
+    pathname: G/GA/GARU/Clone-0.46.tar.gz
     provides:
-      Clone 0.45
+      Clone 0.46
     requirements:
       ExtUtils::MakeMaker 0
   Code-TidyAll-0.82
@@ -1773,16 +1773,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  Future-0.48
-    pathname: P/PE/PEVANS/Future-0.48.tar.gz
+  Future-0.49
+    pathname: P/PE/PEVANS/Future-0.49.tar.gz
     provides:
-      Future 0.48
-      Future::Exception 0.48
-      Future::Mutex 0.48
-      Future::Queue 0.48
-      Future::Utils 0.48
-      Test::Future 0.48
-      Test::Future::Deferred 0.48
+      Future 0.49
+      Future::Exception 0.49
+      Future::Mutex 0.49
+      Future::PP 0.49
+      Future::Utils 0.49
+      Test::Future 0.49
+      Test::Future::Deferred 0.49
     requirements:
       Carp 1.25
       Module::Build 0.4004
@@ -1996,19 +1996,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.41
-    pathname: O/OA/OALDERS/HTTP-Message-6.41.tar.gz
+  HTTP-Message-6.43
+    pathname: S/SI/SIMBABQUE/HTTP-Message-6.43.tar.gz
     provides:
-      HTTP::Config 6.41
-      HTTP::Headers 6.41
-      HTTP::Headers::Auth 6.41
-      HTTP::Headers::ETag 6.41
-      HTTP::Headers::Util 6.41
-      HTTP::Message 6.41
-      HTTP::Request 6.41
-      HTTP::Request::Common 6.41
-      HTTP::Response 6.41
-      HTTP::Status 6.41
+      HTTP::Config 6.43
+      HTTP::Headers 6.43
+      HTTP::Headers::Auth 6.43
+      HTTP::Headers::ETag 6.43
+      HTTP::Headers::Util 6.43
+      HTTP::Message 6.43
+      HTTP::Request 6.43
+      HTTP::Request::Common 6.43
+      HTTP::Response 6.43
+      HTTP::Status 6.43
     requirements:
       Carp 0
       Compress::Raw::Bzip2 0
@@ -2023,8 +2023,6 @@ DISTRIBUTIONS
       IO::Compress::Deflate 0
       IO::Compress::Gzip 0
       IO::HTML 0
-      IO::Uncompress::Bunzip2 2.021
-      IO::Uncompress::Gunzip 0
       IO::Uncompress::Inflate 0
       IO::Uncompress::RawInflate 0
       LWP::MediaTypes 6
@@ -2481,11 +2479,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Log-Log4perl-1.56
-    pathname: E/ET/ETJ/Log-Log4perl-1.56.tar.gz
+  Log-Log4perl-1.57
+    pathname: E/ET/ETJ/Log-Log4perl-1.57.tar.gz
     provides:
       L4pResurrectable 0.01
-      Log::Log4perl 1.56
+      Log::Log4perl 1.57
       Log::Log4perl::Appender undef
       Log::Log4perl::Appender::Buffer 1.53
       Log::Log4perl::Appender::DBI undef
@@ -4041,13 +4039,13 @@ DISTRIBUTIONS
       Scalar::Util 1.18
       XSLoader 0.22
       parent 0
-  Params-Validate-1.30
-    pathname: D/DR/DROLSKY/Params-Validate-1.30.tar.gz
+  Params-Validate-1.31
+    pathname: D/DR/DROLSKY/Params-Validate-1.31.tar.gz
     provides:
-      Params::Validate 1.30
-      Params::Validate::Constants 1.30
-      Params::Validate::PP 1.30
-      Params::Validate::XS 1.30
+      Params::Validate 1.31
+      Params::Validate::Constants 1.31
+      Params::Validate::PP 1.31
+      Params::Validate::XS 1.31
     requirements:
       Carp 0
       Exporter 0
@@ -4115,11 +4113,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.124
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.124.tar.gz
+  Path-Tiny-0.130
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.130.tar.gz
     provides:
-      Path::Tiny 0.124
-      Path::Tiny::Error 0.124
+      Path::Tiny 0.130
+      Path::Tiny::Error 0.130
     requirements:
       Carp 0
       Cwd 0
@@ -4129,6 +4127,7 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 6.17
       Fcntl 0
+      File::Compare 0
       File::Copy 0
       File::Glob 0
       File::Path 2.07
