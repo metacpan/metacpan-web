@@ -7,15 +7,15 @@ use Module::Runtime qw( use_module );
 
 my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo')->new;
 
-my $rt_prefix = $model->rt_url_prefix;
+my $rt_prefix = $model->RT_URL_PREFIX;
 
 sub bugtracker {
     return { resources => { bugtracker => {@_} } };
 }
 
-sub normalize_issues_ok {
+sub get_issues_ok {
     my ( $release, $bugs, $exp, $desc ) = @_;
-    my $normalized = $model->normalize_issues(
+    my $normalized = $model->_get_issues(
         { distribution => 'X', %$release },
 
         # Default to rt url, but let data override.
@@ -24,9 +24,9 @@ sub normalize_issues_ok {
     is_deeply $normalized, $exp, $desc;
 }
 
-subtest 'normalize_issues' => sub {
+subtest 'get_issues' => sub {
 
-    normalize_issues_ok(
+    get_issues_ok(
         {},
         { active => 11 },
         { url    => "${rt_prefix}X", active => 11 },
@@ -39,7 +39,7 @@ subtest 'normalize_issues' => sub {
             mailto => 'foo@example.com',
         };
 
-        normalize_issues_ok(
+        get_issues_ok(
             bugtracker(%$bt),
             { active => 9 },
             { url    => $bt->{web} },
@@ -48,7 +48,7 @@ subtest 'normalize_issues' => sub {
 
         delete $bt->{web};
 
-        normalize_issues_ok(
+        get_issues_ok(
             bugtracker(%$bt),
             { active => 9 },
             { url    => 'mailto:' . $bt->{mailto} },
@@ -57,7 +57,7 @@ subtest 'normalize_issues' => sub {
 
         delete $bt->{mailto};
 
-        normalize_issues_ok(
+        get_issues_ok(
             bugtracker(%$bt),
             { active => 9 },
             { url    => "${rt_prefix}X", active => 9 },
@@ -83,7 +83,7 @@ subtest 'normalize_issues' => sub {
         http://rt.cpan.org/Ticket/Create.html?Queue=X
     ) )
     {
-        normalize_issues_ok(
+        get_issues_ok(
             bugtracker( web => $url ),
             { active => 12 },
             { url    => $url, active => 12 },
@@ -91,7 +91,7 @@ subtest 'normalize_issues' => sub {
         );
     }
 
-    normalize_issues_ok(
+    get_issues_ok(
         bugtracker( web => 'http://canhaz' ),
         { source => 'http://canhaz', active => 13 },
         { url    => 'http://canhaz', active => 13 },
@@ -99,7 +99,7 @@ subtest 'normalize_issues' => sub {
     );
 
     # If a dist specifies a web, and then later removes it.
-    normalize_issues_ok(
+    get_issues_ok(
         {},
         { source => 'anything://else', active => 13 },
         { url    => "${rt_prefix}X" },
@@ -114,7 +114,7 @@ subtest 'normalize_issues' => sub {
         https://www.github.com/user/repo/tree
     ) )
     {
-        normalize_issues_ok(
+        get_issues_ok(
             bugtracker( web => $url ),
             { source => 'https://github.com/user/repo', active => 3 },
             { url    => $url,                           active => 3 },

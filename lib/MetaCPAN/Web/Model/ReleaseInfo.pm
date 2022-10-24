@@ -6,11 +6,12 @@ use MetaCPAN::Moose;
 
 extends 'Catalyst::Model';
 
-use List::Util  qw( all max );
+use List::Util  qw( all );
 use Ref::Util   qw( is_hashref );
 use URI         ();
 use URI::Escape qw( uri_escape uri_unescape );
 use Future      ();
+use MetaCPAN::Web::API::RequestInfo::Orchestrator ();
 
 my %models = (
     _distribution => 'API::Distribution',
@@ -34,139 +35,112 @@ sub ACCEPT_CONTEXT {
     return $class->new(@args);
 }
 
-sub find {
+sub via_dist {
     my ( $self, $dist ) = @_;
-    my $release   = $self->_release->find($dist);
-    my %dist_data = $self->_dist_data($dist);
-    $release->then( sub {
-        my $data = shift;
-        if ( !$data->{release} ) {
-            $_->cancel for values %dist_data;
-            return Future->fail( { code => 404, message => 'Not found' } );
-        }
-        $self->_wrap(
-            release => $data,
-            %dist_data,
-            notification => $self->_get_notifications( $data->{release} ),
-            $self->_release_data(
-                $data->{release}{author},
-                $data->{release}{name}
-            ),
-        );
-    } )->then( $self->normalize );
-}
-
-sub get {
-    my ( $self, $author, $release_name ) = @_;
-    my $release      = $self->_release->get( $author, $release_name );
-    my %release_data = $self->_release_data( $author, $release_name );
-    $release->then( sub {
-        my $data = shift;
-        if ( !$data->{release} ) {
-            $_->cancel for values %release_data;
-            return Future->fail( { code => 404, message => 'Not found' } );
-        }
-        $self->_wrap(
-            release => $data,
-            %release_data,
-            notification =>
-                $self->_get_notifications( $data->{release} ),
-            $self->_dist_data( $data->{release}{distribution} ),
-        );
-    } )->then( $self->normalize );
-}
-
-sub _wrap {
-    my ( $self, %data ) = @_;
-    my @keys   = keys %data;
-    my @values = values %data;
-    Future->needs_all( map { Future->wrap($_)->else_done( {} ) } @values )
-        ->transform(
-        done => sub {
-            my %out;
-            @out{@keys} = @_;
-            \%out;
-        }
-        );
-}
-
-sub _dist_data {
-    my ( $self, $dist ) = @_;
-
-    return (
-        favorites    => $self->_favorite->by_dist($dist),
-        plussers     => $self->_favorite->find_plussers($dist),
-        rating       => $self->_rating->get($dist),
-        versions     => $self->_release->versions($dist),
-        distribution => $self->_distribution->get($dist),
-    );
-}
-
-sub _release_data {
-    my ( $self, $author, $release ) = @_;
-    return (
-        author       => $self->_author->get($author),
-        contributors => $self->_contributors->get( $author, $release ),
-        coverage     => $self->_release->coverage( $author, $release ),
-        (
-            $self->full_details
-            ? (
-                files =>
-                    $self->_release->interesting_files( $author, $release ),
-                modules => $self->_release->modules( $author, $release ),
-                changes => $self->_changes->release_changes(
-                    [ $author, $release ],
-                    include_dev => 1
-                ),
-                )
-            : ()
+    $self->_fetch(
+        MetaCPAN::Web::API::RequestInfo::Orchestrator->new(
+            model => $self->_release,
+            dist  => $dist,
         ),
     );
 }
 
-sub normalize {
-    my $self = shift;
-    sub {
-        my $data = shift;
-
-        Future->done( {
-            took => max(
-                grep defined,
-                map $_->{took},
-                grep is_hashref($_),
-                values %$data
-            ),
-            notification => $data->{notification}{notification},
-            coverage     => $data->{coverage}{coverage},
-            release      => $data->{release}{release},
-            favorites    => $data->{favorites}{favorites},
-            rating       => $data->{rating}{rating},
-            versions     => $data->{versions}{versions},
-            distribution => $data->{distribution}{distribution},
-            author       => $data->{author}{author},
-            contributors => $data->{contributors}{contributors},
-            chat         => $self->groom_chat( $data->{release}{release} ),
-            issues       => $self->normalize_issues(
-                $data->{release}{release},
-                $data->{distribution}{distribution}
-            ),
-            repository =>
-                $self->groom_repository( $data->{release}{release} ),
-            plussers => $data->{plussers}{plussers},
-            (
-                $self->full_details
-                ? (
-                    files   => $data->{files}{files},
-                    modules => $data->{modules}{modules},
-                    changes => $data->{changes}{changes},
-                    )
-                : ()
-            ),
-        } );
-    };
+sub via_release {
+    my ( $self, $author, $release_name ) = @_;
+    $self->_fetch(
+        MetaCPAN::Web::API::RequestInfo::Orchestrator->new(
+            model   => $self->_release,
+            author  => $author,
+            release => $release_name,
+        ),
+    );
 }
 
-sub groom_repository {
+sub _fetch {
+    my ( $self, $fetch ) = @_;
+    $fetch->with_release(
+        sub {
+            my ( $author, $release ) = @_;
+            return (
+                [ author => $self->_author->get($author) ],
+                [
+                    contributors =>
+                        $self->_contributors->get( $author, $release )
+                ],
+                [
+                    coverage => $self->_release->coverage( $author, $release )
+                ],
+            );
+        },
+    )->with_dist(
+        sub {
+            my ($dist) = @_;
+            return (
+                [ favorites    => $self->_favorite->by_dist($dist) ],
+                [ plussers     => $self->_favorite->find_plussers($dist) ],
+                [ rating       => $self->_rating->get($dist) ],
+                [ versions     => $self->_release->versions($dist) ],
+                [ distribution => $self->_distribution->get($dist) ],
+            );
+        },
+    )->with_release_detail(
+        sub {
+            my ($release_data) = @_;
+            return (
+                [ notification => $self->_get_notification($release_data) ],
+            );
+        },
+    )->then( sub {
+        my ($data)  = @_;
+        my $release = $data->{release};
+        my $dist    = $data->{distribution};
+
+        $data->{chat}       = $self->_get_chat( $release, $dist );
+        $data->{issues}     = $self->_get_issues( $release, $dist );
+        $data->{repository} = $self->_get_repository( $release, $dist );
+
+        Future->done($data);
+    } );
+}
+
+sub find {
+    my $self  = shift;
+    my $fetch = $self->via_dist(@_);
+    $fetch = $self->_add_details($fetch)
+        if $self->full_details;
+    return $fetch->fetch;
+}
+
+sub get {
+    my $self  = shift;
+    my $fetch = $self->via_release(@_);
+    $fetch = $self->_add_details($fetch)
+        if $self->full_details;
+    return $fetch->fetch;
+}
+
+sub _add_details {
+    my ( $self, $fetch ) = @_;
+
+    $fetch->with_release( sub {
+        my ( $author, $release ) = @_;
+        return (
+            [
+                files =>
+                    $self->_release->interesting_files( $author, $release )
+            ],
+            [ modules => $self->_release->modules( $author, $release ) ],
+            [
+                changes => $self->_changes->release_changes(
+                    [ $author, $release ],
+                    include_dev => 1
+                )
+            ],
+        );
+    } );
+}
+
+sub _get_repository {
     my ( $self, $release ) = @_;
     my $repo = $release->{resources}{repository}
         or return {};
@@ -211,7 +185,7 @@ sub groom_repository {
     return $repo;
 }
 
-sub groom_chat {
+sub _get_chat {
     my ( $self, $release ) = @_;
 
     my $resources = $release->{metadata}{resources};
@@ -280,11 +254,10 @@ sub groom_chat {
 # However, there are many ways for a release to specify RT :-/
 # See t/model/issues.t for examples.
 
-sub rt_url_prefix {
+use constant RT_URL_PREFIX =>
     'https://rt.cpan.org/Public/Dist/Display.html?Name=';
-}
 
-sub normalize_issues {
+sub _get_issues {
     my ( $self, $release, $distribution ) = @_;
 
     my $issues = {};
@@ -299,7 +272,7 @@ sub normalize_issues {
     }
     else {
         $issues->{url}
-            = $self->rt_url_prefix . uri_escape( $release->{distribution} );
+            = RT_URL_PREFIX . uri_escape( $release->{distribution} );
     }
 
     for my $bugs ( values %{ $distribution->{bugs} || {} } ) {
@@ -312,7 +285,7 @@ sub normalize_issues {
             $self->normalize_issue_url( $bugs->{source} )
 
             # or if both of them look like rt.
-            or all {m{^https?://rt\.cpan\.org(/|$)}}
+            or all {m{^https?://rt\.cpan\.org(?:/|$)}}
             ( $issues->{url}, $bugs->{source} )
             )
         {
@@ -326,7 +299,7 @@ sub normalize_issues {
 sub normalize_issue_url {
     my ( $self, $url ) = @_;
     $url
-        =~ s{^https?:// (?:www\.)? ( github\.com / ([^/]+) / ([^/]+) ) (.*)$}{https://$1}x;
+        =~ s{^https?:// (?:www\.)? ( github\.com / (?:[^/]+) / (?:[^/]+) ) .*$}{https://$1}x;
     $url =~ s{
         ^https?:// rt\.cpan\.org /
         (?:
@@ -339,10 +312,10 @@ sub normalize_issue_url {
     return $url;
 }
 
-sub _get_notifications {
+sub _get_notification {
     my ( $self, $release ) = @_;
-    return $self->_permission->get_notification_info(
-        $release->{main_module} )->then( sub {
+    my $module = $release->{main_module};
+    $self->_permission->get_notification_info($module)->then( sub {
         my $data = shift;
 
         # Unless we already have Notifications from Permissions, see if there
@@ -355,10 +328,9 @@ sub _get_notifications {
 
         # Return the Notifications (either Permission based, or for Deprecated
         # status).
-        return Future->wrap($data);
-        } );
+        return Future->done($data);
+    } );
 }
 
 __PACKAGE__->meta->make_immutable;
-
 1;
