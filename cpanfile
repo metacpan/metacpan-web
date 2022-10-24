@@ -81,7 +81,7 @@ requires 'Types::Path::Tiny';
 requires 'Types::Standard';
 requires 'Types::URI';
 requires 'Type::Utils';
-requires 'URI', '1.71';
+requires 'URI', '5.16';
 requires 'URI::Escape';
 requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
