@@ -9,10 +9,9 @@ use Encode           ();
 use Cpanel::JSON::XS qw( decode_json encode_json );
 use IO::Async::Loop  ();
 use IO::Async::SSL;    ## no perlimports
-use IO::Socket::SSL  qw( SSL_VERIFY_PEER );
-use Net::Async::HTTP ();
-use URI              ();
-use URI::QueryParam;
+use IO::Socket::SSL       qw( SSL_VERIFY_PEER );
+use Net::Async::HTTP      ();
+use URI                   ();
 use MetaCPAN::Web::Types  qw( Uri );
 use Try::Tiny             qw( catch try );
 use HTTP::Request         ();
