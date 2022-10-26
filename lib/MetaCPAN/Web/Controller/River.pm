@@ -7,7 +7,8 @@ sub gauge : Chained('/dist/root') PathPart('river.svg') Args(0) {
     my ( $self, $c ) = @_;
     my $dist = $c->stash->{distribution_name};
 
-    my $dist_info = $c->model('API::Distribution')->get($dist)->get;
+    my $dist_info
+        = $c->model('API::Distribution')->get($dist)->get->{distribution};
 
     # Lack of river data for a dist is handled differently in the template.
     $c->detach('/not_found')
@@ -15,7 +16,8 @@ sub gauge : Chained('/dist/root') PathPart('river.svg') Args(0) {
 
     $c->res->content_type('image/svg+xml');
     $c->stash( {
-        distribution => $dist_info,
+        river        => $dist_info->{river},
+        distribution => $dist_info->{name},
         template     => 'river/gauge.svg.tx',
     } );
 
