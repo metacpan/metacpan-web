@@ -6,7 +6,7 @@ use MetaCPAN::Web::Test qw( app GET test_psgi );
 test_psgi app, sub {
     my $cb = shift;
     {
-        ok( my $res = $cb->( GET '/static/images/logo.png' ),
+        ok( my $res = $cb->( GET '/static/images/metacpan-logo.svg' ),
             'GET /static/images/logo.png...' );
         is( $res->code,                 200,   'code 200' );
         is( $res->header('Set-Cookie'), undef, 'No cookie' );

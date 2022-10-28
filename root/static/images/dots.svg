@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="404.564 267.158 61.894 61.684" width="61.894" height="61.684" xmlns="http://www.w3.org/2000/svg">
-  <g>
-    <g>
-      <circle fill="#DA2037" cx="453.302" cy="280.315" r="13.156"/>
-    </g>
-    <g>
-      <circle fill="#DA2037" cx="417.721" cy="280.315" r="13.157"/>
-    </g>
-    <g>
-      <circle fill="#DA2037" cx="453.302" cy="315.685" r="13.156"/>
-    </g>
-    <g>
-      <circle fill="#DA2037" cx="417.721" cy="315.685" r="13.157"/>
-    </g>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  x="0"
+  y="0"
+  width="64"
+  height="64"
+  viewBox="0 0 16 16"
+  preserveAspectRatio="xMinYMin meet"
+>
+  <g fill="#DA2037">
+    <circle cx="4" cy="4" r="3" />
+    <circle cx="4" cy="12" r="3" />
+    <circle cx="12" cy="4" r="3" />
+    <circle cx="12" cy="12" r="3" />
   </g>
 </svg>
