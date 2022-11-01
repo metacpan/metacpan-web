@@ -2,7 +2,7 @@
 %%# means browsers will display the <title> elements of the SVG.  Yay!
 %%  if $river {
 <span class="river-gauge-gauge">
-  %% include "river/gauge.svg.tx" { embed => 1, river => $river }
+  %% include "river/gauge.svg.tx" { river => $river }
 </span>
 %%  }
 %%  else {

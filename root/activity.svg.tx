@@ -1,12 +1,8 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-
 <svg width="170" height="22" version="1.1"
 xmlns="http://www.w3.org/2000/svg">
-%%  my $max = $data.max() || 1;
+%%  my $max = $activity.max() || 1;
 %%  my $width = (170 / $data.size()).int();
-%%  for $data -> $week {
+%%  for $activity -> $week {
 %%      my $height = $week / $max * 20;
 <rect x="[% $~week * $width %]"
       y="[% 20 - $height %]"

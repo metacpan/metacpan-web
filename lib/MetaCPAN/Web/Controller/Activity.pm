@@ -50,7 +50,7 @@ sub activity : Private {
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );
     $c->stash( {
-        data     => $line->{activity},
+        activity => $line->{activity},
         template => 'activity.svg.tx',
     } );
 }
