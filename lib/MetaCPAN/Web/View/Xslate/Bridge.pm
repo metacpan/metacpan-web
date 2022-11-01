@@ -129,8 +129,10 @@ sub datetime {
         return $datetime->from_epoch( epoch => $date );
     }
     else {
-        my $datetime = DateTime::Format::ISO8601->parse_datetime($date);
-        my $tz       = $datetime->time_zone;
+        my $datetime
+            = eval { DateTime::Format::ISO8601->parse_datetime($date) }
+            // return undef;
+        my $tz = $datetime->time_zone;
         $datetime->set_time_zone('GMT')
             if $tz->isa('DateTime::TimeZone::Local')
             || $tz->isa('DateTime::TimeZone::Floating');
