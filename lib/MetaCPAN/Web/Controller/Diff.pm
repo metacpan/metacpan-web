@@ -10,15 +10,28 @@ sub release : Chained('/release/root') PathPart('diff') Args {
     my ( $self, $c, $source_author, $source_release, @path ) = @_;
     my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
 
+    if ( !defined $source_author || !$source_release ) {
+        $c->res->redirect( $c->uri_for( '/release', $author, $release ),
+            302 );
+        $c->detach;
+    }
+
     $c->forward( 'view',
         [ $source_author, $source_release, $author, $release, @path ] );
 }
 
-sub dist : Chained('/dist/root') PathPart('raw') Args {
+sub dist : Chained('/dist/root') PathPart('diff') Args {
     my ( $self, $c, $source_author, $source_release, @path ) = @_;
-    my $dist    = $c->stash->{distribution_name};
+    my $dist = $c->stash->{distribution_name};
+
+    if ( !defined $source_author || !$source_release ) {
+        $c->res->redirect( $c->uri_for( '/dist', $dist ), 302 );
+        $c->detach;
+    }
+
     my $release = $c->model('API::Release')->find($dist)->get->{release}
         or $c->detach('/not_found');
+
     $c->forward(
         'view',
         [
