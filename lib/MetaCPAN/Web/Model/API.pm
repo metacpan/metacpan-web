@@ -33,7 +33,6 @@ sub client {
             user_agent =>
                 'MetaCPAN-Web/1.0 (https://github.com/metacpan/metacpan-web)',
             max_connections_per_host => $ENV{NET_ASYNC_HTTP_MAXCONNS} || 5,
-            SSL_verify_mode          => SSL_VERIFY_PEER,
             timeout                  => 10,
         );
         $_[0]->loop->add($http);
@@ -126,7 +125,13 @@ sub request {
         ( $request_id  ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
     );
 
-    my $req_p = $self->client->do_request( request => $request );
+    my $req_p = $self->client->do_request(
+        SSL_verify_mode     => SSL_VERIFY_PEER,
+        SSL_verifycn_name   => $url->host,
+        SSL_verifycn_scheme => 'http',
+        request             => $request,
+    );
+
     $req_p = $req_p->catch( sub {
 
         # retry once
