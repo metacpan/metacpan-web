@@ -1,7 +1,7 @@
 <svg width="170" height="22" version="1.1"
 xmlns="http://www.w3.org/2000/svg">
 %%  my $max = $activity.max() || 1;
-%%  my $width = (170 / $data.size()).int();
+%%  my $width = (170 / $activity.size()).int();
 %%  for $activity -> $week {
 %%      my $height = $week / $max * 20;
 <rect x="[% $~week * $width %]"
