@@ -34,7 +34,6 @@ sub client {
                 'MetaCPAN-Web/1.0 (https://github.com/metacpan/metacpan-web)',
             max_connections_per_host => $ENV{NET_ASYNC_HTTP_MAXCONNS} || 5,
             SSL_verify_mode          => SSL_VERIFY_PEER,
-            SSL_verifycn_scheme      => 'http',
             timeout                  => 10,
         );
         $_[0]->loop->add($http);
