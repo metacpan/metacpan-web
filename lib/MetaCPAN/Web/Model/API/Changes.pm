@@ -86,7 +86,12 @@ sub _releases {
     my $changelog
         = MetaCPAN::Web::Model::API::Changes::Parser->parse($content);
 
-    my @releases = sort { $b->{version_parsed} cmp $a->{version_parsed} }
+    my @releases = sort {
+        my $cmp;
+        eval { $cmp = $b->{version_parsed} cmp $a->{version_parsed}; 1 }
+            ? $cmp
+            : "$b->{version_parsed}" cmp "$a->{version_parsed}"
+        }
         map {
         my $v     = _parse_version( $_->{version} );
         my $trial = $_->{version} =~ /-TRIAL$/
