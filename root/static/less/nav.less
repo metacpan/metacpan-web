@@ -8,6 +8,26 @@
   }
 }
 
+// TODO: Banner Addition - Temporary banner at top of each page
+.temporary-banner {
+  background-color: #FDDA0D;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 5px;
+  place-content: center;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  .fa-info-circle {
+    display: grid;
+    place-content: center;
+  }
+}
+
 .navbar {
     background-color: @gray-darker;
     border-color: @gray-darker;
@@ -15,7 +35,7 @@
     box-shadow: 0 1px 13px 0 rgba(0,0,0,10%), 0 1px 5px 0 rgba(0,0,0,6%);
     margin-bottom: 0;
     position: fixed;
-    top: 0;
+    top: 30px; // TODO: Banner Addition - Put this back to 0 once we remove the banner
     width: 100%;
     z-index: 10;
 
