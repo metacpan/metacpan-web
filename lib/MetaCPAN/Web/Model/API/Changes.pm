@@ -111,7 +111,7 @@ sub _parse_version {
     my ($v) = @_;
     $v =~ s/-TRIAL$//;
     $v =~ s/_//g;
-    $v =~ s/\A0+//;
+    $v =~ s/\A0+(\d)/$1/;
     use warnings FATAL => 'all';
     eval { $v = version->parse($v) };
     return $v;
