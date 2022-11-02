@@ -48,18 +48,6 @@
         %%  }
     </head>
     <body class="[% $body_class %]">
-      <!--TODO: Banner Addition - Temporary banner at top of each page-->
-      <header class="temporary-banner">
-        <i class="fas fa-info-circle"></i>
-        The Perl Advent Calendar
-        <a href="http://cfp.perladvent.org/" target="_blank">
-          needs more articles
-        </a>
-        for 2022.
-        <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
-          Submit your idea today!
-        </a>
-      </header>
         <nav class="navbar navbar-default" role="navigation">
             <div class="header-logo-large hidden-xs">
               <a href="/" tabindex="0">
@@ -179,7 +167,6 @@
                 </li>
             </ul>
         </nav>
-
         <div class="page-content [% $page_class %]">
 
         %%  if $site_alert_message {
@@ -191,6 +178,18 @@
         %%  }
 
         %%  block full_content -> {
+                  <!--TODO: Banner Addition - Temporary banner at top of each page-->
+                  <div class="temporary-banner">
+                    <i class="fas fa-info-circle"></i>
+                    The Perl Advent Calendar
+                    <a href="http://cfp.perladvent.org/" target="_blank">
+                      needs more articles
+                    </a>
+                    for 2022.
+                    <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
+                      Submit your idea today!
+                    </a>
+                  </div>
                   %%  block left_nav -> {
                     <div class="nav-list-container slidepanel">
                       <ul class="nav-list [% block left_nav_classes -> { } %]">

@@ -9,20 +9,36 @@
 }
 
 // TODO: Banner Addition - Temporary banner at top of each page
-.temporary-banner {
+.temporary-banner,
+.home-temporary-banner {
   background-color: #2e3a47;
   color: #fff;
   display: flex;
   flex-wrap: wrap;
   gap: 3px;
-  padding: 5px;
+  padding: 8px;
   place-content: center;
-  position: fixed;
   text-align: center;
-  top: 0;
   width: 100%;
-  z-index: 10;
 
+  .fa-info-circle {
+    display: grid;
+    place-content: center;
+  }
+
+  a {
+    color: #c0d2e4;
+    text-decoration: underline;
+  }
+}
+
+// TODO: Banner Addition - Use a different banner for the homepage
+.page-home .temporary-banner {
+  display: none;
+}
+
+// TODO: Banner Addition - Temporary banner at top of homepage
+.home-temporary-banner {
   .fa-info-circle {
     display: grid;
     place-content: center;
@@ -41,7 +57,7 @@
     box-shadow: 0 1px 13px 0 rgba(0,0,0,10%), 0 1px 5px 0 rgba(0,0,0,6%);
     margin-bottom: 0;
     position: fixed;
-    top: 30px; // TODO: Banner Addition - Put this back to 0 once we remove the banner
+    top: 0;
     width: 100%;
     z-index: 10;
 

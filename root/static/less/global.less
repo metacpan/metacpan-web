@@ -348,18 +348,22 @@ h1, .h1, h2, .h2, h3, .h3 {
 .page-content {
     display: grid;
     grid-template-areas:
-    'menu breadcrumbs'
-    'menu content'
-    'menu pagination';
+      // TODO: Banner Addition - Tempory banner at top of each page. Remove this once we take the banner down.
+      'menu banner'
+      'menu breadcrumbs'
+      'menu content'
+      'menu pagination';
     grid-template-columns: @sidebar-width ~"calc(100vw -" @sidebar-width ~")";
     grid-template-rows: min-content 1fr;
     line-height: 1.54em;
-    margin-top: 82px; // TODO: Banner Addition - Put this back to 57px once we remove the banner
+    margin-top: 57px;
 }
 
 @media (min-width: 0) and (max-width: @screen-sm-max) {
     .page-content {
         grid-template-areas:
+            // TODO: Banner Addition - Tempory banner at top of each page. Remove this once we take the banner down.
+            'banner'
             'breadcrumbs'
             'content';
         grid-template-columns: 1fr;
