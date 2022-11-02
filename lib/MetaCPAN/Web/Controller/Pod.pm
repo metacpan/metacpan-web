@@ -16,7 +16,7 @@ sub find : Path : Args(1) {
     $c->browser_max_age('1h');
 
     # TODO: Pass size param so we can disambiguate?
-    my $pod_file = $c->stash->{pod_file}
+    my $pod_file = $c->stash->{file}
         = $c->model('API::Module')->find(@path)->get;
 
     $c->detach('/not_found')
@@ -24,7 +24,7 @@ sub find : Path : Args(1) {
 
     my $release_info
         = $c->model('ReleaseInfo')
-        ->get( $pod_file->{author}, $pod_file->{release}, $pod_file )
+        ->get( $pod_file->{author}, $pod_file->{release} )
         ->else( sub { Future->done( {} ) } );
     $c->stash( $release_info->get );
 
@@ -36,7 +36,7 @@ sub find : Path : Args(1) {
 sub view : Private {
     my ( $self, $c, @path ) = @_;
 
-    my $data       = $c->stash->{pod_file};
+    my $data       = $c->stash->{file};
     my $permalinks = $c->stash->{permalinks};
 
     if ( $data->{directory} ) {
@@ -93,10 +93,13 @@ sub view : Private {
     $c->add_dist_key( $release->{distribution} );
     $c->add_author_key( $release->{author} );
 
+    if ( $data->{deprecated} ) {
+        $c->stash->{notification} ||= { type => 'MODULE_DEPRECATED' };
+    }
+
     $c->stash( {
         canonical         => $canonical,
         documented_module => $documented_module,
-        module            => $data,
         pod               => $pod_html,
         template          => 'pod.tx',
     } );

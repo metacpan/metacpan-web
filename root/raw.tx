@@ -2,7 +2,7 @@
 %%  override content -> {
 
 <p>
-  <a href="/release/[% $module.author %]/[% $module.release %]/raw/[% $module.path %]?download=1">download</a>
+  <a href="/release/[% $file.author %]/[% $file.release %]/raw/[% $file.path %]?download=1">download</a>
 </p>
 
 <pre>[% $source %]</pre>

@@ -139,6 +139,7 @@ test_psgi app, sub {
     foreach my $ft_test (@tests) {
         my ( $filetype, $file ) = @$ft_test;
         ref $file or $file = { path => $file };
+        $file = MetaCPAN::Web::Role::FileData->_groom_file($file);
 
         is
             MetaCPAN::Web::Controller::Source->detect_filetype($file),
