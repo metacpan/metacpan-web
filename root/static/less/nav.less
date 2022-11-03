@@ -8,6 +8,48 @@
   }
 }
 
+// TODO: Banner Addition - Temporary banner at top of each page
+.temporary-banner,
+.home-temporary-banner {
+  background-color: #2e3a47;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 8px;
+  place-content: center;
+  text-align: center;
+  width: 100%;
+
+  .fa-info-circle {
+    display: grid;
+    place-content: center;
+  }
+
+  a {
+    color: #c0d2e4;
+    text-decoration: underline;
+  }
+}
+
+// TODO: Banner Addition - Use a different banner for the homepage
+.page-home .temporary-banner {
+  display: none;
+}
+
+// TODO: Banner Addition - Temporary banner at top of homepage
+.home-temporary-banner {
+  .fa-info-circle {
+    display: grid;
+    place-content: center;
+  }
+
+  a {
+    color: #c0d2e4;
+    text-decoration: underline;
+  }
+}
+
 .navbar {
     background-color: @gray-darker;
     border-color: @gray-darker;
