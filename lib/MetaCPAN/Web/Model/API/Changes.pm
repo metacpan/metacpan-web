@@ -28,7 +28,7 @@ sub release_changes {
 
         my @changelogs;
         while ( my $r = shift @releases ) {
-            if ( $r->{version_parsed} eq $version ) {
+            if ( "$r->{version_parsed}" eq "$version" ) {
                 $r->{current} = 1;
                 push @changelogs, $r;
                 if ( $opts{include_dev} ) {
@@ -64,7 +64,7 @@ sub by_releases {
                 my @releases = _releases( $change->{changes_text} );
 
                 while ( my $r = shift @releases ) {
-                    if ( $r->{version_parsed} eq $version ) {
+                    if ( "$r->{version_parsed}" eq "$version" ) {
                         $r->{current} = 1;
 
                         # Used in Controller/Feed.pm Line 37
