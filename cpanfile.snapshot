@@ -1841,16 +1841,16 @@ DISTRIBUTIONS
       XSLoader 0
       parent 0
       perl 5.008008
-  HTML-Parser-3.79
-    pathname: O/OA/OALDERS/HTML-Parser-3.79.tar.gz
+  HTML-Parser-3.80
+    pathname: O/OA/OALDERS/HTML-Parser-3.80.tar.gz
     provides:
-      HTML::Entities 3.79
-      HTML::Filter 3.79
-      HTML::HeadParser 3.79
-      HTML::LinkExtor 3.79
-      HTML::Parser 3.79
-      HTML::PullParser 3.79
-      HTML::TokeParser 3.79
+      HTML::Entities 3.80
+      HTML::Filter 3.80
+      HTML::HeadParser 3.80
+      HTML::LinkExtor 3.80
+      HTML::Parser 3.80
+      HTML::PullParser 3.80
+      HTML::TokeParser 3.80
     requirements:
       Carp 0
       Exporter 0
@@ -5552,53 +5552,53 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.16
-    pathname: O/OA/OALDERS/URI-5.16.tar.gz
+  URI-5.17
+    pathname: O/OA/OALDERS/URI-5.17.tar.gz
     provides:
-      URI 5.16
-      URI::Escape 5.16
-      URI::Heuristic 5.16
-      URI::IRI 5.16
-      URI::QueryParam 5.16
-      URI::Split 5.16
-      URI::URL 5.16
-      URI::WithBase 5.16
-      URI::data 5.16
-      URI::file 5.16
-      URI::file::Base 5.16
-      URI::file::FAT 5.16
-      URI::file::Mac 5.16
-      URI::file::OS2 5.16
-      URI::file::QNX 5.16
-      URI::file::Unix 5.16
-      URI::file::Win32 5.16
-      URI::ftp 5.16
-      URI::gopher 5.16
-      URI::http 5.16
-      URI::https 5.16
-      URI::ldap 5.16
-      URI::ldapi 5.16
-      URI::ldaps 5.16
-      URI::mailto 5.16
-      URI::mms 5.16
-      URI::news 5.16
-      URI::nntp 5.16
-      URI::nntps 5.16
-      URI::pop 5.16
-      URI::rlogin 5.16
-      URI::rsync 5.16
-      URI::rtsp 5.16
-      URI::rtspu 5.16
-      URI::sftp 5.16
-      URI::sip 5.16
-      URI::sips 5.16
-      URI::snews 5.16
-      URI::ssh 5.16
-      URI::telnet 5.16
-      URI::tn3270 5.16
-      URI::urn 5.16
-      URI::urn::isbn 5.16
-      URI::urn::oid 5.16
+      URI 5.17
+      URI::Escape 5.17
+      URI::Heuristic 5.17
+      URI::IRI 5.17
+      URI::QueryParam 5.17
+      URI::Split 5.17
+      URI::URL 5.17
+      URI::WithBase 5.17
+      URI::data 5.17
+      URI::file 5.17
+      URI::file::Base 5.17
+      URI::file::FAT 5.17
+      URI::file::Mac 5.17
+      URI::file::OS2 5.17
+      URI::file::QNX 5.17
+      URI::file::Unix 5.17
+      URI::file::Win32 5.17
+      URI::ftp 5.17
+      URI::gopher 5.17
+      URI::http 5.17
+      URI::https 5.17
+      URI::ldap 5.17
+      URI::ldapi 5.17
+      URI::ldaps 5.17
+      URI::mailto 5.17
+      URI::mms 5.17
+      URI::news 5.17
+      URI::nntp 5.17
+      URI::nntps 5.17
+      URI::pop 5.17
+      URI::rlogin 5.17
+      URI::rsync 5.17
+      URI::rtsp 5.17
+      URI::rtspu 5.17
+      URI::sftp 5.17
+      URI::sip 5.17
+      URI::sips 5.17
+      URI::snews 5.17
+      URI::ssh 5.17
+      URI::telnet 5.17
+      URI::tn3270 5.17
+      URI::urn 5.17
+      URI::urn::isbn 5.17
+      URI::urn::oid 5.17
     requirements:
       Carp 0
       Cwd 0
