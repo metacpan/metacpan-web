@@ -3,6 +3,8 @@
 %%  }
 %%  override content -> {
 
+<div class="content">
+
 <h1>Module Permissions for [% $search_term %]</h1>
 
 %%  for $permissions -> $permission {
@@ -20,5 +22,7 @@
   %%  }
 </ul>
 %%  }
+
+</div>
 
 %%  }
