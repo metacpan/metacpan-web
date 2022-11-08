@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Model::API::Changes::Parser;
 
 use Moose;
-use version qw();
 
 my @months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
 my %months = map +( $months[$_] => $_ + 1 ), 0 .. $#months;
@@ -28,6 +27,19 @@ our $W3CDTF_REGEX = qr{
             )?
         )?
     )?
+}x;
+
+our $VERSION_REGEX = qr{
+    (?:
+        v [0-9]+ (?: (?:\.[0-9]+ )+ (?:_[0-9]+)? )?
+        |
+        (?:[0-9]+)? (?:\.[0-9]+){2,} (?:_[0-9]+)?
+        |
+        [0-9]* \.[0-9]+ (?: _[0-9]+ )?
+        |
+        [0-9]+ (?: _[0-9]+ )?
+    )
+    (?: -TRIAL )?
 }x;
 
 our $UNKNOWN_VALS = join(
@@ -62,7 +74,8 @@ sub parse {
     for my $linenr ( 0 .. $#lines ) {
         my $line = $lines[$linenr];
         if ( $line
-            =~ /^(?:version\s+)?($version::LAX(?:-TRIAL)?)(\s+(.*))?$/i )
+            =~ /^(?:(?:version|=item|=head[0-4])\s+)?($VERSION_REGEX)\.?(\s+(.*))?$/i
+            )
         {
             my $version = $1;
             my $note    = $3;
