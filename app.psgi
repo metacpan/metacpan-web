@@ -121,7 +121,7 @@ builder {
                     lc($_) =~ s/^http_(.)/\u$1/r
                         =~ s/_(.)/-\u$1/gr => $env->{$_}
                 ),
-                grep /^HTTP_(?:SEC_FETCH_|REFERER$)/,
+                grep /^HTTP_(?:SEC_|REFERER$)/,
                 keys %$env
             );
 
