@@ -111,12 +111,20 @@ builder {
                 $env->{REMOTE_ADDR}, $env->{REQUEST_URI}, time, $$, rand, ) );
             $env->{'MetaCPAN::Web.request_id'} = $request_id;
 
-            Log::Log4perl::MDC->remove;
-            Log::Log4perl::MDC->put( 'request_id', $request_id );
-            Log::Log4perl::MDC->put( 'ip',         $env->{REMOTE_ADDR} );
-            Log::Log4perl::MDC->put( 'method',     $env->{REMOTE_METHOD} );
-            Log::Log4perl::MDC->put( 'url',        $env->{REQUEST_URI} );
-            Log::Log4perl::MDC->put( 'referer',    $env->{HTTP_REFERER} );
+            my $mdc = Log::Log4perl::MDC->get_context;
+            %$mdc = (
+                request_id => $request_id,
+                ip         => $env->{REMOTE_ADDR},
+                method     => $env->{REMOTE_METHOD},
+                url        => $env->{REQUEST_URI},
+                map +(
+                    lc($_) =~ s/^http_(.)/\u$1/r
+                        =~ s/_(.)/-\u$1/gr => $env->{$_}
+                ),
+                grep /^HTTP_(?:SEC_FETCH_|REFERER$)/,
+                keys %$env
+            );
+
             $app->($env);
         };
     };
