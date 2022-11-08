@@ -37,6 +37,9 @@ $(function () {
     // restricted scheme
     SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-.\/?%&=:@;#~]*[\w-\/?&=:@;#~]/gi;
 
+    // Use regular spaces, not &nbsp;
+    SyntaxHighlighter.config.space = ' ';
+
     // https://metacpan.org/source/RWSTAUNER/Acme-Syntax-Examples-0.001/lib/Acme/Syntax/Examples.pm
 
     // TODO: Might be easier to do the regexp on the plain string (before
