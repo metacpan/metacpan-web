@@ -87,10 +87,13 @@ sub _releases {
         = MetaCPAN::Web::Model::API::Changes::Parser->parse($content);
 
     my @releases = sort {
-        my $cmp;
-        eval { $cmp = $b->{version_parsed} cmp $a->{version_parsed}; 1 }
-            ? $cmp
-            : "$b->{version_parsed}" cmp "$a->{version_parsed}"
+        my $a_v = $a->{version_parsed};
+        my $b_v = $b->{version_parsed};
+        if ( !ref $a || !ref $b ) {
+            $a_v = "$a_v";
+            $b_v = "$b_v";
+        }
+        $a_v cmp $b_v;
         }
         map {
         my $v     = _parse_version( $_->{version} );
