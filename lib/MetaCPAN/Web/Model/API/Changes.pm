@@ -89,7 +89,7 @@ sub _releases {
     my @releases = sort {
         my $a_v = $a->{version_parsed};
         my $b_v = $b->{version_parsed};
-        if ( !ref $a || !ref $b ) {
+        if ( !ref $a_v || !ref $b_v ) {
             $a_v = "$a_v";
             $b_v = "$b_v";
         }
