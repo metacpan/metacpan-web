@@ -74,7 +74,8 @@ sub parse {
     for my $linenr ( 0 .. $#lines ) {
         my $line = $lines[$linenr];
         if ( $line
-            =~ /^(?:version\s+)?($VERSION_REGEX)\.?(\s+(.*))?$/i )
+            =~ /^(?:(?:version|=item|=head[0-4])\s+)?($VERSION_REGEX)\.?(\s+(.*))?$/i
+            )
         {
             my $version = $1;
             my $note    = $3;
