@@ -68,6 +68,12 @@ sub view : Private {
         } );
     }
     elsif ( exists $source->{raw} ) {
+
+        # hack to work around Xslate. utf8-flagged content will be encoded to
+        # output, which is ok. non-utf8 content may be decoded before
+        # re-encoding, which can break.
+        utf8::upgrade( $source->{raw} );
+
         $file->{content} = $source->{raw};
         $c->stash( {
             file     => $file,

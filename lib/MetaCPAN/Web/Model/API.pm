@@ -169,7 +169,7 @@ sub request {
 
 # cache these
 my $encoding = Encode::find_encoding('utf-8-strict')
-    or warn 'UTF-8 Encoding object not found';
+    or die 'UTF-8 Encoding object not found';
 my $encode_check = ( Encode::FB_CROAK | Encode::LEAVE_SRC );
 
 # TODO: Check if it's possible for the API to return any other charset.
@@ -193,7 +193,12 @@ sub raw_api_response {
         }
     }
     catch {
-        warn $_[0];
+        if ( my $logger = $self->log ) {
+            $logger->info( $_[0] );
+        }
+        else {
+            warn $_[0];
+        }
     };
 
     return +{ raw => $data, code => $response->code };
