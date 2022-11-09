@@ -1,6 +1,5 @@
-%%  cascade base {
+%%  cascade base with inc::no_sidebar {
 %%      title      => $title || "All releases by " ~ $author.pauseid,
-%%      body_class => 'no-sidebar',
 %%  }
 %%  override content -> {
 <div class="content">

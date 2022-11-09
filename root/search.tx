@@ -1,6 +1,5 @@
-%%  cascade base::search {
+%%  cascade base::search with inc::no_sidebar {
 %%      title      => $title || 'Search for "' ~ $search_query ~ '"',
-%%      body_class => 'no-sidebar',
 %%  }
 %%  override content -> {
 <div class="content search-results">

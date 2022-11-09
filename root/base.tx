@@ -63,54 +63,22 @@
                 </svg>
               </a>
             </div>
+            %%  block header_nav_menu -> {
             <ul class="nav navbar-nav menu-items hidden-xs hidden-sm">
-            [%-
-                my $menu = [
-                    {
-                        title   => "About",
-                        path    => ["/about"],
-                    },
-                    {
-                        title   => "grep::cpan",
-                        path    => ["https://grep.metacpan.org/"],
-                    },
-                    {
-                        title   => "Recent",
-                        path    => ["/recent"],
-                    },
-                    {
-                        title   => "News",
-                        path    => ["/news"],
-                    },
-                    {
-                        title   => "FAQ",
-                        path    => ["/about/faq"],
-                    },
-                    {
-                        title   => "Tools",
-                        path    => ["/tools"],
-                    },
-                    {
-                        title   => "API",
-                        path    => ["https://fastapi.metacpan.org/"],
-                    },
-                ];
-            -%]
-            %%  for $menu -> $item {
-            %%      my $active = $item.path.map(-> $p { $current[$p] ? 'active' : '' }).join('');
-              <li class="[% $active || $item.class %]">
-                  <a href="[% $item.path.0 %]">
-                      [%- if $item.icon { %]<i class="[% $item.icon %]"></i>[% } %]
-                      [%- if $item.image { %]<img src="[% $item.image %]" [%- if $item.alt { %] alt="[% $item.alt %]"[% } %]/>[% } -%]
-                      [% $item.title -%]
-                  </a>
-              </li>
-            %% }
+              <li><a href="/about">About</a></li>
+              <li><a href="https://grep.metacpan.org/">grep::cpan</a></li>
+              <li><a href="/recent">Recent</a></li>
+              <li><a href="/news">News</a></li>
+              <li><a href="/about/faq">FAQ</a></li>
+              <li><a href="/tools">Tools</a></li>
+              <li><a href="https://fastapi.metacpan.org/">API</a></li>
             </ul>
+            %%  }
             <ul class="nav navbar-nav navbar-right">
                 <button type="button" class="searchbar-btn visible-xs visible-sm">
                     <i class="fa fa-search button-fa-icon"></i>
                 </button>
+                %%  block search_bar -> {
                 <form action="/search" class="searchbar-form visible-md visible-lg search-form form-horizontal">
                    <input type="hidden" name="size" id="metacpan_search-size" value="20">
                   <div class="form-group">
@@ -120,13 +88,14 @@
                       </div>
                   </div>
                 </form>
-                %% if ! $current['/'] {
+                %%  }
+                %%  block sidebar_toggle_button -> {
                     <li class="icon-slidepanel visible-xs visible-sm">
                       <button data-toggle="slidepanel" data-target=".slidepanel">
                         <i class="fa fa-bars button-fa-icon"></i>
                       </button>
                     </li>
-                %% }
+                %%  }
                 <form action="/account/logout" method="POST" id="metacpan-logout"></form>
                 <li class="dropdown logged_in" style="display: none;">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
@@ -167,7 +136,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="page-content [% $page_class %]">
+        <div class="page-content [% block page_content_class -> { } %]">
 
         %%  if $site_alert_message {
             <div class="row">
@@ -178,27 +147,27 @@
         %%  }
 
         %%  block full_content -> {
-                  <!--TODO: Banner Addition - Temporary banner at top of each page-->
-                  <div class="temporary-banner">
-                    <i class="fas fa-info-circle"></i>
-                    The Perl Advent Calendar
-                    <a href="http://cfp.perladvent.org/" target="_blank">
-                      needs more articles
-                    </a>
-                    for 2022.
-                    <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
-                      Submit your idea today!
-                    </a>
-                  </div>
-                  %%  block left_nav -> {
-                    <div class="nav-list-container slidepanel">
-                      <ul class="nav-list [% block left_nav_classes -> { } %]">
-                          %% block left_nav_content -> {}
-                      </ul>
-                    </div>
-                  %%  }
-                  %%  block breadcrumbs -> { }
-                  %%  block content -> { }
+          <!--TODO: Banner Addition - Temporary banner at top of each page-->
+          <div class="temporary-banner">
+            <i class="fas fa-info-circle"></i>
+            The Perl Advent Calendar
+            <a href="http://cfp.perladvent.org/" target="_blank">
+              needs more articles
+            </a>
+            for 2022.
+            <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
+              Submit your idea today!
+            </a>
+          </div>
+          %%  block left_nav -> {
+            <div class="nav-list-container slidepanel">
+              <ul class="nav-list [% block left_nav_classes -> { } %]">
+                  %% block left_nav_content -> {}
+              </ul>
+            </div>
+          %%  }
+          %%  block breadcrumbs -> { }
+          %%  block content -> { }
         %%  }
         </div>
         <footer class="footer">

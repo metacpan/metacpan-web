@@ -1,11 +1,11 @@
-%%  cascade base {
+%%  cascade base with inc::no_sidebar {
 %%      canonical   => $canonical || '/',
 %%      rss         => $rss || '/recent.rss',
 %%      rss_title   => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
-%%      body_class  => 'page-home',
 %%  }
-%%  override left_nav -> { }
 %%  override search_bar -> { }
+%%  override header_nav_menu -> { }
+%%  after page_content_class -> { ' page-home' }
 %%  override content -> {
 <script type="application/ld+json">
 [
@@ -24,19 +24,6 @@
   }
 ]
 </script>
-
-<!--TODO: Banner Addition - Temporary banner at top of each page-->
-<div class="home-temporary-banner">
-  <i class="fas fa-info-circle"></i>
-  The Perl Advent Calendar
-  <a href="http://cfp.perladvent.org/" target="_blank">
-    needs more articles
-  </a>
-  for 2022.
-  <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
-    Submit your idea today!
-  </a>
-</div>
 
 <div class="home">
   <div class="home-hero">

@@ -1,6 +1,4 @@
-%%  cascade base {
-%%      body_class => 'no-sidebar',
-%%  }
+%%  cascade base with inc::no_sidebar
 %%  override content -> {
 <div class="jumbotron">
     <div class="container-fluid">
@@ -23,4 +21,3 @@
     </div>
 </div>
 %%  }
-

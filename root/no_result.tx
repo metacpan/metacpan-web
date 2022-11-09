@@ -1,6 +1,5 @@
-%%  cascade base::error {
+%%  cascade base::error with inc::no_sidebar {
 %%      title      => $title || 'Search for "' ~ $search_query ~ '"',
-%%      body_class => 'no-sidebar',
 %%  }
 %%  override content -> {
     <div class="content no-results text-center">

@@ -4,7 +4,6 @@
 %%    title             => $title ||
 %%      ($file.documentation || $file.module.0.name ) ~
 %%      ($file.abstract ? ' - ' ~ $file.abstract : ''),
-%%    page_class  => $page_class || 'page-pod',
 %%  }
 %%  override left_nav_lead -> {
 %%  my $release_base = $permalinks || $release.status != 'latest'
