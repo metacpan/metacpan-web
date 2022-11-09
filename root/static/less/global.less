@@ -354,19 +354,14 @@ h1, .h1, h2, .h2, h3, .h3 {
       'menu content'
       'menu pagination';
     grid-template-columns: @sidebar-width ~"calc(100vw -" @sidebar-width ~")";
-    grid-template-rows: max-content max-content;
+    grid-template-rows: max-content max-content max-content max-content;
     line-height: 1.54em;
     margin-top: 57px;
 }
 
 @media (min-width: 0) and (max-width: @screen-sm-max) {
     .page-content {
-        grid-template-areas:
-            // TODO: Banner Addition - Tempory banner at top of each page. Remove this once we take the banner down.
-            'banner'
-            'breadcrumbs'
-            'content';
-        grid-template-columns: 1fr;
+        grid-template-columns: 0 1fr;
     }
 }
 
@@ -399,12 +394,7 @@ h1, .h1, h2, .h2, h3, .h3 {
     max-width: 1200px;
     overflow-x: hidden;
     width: 100%;
-}
-
-// Nested content classes create too much padding
-// especially on mobile devices
-.content .content {
-  padding: 0;
+    grid-area: content;
 }
 
 .site-alert-message {
@@ -458,14 +448,8 @@ h1, .h1, h2, .h2, h3, .h3 {
   scroll-margin-top: 60px;
 }
 
-.no-sidebar .nav-list-container,
-.no-sidebar .icon-slidepanel {
-    display: none !important;
-}
-
-.no-sidebar .page-content {
+.no-sidebar.page-content {
     align-items: center;
-    grid-template-areas: 'content';
-    grid-template-columns: 1fr;
+    grid-template-columns: 0 1fr;
     justify-content: center;
 }

@@ -2,13 +2,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const searchBarBtn = document.querySelector('.searchbar-btn');
   const searchBarForm = document.querySelector('.searchbar-form');
   const searchBarInput = document.querySelector('.searchbar-form input[type="text"]');
-  const searchBarHome = document.querySelector('.page-home .searchbar-form');
-
-  // Remove the searchbar from the navbar on the homepage because
-  // it intereferes with the autocomplete-suggestions on the homepage search
-  if (searchBarHome) {
-    searchBarHome.remove();
-  }
 
   searchBarBtn.addEventListener('click', () => {
     searchBarForm.classList.remove('visible-md');

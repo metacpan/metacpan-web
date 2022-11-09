@@ -1,0 +1,3 @@
+%%  after page_content_class -> { ' no-sidebar' }
+%%  override sidebar_toggle_button -> { }
+%%  override left_nav -> { }
