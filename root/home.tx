@@ -41,6 +41,10 @@
       <a href="#" class="keyboard-shortcuts">Keyboard Shortcuts</a>
     </form>
 
+    <a class="fastly-fast-forward-link" href="https://www.fastly.com/blog/fast-forward-lets-build-the-good-internet-together" target="_blank">
+      <img class="fastly-fast-forward-img" src="/static/images/sponsors/ffwd-graphic.png" alt="Fastly fast forward" />
+    </a>
+
     <span class="helper-blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</span>
   </div>
 
