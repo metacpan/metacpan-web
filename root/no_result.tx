@@ -1,4 +1,4 @@
-%%  cascade base::error with inc::no_sidebar {
+%%  cascade base::error {
 %%      title      => $title || 'Search for "' ~ $search_query ~ '"',
 %%  }
 %%  override content -> {

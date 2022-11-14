@@ -45,7 +45,12 @@ sub activity : Private {
         if $params->{res};
 
     my $line = $c->model('API')->request( '/activity', undef, \%args )->get;
-    return unless $line and exists $line->{activity};
+    if ( !$line || !$line->{activity} ) {
+        if ( $line && ( $line->{code} // 0 ) == 404 ) {
+            $c->detach('/not_found');
+        }
+        $c->detach('/internal_error');
+    }
 
     $c->res->content_type('image/svg+xml');
     $c->res->headers->expires( time + 86400 );

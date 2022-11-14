@@ -1,4 +1,4 @@
-%%  cascade base::search {
+%%  cascade base::search with inc::no_sidebar {
 %%      title => $title || 'Error ' ~ $status_code ~ ' - ' ~ $status_message,
 %%  }
 %%  override content -> {
