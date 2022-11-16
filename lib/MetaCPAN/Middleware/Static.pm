@@ -104,9 +104,8 @@ sub wrap {
                     },
                 );
             }
-            else {
-                push @assets, '/static/js/less.min.js', @css_files,
-                    @less_files;
+            elsif (@less_files) {
+                die "Need 'lessc' executable!";
             }
 
             enable sub {
