@@ -1,10 +1,10 @@
-package Plack::Middleware::Assets::FileCached;
+package MetaCPAN::Middleware::Assets::FileCached;
 use File::Temp  ();
 use Digest::SHA qw( sha1_hex );
 use File::Path  ();
 use Moo;
 
-with 'Plack::Middleware::Assets::Core';
+with 'MetaCPAN::Middleware::Assets::Core';
 
 has cache_dir => (
     is      => 'ro',

@@ -1,4 +1,4 @@
-package Plack::Middleware::Session::Cookie::MetaCPAN;
+package MetaCPAN::Middleware::Session::Cookie;
 use strict;
 use parent qw(Plack::Middleware::Session::Cookie);
 

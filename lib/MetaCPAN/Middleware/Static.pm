@@ -75,14 +75,14 @@ sub wrap {
             die 'no lessc available!'
                 if !defined $lessc;
 
-            enable 'Assets::FileCached' => (
+            enable '+MetaCPAN::Middleware::Assets::FileCached' => (
                 files => [ map "root$_", @js_files ],
 
                 filter => sub { JavaScript::Minifier::XS::minify( $_[0] ) },
                 ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
             );
 
-            enable 'Assets::FileCached' => (
+            enable '+MetaCPAN::Middleware::Assets::FileCached' => (
                 files     => [ map "root$_", @css_files, @less_files ],
                 extension => 'css',
                 read_file => sub { scalar `$lessc -s $_[0]` },
@@ -92,7 +92,7 @@ sub wrap {
         else {
             my @assets = (@js_files);
             if ($lessc) {
-                enable 'Assets::Dev' => (
+                enable '+MetaCPAN::Middleware::Assets::Dev' => (
                     files     => [ map "root$_", @css_files, @less_files ],
                     extension => 'css',
                     read_file => sub {
