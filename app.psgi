@@ -146,7 +146,7 @@ builder {
             unless $config->{cookie_secret};
 
         # Add session cookie here only
-        enable 'Session::Cookie::MetaCPAN' => (
+        enable '+MetaCPAN::Middleware::Session::Cookie' => (
             session_key => 'metacpan_secure',
             expires     => 2**30,
             secure      => ( !$dev_mode ),

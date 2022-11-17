@@ -1,4 +1,4 @@
-package Plack::Middleware::Assets::Core;
+package MetaCPAN::Middleware::Assets::Core;
 use Moo::Role;
 
 sub wrap {

@@ -1,8 +1,8 @@
-package Plack::Middleware::Assets::Dev;
+package MetaCPAN::Middleware::Assets::Dev;
 use Digest::SHA qw( sha1_hex );
 use Moo;
 
-with 'Plack::Middleware::Assets::Core';
+with 'MetaCPAN::Middleware::Assets::Core';
 
 has _file_map => ( is => 'lazy' );
 

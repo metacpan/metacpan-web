@@ -22,9 +22,6 @@
         %%  for $assets.grep(rx('\.js$')) -> $js {
         <script src="[% $js %]" type="text/javascript" defer></script>
         %%  }
-        %%  for $assets.grep(rx('\.less$')) -> $less {
-        <link rel="stylesheet/less" type="text/css" href="[% $less %]">
-        %%  }
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
