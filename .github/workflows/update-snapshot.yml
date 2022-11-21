@@ -48,7 +48,7 @@ jobs:
           title: Update cpanfile.snapshot
           author: MetaCPAN Bot <bot@metacpan.org>
           committer: MetaCPAN Bot <bot@metacpan.org>
-        body: |
-          [GitHub Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-        push-to-fork: metacpan-bot/metacpan-web
-        branch: update-cpanfile-snapshot
+          body: |
+            [GitHub Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          push-to-fork: metacpan-bot/metacpan-web
+          branch: update-cpanfile-snapshot
