@@ -4,8 +4,8 @@
 %%    rss_title => $rss_title || 'Recent CPAN Uploads of ' ~ $release.distribution ~ ' - MetaCPAN',
 %%    canonical => $canonical || '/dist/' ~ $release.distribution,
 %%    meta_description => $meta_description || $release.abstract,
-%%    twitter_card_inc => $twitter_card_inc || 'inc/twitter/release.tx',
 %%  }
+%%  override meta_card -> { include inc::twitter::release }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
   <span>

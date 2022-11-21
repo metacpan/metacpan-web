@@ -40,9 +40,7 @@
             ga('send', 'pageview');
           })('ga:clientId', 'UA-27829474-1');
         </script>
-        %%  if $twitter_card_inc {
-        %%      include $twitter_card_inc
-        %%  }
+        %%  block meta_card -> {}
     </head>
     <body class="[% $body_class %]">
         <nav class="navbar navbar-default" role="navigation">
