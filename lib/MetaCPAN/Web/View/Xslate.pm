@@ -79,7 +79,6 @@ around render => sub {
         $c->action->reverse    => 1,
         $c->request->uri->path => 1,
     };
-    $vars->{site_alert_message} = $c->config->{site_alert_message};
 
     return $self->$orig( $c, $template, $vars );
 };

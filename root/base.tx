@@ -132,15 +132,6 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
-
-        %%  if $site_alert_message {
-            <div class="row">
-                <div class="site-alert-message alert alert-danger" role="alert">
-                  [% $site_alert_message %]
-                </div>
-            </div>
-        %%  }
-
         %%  block full_content -> {
           <!--TODO: Banner Addition - Temporary banner at top of each page-->
           <div class="temporary-banner">
