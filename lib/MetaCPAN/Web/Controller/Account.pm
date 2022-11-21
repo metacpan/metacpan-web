@@ -74,10 +74,6 @@ sub logout : Local : Args(0) {
     $c->res->redirect('/');
 }
 
-sub settings : Local : Args(0) {
-    my ( $self, $c ) = @_;
-}
-
 sub identities : Local : Args(0) {
     my ( $self, $c ) = @_;
     if ( $c->req->method eq 'POST'
