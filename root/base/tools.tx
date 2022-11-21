@@ -3,14 +3,14 @@
 %%  override left_nav_content -> {
 [%-
 for [
-  [ '/tools',             'Tools' ],
-  [ '/pod2html',          'Pod Renderer' ],
-  [ '/lab/dashboard',     'Lab: Dashboard' ],
-  [ '/lab/dependencies',  'Lab: Dependencies' ],
+  [ 'Tools',              '/tools' ],
+  [ 'Pod Renderer',       '/pod2html' ],
+  [ 'Lab: Dashboard',     '/lab/dashboard' ],
+  [ 'Lab: Dependencies',  '/lab/dependencies' ],
 ] -> $l {
 %]
-<li class="[% if $current[$l.0] { 'active' } %]">
-    <a href="[% $l.0 %]">[% $l.1 %]</a>
+<li class="[% if $current[$l.1] { 'active' } %]">
+    <a href="[% $l.1 %]">[% $l.0 %]</a>
 </li>
 %%  }
 %%  }

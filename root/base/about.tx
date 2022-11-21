@@ -5,19 +5,19 @@
 %%  override left_nav_content -> {
 [%-
 for [
-  [ '/about',                 'About MetaCPAN' ],
-  [ '/about/contact',         'Contact' ],
-  [ '/about/development',     'Development' ],
-  [ '/about/faq',             'FAQ' ],
-  [ '/about/sponsors',        'Sponsors' ],
-  [ '/about/contributors',    'Contributors' ],
-  [ '/about/meta_hack',       'meta::hack' ],
-  [ '/about/missing_modules', 'Missing Modules' ],
-  [ '/about/metadata',        'Distribution Metadata' ],
+  [ 'About MetaCPAN',         '/about' ],
+  [ 'Contact',                '/about/contact' ],
+  [ 'Development',            '/about/development' ],
+  [ 'FAQ',                    '/about/faq' ],
+  [ 'Sponsors',               '/about/sponsors' ],
+  [ 'Contributors',           '/about/contributors' ],
+  [ 'meta::hack',             '/about/meta_hack' ],
+  [ 'Missing Modules',        '/about/missing_modules' ],
+  [ 'Distribution Metadata',  '/about/metadata' ],
 ] -> $l {
 %]
-<li class="[% if $current[$l.0] { 'active' } %]">
-    <a href="[% $l.0 %]">[% $l.1 %]</a>
+<li class="[% if $current[$l.1] { 'active' } %]">
+    <a href="[% $l.1 %]">[% $l.0 %]</a>
 </li>
 %%  }
 %%  }

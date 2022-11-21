@@ -8,18 +8,18 @@
 %%  override left_nav_content -> {
 [%-
 for [
-  [ '/about',                 'About MetaCPAN' ],
-  [ 'https://grep.metacpan.org/', 'grep::cpan'],
-  [ '/recent',         'Recent' ],
-  [ '/news',         'News' ],
-  [ '/about/faq',             'FAQ' ],
-  [ '/tools',             'Tools' ],
-  [ 'https://github.com/metacpan/metacpan-api/blob/master/docs/API-docs.md', 'API' ],
-  [ '/about/contact',         'Contact' ],
+  [ 'About MetaCPAN', '/about' ],
+  [ 'grep::cpan',     'https://grep.metacpan.org/' ],
+  [ 'Recent',         '/recent' ],
+  [ 'News',           '/news' ],
+  [ 'FAQ',            '/about/faq' ],
+  [ 'Tools',          '/tools' ],
+  [ 'API',            'https://github.com/metacpan/metacpan-api/blob/master/docs/API-docs.md' ],
+  [ 'Contact',        '/about/contact' ],
 ] -> $l {
 %]
-<li class="[% if $current[$l.0] { 'active' } %]">
-    <a href="[% $l.0 %]">[% $l.1 %]</a>
+<li class="[% if $current[$l.1] { 'active' } %]">
+    <a href="[% $l.1 %]">[% $l.0 %]</a>
 </li>
 %%  }
 %%  }
