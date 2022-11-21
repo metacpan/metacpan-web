@@ -1,0 +1,12 @@
+%%  cascade inc::opengraph {
+%%    opengraph_title       => $author.display_name,
+%%    opengraph_description => "CPAN Author - " ~ $author.display_name,
+%%    opengraph_image       => gravatar_image($author, 400),
+%%  }
+%%  after  opengraph -> {
+%%  for $author.profile -> $profile {
+    %%  if $profile.name == "twitter" {
+        <meta name="twitter:creator" content="@[% $profile.id %]" />
+    %%  }
+%%  }
+%%  }

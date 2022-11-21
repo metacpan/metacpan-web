@@ -1,0 +1,4 @@
+%%  cascade inc::opengraph {
+%%    opengraph_title       => $release.name,
+%%    opengraph_description => $release.abstract,
+%%  }

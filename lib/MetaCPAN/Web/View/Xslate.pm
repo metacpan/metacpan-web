@@ -54,6 +54,7 @@ has '+expose_methods' => (
     default =>
         sub
     { [ qw(
+        abs_url
         page_url
     ) ] },
 );
@@ -62,6 +63,13 @@ sub page_url {
     my ( $self, $c, @args ) = @_;
     my $req = $c->request;
     my $uri = @args ? $req->uri_with(@args) : $req->uri;
+    $uri->as_string;
+}
+
+sub abs_url {
+    my ( $self, $c, $url, $base ) = @_;
+    $base ||= $c->request->uri;
+    my $uri = URI->new_abs( $url, $base );
     $uri->as_string;
 }
 

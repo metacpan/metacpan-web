@@ -5,7 +5,7 @@
 %%    canonical => $canonical || '/dist/' ~ $release.distribution,
 %%    meta_description => $meta_description || $release.abstract,
 %%  }
-%%  override meta_card -> { include inc::twitter::release }
+%%  override opengraph -> { include inc::opengraph::release }
 %%  override breadcrumbs -> {
 <div class="breadcrumbs">
   <span>

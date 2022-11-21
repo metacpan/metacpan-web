@@ -1,0 +1,12 @@
+%%  block opengraph -> {
+<meta property="og:site_name"   content="MetaCPAN" />
+<meta name="twitter:site"       content="@metacpan" />
+<meta property="og:type"        content="article" />
+<meta name="twitter:card"       content="summary" />
+<meta property="og:url"         content="[% $abs_url( $canonical || $page_url(), "https://metacpan.org/" ) %]" />
+<meta property="og:title"       content="[% $opengraph_title || $release.name %]" />
+%%  if $opengraph_description {
+<meta property="og:description" content="[% $opengraph_description %]" />
+%%  }
+<meta property="og:image"       content="[% $abs_url( $opengraph_image || "/static/images/dots.png", "https://metacpan.org/") %]" />
+%%  }

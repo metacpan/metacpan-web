@@ -29,7 +29,7 @@
           gtag('js', new Date());
           gtag('config', 'G-E82Q2V8LVD');
         </script>
-        %%  block meta_card -> {}
+        %%  block opengraph -> { }
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
