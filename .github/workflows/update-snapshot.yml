@@ -17,27 +17,27 @@ jobs:
       - name: Install deps
         run: >
           $RUNNER_TEMP/cpm
-            install
-            --cpanfile cpanfile
-            --resolver metacpan
-            --show-build-log-on-failure
-            --local-lib-contained=local
+          install
+          --cpanfile cpanfile
+          --resolver metacpan
+          --show-build-log-on-failure
+          --local-lib-contained=local
       - name: Install forced deps
         run: >
           curl -sL https://cpanmin.us/
           | perl -
-            --cpanfile cpanfile.forced
-            --showdeps --installdeps
-            -L local
-            -q
-            .
+          --cpanfile cpanfile.forced
+          --showdeps --installdeps
+          -L local
+          -q
+          .
           | $RUNNER_TEMP/cpm
-            install
-            --resolver metacpan
-            --show-build-log-on-failure
-            --local-lib-contained=local
-            --reinstall
-            -
+          install
+          --resolver metacpan
+          --show-build-log-on-failure
+          --local-lib-contained=local
+          --reinstall
+          -
       - name: Maybe update cpanfile.snapshot
         run: perl -Ilocal/lib/perl5 local/bin/carton
       - name: Create Pull Request
