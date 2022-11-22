@@ -54,6 +54,7 @@ sub wrap {
             js/cpan.js
             js/github.js
             js/dropdown.js
+            js/recaptcha.js
             js/search.js
             modules/bootstrap-v3.4.1/js/dropdown.js
             modules/bootstrap-v3.4.1/js/collapse.js
