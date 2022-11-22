@@ -1,6 +1,6 @@
 %%  cascade base::account
 %%  override content -> {
-<div class="content account-settings">
+<div class="account-settings">
     %%  if $no_profile {
     <div class="alert alert-danger">
       <h4 class="alert-heading">Error</h4>
@@ -247,7 +247,6 @@
     <input type="submit" value="Save Profile" class="btn btn-primary btn-large search-btn" />
     </form>
     %%  }
-</div>
 
 <script>
 
@@ -341,4 +340,5 @@ function formFixer( e ) {
     }
 }
 </script>
+</div>
 %%  }

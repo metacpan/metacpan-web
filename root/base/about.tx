@@ -21,3 +21,4 @@ for [
 </li>
 %%  }
 %%  }
+%%  after content_classes -> { ' about' }

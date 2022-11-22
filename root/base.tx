@@ -132,9 +132,7 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
-        %%  block full_content -> {
-          <!--TODO: Banner Addition - Temporary banner at top of each page-->
-          <div class="temporary-banner">
+          <div class="top-notify-banner">
             <i class="fas fa-info-circle"></i>
             The Perl Advent Calendar
             <a href="http://cfp.perladvent.org/" target="_blank">
@@ -145,16 +143,24 @@
               Submit your idea today!
             </a>
           </div>
-          %%  block left_nav -> {
-            <div class="nav-list-container slidepanel">
+          <nav class="sidebar">
+            %%  block left_nav -> {
+            <div class="slidepanel">
               <ul class="nav-list [% block left_nav_classes -> { } %]">
                   %% block left_nav_content -> {}
               </ul>
             </div>
-          %%  }
-          %%  block breadcrumbs -> { }
-          %%  block content -> { }
-        %%  }
+            %%  }
+          </nav>
+          <div class="content-navigation">
+            %%  block breadcrumbs -> { }
+          </div>
+          <main class="[% block content_classes -> { 'content' } %]">
+            %%  block content -> { }
+          </main>
+          <div class="content-pagination">
+            %%  block pagination -> { }
+          </div>
         </div>
         <footer class="footer">
           <div class="footer-container">

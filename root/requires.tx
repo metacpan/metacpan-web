@@ -11,7 +11,6 @@
 %%  }
 %%  override content -> {
 
-<div class="content">
     <strong>Distributions Which Depend on <a href="/[% $type_of_required %]/[% $required %]">[% $required %]</a></strong>
     %%  if $releases.size() {
         %%  include inc::release_table {
@@ -20,11 +19,12 @@
         %%      default_sort    => '2,1',
         %%      table_id        => 'revdep_releases',
         %%  };
-        %%  include inc::pager;
     %%  }
     %%  else {
     <p>No distributions depending on <a href="/[% $type_of_required %]/[% $required %]">[% $required %]</a> could be found</p>
     %%  }
-</div>
 
+%%  }
+%%  override pagination -> {
+  %%  include inc::pager
 %%  }

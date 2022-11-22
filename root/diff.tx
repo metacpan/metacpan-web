@@ -42,7 +42,6 @@
     <li><div><a href="#">Top</a></div></li>
 %%  }
 %%  override content -> {
-  <div class="content">
     <table class="table-striped diff-list">
       %%  for $diff.statistics -> $file {
       <tr>
@@ -65,5 +64,4 @@
             <pre><code class="language-diff">[% $file.diff %]</code></pre>
         </div>
     %%  }
-  </div>
 %%  }

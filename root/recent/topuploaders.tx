@@ -1,8 +1,8 @@
 %%  cascade base::recent {
 %%      title => $title || "CPAN Top Uploaders",
 %%  }
+%%  after content_classes -> { ' toplists row' }
 %%  override content -> {
-<div class="content toplists row">
 %%  for $authors -> $author {
 <div class="entry col-sm-6 col-md-3">
     <div class="gravatar">
@@ -17,5 +17,4 @@
     <strong class="count">[% $author.releases %] release[% if $author.releases > 1 { %]s[% } %]</strong>
 </div>
 %%  }
-</div>
 %%  }

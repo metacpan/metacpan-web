@@ -2,7 +2,7 @@
 %%      title      => $title || 'Search for "' ~ $search_query ~ '"',
 %%  }
 %%  override content -> {
-    <div class="content no-results text-center">
+<div class="no-results">
     <h3 class="search-results-header">No search results for [% $search_query %]</h3>
     %%  if $suggest {
             <div class="alert alert-danger">
@@ -11,9 +11,9 @@
             </div>
     %%  }
     %%  else {
-          <p class="nav-header" id="metacpan_header-text-noresult">Something missing?
+          <h4>Something missing?
               <a href="/about/missing_modules">Find out why</a>
-          </p>
+          </h4>
           <p> Sorry, we didn't find a match. Maybe look at <a href="/pod/Task::Kensho">Task::Kensho</a>,<br>
           which is a list of recommended modules for Enlightened Perl development.
           </p>
@@ -23,5 +23,5 @@
               </a>
           </p>
     %%  }
-    </div>
+</div>
 %%  }

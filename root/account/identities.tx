@@ -1,6 +1,6 @@
 %%  cascade base::account
 %%  override content -> {
-<div class="content account-settings">
+<div class="account-settings">
     <div class="alert alert-warning">
       <h4><strong>Information</strong></h4>
       Below are the identities which you may use to log in to MetaCPAN. (Note
@@ -27,6 +27,6 @@
         </td>
     </tr>
 %%  }
-</table>
+    </table>
 </div>
 %%  }

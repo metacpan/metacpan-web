@@ -95,10 +95,8 @@
   });
 </script>
 
-<div class="content about">
   <i class="fa fa-spinner fa-spin" id="metacpan_author-result-loading"></i>
   <div id="metacpan_author-count"></div>
   <div class="author-results"></div>
-</div>
 
 %%  }

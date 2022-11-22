@@ -1,6 +1,5 @@
 %%  cascade base::tools
 %%  override content -> {
-<div class="content">
   <h2 class="content-head">Assorted Tools</h1>
 
   <ul>
@@ -32,5 +31,4 @@
     <li><a href="/lab/dashboard">Dashboard</a> - a personalised dashboard (for logged in authors)</li>
     <li><a href="/lab/dependencies">Dependencies</a> - list the dependencies of a module</li>
   </ul>
-</div>
 %%  }

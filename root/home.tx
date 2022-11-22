@@ -5,7 +5,7 @@
 %%  }
 %%  override search_bar -> { }
 %%  override header_nav_menu -> { }
-%%  after page_content_class -> { ' page-home' }
+%%  after content_classes -> { ' home' }
 %%  override content -> {
 <script type="application/ld+json">
 [
@@ -25,7 +25,6 @@
 ]
 </script>
 
-<div class="home">
   <div class="home-hero">
     <div class="hero-logo">
       <img src="/static/images/metacpan-logo.svg" alt="MetaCPAN" />
@@ -44,6 +43,4 @@
 
     <span class="helper-blurb">Just getting started with Perl? Try these <a target="_blank" rel="noopener" href="https://www.perl.org/learn.html">free learning resources</a> from the Perl community</span>
   </div>
-
-</div>
 %%  }

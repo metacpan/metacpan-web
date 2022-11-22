@@ -126,7 +126,6 @@
     </li>
 %%  }
 %%  override content -> {
-<div class="content">
     <div id="metacpan_feed_subscription" class="page-header">
         <p>
           [% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by
@@ -165,5 +164,4 @@
         <p>No favorite distributions from <a href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a> could be found</p>
     </div>
     %%  }
-</div>
 %%  }

@@ -2,7 +2,7 @@
 %%      title => $title || 'Sponsors',
 %%  }
 %%  override content -> {
-<div class="content about about-sponsor">
+<div class="about-sponsor">
     <div class="sponsor">
         <table>
             <tr>
@@ -370,6 +370,5 @@ community.
     <br />
     <center><strong>If you are interested in sponsoring MetaCPAN, please don't hesitate to contact us at <a href="mailto:noc@metacpan.org">noc@metacpan.org</a>.</strong></center>
 </div>
-
 %%  }
 
