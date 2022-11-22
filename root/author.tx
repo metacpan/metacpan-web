@@ -3,8 +3,8 @@
 %%          $author.display_name ~ ( $author.has_display_name ? ' (' ~ $author.pauseid ~ ')' : '' ),
 %%      rss       => $rss       || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
-%%      twitter_card_inc => $twitter_card_inc || 'inc/twitter/author.tx',
 %%  }
+%%  override meta_card -> { include inc::twitter::author }
 %%  override left_nav_content -> {
     <li>
       [% include inc::author_pic %]

@@ -1,10 +1,10 @@
 %%  cascade base::release {
-%%    twitter_card_inc  => $twitter_card_inc || 'inc/twitter/module.tx',
 %%    meta_description  => $meta_description || $file.abstract,
 %%    title             => $title ||
 %%      ($file.documentation || $file.module.0.name ) ~
 %%      ($file.abstract ? ' - ' ~ $file.abstract : ''),
 %%  }
+%%  override meta_card -> { include inc::twitter::module }
 %%  override left_nav_lead -> {
 %%  my $release_base = $permalinks || $release.status != 'latest'
 %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
