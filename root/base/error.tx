@@ -1,8 +1,8 @@
 %%  cascade base::search with inc::no_sidebar {
 %%      title => $title || 'Error ' ~ $status_code ~ ' - ' ~ $status_message,
 %%  }
+%%  after content_classes -> { ' error-page' }
 %%  override content -> {
-<div class="content error-page">
     <h1>[% $status_message %]</h1>
 
     %%  if $message {
@@ -22,5 +22,4 @@
             Search the CPAN for <a href="/search?q=[% $q | uri %]">[% $q %]</a>
         </p>
     %%  }
-</div>
 %%  }

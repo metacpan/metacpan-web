@@ -25,7 +25,6 @@
   <li>[% pluralize("%d file(s)", $file_count) %]</li>
 %%  }
 %%  override content -> {
-<div class="content">
 <table id="metacpan-file-browse" class="table table-condensed table-striped file-table tablesorter">
 <thead>
     <tr>
@@ -54,5 +53,4 @@
 %%  }
 </tbody>
 </table>
-</div>
 %%  }

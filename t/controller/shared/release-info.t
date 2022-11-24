@@ -127,7 +127,7 @@ test_psgi app, sub {
 
             # not in release-info.html but should be shown on both:
 
-            my $favs = '//*[contains(@class, "favorite")]';
+            my $favs = '//*[contains-token(@class, "favorite")]';
             $tx->like( $favs, qr/\+\+$/, 'tag for favorites (++)' );
 
             optional_test favorited => sub {
@@ -168,8 +168,11 @@ test_psgi app, sub {
             );
 
             # version select box
-            ok( $tx->find_value('//div[@class="breadcrumbs"]//select'),
-                'version select box' );
+            ok(
+                $tx->find_value(
+                    '//div[contains-token(@class, "breadcrumbs")]//select'),
+                'version select box'
+            );
 
             $tx->like(
 

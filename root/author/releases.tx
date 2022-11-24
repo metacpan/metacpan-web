@@ -2,8 +2,8 @@
 %%      title      => $title || "All releases by " ~ $author.pauseid,
 %%  }
 %%  override content -> {
-<div class="content">
   %%  include inc::release_table { header => 1, tablesorter => 0 }
+%%  }
+%%  override pagination -> {
   %%  include inc::pager
-</div>
 %%  }

@@ -1,6 +1,5 @@
 %%  cascade base::account
 %%  override content -> {
-<div class="content account-settings">
     %%  if $error {
     <div class="alert alert-danger">
       <h4 class="alert-heading"><strong>Error</strong></h4>
@@ -22,5 +21,4 @@
         </form>
     </fieldset>
     %%  }
-</div>
 %%  }

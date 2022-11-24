@@ -1,7 +1,5 @@
 %%  cascade base::tools
 %%  override content -> {
-<div class="content">
-
 <h2>[% $personal ? 'Personal' : $pauseid %] Dashboard</h2>
 
 %%  if $report {
@@ -62,5 +60,4 @@
 The dashboard is only available to people who have logged in to MetaCPAN.
 %%  }
 
-</div>
 %%  }

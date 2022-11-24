@@ -98,7 +98,7 @@ test_psgi app, sub {
         is( $res->code, 200, '... and the user gets in' );
         my $tx = tx($res);
         $tx->like(
-            '//div[@class="content account-settings"]',
+            '//div[contains-token(@class, "account-settings")]',
             qr/connect your account to PAUSE/,
             '... and needs to connect to PAUSE'
         );

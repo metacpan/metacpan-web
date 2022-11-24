@@ -33,7 +33,8 @@ test_psgi app, sub {
         ok( my $res = $cb->( GET "/search?q=$k" ), 'search for ' . $k );
         my $tx = tx($res);
         my $module
-            = $tx->find_value('//div[@class="module-result"][1]/h3[1]/a[1]');
+            = $tx->find_value(
+            '//div[contains-token(@class, "module-result")][1]/h3[1]/a[1]');
         is( $module, $v, "$v is first result" );
     }
 
@@ -43,7 +44,7 @@ test_psgi app, sub {
         my $tx = tx($res);
         my $author
             = $tx->find_value(
-            '//div[@class="author-results"]/ul[@class="authors clearfix"]/li[1]/a[1]'
+            '//div[contains-token(@class,"author-results")]/ul[contains-token(@class, "authors")][contains-token(@class, "clearfix")]/li[1]/a[1]'
             );
         like( $author, qr/\b$v\b/, "$v is first result" );
     }

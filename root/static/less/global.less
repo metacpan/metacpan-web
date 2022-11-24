@@ -129,10 +129,6 @@ button.favorite, a.favorite {
     }
 }
 
-.account-settings, .about {
-    border-left: none;
-}
-
 ul {
     list-style-type: none;
 }
@@ -265,9 +261,16 @@ ul.dependencies {
     line-height: 2.5em;
 }
 
-#metacpan_header-text-noresult {
-    padding-left: 0px;
-    font-size: 14px;
+.no-results {
+    text-align: center;
+
+    h4 {
+        padding: 7px 0;
+        font-weight: bold;
+        color: #999;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
 }
 
 .news_feed {
@@ -347,16 +350,34 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 .page-content {
     display: grid;
+    align-items: start;
     grid-template-areas:
       // TODO: Banner Addition - Tempory banner at top of each page. Remove this once we take the banner down.
       'menu banner'
       'menu breadcrumbs'
       'menu content'
       'menu pagination';
-    grid-template-columns: @sidebar-width ~"calc(100vw -" @sidebar-width ~")";
-    grid-template-rows: max-content max-content max-content max-content;
+    grid-template-columns: fit-content(@sidebar-width) auto;
+    grid-template-rows: max-content max-content auto max-content;
     line-height: 1.54em;
     margin-top: 57px;
+}
+
+.sidebar {
+    grid-area: menu;
+    align-self: stretch;
+}
+.top-notify-banner {
+    grid-area: banner;
+}
+.content-navigation {
+    grid-area: breadcrumbs;
+}
+.content {
+    grid-area: content;
+}
+.content-pagination {
+    grid-area: pagination;
 }
 
 @media (min-width: 0) and (max-width: @screen-sm-max) {
@@ -446,10 +467,4 @@ h1, .h1, h2, .h2, h3, .h3 {
 
 * {
   scroll-margin-top: 60px;
-}
-
-.no-sidebar.page-content {
-    align-items: center;
-    grid-template-columns: 0 1fr;
-    justify-content: center;
 }

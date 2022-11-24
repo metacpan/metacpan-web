@@ -1,6 +1,5 @@
 %%  cascade base::about
+%%  after content_classes -> { ' anchors' }
 %%  override content -> {
-<div class="content about anchors">
-%%  block about | markdown -> { }
-</div>
+%%    block about | markdown -> { }
 %%  }

@@ -2,7 +2,6 @@
 %%      title     => $title || 'Module permissions for ' ~ $search_term,
 %%  }
 %%  override content -> {
-<div class="content">
 <h1>Module Permissions for [% $search_term %]</h1>
 
 <table class="table table-striped" style="width: auto; min-width: 33%">
@@ -26,7 +25,5 @@
 </table>
 
 %% include inc::permission
-
-</div>
 
 %%  }

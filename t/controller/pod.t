@@ -43,11 +43,11 @@ test_psgi app, sub {
     );
 
     my $tx2 = tx($res);
-    ok( $tx->find_value('//div[contains(@class, "content")]'),
+    ok( $tx->find_value('//*[contains-token(@class, "content")]'),
         'page has content' );
     is(
-        $tx2->find_value('//div[contains(@class, "content")]'),
-        $tx->find_value('//div[contains(@class, "content")]'),
+        $tx2->find_value('//*[contains-token(@class, "content")]'),
+        $tx->find_value('//*[contains-token(@class, "content")]'),
         'content of both urls is exactly the same'
     );
 

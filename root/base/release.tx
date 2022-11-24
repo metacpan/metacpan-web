@@ -230,11 +230,9 @@
 %%  }
 %%  override content -> {
 
-<div class="content">
   %%  include inc::notification;
 
   %%  block page_content -> { }
-</div>
 
 %%  include inc::module_install;
 %%  }

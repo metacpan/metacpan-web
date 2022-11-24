@@ -1,10 +1,10 @@
 %%  cascade base::search with inc::no_sidebar {
 %%      title      => $title || 'Search for "' ~ $search_query ~ '"',
 %%  }
+%%  after content_classes -> { ' search-results' }
 %%  override content -> {
-<div class="content search-results">
   <h3 class="search-results-header">Search results for "[% $search_query %]"</h3>
-%% if $authors.total {
+%%  if $authors.total {
   <div class="author-results">
     <ul class="authors clearfix">
     %% for $authors.authors -> $author {
@@ -17,16 +17,16 @@
     %% }
     </ul>
   </div>
-%% }
+%%  }
 
-%% for $results -> $group {
-  %% my $first= $group.hits.0;
+%%  for $results -> $group {
+  %%  my $first= $group.hits.0;
   <div class="module-result">
     <h3>
-      %% include inc::link_to_file { file => $first };
-      %% if $first.abstract { ' - ' ~ $first.abstract }
-      %% include inc::river_gauge { distribution => $first.distribution, river => $group.river };
-      %% include inc::favorite { release => $first, favorites => $release.favorites };
+      %%  include inc::link_to_file { file => $first };
+      %%  if $first.abstract { ' - ' ~ $first.abstract }
+      %%  include inc::river_gauge { distribution => $first.distribution, river => $group.river };
+      %%  include inc::favorite { release => $first, favorites => $release.favorites };
     </h3>
     %%  if $first.description {
     <p class="description">[% $first.description.substr(0, 250) ~ '...' %]</p>
@@ -52,7 +52,7 @@
       </li>
       <!-- [% $item.score %] -->
       %%  }
-      %% if $group.total > 4 {
+      %%  if $group.total > 4 {
       <li>
         <a href="/search?q=distribution:[% $first.distribution %]+[% $search_query %]">[% $group.total - 4 %] more result[% if $group.total - 4 > 1 { 's' } %] from [% $first.distribution %] »</a>
       </li>
@@ -62,8 +62,7 @@
   </div>
 %%  }
 
-%% include inc::pager
-
-</div>
-
+%%  }
+%%  override pagination -> {
+%%    include inc::pager
 %%  }

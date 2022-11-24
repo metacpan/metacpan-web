@@ -14,8 +14,12 @@ test_psgi app, sub {
     is( $res->code, 200, 'code 200' );
     my $tx = tx($res);
 
-    is( $tx->find_value('//table[contains(@class, "diff-list")]//td[1]/a'),
-        'lib/Moose.pm', 'Module diff file list' );
+    is(
+        $tx->find_value(
+            '//table[contains-token(@class, "diff-list")]//td[1]/a'),
+        'lib/Moose.pm',
+        'Module diff file list'
+    );
 
     ok( $res = $cb->( GET $rel_diff ), 'GET release diff' );
     is( $res->code, 200, 'code 200' );
@@ -23,7 +27,7 @@ test_psgi app, sub {
 
     is(
         $tx->find_value(
-            '//table[contains(@class, "diff-list")]//tr[position() <= 5]/td[1]/a'
+            '//table[contains-token(@class, "diff-list")]//tr[position() <= 5]/td[1]/a'
         ),
         'ChangesLICENSEMANIFESTMETA.jsonMETA.yml',
         'Release diff file list'

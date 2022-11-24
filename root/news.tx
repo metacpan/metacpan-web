@@ -23,11 +23,10 @@ for [
 </li>
 %%  }
 %%  }
+%%  after content_classes -> { ' news anchors' }
 %%  override content -> {
-<div class="content news anchors">
   <a class="news_feed" href="/news.rss"><i class="fa fa-rss fa-2x"></i></a>
 %%  block news | markdown -> {
 %%      $news
 %%  }
-</div>
 %%  }
