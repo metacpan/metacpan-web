@@ -12,7 +12,7 @@ test_psgi app, sub {
         is( $res->code, 200, "200 on $url" );
         my $tx = tx($res);
         $tx->like(
-            '//div[contains-token(@class, "content")]//pre[@id="metacpan_source"]',
+            '//*[contains-token(@class, "content")]//pre[@id="metacpan_source"]',
             qr/^Revision history for File-Spec-Native/,
             'source view for plain text change log'
         );
@@ -37,12 +37,12 @@ test_psgi app, sub {
         is( $res->code, 404, "404 on $url" );
         my $tx = tx($res);
         $tx->like(
-            '//div[contains-token(@class,"error-page")]',
+            '//*[contains-token(@class,"error-page")]',
             qr/Change log not found for release.+Try the release info page:/,
             'Suggest release info page for not-found dist.'
         );
         $tx->like(
-            qq{//div[contains-token(\@class,"error-page")]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
+            qq{//*[contains-token(\@class,"error-page")]//p[\@class="suggestion"]//a[text()="$missing"]//\@href},
             qr{/$missing$}, 'link to suggested release',
         );
     }

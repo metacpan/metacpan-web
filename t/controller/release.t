@@ -28,13 +28,13 @@ test_psgi app, sub {
     # so pin to an older version for now.
     test_heading_order( $cb->( GET '/release/ETHER/Moose-2.1005' ) );
 
-    ok( $tx->find_value('//div[contains(@class, "plussers")]'),
+    ok( $tx->find_value('//div[contains-token(@class, "plussers")]'),
         'has plussers' );
 
    # Return @href as value b/c there is no child text content (it's an image).
     ok(
         $tx->find_value(
-            '//div[contains(@class, "plussers")]//a[contains(@href, "/author/")]/@href'
+            '//div[contains-token(@class, "plussers")]//a[contains(@href, "/author/")]/@href'
         ),
         'has cpan author plussers'
     );
@@ -47,12 +47,12 @@ test_psgi app, sub {
         ),
         'contains link to "this" version'
     );
-    my $latest = $tx->find_value('//div[@class="content"]');
+    my $latest = $tx->find_value('//*[contains-token(@class, "content")]');
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx_latest = tx($res);
     is(
         $latest,
-        $tx_latest->find_value('//div[@class="content"]'),
+        $tx_latest->find_value('//*[contains-token(@class, "content")]'),
         'content of both urls is exactly the same'
     );
 
@@ -86,7 +86,7 @@ test_psgi app, sub {
     ok( $res = $cb->( GET '/release/SHLOMIF/Config-IniFiles-2.43/' ) );
     $tx_cc = tx($res);
     $tx_cc->not_ok(
-        '//div[@class="content"]/strong[following-sibling::div[@class="last-changes"]]'
+        '//*[contains-token(@class, "content")]/strong[following-sibling::div[contains-token(@class, "last-changes")]]'
     );
 };
 
@@ -209,7 +209,7 @@ sub test_heading_order {
 
     # Boohoo... testing with XPATH :-(
     my $xpath_prefix
-        = '//div[@class="content"]/div[contains(@class, "file-group")]';
+        = '//*[contains-token(@class, "content")]/div[contains-token(@class, "file-group")]';
     $tx->ok(
         "$xpath_prefix/h2",
         sub {

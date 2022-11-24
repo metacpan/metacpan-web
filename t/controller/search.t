@@ -5,8 +5,8 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 use Encode              qw( encode is_utf8 );
 
 my %xpath = (
-    search_results => 'div[contains(@class, "search-results")]',
-    module_result  => 'div[@class="module-result"]',
+    search_results => '*[contains-token(@class, "search-results")]',
+    module_result  => '*[contains-token(@class, "module-result")]',
 );
 
 test_psgi app, sub {

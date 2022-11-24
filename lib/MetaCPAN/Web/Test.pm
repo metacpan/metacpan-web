@@ -102,20 +102,28 @@ sub tx {
     $tx->xpc->registerFunction(
         'contains-token',
         sub {
-            my ( $nodelist, $token ) = @_;
-            my $result = XML::LibXML::NodeList->new;
+            my ( $match, $token, $collation ) = @_;
+            return XML::LibXML::Boolean->False
+                if !$token =~ /\s/;
 
-            s/\A\s+//, s/\s+\z// for $token;
-            if ( length $token ) {
-                for my $node ( $nodelist->get_nodelist ) {
-                    my @tokens = split /\s+/, $node->nodeValue;
-                    if ( grep $_ eq $token, @tokens ) {
-                        $result->push($node);
-                    }
-                }
+            if ( ref $match && $match->isa('XML::LibXML::NodeList') ) {
+                $match = join ' ', map $_->nodeValue, $match->get_nodelist;
             }
 
-            return $result;
+            $match = " $match ";
+            $match =~ s/\s+/ /g;
+
+            if (   $collation
+                && $collation eq
+                'http://www.w3.org/2005/xpath-functions/collation/html-ascii-case-insensitive'
+                )
+            {
+                $_ = CORE::fc($_) for $match, $token;
+            }
+
+            return $match =~ /\Q $token \E/
+                ? XML::LibXML::Boolean->True
+                : XML::LibXML::Boolean->False;
         }
     );
 

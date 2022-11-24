@@ -11,7 +11,7 @@ test_psgi app, sub {
     my $tx = tx($res);
     ok(
         my $release = $tx->find_value(
-            '//table[contains(@class, "table-releases")][1]/tbody/tr[1]/td[@class="name"]//a[1]/@href'
+            '//table[contains-token(@class, "table-releases")][1]/tbody/tr[1]/td[contains-token(@class, "name")]//a[1]/@href'
         ),
         'contains a release'
     );

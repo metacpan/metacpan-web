@@ -18,7 +18,7 @@ test_psgi app, sub {
         my $tx = tx($res);
         my $module
             = $tx->find_value(
-            '//div[contains(@class, "no-results")]//div[@class="alert alert-danger"]//a[1]'
+            '//div[contains-token(@class, "no-results")]//div[contains-token(@class,"alert")][contains-token(@class, "alert-danger")]//a[1]'
             );
         is( $module, $v, 'get no result page with suggestion' );
     }

@@ -13,7 +13,7 @@ test_psgi app, sub {
         is( $res->code, 200, 'code 200' );
         my $tx = tx($res);
         $tx->ok(
-            '//table[contains(@class, "table-releases")]//td[@class="name"]//a',
+            '//table[contains-token(@class, "table-releases")]//td[contains-token(@class, "name")]//a',
             sub {
                 my $anchor = shift;
                 $anchor->is(
