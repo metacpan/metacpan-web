@@ -1616,11 +1616,11 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Exporter-Tiny-1.004004
-    pathname: T/TO/TOBYINK/Exporter-Tiny-1.004004.tar.gz
+  Exporter-Tiny-1.006000
+    pathname: T/TO/TOBYINK/Exporter-Tiny-1.006000.tar.gz
     provides:
-      Exporter::Shiny 1.004004
-      Exporter::Tiny 1.004004
+      Exporter::Shiny 1.006000
+      Exporter::Tiny 1.006000
     requirements:
       ExtUtils::MakeMaker 6.17
       perl 5.006001
@@ -2186,18 +2186,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.076
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.076.tar.gz
+  IO-Socket-SSL-2.077
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.077.tar.gz
     provides:
-      IO::Socket::SSL 2.076
+      IO::Socket::SSL 2.077
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.076
-      IO::Socket::SSL::OCSP_Resolver 2.076
+      IO::Socket::SSL::OCSP_Cache 2.077
+      IO::Socket::SSL::OCSP_Resolver 2.077
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.076
-      IO::Socket::SSL::SSL_HANDLE 2.076
-      IO::Socket::SSL::Session_Cache 2.076
-      IO::Socket::SSL::Trace 2.076
+      IO::Socket::SSL::SSL_Context 2.077
+      IO::Socket::SSL::SSL_HANDLE 2.077
+      IO::Socket::SSL::Session_Cache 2.077
+      IO::Socket::SSL::Trace 2.077
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2408,26 +2408,26 @@ DISTRIBUTIONS
       if 0
       perl 5.006
       utf8 0
-  Log-Any-1.710
-    pathname: P/PR/PREACTION/Log-Any-1.710.tar.gz
+  Log-Any-1.711
+    pathname: P/PR/PREACTION/Log-Any-1.711.tar.gz
     provides:
-      Log::Any 1.710
-      Log::Any::Adapter 1.710
-      Log::Any::Adapter::Base 1.710
-      Log::Any::Adapter::Capture 1.710
-      Log::Any::Adapter::File 1.710
-      Log::Any::Adapter::Multiplex 1.710
-      Log::Any::Adapter::Null 1.710
-      Log::Any::Adapter::Stderr 1.710
-      Log::Any::Adapter::Stdout 1.710
-      Log::Any::Adapter::Syslog 1.710
-      Log::Any::Adapter::Test 1.710
-      Log::Any::Adapter::Util 1.710
-      Log::Any::Manager 1.710
-      Log::Any::Proxy 1.710
-      Log::Any::Proxy::Null 1.710
-      Log::Any::Proxy::Test 1.710
-      Log::Any::Test 1.710
+      Log::Any 1.711
+      Log::Any::Adapter 1.711
+      Log::Any::Adapter::Base 1.711
+      Log::Any::Adapter::Capture 1.711
+      Log::Any::Adapter::File 1.711
+      Log::Any::Adapter::Multiplex 1.711
+      Log::Any::Adapter::Null 1.711
+      Log::Any::Adapter::Stderr 1.711
+      Log::Any::Adapter::Stdout 1.711
+      Log::Any::Adapter::Syslog 1.711
+      Log::Any::Adapter::Test 1.711
+      Log::Any::Adapter::Util 1.711
+      Log::Any::Manager 1.711
+      Log::Any::Proxy 1.711
+      Log::Any::Proxy::Null 1.711
+      Log::Any::Proxy::Test 1.711
+      Log::Any::Test 1.711
     requirements:
       ExtUtils::MakeMaker 0
   Log-Dispatch-2.70
