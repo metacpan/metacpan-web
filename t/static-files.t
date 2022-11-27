@@ -362,7 +362,7 @@ a588394fcb496ee492d289d4db0e1d3624a34528  root/static/images/sponsors/easyname.p
 292b9ab76da7035cf192f8c651a090c4bd4bc2ab  root/static/images/sponsors/elastic.svg
 5d76d29f7e9ce2d323cef2c451cd26300e10c770  root/static/images/sponsors/epo.png
 a9f2f7876e47d1d0d374551135b56a5b86b89886  root/static/images/sponsors/fastly_logo.svg
-d7c56f613b153d3378a98d0ab4640e0394374b2a  root/static/images/sponsors/fastmail.png
+bf821b7f7ef4d00c61046141e8e28b9366eb3dbb  root/static/images/sponsors/fastmail.svg
 4b8d0d2d653d76dc59b446bd706b034a007f581a  root/static/images/sponsors/geocodelogo.svg
 ff77edb3ea13567310837717da9d2cdea155682c  root/static/images/sponsors/github_logo.png
 ddc82658ac274d981a7e3159fc4ed452166f73a4  root/static/images/sponsors/idonethis.png
