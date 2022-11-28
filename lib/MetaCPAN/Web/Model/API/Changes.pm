@@ -28,7 +28,7 @@ sub release_changes {
 
         my @changelogs;
         while ( my $r = shift @releases ) {
-            if ( "$r->{version_parsed}" eq "$version" ) {
+            if ( _versions_eq( $r->{version_parsed}, $version ) ) {
                 $r->{current} = 1;
                 push @changelogs, $r;
                 if ( $opts{include_dev} ) {
@@ -64,7 +64,7 @@ sub by_releases {
                 my @releases = _releases( $change->{changes_text} );
 
                 while ( my $r = shift @releases ) {
-                    if ( "$r->{version_parsed}" eq "$version" ) {
+                    if ( _versions_eq( $r->{version_parsed}, $version ) ) {
                         $r->{current} = 1;
 
                         # Used in Controller/Feed.pm Line 37
@@ -108,6 +108,21 @@ sub _releases {
         };
         } @{ $changelog->{releases} || [] };
     return @releases;
+}
+
+sub _versions_eq {
+    my ( $v1, $v2 ) = @_;
+
+    # we're comparing version objects
+    if ( ref $v1 && ref $v2 ) {
+        return $v1 eq $v2;
+    }
+
+    # if one version failed to parse, force string comparison so version's
+    # overloads don't try to inflate the other version
+    else {
+        return "$v1" eq "$v2";
+    }
 }
 
 sub _parse_version {
