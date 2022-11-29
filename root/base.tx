@@ -134,13 +134,16 @@
         <div class="page-content [% block page_content_class -> { } %]">
           <div class="top-notify-banner">
             <i class="fas fa-info-circle"></i>
-            The Perl Advent Calendar
-            <a href="http://cfp.perladvent.org/" target="_blank">
-              needs more articles
+            Help curate Awesome Perl resources at
+            <a href="https://github.com/hachiojipm/awesome-perl" target="_blank">
+              hachiojipm/awesome-perl
+            </a>,
+            <a href="https://github.com/thibaultduponchelle/perlres" target="_blank">
+               thibaultduponchelle/perlres
             </a>
-            for 2022.
-            <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
-              Submit your idea today!
+            and
+            <a href="https://github.com/uhub/awesome-perl" target="_blank">
+              uhub/awesome-perl
             </a>
           </div>
           <nav class="sidebar">
