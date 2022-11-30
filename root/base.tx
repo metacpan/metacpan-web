@@ -132,17 +132,11 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
+          <!--
           <div class="top-notify-banner">
             <i class="fas fa-info-circle"></i>
-            The Perl Advent Calendar
-            <a href="http://cfp.perladvent.org/" target="_blank">
-              needs more articles
-            </a>
-            for 2022.
-            <a href="https://github.com/perladvent/Perl-Advent/issues/new?assignees=&labels=article&template=i-want-to-write-an-article.md" target="_blank">
-              Submit your idea today!
-            </a>
           </div>
+          -->
           <nav class="sidebar">
             %%  block left_nav -> {
             <div class="slidepanel">
