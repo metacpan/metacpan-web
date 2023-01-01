@@ -7,88 +7,88 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.75
-    pathname: P/PL/PLICEASE/Alien-Build-2.75.tar.gz
+  Alien-Build-2.76
+    pathname: P/PL/PLICEASE/Alien-Build-2.76.tar.gz
     provides:
-      Alien::Base 2.75
-      Alien::Base::PkgConfig 2.75
-      Alien::Base::Wrapper 2.75
-      Alien::Build 2.75
-      Alien::Build::CommandSequence 2.75
-      Alien::Build::Helper 2.75
-      Alien::Build::Interpolate 2.75
-      Alien::Build::Interpolate::Default 2.75
-      Alien::Build::Interpolate::Helper 2.75
-      Alien::Build::Log 2.75
-      Alien::Build::Log::Abbreviate 2.75
-      Alien::Build::Log::Default 2.75
-      Alien::Build::MM 2.75
-      Alien::Build::Meta 2.75
-      Alien::Build::Plugin 2.75
-      Alien::Build::Plugin::Build::Autoconf 2.75
-      Alien::Build::Plugin::Build::CMake 2.75
-      Alien::Build::Plugin::Build::Copy 2.75
-      Alien::Build::Plugin::Build::MSYS 2.75
-      Alien::Build::Plugin::Build::Make 2.75
-      Alien::Build::Plugin::Build::SearchDep 2.75
-      Alien::Build::Plugin::Core::CleanInstall 2.75
-      Alien::Build::Plugin::Core::Download 2.75
-      Alien::Build::Plugin::Core::FFI 2.75
-      Alien::Build::Plugin::Core::Gather 2.75
-      Alien::Build::Plugin::Core::Legacy 2.75
-      Alien::Build::Plugin::Core::Override 2.75
-      Alien::Build::Plugin::Core::Setup 2.75
-      Alien::Build::Plugin::Core::Tail 2.75
-      Alien::Build::Plugin::Decode::DirListing 2.75
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.75
-      Alien::Build::Plugin::Decode::HTML 2.75
-      Alien::Build::Plugin::Decode::Mojo 2.75
-      Alien::Build::Plugin::Digest::Negotiate 2.75
-      Alien::Build::Plugin::Digest::SHA 2.75
-      Alien::Build::Plugin::Digest::SHAPP 2.75
-      Alien::Build::Plugin::Download::Negotiate 2.75
-      Alien::Build::Plugin::Extract::ArchiveTar 2.75
-      Alien::Build::Plugin::Extract::ArchiveZip 2.75
-      Alien::Build::Plugin::Extract::CommandLine 2.75
-      Alien::Build::Plugin::Extract::Directory 2.75
-      Alien::Build::Plugin::Extract::File 2.75
-      Alien::Build::Plugin::Extract::Negotiate 2.75
-      Alien::Build::Plugin::Fetch::CurlCommand 2.75
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.75
-      Alien::Build::Plugin::Fetch::LWP 2.75
-      Alien::Build::Plugin::Fetch::Local 2.75
-      Alien::Build::Plugin::Fetch::LocalDir 2.75
-      Alien::Build::Plugin::Fetch::NetFTP 2.75
-      Alien::Build::Plugin::Fetch::Wget 2.75
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.75
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.75
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.75
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.75
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.75
-      Alien::Build::Plugin::PkgConfig::PP 2.75
-      Alien::Build::Plugin::Prefer::BadVersion 2.75
-      Alien::Build::Plugin::Prefer::GoodVersion 2.75
-      Alien::Build::Plugin::Prefer::SortVersions 2.75
-      Alien::Build::Plugin::Probe::CBuilder 2.75
-      Alien::Build::Plugin::Probe::CommandLine 2.75
-      Alien::Build::Plugin::Probe::Vcpkg 2.75
-      Alien::Build::Plugin::Test::Mock 2.75
-      Alien::Build::PluginMeta 2.75
-      Alien::Build::Temp 2.75
-      Alien::Build::TempDir 2.75
-      Alien::Build::Util 2.75
-      Alien::Build::Version::Basic 2.75
-      Alien::Build::rc 2.75
-      Alien::Role 2.75
-      Alien::Util 2.75
-      Test::Alien 2.75
-      Test::Alien::Build 2.75
-      Test::Alien::CanCompile 2.75
-      Test::Alien::CanPlatypus 2.75
-      Test::Alien::Diag 2.75
-      Test::Alien::Run 2.75
-      Test::Alien::Synthetic 2.75
-      alienfile 2.75
+      Alien::Base 2.76
+      Alien::Base::PkgConfig 2.76
+      Alien::Base::Wrapper 2.76
+      Alien::Build 2.76
+      Alien::Build::CommandSequence 2.76
+      Alien::Build::Helper 2.76
+      Alien::Build::Interpolate 2.76
+      Alien::Build::Interpolate::Default 2.76
+      Alien::Build::Interpolate::Helper 2.76
+      Alien::Build::Log 2.76
+      Alien::Build::Log::Abbreviate 2.76
+      Alien::Build::Log::Default 2.76
+      Alien::Build::MM 2.76
+      Alien::Build::Meta 2.76
+      Alien::Build::Plugin 2.76
+      Alien::Build::Plugin::Build::Autoconf 2.76
+      Alien::Build::Plugin::Build::CMake 2.76
+      Alien::Build::Plugin::Build::Copy 2.76
+      Alien::Build::Plugin::Build::MSYS 2.76
+      Alien::Build::Plugin::Build::Make 2.76
+      Alien::Build::Plugin::Build::SearchDep 2.76
+      Alien::Build::Plugin::Core::CleanInstall 2.76
+      Alien::Build::Plugin::Core::Download 2.76
+      Alien::Build::Plugin::Core::FFI 2.76
+      Alien::Build::Plugin::Core::Gather 2.76
+      Alien::Build::Plugin::Core::Legacy 2.76
+      Alien::Build::Plugin::Core::Override 2.76
+      Alien::Build::Plugin::Core::Setup 2.76
+      Alien::Build::Plugin::Core::Tail 2.76
+      Alien::Build::Plugin::Decode::DirListing 2.76
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.76
+      Alien::Build::Plugin::Decode::HTML 2.76
+      Alien::Build::Plugin::Decode::Mojo 2.76
+      Alien::Build::Plugin::Digest::Negotiate 2.76
+      Alien::Build::Plugin::Digest::SHA 2.76
+      Alien::Build::Plugin::Digest::SHAPP 2.76
+      Alien::Build::Plugin::Download::Negotiate 2.76
+      Alien::Build::Plugin::Extract::ArchiveTar 2.76
+      Alien::Build::Plugin::Extract::ArchiveZip 2.76
+      Alien::Build::Plugin::Extract::CommandLine 2.76
+      Alien::Build::Plugin::Extract::Directory 2.76
+      Alien::Build::Plugin::Extract::File 2.76
+      Alien::Build::Plugin::Extract::Negotiate 2.76
+      Alien::Build::Plugin::Fetch::CurlCommand 2.76
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.76
+      Alien::Build::Plugin::Fetch::LWP 2.76
+      Alien::Build::Plugin::Fetch::Local 2.76
+      Alien::Build::Plugin::Fetch::LocalDir 2.76
+      Alien::Build::Plugin::Fetch::NetFTP 2.76
+      Alien::Build::Plugin::Fetch::Wget 2.76
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.76
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.76
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.76
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.76
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.76
+      Alien::Build::Plugin::PkgConfig::PP 2.76
+      Alien::Build::Plugin::Prefer::BadVersion 2.76
+      Alien::Build::Plugin::Prefer::GoodVersion 2.76
+      Alien::Build::Plugin::Prefer::SortVersions 2.76
+      Alien::Build::Plugin::Probe::CBuilder 2.76
+      Alien::Build::Plugin::Probe::CommandLine 2.76
+      Alien::Build::Plugin::Probe::Vcpkg 2.76
+      Alien::Build::Plugin::Test::Mock 2.76
+      Alien::Build::PluginMeta 2.76
+      Alien::Build::Temp 2.76
+      Alien::Build::TempDir 2.76
+      Alien::Build::Util 2.76
+      Alien::Build::Version::Basic 2.76
+      Alien::Build::rc 2.76
+      Alien::Role 2.76
+      Alien::Util 2.76
+      Test::Alien 2.76
+      Test::Alien::Build 2.76
+      Test::Alien::CanCompile 2.76
+      Test::Alien::CanPlatypus 2.76
+      Test::Alien::Diag 2.76
+      Test::Alien::Run 2.76
+      Test::Alien::Synthetic 2.76
+      alienfile 2.76
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -835,17 +835,18 @@ DISTRIBUTIONS
       File::Spec::Functions 0
       FileHandle 0
       IO::File 0
-  Config-INI-0.027
-    pathname: R/RJ/RJBS/Config-INI-0.027.tar.gz
+  Config-INI-0.028
+    pathname: R/RJ/RJBS/Config-INI-0.028.tar.gz
     provides:
-      Config::INI 0.027
-      Config::INI::Reader 0.027
-      Config::INI::Writer 0.027
+      Config::INI 0.028
+      Config::INI::Reader 0.028
+      Config::INI::Writer 0.028
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
       Mixin::Linewise::Readers 0.110
       Mixin::Linewise::Writers 0
+      perl 5.012
       strict 0
       warnings 0
   Config-Tiny-2.28
@@ -923,10 +924,10 @@ DISTRIBUTIONS
       Module::Build 0.4005
       Module::Build::XSUtil 0.19
       perl 5.008001
-  Data-OptList-0.112
-    pathname: R/RJ/RJBS/Data-OptList-0.112.tar.gz
+  Data-OptList-0.113
+    pathname: R/RJ/RJBS/Data-OptList-0.113.tar.gz
     provides:
-      Data::OptList 0.112
+      Data::OptList 0.113
     requirements:
       ExtUtils::MakeMaker 6.78
       List::Util 0
@@ -1799,12 +1800,12 @@ DISTRIBUTIONS
       Server::Starter 0
       Stream::Buffered 0
       perl 5.008001
-  Getopt-Long-Descriptive-0.110
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.110.tar.gz
+  Getopt-Long-Descriptive-0.111
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.111.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.110
-      Getopt::Long::Descriptive::Opts 0.110
-      Getopt::Long::Descriptive::Usage 0.110
+      Getopt::Long::Descriptive 0.111
+      Getopt::Long::Descriptive::Opts 0.111
+      Getopt::Long::Descriptive::Usage 0.111
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -2604,12 +2605,12 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  MIME-Types-2.23
-    pathname: M/MA/MARKOV/MIME-Types-2.23.tar.gz
+  MIME-Types-2.24
+    pathname: M/MA/MARKOV/MIME-Types-2.24.tar.gz
     provides:
-      MIME::Type 2.23
-      MIME::Types 2.23
-      MojoX::MIME::Types 2.23
+      MIME::Type 2.24
+      MIME::Types 2.24
+      MojoX::MIME::Types 2.24
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -2718,12 +2719,12 @@ DISTRIBUTIONS
       List::Util 1.29
       Module::Build 0.4004
       perl 5.014
-  Mixin-Linewise-0.110
-    pathname: R/RJ/RJBS/Mixin-Linewise-0.110.tar.gz
+  Mixin-Linewise-0.111
+    pathname: R/RJ/RJBS/Mixin-Linewise-0.111.tar.gz
     provides:
-      Mixin::Linewise 0.110
-      Mixin::Linewise::Readers 0.110
-      Mixin::Linewise::Writers 0.110
+      Mixin::Linewise 0.111
+      Mixin::Linewise::Readers 0.111
+      Mixin::Linewise::Writers 0.111
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -4847,14 +4848,15 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  String-RewritePrefix-0.008
-    pathname: R/RJ/RJBS/String-RewritePrefix-0.008.tar.gz
+  String-RewritePrefix-0.009
+    pathname: R/RJ/RJBS/String-RewritePrefix-0.009.tar.gz
     provides:
-      String::RewritePrefix 0.008
+      String::RewritePrefix 0.009
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker 6.78
       Sub::Exporter 0.972
+      perl 5.012
       strict 0
       warnings 0
   String-ShellQuote-1.04
@@ -4869,11 +4871,11 @@ DISTRIBUTIONS
       Struct::Dumb 0.13
     requirements:
       Module::Build 0.4004
-  Sub-Exporter-0.988
-    pathname: R/RJ/RJBS/Sub-Exporter-0.988.tar.gz
+  Sub-Exporter-0.989
+    pathname: R/RJ/RJBS/Sub-Exporter-0.989.tar.gz
     provides:
-      Sub::Exporter 0.988
-      Sub::Exporter::Util 0.988
+      Sub::Exporter 0.989
+      Sub::Exporter::Util 0.989
     requirements:
       Carp 0
       Data::OptList 0.100
@@ -4896,15 +4898,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Sub-Install-0.928
-    pathname: R/RJ/RJBS/Sub-Install-0.928.tar.gz
+  Sub-Install-0.929
+    pathname: R/RJ/RJBS/Sub-Install-0.929.tar.gz
     provides:
-      Sub::Install 0.928
+      Sub::Install 0.929
     requirements:
       B 0
       Carp 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 6.78
       Scalar::Util 0
+      perl 5.008000
       strict 0
       warnings 0
   Sub-Name-0.26
@@ -5052,14 +5055,14 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
-  Test-Fatal-0.016
-    pathname: R/RJ/RJBS/Test-Fatal-0.016.tar.gz
+  Test-Fatal-0.017
+    pathname: R/RJ/RJBS/Test-Fatal-0.017.tar.gz
     provides:
-      Test::Fatal 0.016
+      Test::Fatal 0.017
     requirements:
       Carp 0
       Exporter 5.57
-      ExtUtils::MakeMaker 0
+      ExtUtils::MakeMaker 6.78
       Test::Builder 0
       Try::Tiny 0.07
       strict 0
