@@ -56,6 +56,7 @@ requires 'MooseX::Fastly::Role', '0.03';
 requires 'Net::Async::HTTP';
 requires 'Net::Fastly', '1.05';
 requires 'Number::Format';
+requires 'Parallel::ForkManager', '1.19';
 requires 'Params::ValidationCompiler';
 requires 'Path::Tiny', '0.076';
 requires 'Plack', '1.0039';
