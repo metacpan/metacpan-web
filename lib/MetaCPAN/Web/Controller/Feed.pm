@@ -29,26 +29,16 @@ sub recent : Private {
     $c->forward('/recent/index');
     die join "\n", @{ $c->error } if @{ $c->error };
 
-    my %changes_index;
-
-    my @copy = @{ $c->stash->{recent} };
-    while ( my @batch = splice( @copy, 0, 100 ) ) {
-        my $changes
-            = $c->model('API::Changes')
-            ->by_releases( [ map { [ $_->{author}, $_->{name} ] } @batch ] )
-            ->get;
-
-        for my $x (@$changes) {
-            my $k = $x->{author} . '/' . $x->{name};
-            $changes_index{$k} = $x;
-        }
-    }
+    my $changes
+        = $c->model('API::Changes')
+        ->by_releases(
+        [ map "$_->{author}/$_->{name}", @{ $c->stash->{recent} } ] )->get;
 
     for ( @{ $c->stash->{recent} } ) {
 
         # Provided in Model/API/Changes.pm Line 67
         my $k = $_->{author} . '/' . $_->{name};
-        $_->{changes} = $changes_index{$k};
+        $_->{changes} = $changes->{$k};
     }
 
     $c->stash->{feed} = $self->build_feed(
