@@ -2,9 +2,11 @@ package MetaCPAN::Web::Model::API::Changes;
 use Moose;
 extends 'MetaCPAN::Web::Model::API';
 
+use Ref::Util     qw( is_arrayref );
+use Future        ();
+use Future::Utils qw( fmap_concat );
+
 use MetaCPAN::Web::Model::API::Changes::Parser ();
-use Ref::Util                                  qw( is_arrayref );
-use Future                                     ();
 
 sub get {
     my ( $self, @path ) = @_;
@@ -47,38 +49,53 @@ sub release_changes {
 }
 
 sub by_releases {
-    my ( $self, $releases ) = @_;
+    my ( $self, @releases ) = @_;
 
-    my %release_lookup = map { ( $_->[0] . '/' . $_->[1] ) => $_ } @$releases;
-    my $path           = 'by_releases?'
-        . join( '&', map { 'release=' . $_ } keys %release_lookup );
-    $self->get($path)->transform(
-        done => sub {
-            my $response = shift;
-            my @changes  = @{ $response->{changes} };
+    fmap_concat(
+        sub {
+            my $batch = shift;
+            $self->request(
+                '/changes/by_releases',
+                undef,
+                {
+                    release => $batch,
+                }
+            )->then( sub {
+                my $response = shift;
+                my @changes  = @{ $response->{changes} };
 
-            my @changelogs;
-            for my $change (@changes) {
-                next unless $change->{release} =~ m/-([0-9_\.]+(-TRIAL)?)\z/;
-                my $version  = _parse_version($1);
-                my @releases = _releases( $change->{changes_text} );
+                my %changelogs;
 
-                while ( my $r = shift @releases ) {
-                    if ( _versions_eq( $r->{version_parsed}, $version ) ) {
-                        $r->{current} = 1;
+                for my $change (@changes) {
+                    $change->{release} =~ m/-(v?[0-9_\.]+(-TRIAL)?)\z/
+                        or next;
+                    my $version  = _parse_version($1);
+                    my @releases = _releases( $change->{changes_text} );
 
-                        # Used in Controller/Feed.pm Line 37
-                        $r->{author} = $change->{author};
-                        $r->{name}   = $change->{release};
+                    for my $r (@releases) {
+                        if ( _versions_eq( $r->{version_parsed}, $version ) )
+                        {
+                            $r->{current} = 1;
 
-                        push @changelogs, $r;
-                        last;
+                            $changelogs{
+                                "$change->{author}/$change->{release}"} = $r;
+
+                            last;
+                        }
                     }
                 }
-            }
-            return \@changelogs;
-        }
-    );
+
+                Future->done( \%changelogs );
+            } );
+        },
+        generate => sub {
+            my @batch = splice @releases, 0, 100;
+            return @batch ? \@batch : ();
+        },
+        concurrent => 5,
+    )->then( sub {
+        return { map %$_, @_ };
+    } );
 }
 
 sub _releases {
