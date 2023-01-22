@@ -7,88 +7,88 @@ DISTRIBUTIONS
       Algorithm::Diff::_impl 1.201
     requirements:
       ExtUtils::MakeMaker 0
-  Alien-Build-2.76
-    pathname: P/PL/PLICEASE/Alien-Build-2.76.tar.gz
+  Alien-Build-2.77
+    pathname: P/PL/PLICEASE/Alien-Build-2.77.tar.gz
     provides:
-      Alien::Base 2.76
-      Alien::Base::PkgConfig 2.76
-      Alien::Base::Wrapper 2.76
-      Alien::Build 2.76
-      Alien::Build::CommandSequence 2.76
-      Alien::Build::Helper 2.76
-      Alien::Build::Interpolate 2.76
-      Alien::Build::Interpolate::Default 2.76
-      Alien::Build::Interpolate::Helper 2.76
-      Alien::Build::Log 2.76
-      Alien::Build::Log::Abbreviate 2.76
-      Alien::Build::Log::Default 2.76
-      Alien::Build::MM 2.76
-      Alien::Build::Meta 2.76
-      Alien::Build::Plugin 2.76
-      Alien::Build::Plugin::Build::Autoconf 2.76
-      Alien::Build::Plugin::Build::CMake 2.76
-      Alien::Build::Plugin::Build::Copy 2.76
-      Alien::Build::Plugin::Build::MSYS 2.76
-      Alien::Build::Plugin::Build::Make 2.76
-      Alien::Build::Plugin::Build::SearchDep 2.76
-      Alien::Build::Plugin::Core::CleanInstall 2.76
-      Alien::Build::Plugin::Core::Download 2.76
-      Alien::Build::Plugin::Core::FFI 2.76
-      Alien::Build::Plugin::Core::Gather 2.76
-      Alien::Build::Plugin::Core::Legacy 2.76
-      Alien::Build::Plugin::Core::Override 2.76
-      Alien::Build::Plugin::Core::Setup 2.76
-      Alien::Build::Plugin::Core::Tail 2.76
-      Alien::Build::Plugin::Decode::DirListing 2.76
-      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.76
-      Alien::Build::Plugin::Decode::HTML 2.76
-      Alien::Build::Plugin::Decode::Mojo 2.76
-      Alien::Build::Plugin::Digest::Negotiate 2.76
-      Alien::Build::Plugin::Digest::SHA 2.76
-      Alien::Build::Plugin::Digest::SHAPP 2.76
-      Alien::Build::Plugin::Download::Negotiate 2.76
-      Alien::Build::Plugin::Extract::ArchiveTar 2.76
-      Alien::Build::Plugin::Extract::ArchiveZip 2.76
-      Alien::Build::Plugin::Extract::CommandLine 2.76
-      Alien::Build::Plugin::Extract::Directory 2.76
-      Alien::Build::Plugin::Extract::File 2.76
-      Alien::Build::Plugin::Extract::Negotiate 2.76
-      Alien::Build::Plugin::Fetch::CurlCommand 2.76
-      Alien::Build::Plugin::Fetch::HTTPTiny 2.76
-      Alien::Build::Plugin::Fetch::LWP 2.76
-      Alien::Build::Plugin::Fetch::Local 2.76
-      Alien::Build::Plugin::Fetch::LocalDir 2.76
-      Alien::Build::Plugin::Fetch::NetFTP 2.76
-      Alien::Build::Plugin::Fetch::Wget 2.76
-      Alien::Build::Plugin::Gather::IsolateDynamic 2.76
-      Alien::Build::Plugin::PkgConfig::CommandLine 2.76
-      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.76
-      Alien::Build::Plugin::PkgConfig::MakeStatic 2.76
-      Alien::Build::Plugin::PkgConfig::Negotiate 2.76
-      Alien::Build::Plugin::PkgConfig::PP 2.76
-      Alien::Build::Plugin::Prefer::BadVersion 2.76
-      Alien::Build::Plugin::Prefer::GoodVersion 2.76
-      Alien::Build::Plugin::Prefer::SortVersions 2.76
-      Alien::Build::Plugin::Probe::CBuilder 2.76
-      Alien::Build::Plugin::Probe::CommandLine 2.76
-      Alien::Build::Plugin::Probe::Vcpkg 2.76
-      Alien::Build::Plugin::Test::Mock 2.76
-      Alien::Build::PluginMeta 2.76
-      Alien::Build::Temp 2.76
-      Alien::Build::TempDir 2.76
-      Alien::Build::Util 2.76
-      Alien::Build::Version::Basic 2.76
-      Alien::Build::rc 2.76
-      Alien::Role 2.76
-      Alien::Util 2.76
-      Test::Alien 2.76
-      Test::Alien::Build 2.76
-      Test::Alien::CanCompile 2.76
-      Test::Alien::CanPlatypus 2.76
-      Test::Alien::Diag 2.76
-      Test::Alien::Run 2.76
-      Test::Alien::Synthetic 2.76
-      alienfile 2.76
+      Alien::Base 2.77
+      Alien::Base::PkgConfig 2.77
+      Alien::Base::Wrapper 2.77
+      Alien::Build 2.77
+      Alien::Build::CommandSequence 2.77
+      Alien::Build::Helper 2.77
+      Alien::Build::Interpolate 2.77
+      Alien::Build::Interpolate::Default 2.77
+      Alien::Build::Interpolate::Helper 2.77
+      Alien::Build::Log 2.77
+      Alien::Build::Log::Abbreviate 2.77
+      Alien::Build::Log::Default 2.77
+      Alien::Build::MM 2.77
+      Alien::Build::Meta 2.77
+      Alien::Build::Plugin 2.77
+      Alien::Build::Plugin::Build::Autoconf 2.77
+      Alien::Build::Plugin::Build::CMake 2.77
+      Alien::Build::Plugin::Build::Copy 2.77
+      Alien::Build::Plugin::Build::MSYS 2.77
+      Alien::Build::Plugin::Build::Make 2.77
+      Alien::Build::Plugin::Build::SearchDep 2.77
+      Alien::Build::Plugin::Core::CleanInstall 2.77
+      Alien::Build::Plugin::Core::Download 2.77
+      Alien::Build::Plugin::Core::FFI 2.77
+      Alien::Build::Plugin::Core::Gather 2.77
+      Alien::Build::Plugin::Core::Legacy 2.77
+      Alien::Build::Plugin::Core::Override 2.77
+      Alien::Build::Plugin::Core::Setup 2.77
+      Alien::Build::Plugin::Core::Tail 2.77
+      Alien::Build::Plugin::Decode::DirListing 2.77
+      Alien::Build::Plugin::Decode::DirListingFtpcopy 2.77
+      Alien::Build::Plugin::Decode::HTML 2.77
+      Alien::Build::Plugin::Decode::Mojo 2.77
+      Alien::Build::Plugin::Digest::Negotiate 2.77
+      Alien::Build::Plugin::Digest::SHA 2.77
+      Alien::Build::Plugin::Digest::SHAPP 2.77
+      Alien::Build::Plugin::Download::Negotiate 2.77
+      Alien::Build::Plugin::Extract::ArchiveTar 2.77
+      Alien::Build::Plugin::Extract::ArchiveZip 2.77
+      Alien::Build::Plugin::Extract::CommandLine 2.77
+      Alien::Build::Plugin::Extract::Directory 2.77
+      Alien::Build::Plugin::Extract::File 2.77
+      Alien::Build::Plugin::Extract::Negotiate 2.77
+      Alien::Build::Plugin::Fetch::CurlCommand 2.77
+      Alien::Build::Plugin::Fetch::HTTPTiny 2.77
+      Alien::Build::Plugin::Fetch::LWP 2.77
+      Alien::Build::Plugin::Fetch::Local 2.77
+      Alien::Build::Plugin::Fetch::LocalDir 2.77
+      Alien::Build::Plugin::Fetch::NetFTP 2.77
+      Alien::Build::Plugin::Fetch::Wget 2.77
+      Alien::Build::Plugin::Gather::IsolateDynamic 2.77
+      Alien::Build::Plugin::PkgConfig::CommandLine 2.77
+      Alien::Build::Plugin::PkgConfig::LibPkgConf 2.77
+      Alien::Build::Plugin::PkgConfig::MakeStatic 2.77
+      Alien::Build::Plugin::PkgConfig::Negotiate 2.77
+      Alien::Build::Plugin::PkgConfig::PP 2.77
+      Alien::Build::Plugin::Prefer::BadVersion 2.77
+      Alien::Build::Plugin::Prefer::GoodVersion 2.77
+      Alien::Build::Plugin::Prefer::SortVersions 2.77
+      Alien::Build::Plugin::Probe::CBuilder 2.77
+      Alien::Build::Plugin::Probe::CommandLine 2.77
+      Alien::Build::Plugin::Probe::Vcpkg 2.77
+      Alien::Build::Plugin::Test::Mock 2.77
+      Alien::Build::PluginMeta 2.77
+      Alien::Build::Temp 2.77
+      Alien::Build::TempDir 2.77
+      Alien::Build::Util 2.77
+      Alien::Build::Version::Basic 2.77
+      Alien::Build::rc 2.77
+      Alien::Role 2.77
+      Alien::Util 2.77
+      Test::Alien 2.77
+      Test::Alien::Build 2.77
+      Test::Alien::CanCompile 2.77
+      Test::Alien::CanPlatypus 2.77
+      Test::Alien::Diag 2.77
+      Test::Alien::Run 2.77
+      Test::Alien::Synthetic 2.77
+      alienfile 2.77
     requirements:
       Capture::Tiny 0.17
       Digest::SHA 0
@@ -673,10 +673,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Class-Method-Modifiers-2.13
-    pathname: E/ET/ETHER/Class-Method-Modifiers-2.13.tar.gz
+  Class-Method-Modifiers-2.14
+    pathname: E/ET/ETHER/Class-Method-Modifiers-2.14.tar.gz
     provides:
-      Class::Method::Modifiers 2.13
+      Class::Method::Modifiers 2.14
     requirements:
       B 0
       Carp 0
@@ -2186,18 +2186,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.078
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.078.tar.gz
+  IO-Socket-SSL-2.080
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.080.tar.gz
     provides:
-      IO::Socket::SSL 2.078
+      IO::Socket::SSL 2.080
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.078
-      IO::Socket::SSL::OCSP_Resolver 2.078
+      IO::Socket::SSL::OCSP_Cache 2.080
+      IO::Socket::SSL::OCSP_Resolver 2.080
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.078
-      IO::Socket::SSL::SSL_HANDLE 2.078
-      IO::Socket::SSL::Session_Cache 2.078
-      IO::Socket::SSL::Trace 2.078
+      IO::Socket::SSL::SSL_Context 2.080
+      IO::Socket::SSL::SSL_HANDLE 2.080
+      IO::Socket::SSL::Session_Cache 2.080
+      IO::Socket::SSL::Trace 2.080
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -4937,11 +4937,11 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Sub-Quote-2.006006
-    pathname: H/HA/HAARG/Sub-Quote-2.006006.tar.gz
+  Sub-Quote-2.006008
+    pathname: H/HA/HAARG/Sub-Quote-2.006008.tar.gz
     provides:
-      Sub::Defer 2.006006
-      Sub::Quote 2.006006
+      Sub::Defer 2.006008
+      Sub::Quote 2.006008
     requirements:
       ExtUtils::MakeMaker 0
       Scalar::Util 0
@@ -5116,10 +5116,10 @@ DISTRIBUTIONS
       Test::Harness 3.35
       Test::More 1.302047
       Test::Warn 0.30
-  Test-Needs-0.002009
-    pathname: H/HA/HAARG/Test-Needs-0.002009.tar.gz
+  Test-Needs-0.002010
+    pathname: H/HA/HAARG/Test-Needs-0.002010.tar.gz
     provides:
-      Test::Needs 0.002009
+      Test::Needs 0.002010
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
@@ -5449,59 +5449,59 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.002000
-    pathname: T/TO/TOBYINK/Type-Tiny-2.002000.tar.gz
+  Type-Tiny-2.002001
+    pathname: T/TO/TOBYINK/Type-Tiny-2.002001.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.002000
-      Error::TypeTiny 2.002000
-      Error::TypeTiny::Assertion 2.002000
-      Error::TypeTiny::Compilation 2.002000
-      Error::TypeTiny::WrongNumberOfParameters 2.002000
-      Eval::TypeTiny 2.002000
-      Eval::TypeTiny::CodeAccumulator 2.002000
-      Reply::Plugin::TypeTiny 2.002000
-      Test::TypeTiny 2.002000
-      Type::Coercion 2.002000
-      Type::Coercion::FromMoose 2.002000
-      Type::Coercion::Union 2.002000
-      Type::Library 2.002000
-      Type::Params 2.002000
-      Type::Params::Alternatives 2.002000
-      Type::Params::Parameter 2.002000
-      Type::Params::Signature 2.002000
-      Type::Parser 2.002000
-      Type::Parser::AstBuilder 2.002000
-      Type::Parser::Token 2.002000
-      Type::Parser::TokenStream 2.002000
-      Type::Registry 2.002000
-      Type::Tie 2.002000
-      Type::Tie::ARRAY 2.002000
-      Type::Tie::BASE 2.002000
-      Type::Tie::HASH 2.002000
-      Type::Tie::SCALAR 2.002000
-      Type::Tiny 2.002000
-      Type::Tiny::Class 2.002000
-      Type::Tiny::ConstrainedObject 2.002000
-      Type::Tiny::Duck 2.002000
-      Type::Tiny::Enum 2.002000
-      Type::Tiny::Intersection 2.002000
-      Type::Tiny::Role 2.002000
-      Type::Tiny::Union 2.002000
-      Type::Utils 2.002000
-      Types::Common 2.002000
-      Types::Common::Numeric 2.002000
-      Types::Common::String 2.002000
-      Types::Standard 2.002000
-      Types::Standard::ArrayRef 2.002000
-      Types::Standard::CycleTuple 2.002000
-      Types::Standard::Dict 2.002000
-      Types::Standard::HashRef 2.002000
-      Types::Standard::Map 2.002000
-      Types::Standard::ScalarRef 2.002000
-      Types::Standard::StrMatch 2.002000
-      Types::Standard::Tied 2.002000
-      Types::Standard::Tuple 2.002000
-      Types::TypeTiny 2.002000
+      Devel::TypeTiny::Perl58Compat 2.002001
+      Error::TypeTiny 2.002001
+      Error::TypeTiny::Assertion 2.002001
+      Error::TypeTiny::Compilation 2.002001
+      Error::TypeTiny::WrongNumberOfParameters 2.002001
+      Eval::TypeTiny 2.002001
+      Eval::TypeTiny::CodeAccumulator 2.002001
+      Reply::Plugin::TypeTiny 2.002001
+      Test::TypeTiny 2.002001
+      Type::Coercion 2.002001
+      Type::Coercion::FromMoose 2.002001
+      Type::Coercion::Union 2.002001
+      Type::Library 2.002001
+      Type::Params 2.002001
+      Type::Params::Alternatives 2.002001
+      Type::Params::Parameter 2.002001
+      Type::Params::Signature 2.002001
+      Type::Parser 2.002001
+      Type::Parser::AstBuilder 2.002001
+      Type::Parser::Token 2.002001
+      Type::Parser::TokenStream 2.002001
+      Type::Registry 2.002001
+      Type::Tie 2.002001
+      Type::Tie::ARRAY 2.002001
+      Type::Tie::BASE 2.002001
+      Type::Tie::HASH 2.002001
+      Type::Tie::SCALAR 2.002001
+      Type::Tiny 2.002001
+      Type::Tiny::Class 2.002001
+      Type::Tiny::ConstrainedObject 2.002001
+      Type::Tiny::Duck 2.002001
+      Type::Tiny::Enum 2.002001
+      Type::Tiny::Intersection 2.002001
+      Type::Tiny::Role 2.002001
+      Type::Tiny::Union 2.002001
+      Type::Utils 2.002001
+      Types::Common 2.002001
+      Types::Common::Numeric 2.002001
+      Types::Common::String 2.002001
+      Types::Standard 2.002001
+      Types::Standard::ArrayRef 2.002001
+      Types::Standard::CycleTuple 2.002001
+      Types::Standard::Dict 2.002001
+      Types::Standard::HashRef 2.002001
+      Types::Standard::Map 2.002001
+      Types::Standard::ScalarRef 2.002001
+      Types::Standard::StrMatch 2.002001
+      Types::Standard::Tied 2.002001
+      Types::Standard::Tuple 2.002001
+      Types::TypeTiny 2.002001
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
