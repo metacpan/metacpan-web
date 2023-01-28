@@ -30,7 +30,7 @@ sub release_changes {
 
         my @changelogs;
         while ( my $r = shift @releases ) {
-            if ( _versions_eq( $r->{version_parsed}, $version ) ) {
+            if ( _versions_cmp( $r->{version_parsed}, $version ) == 0 ) {
                 $r->{current} = 1;
                 push @changelogs, $r;
                 if ( $opts{include_dev} ) {
@@ -73,7 +73,8 @@ sub by_releases {
                     my @releases = _releases( $change->{changes_text} );
 
                     for my $r (@releases) {
-                        if ( _versions_eq( $r->{version_parsed}, $version ) )
+                        if ( _versions_cmp( $r->{version_parsed}, $version )
+                            == 0 )
                         {
                             $r->{current} = 1;
 
@@ -103,15 +104,8 @@ sub _releases {
     my $changelog
         = MetaCPAN::Web::Model::API::Changes::Parser->parse($content);
 
-    my @releases = sort {
-        my $a_v = $a->{version_parsed};
-        my $b_v = $b->{version_parsed};
-        if ( !ref $a_v || !ref $b_v ) {
-            $a_v = "$a_v";
-            $b_v = "$b_v";
-        }
-        $a_v cmp $b_v;
-        }
+    my @releases
+        = sort { _versions_cmp( $b->{version_parsed}, $a->{version_parsed} ) }
         map {
         my $v     = _parse_version( $_->{version} );
         my $trial = $_->{version} =~ /-TRIAL$/
@@ -127,18 +121,18 @@ sub _releases {
     return @releases;
 }
 
-sub _versions_eq {
+sub _versions_cmp {
     my ( $v1, $v2 ) = @_;
 
     # we're comparing version objects
     if ( ref $v1 && ref $v2 ) {
-        return $v1 eq $v2;
+        return $v1 cmp $v2;
     }
 
     # if one version failed to parse, force string comparison so version's
     # overloads don't try to inflate the other version
     else {
-        return "$v1" eq "$v2";
+        return "$v1" cmp "$v2";
     }
 }
 
