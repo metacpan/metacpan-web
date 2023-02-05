@@ -1841,16 +1841,16 @@ DISTRIBUTIONS
       XSLoader 0
       parent 0
       perl 5.008008
-  HTML-Parser-3.80
-    pathname: O/OA/OALDERS/HTML-Parser-3.80.tar.gz
+  HTML-Parser-3.81
+    pathname: O/OA/OALDERS/HTML-Parser-3.81.tar.gz
     provides:
-      HTML::Entities 3.80
-      HTML::Filter 3.80
-      HTML::HeadParser 3.80
-      HTML::LinkExtor 3.80
-      HTML::Parser 3.80
-      HTML::PullParser 3.80
-      HTML::TokeParser 3.80
+      HTML::Entities 3.81
+      HTML::Filter 3.81
+      HTML::HeadParser 3.81
+      HTML::LinkExtor 3.81
+      HTML::Parser 3.81
+      HTML::PullParser 3.81
+      HTML::TokeParser 3.81
     requirements:
       Carp 0
       Exporter 0
