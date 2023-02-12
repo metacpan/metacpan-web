@@ -4881,10 +4881,10 @@ DISTRIBUTIONS
       String::ShellQuote 1.04
     requirements:
       ExtUtils::MakeMaker 0
-  Struct-Dumb-0.13
-    pathname: P/PE/PEVANS/Struct-Dumb-0.13.tar.gz
+  Struct-Dumb-0.14
+    pathname: P/PE/PEVANS/Struct-Dumb-0.14.tar.gz
     provides:
-      Struct::Dumb 0.13
+      Struct::Dumb 0.14
     requirements:
       Module::Build 0.4004
   Sub-Exporter-0.989
