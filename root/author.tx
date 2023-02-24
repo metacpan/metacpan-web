@@ -124,6 +124,9 @@
     <li>
         <a href="[% $author.links.backpan_directory %]" title="See all releases ever done by [% $author.pauseid %], not just those currently on CPAN.">BackPAN directory</a> ([% $author.release_count['backpan-only'] %])
     </li>
+    <li>
+        <a href="[% $author.links.repology %]">Repology</a>
+    </li>
 %%  }
 %%  override content -> {
     <div id="metacpan_feed_subscription" class="page-header">
