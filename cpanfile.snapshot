@@ -881,10 +881,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.32
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.32.tar.gz
+  Cpanel-JSON-XS-4.35
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.35.tar.gz
     provides:
-      Cpanel::JSON::XS 4.32
+      Cpanel::JSON::XS 4.35
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -3957,10 +3957,10 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  Package-DeprecationManager-0.17
-    pathname: D/DR/DROLSKY/Package-DeprecationManager-0.17.tar.gz
+  Package-DeprecationManager-0.18
+    pathname: D/DR/DROLSKY/Package-DeprecationManager-0.18.tar.gz
     provides:
-      Package::DeprecationManager 0.17
+      Package::DeprecationManager 0.18
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -3968,7 +3968,7 @@ DISTRIBUTIONS
       Package::Stash 0
       Params::Util 0
       Sub::Install 0
-      Sub::Name 0
+      Sub::Util 0
       strict 0
       warnings 0
   Package-Stash-0.40
