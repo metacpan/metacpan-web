@@ -1769,16 +1769,16 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  Future-0.49
-    pathname: P/PE/PEVANS/Future-0.49.tar.gz
+  Future-0.50
+    pathname: P/PE/PEVANS/Future-0.50.tar.gz
     provides:
-      Future 0.49
-      Future::Exception 0.49
-      Future::Mutex 0.49
-      Future::PP 0.49
-      Future::Utils 0.49
-      Test::Future 0.49
-      Test::Future::Deferred 0.49
+      Future 0.50
+      Future::Exception 0.50
+      Future::Mutex 0.50
+      Future::PP 0.50
+      Future::Utils 0.50
+      Test::Future 0.50
+      Test::Future::Deferred 0.50
     requirements:
       Carp 1.25
       Module::Build 0.4004
@@ -4625,11 +4625,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Basename 0
       Test::More 0.6
-  Pod-Spell-1.25
-    pathname: H/HA/HAARG/Pod-Spell-1.25.tar.gz
+  Pod-Spell-1.26
+    pathname: H/HA/HAARG/Pod-Spell-1.26.tar.gz
     provides:
-      Pod::Spell 1.25
-      Pod::Wordlist 1.25
+      Pod::Spell 1.26
+      Pod::Wordlist 1.26
     requirements:
       Carp 0
       Class::Tiny 0
