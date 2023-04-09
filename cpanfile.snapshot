@@ -848,10 +848,10 @@ DISTRIBUTIONS
       Mixin::Linewise::Writers 0
       perl 5.012
       warnings 0
-  Config-Tiny-2.28
-    pathname: R/RS/RSAVAGE/Config-Tiny-2.28.tgz
+  Config-Tiny-2.29
+    pathname: R/RS/RSAVAGE/Config-Tiny-2.29.tgz
     provides:
-      Config::Tiny 2.28
+      Config::Tiny 2.29
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 3.30
@@ -2424,27 +2424,27 @@ DISTRIBUTIONS
       Log::Any::Test 1.714
     requirements:
       ExtUtils::MakeMaker 0
-  Log-Dispatch-2.70
-    pathname: D/DR/DROLSKY/Log-Dispatch-2.70.tar.gz
+  Log-Dispatch-2.71
+    pathname: D/DR/DROLSKY/Log-Dispatch-2.71.tar.gz
     provides:
-      Log::Dispatch 2.70
-      Log::Dispatch::ApacheLog 2.70
-      Log::Dispatch::Base 2.70
-      Log::Dispatch::Code 2.70
-      Log::Dispatch::Email 2.70
-      Log::Dispatch::Email::MIMELite 2.70
-      Log::Dispatch::Email::MailSend 2.70
-      Log::Dispatch::Email::MailSender 2.70
-      Log::Dispatch::Email::MailSendmail 2.70
-      Log::Dispatch::File 2.70
-      Log::Dispatch::File::Locked 2.70
-      Log::Dispatch::Handle 2.70
-      Log::Dispatch::Null 2.70
-      Log::Dispatch::Output 2.70
-      Log::Dispatch::Screen 2.70
-      Log::Dispatch::Syslog 2.70
-      Log::Dispatch::Types 2.70
-      Log::Dispatch::Vars 2.70
+      Log::Dispatch 2.71
+      Log::Dispatch::ApacheLog 2.71
+      Log::Dispatch::Base 2.71
+      Log::Dispatch::Code 2.71
+      Log::Dispatch::Email 2.71
+      Log::Dispatch::Email::MIMELite 2.71
+      Log::Dispatch::Email::MailSend 2.71
+      Log::Dispatch::Email::MailSender 2.71
+      Log::Dispatch::Email::MailSendmail 2.71
+      Log::Dispatch::File 2.71
+      Log::Dispatch::File::Locked 2.71
+      Log::Dispatch::Handle 2.71
+      Log::Dispatch::Null 2.71
+      Log::Dispatch::Output 2.71
+      Log::Dispatch::Screen 2.71
+      Log::Dispatch::Syslog 2.71
+      Log::Dispatch::Types 2.71
+      Log::Dispatch::Vars 2.71
     requirements:
       Carp 0
       Devel::GlobalDestruction 0
@@ -5438,59 +5438,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.002001
-    pathname: T/TO/TOBYINK/Type-Tiny-2.002001.tar.gz
+  Type-Tiny-2.004000
+    pathname: T/TO/TOBYINK/Type-Tiny-2.004000.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.002001
-      Error::TypeTiny 2.002001
-      Error::TypeTiny::Assertion 2.002001
-      Error::TypeTiny::Compilation 2.002001
-      Error::TypeTiny::WrongNumberOfParameters 2.002001
-      Eval::TypeTiny 2.002001
-      Eval::TypeTiny::CodeAccumulator 2.002001
-      Reply::Plugin::TypeTiny 2.002001
-      Test::TypeTiny 2.002001
-      Type::Coercion 2.002001
-      Type::Coercion::FromMoose 2.002001
-      Type::Coercion::Union 2.002001
-      Type::Library 2.002001
-      Type::Params 2.002001
-      Type::Params::Alternatives 2.002001
-      Type::Params::Parameter 2.002001
-      Type::Params::Signature 2.002001
-      Type::Parser 2.002001
-      Type::Parser::AstBuilder 2.002001
-      Type::Parser::Token 2.002001
-      Type::Parser::TokenStream 2.002001
-      Type::Registry 2.002001
-      Type::Tie 2.002001
-      Type::Tie::ARRAY 2.002001
-      Type::Tie::BASE 2.002001
-      Type::Tie::HASH 2.002001
-      Type::Tie::SCALAR 2.002001
-      Type::Tiny 2.002001
-      Type::Tiny::Class 2.002001
-      Type::Tiny::ConstrainedObject 2.002001
-      Type::Tiny::Duck 2.002001
-      Type::Tiny::Enum 2.002001
-      Type::Tiny::Intersection 2.002001
-      Type::Tiny::Role 2.002001
-      Type::Tiny::Union 2.002001
-      Type::Utils 2.002001
-      Types::Common 2.002001
-      Types::Common::Numeric 2.002001
-      Types::Common::String 2.002001
-      Types::Standard 2.002001
-      Types::Standard::ArrayRef 2.002001
-      Types::Standard::CycleTuple 2.002001
-      Types::Standard::Dict 2.002001
-      Types::Standard::HashRef 2.002001
-      Types::Standard::Map 2.002001
-      Types::Standard::ScalarRef 2.002001
-      Types::Standard::StrMatch 2.002001
-      Types::Standard::Tied 2.002001
-      Types::Standard::Tuple 2.002001
-      Types::TypeTiny 2.002001
+      Devel::TypeTiny::Perl58Compat 2.004000
+      Error::TypeTiny 2.004000
+      Error::TypeTiny::Assertion 2.004000
+      Error::TypeTiny::Compilation 2.004000
+      Error::TypeTiny::WrongNumberOfParameters 2.004000
+      Eval::TypeTiny 2.004000
+      Eval::TypeTiny::CodeAccumulator 2.004000
+      Reply::Plugin::TypeTiny 2.004000
+      Test::TypeTiny 2.004000
+      Type::Coercion 2.004000
+      Type::Coercion::FromMoose 2.004000
+      Type::Coercion::Union 2.004000
+      Type::Library 2.004000
+      Type::Params 2.004000
+      Type::Params::Alternatives 2.004000
+      Type::Params::Parameter 2.004000
+      Type::Params::Signature 2.004000
+      Type::Parser 2.004000
+      Type::Parser::AstBuilder 2.004000
+      Type::Parser::Token 2.004000
+      Type::Parser::TokenStream 2.004000
+      Type::Registry 2.004000
+      Type::Tie 2.004000
+      Type::Tie::ARRAY 2.004000
+      Type::Tie::BASE 2.004000
+      Type::Tie::HASH 2.004000
+      Type::Tie::SCALAR 2.004000
+      Type::Tiny 2.004000
+      Type::Tiny::Bitfield 2.004000
+      Type::Tiny::Class 2.004000
+      Type::Tiny::ConstrainedObject 2.004000
+      Type::Tiny::Duck 2.004000
+      Type::Tiny::Enum 2.004000
+      Type::Tiny::Intersection 2.004000
+      Type::Tiny::Role 2.004000
+      Type::Tiny::Union 2.004000
+      Type::Utils 2.004000
+      Types::Common 2.004000
+      Types::Common::Numeric 2.004000
+      Types::Common::String 2.004000
+      Types::Standard 2.004000
+      Types::Standard::ArrayRef 2.004000
+      Types::Standard::CycleTuple 2.004000
+      Types::Standard::Dict 2.004000
+      Types::Standard::HashRef 2.004000
+      Types::Standard::Map 2.004000
+      Types::Standard::ScalarRef 2.004000
+      Types::Standard::StrMatch 2.004000
+      Types::Standard::Tied 2.004000
+      Types::Standard::Tuple 2.004000
+      Types::TypeTiny 2.004000
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
