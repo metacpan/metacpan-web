@@ -2813,10 +2813,10 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
-  Module-Build-Tiny-0.039
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.039.tar.gz
+  Module-Build-Tiny-0.043
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.043.tar.gz
     provides:
-      Module::Build::Tiny 0.039
+      Module::Build::Tiny 0.043
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -4602,23 +4602,23 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Pod-Parser-1.65
-    pathname: M/MA/MAREKR/Pod-Parser-1.65.tar.gz
+  Pod-Parser-1.66
+    pathname: M/MA/MAREKR/Pod-Parser-1.66.tar.gz
     provides:
-      Pod::Cache 1.65
-      Pod::Cache::Item 1.65
-      Pod::Find 1.65
-      Pod::Hyperlink 1.65
-      Pod::InputObjects 1.65
-      Pod::InputSource 1.65
-      Pod::InteriorSequence 1.65
-      Pod::List 1.65
-      Pod::Paragraph 1.65
-      Pod::ParseTree 1.65
-      Pod::ParseUtils 1.65
-      Pod::Parser 1.65
+      Pod::Cache 1.66
+      Pod::Cache::Item 1.66
+      Pod::Find 1.66
+      Pod::Hyperlink 1.66
+      Pod::InputObjects 1.66
+      Pod::InputSource 1.66
+      Pod::InteriorSequence 1.66
+      Pod::List 1.66
+      Pod::Paragraph 1.66
+      Pod::ParseTree 1.66
+      Pod::ParseUtils 1.66
+      Pod::Parser 1.66
       Pod::PlainText 2.07
-      Pod::Select 1.65
+      Pod::Select 1.66
     requirements:
       Cwd 0
       ExtUtils::MakeMaker 0
