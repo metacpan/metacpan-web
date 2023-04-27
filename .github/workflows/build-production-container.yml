@@ -1,0 +1,24 @@
+---
+name: Build deployment container
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+jobs:
+  docker:
+    runs-on: ubuntu-20.04
+    name: Docker Push
+    steps:
+      - uses: actions/checkout@v3
+      - name: docker build
+        run: docker build . -t metacpan/metacpan-web:latest
+      - name: run Perl tests
+        run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+      - name: push build to Docker hub
+        run: docker push metacpan/metacpan-web:latest
