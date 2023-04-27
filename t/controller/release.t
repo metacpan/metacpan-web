@@ -5,6 +5,7 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 
 test_psgi app, sub {
     my $cb = shift;
+
     ok( my $res = $cb->( GET '/dist/DOESNTEXIST' ), 'GET /dist/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 

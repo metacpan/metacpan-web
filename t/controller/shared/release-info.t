@@ -6,7 +6,7 @@ use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 use Module::Runtime qw( use_module );
 
 my $model     = use_module('MetaCPAN::Web::Model::ReleaseInfo');
-my $rt_prefix = $model->rt_url_prefix;
+my $rt_prefix = $model->RT_URL_PREFIX;
 
 # Test various aspects that should be similar
 # among controllers that show release info (in the side bar).
