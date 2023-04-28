@@ -15,7 +15,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
 COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
-RUN yarn install && yarn cache clean
+RUN yarn install --verbose && yarn cache clean
 
 RUN cpanm --notest App::cpm \
     && cpm install -g Carton \
