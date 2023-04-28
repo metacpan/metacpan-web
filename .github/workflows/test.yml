@@ -34,25 +34,23 @@ jobs:
           node-version: "18"
       - run: npm install -g yarn && yarn install
       - name: Install Carton
-        run: >
-          curl -sL https://git.io/cpm | perl -
-          install -g Carton
-          --show-build-log-on-failure
-      - name: Install deps
-        run: >
-          curl -sL https://git.io/cpm | perl -
-          install
-          --cpanfile cpanfile
-          --resolver ${{ matrix.resolver }}
-          --show-build-log-on-failure
-          --local-lib-contained=local
-        if: success()
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          install: Carton
+          sudo: false
+      - name: Install CPAN deps
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          cpanfile: "cpanfile"
+          sudo: false
+          args: >
+            --resolver ${{ matrix.resolver }}
+            --show-build-log-on-failure
+            --local-lib-contained=local
       - name: Maybe update cpanfile.snapshot
         run: carton
-        if: success()
       - name: Run Tests
         run: carton exec prove -lr --jobs 2 t
-        if: success()
         env:
           TEST_TIDYALL_VERBOSE: 1
       - uses: actions/upload-artifact@v3
