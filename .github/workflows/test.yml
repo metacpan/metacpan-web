@@ -4,7 +4,7 @@ on: [pull_request]
 
 jobs:
   docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     name: Docker
     steps:
       - uses: actions/checkout@v3
@@ -31,28 +31,26 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "10"
+          node-version: "18"
       - run: npm install -g yarn && yarn install
       - name: Install Carton
-        run: >
-          curl -sL https://git.io/cpm | perl -
-          install -g Carton
-          --show-build-log-on-failure
-      - name: Install deps
-        run: >
-          curl -sL https://git.io/cpm | perl -
-          install
-          --cpanfile cpanfile
-          --resolver ${{ matrix.resolver }}
-          --show-build-log-on-failure
-          --local-lib-contained=local
-        if: success()
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          install: Carton
+          sudo: false
+      - name: Install CPAN deps
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          cpanfile: "cpanfile"
+          sudo: false
+          args: >
+            --resolver ${{ matrix.resolver }}
+            --show-build-log-on-failure
+            --local-lib-contained=local
       - name: Maybe update cpanfile.snapshot
         run: carton
-        if: success()
       - name: Run Tests
         run: carton exec prove -lr --jobs 2 t
-        if: success()
         env:
           TEST_TIDYALL_VERBOSE: 1
       - uses: actions/upload-artifact@v3
