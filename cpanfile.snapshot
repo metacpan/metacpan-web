@@ -809,6 +809,15 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
+  CommonMark-0.290000
+    pathname: N/NW/NWELLNHOF/CommonMark-0.290000.tar.gz
+    provides:
+      CommonMark 0.290000
+      CommonMark::Node 0.290000
+    requirements:
+      Devel::CheckLib 0
+      ExtUtils::MakeMaker 0
+      perl 5.008
   Config-Any-0.33
     pathname: H/HA/HAARG/Config-Any-0.33.tar.gz
     provides:
@@ -1482,6 +1491,16 @@ DISTRIBUTIONS
       Test::More 0.98
       parent 0
       perl 5.008001
+  Devel-CheckLib-1.16
+    pathname: M/MA/MATTN/Devel-CheckLib-1.16.tar.gz
+    provides:
+      Devel::CheckLib 1.16
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0.16
+      perl 5.004050
   Devel-Confess-0.009004
     pathname: H/HA/HAARG/Devel-Confess-0.009004.tar.gz
     provides:
@@ -5440,32 +5459,6 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::MakeMaker 0
       perl 5.006
-  Text-Markdown-1.000031
-    pathname: B/BO/BOBTFISH/Text-Markdown-1.000031.tar.gz
-    provides:
-      Text::Markdown 1.000031
-    requirements:
-      Digest::MD5 0
-      Encode 0
-      ExtUtils::MakeMaker 6.42
-      FindBin 0
-      List::MoreUtils 0
-      Test::Differences 0
-      Test::Exception 0
-      Test::More 0.42
-      Text::Balanced 0
-  Text-MultiMarkdown-1.002
-    pathname: B/BD/BDFOY/Text-MultiMarkdown-1.002.tar.gz
-    provides:
-      Text::MultiMarkdown 1.002
-    requirements:
-      Digest::MD5 0
-      Encode 0
-      ExtUtils::MakeMaker 6.64
-      File::Spec::Functions 0
-      HTML::Entities 0
-      Text::Markdown v1.0.26
-      perl 5.008
   Text-Pluralize-1.1
     pathname: K/KV/KVAIL/Text-Pluralize-1.1.tar.gz
     provides:

@@ -10,7 +10,7 @@ use HTML::Escape         qw( escape_html );
 use MetaCPAN::Web::Types qw( ArrayRef Enum HashRef Str Undef Uri DateTime );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny                 qw( path );
-use Text::MultiMarkdown        qw( markdown );
+use MetaCPAN::Web::RenderUtil  qw( render_markdown );
 use URI                        ();
 use XML::FeedPP                ();
 
@@ -100,7 +100,7 @@ sub news : Private {
 
         #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
         $e{abstract} = $str;
-        $e{abstract} = markdown($str);
+        $e{abstract} = render_markdown($str);
 
         push @entries, \%e;
     }
