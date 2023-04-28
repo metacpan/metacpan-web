@@ -34,12 +34,12 @@ jobs:
           node-version: "18"
       - run: npm install -g yarn && yarn install
       - name: Install Carton
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@stable
         with:
           install: Carton
           sudo: false
       - name: Install CPAN deps
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@stable
         with:
           cpanfile: "cpanfile"
           sudo: false
