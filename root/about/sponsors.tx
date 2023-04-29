@@ -325,6 +325,23 @@
       </tr>
       <tr>
         <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.fastmail.com/">
+            <img src="/static/images/sponsors/sonic.png" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            For over 26 years, <a target="_blank" rel="noopener nofollow"
+            href="https://www.sonic.com/">Sonic</a> has been committed to
+            delivering the most technologically advanced and fastest internet
+            service with the highest rated customer care in the industry.
+            Sonic was built in Perl and still relies heavily on the language
+            today for all facets of our internal software development
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.activestate.com/">
             ActiveState
           </a>
