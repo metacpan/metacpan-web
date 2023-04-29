@@ -1,5 +1,5 @@
 ---
-name: Build deployment container
+name: Build production container
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 jobs:
   docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     name: Docker Push
     steps:
       - uses: actions/checkout@v3
@@ -20,5 +20,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: push build to Docker hub
+      - name: Push build to Docker Hub
         run: docker push metacpan/metacpan-web:latest
