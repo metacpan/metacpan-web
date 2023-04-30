@@ -954,17 +954,16 @@ DISTRIBUTIONS
       Data::Page 2
       ExtUtils::MakeMaker 0
       Test::More 0.1
-  Data-Visitor-0.31
-    pathname: E/ET/ETHER/Data-Visitor-0.31.tar.gz
+  Data-Visitor-0.32
+    pathname: E/ET/ETHER/Data-Visitor-0.32.tar.gz
     provides:
-      Data::Visitor 0.31
-      Data::Visitor::Callback 0.31
+      Data::Visitor 0.32
+      Data::Visitor::Callback 0.32
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
       Moose 0.89
       Scalar::Util 0
-      Sub::Name 0
       Symbol 0
       Tie::ToObject 0.01
       constant 0
@@ -1861,10 +1860,10 @@ DISTRIBUTIONS
       URI::URL 0
       XSLoader 0
       strict 0
-  HTML-Restrict-v3.0.1
-    pathname: O/OA/OALDERS/HTML-Restrict-v3.0.1.tar.gz
+  HTML-Restrict-v3.0.2
+    pathname: O/OA/OALDERS/HTML-Restrict-v3.0.2.tar.gz
     provides:
-      HTML::Restrict 3.000001
+      HTML::Restrict 3.000002
     requirements:
       Carp 0
       Data::Dump 0
@@ -2243,10 +2242,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  JSON-MaybeXS-1.004004
-    pathname: E/ET/ETHER/JSON-MaybeXS-1.004004.tar.gz
+  JSON-MaybeXS-1.004005
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004005.tar.gz
     provides:
-      JSON::MaybeXS 1.004004
+      JSON::MaybeXS 1.004005
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -2732,28 +2731,28 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Module-Build-0.4232
-    pathname: L/LE/LEONT/Module-Build-0.4232.tar.gz
+  Module-Build-0.4234
+    pathname: L/LE/LEONT/Module-Build-0.4234.tar.gz
     provides:
-      Module::Build 0.4232
-      Module::Build::Base 0.4232
-      Module::Build::Compat 0.4232
-      Module::Build::Config 0.4232
-      Module::Build::Cookbook 0.4232
-      Module::Build::Dumper 0.4232
-      Module::Build::Notes 0.4232
-      Module::Build::PPMMaker 0.4232
-      Module::Build::Platform::Default 0.4232
-      Module::Build::Platform::MacOS 0.4232
-      Module::Build::Platform::Unix 0.4232
-      Module::Build::Platform::VMS 0.4232
-      Module::Build::Platform::VOS 0.4232
-      Module::Build::Platform::Windows 0.4232
-      Module::Build::Platform::aix 0.4232
-      Module::Build::Platform::cygwin 0.4232
-      Module::Build::Platform::darwin 0.4232
-      Module::Build::Platform::os2 0.4232
-      Module::Build::PodParser 0.4232
+      Module::Build 0.4234
+      Module::Build::Base 0.4234
+      Module::Build::Compat 0.4234
+      Module::Build::Config 0.4234
+      Module::Build::Cookbook 0.4234
+      Module::Build::Dumper 0.4234
+      Module::Build::Notes 0.4234
+      Module::Build::PPMMaker 0.4234
+      Module::Build::Platform::Default 0.4234
+      Module::Build::Platform::MacOS 0.4234
+      Module::Build::Platform::Unix 0.4234
+      Module::Build::Platform::VMS 0.4234
+      Module::Build::Platform::VOS 0.4234
+      Module::Build::Platform::Windows 0.4234
+      Module::Build::Platform::aix 0.4234
+      Module::Build::Platform::cygwin 0.4234
+      Module::Build::Platform::darwin 0.4234
+      Module::Build::Platform::os2 0.4234
+      Module::Build::PodParser 0.4234
     requirements:
       CPAN::Meta 2.142060
       Cwd 0
@@ -2813,10 +2812,10 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
-  Module-Build-Tiny-0.043
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.043.tar.gz
+  Module-Build-Tiny-0.045
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.045.tar.gz
     provides:
-      Module::Build::Tiny 0.043
+      Module::Build::Tiny 0.045
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -4078,10 +4077,10 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Parse-PMFile-0.43
-    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.43.tar.gz
+  Parse-PMFile-0.44
+    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.44.tar.gz
     provides:
-      Parse::PMFile 0.43
+      Parse::PMFile 0.44
     requirements:
       Dumpvalue 0
       ExtUtils::MakeMaker 0
@@ -4915,17 +4914,6 @@ DISTRIBUTIONS
       perl 5.008000
       strict 0
       warnings 0
-  Sub-Name-0.26
-    pathname: E/ET/ETHER/Sub-Name-0.26.tar.gz
-    provides:
-      Sub::Name 0.26
-    requirements:
-      Exporter 0
-      ExtUtils::MakeMaker 0
-      XSLoader 0
-      perl 5.006
-      strict 0
-      warnings 0
   Sub-Quote-2.006008
     pathname: H/HA/HAARG/Sub-Quote-2.006008.tar.gz
     provides:
@@ -5554,53 +5542,53 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.17
-    pathname: O/OA/OALDERS/URI-5.17.tar.gz
+  URI-5.18
+    pathname: S/SI/SIMBABQUE/URI-5.18.tar.gz
     provides:
-      URI 5.17
-      URI::Escape 5.17
-      URI::Heuristic 5.17
-      URI::IRI 5.17
-      URI::QueryParam 5.17
-      URI::Split 5.17
-      URI::URL 5.17
-      URI::WithBase 5.17
-      URI::data 5.17
-      URI::file 5.17
-      URI::file::Base 5.17
-      URI::file::FAT 5.17
-      URI::file::Mac 5.17
-      URI::file::OS2 5.17
-      URI::file::QNX 5.17
-      URI::file::Unix 5.17
-      URI::file::Win32 5.17
-      URI::ftp 5.17
-      URI::gopher 5.17
-      URI::http 5.17
-      URI::https 5.17
-      URI::ldap 5.17
-      URI::ldapi 5.17
-      URI::ldaps 5.17
-      URI::mailto 5.17
-      URI::mms 5.17
-      URI::news 5.17
-      URI::nntp 5.17
-      URI::nntps 5.17
-      URI::pop 5.17
-      URI::rlogin 5.17
-      URI::rsync 5.17
-      URI::rtsp 5.17
-      URI::rtspu 5.17
-      URI::sftp 5.17
-      URI::sip 5.17
-      URI::sips 5.17
-      URI::snews 5.17
-      URI::ssh 5.17
-      URI::telnet 5.17
-      URI::tn3270 5.17
-      URI::urn 5.17
-      URI::urn::isbn 5.17
-      URI::urn::oid 5.17
+      URI 5.18
+      URI::Escape 5.18
+      URI::Heuristic 5.18
+      URI::IRI 5.18
+      URI::QueryParam 5.18
+      URI::Split 5.18
+      URI::URL 5.18
+      URI::WithBase 5.18
+      URI::data 5.18
+      URI::file 5.18
+      URI::file::Base 5.18
+      URI::file::FAT 5.18
+      URI::file::Mac 5.18
+      URI::file::OS2 5.18
+      URI::file::QNX 5.18
+      URI::file::Unix 5.18
+      URI::file::Win32 5.18
+      URI::ftp 5.18
+      URI::gopher 5.18
+      URI::http 5.18
+      URI::https 5.18
+      URI::ldap 5.18
+      URI::ldapi 5.18
+      URI::ldaps 5.18
+      URI::mailto 5.18
+      URI::mms 5.18
+      URI::news 5.18
+      URI::nntp 5.18
+      URI::nntps 5.18
+      URI::pop 5.18
+      URI::rlogin 5.18
+      URI::rsync 5.18
+      URI::rtsp 5.18
+      URI::rtspu 5.18
+      URI::sftp 5.18
+      URI::sip 5.18
+      URI::sips 5.18
+      URI::snews 5.18
+      URI::ssh 5.18
+      URI::telnet 5.18
+      URI::tn3270 5.18
+      URI::urn 5.18
+      URI::urn::isbn 5.18
+      URI::urn::oid 5.18
     requirements:
       Carp 0
       Cwd 0
