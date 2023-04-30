@@ -20,8 +20,7 @@ my %ext_mime_map = qw(
     xs          text/x-c
     md          text/markdown
     mkd         text/markdown
-    md          text/markdown
-    mkd         text/markdown
+    mkdn        text/markdown
     mdwn        text/markdown
     mdown       text/markdown
     mdtxt       text/markdown
