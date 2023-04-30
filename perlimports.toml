@@ -10,7 +10,7 @@
 # preserve_unused disabled.
 
 cache                           = false # setting this to true is currently discouraged
-ignore_modules                  = ["Catalyst::Runtime","Type::Library", "With::Roles"]
+ignore_modules                  = ["Catalyst::Runtime","Test::More", "Type::Library", "With::Roles"]
 ignore_modules_filename         = ""
 ignore_modules_pattern          = "" # regex like "^(Foo|Foo::Bar)"
 ignore_modules_pattern_filename = ""
