@@ -18,7 +18,7 @@ BEGIN {
         = Cwd::abs_path( File::Spec->catdir( $bin_dir, File::Spec->updir ) );
 }
 use lib "$root_dir/lib";
-use MetaCPAN::Sitemap;
+use MetaCPAN::Sitemap ();
 
 my $config = Config::ZOMG->open(
     name => 'MetaCPAN::Web',
