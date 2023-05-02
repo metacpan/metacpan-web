@@ -3,8 +3,8 @@ use warnings;
 use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
 use Test::More;
 use Test::Deep       qw( cmp_deeply );
-use Cpanel::JSON::XS qw( decode_json encode_json );
-use HTTP::Date       qw(time2str);
+use Cpanel::JSON::XS qw( decode_json );
+use HTTP::Date       qw( time2str );
 use HTTP::Cookies    ();
 use Plack::Session   ();
 
