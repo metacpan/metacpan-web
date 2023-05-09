@@ -11,7 +11,7 @@ use List::Util                ();
 use DateTime                  ();
 use With::Roles               ();
 use Text::Pluralize           ();
-use MetaCPAN::Web::RenderUtil ();
+use MetaCPAN::Web::RenderUtil qw( gravatar_image );          ## no perlimports
 use overload                  ();
 
 my $num_formatter = Number::Format->new;
