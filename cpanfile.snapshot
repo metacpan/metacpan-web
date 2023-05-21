@@ -2198,18 +2198,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.081
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.081.tar.gz
+  IO-Socket-SSL-2.083
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.083.tar.gz
     provides:
-      IO::Socket::SSL 2.081
+      IO::Socket::SSL 2.083
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.081
-      IO::Socket::SSL::OCSP_Resolver 2.081
+      IO::Socket::SSL::OCSP_Cache 2.083
+      IO::Socket::SSL::OCSP_Resolver 2.083
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.081
-      IO::Socket::SSL::SSL_HANDLE 2.081
-      IO::Socket::SSL::Session_Cache 2.081
-      IO::Socket::SSL::Trace 2.081
+      IO::Socket::SSL::SSL_Context 2.083
+      IO::Socket::SSL::SSL_HANDLE 2.083
+      IO::Socket::SSL::Session_Cache 2.083
+      IO::Socket::SSL::Trace 2.083
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2543,10 +2543,10 @@ DISTRIBUTIONS
       File::Path 2.07
       File::Spec 0.82
       perl 5.006
-  Log-Log4perl-Layout-JSON-0.59
-    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.59.tar.gz
+  Log-Log4perl-Layout-JSON-0.60
+    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.60.tar.gz
     provides:
-      Log::Log4perl::Layout::JSON 0.59
+      Log::Log4perl::Layout::JSON 0.60
     requirements:
       Carp 0
       Class::Tiny 0
