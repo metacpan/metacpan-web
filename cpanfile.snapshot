@@ -3682,10 +3682,10 @@ DISTRIBUTIONS
       Text::Wrap 0
       constant 0
       perl 5.008001
-  Number-Format-1.75
-    pathname: W/WR/WRW/Number-Format-1.75.tar.gz
+  Number-Format-1.76
+    pathname: R/RJ/RJBS/Number-Format-1.76.tar.gz
     provides:
-      Number::Format 1.75
+      Number::Format 1.76
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
