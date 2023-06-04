@@ -1083,15 +1083,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.38
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.38.tar.gz
+  DateTime-Locale-1.39
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.39.tar.gz
     provides:
-      DateTime::Locale 1.38
-      DateTime::Locale::Base 1.38
-      DateTime::Locale::Catalog 1.38
-      DateTime::Locale::Data 1.38
-      DateTime::Locale::FromData 1.38
-      DateTime::Locale::Util 1.38
+      DateTime::Locale 1.39
+      DateTime::Locale::Base 1.39
+      DateTime::Locale::Catalog 1.39
+      DateTime::Locale::Data 1.39
+      DateTime::Locale::FromData 1.39
+      DateTime::Locale::Util 1.39
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -2561,42 +2561,42 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.884
-    pathname: M/MA/MARIOROY/MCE-1.884.tar.gz
+  MCE-1.885
+    pathname: M/MA/MARIOROY/MCE-1.885.tar.gz
     provides:
-      MCE 1.884
-      MCE::Candy 1.884
-      MCE::Channel 1.884
-      MCE::Channel::Mutex 1.884
-      MCE::Channel::MutexFast 1.884
-      MCE::Channel::Simple 1.884
-      MCE::Channel::SimpleFast 1.884
-      MCE::Channel::Threads 1.884
-      MCE::Channel::ThreadsFast 1.884
-      MCE::Child 1.884
-      MCE::Core::Input::Generator 1.884
-      MCE::Core::Input::Handle 1.884
-      MCE::Core::Input::Iterator 1.884
-      MCE::Core::Input::Request 1.884
-      MCE::Core::Input::Sequence 1.884
-      MCE::Core::Manager 1.884
-      MCE::Core::Validation 1.884
-      MCE::Core::Worker 1.884
-      MCE::Flow 1.884
-      MCE::Grep 1.884
-      MCE::Loop 1.884
-      MCE::Map 1.884
-      MCE::Mutex 1.884
-      MCE::Mutex::Channel 1.884
-      MCE::Mutex::Channel2 1.884
-      MCE::Mutex::Flock 1.884
-      MCE::Queue 1.884
-      MCE::Relay 1.884
-      MCE::Signal 1.884
-      MCE::Step 1.884
-      MCE::Stream 1.884
-      MCE::Subs 1.884
-      MCE::Util 1.884
+      MCE 1.885
+      MCE::Candy 1.885
+      MCE::Channel 1.885
+      MCE::Channel::Mutex 1.885
+      MCE::Channel::MutexFast 1.885
+      MCE::Channel::Simple 1.885
+      MCE::Channel::SimpleFast 1.885
+      MCE::Channel::Threads 1.885
+      MCE::Channel::ThreadsFast 1.885
+      MCE::Child 1.885
+      MCE::Core::Input::Generator 1.885
+      MCE::Core::Input::Handle 1.885
+      MCE::Core::Input::Iterator 1.885
+      MCE::Core::Input::Request 1.885
+      MCE::Core::Input::Sequence 1.885
+      MCE::Core::Manager 1.885
+      MCE::Core::Validation 1.885
+      MCE::Core::Worker 1.885
+      MCE::Flow 1.885
+      MCE::Grep 1.885
+      MCE::Loop 1.885
+      MCE::Map 1.885
+      MCE::Mutex 1.885
+      MCE::Mutex::Channel 1.885
+      MCE::Mutex::Channel2 1.885
+      MCE::Mutex::Flock 1.885
+      MCE::Queue 1.885
+      MCE::Relay 1.885
+      MCE::Signal 1.885
+      MCE::Step 1.885
+      MCE::Stream 1.885
+      MCE::Subs 1.885
+      MCE::Util 1.885
     requirements:
       Carp 0
       Errno 0
@@ -2826,10 +2826,10 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
-  Module-Build-Tiny-0.045
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.045.tar.gz
+  Module-Build-Tiny-0.046
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.046.tar.gz
     provides:
-      Module::Build::Tiny 0.045
+      Module::Build::Tiny 0.046
     requirements:
       CPAN::Meta 0
       DynaLoader 0
