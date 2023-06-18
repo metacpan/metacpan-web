@@ -2074,10 +2074,10 @@ DISTRIBUTIONS
       IO::File 0
       Test::More 0
       URI::Escape 0
-  HTTP-Tiny-0.082
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.082.tar.gz
+  HTTP-Tiny-0.084
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.084.tar.gz
     provides:
-      HTTP::Tiny 0.082
+      HTTP::Tiny 0.084
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -3656,13 +3656,13 @@ DISTRIBUTIONS
       URI 0
       URI::Escape 0
       YAML 0
-  Net-HTTP-6.22
-    pathname: O/OA/OALDERS/Net-HTTP-6.22.tar.gz
+  Net-HTTP-6.23
+    pathname: O/OA/OALDERS/Net-HTTP-6.23.tar.gz
     provides:
-      Net::HTTP 6.22
-      Net::HTTP::Methods 6.22
-      Net::HTTP::NB 6.22
-      Net::HTTPS 6.22
+      Net::HTTP 6.23
+      Net::HTTP::Methods 6.23
+      Net::HTTP::NB 6.23
+      Net::HTTPS 6.23
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
