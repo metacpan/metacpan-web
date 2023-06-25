@@ -160,10 +160,10 @@ DISTRIBUTIONS
       perl 5.006001
       strict 0
       warnings 0
-  B-Keywords-1.24
-    pathname: R/RU/RURBAN/B-Keywords-1.24.tar.gz
+  B-Keywords-1.26
+    pathname: R/RU/RURBAN/B-Keywords-1.26.tar.gz
     provides:
-      B::Keywords 1.24
+      B::Keywords 1.26
     requirements:
       B 0
       ExtUtils::MakeMaker 0
@@ -2074,10 +2074,10 @@ DISTRIBUTIONS
       IO::File 0
       Test::More 0
       URI::Escape 0
-  HTTP-Tiny-0.084
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.084.tar.gz
+  HTTP-Tiny-0.086
+    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.086.tar.gz
     provides:
-      HTTP::Tiny 0.084
+      HTTP::Tiny 0.086
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -2568,42 +2568,42 @@ DISTRIBUTIONS
       perl 5.010
       strict 0
       warnings 0
-  MCE-1.887
-    pathname: M/MA/MARIOROY/MCE-1.887.tar.gz
+  MCE-1.888
+    pathname: M/MA/MARIOROY/MCE-1.888.tar.gz
     provides:
-      MCE 1.887
-      MCE::Candy 1.887
-      MCE::Channel 1.887
-      MCE::Channel::Mutex 1.887
-      MCE::Channel::MutexFast 1.887
-      MCE::Channel::Simple 1.887
-      MCE::Channel::SimpleFast 1.887
-      MCE::Channel::Threads 1.887
-      MCE::Channel::ThreadsFast 1.887
-      MCE::Child 1.887
-      MCE::Core::Input::Generator 1.887
-      MCE::Core::Input::Handle 1.887
-      MCE::Core::Input::Iterator 1.887
-      MCE::Core::Input::Request 1.887
-      MCE::Core::Input::Sequence 1.887
-      MCE::Core::Manager 1.887
-      MCE::Core::Validation 1.887
-      MCE::Core::Worker 1.887
-      MCE::Flow 1.887
-      MCE::Grep 1.887
-      MCE::Loop 1.887
-      MCE::Map 1.887
-      MCE::Mutex 1.887
-      MCE::Mutex::Channel 1.887
-      MCE::Mutex::Channel2 1.887
-      MCE::Mutex::Flock 1.887
-      MCE::Queue 1.887
-      MCE::Relay 1.887
-      MCE::Signal 1.887
-      MCE::Step 1.887
-      MCE::Stream 1.887
-      MCE::Subs 1.887
-      MCE::Util 1.887
+      MCE 1.888
+      MCE::Candy 1.888
+      MCE::Channel 1.888
+      MCE::Channel::Mutex 1.888
+      MCE::Channel::MutexFast 1.888
+      MCE::Channel::Simple 1.888
+      MCE::Channel::SimpleFast 1.888
+      MCE::Channel::Threads 1.888
+      MCE::Channel::ThreadsFast 1.888
+      MCE::Child 1.888
+      MCE::Core::Input::Generator 1.888
+      MCE::Core::Input::Handle 1.888
+      MCE::Core::Input::Iterator 1.888
+      MCE::Core::Input::Request 1.888
+      MCE::Core::Input::Sequence 1.888
+      MCE::Core::Manager 1.888
+      MCE::Core::Validation 1.888
+      MCE::Core::Worker 1.888
+      MCE::Flow 1.888
+      MCE::Grep 1.888
+      MCE::Loop 1.888
+      MCE::Map 1.888
+      MCE::Mutex 1.888
+      MCE::Mutex::Channel 1.888
+      MCE::Mutex::Channel2 1.888
+      MCE::Mutex::Flock 1.888
+      MCE::Queue 1.888
+      MCE::Relay 1.888
+      MCE::Signal 1.888
+      MCE::Step 1.888
+      MCE::Stream 1.888
+      MCE::Subs 1.888
+      MCE::Util 1.888
     requirements:
       Carp 0
       Errno 0
@@ -6139,32 +6139,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.70
-    pathname: S/SI/SIMBABQUE/libwww-perl-6.70.tar.gz
+  libwww-perl-6.71
+    pathname: O/OA/OALDERS/libwww-perl-6.71.tar.gz
     provides:
-      LWP 6.70
-      LWP::Authen::Basic 6.70
-      LWP::Authen::Digest 6.70
-      LWP::Authen::Ntlm 6.70
-      LWP::ConnCache 6.70
-      LWP::Debug 6.70
-      LWP::Debug::TraceHTTP 6.70
-      LWP::DebugFile 6.70
-      LWP::MemberMixin 6.70
-      LWP::Protocol 6.70
-      LWP::Protocol::cpan 6.70
-      LWP::Protocol::data 6.70
-      LWP::Protocol::file 6.70
-      LWP::Protocol::ftp 6.70
-      LWP::Protocol::gopher 6.70
-      LWP::Protocol::http 6.70
-      LWP::Protocol::loopback 6.70
-      LWP::Protocol::mailto 6.70
-      LWP::Protocol::nntp 6.70
-      LWP::Protocol::nogo 6.70
-      LWP::RobotUA 6.70
-      LWP::Simple 6.70
-      LWP::UserAgent 6.70
+      LWP 6.71
+      LWP::Authen::Basic 6.71
+      LWP::Authen::Digest 6.71
+      LWP::Authen::Ntlm 6.71
+      LWP::ConnCache 6.71
+      LWP::Debug 6.71
+      LWP::Debug::TraceHTTP 6.71
+      LWP::DebugFile 6.71
+      LWP::MemberMixin 6.71
+      LWP::Protocol 6.71
+      LWP::Protocol::cpan 6.71
+      LWP::Protocol::data 6.71
+      LWP::Protocol::file 6.71
+      LWP::Protocol::ftp 6.71
+      LWP::Protocol::gopher 6.71
+      LWP::Protocol::http 6.71
+      LWP::Protocol::loopback 6.71
+      LWP::Protocol::mailto 6.71
+      LWP::Protocol::nntp 6.71
+      LWP::Protocol::nogo 6.71
+      LWP::RobotUA 6.71
+      LWP::Simple 6.71
+      LWP::UserAgent 6.71
     requirements:
       Digest::MD5 0
       Encode 2.12
