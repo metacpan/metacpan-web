@@ -61,9 +61,9 @@
             %%  block header_nav_menu -> {
             <ul class="nav navbar-nav menu-items hidden-xs hidden-sm">
               <li><a href="/about">About</a></li>
+              <li><a href="/about/sponsors">Sponsor</a></li>
               <li><a href="https://grep.metacpan.org/">grep::cpan</a></li>
               <li><a href="/recent">Recent</a></li>
-              <li><a href="/news">News</a></li>
               <li><a href="/about/faq">FAQ</a></li>
               <li><a href="/tools">Tools</a></li>
               <li><a href="https://fastapi.metacpan.org/">API</a></li>
@@ -176,13 +176,13 @@
                   <a href="/about">About</a>
               </div>
               <div class="footer-link">
+                  <a href="/about/sponsors">Sponsor</a>
+              </div>
+              <div class="footer-link">
                   <a href="https://grep.metacpan.org">grep::cpan</a>
               </div>
               <div class="footer-link">
                   <a href="/recent">Recent</a>
-              </div>
-              <div class="footer-link">
-                  <a href="/news">News</a>
               </div>
               <div class="footer-link">
                   <a href="about/faq">FAQ</a>

@@ -105,8 +105,8 @@ sub wrap {
                     },
                 );
             }
-            elsif (@less_files) {
-                die "Need 'lessc' executable!";
+            else {
+                die "Need 'lessc' executable set in metacpan_web_local.conf";
             }
 
             enable sub {
