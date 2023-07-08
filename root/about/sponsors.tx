@@ -1,7 +1,28 @@
-%%  cascade base::about {
+%%  cascade base::about::markdown {
 %%      title => $title || 'Sponsors',
 %%  }
-%%  override content -> {
+%%  override about -> {
+
+# Sponsoring and sponsors
+
+## Become a sponsor
+
+We use <a href="https://opencollective.com/metacpan-core">OpenCollective</a> to manage donations. Please <a href="https://opencollective.com/metacpan-core">donate</a> - regular contributions are 
+ideal (to help us budget), but anything you or your company can contribute is appreciated.
+
+## Where does the money go?
+
+As a small open source group of developers we have several things that cost money...
+
+- Running the servers
+- 3rd party system support (to help with the servers, if the open source team are not available)
+- Data storage (including backups)
+- Tools to help us work together better
+- Meta::Hack - getting together once a year or so to push development forward
+- Hosting other <a href="https://perltoolchainsummit.org/">Perl Toolchain projects</a>
+
+## Our current and previous big sponsors
+
 <div class="about-sponsor">
   <div class="sponsor">
     <table>
@@ -605,8 +626,8 @@
     </table>
   </div>
   <div class="sponsor-footer">
-    If you are interested in sponsoring MetaCPAN, please don't hesitate to
-    contact us at <a href="mailto:noc@metacpan.org">noc@metacpan.org</a>.
+    If you are interested in sponsoring MetaCPAN, please use https://opencollective.com/metacpan-core
+    or contact us at <a href="mailto:noc@metacpan.org">noc@metacpan.org</a>.
   </div>
 </div>
 %%  }

@@ -6,10 +6,10 @@
 [%-
 for [
   [ 'About MetaCPAN',         '/about' ],
+  [ 'Sponsor[s|ing]',         '/about/sponsors' ],
   [ 'Contact',                '/about/contact' ],
   [ 'Development',            '/about/development' ],
   [ 'FAQ',                    '/about/faq' ],
-  [ 'Sponsors',               '/about/sponsors' ],
   [ 'Contributors',           '/about/contributors' ],
   [ 'meta::hack',             '/about/meta_hack' ],
   [ 'Missing Modules',        '/about/missing_modules' ],
