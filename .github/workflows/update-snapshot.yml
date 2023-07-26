@@ -14,6 +14,15 @@ jobs:
         run: |
           curl -sL -o $RUNNER_TEMP/cpm https://git.io/cpm
           chmod +x $RUNNER_TEMP/cpm
+      - name: Install Carton::Snapshot
+        run: >
+          $RUNNER_TEMP/cpm
+          install
+          -g
+          Carton::Snapshot
+          --resolver metacpan
+          --show-build-log-on-failure
+          --local-lib-contained=local
       - name: Install deps
         run: >
           $RUNNER_TEMP/cpm
