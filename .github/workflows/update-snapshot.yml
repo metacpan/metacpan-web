@@ -18,14 +18,13 @@ jobs:
         run: >
           $RUNNER_TEMP/cpm
           install
-          -g
           Carton::Snapshot
           --resolver metacpan
           --show-build-log-on-failure
           --local-lib-contained=local
       - name: Install deps
         run: >
-          $RUNNER_TEMP/cpm
+          perl -Ilocal/lib/perl5 $RUNNER_TEMP/cpm
           install
           --cpanfile cpanfile
           --resolver metacpan
