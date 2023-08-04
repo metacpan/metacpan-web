@@ -3582,10 +3582,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20221114
-    pathname: H/HA/HAARG/Mozilla-CA-20221114.tar.gz
+  Mozilla-CA-20230801
+    pathname: L/LW/LWP/Mozilla-CA-20230801.tar.gz
     provides:
-      Mozilla::CA 20221114
+      Mozilla::CA 20230801
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
