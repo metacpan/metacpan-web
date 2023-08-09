@@ -9,13 +9,18 @@ jobs:
     steps:
       - name: Generate Auth Token
         id: auth-token
-        uses: tibdex/github-app-token@v1
+        uses: jamestrousdale/github-app-jwt-token@0.1.4
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - id: git-user
+        name: Set up git user
+        uses: haarg/setup-git-user@v1
+        with:
+          jwt: ${{ steps.auth-token.outputs.jwt }}
       - uses: actions/checkout@v3
         with:
-          token: ${{ steps.auth-token.outputs.token }}
+          token: ${{ steps.auth-token.outputs.auth-token }}
       - name: Get cpm
         run: |
           curl -sL -o $RUNNER_TEMP/cpm https://git.io/cpm
@@ -55,13 +60,13 @@ jobs:
       - name: Maybe update cpanfile.snapshot
         run: perl -Ilocal/lib/perl5 local/bin/carton
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ steps.auth-token.outputs.token }}
+          token: ${{ steps.auth-token.outputs.auth-token }}
           commit-message: Update cpanfile.snapshot
           title: Update cpanfile.snapshot
-          author: MetaCPAN Bot <bot@metacpan.org>
-          committer: MetaCPAN Bot <bot@metacpan.org>
+          author: ${{ steps.git-user.outputs.user-full }}
+          committer: ${{ steps.git-user.outputs.user-full }}
           body: |
             [GitHub Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           branch: update-cpanfile-snapshot
