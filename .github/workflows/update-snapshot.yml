@@ -20,49 +20,54 @@ jobs:
           jwt: ${{ steps.auth-token.outputs.jwt }}
       - uses: actions/checkout@v3
         with:
-          token: ${{ steps.auth-token.outputs.auth-token }}
+          token: ${{ steps.auth-token.outputs.access-token }}
+      - name: Set up installation local::lib
+        run: |
+          mkdir -p $RUNNER_TEMP/perl5/bin
+          mkdir -p $RUNNER_TEMP/perl5/lib/perl5
+          echo "$RUNNER_TEMP/perl5/bin" >> "$GITHUB_PATH"
+          echo "PERL5LIB=$RUNNER_TEMP/perl5/lib/perl5" >> "$GITHUB_ENV"
       - name: Get cpm
         run: |
-          curl -sL -o $RUNNER_TEMP/cpm https://git.io/cpm
-          chmod +x $RUNNER_TEMP/cpm
-      - name: Install Carton::Snapshot
+          curl -sL -o $RUNNER_TEMP/perl5/bin/cpm https://raw.githubusercontent.com/skaji/cpm/main/cpm
+          chmod +x $RUNNER_TEMP/perl5/bin/cpm
+      - name: Install cpanm, Carton, and Carton::Snapshot
         run: >
-          $RUNNER_TEMP/cpm
-          install
+          cpm install
+          App::cpanminus
+          Carton
           Carton::Snapshot
-          --resolver metacpan
+          --without-test
           --show-build-log-on-failure
-          --local-lib-contained=local
-      - name: Install deps
-        run: >
-          perl -Ilocal/lib/perl5 $RUNNER_TEMP/cpm
-          install
-          --cpanfile cpanfile
-          --resolver metacpan
-          --show-build-log-on-failure
-          --local-lib-contained=local
+          --local-lib-contained=$RUNNER_TEMP/perl5
       - name: Install forced deps
         run: >
-          curl -sL https://cpanmin.us/
-          | perl -
+          cpanm
           --cpanfile cpanfile.forced
           --showdeps --installdeps
           -L local
           -q
           .
-          | $RUNNER_TEMP/cpm
-          install
+          | cpm install
+          --without-test
           --resolver metacpan
           --show-build-log-on-failure
           --local-lib-contained=local
           --reinstall
           -
+      - name: Install deps
+        run: >
+          cpm install
+          --cpanfile cpanfile
+          --resolver metacpan
+          --show-build-log-on-failure
+          --local-lib-contained=local
       - name: Maybe update cpanfile.snapshot
-        run: perl -Ilocal/lib/perl5 local/bin/carton
+        run: carton
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ steps.auth-token.outputs.auth-token }}
+          token: ${{ steps.auth-token.outputs.access-token }}
           commit-message: Update cpanfile.snapshot
           title: Update cpanfile.snapshot
           author: ${{ steps.git-user.outputs.user-full }}
