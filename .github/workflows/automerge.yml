@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'metacpan-automation[bot]'
     steps:
-    - uses: alexwilson/enable-github-automerge-action@1.0.0
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Generate Auth Token
+        id: auth-token
+        uses: jamestrousdale/github-app-jwt-token@0.1.4
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ steps.auth-token.outputs.access-token }}
+          pull-request-number: ${{ github.event.pull_request.number }}
