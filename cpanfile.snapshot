@@ -3582,13 +3582,12 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20230801
-    pathname: L/LW/LWP/Mozilla-CA-20230801.tar.gz
+  Mozilla-CA-20230807
+    pathname: L/LW/LWP/Mozilla-CA-20230807.tar.gz
     provides:
-      Mozilla::CA 20230801
+      Mozilla::CA 20230807
     requirements:
       ExtUtils::MakeMaker 0
-      perl 5.006
   Net-Async-HTTP-0.49
     pathname: P/PE/PEVANS/Net-Async-HTTP-0.49.tar.gz
     provides:
@@ -5470,19 +5469,16 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0.42
       Text::Balanced 0
-  Text-MultiMarkdown-1.000035
-    pathname: B/BO/BOBTFISH/Text-MultiMarkdown-1.000035.tar.gz
+  Text-MultiMarkdown-1.001
+    pathname: B/BD/BDFOY/Text-MultiMarkdown-1.001.tar.gz
     provides:
-      Text::MultiMarkdown 1.000035
+      Text::MultiMarkdown 1.001
     requirements:
       Digest::MD5 0
       Encode 0
-      ExtUtils::MakeMaker 6.59
-      FindBin 0
+      ExtUtils::MakeMaker 6.64
+      File::Spec::Functions 0
       HTML::Entities 0
-      List::MoreUtils 0
-      Test::Exception 0
-      Test::More 0.42
       Text::Markdown v1.0.26
       perl 5.008
   Text-Pluralize-1.1
