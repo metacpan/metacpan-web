@@ -2385,36 +2385,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.74
-    pathname: S/SB/SBECK/Locale-Codes-3.74.tar.gz
+  Locale-Codes-3.76
+    pathname: S/SB/SBECK/Locale-Codes-3.76.tar.gz
     provides:
-      Locale::Codes 3.74
-      Locale::Codes::Constants 3.74
-      Locale::Codes::Country 3.74
-      Locale::Codes::Country_Codes 3.74
-      Locale::Codes::Country_Retired 3.74
-      Locale::Codes::Currency 3.74
-      Locale::Codes::Currency_Codes 3.74
-      Locale::Codes::Currency_Retired 3.74
-      Locale::Codes::LangExt 3.74
-      Locale::Codes::LangExt_Codes 3.74
-      Locale::Codes::LangExt_Retired 3.74
-      Locale::Codes::LangFam 3.74
-      Locale::Codes::LangFam_Codes 3.74
-      Locale::Codes::LangFam_Retired 3.74
-      Locale::Codes::LangVar 3.74
-      Locale::Codes::LangVar_Codes 3.74
-      Locale::Codes::LangVar_Retired 3.74
-      Locale::Codes::Language 3.74
-      Locale::Codes::Language_Codes 3.74
-      Locale::Codes::Language_Retired 3.74
-      Locale::Codes::Script 3.74
-      Locale::Codes::Script_Codes 3.74
-      Locale::Codes::Script_Retired 3.74
-      Locale::Country 3.74
-      Locale::Currency 3.74
-      Locale::Language 3.74
-      Locale::Script 3.74
+      Locale::Codes 3.76
+      Locale::Codes::Constants 3.76
+      Locale::Codes::Country 3.76
+      Locale::Codes::Country_Codes 3.76
+      Locale::Codes::Country_Retired 3.76
+      Locale::Codes::Currency 3.76
+      Locale::Codes::Currency_Codes 3.76
+      Locale::Codes::Currency_Retired 3.76
+      Locale::Codes::LangExt 3.76
+      Locale::Codes::LangExt_Codes 3.76
+      Locale::Codes::LangExt_Retired 3.76
+      Locale::Codes::LangFam 3.76
+      Locale::Codes::LangFam_Codes 3.76
+      Locale::Codes::LangFam_Retired 3.76
+      Locale::Codes::LangVar 3.76
+      Locale::Codes::LangVar_Codes 3.76
+      Locale::Codes::LangVar_Retired 3.76
+      Locale::Codes::Language 3.76
+      Locale::Codes::Language_Codes 3.76
+      Locale::Codes::Language_Retired 3.76
+      Locale::Codes::Script 3.76
+      Locale::Codes::Script_Codes 3.76
+      Locale::Codes::Script_Retired 3.76
+      Locale::Country 3.76
+      Locale::Currency 3.76
+      Locale::Language 3.76
+      Locale::Script 3.76
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -4405,27 +4405,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20230701
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20230701.tar.gz
+  Perl-Tidy-20230909
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20230909.tar.gz
     provides:
-      Perl::Tidy 20230701
-      Perl::Tidy::Debugger 20230701
-      Perl::Tidy::DevNull 20230701
-      Perl::Tidy::Diagnostics 20230701
-      Perl::Tidy::FileWriter 20230701
-      Perl::Tidy::Formatter 20230701
-      Perl::Tidy::HtmlWriter 20230701
-      Perl::Tidy::IOScalar 20230701
-      Perl::Tidy::IOScalarArray 20230701
-      Perl::Tidy::IndentationItem 20230701
-      Perl::Tidy::LineBuffer 20230701
-      Perl::Tidy::LineSink 20230701
-      Perl::Tidy::LineSource 20230701
-      Perl::Tidy::Logger 20230701
-      Perl::Tidy::Tokenizer 20230701
-      Perl::Tidy::VerticalAligner 20230701
-      Perl::Tidy::VerticalAligner::Alignment 20230701
-      Perl::Tidy::VerticalAligner::Line 20230701
+      Perl::Tidy 20230909
+      Perl::Tidy::Debugger 20230909
+      Perl::Tidy::Diagnostics 20230909
+      Perl::Tidy::FileWriter 20230909
+      Perl::Tidy::Formatter 20230909
+      Perl::Tidy::HtmlWriter 20230909
+      Perl::Tidy::IOScalar 20230909
+      Perl::Tidy::IOScalarArray 20230909
+      Perl::Tidy::IndentationItem 20230909
+      Perl::Tidy::Logger 20230909
+      Perl::Tidy::Tokenizer 20230909
+      Perl::Tidy::VerticalAligner 20230909
+      Perl::Tidy::VerticalAligner::Alignment 20230909
+      Perl::Tidy::VerticalAligner::Line 20230909
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
