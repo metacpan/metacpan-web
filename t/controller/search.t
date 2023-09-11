@@ -57,7 +57,7 @@ test_psgi app, sub {
         );
     }
 
-    ok( $res = $cb->( GET $release), "GET $release" );
+    ok( $res = $cb->( GET $release ), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
     ok( $res = $cb->( GET '/search?q=RJBS&lucky=1' ),

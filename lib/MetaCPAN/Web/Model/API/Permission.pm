@@ -50,7 +50,7 @@ sub by_module {
 my %special = (
     NEEDHELP => 1,
     ADOPTME  => 1,
-    HANDOFF  => 1
+    HANDOFF  => 1,
 );
 
 sub _permissions_to_notification {
