@@ -29,7 +29,7 @@ test_psgi app, sub {
         'found a favorite'
     );
 
-    ok( $res = $cb->( GET $release), "GET $release" );
+    ok( $res = $cb->( GET $release ), "GET $release" );
     is( $res->code, 200, 'code 200' );
 
     ok( $res = $cb->( GET '/author/DOESNTEXIST/releases' ),

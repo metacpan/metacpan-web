@@ -95,7 +95,7 @@ requires 'App::Prove';
 requires 'Code::TidyAll', '>= 0.74';
 requires 'Code::TidyAll::Plugin::Test::Vars', '0.04';
 requires 'Perl::Critic', '1.136';
-requires 'Perl::Tidy' => '20220613';
+requires 'Perl::Tidy' => '20230909';
 requires 'Test::Code::TidyAll';
 requires 'Test::More', '0.96';
 requires 'Test::Needs';
