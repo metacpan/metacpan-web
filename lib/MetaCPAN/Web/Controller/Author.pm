@@ -87,7 +87,7 @@ sub releases : Chained('root') PathPart Args(0) {
     my $page      = $req->page;
     my $author_cv = $c->model('API::Author')->get($id);
     my $releases
-        = $c->model('API::Release')->all_by_author( $id, $page_size, $page )
+        = $c->model('API::Release')->all_by_author( $id, $page, $page_size )
         ->get;
 
     my $author_info = $author_cv->get;
