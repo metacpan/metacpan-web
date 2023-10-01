@@ -2004,19 +2004,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.44
-    pathname: O/OA/OALDERS/HTTP-Message-6.44.tar.gz
+  HTTP-Message-6.45
+    pathname: O/OA/OALDERS/HTTP-Message-6.45.tar.gz
     provides:
-      HTTP::Config 6.44
-      HTTP::Headers 6.44
-      HTTP::Headers::Auth 6.44
-      HTTP::Headers::ETag 6.44
-      HTTP::Headers::Util 6.44
-      HTTP::Message 6.44
-      HTTP::Request 6.44
-      HTTP::Request::Common 6.44
-      HTTP::Response 6.44
-      HTTP::Status 6.44
+      HTTP::Config 6.45
+      HTTP::Headers 6.45
+      HTTP::Headers::Auth 6.45
+      HTTP::Headers::ETag 6.45
+      HTTP::Headers::Util 6.45
+      HTTP::Message 6.45
+      HTTP::Request 6.45
+      HTTP::Request::Common 6.45
+      HTTP::Response 6.45
+      HTTP::Status 6.45
     requirements:
       Carp 0
       Clone 0.46
@@ -2826,10 +2826,10 @@ DISTRIBUTIONS
       Test::Requires 0
       parent 0
       perl 5.008001
-  Module-Build-Tiny-0.046
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.046.tar.gz
+  Module-Build-Tiny-0.047
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.047.tar.gz
     provides:
-      Module::Build::Tiny 0.046
+      Module::Build::Tiny 0.047
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -5273,10 +5273,10 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
-  Test-Warnings-0.031
-    pathname: E/ET/ETHER/Test-Warnings-0.031.tar.gz
+  Test-Warnings-0.032
+    pathname: E/ET/ETHER/Test-Warnings-0.032.tar.gz
     provides:
-      Test::Warnings 0.031
+      Test::Warnings 0.032
     requirements:
       Carp 0
       Exporter 0
