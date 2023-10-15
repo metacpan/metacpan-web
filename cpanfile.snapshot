@@ -847,10 +847,10 @@ DISTRIBUTIONS
       Mixin::Linewise::Writers 0
       perl 5.012
       warnings 0
-  Config-Tiny-2.29
-    pathname: R/RS/RSAVAGE/Config-Tiny-2.29.tgz
+  Config-Tiny-2.30
+    pathname: R/RS/RSAVAGE/Config-Tiny-2.30.tgz
     provides:
-      Config::Tiny 2.29
+      Config::Tiny 2.30
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 3.30
@@ -5047,10 +5047,10 @@ DISTRIBUTIONS
       Test::Builder 0
       Test::More 0.96
       perl 5.012
-  Test-Differences-0.70
-    pathname: D/DC/DCANTRELL/Test-Differences-0.70.tar.gz
+  Test-Differences-0.71
+    pathname: D/DC/DCANTRELL/Test-Differences-0.71.tar.gz
     provides:
-      Test::Differences 0.70
+      Test::Differences 0.71
     requirements:
       Capture::Tiny 0.24
       Data::Dumper 2.126
