@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
       - name: Push build to Docker Hub
-        run: docker push --all-tags metacpan/metacpan-web:latest
+        run: docker push --all-tags metacpan/metacpan-web
