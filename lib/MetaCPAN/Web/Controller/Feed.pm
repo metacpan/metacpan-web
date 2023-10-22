@@ -14,6 +14,11 @@ use Text::MultiMarkdown        qw( markdown );
 use URI                        ();
 use XML::FeedPP                ();
 
+sub recent_rdf : Path('/recent.rdf') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->detach( 'recent', ['rdf'] );
+}
+
 sub recent_rss : Path('/recent.rss') Args(0) {
     my ( $self, $c ) = @_;
     $c->detach( 'recent', ['rss'] );
