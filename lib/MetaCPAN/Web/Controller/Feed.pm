@@ -5,12 +5,19 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use HTML::Escape               qw( escape_html );
-use MetaCPAN::Web::Types       qw( ArrayRef Enum HashRef Str Undef Uri );
+use DateTime             ();
+use HTML::Escape         qw( escape_html );
+use MetaCPAN::Web::Types qw( ArrayRef Enum HashRef Str Undef Uri DateTime );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny                 qw( path );
 use Text::MultiMarkdown        qw( markdown );
+use URI                        ();
 use XML::FeedPP                ();
+
+sub recent_rdf : Path('/recent.rdf') Args(0) {
+    my ( $self, $c ) = @_;
+    $c->detach( 'recent', ['rdf'] );
+}
 
 sub recent_rss : Path('/recent.rss') Args(0) {
     my ( $self, $c ) = @_;
@@ -46,6 +53,8 @@ sub recent : Private {
         entries => $c->stash->{recent},
         host    => URI->new( $c->config->{web_host} ),
         title   => 'Recent CPAN uploads - MetaCPAN',
+        link    => '/recent',
+        date    => DateTime::->now,
     );
 }
 
@@ -179,7 +188,19 @@ my $feed_check = validation_for(
         entries => { type => ArrayRef [HashRef] },
         host    => { type => Uri, optional => 0, },
         title   => { type => Str },
-        format  => {
+        link    => {
+            type    => Uri,
+            default => '/',
+        },
+        date => {
+            type     => DateTime,
+            optional => 1,
+        },
+        description => {
+            type     => Str,
+            optional => 1,
+        },
+        format => {
             type => Enum( [qw(atom rdf rss)] )
                 ->plus_coercions( Undef, '"rdf"', Str, 'lc $_' ),
             default => 'rdf'
@@ -233,11 +254,15 @@ sub build_feed {
         : $params{format} eq 'atom' ? 'Atom::Atom10'
         :                             die 'invalid format';
 
-    my $feed_class = sprintf( '%s::%s', XML::FeedPP::, $format );
+    my $feed_class = "XML::FeedPP::$format";
 
     my $feed = $feed_class->new;
     $feed->title( $params{title} );
-    $feed->link('/');
+    $feed->link("$params{link}");
+    $feed->pubDate( $params{date}->iso8601 )
+        if $params{date};
+    $feed->description( $params{description} )
+        if $params{description};
 
     foreach my $entry ( @{ $params{entries} } ) {
         $feed->add_item( $self->build_entry(

@@ -11,6 +11,7 @@ BEGIN {
         Types::Standard
         Types::Common::Numeric
         Types::Common::String
+        Types::DateTime
         Types::LoadableClass
         Types::Path::Tiny
         Types::URI

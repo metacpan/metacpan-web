@@ -5706,6 +5706,19 @@ DISTRIBUTIONS
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
       perl 5.008001
+  Types-DateTime-0.002
+    pathname: T/TO/TOBYINK/Types-DateTime-0.002.tar.gz
+    provides:
+      Types::DateTime 0.002
+    requirements:
+      DateTime 0
+      DateTime::Duration 0
+      DateTime::Locale 0
+      DateTime::TimeZone 0
+      ExtUtils::MakeMaker 6.17
+      Module::Runtime 0
+      Type::Tiny 0.041
+      perl 5.008
   Types-LoadableClass-0.003
     pathname: T/TO/TOBYINK/Types-LoadableClass-0.003.tar.gz
     provides:

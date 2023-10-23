@@ -78,6 +78,7 @@ requires 'Try::Tiny', '0.24';
 requires 'Type::Library';
 requires 'Types::Common::Numeric';
 requires 'Types::Common::String';
+requires 'Types::DateTime';
 requires 'Types::LoadableClass';
 requires 'Types::Path::Tiny';
 requires 'Types::Standard';
