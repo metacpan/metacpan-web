@@ -1083,15 +1083,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.39
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.39.tar.gz
+  DateTime-Locale-1.40
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.40.tar.gz
     provides:
-      DateTime::Locale 1.39
-      DateTime::Locale::Base 1.39
-      DateTime::Locale::Catalog 1.39
-      DateTime::Locale::Data 1.39
-      DateTime::Locale::FromData 1.39
-      DateTime::Locale::Util 1.39
+      DateTime::Locale 1.40
+      DateTime::Locale::Base 1.40
+      DateTime::Locale::Catalog 1.40
+      DateTime::Locale::Data 1.40
+      DateTime::Locale::FromData 1.40
+      DateTime::Locale::Util 1.40
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -5458,10 +5458,10 @@ DISTRIBUTIONS
       Test::Exception 0
       Test::More 0.42
       Text::Balanced 0
-  Text-MultiMarkdown-1.001
-    pathname: B/BD/BDFOY/Text-MultiMarkdown-1.001.tar.gz
+  Text-MultiMarkdown-1.002
+    pathname: B/BD/BDFOY/Text-MultiMarkdown-1.002.tar.gz
     provides:
-      Text::MultiMarkdown 1.001
+      Text::MultiMarkdown 1.002
     requirements:
       Digest::MD5 0
       Encode 0
