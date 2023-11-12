@@ -972,19 +972,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.63
-    pathname: D/DR/DROLSKY/DateTime-1.63.tar.gz
+  DateTime-1.65
+    pathname: D/DR/DROLSKY/DateTime-1.65.tar.gz
     provides:
-      DateTime 1.63
-      DateTime::Duration 1.63
-      DateTime::Helpers 1.63
-      DateTime::Infinite 1.63
-      DateTime::Infinite::Future 1.63
-      DateTime::Infinite::Past 1.63
-      DateTime::LeapSecond 1.63
-      DateTime::PP 1.63
-      DateTime::PPExtra 1.63
-      DateTime::Types 1.63
+      DateTime 1.65
+      DateTime::Duration 1.65
+      DateTime::Helpers 1.65
+      DateTime::Infinite 1.65
+      DateTime::Infinite::Future 1.65
+      DateTime::Infinite::Past 1.65
+      DateTime::LeapSecond 1.65
+      DateTime::PP 1.65
+      DateTime::PPExtra 1.65
+      DateTime::Types 1.65
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -2199,18 +2199,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.083
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.083.tar.gz
+  IO-Socket-SSL-2.084
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.084.tar.gz
     provides:
-      IO::Socket::SSL 2.083
+      IO::Socket::SSL 2.084
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.083
-      IO::Socket::SSL::OCSP_Resolver 2.083
+      IO::Socket::SSL::OCSP_Cache 2.084
+      IO::Socket::SSL::OCSP_Resolver 2.084
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.083
-      IO::Socket::SSL::SSL_HANDLE 2.083
-      IO::Socket::SSL::Session_Cache 2.083
-      IO::Socket::SSL::Trace 2.083
+      IO::Socket::SSL::SSL_Context 2.084
+      IO::Socket::SSL::SSL_HANDLE 2.084
+      IO::Socket::SSL::Session_Cache 2.084
+      IO::Socket::SSL::Trace 2.084
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -3700,10 +3700,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  POSIX-strftime-Compiler-0.44
-    pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.44.tar.gz
+  POSIX-strftime-Compiler-0.45
+    pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.45.tar.gz
     provides:
-      POSIX::strftime::Compiler 0.44
+      POSIX::strftime::Compiler 0.45
     requirements:
       Carp 0
       Exporter 0
