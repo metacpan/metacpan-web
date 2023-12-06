@@ -87,7 +87,10 @@
                 %%  block sidebar_toggle_button -> {
                     <li class="icon-slidepanel visible-xs visible-sm">
                       <button data-toggle="slidepanel" data-target=".slidepanel">
-                        <i class="fa fa-bars button-fa-icon"></i>
+                        <span class="button-fa-icon">
+                          <i class="fa fa-bars slidepanel-open"></i>
+                          <i class="fa fa-times slidepanel-close"></i>
+                        </span>
                       </button>
                     </li>
                 %%  }
