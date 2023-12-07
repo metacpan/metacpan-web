@@ -112,10 +112,6 @@
         margin-left: 0px;
     }
 
-    .navbar-inner, .navbar-inner .container-fluid {
-        padding: 0px;
-    }
-
     .home {
         padding-top: 0px;
     }
@@ -124,7 +120,34 @@
         font-size: 1.4em;
     }
 
-@import "bootstrap-slidepanel.less";
+    .slidepanel {
+        background-color: #e9e9e9;
+        visibility: hidden;
+        position: fixed;
+        top: 0px;
+        max-width: @sidebar-width;
+        width: 100%;
+        z-index: 1500;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .slidepanel.slidepanel-visible {
+        visibility: visible;
+    }
+
+    .slidepanel-close {
+        display: none;
+    }
+    .slidepanel-visible {
+        .slidepanel-open {
+            display: none;
+        }
+        .slidepanel-close {
+            display: block;
+        }
+    }
 
     .slidepanel {
         margin-top: 58px;
