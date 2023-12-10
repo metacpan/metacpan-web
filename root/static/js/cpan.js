@@ -299,7 +299,7 @@ $(document).ready(function() {
     $('.dropdown-toggle').dropdown();
 
     function format_index(index) {
-        index.wrap('<div id="index-container" class="pull-right"><div class="index-border"></div></div>');
+        index.wrap('<div id="index-container"><div class="index-border"></div></div>');
         var container = index.parent().parent();
 
         var index_hidden = MetaCPAN.storage.getItem('hideTOC') == 1;
