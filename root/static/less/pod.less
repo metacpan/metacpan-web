@@ -101,10 +101,11 @@ ul#index, #index ul {
 }
 
 #index-container {
-    margin-left: 50px;
+    margin-bottom: 40px;
 
-    @media (min-width: 0) and (max-width: @screen-md-max) {
-        .responsive-invisibility();
+    @media (min-width: @screen-md-max) {
+        float: right;
+        margin-left: 50px;
     }
 
     overflow-y: hidden;
