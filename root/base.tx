@@ -170,8 +170,8 @@
               <a class="footer-social-link" href="https://github.com/metacpan">
                 <i class="fab fa-github-square"></i>
               </a>
-              <a class="footer-social-link" href="https://twitter.com/metacpan">
-                <i class="fab fa-twitter-square"></i>
+              <a class="footer-social-link" href="https://fosstodon.org/@metacpan">
+                <i class="fab fa-mastodon"></i>
               </a>
             </div>
             <div class="footer-links">
