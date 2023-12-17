@@ -1805,12 +1805,12 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Usage 1.14
-  Getopt-Long-Descriptive-0.112
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.112.tar.gz
+  Getopt-Long-Descriptive-0.113
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.113.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.112
-      Getopt::Long::Descriptive::Opts 0.112
-      Getopt::Long::Descriptive::Usage 0.112
+      Getopt::Long::Descriptive 0.113
+      Getopt::Long::Descriptive::Opts 0.113
+      Getopt::Long::Descriptive::Usage 0.113
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -3584,10 +3584,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20230821
-    pathname: L/LW/LWP/Mozilla-CA-20230821.tar.gz
+  Mozilla-CA-20231213
+    pathname: L/LW/LWP/Mozilla-CA-20231213.tar.gz
     provides:
-      Mozilla::CA 20230821
+      Mozilla::CA 20231213
     requirements:
       ExtUtils::MakeMaker 0
   Net-Async-HTTP-0.49
