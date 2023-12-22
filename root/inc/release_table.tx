@@ -27,7 +27,7 @@
     %%  }
         <tr>
           <td class="river-gauge" sort="[% $release.river.total || 0 %]">[% include inc::river_gauge { distribution => $release.distribution, river => $release.river } %]</td>
-          <td class="name"><strong><a href="[% $release.status == 'latest' ? '/dist/' ~ $release.distribution : '/release/' ~ $release.author ~ '/' ~ $release.name %]" class="ellipsis" title="[% $release.author ~ '/' ~ $release.name %]">[% $release.name %]</a></strong></td>
+          <td class="name dist-release status-[% $release.status %] maturity-[% $release.maturity %]"><strong><a href="[% $release.status == 'latest' ? '/dist/' ~ $release.distribution : '/release/' ~ $release.author ~ '/' ~ $release.name %]" class="ellipsis release-name" title="[% $release.author ~ '/' ~ $release.name %]">[% $release.name %]</a></strong></td>
           <td class="abstract">[% $release.abstract %]</td>
           <td class="date relatize" sort="[% $date %]">[% $date %]</td>
         </tr>
