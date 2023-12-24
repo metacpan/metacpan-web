@@ -3449,20 +3449,20 @@ DISTRIBUTIONS
       HTTP::Tiny 0
       Moose::Role 0
       Net::Fastly 1.08
-  MooseX-Getopt-0.75
-    pathname: E/ET/ETHER/MooseX-Getopt-0.75.tar.gz
+  MooseX-Getopt-0.76
+    pathname: E/ET/ETHER/MooseX-Getopt-0.76.tar.gz
     provides:
-      MooseX::Getopt 0.75
-      MooseX::Getopt::Basic 0.75
-      MooseX::Getopt::Dashes 0.75
-      MooseX::Getopt::GLD 0.75
-      MooseX::Getopt::Meta::Attribute 0.75
-      MooseX::Getopt::Meta::Attribute::NoGetopt 0.75
-      MooseX::Getopt::Meta::Attribute::Trait 0.75
-      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.75
-      MooseX::Getopt::OptionTypeMap 0.75
-      MooseX::Getopt::ProcessedArgv 0.75
-      MooseX::Getopt::Strict 0.75
+      MooseX::Getopt 0.76
+      MooseX::Getopt::Basic 0.76
+      MooseX::Getopt::Dashes 0.76
+      MooseX::Getopt::GLD 0.76
+      MooseX::Getopt::Meta::Attribute 0.76
+      MooseX::Getopt::Meta::Attribute::NoGetopt 0.76
+      MooseX::Getopt::Meta::Attribute::Trait 0.76
+      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.76
+      MooseX::Getopt::OptionTypeMap 0.76
+      MooseX::Getopt::ProcessedArgv 0.76
+      MooseX::Getopt::Strict 0.76
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
