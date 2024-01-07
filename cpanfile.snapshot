@@ -871,10 +871,10 @@ DISTRIBUTIONS
       Hash::Merge::Simple 0
       List::Util 0
       Moo 0
-  Cookie-Baker-0.11
-    pathname: K/KA/KAZEBURO/Cookie-Baker-0.11.tar.gz
+  Cookie-Baker-0.12
+    pathname: K/KA/KAZEBURO/Cookie-Baker-0.12.tar.gz
     provides:
-      Cookie::Baker 0.11
+      Cookie::Baker 0.12
     requirements:
       Exporter 0
       Module::Build::Tiny 0.035
@@ -3709,10 +3709,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  POSIX-strftime-Compiler-0.45
-    pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.45.tar.gz
+  POSIX-strftime-Compiler-0.46
+    pathname: K/KA/KAZEBURO/POSIX-strftime-Compiler-0.46.tar.gz
     provides:
-      POSIX::strftime::Compiler 0.45
+      POSIX::strftime::Compiler 0.46
     requirements:
       Carp 0
       Exporter 0
@@ -4437,12 +4437,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0050
-    pathname: M/MI/MIYAGAWA/Plack-1.0050.tar.gz
+  Plack-1.0051
+    pathname: M/MI/MIYAGAWA/Plack-1.0051.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0050
+      Plack 1.0051
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -4501,9 +4501,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0050
+      Plack::Request 1.0051
       Plack::Request::Upload undef
-      Plack::Response 1.0050
+      Plack::Response 1.0051
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
@@ -4535,7 +4535,7 @@ DISTRIBUTIONS
       URI 1.59
       WWW::Form::UrlEncoded 0.23
       parent 0
-      perl 5.008001
+      perl 5.012000
   Plack-Middleware-FixMissingBodyInRedirect-0.12
     pathname: S/SW/SWEETKID/Plack-Middleware-FixMissingBodyInRedirect-0.12.tar.gz
     provides:
@@ -4617,23 +4617,23 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Pod-Parser-1.66
-    pathname: M/MA/MAREKR/Pod-Parser-1.66.tar.gz
+  Pod-Parser-1.67
+    pathname: M/MA/MAREKR/Pod-Parser-1.67.tar.gz
     provides:
-      Pod::Cache 1.66
-      Pod::Cache::Item 1.66
-      Pod::Find 1.66
-      Pod::Hyperlink 1.66
-      Pod::InputObjects 1.66
-      Pod::InputSource 1.66
-      Pod::InteriorSequence 1.66
-      Pod::List 1.66
-      Pod::Paragraph 1.66
-      Pod::ParseTree 1.66
-      Pod::ParseUtils 1.66
-      Pod::Parser 1.66
+      Pod::Cache 1.67
+      Pod::Cache::Item 1.67
+      Pod::Find 1.67
+      Pod::Hyperlink 1.67
+      Pod::InputObjects 1.67
+      Pod::InputSource 1.67
+      Pod::InteriorSequence 1.67
+      Pod::List 1.67
+      Pod::Paragraph 1.67
+      Pod::ParseTree 1.67
+      Pod::ParseUtils 1.67
+      Pod::Parser 1.67
       Pod::PlainText 2.07
-      Pod::Select 1.66
+      Pod::Select 1.67
     requirements:
       Cwd 0
       ExtUtils::MakeMaker 0
