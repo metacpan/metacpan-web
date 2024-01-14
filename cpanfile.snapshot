@@ -1534,11 +1534,11 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       FindBin 0
-  Devel-StackTrace-2.04
-    pathname: D/DR/DROLSKY/Devel-StackTrace-2.04.tar.gz
+  Devel-StackTrace-2.05
+    pathname: D/DR/DROLSKY/Devel-StackTrace-2.05.tar.gz
     provides:
-      Devel::StackTrace 2.04
-      Devel::StackTrace::Frame 2.04
+      Devel::StackTrace 2.05
+      Devel::StackTrace::Frame 2.05
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -3675,11 +3675,11 @@ DISTRIBUTIONS
       perl 5.006002
       strict 0
       warnings 0
-  Net-SSLeay-1.92
-    pathname: C/CH/CHRISN/Net-SSLeay-1.92.tar.gz
+  Net-SSLeay-1.94
+    pathname: C/CH/CHRISN/Net-SSLeay-1.94.tar.gz
     provides:
-      Net::SSLeay 1.92
-      Net::SSLeay::Handle 1.92
+      Net::SSLeay 1.94
+      Net::SSLeay::Handle 1.94
     requirements:
       English 0
       ExtUtils::MakeMaker 0
@@ -6147,32 +6147,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.72
-    pathname: O/OA/OALDERS/libwww-perl-6.72.tar.gz
+  libwww-perl-6.73
+    pathname: O/OA/OALDERS/libwww-perl-6.73.tar.gz
     provides:
-      LWP 6.72
-      LWP::Authen::Basic 6.72
-      LWP::Authen::Digest 6.72
-      LWP::Authen::Ntlm 6.72
-      LWP::ConnCache 6.72
-      LWP::Debug 6.72
-      LWP::Debug::TraceHTTP 6.72
-      LWP::DebugFile 6.72
-      LWP::MemberMixin 6.72
-      LWP::Protocol 6.72
-      LWP::Protocol::cpan 6.72
-      LWP::Protocol::data 6.72
-      LWP::Protocol::file 6.72
-      LWP::Protocol::ftp 6.72
-      LWP::Protocol::gopher 6.72
-      LWP::Protocol::http 6.72
-      LWP::Protocol::loopback 6.72
-      LWP::Protocol::mailto 6.72
-      LWP::Protocol::nntp 6.72
-      LWP::Protocol::nogo 6.72
-      LWP::RobotUA 6.72
-      LWP::Simple 6.72
-      LWP::UserAgent 6.72
+      LWP 6.73
+      LWP::Authen::Basic 6.73
+      LWP::Authen::Digest 6.73
+      LWP::Authen::Ntlm 6.73
+      LWP::ConnCache 6.73
+      LWP::Debug 6.73
+      LWP::Debug::TraceHTTP 6.73
+      LWP::DebugFile 6.73
+      LWP::MemberMixin 6.73
+      LWP::Protocol 6.73
+      LWP::Protocol::cpan 6.73
+      LWP::Protocol::data 6.73
+      LWP::Protocol::file 6.73
+      LWP::Protocol::ftp 6.73
+      LWP::Protocol::gopher 6.73
+      LWP::Protocol::http 6.73
+      LWP::Protocol::loopback 6.73
+      LWP::Protocol::mailto 6.73
+      LWP::Protocol::nntp 6.73
+      LWP::Protocol::nogo 6.73
+      LWP::RobotUA 6.73
+      LWP::Simple 6.73
+      LWP::UserAgent 6.73
     requirements:
       Digest::MD5 0
       Encode 2.12
