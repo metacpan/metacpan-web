@@ -2,8 +2,7 @@ package MetaCPAN::Web::Controller::Pod;
 
 use Moose;
 
-use Future                    ();
-use MetaCPAN::Web::RenderUtil qw( filter_html );
+use Future ();
 
 use namespace::autoclean;
 
@@ -48,25 +47,6 @@ sub view : Private {
     $c->detach('/not_found')
         unless $data->{name};
 
-    my $pod_path
-        = '/pod/'
-        . ( $data->{assoc_pod}
-            || "$data->{author}/$data->{release}/$data->{path}" );
-
-    my $pod = $c->model('API')->request(
-        $pod_path,
-        undef,
-        {
-            show_errors => 1,
-            ( $permalinks ? ( permalinks => 1 ) : () ),
-            url_prefix => '/pod/',
-        }
-    )->get;
-    $c->detach('/not_found')
-        if ( $pod->{code} || 0 ) > 399;
-
-    my $pod_html = filter_html( $pod->{raw}, $data );
-
     my $documented_module = $data->{documented_module};
 
     my $canonical
@@ -75,6 +55,16 @@ sub view : Private {
             && $documented_module->{indexed} )
         ? "/pod/$data->{documentation}"
         : "/dist/$release->{distribution}/view/$data->{path}";
+
+    my $pod = $c->model('API::Pod')->file_pod(
+        $data,
+        {
+            permalinks => $permalinks,
+        }
+    )->get;
+
+    $c->detach('/not_found')
+        if ( $pod->{code} || 0 ) > 399;
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');
@@ -88,12 +78,12 @@ sub view : Private {
     $c->stash( {
         canonical         => $canonical,
         documented_module => $documented_module,
-        pod               => $pod_html,
+        pod               => $pod->{pod_html},
         template          => 'pod.tx',
     } );
 
     unless ( $pod->{raw} ) {
-        $c->stash( pod_error => $pod->{message}, );
+        $c->stash( pod_error => $pod->{message} );
     }
 }
 
