@@ -2,7 +2,7 @@ package MetaCPAN::Web::Model::API::Pod;
 use Moose;
 use namespace::autoclean;
 
-use MetaCPAN::Web::RenderUtil qw( filter_html );
+use MetaCPAN::Web::RenderUtil qw( split_index filter_html );
 use Encode                    qw( encode );
 use Future                    ();
 
@@ -75,8 +75,11 @@ sub _with_filter {
     sub {
         my $data = shift;
         if ( my $raw = $data->{raw} ) {
+            my ( $index, $body ) = split_index($raw);
+            $data->{pod_index}
+                = filter_html( $index, $data->{path} ? $data : () );
             $data->{pod_html}
-                = filter_html( $raw, $data->{path} ? $data : () );
+                = filter_html( $body, $data->{path} ? $data : () );
         }
         return Future->done($data);
     };

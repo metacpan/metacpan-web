@@ -84,89 +84,63 @@
     }
 }
 
-ul#index, #index ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+.content .toc {
+    display: inline-block;
+    border: 1px solid rgb(215, 215, 215);
+    padding: 3px 10px;
 
-    ul {
-        margin-left: 1.5em;
-    }
-
-    li {
-        margin-bottom: 0;
-        margin-top: 0.4em;
-        line-height: 1.3em;
-    }
-}
-
-#index-container {
+    overflow-x: auto;
+    overflow-y: hidden;
     margin-bottom: 40px;
 
     @media (min-width: @screen-md-max) {
         float: right;
         margin-left: 50px;
+        max-width: 400px;
     }
 
-    overflow-y: hidden;
-
-    .index-header {
+    .toc-header {
         text-align: center;
         line-height: 24px;
     }
 
-    .index-border {
-        display: inline-block;
-        border: 1px solid rgb(215, 215, 215);
-        padding: 3px 10px;
+    > ul {
+        overflow-y: hidden;
+        transition: height 0.3s ease-out;
     }
 
-    #index {
-        overflow-y: hidden;
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+
+        ul {
+            margin-left: 1.5em;
+        }
+
+        li {
+            margin-bottom: 0;
+            margin-top: 0.4em;
+            line-height: 1.3em;
+        }
     }
 
     .toggle-show {
         display: none;
     }
 
-    &.hide-index {
+    &.hide-toc {
         .toggle-hide {
             display: none;
         }
         .toggle-show {
             display: inline;
         }
-        #index {
+        > ul {
             height: 0;
         }
     }
 
-    .toggle-index-right {
-        color: #000;
-        float: right;
-        border: 0;
-        margin: -6px -7px 0 -7px;
-    }
-
-    .toggle-left {
-        display: none;
-    }
-
-    &.pull-right {
-        .index-border {
-            margin-left: 5px;
-            max-width: 225px;
-            overflow-x: auto;
-        }
-
-        .toggle-right {
-            display: none;
-            visibility: collapse;
-        }
-        .toggle-left {
-            display: inline-block;
-        }
-    }
 }
 
 .pod p.pod-error {

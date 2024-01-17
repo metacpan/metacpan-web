@@ -79,6 +79,7 @@ sub view : Private {
         canonical         => $canonical,
         documented_module => $documented_module,
         pod               => $pod->{pod_html},
+        pod_index         => $pod->{pod_index},
         template          => 'pod.tx',
     } );
 

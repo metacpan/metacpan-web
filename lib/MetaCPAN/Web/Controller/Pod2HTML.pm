@@ -30,20 +30,30 @@ sub pod2html : Path : Args(0) {
             show_errors => 1,
         }
     )->get;
-    my $html = $pod_data->{pod_html} // q{};
+    my $html  = $pod_data->{pod_html}  // q{};
+    my $index = $pod_data->{pod_index} // q{};
 
     my $results = {
-        pod          => $pod,
-        pod_rendered => $html,
-        pod_name     => $pod_data->{pod_name},
-        abstract     => $pod_data->{abstract},
+        pod       => $pod,
+        pod_html  => $html,
+        pod_index => $index,
+        pod_name  => $pod_data->{pod_name},
+        abstract  => $pod_data->{abstract},
     };
     if ( $c->req->parameters->{raw} ) {
         $c->res->content_type('text/html');
-        $c->res->body($html);
+        $c->res->body( '<nav class="toc">' . $index . '</nav>' . $html );
         $c->detach;
     }
-    $c->stash($results);
+    elsif ( $c->req->accepts('application/json') ) {
+        $c->stash( {
+            current_view => 'JSON',
+            json         => $results,
+        } );
+    }
+    else {
+        $c->stash($results);
+    }
 }
 
 __PACKAGE__->meta->make_immutable;
