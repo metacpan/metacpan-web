@@ -37,16 +37,16 @@ my %file_mime_map = qw(
 my ($EXT_RE) = map qr{$_}i, join '|', sort keys %ext_mime_map;
 
 sub _groom_fileinfo {
-    my ( $self, @sub ) = @_;
+    my ( $self, $sub, $path ) = @_;
     sub {
         my $data  = shift;
         my $files = $data;
         $files = [ $files // () ]
             if !is_arrayref $files;
-        for my $sub (@sub) {
+        for my $sub_key (@$sub) {
             $files = [
                 map {
-                    my $file = $_->{$sub};
+                    my $file = $_->{$sub_key};
                     is_arrayref($file)  ? @$file
                         : defined $file ? $file
                         :                 ();
@@ -55,14 +55,14 @@ sub _groom_fileinfo {
         }
 
         for my $file (@$files) {
-            %$file = %{ $self->_groom_file($file) };
+            %$file = %{ $self->_groom_file( $file, $path ) };
         }
         return Future->done($data);
     };
 }
 
 sub _groom_file {
-    my ( $self, $file ) = @_;
+    my ( $self, $file, $request_path ) = @_;
 
     $file = {%$file};
     if ( $file->{directory} ) {
@@ -81,6 +81,32 @@ sub _groom_file {
             if grep $_->{associated_pod}, @$modules;
         $file->{has_authorized_module} = 1
             if grep +( $_->{authorized} && $_->{indexed} ), @$modules;
+
+        if ( $request_path && @$request_path ) {
+            my ($documented_module) = grep {
+                $_->{associated_pod}
+                    && ( !$file->{documentation}
+                    || $_->{name} eq $file->{documentation} )
+                    && ( @$request_path > 1
+                    || $_->{name} eq $request_path->[0] )
+            } @$modules;
+
+            if ($documented_module) {
+                $file->{documented_module} = $documented_module;
+                $file->{documentation}     = $documented_module->{name};
+
+                my $assoc_pod = $documented_module->{associated_pod};
+
+                if (   $assoc_pod
+                    && $assoc_pod ne
+                    "$file->{author}/$file->{release}/$file->{path}" )
+                {
+                    $file->{pod_path}
+                        = $assoc_pod
+                        =~ s{^\Q$file->{author}/$file->{release}/}{}r;
+                }
+            }
+        }
     }
 
     if ( exists $file_mime_map{$name} ) {

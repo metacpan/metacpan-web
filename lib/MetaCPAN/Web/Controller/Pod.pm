@@ -38,33 +38,20 @@ sub view : Private {
 
     my $data       = $c->stash->{file};
     my $permalinks = $c->stash->{permalinks};
+    my $release    = $c->stash->{release};
 
     if ( $data->{directory} ) {
         $c->res->redirect( $c->uri_for( '/source', @path ), 301 );
         $c->detach;
     }
 
-    my ( $documentation, $assoc_pod, $documented_module )
-        = map { $_->{name}, $_->{associated_pod}, $_ }
-        grep  { @path > 1 || $path[0] eq $_->{name} }
-        grep {
-              !$data->{documentation}
-            || $data->{documentation} eq $_->{name}
-        }
-        grep { $_->{associated_pod} } @{ $data->{module} || [] };
+    $c->detach('/not_found')
+        unless $data->{name};
 
-    $data->{documentation} = $documentation if $documentation;
-
-    if (   $assoc_pod
-        && $assoc_pod ne "$data->{author}/$data->{release}/$data->{path}" )
-    {
-        $data->{pod_path}
-            = $assoc_pod =~ s{^\Q$data->{author}/$data->{release}/}{}r;
-    }
-
-    $c->detach('/not_found') unless ( $data->{name} );
-
-    my $pod_path = '/pod/' . ( $assoc_pod || join( '/', @path ) );
+    my $pod_path
+        = '/pod/'
+        . ( $data->{assoc_pod}
+            || "$data->{author}/$data->{release}/$data->{path}" );
 
     my $pod = $c->model('API')->request(
         $pod_path,
@@ -75,17 +62,18 @@ sub view : Private {
             url_prefix => '/pod/',
         }
     )->get;
-    $c->detach('/not_found') if ( $pod->{code} || 0 ) > 399;
+    $c->detach('/not_found')
+        if ( $pod->{code} || 0 ) > 399;
 
     my $pod_html = filter_html( $pod->{raw}, $data );
 
-    my $release = $c->stash->{release};
+    my $documented_module = $data->{documented_module};
 
     my $canonical
         = (    $documented_module
             && $documented_module->{authorized}
             && $documented_module->{indexed} )
-        ? "/pod/$documentation"
+        ? "/pod/$data->{documentation}"
         : "/dist/$release->{distribution}/view/$data->{path}";
 
     # Store at fastly for a year - as we will purge!
