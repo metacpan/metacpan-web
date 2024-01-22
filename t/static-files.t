@@ -354,9 +354,7 @@ ee9ccebabfe78643470da003d83e6b61608979f6  root/static/images/sponsors/booking.pn
 12036785cf973c7340818e0837db942830dbf01e  root/static/images/sponsors/control-my-id.png
 8d0a1c548cae06f8d384c7619ee55baabcc27386  root/static/images/sponsors/cpanel.png
 0f8418f040c5504fa69386bafcf7046f11c37503  root/static/images/sponsors/dealspotr.png
-e08d05b3ac61f49694c04540eb4f7ee70a8e6894  root/static/images/sponsors/deriv-horizontal-web-dark-100-removebg.png
-ca16d4cefecab05b457f5ed88415d28f3cce3832  root/static/images/sponsors/deriv-horizontal-web-dark-100.jpeg
-940396b51a065d9580f887d24fd7f5ebf1bd236a  root/static/images/sponsors/deriv.webp
+6f5474eb784a5e9c7498c7a5d773b6ae7b9b5c2d  root/static/images/sponsors/deriv.svg
 8c9059f6ef31a420bfb9f6efb4ce01278e5a5740  root/static/images/sponsors/dyn.png
 a588394fcb496ee492d289d4db0e1d3624a34528  root/static/images/sponsors/easyname.png
 292b9ab76da7035cf192f8c651a090c4bd4bc2ab  root/static/images/sponsors/elastic.svg
