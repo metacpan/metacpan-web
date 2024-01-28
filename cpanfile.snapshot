@@ -1935,20 +1935,6 @@ DISTRIBUTIONS
       File::Temp 0.14
       HTTP::Headers 0
       IO::File 1.14
-  HTTP-CookieJar-0.014
-    pathname: D/DA/DAGOLDEN/HTTP-CookieJar-0.014.tar.gz
-    provides:
-      HTTP::CookieJar 0.014
-      HTTP::CookieJar::LWP 0.014
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.17
-      HTTP::Date 0
-      Time::Local 1.1901
-      parent 0
-      perl 5.008001
-      strict 0
-      warnings 0
   HTTP-Cookies-6.11
     pathname: O/OA/OALDERS/HTTP-Cookies-6.11.tar.gz
     provides:
@@ -2208,18 +2194,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.084
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.084.tar.gz
+  IO-Socket-SSL-2.085
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.085.tar.gz
     provides:
-      IO::Socket::SSL 2.084
+      IO::Socket::SSL 2.085
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.084
-      IO::Socket::SSL::OCSP_Resolver 2.084
+      IO::Socket::SSL::OCSP_Cache 2.085
+      IO::Socket::SSL::OCSP_Resolver 2.085
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.084
-      IO::Socket::SSL::SSL_HANDLE 2.084
-      IO::Socket::SSL::Session_Cache 2.084
-      IO::Socket::SSL::Trace 2.084
+      IO::Socket::SSL::SSL_Context 2.085
+      IO::Socket::SSL::SSL_HANDLE 2.085
+      IO::Socket::SSL::Session_Cache 2.085
+      IO::Socket::SSL::Trace 2.085
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2305,11 +2291,11 @@ DISTRIBUTIONS
       Scalar::Util 0
       perl 5.006002
       strict 0
-  LWP-Protocol-https-6.11
-    pathname: O/OA/OALDERS/LWP-Protocol-https-6.11.tar.gz
+  LWP-Protocol-https-6.12
+    pathname: O/OA/OALDERS/LWP-Protocol-https-6.12.tar.gz
     provides:
-      LWP::Protocol::https 6.11
-      LWP::Protocol::https::Socket 6.11
+      LWP::Protocol::https 6.12
+      LWP::Protocol::https::Socket 6.12
     requirements:
       ExtUtils::MakeMaker 0
       IO::Socket::SSL 1.970
@@ -2552,10 +2538,10 @@ DISTRIBUTIONS
       File::Path 2.07
       File::Spec 0.82
       perl 5.006
-  Log-Log4perl-Layout-JSON-0.60
-    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.60.tar.gz
+  Log-Log4perl-Layout-JSON-0.61
+    pathname: M/MS/MSCHOUT/Log-Log4perl-Layout-JSON-0.61.tar.gz
     provides:
-      Log::Log4perl::Layout::JSON 0.60
+      Log::Log4perl::Layout::JSON 0.61
     requirements:
       Carp 0
       Class::Tiny 0
@@ -4097,10 +4083,10 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Parse-PMFile-0.44
-    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.44.tar.gz
+  Parse-PMFile-0.45
+    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.45.tar.gz
     provides:
-      Parse::PMFile 0.44
+      Parse::PMFile 0.45
     requirements:
       Dumpvalue 0
       ExtUtils::MakeMaker 0
@@ -5282,10 +5268,10 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
-  Test-Warnings-0.032
-    pathname: E/ET/ETHER/Test-Warnings-0.032.tar.gz
+  Test-Warnings-0.033
+    pathname: E/ET/ETHER/Test-Warnings-0.033.tar.gz
     provides:
-      Test::Warnings 0.032
+      Test::Warnings 0.033
     requirements:
       Carp 0
       Exporter 0
@@ -5786,55 +5772,55 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.21
-    pathname: O/OA/OALDERS/URI-5.21.tar.gz
+  URI-5.25
+    pathname: O/OA/OALDERS/URI-5.25.tar.gz
     provides:
-      URI 5.21
-      URI::Escape 5.21
-      URI::Heuristic 5.21
-      URI::IRI 5.21
-      URI::QueryParam 5.21
-      URI::Split 5.21
-      URI::URL 5.21
-      URI::WithBase 5.21
-      URI::data 5.21
-      URI::file 5.21
-      URI::file::Base 5.21
-      URI::file::FAT 5.21
-      URI::file::Mac 5.21
-      URI::file::OS2 5.21
-      URI::file::QNX 5.21
-      URI::file::Unix 5.21
-      URI::file::Win32 5.21
-      URI::ftp 5.21
-      URI::gopher 5.21
-      URI::http 5.21
-      URI::https 5.21
-      URI::icap 5.21
-      URI::icaps 5.21
-      URI::ldap 5.21
-      URI::ldapi 5.21
-      URI::ldaps 5.21
-      URI::mailto 5.21
-      URI::mms 5.21
-      URI::news 5.21
-      URI::nntp 5.21
-      URI::nntps 5.21
-      URI::pop 5.21
-      URI::rlogin 5.21
-      URI::rsync 5.21
-      URI::rtsp 5.21
-      URI::rtspu 5.21
-      URI::sftp 5.21
-      URI::sip 5.21
-      URI::sips 5.21
-      URI::snews 5.21
-      URI::ssh 5.21
-      URI::telnet 5.21
-      URI::tn3270 5.21
-      URI::urn 5.21
-      URI::urn::isbn 5.21
-      URI::urn::oid 5.21
+      URI 5.25
+      URI::Escape 5.25
+      URI::Heuristic 5.25
+      URI::IRI 5.25
+      URI::QueryParam 5.25
+      URI::Split 5.25
+      URI::URL 5.25
+      URI::WithBase 5.25
+      URI::data 5.25
+      URI::file 5.25
+      URI::file::Base 5.25
+      URI::file::FAT 5.25
+      URI::file::Mac 5.25
+      URI::file::OS2 5.25
+      URI::file::QNX 5.25
+      URI::file::Unix 5.25
+      URI::file::Win32 5.25
+      URI::ftp 5.25
+      URI::gopher 5.25
+      URI::http 5.25
+      URI::https 5.25
+      URI::icap 5.25
+      URI::icaps 5.25
+      URI::ldap 5.25
+      URI::ldapi 5.25
+      URI::ldaps 5.25
+      URI::mailto 5.25
+      URI::mms 5.25
+      URI::news 5.25
+      URI::nntp 5.25
+      URI::nntps 5.25
+      URI::pop 5.25
+      URI::rlogin 5.25
+      URI::rsync 5.25
+      URI::rtsp 5.25
+      URI::rtspu 5.25
+      URI::sftp 5.25
+      URI::sip 5.25
+      URI::sips 5.25
+      URI::snews 5.25
+      URI::ssh 5.25
+      URI::telnet 5.25
+      URI::tn3270 5.25
+      URI::urn 5.25
+      URI::urn::isbn 5.25
+      URI::urn::oid 5.25
     requirements:
       Carp 0
       Cwd 0
@@ -5984,45 +5970,45 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       XML::TreePP 0.39
-  XML-LibXML-2.0209
-    pathname: S/SH/SHLOMIF/XML-LibXML-2.0209.tar.gz
+  XML-LibXML-2.0210
+    pathname: S/SH/SHLOMIF/XML-LibXML-2.0210.tar.gz
     provides:
-      XML::LibXML 2.0209
-      XML::LibXML::Attr 2.0209
-      XML::LibXML::AttributeHash 2.0209
-      XML::LibXML::Boolean 2.0209
-      XML::LibXML::CDATASection 2.0209
-      XML::LibXML::Comment 2.0209
-      XML::LibXML::Common 2.0209
-      XML::LibXML::Devel 2.0209
-      XML::LibXML::Document 2.0209
-      XML::LibXML::DocumentFragment 2.0209
-      XML::LibXML::Dtd 2.0209
-      XML::LibXML::Element 2.0209
-      XML::LibXML::ErrNo 2.0209
-      XML::LibXML::Error 2.0209
-      XML::LibXML::InputCallback 2.0209
-      XML::LibXML::Literal 2.0209
-      XML::LibXML::NamedNodeMap 2.0209
-      XML::LibXML::Namespace 2.0209
-      XML::LibXML::Node 2.0209
-      XML::LibXML::NodeList 2.0209
-      XML::LibXML::Number 2.0209
-      XML::LibXML::PI 2.0209
-      XML::LibXML::Pattern 2.0209
-      XML::LibXML::Reader 2.0209
-      XML::LibXML::RegExp 2.0209
-      XML::LibXML::RelaxNG 2.0209
-      XML::LibXML::SAX 2.0209
-      XML::LibXML::SAX::AttributeNode 2.0209
-      XML::LibXML::SAX::Builder 2.0209
-      XML::LibXML::SAX::Generator 2.0209
-      XML::LibXML::SAX::Parser 2.0209
-      XML::LibXML::Schema 2.0209
-      XML::LibXML::Text 2.0209
-      XML::LibXML::XPathContext 2.0209
-      XML::LibXML::XPathExpression 2.0209
-      XML::LibXML::_SAXParser 2.0209
+      XML::LibXML 2.0210
+      XML::LibXML::Attr 2.0210
+      XML::LibXML::AttributeHash 2.0210
+      XML::LibXML::Boolean 2.0210
+      XML::LibXML::CDATASection 2.0210
+      XML::LibXML::Comment 2.0210
+      XML::LibXML::Common 2.0210
+      XML::LibXML::Devel 2.0210
+      XML::LibXML::Document 2.0210
+      XML::LibXML::DocumentFragment 2.0210
+      XML::LibXML::Dtd 2.0210
+      XML::LibXML::Element 2.0210
+      XML::LibXML::ErrNo 2.0210
+      XML::LibXML::Error 2.0210
+      XML::LibXML::InputCallback 2.0210
+      XML::LibXML::Literal 2.0210
+      XML::LibXML::NamedNodeMap 2.0210
+      XML::LibXML::Namespace 2.0210
+      XML::LibXML::Node 2.0210
+      XML::LibXML::NodeList 2.0210
+      XML::LibXML::Number 2.0210
+      XML::LibXML::PI 2.0210
+      XML::LibXML::Pattern 2.0210
+      XML::LibXML::Reader 2.0210
+      XML::LibXML::RegExp 2.0210
+      XML::LibXML::RelaxNG 2.0210
+      XML::LibXML::SAX 2.0210
+      XML::LibXML::SAX::AttributeNode 2.0210
+      XML::LibXML::SAX::Builder 2.0210
+      XML::LibXML::SAX::Generator 2.0210
+      XML::LibXML::SAX::Parser 2.0210
+      XML::LibXML::Schema 2.0210
+      XML::LibXML::Text 2.0210
+      XML::LibXML::XPathContext 2.0210
+      XML::LibXML::XPathExpression 2.0210
+      XML::LibXML::_SAXParser 2.0210
     requirements:
       Alien::Base::Wrapper 0
       Alien::Libxml2 0.14
@@ -6147,32 +6133,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.73
-    pathname: O/OA/OALDERS/libwww-perl-6.73.tar.gz
+  libwww-perl-6.76
+    pathname: O/OA/OALDERS/libwww-perl-6.76.tar.gz
     provides:
-      LWP 6.73
-      LWP::Authen::Basic 6.73
-      LWP::Authen::Digest 6.73
-      LWP::Authen::Ntlm 6.73
-      LWP::ConnCache 6.73
-      LWP::Debug 6.73
-      LWP::Debug::TraceHTTP 6.73
-      LWP::DebugFile 6.73
-      LWP::MemberMixin 6.73
-      LWP::Protocol 6.73
-      LWP::Protocol::cpan 6.73
-      LWP::Protocol::data 6.73
-      LWP::Protocol::file 6.73
-      LWP::Protocol::ftp 6.73
-      LWP::Protocol::gopher 6.73
-      LWP::Protocol::http 6.73
-      LWP::Protocol::loopback 6.73
-      LWP::Protocol::mailto 6.73
-      LWP::Protocol::nntp 6.73
-      LWP::Protocol::nogo 6.73
-      LWP::RobotUA 6.73
-      LWP::Simple 6.73
-      LWP::UserAgent 6.73
+      LWP 6.76
+      LWP::Authen::Basic 6.76
+      LWP::Authen::Digest 6.76
+      LWP::Authen::Ntlm 6.76
+      LWP::ConnCache 6.76
+      LWP::Debug 6.76
+      LWP::Debug::TraceHTTP 6.76
+      LWP::DebugFile 6.76
+      LWP::MemberMixin 6.76
+      LWP::Protocol 6.76
+      LWP::Protocol::cpan 6.76
+      LWP::Protocol::data 6.76
+      LWP::Protocol::file 6.76
+      LWP::Protocol::ftp 6.76
+      LWP::Protocol::gopher 6.76
+      LWP::Protocol::http 6.76
+      LWP::Protocol::loopback 6.76
+      LWP::Protocol::mailto 6.76
+      LWP::Protocol::nntp 6.76
+      LWP::Protocol::nogo 6.76
+      LWP::RobotUA 6.76
+      LWP::Simple 6.76
+      LWP::UserAgent 6.76
     requirements:
       Digest::MD5 0
       Encode 2.12
@@ -6184,7 +6170,6 @@ DISTRIBUTIONS
       Getopt::Long 0
       HTML::Entities 0
       HTML::HeadParser 3.71
-      HTTP::CookieJar::LWP 0
       HTTP::Cookies 6
       HTTP::Date 6
       HTTP::Negotiate 6
