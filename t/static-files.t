@@ -11,6 +11,66 @@ use Digest::SHA ();
 # normally use a new file name. If it's a minor change where it is acceptable
 # for users to use the old files, then updating the hash can be done instead.
 
+## regenerate with: perl t/static-files.t --regen
+
+for my $arg (@ARGV) {
+    if ( $arg eq '--regen' ) {
+        my @roots = qw(
+            root/static/icons
+            root/static/images
+        );
+
+        my @files;
+
+        require File::Find;
+        File::Find::find(
+            {
+                no_chdir => 1,
+                wanted   => sub {
+                    return
+                        if -d;
+                    return
+                        if m{\/\.} || m{~$};
+
+                    push @files, $_;
+                },
+            },
+            @roots,
+        );
+
+        my %sha = map {
+            $_ => Digest::SHA->new('sha1')->addfile( $_, 'b' )->hexdigest
+        } @files;
+
+        my $script = $0;
+        $script = "./$script"
+            unless $script =~ m{^/};
+
+        open my $fh, '+<', $script
+            or die;
+
+        while ( my $line = <$fh> ) {
+            chomp $line;
+            if ( $line eq '__DATA__' ) {
+                truncate $fh, tell $fh;
+                for my $file ( sort keys %sha ) {
+                    print $fh "$sha{$file}  $file\n";
+                }
+                close $fh;
+
+                @ARGV = ();
+                do $script or die;
+                exit;
+            }
+        }
+
+        die "Can't find __DATA__ marker in $0!\n";
+    }
+    else {
+        die "Unsupported option $arg!\n";
+    }
+}
+
 my %files = reverse map /(\S+)/g, <DATA>;
 
 for my $file ( sort keys %files ) {
@@ -22,8 +82,6 @@ for my $file ( sort keys %files ) {
 }
 
 done_testing;
-
-## generated with: shasum $(find root/static/icons root/static/images -type f | sort)
 
 __DATA__
 679be699079a90f586aa90dbc79aac14731a226c  root/static/icons/apple-touch-icon.png
@@ -373,6 +431,7 @@ fb43b99a721b83aeebf528977f3df7083a69289e  root/static/images/sponsors/perl-caree
 5cdd9d7bda9936c0ab678063a93df341fd37acb1  root/static/images/sponsors/perl_logo.png
 e691cd3eb125c4b9e157a083a1c0a5f14e5a692a  root/static/images/sponsors/qah-2014.png
 bb659e08ba1966a9e6d90f9969ce89dd8c6a61b7  root/static/images/sponsors/servercentral.png
+b22714f31bf7817c297cf6670fa27c0fe53e9897  root/static/images/sponsors/sonic.png
 f251ab8c5c58c9c87bbd2e6042d9b2574cd0bc8b  root/static/images/sponsors/speedchilli.png
 28b210ec069326d1914b54186854e278b874e08e  root/static/images/sponsors/travis-ci.png
 d1756602e3883c084a901338b96d8a03b8b540b9  root/static/images/sponsors/vienna.pm.jpeg
