@@ -6,6 +6,7 @@ Disallow: /diff/
 Disallow: /source/
 Disallow: /raw/
 Disallow: /account/
+Disallow: /search
 
 # Do not allow changing the default per page as is not useful
 Disallow: /*?*size=*
