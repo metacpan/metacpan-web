@@ -32,6 +32,11 @@
     </div>
   </div>
 </div>
-<div id="metacpan-pod-renderer-output" class="pod anchors" [% if !$pod_rendered { %]style="display: none"[% } %]>[% $pod_rendered | raw %]</div>
+<div id="metacpan-pod-renderer-output" class="pod anchors" [% if !$pod_html { %]style="display: none"[% } %]>
+  <nav class="toc">
+    <div class="toc-header"><strong>Contents</strong></div>
+    [% $pod_index %]
+  </nav>
+  [% $pod_html | raw %]
 </div>
 %%  }

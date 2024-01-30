@@ -2,29 +2,11 @@ package MetaCPAN::Web::Controller::Pod2HTML;
 
 use Moose;
 
-use Encode                    qw( decode DIE_ON_ERR encode LEAVE_SRC );
-use HTML::TokeParser          ();
-use MetaCPAN::Web::RenderUtil qw( filter_html );
-use Future                    ();
+use Encode qw( decode DIE_ON_ERR LEAVE_SRC );
 
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
-
-sub render_pod {
-    my ( $c, $pod ) = @_;
-    my $html = $c->model('API')->request(
-        'pod_render',
-        undef,
-        {
-            pod         => encode( 'UTF-8', $pod ),
-            show_errors => 1,
-        },
-        'POST'
-    )->then( sub {
-        Future->done( filter_html( $_[0]->{raw} ) );
-    } );
-}
 
 sub pod2html : Path : Args(0) {
     my ( $self, $c ) = @_;
@@ -34,46 +16,44 @@ sub pod2html : Path : Args(0) {
         eval {
             $pod = decode( 'UTF-8', $raw_pod, DIE_ON_ERR | LEAVE_SRC );
             1;
-        } or $pod = decode( 'cp1252', $raw_pod );
+        } or do {
+            $pod = decode( 'cp1252', $raw_pod );
+        };
     }
     else {
         $pod = $c->req->parameters->{pod} // q{};
     }
 
-    my $html = length $pod ? render_pod( $c, $pod )->get : q{};
+    my $pod_data = $c->model('API::Pod')->pod2html(
+        $pod,
+        {
+            show_errors => 1,
+        }
+    )->get;
+    my $html  = $pod_data->{pod_html}  // q{};
+    my $index = $pod_data->{pod_index} // q{};
 
+    my $results = {
+        pod       => $pod,
+        pod_html  => $html,
+        pod_index => $index,
+        pod_name  => $pod_data->{pod_name},
+        abstract  => $pod_data->{abstract},
+    };
     if ( $c->req->parameters->{raw} ) {
         $c->res->content_type('text/html');
-        $c->res->body($html);
+        $c->res->body( '<nav class="toc">' . $index . '</nav>' . $html );
         $c->detach;
     }
-
-    $c->stash( {
-        pod          => $pod,
-        pod_rendered => $html,
-        ( length $html ? %{ pod_info($html) } : () ),
-    } );
-}
-
-sub pod_info {
-    my $p = HTML::TokeParser->new( \( $_[0] ) );
-    while ( my $t = $p->get_token ) {
-        my ( $type, $tag, $attr ) = @$t;
-        next
-            unless ( $type eq 'S'
-            && $tag eq 'h1'
-            && $attr->{id}
-            && $attr->{id} eq 'NAME' );
-
-        my $name_section = $p->get_trimmed_text('h1') or next;
-        if ( $name_section =~ /(?:NAME\s+)?([^-]+?)\s*-\s*(.*)/s ) {
-            return {
-                pod_name => "$1",
-                abstract => "$2",
-            };
-        }
+    elsif ( $c->req->accepts('application/json') ) {
+        $c->stash( {
+            current_view => 'JSON',
+            json         => $results,
+        } );
     }
-    return {};
+    else {
+        $c->stash($results);
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -51,32 +51,6 @@ function togglePanel(side, visible) {
     return false;
 }
 
-function toggleTOC() {
-    var container = $('#index-container');
-    if (container.length == 0) return false;
-    var visible = !container.hasClass('hide-index');
-    var index = $('#index');
-    var newHeight = 0;
-    if (!visible) {
-        newHeight = index.get(0).scrollHeight;
-    }
-    index.animate({
-        height: newHeight
-    }, {
-        duration: 200,
-        complete: function() {
-            if (newHeight > 0) {
-                index.css({
-                    height: 'auto'
-                });
-            }
-        }
-    });
-    MetaCPAN.storage.setItem('hideTOC', (visible ? 1 : 0));
-    container.toggleClass('hide-index');
-    return false;
-}
-
 function setFavTitle(button) {
     button.attr('title', button.hasClass('active') ? 'Remove from favorites' : 'Add to favorites');
     return;
@@ -298,25 +272,54 @@ $(document).ready(function() {
 
     $('.dropdown-toggle').dropdown();
 
-    function format_index(index) {
-        index.wrap('<div id="index-container"><div class="index-border"></div></div>');
-        var container = index.parent().parent();
-
-        var index_hidden = MetaCPAN.storage.getItem('hideTOC') == 1;
-        index.before(
-            '<div class="index-header"><b>Contents</b>' + ' [ <button class="btn-link toggle-index"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ] </div>');
-
-        $('.toggle-index').on('click', function(e) {
-            e.preventDefault();
-            toggleTOC();
-        });
-        if (index_hidden) {
-            container.addClass("hide-index");
+    function format_toc(toc) {
+        'use strict';
+        if (MetaCPAN.storage.getItem('hideTOC') == 1) {
+            toc.classList.add("hide-toc");
         }
+
+        const toc_header = toc.querySelector('.toc-header');
+        const toc_body = toc.querySelector('ul');
+
+        toc_header.insertAdjacentHTML('beforeend',
+            ' [ <button class="btn-link toggle-toc"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]'
+        );
+        toc_header.querySelector('.toggle-toc').addEventListener('click', e => {
+            e.preventDefault();
+            const currentVisible = !toc.classList.contains('hide-toc');
+            MetaCPAN.storage.setItem('hideTOC', currentVisible ? 1 : 0);
+
+            const fullHeight = toc_body.scrollHeight;
+
+            if (currentVisible) {
+                const trans = toc_body.style.transition;
+                toc_body.style.transition = '';
+
+                requestAnimationFrame(() => {
+                    toc_body.style.height = fullHeight + 'px';
+                    toc_body.style.transition = trans;
+                    toc.classList.toggle('hide-toc');
+
+                    requestAnimationFrame(() => {
+                        toc_body.style.height = null;
+                    });
+                });
+            } else {
+                const finish = e => {
+                    toc_body.removeEventListener('transitionend', finish);
+                    toc_body.style.height = null;
+                };
+
+                toc_body.addEventListener('transitionend', finish);
+                toc_body.style.height = fullHeight + 'px';
+                toc.classList.toggle('hide-toc');
+            }
+        });
     }
-    var index = $("#index");
-    if (index.length) {
-        format_index(index);
+
+    let toc = document.querySelector(".content .toc")
+    if (toc) {
+        format_toc(toc);
     }
 
     $('a[href*="/search?"]').on('click', function() {
@@ -366,24 +369,28 @@ $(document).ready(function() {
             url: '/pod2html',
             method: 'POST',
             data: {
-                pod: pod,
-                raw: true
+                pod: pod
+            },
+            headers: {
+                Accept: "application/json"
             },
             success: function(data, stat, req) {
-                rendered.html(data);
-                loading.hide();
-                error.hide();
-                var res = $('#NAME + p').text().match(/^([^-]+?)\s*-\s*(.*)/);
-                if (res) {
-                    var title = res[0];
-                    var abstract = res[1];
-                    document.title = "Pod Renderer - " + title + " - metacpan.org";
-                }
-                var index = $("#index", rendered);
-                if (index.length) {
-                    format_index(index);
+                var title = data.pod_title;
+                var abstract = data.pod_abstract;
+                document.title = "Pod Renderer - " + title + " - metacpan.org";
+                rendered.html(
+                    '<nav class="toc"><div class="toc-header"><strong>Contents</strong></div>' +
+                    data.pod_index +
+                    '</nav>' +
+                    data.pod_html
+                );
+                var toc = $("nav", rendered);
+                if (toc.length) {
+                    format_toc(toc[0]);
                 }
                 create_anchors(rendered);
+                loading.hide();
+                error.hide();
                 rendered.show();
                 submit.removeAttr("disabled");
             },

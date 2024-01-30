@@ -2,8 +2,7 @@ package MetaCPAN::Web::Controller::Pod;
 
 use Moose;
 
-use Future                    ();
-use MetaCPAN::Web::RenderUtil qw( filter_html );
+use Future ();
 
 use namespace::autoclean;
 
@@ -38,55 +37,34 @@ sub view : Private {
 
     my $data       = $c->stash->{file};
     my $permalinks = $c->stash->{permalinks};
+    my $release    = $c->stash->{release};
 
     if ( $data->{directory} ) {
         $c->res->redirect( $c->uri_for( '/source', @path ), 301 );
         $c->detach;
     }
 
-    my ( $documentation, $assoc_pod, $documented_module )
-        = map { $_->{name}, $_->{associated_pod}, $_ }
-        grep  { @path > 1 || $path[0] eq $_->{name} }
-        grep {
-              !$data->{documentation}
-            || $data->{documentation} eq $_->{name}
-        }
-        grep { $_->{associated_pod} } @{ $data->{module} || [] };
+    $c->detach('/not_found')
+        unless $data->{name};
 
-    $data->{documentation} = $documentation if $documentation;
-
-    if (   $assoc_pod
-        && $assoc_pod ne "$data->{author}/$data->{release}/$data->{path}" )
-    {
-        $data->{pod_path}
-            = $assoc_pod =~ s{^\Q$data->{author}/$data->{release}/}{}r;
-    }
-
-    $c->detach('/not_found') unless ( $data->{name} );
-
-    my $pod_path = '/pod/' . ( $assoc_pod || join( '/', @path ) );
-
-    my $pod = $c->model('API')->request(
-        $pod_path,
-        undef,
-        {
-            show_errors => 1,
-            ( $permalinks ? ( permalinks => 1 ) : () ),
-            url_prefix => '/pod/',
-        }
-    )->get;
-    $c->detach('/not_found') if ( $pod->{code} || 0 ) > 399;
-
-    my $pod_html = filter_html( $pod->{raw}, $data );
-
-    my $release = $c->stash->{release};
+    my $documented_module = $data->{documented_module};
 
     my $canonical
         = (    $documented_module
             && $documented_module->{authorized}
             && $documented_module->{indexed} )
-        ? "/pod/$documentation"
+        ? "/pod/$data->{documentation}"
         : "/dist/$release->{distribution}/view/$data->{path}";
+
+    my $pod = $c->model('API::Pod')->file_pod(
+        $data,
+        {
+            permalinks => $permalinks,
+        }
+    )->get;
+
+    $c->detach('/not_found')
+        if ( $pod->{code} || 0 ) > 399;
 
     # Store at fastly for a year - as we will purge!
     $c->cdn_max_age('1y');
@@ -100,12 +78,13 @@ sub view : Private {
     $c->stash( {
         canonical         => $canonical,
         documented_module => $documented_module,
-        pod               => $pod_html,
+        pod               => $pod->{pod_html},
+        pod_index         => $pod->{pod_index},
         template          => 'pod.tx',
     } );
 
     unless ( $pod->{raw} ) {
-        $c->stash( pod_error => $pod->{message}, );
+        $c->stash( pod_error => $pod->{message} );
     }
 }
 

@@ -80,7 +80,7 @@ sub modules {
             $data->{modules} = $modules;
         }
         Future->done($data);
-    } )->then( $self->_groom_fileinfo('modules') );
+    } )->then( $self->_groom_fileinfo( ['modules'] ) );
 }
 
 sub find {
@@ -118,7 +118,7 @@ sub reverse_dependencies {
 sub interesting_files {
     my ( $self, $author, $release ) = @_;
     $self->request("/release/interesting_files/$author/$release")
-        ->then( $self->_groom_fileinfo('files') );
+        ->then( $self->_groom_fileinfo( ['files'] ) );
 }
 
 sub versions {

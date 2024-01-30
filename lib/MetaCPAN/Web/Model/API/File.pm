@@ -6,7 +6,7 @@ with 'MetaCPAN::Web::Role::FileData';
 sub get {
     my ( $self, @path ) = @_;
     $self->request( '/file/' . join( '/', @path ) )
-        ->then( $self->_groom_fileinfo );
+        ->then( $self->_groom_fileinfo( [], \@path ) );
 }
 
 sub source {
@@ -31,7 +31,7 @@ sub dir {
             }
             return $dir;
         }
-    )->then( $self->_groom_fileinfo('dir') );
+    )->then( $self->_groom_fileinfo( ['dir'] ) );
 }
 
 __PACKAGE__->meta->make_immutable;

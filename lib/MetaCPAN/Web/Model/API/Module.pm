@@ -27,7 +27,7 @@ it under the same terms as Perl itself.
 sub find {
     my ( $self, @path ) = @_;
     $self->request( '/module/' . join( '/', @path ) )
-        ->then( $self->_groom_fileinfo );
+        ->then( $self->_groom_fileinfo( [], \@path ) );
 }
 
 sub autocomplete {
@@ -46,7 +46,7 @@ sub search_web {
     $self->request( '/search/web', undef,
         { q => $query, size => $page_size // 20, from => $from // 0 } )
         ->then( $self->add_river( sub { @{ $_[0]{results} || [] } } ) )
-        ->then( $self->_groom_fileinfo( 'results', 'hits' ) );
+        ->then( $self->_groom_fileinfo( [ 'results', 'hits' ] ) );
 }
 
 sub first {
