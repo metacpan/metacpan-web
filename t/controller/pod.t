@@ -57,6 +57,25 @@ test_psgi app, sub {
     is( $res->code, 301, '301 on lowercase author name' );
     my $location = $res->headers->header('location') =~ s{^http://[^/]+}{}r;
     is( $location, $this, 'redirect to uppercase author name' );
+
+    subtest 'split pod' => sub {
+        my $res = $cb->(
+            GET '/release/KHW/Pod-Simple-3.45/view/lib/Pod/Simple.pm' );
+        is( $res->code, 200, 'found Pod::Simple pod' );
+
+        my $tx = tx($res);
+        $tx->like(
+            '//h1[@id="NAME"]/following-sibling::p//text()',
+            qr/framework for parsing Pod/,
+            'contains pod content'
+        );
+        $tx->is(
+            '//a[text()="Pod Source"]/@href',
+            '/release/KHW/Pod-Simple-3.45/source/lib/Pod/Simple.pod',
+            'contains link to pod'
+        );
+    };
+
 };
 
 done_testing;
