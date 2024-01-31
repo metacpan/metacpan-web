@@ -14,13 +14,13 @@ sub file_pod {
 
     $opts ||= {};
 
-    my $pod_path
-        = '/pod/'
-        . ( $file->{assoc_pod}
-            || "$file->{author}/$file->{release}/$file->{path}" );
+    my $pod_path = join '/',
+        $file->{author},
+        $file->{release},
+        $file->{pod_path} || $file->{path};
 
     return $self->request(
-        $pod_path,
+        "/pod/$pod_path",
         undef,
         {
             show_errors => 1,
