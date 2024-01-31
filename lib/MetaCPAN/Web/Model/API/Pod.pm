@@ -5,6 +5,7 @@ use namespace::autoclean;
 use MetaCPAN::Web::RenderUtil qw( split_index filter_html );
 use Encode                    qw( encode );
 use Future                    ();
+use HTML::TokeParser          ();
 
 extends 'MetaCPAN::Web::Model::API';
 
