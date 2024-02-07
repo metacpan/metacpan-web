@@ -40,6 +40,14 @@ RUN mkdir var && chown metacpan:users var
 
 USER metacpan
 
-EXPOSE 5001
+CMD [ \
+    "/usr/bin/uwsgi", \
+    "--plugins", "psgi", \
+    "--uwsgi-socket", ":3031", \
+    "--http-socket", ":80", \
+    "--http-socket-modifier1", "5", \
+    "--ini", "/metacpan-web/servers/uwsgi.ini", \
+    "--psgi", "app.psgi" \
+]
 
-CMD ["plackup", "-p", "5001", "-r"]
+EXPOSE 80 3031
