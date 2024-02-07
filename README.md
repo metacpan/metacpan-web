@@ -24,7 +24,7 @@ If you prefer not to use Docker, the following commands will get you started:
 ## Installing Manually
 
     carton install
-    yarn install
+    npm install
     export PATH="$(realpath ./node_modules/.bin):$PATH"
 
 ### Installing on macOS
