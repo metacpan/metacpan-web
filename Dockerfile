@@ -13,7 +13,7 @@ RUN \
     apt update
     apt install -y -f --no-install-recommends nodejs
     npm install -g npm
-    apt install -y -f libcmark-dev dumb-init
+    apt install -y -f libcmark-dev
 EOT
 
 WORKDIR /metacpan-web/
@@ -39,9 +39,14 @@ RUN mkdir var && chown metacpan:users var
 
 USER metacpan
 
-EXPOSE 5001
+CMD [ \
+    "/usr/bin/uwsgi", \
+    "--plugins", "psgi", \
+    "--uwsgi-socket", ":3031", \
+    "--http-socket", ":80", \
+    "--http-socket-modifier1", "5", \
+    "--ini", "/metacpan-web/servers/uwsgi.ini", \
+    "--psgi", "app.psgi" \
+]
 
-# Runs "/usr/bin/dumb-init -- /my/script --with --args"
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-
-CMD ["plackup", "-p", "5001", "-r"]
+EXPOSE 80 3031
