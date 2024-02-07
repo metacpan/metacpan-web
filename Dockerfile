@@ -4,31 +4,40 @@ ARG CPM_ARGS=--with-test
 
 ENV NO_UPDATE_NOTIFIER=1
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN \
+    --mount=type=cache,target=/var/cache/apt,sharing=private \
+    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
+    --mount=type=cache,target=/root/.npm,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    curl -fsSL https://deb.nodesource.com/setup_21.x | bash -
+    apt update
+    apt install -y -f --no-install-recommends nodejs
+    npm install -g npm
+    apt install -y -f libcmark-dev dumb-init
+EOT
 
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
-    && apt-get update \
-    && apt-get install -y -f --no-install-recommends libcmark-dev dumb-init nodejs \
-    && apt-get clean \
-    && npm install -g npm \
-    && rm -rf /var/lib/apt/lists/* /root/.npm
+WORKDIR /metacpan-web/
+RUN chown metacpan:users /metacpan-web/
 
-WORKDIR /metacpan-web
-
-COPY package.json package-lock.json .
-RUN npm install --verbose && npm cache clean --force
+COPY --chown=metacpan:users package.json package-lock.json .
+RUN \
+    --mount=type=cache,target=/root/.npm,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    npm install --verbose
+    npm audit fix
+EOT
 
 COPY --chown=metacpan:users cpanfile cpanfile.snapshot .
-RUN cpanm --notest App::cpm \
-    && cpm install -g Carton \
-    && useradd -m metacpan-web -g users \
-    && cpm install -g ${CPM_ARGS}\
-    && rm -fr /root/.cpanm /root/.perl-cpm /tmp/*
+RUN \
+    --mount=type=cache,target=/root/.perl-cpm,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    cpm install -g ${CPM_ARGS}
+EOT
 
-COPY . /metacpan-web/
-RUN chown -R metacpan-web:users /metacpan-web
+COPY --chown=metacpan:users . .
+RUN mkdir var && chown metacpan:users var
 
-USER metacpan-web:users
+USER metacpan
 
 EXPOSE 5001
 
