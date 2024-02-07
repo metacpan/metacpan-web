@@ -13,17 +13,19 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
     && npm install -g npm
     && rm -rf /var/lib/apt/lists/* /root/.npm
 
-COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
+COPY package.json package-lock.json .
 RUN npm install --verbose && npm cache clean --force
 
+COPY --chown=metacpan:users cpanfile cpanfile.snapshot .
 RUN cpanm --notest App::cpm \
     && cpm install -g Carton \
     && useradd -m metacpan-web -g users \
     && cpm install -g ${CPM_ARGS}\
     && rm -fr /root/.cpanm /root/.perl-cpm /tmp/*
 
+COPY . /metacpan-web/
 RUN chown -R metacpan-web:users /metacpan-web
 
 USER metacpan-web:users
