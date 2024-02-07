@@ -1,0 +1,48 @@
+server {
+    listen 80;
+
+    error_log /dev/stderr info;
+    access_log off;
+
+    gzip             on;
+    gzip_proxied     any;
+    gzip_vary        on;
+    gzip_types       text/plain application/xml application/json application/javascript text/css image/svg+xml application/x-javascript;
+    gzip_disable     "MSIE [1-6]\.";
+    gzip_comp_level  4;
+
+    root   /usr/share/nginx/html;
+
+    rewrite ^()$ $1/ permanent;
+    rewrite ^/(.*)/$ /$1 permanent;
+
+    location ~ ^/static/(images|icons|fonts|modules)/ {
+        add_header Cache-Control "public, max-age=${NGINX_STATIC_CACHE}, immutable";
+        add_header Surrogate-Key "assets";
+        add_header Surrogate-Control "max-age=31536000";
+
+        try_files $uri =404;
+    }
+
+    location ^~ /static/ {
+        add_header Cache-Control "public, max-age=86400, immutable";
+        add_header Surrogate-Key "assets";
+        add_header Surrogate-Control "max-age=31536000";
+
+        try_files $uri =404;
+    }
+
+    location / {
+        ${NGINX_UPSTREAM}_pass ${NGINX_UPSTREAM_ADDRESS};
+
+        proxy_redirect off;
+        proxy_set_header   Host                 $host;
+        proxy_set_header   X-Real-IP            $remote_addr;
+        proxy_set_header   X-Forwarded-For      $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Port     $server_port;
+        proxy_set_header   X-Forwarded-Host     $host;
+        proxy_set_header   X-Forwarded-Proto    $scheme;
+
+        include uwsgi_params;
+    }
+}
