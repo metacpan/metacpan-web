@@ -17,7 +17,6 @@
     "js-beautify": "^1.10.2"
   },
   "dependencies": {
-    "less": "^4.1.2",
-    "yarn": "^1.22.0"
+    "less": "^4.1.2"
   }
 }

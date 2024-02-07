@@ -2,20 +2,21 @@ FROM metacpan/metacpan-base:latest
 
 ARG CPM_ARGS=--with-test
 
+ENV NO_UPDATE_NOTIFIER=1
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
-    && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y -f --no-install-recommends libcmark-dev nodejs yarn=1.19.2-1 \
+    && apt-get install -y -f --no-install-recommends libcmark-dev nodejs \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && npm install -g npm
+    && rm -rf /var/lib/apt/lists/* /root/.npm
 
 COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
-RUN yarn install --verbose && yarn cache clean
+RUN npm install --verbose && npm cache clean --force
 
 RUN cpanm --notest App::cpm \
     && cpm install -g Carton \
