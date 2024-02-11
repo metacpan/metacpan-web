@@ -151,7 +151,7 @@ my $profile_data = {
     },
     hackerrank => {
         name       => 'HackerRank',
-        url_format => 'https://www.hackerrank.com/%s',
+        url_format => 'https://www.hackerrank.com/profile/%s',
     },
     hackthissite => {
         name       => 'HackThisSite',

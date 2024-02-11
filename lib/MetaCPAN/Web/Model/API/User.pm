@@ -62,7 +62,17 @@ sub update_profile {
 
 sub get_profile {
     my ( $self, $token ) = @_;
-    $self->request( '/user/profile', undef, { access_token => $token } );
+    $self->request( '/user/profile', undef, { access_token => $token } )
+        ->then( sub {
+        my $data = shift;
+        for my $field (qw(email website)) {
+            my $value = $data->{$field}
+                or next;
+            $data->{$field} = [$value]
+                if !ref $value;
+        }
+        return $data;
+        } );
 }
 
 sub add_favorite {
