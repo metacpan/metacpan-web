@@ -1,0 +1,37 @@
+services:
+  web:
+    build: .
+    volumes:
+      - './:/metacpan-web/'
+      - 'node_modules:/metacpan-web/node_modules'
+      - 'local_lib:/metacpan-web/local'
+    command: [
+      'plackup',
+      '-p', '80',
+      '-r',
+      '-R', 'metacpan_web.conf',
+      '-R', 'metacpan_web_local.conf',
+    ]
+  nginx:
+    image: nginx
+    configs:
+      - source: nginx_config
+        target: /etc/nginx/templates/default.conf.template
+    environment:
+      NGINX_ENVSUBST_FILTER: NGINX
+      NGINX_STATIC_CACHE: 0
+      NGINX_UPSTREAM: proxy
+      NGINX_UPSTREAM_ADDRESS: http://web/
+      #NGINX_UPSTREAM: uwsgi
+      #NGINX_UPSTREAM_ADDRESS: web:3031
+    ports:
+      - "8000:80"
+    volumes:
+      - './root/static:/usr/share/nginx/html/static'
+
+configs:
+  nginx_config:
+    file: servers/nginx.conf.template
+volumes:
+  node_modules:
+  local_lib:
