@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
     && curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get install -y -f --no-install-recommends libcmark-dev nodejs yarn=1.19.2-1 \
+    && apt-get install -y -f --no-install-recommends libcmark-dev dumb-init nodejs yarn=1.19.2-1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,5 +28,8 @@ RUN chown -R metacpan-web:users /metacpan-web
 USER metacpan-web:users
 
 EXPOSE 5001
+
+# Runs "/usr/bin/dumb-init -- /my/script --with --args"
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 CMD ["plackup", "-p", "5001", "-r"]
