@@ -552,6 +552,7 @@ function favDistribution(form) {
         type: 'POST',
         url: form.attr('action'),
         data: data,
+        dataType: 'json',
         success: function() {
             var button = form.find('button');
             button.toggleClass('active');

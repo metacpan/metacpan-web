@@ -16,7 +16,7 @@ extends 'Catalyst';
 
 __PACKAGE__->request_class_traits( [ qw(
     MetaCPAN::Web::Role::Request
-    Catalyst::TraitFor::Request::REST::ForBrowsers
+    Catalyst::TraitFor::Request::REST
 ) ] );
 
 __PACKAGE__->response_class_traits( [ qw(
