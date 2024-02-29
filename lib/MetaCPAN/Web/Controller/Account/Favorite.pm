@@ -5,7 +5,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub add : Local : Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( { current_view => 'JSON' } );
+    my $json = $c->req->accepts('application/json');
+    $c->stash( { current_view => 'JSON' } )
+        if $json;
     $c->detach('/forbidden') unless ( $c->req->method eq 'POST' );
     my $user = $c->user;
     $c->detach('/forbidden') unless $user;
@@ -24,16 +26,16 @@ sub add : Local : Args(0) {
     $c->purge_author_key( $data->{author} )     if $data->{author};
     $c->purge_dist_key( $data->{distribution} ) if $data->{distribution};
 
-    if ( $c->req->looks_like_browser ) {
+    if ($json) {
+        $c->res->code(400) if ( $res->{error} );
+        $c->stash->{json}{success} = $res->{error} ? \0 : \1;
+    }
+    else {
         $c->res->redirect(
               $res->{error}
             ? $c->req->referer
             : $c->uri_for('/account/turing/index')
         );
-    }
-    else {
-        $c->res->code(400) if ( $res->{error} );
-        $c->stash->{json}{success} = $res->{error} ? \0 : \1;
     }
 }
 

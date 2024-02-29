@@ -10,7 +10,7 @@ requires 'Catalyst::Model';
 requires 'Catalyst::Plugin::Authentication';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
-requires 'Catalyst::TraitFor::Request::REST::ForBrowsers';
+requires 'Catalyst::TraitFor::Request::REST';
 requires 'Catalyst::View::JSON';
 requires 'Catalyst::View::Xslate';
 requires 'CatalystX::Fastly::Role::Response', '0.06';
