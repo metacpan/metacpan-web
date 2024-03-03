@@ -142,12 +142,12 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  B-Hooks-EndOfScope-0.26
-    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.26.tar.gz
+  B-Hooks-EndOfScope-0.28
+    pathname: E/ET/ETHER/B-Hooks-EndOfScope-0.28.tar.gz
     provides:
-      B::Hooks::EndOfScope 0.26
-      B::Hooks::EndOfScope::PP 0.26
-      B::Hooks::EndOfScope::XS 0.26
+      B::Hooks::EndOfScope 0.28
+      B::Hooks::EndOfScope::PP 0.28
+      B::Hooks::EndOfScope::XS 0.28
     requirements:
       ExtUtils::MakeMaker 0
       Hash::Util::FieldHash 0
