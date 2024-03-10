@@ -1890,12 +1890,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       version 0
-  HTML-Tagset-3.20
-    pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
+  HTML-Tagset-3.22
+    pathname: P/PE/PETDANCE/HTML-Tagset-3.22.tar.gz
     provides:
-      HTML::Tagset 3.20
+      HTML::Tagset 3.22
     requirements:
       ExtUtils::MakeMaker 0
+      perl 5.010001
   HTML-Tree-5.07
     pathname: K/KE/KENTNL/HTML-Tree-5.07.tar.gz
     provides:
@@ -2085,10 +2086,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  HTTP-Tinyish-0.18
-    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.18.tar.gz
+  HTTP-Tinyish-0.19
+    pathname: M/MI/MIYAGAWA/HTTP-Tinyish-0.19.tar.gz
     provides:
-      HTTP::Tinyish 0.18
+      HTTP::Tinyish 0.19
       HTTP::Tinyish::Base undef
       HTTP::Tinyish::Curl undef
       HTTP::Tinyish::HTTPTiny undef
@@ -2373,36 +2374,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.77
-    pathname: S/SB/SBECK/Locale-Codes-3.77.tar.gz
+  Locale-Codes-3.78
+    pathname: S/SB/SBECK/Locale-Codes-3.78.tar.gz
     provides:
-      Locale::Codes 3.77
-      Locale::Codes::Constants 3.77
-      Locale::Codes::Country 3.77
-      Locale::Codes::Country_Codes 3.77
-      Locale::Codes::Country_Retired 3.77
-      Locale::Codes::Currency 3.77
-      Locale::Codes::Currency_Codes 3.77
-      Locale::Codes::Currency_Retired 3.77
-      Locale::Codes::LangExt 3.77
-      Locale::Codes::LangExt_Codes 3.77
-      Locale::Codes::LangExt_Retired 3.77
-      Locale::Codes::LangFam 3.77
-      Locale::Codes::LangFam_Codes 3.77
-      Locale::Codes::LangFam_Retired 3.77
-      Locale::Codes::LangVar 3.77
-      Locale::Codes::LangVar_Codes 3.77
-      Locale::Codes::LangVar_Retired 3.77
-      Locale::Codes::Language 3.77
-      Locale::Codes::Language_Codes 3.77
-      Locale::Codes::Language_Retired 3.77
-      Locale::Codes::Script 3.77
-      Locale::Codes::Script_Codes 3.77
-      Locale::Codes::Script_Retired 3.77
-      Locale::Country 3.77
-      Locale::Currency 3.77
-      Locale::Language 3.77
-      Locale::Script 3.77
+      Locale::Codes 3.78
+      Locale::Codes::Constants 3.78
+      Locale::Codes::Country 3.78
+      Locale::Codes::Country_Codes 3.78
+      Locale::Codes::Country_Retired 3.78
+      Locale::Codes::Currency 3.78
+      Locale::Codes::Currency_Codes 3.78
+      Locale::Codes::Currency_Retired 3.78
+      Locale::Codes::LangExt 3.78
+      Locale::Codes::LangExt_Codes 3.78
+      Locale::Codes::LangExt_Retired 3.78
+      Locale::Codes::LangFam 3.78
+      Locale::Codes::LangFam_Codes 3.78
+      Locale::Codes::LangFam_Retired 3.78
+      Locale::Codes::LangVar 3.78
+      Locale::Codes::LangVar_Codes 3.78
+      Locale::Codes::LangVar_Retired 3.78
+      Locale::Codes::Language 3.78
+      Locale::Codes::Language_Codes 3.78
+      Locale::Codes::Language_Retired 3.78
+      Locale::Codes::Script 3.78
+      Locale::Codes::Script_Codes 3.78
+      Locale::Codes::Script_Retired 3.78
+      Locale::Country 3.78
+      Locale::Currency 3.78
+      Locale::Language 3.78
+      Locale::Script 3.78
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
