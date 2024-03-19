@@ -301,15 +301,13 @@ As a small open source group of developers we have several things that cost mone
             account. It provides a simple yet powerful interface for managing
             email accounts, security, domains, databases, and more. cPanel was
             originally written (in Perl!) by Nick Koston in 1997. cPanel (the
-            company) now employees over 200 people, and Nick is their CEO.
-            They've been using Perl for nearly 20 years now, and have long
-            been supporters of Perl and its community. You may recognise some
-            of their developers who are CPAN authors: Todd Rinaldo (<a
-            target="_blank" rel="noopener nofollow"
+            company) now employs over 200 people. They've been using Perl
+            for nearly 20 years now, and have long been supporters of Perl and
+            its community. You may recognise some of their developers who are
+            CPAN authors: Todd Rinaldo (<a target="_blank" rel="noopener nofollow"
             href="https://metacpan.org/author/TODDR">TODDR</a>), Xan
             Hilmisdóttir (<a target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/XAN">XAN</a>), and others. Their
-            CEO, Nick, still develops in Perl today.
+            href="https://metacpan.org/author/XAN">XAN</a>), and others.
           </p>
         </td>
       </tr>
