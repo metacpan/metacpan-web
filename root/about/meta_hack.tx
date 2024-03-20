@@ -29,7 +29,7 @@
       </div>
       <div class="col-sm-10 col-xs-12">
                   <p>
-<a href="https://cpanel.com/" target="_blank" rel="noopener">cPanel</a> is a web-based control panel for managing a web hosting account. It provides a simple yet powerful interface for managing email accounts, security, domains, databases, and more. cPanel was originally written (in Perl!) by Nick Koston in 1997. cPanel (the company) now employees over 200 people, and Nick is their CEO. They've been using Perl for nearly 20 years now, and have long been supporters of Perl and its community. You may recognise some of their developers who are CPAN authors: Todd Rinaldo (<a href="https://metacpan.org/author/TODDR">TODDR</a>), Xan Hilmisdóttir (<a href="https://metacpan.org/author/XAN">XAN</a>), and others. Their CEO, Nick, still develops in Perl today.
+<a href="https://cpanel.com/" target="_blank" rel="noopener">cPanel</a> is a web-based control panel for managing a web hosting account. It provides a simple yet powerful interface for managing email accounts, security, domains, databases, and more. cPanel was originally written (in Perl!) by Nick Koston in 1997. cPanel (the company) now employs over 200 people. They've been using Perl for nearly 20 years now, and have long been supporters of Perl and its community. You may recognise some of their developers who are CPAN authors: Todd Rinaldo (<a href="https://metacpan.org/author/TODDR">TODDR</a>), Xan Hilmisdóttir (<a href="https://metacpan.org/author/XAN">XAN</a>), and others.
                   </p>
       </div>
     </div>
