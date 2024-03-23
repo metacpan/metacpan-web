@@ -124,11 +124,13 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
-          <!--
           <div class="top-notify-banner">
             <i class="fas fa-info-circle"></i>
+              The Perl Toolchain Summit needs more sponsors. If your company
+              depends on Perl, <a targe="_blank"
+              href="https://perltoolchainsummit.org/pts2024/PTS2024-Sponsor-Prospectus.pdf">please
+            support this very important event</a>.
           </div>
-          -->
           <nav class="sidebar">
             %%  block left_nav -> {
             <div class="slidepanel">
@@ -203,7 +205,7 @@
                 <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
               </a>
               <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener">
-                <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly logo">
+
               </a>
               <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener">
                 <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
