@@ -5884,10 +5884,10 @@ DISTRIBUTIONS
       POSIX 0
       Test::More 0
       Time::HiRes 0
-  Variable-Magic-0.63
-    pathname: V/VP/VPIT/Variable-Magic-0.63.tar.gz
+  Variable-Magic-0.64
+    pathname: V/VP/VPIT/Variable-Magic-0.64.tar.gz
     provides:
-      Variable::Magic 0.63
+      Variable::Magic 0.64
     requirements:
       Carp 0
       Config 0
