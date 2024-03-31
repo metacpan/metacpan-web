@@ -1920,15 +1920,15 @@ DISTRIBUTIONS
       base 0
       integer 0
       perl 5.008
-  HTTP-Body-1.22
-    pathname: G/GE/GETTY/HTTP-Body-1.22.tar.gz
+  HTTP-Body-1.23
+    pathname: G/GE/GETTY/HTTP-Body-1.23.tar.gz
     provides:
-      HTTP::Body 1.22
-      HTTP::Body::MultiPart 1.22
-      HTTP::Body::OctetStream 1.22
-      HTTP::Body::UrlEncoded 1.22
-      HTTP::Body::XForms 1.22
-      HTTP::Body::XFormsMultipart 1.22
+      HTTP::Body 1.23
+      HTTP::Body::MultiPart 1.23
+      HTTP::Body::OctetStream 1.23
+      HTTP::Body::UrlEncoded 1.23
+      HTTP::Body::XForms 1.23
+      HTTP::Body::XFormsMultipart 1.23
     requirements:
       Carp 0
       Digest::MD5 0
@@ -5773,56 +5773,56 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.27
-    pathname: O/OA/OALDERS/URI-5.27.tar.gz
+  URI-5.28
+    pathname: O/OA/OALDERS/URI-5.28.tar.gz
     provides:
-      URI 5.27
-      URI::Escape 5.27
-      URI::Heuristic 5.27
-      URI::IRI 5.27
-      URI::QueryParam 5.27
-      URI::Split 5.27
-      URI::URL 5.27
-      URI::WithBase 5.27
-      URI::data 5.27
-      URI::file 5.27
-      URI::file::Base 5.27
-      URI::file::FAT 5.27
-      URI::file::Mac 5.27
-      URI::file::OS2 5.27
-      URI::file::QNX 5.27
-      URI::file::Unix 5.27
-      URI::file::Win32 5.27
-      URI::ftp 5.27
-      URI::geo 5.27
-      URI::gopher 5.27
-      URI::http 5.27
-      URI::https 5.27
-      URI::icap 5.27
-      URI::icaps 5.27
-      URI::ldap 5.27
-      URI::ldapi 5.27
-      URI::ldaps 5.27
-      URI::mailto 5.27
-      URI::mms 5.27
-      URI::news 5.27
-      URI::nntp 5.27
-      URI::nntps 5.27
-      URI::pop 5.27
-      URI::rlogin 5.27
-      URI::rsync 5.27
-      URI::rtsp 5.27
-      URI::rtspu 5.27
-      URI::sftp 5.27
-      URI::sip 5.27
-      URI::sips 5.27
-      URI::snews 5.27
-      URI::ssh 5.27
-      URI::telnet 5.27
-      URI::tn3270 5.27
-      URI::urn 5.27
-      URI::urn::isbn 5.27
-      URI::urn::oid 5.27
+      URI 5.28
+      URI::Escape 5.28
+      URI::Heuristic 5.28
+      URI::IRI 5.28
+      URI::QueryParam 5.28
+      URI::Split 5.28
+      URI::URL 5.28
+      URI::WithBase 5.28
+      URI::data 5.28
+      URI::file 5.28
+      URI::file::Base 5.28
+      URI::file::FAT 5.28
+      URI::file::Mac 5.28
+      URI::file::OS2 5.28
+      URI::file::QNX 5.28
+      URI::file::Unix 5.28
+      URI::file::Win32 5.28
+      URI::ftp 5.28
+      URI::geo 5.28
+      URI::gopher 5.28
+      URI::http 5.28
+      URI::https 5.28
+      URI::icap 5.28
+      URI::icaps 5.28
+      URI::ldap 5.28
+      URI::ldapi 5.28
+      URI::ldaps 5.28
+      URI::mailto 5.28
+      URI::mms 5.28
+      URI::news 5.28
+      URI::nntp 5.28
+      URI::nntps 5.28
+      URI::pop 5.28
+      URI::rlogin 5.28
+      URI::rsync 5.28
+      URI::rtsp 5.28
+      URI::rtspu 5.28
+      URI::sftp 5.28
+      URI::sip 5.28
+      URI::sips 5.28
+      URI::snews 5.28
+      URI::ssh 5.28
+      URI::telnet 5.28
+      URI::tn3270 5.28
+      URI::urn 5.28
+      URI::urn::isbn 5.28
+      URI::urn::oid 5.28
     requirements:
       Carp 0
       Cwd 0
