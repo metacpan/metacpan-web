@@ -24,8 +24,7 @@ sub by_user {
     $size ||= 250;
     return Future->done( [] )
         if !defined $user;
-    my $ret
-        = $self->request( "/favorite/by_user/$user", { size => $size } )
+    return $self->request( "/favorite/by_user/$user", { size => $size } )
         ->transform(
         done => sub {
             my $data = shift;
