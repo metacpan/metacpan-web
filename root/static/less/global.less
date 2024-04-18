@@ -462,3 +462,26 @@ h1, .h1, h2, .h2, h3, .h3 {
 .page-content * {
     scroll-margin-top: 60px;
 }
+
+@keyframes slide-down {
+  0%   { grid-template-rows: 0fr }
+  100% { grid-template-rows: 1fr }
+}
+@keyframes slide-up {
+  0%   { grid-template-rows: 1fr }
+  100% { grid-template-rows: 0fr }
+}
+.slide-out {
+    display: grid;
+    grid-template-rows: 1fr;
+}
+.slide-out.slide-down {
+    animation: slide-down 0.4s;
+}
+.slide-out.slide-up {
+    animation: slide-up 0.4s;
+    grid-template-rows: 0fr;
+}
+.slide-out > div {
+    overflow: hidden;
+}

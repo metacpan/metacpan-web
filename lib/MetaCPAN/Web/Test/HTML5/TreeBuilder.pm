@@ -55,6 +55,7 @@ sub start {
         local $HTML::TreeBuilder::isBodyElement{source}     = 1;
         local $HTML::TreeBuilder::isBodyElement{summary}    = 1;
         local $HTML::TreeBuilder::isBodyElement{svg}        = 1;
+        local $HTML::TreeBuilder::isBodyElement{template}   = 1;
         local $HTML::TreeBuilder::isBodyElement{time}       = 1;
         local $HTML::TreeBuilder::isBodyElement{track}      = 1;
         local $HTML::TreeBuilder::isBodyElement{video}      = 1;

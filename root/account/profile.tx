@@ -8,7 +8,7 @@
     </div>
     %%  }
     %%  else {
-    <form method="POST" action="" class="form-horizontal" role="form" accept-charset="utf-8">
+    <form method="POST" action="" class="profile-form form-horizontal" role="form" accept-charset="utf-8">
         <input type="hidden" name="utf8" value="🐪" />
         %%  if $errors {
         <fieldset><legend style="color: #600">Errors</legend>
@@ -58,19 +58,23 @@
                     <div class="form-group">
                         <label class="col-sm-4 col-md-4 control-label">Email</label>
                         <div class="col-sm-8 col-md-6">
-                            <div class="input-group">
-                                <input type="email" class="form-control" name="email" value="[% $author.email.0 %]" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary search-btn" type="button" onclick="return addField('email')">add</button>
-                                </span>
+                            <div class="field-container">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email" value="[% $author.email.0 %]" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary search-btn add-field" type="button" data-field-type="email">add</button>
+                                    </span>
+                                </div>
                             </div>
                             %%  for $author.email -> $email {
                                 %%  if $~email.is_first { next }
-                            <div class="input-group">
-                                <input type="email" class="form-control" name="email" value="[% $email %]" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary search-btn" type="button" onclick="return removeDiv(this)">remove</button>
-                                </span>
+                            <div class="field-container">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email" value="[% $email %]" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
+                                    </span>
+                                </div>
                             </div>
                             %%  }
                         </div>
@@ -80,19 +84,23 @@
                     <div class="form-group">
                         <label class="col-sm-4 col-md-4 control-label">Website</label>
                         <div class="col-sm-8 col-md-6">
-                            <div class="input-group">
-                                <input type="url" class="form-control" name="website" value="[% $author.website.0 %]" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary search-btn" type="button" onclick="return addField('website')">add</button>
-                                </span>
+                            <div class="field-container">
+                                <div class="input-group">
+                                    <input type="url" class="form-control" name="website" value="[% $author.website.0 %]" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary search-btn add-field" data-field-type="website" type="button">add</button>
+                                    </span>
+                                </div>
                             </div>
                             %%  for $author.website -> $website {
                                 %%  if $~website.is_first { next }
-                            <div class="input-group">
-                                <input type="url" class="form-control" name="website" value="[% $website %]" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary search-btn" type="button" href="" onclick="return removeDiv(this)">remove</a></button>
-                                </span>
+                            <div class="field-container">
+                                <div class="input-group">
+                                    <input type="url" class="form-control" name="website" value="[% $website %]" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-primary search-btn remove-field" type="button" href="">raemove</a></button>
+                                    </span>
+                                </div>
                             </div>
                             %%  }
                         </div>
@@ -173,7 +181,7 @@
                         <input class="input-small form-control" type="text" placeholder="Latitude" name="latitude" value="[% $author.location.0 %]" />
                         <input class="input-small form-control" type="text" placeholder="Longitude" name="longitude" value="[% $author.location.1 %]" />
                         <span class="input-group-btn">
-                            <button class="btn btn-primary search-btn" type="button" onclick="return fillLocation()">locate me</button>
+                            <button class="btn btn-primary search-btn fill-location" type="button">locate me</button>
                         </span>
                         </div>
                     </div>
@@ -188,48 +196,47 @@
             <div class="form-group profile">
                 <label class="col-sm-4 col-md-4"></label>
                 <div class="col-sm-8 col-md-6">
-                    <select class="form-control" onchange="return addProfile(this)">
+                    <select class="form-control add-profile">
                         <option>Add Profile</option>
                         %%  for $profiles.kv() -> $profile {
-                            %%  my $option_value = {
-                            %%      id => $profile.key,
-                            %%      name => $profile.value.name,
-                            %%      url => $profile.value.url_format,
-                            %%  };
-                        <option value="[% $option_value.json() %]">[% $profile.value.name %]</option>
+                        <option value="[% $profile.key %]" data-title="[% $profile.value.name %]" data-url-format="[ $profile.value.url_format %]">[% $profile.value.name %]</option>
                         %%  }
                         <option value="">Custom...</option>
                     </select>
                 </div>
             </div>
             <div id="metacpan_profiles" class="profiles">
-                <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
-                    <label class="col-sm-4 col-md-4 control-label">metacpan</label>
-                    <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" value="[% $author.user %]" disabled="disabled" />
+                <div class="profile-container">
+                    <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
+                        <label class="col-sm-4 col-md-4 control-label">metacpan</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="text" class="form-control" value="[% $author.user %]" disabled="disabled" />
+                        </div>
                     </div>
                 </div>
                 %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
                     %%  my $known = $profiles[$profile.name];
-                <div class="form-group [% if $known { %]profile profile-[% $profile.name %][% } %]">
-                    <label class="col-sm-4 col-md-4 control-label">
-                        %%  if $known {
-                        [% $known.name %]
-                        <input type="hidden" name="profile.name" value="[% $profile.name %]" />
-                        %%  }
-                        %%  else {
-                        <input class="input-small" type="text" class="form-control" name="profile.name" value="[% $profile.name %]">
-                        %%  }
-                    </label>
-                    <div class="col-sm-8 col-md-6">
-                        <div class="input-group">
-                            <input class="small form-control" type="text" class="form-control" name="profile.id" value="[% $profile.id %]" />
-                            <span class="input-group-btn">
-                            <a href="" class="btn btn-danger remove" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-alt"></i> remove</a>
+                <div class="profile-container">
+                    <div class="form-group [% if $known { %]profile profile-[% $profile.name %][% } %]">
+                        <label class="col-sm-4 col-md-4 control-label">
                             %%  if $known {
-                            <a href="" class="btn btn-primary search-btn" target="_blank" tmpl="[% $known.url_format %]" onclick="return rewriteURL(this)"><i class="fa fa-check-square"></i> check</a>
-                            </span>
+                            [% $known.name %]
+                            <input type="hidden" name="profile.name" value="[% $profile.name %]" />
                             %%  }
+                            %%  else {
+                            <input class="input-small" type="text" class="form-control" name="profile.name" value="[% $profile.name %]">
+                            %%  }
+                        </label>
+                        <div class="col-sm-8 col-md-6">
+                            <div class="input-group">
+                                <input class="small form-control" type="text" class="form-control" name="profile.id" value="[% $profile.id %]" />
+                                <span class="input-group-btn">
+                                <a href="" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt"></i> remove</a>
+                                %%  if $known {
+                                <a href="" class="btn btn-primary search-btn check-url" target="_blank" data-url-template="[% $known.url_format %]"><i class="fa fa-check-square"></i> check</a>
+                                </span>
+                                %%  }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,106 +246,45 @@
         </div>
     </fieldset>
 
-    <fieldset><legend>Extra</legend>
+    <fieldset>
+        <legend>Extra</legend>
         <p>Any additional data you want to add to your profiles goes in here (JSON format).</p>
-        <textarea name="extra" class="form-control" rows="10" onkeyup="validateJSON(this)">[% $author.extra.json_pretty() %]</textarea><div class="valid">invalid</div>
+        <textarea name="extra" class="form-control" rows="10">[% $author.extra.json_pretty() %]</textarea>
     </fieldset>
     <br />
     <input type="submit" value="Save Profile" class="btn btn-primary btn-large search-btn" />
     </form>
     %%  }
 
-<script>
+    <template id="profile-tmpl">
+      <div class="slide-out slide-down profile-container"><div>
+        <div class="form-group">
+          <label class="col-sm-4 col-md-4 control-label">
+            <span class="profile-title"></span>
+            <input placeholder="Profile name" class="input-small" type="text" class="form-control" name="profile.name" />
+          </label>
+          <div class="col-sm-8 col-md-6">
+            <div class="input-group">
+              <input type="text" class="form-control" name="profile.id" />
+              <span class="input-group-btn">
+                <a href="" class="btn btn-danger remove-profile" class="check"><i class="fa fa-trash-alt"></i> remove</a>
+                <a href="" class="btn btn-primary search-btn check-url" data-url-template="" target="_blank"><i class="fa fa-check-square"></i> check</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </template>
 
-function addProfile(select) {
-    var value = select.value;
-    var profile = value ? JSON.parse(value) : null;
-    select.selectedIndex = 0;
-    var container = $('#metacpan_profiles');
-    var html = '<div style="display: none" class="form-group'
-    if (value) {
-        html += ' profile profile-' + profile.id;
-    }
-    html += '"><label class="col-sm-4 col-md-4 control-label">';
-    if(value) {
-        html += profile.name
-        + '<input type="hidden" name="profile.name" value="' + profile.id  + '" /> ';
-    } else {
-        html += '<input placeholder="Profile name" class="input-small" type="text" class="form-control" name="profile.name" /> ';
-    }
-    html += '</label>'
-    html += '<div class="col-sm-8 col-md-6"><div class="input-group">'
-        + '<input type="text" class="form-control" name="profile.id" /> '
-        + '<span class="input-group-btn"><a href="" class="btn btn-danger" class="check" onclick="return removeDiv(this.parentNode.parentNode.parentNode)"><i class="fa fa-trash-alt"></i> remove</a> ';
-    if (value) {
-        html += '<a href="" class="btn btn-primary search-btn" tmpl="' + profile.url + '" onclick="return rewriteURL(this)" target="_blank"><i class="fa fa-check-square"></i> check</a>';
-    }
-
-    html += '</span></div></div></div>';
-
-      container.append(html);
-      var add = container.children().last();
-      add.slideDown();
-}
-
-function rewriteURL(link) {
-    link = $(link);
-    var url = link.attr('tmpl');
-    var input = link.parent().prev();
-    link.attr('href', url.replace('%s', input.val()));
-    return true;
-}
-
-function removeDiv(link) {
-    $(link).parents('div').first().slideUp("normal", function(){$(this).remove()});
-    return false;
-}
-
-function removeLabel(link) {
-    $(link).parents('.controls').first().slideUp("normal", function(){$(this).remove()});
-    return false;
-}
-
-function validateJSON(text) {
-    var valid = $('.valid');
-    try {
-        text.value && JSON.parse(text.value);
-        valid.removeClass('invalid');
-    } catch(err) {
-        valid.addClass('invalid');
-    }
-}
-
-function addField(id) {
-    var input = $('input[name="' + id + '"]').last();
-    var container = input.parent().parent();
-    container.append('<div class="input-group"><input type="text" class="form-control" name="' + id + '" /><span class="input-group-btn"><button type="button" class="btn btn-primary search-btn" onclick="return removeDiv(this.parentNode)">remove</button></span></div>');
-    var add = container.children().last();
-    add.slideDown();
-    return false;
-}
-
-function fillLocation() {
-    navigator.geolocation.getCurrentPosition(function(pos) {
-        $('input[name="latitude"]').val(pos.coords.latitude);
-        $('input[name="longitude"]').val(pos.coords.longitude);
-    }, function(){
-    });
-    return false;
-}
-document.addEventListener('DOMContentLoaded', function () {
-    $(window).bind("resize", formFixer);
-    formFixer();
-});
-
-function formFixer( e ) {
-    if($(window).width()<=480){
-        $('form').removeClass('form-horizontal');
-    }
-    else{
-        $('form').addClass('form-horizontal');
-    }
-}
-</script>
+    <template id="field-tmpl">
+      <div class="slide-out slide-down field-container"><div>
+        <div class="input-group">
+          <input type="text" class="form-control" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-primary search-btn remove-field">remove</button>
+          </span>
+        </div>
+      </div></div>
+    </template>
 </div>
 %%  }
