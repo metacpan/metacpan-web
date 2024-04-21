@@ -1083,15 +1083,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.41
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.41.tar.gz
+  DateTime-Locale-1.42
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.42.tar.gz
     provides:
-      DateTime::Locale 1.41
-      DateTime::Locale::Base 1.41
-      DateTime::Locale::Catalog 1.41
-      DateTime::Locale::Data 1.41
-      DateTime::Locale::FromData 1.41
-      DateTime::Locale::Util 1.41
+      DateTime::Locale 1.42
+      DateTime::Locale::Base 1.42
+      DateTime::Locale::Catalog 1.42
+      DateTime::Locale::Data 1.42
+      DateTime::Locale::FromData 1.42
+      DateTime::Locale::Util 1.42
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -4084,10 +4084,10 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Parse-PMFile-0.45
-    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.45.tar.gz
+  Parse-PMFile-0.47
+    pathname: I/IS/ISHIGAKI/Parse-PMFile-0.47.tar.gz
     provides:
-      Parse::PMFile 0.45
+      Parse::PMFile 0.47
     requirements:
       Dumpvalue 0
       ExtUtils::MakeMaker 0
