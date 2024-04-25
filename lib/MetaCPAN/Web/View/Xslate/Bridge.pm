@@ -6,12 +6,12 @@ use parent qw(Text::Xslate::Bridge);
 use Text::Xslate::Util        qw( mark_raw );
 use Number::Format            ();
 use Ref::Util                 qw( is_coderef is_regexpref );
-use Text::MultiMarkdown       ();
 use List::Util                ();
 use DateTime                  ();
 use With::Roles               ();
 use Text::Pluralize           ();
 use MetaCPAN::Web::RenderUtil qw( gravatar_image );          ## no perlimports
+use MetaCPAN::Web::RenderUtil qw( render_markdown );
 use overload                  ();
 
 my $num_formatter = Number::Format->new;
@@ -26,11 +26,9 @@ sub format_bytes {
     $num_formatter->format_bytes($number);
 }
 
-my $md = Text::MultiMarkdown->new( heading_ids => 1 );
-
 sub markdown {
     my ($text) = @_;
-    mark_raw( $md->markdown($text) );
+    mark_raw( render_markdown($text) );
 }
 
 sub filter_html {
