@@ -15,8 +15,6 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
 COPY . /metacpan-web/
 WORKDIR /metacpan-web
 
-RUN yarn install --verbose && yarn cache clean
-
 RUN cpanm --notest App::cpm \
     && cpm install -g Carton \
     && useradd -m metacpan-web -g users \
@@ -26,6 +24,8 @@ RUN cpanm --notest App::cpm \
 RUN chown -R metacpan-web:users /metacpan-web
 
 USER metacpan-web:users
+
+RUN yarn install --verbose && yarn cache clean
 
 EXPOSE 5001
 
