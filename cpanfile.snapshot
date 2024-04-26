@@ -905,6 +905,33 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  Crypt-OpenSSL-Guess-0.15
+    pathname: A/AK/AKIYM/Crypt-OpenSSL-Guess-0.15.tar.gz
+    provides:
+      Crypt::OpenSSL::Guess 0.15
+    requirements:
+      Config 0
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.64
+      File::Spec 0
+      Symbol 0
+      perl 5.008001
+  Crypt-OpenSSL-RSA-0.33
+    pathname: T/TO/TODDR/Crypt-OpenSSL-RSA-0.33.tar.gz
+    provides:
+      Crypt::OpenSSL::RSA 0.33
+    requirements:
+      Crypt::OpenSSL::Random 0
+      ExtUtils::MakeMaker 0
+      Test::More 0
+      perl 5.006
+  Crypt-OpenSSL-Random-0.16
+    pathname: R/RU/RURBAN/Crypt-OpenSSL-Random-0.16.tar.gz
+    provides:
+      Crypt::OpenSSL::Random 0.16
+    requirements:
+      Crypt::OpenSSL::Guess 0.11
+      ExtUtils::MakeMaker 0
   Data-Dump-1.25
     pathname: G/GA/GARU/Data-Dump-1.25.tar.gz
     provides:
