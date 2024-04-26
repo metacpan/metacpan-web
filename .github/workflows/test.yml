@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npm install -g yarn && yarn install
+      - run: npm install
       - run: apt-get update && apt-get -y install libcmark-dev
       - name: Install Carton
         uses: perl-actions/install-with-cpm@stable
