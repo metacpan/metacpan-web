@@ -36,20 +36,6 @@ $.extend({
     }
 });
 
-function togglePanel(side, visible) {
-    var elements = $('#metacpan_' + side + '-panel-toggle').add($('#metacpan_' + side + '-panel'));
-    var className = 'panel-hide';
-    if (typeof visible == "undefined") {
-        visible = elements.first().hasClass(className);
-    }
-    if (visible) {
-        elements.removeClass(className);
-    } else {
-        elements.addClass(className);
-    }
-    MetaCPAN.storage.setItem("hide_" + side + "_panel", visible ? 0 : 1);
-    return false;
-}
 
 function setFavTitle(button) {
     button.attr('title', button.hasClass('active') ? 'Remove from favorites' : 'Add to favorites');
