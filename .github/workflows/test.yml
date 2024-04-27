@@ -54,8 +54,3 @@ jobs:
         run: carton exec prove -lr --jobs 2 t
         env:
           TEST_TIDYALL_VERBOSE: 1
-      - uses: actions/upload-artifact@v3
-        with:
-          name: "${{ matrix.perl-version }}.${{ matrix.resolver }}"
-          path: cpanfile.snapshot
-        if: success() && matrix.resolver == 'metacpan'
