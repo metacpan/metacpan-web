@@ -31,6 +31,8 @@ jobs:
         run: |
           curl -sL -o $RUNNER_TEMP/perl5/bin/cpm https://raw.githubusercontent.com/skaji/cpm/main/cpm
           chmod +x $RUNNER_TEMP/perl5/bin/cpm
+      - name: libcmark-dev
+        run: sudo apt-get install -y -f --no-install-recommends libcmark-dev
       - name: Install cpanm, Carton, and Carton::Snapshot
         run: >
           cpm install
