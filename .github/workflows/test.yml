@@ -11,7 +11,16 @@ jobs:
       - name: docker build
         run: docker build . -t metacpan/metacpan-web:latest
       - name: run Perl tests
-        run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
+        run: >
+          docker run
+          -e HARNESS_PERL_SWITCHES=-MDevel::Cover
+          -i
+          metacpan/metacpan-web
+          carton exec prove -lr --jobs 2 t
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
   test:
     runs-on: ubuntu-20.04
     name: Dockerless
