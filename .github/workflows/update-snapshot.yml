@@ -67,7 +67,7 @@ jobs:
       - name: Maybe update cpanfile.snapshot
         run: carton
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ steps.auth-token.outputs.access-token }}
           commit-message: Update cpanfile.snapshot
