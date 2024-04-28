@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: docker build
-        run: docker build . -t metacpan/metacpan-web:latest
+        run: docker build . --target test -t metacpan/metacpan-web:latest
       - name: run Perl tests
         run: >
           docker run -i metacpan/metacpan-web
@@ -57,6 +57,8 @@ jobs:
             --resolver ${{ matrix.resolver }}
             --show-build-log-on-failure
             --local-lib-contained=local
+      - name: Build assets
+        run: npm run build
       - name: Run tests without coverage
         if: matrix.resolver != 'snapshot'
         run: carton exec prove -lr --jobs 2 t

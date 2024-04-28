@@ -34,5 +34,8 @@ builder {
         remote => "http://localhost:$port",
         preserve_host_header => 1,
         backend => 'LWP',
+        options => {
+            env_proxy => 0,
+        },
     )->to_app;
 };

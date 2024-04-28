@@ -2,6 +2,9 @@
   "name": "metacpan-web",
   "version": "1.0.0",
   "scripts": {
+    "build": "./build-assets.mjs",
+    "build:min": "./build-assets.mjs --minify",
+    "build:watch": "./build-assets.mjs --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +20,10 @@
     "js-beautify": "^1.15.1"
   },
   "dependencies": {
-    "less": "^4.2.0"
+    "less": "^4.2.0",
+    "esbuild": "^0.20.0",
+    "esbuild-plugin-less": "^1.3.2",
+    "jquery": "^3.7.1",
+    "minimist": "^1.2.8"
   }
 }
