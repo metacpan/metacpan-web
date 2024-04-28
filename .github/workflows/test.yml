@@ -75,7 +75,7 @@ jobs:
         if: matrix.resolver == 'snapshot'
         run: carton exec prove -lr --jobs 2 t
         env:
-          HARNESS_PERL_SWITCHES: -MDevel::Cover
+          HARNESS_PERL_SWITCHES: -MDevel::Cover=+ignore,^t/
       - name: Upload coverage reports to Codecov
         if: matrix.resolver == 'snapshot'
         run: cover -report codecov
