@@ -1,6 +1,13 @@
 ---
 name: test
-on: [pull_request]
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "*"
+  workflow_dispatch:
 
 jobs:
   docker:
@@ -11,7 +18,9 @@ jobs:
       - name: docker build
         run: docker build . -t metacpan/metacpan-web:latest
       - name: run Perl tests
-        run: docker run -i metacpan/metacpan-web carton exec prove -lr --jobs 2 t
+        run: >
+          docker run -i metacpan/metacpan-web
+          carton exec prove -lr --jobs 2 t
   test:
     runs-on: ubuntu-20.04
     name: Dockerless
@@ -21,8 +30,8 @@ jobs:
         perl-version:
           - "5.30"
         resolver:
-          - metacpan
           - snapshot
+          - metacpan
     container:
       image: perl:${{ matrix.perl-version }}
       env:
@@ -48,9 +57,27 @@ jobs:
             --resolver ${{ matrix.resolver }}
             --show-build-log-on-failure
             --local-lib-contained=local
-      - name: Maybe update cpanfile.snapshot
-        run: carton
-      - name: Run Tests
+      - name: Run tests without coverage
+        if: matrix.resolver != 'snapshot'
         run: carton exec prove -lr --jobs 2 t
         env:
           TEST_TIDYALL_VERBOSE: 1
+      - name: Install Codecovbash
+        if: matrix.resolver == 'snapshot'
+        uses: perl-actions/install-with-cpm@stable
+        with:
+          install: |
+            Devel::Cover
+            Devel::Cover::Report::Codecov
+            Devel::Cover::Report::Codecovbash
+          sudo: false
+      - name: Run tests with coverage
+        if: matrix.resolver == 'snapshot'
+        run: carton exec prove -lr --jobs 2 t
+        env:
+          HARNESS_PERL_SWITCHES: -MDevel::Cover
+      - name: Upload coverage reports to Codecov
+        if: matrix.resolver == 'snapshot'
+        run: cover -report codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
