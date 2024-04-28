@@ -21,11 +21,6 @@ sub add : Local : Args(0) {
         $res = $user->add_favorite($data)->get;
     }
 
-    # We need to purge if the rating has changes until the fav count
-    # is moved from server to client side
-    $c->purge_author_key( $data->{author} )     if $data->{author};
-    $c->purge_dist_key( $data->{distribution} ) if $data->{distribution};
-
     if ($json) {
         $c->res->code(400) if ( $res->{error} );
         $c->stash->{json}{success} = $res->{error} ? \0 : \1;
