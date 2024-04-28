@@ -6,6 +6,7 @@ use Plack::App::File         ();
 use JavaScript::Minifier::XS ();
 use Cwd                      qw( cwd );
 use Plack::MIME              ();
+use JSON::MaybeXS            ();
 
 Plack::MIME->add_type(
     '.eot'   => 'application/vnd.ms-fontobject',
@@ -28,97 +29,33 @@ sub wrap {
         = exists $args{dev_mode}
         ? $args{dev_mode}
         : ( $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development' );
-    my $tempdir = $args{temp_dir};
-    my $config  = $args{config};
-    my $lessc   = $config->{lessc_command};
-    if ( $lessc && `$lessc --version` !~ /lessc/ ) {
-        undef $lessc;
+
+    my $get_assets = sub {
+        open my $fh, '<', "$root_dir/root/assets/assets.json"
+            or die "can't find asset map";
+        my $json = do { local $/; <$fh> };
+        close $fh;
+        my $files = JSON::MaybeXS->new->decode($json);
+        return [ map "/assets/$_", @$files ];
+    };
+
+    my $assets;
+    if ( !$dev_mode ) {
+        $assets = $get_assets->();
     }
 
-    my @js_files = map {"/static/$_"} (
-        qw(
-            js/jquery.min.js
-            js/jquery.tablesorter.js
-            js/jquery.relatize_date.js
-            js/jquery.qtip.min.js
-            js/jquery.autocomplete.min.js
-            js/mousetrap.min.js
-            js/shCore.js
-            js/shBrushPerl.js
-            js/shBrushPlain.js
-            js/shBrushYaml.js
-            js/shBrushJScript.js
-            js/shBrushDiff.js
-            js/shBrushCpp.js
-            js/shBrushCPANChanges.js
-            js/cpan.js
-            js/github.js
-            js/dropdown.js
-            js/profile.js
-            js/recaptcha.js
-            js/search.js
-            modules/bootstrap-v3.4.1/js/dropdown.js
-            modules/bootstrap-v3.4.1/js/collapse.js
-            modules/bootstrap-v3.4.1/js/modal.js
-            modules/bootstrap-v3.4.1/js/tooltip.js
-            modules/bootstrap-v3.4.1/js/affix.js
-            js/bootstrap-slidepanel.js
-            js/syntaxhighlighter.js
-        ),
-    );
-
-    my @css_files = map { my $f = $_; $f =~ s{^\Q$root_dir\E/root/}{/}; $f }
-        glob "$root_dir/root/static/css/*.css";
-
-    my @less_files = ('/static/less/style.less');
-
     builder {
-        if ( !$dev_mode ) {
-            die 'no lessc available!'
-                if !defined $lessc;
-
-            enable '+MetaCPAN::Middleware::Assets::FileCached' => (
-                files => [ map "root$_", @js_files ],
-
-                filter => sub { JavaScript::Minifier::XS::minify( $_[0] ) },
-                ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
-            );
-
-            enable '+MetaCPAN::Middleware::Assets::FileCached' => (
-                files     => [ map "root$_", @css_files, @less_files ],
-                extension => 'css',
-                read_file => sub { scalar `$lessc -s $_[0]` },
-                ( $tempdir ? ( cache_dir => "$tempdir/assets" ) : () ),
-            );
-        }
-        else {
-            my @assets = (@js_files);
-            if ($lessc) {
-                enable '+MetaCPAN::Middleware::Assets::Dev' => (
-                    files     => [ map "root$_", @css_files, @less_files ],
-                    extension => 'css',
-                    read_file => sub {
-                        my $file = shift;
-                        my ($root_path) = $file =~ m{^root/(.*)/};
-                        return
-                            scalar
-                            `$lessc -s --source-map-map-inline --source-map-rootpath="/$root_path/" "$file"`;
-                    },
-                );
-            }
-            else {
-                die "Need 'lessc' executable set in metacpan_web_local.conf";
-            }
-
-            enable sub {
-                my ($app) = @_;
-                sub {
-                    my ($env) = @_;
-                    push @{ $env->{'psgix.assets'} ||= [] }, @assets;
-                    $app->($env);
-                };
+        enable sub {
+            my ($app) = @_;
+            sub {
+                my ($env) = @_;
+                if ($dev_mode) {
+                    $assets = $get_assets->();
+                }
+                push @{ $env->{'psgix.assets'} ||= [] }, @$assets;
+                $app->($env);
             };
-        }
+        };
 
         mount '/sitemap-authors.xml.gz' => Plack::App::File->new(
             file => 'root/static/sitemaps/sitemap-authors.xml.gz' )->to_app;
@@ -158,6 +95,19 @@ sub wrap {
                 'Surrogate-Control' => "max-age=${year_ttl}",
                 );
             $res;
+        };
+        my $assets_app
+            = Plack::App::File->new( root => 'root/assets' )->to_app;
+        mount '/assets' => sub {
+            my $env = shift;
+            my $res = $assets_app->($env);
+            push @{ $res->[1] },
+                (
+                'Cache-Control' => "public, max-age=${year_ttl}, immutable",
+                'Surrogate-Key' => 'assets',
+                'Surrogate-Control' => "max-age=${year_ttl}",
+                );
+            return $res;
         };
 
         mount '/' => $app;

@@ -20,6 +20,8 @@
 #
 # Then browse to http://localhost:5000/
 
+METACPAN_PROXY_LISTEN="localhost:5000"
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --suffix)
@@ -31,6 +33,20 @@ while [[ $# -gt 0 ]]; do
             METACPAN_WEB_CONFIG_LOCAL_SUFFIX="${1:9}"
             export METACPAN_WEB_CONFIG_LOCAL_SUFFIX
         ;;
+        -l)
+            METACPAN_PROXY_LISTEN="$2"
+            shift
+        ;;
+        -l*)
+            METACPAN_PROXY_LISTEN="${1:2}"
+        ;;
+        --listen)
+            METACPAN_PROXY_LISTEN="$2"
+            shift
+        ;;
+        --listen=*)
+            METACPAN_PROXY_LISTEN="${1:9}"
+        ;;
         *)
             echo "Unsupported option $1" >&2
             exit 1
@@ -39,7 +55,7 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-export METACPAN_WEB_PORT=5001
+export METACPAN_WEB_PORT=13272
 export COLUMNS="$(tput cols)"
 [ -z "$PLACK_ENV" ] && PLACK_ENV=development
 export PLACK_ENV
@@ -52,7 +68,11 @@ log4perl="$(perl -MConfig::ZOMG -e'print Config::ZOMG->new(name => "MetaCPAN::We
 
 plackup -r -R metacpan_web.conf -R "metacpan_web_$suffix.conf" -R "$log4perl" -o localhost -p "$METACPAN_WEB_PORT" &
 app_pid="$!"
-trap 'kill "$app_pid"; exit 1' SIGHUP SIGINT SIGTERM SIGQUIT
+npm run build:watch &
+watch_pid="$!"
+for sig in SIGHUP SIGINT SIGTERM SIGQUIT; do
+    trap "kill $app_pid $watch_pid; trap $sig; kill -s $sig $$; exit" "$sig"
+done
 while true; do
     sleep 1
     ( echo '' >/dev/tcp/localhost/"$METACPAN_WEB_PORT" ) 2>/dev/null && break
@@ -60,9 +80,5 @@ done
 for fast_handler in Gazelle Starlet Starman; do
     perl -mPlack::Handler::$fast_handler -e1 &>/dev/null && break
 done
-unset HTTP_PROXY
-unset http_proxy
-unset HTTPS_PROXY
-unset https_proxy
-plackup --no-default-middleware -s "$fast_handler" -o localhost -p 5000 static-app.psgi
+plackup --no-default-middleware -s "$fast_handler" -l "$METACPAN_PROXY_LISTEN" static-app.psgi
 kill "$app_pid"

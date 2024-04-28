@@ -48,9 +48,6 @@ BEGIN {
 use lib "$root_dir/lib";
 use MetaCPAN::Web;
 
-# do not use the read only mount point when running from a docker container
-my $tempdir = is_linux_container() ? '/var/tmp' : "$root_dir/var/tmp";
-
 STDERR->autoflush;
 
 # explicitly call ->to_app on every Plack::App::* for performance
@@ -137,7 +134,6 @@ builder {
     enable '+MetaCPAN::Middleware::Static' => (
         root     => $root_dir,
         dev_mode => $dev_mode,
-        temp_dir => $tempdir,
         config   => $config,
     );
 
@@ -158,6 +154,3 @@ builder {
     };
 };
 
-sub is_linux_container {
-    return -e '/proc/1/cgroup';
-}

@@ -1,8 +1,95 @@
-FROM metacpan/metacpan-base:latest
+################### Asset Builder
 
-ARG CPM_ARGS=--with-test
+FROM node:22 AS build-assets
+ENV NO_UPDATE_NOTIFIER=1
+
+WORKDIR /build/
+
+COPY package.json package-lock.json .
+RUN \
+    --mount=type=cache,target=/root/.npm,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    npm install --verbose
+    npm audit fix
+EOT
+
+# not supported yet
+#COPY --parents build-assets.mjs root/static .
+
+COPY build-assets.mjs .
+COPY root/static root/static
+RUN <<EOT /bin/bash -euo pipefail
+    npm run build:min
+EOT
+
+################### Web Server
+FROM metacpan/metacpan-base:latest AS server
+
+RUN \
+    --mount=type=cache,target=/var/cache/apt,sharing=private \
+    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    apt update
+    apt install -y -f libcmark-dev
+EOT
+
+WORKDIR /metacpan-web/
+
+COPY cpanfile cpanfile.snapshot .
+RUN \
+    --mount=type=cache,target=/root/.perl-cpm,sharing=private \
+<<EOT /bin/bash -euo pipefail
+    cpm install
+EOT
+
+RUN mkdir var && chown metacpan:users var
+
+ENV PERL5LIB="/metacpan-web/local/lib/perl5"
+ENV PATH="/metacpan-web/local/bin:${PATH}"
+
+COPY *.md app.psgi *.conf .
+COPY bin bin
+COPY lib lib
+COPY root root
+COPY --from=build-assets /build/root/assets root/assets
+
+STOPSIGNAL SIGKILL
+
+CMD [ \
+    "/uwsgi.sh", \
+    "--http-socket", ":80" \
+]
+
+EXPOSE 80
+
+################### Development Server
+FROM server AS develop
+
+ENV COLUMNS="${COLUMNS:-120}"
+ENV PLACK_ENV=development
+
+USER root
+
+RUN \
+    --mount=type=cache,target=/root/.perl-cpm \
+<<EOT /bin/bash -euo pipefail
+    cpm install --with-develop
+EOT
+
+USER metacpan
+
+CMD [ \
+    "/uwsgi.sh", \
+    "--http-socket", ":80" \
+]
+
+################### Test Runner
+FROM develop AS test
 
 ENV NO_UPDATE_NOTIFIER=1
+ENV PLACK_ENV=
+
+USER root
 
 RUN \
     --mount=type=cache,target=/var/cache/apt,sharing=private \
@@ -13,40 +100,29 @@ RUN \
     apt update
     apt install -y -f --no-install-recommends nodejs
     npm install -g npm
-    apt install -y -f libcmark-dev
 EOT
 
-WORKDIR /metacpan-web/
-RUN chown metacpan:users /metacpan-web/
-
-COPY --chown=metacpan:users package.json package-lock.json .
+COPY package.json package-lock.json .
 RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT /bin/bash -euo pipefail
-    npm install --verbose
+    npm install --verbose --include=dev
     npm audit fix
 EOT
 
-COPY --chown=metacpan:users cpanfile cpanfile.snapshot .
 RUN \
-    --mount=type=cache,target=/root/.perl-cpm,sharing=private \
+    --mount=type=cache,target=/root/.perl-cpm \
 <<EOT /bin/bash -euo pipefail
-    cpm install -g ${CPM_ARGS}
+    cpm install --with-test
 EOT
 
-COPY --chown=metacpan:users . .
-RUN mkdir var && chown metacpan:users var
+COPY .perlcriticrc .perltidyrc perlimports.toml tidyall.ini ./
+COPY t t
 
 USER metacpan
+CMD [ "prove", "-lr", "t" ]
 
-CMD [ \
-    "/usr/bin/uwsgi", \
-    "--plugins", "psgi", \
-    "--uwsgi-socket", ":3031", \
-    "--http-socket", ":80", \
-    "--http-socket-modifier1", "5", \
-    "--ini", "/metacpan-web/servers/uwsgi.ini", \
-    "--psgi", "app.psgi" \
-]
+################### Production Server
+FROM server AS production
 
-EXPOSE 80 3031
+USER metacpan
