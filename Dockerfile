@@ -1,14 +1,15 @@
 ################### Asset Builder
 
 FROM node:22 AS build-assets
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 ENV NO_UPDATE_NOTIFIER=1
 
 WORKDIR /build/
 
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     npm install --verbose
     npm audit fix
 EOT
@@ -16,30 +17,32 @@ EOT
 # not supported yet
 #COPY --parents build-assets.mjs root/static .
 
-COPY build-assets.mjs .
+COPY build-assets.mjs ./
 COPY root/static root/static
-RUN <<EOT /bin/bash -euo pipefail
+RUN <<EOT
     npm run build:min
 EOT
 
 ################### Web Server
+# hadolint ignore=DL3007
 FROM metacpan/metacpan-base:latest AS server
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 RUN \
     --mount=type=cache,target=/var/cache/apt,sharing=private \
     --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
-<<EOT /bin/bash -euo pipefail
-    apt update
-    apt install -y -f libcmark-dev
+<<EOT
+    apt-get update
+    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
 EOT
 
 WORKDIR /metacpan-web/
 
-COPY cpanfile cpanfile.snapshot .
+COPY cpanfile cpanfile.snapshot ./
 RUN \
     --mount=type=cache,target=/root/.perl-cpm,sharing=private \
 <<EOT /bin/bash -euo pipefail
-    cpm install
+    cpm install --show-build-log-on-failure
 EOT
 
 RUN mkdir var && chown metacpan:users var
@@ -85,6 +88,7 @@ CMD [ \
 
 ################### Test Runner
 FROM develop AS test
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ENV NO_UPDATE_NOTIFIER=1
 ENV PLACK_ENV=
@@ -97,12 +101,12 @@ RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT /bin/bash -euo pipefail
     curl -fsSL https://deb.nodesource.com/setup_21.x | bash -
-    apt update
-    apt install -y -f --no-install-recommends nodejs
-    npm install -g npm
+    apt-get update
+    apt-get satisfy -y -f --no-install-recommends 'nodejs (>= 21.6.1)'
+    npm install -g npm@^10.4.0
 EOT
 
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT /bin/bash -euo pipefail
@@ -113,7 +117,7 @@ EOT
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT /bin/bash -euo pipefail
-    cpm install --with-test
+    cpm install --show-build-log-on-failure --with-test
 EOT
 
 COPY .perlcriticrc .perltidyrc perlimports.toml tidyall.ini ./
