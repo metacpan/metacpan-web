@@ -124,7 +124,7 @@ COPY .perlcriticrc .perltidyrc perlimports.toml tidyall.ini ./
 COPY t t
 
 USER metacpan
-CMD [ "prove", "-lr", "t" ]
+CMD [ "prove", "-l", "-r", "-j", "2", "t" ]
 
 ################### Production Server
 FROM server AS production
