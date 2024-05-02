@@ -124,13 +124,11 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
+          <!--
           <div class="top-notify-banner">
             <i class="fas fa-info-circle"></i>
-              The Perl Toolchain Summit needs more sponsors. If your company
-              depends on Perl, <a targe="_blank"
-              href="https://perltoolchainsummit.org/pts2024/PTS2024-Sponsor-Prospectus.pdf">please
-            support this very important event</a>.
           </div>
+          -->
           <nav class="sidebar">
             %%  block left_nav -> {
             <div class="slidepanel">
