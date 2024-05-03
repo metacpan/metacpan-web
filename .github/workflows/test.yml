@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: Docker
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: docker build
         run: docker build . --target test -t metacpan/metacpan-web:latest
       - name: run Perl tests
@@ -37,7 +37,7 @@ jobs:
       env:
         DEVEL_COVER_OPTIONS: "-ignore,^local/"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
