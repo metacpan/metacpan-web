@@ -18,7 +18,7 @@ jobs:
         uses: haarg/setup-git-user@v1
         with:
           jwt: ${{ steps.auth-token.outputs.jwt }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           token: ${{ steps.auth-token.outputs.access-token }}
       - name: Set up installation local::lib
