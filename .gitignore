@@ -9,6 +9,8 @@
 /MYMETA.*
 /Makefile
 /Makefile.old
+/bin/precious
+/bin/ubi
 /blib
 /carton.lock
 /cover_db/
