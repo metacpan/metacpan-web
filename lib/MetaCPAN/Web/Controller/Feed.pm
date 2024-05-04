@@ -5,14 +5,14 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use DateTime             ();
-use HTML::Escape         qw( escape_html );
-use MetaCPAN::Web::Types qw( ArrayRef Enum HashRef Str Undef Uri DateTime );
+use DateTime                  ();
+use HTML::Escape              qw( escape_html );
+use MetaCPAN::Web::RenderUtil qw( render_markdown );
+use MetaCPAN::Web::Types qw( ArrayRef DateTime Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
 use Path::Tiny                 qw( path );
-use MetaCPAN::Web::RenderUtil  qw( render_markdown );
+use XML::FeedPP                ();                     ## no perlimports
 use URI                        ();
-use XML::FeedPP                ();
 
 sub recent_rdf : Path('/recent.rdf') Args(0) {
     my ( $self, $c ) = @_;
@@ -248,13 +248,11 @@ sub build_feed {
     my $self   = shift;
     my %params = $feed_check->(@_);
 
-    my $format
-        = $params{format} eq 'rdf'  ? 'RDF'
-        : $params{format} eq 'rss'  ? 'RSS'
-        : $params{format} eq 'atom' ? 'Atom::Atom10'
+    my $feed_class
+        = $params{format} eq 'rdf'  ? XML::FeedPP::RDF::
+        : $params{format} eq 'rss'  ? XML::FeedPP::RSS::
+        : $params{format} eq 'atom' ? XML::FeedPP::Atom::Atom10::
         :                             die 'invalid format';
-
-    my $feed_class = "XML::FeedPP::$format";
 
     my $feed = $feed_class->new;
     $feed->title( $params{title} );

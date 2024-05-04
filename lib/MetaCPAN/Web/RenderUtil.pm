@@ -8,7 +8,20 @@ use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
 use Digest::MD5    ();
-use CommonMark     qw( :node :event );
+use CommonMark     qw(
+    EVENT_ENTER
+    EVENT_EXIT
+    NODE_CODE
+    NODE_CODE_BLOCK
+    NODE_DOCUMENT
+    NODE_HEADER
+    NODE_HRULE
+    NODE_HTML
+    NODE_INLINE_HTML
+    NODE_LINEBREAK
+    NODE_SOFTBREAK
+    NODE_TEXT
+);
 
 our @EXPORT_OK = qw(
     filter_html

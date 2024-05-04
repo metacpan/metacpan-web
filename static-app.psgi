@@ -1,11 +1,12 @@
 use strict;
 use warnings;
-use Plack::Builder;
+use Plack::Builder qw( builder enable mount );
 use Plack::App::Proxy;
-use File::Basename;
-use Config::ZOMG ();
+use File::Basename ();
+use Config::ZOMG   ();
 
-my $root_dir; BEGIN { $root_dir = File::Basename::dirname(__FILE__); }
+my $root_dir;
+BEGIN { $root_dir = File::Basename::dirname(__FILE__); }
 use lib "$root_dir/lib";
 
 my $port = $ENV{METACPAN_WEB_PORT} || 5001;
@@ -17,8 +18,8 @@ my $config = Config::ZOMG->open(
 
 builder {
     enable '+MetaCPAN::Middleware::Static' => (
-        root => $root_dir,
-        config => $config,
+        root     => $root_dir,
+        config   => $config,
         dev_mode => 1,
     );
     enable sub {
@@ -31,10 +32,10 @@ builder {
         };
     };
     mount '/' => Plack::App::Proxy->new(
-        remote => "http://localhost:$port",
+        remote               => "http://localhost:$port",
         preserve_host_header => 1,
-        backend => 'LWP',
-        options => {
+        backend              => 'LWP',
+        options              => {
             env_proxy => 0,
         },
     )->to_app;

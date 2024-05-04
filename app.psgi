@@ -12,7 +12,6 @@ use Config::ZOMG       ();
 use Log::Log4perl      ();
 use Log::Log4perl::MDC ();
 use File::Spec         ();
-use File::Path         ();
 use Plack::Builder     qw( builder enable );
 use Digest::SHA        ();
 
@@ -46,7 +45,7 @@ BEGIN {
 }
 
 use lib "$root_dir/lib";
-use MetaCPAN::Web;
+use MetaCPAN::Web ();
 
 STDERR->autoflush;
 

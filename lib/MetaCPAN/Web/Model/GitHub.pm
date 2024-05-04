@@ -7,14 +7,12 @@ use namespace::autoclean;
 
 use Cpanel::JSON::XS qw( decode_json encode_json );
 
-use IO::Async::Loop       ();
-use IO::Async::SSL        ();
-use IO::Socket::SSL       qw( SSL_VERIFY_PEER );
-use Net::Async::HTTP      ();
-use HTTP::Request::Common ();
-use MIME::Base64          qw(encode_base64url);
-use Crypt::OpenSSL::RSA   ();
-use Ref::Util             qw(is_arrayref is_hashref);
+use IO::Async::Loop     ();
+use IO::Socket::SSL     qw( SSL_VERIFY_PEER );
+use Net::Async::HTTP    ();
+use MIME::Base64        qw( encode_base64url );
+use Crypt::OpenSSL::RSA ();
+use Ref::Util           qw( is_arrayref is_hashref );
 
 my $loop;
 
