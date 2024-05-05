@@ -1712,10 +1712,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  ExtUtils-HasCompiler-0.024
-    pathname: L/LE/LEONT/ExtUtils-HasCompiler-0.024.tar.gz
+  ExtUtils-HasCompiler-0.025
+    pathname: L/LE/LEONT/ExtUtils-HasCompiler-0.025.tar.gz
     provides:
-      ExtUtils::HasCompiler 0.024
+      ExtUtils::HasCompiler 0.025
     requirements:
       Carp 0
       DynaLoader 0
