@@ -28,4 +28,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: metacpan/metacpan-web:latest,metacpan/metacpan-web:$GITHUB_SHA
+          tags: metacpan/metacpan-web:latest,metacpan/metacpan-web:${{ github.sha }}
