@@ -10,7 +10,15 @@ jobs:
     runs-on: ubuntu-22.04
     name: Docker Push
     steps:
+      - name: Generate Auth Token
+        id: auth-token
+        uses: jamestrousdale/github-app-jwt-token@0.1.4
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.auth-token.outputs.access-token }}
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -29,3 +37,10 @@ jobs:
         with:
           push: true
           tags: metacpan/metacpan-web:latest,metacpan/metacpan-web:${{ github.sha }}
+      - name: Update deployed image
+        uses: aurelien-baudet/workflow-dispatch@v2
+        with:
+          repo: metacpan/metacpan-k8s
+          workflow: set-image.yml
+          token: ${{ steps.auth-token.outputs.access-token }}
+          inputs: '{ "app": "web", "environment": "prod", "repository": "metacpan/metacpan-web", "tag": "${{ github.sha }}" }'
