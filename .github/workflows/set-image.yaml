@@ -1,0 +1,49 @@
+name: Update Image with Kustomize
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - master
+
+jobs:
+  update-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+      - name: Checkout Application repository
+        uses: actions/checkout@v4
+        with:
+          path: app
+      - name: Checkout Manifests repository
+        uses: actions/checkout@v4
+        with:
+          repository: metacpan/metacpan-k8s
+          path: manifests
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+      - name: Setup Manifests repository
+        working-directory: ./manifests
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - name: Update Image Tag
+        working-directory: ./manifests/apps/web/environments/prod
+        run: |
+          kustomize edit set image "${{ github.repository }}:latest" "${{ github.repository }}:${{ github.sha }}"
+          git add kustomization.yaml
+          git commit -m "Update image to ${{ github.sha }}"
+      - name: Push manifests
+        if: github.ref == 'refs/heads/master'
+        working-directory: ./manifests
+        run: git push origin main
