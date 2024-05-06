@@ -43,4 +43,5 @@ jobs:
           repo: metacpan/metacpan-k8s
           workflow: set-image.yml
           token: ${{ steps.auth-token.outputs.access-token }}
+          ref: main
           inputs: '{ "app": "web", "environment": "prod", "repository": "metacpan/metacpan-web", "tag": "${{ github.sha }}" }'
