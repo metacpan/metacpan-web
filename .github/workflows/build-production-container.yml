@@ -38,7 +38,7 @@ jobs:
           push: true
           tags: metacpan/metacpan-web:latest,metacpan/metacpan-web:${{ github.sha }}
       - name: Update deployed image
-        uses: aurelien-baudet/workflow-dispatch@v2
+        uses: benc-uk/workflow-dispatch@v1
         with:
           repo: metacpan/metacpan-k8s
           workflow: set-image.yml
