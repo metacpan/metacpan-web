@@ -29,24 +29,6 @@ ok-exit-codes = 0
 lint-failure-exit-codes = 2
 ignore-stderr = "Begin Error Output Stream"
 
-[commands.podchecker]
-type = "lint"
-include = [ "**/*.{pl,pm,pod}" ]
-cmd = [ "podchecker", "--warnings", "--warnings" ]
-ok-exit-codes = [ 0, 2 ]
-lint-failure-exit-codes = 1
-ignore-stderr = [
-    ".+ pod syntax OK",
-    ".+ does not contain any pod commands",
-]
-
-[commands.podtidy]
-type = "tidy"
-include = [ "**/*.{pl,pm,pod}" ]
-cmd = [ "podtidy", "--columns", "80", "--inplace", "--nobackup" ]
-ok-exit-codes = 0
-lint-failure-exit-codes = 1
-
 [commands.omegasort-gitignore]
 type = "both"
 include = "**/.gitignore"
@@ -81,6 +63,7 @@ include = "**/*.yml"
 cmd     = [
     "./node_modules/.bin/prettier",
     "--no-config",
+    "--single-quote",
 ]
 lint-flags = "--check"
 tidy-flags = "--write"
