@@ -24,9 +24,11 @@ If you prefer not to use Docker, the following commands will get you started:
 
 ## Installing Manually
 
-    carton install
-    npm install
-    export PATH="$(realpath ./node_modules/.bin):$PATH"
+```bash
+carton install
+npm install
+export PATH="$(realpath ./node_modules/.bin):$PATH"
+```
 
 ### Installing on macOS
 
@@ -50,7 +52,9 @@ installed path on your system.
 
 You can use the supplied wrapper around `prove` to run tests:
 
-    ./bin/prove t
+```bash
+./bin/prove t
+```
 
 To run the tests in parallel, add `-j8` (or however many CPUs you have) to the
 `prove` command.
@@ -71,7 +75,9 @@ carton exec plackup -p 5001 -s Gazelle -r
 
 You will want to set up the supplied pre-commit Git hook like so:
 
-    ./git/setup.sh
+```bash
+./git/setup.sh
+```
 
 which causes `precious` to be run before each commit. You can manually run this
 with `precious path/to/file`
@@ -83,7 +89,9 @@ optional and not required to hack on the front end. The address to the API being
 used can be changed in the `metacpan_web.conf` file. Ideally you would create a
 new file called `metacpan_web_local.conf` that contains
 
-    api                 http://127.0.0.1:5000
+```bash
+api                 http://127.0.0.1:5000
+```
 
 which will be loaded on top of the existing config file.
 
