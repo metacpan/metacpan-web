@@ -114,7 +114,7 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 
-COPY .perlcriticrc .perltidyrc perlimports.toml tidyall.ini ./
+COPY .perlcriticrc .perltidyrc perlimports.toml ./
 COPY t t
 
 USER metacpan

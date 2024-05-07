@@ -71,8 +71,8 @@ You will want to set up the supplied pre-commit Git hook like so:
 
     ./git/setup.sh
 
-which causes `tidyall` to be run before each commit. You can manually run this with
-`tidyall path/to/file`
+which causes `precious` to be run before each commit. You can manually run this with
+`precious path/to/file`
 
 ## Local Configuration Changes
 
