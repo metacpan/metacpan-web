@@ -77,6 +77,7 @@ RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT /bin/bash -euo pipefail
     cpm install --with-develop
+    chown -R metacpan:users ./
 EOT
 
 USER metacpan
