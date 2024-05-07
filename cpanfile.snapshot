@@ -2370,13 +2370,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.52
       Types::Serialiser 0
       common::sense 0
-  JavaScript-Minifier-XS-0.15
-    pathname: G/GT/GTERMARS/JavaScript-Minifier-XS-0.15.tar.gz
-    provides:
-      JavaScript::Minifier::XS 0.15
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.008001
   LWP-MediaTypes-6.04
     pathname: O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
     provides:
