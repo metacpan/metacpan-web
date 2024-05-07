@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# This is for installing precious in a Docker container
+# This is for installing precious and other 3rd party libs needed for linting
+# in CI
 
 set -euo pipefail
 
