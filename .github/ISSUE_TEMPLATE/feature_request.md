@@ -12,6 +12,7 @@ assignees: ""
 
 **Expected behavior** A clear and concise description of what you expect to see.
 
-**Volunteering** Are you willing to implement (or help to implement) this feature?
+**Volunteering** Are you willing to implement (or help to implement) this
+feature?
 
 **Additional context** Add any other context about the request here.

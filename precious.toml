@@ -48,7 +48,7 @@ include = "**/*.md"
 cmd     = [
     "./node_modules/.bin/prettier",
     "--no-config",
-    "--print-width", "100",
+    "--print-width", "80",
     "--prose-wrap", "always",
 ]
 lint-flags = "--check"

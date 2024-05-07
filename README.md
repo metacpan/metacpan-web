@@ -16,8 +16,9 @@
 
 # Getting Started
 
-We strongly recommend using [metacpan-docker](https://github.com/metacpan/metacpan-docker). This
-will give you a virtual machine already configured and ready to start developing on.
+We strongly recommend using
+[metacpan-docker](https://github.com/metacpan/metacpan-docker). This will give
+you a virtual machine already configured and ready to start developing on.
 
 If you prefer not to use Docker, the following commands will get you started:
 
@@ -35,15 +36,15 @@ If you like, you can install `carton` via Homebrew:
 brew install carton
 ```
 
-If your `carton install` is having issues with SSL-related modules, you may need to use an
-`OPENSSL_PREFIX`. Something like:
+If your `carton install` is having issues with SSL-related modules, you may need
+to use an `OPENSSL_PREFIX`. Something like:
 
 ```bash
 OPENSSL_PREFIX="/usr/local/Cellar/openssl@1.1/1.1.1q" carton install
 ```
 
-You may need to check `/usr/local/Cellar/openssl@1.1` to find the latest installed path on your
-system.
+You may need to check `/usr/local/Cellar/openssl@1.1` to find the latest
+installed path on your system.
 
 ## Running Tests
 
@@ -51,7 +52,8 @@ You can use the supplied wrapper around `prove` to run tests:
 
     ./bin/prove t
 
-To run the tests in parallel, add `-j8` (or however many CPUs you have) to the `prove` command.
+To run the tests in parallel, add `-j8` (or however many CPUs you have) to the
+`prove` command.
 
 ## Running the App
 
@@ -71,15 +73,15 @@ You will want to set up the supplied pre-commit Git hook like so:
 
     ./git/setup.sh
 
-which causes `precious` to be run before each commit. You can manually run this with
-`precious path/to/file`
+which causes `precious` to be run before each commit. You can manually run this
+with `precious path/to/file`
 
 ## Local Configuration Changes
 
-The back end defaults to `fastapi.metacpan.org`. Running a local API server is optional and not
-required to hack on the front end. The address to the API being used can be changed in the
-`metacpan_web.conf` file. Ideally you would create a new file called `metacpan_web_local.conf` that
-contains
+The back end defaults to `fastapi.metacpan.org`. Running a local API server is
+optional and not required to hack on the front end. The address to the API being
+used can be changed in the `metacpan_web.conf` file. Ideally you would create a
+new file called `metacpan_web_local.conf` that contains
 
     api                 http://127.0.0.1:5000
 
@@ -87,6 +89,7 @@ which will be loaded on top of the existing config file.
 
 ## Compatibility Notes
 
-On Win32 (and possibly also on other platforms) when using Perl < 5.12, the server started with
-plackup will generate warnings relating to date parsing. These are caused by Plack due to a bug in
-the gmtime implementation and can be removed by upgrading to Perl 5.12.
+On Win32 (and possibly also on other platforms) when using Perl < 5.12, the
+server started with plackup will generate warnings relating to date parsing.
+These are caused by Plack due to a bug in the gmtime implementation and can be
+removed by upgrading to Perl 5.12.
