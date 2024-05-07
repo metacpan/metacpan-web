@@ -2,9 +2,9 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| `master` branch   | :white_check_mark: |
+| Version         | Supported          |
+| --------------- | ------------------ |
+| `master` branch | :white_check_mark: |
 
 ## Reporting a Vulnerability
 

@@ -1,5 +1,5 @@
 ---
 seq:
-    - seq: t/tidyall.t
-    - par:
-        - t/**.t
+  - seq: t/tidyall.t
+  - par:
+      - t/**.t
