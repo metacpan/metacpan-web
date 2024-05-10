@@ -42,7 +42,7 @@ COPY cpanfile cpanfile.snapshot ./
 RUN \
     --mount=type=cache,target=/root/.perl-cpm,sharing=private \
 <<EOT /bin/bash -euo pipefail
-    cpm install --show-build-log-on-failure
+    cpm install --show-build-log-on-failure --resolver=snapshot
 EOT
 
 RUN mkdir var && chown metacpan:users var
@@ -50,13 +50,11 @@ RUN mkdir var && chown metacpan:users var
 ENV PERL5LIB="/metacpan-web/local/lib/perl5"
 ENV PATH="/metacpan-web/local/bin:${PATH}"
 
-COPY *.md app.psgi *.conf .
+COPY *.md app.psgi *.conf ./
 COPY bin bin
 COPY lib lib
 COPY root root
 COPY --from=build-assets /build/root/assets root/assets
-
-STOPSIGNAL SIGKILL
 
 CMD [ \
     "/uwsgi.sh", \
@@ -76,16 +74,11 @@ USER root
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT /bin/bash -euo pipefail
-    cpm install --with-develop
+    cpm install --show-build-log-on-failure --resolver=snapshot --with-develop
     chown -R metacpan:users ./
 EOT
 
 USER metacpan
-
-CMD [ \
-    "/uwsgi.sh", \
-    "--http-socket", ":80" \
-]
 
 ################### Test Runner
 FROM develop AS test
@@ -118,7 +111,7 @@ EOT
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT /bin/bash -euo pipefail
-    cpm install --show-build-log-on-failure --with-test
+    cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 
 COPY .perlcriticrc .perltidyrc perlimports.toml tidyall.ini ./
