@@ -50,7 +50,7 @@ RUN mkdir var && chown metacpan:users var
 ENV PERL5LIB="/metacpan-web/local/lib/perl5"
 ENV PATH="/metacpan-web/local/bin:${PATH}"
 
-COPY *.md app.psgi *.conf .
+COPY *.md app.psgi *.conf ./
 COPY bin bin
 COPY lib lib
 COPY root root
