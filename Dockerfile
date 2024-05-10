@@ -82,11 +82,6 @@ EOT
 
 USER metacpan
 
-CMD [ \
-    "/uwsgi.sh", \
-    "--http-socket", ":80" \
-]
-
 ################### Test Runner
 FROM develop AS test
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
