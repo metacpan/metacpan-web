@@ -56,8 +56,6 @@ COPY lib lib
 COPY root root
 COPY --from=build-assets /build/root/assets root/assets
 
-STOPSIGNAL SIGKILL
-
 CMD [ \
     "/uwsgi.sh", \
     "--http-socket", ":80" \
