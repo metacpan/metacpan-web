@@ -4212,11 +4212,11 @@ DISTRIBUTIONS
       overload 0
       parent 0
       strict 0
-  Path-Tiny-0.144
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.144.tar.gz
+  Path-Tiny-0.146
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.146.tar.gz
     provides:
-      Path::Tiny 0.144
-      Path::Tiny::Error 0.144
+      Path::Tiny 0.146
+      Path::Tiny::Error 0.146
     requirements:
       Carp 0
       Cwd 0
@@ -4485,23 +4485,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20240202
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20240202.tar.gz
+  Perl-Tidy-20240511
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20240511.tar.gz
     provides:
-      Perl::Tidy 20240202
-      Perl::Tidy::Debugger 20240202
-      Perl::Tidy::Diagnostics 20240202
-      Perl::Tidy::FileWriter 20240202
-      Perl::Tidy::Formatter 20240202
-      Perl::Tidy::HtmlWriter 20240202
-      Perl::Tidy::IOScalar 20240202
-      Perl::Tidy::IOScalarArray 20240202
-      Perl::Tidy::IndentationItem 20240202
-      Perl::Tidy::Logger 20240202
-      Perl::Tidy::Tokenizer 20240202
-      Perl::Tidy::VerticalAligner 20240202
-      Perl::Tidy::VerticalAligner::Alignment 20240202
-      Perl::Tidy::VerticalAligner::Line 20240202
+      Perl::Tidy 20240511
+      Perl::Tidy::Debugger 20240511
+      Perl::Tidy::Diagnostics 20240511
+      Perl::Tidy::FileWriter 20240511
+      Perl::Tidy::Formatter 20240511
+      Perl::Tidy::HtmlWriter 20240511
+      Perl::Tidy::IOScalar 20240511
+      Perl::Tidy::IOScalarArray 20240511
+      Perl::Tidy::IndentationItem 20240511
+      Perl::Tidy::Logger 20240511
+      Perl::Tidy::Tokenizer 20240511
+      Perl::Tidy::VerticalAligner 20240511
+      Perl::Tidy::VerticalAligner::Alignment 20240511
+      Perl::Tidy::VerticalAligner::Line 20240511
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
