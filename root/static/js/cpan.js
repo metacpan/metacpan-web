@@ -122,82 +122,6 @@ $(document).ready(function() {
         });
     }
 
-    $('table.tablesorter').each(function() {
-        var table = $(this);
-
-        var cfg = {
-            textExtraction: function(node) {
-                var $node = $(node);
-                var sort = $node.attr("sort");
-                if (!sort) return $node.text();
-                if ($node.hasClass("date")) {
-                    return (new Date(sort)).getTime();
-                } else {
-                    return sort;
-                }
-            },
-            headers: {}
-        };
-
-        var sortable = [];
-        table.find('thead th').each(function(i, el) {
-            var header = {};
-            if ($(el).hasClass('no-sort')) {
-                header.sorter = false;
-            } else {
-                sortable.push(i);
-            }
-            cfg.headers[i] = header;
-        });
-
-        var sortid;
-        if (table.attr('id')) {
-            var storageid = table.attr('id').replace(/^metacpan_/, '');
-            sortid = storage.getItem("tablesorter:" + storageid);
-        }
-        if (!sortid && table.attr('data-default-sort')) {
-            sortid = table.attr('data-default-sort');
-        }
-        if (!sortid) {
-            var match = /[?&]sort=\[\[([0-9,]+)\]\]/.exec(window.location.search);
-            if (match) {
-                sortid = decodeURIComponent(match[1]);
-            } else {
-                sortid = '0,0';
-            }
-        }
-        try {
-            sortid = JSON.parse('[' + sortid + ']');
-        } catch (e) {
-            sortid = [0, 0];
-        }
-
-        var sortCol;
-        var sortHeader = cfg.headers[sortid[0]];
-        if (typeof sortHeader === 'undefined') {
-            sortLCol = [sortable[0], 0];
-        } else if (sortHeader.sorter == false) {
-            sortCol = [sortable[0], 0];
-        } else {
-            sortCol = sortid;
-        }
-        cfg.sortList = [sortCol];
-
-        table.tablesorter(cfg);
-    });
-
-    $('.tablesorter.remote th.header').each(function() {
-        $(this).unbind('click');
-        $(this).click(function(event) {
-            var $cell = $(this);
-            var params = $.getUrlVars();
-            params.sort = '[[' + this.column + ',' + this.count++ % 2 + ']]';
-            var query = $.param(params);
-            var url = window.location.href.replace(window.location.search, '');
-            window.location.href = url + '?' + query;
-        });
-    });
-
     relatizeDate(document.querySelectorAll('.relatize'));
 
     // Autocomplete issues:
@@ -289,18 +213,6 @@ $(document).ready(function() {
         });
     }
     create_anchors($('.anchors'));
-
-    $('table.tablesorter th.header').on('click', function() {
-        tableid = $(this).parents().eq(2).attr('id');
-        var storageid = tableid.replace(/^metacpan_/, '');
-        setTimeout(function() {
-            var sortParam = $.getUrlVar('sort');
-            if (sortParam != null) {
-                sortParam = sortParam.slice(2, sortParam.length - 2);
-                storage.setItem("tablesorter:" + storageid, sortParam);
-            }
-        }, 1000);
-    });
 
     for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
         setFavTitle(favButton);
