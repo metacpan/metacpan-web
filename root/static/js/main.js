@@ -1,6 +1,5 @@
 require('jquery');
 require('./jquery.tablesorter.js');
-require('./jquery.relatize_date.js');
 require('./jquery.qtip.min.js');
 require('./jquery.autocomplete.min.js');
 require('./mousetrap.min.js');

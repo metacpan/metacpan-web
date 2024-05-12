@@ -1,4 +1,6 @@
 /*global document,$ */
+const relatizeDate = require('./relatize_date.js');
+
 (function(){
 
     // TODO: In some cases there are separate web/clone urls, but they resolve
@@ -167,7 +169,7 @@
                                 qtip.set('content.text', html);
                                 $('.qtip-github .relatize').each(function() {
                                     if ( !$(this).hasClass('relatized') ) {
-                                        $(this).relatizeDate();
+                                        relatizeDate([this]);
                                         $(this).addClass('relatized');
                                     }
                                 });

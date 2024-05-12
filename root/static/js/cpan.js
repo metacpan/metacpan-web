@@ -1,5 +1,7 @@
 /* jshint white: true, lastsemic: true */
 
+const relatizeDate = require('./relatize_date.js');
+
 // Store global data in this object
 var MetaCPAN = {};
 
@@ -210,7 +212,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.relatize').relatizeDate();
+    relatizeDate(document.querySelectorAll('.relatize'));
 
     // Autocomplete issues:
     // #345/#396 Up/down keys should put selected value in text box for further editing.
