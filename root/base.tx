@@ -83,8 +83,7 @@
                       </button>
                     </li>
                 %%  }
-                <form action="/account/logout" method="POST" id="metacpan-logout"></form>
-                <li class="dropdown logged_in" style="display: none;">
+                <li class="dropdown login-dropdown show-logged-in">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="fa fa-user button-fa-icon logged-in-icon" aria-hidden="true"></i>
                       <i class="fas fa-chevron-down"></i>
@@ -94,15 +93,15 @@
                         <li><a href="/account/profile">Profile</a></li>
                         <li><a href="/account/favorite/list">Favorites</a></li>
                         <li>
-                            <a href="#" type="button" onclick="$('#metacpan-logout').submit(); return false">
+                            <a href="#" type="button" class="logout-button">
                               Logout
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown logged_out" style="display: none;">
+                <li class="dropdown login-dropdown show-logged-out">
                     <button type="button" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
+                      <i class="fa fa-user button-fa-icon avatar-placeholder" aria-hidden="true"></i>
                       <i class="fas fa-chevron-down"></i>
                     </button>
                     <ul class="dropdown-menu">
@@ -116,7 +115,7 @@
                         %%  }
                     </ul>
                 </li>
-                <li class="dropdown logged_placeholder">
+                <li class="dropdown login-dropdown hide-logged-in hide-logged-out">
                     <button>
                       <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
                     </button>

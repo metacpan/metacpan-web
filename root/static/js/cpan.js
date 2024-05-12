@@ -42,6 +42,56 @@ function setFavTitle(button) {
     return;
 }
 
+async function processUserData() {
+    let user_data;
+    try {
+        user_data = await fetch('/account/login_status').then(res => res.json());
+    } catch (e) {
+        document.body.classList.remove('logged-in');
+        document.body.classList.add('logged-out');
+        return;
+    }
+    if (!user_data.logged_in) {
+        document.body.classList.remove('logged-in');
+        document.body.classList.add('logged-out');
+        return;
+    }
+
+    document.body.classList.add('logged-in');
+    document.body.classList.remove('logged-out');
+
+    if (user_data.avatar) {
+        const base_av = format_string(user_data.avatar, {
+            size: 35
+        });
+        const double_av = format_string(user_data.avatar, {
+            size: 70
+        });
+
+        const avatar = document.createElement('img');
+        avatar.classList.add('logged-in-avatar');
+        avatar.src = base_av;
+        avatar.srcset = `${base_av}, ${double_av} 2x`;
+        avatar.crossorigin = 'anonymous';
+        document.querySelector('.logged-in-icon').replaceWith(avatar);
+    }
+
+    // process users current favs
+    for (const fav of user_data.faves) {
+        const distribution = fav.distribution;
+
+        // On the page... make it deltable and styled as 'active'
+        const fav_display = document.querySelector(`#${distribution}-fav`);
+
+        if (fav_display) {
+            fav_display.querySelector('input[name="remove"]').value = 1;
+            var button = fav_display.querySelector('button');
+            button.classList.add('active');
+            setFavTitle($(button));
+        }
+    }
+}
+
 $(document).ready(function() {
 
     // User customisations
@@ -73,6 +123,17 @@ $(document).ready(function() {
             window.location = $(element).attr('href');
         });
     });
+
+    for (const logout of document.querySelectorAll('.logout-button')) {
+        logout.addEventListener('click', e => {
+            e.preventDefault();
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/account/logout';
+            document.body.appendChild(form);
+            form.submit();
+        });
+    }
 
     $('table.tablesorter').each(function() {
         var table = $(this);
@@ -478,57 +539,6 @@ function format_string(input_string, replacements) {
         slash + replacements[placeholder] : ''
     );
     return output_string;
-}
-
-function showUserData(user_data) {
-    // User is logged in, so show it
-    $('.logged_in').css('display', 'grid');
-    $('.logged_placeholder').css('display', 'none');
-    if (user_data.avatar) {
-        const avatar = document.createElement('img');
-        avatar.classList.add('logged-in-avatar');
-
-        // could use srcset
-        avatar.src = format_string(user_data.avatar, {
-            size: Math.floor(35 * window.devicePixelRatio)
-        });
-        avatar.crossorigin = 'anonymous';
-        document.querySelector('.logged_in .logged-in-icon').replaceWith(avatar);
-    }
-
-    // process users current favs
-    $.each(user_data.faves, function(index, value) {
-        var distribution = value.distribution;
-
-        // On the page... make it deltable and styled as 'active'
-        var fav_display = $('#' + distribution + '-fav');
-
-        if (fav_display.length) {
-            fav_display.find('input[name="remove"]').val(1);
-            var button = fav_display.find('button');
-            button.addClass('active');
-            setFavTitle(button);
-        }
-
-    });
-
-}
-
-function processUserData() {
-    fetch('/account/login_status')
-        .then(res => res.json())
-        .then(data => {
-            if (data.logged_in) {
-                showUserData(data);
-            } else {
-                $('.logged_out').css('display', 'inline');
-            }
-            $('.logged_placeholder').css('display', 'none');
-        })
-        .catch(() => {
-            $('.logged_out').css('display', 'inline');
-        });
-    return true;
 }
 
 function favDistribution(form) {

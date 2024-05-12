@@ -1,4 +1,4 @@
-<div id="[% $release.distribution %]-fav" class="logged_in">
+<div id="[% $release.distribution %]-fav" class="show-logged-in">
 <form action="/account/favorite/add" style="display: inline" onsubmit="return favDistribution(this)">
     <input type="hidden" name="remove" value="0">
     <input type="hidden" name="release" value="[% $release.name %]">
@@ -7,7 +7,7 @@
     <button type="submit" class="favorite[% if $favorites { %] highlight[% } %]"><span>[% $favorites %]</span> ++</button>
 </form>
 </div>
-<div class="logged_out">
+<div class="hide-logged-in">
 <a href="" onclick="alert('Please sign in to add favorites'); return false" class="favorite[% if $favorites { %] highlight[% } %]">
 <span>[% $favorites %]</span> ++</a>
 </div>
