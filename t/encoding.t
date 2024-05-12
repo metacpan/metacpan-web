@@ -1,6 +1,7 @@
-# vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 use strict;
 use warnings;
+use lib 't/lib';
+
 use Test::More;
 use MetaCPAN::Web::Test qw( override_api_response );
 use Encode              qw( encode is_utf8 );

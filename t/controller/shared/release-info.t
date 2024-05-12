@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+use lib 't/lib';
+
 use Test::More 0.96;
 use MetaCPAN::Web::Test qw( app GET test_psgi tx );
 

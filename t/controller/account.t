@@ -1,12 +1,14 @@
 use strict;
 use warnings;
-use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
+use lib 't/lib';
+
 use Test::More;
-use Test::Deep       qw( cmp_deeply );
-use Cpanel::JSON::XS qw( decode_json );
-use HTTP::Date       qw( time2str );
-use HTTP::Cookies    ();
-use Plack::Session   ();
+use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
+use Test::Deep          qw( cmp_deeply );
+use Cpanel::JSON::XS    qw( decode_json );
+use HTTP::Date          qw( time2str );
+use HTTP::Cookies       ();
+use Plack::Session      ();
 
 my $api_res;
 my $api_req;

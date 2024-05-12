@@ -1,7 +1,6 @@
-#!/usr/bin/env perl
-
 use strict;
 use warnings;
+use lib 't/lib';
 
 # This test is _really_ slow with Devel::Cover running.  Also,
 # there's really no reason to run this when coverage tests are running, since
