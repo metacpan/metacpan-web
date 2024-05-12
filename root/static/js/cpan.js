@@ -1,24 +1,10 @@
 /* jshint white: true, lastsemic: true */
 
 const relatizeDate = require('./relatize_date.js');
+const storage = require('./storage.js');
 
 // Store global data in this object
 var MetaCPAN = {};
-
-// provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
-try {
-    MetaCPAN.storage = window.localStorage;
-} catch (e) {}
-if (!MetaCPAN.storage) {
-    MetaCPAN.storage = {
-        getItem: function(k) {
-            return this["_" + k];
-        },
-        setItem: function(k, v) {
-            return this["_" + k] = v;
-        },
-    };
-}
 
 $.extend({
     getUrlVars: function() {
@@ -167,7 +153,7 @@ $(document).ready(function() {
         var sortid;
         if (table.attr('id')) {
             var storageid = table.attr('id').replace(/^metacpan_/, '');
-            sortid = MetaCPAN.storage.getItem("tablesorter:" + storageid);
+            sortid = storage.getItem("tablesorter:" + storageid);
         }
         if (!sortid && table.attr('data-default-sort')) {
             sortid = table.attr('data-default-sort');
@@ -311,7 +297,7 @@ $(document).ready(function() {
             var sortParam = $.getUrlVar('sort');
             if (sortParam != null) {
                 sortParam = sortParam.slice(2, sortParam.length - 2);
-                MetaCPAN.storage.setItem("tablesorter:" + storageid, sortParam);
+                storage.setItem("tablesorter:" + storageid, sortParam);
             }
         }, 1000);
     });
@@ -324,7 +310,7 @@ $(document).ready(function() {
 
     function format_toc(toc) {
         'use strict';
-        if (MetaCPAN.storage.getItem('hideTOC') == 1) {
+        if (storage.getItem('hideTOC') == 1) {
             toc.classList.add("hide-toc");
         }
 
@@ -337,7 +323,7 @@ $(document).ready(function() {
         toc_header.querySelector('.toggle-toc').addEventListener('click', e => {
             e.preventDefault();
             const currentVisible = !toc.classList.contains('hide-toc');
-            MetaCPAN.storage.setItem('hideTOC', currentVisible ? 1 : 0);
+            storage.setItem('hideTOC', currentVisible ? 1 : 0);
 
             const fullHeight = toc_body.scrollHeight;
 
@@ -376,10 +362,10 @@ $(document).ready(function() {
         var url = $(this).attr('href');
         var result = /size=(\d+)/.exec(url);
         if (result && result[1]) {
-            MetaCPAN.storage.setItem('search_size', result[1]);
+            storage.setItem('search_size', result[1]);
         }
     });
-    var size = MetaCPAN.storage.getItem('search_size');
+    var size = storage.getItem('search_size');
     if (size) {
         $('#metacpan_search-size').val(size);
     }
@@ -577,10 +563,10 @@ function set_page_size(selector, storage_name) {
         if (result && result[1]) {
             size = result[1];
             $(this).click(function() {
-                MetaCPAN.storage.setItem(storage_name, size);
+                storage.setItem(storage_name, size);
                 return true;
             });
-        } else if (size = MetaCPAN.storage.getItem(storage_name)) {
+        } else if (size = storage.getItem(storage_name)) {
             if (/\?/.exec(url)) {
                 this.href += '&size=' + size;
             } else {
