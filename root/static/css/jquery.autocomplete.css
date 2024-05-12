@@ -1,37 +1,37 @@
 .autocomplete-suggestions {
-  padding: 0px;
-  border: 1px solid #ccc;
-  background-color: white;
-  z-index: 99999; 
-  cursor: default; 
-  overflow-x: hidden; 
-  -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
-  -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
-  box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); 
-  font-family: arial, sans-serif;
-  font-size: 18px;  
- }
-
- .autocomplete-suggestions strong { 
-  font-weight: bold; 
-  color: #000000; 
+    padding: 0px;
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 99999;
+    cursor: default;
+    overflow-x: hidden;
+    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    font-family: arial, sans-serif;
+    font-size: 18px;
 }
 
-.autocomplete-suggestion { 
-  margin: 0px;
-  padding: 2px 5px;
-  display: block; 
-  white-space: nowrap; 
-  overflow: hidden; 
+.autocomplete-suggestions strong {
+    font-weight: bold;
+    color: #000000;
+}
+
+.autocomplete-suggestion {
+    margin: 0px;
+    padding: 2px 5px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .autocomplete-suggestion-description {
-  font-size: 0.7em;
-  margin-left: 10px;
+    font-size: 0.7em;
+    margin-left: 10px;
 }
 
-div.autocomplete-suggestions div:nth-child(2n+2) { 
-  background: #f9f9f9; 
+div.autocomplete-suggestions div:nth-child(2n+2) {
+    background: #f9f9f9;
 }
 
 /* The !important is required to override the alternating row background. */
@@ -39,11 +39,11 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
 /* The plugin highlights when you mouse over an item, but since I've disabled that,
    simulate the effect with css (but use a different color than the actually "selected" item). */
 .autocomplete-suggestion:hover {
-  background: #DDEEFF !important;
+    background: #DDEEFF !important;
 }
 /* Use two classs (and place after) to increase priority over the above hover style. */
 .autocomplete-suggestion.autocomplete-selected {
-  background: #BAD3EA !important; 
+    background: #BAD3EA !important;
 }
 
 /*
@@ -52,5 +52,5 @@ div.autocomplete-suggestions div:nth-child(2n+2) {
     GH #1707, Dan McCormick
 */
 #metacpan_autocomplete-direct-results:before {
-  content: 'Authors'
+    content: 'Authors';
 }
