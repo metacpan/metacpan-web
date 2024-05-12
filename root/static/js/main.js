@@ -1,7 +1,7 @@
 require('jquery');
+require('./autocomplete.js');
 require('./tablesorter.js');
 require('./jquery.qtip.min.js');
-require('./jquery.autocomplete.min.js');
 require('./shCore.js');
 require('./shBrushPerl.js');
 require('./shBrushPlain.js');
