@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use lib 't/lib';
 
 use MetaCPAN::Web                   ();
 use MetaCPAN::Web::Controller::Feed ();

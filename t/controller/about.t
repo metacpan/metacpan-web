@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+use lib 't/lib';
+
 use Test::More;
 use MetaCPAN::Web::Test qw( app GET test_cache_headers test_psgi );
 

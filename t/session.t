@@ -1,5 +1,7 @@
 use strict;
 use warnings;
+use lib 't/lib';
+
 use Test::More;
 use MetaCPAN::Web::Test qw( app test_psgi );
 use URI::Escape         ();
