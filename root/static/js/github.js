@@ -1,4 +1,5 @@
 /*global document,$ */
+const Mousetrap = require('mousetrap');
 const relatizeDate = require('./relatize_date.js');
 
 (function(){
@@ -246,12 +247,12 @@ $(document).ready(function() {
         }
     });
 
-    var repository = $('a[data-keyboard-shortcut="g r"]');
+    const repository = document.querySelector('a[data-keyboard-shortcut="g r"]');
 
     if( GitHubUrl.match(repository) ) {
-        Mousetrap.bind('g p', function() {
+        Mousetrap.bind('g p', () => {
             // we haven't hit the github api at this point, so we cheat for the url
-            var pull_request_url = repository.attr('href') + '/pulls';
+            const pull_request_url = repository.href + '/pulls';
             window.location = pull_request_url;
         });
     }

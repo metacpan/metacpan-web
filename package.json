@@ -28,6 +28,7 @@
     "jquery": "^3.7.1",
     "less": "^4.2.0",
     "minimist": "^1.2.8",
+    "mousetrap": "^1.6.5",
     "tablesorter": "^2.31.3"
   }
 }
