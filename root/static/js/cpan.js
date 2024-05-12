@@ -38,8 +38,7 @@ $.extend({
 
 
 function setFavTitle(button) {
-    button.attr('title', button.hasClass('active') ? 'Remove from favorites' : 'Add to favorites');
-    return;
+    button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
 }
 
 async function processUserData() {
@@ -87,7 +86,7 @@ async function processUserData() {
             fav_display.querySelector('input[name="remove"]').value = 1;
             var button = fav_display.querySelector('button');
             button.classList.add('active');
-            setFavTitle($(button));
+            setFavTitle(button);
         }
     }
 }
@@ -315,7 +314,9 @@ $(document).ready(function() {
         }, 1000);
     });
 
-    setFavTitle($('.breadcrumbs .favorite'));
+    for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
+        setFavTitle(favButton);
+    }
 
     $('.dropdown-toggle').dropdown();
 
@@ -394,6 +395,57 @@ $(document).ready(function() {
     var changes_ui_height = Math.round(changes_inner.height() + changes_toggle.height());
     if (changes_content_height <= changes_ui_height) {
         changes.removeClass(['collapsable', 'collapsed']);
+    }
+
+    for (const favForm of document.querySelectorAll('form[action="/account/favorite/add"]')) {
+        favForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(favForm);
+            let response;
+            try {
+                response = await fetch(favForm.action, {
+                    method: favForm.method,
+                    headers: {
+                        'Accepts': 'application/json',
+                    },
+                    body: formData,
+                });
+            } catch (e) {
+                if (confirm("You have to complete a Captcha in order to ++.")) {
+                    document.location.href = "/account/turing";
+                }
+            }
+
+            const button = favForm.querySelector('button');
+            button.classList.toggle('active');
+            setFavTitle(button);
+            const counter = button.querySelector('span');
+            const count = counter.innerText;
+            if (button.classList.contains('active')) {
+                counter.innerText = count ? parseInt(count, 10) + 1 : 1;
+                // now added let users remove
+                favForm.querySelector('input[name="remove"]').value = 1;
+                if (!count)
+                    button.classList.toggle('highlight');
+            } else {
+                // can't delete what's already deleted
+                favForm.querySelector('input[name="remove"]').value = 0;
+
+                counter.textContent = parseInt(count, 10) - 1;
+
+                if (counter.textContent == 0) {
+                    counter.textContent = '';
+                    button.classList.toggle('highlight');
+                }
+            }
+        });
+    }
+
+    for (const favButton of document.querySelectorAll('.fav-not-logged-in')) {
+        favButton.addEventListener('click', e => {
+            e.preventDefault();
+            alert('Please sign in to add favorites');
+        });
     }
 
     var pod2html_form = $('#metacpan-pod-renderer-form');
@@ -540,45 +592,3 @@ function format_string(input_string, replacements) {
     );
     return output_string;
 }
-
-function favDistribution(form) {
-    form = $(form);
-    var data = form.serialize();
-    $.ajax({
-        type: 'POST',
-        url: form.attr('action'),
-        data: data,
-        dataType: 'json',
-        success: function() {
-            var button = form.find('button');
-            button.toggleClass('active');
-            setFavTitle(button);
-            var counter = button.find('span');
-            var count = counter.text();
-            if (button.hasClass('active')) {
-                counter.text(count ? parseInt(count, 10) + 1 : 1);
-                // now added let users remove
-                form.find('input[name="remove"]').val(1);
-                if (!count)
-                    button.toggleClass('highlight');
-            } else {
-                // can't delete what's already deleted
-                form.find('input[name="remove"]').val(0);
-
-                counter.text(parseInt(count, 10) - 1);
-
-                if (counter.text() == 0) {
-                    counter.text("");
-                    button.toggleClass('highlight');
-                }
-            }
-        },
-        error: function() {
-            if (confirm("You have to complete a Captcha in order to ++.")) {
-                document.location.href = "/account/turing";
-            }
-        }
-    });
-    return false;
-}
-window.favDistribution = favDistribution;
