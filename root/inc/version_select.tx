@@ -1,11 +1,6 @@
-<select onchange="document.location.href=[%
-block navigate -> {
-  "'/release/'+this.value";
-  if $file {
-    "+'/view/" ~ $file.path ~ "'";
-  }
-}
-%]" class="[% $class %]">
+<select class="select-navigator [% $class %]">
+%%  my $nav_format = $navigate_format || "/release/%s/%s";
+%%  my $view_format = $file_format || "/view/%s";
 %%  if $head {
   <option disabled [% if $active != 'selected' { 'selected' } %]>[% $head %]</option>
 %%  }
@@ -16,7 +11,7 @@ block navigate -> {
 %%    }
 <option
   [% $release.author == $version.author && $release.name == $version.name ? ($active || "selected") : "" %]
-  value="[% $version.author %]/[% $version.name %]"
+  value="[% $nav_format.sprintf($version.author, $version.name); %][% if $file { $view_format.sprintf($file.path); } %]"
 >
   [%- $version.distnameinfo.version ~ ($version.maturity == 'developer' ? ' DEV' : '') %]
   ([% $version.author %] on [% datetime($version.date).to_ymd %])

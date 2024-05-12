@@ -448,6 +448,13 @@ $(document).ready(function() {
         });
     }
 
+    for (const sel of document.querySelectorAll('.select-navigator')) {
+        sel.addEventListener('change', () => {
+            document.location.href = sel.value;
+            sel.selectedIndex = 0;
+        });
+    }
+
     var pod2html_form = $('#metacpan-pod-renderer-form');
     var pod2html_text = $('[name="pod"]', pod2html_form);
     var pod2html_update = function(pod) {
