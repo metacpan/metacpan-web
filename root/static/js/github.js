@@ -1,6 +1,7 @@
 /*global document,$ */
 const Mousetrap = require('mousetrap');
 const relatizeDate = require('./relatize_date.js');
+require('qtip2');
 
 (function(){
 
