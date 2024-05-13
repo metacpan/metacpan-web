@@ -10,11 +10,12 @@ const assets_dir = 'root/assets';
 
 const config = {
     entryPoints: [
-        'root/static/js/main.js',
+        'root/static/js/main.mjs',
         'root/static/less/style.less',
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
+    format: 'esm',
     outdir: assets_dir,
     bundle: true,
     sourcemap: true,
