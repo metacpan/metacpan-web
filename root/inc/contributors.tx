@@ -1,32 +1,32 @@
 %% if $contributors.size() {
-<div id="metacpan_contributors">
-  <div>
-    <button class="btn-link"
-      onclick="$(this).hide(); $('#metacpan_contributors ul').slideDown(); return false;"
-    >and [% $contributors.size() %] contributors</button>
+<div>
+  <button class="contributors-show-button btn-link">and [% $contributors.size() %] contributors</button>
+  <div id="metacpan_contributors" class="slide-out slide-out-hidden">
+    <div>
+      <ul>
+      %%  for $contributors -> $contributor {
+        <li class="contributor"
+          %%  if $contributor.pauseid {
+          data-cpan-author="[% $contributor.pauseid %]"
+          %%  }
+          %%  if $contributor.email.size() {
+          data-contrib-email="[% $contributor.email.join(' ') %]"
+          %%  }
+        >
+        %%  if $contributor.pauseid {
+          <a href="/author/[% $contributor.pauseid %]" class="cpan-author">
+        %%  }
+        %%  if $contributor.pauseid || $contributor.email.size() {
+          <img class="gravatar" width="20" height="20" src="[% gravatar_image($contributor, 20) %]" />
+        %%  }
+          [% $contributor.name %]
+        %%  if $contributor.pauseid {
+          </a>
+        %%  }
+        </li>
+      %%  }
+      </ul>
+    </div>
   </div>
-  <ul style="display: none">
-  %%  for $contributors -> $contributor {
-    <li class="contributor"
-      %%  if $contributor.pauseid {
-      data-cpan-author="[% $contributor.pauseid %]"
-      %%  }
-      %%  if $contributor.email.size() {
-      data-contrib-email="[% $contributor.email.join(' ') %]"
-      %%  }
-    >
-    %%  if $contributor.pauseid {
-      <a href="/author/[% $contributor.pauseid %]" class="cpan-author">
-    %%  }
-    %%  if $contributor.pauseid || $contributor.email.size() {
-      <img class="gravatar" width="20" height="20" src="[% gravatar_image($contributor, 20) %]" />
-    %%  }
-      [% $contributor.name %]
-    %%  if $contributor.pauseid {
-      </a>
-    %%  }
-    </li>
-  %%  }
-  </ul>
 </div>
 %%  }

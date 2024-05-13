@@ -310,6 +310,17 @@ $(document).ready(function() {
             sel.selectedIndex = 0;
         });
     }
+
+    const contribs = document.querySelector('#metacpan_contributors');
+    if (contribs) {
+        const contrib_button = document.querySelector('.contributors-show-button');
+        contrib_button.addEventListener('click', e => {
+            e.preventDefault();
+            contrib_button.style.display = 'none';
+            contribs.classList.remove('slide-out-hidden');
+            contribs.classList.add('slide-down');
+        });
+    }
 });
 
 function set_page_size(selector, storage_name) {
