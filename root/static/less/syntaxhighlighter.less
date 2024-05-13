@@ -3,17 +3,10 @@ html body .syntaxhighlighter {
     margin: 0 !important;
     overflow: visible !important;
     /* needs higher specificity than the syntax highligher's rules */
-    &, *, * *, * * *, * * * * {
+    &, *, * *, * * *, * * * *, .line.alt2, .line.alt1 {
         font-family: inherit !important;
         line-height: normal !important;
     }
-}
-
-/* work around incompatibility between bootstrap and syntaxhighlighter
- * https://github.com/alexgorbatchev/syntaxhighlighter/issues/275 */
-.syntaxhighlighter .container:before,
-.syntaxhighlighter .container:after {
-    content: none !important;
 }
 
 .syntaxhighlighter a {

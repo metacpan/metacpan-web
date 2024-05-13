@@ -2,6 +2,7 @@
 "use strict";
 import * as esbuild from 'esbuild'
 import { lessLoader } from 'esbuild-plugin-less';
+import { sassPlugin } from 'esbuild-sass-plugin';
 import { writeFile, opendir, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import parseArgs from 'minimist';
@@ -12,6 +13,7 @@ const config = {
     entryPoints: [
         'root/static/js/main.mjs',
         'root/static/less/style.less',
+        'root/static/scss/style.scss',
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
@@ -30,6 +32,7 @@ const config = {
     },
     plugins: [
         lessLoader(),
+        sassPlugin(),
         new class {
             name = 'metacpan-build';
 
@@ -37,10 +40,6 @@ const config = {
                 build.onStart(() => {
                     console.log('building assets...')
                 });
-                build.onResolve(
-                    { filter: /^(shCore|xregexp)$/ },
-                    args => ({ external: true }),
-                );
                 build.onResolve(
                     { filter: /^\// },
                     args => ({ external: true }),
