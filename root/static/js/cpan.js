@@ -230,14 +230,27 @@ $(document).ready(function() {
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
 
-    var changes = $('#metacpan_last-changes');
-    var changes_inner = $('#metacpan_last-changes-container');
-    var changes_toggle = $("#metacpan_last-changes-toggle");
-    changes.addClass(['collapsable', 'collapsed']);
-    var changes_content_height = Math.round(changes_inner.prop('scrollHeight'));
-    var changes_ui_height = Math.round(changes_inner.height() + changes_toggle.height());
-    if (changes_content_height <= changes_ui_height) {
-        changes.removeClass(['collapsable', 'collapsed']);
+    const changes = document.querySelector('#metacpan_last-changes');
+    if (changes) {
+        const changes_content = changes.querySelector('.changes-content');
+        const changes_toggle = changes.querySelector(".changes-toggle");
+        changes.classList.add('collapsable', 'collapsed');
+
+        const content_height = Math.round(changes_content.scrollHeight);
+        const toggle_style = window.getComputedStyle(changes_toggle);
+
+        const potential_size = Math.round(
+            changes_content.offsetHeight +
+            changes_toggle.offsetHeight
+        );
+
+        if (content_height <= potential_size) {
+            changes.classList.remove('collapsable', 'collapsed');
+        }
+        changes_toggle.addEventListener('click', e => {
+            e.preventDefault();
+            changes.classList.toggle('collapsed');
+        });
     }
 
     for (const favForm of document.querySelectorAll('form[action="/account/favorite/add"]')) {
