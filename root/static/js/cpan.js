@@ -3,6 +3,10 @@
 const relatizeDate = require('./relatize_date.js');
 const storage = require('./storage.js');
 const Mousetrap = require('mousetrap');
+const {
+    formatTOC,
+    createAnchors
+} = require('./document-ui.mjs');
 
 // Store global data in this object
 var MetaCPAN = {};
@@ -151,16 +155,7 @@ $(document).ready(function() {
         element.insertBefore(start, end);
     }
 
-    function create_anchors(top) {
-        top.find('h1,h2,h3,h4,h5,h6,dt').each(function() {
-            if (this.id) {
-                $(document.createElement('a')).attr('href', '#' + this.id).addClass('anchor').append(
-                    $(document.createElement('span')).addClass('fa fa-bookmark black')
-                ).prependTo(this);
-            }
-        });
-    }
-    create_anchors($('.anchors'));
+    createAnchors(document.querySelectorAll('.anchors'));
 
     for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
         setFavTitle(favButton);
@@ -213,9 +208,9 @@ $(document).ready(function() {
         });
     }
 
-    let toc = document.querySelector(".content .toc")
+    const toc = document.querySelector(".content .toc")
     if (toc) {
-        format_toc(toc);
+        formatTOC(toc);
     }
 
     $('a[href*="/search?"]').on('click', function() {
@@ -340,9 +335,9 @@ $(document).ready(function() {
                 );
                 var toc = $("nav", rendered);
                 if (toc.length) {
-                    format_toc(toc[0]);
+                    formatTOC(toc[0]);
                 }
-                create_anchors(rendered);
+                createAnchors(rendered);
                 loading.hide();
                 error.hide();
                 rendered.show();
