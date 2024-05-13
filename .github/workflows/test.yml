@@ -77,7 +77,6 @@ jobs:
         with:
           install: |
             Devel::Cover
-            Devel::Cover::Report::Codecov
             Devel::Cover::Report::Codecovbash
           sudo: false
       - name: Run tests with coverage
@@ -85,11 +84,15 @@ jobs:
         run: carton exec prove -lr --jobs 2 t
         env:
           HARNESS_PERL_SWITCHES: -MDevel::Cover=+ignore,^t/
-      - name: Upload coverage reports to Codecov
+      - name: Generate Codecov report
         if: matrix.resolver == 'snapshot'
-        run: cover -report codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: cover -report codecovbash
+      - uses: codecov/codecov-action@v4
+        if: matrix.resolver == 'snapshot'
+        with:
+          fail_ci_if_error: true
+          file: ./cover_db/codecov.json
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Install precious
         run: ./bin/install-precious /usr/local/bin
       - name: Install perlimports
