@@ -14,3 +14,4 @@ import 'bootstrap/js/tooltip.js';
 import 'bootstrap/js/affix.js';
 import './bootstrap-slidepanel.js';
 import './syntaxhighlighter.mjs';
+import './pod2html.mjs';
