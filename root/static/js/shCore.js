@@ -2290,7 +2290,7 @@ function getMatches(code, regexInfo)
 	var index = 0,
 		match = null,
 		matches = [],
-		func = regexInfo.func ? regexInfo.func : defaultAdd
+		func = regexInfo.func ? regexInfo.func : defaultAdd,
 		pos = 0
 		;
 
@@ -2830,14 +2830,15 @@ sh.Highlighter.prototype = {
 			classes = [ 'syntaxhighlighter' ],
 			tabSize,
 			matches,
-			lineNumbers
+			lineNumbers,
+			gutter
 			;
 
 		// process light mode
 		if (this.getParam('light') == true)
 			this.params.toolbar = this.params.gutter = false;
 
-		className = 'syntaxhighlighter';
+		// className = 'syntaxhighlighter';
 
 		if (this.getParam('collapse') == true)
 			classes.push('collapsed');
