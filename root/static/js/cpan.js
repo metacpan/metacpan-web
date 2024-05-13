@@ -571,3 +571,4 @@ function favDistribution(form) {
     });
     return false;
 }
+window.favDistribution = favDistribution;

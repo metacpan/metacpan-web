@@ -291,3 +291,4 @@ function togglePod() {
         $(window).scrollTop(topLine.offset().top - topOffset);
     }
 }
+window.togglePod = togglePod;
