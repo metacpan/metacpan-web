@@ -34,7 +34,6 @@ requires 'Gazelle';
 requires 'Getopt::Long::Descriptive';
 requires 'HTML::Escape';
 requires 'HTML::Restrict', '2.2.2';
-requires 'HTML::Tree';
 requires 'HTTP::Message::PSGI';
 requires 'HTTP::Request';
 requires 'HTTP::Request::Common';
@@ -90,14 +89,18 @@ requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::FeedPP';
 
-# Test dependencies
-requires 'aliased', '0.34';
-requires 'App::Prove';
-requires 'Perl::Critic', '1.136';
-requires 'Perl::Tidy' => '20230909';
-requires 'Test::Code::TidyAll';
-requires 'Test::More', '0.96';
-requires 'Test::Needs';
-requires 'Test::Perl::Critic';
-requires 'Test::Warnings';
-requires 'Test::XPath', '0.15';
+on test => sub {
+    requires 'App::Prove';
+    requires 'HTML::Tree';
+    requires 'Test::More', '0.96';
+    requires 'Test::Warnings';
+    requires 'Test::XPath', '0.15';
+    requires 'aliased', '0.34';
+};
+
+on develop => sub {
+    requires 'App::perlimports';
+    requires 'Perl::Critic', '1.136';
+    requires 'Perl::Tidy' => '20230909';
+    requires 'Test::Vars';
+};

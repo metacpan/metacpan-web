@@ -64,6 +64,7 @@ jobs:
           --resolver metacpan
           --show-build-log-on-failure
           --local-lib-contained=local
+          --with-develop
       - name: Maybe update cpanfile.snapshot
         run: carton
       - name: Create Pull Request

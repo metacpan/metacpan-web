@@ -10,6 +10,39 @@ on:
   workflow_dispatch:
 
 jobs:
+  code-formatting:
+    runs-on: ubuntu-22.04
+    name: Code Formatting
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch base ref
+        if: ${{ github.event.pull_request }}
+        run: git fetch origin ${{ github.base_ref }}:upstream
+      - run: npm install
+      - name: Install Carton
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          install: Carton
+      - name: Install CPAN deps
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          cpanfile: 'cpanfile'
+          args: >
+            --resolver=snapshot
+            --without-runtime
+            --without-test
+            --without-build
+            --with-develop
+      - name: Install precious
+        run: ./bin/install-precious /usr/local/bin
+      - name: Lint modified files
+        if: ${{ github.event.pull_request }}
+        run: precious lint --git-diff-from upstream
+      - name: Lint all files
+        if: ${{ ! github.event.pull_request }}
+        run: precious lint --all
   docker:
     runs-on: ubuntu-22.04
     name: Docker
@@ -40,8 +73,6 @@ jobs:
         DEVEL_COVER_OPTIONS: '-ignore,^local/'
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
         if: matrix.resolver == 'snapshot'
       - uses: actions/checkout@v4
         if: matrix.resolver != 'snapshot'
@@ -91,17 +122,3 @@ jobs:
           fail_ci_if_error: true
           file: ./cover_db/codecov.json
           token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Install precious
-        run: ./bin/install-precious /usr/local/bin
-      - name: Install perlimports
-        run: cpm install -g App::perlimports
-        if: matrix.resolver == 'snapshot'
-      - name: Fetch master
-        run: git fetch origin master:master
-        if: github.ref != 'refs/heads/master' && matrix.resolver == 'snapshot'
-      - name: Lint files in diff (branch)
-        run: precious lint -d master
-        if: github.ref != 'refs/heads/master' && matrix.resolver == 'snapshot'
-      - name: Lint all files (master)
-        run: precious lint --all
-        if: github.ref == 'refs/heads/master' && matrix.resolver == 'snapshot'
