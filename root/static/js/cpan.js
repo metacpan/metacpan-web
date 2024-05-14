@@ -9,28 +9,6 @@ const {
     createAnchors
 } = require('./document-ui.mjs');
 
-// Store global data in this object
-var MetaCPAN = {};
-
-$.extend({
-    getUrlVars: function() {
-        var vars = {},
-            hash;
-        var indexOfQ = window.location.href.indexOf('?');
-        if (indexOfQ == -1) return vars;
-        var hashes = window.location.href.slice(indexOfQ + 1).split('&');
-        $.each(hashes, function(idx, hash) {
-            var kv = hash.split('=');
-            vars[kv[0]] = decodeURIComponent(kv[1]);
-        });
-        return vars;
-    },
-    getUrlVar: function(name) {
-        return $.getUrlVars()[name];
-    }
-});
-
-
 function setFavTitle(button) {
     button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
 }
