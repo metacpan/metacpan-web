@@ -1,5 +1,6 @@
 /* jshint white: true, lastsemic: true */
 
+const $ = require('jquery');
 const relatizeDate = require('./relatize_date.js');
 const storage = require('./storage.js');
 const Mousetrap = require('mousetrap');
