@@ -6,7 +6,7 @@ services:
     volumes:
       - './root:/build/root/'
       - 'assets:/build/root/assets/'
-    command: [ './build-assets.mjs', '--watch' ]
+    command: ['./build-assets.mjs', '--watch']
   server:
     build:
       context: .
@@ -16,6 +16,6 @@ services:
       - 'assets:/metacpan-web/root/assets'
       - '/metacpan-web/local'
     ports:
-      - "8000:80"
+      - '8000:80'
 volumes:
   assets:

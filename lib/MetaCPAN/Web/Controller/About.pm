@@ -2,7 +2,7 @@ package MetaCPAN::Web::Controller::About;
 
 use Moose;
 
-use Cpanel::JSON::XS qw(encode_json);
+use Cpanel::JSON::XS qw( encode_json );
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

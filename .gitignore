@@ -1,7 +1,3 @@
-!/root/assets/.gitignore
-*.bak
-*.sw*
-.DS_Store
 /.carton
 /.includepath
 /.project
@@ -18,7 +14,13 @@
 /node_modules/
 /perltidy.LOG
 /pm_to_blib
-/root/assets
-/root/static/sitemaps
 /tidyall.ERR
 /var
+/bin/precious
+/bin/ubi
+/root/assets
+/root/static/sitemaps
+*.bak
+*.sw*
+.DS_Store
+!/root/assets/.gitignore

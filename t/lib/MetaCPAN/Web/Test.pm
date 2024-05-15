@@ -5,9 +5,9 @@ package MetaCPAN::Web::Test;
 use strict;
 use warnings;
 
-use Plack::Test           qw( test_psgi );
-use HTTP::Request::Common qw( GET POST );
-use HTTP::Message::PSGI   ();
+use HTTP::Request::Common qw( GET POST );    ## no perlimports
+use HTTP::Message::PSGI   ();                ## no perlimports
+use Plack::Test           qw( test_psgi);    ## no perlimports
 use Test::More import => [qw( is )];
 use Test::XPath                             ();
 use Try::Tiny                               qw( catch try );
