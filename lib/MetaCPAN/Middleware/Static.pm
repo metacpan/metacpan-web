@@ -5,7 +5,7 @@ use Plack::Builder   qw( builder enable mount );
 use Plack::App::File ();
 use Cwd              qw( cwd );
 use Plack::MIME      ();
-use JSON::MaybeXS    ();
+use Cpanel::JSON::XS ();
 
 Plack::MIME->add_type(
     '.eot'   => 'application/vnd.ms-fontobject',
@@ -34,7 +34,7 @@ sub wrap {
             or die "can't find asset map";
         my $json = do { local $/; <$fh> };
         close $fh;
-        my $files = JSON::MaybeXS->new->decode($json);
+        my $files = Cpanel::JSON::XS->new->decode($json);
         return [ map "/assets/$_", @$files ];
     };
 

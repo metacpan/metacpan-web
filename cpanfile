@@ -41,7 +41,6 @@ requires 'HTTP::Request::Common';
 requires 'IO::Async::Loop';
 requires 'IO::Async::SSL';
 requires 'IO::Socket::SSL';
-requires 'JSON::MaybeXS' => '1.004000';
 requires 'List::Util', '1.45';
 requires 'Locale::Country','3.62';
 requires 'Log::Dispatch';
