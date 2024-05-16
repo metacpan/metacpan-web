@@ -62,8 +62,6 @@ jobs:
           sudo: false
           args: >
             --resolver ${{ matrix.resolver }}
-            --show-build-log-on-failure
-            --local-lib-contained=local
       - name: Build assets
         run: npm run build
       - name: Run tests without coverage
