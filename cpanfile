@@ -46,7 +46,6 @@ requires 'Locale::Country','3.62';
 requires 'Log::Dispatch';
 requires 'Log::Log4perl::Catalyst';
 requires 'Log::Log4perl::Layout::JSON';
-requires 'MetaCPAN::Moose';
 requires 'MetaCPAN::Role', '0.06';
 requires 'Module::Build::Tiny', '0.037';
 requires 'Module::Runtime';
