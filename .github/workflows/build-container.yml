@@ -20,6 +20,7 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: metacpan
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
