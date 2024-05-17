@@ -74,7 +74,7 @@ around render => sub {
 
     $vars->{api_public}  = $self->api_public;
     $vars->{source_host} = $self->source_host;
-    $vars->{assets}      = $req->env->{'psgix.assets'} || [];
+    $vars->{assets}      = $req->env->{'metacpan.assets'} || [];
     $vars->{current}     = {
         $c->action->reverse    => 1,
         $c->request->uri->path => 1,

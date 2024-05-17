@@ -51,7 +51,7 @@ sub wrap {
                 if ($dev_mode) {
                     $assets = $get_assets->();
                 }
-                push @{ $env->{'psgix.assets'} ||= [] }, @$assets;
+                push @{ $env->{'metacpan.assets'} ||= [] }, @$assets;
                 $app->($env);
             };
         };
