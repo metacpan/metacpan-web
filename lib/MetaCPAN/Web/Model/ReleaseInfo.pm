@@ -2,7 +2,7 @@ package MetaCPAN::Web::Model::ReleaseInfo;
 
 use strict;
 use warnings;
-use MetaCPAN::Moose;
+use Moose;
 
 extends 'Catalyst::Model';
 
