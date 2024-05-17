@@ -36,7 +36,7 @@ RUN \
     apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
 EOT
 
-WORKDIR /metacpan-web/
+WORKDIR /app/
 
 COPY cpanfile cpanfile.snapshot ./
 RUN \
@@ -47,8 +47,8 @@ EOT
 
 RUN mkdir var && chown metacpan:users var
 
-ENV PERL5LIB="/metacpan-web/local/lib/perl5"
-ENV PATH="/metacpan-web/local/bin:${PATH}"
+ENV PERL5LIB="/app/local/lib/perl5"
+ENV PATH="/app/local/bin:${PATH}"
 
 COPY *.md app.psgi *.conf ./
 COPY bin bin

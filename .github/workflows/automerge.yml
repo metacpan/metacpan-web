@@ -1,4 +1,4 @@
-name: Maybe Enable Auto-Merge
+name: Enable Auto-Merge For metacpan-automation
 on:
   pull_request_target:
     types: [opened]
@@ -9,12 +9,12 @@ jobs:
     if: github.event.pull_request.user.login == 'metacpan-automation[bot]'
     steps:
       - name: Generate Auth Token
-        id: auth-token
-        uses: jamestrousdale/github-app-jwt-token@0.1.4
+        uses: actions/create-github-app-token@v1
+        id: app-token
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          token: ${{ steps.auth-token.outputs.access-token }}
+          token: ${{ steps.app-token.outputs.token }}
           pull-request-number: ${{ github.event.pull_request.number }}

@@ -46,7 +46,7 @@ ignore-stderr = [
 type    = "both"
 include = "**/*.md"
 cmd     = [
-    "./node_modules/.bin/prettier",
+    "npx", "-s", "prettier",
     "--no-config",
     "--print-width", "80",
     "--prose-wrap", "always",
@@ -61,7 +61,7 @@ ignore-stderr = [ "Code style issues" ]
 type    = "both"
 include = "**/*.yml"
 cmd     = [
-    "./node_modules/.bin/prettier",
+    "npx", "-s", "prettier",
     "--no-config",
     "--single-quote",
 ]

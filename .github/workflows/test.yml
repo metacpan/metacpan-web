@@ -10,17 +10,52 @@ on:
   workflow_dispatch:
 
 jobs:
+  code-formatting:
+    runs-on: ubuntu-22.04
+    name: Code Formatting
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch base ref
+        if: ${{ github.event.pull_request }}
+        run: git fetch origin ${{ github.base_ref }}:upstream
+      - run: npm install
+      - name: Install Carton
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          install: Carton
+      - name: Install CPAN deps
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          cpanfile: 'cpanfile'
+          args: >
+            --resolver=snapshot
+            --without-runtime
+            --without-test
+            --without-build
+            --with-develop
+      - name: Install precious
+        run: ./bin/install-precious /usr/local/bin
+      - name: Lint modified files
+        if: ${{ github.event.pull_request }}
+        run: precious lint --git-diff-from upstream
+      - name: Lint all files
+        if: ${{ ! github.event.pull_request }}
+        run: precious lint --all
   docker:
     runs-on: ubuntu-22.04
     name: Docker
     steps:
-      - uses: actions/checkout@v4
-      - name: docker build
-        run: docker build . --target test -t metacpan/metacpan-web:latest
-      - name: run Perl tests
-        run: >
-          docker run -i metacpan/metacpan-web
-          carton exec prove -lr --jobs 2 t
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v5
+        with:
+          target: test
+          push: false
+          load: true
+      - name: Run Perl tests
+        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
   test:
     runs-on: ubuntu-20.04
     name: Dockerless
@@ -28,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         perl-version:
-          - '5.30'
+          - '5.36'
         resolver:
           - snapshot
           - metacpan
@@ -38,14 +73,12 @@ jobs:
         DEVEL_COVER_OPTIONS: '-ignore,^local/'
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
         if: matrix.resolver == 'snapshot'
       - uses: actions/checkout@v4
         if: matrix.resolver != 'snapshot'
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
       - run: npm install
       - run: apt-get update && apt-get -y install libcmark-dev
       - name: Install Carton
@@ -60,8 +93,6 @@ jobs:
           sudo: false
           args: >
             --resolver ${{ matrix.resolver }}
-            --show-build-log-on-failure
-            --local-lib-contained=local
       - name: Build assets
         run: npm run build
       - name: Run tests without coverage
@@ -75,7 +106,6 @@ jobs:
         with:
           install: |
             Devel::Cover
-            Devel::Cover::Report::Codecov
             Devel::Cover::Report::Codecovbash
           sudo: false
       - name: Run tests with coverage
@@ -83,22 +113,12 @@ jobs:
         run: carton exec prove -lr --jobs 2 t
         env:
           HARNESS_PERL_SWITCHES: -MDevel::Cover=+ignore,^t/
-      - name: Upload coverage reports to Codecov
+      - name: Generate Codecov report
         if: matrix.resolver == 'snapshot'
-        run: cover -report codecov
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Install precious
-        run: ./bin/install-precious /usr/local/bin
-      - name: Install perlimports
-        run: cpm install -g App::perlimports
+        run: cover -report codecovbash
+      - uses: codecov/codecov-action@v4
         if: matrix.resolver == 'snapshot'
-      - name: Fetch master
-        run: git fetch origin master:master
-        if: github.ref != 'refs/heads/master' && matrix.resolver == 'snapshot'
-      - name: Lint files in diff (branch)
-        run: precious lint -d master
-        if: github.ref != 'refs/heads/master' && matrix.resolver == 'snapshot'
-      - name: Lint all files (master)
-        run: precious lint --all
-        if: github.ref == 'refs/heads/master' && matrix.resolver == 'snapshot'
+        with:
+          fail_ci_if_error: true
+          file: ./cover_db/codecov.json
+          token: ${{ secrets.CODECOV_TOKEN }}
