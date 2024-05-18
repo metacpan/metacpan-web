@@ -7,19 +7,23 @@
 
 ## Become a sponsor
 
-We use <a href="https://opencollective.com/metacpan-core">OpenCollective</a> to manage donations. Please <a href="https://opencollective.com/metacpan-core">donate</a> - regular contributions are 
-ideal (to help us budget), but anything you or your company can contribute is appreciated.
+We use [OpenCollective](https://opencollective.com/metacpan-core) to manage
+donations. Please [donate](https://opencollective.com/metacpan-core) - regular
+contributions are ideal (to help us budget), but anything you or your company
+can contribute is appreciated.
 
 ## Where does the money go?
 
-As a small open source group of developers we have several things that cost money...
+As a small open source group of developers we have several things that cost
+money...
 
 - Running the servers
-- 3rd party system support (to help with the servers, if the open source team are not available)
+- 3rd party system support (to help with the servers, if the open source team
+  are not available)
 - Data storage (including backups)
 - Tools to help us work together better
 - Meta::Hack - getting together once a year or so to push development forward
-- Hosting other <a href="https://perltoolchainsummit.org/">Perl Toolchain projects</a>
+- Hosting other [Perl Toolchain projects](https://perltoolchainsummit.org/)
 
 ## Our current and previous big sponsors
 
@@ -629,4 +633,3 @@ As a small open source group of developers we have several things that cost mone
   </div>
 </div>
 %%  }
-
