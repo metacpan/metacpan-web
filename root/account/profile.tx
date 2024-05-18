@@ -123,11 +123,11 @@
                     %%  my $donation = $author.donation.map(-> $d { $d.id }).grep.size();
                     <div class="col-sm-8 col-md-6">
                         <label class="checkbox">
-                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] onchange="$('#metacpan_donations').slideToggle()" /> Accept donations
+                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] /> Accept donations
                         </label>
                     </div>
                 </div>
-                <div id="metacpan_donations"[% if !$donation { %] style="display: none"[% } %]>
+                <div id="metacpan_donations" class="slide-out [% if !$donation { 'slide-out-hidden' } %]">
                     %%  my $user_donations = $author.donation.indexed_by('name');
                     %%  for ['PayPal', 'Wishlist', 'Flattr'] -> $system {
                     %%      my $found = $user_donations[$system];

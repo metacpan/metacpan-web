@@ -225,7 +225,7 @@ a.ellipsis:hover * {
 * see /release/Plack for example
 */
 #metacpan_contributors {
-    > ul {
+    ul {
         padding: 10px 0;
     }
 
@@ -474,6 +474,9 @@ h1, .h1, h2, .h2, h3, .h3 {
 .slide-out {
     display: grid;
     grid-template-rows: 1fr;
+}
+.slide-out-hidden {
+    grid-template-rows: 0fr;
 }
 .slide-out.slide-down {
     animation: slide-down 0.4s;

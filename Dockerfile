@@ -15,7 +15,7 @@ RUN \
 EOT
 
 # not supported yet
-#COPY --parents build-assets.mjs root/static .
+#COPY --parents build-assets.mjs root/static ./
 
 COPY build-assets.mjs ./
 COPY root/static root/static
@@ -41,7 +41,7 @@ WORKDIR /app/
 COPY cpanfile cpanfile.snapshot ./
 RUN \
     --mount=type=cache,target=/root/.perl-cpm,sharing=private \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     cpm install --show-build-log-on-failure --resolver=snapshot
 EOT
 
@@ -73,7 +73,7 @@ USER root
 
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     cpm install --show-build-log-on-failure --resolver=snapshot --with-develop
     chown -R metacpan:users ./
 EOT
@@ -82,7 +82,6 @@ USER metacpan
 
 ################### Test Runner
 FROM develop AS test
-SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ENV NO_UPDATE_NOTIFIER=1
 ENV PLACK_ENV=
@@ -93,7 +92,7 @@ RUN \
     --mount=type=cache,target=/var/cache/apt,sharing=private \
     --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
     --mount=type=cache,target=/root/.npm,sharing=private \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     curl -fsSL https://deb.nodesource.com/setup_21.x | bash -
     apt-get update
     apt-get satisfy -y -f --no-install-recommends 'nodejs (>= 21.6.1)'
@@ -103,14 +102,14 @@ EOT
 COPY package.json package-lock.json ./
 RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     npm install --verbose --include=dev
     npm audit fix
 EOT
 
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
-<<EOT /bin/bash -euo pipefail
+<<EOT
     cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 

@@ -22,14 +22,14 @@ sub add : Local : Args(0) {
     }
 
     if ($json) {
-        $c->res->code(400) if ( $res->{error} );
+        $c->res->code(400) if $res->{error};
         $c->stash->{json}{success} = $res->{error} ? \0 : \1;
     }
     else {
         $c->res->redirect(
               $res->{error}
-            ? $c->req->referer
-            : $c->uri_for('/account/turing/index')
+            ? $c->uri_for('/account/turing/index')
+            : $c->req->referer
         );
     }
 }

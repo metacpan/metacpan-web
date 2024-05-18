@@ -2,7 +2,7 @@
 
 table.tablesorter {
     thead tr {
-        th.header {
+        th.tablesorter-header {
             cursor: pointer;
             height: auto;
             font-weight: bold;
@@ -15,10 +15,10 @@ table.tablesorter {
                 padding-left: 5px;
                 content: @fa-var-sort;
             }
-            &.headerSortUp:before {
+            &.tablesorter-headerDesc:before {
                 content: @fa-var-caret-down;
             }
-            &.headerSortDown:before {
+            &.tablesorter-headerAsc:before {
                 content: @fa-var-caret-up;
             }
         }

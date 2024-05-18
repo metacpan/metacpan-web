@@ -38,7 +38,7 @@
     <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ $file.path %]?download=1">Download</a>
   </li>
   %%  if $file.sloc {
-  <li><button class="btn-link pod-toggle pod-hidden" onclick="togglePod()"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>
+  <li><button class="btn-link pod-toggle pod-hidden"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button></li>
   %%  }
   <li class="nav-header">Info</li>
   <li>[% $file.sloc %] lines of code</li>

@@ -119,4 +119,15 @@ document.querySelector('.account-settings button.fill-location').addEventListene
     fillLocation();
 });
 
+const donation_box = document.querySelector('#metacpan_donations');
+document.querySelector('.profile-form input[name="donations"]').addEventListener('change', (e) => {
+    if (donation_box.classList.contains("slide-out-hidden")) {
+        donation_box.classList.toggle("slide-out-hidden");
+    }
+    else {
+        donation_box.classList.toggle("slide-up");
+    }
+    donation_box.classList.toggle("slide-down");
+});
+
 });

@@ -28,10 +28,10 @@
     </li>
     %%  if $diff.statistics.size() {
     <li>
-      <select onchange="document.location.href='#' + this.value; this.selectedIndex = 0">
+      <select class="select-navigator">
         <option>Jump to file</option>
         %%  for $diff.statistics -> $file {
-        <option value="[% $file.path %]">[% $file.path %]</option>
+        <option value="#[% $file.file %]">[% $file.file %]</option>
         %%  }
       </select>
     </li>

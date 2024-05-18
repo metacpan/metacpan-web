@@ -18,6 +18,6 @@
     <a href="/account/favorite/list">Favorites</a>
 </li>
 <li>
-    <a href="#" onclick="$('#metacpan-logout').submit(); return false">Logout</a>
+    <a href="#" class="logout-button">Logout</a>
 </li>
 %%  }

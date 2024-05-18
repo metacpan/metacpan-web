@@ -2,17 +2,23 @@
 "use strict";
 import * as esbuild from 'esbuild'
 import { lessLoader } from 'esbuild-plugin-less';
-import fs from 'fs';
+import { sassPlugin } from 'esbuild-sass-plugin';
+import { writeFile, opendir, unlink } from 'node:fs/promises';
+import path from 'node:path';
 import parseArgs from 'minimist';
+
+const assets_dir = 'root/assets';
 
 const config = {
     entryPoints: [
-        'root/static/js/main.js',
+        'root/static/js/main.mjs',
         'root/static/less/style.less',
+        'root/static/scss/style.scss',
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
-    outdir: 'root/assets',
+    format: 'esm',
+    outdir: assets_dir,
     bundle: true,
     sourcemap: true,
     metafile: true,
@@ -26,37 +32,34 @@ const config = {
     },
     plugins: [
         lessLoader(),
+        sassPlugin(),
         new class {
             name = 'metacpan-build';
 
             setup(build) {
-                build.onResolve(
-                    { filter: /^(shCore|xregexp)$/ },
-                    args => ({ external: true }),
-                );
+                build.onStart(() => {
+                    console.log('building assets...')
+                });
                 build.onResolve(
                     { filter: /^\// },
                     args => ({ external: true }),
                 );
-                build.onEnd(result => {
+                build.onEnd(async result => {
                     const metafile = result.metafile;
                     if (metafile && metafile.outputs) {
                         const files = Object.keys(metafile.outputs).sort()
-                            .map(file => file.replace(/^root\/assets\//, ''));
-                        fs.writeFile(
-                            'root/assets/assets.json',
-                            JSON.stringify(files),
-                            'utf8',
-                            (e) => {
-                                if (e) {
-                                    console.log(e);
-                                }
-                            }
-                        );
-                        console.log('assets built');
-                    }
-                    else {
-                        console.log('asset build failure');
+                            .map(file => path.relative(assets_dir, file));
+                        try {
+                            await writeFile(
+                                path.join(assets_dir, 'assets.json'),
+                                JSON.stringify(files),
+                                'utf8',
+                            );
+                        }
+                        catch (e) {
+                            console.log(e);
+                        }
+                        console.log(`build complete (${files.filter(f => !f.match(/\.map$/)).join(' ')})`);
                     }
                 });
             }
@@ -68,11 +71,29 @@ const args = parseArgs(process.argv, {
     boolean: [
         'watch',
         'minify',
+        'clean',
     ],
 });
 if (args.minify) {
     config.minify = true;
 }
+if (args.clean) {
+
+    for await (const file of await opendir(assets_dir, { withFileTypes: true })) {
+        const filePath = path.join(file.parentPath, file.name);
+        if (file.name.match(/^\./)) {
+            // ignore these
+        }
+        else if (!file.isFile()) {
+            console.log(`cowardly refusing to remove non-file ${filePath}`);
+        }
+        else {
+            console.log(`deleting ${filePath}`);
+            await unlink(filePath);
+        }
+    }
+}
+
 const ctx = await esbuild.context(config);
 if (args.watch) {
     await ctx.watch();

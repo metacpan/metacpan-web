@@ -1,45 +1,66 @@
 /* jshint white: true, lastsemic: true */
 
-// Store global data in this object
-var MetaCPAN = {};
-
-// provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
-try {
-    MetaCPAN.storage = window.localStorage;
-} catch (e) {}
-if (!MetaCPAN.storage) {
-    MetaCPAN.storage = {
-        getItem: function(k) {
-            return this["_" + k];
-        },
-        setItem: function(k, v) {
-            return this["_" + k] = v;
-        },
-    };
-}
-
-$.extend({
-    getUrlVars: function() {
-        var vars = {},
-            hash;
-        var indexOfQ = window.location.href.indexOf('?');
-        if (indexOfQ == -1) return vars;
-        var hashes = window.location.href.slice(indexOfQ + 1).split('&');
-        $.each(hashes, function(idx, hash) {
-            var kv = hash.split('=');
-            vars[kv[0]] = decodeURIComponent(kv[1]);
-        });
-        return vars;
-    },
-    getUrlVar: function(name) {
-        return $.getUrlVars()[name];
-    }
-});
-
+const $ = require('jquery');
+const relatizeDate = require('./relatize_date.js');
+const storage = require('./storage.js');
+const Mousetrap = require('mousetrap');
+const {
+    formatTOC,
+    createAnchors
+} = require('./document-ui.mjs');
 
 function setFavTitle(button) {
-    button.attr('title', button.hasClass('active') ? 'Remove from favorites' : 'Add to favorites');
-    return;
+    button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
+}
+
+async function processUserData() {
+    let user_data;
+    try {
+        user_data = await fetch('/account/login_status').then(res => res.json());
+    } catch (e) {
+        document.body.classList.remove('logged-in');
+        document.body.classList.add('logged-out');
+        return;
+    }
+    if (!user_data.logged_in) {
+        document.body.classList.remove('logged-in');
+        document.body.classList.add('logged-out');
+        return;
+    }
+
+    document.body.classList.add('logged-in');
+    document.body.classList.remove('logged-out');
+
+    if (user_data.avatar) {
+        const base_av = format_string(user_data.avatar, {
+            size: 35
+        });
+        const double_av = format_string(user_data.avatar, {
+            size: 70
+        });
+
+        const avatar = document.createElement('img');
+        avatar.classList.add('logged-in-avatar');
+        avatar.src = base_av;
+        avatar.srcset = `${base_av}, ${double_av} 2x`;
+        avatar.crossorigin = 'anonymous';
+        document.querySelector('.logged-in-icon').replaceWith(avatar);
+    }
+
+    // process users current favs
+    for (const fav of user_data.faves) {
+        const distribution = fav.distribution;
+
+        // On the page... make it deltable and styled as 'active'
+        const fav_display = document.querySelector(`#${distribution}-fav`);
+
+        if (fav_display) {
+            fav_display.querySelector('input[name="remove"]').value = 1;
+            var button = fav_display.querySelector('button');
+            button.classList.add('active');
+            setFavTitle(button);
+        }
+    }
 }
 
 $(document).ready(function() {
@@ -74,136 +95,18 @@ $(document).ready(function() {
         });
     });
 
-    $('table.tablesorter').each(function() {
-        var table = $(this);
-
-        var cfg = {
-            textExtraction: function(node) {
-                var $node = $(node);
-                var sort = $node.attr("sort");
-                if (!sort) return $node.text();
-                if ($node.hasClass("date")) {
-                    return (new Date(sort)).getTime();
-                } else {
-                    return sort;
-                }
-            },
-            headers: {}
-        };
-
-        var sortable = [];
-        table.find('thead th').each(function(i, el) {
-            var header = {};
-            if ($(el).hasClass('no-sort')) {
-                header.sorter = false;
-            } else {
-                sortable.push(i);
-            }
-            cfg.headers[i] = header;
+    for (const logout of document.querySelectorAll('.logout-button')) {
+        logout.addEventListener('click', e => {
+            e.preventDefault();
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/account/logout';
+            document.body.appendChild(form);
+            form.submit();
         });
+    }
 
-        var sortid;
-        if (table.attr('id')) {
-            var storageid = table.attr('id').replace(/^metacpan_/, '');
-            sortid = MetaCPAN.storage.getItem("tablesorter:" + storageid);
-        }
-        if (!sortid && table.attr('data-default-sort')) {
-            sortid = table.attr('data-default-sort');
-        }
-        if (!sortid) {
-            var match = /[?&]sort=\[\[([0-9,]+)\]\]/.exec(window.location.search);
-            if (match) {
-                sortid = decodeURIComponent(match[1]);
-            } else {
-                sortid = '0,0';
-            }
-        }
-        try {
-            sortid = JSON.parse('[' + sortid + ']');
-        } catch (e) {
-            sortid = [0, 0];
-        }
-
-        var sortCol;
-        var sortHeader = cfg.headers[sortid[0]];
-        if (typeof sortHeader === 'undefined') {
-            sortLCol = [sortable[0], 0];
-        } else if (sortHeader.sorter == false) {
-            sortCol = [sortable[0], 0];
-        } else {
-            sortCol = sortid;
-        }
-        cfg.sortList = [sortCol];
-
-        table.tablesorter(cfg);
-    });
-
-    $('.tablesorter.remote th.header').each(function() {
-        $(this).unbind('click');
-        $(this).click(function(event) {
-            var $cell = $(this);
-            var params = $.getUrlVars();
-            params.sort = '[[' + this.column + ',' + this.count++ % 2 + ']]';
-            var query = $.param(params);
-            var url = window.location.href.replace(window.location.search, '');
-            window.location.href = url + '?' + query;
-        });
-    });
-
-    $('.relatize').relatizeDate();
-
-    // Autocomplete issues:
-    // #345/#396 Up/down keys should put selected value in text box for further editing.
-    // #441 Allow more specific queries to send ("Ty", "Type::").
-    // #744/#993 Don't select things if the mouse pointer happens to be over the dropdown when it appears.
-    // Please don't steal ctrl-pg up/down.
-    var search_input = $("#metacpan_search-input");
-    var ac_width = search_input.outerWidth();
-
-    search_input.autocomplete({
-        serviceUrl: '/search/autocomplete',
-        // Wait for more typing rather than firing at every keystroke.
-        deferRequestBy: 150,
-        // If the autocomplete fires with a single colon ("type:") it will get no results
-        // and anything else typed after that will never trigger another query.
-        // Set 'preventBadQueries:false' to keep trying.
-        preventBadQueries: false,
-        dataType: 'json',
-        lookupLitmit: 20,
-        paramName: 'q',
-        autoSelectFirst: false,
-        // This simply caches the results of a previous search by url (so no reason not to).
-        noCache: false,
-        triggerSelectOnValidInput: false,
-        maxHeight: 180,
-        width: ac_width,
-        onSelect: function(suggestion) {
-            if (suggestion.data.type == 'module') {
-                document.location.href = '/pod/' + suggestion.data.module;
-            } else if (suggestion.data.type == 'author') {
-                document.location.href = '/author/' + suggestion.data.id;
-            }
-        }
-    });
-    var ac = search_input.autocomplete();
-    var formatResult = ac.options.formatResult;
-    ac.options.formatResult = function(suggestion, currentValue) {
-        var out = formatResult(suggestion, currentValue);
-        if (suggestion.data.type == 'author') {
-            return "<span class=\"suggest-author-label\">Author:</span> " + out;
-        }
-        return out;
-    };
-
-
-    // Disable the built-in hover events to work around the issue that
-    // if the mouse pointer is over the box before it appears the event may fire erroneously.
-    // Besides, does anybody really expect an item to be selected just by
-    // hovering over it?  Seems unintuitive to me.  I expect anyone would either
-    // click or hit a key to actually pick an item, and who's going to hover to
-    // the item they want and then instead of just clicking hit tab/enter?
-    $('.autocomplete-suggestions').off('mouseover.autocomplete');
-    $('.autocomplete-suggestions').off('mouseout.autocomplete');
+    relatizeDate(document.querySelectorAll('.relatize'));
 
     var items = $('.ellipsis');
     for (var i = 0; i < items.length; i++) {
@@ -231,36 +134,17 @@ $(document).ready(function() {
         element.insertBefore(start, end);
     }
 
-    function create_anchors(top) {
-        top.find('h1,h2,h3,h4,h5,h6,dt').each(function() {
-            if (this.id) {
-                $(document.createElement('a')).attr('href', '#' + this.id).addClass('anchor').append(
-                    $(document.createElement('span')).addClass('fa fa-bookmark black')
-                ).prependTo(this);
-            }
-        });
+    createAnchors(document.querySelectorAll('.anchors'));
+
+    for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
+        setFavTitle(favButton);
     }
-    create_anchors($('.anchors'));
-
-    $('table.tablesorter th.header').on('click', function() {
-        tableid = $(this).parents().eq(2).attr('id');
-        var storageid = tableid.replace(/^metacpan_/, '');
-        setTimeout(function() {
-            var sortParam = $.getUrlVar('sort');
-            if (sortParam != null) {
-                sortParam = sortParam.slice(2, sortParam.length - 2);
-                MetaCPAN.storage.setItem("tablesorter:" + storageid, sortParam);
-            }
-        }, 1000);
-    });
-
-    setFavTitle($('.breadcrumbs .favorite'));
 
     $('.dropdown-toggle').dropdown();
 
     function format_toc(toc) {
         'use strict';
-        if (MetaCPAN.storage.getItem('hideTOC') == 1) {
+        if (storage.getItem('hideTOC') == 1) {
             toc.classList.add("hide-toc");
         }
 
@@ -273,7 +157,7 @@ $(document).ready(function() {
         toc_header.querySelector('.toggle-toc').addEventListener('click', e => {
             e.preventDefault();
             const currentVisible = !toc.classList.contains('hide-toc');
-            MetaCPAN.storage.setItem('hideTOC', currentVisible ? 1 : 0);
+            storage.setItem('hideTOC', currentVisible ? 1 : 0);
 
             const fullHeight = toc_body.scrollHeight;
 
@@ -303,19 +187,19 @@ $(document).ready(function() {
         });
     }
 
-    let toc = document.querySelector(".content .toc")
+    const toc = document.querySelector(".content .toc")
     if (toc) {
-        format_toc(toc);
+        formatTOC(toc);
     }
 
     $('a[href*="/search?"]').on('click', function() {
         var url = $(this).attr('href');
         var result = /size=(\d+)/.exec(url);
         if (result && result[1]) {
-            MetaCPAN.storage.setItem('search_size', result[1]);
+            storage.setItem('search_size', result[1]);
         }
     });
-    var size = MetaCPAN.storage.getItem('search_size');
+    var size = storage.getItem('search_size');
     if (size) {
         $('#metacpan_search-size').val(size);
     }
@@ -325,126 +209,97 @@ $(document).ready(function() {
     set_page_size('a[href*="/recent"]', 'recent_page_size');
     set_page_size('a[href*="/requires"]', 'requires_page_size');
 
-    var changes = $('#metacpan_last-changes');
-    var changes_inner = $('#metacpan_last-changes-container');
-    var changes_toggle = $("#metacpan_last-changes-toggle");
-    changes.addClass(['collapsable', 'collapsed']);
-    var changes_content_height = Math.round(changes_inner.prop('scrollHeight'));
-    var changes_ui_height = Math.round(changes_inner.height() + changes_toggle.height());
-    if (changes_content_height <= changes_ui_height) {
-        changes.removeClass(['collapsable', 'collapsed']);
+    const changes = document.querySelector('#metacpan_last-changes');
+    if (changes) {
+        const changes_content = changes.querySelector('.changes-content');
+        const changes_toggle = changes.querySelector(".changes-toggle");
+        changes.classList.add('collapsable', 'collapsed');
+
+        const content_height = Math.round(changes_content.scrollHeight);
+        const toggle_style = window.getComputedStyle(changes_toggle);
+
+        const potential_size = Math.round(
+            changes_content.offsetHeight +
+            changes_toggle.offsetHeight
+        );
+
+        if (content_height <= potential_size) {
+            changes.classList.remove('collapsable', 'collapsed');
+        }
+        changes_toggle.addEventListener('click', e => {
+            e.preventDefault();
+            changes.classList.toggle('collapsed');
+        });
     }
 
-    var pod2html_form = $('#metacpan-pod-renderer-form');
-    var pod2html_text = $('[name="pod"]', pod2html_form);
-    var pod2html_update = function(pod) {
-        if (!pod) {
-            pod = pod2html_text.get(0).value;
-        }
-        var submit = pod2html_form.find('input[type="submit"]');
-        submit.attr("disabled", "disabled");
-        var rendered = $('#metacpan-pod-renderer-output');
-        var loading = $('#metacpan-pod-renderer-loading');
-        var error = $('#metacpan-pod-renderer-error');
-        rendered.hide();
-        rendered.html('');
-        loading.show();
-        error.hide();
-        document.title = "Pod Renderer - metacpan.org";
-        $.ajax({
-            url: '/pod2html',
-            method: 'POST',
-            data: {
-                pod: pod
-            },
-            headers: {
-                Accept: "application/json"
-            },
-            success: function(data, stat, req) {
-                var title = data.pod_title;
-                var abstract = data.pod_abstract;
-                document.title = "Pod Renderer - " + title + " - metacpan.org";
-                rendered.html(
-                    '<nav class="toc"><div class="toc-header"><strong>Contents</strong></div>' +
-                    data.pod_index +
-                    '</nav>' +
-                    data.pod_html
-                );
-                var toc = $("nav", rendered);
-                if (toc.length) {
-                    format_toc(toc[0]);
+    for (const favForm of document.querySelectorAll('form[action="/account/favorite/add"]')) {
+        favForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            const formData = new FormData(favForm);
+            let response;
+            try {
+                response = await fetch(favForm.action, {
+                    method: favForm.method,
+                    headers: {
+                        'Accepts': 'application/json',
+                    },
+                    body: formData,
+                });
+            } catch (e) {
+                if (confirm("You have to complete a Captcha in order to ++.")) {
+                    document.location.href = "/account/turing";
                 }
-                create_anchors(rendered);
-                loading.hide();
-                error.hide();
-                rendered.show();
-                submit.removeAttr("disabled");
-            },
-            error: function(data, stat) {
-                rendered.hide();
-                loading.hide();
-                error.html('Error rendering POD' +
-                    (data && data.length ? ' - ' + data : ''));
-                error.show();
-                submit.removeAttr("disabled");
             }
-        });
-    };
-    if (window.FileReader) {
-        $('input[type="file"]', pod2html_form).on('change', function(e) {
-            var files = this.files;
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    pod2html_text.get(0).value = e.target.result;
-                    pod2html_update(e.target.result);
-                };
-                reader.readAsText(file);
+
+            const button = favForm.querySelector('button');
+            button.classList.toggle('active');
+            setFavTitle(button);
+            const counter = button.querySelector('span');
+            const count = counter.innerText;
+            if (button.classList.contains('active')) {
+                counter.innerText = count ? parseInt(count, 10) + 1 : 1;
+                // now added let users remove
+                favForm.querySelector('input[name="remove"]').value = 1;
+                if (!count)
+                    button.classList.toggle('highlight');
+            } else {
+                // can't delete what's already deleted
+                favForm.querySelector('input[name="remove"]').value = 0;
+
+                counter.textContent = parseInt(count, 10) - 1;
+
+                if (counter.textContent == 0) {
+                    counter.textContent = '';
+                    button.classList.toggle('highlight');
+                }
             }
-            this.value = null;
         });
     }
-    pod2html_form.on('submit', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        pod2html_update();
-    });
 
-    var renderer = $(".metacpan-pod-renderer")
+    for (const favButton of document.querySelectorAll('.fav-not-logged-in')) {
+        favButton.addEventListener('click', e => {
+            e.preventDefault();
+            alert('Please sign in to add favorites');
+        });
+    }
 
-    var dragTimer;
-    renderer.on("dragover", function(event) {
-        event.preventDefault();
-        if (dragTimer) {
-            window.clearTimeout(dragTimer);
-        }
-        dragTimer = window.setTimeout(function() {
-            renderer.removeClass("dragging");
-            window.clearTimeout(dragTimer);
-            dragTimer = null;
-        }, 500);
-    });
+    for (const sel of document.querySelectorAll('.select-navigator')) {
+        sel.addEventListener('change', () => {
+            document.location.href = sel.value;
+            sel.selectedIndex = 0;
+        });
+    }
 
-    $(document).on("dragenter", function(event) {
-        renderer.addClass("dragging");
-    });
-
-    renderer.on("drop", function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        renderer.removeClass("dragging");
-        if (dragTimer) {
-            window.clearTimeout(dragTimer);
-            dragTimer = null;
-        }
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            pod2html_text.get(0).value = e.target.result;
-            pod2html_update(e.target.result);
-        };
-        reader.readAsText(event.originalEvent.dataTransfer.files[0]);
-    });
+    const contribs = document.querySelector('#metacpan_contributors');
+    if (contribs) {
+        const contrib_button = document.querySelector('.contributors-show-button');
+        contrib_button.addEventListener('click', e => {
+            e.preventDefault();
+            contrib_button.style.display = 'none';
+            contribs.classList.remove('slide-out-hidden');
+            contribs.classList.add('slide-down');
+        });
+    }
 });
 
 function set_page_size(selector, storage_name) {
@@ -455,10 +310,10 @@ function set_page_size(selector, storage_name) {
         if (result && result[1]) {
             size = result[1];
             $(this).click(function() {
-                MetaCPAN.storage.setItem(storage_name, size);
+                storage.setItem(storage_name, size);
                 return true;
             });
-        } else if (size = MetaCPAN.storage.getItem(storage_name)) {
+        } else if (size = storage.getItem(storage_name)) {
             if (/\?/.exec(url)) {
                 this.href += '&size=' + size;
             } else {
@@ -479,96 +334,3 @@ function format_string(input_string, replacements) {
     );
     return output_string;
 }
-
-function showUserData(user_data) {
-    // User is logged in, so show it
-    $('.logged_in').css('display', 'grid');
-    $('.logged_placeholder').css('display', 'none');
-    if (user_data.avatar) {
-        const avatar = document.createElement('img');
-        avatar.classList.add('logged-in-avatar');
-
-        // could use srcset
-        avatar.src = format_string(user_data.avatar, {
-            size: Math.floor(35 * window.devicePixelRatio)
-        });
-        avatar.crossorigin = 'anonymous';
-        document.querySelector('.logged_in .logged-in-icon').replaceWith(avatar);
-    }
-
-    // process users current favs
-    $.each(user_data.faves, function(index, value) {
-        var distribution = value.distribution;
-
-        // On the page... make it deltable and styled as 'active'
-        var fav_display = $('#' + distribution + '-fav');
-
-        if (fav_display.length) {
-            fav_display.find('input[name="remove"]').val(1);
-            var button = fav_display.find('button');
-            button.addClass('active');
-            setFavTitle(button);
-        }
-
-    });
-
-}
-
-function processUserData() {
-    fetch('/account/login_status')
-        .then(res => res.json())
-        .then(data => {
-            if (data.logged_in) {
-                showUserData(data);
-            } else {
-                $('.logged_out').css('display', 'inline');
-            }
-            $('.logged_placeholder').css('display', 'none');
-        })
-        .catch(() => {
-            $('.logged_out').css('display', 'inline');
-        });
-    return true;
-}
-
-function favDistribution(form) {
-    form = $(form);
-    var data = form.serialize();
-    $.ajax({
-        type: 'POST',
-        url: form.attr('action'),
-        data: data,
-        dataType: 'json',
-        success: function() {
-            var button = form.find('button');
-            button.toggleClass('active');
-            setFavTitle(button);
-            var counter = button.find('span');
-            var count = counter.text();
-            if (button.hasClass('active')) {
-                counter.text(count ? parseInt(count, 10) + 1 : 1);
-                // now added let users remove
-                form.find('input[name="remove"]').val(1);
-                if (!count)
-                    button.toggleClass('highlight');
-            } else {
-                // can't delete what's already deleted
-                form.find('input[name="remove"]').val(0);
-
-                counter.text(parseInt(count, 10) - 1);
-
-                if (counter.text() == 0) {
-                    counter.text("");
-                    button.toggleClass('highlight');
-                }
-            }
-        },
-        error: function() {
-            if (confirm("You have to complete a Captcha in order to ++.")) {
-                document.location.href = "/account/turing";
-            }
-        }
-    });
-    return false;
-}
-window.favDistribution = favDistribution;

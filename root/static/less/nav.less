@@ -138,9 +138,7 @@ nav.navbar {
       border: 1px solid @list-group-border;
       border-radius: 25px;
       cursor: pointer;
-      display: grid;
       height: 35px;
-      place-content: center;
       width: 35px;
     }
 
@@ -171,19 +169,40 @@ nav.navbar {
     margin-top: 4px !important;
   }
 
-  .logged_in {
+  .login-dropdown {
     place-content: center;
   }
 
-  .logged_in .fa-user {
+  .logged-in-icon {
     color: #da2037;
   }
 
-  .logged_placeholder .button-fa-icon {
+  .avatar-placeholder {
     background-color: @gray-darker;
     border: 2px solid @gray-darker;
     color: @gray-darker;
   }
+}
+
+body.logged-in {
+    .hide-logged-in {
+        display: none;
+    }
+}
+body.logged-out {
+    .hide-logged-out {
+        display: none;
+    }
+}
+body:not(.logged-out) {
+    .show-logged-out {
+        display: none;
+    }
+}
+body:not(.logged-in) {
+    .show-logged-in {
+        display: none;
+    }
 }
 
 .header-logo-large,
