@@ -42,28 +42,11 @@ ignore-stderr = [
     "The .+ file is not unique",
 ]
 
-[commands.prettier-markdown]
+[commands.prettier]
 type    = "both"
-include = "**/*.md"
+include = [ "**/*.md", "**/*.yml", "**/*.yaml" ]
 cmd     = [
-    "npx", "-s", "prettier",
-    "--no-config",
-    "--print-width", "80",
-    "--prose-wrap", "always",
-]
-lint-flags = "--check"
-tidy-flags = "--write"
-ok-exit-codes = 0
-lint-failure-exit-codes = 1
-ignore-stderr = [ "Code style issues" ]
-
-[commands.prettier-yaml]
-type    = "both"
-include = "**/*.yml"
-cmd     = [
-    "npx", "-s", "prettier",
-    "--no-config",
-    "--single-quote",
+    "npx", "-s", "prettier"
 ]
 lint-flags = "--check"
 tidy-flags = "--write"
