@@ -56,11 +56,6 @@ sub wrap {
             };
         };
 
-        mount '/sitemap-authors.xml.gz' => Plack::App::File->new(
-            file => 'root/static/sitemaps/sitemap-authors.xml.gz' )->to_app;
-        mount '/sitemap-releases.xml.gz' => Plack::App::File->new(
-            file => 'root/static/sitemaps/sitemap-releases.xml.gz' )->to_app;
-
         my $favicon_app
             = Plack::App::File->new( file => 'root/static/icons/favicon.ico' )
             ->to_app;
