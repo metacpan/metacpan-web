@@ -6,6 +6,9 @@
 %%  override search_bar -> { }
 %%  override header_nav_menu -> { }
 %%  after content_classes -> { ' home' }
+%%  override opengraph -> {
+%%    include inc::opengraph;
+%%  }
 %%  override content -> {
 <script type="application/ld+json">
 [

@@ -4,7 +4,7 @@
 %%      rss       => $rss       || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%  }
-%%  override meta_card -> { include inc::twitter::author }
+%%  override opengraph -> { include inc::opengraph::author }
 %%  override left_nav_content -> {
     <li>
       [% include inc::author_pic %]
