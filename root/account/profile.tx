@@ -199,7 +199,7 @@
                     <select class="form-control add-profile">
                         <option>Add Profile</option>
                         %%  for $profiles.kv() -> $profile {
-                        <option value="[% $profile.key %]" data-title="[% $profile.value.name %]" data-url-format="[ $profile.value.url_format %]">[% $profile.value.name %]</option>
+                        <option value="[% $profile.key %]" data-title="[% $profile.value.name %]" data-url-format="[% $profile.value.url_format %]">[% $profile.value.name %]</option>
                         %%  }
                         <option value="">Custom...</option>
                     </select>

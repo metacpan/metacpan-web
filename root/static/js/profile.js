@@ -1,7 +1,3 @@
-window.addEventListener('DOMContentLoaded', function() {
-
-if (!document.querySelector('.profile-form')) return;
-
 "use strict";
 
 function rewriteURL(link) {
@@ -9,12 +5,6 @@ function rewriteURL(link) {
     const input = link.parentNode.previousElementSibling;
     link.href = url.replace('%s', input.value);
     return true;
-}
-
-for (const check_url of document.querySelectorAll('.account-settings .check-url')) {
-    check_url.addEventListener('click', function(e) {
-        return rewriteURL(this);
-    });
 }
 
 function removeDiv(div) {
@@ -30,17 +20,10 @@ function removeField(e) {
     e.preventDefault();
     removeDiv(this.closest('.field-container'));
 }
-for (const remove_field of document.querySelectorAll('.account-settings .remove-field')) {
-    remove_field.addEventListener('click', removeField);
-}
 
 function removeProfile(e) {
     e.preventDefault();
     removeDiv(this.closest('.profile-container'));
-}
-
-for (const remove_profile of document.querySelectorAll('.account-settings .remove-profile')) {
-    remove_profile.addEventListener('click', removeProfile);
 }
 
 function addProfile(container, id, title, formatUrl) {
@@ -52,28 +35,17 @@ function addProfile(container, id, title, formatUrl) {
         const profile_name = profileNode.querySelector('input[name="profile.name"]');
         profile_name.value = id;
         profile_name.type = 'hidden';
-        profileNode.querySelector('a.check-url').dataset.urlTemplate(formatUrl);
 
-        for (const check_url of profileNode.querySelectorAll(':scope .check-url')) {
-            check_url.addEventListener('click', function(e) {
-                return rewriteURL(this);
-            });
-        }
+        const check_button = profileNode.querySelector('a.check-url');
+
+        check_button.dataset.urlTemplate = formatUrl;
+
+        check_button.addEventListener('click', function(e) {
+            rewriteURL(this);
+        });
     }
     container.append(profileNode);
 }
-
-document.querySelector('.account-settings .add-profile').addEventListener('change', function(e) {
-    e.preventDefault();
-    const option = this.selectedOptions[0];
-    addProfile(
-        document.querySelector('#metacpan_profiles'),
-        this.value,
-        option.dataset.title,
-        option.dataset.urlFormat,
-    );
-    this.selectedIndex = 0;
-});
 
 function addField(container, id) {
     const fieldNode = document.importNode(document.querySelector('template#field-tmpl').content, true);
@@ -81,14 +53,6 @@ function addField(container, id) {
     fieldNode.querySelector('.remove-field').addEventListener('click', removeField);
     container.append(fieldNode);
 }
-
-for (const btn of document.querySelectorAll('.account-settings button.add-field')) {
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        addField(this.closest('.field-container').parentNode, this.dataset.fieldType);
-    });
-}
-
 
 function validateJSON(input) {
     try {
@@ -99,12 +63,6 @@ function validateJSON(input) {
     }
 }
 
-const extra = document.querySelector('.account-settings textarea[name="extra"]')
-extra.addEventListener('keyup', function (e) {
-    validateJSON(this);
-});
-validateJSON(extra);
-
 function fillLocation() {
     navigator.geolocation.getCurrentPosition((pos) => {
         document.querySelector('input[name="latitude"]').value = pos.coords.latitude;
@@ -114,20 +72,64 @@ function fillLocation() {
     return false;
 }
 
-document.querySelector('.account-settings button.fill-location').addEventListener('click', function (e) {
-    e.preventDefault();
-    fillLocation();
-});
+const profileForm = document.querySelector('.profile-form');
 
-const donation_box = document.querySelector('#metacpan_donations');
-document.querySelector('.profile-form input[name="donations"]').addEventListener('change', (e) => {
-    if (donation_box.classList.contains("slide-out-hidden")) {
-        donation_box.classList.toggle("slide-out-hidden");
+if (profileForm) {
+    for (const btn of profileForm.querySelectorAll(':scope .add-field')) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            addField(this.closest('.field-container').parentNode, this.dataset.fieldType);
+        });
     }
-    else {
-        donation_box.classList.toggle("slide-up");
-    }
-    donation_box.classList.toggle("slide-down");
-});
 
-});
+    for (const remove_field of profileForm.querySelectorAll(':scope .remove-field')) {
+        remove_field.addEventListener('click', removeField);
+    }
+
+    profileForm.querySelector('.add-profile').addEventListener('change', function(e) {
+        e.preventDefault();
+        const option = this.selectedOptions[0];
+        addProfile(
+            document.querySelector('#metacpan_profiles'),
+            this.value,
+            option.dataset.title,
+            option.dataset.urlFormat,
+        );
+        this.selectedIndex = 0;
+    });
+
+    for (const remove_profile of profileForm.querySelectorAll(':scope .remove-profile')) {
+        remove_profile.addEventListener('click', removeProfile);
+    }
+
+    for (const check_url of profileForm.querySelectorAll(':scope .check-url')) {
+        check_url.addEventListener('click', function(e) {
+            rewriteURL(this);
+        });
+    }
+
+    const extra = profileForm.querySelector('textarea[name="extra"]')
+    extra.addEventListener('keyup', function (e) {
+        validateJSON(this);
+    });
+    validateJSON(extra);
+
+    profileForm.querySelector('.fill-location').addEventListener('click', function (e) {
+        e.preventDefault();
+        fillLocation();
+    });
+
+    const donation_box = document.querySelector('#metacpan_donations');
+    profileForm.querySelector('input[name="donations"]').addEventListener('change', (e) => {
+        donation_box.classList.remove("slide-out-hidden");
+
+        if (this.value) {
+            donation_box.classList.add("slide-down");
+            donation_box.classList.remove("slide-up");
+        }
+        else {
+            donation_box.classList.remove("slide-down");
+            donation_box.classList.add("slide-up");
+        }
+    });
+}
