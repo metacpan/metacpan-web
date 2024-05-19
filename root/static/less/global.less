@@ -1,34 +1,42 @@
 /* float:none prevents the span-x classes from breaking table-cell display */
 body {
-  background-color: @body-bg;
-  color: @text-color;
-  display: flex;
-  flex-direction: column;
-  font-family: @font-family-base;
-  font-size: @font-size-base;
-  height: 100%;
-  line-height: @line-height-base;
-  min-height: 100vh;
-  margin: 0;
-  overflow-x: hidden;
+    background-color: @body-bg;
+    color: @text-color;
+    display: flex;
+    flex-direction: column;
+    font-family: @font-family-base;
+    font-size: @font-size-base;
+    height: 100%;
+    line-height: @line-height-base;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-caption, th, td {
+caption,
+th,
+td {
     text-align: left;
     font-weight: normal;
     float: none !important;
 }
 
-table, th, td {
+table,
+th,
+td {
     vertical-align: middle;
 }
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
-blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
 }
 
-blockquote, q {
+blockquote,
+q {
     quotes: "" "";
 }
 
@@ -49,7 +57,8 @@ label span {
     }
 }
 
-label input[type="text"], label select {
+label input[type="text"],
+label select {
     width: 200px;
 }
 
@@ -88,7 +97,8 @@ table.keyboard-shortcuts td.keys {
     bottom: -2px;
 }
 
-button.favorite, a.favorite {
+button.favorite,
+a.favorite {
     padding: 1px 3px;
     font-size: 0.9em;
     background-color: #fff;
@@ -120,11 +130,12 @@ button.favorite, a.favorite {
         opacity: 1;
     }
 
-    &:hover, &.active {
-        background: #36C linear-gradient(to bottom, #69f, #36c);
+    &:hover,
+    &.active {
+        background: #36c linear-gradient(to bottom, #69f, #36c);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
-        border-color: #36C;
+        border-color: #36c;
         opacity: 1;
         text-decoration: none;
     }
@@ -181,20 +192,22 @@ a.ellipsis:hover * {
 
     table {
         width: 100%;
-        td, th {
+        td,
+        th {
             padding: 3px;
-            border: 1px solid #F1F1F1;
+            border: 1px solid #f1f1f1;
         }
         th {
             padding-right: 8px;
             white-space: nowrap;
-            background-color: #F9F9F9;
+            background-color: #f9f9f9;
         }
     }
 }
 
 .file-table {
-    .mtime, .size {
+    .mtime,
+    .size {
         width: 110px;
         font-size: 1em;
     }
@@ -209,17 +222,18 @@ a.ellipsis:hover * {
     }
 }
 
-.file-table td.mtime, .release-table td.date {
+.file-table td.mtime,
+.release-table td.date {
     text-align: right;
 }
 
 .icon-grid {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-image: url(/static/icons/grid.svg);
-  vertical-align: text-bottom;
-  margin-bottom: 1px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(/static/icons/grid.svg);
+    vertical-align: text-bottom;
+    margin-bottom: 1px;
 }
 
 /* Contributors list on release pages
@@ -258,7 +272,7 @@ ul.dependencies {
 }
 
 .smaller {
-    font-size: 1.0em;
+    font-size: 1em;
     line-height: 2.5em;
 }
 
@@ -278,7 +292,12 @@ ul.dependencies {
     float: right;
 }
 
-h1, .h1, h2, .h2, h3, .h3 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
     line-height: 1.8em;
 }
 
@@ -347,11 +366,10 @@ h1, .h1, h2, .h2, h3, .h3 {
     display: grid;
     align-items: start;
     grid-template-areas:
-      // TODO: Banner Addition - Tempory banner at top of each page. Remove this once we take the banner down.
-      'menu banner'
-      'menu breadcrumbs'
-      'menu content'
-      'menu pagination';
+        "menu banner"
+        "menu breadcrumbs"
+        "menu content"
+        "menu pagination";
     grid-template-columns: fit-content(@sidebar-width) 1fr;
     grid-template-rows: max-content max-content 1fr max-content;
     line-height: 1.54em;
@@ -450,7 +468,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 
     &.maturity-developer {
         color: #fff;
-        background-color: #D9534F;
+        background-color: #d9534f;
         border-style: none;
     }
 }
@@ -465,12 +483,20 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 @keyframes slide-down {
-  0%   { grid-template-rows: 0fr }
-  100% { grid-template-rows: 1fr }
+    0% {
+        grid-template-rows: 0fr;
+    }
+    100% {
+        grid-template-rows: 1fr;
+    }
 }
 @keyframes slide-up {
-  0%   { grid-template-rows: 1fr }
-  100% { grid-template-rows: 0fr }
+    0% {
+        grid-template-rows: 1fr;
+    }
+    100% {
+        grid-template-rows: 0fr;
+    }
 }
 .slide-out {
     display: grid;
