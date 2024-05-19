@@ -1,7 +1,7 @@
 import storage from './storage.js';
 
 export const createAnchors = (topList) => {
-    const it = typeof (topList)[Symbol.iterator] === 'function' ? topList : [topList];
+    const it = typeof(topList)[Symbol.iterator] === 'function' ? topList : [topList];
     for (const top of it) {
         for (const heading of top.querySelectorAll(':scope h1,h2,h3,h4,h5,h6,dt')) {
             const id = heading.id;
@@ -53,7 +53,8 @@ export const formatTOC = (toc) => {
                     toc_body.style.height = null;
                 });
             });
-        } else {
+        }
+        else {
             const finish = e => {
                 toc_body.removeEventListener('transitionend', finish);
                 toc_body.style.height = null;

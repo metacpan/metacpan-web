@@ -1,5 +1,9 @@
 import jQuery from 'jquery';
-import { formatTOC, createAnchors } from './document-ui.mjs';
+import {
+    formatTOC,
+    createAnchors
+}
+from './document-ui.mjs';
 
 const pod2html_form = jQuery('#metacpan-pod-renderer-form');
 const pod2html_text = jQuery('[name="pod"]', pod2html_form);

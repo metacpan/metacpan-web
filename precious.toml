@@ -54,3 +54,15 @@ tidy-flags = "--write"
 ok-exit-codes = 0
 lint-failure-exit-codes = 1
 ignore-stderr = [ "Code style issues" ]
+
+[commands.js-beautify]
+type    = "tidy"
+include = [ "**/*.js", "**/*.mjs" ]
+cmd     = [
+    "npx", "-s", "js-beautify",
+    "--editorconfig",
+    "--brace-style", "end-expand",
+    "--replace"
+]
+ok-exit-codes = 0
+lint-failure-exit-codes = 1

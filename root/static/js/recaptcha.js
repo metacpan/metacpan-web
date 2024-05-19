@@ -1,7 +1,7 @@
 'use strict';
 
-function recaptcha_prepare () {
-    return new Promise ((resolve, reject) => {
+function recaptcha_prepare() {
+    return new Promise((resolve, reject) => {
         const recaptcha_script = document.createElement('script');
         recaptcha_script.setAttribute('async', '');
         recaptcha_script.setAttribute('defer', '');

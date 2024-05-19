@@ -21,7 +21,8 @@ async function processUserData() {
     let user_data;
     try {
         user_data = await fetch('/account/login_status').then(res => res.json());
-    } catch (e) {
+    }
+    catch (e) {
         document.body.classList.remove('logged-in');
         document.body.classList.add('logged-out');
         return;
@@ -252,7 +253,8 @@ for (const favForm of document.querySelectorAll('form[action="/account/favorite/
             favForm.querySelector('input[name="remove"]').value = 1;
             if (!count)
                 button.classList.toggle('highlight');
-        } else {
+        }
+        else {
             // can't delete what's already deleted
             favForm.querySelector('input[name="remove"]').value = 0;
 

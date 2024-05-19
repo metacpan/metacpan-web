@@ -3,7 +3,8 @@ let storage;
 // provide localStorage shim to work around https://bugzilla.mozilla.org/show_bug.cgi?id=748620
 try {
     storage = window.localStorage;
-} catch (e) {}
+}
+catch (e) {}
 if (!storage) {
     storage = new class {
         getItem(k) {

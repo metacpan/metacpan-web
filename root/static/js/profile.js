@@ -58,7 +58,8 @@ function validateJSON(input) {
     try {
         input.value && JSON.parse(input.value);
         input.classList.remove('invalid');
-    } catch(err) {
+    }
+    catch (err) {
         input.classList.add('invalid');
     }
 }
@@ -67,8 +68,7 @@ function fillLocation() {
     navigator.geolocation.getCurrentPosition((pos) => {
         document.querySelector('input[name="latitude"]').value = pos.coords.latitude;
         document.querySelector('input[name="longitude"]').value = pos.coords.longitude;
-    }, function(){
-    });
+    }, function() {});
     return false;
 }
 
@@ -76,7 +76,7 @@ const profileForm = document.querySelector('.profile-form');
 
 if (profileForm) {
     for (const btn of profileForm.querySelectorAll(':scope .add-field')) {
-        btn.addEventListener('click', function (e) {
+        btn.addEventListener('click', function(e) {
             e.preventDefault();
             addField(this.closest('.field-container').parentNode, this.dataset.fieldType);
         });
@@ -109,12 +109,12 @@ if (profileForm) {
     }
 
     const extra = profileForm.querySelector('textarea[name="extra"]')
-    extra.addEventListener('keyup', function (e) {
+    extra.addEventListener('keyup', function(e) {
         validateJSON(this);
     });
     validateJSON(extra);
 
-    profileForm.querySelector('.fill-location').addEventListener('click', function (e) {
+    profileForm.querySelector('.fill-location').addEventListener('click', function(e) {
         e.preventDefault();
         fillLocation();
     });
