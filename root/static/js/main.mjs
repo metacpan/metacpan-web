@@ -1,4 +1,3 @@
-import 'jquery';
 import './autocomplete.js';
 import './tablesorter.js';
 import './cpan.js';

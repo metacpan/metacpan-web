@@ -1,6 +1,5 @@
 'use strict';
 
-const $ = require('jquery');
 const relatizeDate = require('./relatize_date.js');
 const storage = require('./storage.js');
 const Mousetrap = require('mousetrap');
@@ -8,6 +7,11 @@ const {
     formatTOC,
     createAnchors
 } = require('./document-ui.mjs');
+
+const jQuery = require('jquery');
+require('bootstrap/js/dropdown.js');
+require('bootstrap/js/modal.js');
+require('bootstrap/js/tooltip.js');
 
 function setFavTitle(button) {
     button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
@@ -64,25 +68,25 @@ async function processUserData() {
 }
 
 function set_page_size(selector, storage_name) {
-    $(selector).each(function() {
-        var url = this.href;
-        var result = /[&;?]size=(\d+)(?:$|[&;])/.exec(url);
-        var size;
+    for (const el of document.querySelectorAll(selector)) {
+        const result = el.href.match(/[&;?]size=(\d+)(?:$|[&;])/);
         if (result && result[1]) {
-            size = result[1];
-            $(this).click(function() {
+            const size = result[1];
+            el.addEventListener('click', () => {
                 storage.setItem(storage_name, size);
-                return true;
             });
-        } else if (size = storage.getItem(storage_name)) {
-            if (/\?/.exec(url)) {
-                this.href += '&size=' + size;
-            } else {
-                this.href += '?size=' + size;
+            return;
+        }
+        const storage_size = storage.getItem(storage_name);
+        if (storage_size) {
+            if (el.href.match(/\?/)) {
+                el.href += '&size=' + storage_size;
+            }
+            else {
+                el.href += '?size=' + storage_size;
             }
         }
-        return true;
-    });
+    }
 }
 
 // poor man's RFC-6570 formatter
@@ -99,32 +103,32 @@ function format_string(input_string, replacements) {
 // User customisations
 processUserData();
 
-$(".ttip").tooltip();
+jQuery(".ttip").tooltip(); // bootstrap
 
-$('.keyboard-shortcuts').each(function() {
-    $(this).click(function(event) {
-        $('#metacpan_keyboard-shortcuts').modal();
-        event.preventDefault();
-    })
-});
+for (const el of document.querySelectorAll('.keyboard-shortcuts')) {
+    el.addEventListener('click', e => {
+        e.preventDefault();
+        jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
+    });
+}
 
 // Global keyboard shortcuts
 Mousetrap.bind('?', function() {
-    $('#metacpan_keyboard-shortcuts').modal();
+    jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
 });
 Mousetrap.bind('s', function(e) {
-    $('#metacpan_search-input').focus();
     e.preventDefault();
+    document.querySelector('#metacpan_search-input').focus();
 });
 
 // install a default handler for 'g s' for non pod pages
 Mousetrap.bind('g s', function(e) {});
 
-$('a[data-keyboard-shortcut]').each(function(index, element) {
-    Mousetrap.bind($(element).data('keyboard-shortcut'), function() {
-        window.location = $(element).attr('href');
+for (const el of document.querySelectorAll('a[data-keyboard-shortcut]')) {
+    Mousetrap.bind(el.dataset.keyboardShortcut, e => {
+        window.location = el.href;
     });
-});
+}
 
 for (const logout of document.querySelectorAll('.logout-button')) {
     logout.addEventListener('click', e => {
@@ -139,30 +143,30 @@ for (const logout of document.querySelectorAll('.logout-button')) {
 
 relatizeDate(document.querySelectorAll('.relatize'));
 
-var items = $('.ellipsis');
-for (var i = 0; i < items.length; i++) {
-    var element = items[i];
-    var text = element.textContent;
+for (const el of document.querySelectorAll('.ellipsis')) {
+    const text = el.textContent;
 
     // try to find a reasonable place to cut to allow mid-abbreviation.
     // we want to cut "near" the middle, but prefer on a boundary.
-    var cut = Math.floor(text.length / 5 * 3);
-    var start_text = text.substr(0, cut);
-    var end_text = text.substr(cut);
-    var res = start_text.match(/^(.*[- :])(.*?)$/);
+    const initial_cut = Math.floor(text.length / 5 * 3);
+    let start_text = text.substr(0, initial_cut);
+    let end_text = text.substr(initial_cut);
+    const res = start_text.match(/^(.*[- :])(.*?)$/);
     if (res && res[1].length > text.length / 4) {
         start_text = res[1];
         end_text = res[2] + end_text;
     }
 
-    var start = document.createElement('span');
-    start.appendChild(document.createTextNode(start_text));
-    var end = document.createElement('span');
-    end.appendChild(document.createTextNode(end_text));
-    $(element).empty();
-    element.appendChild(end);
+    const start = document.createElement('span');
+    start.append(start_text);
+    const end = document.createElement('span');
+    end.append(end_text);
+
+    el.replaceChildren();
+
+    el.append(end);
     start.style.maxWidth = 'calc(100% - ' + end.clientWidth + 'px)';
-    element.insertBefore(start, end);
+    el.prepend(start);
 }
 
 createAnchors(document.querySelectorAll('.anchors'));
@@ -171,23 +175,25 @@ for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
     setFavTitle(favButton);
 }
 
-$('.dropdown-toggle').dropdown();
+jQuery('.dropdown-toggle').dropdown(); // bootstrap
 
 const toc = document.querySelector(".content .toc")
 if (toc) {
     formatTOC(toc);
 }
 
-$('a[href*="/search?"]').on('click', function() {
-    var url = $(this).attr('href');
-    var result = /size=(\d+)/.exec(url);
-    if (result && result[1]) {
-        storage.setItem('search_size', result[1]);
-    }
-});
-var size = storage.getItem('search_size');
+for (const link of document.querySelectorAll('a[href*="/search?"]')) {
+    link.addEventListener('click', e => {
+        const result = link.href.match(/size=(\d+)/);
+        if (result && result[1]) {
+            storage.setItem('search_size', result[1]);
+        }
+    });
+}
+
+const size = storage.getItem('search_size');
 if (size) {
-    $('#metacpan_search-size').val(size);
+    document.querySelector('#metacpan_search-size').value = size;
 }
 
 // TODO use a more specific locator for /author/PAUSID/release ?
