@@ -108,7 +108,7 @@ jobs:
       - name: Run tests
         run: carton exec prove -lr --jobs 2 t
         env:
-          HARNESS_PERL_SWITCHES: $${ steps.coverage.outputs.switches }}
+          HARNESS_PERL_SWITCHES: ${{ steps.coverage.outputs.switches }}
       - name: Generate Codecov report
         if: matrix.resolver == 'snapshot'
         run: cover -report codecovbash
