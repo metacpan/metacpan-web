@@ -82,3 +82,12 @@ cmd     = [
 ]
 ok-exit-codes = 0
 lint-failure-exit-codes = 1
+
+[commands.eslint]
+type    = "lint"
+include = [ "**/*.js", "**/*.mjs" ]
+cmd     = [
+    "npx", "-s", "eslint"
+]
+ok-exit-codes = 0
+lint-failure-exit-codes = 1
