@@ -1,10 +1,19 @@
-html body .syntaxhighlighter {
-    font-size: 100% !important;
-    margin: 0 !important;
-    overflow: visible !important;
+html > body .syntaxhighlighter {
+    font-size: unset !important;
+    margin: unset !important;
+    overflow: unset !important;
+}
+
+html > body .syntaxhighlighter {
     /* needs higher specificity than the syntax highligher's rules */
-    &, *, * *, * * *, * * * *, .line.alt2, .line.alt1 {
-        font-family: inherit !important;
+    &,
+    *,
+    * *,
+    * * *,
+    * * * *,
+    .line.alt2,
+    .line.alt1 {
+        font-family: unset !important;
         line-height: normal !important;
     }
 }
