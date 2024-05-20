@@ -22,8 +22,14 @@ sub add : Local : Args(0) {
     }
 
     if ($json) {
-        $c->res->code(400) if $res->{error};
-        $c->stash->{json}{success} = $res->{error} ? \0 : \1;
+        if ($res->{error}) {
+            $c->res->code(400);
+            $c->stash->{json}{success} = \0;
+            $c->stash->{json}{error} = $res->{error};
+        }
+        else {
+            $c->stash->{json}{success} = \1;
+        }
     }
     else {
         $c->res->redirect(
