@@ -44,32 +44,32 @@ const findLines = (el, lines) => {
 const togglePod = (e) => {
     e.preventDefault();
 
-    const scrollTop = window.scrollTop;
+    const scrollTop = window.scrollY;
 
     let topLine;
     let topOffset;
-    for (const line of document.querySelectorAll('.syntaxhighlighter .line')) {
-        if (line.classList.contains('pod-line')) {
-            continue;
-        }
-        else if (line.getClientRects().top < scrollTop) {
+    for (const line of document.querySelectorAll('.syntaxhighlighter .container .line:not(.pod-line)')) {
+        const lineTop = line.getBoundingClientRect().top;
+        if (lineTop < 0) {
             topLine = line;
+            topOffset = lineTop;
         }
-    }
-    if (topLine) {
-        topOffset = line.getClientRects().top - scrollTop;
+        else {
+            break;
+        }
     }
     for (const toggle of document.querySelectorAll('.pod-toggle')) {
         toggle.classList.toggle('pod-hidden');
     }
     if (topLine) {
+        const diff = topLine.getBoundingClientRect().top - topOffset;
+
         window.scrollTo({
-            top: line.getClientRects().top - topOffset,
+            top: scrollTop + diff,
             left: 0,
             behavior: "instant"
         });
     }
-
 }
 
 const hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
