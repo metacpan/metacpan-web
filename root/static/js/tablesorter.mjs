@@ -1,4 +1,3 @@
-'use strict';
 import jQuery from 'jquery';
 import storage from './storage.js';
 

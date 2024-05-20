@@ -30,7 +30,7 @@ const config = {
     outdir: 'root/assets',
     bundle: true,
     sourcemap: true,
-    inject: ['root/static/js/inject.js'],
+    inject: ['root/static/js/inject.mjs'],
     loader: {
         '.eot': 'file',
         '.svg': 'file',
