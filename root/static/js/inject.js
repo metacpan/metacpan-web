@@ -1,5 +1,4 @@
-import jQuery from 'jquery';
-
 export {
-    jQuery,
-};
+    default as 'jQuery',
+}
+from 'jquery';
