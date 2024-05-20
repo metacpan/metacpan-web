@@ -22,10 +22,10 @@ sub add : Local : Args(0) {
     }
 
     if ($json) {
-        if ($res->{error}) {
+        if ( $res->{error} ) {
             $c->res->code(400);
             $c->stash->{json}{success} = \0;
-            $c->stash->{json}{error} = $res->{error};
+            $c->stash->{json}{error}   = $res->{error};
         }
         else {
             $c->stash->{json}{success} = \1;
