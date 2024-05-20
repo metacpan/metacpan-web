@@ -80,7 +80,7 @@ const hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
 // Original is /\w+:\/\/[\w-.\/?%&=:@;#]*/g
 // Allow tilde, disallow period or percent as last character, and a more
 // restricted scheme
-SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-.\/?%&=:@;#~]*[\w-\/?&=:@;#~]/gi;
+SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-./?%&=:@;#~]*[\w-/?&=:@;#~]/gi;
 
 // Use regular spaces, not &nbsp;
 SyntaxHighlighter.config.space = ' ';
@@ -102,7 +102,7 @@ const processPackages = function(code) {
     // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
     // Space should only be allowed after qw, but it probably doesn't hurt to match it.
     // This is a lax re for html entity, but probably good enough.
-    const strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_\:]+)(.*)/;
+    const strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_:]+)(.*)/;
 
     // Wow, this regexp is hairy.
     // We have to specifically match the "qw" followed by a non-letter or an html entity followed by a closing tag,
@@ -162,8 +162,8 @@ CODE: for (const code of document.querySelectorAll(".pod pre > code")) {
 
 const source = document.querySelector("#metacpan_source");
 if (source) {
-    let lineMatch;
-    let packageMatch;
+    const packageMatch = document.location.hash.match(/^#P(\S+)$/);
+    const lineMatch = document.location.hash.match(hashLines);
     // avoid highlighting excessively large blocks of code as they will take
     // too long, causing browsers to lag and offer to kill the script
     if (source.innerHTML.length > 500000) {
@@ -171,15 +171,11 @@ if (source) {
             el.classList.remove(...el.classList);
         }
     }
-    // save highlighted lines in an attribute, to be used later
-    else if (lineMatch = document.location.hash.match(hashLines)) {
-        source.dataset.line = lineMatch[1];
-    }
     // check for 'P{encoded_package_name}' anchor, convert to
     // line number (if possible), and then highlight and jump
     // as long as the matching line is not the first line in
     // the code.
-    else if (packageMatch = document.location.hash.match(/^#P(\S+)$/)) {
+    else if (packageMatch) {
         const decodedPackageMatch = decodeURIComponent(packageMatch[1]);
         const leadingSource = source.text().split("package " + decodedPackageMatch + ";");
         const lineCount = leadingSource[0].split("\n").length;
@@ -192,9 +188,13 @@ if (source) {
             window.history.replaceState(null, '', loc);
         }
     }
+    // save highlighted lines in an attribute, to be used later
+    else if (lineMatch) {
+        source.dataset.line = lineMatch[1];
+    }
 }
 
-CODE: for (const code of document.querySelectorAll(".content pre > code")) {
+for (const code of document.querySelectorAll(".content pre > code")) {
     const pre = code.parentNode;
 
     const config = {

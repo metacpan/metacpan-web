@@ -22,7 +22,7 @@ async function processUserData() {
     try {
         user_data = await fetch('/account/login_status').then(res => res.json());
     }
-    catch (e) {
+    catch {
         document.body.classList.remove('logged-in');
         document.body.classList.add('logged-out');
         return;
@@ -95,7 +95,7 @@ function format_string(input_string, replacements) {
     const output_string = input_string.replace(
         /\{(\/?)(\w+)\}/g,
         (x, slash, placeholder) =>
-        replacements.hasOwnProperty(placeholder) ?
+        Object.hasOwn(replacements, placeholder) ?
         slash + replacements[placeholder] : ''
     );
     return output_string;
@@ -123,10 +123,10 @@ Mousetrap.bind('s', function(e) {
 });
 
 // install a default handler for 'g s' for non pod pages
-Mousetrap.bind('g s', function(e) {});
+Mousetrap.bind('g s', () => {});
 
 for (const el of document.querySelectorAll('a[data-keyboard-shortcut]')) {
-    Mousetrap.bind(el.dataset.keyboardShortcut, e => {
+    Mousetrap.bind(el.dataset.keyboardShortcut, () => {
         window.location = el.href;
     });
 }
@@ -184,7 +184,7 @@ if (toc) {
 }
 
 for (const link of document.querySelectorAll('a[href*="/search?"]')) {
-    link.addEventListener('click', e => {
+    link.addEventListener('click', () => {
         const result = link.href.match(/size=(\d+)/);
         if (result && result[1]) {
             storage.setItem('search_size', result[1]);
@@ -209,7 +209,6 @@ if (changes) {
     changes.classList.add('collapsable', 'collapsed');
 
     const content_height = Math.round(changes_content.scrollHeight);
-    const toggle_style = window.getComputedStyle(changes_toggle);
 
     const potential_size = Math.round(
         changes_content.offsetHeight +

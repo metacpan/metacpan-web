@@ -36,53 +36,38 @@ const relDate = {
             return new Array((2 - string.length) + 1).join('0') + string
         };
 
-        return format.replace(/\%([aAbBcdHImMpSwyY])/g, (match, letter) => {
+        return format.replace(/%([aAbBcdHImMpSwyY])/g, (match, letter) => {
             switch (letter) {
                 case 'a':
                     return this.shortDays[day];
-                    break;
                 case 'A':
                     return this.days[day];
-                    break;
                 case 'b':
                     return this.shortMonths[month];
-                    break;
                 case 'B':
                     return this.months[month];
-                    break;
                 case 'c':
                     return date.toString();
-                    break;
                 case 'd':
                     return pad(date.getDate());
-                    break;
                 case 'H':
                     return pad(hours);
-                    break;
                 case 'I':
                     return pad((hours + 12) % 12);
-                    break;
                 case 'm':
                     return pad(month + 1);
-                    break;
                 case 'M':
                     return pad(minutes);
-                    break;
                 case 'p':
                     return hours > 12 ? 'PM' : 'AM';
-                    break;
                 case 'S':
                     return pad(date.getSeconds());
-                    break;
                 case 'w':
                     return day;
-                    break;
                 case 'y':
                     return pad(date.getFullYear() % 100);
-                    break;
                 case 'Y':
                     return date.getFullYear().toString();
-                    break;
             }
         });
     },

@@ -40,8 +40,8 @@ function addProfile(container, id, title, formatUrl) {
 
         check_button.dataset.urlTemplate = formatUrl;
 
-        check_button.addEventListener('click', function(e) {
-            rewriteURL(this);
+        check_button.addEventListener('click', () => {
+            rewriteURL(check_button);
         });
     }
     container.append(profileNode);
@@ -59,7 +59,7 @@ function validateJSON(input) {
         input.value && JSON.parse(input.value);
         input.classList.remove('invalid');
     }
-    catch (err) {
+    catch {
         input.classList.add('invalid');
     }
 }
@@ -103,14 +103,14 @@ if (profileForm) {
     }
 
     for (const check_url of profileForm.querySelectorAll(':scope .check-url')) {
-        check_url.addEventListener('click', function(e) {
-            rewriteURL(this);
+        check_url.addEventListener('click', () => {
+            rewriteURL(check_url);
         });
     }
 
     const extra = profileForm.querySelector('textarea[name="extra"]')
-    extra.addEventListener('keyup', function(e) {
-        validateJSON(this);
+    extra.addEventListener('keyup', () => {
+        validateJSON(extra);
     });
     validateJSON(extra);
 
@@ -120,10 +120,11 @@ if (profileForm) {
     });
 
     const donation_box = document.querySelector('#metacpan_donations');
-    profileForm.querySelector('input[name="donations"]').addEventListener('change', (e) => {
+    const donations = profileForm.querySelector('input[name="donations"]');
+    donations.addEventListener('change', () => {
         donation_box.classList.remove("slide-out-hidden");
 
-        if (this.value) {
+        if (donations.value) {
             donation_box.classList.add("slide-down");
             donation_box.classList.remove("slide-up");
         }

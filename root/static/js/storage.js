@@ -4,7 +4,9 @@ let storage;
 try {
     storage = window.localStorage;
 }
-catch (e) {}
+catch {
+    // noop
+}
 if (!storage) {
     storage = new class {
         getItem(k) {

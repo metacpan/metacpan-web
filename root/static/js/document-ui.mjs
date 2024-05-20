@@ -55,7 +55,7 @@ export const formatTOC = (toc) => {
             });
         }
         else {
-            const finish = e => {
+            const finish = () => {
                 toc_body.removeEventListener('transitionend', finish);
                 toc_body.style.height = null;
             };

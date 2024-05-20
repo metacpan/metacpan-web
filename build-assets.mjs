@@ -48,7 +48,7 @@ const config = {
                 build.onResolve({
                         filter: /^\//
                     },
-                    args => ({
+                    () => ({
                         external: true
                     }),
                 );

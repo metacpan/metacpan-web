@@ -1,5 +1,4 @@
 const BrushBase = require('brush-base');
-const regexLib = require('syntaxhighlighter-regex').commonRegExp;
 
 function Brush() {
     this.regexList = [

@@ -50,7 +50,7 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
     try {
         sortid = JSON.parse('[' + sortid + ']');
     }
-    catch (e) {
+    catch {
         sortid = [0, 0];
     }
 

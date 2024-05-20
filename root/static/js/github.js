@@ -29,7 +29,7 @@ class GitHubUrl {
 
     config = {
         issues: {
-            pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/issues\/?$/,
+            pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/]+)\/([^/]+)\/issues\/?$/,
             prepareData: function(data, cb) {
                 // we need additionally the repo info
                 var url = this.url.replace('/issues', '');
@@ -70,7 +70,7 @@ class GitHubUrl {
         // Release info
         repo: {
             // NOTE: Not allowing dots in the repo name might be too restrictive.
-            pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com(?:\/|:)([^\/]+)\/([^\/\.]+)(?:\/(tree(?:\/master)?)?|\.git)*$/,
+            pattern: /^(?:(?:git|https?):\/\/)?(?:www\.)?github\.com[/:]([^/]+)\/([^/.]+)(?:\/(tree(?:\/master)?)?|\.git)*$/,
             normalizeUrl: function(match) {
                 // Old releases might have old github urls ("/$user/$repo/tree").
                 // Since github doesn't honor those anymore, fix the link.
@@ -107,7 +107,7 @@ class GitHubUrl {
                     '  <tr><th>Pull Requests:</th><td><a href="' + data.html_url + '/pulls">' + data.html_url + '/pulls' + '</a></td></tr>' +
                     '  <tr><th>Clone URL:</th><td><a href="' + data.clone_url + '">' + data.clone_url + '</a></td></tr>' +
                     '  <tr><th>GitHub URL:</th><td><a href="' + data.html_url + '">' + data.html_url + '</a></td></tr>' +
-                    '  <tr><th>SSH URL:</th><td><a href="' + data.ssh_url.replace(/^(\w+\@)?([^:\/]+):/, 'ssh://$1$2/') + '">' + data.ssh_url + '</a></td></tr>' +
+                    '  <tr><th>SSH URL:</th><td><a href="' + data.ssh_url.replace(/^(\w+@)?([^:/]+):/, 'ssh://$1$2/') + '">' + data.ssh_url + '</a></td></tr>' +
                     '  <tr><th>Last Commit:</th><td><span class="relatize">' + data.pushed_at + '</span></td></tr>' +
                     '</table>';
             },
@@ -118,7 +118,7 @@ class GitHubUrl {
 
         // Author profiles
         user: {
-            pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/]+)\/?$/,
+            pattern: /^(?:https?:\/\/)?(?:www\.)?github\.com\/([^/]+)\/?$/,
             render: function(data) {
                 return '<table>' +
                     (data.name ?
@@ -240,7 +240,7 @@ class GitHubUrl {
         try {
             return this.config[this.type].render.call(this, data);
         }
-        catch (x) {
+        catch {
             // Don't let the spinner spin forever.
             return '<i>Error</i>';
         }
