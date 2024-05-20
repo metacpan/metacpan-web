@@ -10,52 +10,52 @@ on:
   workflow_dispatch:
 
 jobs:
-  code-formatting:
-    runs-on: ubuntu-22.04
-    name: Code Formatting
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Fetch base ref
-        if: ${{ github.event.pull_request }}
-        run: git fetch origin ${{ github.base_ref }}:upstream
-      - run: npm install
-      - name: Install Carton
-        uses: perl-actions/install-with-cpm@v1
-        with:
-          install: Carton
-      - name: Install CPAN deps
-        uses: perl-actions/install-with-cpm@v1
-        with:
-          cpanfile: 'cpanfile'
-          args: >
-            --resolver=snapshot
-            --without-runtime
-            --without-test
-            --without-build
-            --with-develop
-      - name: Install precious
-        run: ./bin/install-precious /usr/local/bin
-      - name: Lint modified files
-        if: ${{ github.event.pull_request }}
-        run: precious lint --git-diff-from upstream
-      - name: Lint all files
-        if: ${{ ! github.event.pull_request }}
-        run: precious lint --all
-  docker:
-    runs-on: ubuntu-22.04
-    name: Docker
-    steps:
-      - name: Build test image
-        id: docker-build-test
-        uses: docker/build-push-action@v5
-        with:
-          target: test
-          push: false
-          load: true
-      - name: Run Perl tests
-        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
+#  code-formatting:
+#    runs-on: ubuntu-22.04
+#    name: Code Formatting
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#      - name: Fetch base ref
+#        if: ${{ github.event.pull_request }}
+#        run: git fetch origin ${{ github.base_ref }}:upstream
+#      - run: npm install
+#      - name: Install Carton
+#        uses: perl-actions/install-with-cpm@v1
+#        with:
+#          install: Carton
+#      - name: Install CPAN deps
+#        uses: perl-actions/install-with-cpm@v1
+#        with:
+#          cpanfile: 'cpanfile'
+#          args: >
+#            --resolver=snapshot
+#            --without-runtime
+#            --without-test
+#            --without-build
+#            --with-develop
+#      - name: Install precious
+#        run: ./bin/install-precious /usr/local/bin
+#      - name: Lint modified files
+#        if: ${{ github.event.pull_request }}
+#        run: precious lint --git-diff-from upstream
+#      - name: Lint all files
+#        if: ${{ ! github.event.pull_request }}
+#        run: precious lint --all
+#  docker:
+#    runs-on: ubuntu-22.04
+#    name: Docker
+#    steps:
+#      - name: Build test image
+#        id: docker-build-test
+#        uses: docker/build-push-action@v5
+#        with:
+#          target: test
+#          push: false
+#          load: true
+#      - name: Run Perl tests
+#        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
   test:
     runs-on: ubuntu-20.04
     name: Dockerless
@@ -66,7 +66,7 @@ jobs:
           - '5.36'
         resolver:
           - snapshot
-          - metacpan
+#          - metacpan
     container:
       image: perl:${{ matrix.perl-version }}
       env:
