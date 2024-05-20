@@ -228,16 +228,14 @@ for (const favForm of document.querySelectorAll('form[action="/account/favorite/
     favForm.addEventListener('submit', async e => {
         e.preventDefault();
         const formData = new FormData(favForm);
-        let response;
-        try {
-            response = await fetch(favForm.action, {
-                method: favForm.method,
-                headers: {
-                    'Accepts': 'application/json',
-                },
-                body: formData,
-            });
-        } catch (e) {
+        const response = await fetch(favForm.action, {
+            method: favForm.method,
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: formData,
+        });
+        if (!response.ok) {
             if (confirm("You have to complete a Captcha in order to ++.")) {
                 document.location.href = "/account/turing";
             }
