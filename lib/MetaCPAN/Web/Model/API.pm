@@ -117,13 +117,14 @@ sub request {
                 'Content'      => encode_json($search),
                 )
             : $method eq 'POST' && $params ? (
-                'Content_Type' => 'multipart/form-data',
+                'Content-Type' => 'multipart/form-data',
                 'Content'      => $params,
                 )
             : ()
         ),
         ( $current_url ? ( 'Referer' => $current_url->as_string )   : () ),
         ( $request_id  ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
+        'Accept' => 'application/json, */*',
     );
 
     my $req_p = $self->client->do_request( request => $request );
