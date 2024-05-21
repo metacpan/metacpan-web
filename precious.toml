@@ -1,6 +1,7 @@
 excludes = [
     ".build/**",
     "blib/**",
+    "root/assets/**",
 ]
 
 [commands.perlimports]
