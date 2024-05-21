@@ -37,12 +37,16 @@ jobs:
             --with-develop
       - name: Install precious
         run: ./bin/install-precious /usr/local/bin
-      - name: Lint modified files
-        if: ${{ github.event.pull_request }}
-        run: precious lint --git-diff-from upstream
-      - name: Lint all files
-        if: ${{ ! github.event.pull_request }}
-        run: precious lint --all
+      - name: Select files
+        id: select-files
+        run: |
+          if [[ -n "${{ github.event.pull_request.number }}" ]]; then
+            echo 'precious-args=--git-diff-from upstream' >> "$GITHUB_OUTPUT"
+          else
+            echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Lint files
+        run: precious lint ${{ steps.select-files.outputs.precious-args }}
   docker:
     runs-on: ubuntu-22.04
     name: Docker
