@@ -55,7 +55,7 @@ ok-exit-codes = 0
 lint-failure-exit-codes = 1
 ignore-stderr = [ "Code style issues" ]
 
-[commands.js-beautify]
+[commands.js-beautify-tidy]
 type    = "tidy"
 include = [ "**/*.js", "**/*.mjs" ]
 cmd     = [
@@ -63,6 +63,22 @@ cmd     = [
     "--editorconfig",
     "--brace-style", "end-expand",
     "--replace"
+]
+ok-exit-codes = 0
+lint-failure-exit-codes = 1
+
+[commands.js-beautify-lint]
+type    = "lint"
+include = [ "**/*.js", "**/*.mjs" ]
+cmd     = [
+    "bash", "-c", """
+    diff -u "$0" <( \
+        npx -s js-beautify \
+        --editorconfig \
+        --brace-style end-expand \
+        "$0" \
+    ) >&2
+    """
 ]
 ok-exit-codes = 0
 lint-failure-exit-codes = 1
