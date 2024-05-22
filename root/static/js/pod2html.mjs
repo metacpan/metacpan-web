@@ -1,5 +1,9 @@
 import jQuery from 'jquery';
-import { formatTOC, createAnchors } from './document-ui.mjs';
+import {
+    formatTOC,
+    createAnchors
+}
+from './document-ui.mjs';
 
 const pod2html_form = jQuery('#metacpan-pod-renderer-form');
 const pod2html_text = jQuery('[name="pod"]', pod2html_form);
@@ -26,9 +30,8 @@ const pod2html_update = function(pod) {
         headers: {
             Accept: "application/json"
         },
-        success: function(data, stat, req) {
+        success: function(data) {
             const title = data.pod_title;
-            const abstract = data.pod_abstract;
             document.title = "Pod Renderer - " + title + " - metacpan.org";
             rendered.html(
                 '<nav class="toc"><div class="toc-header"><strong>Contents</strong></div>' +
@@ -46,7 +49,7 @@ const pod2html_update = function(pod) {
             rendered.show();
             submit.removeAttr("disabled");
         },
-        error: function(data, stat) {
+        error: function(data) {
             rendered.hide();
             loading.hide();
             error.html('Error rendering POD' +
@@ -57,7 +60,7 @@ const pod2html_update = function(pod) {
     });
 };
 if (window.FileReader) {
-    jQuery('input[type="file"]', pod2html_form).on('change', function(e) {
+    jQuery('input[type="file"]', pod2html_form).on('change', function() {
         const files = this.files;
         for (var i = 0; i < files.length; i++) {
             const file = files[i];
@@ -92,7 +95,7 @@ renderer.on("dragover", function(event) {
     }, 500);
 });
 
-jQuery(document).on("dragenter", function(event) {
+jQuery(document).on("dragenter", function() {
     renderer.addClass("dragging");
 });
 

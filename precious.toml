@@ -1,6 +1,7 @@
 excludes = [
     ".build/**",
     "blib/**",
+    "root/assets/**",
 ]
 
 [commands.perlimports]
@@ -42,14 +43,11 @@ ignore-stderr = [
     "The .+ file is not unique",
 ]
 
-[commands.prettier-markdown]
+[commands.prettier]
 type    = "both"
-include = "**/*.md"
+include = [ "**/*.md", "**/*.yml", "**/*.yaml", "**/*.css", "**/*.less", "**/*.scss" ]
 cmd     = [
-    "npx", "-s", "prettier",
-    "--no-config",
-    "--print-width", "80",
-    "--prose-wrap", "always",
+    "npx", "-s", "prettier"
 ]
 lint-flags = "--check"
 tidy-flags = "--write"
@@ -57,16 +55,39 @@ ok-exit-codes = 0
 lint-failure-exit-codes = 1
 ignore-stderr = [ "Code style issues" ]
 
-[commands.prettier-yaml]
-type    = "both"
-include = "**/*.yml"
+[commands.js-beautify-tidy]
+type    = "tidy"
+include = [ "**/*.js", "**/*.mjs" ]
 cmd     = [
-    "npx", "-s", "prettier",
-    "--no-config",
-    "--single-quote",
+    "npx", "-s", "js-beautify",
+    "--editorconfig",
+    "--brace-style", "end-expand",
+    "--replace"
 ]
-lint-flags = "--check"
-tidy-flags = "--write"
 ok-exit-codes = 0
 lint-failure-exit-codes = 1
-ignore-stderr = [ "Code style issues" ]
+
+[commands.js-beautify-lint]
+type    = "lint"
+include = [ "**/*.js", "**/*.mjs" ]
+cmd     = [
+    "bash", "-c", """
+    diff -u "$0" <( \
+        npx -s js-beautify \
+        --editorconfig \
+        --brace-style end-expand \
+        "$0" \
+    ) >&2
+    """
+]
+ok-exit-codes = 0
+lint-failure-exit-codes = 1
+
+[commands.eslint]
+type    = "lint"
+include = [ "**/*.js", "**/*.mjs" ]
+cmd     = [
+    "npx", "-s", "eslint"
+]
+ok-exit-codes = 0
+lint-failure-exit-codes = 1

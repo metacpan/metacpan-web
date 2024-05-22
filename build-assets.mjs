@@ -1,8 +1,20 @@
 #!/usr/bin/env node
+
 import * as esbuild from 'esbuild'
-import { lessLoader } from 'esbuild-plugin-less';
-import { sassPlugin } from 'esbuild-sass-plugin';
-import { writeFile, opendir, unlink } from 'node:fs/promises';
+import {
+    lessLoader
+}
+from 'esbuild-plugin-less';
+import {
+    sassPlugin
+}
+from 'esbuild-sass-plugin';
+import {
+    writeFile,
+    opendir,
+    unlink
+}
+from 'node:fs/promises';
 import path from 'node:path';
 import parseArgs from 'minimist';
 
@@ -18,7 +30,7 @@ const config = {
     outdir: 'root/assets',
     bundle: true,
     sourcemap: true,
-    inject: ['root/static/js/inject.js'],
+    inject: ['root/static/js/inject.mjs'],
     loader: {
         '.eot': 'file',
         '.svg': 'file',
@@ -33,9 +45,12 @@ const config = {
             name = 'metacpan-build';
 
             setup(build) {
-                build.onResolve(
-                    { filter: /^\// },
-                    args => ({ external: true }),
+                build.onResolve({
+                        filter: /^\//
+                    },
+                    () => ({
+                        external: true
+                    }),
                 );
 
                 build.initialOptions.metafile = true;
@@ -76,7 +91,9 @@ if (args.minify) {
     config.minify = true;
 }
 if (args.clean) {
-    for await (const file of await opendir(config.outdir, { withFileTypes: true })) {
+    for await (const file of await opendir(config.outdir, {
+        withFileTypes: true
+    })) {
         const filePath = path.join(file.parentPath, file.name);
         if (file.name.match(/^\./)) {
             // ignore these

@@ -1,4 +1,3 @@
-'use strict';
 import jQuery from 'jquery';
 import storage from './storage.js';
 
@@ -11,7 +10,8 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
             if (!sort) return node.textContent;
             if (node.classList.contains("date")) {
                 return (new Date(sort)).getTime();
-            } else {
+            }
+            else {
                 return sort;
             }
         },
@@ -23,7 +23,8 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
         const header = {};
         if (el.classList.contains('no-sort')) {
             header.sorter = false;
-        } else {
+        }
+        else {
             sortable.push(i);
         }
         cfg.headers[i] = header;
@@ -41,13 +42,15 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
         const match = window.location.search.match(/[?&]sort=\[\[([0-9,]+)\]\]/);
         if (match) {
             sortid = decodeURIComponent(match[1]);
-        } else {
+        }
+        else {
             sortid = '0,0';
         }
     }
     try {
         sortid = JSON.parse('[' + sortid + ']');
-    } catch (e) {
+    }
+    catch {
         sortid = [0, 0];
     }
 
@@ -55,9 +58,11 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
     const sortHeader = cfg.headers[sortid[0]];
     if (typeof sortHeader === 'undefined') {
         sortCol = [sortable[0], 0];
-    } else if (sortHeader.sorter == false) {
+    }
+    else if (sortHeader.sorter == false) {
         sortCol = [sortable[0], 0];
-    } else {
+    }
+    else {
         sortCol = sortid;
     }
     cfg.sortList = [sortCol];
@@ -70,7 +75,9 @@ for (const header of document.querySelectorAll('.tablesorter.remote th.header'))
     header.addEventListener('click', () => {
         const loc = new URL(document.location);
         loc.searchParams.set('sort',
-            JSON.stringify([[ header.column, header.count++ % 2 ]]));
+            JSON.stringify([
+                [header.column, header.count++ % 2]
+            ]));
         window.location.assign(loc);
     });
 }

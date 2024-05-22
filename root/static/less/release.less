@@ -8,7 +8,8 @@
         }
         div.release-row {
             display: table-row;
-            div.left, div.right {
+            div.left,
+            div.right {
                 display: table-cell;
             }
             div.left {
@@ -45,17 +46,20 @@
  * See /release/CPAN-Changes for example
  */
 #metacpan_last-changes {
-    h2:extend(.content .file-group h2) {}
+    h2:extend(.content .file-group h2) {
+    }
 
     ul {
         padding-left: 20px;
         margin-bottom: 0px;
     }
 
-    ul, ul ul ul {
+    ul,
+    ul ul ul {
         list-style: disc;
     }
-    ul ul, ul ul ul ul {
+    ul ul,
+    ul ul ul ul {
         list-style: circle;
     }
 
@@ -64,11 +68,19 @@
             display: inline-block;
         }
 
-        .show-more { display: none }
-        .hide-more { display: inline }
+        .show-more {
+            display: none;
+        }
+        .hide-more {
+            display: inline;
+        }
         &.collapsed {
-            .show-more { display: inline }
-            .hide-more { display: none }
+            .show-more {
+                display: inline;
+            }
+            .hide-more {
+                display: none;
+            }
 
             .changes-content {
                 overflow: hidden;

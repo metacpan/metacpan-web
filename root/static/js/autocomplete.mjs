@@ -31,7 +31,8 @@ jQuery(search_input).autocomplete({
     onSelect: function(suggestion) {
         if (suggestion.data.type == 'module') {
             document.location.href = '/pod/' + suggestion.data.module;
-        } else if (suggestion.data.type == 'author') {
+        }
+        else if (suggestion.data.type == 'author') {
             document.location.href = '/author/' + suggestion.data.id;
         }
     }

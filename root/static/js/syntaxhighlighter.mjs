@@ -1,4 +1,7 @@
-import SyntaxHighlighter, { registerBrush } from 'syntaxhighlighter';
+import SyntaxHighlighter, {
+    registerBrush
+}
+from 'syntaxhighlighter';
 import Renderer from 'syntaxhighlighter-html-renderer';
 
 await Promise.all([
@@ -18,8 +21,8 @@ const parseLines = (lines) => {
         var line = lines[i];
         var res = line.match(/^\s*(\d+)\s*(?:-\s*(\d+)\s*)?$/);
         if (res) {
-            var start = res[1]*1;
-            var end = (res[2] || res[1])*1;
+            var start = res[1] * 1;
+            var end = (res[2] || res[1]) * 1;
             if (start > end) {
                 var swap = end;
                 end = start;
@@ -77,7 +80,7 @@ const hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
 // Original is /\w+:\/\/[\w-.\/?%&=:@;#]*/g
 // Allow tilde, disallow period or percent as last character, and a more
 // restricted scheme
-SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-.\/?%&=:@;#~]*[\w-\/?&=:@;#~]/gi;
+SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-./?%&=:@;#~]*[\w-/?&=:@;#~]/gi;
 
 // Use regular spaces, not &nbsp;
 SyntaxHighlighter.config.space = ' ';
@@ -89,17 +92,17 @@ SyntaxHighlighter.config.space = ' ';
 // references to the package name in the html after highlighting.
 
 /**
-* Turns all package names into metacpan.org links within <a/> tags.
-* @param {String} code Input code.
-* @return {String} Returns code with </a> tags.
-*/
-const processPackages = function (code) {
+ * Turns all package names into metacpan.org links within <a/> tags.
+ * @param {String} code Input code.
+ * @return {String} Returns code with </a> tags.
+ */
+const processPackages = function(code) {
     const target_pattern = this.opts.package_target_type == 'source' ? '/module/%s/source' : '/pod/%s';
     // This regexp is not great, but its good enough so far:
     // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
     // Space should only be allowed after qw, but it probably doesn't hurt to match it.
     // This is a lax re for html entity, but probably good enough.
-    const strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_\:]+)(.*)/;
+    const strip_delimiters = /((?:["']|q[qw]?(?:[^&a-z]|&#?[a-zA-Z0-9]+;))\s*)([A-Za-z0-9_:]+)(.*)/;
 
     // Wow, this regexp is hairy.
     // We have to specifically match the "qw" followed by a non-letter or an html entity followed by a closing tag,
@@ -110,12 +113,11 @@ const processPackages = function (code) {
     // (again, possibly across a newline (which is  actually a new div))
     // without knowing where to end (the closing delimiter) would be really difficult.
     // See also the above comment about scanning the plain string and linkifying later.
-    code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m,prefix,pkg,suffix)
-    {
+    code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m, prefix, pkg, suffix) {
         const match = strip_delimiters.exec(pkg);
-        if ( match ) {
+        if (match) {
             prefix = prefix + match[1];
-            pkg    = match[2];
+            pkg = match[2];
             suffix = match[3] + suffix;
         }
 
@@ -160,8 +162,8 @@ CODE: for (const code of document.querySelectorAll(".pod pre > code")) {
 
 const source = document.querySelector("#metacpan_source");
 if (source) {
-    let lineMatch;
-    let packageMatch;
+    const packageMatch = document.location.hash.match(/^#P(\S+)$/);
+    const lineMatch = document.location.hash.match(hashLines);
     // avoid highlighting excessively large blocks of code as they will take
     // too long, causing browsers to lag and offer to kill the script
     if (source.innerHTML.length > 500000) {
@@ -169,15 +171,11 @@ if (source) {
             el.classList.remove(...el.classList);
         }
     }
-    // save highlighted lines in an attribute, to be used later
-    else if ( lineMatch = document.location.hash.match(hashLines) ) {
-        source.dataset.line = lineMatch[1];
-    }
     // check for 'P{encoded_package_name}' anchor, convert to
     // line number (if possible), and then highlight and jump
     // as long as the matching line is not the first line in
     // the code.
-    else if ( packageMatch = document.location.hash.match(/^#P(\S+)$/) ) {
+    else if (packageMatch) {
         const decodedPackageMatch = decodeURIComponent(packageMatch[1]);
         const leadingSource = source.text().split("package " + decodedPackageMatch + ";");
         const lineCount = leadingSource[0].split("\n").length;
@@ -190,16 +188,20 @@ if (source) {
             window.history.replaceState(null, '', loc);
         }
     }
+    // save highlighted lines in an attribute, to be used later
+    else if (lineMatch) {
+        source.dataset.line = lineMatch[1];
+    }
 }
 
-CODE: for (const code of document.querySelectorAll(".content pre > code")) {
+for (const code of document.querySelectorAll(".content pre > code")) {
     const pre = code.parentNode;
 
     const config = {
-        'gutter'      : false,
-        'toolbar'     : false,
-        'quick-code'  : false,
-        'tab-size'    : 8
+        'gutter': false,
+        'toolbar': false,
+        'quick-code': false,
+        'tab-size': 8
     };
     for (const className of code.classList) {
         const res = className.match(/(?:\s|^)language-(\S+)/);
@@ -269,7 +271,7 @@ CODE: for (const code of document.querySelectorAll(".content pre > code")) {
                         next = next.nextSibling;
                         lines++;
                     }
-                    tmpl.innerHTML = '<div class="pod-placeholder"><button class="btn-link"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> '+lines+' line'+(lines > 1 ? 's' : '')+' of Pod</button></div>';
+                    tmpl.innerHTML = '<div class="pod-placeholder"><button class="btn-link"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> ' + lines + ' line' + (lines > 1 ? 's' : '') + ' of Pod</button></div>';
                 }
                 line.parentNode.insertBefore(tmpl.content, line);
                 const toggleButton = line.previousSibling.querySelector('button');
@@ -306,8 +308,8 @@ if (source) {
             let line = linenr;
             if (e.shiftKey && source.dataset.line) {
                 const startLine = parseLines(source.dataset.line)[0];
-                line = startLine < line ? startLine + '-' + line
-                                        : line + '-' + startLine;
+                line = startLine < line ? startLine + '-' + line :
+                    line + '-' + startLine;
             }
             link.removeAttribute('id');
             document.location.hash = '#L' + line;

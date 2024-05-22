@@ -113,7 +113,7 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 
-COPY .perlcriticrc .perltidyrc perlimports.toml ./
+COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 COPY t t
 
 USER metacpan

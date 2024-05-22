@@ -1,40 +1,42 @@
 // For some reason in Safari, the .clearfix() styling
 // is causing the icons to be outside of the viewport.
 .nav {
-  &:before,
-  &:after {
-    content: "" !important;
-    display: block !important;
-  }
+    &:before,
+    &:after {
+        content: "" !important;
+        display: block !important;
+    }
 }
 
 .top-notify-banner {
-  background-color: #006081;
-  color: #fff;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  padding: 8px;
-  place-content: center;
-  text-align: center;
-  width: 100%;
-
-  .fa-info-circle {
-    display: grid;
+    background-color: #006081;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 8px;
     place-content: center;
-  }
+    text-align: center;
+    width: 100%;
 
-  a {
-    color: #c0d2e4;
-    text-decoration: underline;
-  }
+    .fa-info-circle {
+        display: grid;
+        place-content: center;
+    }
+
+    a {
+        color: #c0d2e4;
+        text-decoration: underline;
+    }
 }
 
 .navbar {
     background-color: @gray-darker;
     border-color: @gray-darker;
     border-radius: 0;
-    box-shadow: 0 1px 13px 0 rgba(0,0,0,10%), 0 1px 5px 0 rgba(0,0,0,6%);
+    box-shadow:
+        0 1px 13px 0 rgba(0, 0, 0, 10%),
+        0 1px 5px 0 rgba(0, 0, 0, 6%);
     margin-bottom: 0;
     position: fixed;
     top: 0;
@@ -43,7 +45,8 @@
 
     .nav {
         li.dropdown {
-            .dropdown-toggle .caret, &.open .caret {
+            .dropdown-toggle .caret,
+            &.open .caret {
                 border-top-color: black;
             }
 
@@ -70,7 +73,8 @@
             }
         }
         .active {
-            > a, > a:hover {
+            > a,
+            > a:hover {
                 background-color: transparent;
                 border-bottom: 2px solid #da2037;
                 color: @body-bg;
@@ -87,31 +91,31 @@
 
 .navbar-default .menu-items {
     li a {
-      color: @body-bg !important;
+        color: @body-bg !important;
     }
 
     li a:hover {
-      background-color: transparent !important;
-      color: @body-bg !important;
+        background-color: transparent !important;
+        color: @body-bg !important;
     }
 }
 
 ul.nav-pills.affix {
     top: 30px;
-    /* Set the top position of pinned element */;
+    /* Set the top position of pinned element */
 }
 
 .navbar-right .fa-search {
-  &:hover {
-    cursor: pointer;
-  }
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 nav.navbar {
     align-items: center;
     display: grid;
     column-gap: 40px;
-    grid-template-areas: 'logo menu icons';
+    grid-template-areas: "logo menu icons";
     grid-template-columns: 1fr 1fr 1fr;
     padding: 10px 40px;
 }
@@ -123,65 +127,65 @@ nav.navbar {
 }
 
 .navbar-right {
-  gap: 0;
-  grid-area: icons;
-  justify-self: end;
-  margin: 0;
+    gap: 0;
+    grid-area: icons;
+    justify-self: end;
+    margin: 0;
 
-  button {
-    background-color: transparent;
-    border: 0;
-    padding: 0 6px;
+    button {
+        background-color: transparent;
+        border: 0;
+        padding: 0 6px;
 
-    .button-fa-icon,
-    .logged-in-avatar {
-      border: 1px solid @list-group-border;
-      border-radius: 25px;
-      cursor: pointer;
-      height: 35px;
-      width: 35px;
+        .button-fa-icon,
+        .logged-in-avatar {
+            border: 1px solid @list-group-border;
+            border-radius: 25px;
+            cursor: pointer;
+            height: 35px;
+            width: 35px;
+        }
+
+        .button-fa-icon {
+            background-color: @body-bg;
+            color: @list-group-link-color;
+            padding: 10px;
+
+            &:hover {
+                background-color: #e9e9e9;
+            }
+        }
+
+        .fa-chevron-down {
+            background-color: @gray-darker;
+            border-radius: 25px;
+            color: #e9e9e9;
+            font-size: 10px;
+            padding: 5px;
+            position: absolute;
+            right: 0;
+            top: 22px;
+        }
     }
 
-    .button-fa-icon {
-      background-color: @body-bg;
-      color: @list-group-link-color;
-      padding: 10px;
-
-      &:hover {
-        background-color: #e9e9e9;
-      }
+    .dropdown-menu {
+        border-radius: 5px !important;
+        margin-top: 4px !important;
     }
 
-    .fa-chevron-down {
-      background-color: @gray-darker;
-      border-radius: 25px;
-      color: #e9e9e9;
-      font-size: 10px;
-      padding: 5px;
-      position: absolute;
-      right: 0;
-      top: 22px;
+    .login-dropdown {
+        place-content: center;
     }
-  }
 
-  .dropdown-menu {
-    border-radius: 5px !important;
-    margin-top: 4px !important;
-  }
+    .logged-in-icon {
+        color: #da2037;
+    }
 
-  .login-dropdown {
-    place-content: center;
-  }
-
-  .logged-in-icon {
-    color: #da2037;
-  }
-
-  .avatar-placeholder {
-    background-color: @gray-darker;
-    border: 2px solid @gray-darker;
-    color: @gray-darker;
-  }
+    .avatar-placeholder {
+        background-color: @gray-darker;
+        border: 2px solid @gray-darker;
+        color: @gray-darker;
+    }
 }
 
 body.logged-in {
@@ -207,23 +211,23 @@ body:not(.logged-in) {
 
 .header-logo-large,
 .header-logo-icon {
-  grid-area: logo;
+    grid-area: logo;
 }
 
 .header-logo-large .logo {
-  width: 172px;
-  height: 35px;
-  --text-color: #fff;
-  vertical-align: middle;
+    width: 172px;
+    height: 35px;
+    --text-color: #fff;
+    vertical-align: middle;
 }
 
 .header-logo-icon .logo {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
 }
 
 .menu-items {
-  grid-area: menu;
-  justify-self: center;
+    grid-area: menu;
+    justify-self: center;
 }

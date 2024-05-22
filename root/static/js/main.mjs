@@ -1,10 +1,11 @@
-import './autocomplete.js';
-import './tablesorter.js';
+import './google-analytics.mjs';
+import './autocomplete.mjs';
+import './tablesorter.mjs';
 import './cpan.js';
 import './github.js';
 import './dropdown.js';
 import './profile.js';
-import './recaptcha.js';
+import './recaptcha.mjs';
 import './search.js';
 import 'bootstrap/js/dropdown.js';
 import 'bootstrap/js/collapse.js';

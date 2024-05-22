@@ -23,12 +23,6 @@
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E82Q2V8LVD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-E82Q2V8LVD');
-        </script>
         %%  block opengraph -> { }
     </head>
     <body>

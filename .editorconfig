@@ -5,24 +5,22 @@
 root = true
 
 [*]
-
 indent_style = space
 indent_size  = 4
 
-# We recommend you to keep these unchanged
 end_of_line = lf
 charset     = utf-8
 
-# I'd like to enable this, but we should fix all the files first to avoid diff noise.
-#trim_trailing_whitespace = true
+trim_trailing_whitespace = true
 insert_final_newline     = true
 
-# There's no reason to keep this, it just seems to be the overwhelming style currently.
 [*.html]
 indent_size  = 2
 [*.tx]
 indent_size  = 2
-
-# yaml indents are weird
+[*.md]
+indent_size  = 2
+max_line_length = 80
 [*.{yml,yaml}]
 indent_size = 2
+quote_type = single
