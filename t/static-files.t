@@ -93,6 +93,7 @@ __DATA__
 aa842d887b715e457517c3a6d5006189275e12fd  root/static/icons/page_white.png
 9d0aaf1b7b03783229d08e972fd5ca7e5113e2de  root/static/icons/page_white_c.png
 5cd510d1d1ae6126d23ecdba62fac129520a3af4  root/static/icons/page_white_code.png
+206b6499e0042c778be417a65eb74d3682cb8fdb  root/static/images/dots.png
 c6eb68299d78fecc8b74b05ee11942c034992da5  root/static/images/dots.svg
 b0cdcd8a2baf229cea555bb5a72e94a234057641  root/static/images/flag/ad.png
 9be5373eb09ae6dda325cf774dca5917c0141b4f  root/static/images/flag/ae.png
