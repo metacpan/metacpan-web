@@ -7,6 +7,9 @@ BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 sub root : Chained('/') PathPart('dist') CaptureArgs(1) {
     my ( $self, $c, $dist ) = @_;
+    if ( $dist =~ /[^A-Za-z0-9_\-\.\@\+]/ ) {
+        $c->detach('/not_found');
+    }
     $c->stash( { distribution_name => $dist } );
 }
 
