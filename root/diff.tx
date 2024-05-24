@@ -37,8 +37,8 @@
     </li>
     %%  }
     <li class="nav-header">Info</li>
-    <li>[% pluralize("%d insertion(s)", $diff.statistics.map(-> $f { $f.insertions }).sum()) %]</li>
-    <li>[% pluralize("%d deletion(s)", $diff.statistics.map(-> $f { $f.deletions }).sum()) %]</li>
+    <li>[% pluralize("%d insertion(s)", $diff.statistics.map(-> $f { $f.insertions }).grep(rx('^\d+$')).sum()) %]</li>
+    <li>[% pluralize("%d deletion(s)", $diff.statistics.map(-> $f { $f.deletions }).grep(rx('^\d+$')).sum()) %]</li>
     <li><div><a href="#">Top</a></div></li>
 %%  }
 %%  override content -> {
@@ -51,7 +51,7 @@
       %%  }
       <tr>
         <td>[% pluralize("%s file(s)", $diff.statistics.size()) %] changed  (This is a [% $diff.source.file ? 'file' : 'version' %] diff)</td>
-        <td><span class="minus">[% $diff.statistics.map(-> $f { $f.deletions }).sum() %]</span><span class="plus">[% $diff.statistics.map(-> $f { $f.insertions }).sum() %]</span></td>
+        <td><span class="minus">[% $diff.statistics.map(-> $f { $f.deletions }).grep(rx('^\d+$')).sum() %]</span><span class="plus">[% $diff.statistics.map(-> $f { $f.insertions }).grep(rx('^\d+$')).sum() %]</span></td>
       </tr>
     </table>
 

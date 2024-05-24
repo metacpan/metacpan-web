@@ -11,6 +11,9 @@ test_psgi app, sub {
     ok( my $res = $cb->( GET '/dist/DOESNTEXIST' ), 'GET /dist/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
+    ok( $res = $cb->( GET '/dist/$$$$' ), 'GET /dist/$$$$' );
+    is( $res->code, 404, 'code 404' );
+
     ok( $res = $cb->( GET '/release/AUTHORDOESNTEXIST/DOESNTEXIST' ),
         'GET /release/AUTHORDOESNTEXIST/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
