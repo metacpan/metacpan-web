@@ -6,13 +6,12 @@ use Catalyst::Runtime 5.90042;
 
 use Catalyst qw/
     ConfigLoader
-    Static::Simple
     Authentication
-    +MetaCPAN::Role::Fastly::Catalyst
     /, '-Log=warn,error,fatal';
 use Log::Log4perl::Catalyst ();
 
-extends 'Catalyst';
+with 'MetaCPAN::Role::Fastly';
+with 'MetaCPAN::Role::Fastly::Catalyst';
 
 __PACKAGE__->request_class_traits( [ qw(
     MetaCPAN::Web::Role::Request
