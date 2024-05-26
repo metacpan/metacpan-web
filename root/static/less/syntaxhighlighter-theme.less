@@ -1,0 +1,131 @@
+.syntaxhighlighter {
+    line-height: 1.2em;
+    width: 100%;
+
+    // fix conflicts with bootstrap
+    .container {
+        width: unset;
+        padding: 0;
+        &:before,
+        &:after {
+            content: none !important;
+        }
+    }
+
+    // set up bold and italic
+    .bold {
+        font-weight: bold;
+    }
+    .italic {
+        font-style: italic;
+    }
+
+    .line {
+        white-space: pre;
+    }
+
+    // main table and columns
+    table {
+        width: 100%;
+
+        td.code {
+            width: 100%;
+        }
+
+        // middle spacing between line numbers and lines
+        td.gutter .line {
+            text-align: right;
+            padding: 0 0.5em 0 1em;
+        }
+
+        td.code .line {
+            padding: 0 1em;
+        }
+
+        td {
+            padding: unset;
+            border: unset;
+        }
+    }
+
+    .container {
+        position: relative;
+
+        .highlighted {
+            background-color: rgb(0 0 0 / 10%);
+        }
+    }
+
+    &.nogutter {
+        td.code {
+            .line {
+                padding-left: 0em;
+            }
+        }
+    }
+
+    // Add border to the lines
+    .gutter {
+        color: #afafaf;
+        .line {
+            border-right: 3px solid #6ce26c;
+            &.highlighted {
+                background-color: #6ce26c;
+            }
+        }
+    }
+
+    // Actual syntax highlighter colors.
+    .plain,
+    .plain a {
+        color: #000000;
+    }
+    .comments,
+    .comments a {
+        color: #008200;
+    }
+    .string,
+    .string a {
+        color: #0000ff;
+    }
+    .keyword {
+        font-weight: bold;
+        color: #006699;
+    }
+    .preprocessor {
+        color: #808080;
+    }
+    .variable {
+        color: #aa7700;
+    }
+    .value {
+        color: #009900;
+    }
+    .functions {
+        color: #ff1493;
+    }
+    .constants {
+        color: #0066cc;
+    }
+    .script {
+        font-weight: bold;
+        color: #006699;
+        background-color: none;
+    }
+    .color1,
+    .color1 a {
+        color: #808080;
+    }
+    .color2,
+    .color2 a {
+        color: #ff1493;
+    }
+    .color3,
+    .color3 a {
+        color: #ff0000;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}

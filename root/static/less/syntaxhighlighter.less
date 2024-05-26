@@ -1,25 +1,71 @@
-html > body .syntaxhighlighter {
-    font-size: unset !important;
-    margin: unset !important;
-    overflow: unset !important;
-}
+.syntaxhighlighter {
+    .gutter {
+        .line {
+            border-left: 1px solid rgb(0 0 0 / 0%);
+            border-right: 1px solid rgb(0 0 0 / 0%);
+        }
+        .pod-line {
+            border-left: 1px solid rgb(0 0 0 / 15%);
+            border-right: 1px solid rgb(0 0 0 / 15%);
+            background-color: rgb(0 0 0 / 5%);
+        }
+    }
+    .pod-line:first-child,
+    :not(.pod-line) + .pod-line {
+        border-top: 1px solid rgb(0 0 0 / 15%);
+    }
+    .pod-line + :not(.pod-line) {
+        border-top: 1px solid rgb(0 0 0 / 15%);
+    }
+    .pod-line:last-child {
+        border-bottom: 1px solid rgb(0 0 0 / 15%);
+    }
 
-html > body .syntaxhighlighter {
-    /* needs higher specificity than the syntax highligher's rules */
-    &,
-    *,
-    * *,
-    * * *,
-    * * * *,
-    .line.alt2,
-    .line.alt1 {
-        font-family: unset !important;
-        line-height: normal !important;
+    .gutter {
+        .pod-placeholder {
+            text-align: right;
+            padding: 0 0.5em;
+            border-right: 3px solid transparent;
+
+            position: absolute;
+            height: 0px;
+            overflow: hidden;
+        }
+    }
+
+    .pod-placeholder {
+        font-style: italic;
+        background-color: rgb(0 0 0 / 15%);
+
+        position: absolute;
+        right: 0;
+        border-radius: 0 0 0 5px;
+
+        button {
+            padding: 0 1em;
+        }
     }
 }
 
-.syntaxhighlighter a {
-    text-decoration: underline;
+.pod-hidden {
+    .syntaxhighlighter {
+        div.pod-placeholder {
+            display: block;
+            position: static;
+            height: auto;
+            overflow: auto;
+
+            right: auto;
+            padding-left: 0;
+            border-radius: 0;
+
+            button {
+                text-align: left;
+                padding-left: 2em;
+                width: 100%;
+            }
+        }
+    }
 }
 
 .pod-hidden {
@@ -31,93 +77,6 @@ html > body .syntaxhighlighter {
     }
     .show-pod {
         display: inline;
-    }
-}
-
-body {
-    .syntaxhighlighter {
-        .pod-line {
-            background-color: darken(@pre-bg, 5%) !important;
-        }
-        .container {
-            .pod-line {
-                border-right: 1px solid darken(@pre-bg, 15%) !important;
-            }
-        }
-        .gutter {
-            .pod-line {
-                border-left: 1px solid darken(@pre-bg, 15%) !important;
-            }
-        }
-        .pod-line:first-child,
-        :not(.pod-line) + .pod-line {
-            border-top: 1px solid darken(@pre-bg, 15%) !important;
-        }
-        .pod-line + :not(.pod-line) {
-            border-top: 1px solid darken(@pre-bg, 15%) !important;
-        }
-        .pod-line:last-child {
-            border-bottom: 1px solid darken(@pre-bg, 15%) !important;
-        }
-
-        .gutter {
-            .pod-placeholder {
-                text-align: right !important;
-                padding: 0 0.5em !important;
-                border-right: 3px solid transparent !important;
-            }
-        }
-    }
-    .syntaxhighlighter {
-        .pod-placeholder {
-            font-style: italic !important;
-            background-color: darken(@pre-bg, 15%) !important;
-        }
-    }
-
-    .pod-hidden {
-        .syntaxhighlighter {
-            div.pod-placeholder {
-                display: block;
-                position: static !important;
-                height: auto !important;
-                overflow: auto !important;
-            }
-            .container {
-                .pod-placeholder {
-                    position: static !important;
-                    right: auto !important;
-                    padding-left: 0 !important;
-                    border-radius: 0;
-
-                    button {
-                        text-align: left;
-                        padding-left: 2em;
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
-    .syntaxhighlighter {
-        .gutter {
-            .pod-placeholder {
-                position: absolute !important;
-                height: 0px !important;
-                overflow: hidden !important;
-            }
-        }
-        .container {
-            .pod-placeholder {
-                position: absolute !important;
-                right: 0 !important;
-                border-radius: 0 0 0 5px;
-
-                button {
-                    padding: 0 1em;
-                }
-            }
-        }
     }
 }
 

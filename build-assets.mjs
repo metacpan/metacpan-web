@@ -6,10 +6,6 @@ import {
 }
 from 'esbuild-plugin-less';
 import {
-    sassPlugin
-}
-from 'esbuild-sass-plugin';
-import {
     writeFile,
     opendir,
     unlink
@@ -22,7 +18,6 @@ const config = {
     entryPoints: [
         'root/static/js/main.mjs',
         'root/static/less/style.less',
-        'root/static/scss/style.scss',
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
@@ -40,7 +35,6 @@ const config = {
     },
     plugins: [
         lessLoader(),
-        sassPlugin(),
         new class {
             name = 'metacpan-build';
 
