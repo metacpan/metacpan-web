@@ -6,11 +6,13 @@ on:
       - staging
       - prod
   pull_request:
+    types: [opened, synchronize, labeled]
     branches:
       - master
   workflow_dispatch:
 jobs:
-  docker:
+  docker-build:
+    if: github.event_name != 'pull_request' || contains(github.event.pull_request.labels.*.name, 'build-container')
     runs-on: ubuntu-22.04
     name: Docker Build and Push
     steps:
@@ -48,7 +50,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=sha,format=long,priority=2000
+            type=sha,format=long,priority=2000,enable={{is_default_branch}}
             type=ref,event=branch
             type=ref,event=pr
             type=raw,value=latest,enable={{is_default_branch}}
