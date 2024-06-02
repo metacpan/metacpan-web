@@ -224,10 +224,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  B-Keywords-1.26
-    pathname: R/RU/RURBAN/B-Keywords-1.26.tar.gz
+  B-Keywords-1.27
+    pathname: R/RU/RURBAN/B-Keywords-1.27.tar.gz
     provides:
-      B::Keywords 1.26
+      B::Keywords 1.27
     requirements:
       B 0
       ExtUtils::MakeMaker 0
@@ -797,10 +797,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.37
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.37.tar.gz
+  Cpanel-JSON-XS-4.38
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.38.tar.gz
     provides:
-      Cpanel::JSON::XS 4.37
+      Cpanel::JSON::XS 4.38
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -1987,19 +1987,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.45
-    pathname: O/OA/OALDERS/HTTP-Message-6.45.tar.gz
+  HTTP-Message-6.46
+    pathname: O/OA/OALDERS/HTTP-Message-6.46.tar.gz
     provides:
-      HTTP::Config 6.45
-      HTTP::Headers 6.45
-      HTTP::Headers::Auth 6.45
-      HTTP::Headers::ETag 6.45
-      HTTP::Headers::Util 6.45
-      HTTP::Message 6.45
-      HTTP::Request 6.45
-      HTTP::Request::Common 6.45
-      HTTP::Response 6.45
-      HTTP::Status 6.45
+      HTTP::Config 6.46
+      HTTP::Headers 6.46
+      HTTP::Headers::Auth 6.46
+      HTTP::Headers::ETag 6.46
+      HTTP::Headers::Util 6.46
+      HTTP::Message 6.46
+      HTTP::Request 6.46
+      HTTP::Request::Common 6.46
+      HTTP::Response 6.46
+      HTTP::Status 6.46
     requirements:
       Carp 0
       Clone 0.46
@@ -2263,36 +2263,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.78
-    pathname: S/SB/SBECK/Locale-Codes-3.78.tar.gz
+  Locale-Codes-3.79
+    pathname: S/SB/SBECK/Locale-Codes-3.79.tar.gz
     provides:
-      Locale::Codes 3.78
-      Locale::Codes::Constants 3.78
-      Locale::Codes::Country 3.78
-      Locale::Codes::Country_Codes 3.78
-      Locale::Codes::Country_Retired 3.78
-      Locale::Codes::Currency 3.78
-      Locale::Codes::Currency_Codes 3.78
-      Locale::Codes::Currency_Retired 3.78
-      Locale::Codes::LangExt 3.78
-      Locale::Codes::LangExt_Codes 3.78
-      Locale::Codes::LangExt_Retired 3.78
-      Locale::Codes::LangFam 3.78
-      Locale::Codes::LangFam_Codes 3.78
-      Locale::Codes::LangFam_Retired 3.78
-      Locale::Codes::LangVar 3.78
-      Locale::Codes::LangVar_Codes 3.78
-      Locale::Codes::LangVar_Retired 3.78
-      Locale::Codes::Language 3.78
-      Locale::Codes::Language_Codes 3.78
-      Locale::Codes::Language_Retired 3.78
-      Locale::Codes::Script 3.78
-      Locale::Codes::Script_Codes 3.78
-      Locale::Codes::Script_Retired 3.78
-      Locale::Country 3.78
-      Locale::Currency 3.78
-      Locale::Language 3.78
-      Locale::Script 3.78
+      Locale::Codes 3.79
+      Locale::Codes::Constants 3.79
+      Locale::Codes::Country 3.79
+      Locale::Codes::Country_Codes 3.79
+      Locale::Codes::Country_Retired 3.79
+      Locale::Codes::Currency 3.79
+      Locale::Codes::Currency_Codes 3.79
+      Locale::Codes::Currency_Retired 3.79
+      Locale::Codes::LangExt 3.79
+      Locale::Codes::LangExt_Codes 3.79
+      Locale::Codes::LangExt_Retired 3.79
+      Locale::Codes::LangFam 3.79
+      Locale::Codes::LangFam_Codes 3.79
+      Locale::Codes::LangFam_Retired 3.79
+      Locale::Codes::LangVar 3.79
+      Locale::Codes::LangVar_Codes 3.79
+      Locale::Codes::LangVar_Retired 3.79
+      Locale::Codes::Language 3.79
+      Locale::Codes::Language_Codes 3.79
+      Locale::Codes::Language_Retired 3.79
+      Locale::Codes::Script 3.79
+      Locale::Codes::Script_Codes 3.79
+      Locale::Codes::Script_Retired 3.79
+      Locale::Country 3.79
+      Locale::Currency 3.79
+      Locale::Language 3.79
+      Locale::Script 3.79
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
