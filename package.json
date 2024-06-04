@@ -18,7 +18,7 @@
   "homepage": "https://github.com/metacpan/metacpanweb#readme",
   "devDependencies": {
     "@eslint/js": "^9.3.0",
-    "eslint": "^9.3.0",
+    "eslint": "^9.4.0",
     "globals": "^15.3.0",
     "js-beautify": "^1.15.1",
     "prettier": "3.2.5"
