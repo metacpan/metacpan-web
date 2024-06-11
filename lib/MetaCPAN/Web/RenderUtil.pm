@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use Exporter qw(import);
 
+use Carp           qw( croak );
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
@@ -21,6 +22,7 @@ use CommonMark     qw(
     NODE_LINEBREAK
     NODE_SOFTBREAK
     NODE_TEXT
+    OPT_UNSAFE
 );
 
 our @EXPORT_OK = qw(
@@ -184,7 +186,16 @@ $is_leaf[$_] = 1
     );
 
 sub render_markdown {
-    my ($markdown) = @_;
+    my ( $markdown, %opts ) = @_;
+
+    my $render_opts = 0;
+    if ( delete $opts{unsafe} // 1 ) {
+        $render_opts |= OPT_UNSAFE;
+    }
+
+    if (%opts) {
+        croak "Unsupported options: " . join( ', ', sort keys %opts );
+    }
 
     my $doc = CommonMark->parse_document($markdown);
 
@@ -206,7 +217,7 @@ sub render_markdown {
                 $header_content =~ s{(?:-(\d+))?$}{'-' . (($1 // 1) + 1)}e
                     while $seen_header{$header_content}++;
 
-                my $header_html = $node->render_html;
+                my $header_html = $node->render_html($render_opts);
                 $header_html
                     =~ s/^<h[0-9]+\b\K/' id="'.escape_html($header_content).'"'/e;
                 $html .= $header_html;
@@ -217,7 +228,7 @@ sub render_markdown {
         elsif ($ev_type == EVENT_ENTER
             && $node->parent->get_type == NODE_DOCUMENT )
         {
-            $html .= $node->render_html;
+            $html .= $node->render_html($render_opts);
         }
 
         if ( defined $header_content ) {
