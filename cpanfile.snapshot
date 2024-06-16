@@ -833,10 +833,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006
-  Crypt-OpenSSL-Random-0.16
-    pathname: R/RU/RURBAN/Crypt-OpenSSL-Random-0.16.tar.gz
+  Crypt-OpenSSL-Random-0.17
+    pathname: R/RU/RURBAN/Crypt-OpenSSL-Random-0.17.tar.gz
     provides:
-      Crypt::OpenSSL::Random 0.16
+      Crypt::OpenSSL::Random 0.17
     requirements:
       Crypt::OpenSSL::Guess 0.11
       ExtUtils::MakeMaker 0
@@ -1791,11 +1791,11 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Time::HiRes 0
       perl 5.010
-  Getopt-Long-2.57
-    pathname: J/JV/JV/Getopt-Long-2.57.tar.gz
+  Getopt-Long-2.58
+    pathname: J/JV/JV/Getopt-Long-2.58.tar.gz
     provides:
-      Getopt::Long 2.57
-      Getopt::Long::Parser 2.57
+      Getopt::Long 2.58
+      Getopt::Long::Parser 2.58
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Usage 1.14
