@@ -53,7 +53,7 @@ jobs:
     steps:
       - name: Build test image
         id: docker-build-test
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           target: test
           push: false

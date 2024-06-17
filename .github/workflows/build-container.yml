@@ -35,7 +35,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
       - name: Build test image
         id: docker-build-test
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           target: test
           push: false
@@ -57,7 +57,7 @@ jobs:
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
