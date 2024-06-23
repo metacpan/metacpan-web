@@ -1611,13 +1611,13 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  ExtUtils-Helpers-0.026
-    pathname: L/LE/LEONT/ExtUtils-Helpers-0.026.tar.gz
+  ExtUtils-Helpers-0.027
+    pathname: L/LE/LEONT/ExtUtils-Helpers-0.027.tar.gz
     provides:
-      ExtUtils::Helpers 0.026
-      ExtUtils::Helpers::Unix 0.026
-      ExtUtils::Helpers::VMS 0.026
-      ExtUtils::Helpers::Windows 0.026
+      ExtUtils::Helpers 0.027
+      ExtUtils::Helpers::Unix 0.027
+      ExtUtils::Helpers::VMS 0.027
+      ExtUtils::Helpers::Windows 0.027
     requirements:
       Carp 0
       Exporter 5.57
@@ -1626,7 +1626,6 @@ DISTRIBUTIONS
       File::Copy 0
       File::Spec::Functions 0
       Text::ParseWords 3.24
-      perl 5.006
       strict 0
       warnings 0
   ExtUtils-InstallPaths-0.013
