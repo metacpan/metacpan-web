@@ -6,7 +6,9 @@ on:
 jobs:
   enable-auto-merge:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'metacpan-automation[bot]'
+    if: >
+      github.event.pull_request.user.login == 'metacpan-automation[bot]'
+      || github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Generate Auth Token
         uses: actions/create-github-app-token@v1
