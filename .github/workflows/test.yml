@@ -78,7 +78,9 @@ jobs:
     steps:
       - name: Enable coverage
         id: coverage
-        if: matrix.resolver == 'snapshot'
+        if: >
+          matrix.resolver == 'snapshot'
+          && github.event.pull_request.user.login != 'dependabot[bot]'
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
