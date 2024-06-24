@@ -74,12 +74,13 @@ jobs:
     container:
       image: perl:${{ matrix.perl-version }}
       env:
-        DEVEL_COVER_OPTIONS: '-ignore,^local/'
+        DEVEL_COVER_OPTIONS: '+ignore,^local/,^t/'
     steps:
-      - uses: actions/checkout@v4
+      - name: Enable coverage
+        id: coverage
         if: matrix.resolver == 'snapshot'
+        run: echo "enabled=1" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
-        if: matrix.resolver != 'snapshot'
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -99,29 +100,24 @@ jobs:
             --resolver ${{ matrix.resolver }}
       - name: Build assets
         run: npm run build
-      - name: Run tests without coverage
-        if: matrix.resolver != 'snapshot'
-        run: carton exec prove -lr --jobs 2 t
-        env:
-          TEST_TIDYALL_VERBOSE: 1
       - name: Install Codecovbash
-        if: matrix.resolver == 'snapshot'
+        if: steps.coverage.outputs.enabled
         uses: perl-actions/install-with-cpm@v1
         with:
           install: |
             Devel::Cover
             Devel::Cover::Report::Codecovbash
           sudo: false
-      - name: Run tests with coverage
-        if: matrix.resolver == 'snapshot'
+      - name: Enable coverage
+        if: steps.coverage.outputs.enabled
+        run: echo "HARNESS_PERL_SWITCHES=-MDevel::Cover" >> "$GITHUB_ENV"
+      - name: Run tests
         run: carton exec prove -lr --jobs 2 t
-        env:
-          HARNESS_PERL_SWITCHES: -MDevel::Cover=+ignore,^t/
       - name: Generate Codecov report
-        if: matrix.resolver == 'snapshot'
+        if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
       - uses: codecov/codecov-action@v4
-        if: matrix.resolver == 'snapshot'
+        if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
           file: ./cover_db/codecov.json
