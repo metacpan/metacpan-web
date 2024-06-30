@@ -32,10 +32,10 @@ export PATH="$(realpath ./node_modules/.bin):$PATH"
 
 ### Installing on macOS
 
-If you like, you can install `carton` via Homebrew:
+If you like, you can install `carton` and `cmark` via Homebrew:
 
 ```bash
-brew install carton
+brew install carton cmark
 ```
 
 If your `carton install` is having issues with SSL-related modules, you may need
