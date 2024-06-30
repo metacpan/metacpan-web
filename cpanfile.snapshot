@@ -142,18 +142,18 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000053
-    pathname: O/OA/OALDERS/App-perlimports-0.000053.tar.gz
+  App-perlimports-0.000054
+    pathname: O/OA/OALDERS/App-perlimports-0.000054.tar.gz
     provides:
-      App::perlimports 0.000053
-      App::perlimports::Annotations 0.000053
-      App::perlimports::CLI 0.000053
-      App::perlimports::Config 0.000053
-      App::perlimports::Document 0.000053
-      App::perlimports::ExportInspector 0.000053
-      App::perlimports::Include 0.000053
-      App::perlimports::Role::Logger 0.000053
-      App::perlimports::Sandbox 0.000053
+      App::perlimports 0.000054
+      App::perlimports::Annotations 0.000054
+      App::perlimports::CLI 0.000054
+      App::perlimports::Config 0.000054
+      App::perlimports::Document 0.000054
+      App::perlimports::ExportInspector 0.000054
+      App::perlimports::Include 0.000054
+      App::perlimports::Role::Logger 0.000054
+      App::perlimports::Sandbox 0.000054
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
