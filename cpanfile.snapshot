@@ -142,18 +142,18 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000054
-    pathname: O/OA/OALDERS/App-perlimports-0.000054.tar.gz
+  App-perlimports-0.000055
+    pathname: O/OA/OALDERS/App-perlimports-0.000055.tar.gz
     provides:
-      App::perlimports 0.000054
-      App::perlimports::Annotations 0.000054
-      App::perlimports::CLI 0.000054
-      App::perlimports::Config 0.000054
-      App::perlimports::Document 0.000054
-      App::perlimports::ExportInspector 0.000054
-      App::perlimports::Include 0.000054
-      App::perlimports::Role::Logger 0.000054
-      App::perlimports::Sandbox 0.000054
+      App::perlimports 0.000055
+      App::perlimports::Annotations 0.000055
+      App::perlimports::CLI 0.000055
+      App::perlimports::Config 0.000055
+      App::perlimports::Document 0.000055
+      App::perlimports::ExportInspector 0.000055
+      App::perlimports::Include 0.000055
+      App::perlimports::Role::Logger 0.000055
+      App::perlimports::Sandbox 0.000055
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
@@ -2165,18 +2165,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.085
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.085.tar.gz
+  IO-Socket-SSL-2.086
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.086.tar.gz
     provides:
-      IO::Socket::SSL 2.085
+      IO::Socket::SSL 2.086
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.085
-      IO::Socket::SSL::OCSP_Resolver 2.085
+      IO::Socket::SSL::OCSP_Cache 2.086
+      IO::Socket::SSL::OCSP_Resolver 2.086
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.085
-      IO::Socket::SSL::SSL_HANDLE 2.085
-      IO::Socket::SSL::Session_Cache 2.085
-      IO::Socket::SSL::Trace 2.085
+      IO::Socket::SSL::SSL_Context 2.086
+      IO::Socket::SSL::SSL_HANDLE 2.086
+      IO::Socket::SSL::Session_Cache 2.086
+      IO::Socket::SSL::Trace 2.086
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
