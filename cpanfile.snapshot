@@ -2165,22 +2165,21 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.086
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.086.tar.gz
+  IO-Socket-SSL-2.088
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.088.tar.gz
     provides:
-      IO::Socket::SSL 2.086
+      IO::Socket::SSL 2.088
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.086
-      IO::Socket::SSL::OCSP_Resolver 2.086
+      IO::Socket::SSL::OCSP_Cache 2.088
+      IO::Socket::SSL::OCSP_Resolver 2.088
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.086
-      IO::Socket::SSL::SSL_HANDLE 2.086
-      IO::Socket::SSL::Session_Cache 2.086
-      IO::Socket::SSL::Trace 2.086
+      IO::Socket::SSL::SSL_Context 2.088
+      IO::Socket::SSL::SSL_HANDLE 2.088
+      IO::Socket::SSL::Session_Cache 2.088
+      IO::Socket::SSL::Trace 2.088
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
-      Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
   JSON-MaybeXS-1.004005
@@ -3288,12 +3287,6 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       XSLoader 0.02
       perl 5.008005
-  Mozilla-CA-20240313
-    pathname: L/LW/LWP/Mozilla-CA-20240313.tar.gz
-    provides:
-      Mozilla::CA 20240313
-    requirements:
-      ExtUtils::MakeMaker 0
   Net-Async-HTTP-0.49
     pathname: P/PE/PEVANS/Net-Async-HTTP-0.49.tar.gz
     provides:
