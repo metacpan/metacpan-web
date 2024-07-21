@@ -203,11 +203,11 @@
               <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener">
                 <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage logo">
               </a>
-              <!-- Added 2024-07-19 -->
+              <!-- Added 2024-07-22 -->
               <a class="footer-sponsor-link" target="_blank" href="https://www.elastic.co/" rel="noopener">
                 <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic logo">
               </a>
-              <!-- Added 2024-07-19 -->
+              <!-- Added 2024-07-22 -->
               <a class="footer-sponsor-link" target="_blank" href="https://route4me.com/" rel="noopener">
                 <img class="footer-sponsor-route4me" src="/static/images/sponsors/route4me.png" alt="Route4Me logo">
               </a>
