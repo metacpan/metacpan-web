@@ -1034,15 +1034,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.42
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.42.tar.gz
+  DateTime-Locale-1.43
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.43.tar.gz
     provides:
-      DateTime::Locale 1.42
-      DateTime::Locale::Base 1.42
-      DateTime::Locale::Catalog 1.42
-      DateTime::Locale::Data 1.42
-      DateTime::Locale::FromData 1.42
-      DateTime::Locale::Util 1.42
+      DateTime::Locale 1.43
+      DateTime::Locale::Base 1.43
+      DateTime::Locale::Catalog 1.43
+      DateTime::Locale::Data 1.43
+      DateTime::Locale::FromData 1.43
+      DateTime::Locale::Util 1.43
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
