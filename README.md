@@ -5,6 +5,7 @@
 
 - [Getting Started](#getting-started)
   - [Installing Manually](#installing-manually)
+    - [Building Static Assets](#building-static-assets)
     - [Installing on macOS](#installing-on-macos)
   - [Running Tests](#running-tests)
   - [Running the App](#running-the-app)
@@ -30,12 +31,27 @@ npm install
 export PATH="$(realpath ./node_modules/.bin):$PATH"
 ```
 
+### Building Static Assets
+
+```bash
+npm run build
+```
+
+Without running this command you may get errors about a missing "asset map".
+
 ### Installing on macOS
 
 If you like, you can install `carton` and `cmark` via Homebrew:
 
 ```bash
 brew install carton cmark
+```
+
+On an ARM Mac you may need to install
+[CommonMark](https://metacpan.org/pod/CommonMark) in the following way:
+
+```bash
+LIBRARY_PATH=/opt/homebrew/lib CPATH=/opt/homebrew/include cpm install -g CommonMark
 ```
 
 If your `carton install` is having issues with SSL-related modules, you may need
