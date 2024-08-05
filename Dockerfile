@@ -11,7 +11,6 @@ RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT
     npm install --verbose
-    npm audit fix
 EOT
 
 # not supported yet
@@ -104,7 +103,6 @@ RUN \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT
     npm install --verbose --include=dev
-    npm audit fix
 EOT
 
 RUN \
