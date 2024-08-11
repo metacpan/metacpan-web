@@ -2182,10 +2182,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Net::SSLeay 1.46
       Scalar::Util 0
-  JSON-MaybeXS-1.004007
-    pathname: E/ET/ETHER/JSON-MaybeXS-1.004007.tar.gz
+  JSON-MaybeXS-1.004008
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.004008.tar.gz
     provides:
-      JSON::MaybeXS 1.004007
+      JSON::MaybeXS 1.004008
     requirements:
       Carp 0
       Cpanel::JSON::XS 2.3310
@@ -4406,13 +4406,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Scalar-List-Utils-1.64
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.64.tar.gz
+  Scalar-List-Utils-1.65
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.65.tar.gz
     provides:
-      List::Util 1.64
-      List::Util::XS 1.64
-      Scalar::Util 1.64
-      Sub::Util 1.64
+      List::Util 1.65
+      List::Util::XS 1.65
+      Scalar::Util 1.65
+      Sub::Util 1.65
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
@@ -4718,16 +4718,16 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::CBuilder 0
       ExtUtils::MakeMaker 0
-  Term-Table-0.020
-    pathname: E/EX/EXODIST/Term-Table-0.020.tar.gz
+  Term-Table-0.022
+    pathname: E/EX/EXODIST/Term-Table-0.022.tar.gz
     provides:
-      Term::Table 0.020
-      Term::Table::Cell 0.020
-      Term::Table::CellStack 0.020
-      Term::Table::HashBase 0.020
-      Term::Table::LineBreak 0.020
-      Term::Table::Spacer 0.020
-      Term::Table::Util 0.020
+      Term::Table 0.022
+      Term::Table::Cell 0.022
+      Term::Table::CellStack 0.022
+      Term::Table::HashBase 0.022
+      Term::Table::LineBreak 0.022
+      Term::Table::Spacer 0.022
+      Term::Table::Util 0.022
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
