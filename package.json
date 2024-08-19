@@ -40,6 +40,6 @@
     "mousetrap": "^1.6.5",
     "qtip2": "^3.0.3",
     "syntaxhighlighter": "^4.0.1",
-    "tablesorter": "^2.31.3"
+    "tablesorter": "^2.32.0"
   }
 }
