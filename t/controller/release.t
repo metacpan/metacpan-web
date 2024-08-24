@@ -22,6 +22,13 @@ test_psgi app, sub {
         'GET /release/PERLER/DOESNTEXIST' );
     is( $res->code, 404, 'code 404' );
 
+    ok( $res = $cb->( GET '/release/BRICAS/CPAN-Changes-0.21' ), 'GET /release/BRICAS/CPAN-Changes-0.21' );
+    is( $res->code, 200, 'code 200' );
+
+    # Testing missing author returns 404 not a 500
+    ok( $res = $cb->( GET '/release//CPAN-Changes-0.21' ), 'GET /release//CPAN-Changes-0.21' );
+    is( $res->code, 404, 'code 404' );
+
     ok( $res = $cb->( GET '/dist/Moose' ), 'GET /dist/Moose' );
     is( $res->code, 200, 'code 200' );
 

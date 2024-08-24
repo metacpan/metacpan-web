@@ -39,11 +39,18 @@ sub release_view : Chained('root') PathPart('') Args(0) {
     my ( $self,   $c )       = @_;
     my ( $author, $release ) = $c->stash->@{qw(author_name release_name)};
 
-    $c->stash(
-        permalinks   => 1,
-        release_info => $c->model( 'ReleaseInfo', full_details => 1 )
-            ->get( $author, $release ),
-    );
+    if ( !$author ) {
+
+        # /release//File-Stat-Convert and others are never going to match
+        # do not even try call the API
+        $c->detach('/not_found');
+    } else {
+        $c->stash(
+            permalinks   => 1,
+            release_info => $c->model( 'ReleaseInfo', full_details => 1 )
+                ->get( $author, $release ),
+        );
+    }
     $c->forward('view');
 }
 
