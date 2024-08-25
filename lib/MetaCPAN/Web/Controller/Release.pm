@@ -1,13 +1,15 @@
 package MetaCPAN::Web::Controller::Release;
 
 use Moose;
-use namespace::autoclean;
+use namespace::autoclean -except => [qw(NonEmptyStr)];
 use experimental 'postderef';
-use Future ();
+use Future               ();
+use MetaCPAN::Web::Types qw(NonEmptyStr);    ## no perlimports
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-sub root : Chained('/') PathPart('release') CaptureArgs(2) {
+sub root : Chained('/') PathPart('release')
+    CaptureArgs(NonEmptyStr,NonEmptyStr) {
     my ( $self, $c, $author, $release ) = @_;
 
     # force consistent casing in URLs
