@@ -1742,10 +1742,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       base 0
       perl 5.006
-  File-XDG-1.02
-    pathname: P/PL/PLICEASE/File-XDG-1.02.tar.gz
+  File-XDG-1.03
+    pathname: P/PL/PLICEASE/File-XDG-1.03.tar.gz
     provides:
-      File::XDG 1.02
+      File::XDG 1.03
     requirements:
       ExtUtils::MakeMaker 0
       File::Path 2.07
@@ -2165,18 +2165,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.088
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.088.tar.gz
+  IO-Socket-SSL-2.089
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.089.tar.gz
     provides:
-      IO::Socket::SSL 2.088
+      IO::Socket::SSL 2.089
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.088
-      IO::Socket::SSL::OCSP_Resolver 2.088
+      IO::Socket::SSL::OCSP_Cache 2.089
+      IO::Socket::SSL::OCSP_Resolver 2.089
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.088
-      IO::Socket::SSL::SSL_HANDLE 2.088
-      IO::Socket::SSL::Session_Cache 2.088
-      IO::Socket::SSL::Trace 2.088
+      IO::Socket::SSL::SSL_Context 2.089
+      IO::Socket::SSL::SSL_HANDLE 2.089
+      IO::Socket::SSL::Session_Cache 2.089
+      IO::Socket::SSL::Trace 2.089
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -5972,13 +5972,13 @@ DISTRIBUTIONS
       indirect 0
       multidimensional 0
       perl 5.006
-  version-0.9932
-    pathname: L/LE/LEONT/version-0.9932.tar.gz
+  version-0.9933
+    pathname: L/LE/LEONT/version-0.9933.tar.gz
     provides:
-      version 0.9932
-      version::regex 0.9932
-      version::vpp 0.9932
-      version::vxs 0.9932
+      version 0.9933
+      version::regex 0.9933
+      version::vpp 0.9933
+      version::vxs 0.9933
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006002
