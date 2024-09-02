@@ -1,9 +1,9 @@
 package MetaCPAN::Web::Controller::Release;
 
 use Moose;
-use namespace::autoclean -except => [qw(NonEmptyStr)];
 use experimental 'postderef';
-use Future               ();
+use Future ();
+use namespace::autoclean -except => [qw(NonEmptyStr)];
 use MetaCPAN::Web::Types qw(NonEmptyStr);    ## no perlimports
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }

@@ -2,8 +2,8 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More 0.96;
 use MetaCPAN::Web::Test qw( app GET test_psgi tx );
+use Test::More 0.96;
 
 use Module::Runtime qw( use_module );
 

@@ -1,8 +1,8 @@
 package MetaCPAN::Web::Controller::Changes;
 
 use Moose;
-use namespace::autoclean;
 use experimental 'postderef';
+use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

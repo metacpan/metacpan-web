@@ -4,8 +4,8 @@ use Moose;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use MetaCPAN::Web::RenderUtil ();
 use Cpanel::JSON::XS          ();
+use MetaCPAN::Web::RenderUtil ();
 
 sub auto : Private {
     my ( $self, $c ) = @_;

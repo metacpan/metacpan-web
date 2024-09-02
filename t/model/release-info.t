@@ -2,8 +2,8 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
 use Module::Runtime qw( use_module );
+use Test::More;
 
 my $model = use_module('MetaCPAN::Web::Model::ReleaseInfo')->new;
 

@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Model::API::Lab;
 use Moose;
-use namespace::autoclean;
 use Future ();
+use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API::File';
 

@@ -2,8 +2,8 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
 use MetaCPAN::Web::Test qw( app GET test_psgi tx );
+use Test::More;
 
 my %tests = (
     'DBIx:Class:::ResultSet'   => 'DBIx::Class::ResultSet',

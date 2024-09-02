@@ -1,8 +1,8 @@
 package MetaCPAN::Web::Role::FileData;
 use Moose::Role;
-use Future    ();
-use Ref::Util qw( is_arrayref );
+use Future ();
 use namespace::autoclean;
+use Ref::Util qw( is_arrayref );
 
 # the MIME type coming from the API is not always useful. Use our own mapping
 # of extensions to override what the API gives us.

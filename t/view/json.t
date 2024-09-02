@@ -2,10 +2,10 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
+use Cpanel::JSON::XS      qw( decode_json );
 use HTTP::Request::Common qw( POST );
 use MetaCPAN::Web::Test   qw( app test_psgi );
-use Cpanel::JSON::XS      qw( decode_json );
+use Test::More;
 
 sub post_json {
     POST(

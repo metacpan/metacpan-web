@@ -8,13 +8,13 @@ use warnings;
 use HTTP::Request::Common qw( GET POST );    ## no perlimports
 use HTTP::Message::PSGI   ();                ## no perlimports
 use Plack::Test           qw( test_psgi);    ## no perlimports
-use Test::More import => [qw( is )];
-use Test::XPath                             ();
-use Try::Tiny                               qw( catch try );
+use base 'Exporter';
 use Encode                                  qw( decode_utf8 );
 use Future                                  ();
 use MetaCPAN::Web::Test::HTML5::TreeBuilder ();
-use base 'Exporter';
+use Test::More import => [qw( is )];
+use Test::XPath ();
+use Try::Tiny   qw( catch try );
 our @EXPORT = qw(
     GET
     POST

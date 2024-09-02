@@ -2,9 +2,9 @@ package MetaCPAN::Web::Model::API::Changes;
 use Moose;
 extends 'MetaCPAN::Web::Model::API';
 
-use Ref::Util     qw( is_arrayref );
 use Future        ();
 use Future::Utils qw( fmap_concat );
+use Ref::Util     qw( is_arrayref );
 
 use MetaCPAN::Web::Model::API::Changes::Parser ();
 
