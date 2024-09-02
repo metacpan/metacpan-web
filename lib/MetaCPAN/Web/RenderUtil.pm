@@ -5,10 +5,10 @@ use warnings;
 use Exporter qw(import);
 
 use Carp           qw( croak );
+use Digest::MD5    ();
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
-use Digest::MD5    ();
 use CommonMark     qw(
     EVENT_ENTER
     EVENT_EXIT

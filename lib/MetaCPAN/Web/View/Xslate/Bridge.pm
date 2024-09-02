@@ -3,13 +3,13 @@ use strict;
 use warnings;
 use parent qw(Text::Xslate::Bridge);
 
-use Text::Xslate::Util        qw( mark_raw );
+use DateTime                  ();
+use List::Util                ();
 use Number::Format            ();
 use Ref::Util                 qw( is_coderef is_regexpref );
-use List::Util                ();
-use DateTime                  ();
-use With::Roles               ();
 use Text::Pluralize           ();
+use Text::Xslate::Util        qw( mark_raw );
+use With::Roles               ();
 use MetaCPAN::Web::RenderUtil qw( gravatar_image );          ## no perlimports
 use MetaCPAN::Web::RenderUtil qw( render_markdown );
 use overload                  ();

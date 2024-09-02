@@ -2,8 +2,8 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
 use Digest::SHA ();
+use Test::More;
 
 # This test validates that all of the static files in the images, icons, and
 # fonts directories have the expected content. These files are served with an

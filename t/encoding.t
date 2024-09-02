@@ -2,9 +2,9 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
-use MetaCPAN::Web::Test qw( override_api_response );
 use Encode              qw( encode is_utf8 );
+use MetaCPAN::Web::Test qw( override_api_response );
+use Test::More;
 
 my ( $res_body, $content_type ) = ( q{}, 'text/plain' );
 

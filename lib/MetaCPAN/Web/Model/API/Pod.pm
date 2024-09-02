@@ -2,10 +2,10 @@ package MetaCPAN::Web::Model::API::Pod;
 use Moose;
 use namespace::autoclean;
 
-use MetaCPAN::Web::RenderUtil qw( filter_html split_index );
 use Encode                    qw( encode );
 use Future                    ();
 use HTML::TokeParser          ();
+use MetaCPAN::Web::RenderUtil qw( filter_html split_index );
 
 extends 'MetaCPAN::Web::Model::API';
 

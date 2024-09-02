@@ -1,9 +1,9 @@
 package MetaCPAN::Web::Role::Request;
 
 use Moose::Role;
-use Plack::Session       ();
 use Cpanel::JSON::XS     ();
 use MetaCPAN::Web::Types qw( is_PositiveInt );
+use Plack::Session       ();
 use Try::Tiny            qw( catch try );
 
 use namespace::autoclean;

@@ -1,7 +1,7 @@
 package MetaCPAN::Web::Controller::Root;
 use Moose;
-use namespace::autoclean;
 use HTTP::Status ();
+use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 

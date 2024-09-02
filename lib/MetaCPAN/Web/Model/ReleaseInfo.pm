@@ -6,12 +6,12 @@ use Moose;
 
 extends 'Catalyst::Model';
 
-use List::Util  qw( all );
-use Ref::Util   qw( is_hashref );
-use URI         ();
-use URI::Escape qw( uri_escape uri_unescape );
-use Future      ();
+use Future                                        ();
+use List::Util                                    qw( all );
 use MetaCPAN::Web::API::RequestInfo::Orchestrator ();
+use Ref::Util                                     qw( is_hashref );
+use URI                                           ();
+use URI::Escape qw( uri_escape uri_unescape );
 
 my %models = (
     _distribution => 'API::Distribution',

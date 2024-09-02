@@ -2,10 +2,10 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
+use Cpanel::JSON::XS    qw( decode_json );
 use Encode              qw( encode is_utf8 );
 use MetaCPAN::Web::Test qw( app GET test_psgi );
-use Cpanel::JSON::XS    qw( decode_json );
+use Test::More;
 
 my @tests = (
     [ moose           => 'Moose',                  1 ],
