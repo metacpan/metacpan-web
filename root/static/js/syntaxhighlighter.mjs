@@ -177,7 +177,7 @@ if (source) {
     // the code.
     else if (packageMatch) {
         const decodedPackageMatch = decodeURIComponent(packageMatch[1]);
-        const leadingSource = source.text().split("package " + decodedPackageMatch + ";");
+        const leadingSource = source.innerText.split("package " + decodedPackageMatch + ";");
         const lineCount = leadingSource[0].split("\n").length;
         if (leadingSource.length > 1 && lineCount > 1) {
             source.dataset.line = lineCount;
