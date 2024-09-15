@@ -1568,16 +1568,16 @@ DISTRIBUTIONS
       Text::ParseWords 3.24
       strict 0
       warnings 0
-  ExtUtils-InstallPaths-0.013
-    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.013.tar.gz
+  ExtUtils-InstallPaths-0.014
+    pathname: L/LE/LEONT/ExtUtils-InstallPaths-0.014.tar.gz
     provides:
-      ExtUtils::InstallPaths 0.013
+      ExtUtils::InstallPaths 0.014
     requirements:
       Carp 0
-      ExtUtils::Config 0.002
+      ExtUtils::Config 0.009
       ExtUtils::MakeMaker 0
       File::Spec 0
-      perl 5.006
+      perl 5.008
       strict 0
       warnings 0
   ExtUtils-MakeMaker-7.70
