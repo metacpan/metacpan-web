@@ -11,7 +11,7 @@
   <li class="nav-header">Tools</li>
     %%  if $diff.source.file {
       <li>
-        <a href="/release/[% $diff.source.author %]/[% $diff.source.release %]/diff/[% $diff.target.author %]/[% $diff.target.release %]">
+        <a href="/release/[% $diff.target.author %]/[% $diff.target.release %]/diff/[% $diff.source.author %]/[% $diff.source.release %]">
           Diff full distribution
         </a>
       </li>
