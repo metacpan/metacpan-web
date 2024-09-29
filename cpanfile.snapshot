@@ -4210,22 +4210,22 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  Plack-Middleware-Session-0.33
-    pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.33.tar.gz
+  Plack-Middleware-Session-0.34
+    pathname: M/MI/MIYAGAWA/Plack-Middleware-Session-0.34.tar.gz
     provides:
-      Plack::Middleware::Session 0.33
+      Plack::Middleware::Session 0.34
       Plack::Middleware::Session::Cookie undef
-      Plack::Session 0.33
-      Plack::Session::Cleanup 0.33
-      Plack::Session::State 0.33
-      Plack::Session::State::Cookie 0.33
-      Plack::Session::Store 0.33
-      Plack::Session::Store::Cache 0.33
-      Plack::Session::Store::DBI 0.33
-      Plack::Session::Store::File 0.33
-      Plack::Session::Store::Null 0.33
+      Plack::Session 0.34
+      Plack::Session::Cleanup 0.34
+      Plack::Session::State 0.34
+      Plack::Session::State::Cookie 0.34
+      Plack::Session::Store 0.34
+      Plack::Session::Store::Cache 0.34
+      Plack::Session::Store::DBI 0.34
+      Plack::Session::Store::File 0.34
+      Plack::Session::Store::Null 0.34
     requirements:
-      Cookie::Baker 0.10
+      Cookie::Baker 0.12
       Digest::HMAC_SHA1 1.03
       Digest::SHA 0
       Module::Build::Tiny 0.034
