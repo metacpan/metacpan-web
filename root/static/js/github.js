@@ -147,9 +147,9 @@ class GitHubUrl {
 
                     +
                     '  <tr><th>Member Since:</th><td><span class="relatize">' + data.created_at + '</span></td></tr>' +
-                    '  <tr><th><a href="' + data.html_url + '/followers">Followers</a>:</th><td>' + data.followers + '</td></tr>' +
-                    '  <tr><th><a href="' + data.html_url + '/following">Following</a>:</th><td>' + data.following + '</td></tr>' +
-                    '  <tr><th><a href="' + data.html_url + '/repositories">Public Repos</a>:</th><td>' + data.public_repos + '</td></tr>' +
+                    '  <tr><th><a href="' + data.html_url + '?tab=followers">Followers</a>:</th><td>' + data.followers + '</td></tr>' +
+                    '  <tr><th><a href="' + data.html_url + '?tab=following">Following</a>:</th><td>' + data.following + '</td></tr>' +
+                    '  <tr><th><a href="' + data.html_url + '?tab=repositories">Public Repos</a>:</th><td>' + data.public_repos + '</td></tr>' +
                     '</table>';
             },
             url: function(result) {
