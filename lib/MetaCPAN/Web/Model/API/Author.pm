@@ -201,10 +201,6 @@ my $profile_data = {
         name       => 'Pinboard',
         url_format => 'https://pinboard.in/u:%s',
     },
-    prepan => {
-        name       => 'PrePAN',
-        url_format => 'http://prepan.org/user/%s',
-    },
     reddit => {
         name       => 'Reddit',
         url_format => 'https://www.reddit.com/user/%s',
