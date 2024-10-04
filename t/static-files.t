@@ -388,7 +388,6 @@ cf600d1ce2ba84d54bc210ed4859b90a07d22f6a  root/static/images/profile/newsvine.pn
 a8caffce132bcfdaa0d87d6311ca7ba40be30e9d  root/static/images/profile/pinboard.png
 bbc03be0b7e878b0ac5b552ca1c2c4a568dcd744  root/static/images/profile/playperl.png
 723b1d505ba65d0d11c3e7e5f33158ae1349cc5b  root/static/images/profile/posterous.png
-0e5490b976ed2a7bbdcc9a71dfe880ef7deca898  root/static/images/profile/prepan.png
 f53a57193f209a34f70bb791750cb60df3a4cb30  root/static/images/profile/reddit.png
 9375111d1ec664e1c38203b419e4518f770076d6  root/static/images/profile/slideshare.png
 3911607f7c8558628bf3da1dac17c629f073a490  root/static/images/profile/sourceforge.png
