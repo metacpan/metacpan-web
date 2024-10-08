@@ -37,6 +37,8 @@ jobs:
             --with-develop
       - name: Install precious
         run: ./bin/install-precious /usr/local/bin
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       - name: Select files
         id: select-files
         run: |
