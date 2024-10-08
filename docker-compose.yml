@@ -1,5 +1,5 @@
 services:
-  asset-build:
+  web-asset-build:
     build:
       context: .
       target: build-assets
@@ -7,7 +7,7 @@ services:
       - './root:/build/root/'
       - 'assets:/build/root/assets/'
     command: ['./build-assets.mjs', '--watch']
-  server:
+  web-server:
     build:
       context: .
       target: develop
