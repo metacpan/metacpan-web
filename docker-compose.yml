@@ -12,9 +12,9 @@ services:
       context: .
       target: develop
     volumes:
-      - './:/metacpan-web/'
+      - './:/app/'
       - 'assets:/metacpan-web/root/assets'
-      - '/metacpan-web/local'
+      - '/app/local'
     ports:
       - '8000:80'
 volumes:
