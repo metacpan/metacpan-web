@@ -17,5 +17,9 @@ services:
       - '/app/local'
     ports:
       - '8000:80'
+    develop:
+      watch:
+        - path: ./cpanfile
+          action: rebuild
 volumes:
   assets:
