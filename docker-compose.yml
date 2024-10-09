@@ -17,6 +17,9 @@ services:
       - '/app/local'
     ports:
       - '8000:80'
+    environment:
+      # default is 120, shorten to work with compose label
+      COLUMNS: 96
     develop:
       watch:
         - path: ./cpanfile
