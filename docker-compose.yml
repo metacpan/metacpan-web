@@ -17,5 +17,14 @@ services:
       - '/app/local'
     ports:
       - '8000:80'
+    environment:
+      # default is 120, shorten to work with compose label
+      COLUMNS: 96
+    depends_on:
+      - web-asset-build
+    develop:
+      watch:
+        - path: ./cpanfile
+          action: rebuild
 volumes:
   assets:
