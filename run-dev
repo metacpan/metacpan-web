@@ -6,7 +6,7 @@
 #
 # It starts two web servers.  The first on port 5001 using a simple server
 # with no concurrency (to aid in debugging) to handle the dynamic requests.
-# The second on port 5000 using a "fast" server that can handle many
+# The second on port 8000 using a "fast" server that can handle many
 # concurrent requests which will serve the static files and proxy to the
 # first server.
 
@@ -18,9 +18,9 @@
 #
 # carton exec ./run-dev
 #
-# Then browse to http://localhost:5000/
+# Then browse to http://localhost:8000/
 
-METACPAN_PROXY_LISTEN="localhost:5000"
+METACPAN_PROXY_LISTEN="localhost:8000"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
