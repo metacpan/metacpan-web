@@ -22,6 +22,8 @@ RUN <<EOT
     npm run build:min
 EOT
 
+HEALTHCHECK CMD [ "test", "-e", "root/assets/assets.json" ]
+
 ################### Web Server
 # hadolint ignore=DL3007
 FROM metacpan/metacpan-base:latest AS server
@@ -61,6 +63,8 @@ CMD [ \
 ]
 
 EXPOSE 80
+
+HEALTHCHECK --start-period=3s CMD [ "curl", "--fail", "http://localhost/healthcheck" ]
 
 ################### Development Server
 FROM server AS develop

@@ -93,6 +93,16 @@ sub robots : Path("robots.txt") : Args(0) {
     } );
 }
 
+sub healthcheck : Local : Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->res->content_type('application/json');
+    $c->stash( {
+        template => 'healthcheck.tx',
+        status   => 'healthy',
+    } );
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
