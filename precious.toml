@@ -46,7 +46,7 @@ ignore-stderr = [
 
 [commands.prettier]
 type    = "both"
-include = [ "**/*.md", "**/*.yml", "**/*.yaml", "**/*.css", "**/*.less", "**/*.scss" ]
+include = [ "**/*.md", "**/*.yml", "**/*.yaml", "**/*.css", "**/*.less", "**/*.scss", "**/*.json" ]
 cmd     = [
     "npx", "-s", "prettier"
 ]
