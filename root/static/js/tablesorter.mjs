@@ -5,17 +5,17 @@ import 'tablesorter';
 
 for (const table of document.querySelectorAll('table.tablesorter')) {
     const cfg = {
-        textExtraction: function(node) {
-            const sort = node.getAttribute("sort");
+        textExtraction: function (node) {
+            const sort = node.getAttribute('sort');
             if (!sort) return node.textContent;
-            if (node.classList.contains("date")) {
+            if (node.classList.contains('date')) {
                 return (new Date(sort)).getTime();
             }
             else {
                 return sort;
             }
         },
-        headers: {}
+        headers: {},
     };
 
     const sortable = [];
@@ -33,7 +33,7 @@ for (const table of document.querySelectorAll('table.tablesorter')) {
     let sortid;
     if (table.id) {
         const storageid = table.id.replace(/^metacpan_/, '');
-        sortid = storage.getItem("tablesorter:" + storageid);
+        sortid = storage.getItem('tablesorter:' + storageid);
     }
     if (!sortid && table.dataset.defaultSort) {
         sortid = table.dataset.defaultSort;
@@ -76,7 +76,7 @@ for (const header of document.querySelectorAll('.tablesorter.remote th.header'))
         const loc = new URL(document.location);
         loc.searchParams.set('sort',
             JSON.stringify([
-                [header.column, header.count++ % 2]
+                [header.column, header.count++ % 2],
             ]));
         window.location.assign(loc);
     });
@@ -86,11 +86,11 @@ for (const header of document.querySelectorAll('.tablesorter th.header')) {
     const tableid = header.closest('table').id;
     const storageid = tableid.replace(/^metacpan_/, '');
     header.addEventListener('click', () => {
-        setTimeout(function() {
+        setTimeout(function () {
             var sortParam = (new URL(document.location)).searchParams.get('sort');
             if (sortParam != null) {
                 sortParam = sortParam.slice(2, sortParam.length - 2);
-                storage.setItem("tablesorter:" + storageid, sortParam);
+                storage.setItem('tablesorter:' + storageid, sortParam);
             }
         }, 1000);
     });

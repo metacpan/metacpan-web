@@ -6,7 +6,7 @@ const gtag = (...args) => {
 
 gtag('js', new Date());
 gtag('config', 'G-6B2JCQSHJE', {
-    cookie_flags: 'SameSite=Lax;Secure'
+    cookie_flags: 'SameSite=Lax;Secure',
 });
 
 export {
