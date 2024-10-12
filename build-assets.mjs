@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
-import * as esbuild from 'esbuild'
-import {
-    lessLoader
-}
-from 'esbuild-plugin-less';
+import * as esbuild from 'esbuild';
+import { lessLoader } from 'esbuild-plugin-less';
 import {
     writeFile,
     opendir,
-    unlink
-}
-from 'node:fs/promises';
+    unlink,
+} from 'node:fs/promises';
+import console from 'node:console';
+import process from 'node:process';
 import path from 'node:path';
 import parseArgs from 'minimist';
 
@@ -21,16 +19,16 @@ const config = {
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
-    format: 'esm',
-    outdir: 'root/assets',
-    bundle: true,
-    sourcemap: true,
-    inject: ['root/static/js/inject.mjs'],
-    loader: {
-        '.eot': 'file',
-        '.svg': 'file',
-        '.ttf': 'file',
-        '.woff': 'file',
+    format:     'esm',
+    outdir:     'root/assets',
+    bundle:     true,
+    sourcemap:  true,
+    inject:     ['root/static/js/inject.mjs'],
+    loader:     {
+        '.eot':   'file',
+        '.svg':   'file',
+        '.ttf':   'file',
+        '.woff':  'file',
         '.woff2': 'file',
     },
     plugins: [
@@ -40,18 +38,18 @@ const config = {
 
             setup(build) {
                 build.onResolve({
-                        filter: /^\//
-                    },
-                    () => ({
-                        external: true
-                    }),
+                    filter: /^\//,
+                },
+                () => ({
+                    external: true,
+                }),
                 );
 
                 build.initialOptions.metafile = true;
                 build.onStart(() => {
-                    console.log('building assets...')
+                    console.log('building assets...');
                 });
-                build.onEnd(async result => {
+                build.onEnd(async (result) => {
                     const outputs = result?.metafile?.outputs;
                     if (outputs) {
                         const files = Object.keys(outputs).sort()
@@ -70,7 +68,7 @@ const config = {
                     }
                 });
             }
-        },
+        }(),
     ],
 };
 
@@ -86,7 +84,7 @@ if (args.minify) {
 }
 if (args.clean) {
     for await (const file of await opendir(config.outdir, {
-        withFileTypes: true
+        withFileTypes: true,
     })) {
         const filePath = path.join(file.parentPath, file.name);
         if (file.name.match(/^\./)) {
@@ -105,7 +103,7 @@ if (args.clean) {
 const ctx = await esbuild.context(config);
 if (args.watch) {
     await ctx.watch();
-    const sig = await new Promise(resolve => {
+    const sig = await new Promise((resolve) => {
         [
             'SIGTERM',
             'SIGQUIT',

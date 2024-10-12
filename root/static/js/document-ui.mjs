@@ -1,7 +1,7 @@
 import storage from './storage.js';
 
 export const createAnchors = (topList) => {
-    const it = typeof(topList)[Symbol.iterator] === 'function' ? topList : [topList];
+    const it = typeof (topList)[Symbol.iterator] === 'function' ? topList : [topList];
     for (const top of it) {
         for (const heading of top.querySelectorAll(':scope h1,h2,h3,h4,h5,h6,dt')) {
             const id = heading.id;
@@ -20,20 +20,20 @@ export const createAnchors = (topList) => {
             heading.prepend(link);
         }
     }
-}
+};
 
 export const formatTOC = (toc) => {
     if (storage.getItem('hideTOC') == 1) {
-        toc.classList.add("hide-toc");
+        toc.classList.add('hide-toc');
     }
 
     const toc_header = toc.querySelector('.toc-header');
     const toc_body = toc.querySelector('ul');
 
     toc_header.insertAdjacentHTML('beforeend',
-        ' [ <button class="btn-link toggle-toc"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]'
+        ' [ <button class="btn-link toggle-toc"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]',
     );
-    toc_header.querySelector('.toggle-toc').addEventListener('click', e => {
+    toc_header.querySelector('.toggle-toc').addEventListener('click', (e) => {
         e.preventDefault();
         const currentVisible = !toc.classList.contains('hide-toc');
         storage.setItem('hideTOC', currentVisible ? 1 : 0);
