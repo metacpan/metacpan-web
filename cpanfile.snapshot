@@ -349,17 +349,16 @@ DISTRIBUTIONS
       Params::Validate 0.76
       URI::Find 0
       namespace::autoclean 0
-  Catalyst-Action-RenderView-0.16
-    pathname: B/BO/BOBTFISH/Catalyst-Action-RenderView-0.16.tar.gz
+  Catalyst-Action-RenderView-0.17
+    pathname: H/HA/HAARG/Catalyst-Action-RenderView-0.17.tar.gz
     provides:
-      Catalyst::Action::RenderView 0.16
+      Catalyst::Action::RenderView 0.17
     requirements:
       Catalyst::Runtime 5.80030
       Data::Visitor 0.24
-      ExtUtils::MakeMaker 6.42
-      HTTP::Request::AsCGI 0
+      ExtUtils::MakeMaker 0
       MRO::Compat 0
-      Test::More 0.88
+      perl 5.008005
   Catalyst-Plugin-Authentication-0.10023
     pathname: B/BO/BOBTFISH/Catalyst-Plugin-Authentication-0.10023.tar.gz
     provides:
@@ -571,13 +570,13 @@ DISTRIBUTIONS
       Scalar::Util 0
       Text::Xslate 0.1045
   CatalystX-Fastly-Role-Response-0.07
-    pathname: L/LL/LLAP/CatalystX-Fastly-Role-Response-0.07.tar.gz
+    pathname: H/HA/HAARG/CatalystX-Fastly-Role-Response-0.07.tar.gz
     provides:
       CatalystX::Fastly::Role::Response 0.07
     requirements:
-      Carp 0
       ExtUtils::MakeMaker 0
-      Moose::Role 0
+      Moose::Role 2.2200
+      perl 5.008005
   Class-Accessor-0.51
     pathname: K/KA/KASEI/Class-Accessor-0.51.tar.gz
     provides:
@@ -1926,19 +1925,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-6.46
-    pathname: O/OA/OALDERS/HTTP-Message-6.46.tar.gz
+  HTTP-Message-7.00
+    pathname: O/OA/OALDERS/HTTP-Message-7.00.tar.gz
     provides:
-      HTTP::Config 6.46
-      HTTP::Headers 6.46
-      HTTP::Headers::Auth 6.46
-      HTTP::Headers::ETag 6.46
-      HTTP::Headers::Util 6.46
-      HTTP::Message 6.46
-      HTTP::Request 6.46
-      HTTP::Request::Common 6.46
-      HTTP::Response 6.46
-      HTTP::Status 6.46
+      HTTP::Config 7.00
+      HTTP::Headers 7.00
+      HTTP::Headers::Auth 7.00
+      HTTP::Headers::ETag 7.00
+      HTTP::Headers::Util 7.00
+      HTTP::Message 7.00
+      HTTP::Request 7.00
+      HTTP::Request::Common 7.00
+      HTTP::Response 7.00
+      HTTP::Status 7.00
     requirements:
       Carp 0
       Clone 0.46
@@ -1983,19 +1982,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  HTTP-Request-AsCGI-1.2
-    pathname: F/FL/FLORA/HTTP-Request-AsCGI-1.2.tar.gz
-    provides:
-      HTTP::Request::AsCGI 1.2
-    requirements:
-      Carp 0
-      Class::Accessor 0
-      ExtUtils::MakeMaker 0
-      HTTP::Request 0
-      HTTP::Response 1.53
-      IO::File 0
-      Test::More 0
-      URI::Escape 0
   HTTP-Tiny-0.088
     pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.088.tar.gz
     provides:
@@ -4574,13 +4560,6 @@ DISTRIBUTIONS
       Role::Tiny 0
       Type::Tiny 1.004
       perl 5.008001
-  Sub-Identify-0.14
-    pathname: R/RG/RGARCIA/Sub-Identify-0.14.tar.gz
-    provides:
-      Sub::Identify 0.14
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   Sub-Install-0.929
     pathname: R/RJ/RJBS/Sub-Install-0.929.tar.gz
     provides:
@@ -5428,57 +5407,62 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.29
-    pathname: O/OA/OALDERS/URI-5.29.tar.gz
+  URI-5.30
+    pathname: O/OA/OALDERS/URI-5.30.tar.gz
     provides:
-      URI 5.29
-      URI::Escape 5.29
-      URI::Heuristic 5.29
-      URI::IRI 5.29
-      URI::QueryParam 5.29
-      URI::Split 5.29
-      URI::URL 5.29
-      URI::WithBase 5.29
-      URI::data 5.29
-      URI::file 5.29
-      URI::file::Base 5.29
-      URI::file::FAT 5.29
-      URI::file::Mac 5.29
-      URI::file::OS2 5.29
-      URI::file::QNX 5.29
-      URI::file::Unix 5.29
-      URI::file::Win32 5.29
-      URI::ftp 5.29
-      URI::geo 5.29
-      URI::gopher 5.29
-      URI::http 5.29
-      URI::https 5.29
-      URI::icap 5.29
-      URI::icaps 5.29
-      URI::ldap 5.29
-      URI::ldapi 5.29
-      URI::ldaps 5.29
-      URI::mailto 5.29
-      URI::mms 5.29
-      URI::news 5.29
-      URI::nntp 5.29
-      URI::nntps 5.29
-      URI::otpauth 5.29
-      URI::pop 5.29
-      URI::rlogin 5.29
-      URI::rsync 5.29
-      URI::rtsp 5.29
-      URI::rtspu 5.29
-      URI::sftp 5.29
-      URI::sip 5.29
-      URI::sips 5.29
-      URI::snews 5.29
-      URI::ssh 5.29
-      URI::telnet 5.29
-      URI::tn3270 5.29
-      URI::urn 5.29
-      URI::urn::isbn 5.29
-      URI::urn::oid 5.29
+      URI 5.30
+      URI::Escape 5.30
+      URI::Heuristic 5.30
+      URI::IRI 5.30
+      URI::QueryParam 5.30
+      URI::Split 5.30
+      URI::URL 5.30
+      URI::WithBase 5.30
+      URI::data 5.30
+      URI::file 5.30
+      URI::file::Base 5.30
+      URI::file::FAT 5.30
+      URI::file::Mac 5.30
+      URI::file::OS2 5.30
+      URI::file::QNX 5.30
+      URI::file::Unix 5.30
+      URI::file::Win32 5.30
+      URI::ftp 5.30
+      URI::ftpes 5.30
+      URI::ftps 5.30
+      URI::geo 5.30
+      URI::gopher 5.30
+      URI::http 5.30
+      URI::https 5.30
+      URI::icap 5.30
+      URI::icaps 5.30
+      URI::irc 5.30
+      URI::ircs 5.30
+      URI::ldap 5.30
+      URI::ldapi 5.30
+      URI::ldaps 5.30
+      URI::mailto 5.30
+      URI::mms 5.30
+      URI::news 5.30
+      URI::nntp 5.30
+      URI::nntps 5.30
+      URI::otpauth 5.30
+      URI::pop 5.30
+      URI::rlogin 5.30
+      URI::rsync 5.30
+      URI::rtsp 5.30
+      URI::rtspu 5.30
+      URI::scp 5.30
+      URI::sftp 5.30
+      URI::sip 5.30
+      URI::sips 5.30
+      URI::snews 5.30
+      URI::ssh 5.30
+      URI::telnet 5.30
+      URI::tn3270 5.30
+      URI::urn 5.30
+      URI::urn::isbn 5.30
+      URI::urn::oid 5.30
     requirements:
       Carp 0
       Cwd 0
@@ -5893,15 +5877,15 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  namespace-autoclean-0.29
-    pathname: E/ET/ETHER/namespace-autoclean-0.29.tar.gz
+  namespace-autoclean-0.31
+    pathname: E/ET/ETHER/namespace-autoclean-0.31.tar.gz
     provides:
-      namespace::autoclean 0.29
+      namespace::autoclean 0.31
     requirements:
+      B 0
       B::Hooks::EndOfScope 0.12
       ExtUtils::MakeMaker 0
       List::Util 0
-      Sub::Identify 0
       namespace::clean 0.20
       perl 5.006
       strict 0
