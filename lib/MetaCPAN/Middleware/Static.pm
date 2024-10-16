@@ -73,8 +73,9 @@ sub _file_app {
 
 sub _get_assets {
     my ($root) = @_;
-    open my $fh, '<', "$root/assets/assets.json"
-        or die "can't find asset map";
+    my $filename = "$root/assets/assets.json";
+    open my $fh, '<', $filename
+        or die "💥 can't find asset map: $filename";
     my $json = do { local $/; <$fh> };
     close $fh;
     my $files = Cpanel::JSON::XS->new->decode($json);
