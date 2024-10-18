@@ -4,7 +4,7 @@ services:
       context: .
       target: build-assets
     volumes:
-      - './root:/build/root/'
+      - './root/static/:/build/root/static/'
       - 'assets:/build/root/assets/'
     command: ['./build-assets.mjs', '--watch']
   web-server:
@@ -13,7 +13,7 @@ services:
       target: develop
     volumes:
       - './:/app/'
-      - 'assets:/metacpan-web/root/assets'
+      - 'assets:/app/root/assets/'
       - '/app/local'
     ports:
       - '8000:80'
