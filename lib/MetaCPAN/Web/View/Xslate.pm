@@ -2,6 +2,7 @@ package MetaCPAN::Web::View::Xslate;
 use Moose;
 extends qw(Catalyst::View::Xslate);
 use File::Path           ();
+use File::Temp           ();
 use MetaCPAN::Web::Types qw( AbsPath );
 
 has '+syntax'      => ( default => 'Metakolon' );
@@ -9,8 +10,15 @@ has '+encode_body' => ( default => 0 );
 has '+preload'     => ( default => 0 );
 has '+cache'       => ( default => 0 );
 has '+cache_dir' => (
-    isa    => AbsPath,
-    coerce => 1,
+    isa     => AbsPath,
+    coerce  => 1,
+    default => sub {
+        File::Temp::tempdir(
+            TEMPLATE => 'metacpan-web-templates-XXXXXX',
+            CLEANUP  => 1,
+            TMPDIR   => 1,
+        );
+    },
 );
 has '+module' => (
     default =>
