@@ -5,7 +5,7 @@ services:
       target: build-assets
     volumes:
       - './root/static/:/build/root/static/'
-      - 'assets:/build/root/assets/'
+      - 'web-assets:/build/root/assets/'
     command: ['./build-assets.mjs', '--watch']
   web-server:
     build:
@@ -13,7 +13,7 @@ services:
       target: develop
     volumes:
       - './:/app/'
-      - 'assets:/app/root/assets/'
+      - 'web-assets:/app/root/assets/'
       - '/app/local'
     ports:
       - '8000:80'
@@ -27,4 +27,4 @@ services:
         - path: ./cpanfile
           action: rebuild
 volumes:
-  assets:
+  web-assets:
