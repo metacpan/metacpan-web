@@ -46,8 +46,6 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot
 EOT
 
-RUN mkdir var && chown metacpan:users var
-
 ENV PERL5LIB="/app/local/lib/perl5"
 ENV PATH="/app/local/bin:${PATH}"
 
