@@ -118,11 +118,6 @@
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
           <div class="top-notify-banner">
-            <i class="fas fa-info-circle"></i>
-              The London Perl and Raku Workshop takes place on 26th Oct 2024. If
-              your company depends on Perl, <a
-                target="_blank"
-                href="https://act.yapc.eu/lpw2024/">please consider sponsoring and/or attending</a>.
           </div>
           <nav class="sidebar">
             %%  block left_nav -> {
