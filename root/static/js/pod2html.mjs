@@ -14,6 +14,11 @@ if (pod2htmlForm) {
     const error = document.querySelector('#metacpan-pod-renderer-error');
     const template = document.querySelector('#metacpan-pod-renderer-content');
 
+    const parseHTML = (html) => {
+        const template = document.createElement('template');
+        template.innerHTML = html;
+        return template.content;
+    };
     const updateHTML = async (pod) => {
         if (!pod) {
             pod = textInput.value;
@@ -47,8 +52,9 @@ if (pod2htmlForm) {
             document.title = "Pod Renderer - " + data.pod_title + " - metacpan.org";
 
             const body = template.content.cloneNode(true);
-            body.querySelector('.toc-body').outerHTML = data.pod_index;
-            body.querySelector('.pod-body').outerHTML = data.pod_html;
+            body.querySelector('.toc-body').replaceWith(parseHTML(data.pod_index));
+            body.querySelector('.pod-body').replaceWith(parseHTML(data.pod_html));
+
             rendered.replaceChildren(body);
 
             formatTOC(rendered.querySelector('nav'));
