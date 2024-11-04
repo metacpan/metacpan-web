@@ -1,116 +1,132 @@
-import jQuery from 'jquery';
 import {
     formatTOC,
     createAnchors
 }
 from './document-ui.mjs';
 
-const pod2html_form = jQuery('#metacpan-pod-renderer-form');
-const pod2html_text = jQuery('[name="pod"]', pod2html_form);
-const pod2html_update = function(pod) {
-    if (!pod) {
-        pod = pod2html_text.get(0).value;
-    }
-    const submit = pod2html_form.find('input[type="submit"]');
-    submit.attr("disabled", "disabled");
-    const rendered = jQuery('#metacpan-pod-renderer-output');
-    const loading = jQuery('#metacpan-pod-renderer-loading');
-    const error = jQuery('#metacpan-pod-renderer-error');
-    rendered.hide();
-    rendered.html('');
-    loading.show();
-    error.hide();
-    document.title = "Pod Renderer - metacpan.org";
-    jQuery.ajax({
-        url: '/pod2html',
-        method: 'POST',
-        data: {
-            pod: pod
-        },
-        headers: {
-            Accept: "application/json"
-        },
-        success: function(data) {
-            const title = data.pod_title;
-            document.title = "Pod Renderer - " + title + " - metacpan.org";
-            rendered.html(
-                '<nav class="toc"><div class="toc-header"><strong>Contents</strong></div>' +
-                data.pod_index +
-                '</nav>' +
-                data.pod_html
-            );
-            var toc = jQuery("nav", rendered);
-            if (toc.length) {
-                formatTOC(toc[0]);
+const pod2htmlForm = document.querySelector('#metacpan-pod-renderer-form');
+if (pod2htmlForm) {
+    const textInput = pod2htmlForm.querySelector('[name="pod"]');
+    const submit = pod2htmlForm.querySelector('input[type="submit"]');
+    const renderer = document.querySelector('.metacpan-pod-renderer');
+    const rendered = document.querySelector('#metacpan-pod-renderer-output');
+    const loading = document.querySelector('#metacpan-pod-renderer-loading');
+    const error = document.querySelector('#metacpan-pod-renderer-error');
+    const template = document.querySelector('#metacpan-pod-renderer-content');
+
+    const updateHTML = async (pod) => {
+        if (!pod) {
+            pod = textInput.value;
+        }
+        submit.disabled = true;
+        document.title = "Pod Renderer - metacpan.org";
+
+        rendered.style.display = 'none';
+        rendered.replaceChildren();
+        loading.style.display = 'block';
+        error.style.display = 'none';
+
+        try {
+            const form = new FormData();
+            form.set('pod', pod);
+
+            const response = await fetch('/pod2html', {
+                method: 'POST',
+                headers: {
+                    "Accept": "application/json",
+                },
+                body: form,
+            });
+
+            if (!response.ok) {
+                throw new Error(await response.text());
             }
+
+            const data = await response.json();
+
+            document.title = "Pod Renderer - " + data.pod_title + " - metacpan.org";
+
+            const body = template.content.cloneNode(true);
+            body.querySelector('.toc-body').outerHTML = data.pod_index;
+            body.querySelector('.pod-body').outerHTML = data.pod_html;
+            rendered.replaceChildren(body);
+
+            formatTOC(rendered.querySelector('nav'));
             createAnchors(rendered);
-            loading.hide();
-            error.hide();
-            rendered.show();
-            submit.removeAttr("disabled");
-        },
-        error: function(data) {
-            rendered.hide();
-            loading.hide();
-            error.html('Error rendering POD' +
-                (data && data.length ? ' - ' + data : ''));
-            error.show();
-            submit.removeAttr("disabled");
+
+            loading.style.display = 'none';
+            error.style.display = 'none';
+            rendered.style.display = 'block';
+
+            submit.disabled = false;
         }
+        catch (err) {
+            rendered.style.display = 'none';
+            loading.style.display = 'none';
+
+            error.replaceChildren();
+            error.append('Error rendering POD - ' + err.message);
+            error.style.display = 'block';
+            submit.disabled = false;
+        }
+    };
+
+    pod2htmlForm.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        updateHTML();
     });
-};
-if (window.FileReader) {
-    jQuery('input[type="file"]', pod2html_form).on('change', function() {
-        const files = this.files;
-        for (var i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                pod2html_text.get(0).value = e.target.result;
-                pod2html_update(e.target.result);
-            };
-            reader.readAsText(file);
+
+    const readFile = (file) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+            textInput.value = reader.result;
+            updateHTML(reader.result);
+        });
+        reader.readAsText(file);
+    };
+
+    const fileInput = pod2htmlForm.querySelector('input[type="file"]');
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) {
+            return;
         }
-        this.value = null;
+        readFile(file);
+        fileInput.value = null;
+    });
+
+    let dragTimer;
+    renderer.addEventListener("dragover", (ev) => {
+        ev.preventDefault();
+        if (dragTimer) {
+            window.clearTimeout(dragTimer);
+        }
+        dragTimer = window.setTimeout(() => {
+            renderer.classList.remove("dragging");
+            window.clearTimeout(dragTimer);
+            dragTimer = null;
+        }, 500);
+    });
+
+    document.addEventListener("dragenter", function() {
+        renderer.classList.add("dragging");
+    });
+
+    renderer.addEventListener("drop", (ev) => {
+        const data = ev.dataTransfer;
+        if (data && data.files && data.files.length) {
+            const file = data.files[0];
+
+            ev.preventDefault();
+            ev.stopPropagation();
+            renderer.classList.remove("dragging");
+            if (dragTimer) {
+                window.clearTimeout(dragTimer);
+                dragTimer = null;
+            }
+
+            readFile(file);
+        }
     });
 }
-pod2html_form.on('submit', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    pod2html_update();
-});
-
-const renderer = jQuery(".metacpan-pod-renderer")
-
-let dragTimer;
-renderer.on("dragover", function(event) {
-    event.preventDefault();
-    if (dragTimer) {
-        window.clearTimeout(dragTimer);
-    }
-    dragTimer = window.setTimeout(function() {
-        renderer.removeClass("dragging");
-        window.clearTimeout(dragTimer);
-        dragTimer = null;
-    }, 500);
-});
-
-jQuery(document).on("dragenter", function() {
-    renderer.addClass("dragging");
-});
-
-renderer.on("drop", function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    renderer.removeClass("dragging");
-    if (dragTimer) {
-        window.clearTimeout(dragTimer);
-        dragTimer = null;
-    }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        pod2html_text.get(0).value = e.target.result;
-        pod2html_update(e.target.result);
-    };
-    reader.readAsText(event.originalEvent.dataTransfer.files[0]);
-});

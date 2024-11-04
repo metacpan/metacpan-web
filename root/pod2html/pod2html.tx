@@ -3,6 +3,13 @@
 %%  }
 %%  override content -> {
 <div class="metacpan-pod-renderer">
+  <template id="metacpan-pod-renderer-content">
+    <nav class="toc">
+      <div class="toc-header"><strong>Contents</strong></div>
+      <div class="toc-body"></div>
+    </nav>
+    <div class="pod-body"></div>
+  </template>
   <div class="panel panel-default">
     <div class="panel-heading" role="tab">
       <h3 class="panel-title">Pod Renderer</h3>
