@@ -147,6 +147,14 @@ Renderer.prototype.getHtml = function(...args) {
     return html;
 };
 
+const wrapLine = Renderer.prototype.wrapLine;
+Renderer.prototype.wrapLine = function(lineIndex, lineNumber, lineHtml) {
+    if (lineHtml == ' ') {
+        lineHtml = '';
+    }
+    return wrapLine.call(this, lineIndex, lineNumber, lineHtml);
+};
+
 // on pod pages, set the language to perl if no other language is set
 CODE: for (const code of document.querySelectorAll(".pod pre > code")) {
     for (const className of code.classList) {
