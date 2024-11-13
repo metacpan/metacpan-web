@@ -132,22 +132,27 @@ const processPackages = function(code) {
     return code.replace(/(<code class="p(?:er)?l keyword">(use|package|require)<\/code> <code class="p(?:er)?l plain">)([A-Z_a-z][0-9A-Z_a-z]*(?:::[0-9A-Z_a-z]+)*)(.*?<\/code>)/g, replace_pattern);
 };
 
-const getCodeLinesHtml = Renderer.prototype.getCodeLinesHtml;
-Renderer.prototype.getCodeLinesHtml = function() {
-    // the syntax highlighter has a bug that strips spaces from the first line.
-    // replace any leading whitespace with an entity, preventing that.
-    // html = html.replace(/^ /, "&#32;");
-    // html = html.replace(/^\t/, "&#9;");
-    let html = getCodeLinesHtml.apply(this, arguments);
-    return processPackages.call(this, html);
+const processUrls = Renderer.prototype.processUrls;
+Renderer.prototype.processUrls = function(html, ...args) {
+    html = processPackages.apply(this, [html]);
+    html = processUrls.apply(this, [html, ...args]);
+    return html;
 };
 
 const getHtml = Renderer.prototype.getHtml;
-Renderer.prototype.getHtml = function() {
-    let html = getHtml.call(this);
+Renderer.prototype.getHtml = function(...args) {
+    let html = getHtml.call(this, ...args);
     html = html.replace(/\s+(<(tbody|table|div)\b)/g, '$1');
     html = html.replace(/(<\/(tbody|table|div)>)\s+/g, '$1');
     return html;
+};
+
+const wrapLine = Renderer.prototype.wrapLine;
+Renderer.prototype.wrapLine = function(lineIndex, lineNumber, lineHtml) {
+    if (lineHtml == ' ') {
+        lineHtml = '';
+    }
+    return wrapLine.call(this, lineIndex, lineNumber, lineHtml);
 };
 
 // on pod pages, set the language to perl if no other language is set
@@ -231,14 +236,44 @@ for (const code of document.querySelectorAll(".content pre > code")) {
 
     config.package_target_type = source ? 'source' : 'pod';
 
-    // highlighter strips leading blank lines, throwing off line numbers.
-    // add a blank line for the highlighter to strip
-    // const html = code.innerHTML;
-    // if (html.match(/^ *\n/)) {
-    //     code.innerHTML = "\n " + html;
-    // }
+    let highlightObject = code;
 
-    SyntaxHighlighter.highlight(config, code);
+    const html = code.innerHTML;
+    if (html.match(/^ *\n+/)) {
+        // highlighter strips leading blank lines, throwing off line numbers.
+        // use this awful hack to bypass it. depends on specific details inside
+        // the syntaxhighlighter module
+
+        const fakeCode = {
+            className: code.className,
+            id: code.id,
+            title: code.title,
+            innerHTML: {
+                toString: function() {
+                    return html
+                },
+                replace: function(search, replace) {
+                    if (search.toString() == /^[ ]*[\n]+|[\n]*[ ]*$/g.toString()) {
+                        return html.replace(/\n$/g, '');
+                    }
+                    return html.replace(search, replace);
+                },
+            },
+        };
+        const parentNode = code.parentNode;
+        fakeCode.parentNode = {
+            replaceChild: function(newEl, oldEl) {
+                if (oldEl === fakeCode) {
+                    oldEl = code
+                }
+                parentNode.replaceChild(newEl, oldEl);
+            },
+        };
+
+        highlightObject = fakeCode;
+    }
+
+    SyntaxHighlighter.highlight(config, highlightObject);
 
     const pod_lines = pre.dataset.podLines;
     if (pod_lines) {
