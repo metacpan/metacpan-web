@@ -85,6 +85,11 @@ SyntaxHighlighter.regexLib['url'] = /[a-z][a-z0-9.+-]*:\/\/[\w-./?%&=:@;#~]*[\w-
 // Use regular spaces, not &nbsp;
 SyntaxHighlighter.config.space = ' ';
 
+// We aren't using <script type="syntaxhighlighter" />, and when enabled it
+// attempts to strip <![CDATA[ ]]> sections. That code is buggy, and breaks
+// short code blocks, such as on perlsecret.pod
+SyntaxHighlighter.config.useScriptTags = false;
+
 // https://metacpan.org/source/RWSTAUNER/Acme-Syntax-Examples-0.001/lib/Acme/Syntax/Examples.pm
 
 // TODO: Might be easier to do the regexp on the plain string (before
