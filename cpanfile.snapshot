@@ -971,6 +971,22 @@ DISTRIBUTIONS
       DateTime::Locale::FromData 1.44
       DateTime::Locale::Util 1.44
     requirements:
+      Carp 0
+      Dist::CheckConflicts 0.02
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::ShareDir 0
+      File::ShareDir::Install 0.06
+      File::Spec 0
+      List::Util 1.45
+      Params::ValidationCompiler 0.13
+      Specio::Declare 0
+      Specio::Library::String 0
+      Storable 0
+      namespace::autoclean 0.19
+      perl 5.008004
+      strict 0
+      warnings 0
   DateTime-TimeZone-2.63
     pathname: D/DR/DROLSKY/DateTime-TimeZone-2.63.tar.gz
     provides:
@@ -1870,10 +1886,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  HTTP-Tiny-0.088
-    pathname: D/DA/DAGOLDEN/HTTP-Tiny-0.088.tar.gz
+  HTTP-Tiny-0.090
+    pathname: H/HA/HAARG/HTTP-Tiny-0.090.tar.gz
     provides:
-      HTTP::Tiny 0.088
+      HTTP::Tiny 0.090
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
