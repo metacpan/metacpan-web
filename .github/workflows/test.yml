@@ -120,7 +120,7 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
