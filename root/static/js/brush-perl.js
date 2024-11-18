@@ -95,7 +95,7 @@ function Brush() {
 
         // don't capture the newline after =cut so that =cut\n\n=head1 will start a new pod section
         {
-            regex: /(^|\n)=\w[\s\S]*?(\n=cut\s*(?=\n)|$)/g,
+            regex: /(^|\n)=\w[\s\S]*?(\n=cut(?![a-zA-Z]).*)/g,
             css: 'comments'
         }, // pod
 
