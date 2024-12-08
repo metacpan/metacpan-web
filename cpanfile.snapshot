@@ -2091,36 +2091,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.80
-    pathname: S/SB/SBECK/Locale-Codes-3.80.tar.gz
+  Locale-Codes-3.81
+    pathname: S/SB/SBECK/Locale-Codes-3.81.tar.gz
     provides:
-      Locale::Codes 3.80
-      Locale::Codes::Constants 3.80
-      Locale::Codes::Country 3.80
-      Locale::Codes::Country_Codes 3.80
-      Locale::Codes::Country_Retired 3.80
-      Locale::Codes::Currency 3.80
-      Locale::Codes::Currency_Codes 3.80
-      Locale::Codes::Currency_Retired 3.80
-      Locale::Codes::LangExt 3.80
-      Locale::Codes::LangExt_Codes 3.80
-      Locale::Codes::LangExt_Retired 3.80
-      Locale::Codes::LangFam 3.80
-      Locale::Codes::LangFam_Codes 3.80
-      Locale::Codes::LangFam_Retired 3.80
-      Locale::Codes::LangVar 3.80
-      Locale::Codes::LangVar_Codes 3.80
-      Locale::Codes::LangVar_Retired 3.80
-      Locale::Codes::Language 3.80
-      Locale::Codes::Language_Codes 3.80
-      Locale::Codes::Language_Retired 3.80
-      Locale::Codes::Script 3.80
-      Locale::Codes::Script_Codes 3.80
-      Locale::Codes::Script_Retired 3.80
-      Locale::Country 3.80
-      Locale::Currency 3.80
-      Locale::Language 3.80
-      Locale::Script 3.80
+      Locale::Codes 3.81
+      Locale::Codes::Constants 3.81
+      Locale::Codes::Country 3.81
+      Locale::Codes::Country_Codes 3.81
+      Locale::Codes::Country_Retired 3.81
+      Locale::Codes::Currency 3.81
+      Locale::Codes::Currency_Codes 3.81
+      Locale::Codes::Currency_Retired 3.81
+      Locale::Codes::LangExt 3.81
+      Locale::Codes::LangExt_Codes 3.81
+      Locale::Codes::LangExt_Retired 3.81
+      Locale::Codes::LangFam 3.81
+      Locale::Codes::LangFam_Codes 3.81
+      Locale::Codes::LangFam_Retired 3.81
+      Locale::Codes::LangVar 3.81
+      Locale::Codes::LangVar_Codes 3.81
+      Locale::Codes::LangVar_Retired 3.81
+      Locale::Codes::Language 3.81
+      Locale::Codes::Language_Codes 3.81
+      Locale::Codes::Language_Retired 3.81
+      Locale::Codes::Script 3.81
+      Locale::Codes::Script_Codes 3.81
+      Locale::Codes::Script_Retired 3.81
+      Locale::Country 3.81
+      Locale::Currency 3.81
+      Locale::Language 3.81
+      Locale::Script 3.81
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
