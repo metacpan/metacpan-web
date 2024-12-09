@@ -21,7 +21,7 @@
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
     "js-beautify": "^1.15.1",
-    "prettier": "3.4.1"
+    "prettier": "3.4.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.1",
