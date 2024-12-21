@@ -85,10 +85,7 @@ test_psgi app, sub {
     };
 
     # (we're always authenticated from now on)
-    $user_res = {
-        looks_human => \1,
-        id          => '5',
-    };
+    $user_res = { id => '5', };
 
     subtest 'GET profile' => sub {
         $api_res = { error => 'broken' };

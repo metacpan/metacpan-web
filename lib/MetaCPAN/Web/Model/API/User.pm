@@ -86,15 +86,6 @@ sub remove_favorite {
         undef, { access_token => $token }, 'DELETE' );
 }
 
-sub turing {
-    my ( $self, $token, $answer ) = @_;
-    $self->request(
-        '/user/turing',
-        { answer       => $answer },
-        { access_token => $token },
-    );
-}
-
 __PACKAGE__->meta->make_immutable;
 
 1;

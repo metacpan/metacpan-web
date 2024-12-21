@@ -9,8 +9,7 @@ use Path::Tiny qw( path );
 
 # files that have inline <script> tags
 my %skip = map { $_ => 1 } (
-    'root/about/contributors.tx', 'root/account/profile.tx',
-    'root/account/turing.tx',     'root/base.tx',
+    'root/about/contributors.tx', 'root/account/profile.tx', 'root/base.tx',
 );
 
 File::Find::find(

@@ -32,11 +32,7 @@ sub add : Local : Args(0) {
         }
     }
     else {
-        $c->res->redirect(
-              $res->{error}
-            ? $c->uri_for('/account/turing/index')
-            : $c->req->referer
-        );
+        $c->res->redirect( $c->req->referer );
     }
 }
 

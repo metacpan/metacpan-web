@@ -236,9 +236,7 @@ for (const favForm of document.querySelectorAll('form[action="/account/favorite/
             body: formData,
         });
         if (!response.ok) {
-            if (confirm("You have to complete a Captcha in order to ++.")) {
-                document.location.href = "/account/turing";
-            }
+            alert("Error adding favorite!");
         }
 
         const button = favForm.querySelector('button');
