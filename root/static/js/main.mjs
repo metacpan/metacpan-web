@@ -5,7 +5,6 @@ import './cpan.js';
 import './github.js';
 import './dropdown.js';
 import './profile.js';
-import './recaptcha.mjs';
 import './search.js';
 import 'bootstrap/js/dropdown.js';
 import 'bootstrap/js/collapse.js';

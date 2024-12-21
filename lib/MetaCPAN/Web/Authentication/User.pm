@@ -42,10 +42,8 @@ sub BUILDARGS {
 
 sub for_session { $_[0]->token }
 
-has id             => ( is => 'ro' );
-has looks_human    => ( is => 'ro' );
-has passed_captcha => ( is => 'ro' );
-has access_token   => ( is => 'ro' );
+has id           => ( is => 'ro' );
+has access_token => ( is => 'ro' );
 has identity => (
     is     => 'ro',
     isa    => HashRef->plus_coercions( ArrayToHash ['name'] ),
@@ -70,7 +68,6 @@ for my $method ( qw(
     get_profile
     add_favorite
     remove_favorite
-    turing
 ) )
 {
     no strict 'refs';
