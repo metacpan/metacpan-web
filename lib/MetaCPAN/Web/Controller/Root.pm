@@ -88,6 +88,7 @@ sub robots : Path("robots.txt") : Args(0) {
     $c->browser_max_age('1d');
     $c->cdn_max_age('1y');
 
+    $c->res->content_type('text/plain');
     $c->stash( {
         template => 'robots.txt',
     } );
