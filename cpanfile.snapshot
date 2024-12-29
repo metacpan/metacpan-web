@@ -3243,100 +3243,101 @@ DISTRIBUTIONS
       POSIX 0
       Time::Local 0
       perl 5.008001
-  PPI-1.279
-    pathname: M/MI/MITHALDU/PPI-1.279.tar.gz
+  PPI-1.281
+    pathname: M/MI/MITHALDU/PPI-1.281.tar.gz
     provides:
-      PPI 1.279
-      PPI::Cache 1.279
-      PPI::Document 1.279
-      PPI::Document::File 1.279
-      PPI::Document::Fragment 1.279
-      PPI::Document::Normalized 1.279
-      PPI::Dumper 1.279
-      PPI::Element 1.279
-      PPI::Exception 1.279
-      PPI::Exception::ParserRejection 1.279
-      PPI::Find 1.279
-      PPI::Lexer 1.279
-      PPI::Node 1.279
-      PPI::Normal 1.279
-      PPI::Normal::Standard 1.279
-      PPI::Singletons 1.279
-      PPI::Statement 1.279
-      PPI::Statement::Break 1.279
-      PPI::Statement::Compound 1.279
-      PPI::Statement::Data 1.279
-      PPI::Statement::End 1.279
-      PPI::Statement::Expression 1.279
-      PPI::Statement::Given 1.279
-      PPI::Statement::Include 1.279
-      PPI::Statement::Include::Perl6 1.279
-      PPI::Statement::Null 1.279
-      PPI::Statement::Package 1.279
-      PPI::Statement::Scheduled 1.279
-      PPI::Statement::Sub 1.279
-      PPI::Statement::Unknown 1.279
-      PPI::Statement::UnmatchedBrace 1.279
-      PPI::Statement::Variable 1.279
-      PPI::Statement::When 1.279
-      PPI::Structure 1.279
-      PPI::Structure::Block 1.279
-      PPI::Structure::Condition 1.279
-      PPI::Structure::Constructor 1.279
-      PPI::Structure::For 1.279
-      PPI::Structure::Given 1.279
-      PPI::Structure::List 1.279
-      PPI::Structure::Subscript 1.279
-      PPI::Structure::Unknown 1.279
-      PPI::Structure::When 1.279
-      PPI::Token 1.279
-      PPI::Token::ArrayIndex 1.279
-      PPI::Token::Attribute 1.279
-      PPI::Token::BOM 1.279
-      PPI::Token::Cast 1.279
-      PPI::Token::Comment 1.279
-      PPI::Token::DashedWord 1.279
-      PPI::Token::Data 1.279
-      PPI::Token::End 1.279
-      PPI::Token::HereDoc 1.279
-      PPI::Token::Label 1.279
-      PPI::Token::Magic 1.279
-      PPI::Token::Number 1.279
-      PPI::Token::Number::Binary 1.279
-      PPI::Token::Number::Exp 1.279
-      PPI::Token::Number::Float 1.279
-      PPI::Token::Number::Hex 1.279
-      PPI::Token::Number::Octal 1.279
-      PPI::Token::Number::Version 1.279
-      PPI::Token::Operator 1.279
-      PPI::Token::Pod 1.279
-      PPI::Token::Prototype 1.279
-      PPI::Token::Quote 1.279
-      PPI::Token::Quote::Double 1.279
-      PPI::Token::Quote::Interpolate 1.279
-      PPI::Token::Quote::Literal 1.279
-      PPI::Token::Quote::Single 1.279
-      PPI::Token::QuoteLike 1.279
-      PPI::Token::QuoteLike::Backtick 1.279
-      PPI::Token::QuoteLike::Command 1.279
-      PPI::Token::QuoteLike::Readline 1.279
-      PPI::Token::QuoteLike::Regexp 1.279
-      PPI::Token::QuoteLike::Words 1.279
-      PPI::Token::Regexp 1.279
-      PPI::Token::Regexp::Match 1.279
-      PPI::Token::Regexp::Substitute 1.279
-      PPI::Token::Regexp::Transliterate 1.279
-      PPI::Token::Separator 1.279
-      PPI::Token::Structure 1.279
-      PPI::Token::Symbol 1.279
-      PPI::Token::Unknown 1.279
-      PPI::Token::Whitespace 1.279
-      PPI::Token::Word 1.279
-      PPI::Tokenizer 1.279
-      PPI::Transform 1.279
-      PPI::Transform::UpdateCopyright 1.279
-      PPI::Util 1.279
-      PPI::XSAccessor 1.279
+      PPI 1.281
+      PPI::Cache 1.281
+      PPI::Document 1.281
+      PPI::Document::File 1.281
+      PPI::Document::Fragment 1.281
+      PPI::Document::Normalized 1.281
+      PPI::Dumper 1.281
+      PPI::Element 1.281
+      PPI::Exception 1.281
+      PPI::Exception::ParserRejection 1.281
+      PPI::Find 1.281
+      PPI::Lexer 1.281
+      PPI::Node 1.281
+      PPI::Normal 1.281
+      PPI::Normal::Standard 1.281
+      PPI::Singletons 1.281
+      PPI::Statement 1.281
+      PPI::Statement::Break 1.281
+      PPI::Statement::Compound 1.281
+      PPI::Statement::Data 1.281
+      PPI::Statement::End 1.281
+      PPI::Statement::Expression 1.281
+      PPI::Statement::Given 1.281
+      PPI::Statement::Include 1.281
+      PPI::Statement::Include::Perl6 1.281
+      PPI::Statement::Null 1.281
+      PPI::Statement::Package 1.281
+      PPI::Statement::Scheduled 1.281
+      PPI::Statement::Sub 1.281
+      PPI::Statement::Unknown 1.281
+      PPI::Statement::UnmatchedBrace 1.281
+      PPI::Statement::Variable 1.281
+      PPI::Statement::When 1.281
+      PPI::Structure 1.281
+      PPI::Structure::Block 1.281
+      PPI::Structure::Condition 1.281
+      PPI::Structure::Constructor 1.281
+      PPI::Structure::For 1.281
+      PPI::Structure::Given 1.281
+      PPI::Structure::List 1.281
+      PPI::Structure::Signature 1.281
+      PPI::Structure::Subscript 1.281
+      PPI::Structure::Unknown 1.281
+      PPI::Structure::When 1.281
+      PPI::Token 1.281
+      PPI::Token::ArrayIndex 1.281
+      PPI::Token::Attribute 1.281
+      PPI::Token::BOM 1.281
+      PPI::Token::Cast 1.281
+      PPI::Token::Comment 1.281
+      PPI::Token::DashedWord 1.281
+      PPI::Token::Data 1.281
+      PPI::Token::End 1.281
+      PPI::Token::HereDoc 1.281
+      PPI::Token::Label 1.281
+      PPI::Token::Magic 1.281
+      PPI::Token::Number 1.281
+      PPI::Token::Number::Binary 1.281
+      PPI::Token::Number::Exp 1.281
+      PPI::Token::Number::Float 1.281
+      PPI::Token::Number::Hex 1.281
+      PPI::Token::Number::Octal 1.281
+      PPI::Token::Number::Version 1.281
+      PPI::Token::Operator 1.281
+      PPI::Token::Pod 1.281
+      PPI::Token::Prototype 1.281
+      PPI::Token::Quote 1.281
+      PPI::Token::Quote::Double 1.281
+      PPI::Token::Quote::Interpolate 1.281
+      PPI::Token::Quote::Literal 1.281
+      PPI::Token::Quote::Single 1.281
+      PPI::Token::QuoteLike 1.281
+      PPI::Token::QuoteLike::Backtick 1.281
+      PPI::Token::QuoteLike::Command 1.281
+      PPI::Token::QuoteLike::Readline 1.281
+      PPI::Token::QuoteLike::Regexp 1.281
+      PPI::Token::QuoteLike::Words 1.281
+      PPI::Token::Regexp 1.281
+      PPI::Token::Regexp::Match 1.281
+      PPI::Token::Regexp::Substitute 1.281
+      PPI::Token::Regexp::Transliterate 1.281
+      PPI::Token::Separator 1.281
+      PPI::Token::Structure 1.281
+      PPI::Token::Symbol 1.281
+      PPI::Token::Unknown 1.281
+      PPI::Token::Whitespace 1.281
+      PPI::Token::Word 1.281
+      PPI::Tokenizer 1.281
+      PPI::Transform 1.281
+      PPI::Transform::UpdateCopyright 1.281
+      PPI::Util 1.281
+      PPI::XSAccessor 1.281
     requirements:
       Carp 0
       Clone 0.30
@@ -3347,14 +3348,17 @@ DISTRIBUTIONS
       File::Spec 0.84
       List::Util 1.33
       Params::Util 1.00
+      Safe::Isa 0
       Scalar::Util 0
       Storable 2.17
       Task::Weaken 0
+      YAML::PP 0
       constant 0
       if 0
       overload 0
       perl 5.006
       strict 0
+      version 0.77
   PPIx-QuoteLike-0.023
     pathname: W/WY/WYANT/PPIx-QuoteLike-0.023.tar.gz
     provides:
@@ -4282,52 +4286,53 @@ DISTRIBUTIONS
       Test::Warn 0
       XSLoader 0
       perl 5.008
-  Specio-0.48
-    pathname: D/DR/DROLSKY/Specio-0.48.tar.gz
+  Specio-0.49
+    pathname: D/DR/DROLSKY/Specio-0.49.tar.gz
     provides:
-      Specio 0.48
-      Specio::Coercion 0.48
-      Specio::Constraint::AnyCan 0.48
-      Specio::Constraint::AnyDoes 0.48
-      Specio::Constraint::AnyIsa 0.48
-      Specio::Constraint::Enum 0.48
-      Specio::Constraint::Intersection 0.48
-      Specio::Constraint::ObjectCan 0.48
-      Specio::Constraint::ObjectDoes 0.48
-      Specio::Constraint::ObjectIsa 0.48
-      Specio::Constraint::Parameterizable 0.48
-      Specio::Constraint::Parameterized 0.48
-      Specio::Constraint::Role::CanType 0.48
-      Specio::Constraint::Role::DoesType 0.48
-      Specio::Constraint::Role::Interface 0.48
-      Specio::Constraint::Role::IsaType 0.48
-      Specio::Constraint::Simple 0.48
-      Specio::Constraint::Structurable 0.48
-      Specio::Constraint::Structured 0.48
-      Specio::Constraint::Union 0.48
-      Specio::Declare 0.48
-      Specio::DeclaredAt 0.48
-      Specio::Exception 0.48
-      Specio::Exporter 0.48
-      Specio::Helpers 0.48
-      Specio::Library::Builtins 0.48
-      Specio::Library::Numeric 0.48
-      Specio::Library::Perl 0.48
-      Specio::Library::String 0.48
-      Specio::Library::Structured 0.48
-      Specio::Library::Structured::Dict 0.48
-      Specio::Library::Structured::Map 0.48
-      Specio::Library::Structured::Tuple 0.48
-      Specio::OO 0.48
-      Specio::PartialDump 0.48
-      Specio::Registry 0.48
-      Specio::Role::Inlinable 0.48
-      Specio::Subs 0.48
-      Specio::TypeChecks 0.48
-      Test::Specio 0.48
+      Specio 0.49
+      Specio::Coercion 0.49
+      Specio::Constraint::AnyCan 0.49
+      Specio::Constraint::AnyDoes 0.49
+      Specio::Constraint::AnyIsa 0.49
+      Specio::Constraint::Enum 0.49
+      Specio::Constraint::Intersection 0.49
+      Specio::Constraint::ObjectCan 0.49
+      Specio::Constraint::ObjectDoes 0.49
+      Specio::Constraint::ObjectIsa 0.49
+      Specio::Constraint::Parameterizable 0.49
+      Specio::Constraint::Parameterized 0.49
+      Specio::Constraint::Role::CanType 0.49
+      Specio::Constraint::Role::DoesType 0.49
+      Specio::Constraint::Role::Interface 0.49
+      Specio::Constraint::Role::IsaType 0.49
+      Specio::Constraint::Simple 0.49
+      Specio::Constraint::Structurable 0.49
+      Specio::Constraint::Structured 0.49
+      Specio::Constraint::Union 0.49
+      Specio::Declare 0.49
+      Specio::DeclaredAt 0.49
+      Specio::Exception 0.49
+      Specio::Exporter 0.49
+      Specio::Helpers 0.49
+      Specio::Library::Builtins 0.49
+      Specio::Library::Numeric 0.49
+      Specio::Library::Perl 0.49
+      Specio::Library::String 0.49
+      Specio::Library::Structured 0.49
+      Specio::Library::Structured::Dict 0.49
+      Specio::Library::Structured::Map 0.49
+      Specio::Library::Structured::Tuple 0.49
+      Specio::OO 0.49
+      Specio::PartialDump 0.49
+      Specio::Registry 0.49
+      Specio::Role::Inlinable 0.49
+      Specio::Subs 0.49
+      Specio::TypeChecks 0.49
+      Test::Specio 0.49
     requirements:
       B 0
       Carp 0
+      Clone 0
       Devel::StackTrace 0
       Eval::Closure 0
       Exporter 0
@@ -4339,7 +4344,6 @@ DISTRIBUTIONS
       Role::Tiny 1.003003
       Role::Tiny::With 0
       Scalar::Util 0
-      Storable 0
       Sub::Quote 0
       Test::Fatal 0
       Test::More 0.96
@@ -5372,6 +5376,62 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
+  YAML-PP-v0.38.0
+    pathname: T/TI/TINITA/YAML-PP-v0.38.0.tar.gz
+    provides:
+      YAML::PP v0.38.0
+      YAML::PP::Common v0.38.0
+      YAML::PP::Constructor v0.38.0
+      YAML::PP::Dumper v0.38.0
+      YAML::PP::Emitter v0.38.0
+      YAML::PP::Exception v0.38.0
+      YAML::PP::Grammar v0.38.0
+      YAML::PP::Highlight v0.38.0
+      YAML::PP::Lexer v0.38.0
+      YAML::PP::Loader v0.38.0
+      YAML::PP::Parser v0.38.0
+      YAML::PP::Perl v0.38.0
+      YAML::PP::Preserve::Array v0.38.0
+      YAML::PP::Preserve::Hash v0.38.0
+      YAML::PP::Preserve::Scalar v0.38.0
+      YAML::PP::Reader v0.38.0
+      YAML::PP::Reader::File v0.38.0
+      YAML::PP::Render v0.38.0
+      YAML::PP::Representer v0.38.0
+      YAML::PP::Schema v0.38.0
+      YAML::PP::Schema::Binary v0.38.0
+      YAML::PP::Schema::Core v0.38.0
+      YAML::PP::Schema::Failsafe v0.38.0
+      YAML::PP::Schema::Include v0.38.0
+      YAML::PP::Schema::JSON v0.38.0
+      YAML::PP::Schema::Merge v0.38.0
+      YAML::PP::Schema::Perl v0.38.0
+      YAML::PP::Schema::Tie::IxHash v0.38.0
+      YAML::PP::Schema::YAML1_1 v0.38.0
+      YAML::PP::Type::MergeKey v0.38.0
+      YAML::PP::Writer v0.38.0
+      YAML::PP::Writer::File v0.38.0
+    requirements:
+      B 0
+      B::Deparse 0
+      Carp 0
+      Data::Dumper 0
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      Getopt::Long 0
+      MIME::Base64 0
+      Module::Load 0
+      Scalar::Util 1.07
+      Tie::Array 0
+      Tie::Hash 0
+      base 0
+      constant 0
+      overload 0
+      perl 5.008000
+      strict 0
+      warnings 0
   aliased-0.34
     pathname: E/ET/ETHER/aliased-0.34.tar.gz
     provides:
