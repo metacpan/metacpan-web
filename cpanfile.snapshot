@@ -1641,12 +1641,12 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Usage 1.14
-  Getopt-Long-Descriptive-0.115
-    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.115.tar.gz
+  Getopt-Long-Descriptive-0.116
+    pathname: R/RJ/RJBS/Getopt-Long-Descriptive-0.116.tar.gz
     provides:
-      Getopt::Long::Descriptive 0.115
-      Getopt::Long::Descriptive::Opts 0.115
-      Getopt::Long::Descriptive::Usage 0.115
+      Getopt::Long::Descriptive 0.116
+      Getopt::Long::Descriptive::Opts 0.116
+      Getopt::Long::Descriptive::Usage 0.116
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.78
@@ -3005,23 +3005,22 @@ DISTRIBUTIONS
       HTTP::Tiny 0
       Moose::Role 0
       Net::Fastly 1.08
-  MooseX-Getopt-0.76
-    pathname: E/ET/ETHER/MooseX-Getopt-0.76.tar.gz
+  MooseX-Getopt-0.78
+    pathname: E/ET/ETHER/MooseX-Getopt-0.78.tar.gz
     provides:
-      MooseX::Getopt 0.76
-      MooseX::Getopt::Basic 0.76
-      MooseX::Getopt::Dashes 0.76
-      MooseX::Getopt::GLD 0.76
-      MooseX::Getopt::Meta::Attribute 0.76
-      MooseX::Getopt::Meta::Attribute::NoGetopt 0.76
-      MooseX::Getopt::Meta::Attribute::Trait 0.76
-      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.76
-      MooseX::Getopt::OptionTypeMap 0.76
-      MooseX::Getopt::ProcessedArgv 0.76
-      MooseX::Getopt::Strict 0.76
+      MooseX::Getopt 0.78
+      MooseX::Getopt::Basic 0.78
+      MooseX::Getopt::Dashes 0.78
+      MooseX::Getopt::GLD 0.78
+      MooseX::Getopt::Meta::Attribute 0.78
+      MooseX::Getopt::Meta::Attribute::NoGetopt 0.78
+      MooseX::Getopt::Meta::Attribute::Trait 0.78
+      MooseX::Getopt::Meta::Attribute::Trait::NoGetopt 0.78
+      MooseX::Getopt::OptionTypeMap 0.78
+      MooseX::Getopt::ProcessedArgv 0.78
+      MooseX::Getopt::Strict 0.78
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 0
       Getopt::Long 2.37
       Getopt::Long::Descriptive 0.088
       Module::Build::Tiny 0.034
@@ -3908,23 +3907,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20240903
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20240903.tar.gz
+  Perl-Tidy-20250105
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20250105.tar.gz
     provides:
-      Perl::Tidy 20240903
-      Perl::Tidy::Debugger 20240903
-      Perl::Tidy::Diagnostics 20240903
-      Perl::Tidy::FileWriter 20240903
-      Perl::Tidy::Formatter 20240903
-      Perl::Tidy::HtmlWriter 20240903
-      Perl::Tidy::IOScalar 20240903
-      Perl::Tidy::IOScalarArray 20240903
-      Perl::Tidy::IndentationItem 20240903
-      Perl::Tidy::Logger 20240903
-      Perl::Tidy::Tokenizer 20240903
-      Perl::Tidy::VerticalAligner 20240903
-      Perl::Tidy::VerticalAligner::Alignment 20240903
-      Perl::Tidy::VerticalAligner::Line 20240903
+      Perl::Tidy 20250105
+      Perl::Tidy::Debugger 20250105
+      Perl::Tidy::Diagnostics 20250105
+      Perl::Tidy::FileWriter 20250105
+      Perl::Tidy::Formatter 20250105
+      Perl::Tidy::HtmlWriter 20250105
+      Perl::Tidy::IOScalar 20250105
+      Perl::Tidy::IOScalarArray 20250105
+      Perl::Tidy::IndentationItem 20250105
+      Perl::Tidy::Logger 20250105
+      Perl::Tidy::Tokenizer 20250105
+      Perl::Tidy::VerticalAligner 20250105
+      Perl::Tidy::VerticalAligner::Alignment 20250105
+      Perl::Tidy::VerticalAligner::Line 20250105
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
@@ -4689,15 +4688,17 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
-  Test-Warnings-0.033
-    pathname: E/ET/ETHER/Test-Warnings-0.033.tar.gz
+  Test-Warnings-0.036
+    pathname: E/ET/ETHER/Test-Warnings-0.036.tar.gz
     provides:
-      Test::Warnings 0.033
+      Test2::Warnings 0.036
+      Test::Warnings 0.036
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 0
       Test::Builder 0
+      base 0
       parent 0
       perl 5.006
       strict 0
