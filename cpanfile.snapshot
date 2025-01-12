@@ -679,10 +679,10 @@ DISTRIBUTIONS
       Config::Any::YAML undef
     requirements:
       Module::Pluggable::Object 3.6
-  Config-General-2.65
-    pathname: T/TL/TLINDEN/Config-General-2.65.tar.gz
+  Config-General-2.67
+    pathname: T/TL/TLINDEN/Config-General-2.67.tar.gz
     provides:
-      Config::General 2.65
+      Config::General 2.67
       Config::General::Extended 2.07
       Config::General::Interpolated 2.16
     requirements:
@@ -2440,11 +2440,11 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
-  Module-Pluggable-6.2
-    pathname: S/SI/SIMONW/Module-Pluggable-6.2.tar.gz
+  Module-Pluggable-6.3
+    pathname: S/SI/SIMONW/Module-Pluggable-6.3.tar.gz
     provides:
       Devel::InnerPackage 0.4
-      Module::Pluggable 6.2
+      Module::Pluggable 6.3
       Module::Pluggable::Object 5.2
     requirements:
       Exporter 5.57
@@ -4688,17 +4688,16 @@ DISTRIBUTIONS
       Test::Builder 0.13
       Test::Builder::Tester 1.02
       perl 5.006
-  Test-Warnings-0.036
-    pathname: E/ET/ETHER/Test-Warnings-0.036.tar.gz
+  Test-Warnings-0.037
+    pathname: E/ET/ETHER/Test-Warnings-0.037.tar.gz
     provides:
-      Test2::Warnings 0.036
-      Test::Warnings 0.036
+      Test2::Warnings 0.037
+      Test::Warnings 0.037
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 0
       Test::Builder 0
-      base 0
       parent 0
       perl 5.006
       strict 0
