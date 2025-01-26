@@ -5376,41 +5376,42 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  YAML-PP-v0.38.0
-    pathname: T/TI/TINITA/YAML-PP-v0.38.0.tar.gz
+  YAML-PP-v0.38.1
+    pathname: T/TI/TINITA/YAML-PP-v0.38.1.tar.gz
     provides:
-      YAML::PP v0.38.0
-      YAML::PP::Common v0.38.0
-      YAML::PP::Constructor v0.38.0
-      YAML::PP::Dumper v0.38.0
-      YAML::PP::Emitter v0.38.0
-      YAML::PP::Exception v0.38.0
-      YAML::PP::Grammar v0.38.0
-      YAML::PP::Highlight v0.38.0
-      YAML::PP::Lexer v0.38.0
-      YAML::PP::Loader v0.38.0
-      YAML::PP::Parser v0.38.0
-      YAML::PP::Perl v0.38.0
-      YAML::PP::Preserve::Array v0.38.0
-      YAML::PP::Preserve::Hash v0.38.0
-      YAML::PP::Preserve::Scalar v0.38.0
-      YAML::PP::Reader v0.38.0
-      YAML::PP::Reader::File v0.38.0
-      YAML::PP::Render v0.38.0
-      YAML::PP::Representer v0.38.0
-      YAML::PP::Schema v0.38.0
-      YAML::PP::Schema::Binary v0.38.0
-      YAML::PP::Schema::Core v0.38.0
-      YAML::PP::Schema::Failsafe v0.38.0
-      YAML::PP::Schema::Include v0.38.0
-      YAML::PP::Schema::JSON v0.38.0
-      YAML::PP::Schema::Merge v0.38.0
-      YAML::PP::Schema::Perl v0.38.0
-      YAML::PP::Schema::Tie::IxHash v0.38.0
-      YAML::PP::Schema::YAML1_1 v0.38.0
-      YAML::PP::Type::MergeKey v0.38.0
-      YAML::PP::Writer v0.38.0
-      YAML::PP::Writer::File v0.38.0
+      YAML::PP v0.38.1
+      YAML::PP::Common v0.38.1
+      YAML::PP::Constructor v0.38.1
+      YAML::PP::Dumper v0.38.1
+      YAML::PP::Emitter v0.38.1
+      YAML::PP::Exception v0.38.1
+      YAML::PP::Grammar v0.38.1
+      YAML::PP::Highlight v0.38.1
+      YAML::PP::Lexer v0.38.1
+      YAML::PP::Loader v0.38.1
+      YAML::PP::Parser v0.38.1
+      YAML::PP::Perl v0.38.1
+      YAML::PP::Preserve::Array v0.38.1
+      YAML::PP::Preserve::Hash v0.38.1
+      YAML::PP::Preserve::Scalar v0.38.1
+      YAML::PP::Reader v0.38.1
+      YAML::PP::Reader::File v0.38.1
+      YAML::PP::Render v0.38.1
+      YAML::PP::Representer v0.38.1
+      YAML::PP::Schema v0.38.1
+      YAML::PP::Schema::Binary v0.38.1
+      YAML::PP::Schema::Catchall v0.38.1
+      YAML::PP::Schema::Core v0.38.1
+      YAML::PP::Schema::Failsafe v0.38.1
+      YAML::PP::Schema::Include v0.38.1
+      YAML::PP::Schema::JSON v0.38.1
+      YAML::PP::Schema::Merge v0.38.1
+      YAML::PP::Schema::Perl v0.38.1
+      YAML::PP::Schema::Tie::IxHash v0.38.1
+      YAML::PP::Schema::YAML1_1 v0.38.1
+      YAML::PP::Type::MergeKey v0.38.1
+      YAML::PP::Writer v0.38.1
+      YAML::PP::Writer::File v0.38.1
     requirements:
       B 0
       B::Deparse 0
