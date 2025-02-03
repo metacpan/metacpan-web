@@ -379,12 +379,10 @@ if (source) {
             for (const toggle of document.querySelectorAll('.pod-toggle')) {
                 toggle.classList.remove('pod-hidden');
             }
-            window.scrollTo({
-                top: lines[0].getClientRects().top,
-                left: 0,
-                behavior: 'smooth'
-            });
         }
+        lines[0].scrollIntoView({
+            behavior: 'smooth',
+        });
     });
 }
 
@@ -395,10 +393,8 @@ const line_hash = document.location.hash.match(/^(#L\d+)(-|,|$)/);
 if (line_hash) {
     const el = document.querySelector(line_hash[1]);
     if (el) {
-        window.scrollTo({
-            top: el.getClientRects().top,
-            left: 0,
-            behavior: 'smooth'
+        el.scrollIntoView({
+            behavior: 'instant',
         });
     }
 }
