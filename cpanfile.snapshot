@@ -2260,12 +2260,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
-  MIME-Types-2.26
-    pathname: M/MA/MARKOV/MIME-Types-2.26.tar.gz
+  MIME-Types-2.27
+    pathname: M/MA/MARKOV/MIME-Types-2.27.tar.gz
     provides:
-      MIME::Type 2.26
-      MIME::Types 2.26
-      MojoX::MIME::Types 2.26
+      MIME::Type 2.27
+      MIME::Types 2.27
+      MojoX::MIME::Types 2.27
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
