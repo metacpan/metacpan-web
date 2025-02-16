@@ -3907,23 +3907,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20250105
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20250105.tar.gz
+  Perl-Tidy-20250214
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20250214.tar.gz
     provides:
-      Perl::Tidy 20250105
-      Perl::Tidy::Debugger 20250105
-      Perl::Tidy::Diagnostics 20250105
-      Perl::Tidy::FileWriter 20250105
-      Perl::Tidy::Formatter 20250105
-      Perl::Tidy::HtmlWriter 20250105
-      Perl::Tidy::IOScalar 20250105
-      Perl::Tidy::IOScalarArray 20250105
-      Perl::Tidy::IndentationItem 20250105
-      Perl::Tidy::Logger 20250105
-      Perl::Tidy::Tokenizer 20250105
-      Perl::Tidy::VerticalAligner 20250105
-      Perl::Tidy::VerticalAligner::Alignment 20250105
-      Perl::Tidy::VerticalAligner::Line 20250105
+      Perl::Tidy 20250214
+      Perl::Tidy::Debugger 20250214
+      Perl::Tidy::Diagnostics 20250214
+      Perl::Tidy::FileWriter 20250214
+      Perl::Tidy::Formatter 20250214
+      Perl::Tidy::HtmlWriter 20250214
+      Perl::Tidy::IOScalar 20250214
+      Perl::Tidy::IOScalarArray 20250214
+      Perl::Tidy::IndentationItem 20250214
+      Perl::Tidy::Logger 20250214
+      Perl::Tidy::Tokenizer 20250214
+      Perl::Tidy::VerticalAligner 20250214
+      Perl::Tidy::VerticalAligner::Alignment 20250214
+      Perl::Tidy::VerticalAligner::Line 20250214
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
@@ -4489,15 +4489,15 @@ DISTRIBUTIONS
     requirements:
       Call::Context 0
       ExtUtils::MakeMaker 0
-  TOML-Tiny-0.18
-    pathname: O/OA/OALDERS/TOML-Tiny-0.18.tar.gz
+  TOML-Tiny-0.19
+    pathname: O/OA/OALDERS/TOML-Tiny-0.19.tar.gz
     provides:
-      TOML::Tiny 0.18
-      TOML::Tiny::Grammar 0.18
-      TOML::Tiny::Parser 0.18
-      TOML::Tiny::Tokenizer 0.18
-      TOML::Tiny::Util 0.18
-      TOML::Tiny::Writer 0.18
+      TOML::Tiny 0.19
+      TOML::Tiny::Grammar 0.19
+      TOML::Tiny::Parser 0.19
+      TOML::Tiny::Tokenizer 0.19
+      TOML::Tiny::Util 0.19
+      TOML::Tiny::Writer 0.19
     requirements:
       Carp 0
       Data::Dumper 0
@@ -5376,42 +5376,42 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  YAML-PP-v0.38.1
-    pathname: T/TI/TINITA/YAML-PP-v0.38.1.tar.gz
+  YAML-PP-v0.39.0
+    pathname: T/TI/TINITA/YAML-PP-v0.39.0.tar.gz
     provides:
-      YAML::PP v0.38.1
-      YAML::PP::Common v0.38.1
-      YAML::PP::Constructor v0.38.1
-      YAML::PP::Dumper v0.38.1
-      YAML::PP::Emitter v0.38.1
-      YAML::PP::Exception v0.38.1
-      YAML::PP::Grammar v0.38.1
-      YAML::PP::Highlight v0.38.1
-      YAML::PP::Lexer v0.38.1
-      YAML::PP::Loader v0.38.1
-      YAML::PP::Parser v0.38.1
-      YAML::PP::Perl v0.38.1
-      YAML::PP::Preserve::Array v0.38.1
-      YAML::PP::Preserve::Hash v0.38.1
-      YAML::PP::Preserve::Scalar v0.38.1
-      YAML::PP::Reader v0.38.1
-      YAML::PP::Reader::File v0.38.1
-      YAML::PP::Render v0.38.1
-      YAML::PP::Representer v0.38.1
-      YAML::PP::Schema v0.38.1
-      YAML::PP::Schema::Binary v0.38.1
-      YAML::PP::Schema::Catchall v0.38.1
-      YAML::PP::Schema::Core v0.38.1
-      YAML::PP::Schema::Failsafe v0.38.1
-      YAML::PP::Schema::Include v0.38.1
-      YAML::PP::Schema::JSON v0.38.1
-      YAML::PP::Schema::Merge v0.38.1
-      YAML::PP::Schema::Perl v0.38.1
-      YAML::PP::Schema::Tie::IxHash v0.38.1
-      YAML::PP::Schema::YAML1_1 v0.38.1
-      YAML::PP::Type::MergeKey v0.38.1
-      YAML::PP::Writer v0.38.1
-      YAML::PP::Writer::File v0.38.1
+      YAML::PP v0.39.0
+      YAML::PP::Common v0.39.0
+      YAML::PP::Constructor v0.39.0
+      YAML::PP::Dumper v0.39.0
+      YAML::PP::Emitter v0.39.0
+      YAML::PP::Exception v0.39.0
+      YAML::PP::Grammar v0.39.0
+      YAML::PP::Highlight v0.39.0
+      YAML::PP::Lexer v0.39.0
+      YAML::PP::Loader v0.39.0
+      YAML::PP::Parser v0.39.0
+      YAML::PP::Perl v0.39.0
+      YAML::PP::Preserve::Array v0.39.0
+      YAML::PP::Preserve::Hash v0.39.0
+      YAML::PP::Preserve::Scalar v0.39.0
+      YAML::PP::Reader v0.39.0
+      YAML::PP::Reader::File v0.39.0
+      YAML::PP::Render v0.39.0
+      YAML::PP::Representer v0.39.0
+      YAML::PP::Schema v0.39.0
+      YAML::PP::Schema::Binary v0.39.0
+      YAML::PP::Schema::Catchall v0.39.0
+      YAML::PP::Schema::Core v0.39.0
+      YAML::PP::Schema::Failsafe v0.39.0
+      YAML::PP::Schema::Include v0.39.0
+      YAML::PP::Schema::JSON v0.39.0
+      YAML::PP::Schema::Merge v0.39.0
+      YAML::PP::Schema::Perl v0.39.0
+      YAML::PP::Schema::Tie::IxHash v0.39.0
+      YAML::PP::Schema::YAML1_1 v0.39.0
+      YAML::PP::Type::MergeKey v0.39.0
+      YAML::PP::Writer v0.39.0
+      YAML::PP::Writer::File v0.39.0
     requirements:
       B 0
       B::Deparse 0
