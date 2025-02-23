@@ -850,19 +850,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.65
-    pathname: D/DR/DROLSKY/DateTime-1.65.tar.gz
+  DateTime-1.66
+    pathname: D/DR/DROLSKY/DateTime-1.66.tar.gz
     provides:
-      DateTime 1.65
-      DateTime::Duration 1.65
-      DateTime::Helpers 1.65
-      DateTime::Infinite 1.65
-      DateTime::Infinite::Future 1.65
-      DateTime::Infinite::Past 1.65
-      DateTime::LeapSecond 1.65
-      DateTime::PP 1.65
-      DateTime::PPExtra 1.65
-      DateTime::Types 1.65
+      DateTime 1.66
+      DateTime::Duration 1.66
+      DateTime::Helpers 1.66
+      DateTime::Infinite 1.66
+      DateTime::Infinite::Future 1.66
+      DateTime::Infinite::Past 1.66
+      DateTime::LeapSecond 1.66
+      DateTime::PP 1.66
+      DateTime::PPExtra 1.66
+      DateTime::Types 1.66
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -872,7 +872,7 @@ DISTRIBUTIONS
       POSIX 0
       Params::ValidationCompiler 0.26
       Scalar::Util 0
-      Specio 0.18
+      Specio 0.50
       Specio::Declare 0
       Specio::Exporter 0
       Specio::Library::Builtins 0
@@ -917,11 +917,11 @@ DISTRIBUTIONS
       DateTime 0.17
       HTTP::Date 1.44
       Test::More 0.47
-  DateTime-Format-ISO8601-0.16
-    pathname: D/DR/DROLSKY/DateTime-Format-ISO8601-0.16.tar.gz
+  DateTime-Format-ISO8601-0.17
+    pathname: D/DR/DROLSKY/DateTime-Format-ISO8601-0.17.tar.gz
     provides:
-      DateTime::Format::ISO8601 0.16
-      DateTime::Format::ISO8601::Types 0.16
+      DateTime::Format::ISO8601 0.17
+      DateTime::Format::ISO8601::Types 0.17
     requirements:
       Carp 0
       DateTime 1.45
@@ -4285,49 +4285,49 @@ DISTRIBUTIONS
       Test::Warn 0
       XSLoader 0
       perl 5.008
-  Specio-0.49
-    pathname: D/DR/DROLSKY/Specio-0.49.tar.gz
+  Specio-0.50
+    pathname: D/DR/DROLSKY/Specio-0.50.tar.gz
     provides:
-      Specio 0.49
-      Specio::Coercion 0.49
-      Specio::Constraint::AnyCan 0.49
-      Specio::Constraint::AnyDoes 0.49
-      Specio::Constraint::AnyIsa 0.49
-      Specio::Constraint::Enum 0.49
-      Specio::Constraint::Intersection 0.49
-      Specio::Constraint::ObjectCan 0.49
-      Specio::Constraint::ObjectDoes 0.49
-      Specio::Constraint::ObjectIsa 0.49
-      Specio::Constraint::Parameterizable 0.49
-      Specio::Constraint::Parameterized 0.49
-      Specio::Constraint::Role::CanType 0.49
-      Specio::Constraint::Role::DoesType 0.49
-      Specio::Constraint::Role::Interface 0.49
-      Specio::Constraint::Role::IsaType 0.49
-      Specio::Constraint::Simple 0.49
-      Specio::Constraint::Structurable 0.49
-      Specio::Constraint::Structured 0.49
-      Specio::Constraint::Union 0.49
-      Specio::Declare 0.49
-      Specio::DeclaredAt 0.49
-      Specio::Exception 0.49
-      Specio::Exporter 0.49
-      Specio::Helpers 0.49
-      Specio::Library::Builtins 0.49
-      Specio::Library::Numeric 0.49
-      Specio::Library::Perl 0.49
-      Specio::Library::String 0.49
-      Specio::Library::Structured 0.49
-      Specio::Library::Structured::Dict 0.49
-      Specio::Library::Structured::Map 0.49
-      Specio::Library::Structured::Tuple 0.49
-      Specio::OO 0.49
-      Specio::PartialDump 0.49
-      Specio::Registry 0.49
-      Specio::Role::Inlinable 0.49
-      Specio::Subs 0.49
-      Specio::TypeChecks 0.49
-      Test::Specio 0.49
+      Specio 0.50
+      Specio::Coercion 0.50
+      Specio::Constraint::AnyCan 0.50
+      Specio::Constraint::AnyDoes 0.50
+      Specio::Constraint::AnyIsa 0.50
+      Specio::Constraint::Enum 0.50
+      Specio::Constraint::Intersection 0.50
+      Specio::Constraint::ObjectCan 0.50
+      Specio::Constraint::ObjectDoes 0.50
+      Specio::Constraint::ObjectIsa 0.50
+      Specio::Constraint::Parameterizable 0.50
+      Specio::Constraint::Parameterized 0.50
+      Specio::Constraint::Role::CanType 0.50
+      Specio::Constraint::Role::DoesType 0.50
+      Specio::Constraint::Role::Interface 0.50
+      Specio::Constraint::Role::IsaType 0.50
+      Specio::Constraint::Simple 0.50
+      Specio::Constraint::Structurable 0.50
+      Specio::Constraint::Structured 0.50
+      Specio::Constraint::Union 0.50
+      Specio::Declare 0.50
+      Specio::DeclaredAt 0.50
+      Specio::Exception 0.50
+      Specio::Exporter 0.50
+      Specio::Helpers 0.50
+      Specio::Library::Builtins 0.50
+      Specio::Library::Numeric 0.50
+      Specio::Library::Perl 0.50
+      Specio::Library::String 0.50
+      Specio::Library::Structured 0.50
+      Specio::Library::Structured::Dict 0.50
+      Specio::Library::Structured::Map 0.50
+      Specio::Library::Structured::Tuple 0.50
+      Specio::OO 0.50
+      Specio::PartialDump 0.50
+      Specio::Registry 0.50
+      Specio::Role::Inlinable 0.50
+      Specio::Subs 0.50
+      Specio::TypeChecks 0.50
+      Test::Specio 0.50
     requirements:
       B 0
       Carp 0
@@ -5450,32 +5450,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.77
-    pathname: O/OA/OALDERS/libwww-perl-6.77.tar.gz
+  libwww-perl-6.78
+    pathname: O/OA/OALDERS/libwww-perl-6.78.tar.gz
     provides:
-      LWP 6.77
-      LWP::Authen::Basic 6.77
-      LWP::Authen::Digest 6.77
-      LWP::Authen::Ntlm 6.77
-      LWP::ConnCache 6.77
-      LWP::Debug 6.77
-      LWP::Debug::TraceHTTP 6.77
-      LWP::DebugFile 6.77
-      LWP::MemberMixin 6.77
-      LWP::Protocol 6.77
-      LWP::Protocol::cpan 6.77
-      LWP::Protocol::data 6.77
-      LWP::Protocol::file 6.77
-      LWP::Protocol::ftp 6.77
-      LWP::Protocol::gopher 6.77
-      LWP::Protocol::http 6.77
-      LWP::Protocol::loopback 6.77
-      LWP::Protocol::mailto 6.77
-      LWP::Protocol::nntp 6.77
-      LWP::Protocol::nogo 6.77
-      LWP::RobotUA 6.77
-      LWP::Simple 6.77
-      LWP::UserAgent 6.77
+      LWP 6.78
+      LWP::Authen::Basic 6.78
+      LWP::Authen::Digest 6.78
+      LWP::Authen::Ntlm 6.78
+      LWP::ConnCache 6.78
+      LWP::Debug 6.78
+      LWP::Debug::TraceHTTP 6.78
+      LWP::DebugFile 6.78
+      LWP::MemberMixin 6.78
+      LWP::Protocol 6.78
+      LWP::Protocol::cpan 6.78
+      LWP::Protocol::data 6.78
+      LWP::Protocol::file 6.78
+      LWP::Protocol::ftp 6.78
+      LWP::Protocol::gopher 6.78
+      LWP::Protocol::http 6.78
+      LWP::Protocol::loopback 6.78
+      LWP::Protocol::mailto 6.78
+      LWP::Protocol::nntp 6.78
+      LWP::Protocol::nogo 6.78
+      LWP::RobotUA 6.78
+      LWP::Simple 6.78
+      LWP::UserAgent 6.78
     requirements:
       Digest::MD5 0
       Encode 2.12
