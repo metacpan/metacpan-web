@@ -1,7 +1,6 @@
 package MetaCPAN::Web::View::Xslate;
 use Moose;
 extends qw(Catalyst::View::Xslate);
-use File::Path           ();
 use File::Temp           ();
 use MetaCPAN::Web::Types qw( AbsPath );
 
@@ -47,16 +46,6 @@ sub COMPONENT {
     );
     return $class->SUPER::COMPONENT( $app, $args );
 }
-
-around preload_templates => sub {
-    my ( $orig, $self ) = ( shift, shift );
-
-    if ( my $cache_dir = $self->xslate->{cache_dir} ) {
-        File::Path::rmtree($cache_dir);
-    }
-
-    $self->$orig(@_);
-};
 
 has '+expose_methods' => (
     default =>
