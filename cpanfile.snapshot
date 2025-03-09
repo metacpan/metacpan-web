@@ -142,18 +142,18 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000055
-    pathname: O/OA/OALDERS/App-perlimports-0.000055.tar.gz
+  App-perlimports-0.000056
+    pathname: O/OA/OALDERS/App-perlimports-0.000056.tar.gz
     provides:
-      App::perlimports 0.000055
-      App::perlimports::Annotations 0.000055
-      App::perlimports::CLI 0.000055
-      App::perlimports::Config 0.000055
-      App::perlimports::Document 0.000055
-      App::perlimports::ExportInspector 0.000055
-      App::perlimports::Include 0.000055
-      App::perlimports::Role::Logger 0.000055
-      App::perlimports::Sandbox 0.000055
+      App::perlimports 0.000056
+      App::perlimports::Annotations 0.000056
+      App::perlimports::CLI 0.000056
+      App::perlimports::Config 0.000056
+      App::perlimports::Document 0.000056
+      App::perlimports::ExportInspector 0.000056
+      App::perlimports::Include 0.000056
+      App::perlimports::Role::Logger 0.000056
+      App::perlimports::Sandbox 0.000056
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
@@ -2091,36 +2091,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.81
-    pathname: S/SB/SBECK/Locale-Codes-3.81.tar.gz
+  Locale-Codes-3.82
+    pathname: S/SB/SBECK/Locale-Codes-3.82.tar.gz
     provides:
-      Locale::Codes 3.81
-      Locale::Codes::Constants 3.81
-      Locale::Codes::Country 3.81
-      Locale::Codes::Country_Codes 3.81
-      Locale::Codes::Country_Retired 3.81
-      Locale::Codes::Currency 3.81
-      Locale::Codes::Currency_Codes 3.81
-      Locale::Codes::Currency_Retired 3.81
-      Locale::Codes::LangExt 3.81
-      Locale::Codes::LangExt_Codes 3.81
-      Locale::Codes::LangExt_Retired 3.81
-      Locale::Codes::LangFam 3.81
-      Locale::Codes::LangFam_Codes 3.81
-      Locale::Codes::LangFam_Retired 3.81
-      Locale::Codes::LangVar 3.81
-      Locale::Codes::LangVar_Codes 3.81
-      Locale::Codes::LangVar_Retired 3.81
-      Locale::Codes::Language 3.81
-      Locale::Codes::Language_Codes 3.81
-      Locale::Codes::Language_Retired 3.81
-      Locale::Codes::Script 3.81
-      Locale::Codes::Script_Codes 3.81
-      Locale::Codes::Script_Retired 3.81
-      Locale::Country 3.81
-      Locale::Currency 3.81
-      Locale::Language 3.81
-      Locale::Script 3.81
+      Locale::Codes 3.82
+      Locale::Codes::Constants 3.82
+      Locale::Codes::Country 3.82
+      Locale::Codes::Country_Codes 3.82
+      Locale::Codes::Country_Retired 3.82
+      Locale::Codes::Currency 3.82
+      Locale::Codes::Currency_Codes 3.82
+      Locale::Codes::Currency_Retired 3.82
+      Locale::Codes::LangExt 3.82
+      Locale::Codes::LangExt_Codes 3.82
+      Locale::Codes::LangExt_Retired 3.82
+      Locale::Codes::LangFam 3.82
+      Locale::Codes::LangFam_Codes 3.82
+      Locale::Codes::LangFam_Retired 3.82
+      Locale::Codes::LangVar 3.82
+      Locale::Codes::LangVar_Codes 3.82
+      Locale::Codes::LangVar_Retired 3.82
+      Locale::Codes::Language 3.82
+      Locale::Codes::Language_Codes 3.82
+      Locale::Codes::Language_Retired 3.82
+      Locale::Codes::Script 3.82
+      Locale::Codes::Script_Codes 3.82
+      Locale::Codes::Script_Retired 3.82
+      Locale::Country 3.82
+      Locale::Currency 3.82
+      Locale::Language 3.82
+      Locale::Script 3.82
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
