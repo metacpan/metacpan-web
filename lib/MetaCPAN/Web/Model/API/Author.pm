@@ -77,7 +77,7 @@ sub get_multiple {
             $data->{authors} = [ @authors{@authors} ];
             $data;
         }
-    )->then( \&_filter_authors );
+        )->then( \&_filter_authors );
 }
 
 sub search {

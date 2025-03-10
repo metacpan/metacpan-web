@@ -39,7 +39,8 @@ sub recent : Private {
     my $changes
         = $c->model('API::Changes')
         ->by_releases(
-        [ map "$_->{author}/$_->{name}", @{ $c->stash->{recent} } ] )->get;
+        [ map "$_->{author}/$_->{name}", @{ $c->stash->{recent} } ] )
+        ->get;
 
     for ( @{ $c->stash->{recent} } ) {
 

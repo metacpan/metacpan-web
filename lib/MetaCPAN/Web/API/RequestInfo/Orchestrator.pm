@@ -113,7 +113,8 @@ sub _via_release {
     my $model = $self->model;
 
     Future->wait_all(
-        $model->get( $author, $release )->then( \&_fail_without_release )
+        $model->get( $author, $release )
+            ->then( \&_fail_without_release )
             ->then( sub {
             my $data         = shift;
             my $release_data = $data->{release};

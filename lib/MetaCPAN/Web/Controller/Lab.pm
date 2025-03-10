@@ -61,7 +61,9 @@ sub dashboard : Local : Args(1) {
 
     my $report;
     if ($pauseid) {
-        $report = $c->model('API::Lab')->fetch_latest_distros( 300, $pauseid )
+        $report
+            = $c->model('API::Lab')
+            ->fetch_latest_distros( 300, $pauseid )
             ->get;
     }
 

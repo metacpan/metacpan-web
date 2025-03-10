@@ -21,8 +21,8 @@ sub is_bool {
 subtest modules => sub {
     my @files
         = @{ MetaCPAN::Web->model('API::Release')
-            ->modules( 'OALDERS', 'HTTP-CookieMonster-0.09' )->get->{modules}
-        };
+            ->modules( 'OALDERS', 'HTTP-CookieMonster-0.09' )
+            ->get->{modules} };
 
     ok( scalar @files, 'found files with modules' );
 
@@ -52,7 +52,8 @@ subtest versions => sub {
     # Something with not too many versions.
     my @versions
         = @{ MetaCPAN::Web->model('API::Release')
-            ->versions('Mojolicious-Plugin-HamlRenderer')->get->{versions} };
+            ->versions('Mojolicious-Plugin-HamlRenderer')
+            ->get->{versions} };
 
     ok( scalar @versions, 'found release versions' );
 

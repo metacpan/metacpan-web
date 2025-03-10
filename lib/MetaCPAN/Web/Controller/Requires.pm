@@ -30,7 +30,8 @@ sub distribution : Chained('/dist/root') PathPart('requires') Args(0)
 
     my $data
         = $c->model('API::Release')
-        ->reverse_dependencies( $dist, $page, $page_size, $sort )->get;
+        ->reverse_dependencies( $dist, $page, $page_size, $sort )
+        ->get;
 
     my $pageset = Data::Pageset->new( {
         current_page     => $page,
@@ -59,7 +60,8 @@ sub module : Chained('/module/root') PathPart('requires') Args(0)
 
     my $data
         = $c->model('API::Module')
-        ->requires( $module, $page, $page_size, $sort )->get;
+        ->requires( $module, $page, $page_size, $sort )
+        ->get;
 
     my $pageset = Data::Pageset->new( {
         current_page     => $page,

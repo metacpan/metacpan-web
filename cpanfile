@@ -91,6 +91,6 @@ on test => sub {
 on develop => sub {
     requires 'App::perlimports';
     requires 'Perl::Critic', '1.136';
-    requires 'Perl::Tidy' => '20240511';
+    requires 'Perl::Tidy' => '== 20250214';
     requires 'Test::Vars';
 };
