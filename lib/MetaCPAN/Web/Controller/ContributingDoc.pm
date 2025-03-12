@@ -32,7 +32,8 @@ sub get : Private {
 
     my $contributing_re = qr/CONTRIBUTING|HACKING/i;
     my $files
-        = $c->model('API::Release')->interesting_files( $author, $release )
+        = $c->model('API::Release')
+        ->interesting_files( $author, $release )
         ->get->{files};
 
     my $file = List::Util::first { $_->{name} =~ /$contributing_re/ } @$files;

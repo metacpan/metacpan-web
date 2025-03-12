@@ -42,21 +42,24 @@ sub coverage {
 
 sub get {
     my ( $self, $author, $release ) = @_;
-    $self->request("/release/$author/$release")->then( \&_with_distnameinfo )
+    $self->request("/release/$author/$release")
+        ->then( \&_with_distnameinfo )
         ->then( \&_fix_dependency );
 }
 
 sub latest_by_author {
     my ( $self, $pauseid ) = @_;
     $self->request("/release/latest_by_author/$pauseid")
-        ->then( \&_with_distnameinfo )->then( $self->add_river );
+        ->then( \&_with_distnameinfo )
+        ->then( $self->add_river );
 }
 
 sub all_by_author {
     my ( $self, $pauseid, $page, $page_size ) = @_;
     $self->request( "/release/all_by_author/$pauseid",
         undef, { page => $page, page_size => $page_size } )
-        ->then( \&_with_distnameinfo )->then( $self->add_river );
+        ->then( \&_with_distnameinfo )
+        ->then( $self->add_river );
 }
 
 sub recent {
@@ -86,7 +89,8 @@ sub modules {
 sub find {
     my ( $self, $distribution ) = @_;
     $self->request("/release/latest_by_distribution/$distribution")
-        ->then( \&_with_distnameinfo )->then( \&_fix_dependency );
+        ->then( \&_with_distnameinfo )
+        ->then( \&_fix_dependency );
 }
 
 # stolen from Module/requires
@@ -123,7 +127,8 @@ sub interesting_files {
 
 sub versions {
     my ( $self, $dist ) = @_;
-    $self->request("/release/versions/$dist")->then( \&_with_distnameinfo )
+    $self->request("/release/versions/$dist")
+        ->then( \&_with_distnameinfo )
         ->then( sub {
         my ($data) = @_;
         $data->{versions} = delete $data->{releases};
