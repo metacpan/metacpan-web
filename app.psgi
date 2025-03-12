@@ -88,7 +88,7 @@ builder {
                         "frame-ancestors 'self' *.metacpan.org",
 
         # temporary 'unsafe-eval' because root/static/js/jquery.tablesorter.js
-                        "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.metacpan.org https://*.googletagmanager.com",
+                        "script-src 'self' 'unsafe-eval' 'unsafe-inline' *.metacpan.org https://*.googletagmanager.com https://perl-ads.perlhacks.com",
                         ),
                         'X-Frame-Options'        => 'SAMEORIGIN',
                         'X-XSS-Protection'       => '1; mode=block',

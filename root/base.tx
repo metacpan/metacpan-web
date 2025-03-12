@@ -22,6 +22,7 @@
         <link rel="shortcut icon" href="/static/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
+        <script async src="https://perl-ads.perlhacks.com/perl-ads.js"></script>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E82Q2V8LVD"></script>
         %%  block opengraph -> { }
     </head>
@@ -117,7 +118,7 @@
             </ul>
         </nav>
         <div class="page-content [% block page_content_class -> { } %]">
-          <div class="top-notify-banner">
+          <div id="perl-ad-target" class="top-notify-banner perl-ad-target">
           </div>
           <nav class="sidebar">
             %%  block left_nav -> {
