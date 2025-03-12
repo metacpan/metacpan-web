@@ -12,7 +12,8 @@ sub index : Path : Args(0) {
 
     my $filter = $req->params->{f} || 'l';
     my ($data)
-        = $c->model('API::Release')->recent( $page, $page_size, $filter )
+        = $c->model('API::Release')
+        ->recent( $page, $page_size, $filter )
         ->get;
 
     $c->add_surrogate_key( 'RECENT', 'DIST_UPDATES' );

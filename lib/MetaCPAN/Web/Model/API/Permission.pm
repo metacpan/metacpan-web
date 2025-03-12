@@ -120,8 +120,10 @@ sub _add_email_to_notification {
 
 sub get_notification_info {
     my ( $self, $module ) = @_;
-    $self->by_module($module)->then( $self->_permissions_to_notification )
-        ->then( $self->_add_email_to_notification )->then( sub {
+    $self->by_module($module)
+        ->then( $self->_permissions_to_notification )
+        ->then( $self->_add_email_to_notification )
+        ->then( sub {
         my $data = shift;
         Future->done( {
             took         => $data->{took},
