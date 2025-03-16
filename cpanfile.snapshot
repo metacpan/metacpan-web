@@ -3907,23 +3907,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20250214
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20250214.tar.gz
+  Perl-Tidy-20250311
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20250311.tar.gz
     provides:
-      Perl::Tidy 20250214
-      Perl::Tidy::Debugger 20250214
-      Perl::Tidy::Diagnostics 20250214
-      Perl::Tidy::FileWriter 20250214
-      Perl::Tidy::Formatter 20250214
-      Perl::Tidy::HtmlWriter 20250214
-      Perl::Tidy::IOScalar 20250214
-      Perl::Tidy::IOScalarArray 20250214
-      Perl::Tidy::IndentationItem 20250214
-      Perl::Tidy::Logger 20250214
-      Perl::Tidy::Tokenizer 20250214
-      Perl::Tidy::VerticalAligner 20250214
-      Perl::Tidy::VerticalAligner::Alignment 20250214
-      Perl::Tidy::VerticalAligner::Line 20250214
+      Perl::Tidy 20250311
+      Perl::Tidy::Debugger 20250311
+      Perl::Tidy::Diagnostics 20250311
+      Perl::Tidy::FileWriter 20250311
+      Perl::Tidy::Formatter 20250311
+      Perl::Tidy::HtmlWriter 20250311
+      Perl::Tidy::IOScalar 20250311
+      Perl::Tidy::IOScalarArray 20250311
+      Perl::Tidy::IndentationItem 20250311
+      Perl::Tidy::Logger 20250311
+      Perl::Tidy::Tokenizer 20250311
+      Perl::Tidy::VerticalAligner 20250311
+      Perl::Tidy::VerticalAligner::Alignment 20250311
+      Perl::Tidy::VerticalAligner::Line 20250311
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
