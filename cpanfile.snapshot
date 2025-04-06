@@ -961,15 +961,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.44
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.44.tar.gz
+  DateTime-Locale-1.45
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.45.tar.gz
     provides:
-      DateTime::Locale 1.44
-      DateTime::Locale::Base 1.44
-      DateTime::Locale::Catalog 1.44
-      DateTime::Locale::Data 1.44
-      DateTime::Locale::FromData 1.44
-      DateTime::Locale::Util 1.44
+      DateTime::Locale 1.45
+      DateTime::Locale::Base 1.45
+      DateTime::Locale::Catalog 1.45
+      DateTime::Locale::Data 1.45
+      DateTime::Locale::FromData 1.45
+      DateTime::Locale::Util 1.45
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -2458,16 +2458,13 @@ DISTRIBUTIONS
       if 0
       perl 5.006
       strict 0
-  Module-Runtime-0.016
-    pathname: Z/ZE/ZEFRAM/Module-Runtime-0.016.tar.gz
+  Module-Runtime-0.017
+    pathname: H/HA/HAARG/Module-Runtime-0.017.tar.gz
     provides:
-      Module::Runtime 0.016
+      Module::Runtime 0.017
     requirements:
-      Module::Build 0
-      Test::More 0.41
-      perl 5.006
-      strict 0
-      warnings 0
+      ExtUtils::MakeMaker 0
+      perl 5.006000
   Module-Runtime-Conflicts-0.003
     pathname: E/ET/ETHER/Module-Runtime-Conflicts-0.003.tar.gz
     provides:
@@ -4230,14 +4227,14 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Scalar-List-Utils-1.68
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.68.tar.gz
+  Scalar-List-Utils-1.69
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.69.tar.gz
     provides:
-      List::Util 1.68
-      List::Util::XS 1.68
-      Scalar::List::Utils 1.68
-      Scalar::Util 1.68
-      Sub::Util 1.68
+      List::Util 1.69
+      List::Util::XS 1.69
+      Scalar::List::Utils 1.69
+      Scalar::Util 1.69
+      Sub::Util 1.69
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
@@ -4410,38 +4407,38 @@ DISTRIBUTIONS
       Sub::Exporter::Progressive 0.001013
     requirements:
       ExtUtils::MakeMaker 0
-  Sub-HandlesVia-0.050001
-    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.050001.tar.gz
+  Sub-HandlesVia-0.050002
+    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.050002.tar.gz
     provides:
-      Sub::HandlesVia 0.050001
-      Sub::HandlesVia::CodeGenerator 0.050001
-      Sub::HandlesVia::Declare 0.050001
-      Sub::HandlesVia::Handler 0.050001
-      Sub::HandlesVia::Handler::CodeRef 0.050001
-      Sub::HandlesVia::Handler::Traditional 0.050001
-      Sub::HandlesVia::HandlerLibrary 0.050001
-      Sub::HandlesVia::HandlerLibrary::Array 0.050001
-      Sub::HandlesVia::HandlerLibrary::Blessed 0.050001
-      Sub::HandlesVia::HandlerLibrary::Bool 0.050001
-      Sub::HandlesVia::HandlerLibrary::Code 0.050001
-      Sub::HandlesVia::HandlerLibrary::Counter 0.050001
-      Sub::HandlesVia::HandlerLibrary::Enum 0.050001
-      Sub::HandlesVia::HandlerLibrary::Hash 0.050001
-      Sub::HandlesVia::HandlerLibrary::Number 0.050001
-      Sub::HandlesVia::HandlerLibrary::Scalar 0.050001
-      Sub::HandlesVia::HandlerLibrary::String 0.050001
+      Sub::HandlesVia 0.050002
+      Sub::HandlesVia::CodeGenerator 0.050002
+      Sub::HandlesVia::Declare 0.050002
+      Sub::HandlesVia::Handler 0.050002
+      Sub::HandlesVia::Handler::CodeRef 0.050002
+      Sub::HandlesVia::Handler::Traditional 0.050002
+      Sub::HandlesVia::HandlerLibrary 0.050002
+      Sub::HandlesVia::HandlerLibrary::Array 0.050002
+      Sub::HandlesVia::HandlerLibrary::Blessed 0.050002
+      Sub::HandlesVia::HandlerLibrary::Bool 0.050002
+      Sub::HandlesVia::HandlerLibrary::Code 0.050002
+      Sub::HandlesVia::HandlerLibrary::Counter 0.050002
+      Sub::HandlesVia::HandlerLibrary::Enum 0.050002
+      Sub::HandlesVia::HandlerLibrary::Hash 0.050002
+      Sub::HandlesVia::HandlerLibrary::Number 0.050002
+      Sub::HandlesVia::HandlerLibrary::Scalar 0.050002
+      Sub::HandlesVia::HandlerLibrary::String 0.050002
       Sub::HandlesVia::Mite undef
-      Sub::HandlesVia::Toolkit 0.050001
-      Sub::HandlesVia::Toolkit::Mite 0.050001
-      Sub::HandlesVia::Toolkit::Moo 0.050001
-      Sub::HandlesVia::Toolkit::Moose 0.050001
-      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.050001
-      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.050001
-      Sub::HandlesVia::Toolkit::Mouse 0.050001
-      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.050001
-      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.050001
-      Sub::HandlesVia::Toolkit::ObjectPad 0.050001
-      Sub::HandlesVia::Toolkit::Plain 0.050001
+      Sub::HandlesVia::Toolkit 0.050002
+      Sub::HandlesVia::Toolkit::Mite 0.050002
+      Sub::HandlesVia::Toolkit::Moo 0.050002
+      Sub::HandlesVia::Toolkit::Moose 0.050002
+      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.050002
+      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.050002
+      Sub::HandlesVia::Toolkit::Mouse 0.050002
+      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.050002
+      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.050002
+      Sub::HandlesVia::Toolkit::ObjectPad 0.050002
+      Sub::HandlesVia::Toolkit::Plain 0.050002
     requirements:
       Class::Method::Modifiers 0
       Exporter::Shiny 0
@@ -4536,60 +4533,60 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::CBuilder 0
       ExtUtils::MakeMaker 0
-  Test-Deep-1.204
-    pathname: R/RJ/RJBS/Test-Deep-1.204.tar.gz
+  Test-Deep-1.205
+    pathname: R/RJ/RJBS/Test-Deep-1.205.tar.gz
     provides:
-      Test::Deep 1.204
-      Test::Deep::All 1.204
-      Test::Deep::Any 1.204
-      Test::Deep::Array 1.204
-      Test::Deep::ArrayEach 1.204
-      Test::Deep::ArrayElementsOnly 1.204
-      Test::Deep::ArrayLength 1.204
-      Test::Deep::ArrayLengthOnly 1.204
-      Test::Deep::Blessed 1.204
-      Test::Deep::Boolean 1.204
-      Test::Deep::Cache 1.204
-      Test::Deep::Cache::Simple 1.204
-      Test::Deep::Class 1.204
-      Test::Deep::Cmp 1.204
-      Test::Deep::Code 1.204
-      Test::Deep::Hash 1.204
-      Test::Deep::HashEach 1.204
-      Test::Deep::HashElements 1.204
-      Test::Deep::HashKeys 1.204
-      Test::Deep::HashKeysOnly 1.204
-      Test::Deep::Ignore 1.204
-      Test::Deep::Isa 1.204
-      Test::Deep::ListMethods 1.204
-      Test::Deep::MM 1.204
-      Test::Deep::Methods 1.204
-      Test::Deep::NoTest 1.204
-      Test::Deep::None 1.204
-      Test::Deep::Number 1.204
-      Test::Deep::Obj 1.204
-      Test::Deep::Ref 1.204
-      Test::Deep::RefType 1.204
-      Test::Deep::Regexp 1.204
-      Test::Deep::RegexpMatches 1.204
-      Test::Deep::RegexpOnly 1.204
-      Test::Deep::RegexpRef 1.204
-      Test::Deep::RegexpRefOnly 1.204
-      Test::Deep::RegexpVersion 1.204
-      Test::Deep::ScalarRef 1.204
-      Test::Deep::ScalarRefOnly 1.204
-      Test::Deep::Set 1.204
-      Test::Deep::Shallow 1.204
-      Test::Deep::Stack 1.204
-      Test::Deep::String 1.204
-      Test::Deep::SubHash 1.204
-      Test::Deep::SubHashElements 1.204
-      Test::Deep::SubHashKeys 1.204
-      Test::Deep::SubHashKeysOnly 1.204
-      Test::Deep::SuperHash 1.204
-      Test::Deep::SuperHashElements 1.204
-      Test::Deep::SuperHashKeys 1.204
-      Test::Deep::SuperHashKeysOnly 1.204
+      Test::Deep 1.205
+      Test::Deep::All 1.205
+      Test::Deep::Any 1.205
+      Test::Deep::Array 1.205
+      Test::Deep::ArrayEach 1.205
+      Test::Deep::ArrayElementsOnly 1.205
+      Test::Deep::ArrayLength 1.205
+      Test::Deep::ArrayLengthOnly 1.205
+      Test::Deep::Blessed 1.205
+      Test::Deep::Boolean 1.205
+      Test::Deep::Cache 1.205
+      Test::Deep::Cache::Simple 1.205
+      Test::Deep::Class 1.205
+      Test::Deep::Cmp 1.205
+      Test::Deep::Code 1.205
+      Test::Deep::Hash 1.205
+      Test::Deep::HashEach 1.205
+      Test::Deep::HashElements 1.205
+      Test::Deep::HashKeys 1.205
+      Test::Deep::HashKeysOnly 1.205
+      Test::Deep::Ignore 1.205
+      Test::Deep::Isa 1.205
+      Test::Deep::ListMethods 1.205
+      Test::Deep::MM 1.205
+      Test::Deep::Methods 1.205
+      Test::Deep::NoTest 1.205
+      Test::Deep::None 1.205
+      Test::Deep::Number 1.205
+      Test::Deep::Obj 1.205
+      Test::Deep::Ref 1.205
+      Test::Deep::RefType 1.205
+      Test::Deep::Regexp 1.205
+      Test::Deep::RegexpMatches 1.205
+      Test::Deep::RegexpOnly 1.205
+      Test::Deep::RegexpRef 1.205
+      Test::Deep::RegexpRefOnly 1.205
+      Test::Deep::RegexpVersion 1.205
+      Test::Deep::ScalarRef 1.205
+      Test::Deep::ScalarRefOnly 1.205
+      Test::Deep::Set 1.205
+      Test::Deep::Shallow 1.205
+      Test::Deep::Stack 1.205
+      Test::Deep::String 1.205
+      Test::Deep::SubHash 1.205
+      Test::Deep::SubHashElements 1.205
+      Test::Deep::SubHashKeys 1.205
+      Test::Deep::SubHashKeysOnly 1.205
+      Test::Deep::SuperHash 1.205
+      Test::Deep::SuperHashElements 1.205
+      Test::Deep::SuperHashKeys 1.205
+      Test::Deep::SuperHashKeysOnly 1.205
     requirements:
       ExtUtils::MakeMaker 6.78
       List::Util 1.09
@@ -4902,60 +4899,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.006000
-    pathname: T/TO/TOBYINK/Type-Tiny-2.006000.tar.gz
+  Type-Tiny-2.008000
+    pathname: T/TO/TOBYINK/Type-Tiny-2.008000.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.006000
-      Error::TypeTiny 2.006000
-      Error::TypeTiny::Assertion 2.006000
-      Error::TypeTiny::Compilation 2.006000
-      Error::TypeTiny::WrongNumberOfParameters 2.006000
-      Eval::TypeTiny 2.006000
-      Eval::TypeTiny::CodeAccumulator 2.006000
-      Reply::Plugin::TypeTiny 2.006000
-      Test::TypeTiny 2.006000
-      Type::Coercion 2.006000
-      Type::Coercion::FromMoose 2.006000
-      Type::Coercion::Union 2.006000
-      Type::Library 2.006000
-      Type::Params 2.006000
-      Type::Params::Alternatives 2.006000
-      Type::Params::Parameter 2.006000
-      Type::Params::Signature 2.006000
-      Type::Parser 2.006000
-      Type::Parser::AstBuilder 2.006000
-      Type::Parser::Token 2.006000
-      Type::Parser::TokenStream 2.006000
-      Type::Registry 2.006000
-      Type::Tie 2.006000
-      Type::Tie::ARRAY 2.006000
-      Type::Tie::BASE 2.006000
-      Type::Tie::HASH 2.006000
-      Type::Tie::SCALAR 2.006000
-      Type::Tiny 2.006000
-      Type::Tiny::Bitfield 2.006000
-      Type::Tiny::Class 2.006000
-      Type::Tiny::ConstrainedObject 2.006000
-      Type::Tiny::Duck 2.006000
-      Type::Tiny::Enum 2.006000
-      Type::Tiny::Intersection 2.006000
-      Type::Tiny::Role 2.006000
-      Type::Tiny::Union 2.006000
-      Type::Utils 2.006000
-      Types::Common 2.006000
-      Types::Common::Numeric 2.006000
-      Types::Common::String 2.006000
-      Types::Standard 2.006000
-      Types::Standard::ArrayRef 2.006000
-      Types::Standard::CycleTuple 2.006000
-      Types::Standard::Dict 2.006000
-      Types::Standard::HashRef 2.006000
-      Types::Standard::Map 2.006000
-      Types::Standard::ScalarRef 2.006000
-      Types::Standard::StrMatch 2.006000
-      Types::Standard::Tied 2.006000
-      Types::Standard::Tuple 2.006000
-      Types::TypeTiny 2.006000
+      Devel::TypeTiny::Perl58Compat 2.008000
+      Error::TypeTiny 2.008000
+      Error::TypeTiny::Assertion 2.008000
+      Error::TypeTiny::Compilation 2.008000
+      Error::TypeTiny::WrongNumberOfParameters 2.008000
+      Eval::TypeTiny 2.008000
+      Eval::TypeTiny::CodeAccumulator 2.008000
+      Reply::Plugin::TypeTiny 2.008000
+      Test::TypeTiny 2.008000
+      Type::Coercion 2.008000
+      Type::Coercion::FromMoose 2.008000
+      Type::Coercion::Union 2.008000
+      Type::Library 2.008000
+      Type::Params 2.008000
+      Type::Params::Alternatives 2.008000
+      Type::Params::Parameter 2.008000
+      Type::Params::Signature 2.008000
+      Type::Parser 2.008000
+      Type::Parser::AstBuilder 2.008000
+      Type::Parser::Token 2.008000
+      Type::Parser::TokenStream 2.008000
+      Type::Registry 2.008000
+      Type::Tie 2.008000
+      Type::Tie::ARRAY 2.008000
+      Type::Tie::BASE 2.008000
+      Type::Tie::HASH 2.008000
+      Type::Tie::SCALAR 2.008000
+      Type::Tiny 2.008000
+      Type::Tiny::Bitfield 2.008000
+      Type::Tiny::Class 2.008000
+      Type::Tiny::ConstrainedObject 2.008000
+      Type::Tiny::Duck 2.008000
+      Type::Tiny::Enum 2.008000
+      Type::Tiny::Intersection 2.008000
+      Type::Tiny::Role 2.008000
+      Type::Tiny::Union 2.008000
+      Type::Utils 2.008000
+      Types::Common 2.008000
+      Types::Common::Numeric 2.008000
+      Types::Common::String 2.008000
+      Types::Standard 2.008000
+      Types::Standard::ArrayRef 2.008000
+      Types::Standard::CycleTuple 2.008000
+      Types::Standard::Dict 2.008000
+      Types::Standard::HashRef 2.008000
+      Types::Standard::Map 2.008000
+      Types::Standard::ScalarRef 2.008000
+      Types::Standard::StrMatch 2.008000
+      Types::Standard::Tied 2.008000
+      Types::Standard::Tuple 2.008000
+      Types::TypeTiny 2.008000
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
