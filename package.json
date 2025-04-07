@@ -35,7 +35,7 @@
     "esbuild": "^0.25.0",
     "esbuild-plugin-less": "^1.3.18",
     "jquery": "^3.7.1",
-    "less": "^4.2.1",
+    "less": "^4.3.0",
     "minimist": "^1.2.8",
     "mousetrap": "^1.6.5",
     "qtip2": "^3.0.3",
