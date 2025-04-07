@@ -17,7 +17,7 @@ jobs:
     name: Docker Build and Push
     steps:
       - name: Generate Auth Token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: ${{ secrets.APP_ID }}
