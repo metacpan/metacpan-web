@@ -23,4 +23,3 @@
 *.bak
 *.sw*
 .DS_Store
-!/root/assets/.gitignore
