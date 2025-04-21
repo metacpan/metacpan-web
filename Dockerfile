@@ -49,7 +49,7 @@ EOT
 ENV PERL5LIB="/app/local/lib/perl5"
 ENV PATH="/app/local/bin:${PATH}"
 
-COPY *.md app.psgi *.conf ./
+COPY *.md app.psgi log4perl* metacpan_web.* metacpan_web_local.* ./
 COPY bin bin
 COPY lib lib
 COPY root root

@@ -78,6 +78,7 @@ requires 'URI::Escape';
 requires 'With::Roles', '0.001002';
 requires 'WWW::Form::UrlEncoded::XS';
 requires 'XML::FeedPP';
+requires 'YAML::XS';
 
 on test => sub {
     requires 'App::Prove';
