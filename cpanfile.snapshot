@@ -1358,7 +1358,7 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Spec 0
       File::Temp 0.16
-      perl 5.00405
+      perl 5.004050
   Devel-GlobalDestruction-0.14
     pathname: H/HA/HAARG/Devel-GlobalDestruction-0.14.tar.gz
     provides:
@@ -1919,46 +1919,46 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  IO-Async-0.803
-    pathname: P/PE/PEVANS/IO-Async-0.803.tar.gz
+  IO-Async-0.804
+    pathname: P/PE/PEVANS/IO-Async-0.804.tar.gz
     provides:
-      Future::IO::Impl::IOAsync 0.803
-      IO::Async 0.803
-      IO::Async::Channel 0.803
-      IO::Async::Debug 0.803
-      IO::Async::File 0.803
-      IO::Async::FileStream 0.803
-      IO::Async::Function 0.803
-      IO::Async::Future 0.803
-      IO::Async::Handle 0.803
-      IO::Async::Internals::ChildManager 0.803
-      IO::Async::Internals::FunctionWorker 0.803
-      IO::Async::Listener 0.803
-      IO::Async::Loop 0.803
-      IO::Async::Loop::Poll 0.803
-      IO::Async::Loop::Select 0.803
-      IO::Async::LoopTests 0.803
-      IO::Async::Metrics 0.803
-      IO::Async::Notifier 0.803
-      IO::Async::OS 0.803
-      IO::Async::OS::MSWin32 0.803
-      IO::Async::OS::cygwin 0.803
-      IO::Async::OS::linux 0.803
-      IO::Async::PID 0.803
-      IO::Async::Process 0.803
-      IO::Async::Protocol 0.803
-      IO::Async::Protocol::LineStream 0.803
-      IO::Async::Protocol::Stream 0.803
-      IO::Async::Resolver 0.803
-      IO::Async::Routine 0.803
-      IO::Async::Signal 0.803
-      IO::Async::Socket 0.803
-      IO::Async::Stream 0.803
-      IO::Async::Test 0.803
-      IO::Async::Timer 0.803
-      IO::Async::Timer::Absolute 0.803
-      IO::Async::Timer::Countdown 0.803
-      IO::Async::Timer::Periodic 0.803
+      Future::IO::Impl::IOAsync 0.804
+      IO::Async 0.804
+      IO::Async::Channel 0.804
+      IO::Async::Debug 0.804
+      IO::Async::File 0.804
+      IO::Async::FileStream 0.804
+      IO::Async::Function 0.804
+      IO::Async::Future 0.804
+      IO::Async::Handle 0.804
+      IO::Async::Internals::ChildManager 0.804
+      IO::Async::Internals::FunctionWorker 0.804
+      IO::Async::Listener 0.804
+      IO::Async::Loop 0.804
+      IO::Async::Loop::Poll 0.804
+      IO::Async::Loop::Select 0.804
+      IO::Async::LoopTests 0.804
+      IO::Async::Metrics 0.804
+      IO::Async::Notifier 0.804
+      IO::Async::OS 0.804
+      IO::Async::OS::MSWin32 0.804
+      IO::Async::OS::cygwin 0.804
+      IO::Async::OS::linux 0.804
+      IO::Async::PID 0.804
+      IO::Async::Process 0.804
+      IO::Async::Protocol 0.804
+      IO::Async::Protocol::LineStream 0.804
+      IO::Async::Protocol::Stream 0.804
+      IO::Async::Resolver 0.804
+      IO::Async::Routine 0.804
+      IO::Async::Signal 0.804
+      IO::Async::Socket 0.804
+      IO::Async::Stream 0.804
+      IO::Async::Test 0.804
+      IO::Async::Timer 0.804
+      IO::Async::Timer::Absolute 0.804
+      IO::Async::Timer::Countdown 0.804
+      IO::Async::Timer::Periodic 0.804
     requirements:
       Exporter 5.57
       File::stat 0
@@ -2019,7 +2019,7 @@ DISTRIBUTIONS
       JSON::MaybeXS 1.004008
     requirements:
       Carp 0
-      Cpanel::JSON::XS 2.3310
+      Cpanel::JSON::XS 4.38
       ExtUtils::MakeMaker 0
       JSON::PP 2.27300
       Scalar::Util 0
@@ -2261,12 +2261,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
-  MIME-Types-2.27
-    pathname: M/MA/MARKOV/MIME-Types-2.27.tar.gz
+  MIME-Types-2.28
+    pathname: M/MA/MARKOV/MIME-Types-2.28.tar.gz
     provides:
-      MIME::Type 2.27
-      MIME::Types 2.27
-      MojoX::MIME::Types 2.27
+      MIME::Type 2.28
+      MIME::Types 2.28
+      MojoX::MIME::Types 2.28
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -2458,10 +2458,10 @@ DISTRIBUTIONS
       if 0
       perl 5.006
       strict 0
-  Module-Runtime-0.017
-    pathname: H/HA/HAARG/Module-Runtime-0.017.tar.gz
+  Module-Runtime-0.018
+    pathname: H/HA/HAARG/Module-Runtime-0.018.tar.gz
     provides:
-      Module::Runtime 0.017
+      Module::Runtime 0.018
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006000
@@ -4227,17 +4227,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Scalar-List-Utils-1.69
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.69.tar.gz
-    provides:
-      List::Util 1.69
-      List::Util::XS 1.69
-      Scalar::List::Utils 1.69
-      Scalar::Util 1.69
-      Sub::Util 1.69
-    requirements:
-      ExtUtils::MakeMaker 0
-      perl 5.006
   Sereal-Decoder-5.004
     pathname: Y/YV/YVES/Sereal-Decoder-5.004.tar.gz
     provides:
@@ -4730,7 +4719,7 @@ DISTRIBUTIONS
       Exporter 0
       ExtUtils::MakeMaker 0
       constant 0
-      perl 5.00503
+      perl 5.005030
   Text-Pluralize-1.1
     pathname: K/KV/KVAIL/Text-Pluralize-1.1.tar.gz
     provides:
@@ -4899,60 +4888,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.008000
-    pathname: T/TO/TOBYINK/Type-Tiny-2.008000.tar.gz
+  Type-Tiny-2.008001
+    pathname: T/TO/TOBYINK/Type-Tiny-2.008001.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.008000
-      Error::TypeTiny 2.008000
-      Error::TypeTiny::Assertion 2.008000
-      Error::TypeTiny::Compilation 2.008000
-      Error::TypeTiny::WrongNumberOfParameters 2.008000
-      Eval::TypeTiny 2.008000
-      Eval::TypeTiny::CodeAccumulator 2.008000
-      Reply::Plugin::TypeTiny 2.008000
-      Test::TypeTiny 2.008000
-      Type::Coercion 2.008000
-      Type::Coercion::FromMoose 2.008000
-      Type::Coercion::Union 2.008000
-      Type::Library 2.008000
-      Type::Params 2.008000
-      Type::Params::Alternatives 2.008000
-      Type::Params::Parameter 2.008000
-      Type::Params::Signature 2.008000
-      Type::Parser 2.008000
-      Type::Parser::AstBuilder 2.008000
-      Type::Parser::Token 2.008000
-      Type::Parser::TokenStream 2.008000
-      Type::Registry 2.008000
-      Type::Tie 2.008000
-      Type::Tie::ARRAY 2.008000
-      Type::Tie::BASE 2.008000
-      Type::Tie::HASH 2.008000
-      Type::Tie::SCALAR 2.008000
-      Type::Tiny 2.008000
-      Type::Tiny::Bitfield 2.008000
-      Type::Tiny::Class 2.008000
-      Type::Tiny::ConstrainedObject 2.008000
-      Type::Tiny::Duck 2.008000
-      Type::Tiny::Enum 2.008000
-      Type::Tiny::Intersection 2.008000
-      Type::Tiny::Role 2.008000
-      Type::Tiny::Union 2.008000
-      Type::Utils 2.008000
-      Types::Common 2.008000
-      Types::Common::Numeric 2.008000
-      Types::Common::String 2.008000
-      Types::Standard 2.008000
-      Types::Standard::ArrayRef 2.008000
-      Types::Standard::CycleTuple 2.008000
-      Types::Standard::Dict 2.008000
-      Types::Standard::HashRef 2.008000
-      Types::Standard::Map 2.008000
-      Types::Standard::ScalarRef 2.008000
-      Types::Standard::StrMatch 2.008000
-      Types::Standard::Tied 2.008000
-      Types::Standard::Tuple 2.008000
-      Types::TypeTiny 2.008000
+      Devel::TypeTiny::Perl58Compat 2.008001
+      Error::TypeTiny 2.008001
+      Error::TypeTiny::Assertion 2.008001
+      Error::TypeTiny::Compilation 2.008001
+      Error::TypeTiny::WrongNumberOfParameters 2.008001
+      Eval::TypeTiny 2.008001
+      Eval::TypeTiny::CodeAccumulator 2.008001
+      Reply::Plugin::TypeTiny 2.008001
+      Test::TypeTiny 2.008001
+      Type::Coercion 2.008001
+      Type::Coercion::FromMoose 2.008001
+      Type::Coercion::Union 2.008001
+      Type::Library 2.008001
+      Type::Params 2.008001
+      Type::Params::Alternatives 2.008001
+      Type::Params::Parameter 2.008001
+      Type::Params::Signature 2.008001
+      Type::Parser 2.008001
+      Type::Parser::AstBuilder 2.008001
+      Type::Parser::Token 2.008001
+      Type::Parser::TokenStream 2.008001
+      Type::Registry 2.008001
+      Type::Tie 2.008001
+      Type::Tie::ARRAY 2.008001
+      Type::Tie::BASE 2.008001
+      Type::Tie::HASH 2.008001
+      Type::Tie::SCALAR 2.008001
+      Type::Tiny 2.008001
+      Type::Tiny::Bitfield 2.008001
+      Type::Tiny::Class 2.008001
+      Type::Tiny::ConstrainedObject 2.008001
+      Type::Tiny::Duck 2.008001
+      Type::Tiny::Enum 2.008001
+      Type::Tiny::Intersection 2.008001
+      Type::Tiny::Role 2.008001
+      Type::Tiny::Union 2.008001
+      Type::Utils 2.008001
+      Types::Common 2.008001
+      Types::Common::Numeric 2.008001
+      Types::Common::String 2.008001
+      Types::Standard 2.008001
+      Types::Standard::ArrayRef 2.008001
+      Types::Standard::CycleTuple 2.008001
+      Types::Standard::Dict 2.008001
+      Types::Standard::HashRef 2.008001
+      Types::Standard::Map 2.008001
+      Types::Standard::ScalarRef 2.008001
+      Types::Standard::StrMatch 2.008001
+      Types::Standard::Tied 2.008001
+      Types::Standard::Tuple 2.008001
+      Types::TypeTiny 2.008001
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
