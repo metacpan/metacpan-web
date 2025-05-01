@@ -43,7 +43,7 @@ test_psgi app, sub {
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
     my $release
-        = $tx->find_value(qq!//$xpath{search_results}//div[1]/h3/a/\@href!);
+        = $tx->find_value(qq!//$xpath{search_results}//div[2]/h3/a/\@href!);
     ok( $release, "found release $release" );
 
     {
