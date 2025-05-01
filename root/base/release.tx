@@ -90,7 +90,7 @@
     </li>
     <li>
       %%  my $cpantesters_base = 'https://www.cpantesters.org/distro/' ~ $release.distribution.substr(0, 1) ~ '/' ~ $release.distribution ~ '.html?oncpan=1&distmat=1&version=' ~ uri_escape($release.distnameinfo.version)
-      <a rel="noopener nofollow" href="http://matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix">Testers</a>
+      <a rel="noopener nofollow" href="https://fast2-matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix">Testers</a>
         %%  if $release.tests.size() {
         <span title="(pass / fail / na)">(<a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=2' %]" style="color: #090">[% $release.tests.pass %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=3' %]" style="color: #900">[% $release.tests.fail %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=4' %]">[% $release.tests.na %]</a>)</span>
         %%  }

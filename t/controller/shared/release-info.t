@@ -165,7 +165,7 @@ test_psgi app, sub {
 
             $tx->is(
                 '//a[@title="Matrix"]/@href',
-                "http://matrix.cpantesters.org/?dist=$qs_dist+$qs_version",
+                "https://fast2-matrix.cpantesters.org/?dist=$qs_dist+$qs_version",
                 'link to test matrix'
             );
 
