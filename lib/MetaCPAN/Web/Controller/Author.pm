@@ -60,6 +60,12 @@ sub index : Chained('root') PathPart('') Args(0) {
     my $profiles = $c->model('API::Author')->profile_data;
 
     my $took = $releases->{took};
+    my $pause_id = $author->{pauseid};
+    if (defined $pause_id) {
+        $author->{links}->{backpan_directory} =
+            sprintf("https://backpan.perl.org/authors/id/%s/%s/%s",
+                substr($pause_id, 0, 1), substr($pause_id, 0, 2), $pause_id);
+    }
 
     $c->stash( {
         author   => $author,
