@@ -4,6 +4,16 @@
 %%  after content_classes -> { ' search-results' }
 %%  override content -> {
   <h3 class="search-results-header">Search results for "[% $search_query %]"</h3>
+
+%%  if $pageset && $pageset.total_entries {
+  <div class="smaller">
+    [% $pageset.total_entries | format_number %]
+    [% pluralize("result", $pageset.total_entries) %]
+    [% if $took { %] ([% $took / 1000 %] seconds)[% } %]
+  </div>
+  <hr>
+%% }
+
 %%  if $authors.total {
   <div class="author-results">
     <ul class="authors clearfix">
