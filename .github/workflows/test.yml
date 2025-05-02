@@ -11,7 +11,7 @@ on:
 
 jobs:
   code-formatting:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     name: Code Formatting
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +50,7 @@ jobs:
       - name: Lint files
         run: precious lint ${{ steps.select-files.outputs.precious-args }}
   docker:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     name: Docker
     steps:
       - name: Build test image
