@@ -1,4 +1,4 @@
 <div class="activity-graph">
-    <img src="[% $url %]?res=month" />
+    <img src="[% $url %]?res=month" alt="Activity Graph"/>
     <div class="comment">24 month</div>
 </div>
