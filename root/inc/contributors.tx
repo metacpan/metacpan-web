@@ -1,3 +1,4 @@
+<div class="nav-header">Authored by: <a href="/author/[% $release.author %]" class="cpan-author">[% $release.author %]</a></div>
 %% if $contributors.size() {
 <div>
   <button class="contributors-show-button btn-link">and [% $contributors.size() %] contributors</button>
