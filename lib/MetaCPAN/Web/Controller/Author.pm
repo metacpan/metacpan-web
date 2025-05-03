@@ -55,7 +55,11 @@ sub index : Chained('root') PathPart('') Args(0) {
         @{ $releases->{releases} };
     $c->res->last_modified($date) if $date;
 
-    my $faves = $c->model('API::Favorite')->by_user( $author->{user} )->get;
+    # Issue: https://github.com/metacpan/metacpan-web/issues/3235
+    # Explicitly setting size to 500 to override the default size 250.
+    my $size = 500;
+    my $faves
+        = $c->model('API::Favorite')->by_user( $author->{user}, $size )->get;
 
     my $profiles = $c->model('API::Author')->profile_data;
 

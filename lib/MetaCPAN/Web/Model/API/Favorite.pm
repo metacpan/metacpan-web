@@ -24,8 +24,8 @@ sub by_user {
     $size ||= 250;
     return Future->done( [] )
         if !defined $user;
-    return $self->request( "/favorite/by_user/$user", { size => $size } )
-        ->transform(
+    return $self->request( "/favorite/by_user/$user", undef,
+        { size => $size } )->transform(
         done => sub {
             my $data = shift;
             return [] unless exists $data->{favorites};
