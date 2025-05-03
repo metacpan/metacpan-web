@@ -76,7 +76,7 @@ jobs:
           load: true
       - name: Run Perl tests
         run: >
-          docker run -d -i -p 8000:80
+          docker run -d -i -p 5001:80
           ${{ steps.docker-build-test.outputs.imageid }}
       - uses: actions/setup-node@v4
         with:
