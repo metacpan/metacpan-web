@@ -362,7 +362,6 @@ a5d3e94fbb974e2ef0154228a5dcb36b8a3e75f8  root/static/images/profile/coderwall.p
 0d8cf45c93988001f7465ff87be26d0b82f1bef8  root/static/images/profile/furl.png
 968957a97c6066602d4d359e6a0a4ae340156f15  root/static/images/profile/gamespot.png
 c9aad238ad66887c8498279293f4c779cc142887  root/static/images/profile/geeklist.png
-82ea50c2b692fcfd63f4975cd72df684d83b28a8  root/static/images/profile/github-meets-cpan.png
 7768618ea6b52b35ce13ba8866228fda77e86c5b  root/static/images/profile/github.png
 976db088e71f755f7e51b29496df6bd8de53c13b  root/static/images/profile/gitlab.png
 21dff75b978510ddfa6c33203ca8b266494ab2d0  root/static/images/profile/gitorious.png
