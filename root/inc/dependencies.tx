@@ -7,10 +7,10 @@
   <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
   %%  }
   %%  if !$deps.size() && !$release.metadata {
-  <li><i class="ttip" title="no META file provided">unknown</i></li>
+  <li><i title="no META file provided">unknown</i></li>
   %%  }
   %%  else if $release.metadata.dynamic_config {
-  <li><i class="ttip" title="dynamic_config enabled">[% $deps.size() ? "and possibly others" : "unknown" %]</i></li>
+  <li><i title="dynamic_config enabled">[% $deps.size() ? "and possibly others" : "unknown" %]</i></li>
   %%  }
   %%  else if !$deps.size() {
   <li><i>none</i></li>
