@@ -12,6 +12,7 @@
 /metacpan_web_local.*
 /node_modules/
 /perltidy.LOG
+/playwright
 /pm_to_blib
 /tidyall.ERR
 /var

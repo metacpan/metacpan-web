@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -eu -o pipefail
+npm i
+npx playwright install chromium --with-deps
