@@ -62,6 +62,29 @@ jobs:
           load: true
       - name: Run Perl tests
         run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
+  playwright:
+    runs-on: ubuntu-24.04
+    name: playwright test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v6
+        with:
+          target: server
+          push: false
+          load: true
+      - name: Run Perl tests
+        run: >
+          docker run -d -i -p 8000:80
+          ${{ steps.docker-build-test.outputs.imageid }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Browsers
+        run: ./bin/install-playwright
+      - name: Run Playwright tests
+        run: npx playwright test
   test:
     runs-on: ubuntu-24.04
     name: Dockerless
