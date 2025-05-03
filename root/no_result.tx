@@ -5,8 +5,8 @@
 <div class="no-results">
     <h3 class="search-results-header">No search results for [% $search_query %]</h3>
     %%  if $suggest {
-            <div class="alert alert-danger">
-                Did you mean :
+            <div class="alert alert-danger" role="alert">
+                Did you mean:
                 <a href="/search?q=[% $suggest | uri %]">[% $suggest %]</a>
             </div>
     %%  }
