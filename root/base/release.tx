@@ -50,9 +50,7 @@
     %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
     %%    : '/dist/' ~ $release.distribution;
     <li class="nav-header no-margin-top">
-      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released.">
-        <span class="relatize">[% datetime($release.date).to_http %]</span>
-      </div>
+      <span>Released <span class="relatize">[% datetime($release.date).to_http %]</span></span>
     </li>
     %%  include inc::release_status { maturity => $release.maturity }
     %%  block left_nav_lead -> {
@@ -101,7 +99,7 @@
     </li>
     %% if defined $distribution.river.bus_factor {
     <li>
-      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
+      <div title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
       Bus factor: [% $distribution.river.bus_factor %]
       </div>
     </li>
