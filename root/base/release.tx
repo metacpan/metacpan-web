@@ -97,6 +97,7 @@
     </li>
     <li>
       <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]">Kwalitee</a>
+      <img src="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %].svg" alt="Kwalitee Score">
     </li>
     %% if defined $distribution.river.bus_factor {
     <li>
