@@ -8,7 +8,6 @@
 /blib
 /carton.lock
 /cover_db/
-/local/
 /log4perl_local.conf
 /metacpan_web_local.*
 /node_modules/
