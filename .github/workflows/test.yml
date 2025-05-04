@@ -70,23 +70,49 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Build test image
-        id: docker-build-test
+        id: docker-build-playwright
         uses: docker/build-push-action@v6
         with:
-          target: server
+          target: playwright
           push: false
           load: true
-      - name: Run Perl tests
+      - name: Start playwright server
+        id: start-container
         run: >
-          docker run -d -i -p 5001:8000
-          ${{ steps.docker-build-test.outputs.imageid }}
+          CONTAINER_ID=$(docker run -d -i -p 8000:80
+          -v $(pwd):/app
+          ${{ steps.docker-build-playwright.outputs.imageid }})
+          && echo "container_id=$CONTAINER_ID" >> $GITHUB_OUTPUT
+          || (echo "Failed to start container" && exit 1)
       - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Install Playwright Browsers
         run: ./bin/install-playwright
+      - name: Install Codecovbash
+        uses: perl-actions/install-with-cpm@v1
+        with:
+          install: |
+            Devel::Cover
+            Devel::Cover::Report::Codecovbash
+          sudo: true
+      - name: Check docker status
+        id: playwright-tests
+        run: |
+          npx playwright test || {
+            echo "Playwright tests failed"
+            docker logs ${{ steps.start-container.outputs.container_id }}
+            exit 1
+          }
       - name: Run Playwright tests
         run: npx playwright test
+      - name: Generate Codecov report
+        run: cover -report codecovbash
+      - uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          file: ./cover_db/codecov.json
+          token: ${{ secrets.CODECOV_TOKEN }}
   test:
     runs-on: ubuntu-24.04
     name: Dockerless
