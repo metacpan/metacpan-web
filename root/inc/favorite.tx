@@ -12,8 +12,8 @@
 </div>
 %% if $github && $repository.url {
   <div class="star-rating">
-    <a href="[% $repository.url %]" target="_blank" class="btn btn-primary">
-      ⭐ Starred <span class="badge badge-primary">[% $github.stars %]</span>
+    <a href="[% $repository.url %]" target="_blank" class="btn btn-primary" title="View on GitHub">
+      ⭐ Starred <span>[% $github.stars %]</span>
       <span class="sr-only">GitHub stars</span>
     </a>
   </div>
