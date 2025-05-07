@@ -141,10 +141,6 @@ my $profile_data = {
         name       => 'GitLab',
         url_format => 'https://gitlab.com/%s',
     },
-    'github-meets-cpan' => {
-        name       => 'GitHub Meets CPAN',
-        url_format => 'https://gh.metacpan.org/user/%s',
-    },
     hackernews => {
         name       => 'Hacker News',
         url_format => 'https://news.ycombinator.com/user?id=%s',
