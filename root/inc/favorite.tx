@@ -10,3 +10,11 @@
 <div class="show-logged-out">
     <button class="fav-not-logged-in favorite[% if $favorites { %] highlight[% } %]"><span>[% $favorites %]</span> ++</button>
 </div>
+%% if $github && $repository.url {
+  <div class="star-rating">
+    <a href="[% $repository.url %]" target="_blank" class="btn btn-primary" title="View on GitHub">
+      ⭐ Starred <span>[% $github.stars %]</span>
+      <span class="sr-only">GitHub stars</span>
+    </a>
+  </div>
+%% }
