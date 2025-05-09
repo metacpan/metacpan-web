@@ -51,7 +51,7 @@ test_psgi app, sub {
         my @versioned_link_tests = (
             {
                 xpath    => '//a[text()="Raw code"]/@href',
-                expected => qr{\bfastapi.metacpan.org/},
+                expected => qr{\bapi\.metacpan\.org/v1/},
                 desc     => 'raw code points to fastapi'
             },
             {

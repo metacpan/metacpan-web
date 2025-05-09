@@ -1,6 +1,6 @@
 name: MetaCPAN::Web
 
-api: https://fastapi.metacpan.org
+api: https://api.metacpan.org/v1
 source_host: https://st.aticpan.org
 web_host: https://metacpan.org
 consumer_key: metacpan.dev

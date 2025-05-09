@@ -100,7 +100,7 @@ with `precious path/to/file`
 
 ## Local Configuration Changes
 
-The back end defaults to `fastapi.metacpan.org`. Running a local API server is
+The back end defaults to `api.metacpan.org/v1`. Running a local API server is
 optional and not required to hack on the front end. The address to the API being
 used can be changed in the `metacpan_web.conf` file. Ideally you would create a
 new file called `metacpan_web_local.conf` that contains

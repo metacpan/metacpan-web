@@ -50,7 +50,7 @@
               <li><a href="/recent">Recent</a></li>
               <li><a href="/about/faq">FAQ</a></li>
               <li><a href="/tools">Tools</a></li>
-              <li><a href="https://fastapi.metacpan.org/">API</a></li>
+              <li><a href="https://api.metacpan.org/">API</a></li>
             </ul>
             %%  }
             <ul class="nav navbar-nav navbar-right">
@@ -174,7 +174,7 @@
                   <a href="/tools">Tools</a>
               </div>
               <div class="footer-link">
-                  <a href="https://fastapi.metacpan.org/">API</a>
+                  <a href="https://api.metacpan.org/">API</a>
               </div>
               <div class="footer-link">
                   <a href="https://www.perl.org/">Perl.org</a>
