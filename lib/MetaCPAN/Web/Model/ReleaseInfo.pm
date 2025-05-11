@@ -95,6 +95,7 @@ sub _fetch {
 
         $data->{chat}       = $self->_get_chat( $release, $dist );
         $data->{issues}     = $self->_get_issues( $release, $dist );
+        $data->{github}     = $dist->{repo}->{github};
         $data->{repository} = $self->_get_repository( $release, $dist );
 
         Future->done($data);
