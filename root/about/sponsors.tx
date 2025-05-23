@@ -184,6 +184,20 @@ money...
       </tr>
       <tr>
         <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.datadoghq.com/">
+            <img src="/static/images/sponsors/datadog.png" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://www.datadoghq.com/">Datadog</a> supports MetaCPAN by
+            providing monitoring and log analysis.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <a target="_blank" rel="noopener nofollow" href="https://travis-ci.com">
             <img src="/static/images/sponsors/travis-ci.png" width="170">
           </a>
