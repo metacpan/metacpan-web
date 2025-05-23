@@ -63,6 +63,16 @@ sub view : Private {
         $c->detach( '/internal_error', $error );
     } )->get;
 
+    ## Remove author from contributors list
+    my $author_name  = $data->{author}->{name};
+    my $contributors = [];
+    foreach my $contributor (@{$data->{contributors}}) {
+        if ($contributor->{name} !~ /\b$author_name\b/) {
+            push @$contributors, $contributor;
+        }
+    }
+    $data->{contributors} = $contributors;
+
     my $release = $data->{release};
 
     $c->browser_max_age('1h');
