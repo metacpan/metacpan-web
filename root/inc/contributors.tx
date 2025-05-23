@@ -1,7 +1,7 @@
 <div class="nav-header">Authored by: <a href="/author/[% $release.author %]" class="cpan-author">[% $release.author %]</a></div>
 %% if $contributors.size() {
 <div>
-  <button class="contributors-show-button btn-link">and [% $contributors.size() %] contributors</button>
+  <button class="contributors-show-button btn-link">and [% $contributors.size() %] [% $contributors.size() > 1 ? 'contributors' : 'contributor' %]</button>
   <div id="metacpan_contributors" class="slide-out slide-out-hidden">
     <div>
       <ul>
