@@ -66,8 +66,8 @@ sub view : Private {
     ## Remove author from contributors list
     my $author_name  = $data->{author}->{name};
     my $contributors = [];
-    foreach my $contributor (@{$data->{contributors}}) {
-        if ($contributor->{name} !~ /\b$author_name\b/) {
+    foreach my $contributor ( @{ $data->{contributors} } ) {
+        if ( $contributor->{name} !~ /\b$author_name\b/ ) {
             push @$contributors, $contributor;
         }
     }
