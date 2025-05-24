@@ -18,9 +18,9 @@
 #
 # carton exec ./run-dev
 #
-# Then browse to http://localhost:8000/
+# Then browse to http://localhost:5001/
 
-METACPAN_PROXY_LISTEN="localhost:8000"
+METACPAN_PROXY_LISTEN="localhost:5001"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
