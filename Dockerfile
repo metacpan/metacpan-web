@@ -67,7 +67,7 @@ HEALTHCHECK --start-period=3s CMD [ "curl", "--fail", "http://localhost/healthch
 ################### Development Server
 FROM server AS develop
 
-ENV COLUMNS="${COLUMNS:-120}"
+ENV COLUMNS=120
 ENV PLACK_ENV=development
 
 USER root
