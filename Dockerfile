@@ -1,8 +1,8 @@
 ################### Asset Builder
 
-FROM node:22 AS build-assets
-SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+FROM node:24-alpine AS build-assets
 ENV NO_UPDATE_NOTIFIER=1
+SHELL [ "/bin/sh", "-euo", "pipefail", "-c" ]
 
 WORKDIR /build/
 
