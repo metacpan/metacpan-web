@@ -25,8 +25,7 @@ EOT
 HEALTHCHECK CMD [ "test", "-e", "root/assets/assets.json" ]
 
 ################### Web Server
-# hadolint ignore=DL3007
-FROM metacpan/metacpan-base:latest AS server
+FROM metacpan/metacpan-base:main-20250531-090128 AS server
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 RUN \
