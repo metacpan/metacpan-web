@@ -83,12 +83,12 @@ ENV METACPAN_WEB_HOME=/app
 
 CMD [ \
     "/uwsgi.sh", \
-    "--http-socket", ":80" \
+    "--http-socket", ":8000" \
 ]
 
-EXPOSE 80
+EXPOSE 8000
 
-HEALTHCHECK --start-period=3s CMD [ "curl", "--fail", "http://localhost/healthcheck" ]
+HEALTHCHECK --start-period=3s CMD [ "curl", "--fail", "http://localhost:8000/healthcheck" ]
 
 ################### Development Server
 FROM server AS develop

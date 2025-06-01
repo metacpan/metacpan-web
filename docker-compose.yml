@@ -22,7 +22,7 @@ services:
       - 'web-assets:/app/root/assets/'
       - '/app/local'
     ports:
-      - '5001:80'
+      - '5001:8000'
     environment:
       # default is 120, shorten to work with compose label
       COLUMNS: 96
