@@ -122,10 +122,10 @@ RUN \
     --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
     --mount=type=cache,target=/root/.npm,sharing=private \
 <<EOT
-    curl -fsSL https://deb.nodesource.com/setup_21.x | bash -
+    curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
     apt-get update
-    apt-get satisfy -y -f --no-install-recommends 'nodejs (>= 21.6.1)'
-    npm install -g npm@^10.4.0
+    apt-get satisfy -y -f --no-install-recommends 'nodejs (>= 24.1.0)'
+    npm install -g npm@^11.4.1
 EOT
 
 COPY package.json package-lock.json ./
