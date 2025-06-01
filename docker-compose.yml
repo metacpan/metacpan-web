@@ -7,6 +7,12 @@ services:
       - './root/static/:/build/root/static/'
       - 'web-assets:/build/root/assets/'
     command: ['./build-assets.mjs', '--watch']
+    develop:
+      watch:
+        - path: ./build-assets.mjs
+          action: rebuild
+        - path: ./package.json
+          action: rebuild
   web-server:
     build:
       context: .
