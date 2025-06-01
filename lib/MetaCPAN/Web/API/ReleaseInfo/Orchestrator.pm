@@ -1,4 +1,4 @@
-package MetaCPAN::Web::API::RequestInfo::Orchestrator;
+package MetaCPAN::Web::API::ReleaseInfo::Orchestrator;
 use Moo;
 use List::Util qw( max );
 use namespace::clean;
