@@ -24,8 +24,11 @@ EOT
 
 HEALTHCHECK CMD [ "test", "-e", "root/assets/assets.json" ]
 
-################### Web Server
-FROM metacpan/metacpan-base:main-20250531-090128 AS server
+################### Web Server Base
+FROM metacpan/metacpan-base:main-20250531-090128 AS server-base
+
+################### CPAN Prereqs
+FROM server-base AS build-cpan-prereqs
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 RUN \
@@ -45,14 +48,31 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot
 EOT
 
-ENV PERL5LIB="/app/local/lib/perl5"
-ENV PATH="/app/local/bin:${PATH}"
+################### Web Server
+FROM server-base AS server
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+
+RUN \
+    --mount=type=cache,target=/var/cache/apt,sharing=private \
+    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
+<<EOT
+    apt-get update
+    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
+EOT
+
+WORKDIR /app/
 
 COPY *.md app.psgi log4perl* metacpan_web.* metacpan_web_local.* ./
 COPY bin bin
 COPY lib lib
 COPY root root
+
 COPY --from=build-assets /build/root/assets root/assets
+COPY --from=build-cpan-prereqs /app/local local
+
+ENV PERL5LIB="/app/local/lib/perl5"
+ENV PATH="/app/local/bin:${PATH}"
+ENV METACPAN_WEB_HOME=/app
 
 CMD [ \
     "/uwsgi.sh", \
@@ -70,6 +90,8 @@ ENV COLUMNS=120
 ENV PLACK_ENV=development
 
 USER root
+
+COPY cpanfile cpanfile.snapshot ./
 
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
