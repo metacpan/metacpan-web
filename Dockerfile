@@ -1,3 +1,7 @@
+ARG SLIM_BUILD
+ARG MAYBE_BASE_BUILD=${SLIM_BUILD:+server-base-slim}
+ARG BASE_BUILD=${MAYBE_BASE_BUILD:-server-base}
+
 ################### Asset Builder
 
 FROM node:24-alpine AS build-assets
@@ -26,6 +30,7 @@ HEALTHCHECK CMD [ "test", "-e", "root/assets/assets.json" ]
 
 ################### Web Server Base
 FROM metacpan/metacpan-base:main-20250531-090128 AS server-base
+FROM metacpan/metacpan-base:main-20250531-090129-slim AS server-base-slim
 
 ################### CPAN Prereqs
 FROM server-base AS build-cpan-prereqs
@@ -49,7 +54,9 @@ RUN \
 EOT
 
 ################### Web Server
-FROM server-base AS server
+# false positive
+# hadolint ignore=DL3006
+FROM ${BASE_BUILD} AS server
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 RUN \
