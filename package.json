@@ -19,7 +19,7 @@
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "@playwright/test": "^1.52.0",
-    "eslint": "^9.27.0",
+    "eslint": "^9.28.0",
     "globals": "^16.2.0",
     "js-beautify": "^1.15.4",
     "prettier": "3.5.3"
