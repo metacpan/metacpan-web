@@ -8,7 +8,7 @@ extends 'Catalyst::Model';
 
 use Future                                        ();
 use List::Util                                    qw( all );
-use MetaCPAN::Web::API::RequestInfo::Orchestrator ();
+use MetaCPAN::Web::API::ReleaseInfo::Orchestrator ();
 use Ref::Util                                     qw( is_hashref );
 use URI                                           ();
 use URI::Escape qw( uri_escape uri_unescape );
@@ -37,7 +37,7 @@ sub ACCEPT_CONTEXT {
 sub via_dist {
     my ( $self, $dist ) = @_;
     $self->_fetch(
-        MetaCPAN::Web::API::RequestInfo::Orchestrator->new(
+        MetaCPAN::Web::API::ReleaseInfo::Orchestrator->new(
             model => $self->_release,
             dist  => $dist,
         ),
@@ -47,7 +47,7 @@ sub via_dist {
 sub via_release {
     my ( $self, $author, $release_name ) = @_;
     $self->_fetch(
-        MetaCPAN::Web::API::RequestInfo::Orchestrator->new(
+        MetaCPAN::Web::API::ReleaseInfo::Orchestrator->new(
             model   => $self->_release,
             author  => $author,
             release => $release_name,
