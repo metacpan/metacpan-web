@@ -92,6 +92,7 @@ HEALTHCHECK --start-period=3s CMD [ "curl", "--fail", "http://localhost:8000/hea
 
 ################### Development Server
 FROM server AS develop
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ENV COLUMNS=120
 ENV PLACK_ENV=development
@@ -111,6 +112,7 @@ USER metacpan
 
 ################### Test Runner
 FROM develop AS test
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ENV NO_UPDATE_NOTIFIER=1
 ENV PLACK_ENV=
