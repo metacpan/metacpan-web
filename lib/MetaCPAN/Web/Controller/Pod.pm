@@ -40,6 +40,7 @@ sub view : Private {
     my $release    = $c->stash->{release};
 
     if ( $data->{directory} ) {
+        $c->cdn_max_age('1y');
         $c->res->redirect( $c->uri_for( '/source', @path ), 301 );
         $c->detach;
     }
