@@ -53,7 +53,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ github.repository }}
+            docker.io/${{ github.repository }}
             ghcr.io/${{ github.repository }}
           flavor: |
             latest=false
@@ -72,7 +72,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
       - name: Update deployed image
-        if: ${{ contains( fromJSON(steps.meta.outputs.json).tags, format('{0}:latest', github.repository)) }}
+        if: contains( format(',{0},', join( fromJSON(steps.meta.outputs.json).tags, ',' ) ), ':latest,' )
         uses: benc-uk/workflow-dispatch@v1
         with:
           repo: metacpan/metacpan-k8s

@@ -7,6 +7,12 @@ services:
       - './root/static/:/build/root/static/'
       - 'web-assets:/build/root/assets/'
     command: ['./build-assets.mjs', '--watch']
+    develop:
+      watch:
+        - path: ./build-assets.mjs
+          action: rebuild
+        - path: ./package.json
+          action: rebuild
   web-server:
     build:
       context: .
@@ -16,7 +22,7 @@ services:
       - 'web-assets:/app/root/assets/'
       - '/app/local'
     ports:
-      - '5001:80'
+      - '5001:8000'
     environment:
       # default is 120, shorten to work with compose label
       COLUMNS: 96

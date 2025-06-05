@@ -1,4 +1,4 @@
-name: Enable Auto-Merge For metacpan-automation
+name: Enable Auto-Merge For bots
 on:
   pull_request_target:
     types: [opened]
