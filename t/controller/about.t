@@ -27,7 +27,7 @@ test_psgi app, sub {
                 surrogate_key =>
                     'ABOUT STATIC content_type=text/html content_type=text',
                 surrogate_control =>
-                    'max-age=31556952, stale-if-error=2592000',
+                    'max-age=31556952, stale-while-revalidate=86400, stale-if-error=2592000',
             }
         );
     }

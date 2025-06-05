@@ -47,7 +47,7 @@ test_psgi app, sub {
                     surrogate_key =>
                         'RECENT DIST_UPDATES content_type=application/rss+xml content_type=application',
                     surrogate_control =>
-                        'max-age=31556952, stale-if-error=2592000',
+                        'max-age=31556952, stale-while-revalidate=86400, stale-if-error=2592000',
                 }
             );
         }
@@ -73,7 +73,7 @@ test_psgi app, sub {
                     surrogate_key =>
                         'author=PERLER content_type=application/rss+xml content_type=application',
                     surrogate_control =>
-                        'max-age=31556952, stale-if-error=2592000',
+                        'max-age=31556952, stale-while-revalidate=86400, stale-if-error=2592000',
                 }
             );
         }
@@ -90,7 +90,7 @@ test_psgi app, sub {
                     surrogate_key =>
                         'dist=MOOSE content_type=application/rss+xml content_type=application',
                     surrogate_control =>
-                        'max-age=31556952, stale-if-error=2592000',
+                        'max-age=31556952, stale-while-revalidate=86400, stale-if-error=2592000',
                 }
             );
         }
@@ -141,7 +141,8 @@ sub test_redirect {
         {
             cache_control     => 'max-age=31556952',
             surrogate_key     => 'content_type=text/html content_type=text',
-            surrogate_control => 'max-age=31556952, stale-if-error=2592000',
+            surrogate_control =>
+                'max-age=31556952, stale-while-revalidate=86400, stale-if-error=2592000',
         }
     );
 
