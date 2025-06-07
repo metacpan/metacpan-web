@@ -304,6 +304,17 @@ sub end : Private {
     my $feed = $c->stash->{feed};
     $c->detach('/end')
         if !$feed;
+
+   
+# This will only affect if `cdn_max_age` has been set.
+# https://www.fastly.com/documentation/guides/concepts/edge-state/cache/stale/
+# If it has then do revalidation in the background
+    $c->cdn_stale_while_revalidate('1d');
+
+    # And if there is still an error serve from cache
+    $c->cdn_stale_if_error('1y');
+
+
     $c->res->content_type(
         $feed->isa('XML::FeedPP::Atom')
         ? 'application/atom+xml; charset=UTF-8'
