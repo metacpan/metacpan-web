@@ -10,7 +10,6 @@ use HTML::Escape              qw( escape_html );
 use MetaCPAN::Web::RenderUtil qw( render_markdown );
 use MetaCPAN::Web::Types qw( ArrayRef DateTime Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
-use Path::Tiny                 qw( path );
 use XML::FeedPP                ();                     ## no perlimports
 use URI                        ();
 
@@ -56,61 +55,6 @@ sub recent : Private {
         title   => 'Recent CPAN uploads - MetaCPAN',
         link    => '/recent',
         date    => DateTime::->now,
-    );
-}
-
-sub news_rss : Path('/news.rss') Args(0) {
-    my ( $self, $c ) = @_;
-    $c->detach( 'news', ['rss'] );
-}
-
-sub news_atom : Path('/news.atom') Args(0) {
-    my ( $self, $c ) = @_;
-    $c->detach( 'news', ['atom'] );
-}
-
-sub news : Private {
-    my ( $self, $c, $type ) = @_;
-
-    $c->add_surrogate_key('NEWS');
-    $c->browser_max_age('1h');
-    $c->cdn_max_age('1h');
-
-    my $file = $c->config->{home} . '/News.md';
-    my $news = path($file)->slurp_utf8;
-    $news =~ s/^\s+|\s+$//g;
-    my @entries;
-    foreach my $str ( split /^Title:\s*/m, $news ) {
-        next if $str =~ /^\s*$/;
-
-        my %e;
-        $e{name} = $str =~ s/\A(.+)$//m ? $1 : 'No title';
-
-        # Use the same processing as _Header2Label in
-        # Text::MultiMarkdown
-        my $a_name = lc $e{name};
-        $a_name =~ s/[^A-Za-z0-9:_.-]//g;
-        $a_name =~ s/^[^a-z]+//gi;
-
-        $str =~ s/\A\s*-+//g;
-        $e{date} = $str =~ s/^Date:\s*(.*)$//m ? $1 : '2014-01-01T00:00:00';
-        $e{link}     = '/news';
-        $e{fragment} = $a_name;
-        $e{author}   = 'METACPAN';
-        $str =~ s/^\s*|\s*$//g;
-
-        #$str =~ s{\[([^]]+)\]\(([^)]+)\)}{<a href="$2">$1</a>}g;
-        $e{abstract} = $str;
-        $e{abstract} = render_markdown($str);
-
-        push @entries, \%e;
-    }
-
-    $c->stash->{feed} = $self->build_feed(
-        format  => $type,
-        entries => \@entries,
-        host    => $c->config->{web_host},
-        title   => 'Recent MetaCPAN News',
     );
 }
 
@@ -304,6 +248,15 @@ sub end : Private {
     my $feed = $c->stash->{feed};
     $c->detach('/end')
         if !$feed;
+
+# This will only affect if `cdn_max_age` has been set.
+# https://www.fastly.com/documentation/guides/concepts/edge-state/cache/stale/
+# If it has then do revalidation in the background
+    $c->cdn_stale_while_revalidate('1d');
+
+    # And if there is still an error serve from cache
+    $c->cdn_stale_if_error('1y');
+
     $c->res->content_type(
         $feed->isa('XML::FeedPP::Atom')
         ? 'application/atom+xml; charset=UTF-8'

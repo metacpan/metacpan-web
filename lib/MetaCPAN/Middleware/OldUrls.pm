@@ -70,7 +70,6 @@ sub _routes { (
     [ '/permission/module/:module',         '/module/:module/permissions' ],
 
     [ '/feed/recent',             '/recent.:type',                  $feed_type ],
-    [ '/feed/news',               '/news.:type',                    $feed_type ],
     [ '/feed/author/:author',     '/author/:author/activity.:type', $feed_type ],
     [ '/feed/distribution/:dist', '/dist/:dist/releases.:type',     $feed_type ],
 
