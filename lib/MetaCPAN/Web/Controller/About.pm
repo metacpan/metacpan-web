@@ -38,14 +38,6 @@ sub meta_hack : Local : Args(0) {
     my ( $self, $c ) = @_;
 }
 
-sub resources : Local : Args(0) {
-    my ( $self, $c ) = @_;
-    $c->browser_max_age('1y');
-    $c->cdn_max_age('1y');
-    $c->res->redirect( '/about/contact', 301 );
-    $c->detach;
-}
-
 sub sponsors : Local : Args(0) {
     my ( $self, $c ) = @_;
 }
