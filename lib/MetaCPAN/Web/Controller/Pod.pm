@@ -40,7 +40,10 @@ sub view : Private {
     my $release    = $c->stash->{release};
 
     if ( $data->{directory} ) {
-        $c->cdn_max_age('1y');
+
+# This can end up being a redirect from a non-versioned path to a versioned path
+# and it doesn't have any surrogate keys so it won't get purged.
+        $c->cdn_max_age('1d');
         $c->res->redirect( $c->uri_for( '/source', @path ), 301 );
         $c->detach;
     }
