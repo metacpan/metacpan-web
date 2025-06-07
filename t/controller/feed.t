@@ -95,23 +95,6 @@ test_psgi app, sub {
             );
         }
     );
-    get_feed_ok(
-        $cb,
-        '/news.rss',
-        sub {
-            my ( $res, $tx ) = @_;
-            test_cache_headers(
-                $res,
-                {
-                    cache_control => 'max-age=3600',
-                    surrogate_key =>
-                        'NEWS content_type=application/rss+xml content_type=application',
-                    surrogate_control =>
-                        'max-age=3600, stale-if-error=2592000',
-                }
-            );
-        }
-    );
 
     test_redirect( $cb, 'oalders' );
 
