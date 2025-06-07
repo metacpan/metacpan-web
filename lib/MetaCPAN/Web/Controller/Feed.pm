@@ -58,7 +58,6 @@ sub recent : Private {
     );
 }
 
-
 sub author_rss : Chained('/author/root') PathPart('activity.rss') Args(0) {
     $_[1]->detach( 'author', ['rss'] );
 }
@@ -250,7 +249,6 @@ sub end : Private {
     $c->detach('/end')
         if !$feed;
 
-   
 # This will only affect if `cdn_max_age` has been set.
 # https://www.fastly.com/documentation/guides/concepts/edge-state/cache/stale/
 # If it has then do revalidation in the background
@@ -258,7 +256,6 @@ sub end : Private {
 
     # And if there is still an error serve from cache
     $c->cdn_stale_if_error('1y');
-
 
     $c->res->content_type(
         $feed->isa('XML::FeedPP::Atom')
