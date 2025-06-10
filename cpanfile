@@ -40,7 +40,7 @@ requires 'Locale::Country','3.62';
 requires 'Log::Dispatch';
 requires 'Log::Log4perl::Catalyst';
 requires 'Log::Log4perl::Layout::JSON';
-requires 'MetaCPAN::Role', '0.06';
+requires 'MetaCPAN::Role', '1.00';
 requires 'Module::Build::Tiny', '0.037';
 requires 'Module::Runtime';
 requires 'Moo', '2.000002';

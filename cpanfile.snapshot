@@ -2280,18 +2280,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006
-  MetaCPAN-Role-0.06
-    pathname: L/LL/LLAP/MetaCPAN-Role-0.06.tar.gz
+  MetaCPAN-Role-1.00
+    pathname: L/LL/LLAP/MetaCPAN-Role-1.00.tar.gz
     provides:
-      MetaCPAN::Role 0.06
-      MetaCPAN::Role::Fastly 0.06
-      MetaCPAN::Role::Fastly::Catalyst 0.06
+      MetaCPAN::Role 1.00
+      MetaCPAN::Role::Fastly 1.00
+      MetaCPAN::Role::Fastly::Catalyst 1.00
     requirements:
       Carp 0
-      CatalystX::Fastly::Role::Response 0.04
+      CatalystX::Fastly::Role::Response 0.07
       ExtUtils::MakeMaker 0
       Moose::Role 0
-      MooseX::Fastly::Role 0.01
+      MooseX::Fastly::Role 0.04
       Net::Fastly 1.05
   Metrics-Any-0.10
     pathname: P/PE/PEVANS/Metrics-Any-0.10.tar.gz
