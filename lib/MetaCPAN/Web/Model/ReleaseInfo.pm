@@ -75,7 +75,6 @@ sub _fetch {
         sub {
             my ($dist) = @_;
             return (
-                [ favorites    => $self->_favorite->by_dist($dist) ],
                 [ plussers     => $self->_favorite->find_plussers($dist) ],
                 [ versions     => $self->_release->versions($dist) ],
                 [ distribution => $self->_distribution->get($dist) ],

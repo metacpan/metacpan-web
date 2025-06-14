@@ -13,9 +13,6 @@ require('bootstrap/js/dropdown.js');
 require('bootstrap/js/modal.js');
 require('bootstrap/js/tooltip.js');
 
-function setFavTitle(button) {
-    button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
-}
 
 async function processUserData() {
     let user_data;
@@ -52,20 +49,6 @@ async function processUserData() {
         document.querySelector('.logged-in-icon').replaceWith(avatar);
     }
 
-    // process users current favs
-    for (const fav of user_data.faves) {
-        const distribution = fav.distribution;
-
-        // On the page... make it deltable and styled as 'active'
-        const fav_display = document.querySelector(`#${distribution}-fav`);
-
-        if (fav_display) {
-            fav_display.querySelector('input[name="remove"]').value = 1;
-            var button = fav_display.querySelector('button');
-            button.classList.add('active');
-            setFavTitle(button);
-        }
-    }
 }
 
 function set_page_size(selector, storage_name) {
@@ -172,10 +155,6 @@ for (const el of document.querySelectorAll('.ellipsis')) {
 
 createAnchors(document.querySelectorAll('.anchors'));
 
-for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
-    setFavTitle(favButton);
-}
-
 jQuery('.dropdown-toggle').dropdown(); // bootstrap
 
 const toc = document.querySelector(".content .toc")
@@ -221,54 +200,6 @@ if (changes) {
     changes_toggle.addEventListener('click', e => {
         e.preventDefault();
         changes.classList.toggle('collapsed');
-    });
-}
-
-for (const favForm of document.querySelectorAll('form[action="/account/favorite/add"]')) {
-    favForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        const formData = new FormData(favForm);
-        const response = await fetch(favForm.action, {
-            method: favForm.method,
-            headers: {
-                'Accept': 'application/json',
-            },
-            body: formData,
-        });
-        if (!response.ok) {
-            alert("Error adding favorite!");
-        }
-
-        const button = favForm.querySelector('button');
-        button.classList.toggle('active');
-        setFavTitle(button);
-        const counter = button.querySelector('span');
-        const count = counter.innerText;
-        if (button.classList.contains('active')) {
-            counter.innerText = count ? parseInt(count, 10) + 1 : 1;
-            // now added let users remove
-            favForm.querySelector('input[name="remove"]').value = 1;
-            if (!count)
-                button.classList.toggle('highlight');
-        }
-        else {
-            // can't delete what's already deleted
-            favForm.querySelector('input[name="remove"]').value = 0;
-
-            counter.textContent = parseInt(count, 10) - 1;
-
-            if (counter.textContent == 0) {
-                counter.textContent = '';
-                button.classList.toggle('highlight');
-            }
-        }
-    });
-}
-
-for (const favButton of document.querySelectorAll('.fav-not-logged-in')) {
-    favButton.addEventListener('click', e => {
-        e.preventDefault();
-        alert('Please sign in to add favorites');
     });
 }
 
