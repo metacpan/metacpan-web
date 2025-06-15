@@ -1996,18 +1996,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.090
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.090.tar.gz
+  IO-Socket-SSL-2.091
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.091.tar.gz
     provides:
-      IO::Socket::SSL 2.090
+      IO::Socket::SSL 2.091
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.090
-      IO::Socket::SSL::OCSP_Resolver 2.090
+      IO::Socket::SSL::OCSP_Cache 2.091
+      IO::Socket::SSL::OCSP_Resolver 2.091
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.090
-      IO::Socket::SSL::SSL_HANDLE 2.090
-      IO::Socket::SSL::Session_Cache 2.090
-      IO::Socket::SSL::Trace 2.090
+      IO::Socket::SSL::SSL_Context 2.091
+      IO::Socket::SSL::SSL_HANDLE 2.091
+      IO::Socket::SSL::Session_Cache 2.091
+      IO::Socket::SSL::Trace 2.091
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -2092,36 +2092,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.82
-    pathname: S/SB/SBECK/Locale-Codes-3.82.tar.gz
+  Locale-Codes-3.84
+    pathname: S/SB/SBECK/Locale-Codes-3.84.tar.gz
     provides:
-      Locale::Codes 3.82
-      Locale::Codes::Constants 3.82
-      Locale::Codes::Country 3.82
-      Locale::Codes::Country_Codes 3.82
-      Locale::Codes::Country_Retired 3.82
-      Locale::Codes::Currency 3.82
-      Locale::Codes::Currency_Codes 3.82
-      Locale::Codes::Currency_Retired 3.82
-      Locale::Codes::LangExt 3.82
-      Locale::Codes::LangExt_Codes 3.82
-      Locale::Codes::LangExt_Retired 3.82
-      Locale::Codes::LangFam 3.82
-      Locale::Codes::LangFam_Codes 3.82
-      Locale::Codes::LangFam_Retired 3.82
-      Locale::Codes::LangVar 3.82
-      Locale::Codes::LangVar_Codes 3.82
-      Locale::Codes::LangVar_Retired 3.82
-      Locale::Codes::Language 3.82
-      Locale::Codes::Language_Codes 3.82
-      Locale::Codes::Language_Retired 3.82
-      Locale::Codes::Script 3.82
-      Locale::Codes::Script_Codes 3.82
-      Locale::Codes::Script_Retired 3.82
-      Locale::Country 3.82
-      Locale::Currency 3.82
-      Locale::Language 3.82
-      Locale::Script 3.82
+      Locale::Codes 3.84
+      Locale::Codes::Constants 3.84
+      Locale::Codes::Country 3.84
+      Locale::Codes::Country_Codes 3.84
+      Locale::Codes::Country_Retired 3.84
+      Locale::Codes::Currency 3.84
+      Locale::Codes::Currency_Codes 3.84
+      Locale::Codes::Currency_Retired 3.84
+      Locale::Codes::LangExt 3.84
+      Locale::Codes::LangExt_Codes 3.84
+      Locale::Codes::LangExt_Retired 3.84
+      Locale::Codes::LangFam 3.84
+      Locale::Codes::LangFam_Codes 3.84
+      Locale::Codes::LangFam_Retired 3.84
+      Locale::Codes::LangVar 3.84
+      Locale::Codes::LangVar_Codes 3.84
+      Locale::Codes::LangVar_Retired 3.84
+      Locale::Codes::Language 3.84
+      Locale::Codes::Language_Codes 3.84
+      Locale::Codes::Language_Retired 3.84
+      Locale::Codes::Script 3.84
+      Locale::Codes::Script_Codes 3.84
+      Locale::Codes::Script_Retired 3.84
+      Locale::Country 3.84
+      Locale::Currency 3.84
+      Locale::Language 3.84
+      Locale::Script 3.84
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -3905,26 +3905,26 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20250311
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20250311.tar.gz
+  Perl-Tidy-20250616
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20250616.tar.gz
     provides:
-      Perl::Tidy 20250311
-      Perl::Tidy::Debugger 20250311
-      Perl::Tidy::Diagnostics 20250311
-      Perl::Tidy::FileWriter 20250311
-      Perl::Tidy::Formatter 20250311
-      Perl::Tidy::HtmlWriter 20250311
-      Perl::Tidy::IOScalar 20250311
-      Perl::Tidy::IOScalarArray 20250311
-      Perl::Tidy::IndentationItem 20250311
-      Perl::Tidy::Logger 20250311
-      Perl::Tidy::Tokenizer 20250311
-      Perl::Tidy::VerticalAligner 20250311
-      Perl::Tidy::VerticalAligner::Alignment 20250311
-      Perl::Tidy::VerticalAligner::Line 20250311
+      Perl::Tidy 20250616
+      Perl::Tidy::Debugger 20250616
+      Perl::Tidy::Diagnostics 20250616
+      Perl::Tidy::FileWriter 20250616
+      Perl::Tidy::Formatter 20250616
+      Perl::Tidy::HtmlWriter 20250616
+      Perl::Tidy::IOScalar 20250616
+      Perl::Tidy::IOScalarArray 20250616
+      Perl::Tidy::IndentationItem 20250616
+      Perl::Tidy::Logger 20250616
+      Perl::Tidy::Tokenizer 20250616
+      Perl::Tidy::VerticalAligner 20250616
+      Perl::Tidy::VerticalAligner::Alignment 20250616
+      Perl::Tidy::VerticalAligner::Line 20250616
     requirements:
       ExtUtils::MakeMaker 0
-      perl 5.008
+      perl 5.008001
   PerlIO-utf8_strict-0.010
     pathname: L/LE/LEONT/PerlIO-utf8_strict-0.010.tar.gz
     provides:
