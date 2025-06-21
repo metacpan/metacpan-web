@@ -137,11 +137,13 @@ sub request {
     );
 
     my $req_p = $self->client->do_request( request => $request );
-    $req_p = $req_p->catch( sub {
 
-        # retry once
-        $self->client->do_request( request => $request );
-    } );
+    # Do not retry - if the API is loaded/slow then this just makes it worse.
+    # $req_p = $req_p->catch( sub {
+
+    #     # retry once
+    #     $self->client->do_request( request => $request );
+    # } );
     $req_p->transform(
         done => sub {
             my $response = shift;
