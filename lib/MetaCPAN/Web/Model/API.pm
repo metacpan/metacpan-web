@@ -52,6 +52,7 @@ has log         => ( is => 'ro' );
 has debug       => ( is => 'ro' );
 has request_uri => ( is => 'ro' );
 has request_id  => ( is => 'ro' );
+has x_trace_id  => ( is => 'ro' );
 
 sub COMPONENT {
     my ( $class, $app, $args ) = @_;
@@ -77,7 +78,10 @@ sub ACCEPT_CONTEXT {
             request_url => $r->uri,
             (
                 $r->env
-                ? ( request_id => $r->env->{'MetaCPAN::Web.request_id'}, )
+                ? (
+                    request_id => $r->env->{'MetaCPAN::Web.request_id'},
+                    x_trace_id => $r->env->{'MetaCPAN::Web.x_trace_id'},
+                    )
                 : ()
             ),
         );
@@ -102,6 +106,8 @@ sub request {
 
     my $current_url = $self->request_uri;
     my $request_id  = $self->request_id;
+    my $x_trace_id  = $self->x_trace_id || 'No-Trace-ID-to-MC';
+
     if ( $method =~ /^(GET|DELETE)$/ || $search ) {
         for my $param ( keys %{ $params || {} } ) {
             $url->query_param( $param => $params->{$param} );
@@ -124,6 +130,9 @@ sub request {
         ),
         ( $current_url ? ( 'Referer' => $current_url->as_string )   : () ),
         ( $request_id  ? ( 'X-MetaCPAN-Request-ID' => $request_id ) : () ),
+
+        # Comes from the UUID fastly sets
+        ( $x_trace_id ? ( 'X-Trace-ID' => $x_trace_id ) : () ),
         'Accept' => 'application/json, */*',
     );
 

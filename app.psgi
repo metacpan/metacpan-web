@@ -106,6 +106,9 @@ builder {
                 $env->{REMOTE_ADDR}, $env->{REQUEST_URI}, time, $$, rand, ) );
             $env->{'MetaCPAN::Web.request_id'} = $request_id;
 
+            # Capture X-Trace-ID, set by Fastly, to pass to API backend
+            $env->{'MetaCPAN::Web.x_trace_id'} = $env->{HTTP_X_TRACE_ID};
+
             my $mdc = Log::Log4perl::MDC->get_context;
             %$mdc = (
                 request_id => $request_id,
