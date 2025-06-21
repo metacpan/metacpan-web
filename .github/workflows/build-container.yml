@@ -74,7 +74,7 @@ jobs:
       - name: Find tag names
         id: find-tag-names
         run: |
-          echo "${{ steps.meta.outputs.json }}" | jq -r '.tags | reverse | map ( { (split(":").[-1]) : . }) | add | keys[] as $k | "\($k)=\(.[$k])"' >> "$GITHUB_OUTPUT"
+          echo "${{ steps.meta.outputs.json }}" | jq -r '.tags | reverse | map ( { (split(":")[-1]) : . }) | add | keys[] as $k | "\($k)=\(.[$k])"' >> "$GITHUB_OUTPUT"
       - name: Update deployed image
         if: steps.find-tag-names.outputs.latest
         uses: benc-uk/workflow-dispatch@v1
