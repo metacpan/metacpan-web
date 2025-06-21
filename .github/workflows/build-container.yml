@@ -73,8 +73,10 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
       - name: Find tag names
         id: find-tag-names
+        env:
+          DOCKER_META_JSON: ${{ steps.meta.outputs.json }}
         run: |
-          echo "${{ steps.meta.outputs.json }}" | jq -r '.tags | reverse | map ( { (split(":")[-1]) : . }) | add | keys[] as $k | "\($k)=\(.[$k])"' >> "$GITHUB_OUTPUT"
+          echo "$DOCKER_META_JSON" | jq -r '.tags | reverse | map ( { (split(":")[-1]) : . }) | add | keys[] as $k | "\($k)=\(.[$k])"' >> "$GITHUB_OUTPUT"
       - name: Update deployed image
         if: steps.find-tag-names.outputs.latest
         uses: benc-uk/workflow-dispatch@v1
