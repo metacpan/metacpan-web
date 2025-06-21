@@ -71,12 +71,22 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
+      - name: Find tag names
+        id: find-tag-names
+        run:
+          echo "${{ steps.meta.outputs.json }}" | jq -r '.tags | reverse | map ( { (split(":").[-1]) : . }) | add | keys[] as $k | "\($k)=\(.[$k])"' >> "$GITHUB_OUTPUT"
       - name: Update deployed image
-        if: contains( format(',{0},', join( fromJSON(steps.meta.outputs.json).tags, ',' ) ), ':latest,' )
+        if: steps.find-tag-names.outputs.latest
         uses: benc-uk/workflow-dispatch@v1
         with:
           repo: metacpan/metacpan-k8s
           ref: main
           workflow: set-image.yml
           token: ${{ steps.app-token.outputs.token }}
-          inputs: '{ "app": "web", "environment": "prod", "base-tag": "${{ github.repository }}:latest", "tag": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}" }'
+          inputs: |
+            {
+              "app": "web",
+              "environment": "prod",
+              "base-tag": "${{ steps.find-tag-names.outputs.latest }}",
+              "tag": "${{ fromJSON(steps.meta.outputs.json).tags[0] }}"
+            }
