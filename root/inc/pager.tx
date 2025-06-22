@@ -3,17 +3,17 @@
 <div class="text-center">
   <ul class="pagination">
     <li class="[% if !$pageset.previous_page { 'disabled' } %]">
-      <a href="[% $page_url({ p => $pageset.previous_page }) %]">«</a>
+      <a href="[% $page_url({ p => $pageset.previous_page, size => $pageset.entries_per_page }) %]">«</a>
     </li>
 
     %%  for $pageset.pages_in_set -> $page_num {
     <li [% if $page_num == $pageset.current_page { %] class="active"[% } %]>
-      <a href="[% $page_url({ p => $page_num }) %]">[% $page_num %]</a>
+      <a href="[% $page_url({ p => $page_num, size => $pageset.entries_per_page  }) %]">[% $page_num %]</a>
     </li>
     %%  }
 
     <li class="[% if !$pageset.next_page { 'disabled' } %]">
-      <a href="[% $page_url({ p => $pageset.next_page }) %]">»</a>
+      <a href="[% $page_url({ p => $pageset.next_page, size => $pageset.entries_per_page }) %]">»</a>
     </li>
   </ul>
 </div>

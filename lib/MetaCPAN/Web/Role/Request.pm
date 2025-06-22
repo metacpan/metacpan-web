@@ -26,7 +26,9 @@ sub get_page_size {
     my $default_page_size = shift;
 
     my $page_size = $req->param('size');
-    unless ( is_PositiveInt($page_size) && $page_size <= 500 ) {
+
+    # We no longer support more than 100 results per page
+    unless ( is_PositiveInt($page_size) && $page_size <= 100 ) {
         $page_size = $default_page_size;
     }
     return $page_size;
