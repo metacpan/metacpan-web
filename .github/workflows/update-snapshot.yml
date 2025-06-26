@@ -7,74 +7,25 @@ jobs:
   update-dep:
     runs-on: 'ubuntu-24.04'
     steps:
+      - name: libcmark-dev
+        run: sudo apt-get install -y -f --no-install-recommends libcmark-dev
       - name: Generate Auth Token
         uses: actions/create-github-app-token@v2
         id: app-token
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-      - id: git-user
-        name: Set up git user
-        uses: haarg/setup-git-user@v1
-        with:
-          app: ${{ steps.app-token.outputs.app-slug }}
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
-      - name: Set up installation local::lib
-        run: |
-          mkdir -p $RUNNER_TEMP/perl5/bin
-          mkdir -p $RUNNER_TEMP/perl5/lib/perl5
-          echo "$RUNNER_TEMP/perl5/bin" >> "$GITHUB_PATH"
-          echo "PERL5LIB=$RUNNER_TEMP/perl5/lib/perl5" >> "$GITHUB_ENV"
-      - name: Get cpm
-        run: |
-          curl -sL -o $RUNNER_TEMP/perl5/bin/cpm https://raw.githubusercontent.com/skaji/cpm/main/cpm
-          chmod +x $RUNNER_TEMP/perl5/bin/cpm
-      - name: libcmark-dev
-        run: sudo apt-get install -y -f --no-install-recommends libcmark-dev
-      - name: Install cpanm, Carton, and Carton::Snapshot
-        run: >
-          cpm install
-          App::cpanminus
-          Carton
-          Carton::Snapshot
-          --without-test
-          --show-build-log-on-failure
-          --local-lib-contained=$RUNNER_TEMP/perl5
-      - name: Install forced deps
-        run: >
-          cpanm
-          --cpanfile cpanfile.forced
-          --showdeps --installdeps
-          -L local
-          -q
-          .
-          | cpm install
-          --without-test
-          --resolver metacpan
-          --show-build-log-on-failure
-          --local-lib-contained=local
-          --reinstall
-          -
-      - name: Install deps
-        run: >
-          cpm install
-          --cpanfile cpanfile
-          --resolver metacpan
-          --show-build-log-on-failure
-          --local-lib-contained=local
-          --with-develop
-      - name: Maybe update cpanfile.snapshot
-        run: carton
+      - uses: metacpan/metacpan-actions/update-snapshot@master
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app-token.outputs.token }}
           commit-message: Update cpanfile.snapshot
           title: Update cpanfile.snapshot
-          author: ${{ steps.git-user.outputs.user-full }}
-          committer: ${{ steps.git-user.outputs.user-full }}
+          sign-commits: true
           body: |
             [GitHub Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           branch: update-cpanfile-snapshot
