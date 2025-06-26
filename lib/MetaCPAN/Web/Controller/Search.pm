@@ -22,7 +22,7 @@ sub index : Path : Args(0) {
     # Redirect back to main page if search query is empty irrespective of
     # whether we're feeling lucky or not.
     unless ( $req->param('q') ) {
-        $c->browser_max_age('1w');
+        $c->browser_max_age('7d');
         $c->res->redirect('/');
         $c->detach;
     }
