@@ -13,11 +13,6 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-      - id: git-user
-        name: Set up git user
-        uses: haarg/setup-git-user@v1
-        with:
-          app: ${{ steps.app-token.outputs.app-slug }}
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -29,34 +24,34 @@ jobs:
           echo "PERL5LIB=$RUNNER_TEMP/perl5/lib/perl5" >> "$GITHUB_ENV"
       - name: Get cpm
         run: |
-          curl -sL -o $RUNNER_TEMP/perl5/bin/cpm https://raw.githubusercontent.com/skaji/cpm/main/cpm
+          curl -sLf -o $RUNNER_TEMP/perl5/bin/cpm https://raw.githubusercontent.com/skaji/cpm/main/cpm
           chmod +x $RUNNER_TEMP/perl5/bin/cpm
       - name: libcmark-dev
         run: sudo apt-get install -y -f --no-install-recommends libcmark-dev
       - name: Install cpanm, Carton, and Carton::Snapshot
         run: >
           cpm install
-          App::cpanminus
           Carton
           Carton::Snapshot
           --without-test
           --show-build-log-on-failure
           --local-lib-contained=$RUNNER_TEMP/perl5
+      - name: Get forced prereqs
+        id: prereqs-forced
+        uses: perl-actions/get-prereqs@v1
+        with:
+          sources: cpanfile.forced
       - name: Install forced deps
+        env:
+          PREREQS: ${{ steps.prereqs-forced.outputs.prereqs }}
         run: >
-          cpanm
-          --cpanfile cpanfile.forced
-          --showdeps --installdeps
-          -L local
-          -q
-          .
-          | cpm install
+          cpm install
           --without-test
           --resolver metacpan
           --show-build-log-on-failure
           --local-lib-contained=local
           --reinstall
-          -
+          $PREREQS
       - name: Install deps
         run: >
           cpm install
@@ -73,8 +68,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           commit-message: Update cpanfile.snapshot
           title: Update cpanfile.snapshot
-          author: ${{ steps.git-user.outputs.user-full }}
-          committer: ${{ steps.git-user.outputs.user-full }}
+          sign-commits: true
           body: |
             [GitHub Action Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           branch: update-cpanfile-snapshot
