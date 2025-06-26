@@ -113,6 +113,10 @@ my $profile_data = {
         name       => 'Bitbucket',
         url_format => 'https://bitbucket.org/%s',
     },
+    codeberg => {
+        name       => 'Codeberg',
+        url_format => 'https://codeberg.org/%s',
+    },
     coderwall => {
         name       => 'Coderwall',
         url_format => 'https://coderwall.com/%s',
