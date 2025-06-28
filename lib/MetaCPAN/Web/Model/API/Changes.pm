@@ -13,6 +13,49 @@ sub get {
     $self->request( '/changes/' . join( '/', @path ) );
 }
 
+sub _relevant_changes {
+    my ( $self, $content, $opts ) = @_;
+
+    my $version = _parse_version( $opts->{version} );
+
+    my @releases = _releases($content);
+
+    my @changelogs;
+
+    if ( _versions_cmp( $releases[-1]->{version_parsed}, $version ) == 0 ) {
+        @releases = reverse @releases;
+    }
+    elsif ( _versions_cmp( $releases[0]->{version_parsed}, $version ) == 0 ) {
+
+        # noop
+    }
+    else {
+        @releases = sort {
+            _versions_cmp( $b->{version_parsed}, $a->{version_parsed} )
+        } @releases;
+        if ( _versions_cmp( $releases[0]->{version_parsed}, $version ) != 0 )
+        {
+            @releases = ();
+        }
+    }
+
+    if (@releases) {
+        my $current = shift @releases;
+        $current->{current} = 1;
+        push @changelogs, $current;
+
+        if ( $opts->{include_dev} ) {
+            for my $dev_r (@releases) {
+                last
+                    if !$dev_r->{dev};
+                push @changelogs, $dev_r;
+            }
+        }
+    }
+
+    return \@changelogs;
+}
+
 sub release_changes {
     my ( $self, $path, %opts ) = @_;
     $path = join '/', @$path
@@ -23,27 +66,11 @@ sub release_changes {
         my $content = $file->{content}
             or return Future->done( { code => 404 } );
 
-        my $version
-            = _parse_version( $opts{version} || $file->{version} );
+        $opts{version} ||= $file->{version};
 
-        my @releases = _releases($content);
-
-        my @changelogs;
-        while ( my $r = shift @releases ) {
-            if ( _versions_cmp( $r->{version_parsed}, $version ) == 0 ) {
-                $r->{current} = 1;
-                push @changelogs, $r;
-                if ( $opts{include_dev} ) {
-                    for my $dev_r (@releases) {
-                        last
-                            if !$dev_r->{dev};
-                        push @changelogs, $dev_r;
-                    }
-                }
-            }
-        }
+        my $changes = $self->_relevant_changes( $content, \%opts );
         return Future->done( {
-            changes => \@changelogs,
+            changes => $changes,
         } );
     } );
 }
@@ -104,9 +131,8 @@ sub _releases {
     my $changelog
         = MetaCPAN::Web::Model::API::Changes::Parser->parse($content);
 
-    my @releases
-        = sort { _versions_cmp( $b->{version_parsed}, $a->{version_parsed} ) }
-        map {
+    my @releases = map {
+        ;
         my $v     = _parse_version( $_->{version} );
         my $trial = $_->{version} =~ /-TRIAL$/
             || $_->{note} && $_->{note} =~ /\bTRIAL\b/;
@@ -117,7 +143,7 @@ sub _releases {
             trial          => $trial,
             dev            => $dev,
         };
-        } @{ $changelog->{releases} || [] };
+    } @{ $changelog->{releases} || [] };
     return @releases;
 }
 
