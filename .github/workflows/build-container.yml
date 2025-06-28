@@ -38,7 +38,7 @@ jobs:
         if: steps.find-tag-names.outputs.latest
         uses: metacpan/metacpan-actions/update-deployed-tag:master
         with:
-          token:
+          token: ${{ steps.app-token.outputs.token }}
           app: web
           environment: prod
           base-tag: ${{ steps.find-tag-names.outputs.latest }}
