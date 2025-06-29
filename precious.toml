@@ -1,7 +1,8 @@
-excludes = [
-    ".build/**",
-    "blib/**",
-    "root/assets/**",
+exclude = [
+    "/.build/**",
+    "/blib/**",
+    "/root/assets/**",
+    "/local/**",
 ]
 
 [commands.perlimports]
