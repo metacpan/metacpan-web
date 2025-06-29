@@ -15,6 +15,9 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: haarg/setup-git-user@v1
+        with:
+          app: ${{ steps.app-token.output.app-slug }}
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
