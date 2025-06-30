@@ -38,11 +38,11 @@ jobs:
           ghcr_username: ${{ github.repository_owner }}
           ghcr_password: ${{ secrets.GITHUB_TOKEN }}
       - name: Update deployed image
-        if: steps.find-tag-names.outputs.latest
-        uses: metacpan/metacpan-actions/update-deployed-tag:master
+        if: ${{ fromJSON(steps.build-push.outputs.tag-fq).latest }}
+        uses: metacpan/metacpan-actions/update-deployed-tag@master
         with:
           token: ${{ steps.app-token.outputs.token }}
           app: web
           environment: prod
-          base-tag: ${{ steps.find-tag-names.outputs.latest }}
-          tag: ${{ steps.find-tag-names.outputs.sha }}
+          base-tag: ${{ fromJSON(steps.build-push.outputs.tag-fq).latest }}
+          tag: ${{ fromJSON(steps.build-push.outputs.tag-fq).sha }}
