@@ -26,6 +26,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
+      - name: Docker build test
+        run: docker build . --target test --tag test
+      - name: Docker test
+        run: docker run -it test
       - uses: metacpan/metacpan-actions/docker-build-push@master
         id: build-push
         with:
@@ -33,7 +37,6 @@ jobs:
           docker_hub_password: ${{ secrets.DOCKER_HUB_TOKEN }}
           ghcr_username: ${{ github.repository_owner }}
           ghcr_password: ${{ secrets.GITHUB_TOKEN }}
-          test-target: test
       - name: Update deployed image
         if: steps.find-tag-names.outputs.latest
         uses: metacpan/metacpan-actions/update-deployed-tag:master
