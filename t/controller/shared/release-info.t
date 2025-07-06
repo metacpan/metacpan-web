@@ -16,6 +16,7 @@ my $rt_prefix = $model->RT_URL_PREFIX;
 
 # Not all tests apply to all releases.
 my @optional = qw(
+    favorited
     home_page
     repository
     issues
@@ -69,6 +70,7 @@ test_psgi app, sub {
             home_page  => 0,
             reviews    => 0,
             repository => 0,
+            favorited  => 0
         },
     );
 
@@ -124,6 +126,18 @@ test_psgi app, sub {
 
             # TODO: latest version (should be where we already are)
             # TODO: author
+
+            # not in release-info.html but should be shown on both:
+
+            my $favs = '//*[contains-token(@class, "favorite")]';
+            $tx->like( $favs, qr/\+\+$/, 'tag for favorites (++)' );
+
+            optional_test favorited => sub {
+                ok(
+                    $tx->find_value("$favs/span") > 0,
+                    "$req_uri has been marked as favorite"
+                );
+            };
 
 # Info about a release (either the one we're looking at or the one the module belongs to)
 
