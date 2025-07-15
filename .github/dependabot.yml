@@ -8,6 +8,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
   - package-ecosystem: docker
     directory: /
     schedule:
