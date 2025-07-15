@@ -93,7 +93,7 @@ If you can only connect your account to GitHub _or_ PAUSE
 (e.g. connecting to one disconnects the other), it is usually because
 you have (probably accidentally) created two accounts.
 
-To fix this you need to manualy merge your identities into a single account:
+To fix this you need to manually merge your identities into a single account:
 
 1. Log in with your secondary account
 (please note that PAUSE cannot be used for logging in)
