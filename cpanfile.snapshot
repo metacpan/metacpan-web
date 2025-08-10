@@ -657,14 +657,6 @@ DISTRIBUTIONS
       Clone 0.47
     requirements:
       ExtUtils::MakeMaker 0
-  Clone-Choose-0.010
-    pathname: H/HE/HERMES/Clone-Choose-0.010.tar.gz
-    provides:
-      Clone::Choose 0.010
-    requirements:
-      ExtUtils::MakeMaker 0
-      Storable 0
-      perl 5.008001
   Clone-PP-1.08
     pathname: N/NE/NEILB/Clone-PP-1.08.tar.gz
     provides:
@@ -4348,56 +4340,55 @@ DISTRIBUTIONS
       Test::Warn 0
       XSLoader 0
       perl 5.008
-  Specio-0.51
-    pathname: D/DR/DROLSKY/Specio-0.51.tar.gz
+  Specio-0.52
+    pathname: D/DR/DROLSKY/Specio-0.52.tar.gz
     provides:
-      Specio 0.51
-      Specio::Coercion 0.51
-      Specio::Constraint::AnyCan 0.51
-      Specio::Constraint::AnyDoes 0.51
-      Specio::Constraint::AnyIsa 0.51
-      Specio::Constraint::Enum 0.51
-      Specio::Constraint::Intersection 0.51
-      Specio::Constraint::ObjectCan 0.51
-      Specio::Constraint::ObjectDoes 0.51
-      Specio::Constraint::ObjectIsa 0.51
-      Specio::Constraint::Parameterizable 0.51
-      Specio::Constraint::Parameterized 0.51
-      Specio::Constraint::Role::CanType 0.51
-      Specio::Constraint::Role::DoesType 0.51
-      Specio::Constraint::Role::Interface 0.51
-      Specio::Constraint::Role::IsaType 0.51
-      Specio::Constraint::Simple 0.51
-      Specio::Constraint::Structurable 0.51
-      Specio::Constraint::Structured 0.51
-      Specio::Constraint::Union 0.51
-      Specio::Declare 0.51
-      Specio::DeclaredAt 0.51
-      Specio::Exception 0.51
-      Specio::Exporter 0.51
-      Specio::Helpers 0.51
-      Specio::Library::Builtins 0.51
-      Specio::Library::Numeric 0.51
-      Specio::Library::Perl 0.51
-      Specio::Library::String 0.51
-      Specio::Library::Structured 0.51
-      Specio::Library::Structured::Dict 0.51
-      Specio::Library::Structured::Map 0.51
-      Specio::Library::Structured::Tuple 0.51
-      Specio::OO 0.51
-      Specio::PP 0.51
-      Specio::PartialDump 0.51
-      Specio::Registry 0.51
-      Specio::Role::Inlinable 0.51
-      Specio::Subs 0.51
-      Specio::TypeChecks 0.51
-      Specio::XS 0.51
-      Test::Specio 0.51
+      Specio 0.52
+      Specio::Coercion 0.52
+      Specio::Constraint::AnyCan 0.52
+      Specio::Constraint::AnyDoes 0.52
+      Specio::Constraint::AnyIsa 0.52
+      Specio::Constraint::Enum 0.52
+      Specio::Constraint::Intersection 0.52
+      Specio::Constraint::ObjectCan 0.52
+      Specio::Constraint::ObjectDoes 0.52
+      Specio::Constraint::ObjectIsa 0.52
+      Specio::Constraint::Parameterizable 0.52
+      Specio::Constraint::Parameterized 0.52
+      Specio::Constraint::Role::CanType 0.52
+      Specio::Constraint::Role::DoesType 0.52
+      Specio::Constraint::Role::Interface 0.52
+      Specio::Constraint::Role::IsaType 0.52
+      Specio::Constraint::Simple 0.52
+      Specio::Constraint::Structurable 0.52
+      Specio::Constraint::Structured 0.52
+      Specio::Constraint::Union 0.52
+      Specio::Declare 0.52
+      Specio::DeclaredAt 0.52
+      Specio::Exception 0.52
+      Specio::Exporter 0.52
+      Specio::Helpers 0.52
+      Specio::Library::Builtins 0.52
+      Specio::Library::Numeric 0.52
+      Specio::Library::Perl 0.52
+      Specio::Library::String 0.52
+      Specio::Library::Structured 0.52
+      Specio::Library::Structured::Dict 0.52
+      Specio::Library::Structured::Map 0.52
+      Specio::Library::Structured::Tuple 0.52
+      Specio::OO 0.52
+      Specio::PP 0.52
+      Specio::PartialDump 0.52
+      Specio::Registry 0.52
+      Specio::Role::Inlinable 0.52
+      Specio::Subs 0.52
+      Specio::TypeChecks 0.52
+      Specio::XS 0.52
+      Test::Specio 0.52
     requirements:
       B 0
       Carp 0
       Clone 0
-      Clone::Choose 0
       Clone::PP 0
       Devel::StackTrace 0
       Eval::Closure 0
