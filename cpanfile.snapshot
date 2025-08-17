@@ -1397,10 +1397,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       File::Temp 0
       perl 5.006001
-  Devel-OverloadInfo-0.007
-    pathname: I/IL/ILMARI/Devel-OverloadInfo-0.007.tar.gz
+  Devel-OverloadInfo-0.008
+    pathname: I/IL/ILMARI/Devel-OverloadInfo-0.008.tar.gz
     provides:
-      Devel::OverloadInfo 0.007
+      Devel::OverloadInfo 0.008
     requirements:
       B 0
       Exporter 5.57
