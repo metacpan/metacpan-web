@@ -21,15 +21,29 @@ We strongly recommend using
 [metacpan-docker](https://github.com/metacpan/metacpan-docker). This will give
 you a virtual machine already configured and ready to start developing on.
 
-If you prefer not to use Docker, the following commands will get you started:
+If you prefer not to use Docker, you can set up a local development environment:
+
+## Quick Setup
+
+For automated setup, run:
+
+```bash
+./bin/setup-dev
+```
+
+This will install all dependencies, build assets, and verify your setup.
 
 ## Installing Manually
+
+If you prefer manual setup or need more control:
 
 ```bash
 carton install
 npm install
 export PATH="$(realpath ./node_modules/.bin):$PATH"
 ```
+
+For detailed setup instructions, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ### Building Static Assets
 
