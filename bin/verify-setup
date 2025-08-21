@@ -1,0 +1,192 @@
+#!/bin/bash
+
+# MetaCPAN Web Environment Verification Script
+# This script checks if the development environment is properly set up
+
+set -euo pipefail
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+log_info() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+log_warn() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+log_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+log_check() {
+    echo -e "${BLUE}→${NC} $1"
+}
+
+# Check if we're in the right directory
+if [[ ! -f "cpanfile" || ! -f "package.json" ]]; then
+    log_error "This script must be run from the metacpan-web repository root directory"
+    exit 1
+fi
+
+echo "MetaCPAN Web Environment Verification"
+echo "====================================="
+echo
+
+# System requirements
+log_check "Checking system requirements..."
+
+# Perl
+if command -v perl >/dev/null 2>&1; then
+    PERL_VERSION=$(perl -e 'print $^V' | sed 's/v//')
+    log_info "Perl $PERL_VERSION"
+else
+    log_error "Perl not found"
+fi
+
+# Node.js
+if command -v node >/dev/null 2>&1; then
+    NODE_VERSION=$(node --version)
+    log_info "Node.js $NODE_VERSION"
+else
+    log_error "Node.js not found"
+fi
+
+# npm
+if command -v npm >/dev/null 2>&1; then
+    NPM_VERSION=$(npm --version)
+    log_info "npm $NPM_VERSION"
+else
+    log_error "npm not found"
+fi
+
+echo
+
+# System dependencies
+log_check "Checking system dependencies..."
+
+if command -v apt-get >/dev/null 2>&1; then
+    if dpkg -l | grep -q libcmark-dev; then
+        log_info "libcmark-dev installed"
+    else
+        log_error "libcmark-dev not installed"
+    fi
+else
+    log_warn "Cannot check libcmark-dev (not on Debian/Ubuntu system)"
+fi
+
+echo
+
+# Perl tools
+log_check "Checking Perl development tools..."
+
+if command -v carton >/dev/null 2>&1; then
+    CARTON_VERSION=$(carton version 2>/dev/null || echo "unknown")
+    log_info "carton $CARTON_VERSION"
+else
+    log_error "carton not found"
+fi
+
+if command -v cpm >/dev/null 2>&1; then
+    CPM_VERSION=$(cpm --version 2>/dev/null | head -1 || echo "unknown")
+    log_info "cpm $CPM_VERSION"
+else
+    log_error "cpm not found"
+fi
+
+echo
+
+# Dependencies
+log_check "Checking dependencies..."
+
+if [[ -d "node_modules" ]]; then
+    log_info "Node.js dependencies installed"
+else
+    log_error "Node.js dependencies not installed (run 'npm install')"
+fi
+
+if [[ -d "local" ]]; then
+    log_info "Perl dependencies installed"
+else
+    log_error "Perl dependencies not installed (run 'carton install' or 'cpm install')"
+fi
+
+echo
+
+# Assets
+log_check "Checking static assets..."
+
+if [[ -f "root/assets/assets.json" ]]; then
+    log_info "Static assets built"
+else
+    log_error "Static assets not built (run 'npm run build')"
+fi
+
+echo
+
+# Git hooks
+log_check "Checking git hooks..."
+
+if [[ -L ".git/hooks/pre-commit" ]]; then
+    log_info "Git pre-commit hook configured"
+else
+    log_warn "Git pre-commit hook not configured (run './git/setup.sh')"
+fi
+
+echo
+
+# Basic functionality test
+log_check "Testing basic functionality..."
+
+# Test if we can load the application
+if command -v carton >/dev/null 2>&1; then
+    log_check "Testing application startup..."
+    
+    # Quick syntax check
+    if carton exec perl -c app.psgi >/dev/null 2>&1; then
+        log_info "Application syntax OK"
+    else
+        log_error "Application syntax errors"
+    fi
+    
+    # Test basic modules
+    log_check "Testing basic tests..."
+    if carton exec prove -l t/moose.t >/dev/null 2>&1; then
+        log_info "Basic tests pass"
+    else
+        log_error "Basic tests fail"
+    fi
+    
+    if carton exec prove -l t/assets.t >/dev/null 2>&1; then
+        log_info "Asset tests pass"
+    else
+        log_error "Asset tests fail"
+    fi
+else
+    log_warn "Cannot test functionality (carton not available)"
+fi
+
+echo
+
+# Summary
+log_check "Environment Summary:"
+echo
+if command -v carton >/dev/null 2>&1 && [[ -d "local" ]] && [[ -d "node_modules" ]] && [[ -f "root/assets/assets.json" ]]; then
+    log_info "Development environment appears to be ready!"
+    echo
+    echo "You can now run:"
+    echo "  carton exec plackup -p 5001 -r app.psgi"
+    echo
+    echo "And visit: http://localhost:5001"
+else
+    log_warn "Development environment needs attention"
+    echo
+    echo "Try running: ./bin/setup-dev"
+fi
+
+echo
