@@ -4442,12 +4442,13 @@ DISTRIBUTIONS
       perl 5.012
       strict 0
       warnings 0
-  Struct-Dumb-0.14
-    pathname: P/PE/PEVANS/Struct-Dumb-0.14.tar.gz
+  Struct-Dumb-0.15
+    pathname: P/PE/PEVANS/Struct-Dumb-0.15.tar.gz
     provides:
-      Struct::Dumb 0.14
+      Struct::Dumb 0.15
     requirements:
       Module::Build 0.4004
+      perl 5.014
   Sub-Exporter-0.991
     pathname: R/RJ/RJBS/Sub-Exporter-0.991.tar.gz
     provides:
@@ -4521,11 +4522,11 @@ DISTRIBUTIONS
       perl 5.008000
       strict 0
       warnings 0
-  Sub-Quote-2.006008
-    pathname: H/HA/HAARG/Sub-Quote-2.006008.tar.gz
+  Sub-Quote-2.006009
+    pathname: H/HA/HAARG/Sub-Quote-2.006009.tar.gz
     provides:
-      Sub::Defer 2.006008
-      Sub::Quote 2.006008
+      Sub::Defer 2.006009
+      Sub::Quote 2.006009
     requirements:
       ExtUtils::MakeMaker 0
       Scalar::Util 0
