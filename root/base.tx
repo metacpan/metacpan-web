@@ -23,7 +23,7 @@
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
         <script async src="https://perl-ads.perlhacks.com/perl-ads.js"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-E82Q2V8LVD"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6B2JCQSHJE"></script>
         %%  block opengraph -> { }
     </head>
     <body>
