@@ -219,13 +219,13 @@ DISTRIBUTIONS
     requirements:
       B 0
       ExtUtils::MakeMaker 0
-  CGI-Simple-1.281
-    pathname: M/MA/MANWAR/CGI-Simple-1.281.tar.gz
+  CGI-Simple-1.282
+    pathname: M/MA/MANWAR/CGI-Simple-1.282.tar.gz
     provides:
-      CGI::Simple 1.281
-      CGI::Simple::Cookie 1.281
-      CGI::Simple::Standard 1.281
-      CGI::Simple::Util 1.281
+      CGI::Simple 1.282
+      CGI::Simple::Cookie 1.282
+      CGI::Simple::Standard 1.282
+      CGI::Simple::Util 1.282
     requirements:
       ExtUtils::MakeMaker 0
   CGI-Struct-1.21
@@ -3251,13 +3251,13 @@ DISTRIBUTIONS
       URI 0
       URI::Escape 0
       YAML 0
-  Net-HTTP-6.23
-    pathname: O/OA/OALDERS/Net-HTTP-6.23.tar.gz
+  Net-HTTP-6.24
+    pathname: O/OA/OALDERS/Net-HTTP-6.24.tar.gz
     provides:
-      Net::HTTP 6.23
-      Net::HTTP::Methods 6.23
-      Net::HTTP::NB 6.23
-      Net::HTTPS 6.23
+      Net::HTTP 6.24
+      Net::HTTP::Methods 6.24
+      Net::HTTP::NB 6.24
+      Net::HTTPS 6.24
     requirements:
       Carp 0
       Compress::Raw::Zlib 0
