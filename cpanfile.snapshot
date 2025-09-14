@@ -735,10 +735,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.39
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.39.tar.gz
+  Cpanel-JSON-XS-4.40
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.40.tar.gz
     provides:
-      Cpanel::JSON::XS 4.39
+      Cpanel::JSON::XS 4.40
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -2092,10 +2092,10 @@ DISTRIBUTIONS
       JSON::PP 2.27300
       Scalar::Util 0
       perl 5.006
-  JSON-XS-4.03
-    pathname: M/ML/MLEHMANN/JSON-XS-4.03.tar.gz
+  JSON-XS-4.04
+    pathname: M/ML/MLEHMANN/JSON-XS-4.04.tar.gz
     provides:
-      JSON::XS 4.03
+      JSON::XS 4.04
     requirements:
       Canary::Stability 0
       ExtUtils::MakeMaker 6.52
@@ -3973,23 +3973,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20250711
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20250711.tar.gz
+  Perl-Tidy-20250912
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20250912.tar.gz
     provides:
-      Perl::Tidy 20250711
-      Perl::Tidy::Debugger 20250711
-      Perl::Tidy::Diagnostics 20250711
-      Perl::Tidy::FileWriter 20250711
-      Perl::Tidy::Formatter 20250711
-      Perl::Tidy::HtmlWriter 20250711
-      Perl::Tidy::IOScalar 20250711
-      Perl::Tidy::IOScalarArray 20250711
-      Perl::Tidy::IndentationItem 20250711
-      Perl::Tidy::Logger 20250711
-      Perl::Tidy::Tokenizer 20250711
-      Perl::Tidy::VerticalAligner 20250711
-      Perl::Tidy::VerticalAligner::Alignment 20250711
-      Perl::Tidy::VerticalAligner::Line 20250711
+      Perl::Tidy 20250912
+      Perl::Tidy::Debugger 20250912
+      Perl::Tidy::Diagnostics 20250912
+      Perl::Tidy::FileWriter 20250912
+      Perl::Tidy::Formatter 20250912
+      Perl::Tidy::HtmlWriter 20250912
+      Perl::Tidy::IOScalar 20250912
+      Perl::Tidy::IOScalarArray 20250912
+      Perl::Tidy::IndentationItem 20250912
+      Perl::Tidy::Logger 20250912
+      Perl::Tidy::Tokenizer 20250912
+      Perl::Tidy::VerticalAligner 20250912
+      Perl::Tidy::VerticalAligner::Alignment 20250912
+      Perl::Tidy::VerticalAligner::Line 20250912
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
@@ -5526,32 +5526,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.79
-    pathname: O/OA/OALDERS/libwww-perl-6.79.tar.gz
+  libwww-perl-6.80
+    pathname: O/OA/OALDERS/libwww-perl-6.80.tar.gz
     provides:
-      LWP 6.79
-      LWP::Authen::Basic 6.79
-      LWP::Authen::Digest 6.79
-      LWP::Authen::Ntlm 6.79
-      LWP::ConnCache 6.79
-      LWP::Debug 6.79
-      LWP::Debug::TraceHTTP 6.79
-      LWP::DebugFile 6.79
-      LWP::MemberMixin 6.79
-      LWP::Protocol 6.79
-      LWP::Protocol::cpan 6.79
-      LWP::Protocol::data 6.79
-      LWP::Protocol::file 6.79
-      LWP::Protocol::ftp 6.79
-      LWP::Protocol::gopher 6.79
-      LWP::Protocol::http 6.79
-      LWP::Protocol::loopback 6.79
-      LWP::Protocol::mailto 6.79
-      LWP::Protocol::nntp 6.79
-      LWP::Protocol::nogo 6.79
-      LWP::RobotUA 6.79
-      LWP::Simple 6.79
-      LWP::UserAgent 6.79
+      LWP 6.80
+      LWP::Authen::Basic 6.80
+      LWP::Authen::Digest 6.80
+      LWP::Authen::Ntlm 6.80
+      LWP::ConnCache 6.80
+      LWP::Debug 6.80
+      LWP::Debug::TraceHTTP 6.80
+      LWP::DebugFile 6.80
+      LWP::MemberMixin 6.80
+      LWP::Protocol 6.80
+      LWP::Protocol::cpan 6.80
+      LWP::Protocol::data 6.80
+      LWP::Protocol::file 6.80
+      LWP::Protocol::ftp 6.80
+      LWP::Protocol::gopher 6.80
+      LWP::Protocol::http 6.80
+      LWP::Protocol::loopback 6.80
+      LWP::Protocol::mailto 6.80
+      LWP::Protocol::nntp 6.80
+      LWP::Protocol::nogo 6.80
+      LWP::RobotUA 6.80
+      LWP::Simple 6.80
+      LWP::UserAgent 6.80
     requirements:
       Digest::MD5 0
       Encode 2.12
