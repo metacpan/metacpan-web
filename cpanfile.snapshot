@@ -2329,12 +2329,12 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       perl 5.008001
       utf8 0
-  MIME-Types-2.28
-    pathname: M/MA/MARKOV/MIME-Types-2.28.tar.gz
+  MIME-Types-2.29
+    pathname: M/MA/MARKOV/MIME-Types-2.29.tar.gz
     provides:
-      MIME::Type 2.28
-      MIME::Types 2.28
-      MojoX::MIME::Types 2.28
+      MIME::Type 2.29
+      MIME::Types 2.29
+      MojoX::MIME::Types 2.29
     requirements:
       ExtUtils::MakeMaker 0
       File::Basename 0
@@ -3457,75 +3457,75 @@ DISTRIBUTIONS
       re 0
       strict 0
       warnings 0
-  PPIx-Regexp-0.089
-    pathname: W/WY/WYANT/PPIx-Regexp-0.089.tar.gz
+  PPIx-Regexp-0.090
+    pathname: W/WY/WYANT/PPIx-Regexp-0.090.tar.gz
     provides:
-      PPIx::Regexp 0.089
+      PPIx::Regexp 0.090
       PPIx::Regexp::Constant 0.085_04
-      PPIx::Regexp::Constant::Inf 0.089
-      PPIx::Regexp::Dumper 0.089
-      PPIx::Regexp::Element 0.089
-      PPIx::Regexp::Lexer 0.089
-      PPIx::Regexp::Node 0.089
-      PPIx::Regexp::Node::Range 0.089
-      PPIx::Regexp::Node::Unknown 0.089
-      PPIx::Regexp::Structure 0.089
-      PPIx::Regexp::Structure::Assertion 0.089
-      PPIx::Regexp::Structure::Atomic_Script_Run 0.089
-      PPIx::Regexp::Structure::BranchReset 0.089
-      PPIx::Regexp::Structure::Capture 0.089
-      PPIx::Regexp::Structure::CharClass 0.089
-      PPIx::Regexp::Structure::Code 0.089
-      PPIx::Regexp::Structure::Main 0.089
-      PPIx::Regexp::Structure::Modifier 0.089
-      PPIx::Regexp::Structure::NamedCapture 0.089
-      PPIx::Regexp::Structure::Quantifier 0.089
-      PPIx::Regexp::Structure::RegexSet 0.089
-      PPIx::Regexp::Structure::Regexp 0.089
-      PPIx::Regexp::Structure::Replacement 0.089
-      PPIx::Regexp::Structure::Script_Run 0.089
-      PPIx::Regexp::Structure::Subexpression 0.089
-      PPIx::Regexp::Structure::Switch 0.089
-      PPIx::Regexp::Structure::Unknown 0.089
-      PPIx::Regexp::Support 0.089
-      PPIx::Regexp::Token 0.089
-      PPIx::Regexp::Token::Assertion 0.089
-      PPIx::Regexp::Token::Backreference 0.089
-      PPIx::Regexp::Token::Backtrack 0.089
-      PPIx::Regexp::Token::CharClass 0.089
-      PPIx::Regexp::Token::CharClass::POSIX 0.089
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.089
-      PPIx::Regexp::Token::CharClass::Simple 0.089
-      PPIx::Regexp::Token::Code 0.089
-      PPIx::Regexp::Token::Comment 0.089
-      PPIx::Regexp::Token::Condition 0.089
-      PPIx::Regexp::Token::Control 0.089
-      PPIx::Regexp::Token::Delimiter 0.089
-      PPIx::Regexp::Token::Greediness 0.089
-      PPIx::Regexp::Token::GroupType 0.089
-      PPIx::Regexp::Token::GroupType::Assertion 0.089
-      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.089
-      PPIx::Regexp::Token::GroupType::BranchReset 0.089
-      PPIx::Regexp::Token::GroupType::Code 0.089
-      PPIx::Regexp::Token::GroupType::Modifier 0.089
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.089
-      PPIx::Regexp::Token::GroupType::Script_Run 0.089
-      PPIx::Regexp::Token::GroupType::Subexpression 0.089
-      PPIx::Regexp::Token::GroupType::Switch 0.089
-      PPIx::Regexp::Token::Interpolation 0.089
-      PPIx::Regexp::Token::Literal 0.089
-      PPIx::Regexp::Token::Modifier 0.089
-      PPIx::Regexp::Token::NoOp 0.089
-      PPIx::Regexp::Token::Operator 0.089
-      PPIx::Regexp::Token::Quantifier 0.089
-      PPIx::Regexp::Token::Recursion 0.089
-      PPIx::Regexp::Token::Reference 0.089
-      PPIx::Regexp::Token::Structure 0.089
-      PPIx::Regexp::Token::Unknown 0.089
-      PPIx::Regexp::Token::Unmatched 0.089
-      PPIx::Regexp::Token::Whitespace 0.089
-      PPIx::Regexp::Tokenizer 0.089
-      PPIx::Regexp::Util 0.089
+      PPIx::Regexp::Constant::Inf 0.090
+      PPIx::Regexp::Dumper 0.090
+      PPIx::Regexp::Element 0.090
+      PPIx::Regexp::Lexer 0.090
+      PPIx::Regexp::Node 0.090
+      PPIx::Regexp::Node::Range 0.090
+      PPIx::Regexp::Node::Unknown 0.090
+      PPIx::Regexp::Structure 0.090
+      PPIx::Regexp::Structure::Assertion 0.090
+      PPIx::Regexp::Structure::Atomic_Script_Run 0.090
+      PPIx::Regexp::Structure::BranchReset 0.090
+      PPIx::Regexp::Structure::Capture 0.090
+      PPIx::Regexp::Structure::CharClass 0.090
+      PPIx::Regexp::Structure::Code 0.090
+      PPIx::Regexp::Structure::Main 0.090
+      PPIx::Regexp::Structure::Modifier 0.090
+      PPIx::Regexp::Structure::NamedCapture 0.090
+      PPIx::Regexp::Structure::Quantifier 0.090
+      PPIx::Regexp::Structure::RegexSet 0.090
+      PPIx::Regexp::Structure::Regexp 0.090
+      PPIx::Regexp::Structure::Replacement 0.090
+      PPIx::Regexp::Structure::Script_Run 0.090
+      PPIx::Regexp::Structure::Subexpression 0.090
+      PPIx::Regexp::Structure::Switch 0.090
+      PPIx::Regexp::Structure::Unknown 0.090
+      PPIx::Regexp::Support 0.090
+      PPIx::Regexp::Token 0.090
+      PPIx::Regexp::Token::Assertion 0.090
+      PPIx::Regexp::Token::Backreference 0.090
+      PPIx::Regexp::Token::Backtrack 0.090
+      PPIx::Regexp::Token::CharClass 0.090
+      PPIx::Regexp::Token::CharClass::POSIX 0.090
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.090
+      PPIx::Regexp::Token::CharClass::Simple 0.090
+      PPIx::Regexp::Token::Code 0.090
+      PPIx::Regexp::Token::Comment 0.090
+      PPIx::Regexp::Token::Condition 0.090
+      PPIx::Regexp::Token::Control 0.090
+      PPIx::Regexp::Token::Delimiter 0.090
+      PPIx::Regexp::Token::Greediness 0.090
+      PPIx::Regexp::Token::GroupType 0.090
+      PPIx::Regexp::Token::GroupType::Assertion 0.090
+      PPIx::Regexp::Token::GroupType::Atomic_Script_Run 0.090
+      PPIx::Regexp::Token::GroupType::BranchReset 0.090
+      PPIx::Regexp::Token::GroupType::Code 0.090
+      PPIx::Regexp::Token::GroupType::Modifier 0.090
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.090
+      PPIx::Regexp::Token::GroupType::Script_Run 0.090
+      PPIx::Regexp::Token::GroupType::Subexpression 0.090
+      PPIx::Regexp::Token::GroupType::Switch 0.090
+      PPIx::Regexp::Token::Interpolation 0.090
+      PPIx::Regexp::Token::Literal 0.090
+      PPIx::Regexp::Token::Modifier 0.090
+      PPIx::Regexp::Token::NoOp 0.090
+      PPIx::Regexp::Token::Operator 0.090
+      PPIx::Regexp::Token::Quantifier 0.090
+      PPIx::Regexp::Token::Recursion 0.090
+      PPIx::Regexp::Token::Reference 0.090
+      PPIx::Regexp::Token::Structure 0.090
+      PPIx::Regexp::Token::Unknown 0.090
+      PPIx::Regexp::Token::Unmatched 0.090
+      PPIx::Regexp::Token::Whitespace 0.090
+      PPIx::Regexp::Tokenizer 0.090
+      PPIx::Regexp::Util 0.090
     requirements:
       Carp 0
       Encode 0
@@ -5090,63 +5090,66 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.32
-    pathname: O/OA/OALDERS/URI-5.32.tar.gz
+  URI-5.34
+    pathname: O/OA/OALDERS/URI-5.34.tar.gz
     provides:
-      URI 5.32
-      URI::Escape 5.32
-      URI::Heuristic 5.32
-      URI::IRI 5.32
-      URI::QueryParam 5.32
-      URI::Split 5.32
-      URI::URL 5.32
-      URI::WithBase 5.32
-      URI::data 5.32
-      URI::file 5.32
-      URI::file::Base 5.32
-      URI::file::FAT 5.32
-      URI::file::Mac 5.32
-      URI::file::OS2 5.32
-      URI::file::QNX 5.32
-      URI::file::Unix 5.32
-      URI::file::Win32 5.32
-      URI::ftp 5.32
-      URI::ftpes 5.32
-      URI::ftps 5.32
-      URI::geo 5.32
-      URI::gopher 5.32
-      URI::http 5.32
-      URI::https 5.32
-      URI::icap 5.32
-      URI::icaps 5.32
-      URI::irc 5.32
-      URI::ircs 5.32
-      URI::ldap 5.32
-      URI::ldapi 5.32
-      URI::ldaps 5.32
-      URI::mailto 5.32
-      URI::mms 5.32
-      URI::news 5.32
-      URI::nntp 5.32
-      URI::nntps 5.32
-      URI::otpauth 5.32
-      URI::pop 5.32
-      URI::rlogin 5.32
-      URI::rsync 5.32
-      URI::rtsp 5.32
-      URI::rtspu 5.32
-      URI::scp 5.32
-      URI::sftp 5.32
-      URI::sip 5.32
-      URI::sips 5.32
-      URI::smb 5.32
-      URI::snews 5.32
-      URI::ssh 5.32
-      URI::telnet 5.32
-      URI::tn3270 5.32
-      URI::urn 5.32
-      URI::urn::isbn 5.32
-      URI::urn::oid 5.32
+      URI 5.34
+      URI::Escape 5.34
+      URI::Heuristic 5.34
+      URI::IRI 5.34
+      URI::QueryParam 5.34
+      URI::Split 5.34
+      URI::URL 5.34
+      URI::WithBase 5.34
+      URI::data 5.34
+      URI::file 5.34
+      URI::file::Base 5.34
+      URI::file::FAT 5.34
+      URI::file::Mac 5.34
+      URI::file::OS2 5.34
+      URI::file::QNX 5.34
+      URI::file::Unix 5.34
+      URI::file::Win32 5.34
+      URI::ftp 5.34
+      URI::ftpes 5.34
+      URI::ftps 5.34
+      URI::geo 5.34
+      URI::gopher 5.34
+      URI::http 5.34
+      URI::https 5.34
+      URI::icap 5.34
+      URI::icaps 5.34
+      URI::irc 5.34
+      URI::ircs 5.34
+      URI::ldap 5.34
+      URI::ldapi 5.34
+      URI::ldaps 5.34
+      URI::mailto 5.34
+      URI::mms 5.34
+      URI::news 5.34
+      URI::nntp 5.34
+      URI::nntps 5.34
+      URI::otpauth 5.34
+      URI::pop 5.34
+      URI::rlogin 5.34
+      URI::rsync 5.34
+      URI::rtsp 5.34
+      URI::rtspu 5.34
+      URI::scp 5.34
+      URI::sftp 5.34
+      URI::sip 5.34
+      URI::sips 5.34
+      URI::smb 5.34
+      URI::smtp 5.34
+      URI::snews 5.34
+      URI::ssh 5.34
+      URI::telnet 5.34
+      URI::tn3270 5.34
+      URI::urn 5.34
+      URI::urn::isbn 5.34
+      URI::urn::oid 5.34
+      URI::ws 5.34
+      URI::wss 5.34
     requirements:
       Carp 0
       Cwd 0
@@ -5188,14 +5191,6 @@ DISTRIBUTIONS
       URI 1.68
       strict 0
       warnings 0
-  URI-ws-0.03
-    pathname: P/PL/PLICEASE/URI-ws-0.03.tar.gz
-    provides:
-      URI::ws 0.03
-      URI::wss 0.03
-    requirements:
-      ExtUtils::MakeMaker 6.30
-      URI 0
   UUID-Tiny-1.04
     pathname: C/CA/CAUGUSTIN/UUID-Tiny-1.04.tar.gz
     provides:
