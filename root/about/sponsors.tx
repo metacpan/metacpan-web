@@ -626,24 +626,6 @@ money...
       </tr>
       <tr>
         <td>
-          <img src="/static/images/sponsors/kritika.svg">
-        </td>
-        <td>
-          <p>
-            Kritika.IO sponsored <a target="_blank" rel="noopener nofollow"
-            href="/about/meta_hack">meta::hack v2</a> in 2017.
-          </p>
-          <p>
-            Kritika.IO automates your Perl code review by adding it to your
-            continuous integration. Find code style violations, catch bugs,
-            detect duplications, keep complexity to a minimum, control test
-            coverage and more! Enforce best practices and keep improving your
-            code. Reduce technical debt and deliver features faster.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.google.com">
             Google
           </a>
