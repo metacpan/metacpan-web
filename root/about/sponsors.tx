@@ -106,6 +106,135 @@ money...
       </tr>
       <tr>
         <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.elastic.co/">
+            <img src="/static/images/sponsors/elastic.svg" width="180">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://www.elastic.co">Elastic</a> is the company behind
+            the <a target="_blank" rel="noopener nofollow"
+            href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>
+            open source search and analytics engine, along with <a
+            target="_blank" rel="noopener nofollow"
+            href="https://www.elastic.co/products/logstash">Logstash</a>, <a
+            target="_blank" rel="noopener nofollow"
+            href="https://www.elastic.co/products/kibana">Kibana</a> (which
+            lets you visualize your Elasticsearch data), and <a
+            target="_blank" rel="noopener nofollow"
+            href="https://www.elastic.co/products/beats">Beats</a>
+            (lightweight agents for sending data to Logstash or
+            Elasticsearch).
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.datadoghq.com/">
+            <img src="/static/images/sponsors/datadog.png" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://www.datadoghq.com/">Datadog</a> supports MetaCPAN by
+            providing monitoring and log analysis.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.fastmail.com/">
+            <img src="/static/images/sponsors/fastmail.svg" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://www.fastmail.com/c/metacpan">Fastmail</a> is a
+            commercial hosted email service founded in 1999, which has
+            established a reputation for technical leadership in the hosted
+            email space, with a focus on security, privacy, and reliability.
+            It is run by Fastmail Pty Ltd, an Australian company based in
+            Melbourne. From their early days they've been users and supporters
+            of Perl, and several of their developers are CPAN authors: <a
+            target="_blank" rel="noopener nofollow"
+            href="https://metacpan.org/author/BRONG">BRONG</a>, <a
+            target="_blank" rel="noopener nofollow"
+            href="https://metacpan.org/author/ROBN">ROBN</a>, <a
+            target="_blank" rel="noopener nofollow"
+            href="https://metacpan.org/author/RJBS">RJBS</a>, <a
+            target="_blank" rel="noopener nofollow"
+            href="https://metacpan.org/author/WOLFSAGE">WOLFSAGE</a> and <a
+            target="_blank" rel="noopener nofollow"
+            href="https://metacpan.org/author/ROBM">ROBM</a> (one of the
+            founders). In late 2015 they acquired pobox.com, another hosted
+            mail company and longtime user and supporter of Perl.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://github.com/">
+            <img src="/static/images/sponsors/github_logo.png">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://github.com/">GitHub</a> supports MetaCPAN by
+            donating free private repositories.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://deriv.com/careers/">
+            <img src="/static/images/sponsors/deriv.svg" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://deriv.com">Deriv</a> is one of the world’s largest
+            online brokers.  <a target="_blank" rel="noopener nofollow"
+            href="https://deriv.com">Deriv</a> offers CFDs and other
+            derivatives on forex, indices, cryptocurrencies, commodities, and
+            synthetics to millions of registered users across the globe.
+          </p>
+          <p>
+            More than that, <a target="_blank" rel="noopener nofollow"
+            href="https://deriv.com">Deriv</a> heavily relies on CPAN (and
+            bring back a lot to it in return!) with its backend code being
+            written in modern Perl and some great names being part of the
+            company.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://route4me.com/">
+            <img src="/static/images/sponsors/route4me.png" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            Route4Me is a powerful route planning and optimization software
+            designed to streamline last-mile delivery and service operations.
+            It automates and integrates crucial workflows for route planners,
+            dispatchers, drivers, and managers, enhancing efficiency and
+            customer satisfaction. With features like real-time GPS tracking,
+            mobile apps, and seamless integration with other platforms,
+            Route4Me helps businesses save time, reduce fuel costs, and improve
+            overall operational efficiency. The software supports dynamic
+            routing and recurring route planning, making it adaptable for
+            various industries and business needs.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <div>
             <a target="_blank" rel="noopener nofollow" href="https://control.my.id/">
               <img src="/static/images/sponsors/control-my-id.png" width="170">
@@ -165,34 +294,6 @@ money...
             href="https://dyn.com">dyn.com</a> - <a target="_blank"
             rel="noopener nofollow"
             href="https://twitter.com/DynInc">@DynInc</a>.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a target="_blank" rel="noopener nofollow" href="https://github.com/">
-            <img src="/static/images/sponsors/github_logo.png">
-          </a>
-        </td>
-        <td>
-          <p>
-            <a target="_blank" rel="noopener nofollow"
-            href="https://github.com/">GitHub</a> supports MetaCPAN by
-            donating free private repositories.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a target="_blank" rel="noopener nofollow" href="https://www.datadoghq.com/">
-            <img src="/static/images/sponsors/datadog.png" width="170">
-          </a>
-        </td>
-        <td>
-          <p>
-            <a target="_blank" rel="noopener nofollow"
-            href="https://www.datadoghq.com/">Datadog</a> supports MetaCPAN by
-            providing monitoring and log analysis.
           </p>
         </td>
       </tr>
@@ -332,37 +433,6 @@ money...
       <tr>
         <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.fastmail.com/">
-            <img src="/static/images/sponsors/fastmail.svg" width="170">
-          </a>
-        </td>
-        <td>
-          <p>
-            <a target="_blank" rel="noopener nofollow"
-            href="https://www.fastmail.com/c/metacpan">Fastmail</a> is a
-            commercial hosted email service founded in 1999, which has
-            established a reputation for technical leadership in the hosted
-            email space, with a focus on security, privacy, and reliability.
-            It is run by Fastmail Pty Ltd, an Australian company based in
-            Melbourne. From their early days they've been users and supporters
-            of Perl, and several of their developers are CPAN authors: <a
-            target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/BRONG">BRONG</a>, <a
-            target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/ROBN">ROBN</a>, <a
-            target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/RJBS">RJBS</a>, <a
-            target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/WOLFSAGE">WOLFSAGE</a> and <a
-            target="_blank" rel="noopener nofollow"
-            href="https://metacpan.org/author/ROBM">ROBM</a> (one of the
-            founders). In late 2015 they acquired pobox.com, another hosted
-            mail company and longtime user and supporter of Perl.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a target="_blank" rel="noopener nofollow" href="https://www.fastmail.com/">
             <img src="/static/images/sponsors/sonic.png" width="170">
           </a>
         </td>
@@ -416,31 +486,6 @@ money...
         <td>
           <p>
             Find Perl Jobs and Perl Developers with Perl Careers.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a target="_blank" rel="noopener nofollow" href="https://www.elastic.co/">
-            <img src="/static/images/sponsors/elastic.svg" width="180">
-          </a>
-        </td>
-        <td>
-          <p>
-            <a target="_blank" rel="noopener nofollow"
-            href="https://www.elastic.co">Elastic</a> is the company behind
-            the <a target="_blank" rel="noopener nofollow"
-            href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a>
-            open source search and analytics engine, along with <a
-            target="_blank" rel="noopener nofollow"
-            href="https://www.elastic.co/products/logstash">Logstash</a>, <a
-            target="_blank" rel="noopener nofollow"
-            href="https://www.elastic.co/products/kibana">Kibana</a> (which
-            lets you visualize your Elasticsearch data), and <a
-            target="_blank" rel="noopener nofollow"
-            href="https://www.elastic.co/products/beats">Beats</a>
-            (lightweight agents for sending data to Logstash or
-            Elasticsearch).
           </p>
         </td>
       </tr>
@@ -581,30 +626,6 @@ money...
       </tr>
       <tr>
         <td>
-          <a target="_blank" rel="noopener nofollow" href="https://deriv.com/careers/">
-            <img src="/static/images/sponsors/deriv.svg" width="170">
-          </a>
-        </td>
-        <td>
-          <p>
-            <a target="_blank" rel="noopener nofollow"
-            href="https://deriv.com">Deriv</a> is one of the world’s largest
-            online brokers.  <a target="_blank" rel="noopener nofollow"
-            href="https://deriv.com">Deriv</a> offers CFDs and other
-            derivatives on forex, indices, cryptocurrencies, commodities, and
-            synthetics to millions of registered users across the globe.
-          </p>
-          <p>
-            More than that, <a target="_blank" rel="noopener nofollow"
-            href="https://deriv.com">Deriv</a> heavily relies on CPAN (and
-            bring back a lot to it in return!) with its backend code being
-            written in modern Perl and some great names being part of the
-            company.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <img src="/static/images/sponsors/kritika.svg">
         </td>
         <td>
@@ -636,27 +657,6 @@ money...
             2014 GSoC also sponsored Talina Shrotriya's work on MetaCPAN.
             We're not actually sure if we're allowed to use the Google logo
             here, so we are erring on the side of caution.
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a target="_blank" rel="noopener nofollow" href="https://route4me.com/">
-            <img src="/static/images/sponsors/route4me.png" width="170">
-          </a>
-        </td>
-        <td>
-          <p>
-            Route4Me is a powerful route planning and optimization software
-            designed to streamline last-mile delivery and service operations.
-            It automates and integrates crucial workflows for route planners,
-            dispatchers, drivers, and managers, enhancing efficiency and
-            customer satisfaction. With features like real-time GPS tracking,
-            mobile apps, and seamless integration with other platforms,
-            Route4Me helps businesses save time, reduce fuel costs, and improve
-            overall operational efficiency. The software supports dynamic
-            routing and recurring route planning, making it adaptable for
-            various industries and business needs.
           </p>
         </td>
       </tr>
