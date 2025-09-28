@@ -33,6 +33,26 @@ money...
       <tr>
         <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.fastly.com/">
+            <img src="/static/images/sponsors/open-cage.svg" width="110" height="51">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://opencagedata.com/">OpenCage</a> operates a highly-available,
+            enterprise level <a target="_blank" rel="noopener nofollow"
+            href="https://opencagedata.com/api">geocoding API</a> based
+            on open data sources like OpenStreetMap. Need geocoding? Visit
+            OpenCage's comprehensive <a target="_blank" rel="noopener nofollow"
+            href="https://opencagedata.com/guides/how-to-compare-and-test-geocoding-services">geocoding buyer's
+            guide</a>. OpenCage uses Perl extensively, and is proud to have sponsored
+           MetaCPAN for many years.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.fastly.com/">
             <img src="/static/images/sponsors/fastly_logo.svg" width="110" height="51">
           </a>
         </td>
