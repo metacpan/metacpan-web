@@ -82,7 +82,7 @@ jobs:
           ${{ steps.docker-build-test.outputs.imageid }}
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: 24
       - name: Install Playwright Browsers
         run: ./bin/install-playwright
       - name: Run Playwright tests
@@ -112,7 +112,7 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
-          node-version: '22'
+          node-version: '24'
       - run: npm install
       - run: apt-get update && apt-get -y install libcmark-dev
       - name: Install Carton
