@@ -1,4 +1,4 @@
-%%  cascade base {
+%%  cascade base with inc::no_sidebar {
 %%      title => $title || 'Plussers - ' ~ $plussers.distribution,
 %%  }
 %%  override content -> {
