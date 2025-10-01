@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "bootstrap": "^3.4.1",
+    "bootstrap": "^5.3.5",
     "brush-cpp": "^4.0.1",
     "brush-diff": "^4.0.0",
     "brush-javascript": "^4.0.0",

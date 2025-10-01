@@ -11,7 +11,6 @@ const {
 const jQuery = require('jquery');
 require('bootstrap/js/dropdown.js');
 require('bootstrap/js/modal.js');
-require('bootstrap/js/tooltip.js');
 
 function setFavTitle(button) {
     button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
@@ -103,8 +102,6 @@ function format_string(input_string, replacements) {
 
 // User customisations
 processUserData();
-
-jQuery(".ttip").tooltip(); // bootstrap
 
 for (const el of document.querySelectorAll('.keyboard-shortcuts')) {
     el.addEventListener('click', e => {
