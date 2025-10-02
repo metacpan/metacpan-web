@@ -8,7 +8,7 @@
 Our code base is based on current best practices and modern web technologies.
 Our stack includes Catalyst, Minion, Plack, Elasticsearch, jQuery, Bootstrap
 and NGINX.  We also use Puppet and Ansible for deployment and Docker for
-development VMs.  We have integration with Twitter, GitHub, PAUSE, and Google.
+development VMs.  We have integration with GitHub, PAUSE, and Google.
 All code is managed on GitHub and we have an active channel (#metacpan) on
 irc.perl.org.  Try the <a
 href="https://widget01.mibbit.com/?autoConnect=true&server=irc.perl.org&channel=%23metacpan&nick=">mibbit

@@ -10,7 +10,7 @@
       information is not exposed to anyone unless you explicitly publish it.
     </div>
     <table width="300">
-%%  for ['GitHub', 'PAUSE', 'Twitter', 'Google'] -> $identity {
+%%  for ['GitHub', 'PAUSE', 'Google'] -> $identity {
 %%  my $connected = !!$user.identity[$identity.lc()];
     <tr>
         <td><big>[% $identity %]</big></td>
