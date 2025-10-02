@@ -153,3 +153,18 @@ CMD [ "prove", "-l", "-r", "-j", "2", "t" ]
 FROM server AS production
 
 USER metacpan
+
+################### Playwright Server
+FROM server AS playwright
+USER root
+
+RUN echo "Starting Playwright stage setup"
+RUN    --mount=type=cache,target=/root/.perl-cpm,sharing=private \
+<<EOT
+    cpm install --show-build-log-on-failure Devel::Cover \
+EOT
+
+ENV HARNESS_ACTIVE=1
+ENV PERL5OPT='-MDevel::Cover=+ignore,^local/|^templates/|^t/|yaml$'
+
+USER metacpan

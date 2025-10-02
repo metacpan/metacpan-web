@@ -88,10 +88,14 @@ sub index : Path : Args(0) {
 
         if ( !$results->{total} && !$authors->{total} ) {
             my $suggest = $query;
+            my $prefix  = q{};
+            if ( $suggest =~ s{^(author|distribution|module|version):}{} ) {
+                $prefix = $1 . ':';
+            }
             $suggest =~ s/\s*:+\s*/::/g;
-            if ( $suggest ne $query ) {
+            if ( $prefix . $suggest ne $query ) {
                 $c->stash( {
-                    suggest => $suggest,
+                    suggest => $prefix . $suggest,
                 } );
             }
             $c->stash( {
