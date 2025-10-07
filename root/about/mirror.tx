@@ -23,7 +23,7 @@ This can be done using the `--metacpan` option.
 
     cpanm -M https://cpan.metacpan.org/ --metacpan Module::To::Install
 
-These options can be set more permanantly using the `PERL_CPANM_OPT` environment variable.
+These options can be set more permanently using the `PERL_CPANM_OPT` environment variable.
 
     export PERL_CPANM_OPT='-M https://cpan.metacpan.org/ --metacpan'
     cpanm Module::To::Install
