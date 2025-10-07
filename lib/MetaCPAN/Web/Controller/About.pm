@@ -38,7 +38,7 @@ sub meta_hack : Local : Args(0) {
     my ( $self, $c ) = @_;
 }
 
-sub mirror : Local : Args(0) {}
+sub mirror : Local : Args(0) { }
 
 sub sponsors : Local : Args(0) {
     my ( $self, $c ) = @_;
