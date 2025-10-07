@@ -1,0 +1,44 @@
+%%  cascade base::about::markdown {
+%%      title => $title || 'Using MetaCPAN as a mirror',
+%%  }
+%%  override about -> {
+## MetaCPAN Mirror
+
+MetaCPAN provides an alternate mirror for CPAN, which is also a BackPAN (it
+includes deleted releases). It can be used if there are issues with the primary
+mirror, or you want to access older deleted releases via the `cpan` client.
+
+The address for the mirror is https://cpan.metacpan.org/
+
+### Configuring the Mirror
+
+#### `cpanm`
+
+`cpanm` can use the MetaCPAN mirror using the `-M` option:
+
+    cpanm -M https://cpan.metacpan.org/ Module::To::Install
+
+When using the MetaCPAN mirror, it may also be useful to use MetaCPAN's index.
+This can be done using the `--metacpan` option.
+
+    cpanm -M https://cpan.metacpan.org/ --metacpan Module::To::Install
+
+These options can be set more permanantly using the `PERL_CPANM_OPT` environment variable.
+
+    export PERL_CPANM_OPT='-M https://cpan.metacpan.org/ --metacpan'
+    cpanm Module::To::Install
+
+#### `cpan`
+
+`CPAN.pm` can be configured to use an alternate mirror using the `urllist`
+configuration setting. It also must be configured to use the `urllist` option
+by disabling the `pushy_https` option.
+
+    cpan
+    o conf urllist https://cpan.metacpan.org/
+    o conf pushy_https 0
+    o conf commit
+    install Module::To::Install
+    exit
+
+%%  }

@@ -12,6 +12,7 @@ for [
   [ 'FAQ',                    '/about/faq' ],
   [ 'Contributors',           '/about/contributors' ],
   [ 'meta::hack',             '/about/meta_hack' ],
+  [ 'CPAN Mirror',            '/about/mirror' ],
   [ 'Missing Modules',        '/about/missing_modules' ],
   [ 'Distribution Metadata',  '/about/metadata' ],
 ] -> $l {
