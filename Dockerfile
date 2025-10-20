@@ -4,7 +4,7 @@ ARG BASE_BUILD=${MAYBE_BASE_BUILD:-server-base}
 
 ################### Asset Builder
 
-FROM node:24-alpine AS build-assets
+FROM node:25-alpine AS build-assets
 ENV NO_UPDATE_NOTIFIER=1
 SHELL [ "/bin/sh", "-euo", "pipefail", "-c" ]
 
