@@ -1,7 +1,7 @@
 import SyntaxHighlighter, {
-    registerBrush
+    registerBrush,
 }
-from 'syntaxhighlighter';
+    from 'syntaxhighlighter';
 import Renderer from 'syntaxhighlighter-html-renderer';
 
 await Promise.all([
@@ -11,7 +11,7 @@ await Promise.all([
     import('brush-javascript').then(brush => registerBrush(brush)),
     import('./brush-perl.js').then(brush => registerBrush(brush)),
     import('brush-plain').then(brush => registerBrush(brush)),
-    import('brush-yaml').then(brush => registerBrush(brush))
+    import('brush-yaml').then(brush => registerBrush(brush)),
 ]);
 
 const parseLines = (lines) => {
@@ -68,12 +68,12 @@ const togglePod = (e) => {
         const diff = topLine.getBoundingClientRect().top - topOffset;
 
         window.scrollTo({
-            top: scrollTop + diff,
-            left: 0,
-            behavior: "instant"
+            top:      scrollTop + diff,
+            left:     0,
+            behavior: 'instant',
         });
     }
-}
+};
 
 const hashLines = /^#L(\d+(?:-\d+)?(?:,\d+(?:-\d+)?)*)$/;
 
@@ -101,7 +101,7 @@ SyntaxHighlighter.config.useScriptTags = false;
  * @param {String} code Input code.
  * @return {String} Returns code with </a> tags.
  */
-const processPackages = function(code) {
+const processPackages = function (code) {
     const target_pattern = this.opts.package_target_type == 'source' ? '/module/%s/source' : '/pod/%s';
     // This regexp is not great, but its good enough so far:
     // Match (possible) quotes or q operators followed by: an html entity or punctuation (not a letter).
@@ -118,7 +118,7 @@ const processPackages = function(code) {
     // (again, possibly across a newline (which is  actually a new div))
     // without knowing where to end (the closing delimiter) would be really difficult.
     // See also the above comment about scanning the plain string and linkifying later.
-    code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function(m, prefix, pkg, suffix) {
+    code = code.replace(/(<code class="p(?:er)?l keyword">(?:with|extends|use<\/code> <code class="p(?:er)?l plain">(?:parent|base|aliased|Mojo::Base))\s*<\/code>\s*<code class="p(?:er)?l string">(?:qw(?:[^&a-z]|&#?[a-zA-Z0-9]+;)<\/code>.+?<code class="p(?:er)?l string">)?)(.+?)(<\/code>)/g, function (m, prefix, pkg, suffix) {
         const match = strip_delimiters.exec(pkg);
         if (match) {
             prefix = prefix + match[1];
@@ -138,14 +138,14 @@ const processPackages = function(code) {
 };
 
 const processUrls = Renderer.prototype.processUrls;
-Renderer.prototype.processUrls = function(html, ...args) {
+Renderer.prototype.processUrls = function (html, ...args) {
     html = processPackages.apply(this, [html]);
     html = processUrls.apply(this, [html, ...args]);
     return html;
 };
 
 const getHtml = Renderer.prototype.getHtml;
-Renderer.prototype.getHtml = function(...args) {
+Renderer.prototype.getHtml = function (...args) {
     let html = getHtml.call(this, ...args);
     html = html.replace(/\s+(<(tbody|table|div)\b)/g, '$1');
     html = html.replace(/(<\/(tbody|table|div)>)\s+/g, '$1');
@@ -153,7 +153,7 @@ Renderer.prototype.getHtml = function(...args) {
 };
 
 const wrapLine = Renderer.prototype.wrapLine;
-Renderer.prototype.wrapLine = function(lineIndex, lineNumber, lineHtml) {
+Renderer.prototype.wrapLine = function (lineIndex, lineNumber, lineHtml) {
     if (lineHtml == ' ') {
         lineHtml = '';
     }
@@ -161,7 +161,7 @@ Renderer.prototype.wrapLine = function(lineIndex, lineNumber, lineHtml) {
 };
 
 // on pod pages, set the language to perl if no other language is set
-CODE: for (const code of document.querySelectorAll(".pod pre > code")) {
+CODE: for (const code of document.querySelectorAll('.pod pre > code')) {
     for (const className of code.classList) {
         if (className.match(/(?:\s|^)language-\S+/)) {
             continue CODE;
@@ -170,7 +170,7 @@ CODE: for (const code of document.querySelectorAll(".pod pre > code")) {
     code.classList.add('language-perl');
 }
 
-const source = document.querySelector("#metacpan_source");
+const source = document.querySelector('#metacpan_source');
 if (source) {
     const packageMatch = document.location.hash.match(/^#P(\S+)$/);
     const lineMatch = document.location.hash.match(hashLines);
@@ -187,8 +187,8 @@ if (source) {
     // the code.
     else if (packageMatch) {
         const decodedPackageMatch = decodeURIComponent(packageMatch[1]);
-        const leadingSource = source.innerText.split("package " + decodedPackageMatch + ";");
-        const lineCount = leadingSource[0].split("\n").length;
+        const leadingSource = source.innerText.split('package ' + decodedPackageMatch + ';');
+        const lineCount = leadingSource[0].split('\n').length;
         if (leadingSource.length > 1 && lineCount > 1) {
             source.dataset.line = lineCount;
         }
@@ -204,14 +204,14 @@ if (source) {
     }
 }
 
-for (const code of document.querySelectorAll(".content pre > code")) {
+for (const code of document.querySelectorAll('.content pre > code')) {
     const pre = code.parentNode;
 
     const config = {
-        'gutter': false,
-        'toolbar': false,
+        'gutter':     false,
+        'toolbar':    false,
         'quick-code': false,
-        'tab-size': 8
+        'tab-size':   8,
     };
     for (const className of code.classList) {
         const res = className.match(/(?:\s|^)language-(\S+)/);
@@ -251,13 +251,13 @@ for (const code of document.querySelectorAll(".content pre > code")) {
 
         const fakeCode = {
             className: code.className,
-            id: code.id,
-            title: code.title,
+            id:        code.id,
+            title:     code.title,
             innerHTML: {
-                toString: function() {
-                    return html
+                toString: function () {
+                    return html;
                 },
-                replace: function(search, replace) {
+                replace: function (search, replace) {
                     if (search.toString() == /^[ ]*[\n]+|[\n]*[ ]*$/g.toString()) {
                         return html.replace(/\n$/g, '');
                     }
@@ -267,9 +267,9 @@ for (const code of document.querySelectorAll(".content pre > code")) {
         };
         const parentNode = code.parentNode;
         fakeCode.parentNode = {
-            replaceChild: function(newEl, oldEl) {
+            replaceChild: function (newEl, oldEl) {
                 if (oldEl === fakeCode) {
-                    oldEl = code
+                    oldEl = code;
                 }
                 parentNode.replaceChild(newEl, oldEl);
             },
@@ -348,8 +348,8 @@ if (source) {
             let line = linenr;
             if (e.shiftKey && source.dataset.line) {
                 const startLine = parseLines(source.dataset.line)[0];
-                line = startLine < line ? startLine + '-' + line :
-                    line + '-' + startLine;
+                line = startLine < line ? startLine + '-' + line
+                    : line + '-' + startLine;
             }
             link.removeAttribute('id');
             document.location.hash = '#L' + line;

@@ -5,9 +5,8 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use DateTime                  ();
-use HTML::Escape              qw( escape_html );
-use MetaCPAN::Web::RenderUtil qw( render_markdown );
+use DateTime             ();
+use HTML::Escape         qw( escape_html );
 use MetaCPAN::Web::Types qw( ArrayRef DateTime Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
 use XML::FeedPP                ();                     ## no perlimports

@@ -10,12 +10,13 @@ catch {
 if (!storage) {
     storage = new class {
         getItem(k) {
-            return this["_" + k];
+            return this['_' + k];
         }
+
         setItem(k, v) {
-            return this["_" + k] = v;
+            return this['_' + k] = v;
         }
-    };
+    }();
 }
 
 module.exports = storage;
