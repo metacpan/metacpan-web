@@ -2246,7 +2246,6 @@ DISTRIBUTIONS
   Log-Log4perl-1.57
     pathname: E/ET/ETJ/Log-Log4perl-1.57.tar.gz
     provides:
-      L4pResurrectable 0.01
       Log::Log4perl 1.57
       Log::Log4perl::Appender undef
       Log::Log4perl::Appender::Buffer 1.53
@@ -4667,17 +4666,17 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0.88
       Text::Diff 1.43
-  Test-Fatal-0.017
-    pathname: R/RJ/RJBS/Test-Fatal-0.017.tar.gz
+  Test-Fatal-0.018
+    pathname: R/RJ/RJBS/Test-Fatal-0.018.tar.gz
     provides:
-      Test::Fatal 0.017
+      Test::Fatal 0.018
     requirements:
       Carp 0
       Exporter 5.57
       ExtUtils::MakeMaker 6.78
       Test::Builder 0
       Try::Tiny 0.07
-      strict 0
+      perl 5.012
       warnings 0
   Test-LongString-0.17
     pathname: R/RG/RGARCIA/Test-LongString-0.17.tar.gz
@@ -5548,6 +5547,7 @@ DISTRIBUTIONS
       LWP::RobotUA 6.81
       LWP::Simple 6.81
       LWP::UserAgent 6.81
+      libwww::perl undef
     requirements:
       Digest::MD5 0
       Encode 2.12
