@@ -4,14 +4,7 @@ use lib 't/lib';
 
 use MetaCPAN::Web                   ();
 use MetaCPAN::Web::Controller::Feed ();
-use MetaCPAN::Web::Test             qw(
-    app
-    GET
-    override_api_response
-    test_cache_headers
-    test_psgi
-    tx
-);
+use MetaCPAN::Web::Test qw( app GET test_cache_headers test_psgi tx );
 use Test::More;
 use Test::Warnings ();
 use Try::Tiny      qw( catch try );
