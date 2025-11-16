@@ -4469,38 +4469,38 @@ DISTRIBUTIONS
       Sub::Exporter::Progressive 0.001013
     requirements:
       ExtUtils::MakeMaker 0
-  Sub-HandlesVia-0.050003
-    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.050003.tar.gz
+  Sub-HandlesVia-0.050007
+    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.050007.tar.gz
     provides:
-      Sub::HandlesVia 0.050003
-      Sub::HandlesVia::CodeGenerator 0.050003
-      Sub::HandlesVia::Declare 0.050003
-      Sub::HandlesVia::Handler 0.050003
-      Sub::HandlesVia::Handler::CodeRef 0.050003
-      Sub::HandlesVia::Handler::Traditional 0.050003
-      Sub::HandlesVia::HandlerLibrary 0.050003
-      Sub::HandlesVia::HandlerLibrary::Array 0.050003
-      Sub::HandlesVia::HandlerLibrary::Blessed 0.050003
-      Sub::HandlesVia::HandlerLibrary::Bool 0.050003
-      Sub::HandlesVia::HandlerLibrary::Code 0.050003
-      Sub::HandlesVia::HandlerLibrary::Counter 0.050003
-      Sub::HandlesVia::HandlerLibrary::Enum 0.050003
-      Sub::HandlesVia::HandlerLibrary::Hash 0.050003
-      Sub::HandlesVia::HandlerLibrary::Number 0.050003
-      Sub::HandlesVia::HandlerLibrary::Scalar 0.050003
-      Sub::HandlesVia::HandlerLibrary::String 0.050003
+      Sub::HandlesVia 0.050007
+      Sub::HandlesVia::CodeGenerator 0.050007
+      Sub::HandlesVia::Declare 0.050007
+      Sub::HandlesVia::Handler 0.050007
+      Sub::HandlesVia::Handler::CodeRef 0.050007
+      Sub::HandlesVia::Handler::Traditional 0.050007
+      Sub::HandlesVia::HandlerLibrary 0.050007
+      Sub::HandlesVia::HandlerLibrary::Array 0.050007
+      Sub::HandlesVia::HandlerLibrary::Blessed 0.050007
+      Sub::HandlesVia::HandlerLibrary::Bool 0.050007
+      Sub::HandlesVia::HandlerLibrary::Code 0.050007
+      Sub::HandlesVia::HandlerLibrary::Counter 0.050007
+      Sub::HandlesVia::HandlerLibrary::Enum 0.050007
+      Sub::HandlesVia::HandlerLibrary::Hash 0.050007
+      Sub::HandlesVia::HandlerLibrary::Number 0.050007
+      Sub::HandlesVia::HandlerLibrary::Scalar 0.050007
+      Sub::HandlesVia::HandlerLibrary::String 0.050007
       Sub::HandlesVia::Mite undef
-      Sub::HandlesVia::Toolkit 0.050003
-      Sub::HandlesVia::Toolkit::Mite 0.050003
-      Sub::HandlesVia::Toolkit::Moo 0.050003
-      Sub::HandlesVia::Toolkit::Moose 0.050003
-      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.050003
-      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.050003
-      Sub::HandlesVia::Toolkit::Mouse 0.050003
-      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.050003
-      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.050003
-      Sub::HandlesVia::Toolkit::ObjectPad 0.050003
-      Sub::HandlesVia::Toolkit::Plain 0.050003
+      Sub::HandlesVia::Toolkit 0.050007
+      Sub::HandlesVia::Toolkit::Mite 0.050007
+      Sub::HandlesVia::Toolkit::Moo 0.050007
+      Sub::HandlesVia::Toolkit::Moose 0.050007
+      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.050007
+      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.050007
+      Sub::HandlesVia::Toolkit::Mouse 0.050007
+      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.050007
+      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.050007
+      Sub::HandlesVia::Toolkit::ObjectPad 0.050007
+      Sub::HandlesVia::Toolkit::Plain 0.050007
     requirements:
       Class::Method::Modifiers 0
       Exporter::Shiny 0
