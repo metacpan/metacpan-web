@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/metacpan/metacpanweb#readme",
   "devDependencies": {
-    "@eslint/js": "^9.39.0",
+    "@eslint/js": "^9.39.1",
     "@playwright/test": "^1.56.1",
-    "eslint": "^9.39.0",
+    "eslint": "^9.39.1",
     "globals": "^16.5.0",
     "js-beautify": "^1.15.4",
     "prettier": "3.6.2"
@@ -33,8 +33,8 @@
     "brush-plain": "^4.0.1",
     "brush-yaml": "^4.0.0",
     "devbridge-autocomplete": "^1.5.0",
-    "esbuild": "^0.25.12",
-    "esbuild-plugin-less": "^1.3.30",
+    "esbuild": "^0.27.0",
+    "esbuild-plugin-less": "^1.3.32",
     "jquery": "^3.7.1",
     "less": "^4.4.2",
     "minimist": "^1.2.8",
