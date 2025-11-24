@@ -4469,38 +4469,38 @@ DISTRIBUTIONS
       Sub::Exporter::Progressive 0.001013
     requirements:
       ExtUtils::MakeMaker 0
-  Sub-HandlesVia-0.050007
-    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.050007.tar.gz
+  Sub-HandlesVia-0.052000
+    pathname: T/TO/TOBYINK/Sub-HandlesVia-0.052000.tar.gz
     provides:
-      Sub::HandlesVia 0.050007
-      Sub::HandlesVia::CodeGenerator 0.050007
-      Sub::HandlesVia::Declare 0.050007
-      Sub::HandlesVia::Handler 0.050007
-      Sub::HandlesVia::Handler::CodeRef 0.050007
-      Sub::HandlesVia::Handler::Traditional 0.050007
-      Sub::HandlesVia::HandlerLibrary 0.050007
-      Sub::HandlesVia::HandlerLibrary::Array 0.050007
-      Sub::HandlesVia::HandlerLibrary::Blessed 0.050007
-      Sub::HandlesVia::HandlerLibrary::Bool 0.050007
-      Sub::HandlesVia::HandlerLibrary::Code 0.050007
-      Sub::HandlesVia::HandlerLibrary::Counter 0.050007
-      Sub::HandlesVia::HandlerLibrary::Enum 0.050007
-      Sub::HandlesVia::HandlerLibrary::Hash 0.050007
-      Sub::HandlesVia::HandlerLibrary::Number 0.050007
-      Sub::HandlesVia::HandlerLibrary::Scalar 0.050007
-      Sub::HandlesVia::HandlerLibrary::String 0.050007
+      Sub::HandlesVia 0.052000
+      Sub::HandlesVia::CodeGenerator 0.052000
+      Sub::HandlesVia::Declare 0.052000
+      Sub::HandlesVia::Handler 0.052000
+      Sub::HandlesVia::Handler::CodeRef 0.052000
+      Sub::HandlesVia::Handler::Traditional 0.052000
+      Sub::HandlesVia::HandlerLibrary 0.052000
+      Sub::HandlesVia::HandlerLibrary::Array 0.052000
+      Sub::HandlesVia::HandlerLibrary::Blessed 0.052000
+      Sub::HandlesVia::HandlerLibrary::Bool 0.052000
+      Sub::HandlesVia::HandlerLibrary::Code 0.052000
+      Sub::HandlesVia::HandlerLibrary::Counter 0.052000
+      Sub::HandlesVia::HandlerLibrary::Enum 0.052000
+      Sub::HandlesVia::HandlerLibrary::Hash 0.052000
+      Sub::HandlesVia::HandlerLibrary::Number 0.052000
+      Sub::HandlesVia::HandlerLibrary::Scalar 0.052000
+      Sub::HandlesVia::HandlerLibrary::String 0.052000
       Sub::HandlesVia::Mite undef
-      Sub::HandlesVia::Toolkit 0.050007
-      Sub::HandlesVia::Toolkit::Mite 0.050007
-      Sub::HandlesVia::Toolkit::Moo 0.050007
-      Sub::HandlesVia::Toolkit::Moose 0.050007
-      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.050007
-      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.050007
-      Sub::HandlesVia::Toolkit::Mouse 0.050007
-      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.050007
-      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.050007
-      Sub::HandlesVia::Toolkit::ObjectPad 0.050007
-      Sub::HandlesVia::Toolkit::Plain 0.050007
+      Sub::HandlesVia::Toolkit 0.052000
+      Sub::HandlesVia::Toolkit::Mite 0.052000
+      Sub::HandlesVia::Toolkit::Moo 0.052000
+      Sub::HandlesVia::Toolkit::Moose 0.052000
+      Sub::HandlesVia::Toolkit::Moose::PackageTrait 0.052000
+      Sub::HandlesVia::Toolkit::Moose::RoleTrait 0.052000
+      Sub::HandlesVia::Toolkit::Mouse 0.052000
+      Sub::HandlesVia::Toolkit::Mouse::PackageTrait 0.052000
+      Sub::HandlesVia::Toolkit::Mouse::RoleTrait 0.052000
+      Sub::HandlesVia::Toolkit::ObjectPad 0.052000
+      Sub::HandlesVia::Toolkit::Plain 0.052000
     requirements:
       Class::Method::Modifiers 0
       Exporter::Shiny 0
@@ -4961,60 +4961,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.008004
-    pathname: T/TO/TOBYINK/Type-Tiny-2.008004.tar.gz
+  Type-Tiny-2.008005
+    pathname: T/TO/TOBYINK/Type-Tiny-2.008005.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.008004
-      Error::TypeTiny 2.008004
-      Error::TypeTiny::Assertion 2.008004
-      Error::TypeTiny::Compilation 2.008004
-      Error::TypeTiny::WrongNumberOfParameters 2.008004
-      Eval::TypeTiny 2.008004
-      Eval::TypeTiny::CodeAccumulator 2.008004
-      Reply::Plugin::TypeTiny 2.008004
-      Test::TypeTiny 2.008004
-      Type::Coercion 2.008004
-      Type::Coercion::FromMoose 2.008004
-      Type::Coercion::Union 2.008004
-      Type::Library 2.008004
-      Type::Params 2.008004
-      Type::Params::Alternatives 2.008004
-      Type::Params::Parameter 2.008004
-      Type::Params::Signature 2.008004
-      Type::Parser 2.008004
-      Type::Parser::AstBuilder 2.008004
-      Type::Parser::Token 2.008004
-      Type::Parser::TokenStream 2.008004
-      Type::Registry 2.008004
-      Type::Tie 2.008004
-      Type::Tie::ARRAY 2.008004
-      Type::Tie::BASE 2.008004
-      Type::Tie::HASH 2.008004
-      Type::Tie::SCALAR 2.008004
-      Type::Tiny 2.008004
-      Type::Tiny::Bitfield 2.008004
-      Type::Tiny::Class 2.008004
-      Type::Tiny::ConstrainedObject 2.008004
-      Type::Tiny::Duck 2.008004
-      Type::Tiny::Enum 2.008004
-      Type::Tiny::Intersection 2.008004
-      Type::Tiny::Role 2.008004
-      Type::Tiny::Union 2.008004
-      Type::Utils 2.008004
-      Types::Common 2.008004
-      Types::Common::Numeric 2.008004
-      Types::Common::String 2.008004
-      Types::Standard 2.008004
-      Types::Standard::ArrayRef 2.008004
-      Types::Standard::CycleTuple 2.008004
-      Types::Standard::Dict 2.008004
-      Types::Standard::HashRef 2.008004
-      Types::Standard::Map 2.008004
-      Types::Standard::ScalarRef 2.008004
-      Types::Standard::StrMatch 2.008004
-      Types::Standard::Tied 2.008004
-      Types::Standard::Tuple 2.008004
-      Types::TypeTiny 2.008004
+      Devel::TypeTiny::Perl58Compat 2.008005
+      Error::TypeTiny 2.008005
+      Error::TypeTiny::Assertion 2.008005
+      Error::TypeTiny::Compilation 2.008005
+      Error::TypeTiny::WrongNumberOfParameters 2.008005
+      Eval::TypeTiny 2.008005
+      Eval::TypeTiny::CodeAccumulator 2.008005
+      Reply::Plugin::TypeTiny 2.008005
+      Test::TypeTiny 2.008005
+      Type::Coercion 2.008005
+      Type::Coercion::FromMoose 2.008005
+      Type::Coercion::Union 2.008005
+      Type::Library 2.008005
+      Type::Params 2.008005
+      Type::Params::Alternatives 2.008005
+      Type::Params::Parameter 2.008005
+      Type::Params::Signature 2.008005
+      Type::Parser 2.008005
+      Type::Parser::AstBuilder 2.008005
+      Type::Parser::Token 2.008005
+      Type::Parser::TokenStream 2.008005
+      Type::Registry 2.008005
+      Type::Tie 2.008005
+      Type::Tie::ARRAY 2.008005
+      Type::Tie::BASE 2.008005
+      Type::Tie::HASH 2.008005
+      Type::Tie::SCALAR 2.008005
+      Type::Tiny 2.008005
+      Type::Tiny::Bitfield 2.008005
+      Type::Tiny::Class 2.008005
+      Type::Tiny::ConstrainedObject 2.008005
+      Type::Tiny::Duck 2.008005
+      Type::Tiny::Enum 2.008005
+      Type::Tiny::Intersection 2.008005
+      Type::Tiny::Role 2.008005
+      Type::Tiny::Union 2.008005
+      Type::Utils 2.008005
+      Types::Common 2.008005
+      Types::Common::Numeric 2.008005
+      Types::Common::String 2.008005
+      Types::Standard 2.008005
+      Types::Standard::ArrayRef 2.008005
+      Types::Standard::CycleTuple 2.008005
+      Types::Standard::Dict 2.008005
+      Types::Standard::HashRef 2.008005
+      Types::Standard::Map 2.008005
+      Types::Standard::ScalarRef 2.008005
+      Types::Standard::StrMatch 2.008005
+      Types::Standard::Tied 2.008005
+      Types::Standard::Tuple 2.008005
+      Types::TypeTiny 2.008005
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
