@@ -18,7 +18,7 @@ jobs:
       - uses: haarg/setup-git-user@v1
         with:
           app: ${{ steps.app-token.outputs.app-slug }}
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           token: ${{ steps.app-token.outputs.token }}
       - uses: metacpan/metacpan-actions/update-snapshot@master
