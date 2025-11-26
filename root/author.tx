@@ -19,7 +19,7 @@
     <li class="author-item">
         <i class="fas fa-map-marker-alt"></i>
     %%  }
-        <img src="/static/images/flag/[% $author.country %].png" alt="[% $author.country %] flag">
+        <img src="/static/images/flag/[% lc($author.country) %].png" alt="[% $author.country %] flag">
         [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
     </li>
     %%  }
