@@ -3149,10 +3149,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Mouse-v2.6.0
-    pathname: S/SY/SYOHEX/Mouse-v2.6.0.tar.gz
+  Mouse-v2.6.1
+    pathname: S/SK/SKAJI/Mouse-v2.6.1.tar.gz
     provides:
-      Mouse v2.6.0
+      Mouse v2.6.1
       Mouse::Exporter undef
       Mouse::Meta::Attribute undef
       Mouse::Meta::Class undef
@@ -3170,11 +3170,10 @@ DISTRIBUTIONS
       Mouse::Meta::TypeConstraint undef
       Mouse::Object undef
       Mouse::PurePerl undef
-      Mouse::Role v2.6.0
-      Mouse::Spec v2.6.0
-      Mouse::Tiny v2.5.12
+      Mouse::Role v2.6.1
+      Mouse::Spec v2.6.1
       Mouse::TypeRegistry undef
-      Mouse::Util v2.6.0
+      Mouse::Util v2.6.1
       Mouse::Util::MetaRole undef
       Mouse::Util::TypeConstraints undef
       Squirrel undef
