@@ -1955,10 +1955,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  HTTP-Tiny-0.090
-    pathname: H/HA/HAARG/HTTP-Tiny-0.090.tar.gz
+  HTTP-Tiny-0.092
+    pathname: H/HA/HAARG/HTTP-Tiny-0.092.tar.gz
     provides:
-      HTTP::Tiny 0.090
+      HTTP::Tiny 0.092
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -1966,6 +1966,7 @@ DISTRIBUTIONS
       IO::Socket 0
       MIME::Base64 0
       Socket 0
+      Time::HiRes 0
       Time::Local 0
       bytes 0
       perl 5.006
