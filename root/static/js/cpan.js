@@ -178,7 +178,7 @@ for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
 
 jQuery('.dropdown-toggle').dropdown(); // bootstrap
 
-const toc = document.querySelector('.content .toc');
+const toc = document.querySelector('main .toc');
 if (toc) {
     formatTOC(toc);
 }
