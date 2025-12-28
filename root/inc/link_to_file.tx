@@ -2,7 +2,7 @@
 my $title = $file.documentation || $file.path;
 
 # If there is pod for this file...
-if $file.documentation || $file.pod_lines.size() || $file.has_associated_pod {
+if $file.documentation || $file.pod_lines.size() || $file.has_associated_pod || $file.mime == 'text/markdown' {
 -%]
 <a href="[%
   if !$permalinks {
