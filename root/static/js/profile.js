@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function rewriteURL(link) {
     const url = link.dataset.urlTemplate;
@@ -8,12 +8,12 @@ function rewriteURL(link) {
 }
 
 function removeDiv(div) {
-    new Promise(resolve => {
-        div.addEventListener("animationend", resolve);
+    new Promise((resolve) => {
+        div.addEventListener('animationend', resolve);
         setTimeout(resolve, 400);
     }).then(() => div.parentNode.removeChild(div));
-    div.classList.remove("slide-down");
-    div.classList.add("slide-up");
+    div.classList.remove('slide-down');
+    div.classList.add('slide-up');
 }
 
 function removeField(e) {
@@ -68,7 +68,7 @@ function fillLocation() {
     navigator.geolocation.getCurrentPosition((pos) => {
         document.querySelector('input[name="latitude"]').value = pos.coords.latitude;
         document.querySelector('input[name="longitude"]').value = pos.coords.longitude;
-    }, function() {});
+    }, function () {});
     return false;
 }
 
@@ -76,7 +76,7 @@ const profileForm = document.querySelector('.profile-form');
 
 if (profileForm) {
     for (const btn of profileForm.querySelectorAll(':scope .add-field')) {
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             e.preventDefault();
             addField(this.closest('.field-container').parentNode, this.dataset.fieldType);
         });
@@ -86,7 +86,7 @@ if (profileForm) {
         remove_field.addEventListener('click', removeField);
     }
 
-    profileForm.querySelector('.add-profile').addEventListener('change', function(e) {
+    profileForm.querySelector('.add-profile').addEventListener('change', function (e) {
         e.preventDefault();
         const option = this.selectedOptions[0];
         addProfile(
@@ -108,13 +108,13 @@ if (profileForm) {
         });
     }
 
-    const extra = profileForm.querySelector('textarea[name="extra"]')
+    const extra = profileForm.querySelector('textarea[name="extra"]');
     extra.addEventListener('keyup', () => {
         validateJSON(extra);
     });
     validateJSON(extra);
 
-    profileForm.querySelector('.fill-location').addEventListener('click', function(e) {
+    profileForm.querySelector('.fill-location').addEventListener('click', function (e) {
         e.preventDefault();
         fillLocation();
     });
@@ -122,15 +122,15 @@ if (profileForm) {
     const donation_box = document.querySelector('#metacpan_donations');
     const donations = profileForm.querySelector('input[name="donations"]');
     donations.addEventListener('change', () => {
-        donation_box.classList.remove("slide-out-hidden");
+        donation_box.classList.remove('slide-out-hidden');
 
         if (donations.value) {
-            donation_box.classList.add("slide-down");
-            donation_box.classList.remove("slide-up");
+            donation_box.classList.add('slide-down');
+            donation_box.classList.remove('slide-up');
         }
         else {
-            donation_box.classList.remove("slide-down");
-            donation_box.classList.add("slide-up");
+            donation_box.classList.remove('slide-down');
+            donation_box.classList.add('slide-up');
         }
     });
 }

@@ -5,7 +5,7 @@ const storage = require('./storage.js');
 const Mousetrap = require('mousetrap');
 const {
     formatTOC,
-    createAnchors
+    createAnchors,
 } = require('./document-ui.mjs');
 
 const jQuery = require('jquery');
@@ -38,10 +38,10 @@ async function processUserData() {
 
     if (user_data.avatar) {
         const base_av = format_string(user_data.avatar, {
-            size: 35
+            size: 35,
         });
         const double_av = format_string(user_data.avatar, {
-            size: 70
+            size: 70,
         });
 
         const avatar = document.createElement('img');
@@ -95,8 +95,8 @@ function format_string(input_string, replacements) {
     const output_string = input_string.replace(
         /\{(\/?)(\w+)\}/g,
         (x, slash, placeholder) =>
-        Object.hasOwn(replacements, placeholder) ?
-        slash + replacements[placeholder] : ''
+            Object.hasOwn(replacements, placeholder)
+                ? slash + replacements[placeholder] : '',
     );
     return output_string;
 }
@@ -104,20 +104,20 @@ function format_string(input_string, replacements) {
 // User customisations
 processUserData();
 
-jQuery(".ttip").tooltip(); // bootstrap
+jQuery('.ttip').tooltip(); // bootstrap
 
 for (const el of document.querySelectorAll('.keyboard-shortcuts')) {
-    el.addEventListener('click', e => {
+    el.addEventListener('click', (e) => {
         e.preventDefault();
         jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
     });
 }
 
 // Global keyboard shortcuts
-Mousetrap.bind('?', function() {
+Mousetrap.bind('?', function () {
     jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
 });
-Mousetrap.bind('s', function(e) {
+Mousetrap.bind('s', function (e) {
     e.preventDefault();
     document.querySelector('#metacpan_search-input').focus();
 });
@@ -132,7 +132,7 @@ for (const el of document.querySelectorAll('a[data-keyboard-shortcut]')) {
 }
 
 for (const logout of document.querySelectorAll('.logout-button')) {
-    logout.addEventListener('click', e => {
+    logout.addEventListener('click', (e) => {
         e.preventDefault();
         const form = document.createElement('form');
         form.method = 'POST';
@@ -178,7 +178,7 @@ for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
 
 jQuery('.dropdown-toggle').dropdown(); // bootstrap
 
-const toc = document.querySelector(".content .toc")
+const toc = document.querySelector('.content .toc');
 if (toc) {
     formatTOC(toc);
 }
@@ -205,38 +205,38 @@ set_page_size('a[href*="/requires"]', 'requires_page_size');
 const changes = document.querySelector('#metacpan_last-changes');
 if (changes) {
     const changes_content = changes.querySelector('.changes-content');
-    const changes_toggle = changes.querySelector(".changes-toggle");
+    const changes_toggle = changes.querySelector('.changes-toggle');
     changes.classList.add('collapsable', 'collapsed');
 
     const content_height = Math.round(changes_content.scrollHeight);
 
     const potential_size = Math.round(
-        changes_content.offsetHeight +
-        changes_toggle.offsetHeight
+        changes_content.offsetHeight
+        + changes_toggle.offsetHeight,
     );
 
     if (content_height <= potential_size) {
         changes.classList.remove('collapsable', 'collapsed');
     }
-    changes_toggle.addEventListener('click', e => {
+    changes_toggle.addEventListener('click', (e) => {
         e.preventDefault();
         changes.classList.toggle('collapsed');
     });
 }
 
 for (const favForm of document.querySelectorAll('form[action="/account/favorite/add"]')) {
-    favForm.addEventListener('submit', async e => {
+    favForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(favForm);
         const response = await fetch(favForm.action, {
-            method: favForm.method,
+            method:  favForm.method,
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
             },
             body: formData,
         });
         if (!response.ok) {
-            alert("Error adding favorite!");
+            alert('Error adding favorite!');
         }
 
         const button = favForm.querySelector('button');
@@ -266,7 +266,7 @@ for (const favForm of document.querySelectorAll('form[action="/account/favorite/
 }
 
 for (const favButton of document.querySelectorAll('.fav-not-logged-in')) {
-    favButton.addEventListener('click', e => {
+    favButton.addEventListener('click', (e) => {
         e.preventDefault();
         alert('Please sign in to add favorites');
     });
@@ -282,7 +282,7 @@ for (const sel of document.querySelectorAll('.select-navigator')) {
 const contribs = document.querySelector('#metacpan_contributors');
 if (contribs) {
     const contrib_button = document.querySelector('.contributors-show-button');
-    contrib_button.addEventListener('click', e => {
+    contrib_button.addEventListener('click', (e) => {
         e.preventDefault();
         contrib_button.style.display = 'none';
         contribs.classList.remove('slide-out-hidden');

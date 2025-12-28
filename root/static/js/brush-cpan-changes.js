@@ -5,24 +5,24 @@ function Brush() {
         // these classes/colors are totally arbitrary
         {
             regex: /^\{\{\$NEXT\}\}$/gm,
-            css: 'color3'
+            css:   'color3',
         }, // placeholder (oops)
         {
             regex: /^v?([0-9._]+)(-TRIAL)?([ \t]+.+)?/gm,
-            css: 'constants'
+            css:   'constants',
         }, // version/date
         {
             regex: /^\s+\[.+?\]/gm,
-            css: 'value'
+            css:   'value',
         }, // group
         {
             regex: /^\s+[-*]/gm,
-            css: 'functions'
+            css:   'functions',
         }, // item marker
         {
             regex: /^[^v0-9].+\n(?=\nv?[0-9_.])/g,
-            css: 'preprocessor'
-        } // preamble
+            css:   'preprocessor',
+        }, // preamble
     ];
 };
 

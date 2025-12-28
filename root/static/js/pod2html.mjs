@@ -1,8 +1,8 @@
 import {
     formatTOC,
-    createAnchors
+    createAnchors,
 }
-from './document-ui.mjs';
+    from './document-ui.mjs';
 
 const pod2htmlForm = document.querySelector('#metacpan-pod-renderer-form');
 if (pod2htmlForm) {
@@ -24,7 +24,7 @@ if (pod2htmlForm) {
             pod = textInput.value;
         }
         submit.disabled = true;
-        document.title = "Pod Renderer - metacpan.org";
+        document.title = 'Pod Renderer - metacpan.org';
 
         rendered.style.display = 'none';
         rendered.replaceChildren();
@@ -36,9 +36,9 @@ if (pod2htmlForm) {
             form.set('pod', pod);
 
             const response = await fetch('/pod2html', {
-                method: 'POST',
+                method:  'POST',
                 headers: {
-                    "Accept": "application/json",
+                    Accept: 'application/json',
                 },
                 body: form,
             });
@@ -49,7 +49,7 @@ if (pod2htmlForm) {
 
             const data = await response.json();
 
-            document.title = "Pod Renderer - " + data.pod_title + " - metacpan.org";
+            document.title = 'Pod Renderer - ' + data.pod_title + ' - metacpan.org';
 
             const body = template.content.cloneNode(true);
             body.querySelector('.toc-body').replaceWith(parseHTML(data.pod_index));
@@ -103,30 +103,30 @@ if (pod2htmlForm) {
     });
 
     let dragTimer;
-    renderer.addEventListener("dragover", (ev) => {
+    renderer.addEventListener('dragover', (ev) => {
         ev.preventDefault();
         if (dragTimer) {
             window.clearTimeout(dragTimer);
         }
         dragTimer = window.setTimeout(() => {
-            renderer.classList.remove("dragging");
+            renderer.classList.remove('dragging');
             window.clearTimeout(dragTimer);
             dragTimer = null;
         }, 500);
     });
 
-    document.addEventListener("dragenter", function() {
-        renderer.classList.add("dragging");
+    document.addEventListener('dragenter', function () {
+        renderer.classList.add('dragging');
     });
 
-    renderer.addEventListener("drop", (ev) => {
+    renderer.addEventListener('drop', (ev) => {
         const data = ev.dataTransfer;
         if (data && data.files && data.files.length) {
             const file = data.files[0];
 
             ev.preventDefault();
             ev.stopPropagation();
-            renderer.classList.remove("dragging");
+            renderer.classList.remove('dragging');
             if (dragTimer) {
                 window.clearTimeout(dragTimer);
                 dragTimer = null;

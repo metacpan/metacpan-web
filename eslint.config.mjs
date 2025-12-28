@@ -1,31 +1,43 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
+import globals from 'globals';
+import stylistic from '@stylistic/eslint-plugin';
+import js from '@eslint/js';
 
-export default [{
-        ignores: ["root/assets/"],
+export default [
+    {
+        ignores: ['root/assets/'],
     },
     {
+        files:           ['**/*.mjs'],
         languageOptions: {
-            globals: globals.browser,
-        }
-    },
-    {
-        files: ['build-assets.mjs'],
-        languageOptions: {
-            globals: globals.nodeBuiltin,
+            sourceType: 'module',
         },
     },
     {
-        files: ['**/*.js'],
+        files:           ['**/*.js'],
         languageOptions: {
             sourceType: 'commonjs',
-        }
+        },
     },
     {
-        files: ['**/*.mjs'],
+        files:           ['root/**/*.mjs', 'root/**/*.js'],
         languageOptions: {
-            sourceType: 'module',
-        }
+            globals: globals.browser,
+        },
     },
-    pluginJs.configs.recommended,
+    js.configs.recommended,
+    stylistic.configs.customize({
+        semi: true,
+    }),
+    {
+        rules: {
+            '@stylistic/indent':            ['error', 4],
+            '@stylistic/multiline-ternary': 'off',
+            '@stylistic/key-spacing':       [
+                'error',
+                {
+                    align: 'value',
+                },
+            ],
+        },
+    },
 ];

@@ -28,7 +28,7 @@ const showSearchBar = () => {
             searchBarForm.classList.add('visible-lg');
         }
     }
-}
+};
 
 document.body.addEventListener('click', showSearchBar);
 
