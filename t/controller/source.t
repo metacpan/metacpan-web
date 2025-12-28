@@ -92,7 +92,7 @@ test_psgi app, sub {
                 desc     => 'has pre-block with expected syntax brush',
             },
             {
-                uri      => '/release/ETHER/Moose-2.1005/source/README.md',
+                uri      => '/release/ETHER/Moose-2.1005/view/README.md',
                 xpath    => '//h1[@id="moose"]',
                 expected => qr/^Moose$/,
                 desc     => 'markdown rendered as HTML',

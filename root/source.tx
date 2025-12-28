@@ -47,14 +47,9 @@
 %%  }
 %%  override content -> {
 %%  if !$file.binary {
-  %%  if $file.mime == 'text/markdown' {
-    [% $source | markdown | filter_html %]
-  %%  }
-  %%  else {
 <pre id="metacpan_source" class="line-numbers pod-toggle[% if $file.sloc > 10 { " pod-hidden"; } %]" data-pod-lines="[%
   $file.pod_lines.map(-> $lines { $lines[0] ~ '-' ~ ($lines[0]+$lines[1]) }).join(', ');
 %]"><code class="language-[% $syntax_type %]">[% $source %]</code></pre>
-  %%  }
 %%  }
 %%  else {
 This file cannot be displayed inline.  Try the <a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">raw file</a>.
