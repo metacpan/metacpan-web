@@ -165,6 +165,25 @@ money...
       </tr>
       <tr>
         <td>
+          <a target="_blank" rel="noopener nofollow" href="https://www.iban.com/">
+            <img src="/static/images/sponsors/iban-logo.png" width="170">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://www.iban.com/">iban.com</a> provides enterprise-grade
+            Software as a Service (SaaS) solutions for payment validation,
+            Verification of Payee (VoP), and data retrieval, including
+            comprehensive services for validating International Bank Account
+            Numbers (IBAN), Bank Identifier Codes (BIC), and other global
+            banking details. They offer an easy-to-integrate API to help
+            businesses reduce failed payments and associated bank charges.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.fastmail.com/">
             <img src="/static/images/sponsors/fastmail.svg" width="170">
           </a>
