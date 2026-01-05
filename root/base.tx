@@ -187,9 +187,6 @@
               <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener">
                 <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
               </a>
-              <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
-                <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.svg" alt="Deriv logo">
-              </a>
               <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener">
                 <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
               </a>
@@ -203,9 +200,9 @@
               <a class="footer-sponsor-link" target="_blank" href="https://www.elastic.co/" rel="noopener">
                 <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic logo">
               </a>
-              <!-- Added 2024-07-22 -->
-              <a class="footer-sponsor-link" target="_blank" href="https://route4me.com/" rel="noopener">
-                <img class="footer-sponsor-route4me" src="/static/images/sponsors/route4me.png" alt="Route4Me logo">
+              <!-- Added 2026-01-06 -->
+              <a class="footer-sponsor-link" target="_blank" href="https://www.iban.com/" rel="noopener">
+                <img class="footer-sponsor-iban" src="/static/images/sponsors/iban-logo.png" alt="IBAN logo">
               </a>
             </div>
           </div>
