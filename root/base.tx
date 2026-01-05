@@ -187,9 +187,6 @@
               <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener">
                 <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="liquidweb logo">
               </a>
-              <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener">
-                <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.svg" alt="Deriv logo">
-              </a>
               <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener">
                 <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geocode logo">
               </a>
