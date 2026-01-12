@@ -2064,18 +2064,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.095
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.095.tar.gz
+  IO-Socket-SSL-2.098
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.098.tar.gz
     provides:
-      IO::Socket::SSL 2.095
+      IO::Socket::SSL 2.098
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.095
-      IO::Socket::SSL::OCSP_Resolver 2.095
+      IO::Socket::SSL::OCSP_Cache 2.098
+      IO::Socket::SSL::OCSP_Resolver 2.098
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.095
-      IO::Socket::SSL::SSL_HANDLE 2.095
-      IO::Socket::SSL::Session_Cache 2.095
-      IO::Socket::SSL::Trace 2.095
+      IO::Socket::SSL::SSL_Context 2.098
+      IO::Socket::SSL::SSL_HANDLE 2.098
+      IO::Socket::SSL::Session_Cache 2.098
+      IO::Socket::SSL::Trace 2.098
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -3971,23 +3971,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20250912
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20250912.tar.gz
+  Perl-Tidy-20260109
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20260109.tar.gz
     provides:
-      Perl::Tidy 20250912
-      Perl::Tidy::Debugger 20250912
-      Perl::Tidy::Diagnostics 20250912
-      Perl::Tidy::FileWriter 20250912
-      Perl::Tidy::Formatter 20250912
-      Perl::Tidy::HtmlWriter 20250912
-      Perl::Tidy::IOScalar 20250912
-      Perl::Tidy::IOScalarArray 20250912
-      Perl::Tidy::IndentationItem 20250912
-      Perl::Tidy::Logger 20250912
-      Perl::Tidy::Tokenizer 20250912
-      Perl::Tidy::VerticalAligner 20250912
-      Perl::Tidy::VerticalAligner::Alignment 20250912
-      Perl::Tidy::VerticalAligner::Line 20250912
+      Perl::Tidy 20260109
+      Perl::Tidy::Debugger 20260109
+      Perl::Tidy::Diagnostics 20260109
+      Perl::Tidy::FileWriter 20260109
+      Perl::Tidy::Formatter 20260109
+      Perl::Tidy::HtmlWriter 20260109
+      Perl::Tidy::IOScalar 20260109
+      Perl::Tidy::IOScalarArray 20260109
+      Perl::Tidy::IndentationItem 20260109
+      Perl::Tidy::Logger 20260109
+      Perl::Tidy::Tokenizer 20260109
+      Perl::Tidy::VerticalAligner 20260109
+      Perl::Tidy::VerticalAligner::Alignment 20260109
+      Perl::Tidy::VerticalAligner::Line 20260109
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
@@ -4959,60 +4959,60 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Type-Tiny-2.010000
-    pathname: T/TO/TOBYINK/Type-Tiny-2.010000.tar.gz
+  Type-Tiny-2.010001
+    pathname: T/TO/TOBYINK/Type-Tiny-2.010001.tar.gz
     provides:
-      Devel::TypeTiny::Perl58Compat 2.010000
-      Error::TypeTiny 2.010000
-      Error::TypeTiny::Assertion 2.010000
-      Error::TypeTiny::Compilation 2.010000
-      Error::TypeTiny::WrongNumberOfParameters 2.010000
-      Eval::TypeTiny 2.010000
-      Eval::TypeTiny::CodeAccumulator 2.010000
-      Reply::Plugin::TypeTiny 2.010000
-      Test::TypeTiny 2.010000
-      Type::Coercion 2.010000
-      Type::Coercion::FromMoose 2.010000
-      Type::Coercion::Union 2.010000
-      Type::Library 2.010000
-      Type::Params 2.010000
-      Type::Params::Alternatives 2.010000
-      Type::Params::Parameter 2.010000
-      Type::Params::Signature 2.010000
-      Type::Parser 2.010000
-      Type::Parser::AstBuilder 2.010000
-      Type::Parser::Token 2.010000
-      Type::Parser::TokenStream 2.010000
-      Type::Registry 2.010000
-      Type::Tie 2.010000
-      Type::Tie::ARRAY 2.010000
-      Type::Tie::BASE 2.010000
-      Type::Tie::HASH 2.010000
-      Type::Tie::SCALAR 2.010000
-      Type::Tiny 2.010000
-      Type::Tiny::Bitfield 2.010000
-      Type::Tiny::Class 2.010000
-      Type::Tiny::ConstrainedObject 2.010000
-      Type::Tiny::Duck 2.010000
-      Type::Tiny::Enum 2.010000
-      Type::Tiny::Intersection 2.010000
-      Type::Tiny::Role 2.010000
-      Type::Tiny::Union 2.010000
-      Type::Utils 2.010000
-      Types::Common 2.010000
-      Types::Common::Numeric 2.010000
-      Types::Common::String 2.010000
-      Types::Standard 2.010000
-      Types::Standard::ArrayRef 2.010000
-      Types::Standard::CycleTuple 2.010000
-      Types::Standard::Dict 2.010000
-      Types::Standard::HashRef 2.010000
-      Types::Standard::Map 2.010000
-      Types::Standard::ScalarRef 2.010000
-      Types::Standard::StrMatch 2.010000
-      Types::Standard::Tied 2.010000
-      Types::Standard::Tuple 2.010000
-      Types::TypeTiny 2.010000
+      Devel::TypeTiny::Perl58Compat 2.010001
+      Error::TypeTiny 2.010001
+      Error::TypeTiny::Assertion 2.010001
+      Error::TypeTiny::Compilation 2.010001
+      Error::TypeTiny::WrongNumberOfParameters 2.010001
+      Eval::TypeTiny 2.010001
+      Eval::TypeTiny::CodeAccumulator 2.010001
+      Reply::Plugin::TypeTiny 2.010001
+      Test::TypeTiny 2.010001
+      Type::Coercion 2.010001
+      Type::Coercion::FromMoose 2.010001
+      Type::Coercion::Union 2.010001
+      Type::Library 2.010001
+      Type::Params 2.010001
+      Type::Params::Alternatives 2.010001
+      Type::Params::Parameter 2.010001
+      Type::Params::Signature 2.010001
+      Type::Parser 2.010001
+      Type::Parser::AstBuilder 2.010001
+      Type::Parser::Token 2.010001
+      Type::Parser::TokenStream 2.010001
+      Type::Registry 2.010001
+      Type::Tie 2.010001
+      Type::Tie::ARRAY 2.010001
+      Type::Tie::BASE 2.010001
+      Type::Tie::HASH 2.010001
+      Type::Tie::SCALAR 2.010001
+      Type::Tiny 2.010001
+      Type::Tiny::Bitfield 2.010001
+      Type::Tiny::Class 2.010001
+      Type::Tiny::ConstrainedObject 2.010001
+      Type::Tiny::Duck 2.010001
+      Type::Tiny::Enum 2.010001
+      Type::Tiny::Intersection 2.010001
+      Type::Tiny::Role 2.010001
+      Type::Tiny::Union 2.010001
+      Type::Utils 2.010001
+      Types::Common 2.010001
+      Types::Common::Numeric 2.010001
+      Types::Common::String 2.010001
+      Types::Standard 2.010001
+      Types::Standard::ArrayRef 2.010001
+      Types::Standard::CycleTuple 2.010001
+      Types::Standard::Dict 2.010001
+      Types::Standard::HashRef 2.010001
+      Types::Standard::Map 2.010001
+      Types::Standard::ScalarRef 2.010001
+      Types::Standard::StrMatch 2.010001
+      Types::Standard::Tied 2.010001
+      Types::Standard::Tuple 2.010001
+      Types::TypeTiny 2.010001
     requirements:
       Exporter::Tiny 1.006000
       ExtUtils::MakeMaker 6.17
