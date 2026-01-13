@@ -36,9 +36,8 @@ sub filter_html {
     my ( $html, $data ) = @_;
 
     my $hr = HTML::Restrict->new(
-        uri_schemes =>
-            [ undef, 'http', 'https', 'data', 'mailto', 'irc', 'ircs' ],
-        rules => {
+        uri_schemes => [ undef, 'http', 'https', 'mailto', 'irc', 'ircs' ],
+        rules       => {
             a       => [qw( href id target )],
             b       => [],
             br      => [],
