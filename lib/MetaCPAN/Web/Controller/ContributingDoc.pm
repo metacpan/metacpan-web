@@ -38,7 +38,7 @@ sub get : Private {
 
     my $file = List::Util::first { $_->{name} =~ /$contributing_re/ } @$files;
 
-    if ( !exists $file->{path} ) {
+    if ( !$file || !exists $file->{path} ) {
         my $release_info = $c->model('ReleaseInfo')->get( $author, $release );
         $c->stash( $release_info->get );
         $c->stash( {
@@ -47,17 +47,11 @@ sub get : Private {
         $c->response->status(404);
     }
     else {
-        if ( $file->{pod_lines} && @{ $file->{pod_lines} } ) {
-            $c->stash(
-                author_name  => $author,
-                release_name => $release,
-            );
-            $c->forward( '/view/release', [ $file->{path} ] );
-        }
-        else {
-            $c->forward( '/source/view',
-                [ $file->{author}, $file->{release}, $file->{path} ] );
-        }
+        $c->stash(
+            author_name  => $author,
+            release_name => $release,
+        );
+        $c->forward( '/view/release', [ $file->{path} ] );
     }
 }
 

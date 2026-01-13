@@ -29,7 +29,7 @@ sub find : Path : Args(1) {
 
     # TODO: Disambiguate if there's more than one match. #176
 
-    $c->forward( 'view', [@path] );
+    $c->forward( '/view/file', [@path] );
 }
 
 sub view : Private {
@@ -69,11 +69,6 @@ sub view : Private {
 
     $c->detach('/not_found')
         if ( $pod->{code} || 0 ) > 399;
-
-    # Store at fastly for a year - as we will purge!
-    $c->cdn_max_age('1y');
-    $c->add_dist_key( $release->{distribution} );
-    $c->add_author_key( $release->{author} );
 
     if ( $data->{deprecated} ) {
         $c->stash->{notification} ||= { type => 'MODULE_DEPRECATED' };

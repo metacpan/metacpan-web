@@ -87,12 +87,12 @@ test_psgi app, sub {
         my @tests = (
             {
                 uri      => '/release/RJBS/Dist-Zilla-5.043/source/bin/dzil',
-                xpath    => '//*[contains-token(@class, "content")]/pre/code/@class',
+                xpath    => '//main/pre/code/@class',
                 expected => qr/\blanguage-perl\b/,
                 desc     => 'has pre-block with expected syntax brush',
             },
             {
-                uri      => '/release/ETHER/Moose-2.1005/source/README.md',
+                uri      => '/release/ETHER/Moose-2.1005/view/README.md',
                 xpath    => '//h1[@id="moose"]',
                 expected => qr/^Moose$/,
                 desc     => 'markdown rendered as HTML',

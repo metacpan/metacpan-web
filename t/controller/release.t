@@ -62,12 +62,12 @@ test_psgi app, sub {
         ),
         'contains link to "this" version'
     );
-    my $latest = $tx->find_value('//*[contains-token(@class, "content")]');
+    my $latest = $tx->find_value('//main');
     ok( $res = $cb->( GET $this ), "GET $this" );
     my $tx_latest = tx($res);
     is(
         $latest,
-        $tx_latest->find_value('//*[contains-token(@class, "content")]'),
+        $tx_latest->find_value('//main'),
         'content of both urls is exactly the same'
     );
 
@@ -223,8 +223,7 @@ sub test_heading_order {
     my $heading = 0;
 
     # Boohoo... testing with XPATH :-(
-    my $xpath_prefix
-        = '//*[contains-token(@class, "content")]/div[contains-token(@class, "file-group")]';
+    my $xpath_prefix = '//main/div[contains-token(@class, "file-group")]';
     $tx->ok(
         "$xpath_prefix/h2",
         sub {

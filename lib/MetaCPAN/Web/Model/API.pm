@@ -19,6 +19,17 @@ use Try::Tiny             qw( catch try );
 use URI                   ();
 use URI::Escape           qw( uri_escape );
 
+use Data::Dump           ();
+use Data::Dump::Filtered ();
+
+Data::Dump::Filtered::add_dump_filter( sub {
+    my ( $ctx, $object_ref ) = @_;
+    if ( $ctx->object_isa('IO::Async::Loop') ) {
+        return { dump => "bless({ '...' => '...' }, '" . $ctx->class . "')" };
+    }
+    return undef;
+} );
+
 my $loop;
 
 sub loop {

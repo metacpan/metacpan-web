@@ -204,7 +204,7 @@ if (source) {
     }
 }
 
-for (const code of document.querySelectorAll('.content pre > code')) {
+for (const code of document.querySelectorAll('main pre > code')) {
     const pre = code.parentNode;
 
     const config = {

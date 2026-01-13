@@ -37,8 +37,7 @@ test_psgi app, sub {
     is( $res->code, 404, 'code 404' );
 
     my $tx2 = tx($res);
-    $tx2->find_value( '//div[contains-token(@class, "content")]',
-        'page has content' );
+    $tx2->find_value( '//main', 'page has content' );
     $tx2->like(
         q[//div[contains-token(@class, 'about')]],
         qr/No Contributing guidelines.+found/,
