@@ -52,6 +52,22 @@ money...
       </tr>
       <tr>
         <td>
+          <a target="_blank" rel="noopener nofollow" href="https://geolytica.com/">
+            <img src="/static/images/sponsors/geocodelogo.svg" width="110" height="51">
+          </a>
+        </td>
+        <td>
+          <p>
+            <a target="_blank" rel="noopener nofollow"
+            href="https://geolytica.com/">Geolytica</a> -- Ground truth at the speed of life.
+            A DaaS and SaaS company offering places data and geocoding based on
+            geo data from the open web. We’ve used Perl since 2004 and still do
+            at over 50% of our codebase.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <a target="_blank" rel="noopener nofollow" href="https://www.fastly.com/">
             <img src="/static/images/sponsors/fastly_logo.svg" width="110" height="51">
           </a>
