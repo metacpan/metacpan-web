@@ -31,7 +31,7 @@ sub dist : Chained('/dist/root') PathPart('view') Args {
         %$release_data, file => $c->model('API::File')->get(@path)->get,
     } );
 
-    $c->forward( '/pod/view', [@path] );
+    $c->forward( 'file', [@path] );
 }
 
 sub release : Chained('/release/root') PathPart('view') Args {
@@ -52,7 +52,31 @@ sub release : Chained('/release/root') PathPart('view') Args {
         permalinks => 1,
     } );
 
-    $c->forward( '/pod/view', [ $author, $release, @path ] );
+    $c->forward( 'file', [ $author, $release, @path ] );
+}
+
+sub file : Private {
+    my ( $self, $c, @path ) = @_;
+
+    my $release = $c->stash->{release};
+    my $file    = $c->stash->{file};
+
+    $c->cdn_max_age('1y');
+    $c->add_dist_key( $release->{distribution} );
+    $c->add_author_key( $release->{author} );
+
+    if (   $file->{mime} eq 'text/x-script.perl'
+        || $file->{mime} eq 'text/x-script.perl-module'
+        || $file->{mime} eq 'text/x-pod' )
+    {
+        $c->forward( '/pod/view', \@path );
+    }
+    elsif ( $file->{mime} eq 'text/markdown' ) {
+        $c->forward( '/md/view', \@path );
+    }
+    else {
+        $c->forward( '/source/view', \@path );
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

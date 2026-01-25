@@ -1,0 +1,4 @@
+%%  cascade pod
+%%  override content -> {
+    [% $source | markdown | filter_html %]
+%%  }

@@ -132,7 +132,7 @@
           <div class="content-navigation">
             %%  block breadcrumbs -> { }
           </div>
-          <main class="[% block content_classes -> { 'content' } %]">
+          <main class="[% block content_classes -> { } %]">
             %%  block content -> { }
           </main>
           <div class="content-pagination">
