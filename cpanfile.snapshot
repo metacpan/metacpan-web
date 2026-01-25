@@ -244,18 +244,18 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  CPAN-Meta-2.150010
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.150010.tar.gz
+  CPAN-Meta-2.150011
+    pathname: R/RJ/RJBS/CPAN-Meta-2.150011.tar.gz
     provides:
-      CPAN::Meta 2.150010
-      CPAN::Meta::Converter 2.150010
-      CPAN::Meta::Feature 2.150010
-      CPAN::Meta::History 2.150010
-      CPAN::Meta::Merge 2.150010
-      CPAN::Meta::Prereqs 2.150010
-      CPAN::Meta::Spec 2.150010
-      CPAN::Meta::Validator 2.150010
-      Parse::CPAN::Meta 2.150010
+      CPAN::Meta 2.150011
+      CPAN::Meta::Converter 2.150011
+      CPAN::Meta::Feature 2.150011
+      CPAN::Meta::History 2.150011
+      CPAN::Meta::Merge 2.150011
+      CPAN::Meta::Prereqs 2.150011
+      CPAN::Meta::Spec 2.150011
+      CPAN::Meta::Validator 2.150011
+      Parse::CPAN::Meta 2.150011
     requirements:
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::YAML 0.011
@@ -1987,46 +1987,46 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  IO-Async-0.804
-    pathname: P/PE/PEVANS/IO-Async-0.804.tar.gz
+  IO-Async-0.805
+    pathname: P/PE/PEVANS/IO-Async-0.805.tar.gz
     provides:
-      Future::IO::Impl::IOAsync 0.804
-      IO::Async 0.804
-      IO::Async::Channel 0.804
-      IO::Async::Debug 0.804
-      IO::Async::File 0.804
-      IO::Async::FileStream 0.804
-      IO::Async::Function 0.804
-      IO::Async::Future 0.804
-      IO::Async::Handle 0.804
-      IO::Async::Internals::ChildManager 0.804
-      IO::Async::Internals::FunctionWorker 0.804
-      IO::Async::Listener 0.804
-      IO::Async::Loop 0.804
-      IO::Async::Loop::Poll 0.804
-      IO::Async::Loop::Select 0.804
-      IO::Async::LoopTests 0.804
-      IO::Async::Metrics 0.804
-      IO::Async::Notifier 0.804
-      IO::Async::OS 0.804
-      IO::Async::OS::MSWin32 0.804
-      IO::Async::OS::cygwin 0.804
-      IO::Async::OS::linux 0.804
-      IO::Async::PID 0.804
-      IO::Async::Process 0.804
-      IO::Async::Protocol 0.804
-      IO::Async::Protocol::LineStream 0.804
-      IO::Async::Protocol::Stream 0.804
-      IO::Async::Resolver 0.804
-      IO::Async::Routine 0.804
-      IO::Async::Signal 0.804
-      IO::Async::Socket 0.804
-      IO::Async::Stream 0.804
-      IO::Async::Test 0.804
-      IO::Async::Timer 0.804
-      IO::Async::Timer::Absolute 0.804
-      IO::Async::Timer::Countdown 0.804
-      IO::Async::Timer::Periodic 0.804
+      Future::IO::Impl::IOAsync 0.805
+      IO::Async 0.805
+      IO::Async::Channel 0.805
+      IO::Async::Debug 0.805
+      IO::Async::File 0.805
+      IO::Async::FileStream 0.805
+      IO::Async::Function 0.805
+      IO::Async::Future 0.805
+      IO::Async::Handle 0.805
+      IO::Async::Internals::ChildManager 0.805
+      IO::Async::Internals::FunctionWorker 0.805
+      IO::Async::Listener 0.805
+      IO::Async::Loop 0.805
+      IO::Async::Loop::Poll 0.805
+      IO::Async::Loop::Select 0.805
+      IO::Async::LoopTests 0.805
+      IO::Async::Metrics 0.805
+      IO::Async::Notifier 0.805
+      IO::Async::OS 0.805
+      IO::Async::OS::MSWin32 0.805
+      IO::Async::OS::cygwin 0.805
+      IO::Async::OS::linux 0.805
+      IO::Async::PID 0.805
+      IO::Async::Process 0.805
+      IO::Async::Protocol 0.805
+      IO::Async::Protocol::LineStream 0.805
+      IO::Async::Protocol::Stream 0.805
+      IO::Async::Resolver 0.805
+      IO::Async::Routine 0.805
+      IO::Async::Signal 0.805
+      IO::Async::Socket 0.805
+      IO::Async::Stream 0.805
+      IO::Async::Test 0.805
+      IO::Async::Timer 0.805
+      IO::Async::Timer::Absolute 0.805
+      IO::Async::Timer::Countdown 0.805
+      IO::Async::Timer::Periodic 0.805
     requirements:
       Exporter 5.57
       File::stat 0
