@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: '1 15 * * 0'
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   update-dep:
     runs-on: 'ubuntu-24.04'
