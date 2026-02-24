@@ -1,0 +1,32 @@
+---
+name: Upload coverage to Codecov
+
+on:
+  workflow_run:
+    workflows: ["test"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  upload:
+    runs-on: ubuntu-24.04
+    if: github.event.workflow_run.conclusion == 'success'
+    permissions: {}
+    steps:
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          path: coverage
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          files: >-
+            coverage/playwright-coverage/codecov.json,
+            coverage/test-coverage/codecov.json
+          token: ${{ secrets.CODECOV_TOKEN }}
+          override_commit: ${{ github.event.workflow_run.head_sha }}
+          override_pr: ${{ github.event.workflow_run.pull_requests[0].number }}
