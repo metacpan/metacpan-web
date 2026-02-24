@@ -107,6 +107,7 @@ jobs:
           docker stop ${{ steps.start-container.outputs.container_id }}
           docker cp ${{ steps.start-container.outputs.container_id }}:/app/cover_db ./cover_db
       - name: Install Codecovbash
+        if: secrets.CODECOV_TOKEN != ''
         uses: perl-actions/install-with-cpm@v1
         with:
           install: |
@@ -114,8 +115,10 @@ jobs:
             Devel::Cover::Report::Codecovbash
           sudo: true
       - name: Generate Codecov report
+        if: secrets.CODECOV_TOKEN != ''
         run: cover -report codecovbash
       - uses: codecov/codecov-action@v5
+        if: secrets.CODECOV_TOKEN != ''
         with:
           fail_ci_if_error: true
           file: ./cover_db/codecov.json
@@ -142,7 +145,7 @@ jobs:
         id: coverage
         if: >
           matrix.resolver == 'snapshot'
-          && github.event.pull_request.user.login != 'dependabot[bot]'
+          && secrets.CODECOV_TOKEN != ''
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
