@@ -115,9 +115,15 @@ jobs:
           sudo: true
       - name: Generate Codecov report
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v5
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
         with:
-          fail_ci_if_error: true
+          name: playwright-coverage
+          path: ./cover_db/codecov.json
+      - uses: codecov/codecov-action@v5
+        if: secrets.CODECOV_TOKEN != ''
+        with:
+          fail_ci_if_error: false
           file: ./cover_db/codecov.json
           token: ${{ secrets.CODECOV_TOKEN }}
   test:
@@ -140,9 +146,7 @@ jobs:
     steps:
       - name: Enable coverage
         id: coverage
-        if: >
-          matrix.resolver == 'snapshot'
-          && github.event.pull_request.user.login != 'dependabot[bot]'
+        if: matrix.resolver == 'snapshot'
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -180,9 +184,15 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v5
+      - name: Upload coverage artifact
         if: steps.coverage.outputs.enabled
+        uses: actions/upload-artifact@v4
         with:
-          fail_ci_if_error: true
+          name: test-coverage
+          path: ./cover_db/codecov.json
+      - uses: codecov/codecov-action@v5
+        if: steps.coverage.outputs.enabled && secrets.CODECOV_TOKEN != ''
+        with:
+          fail_ci_if_error: false
           file: ./cover_db/codecov.json
           token: ${{ secrets.CODECOV_TOKEN }}
