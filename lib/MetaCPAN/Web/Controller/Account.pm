@@ -159,6 +159,9 @@ sub profile : Local : Args(0) {
         $c->stash( { author => $data, errors => $res->{errors} } );
     }
     else {
+        if ( my $pause_id = $c->user->pause_id ) {
+            $c->purge_author_key($pause_id);
+        }
         $c->stash( { success => 1, author => $res } );
     }
 }
