@@ -279,13 +279,17 @@ for (const sel of document.querySelectorAll('.select-navigator')) {
     });
 }
 
-const contribs = document.querySelector('#metacpan_contributors');
-if (contribs) {
-    const contrib_button = document.querySelector('.contributors-show-button');
-    contrib_button.addEventListener('click', (e) => {
-        e.preventDefault();
-        contrib_button.style.display = 'none';
-        contribs.classList.remove('slide-out-hidden');
-        contribs.classList.add('slide-down');
+document.querySelectorAll('.sidebar-toggle-header').forEach((button) => {
+    const targetId = button.getAttribute('aria-controls');
+    const target = document.querySelector('#' + targetId);
+    if (!target) return;
+    const chevron = button.querySelector('.sidebar-toggle-chevron');
+    button.addEventListener('click', () => {
+        const isHidden = target.classList.toggle('slide-out-hidden');
+        button.setAttribute('aria-expanded', String(!isHidden));
+        if (chevron) {
+            chevron.classList.toggle('fa-chevron-right');
+            chevron.classList.toggle('fa-chevron-down');
+        }
     });
-}
+});

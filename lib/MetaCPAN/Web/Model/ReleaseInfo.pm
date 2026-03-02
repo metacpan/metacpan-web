@@ -88,8 +88,21 @@ sub _fetch {
     )->with_release_detail(
         sub {
             my ($release_data) = @_;
+            my $module = $release_data->{main_module};
+
+            # Single permission fetch, shared by notification and maintainers
+            my $perm_future = $self->_permission->by_module($module);
+
             return (
-                [ notification => $self->_get_notification($release_data) ],
+                [
+                    notification => $self->_notification_from_perms(
+                        $perm_future, $release_data
+                    )
+                ],
+                [
+                    maintainers =>
+                        $self->_maintainers_from_perms($perm_future)
+                ],
             );
         },
     )->then( sub {
@@ -97,10 +110,11 @@ sub _fetch {
         my $release = $data->{release};
         my $dist    = $data->{distribution};
 
-        $data->{chat}       = $self->_get_chat( $release, $dist );
-        $data->{issues}     = $self->_get_issues( $release, $dist );
-        $data->{github}     = $dist->{repo}->{github};
-        $data->{repository} = $self->_get_repository( $release, $dist );
+        $data->{chat}             = $self->_get_chat( $release, $dist );
+        $data->{issues}           = $self->_get_issues( $release, $dist );
+        $data->{github}           = $dist->{repo}->{github};
+        $data->{metadata_authors} = $self->_parse_metadata_authors($release);
+        $data->{repository}       = $self->_get_repository( $release, $dist );
 
         Future->done($data);
     } );
@@ -315,24 +329,49 @@ sub normalize_issue_url {
     return $url;
 }
 
-sub _get_notification {
-    my ( $self, $release ) = @_;
-    my $module = $release->{main_module};
-    $self->_permission->get_notification_info($module)->then( sub {
-        my $data = shift;
+sub _notification_from_perms {
+    my ( $self, $perm_future, $release ) = @_;
+    $perm_future->then( $self->_permission->_permissions_to_notification )
+        ->then( $self->_permission->_add_email_to_notification )
+        ->then( sub {
+        my $data         = shift;
+        my $notification = $data->{notifications}[0];
 
-        # Unless we already have Notifications from Permissions, see if there
-        # are others needing to be added.
-        unless ( $data->{notification} ) {
-            if ( $release->{deprecated} ) {
-                $data->{notification} = { type => 'DEPRECATED' };
-            }
+        if ( !$notification && $release->{deprecated} ) {
+            $notification = { type => 'DEPRECATED' };
         }
 
-        # Return the Notifications (either Permission based, or for Deprecated
-        # status).
-        return Future->done($data);
+        return Future->done( {
+            took         => $data->{took},
+            notification => $notification,
+        } );
+        } );
+}
+
+sub _maintainers_from_perms {
+    my ( $self, $perm_future ) = @_;
+    $perm_future->then( sub {
+        my $perm_data = shift;
+        $self->_permission->build_maintainers($perm_data);
     } );
+}
+
+sub _parse_metadata_authors {
+    my ( $self, $release ) = @_;
+    my @authors;
+    for my $entry ( @{ $release->{metadata}{author} || [] } ) {
+        if ( $entry =~ /^(.+?)\s*<([^>]+)>\s*$/ ) {
+            my %author = ( name => $1, email => $2 );
+            if ( $2 =~ /^([A-Za-z][A-Za-z0-9]*)\@cpan\.org$/i ) {
+                $author{pauseid} = uc $1;
+            }
+            push @authors, \%author;
+        }
+        else {
+            push @authors, { name => $entry };
+        }
+    }
+    return \@authors;
 }
 
 __PACKAGE__->meta->make_immutable;

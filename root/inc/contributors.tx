@@ -1,33 +1,109 @@
-<div class="nav-header">Authored by: <a href="/author/[% $release.author %]" class="cpan-author">[% $release.author %]</a></div>
-%% if $contributors.size() {
-<div>
-  <button class="contributors-show-button btn-link">and [% $contributors.size() %] contributors</button>
-  <div id="metacpan_contributors" class="slide-out slide-out-hidden">
-    <div>
-      <ul>
-      %%  for $contributors -> $contributor {
-        <li class="contributor"
-          %%  if $contributor.pauseid {
-          data-cpan-author="[% $contributor.pauseid %]"
-          %%  }
-          %%  if $contributor.email.size() {
-          data-contrib-email="[% $contributor.email.join(' ') %]"
-          %%  }
-        >
-        %%  if $contributor.pauseid {
-          <a href="/author/[% $contributor.pauseid %]" class="cpan-author">
-        %%  }
-        %%  if $contributor.pauseid || $contributor.email.size() {
-          <img class="gravatar" width="20" height="20" src="[% gravatar_image($contributor, 20) %]" />
-        %%  }
-          [% $contributor.name %]
-        %%  if $contributor.pauseid {
-          </a>
-        %%  }
-        </li>
-      %%  }
-      </ul>
+%% my $grav_size = 25;
+%% # --- Authors (from metadata) ---
+%% if $metadata_authors.size() {
+%%   if $metadata_authors.size() > 5 {
+<button type="button" class="sidebar-toggle-header nav-header" aria-expanded="false" aria-controls="metacpan_authors"><i class="fas fa-chevron-right sidebar-toggle-chevron" aria-hidden="true"></i> [% $metadata_authors.size() %] Authors:</button>
+%%   } else {
+<div class="nav-header">Authors:</div>
+%%   }
+%%   for $metadata_authors -> $meta_author {
+%%     if $~meta_author.index < 5 {
+<div class="sidebar-person-row">
+%%       if $meta_author.pauseid {
+  <a href="/author/[% $meta_author.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $meta_author.name %]" src="[% gravatar_image($meta_author, $grav_size) %]" />[% $meta_author.name %]</a>
+%%       } else {
+  <img class="gravatar" alt="[% $meta_author.name %]" src="[% gravatar_image($meta_author, $grav_size) %]" />[% $meta_author.name %]
+%%       }
+</div>
+%%     }
+%%   }
+%%   if $metadata_authors.size() > 5 {
+<div id="metacpan_authors" class="slide-out slide-out-hidden">
+  <div>
+%%     for $metadata_authors -> $meta_author {
+%%       if $~meta_author.index >= 5 {
+    <div class="sidebar-person-row">
+%%         if $meta_author.pauseid {
+      <a href="/author/[% $meta_author.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $meta_author.name %]" src="[% gravatar_image($meta_author, $grav_size) %]" />[% $meta_author.name %]</a>
+%%         } else {
+      <img class="gravatar" alt="[% $meta_author.name %]" src="[% gravatar_image($meta_author, $grav_size) %]" />[% $meta_author.name %]
+%%         }
     </div>
+%%       }
+%%     }
   </div>
 </div>
-%%  }
+%%   }
+%% }
+
+%% # --- Released by (uploader) ---
+<div class="nav-header">Released by:</div>
+<div class="sidebar-person-row">
+  <a href="/author/[% $release.author %]" class="cpan-author"><img class="gravatar" alt="[% $author.display_name %]" src="[% gravatar_image($author, $grav_size) %]" />[% $author.display_name %]</a>
+</div>
+
+%% # --- Maintainers (from PAUSE permissions) ---
+%% if $maintainers.size() {
+%%   if $maintainers.size() > 5 {
+<button type="button" class="sidebar-toggle-header nav-header" aria-expanded="false" aria-controls="metacpan_maintainers"><i class="fas fa-chevron-right sidebar-toggle-chevron" aria-hidden="true"></i> [% $maintainers.size() %] Maintainers:</button>
+%%   } else {
+<div class="nav-header">Maintainers:</div>
+%%   }
+%%   for $maintainers -> $maint {
+%%     if $~maint.index < 5 {
+<div class="sidebar-person-row">
+  <a href="/author/[% $maint.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $maint.pauseid %]" src="[% gravatar_image($maint, $grav_size) %]" />[% $maint.pauseid %]</a>[% if $maint.is_owner { %] <span class="maint-owner-badge">owner</span>[% } %]
+</div>
+%%     }
+%%   }
+%%   if $maintainers.size() > 5 {
+<div id="metacpan_maintainers" class="slide-out slide-out-hidden">
+  <div>
+%%     for $maintainers -> $maint {
+%%       if $~maint.index >= 5 {
+    <div class="sidebar-person-row">
+      <a href="/author/[% $maint.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $maint.pauseid %]" src="[% gravatar_image($maint, $grav_size) %]" />[% $maint.pauseid %]</a>[% if $maint.is_owner { %] <span class="maint-owner-badge">owner</span>[% } %]
+    </div>
+%%       }
+%%     }
+  </div>
+</div>
+%%   }
+%% }
+
+%% # --- Contributors (from x_contributors) ---
+%% if $contributors.size() {
+%%   if $contributors.size() > 5 {
+<button type="button" class="sidebar-toggle-header nav-header" aria-expanded="false" aria-controls="metacpan_contributors"><i class="fas fa-chevron-right sidebar-toggle-chevron" aria-hidden="true"></i> [% $contributors.size() %] Contributors:</button>
+%%   } else {
+<div class="nav-header">Contributors:</div>
+%%   }
+%%   for $contributors -> $contributor {
+%%     if $~contributor.index < 5 {
+<div class="sidebar-person-row">
+%%       if $contributor.pauseid {
+  <a href="/author/[% $contributor.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $contributor.name %]" src="[% gravatar_image($contributor, $grav_size) %]" />[% $contributor.name %]</a>
+%%       } else {
+  <img class="gravatar" alt="[% $contributor.name %]" src="[% gravatar_image($contributor, $grav_size) %]" />[% $contributor.name %]
+%%       }
+</div>
+%%     }
+%%   }
+%%   if $contributors.size() > 5 {
+<div id="metacpan_contributors" class="slide-out slide-out-hidden">
+  <div>
+%%     for $contributors -> $contributor {
+%%       if $~contributor.index >= 5 {
+    <div class="sidebar-person-row">
+%%         if $contributor.pauseid {
+      <a href="/author/[% $contributor.pauseid %]" class="cpan-author"><img class="gravatar" alt="[% $contributor.name %]" src="[% gravatar_image($contributor, $grav_size) %]" />[% $contributor.name %]</a>
+%%         } else {
+      <img class="gravatar" alt="[% $contributor.name %]" src="[% gravatar_image($contributor, $grav_size) %]" />[% $contributor.name %]
+%%         }
+    </div>
+%%       }
+%%     }
+  </div>
+</div>
+%%   }
+%% }

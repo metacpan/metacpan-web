@@ -53,6 +53,24 @@ my %special = (
     HANDOFF  => 1,
 );
 
+sub build_maintainers {
+    my ( $self, $perm_data ) = @_;
+    my ( %seen, @maintainers );
+    for my $perms ( @{ $perm_data->{permissions} || [] } ) {
+        my $owner = $perms->{owner} || '';
+        next if $special{$owner};
+        if ( $owner && !$seen{$owner}++ ) {
+            push @maintainers, { pauseid => $owner, is_owner => 1 };
+        }
+        for my $co ( @{ $perms->{co_maintainers} || [] } ) {
+            next if $special{$co};
+            push @maintainers, { pauseid => $co, is_owner => 0 }
+                unless $seen{$co}++;
+        }
+    }
+    Future->done( { maintainers => \@maintainers } );
+}
+
 sub _permissions_to_notification {
     my ($self) = @_;
     sub {

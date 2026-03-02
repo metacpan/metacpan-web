@@ -259,37 +259,6 @@ a.ellipsis:hover * {
     }
 }
 
-/* Contributors list on release pages
-* see /release/Plack for example
-*/
-#metacpan_contributors {
-    ul {
-        padding: 10px 0;
-    }
-
-    .contributor {
-        position: relative;
-        text-align: left;
-        padding-left: 22px;
-        min-height: 20px;
-
-        img.gravatar {
-            left: 0;
-            position: absolute;
-        }
-
-        * {
-            vertical-align: top;
-        }
-
-        a {
-            padding-left: 22px;
-            padding-right: 0;
-            margin-left: -22px;
-        }
-    }
-}
-
 ul.dependencies {
     padding: 0;
 }
@@ -505,36 +474,26 @@ main {
     scroll-margin-top: 60px;
 }
 
-@keyframes slide-down {
-    0% {
-        grid-template-rows: 0fr;
-    }
-    100% {
-        grid-template-rows: 1fr;
-    }
-}
-@keyframes slide-up {
-    0% {
-        grid-template-rows: 1fr;
-    }
-    100% {
-        grid-template-rows: 0fr;
-    }
-}
 .slide-out {
     display: grid;
     grid-template-rows: 1fr;
+    transition: grid-template-rows 0.3s ease-out;
 }
 .slide-out-hidden {
     grid-template-rows: 0fr;
 }
-.slide-out.slide-down {
-    animation: slide-down 0.4s;
-}
-.slide-out.slide-up {
-    animation: slide-up 0.4s;
-    grid-template-rows: 0fr;
-}
 .slide-out > div {
     overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+    .slide-out {
+        transition: none;
+    }
+}
+.gravatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
 }

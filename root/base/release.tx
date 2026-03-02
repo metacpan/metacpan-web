@@ -227,7 +227,7 @@
       %%  include inc::plussers { plussers => $plussers };
     </li>
     <li>
-      %%  include inc::contributors { contributors => $contributors };
+      %%  include inc::contributors { release => $release, contributors => $contributors, maintainers => $maintainers, author => $author, metadata_authors => $metadata_authors };
     </li>
 %%  }
 %%  override content -> {
