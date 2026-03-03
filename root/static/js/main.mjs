@@ -14,3 +14,4 @@ import 'bootstrap/js/affix.js';
 import './bootstrap-slidepanel.js';
 import './syntaxhighlighter.mjs';
 import './pod2html.mjs';
+import 'perl-ads';

@@ -22,7 +22,6 @@
         <link rel="shortcut icon" href="/static/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="152x152" href="/static/icons/apple-touch-icon.png">
         <link rel="search" href="/static/opensearch.xml" type="application/opensearchdescription+xml" title="MetaCPAN">
-        <script async src="https://perl-ads.perlhacks.com/perl-ads.js"></script>
         %%  block opengraph -> { }
     </head>
     <body>
