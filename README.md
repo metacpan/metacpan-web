@@ -9,6 +9,7 @@
     - [Installing on macOS](#installing-on-macos)
   - [Running Tests](#running-tests)
     - [Running Tests with Docker Compose](#running-tests-with-docker-compose)
+    - [Running Playwright (E2E) Tests](#running-playwright-e2e-tests)
   - [Running the App](#running-the-app)
   - [Local Git and testing considerations](#local-git-and-testing-considerations)
   - [Local Configuration Changes](#local-configuration-changes)
@@ -89,6 +90,27 @@ Run an arbitrary command:
 ```bash
 docker compose --profile test run --rm test prove -lvr t/controller/search.t
 ```
+
+### Running Playwright (E2E) Tests
+
+Playwright tests live in the `e2e/` directory. To run them (outside of Docker):
+
+```bash
+npm test
+```
+
+This automatically starts a local server on port 5099 (via `plackup`) before
+running the tests. If a server is already running on that port, it will be
+reused.
+
+To run the tests against a server you've already started on a different port:
+
+```bash
+PLAYWRIGHT_PORT=5001 npm test
+```
+
+When `PLAYWRIGHT_PORT` is set, Playwright skips starting its own server and
+connects to the specified port instead.
 
 ## Running the App
 

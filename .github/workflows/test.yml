@@ -99,6 +99,8 @@ jobs:
         run: ./bin/install-playwright
       - name: Run Playwright tests
         id: playwright-tests
+        env:
+          PLAYWRIGHT_PORT: 5001
         run: |
           npx playwright test || {
             echo "Playwright tests failed"
