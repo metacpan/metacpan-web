@@ -6,7 +6,7 @@
 %%# display the gravatar url for each pause plusser alongwith their author page as a link. %>
 %%  for $plussers.authors.shuffle() -> $plusser {
     %%  if $~plusser.index >= 5 { last }
-<a class="display-all" href="/author/[% $plusser.pauseid %]"><img src="[% gravatar_image($plusser, 20) %]" title="[% $plusser.pauseid %]" alt="[% $plusser.pauseid %]"></a>
+<a class="display-all" href="/author/[% $plusser.pauseid %]"><img class="gravatar" src="[% gravatar_image($plusser, 25) %]" title="[% $plusser.pauseid %]" alt="[% $plusser.pauseid %]"></a>
 %%  }
 </div>
 <!-- Display counts of plussers-->

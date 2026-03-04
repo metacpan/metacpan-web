@@ -5,6 +5,7 @@ use warnings;
 use Exporter qw(import);
 
 use Carp           qw( croak );
+use Ref::Util      qw( is_plain_arrayref );
 use Digest::MD5    ();
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
@@ -155,10 +156,16 @@ sub filter_html {
 
 sub gravatar_image {
     my ( $author, $size ) = @_;
-    my $email
-        = ( $author && $author->{pauseid} )
-        ? $author->{pauseid} . '@cpan.org'
-        : q{};
+    my $email = q{};
+    if ( $author && $author->{pauseid} ) {
+        $email = $author->{pauseid} . '@cpan.org';
+    }
+    elsif ( $author && $author->{email} ) {
+        $email
+            = is_plain_arrayref( $author->{email} )
+            ? ( $author->{email}[0] // q{} )
+            : ( $author->{email} // q{} );
+    }
     my $grav_id = Digest::MD5::md5_hex( lc $email );
     return sprintf 'https://www.gravatar.com/avatar/%s?d=identicon&s=%s',
         $grav_id, $size // 80;
