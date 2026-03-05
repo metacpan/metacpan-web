@@ -1,3 +1,4 @@
+<div class="dependencies-card">
 <ul class="dependencies">
   %%  my $deps = $release.dependency.map( -> $dep {
   %%    $dep.phase == 'runtime' && $dep.relationship == 'requires' && $dep.module != 'perl' ? $dep.module : ''
@@ -48,3 +49,4 @@
     <a href="https://cpandeps.grinnz.com/?dist=[% $release.distribution | uri %][% if $permalinks || $release.status != 'latest' { %]&amp;dist_version=[% $release.version | uri %][% } %]">Dependency graph</a>
   </li>
 </ul>
+</div>
