@@ -1,10 +1,29 @@
 <ul class="dependencies">
-  <li class="nav-header">Dependencies</li>
   %%  my $deps = $release.dependency.map( -> $dep {
   %%    $dep.phase == 'runtime' && $dep.relationship == 'requires' && $dep.module != 'perl' ? $dep.module : ''
   %%  }).grep().sort();
+  %%  if $deps.size() > 5 {
+  <li><button type="button" class="sidebar-toggle-header nav-header" aria-expanded="false" aria-controls="metacpan_dependencies"><i class="fas fa-chevron-right sidebar-toggle-chevron" aria-hidden="true"></i> [% $deps.size() %] Dependencies</button></li>
+  %%  } else {
+  <li class="nav-header">Dependencies</li>
+  %%  }
   %%  for $deps -> $dep {
+  %%    if $~dep.index < 5 {
   <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
+  %%    }
+  %%  }
+  %%  if $deps.size() > 5 {
+  <li class="slide-out slide-out-hidden" id="metacpan_dependencies">
+    <div>
+      <ul>
+  %%    for $deps -> $dep {
+  %%      if $~dep.index >= 5 {
+        <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
+  %%      }
+  %%    }
+      </ul>
+    </div>
+  </li>
   %%  }
   %%  if !$deps.size() && !$release.metadata {
   <li><i class="ttip" title="no META file provided">unknown</i></li>
