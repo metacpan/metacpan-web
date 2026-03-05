@@ -365,7 +365,8 @@ h3,
     grid-template-columns: fit-content(@sidebar-width) 1fr;
     grid-template-rows: max-content max-content 1fr max-content;
     line-height: 1.54em;
-    margin-top: 57px;
+    margin: 57px auto 0;
+    max-width: calc(@sidebar-width + @content-width);
 }
 
 .sidebar {
@@ -417,7 +418,7 @@ main {
     justify-self: center;
     line-height: 1.54em;
     padding: 40px;
-    max-width: 1200px;
+    max-width: @content-width;
     overflow-x: hidden;
     width: 100%;
     grid-area: content;
