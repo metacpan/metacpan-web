@@ -5,31 +5,36 @@
 %%      ($file.abstract ? ' - ' ~ $file.abstract : ''),
 %%  }
 %%  override opengraph -> { include inc::opengraph::module }
+%%  override left_nav_distribution -> {
+%%  my $release_base = $permalinks || $release.status != 'latest'
+%%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
+%%    : '/dist/' ~ $release.distribution;
+  <li>
+    <i class="fas fa-cube sidebar-icon" aria-hidden="true"></i><a href="[% $release_base %]">[% $file.distribution %]</a>
+  </li>
+  %%  if $documented_module.version {
+  <li>
+    <i class="fas fa-tag sidebar-icon" aria-hidden="true"></i>Module version: [% $documented_module.version %]
+  </li>
+  %%  }
+%%  }
 %%  override left_nav_lead -> {
 %%  my $release_base = $permalinks || $release.status != 'latest'
 %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
 %%    : '/dist/' ~ $release.distribution;
   <li>
-    Distribution: <a href="[% $release_base %]">[% $file.distribution %]</a>
-  </li>
-  %%  if $documented_module.version {
-  <li>
-    Module version: [% $documented_module.version %]
-  </li>
-  %%  }
-  <li>
-    <a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $file.path %]">Source</a>
+    <i class="far fa-file-code sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $file.path %]">Source</a>
     (<a href="[% $release_base %]/source/[% $file.path %]?raw=1">raw</a>)
   </li>
   %%  if $file.pod_path {
   <li>
-    <a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $file.pod_path %]">Pod Source</a>
+    <i class="far fa-file-lines sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g p" href="[% $release_base %]/source/[% $file.pod_path %]">Pod Source</a>
     (<a href="[% $release_base %]/source/[% $file.pod_path %]?raw=1">raw</a>)
   </li>
   %%  }
   <li>
     %%  my $parent_path = $file.path.replace(rx('/?[^/]+$'),'');
-    <a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]">Browse</a>
+    <i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g b" href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]">Browse</a>
     (<a href="[% $release_base %]/source[% $parent_path ? '/' ~ $parent_path : '' %]?raw=1">raw</a>)
   </li>
 %%  }

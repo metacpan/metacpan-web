@@ -10,7 +10,7 @@
   %%  }
   %%  for $deps -> $dep {
   %%    if $~dep.index < 5 {
-  <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
+  <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="dep-name">[% $dep %]</a></li>
   %%    }
   %%  }
   %%  if $deps.size() > 5 {
@@ -19,7 +19,7 @@
       <ul>
   %%    for $deps -> $dep {
   %%      if $~dep.index >= 5 {
-        <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="ellipsis">[% $dep %]</a></li>
+        <li><a href="/pod/[% $dep %]" title="[% $dep %]" class="dep-name">[% $dep %]</a></li>
   %%      }
   %%    }
       </ul>
