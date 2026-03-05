@@ -246,22 +246,6 @@
 
   <div class="sponsor-card">
     <div class="sponsor-logo">
-      <a target="_blank" rel="noopener nofollow" href="https://www.sonic.com/">
-        <img src="/static/images/sponsors/sonic.png" alt="Sonic" width="140">
-      </a>
-    </div>
-    <div class="sponsor-info">
-      <p>
-        <a target="_blank" rel="noopener nofollow"
-        href="https://www.sonic.com/">Sonic</a> was built in Perl and still
-        relies heavily on the language for all facets of their internal
-        software development.
-      </p>
-    </div>
-  </div>
-
-  <div class="sponsor-card">
-    <div class="sponsor-logo">
       <a target="_blank" rel="noopener nofollow" href="https://speedchilli.com">
         <img src="/static/images/sponsors/speedchilli.png" alt="speedchilli" width="130">
       </a>
