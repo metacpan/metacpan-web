@@ -27,3 +27,41 @@
     width: 1em;
     text-align: center;
 }
+.dependencies-wrapper {
+    padding-bottom: 8px;
+}
+
+.dependencies-card {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 10px 8px;
+    margin: 10px 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+
+    .nav-list & {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .slidepanel & {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    a.dep-name {
+        display: block;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    ul.dependencies {
+        margin: 0;
+
+        .nav-header,
+        .sidebar-toggle-header {
+            margin-top: 0;
+            padding: 0;
+        }
+    }
+}

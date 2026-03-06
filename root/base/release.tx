@@ -49,76 +49,75 @@
     %%  my $release_base = $permalinks || $release.status != 'latest'
     %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
     %%    : '/dist/' ~ $release.distribution;
-    <li class="nav-header no-margin-top">
-      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released.">
-        <span class="relatize">[% datetime($release.date).to_http %]</span>
-      </div>
+
+    %%  ## Distribution
+    <li class="nav-header no-margin-top">Distribution</li>
+    %%  block left_nav_distribution -> {
+    <li>
+      <i class="fas fa-cube sidebar-icon" aria-hidden="true"></i><a href="/dist/[% $release.distribution %]">[% $release.distribution %]</a>
     </li>
-    %%  include inc::release_status { maturity => $release.maturity }
-    %%  block left_nav_lead -> {
-    <li><a href="[% $release_base %]/source">Browse</a> (<a href="[% $release_base %]/source?raw=1">raw</a>)</li>
     %%  }
     <li>
-      <a data-keyboard-shortcut="g c" href="[% $release_base %]/changes">Changes</a>
+      <i class="far fa-calendar sidebar-icon" aria-hidden="true"></i><span class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released."><span class="relatize">[% datetime($release.date).to_http %]</span></span>
     </li>
+    %%  include inc::release_status { maturity => $release.maturity };
+    %%  if $release.license {
+    <li>
+      <i class="fas fa-scale-balanced sidebar-icon" aria-hidden="true"></i>License: [% [].merge($release.license).join(', ') %]
+    </li>
+    %%  }
+    %%  if $release.metadata.prereqs.runtime.requires.perl {
+    <li>
+      <i class="fas fa-code sidebar-icon" aria-hidden="true"></i>Perl: [% $release.metadata.prereqs.runtime.requires.perl | version %]
+    </li>
+    %%  }
+
+    %%  ## Code
+    <li><hr></li>
+    <li class="nav-header">Code</li>
+    <li>
+      <i class="fas fa-download sidebar-icon" aria-hidden="true"></i><a itemprop="downloadUrl" href="[% $release.download_url %]">Download (<span itemprop="fileSize">[% format_bytes($release.stat.size) %]B</span>)</a>
+    </li>
+    %%  block left_nav_lead -> {
+    <li><i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a href="[% $release_base %]/source">Browse</a> (<a href="[% $release_base %]/source?raw=1">raw</a>)</li>
+    %%  }
+    <li>
+      <i class="far fa-file-lines sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g c" href="[% $release_base %]/changes">Changes</a>
+    </li>
+
+    %%  ## Project
+    <li><hr></li>
+    <li class="nav-header">Project</li>
     %%  if $release.resources.homepage.is_url() {
     <li>
-      <a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]">Homepage</a>
+      <i class="fas fa-house sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" class="nopopup" href="[% $release.resources.homepage %]">Homepage</a>
     </li>
     %%  }
-    <li>
-      <a class="nopopup" href="[% $release_base %]/contribute">How to Contribute</a>
-    </li>
     %%  if $repository && $repository.web || $repository.url {
     <li>
       %%  if $repository.web.is_url() {
-        <a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $repository.web %]">Repository</a>
+        <i class="fas fa-code-branch sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" data-keyboard-shortcut="g r" href="[% $repository.web %]">Repository</a>
         %%  if $repository.url.is_url() && $repository.url != ($repository.web ~ '.git') {
           (<a rel="noopener nofollow" href="[% $repository.url %]">[% $repository.type %] clone</a>)
         %%  }
       %%  }
       %%  else if $repository.url.is_url() {
-        <a rel="noopener nofollow" href="[% $repository.url %]">Clone [% $repository.type %] repository</a>
+        <i class="fas fa-code-branch sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $repository.url %]">Clone [% $repository.type %] repository</a>
       %%  }
     </li>
     %%  }
     <li>
-      <a rel="noopener nofollow" data-keyboard-shortcut="g i" href="[% $issues.url %]">Issues</a>
+      <i class="fas fa-circle-exclamation sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" data-keyboard-shortcut="g i" href="[% $issues.url %]">Issues</a>
       %%  if $issues.active != nil {
       ([% $issues.active %])
       %%  }
     </li>
     <li>
-      %%  my $cpantesters_base = 'https://www.cpantesters.org/distro/' ~ $release.distribution.substr(0, 1) ~ '/' ~ $release.distribution ~ '.html?oncpan=1&distmat=1&version=' ~ uri_escape($release.distnameinfo.version)
-      <a rel="noopener nofollow" href="https://fast2-matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix">Testers</a>
-        %%  if $release.tests.size() {
-        <span title="(pass / fail / na)">(<a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=2' %]" style="color: #090">[% $release.tests.pass %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=3' %]" style="color: #900">[% $release.tests.fail %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=4' %]">[% $release.tests.na %]</a>)</span>
-        %%  }
+      <i class="fas fa-handshake-angle sidebar-icon" aria-hidden="true"></i><a class="nopopup" href="[% $release_base %]/contribute">How to Contribute</a>
     </li>
+    %%  if $chat.web {
     <li>
-      <a rel="noopener nofollow" href="http://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]">Kwalitee</a>
-      <img src="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %].svg" alt="Kwalitee Score">
-    </li>
-    %% if defined $distribution.river.bus_factor {
-    <li>
-      <div class="ttip" data-toggle="tooltip" data-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
-      Bus factor: [% $distribution.river.bus_factor %]
-      </div>
-    </li>
-    %% }
-    %%  if $coverage.url {
-    <li>
-      <a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
-    </li>
-    %%  }
-    %%  if $release.license {
-    <li>
-      License: [% [].merge($release.license).join(', ') %]
-    </li>
-    %%  }
-    %%  if $release.metadata.prereqs.runtime.requires.perl {
-    <li>
-      Perl: [% $release.metadata.prereqs.runtime.requires.perl | version %]
+      <i class="far fa-comments sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Chat</a>
     </li>
     %%  }
     %%  if $release.metadata.x_help_wanted {
@@ -131,57 +130,89 @@
       </ul>
     </li>
     %%  }
-    %%  if $chat.web {
-    <li class="chat-banner">
-      <div><a rel="noopener nofollow" target="_blank" href="[% $chat.web %]">Chat with us!</a></div>
+
+    %%  ## Quality
+    <li><hr></li>
+    <li class="nav-header">Quality</li>
+    <li>
+      %%  my $cpantesters_base = 'https://www.cpantesters.org/distro/' ~ $release.distribution.substr(0, 1) ~ '/' ~ $release.distribution ~ '.html?oncpan=1&distmat=1&version=' ~ uri_escape($release.distnameinfo.version)
+      <i class="fas fa-vial sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="https://fast2-matrix.cpantesters.org/?dist=[% uri_escape($release.distribution) %]+[% uri_escape($release.distnameinfo.version) %]" title="Matrix">Testers</a>
+        %%  if $release.tests.size() {
+        <span title="(pass / fail / na)">(<a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=2' %]" style="color: #090">[% $release.tests.pass %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=3' %]" style="color: #900">[% $release.tests.fail %]</a> / <a rel="noopener nofollow" href="[% $cpantesters_base ~ '&grade=4' %]">[% $release.tests.na %]</a>)</span>
+        %%  }
+    </li>
+    <li>
+      <i class="fas fa-award sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]">Kwalitee</a>
+      <img src="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %].svg" alt="Kwalitee Score">
+    </li>
+    %%  if $coverage.url {
+    <li>
+      <i class="fas fa-umbrella sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $coverage.url %]">[% $coverage.criteria.total %]% Coverage </a>
     </li>
     %%  }
+    %% if defined $distribution.river.bus_factor {
+    <li>
+      <span class="ttip" data-toggle="tooltip" data-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
+      <i class="fas fa-users sidebar-icon" aria-hidden="true"></i>Bus factor: [% $distribution.river.bus_factor %]
+      </span>
+    </li>
+    %% }
+
+    %%  ## Activity
+    <li><hr></li>
     <li class="nav-header">Activity</li>
     <li>
       %%  include inc::activity {
       %%    url => '/dist/' ~ $release.distribution ~ '/activity.svg',
       %%  }
     </li>
+
+    %%  ## Dependencies
+    <li class="dependencies-wrapper">
+      %%  include inc::dependencies { release => $release };
+    </li>
+
+    %%  ## Tools
+    <li><hr></li>
     <li class="nav-header">Tools</li>
     <li>
-      <a itemprop="downloadUrl" href="[% $release.download_url %]">
-      Download (<span itemprop="fileSize">[% format_bytes($release.stat.size) %]B</span>)</a>
+      <i class="far fa-compass sidebar-icon" aria-hidden="true"></i><a href="https://explorer.metacpan.org/?url=[% uri_escape( $file ? ('/module/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path) : ( '/release/' ~ $release.author ~ '/' ~ $release.name ) ) %]">MetaCPAN Explorer</a>
     </li>
     <li>
-      <a href="https://explorer.metacpan.org/?url=[% uri_escape( $file ? ('/module/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path) : ( '/release/' ~ $release.author ~ '/' ~ $release.name ) ) %]">
-        MetaCPAN Explorer
-      </a>
+      <i class="fas fa-lock sidebar-icon" aria-hidden="true"></i><a href="/dist/[% $release.distribution %]/permissions">Permissions</a>
     </li>
     <li>
-      <a href="/dist/[% $release.distribution %]/permissions">
-        Permissions
-      </a>
+      <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/dist/[% $release.distribution %]/releases.rss">Subscribe to distribution</a>
     </li>
     <li>
-      <a href="/dist/[% $release.distribution %]/releases.rss">
-        Subscribe to distribution
-      </a>
-    </li>
-    <li>
-      <button class="btn btn-link" data-toggle="modal" data-target="#metacpan_install-instructions-dialog">
+      <i class="fas fa-terminal sidebar-icon" aria-hidden="true"></i><button class="btn btn-link" data-toggle="modal" data-target="#metacpan_install-instructions-dialog">
         Install Instructions
       </button>
     </li>
+
+    %%  ## Find in Distribution
+    <li><hr></li>
+    <li class="nav-header">Find in Distribution</li>
     <li>
       <form action="/search">
+        <label for="sidebar-search-dist"><i class="fas fa-magnifying-glass sidebar-icon" aria-hidden="true"></i>search</label>
         <input type="hidden" name="q" value="dist:[% $release.distribution %]">
-        <input type="search" name="q" placeholder="Search distribution" class="form-control tool-bar-form">
+        <input id="sidebar-search-dist" type="search" name="q" placeholder="e.g. method name" class="form-control tool-bar-form">
         <input type="submit" style="display: none">
       </form>
     </li>
     <li>
       <form action="https://grep.metacpan.org/search">
+        <label for="sidebar-grep-dist"><i class="fas fa-code sidebar-icon" aria-hidden="true"></i>grep</label>
         <input type="hidden" name="qd" value="[% $release.distribution %]">
         <input type="hidden" name="source" value="metacpan">
-        <input type="search" name="q" placeholder="grep distribution" class="form-control tool-bar-form">
+        <input id="sidebar-grep-dist" type="search" name="q" placeholder="e.g. regex pattern" class="form-control tool-bar-form">
         <input type="submit" style="display: none">
      </form>
     </li>
+    %%  ## Versions
+    <li><hr></li>
+    <li class="nav-header">Versions</li>
     %%  if $versions.size() > 1 {
     <li class="version-jump">
       %%  include inc::version_select { mark_unauthorized_releases => 0, active => 'disabled', class => 'form-control tool-bar-form', head => 'Jump to version' };
@@ -197,32 +228,21 @@
       </select>
     </li>
     %% }
-
-    %% if $release.metadata.x_help_wanted {
-    <li class="nav-header">Help Wanted</li>
+    <li class="nav-sub-label">Permalinks</li>
     <li>
-      <ul>
-        %%  for $release.metadata.x_help_wanted -> $position {
-        <li>[% $position %]</li>
-        %%  }
-      </ul>
-    </li>
-    %%  }
-    <li>
-      %%  include inc::dependencies { release => $release };
-    </li>
-    <li class="nav-header">Permalinks</li>
-    <li>
-      <a href="/release/[% $release.author %]/[% $release.name %][% if $file { '/view/' ~ $file.path } %]">This version</a>
+      <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a href="/release/[% $release.author %]/[% $release.name %][% if $file { '/view/' ~ $file.path } %]">This version</a>
     </li>
     %%  if $canonical {
       %%  my $has_latest = $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum();
       %%  if $has_latest {
     <li>
-      <a href="[% $canonical %]">Latest version</a>
+      <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a href="[% $canonical %]">Latest version</a>
     </li>
       %%  }
     %%  }
+
+    %%  ## People
+    <li><hr></li>
     <li>
       %%  include inc::plussers { plussers => $plussers };
     </li>

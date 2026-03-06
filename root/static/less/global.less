@@ -144,6 +144,10 @@ ul {
     list-style-type: none;
 }
 
+.activity-graph img {
+    max-height: 20px;
+    width: 100%;
+}
 .activity-graph .comment {
     color: #999;
     font-size: 0.8em;
@@ -261,6 +265,10 @@ a.ellipsis:hover * {
 
 ul.dependencies {
     padding: 0;
+}
+ul.dependencies ul {
+    padding: 0;
+    list-style: none;
 }
 
 .smaller {
@@ -398,7 +406,8 @@ main {
 .tool-bar-form {
     margin-top: 2px;
     margin-bottom: 10px;
-    height: 30px;
+    height: auto;
+    padding: 4px 8px;
 }
 
 .top-content {
