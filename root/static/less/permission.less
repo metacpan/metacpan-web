@@ -60,17 +60,16 @@
 
 .permission-module-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     list-style: none;
     padding-left: 0;
-    border-top: 1px solid #eee;
-    border-left: 1px solid #eee;
 
     li {
         padding: 4px 8px;
         word-break: break-word;
-        border-right: 1px solid #eee;
-        border-bottom: 1px solid #eee;
+        border: 1px solid #eee;
+        margin-top: -1px;
+        margin-left: -1px;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -78,9 +77,5 @@
 
     @media (max-width: @screen-xs-max) {
         grid-template-columns: 1fr;
-    }
-
-    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
