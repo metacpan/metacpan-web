@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Build test image
         id: docker-build-test
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           target: test
           push: false
@@ -80,7 +80,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Build test image
         id: docker-build-playwright
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           target: playwright
           push: false
