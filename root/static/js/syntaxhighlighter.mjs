@@ -177,9 +177,7 @@ if (source) {
     // avoid highlighting excessively large blocks of code as they will take
     // too long, causing browsers to lag and offer to kill the script
     if (source.innerHTML.length > 500000) {
-        for (const el of source.querySelector('code')) {
-            el.classList.remove(...el.classList);
-        }
+        return;
     }
     // check for 'P{encoded_package_name}' anchor, convert to
     // line number (if possible), and then highlight and jump
