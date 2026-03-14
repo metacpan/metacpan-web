@@ -22,7 +22,29 @@
         %%  }
     </div>
     %%  }
+    %%  for $author.donation -> $donate { if $donate.id {
+        %%  if $donate.name == 'paypal' {
+    <div class="author-donate">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_donations">
+          <input type="hidden" name="business" value="[% $donate.id %]">
+          <input type="hidden" name="lc" value="US">
+          <input type="hidden" name="item_name" value="Donation to CPAN Author [% $author.pauseid %] via MetaCPAN">
+          <input type="hidden" name="no_note" value="0">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
+      </form>
+    </div>
+        %%  }
+        %%  else if $donate.name == 'wishlist' {
+    <div class="author-donate">
+        <a rel="me noopener nofollow" href="[% $donate.id %]" target="_blank">Wishlist</a>
+    </div>
+        %%  }
+    %%  } }
     </li>
+    <li><hr></li>
     <li>
         %%  my $email = [].merge($author.email).0;
         <i class="fas fa-envelope sidebar-icon" aria-hidden="true"></i><a href="mailto:[% $email %]" title="[% $email %]">[% $email %]</a>
@@ -49,29 +71,6 @@
         </li>
         %%  }
     %%  }
-
-    %%  ## Donations
-    %%  for $author.donation -> $donate { if $donate.id {
-        %%  if $donate.name == 'paypal' {
-    <li class="author-donate">
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_donations">
-          <input type="hidden" name="business" value="[% $donate.id %]">
-          <input type="hidden" name="lc" value="US">
-          <input type="hidden" name="item_name" value="Donation to CPAN Author [% $author.pauseid %] via MetaCPAN">
-          <input type="hidden" name="no_note" value="0">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
-          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
-      </form>
-    </li>
-        %%  }
-        %%  else if $donate.name == 'wishlist' {
-    <li class="author-donate">
-        <a rel="me noopener nofollow" href="[% $donate.id %]" target="_blank">Wishlist</a>
-    </li>
-        %%  }
-    %%  } }
 
     %%  ## Releases
     <li><hr></li>
