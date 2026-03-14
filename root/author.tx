@@ -54,9 +54,11 @@
     %%  }
     %%  if $author.country || $author.city || $author.region {
     <li>
-        <i class="fas fa-map-marker-alt sidebar-icon" aria-hidden="true"></i>
     %%  if $author.country {
-        <img src="/static/images/flag/[% lc($author.country) %].png" alt="[% $author.country %] flag">
+        <img src="/static/images/flag/[% lc($author.country) %].png" width="16" height="11" alt="[% $author.country %] flag" class="sidebar-icon">
+    %%  }
+    %%  else {
+        <i class="fas fa-map-marker-alt sidebar-icon" aria-hidden="true"></i>
     %%  }
         [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
     </li>
