@@ -8,6 +8,7 @@
     line-height: 1.54em;
     padding: 16px 25px 25px;
     width: @sidebar-width;
+    overflow: hidden;
     z-index: 2;
 
     .nav-header {
@@ -23,6 +24,12 @@
     .btn-link {
         color: @gray-base;
         font-size: 14px;
+    }
+
+    li {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     li + li.nav-header {
         margin-top: 10px;
