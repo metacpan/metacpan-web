@@ -5,27 +5,14 @@
 .author-avatar {
     width: 130px;
     height: 130px;
-    border-radius: 8px;
+    border-radius: 50%;
     margin-bottom: 5px;
-    box-shadow: 2px 2px 5px #ccc;
-}
-
-.author-item {
-    align-items: center;
-    display: flex;
-    font-size: 16px;
-
-    i {
-        padding-right: 5px;
-    }
-
-    img[src*="/static/images/flag/"] {
-        margin-right: 5px;
-    }
+    box-shadow: none;
 }
 
 .author-pic {
-    margin-bottom: 10px;
+    margin-bottom: 2px;
+    text-align: center;
 
     span,
     strong {
@@ -70,21 +57,26 @@
     }
 }
 
+.author-donate {
+    text-align: center;
+}
+
 .user-profiles {
-    margin: 5px 0 20px 0;
+    margin: 0 0 8px 0;
+    text-align: center;
 
     a {
         text-decoration: none;
+        display: inline-block;
+        padding: 1px 6px;
     }
 }
 
 @media (max-width: 480px) {
     .author-pic {
-        > a {
-            > img {
-                width: 65px;
-                height: 65px;
-            }
+        img {
+            width: 65px;
+            height: 65px;
         }
     }
 }

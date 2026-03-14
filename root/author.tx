@@ -6,45 +6,11 @@
 %%  }
 %%  override opengraph -> { include inc::opengraph::author }
 %%  override left_nav_content -> {
+
+    %%  ## Author
     <li>
       [% include inc::author_pic %]
-    </li>
-    <li class="author-item">
-        %%  my $email = [].merge($author.email).0;
-        <i class="fas fa-envelope"></i>
-        <a href="mailto:[% $email %]" class="ellipsis" title="[% $email %]">[% $email %]</a>
-    </li>
-    %%  if $author.country || $author.city || $author.region {
-    %%  if $author.country {
-    <li class="author-item">
-        <i class="fas fa-map-marker-alt"></i>
-    %%  }
-        <img src="/static/images/flag/[% lc($author.country) %].png" alt="[% $author.country %] flag">
-        [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
-    </li>
-    %%  }
-    %%  if $author.website.size() {
-    %%  for $author.website -> $website {
-    <li  class="author-item">
-        <i class="fas fa-link"></i>
-        <a rel="me noopener nofollow" href="[% $website %]" title="[% $website %]" target="_blank">[% $website.decode_punycode() %]</a>
-    </li>
-    %%  } }
-    %%  if $author.blog.size() {
-        %%  for $author.blog -> $blog {
-        <li  class="author-item">
-            <i class="fas fa-pager"></i>
-            %%  if $blog.feed {
-            <a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">
-            </a>
-            %%  }
-            <a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank" class="ellipsis">
-            [% $blog.url.replace(rx("^https?://"), '') %]
-            </a>
-        </li>
-        %%  }
-    %%  }
-     %%  if $author.profile.size() {
+    %%  if $author.profile.size() {
     <div class="user-profiles">
         %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
         %%  my $known = $profiles[$profile.name];
@@ -58,7 +24,7 @@
     %%  }
     %%  for $author.donation -> $donate { if $donate.id {
         %%  if $donate.name == 'paypal' {
-    <li class="author-donate">
+    <div class="author-donate">
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
           <input type="hidden" name="cmd" value="_donations">
           <input type="hidden" name="business" value="[% $donate.id %]">
@@ -69,61 +35,103 @@
           <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
           <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
       </form>
-    </li>
+    </div>
         %%  }
         %%  else if $donate.name == 'wishlist' {
-    <li class="author-donate">
+    <div class="author-donate">
         <a rel="me noopener nofollow" href="[% $donate.id %]" target="_blank">Wishlist</a>
-    </li>
+    </div>
         %%  }
     %%  } }
+    </li>
+    <li><hr></li>
+    <li class="nav-header">Contact</li>
+    %%  my $email = [].merge($author.email).0;
+    %%  if $email {
+    <li>
+        <i class="fas fa-envelope sidebar-icon" aria-hidden="true"></i><a href="mailto:[% $email %]" title="[% $email %]">[% $email %]</a>
+    </li>
+    %%  }
+    %%  if $author.country || $author.city || $author.region {
+    <li>
+    %%  if $author.country {
+        <img src="/static/images/flag/[% lc($author.country) %].png" width="16" height="11" alt="[% $author.country %] flag" class="sidebar-icon">
+    %%  }
+    %%  else {
+        <i class="fas fa-map-marker-alt sidebar-icon" aria-hidden="true"></i>
+    %%  }
+        [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
+    </li>
+    %%  }
+    %%  if $author.website.size() {
+    %%  for $author.website -> $website {
+    <li>
+        <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a rel="me noopener nofollow" href="[% $website %]" title="[% $website %]" target="_blank">[% $website.decode_punycode() %]</a>
+    </li>
+    %%  } }
+    %%  if $author.blog.size() {
+        %%  for $author.blog -> $blog {
+        <li>
+            <i class="fas fa-pager sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank">[% $blog.url.replace(rx("^https?://"), '') %]</a>
+        </li>
+        %%  if $blog.feed {
+        <li>
+            <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">Blog feed</a>
+        </li>
+        %%  }
+        %%  }
+    %%  }
+
+    %%  ## Releases
+    <li><hr></li>
+    <li class="nav-header">Releases</li>
+    %%  if $latest.date {
+    <li>
+        <i class="fas fa-cube sidebar-icon" aria-hidden="true"></i><a href="[% if $latest.status == 'latest' { '/dist/' ~ $latest.distribution } else { '/release/' ~ $latest.author ~ '/' ~ $latest.name } %]" title="[% $latest.name %]">[% $latest.name %]</a>
+    </li>
+    <li>
+        <i class="far fa-calendar sidebar-icon" aria-hidden="true"></i><span class="relatize">[% datetime($latest.date).to_http %]</span>
+    </li>
+    %%  }
+    <li>
+        <i class="fas fa-list sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/releases">All Releases</a>
+    </li>
+    <li>
+        <i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
+    </li>
+    <li>
+        <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/activity.rss">Author release feed</a>
+    </li>
+
+    %%  ## Activity
+    <li><hr></li>
     <li class="nav-header">Activity</li>
     <li>
       %%  include inc::activity {
       %%    url => '/author/' ~ $author.pauseid ~ '/activity.svg',
       %%  }
     </li>
-    %%  if $latest.date {
-    <li class="nav-header">Latest Release</li>
-    <li>
-        <div>
-            <a href="[% if $latest.status == 'latest' { '/dist/' ~ $latest.distribution } else { '/release/' ~ $latest.author ~ '/' ~ $latest.name } %]" class="ellipsis" title="[% $latest.name %]">
-            [% $latest.name %]
-            </a>
-        </div>
-    </li>
-    <li>
-        <div>
-            <span class="relatize">[% datetime($latest.date).to_http %]</span>
-        </div>
-    </li>
-    %%  }
-    <li>
-        <div>
-            <a href="/author/[% $author.pauseid %]/releases">All Releases</a>
-        </div>
-    </li>
+
+    %%  ## Tools
+    <li><hr></li>
     <li class="nav-header">Tools</li>
     <li>
-        <a href="[% $author.links.cpantesters_reports %]">CPANTesters Reports</a>
-        <a href="[% $author.links.cpantesters_matrix %]" title="Matrix">
-            <i class="icon-grid"></i>
-        </a>
+        <i class="fas fa-vial sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_reports %]">CPAN Testers</a>
     </li>
     <li>
-         <a href="[% $author.links.cpants %]">CPANTS</a>
+        <i class="fas fa-table-cells sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_matrix %]">CPAN Testers Matrix</a>
     </li>
     <li>
-        <a href="/author/[% $author.pauseid %]/permissions">Module permissions</a>
+        <i class="fas fa-award sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpants %]">CPANTS</a>
     </li>
     <li>
-        <a href="[% $author.links.metacpan_explorer %]">MetaCPAN Explorer</a>
+        <i class="fas fa-lock sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/permissions">Permissions</a>
     </li>
     <li>
-        <a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
+        <i class="far fa-compass sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.metacpan_explorer %]">MetaCPAN Explorer</a>
     </li>
     <li>
-        <a href="[% $author.links.repology %]">Repology</a>
+        <i class="fas fa-box-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.repology %]">Repology</a>
     </li>
 %%  }
 %%  override content -> {
