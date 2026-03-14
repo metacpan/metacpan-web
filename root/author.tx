@@ -45,10 +45,13 @@
     %%  } }
     </li>
     <li><hr></li>
+    <li class="nav-header">Contact</li>
+    %%  my $email = [].merge($author.email).0;
+    %%  if $email {
     <li>
-        %%  my $email = [].merge($author.email).0;
         <i class="fas fa-envelope sidebar-icon" aria-hidden="true"></i><a href="mailto:[% $email %]" title="[% $email %]">[% $email %]</a>
     </li>
+    %%  }
     %%  if $author.country || $author.city || $author.region {
     <li>
         <i class="fas fa-map-marker-alt sidebar-icon" aria-hidden="true"></i>
@@ -67,8 +70,13 @@
     %%  if $author.blog.size() {
         %%  for $author.blog -> $blog {
         <li>
-            <i class="fas fa-pager sidebar-icon" aria-hidden="true"></i>[% if $blog.feed { %]<a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank"></a>[% } %]<a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank">[% $blog.url.replace(rx("^https?://"), '') %]</a>
+            <i class="fas fa-pager sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank">[% $blog.url.replace(rx("^https?://"), '') %]</a>
         </li>
+        %%  if $blog.feed {
+        <li>
+            <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">Blog feed</a>
+        </li>
+        %%  }
         %%  }
     %%  }
 
@@ -90,7 +98,7 @@
         <i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
     </li>
     <li>
-        <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/activity.rss">Subscribe to author</a>
+        <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/activity.rss">Author release feed</a>
     </li>
 
     %%  ## Activity
