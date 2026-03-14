@@ -171,19 +171,14 @@ CODE: for (const code of document.querySelectorAll('.pod pre > code')) {
 }
 
 const source = document.querySelector('#metacpan_source');
-if (source) {
+if (source && source.innerHTML.length <= 500000) {
     const packageMatch = document.location.hash.match(/^#P(\S+)$/);
     const lineMatch = document.location.hash.match(hashLines);
-    // avoid highlighting excessively large blocks of code as they will take
-    // too long, causing browsers to lag and offer to kill the script
-    if (source.innerHTML.length > 500000) {
-        return;
-    }
     // check for 'P{encoded_package_name}' anchor, convert to
     // line number (if possible), and then highlight and jump
     // as long as the matching line is not the first line in
     // the code.
-    else if (packageMatch) {
+    if (packageMatch) {
         const decodedPackageMatch = decodeURIComponent(packageMatch[1]);
         const leadingSource = source.innerText.split('package ' + decodedPackageMatch + ';');
         const lineCount = leadingSource[0].split('\n').length;
