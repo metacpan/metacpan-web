@@ -90,6 +90,9 @@
     <li>
         <i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
     </li>
+    <li>
+        <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/activity.rss">Subscribe to author</a>
+    </li>
 
     %%  ## Activity
     <li><hr></li>
@@ -105,9 +108,9 @@
     <li class="nav-header">Tools</li>
     <li>
         <i class="fas fa-vial sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_reports %]">CPAN Testers</a>
-        <a href="[% $author.links.cpantesters_matrix %]" title="Matrix">
-            <i class="icon-grid"></i>
-        </a>
+    </li>
+    <li>
+        <i class="fas fa-table-cells sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_matrix %]">CPAN Testers Matrix</a>
     </li>
     <li>
         <i class="fas fa-award sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpants %]">CPANTS</a>
