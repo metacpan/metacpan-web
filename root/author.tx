@@ -10,6 +10,18 @@
     %%  ## Author
     <li>
       [% include inc::author_pic %]
+    %%  if $author.profile.size() {
+    <div class="user-profiles">
+        %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
+        %%  my $known = $profiles[$profile.name];
+        %%  if $known && $profile.id {
+        <a rel="me noopener nofollow" href="[% $known.url_for($profile.id) %]" target="_blank" title="[% $known.label %] - [% $profile.id %]">
+        <img src="[% $known.icon %]" width="16" height="16" alt="[% $known.label %]">
+        </a>
+        %%  }
+        %%  }
+    </div>
+    %%  }
     </li>
     <li>
         %%  my $email = [].merge($author.email).0;
@@ -36,18 +48,6 @@
             <i class="fas fa-pager sidebar-icon" aria-hidden="true"></i>[% if $blog.feed { %]<a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank"></a>[% } %]<a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank">[% $blog.url.replace(rx("^https?://"), '') %]</a>
         </li>
         %%  }
-    %%  }
-    %%  if $author.profile.size() {
-    <div class="user-profiles">
-        %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
-        %%  my $known = $profiles[$profile.name];
-        %%  if $known && $profile.id {
-        <a rel="me noopener nofollow" href="[% $known.url_for($profile.id) %]" target="_blank" title="[% $known.label %] - [% $profile.id %]">
-        <img src="[% $known.icon %]" width="16" height="16" alt="[% $known.label %]">
-        </a>
-        %%  }
-        %%  }
-    </div>
     %%  }
 
     %%  ## Donations
