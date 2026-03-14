@@ -67,7 +67,7 @@
     li {
         padding: 4px 8px;
         word-break: break-word;
-        border: 1px solid #eee;
+        border: 1px solid @gray-lighter;
         margin-top: -1px;
         margin-left: -1px;
         display: flex;
@@ -77,5 +77,92 @@
 
     @media (max-width: @screen-xs-max) {
         grid-template-columns: 1fr;
+    }
+}
+
+.permission-author-summary {
+    margin: 0 0 1em;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.permission-table-wrapper {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+}
+
+.permission-table {
+    thead th {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 1;
+        // Bottom border via box-shadow since border doesn't render on sticky elements
+        box-shadow: inset 0 -1px 0 darken(@gray-lighter, 5%);
+        border-bottom: none;
+        font-size: 0.85em;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: #666;
+    }
+
+    table-layout: auto;
+    width: 100%;
+
+    td,
+    th {
+        padding: 5px 8px;
+        border: 1px solid @gray-lighter;
+
+        // Module column: allow wrapping at :: boundaries
+        &:nth-child(1) {
+            word-break: break-all;
+            word-break: auto-phrase; // prefer natural breaks in supporting browsers
+        }
+
+        // Owner column: shrink-wrap to widest name
+        &:nth-child(2) {
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        // Co-Maintainer column: shrink-wrap to badge content
+        &:nth-child(3) {
+            white-space: nowrap;
+            width: 1px;
+        }
+    }
+
+    @media (max-width: @screen-xs-max) {
+        font-size: 0.9em;
+    }
+}
+
+.permission-author-badge {
+    display: inline-block;
+    background: fade(@brand-primary, 10%);
+    color: @brand-primary;
+    border: 1px solid @brand-primary;
+    padding: 1px 6px;
+    margin: 2px 1px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    white-space: nowrap;
+
+    &:hover {
+        background: fade(@brand-primary, 20%);
+        text-decoration: none;
+    }
+}
+
+.permission-current-author {
+    background: @brand-primary;
+    color: #fff;
+
+    &:hover {
+        background: darken(@brand-primary, 10%);
+        color: #fff;
     }
 }

@@ -1,10 +1,39 @@
-%%  cascade base {
-%%      title     => $title || 'Author module permissions for ' ~ $search_term,
+%%  cascade base with inc::no_sidebar {
+%%      title     => $title || 'Module permissions for ' ~ $search_term,
 %%  }
 %%  override content -> {
+<h1 class="permission-heading">Module Permissions for <a href="/author/[% $search_term %]">[% $search_term %]</a></h1>
+<p class="permission-author-summary">Owner of [% $author_owns %] module[% if $author_owns != 1 { %]s[% } %], co-maintainer of [% $permissions.size() - $author_owns %]</p>
 
-<h1>Author Module Permissions for [% $search_term %]</h1>
-
-%% include inc::permission
+<div class="permission-table-wrapper">
+<table class="table table-striped permission-table" aria-label="Module permissions for [% $search_term %]">
+  <thead>
+    <tr>
+      <th scope="col">Module ([% $permissions.size() %])</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Co-Maintainers</th>
+    </tr>
+  </thead>
+  <tbody>
+  %% for $permissions -> $module {
+    <tr>
+      <td>
+        <a href="/pod/[% $module.module_name %]">[% $module.module_name %]</a>
+      </td>
+      <td>
+        %%  if $module.owner {
+        <a href="/author/[% $module.owner %]" class="permission-author-badge[% if $module.owner == $search_term { %] permission-current-author[% } %]">[% $module.owner %]</a>
+        %%  }
+      </td>
+      <td>
+        %%  for $module.co_maintainers -> $co_maintainer {
+          <a href="/author/[% $co_maintainer %]" class="permission-author-badge[% if $co_maintainer == $search_term { %] permission-current-author[% } %]">[% $co_maintainer %]</a>
+        %%  }
+      </td>
+    </tr>
+  %%  }
+  </tbody>
+</table>
+</div>
 
 %%  }
