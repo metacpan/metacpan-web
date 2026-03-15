@@ -3,7 +3,7 @@
 %%  }
 %%  override content -> {
 <h1 class="permission-heading">Module Permissions for <a href="/author/[% $search_term %]">[% $search_term %]</a></h1>
-<p class="permission-author-summary">Owner of [% $author_owns %] module[% if $author_owns != 1 { %]s[% } %], co-maintainer of [% $permissions.size() - $author_owns %]</p>
+<p class="permission-author-summary">Owner of [% pluralize("%d module", $author_owns) %], co-maintainer of [% pluralize("%d module", $permissions.size() - $author_owns) %]</p>
 
 <div class="permission-table-wrapper">
 <table class="table table-striped permission-table" aria-label="Module permissions for [% $search_term %]">
