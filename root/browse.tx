@@ -21,8 +21,8 @@
   <li class="nav-header">Info</li>
   %%  my $folder_count = $files.map(-> $f { $f.directory ? 1 : 0 }).sum();
   %%  my $file_count = $files.size() - $folder_count;
-  <li>[% pluralize("%d folder(s)", $folder_count) %]</li>
-  <li>[% pluralize("%d file(s)", $file_count) %]</li>
+  <li>[% pluralize("%d folder", $folder_count) %]</li>
+  <li>[% pluralize("%d file", $file_count) %]</li>
 %%  }
 %%  override content -> {
 <table id="metacpan-file-browse" class="table table-condensed table-striped file-table tablesorter">
