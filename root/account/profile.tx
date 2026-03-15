@@ -98,7 +98,7 @@
                                 <div class="input-group">
                                     <input type="url" class="form-control" name="website" value="[% $website %]" />
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary search-btn remove-field" type="button" href="">raemove</a></button>
+                                        <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
                                     </span>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
 
     <fieldset>
         <legend>Extra</legend>
-        <p>Any additional data you want to add to your profiles goes in here (JSON format).</p>
+        <p>Any additional data you want to add to your profile goes in here (JSON format).</p>
         <textarea name="extra" class="form-control" rows="10">[% $author.extra.json_pretty() %]</textarea>
     </fieldset>
     <br />

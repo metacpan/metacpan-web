@@ -1,13 +1,13 @@
 %%  cascade base::tools
 %%  override content -> {
-  <h2 class="content-head">Assorted Tools</h1>
+  <h2 class="content-head">Assorted Tools</h2>
 
   <ul>
     <li><a href="/pod2html">Pod Renderer</a> - Render arbitrary Pod to HTML through MetaCPAN.</li>
   </ul>
 
 
-  <h2 class="content-head">MacOS</h1>
+  <h2 class="content-head">MacOS</h2>
 
   <ul>
     <li><a href="https://github.com/oalders/alfred-metacpan-workflow" rel="nofollow">Alfred MetaCPAN Workflow (written in Go)</a></li>
@@ -15,7 +15,7 @@
     <li><a href="https://github.com/ssoriche/launchbar-metacpan/releases" rel="nofollow">LaunchBar MetaCPAN action</a></li>
   </ul>
 
-  <h2 class="content-head">API Integrations</h1>
+  <h2 class="content-head">API Integrations</h2>
 
   <ul>
     <li><a href="http://mapofcpan.org/" rel="nofollow">Map of CPAN</a></li>

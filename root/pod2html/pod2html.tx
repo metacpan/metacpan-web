@@ -35,7 +35,7 @@
     </div>
     <div class="dragoverlay">
       <div class="dragoverlay-label">Drop Here</div>
-      <div class="drayoverlay-background"></div>
+      <div class="dragoverlay-background"></div>
     </div>
   </div>
 </div>
