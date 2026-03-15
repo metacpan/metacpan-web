@@ -52,6 +52,6 @@
 %]"><code class="language-[% $syntax_type %]">[% $source %]</code></pre>
 %%  }
 %%  else {
-This file cannot be displayed inline.  Try the <a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">raw file</a>.
+This file cannot be displayed inline. Try the <a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">raw file</a>.
 %%  }
 %%  }

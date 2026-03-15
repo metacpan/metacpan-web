@@ -11,12 +11,12 @@
 </div>
 <!-- Display counts of plussers-->
 <div>
-    <a href="/dist/[% $plussers.distribution %]/plussers">[% pluralize("%d PAUSE user(s)", $plussers.authors.size()) %]</a>
+    <a href="/dist/[% $plussers.distribution %]/plussers">[% pluralize("%d PAUSE user", $plussers.authors.size()) %]</a>
 </div>
 %%  }
 %%  if $plussers.others {
 <div>
-    [% pluralize("%d non-PAUSE user(s)", $plussers.others) %]
+    [% pluralize("%d non-PAUSE user", $plussers.others) %]
 </div>
 %%  }
 </div>

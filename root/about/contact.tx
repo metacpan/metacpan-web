@@ -33,7 +33,7 @@ to help, but there are better ways for you to get this help.
 Bugs in the behaviour of this site can be reported at
 [GitHub](https://github.com/metacpan/metacpan-web). Feel free to post all bug
 reports related to this web site and web service here. If your reports belong
-in different MetaCPAN project, we will happily move your reports to that
+in a different MetaCPAN project, we will happily move your reports to that
 location. If in doubt, open a new issue. If you would like to discuss a CPAN
 module or Perl the language, see the [Getting Help with Perl](contact#getting-help-with-perl-(but-not-metacpan)) section above.
 

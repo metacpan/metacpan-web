@@ -13,7 +13,7 @@
               <img src="[% $user.avatar_url %]" class="author-img" />
               <strong>[% $user.login %]</strong>
             </a>
-            ([% pluralize("%d commit(s)", $user.contributions) %])
+            ([% pluralize("%d commit", $user.contributions) %])
           </li>
       %%  }
       </ul>

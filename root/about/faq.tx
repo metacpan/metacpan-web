@@ -2,7 +2,7 @@
 %%      title => $title || 'MetaCPAN FAQ',
 %%  }
 %%  override about -> {
-# FAQ's answered
+# FAQs answered
 
 * [What third-party sites does MetaCPAN use](#what-third-party-sites-does-metacpan-use)
 * [How to list all the Plack Middleware](#how-to-list-all-the-plack-middleware)
@@ -25,16 +25,16 @@
 * [CPAN](https://www.cpan.org/) is where all the Perl modules live.
 MetaCPAN 'just' indexes those files.
 * [CPAN Testers](https://www.cpantesters.org/) collect test reports of the CPAN modules.
-MetaCPAN show the number of test reports and links to the tests.
+MetaCPAN shows the number of test reports and links to the tests.
 * [CPANTS](https://cpants.cpanauthors.org/) provide Kwalitee metrics for CPAN modules.
 MetaCPAN links to the respective pages on the CPANTS site.
 * [RT](https://rt.cpan.org/) is an installation of [Request Tracker](https://www.bestpractical.com/rt/)
-that provides a default bug~ and issue-tracking system for every CPAN distribution.
+that provides a default bug and issue-tracking system for every CPAN distribution.
 Unless the author of the module configured it otherwise MetaCPAN will link the respective RT Queue
 of every distribution.
 * [GitHub](https://github.com/) is the most popular public version control system among Perl module developers.
 Many distributions indicate it as their public VCS. Some of them even mark GitHub as their preferred
-issue tracking system. MetaCPAN links to the GitHub repository and bug tracking system of each distributions
+issue tracking system. MetaCPAN links to the GitHub repository and bug tracking system of each distribution
 if the author has included the information in the META files.
 
 ## How to list all the Plack Middleware
@@ -50,7 +50,7 @@ or <a href="/search?q=module:Perl::Critic::Policy">Perl::Critic::Policy</a>.
 
 ## Special search expressions
 
-These search-terms can be combined with each other and regular search term.
+These search terms can be combined with each other and with regular search terms.
 
 * <em>module:</em>  filter by part of a  module name ( e.g. [module:Plugin](/search?q=module:Plugin) )
 * <em>distribution:</em> search in the files of the specific distribution ( e.g. [distribution:Dancer auth](/search?q=distribution%3ADancer+auth) )
@@ -94,7 +94,7 @@ See [River of CPAN](http://neilb.org/2015/04/20/river-of-cpan.html).
 ## What does the bus factor indicate
 
 The bus factor of a distribution is a count of CPAN authors who have permissions to release that distribution
-who have made any releases to CPAN in the past two years (including other distributions).
+who have made any releases to CPAN in the past two years (including releases of other distributions).
 This is an indication of how many people are likely to be able to release critical fixes in a timely manner.
 Higher bus factors are crucial for distributions in a higher river stage, as more of CPAN depends on them.
 See [CPAN Bus Factor](https://www.olafalders.com/2021/06/30/cpan-bus-factor/).
