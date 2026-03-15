@@ -12,8 +12,16 @@ sub author : Chained('/author/root') : PathPart('permissions') Args(0) {
     my $pause_id = $c->stash->{pauseid};
 
     my $perms = $c->model('API::Permission')->by_author($pause_id)->get;
+
+    my $modules = $perms->{permissions} || [];
+    my $author_owns
+        = scalar grep { defined $_->{owner} && $_->{owner} eq $pause_id }
+        @$modules;
+
     $c->stash( {
-        %$perms, search_term => $pause_id,
+        %$perms,
+        search_term => $pause_id,
+        author_owns => $author_owns,
     } );
     $c->forward('view');
 }
