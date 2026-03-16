@@ -30,7 +30,7 @@
 %%  }
 
 %%  for $results -> $group {
-  %%  my $first= $group.hits.0;
+  %%  my $first = $group.hits.0;
   <div class="module-result">
     <h3>
       %%  include inc::link_to_file { file => $first };

@@ -31,8 +31,7 @@ These options can be set more permanently using the `PERL_CPANM_OPT` environment
 ### `cpan`
 
 `CPAN.pm` can be configured to use an alternate mirror using the `urllist`
-configuration setting. It also must be configured to use the `urllist` option
-by disabling the `pushy_https` option.
+configuration setting and by disabling the `pushy_https` option.
 
     cpan
     o conf urllist https://cpan.metacpan.org/

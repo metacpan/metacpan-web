@@ -54,7 +54,7 @@
     </p>
   %%  }
   %%  if $owners.size() == 0 && $comaints.size() == 0 {
-    <p><em>No owner[% if $comaint_count { %] or co-maintainer[% } %] has permissions for all modules in this distribution.</em></p>
+    <p><em>No owner or co-maintainer has permissions for all modules in this distribution.</em></p>
   %%  }
 </div>
 

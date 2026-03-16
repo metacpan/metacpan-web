@@ -9,6 +9,6 @@ The maintainer of this distribution is looking for people to help them improve t
 %%  override email_body -> {
 Hello,
 
-I'm willing to provide some time to help you with new feature for the [% $module_name %] module, if you can let me know what you would like to be done.
+I'm willing to provide some time to help you with new features for the [% $module_name %] module, if you can let me know what you would like to be done.
 
 %%  }
