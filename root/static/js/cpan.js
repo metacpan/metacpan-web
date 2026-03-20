@@ -284,12 +284,23 @@ document.querySelectorAll('.sidebar-toggle-header').forEach((button) => {
     const target = document.querySelector('#' + targetId);
     if (!target) return;
     const chevron = button.querySelector('.sidebar-toggle-chevron');
-    button.addEventListener('click', () => {
+    const moreIndicator = document.querySelector('#' + targetId + '_more');
+
+    function toggle() {
         const isHidden = target.classList.toggle('slide-out-hidden');
         button.setAttribute('aria-expanded', String(!isHidden));
         if (chevron) {
             chevron.classList.toggle('fa-chevron-right');
             chevron.classList.toggle('fa-chevron-down');
         }
-    });
+        if (moreIndicator) {
+            moreIndicator.style.display = isHidden ? '' : 'none';
+        }
+    }
+
+    button.addEventListener('click', toggle);
+    if (moreIndicator) {
+        moreIndicator.querySelector('.dep-more-btn')
+            .addEventListener('click', toggle);
+    }
 });
