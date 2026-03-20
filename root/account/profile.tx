@@ -231,12 +231,12 @@
                             <input type="hidden" name="profile.name" value="[% $profile.name %]" />
                             %%  }
                             %%  else {
-                            <input class="input-small" type="text" class="form-control" name="profile.name" value="[% $profile.name %]">
+                            <input class="input-small form-control" type="text" name="profile.name" value="[% $profile.name %]">
                             %%  }
                         </label>
                         <div class="col-sm-8 col-md-6">
                             <div class="input-group">
-                                <input class="small form-control" type="text" class="form-control" name="profile.id" value="[% $profile.id %]" />
+                                <input class="small form-control" type="text" name="profile.id" value="[% $profile.id %]" />
                                 <span class="input-group-btn">
                                 <a href="" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt"></i> remove</a>
                                 %%  if $known {
@@ -273,7 +273,7 @@
         <div class="form-group">
           <label class="col-sm-4 col-md-4 control-label">
             <span class="profile-title"></span>
-            <input placeholder="Profile name" class="input-small" type="text" class="form-control" name="profile.name" />
+            <input placeholder="Profile name" class="input-small form-control" type="text" name="profile.name" />
           </label>
           <div class="col-sm-8 col-md-6">
             <div class="input-group">
