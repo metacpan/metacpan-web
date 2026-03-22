@@ -14,6 +14,7 @@
   %%    }
   %%  }
   %%  if $deps.size() > 5 {
+  <li class="dep-more-indicator" id="metacpan_dependencies_more"><button type="button" class="btn-link dep-more-btn" data-toggle-target="metacpan_dependencies">and [% $deps.size() - 5 %] more</button></li>
   <li class="slide-out slide-out-hidden" id="metacpan_dependencies">
     <div>
       <ul>
