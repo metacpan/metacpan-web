@@ -169,6 +169,12 @@ test_psgi app, sub {
                 'link to test matrix'
             );
 
+            $tx->is(
+                '//a[@title="Magpie"]/@href',
+                "https://matrix.perl-magpie.org/dist/$qs_dist/$qs_version",
+                'link to test matrix (magpie)'
+            );
+
             # version select box
             ok(
                 $tx->find_value(
