@@ -127,7 +127,7 @@ jobs:
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
-          file: ./cover_db/codecov.json
+          files: ./cover_db/codecov.json
           token: ${{ secrets.CODECOV_TOKEN }}
   test:
     runs-on: ubuntu-24.04
