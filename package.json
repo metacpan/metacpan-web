@@ -20,7 +20,7 @@
         "@eslint/js": "^10.0.1",
         "@playwright/test": "^1.58.2",
         "@stylistic/eslint-plugin": "^5.10.0",
-        "eslint": "^10.0.3",
+        "eslint": "^10.1.0",
         "globals": "^17.4.0",
         "js-beautify": "^1.15.4",
         "prettier": "3.8.1"
