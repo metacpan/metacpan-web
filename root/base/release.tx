@@ -142,6 +142,9 @@
         %%  }
     </li>
     <li>
+      <i class="fas fa-crow sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="https://matrix.perl-magpie.org/dist/[% uri_escape($release.distribution) %]/[% uri_escape($release.distnameinfo.version) %]" title="Magpie">Testers (Magpie)</a>
+    </li>
+    <li>
       <i class="fas fa-award sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %]">Kwalitee</a>
       <img src="https://cpants.cpanauthors.org/release/[% $release.author %]/[% $release.name %].svg" alt="Kwalitee Score">
     </li>
