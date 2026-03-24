@@ -1,5 +1,5 @@
 %%  cascade base {
-%%      title      => $title || "All uploads by " ~ $author.pauseid,
+%%      title      => $title || "Favorites of " ~ $author.pauseid,
 %%      rss        => $rss   || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title  => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%  }
@@ -12,8 +12,14 @@
 </div>
 %%  }
 %%  override content -> {
-  %%  include inc::release_table { header => 1, tablesorter => 0, table_heading => "All Uploads" }
-%%  }
-%%  override pagination -> {
-  %%  include inc::pager
+  %%  if $faves.0 {
+    <h3 class="author-page-heading">Favorites of [% $author.name %]</h3>
+    %%  include inc::favorite_table { favorites => $faves, author => 1, tablesorter => 1 }
+  %%  }
+  %%  else {
+    <div class="message">
+        <strong>Favorites</strong>
+        <p>No favorite distributions from <a href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a> could be found</p>
+    </div>
+  %%  }
 %%  }

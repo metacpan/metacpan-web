@@ -6,19 +6,23 @@ table.tablesorter {
             cursor: pointer;
             height: auto;
             font-weight: bold;
+            white-space: nowrap;
 
-            &:before {
+            .tablesorter-header-inner {
+                display: inline;
+            }
+
+            &:after {
                 .fa;
                 line-height: inherit;
-                float: right;
                 display: inline;
                 padding-left: 5px;
                 content: @fa-var-sort;
             }
-            &.tablesorter-headerDesc:before {
+            &.tablesorter-headerDesc:after {
                 content: @fa-var-caret-down;
             }
-            &.tablesorter-headerAsc:before {
+            &.tablesorter-headerAsc:after {
                 content: @fa-var-caret-up;
             }
         }

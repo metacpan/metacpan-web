@@ -15,7 +15,7 @@
   <thead>
     <tr>
       <th class="release pull-left-phone">[% $author ? "Favorites" : "Distribution" %]</th>
-      <th class="abstract hidden-phone">[% $author ? "Author" : "Favorited By" %]</th>
+      <th class="hidden-phone">[% $author ? "Author" : "Favorited By" %]</th>
       <th class="date">[% $per_day ? datetime($favorite.date).strftime("%A, %e %B %Y") : "Date" %]</th>
     </tr>
 </thead>
@@ -24,16 +24,16 @@
 <tr>
   <td>
     <strong>
-        <a href="/dist/[% $favorite.distribution %]" class="ellipsis" title="[% $favorite.author ~ '/' ~ $favorite.distribution %]">[% $favorite.distribution %]</a>
+        <a href="/dist/[% $favorite.distribution %]" title="[% $favorite.author ~ '/' ~ $favorite.distribution %]">[% $favorite.distribution %]</a>
     </strong>
   </td>
   %%  if $author {
-  <td class="pull-left-phone">
+  <td class="pull-left-phone hidden-phone">
     <a href="/author/[% $favorite.author %]">[% $favorite.author %]</a>
   </td>
   %%  }
   %%  else {
-  <td class="pull-left-phone">
+  <td class="pull-left-phone hidden-phone">
     <a href="/author/[% $favorite.clicked_by_author %]">[% $favorite.clicked_by_author %]</a>
   </td>
   %%  }
