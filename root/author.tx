@@ -9,13 +9,6 @@
     %%  include inc::author_sidebar
 %%  }
 %%  override content -> {
-    <div class="toolbar-search-form">
-      <form action="/search">
-          <input type="hidden" name="q" value="author:[% $author.pauseid %]">
-          <input type="text" placeholder="Search distributions by [% $author.name %]" name="q" class="form-control tool-bar-form">
-          <input type="submit" style="display: none">
-      </form>
-    </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {
         %%  include inc::release_table { header => 1, tablesorter => 0, table_id => 'metacpan_author_releases', table_heading => "Releases" };

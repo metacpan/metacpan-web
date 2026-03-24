@@ -122,3 +122,14 @@
     <li>
         <i class="fas fa-box-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.repology %]">Repology</a>
     </li>
+
+    %%  ## Search
+    <li><hr></li>
+    <li class="nav-header">Search</li>
+    <li>
+        <form action="/search" class="sidebar-search">
+            <label for="author-search" class="sr-only">Search distributions by [% $author.name %]</label>
+            <input type="hidden" name="q" value="author:[% $author.pauseid %]">
+            <input type="text" id="author-search" placeholder="Search [% $author.pauseid %]" name="q" class="form-control input-sm">
+        </form>
+    </li>
