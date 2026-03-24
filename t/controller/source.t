@@ -128,6 +128,39 @@ test_psgi app, sub {
             'search link URL contains only the distribution name'
         );
     }
+
+    subtest 'markdown documentation link in browse view' => sub {
+        my $uri = '/release/ETHER/Moose-2.1005/source';
+        ok( my $res = $cb->( GET $uri ), "GET $uri" );
+        is( $res->code, 200, 'code 200' );
+        my $tx = tx($res);
+        $tx->ok(
+            '//td[contains-token(@class, "name")]/a[text()="README.md"]',
+            'browse view has README.md file entry',
+        );
+        ok(
+            $tx->find_value(
+                '//tr[.//a[text()="README.md"]]/td[contains-token(@class, "documentation")]/strong/a[text()="README.md"]/@href'
+            ),
+            'browse view shows documentation link for README.md',
+        );
+    };
+
+    subtest 'markdown Documentation View link in source view' => sub {
+        my $uri = '/release/ETHER/Moose-2.1005/source/README.md';
+        ok( my $res = $cb->( GET $uri ), "GET $uri" );
+        is( $res->code, 200, 'code 200' );
+        my $tx = tx($res);
+        ok(
+            $tx->find_value('//a[text()="Documentation View"]/@href'),
+            'source view has Documentation View link for markdown file',
+        );
+        like(
+            $tx->find_value('//a[text()="Documentation View"]/@href'),
+            qr{/view/README\.md$},
+            'Documentation View link points to rendered view',
+        );
+    };
 };
 
 {

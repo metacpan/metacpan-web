@@ -168,7 +168,9 @@ sub _files_to_categories {
         elsif ( $path =~ m{(?:eg|ex|examples?|samples?)\b}i ) {
             push @{ $ret->{examples} }, $f;
         }
-        elsif ( $path =~ m/\.pod$/ ) {
+        elsif ( $path =~ m/\.pod$/
+            || ( $f->{mime} && $f->{mime} eq 'text/markdown' ) )
+        {
             push @{ $ret->{documentation} }, $f;
         }
         else {
