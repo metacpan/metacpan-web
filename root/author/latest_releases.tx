@@ -1,5 +1,5 @@
 %%  cascade base {
-%%      title      => $title || "All releases by " ~ $author.pauseid,
+%%      title      => $title || "Releases by " ~ $author.pauseid,
 %%      rss        => $rss   || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title  => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%  }

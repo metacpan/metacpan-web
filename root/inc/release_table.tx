@@ -8,7 +8,7 @@
 
   %%  if $day_start {
     %% if $author {
-      <h3 class="author-page-heading">[% $table_heading || "All Releases" %] by [% $author.name %]</h3>
+      <h3 class="author-page-heading">[% $table_heading || "Releases" %]</h3>
     %% }
     <table [% if $table_id { %] id="[% $table_id %]"[% } %]
       %%  if $tablesorter {

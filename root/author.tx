@@ -18,7 +18,7 @@
     </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {
-        %%  include inc::release_table { header => 1, tablesorter => 0, table_id => 'metacpan_author_releases', table_heading => "Recent Releases" };
+        %%  include inc::release_table { header => 1, tablesorter => 0, table_id => 'metacpan_author_releases', table_heading => "Releases" };
         %%  if $total > 10 {
     <p class="text-center">
         <a href="/author/[% $author.pauseid %]/latest">View all [% $total %] releases by [% $author.name %]</a>
@@ -32,7 +32,7 @@
     </div>
     %%  }
     %%  if $faves.0 {
-        <h3>Latest Favorites by [% $author.name %]</h3>
+        <h3>Favorites</h3>
         %%  include inc::favorite_table { favorites => $faves, author => 1, tablesorter => 0 };
         %%  if $faves_total > 10 {
     <p class="text-center">

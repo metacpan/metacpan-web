@@ -14,7 +14,7 @@
   class="table table-condensed table-striped table-favorites[% if $tablesorter { %] tablesorter[% } %]">
   <thead>
     <tr>
-      <th class="release pull-left-phone">[% $author ? "Favorites" : "Distribution" %]</th>
+      <th class="release pull-left-phone">Distribution</th>
       <th class="hidden-phone">[% $author ? "Author" : "Favorited By" %]</th>
       <th class="date">[% $per_day ? datetime($favorite.date).strftime("%A, %e %B %Y") : "Date" %]</th>
     </tr>

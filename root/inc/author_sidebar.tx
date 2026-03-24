@@ -77,7 +77,7 @@
     <li><hr></li>
     <li class="nav-header">Releases</li>
     <li>
-        <i class="fas fa-box sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/latest">All latest releases</a>
+        <i class="fas fa-box sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/latest">All releases</a>
     </li>
     <li>
         <i class="fas fa-list sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/releases">All uploads</a>

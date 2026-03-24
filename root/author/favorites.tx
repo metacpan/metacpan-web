@@ -13,7 +13,7 @@
 %%  }
 %%  override content -> {
   %%  if $faves.0 {
-    <h3 class="author-page-heading">Favorites of [% $author.name %]</h3>
+    <h3 class="author-page-heading">Favorites</h3>
     %%  include inc::favorite_table { favorites => $faves, author => 1, tablesorter => 1 }
   %%  }
   %%  else {
