@@ -65,7 +65,10 @@ sub file : Private {
     $c->add_dist_key( $release->{distribution} );
     $c->add_author_key( $release->{author} );
 
-    if (   $file->{mime} eq 'text/x-script.perl'
+    if ( $file->{directory} ) {
+        $c->forward( '/source/view', \@path );
+    }
+    elsif ($file->{mime} eq 'text/x-script.perl'
         || $file->{mime} eq 'text/x-script.perl-module'
         || $file->{mime} eq 'text/x-pod' )
     {
