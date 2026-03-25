@@ -106,6 +106,28 @@ test_psgi app, sub {
                 $test->{expected}, $test->{desc}, );
         }
     }
+    # When a dist exists but the source path doesn't, the internal forward
+    # to the view action sets req->args to [author, versioned-release-name].
+    # The 404 search suggestion should use the distribution name from the
+    # stash, not those internal values.
+    {
+        my $url = '/dist/Moose/source/no/such/path';
+        ok( my $res = $cb->( GET $url ), "GET $url" );
+        is( $res->code, 404, "404 on $url" );
+
+        my $tx    = tx($res);
+        my $xpath = '//main[contains-token(@class, "error-page")]//a[contains(@href, "/search?q=")]';
+        is(
+            $tx->find_value($xpath),
+            'Moose',
+            'search suggestion uses dist name, not author or versioned release'
+        );
+        is(
+            $tx->find_value("$xpath/\@href"),
+            '/search?q=Moose',
+            'search link URL contains only the distribution name'
+        );
+    }
 };
 
 {

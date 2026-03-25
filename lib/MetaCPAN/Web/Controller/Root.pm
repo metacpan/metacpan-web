@@ -55,9 +55,23 @@ sub not_found : Private {
 
     $c->stash( {
         template     => 'not_found.tx',
-        search_terms => [ uniq @{ $c->req->args }, @{ $c->req->captures } ],
+        search_terms => $self->_search_terms($c),
     } );
     $c->response->status(404);
+}
+
+sub _search_terms {
+    my ( $self, $c ) = @_;
+    my $stash = $c->stash;
+
+    my @terms;
+    push @terms, $stash->{author_name}       if $stash->{author_name};
+    push @terms, $stash->{distribution_name} if $stash->{distribution_name};
+    push @terms, $stash->{module_name}       if $stash->{module_name};
+
+    return \@terms if @terms;
+
+    return [ uniq @{ $c->req->args }, @{ $c->req->captures } ];
 }
 
 sub internal_error : Private {
