@@ -169,4 +169,6 @@ CMD ["/app/bin/plackup-cover", "-p", "8000", "app.psgi"]
 ################### Production Server
 FROM server AS production
 
+RUN perl -Ilib -MMetaCPAN::Web -e'MetaCPAN::Web->new->compile'
+
 USER metacpan

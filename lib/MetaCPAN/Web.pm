@@ -50,6 +50,11 @@ after prepare_action => sub {
     $self->req->final_args( $self->req->args );
 };
 
+sub compile {
+    my $self = shift;
+    $self->view('Xslate')->preload_templates;
+}
+
 __PACKAGE__->setup;
 __PACKAGE__->meta->make_immutable;
 
