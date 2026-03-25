@@ -6,153 +6,17 @@
 %%  }
 %%  override opengraph -> { include inc::opengraph::author }
 %%  override left_nav_content -> {
-
-    %%  ## Author
-    <li>
-      [% include inc::author_pic %]
-    %%  if $author.profile.size() {
-    <div class="user-profiles">
-        %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
-        %%  my $known = $profiles[$profile.name];
-        %%  if $known && $profile.id {
-        <a rel="me noopener nofollow" href="[% $known.url_for($profile.id) %]" target="_blank" title="[% $known.label %] - [% $profile.id %]">
-        <img src="[% $known.icon %]" width="16" height="16" alt="[% $known.label %]">
-        </a>
-        %%  }
-        %%  }
-    </div>
-    %%  }
-    %%  for $author.donation -> $donate { if $donate.id {
-        %%  if $donate.name == 'paypal' {
-    <div class="author-donate">
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-          <input type="hidden" name="cmd" value="_donations">
-          <input type="hidden" name="business" value="[% $donate.id %]">
-          <input type="hidden" name="lc" value="US">
-          <input type="hidden" name="item_name" value="Donation to CPAN Author [% $author.pauseid %] via MetaCPAN">
-          <input type="hidden" name="no_note" value="0">
-          <input type="hidden" name="currency_code" value="USD">
-          <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
-          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width: auto">
-      </form>
-    </div>
-        %%  }
-        %%  else if $donate.name == 'wishlist' {
-    <div class="author-donate">
-        <a rel="me noopener nofollow" href="[% $donate.id %]" target="_blank">Wishlist</a>
-    </div>
-        %%  }
-    %%  } }
-    </li>
-    <li><hr></li>
-    <li class="nav-header">Contact</li>
-    %%  my $email = [].merge($author.email).0;
-    %%  if $email {
-    <li>
-        <i class="fas fa-envelope sidebar-icon" aria-hidden="true"></i><a href="mailto:[% $email %]" title="[% $email %]">[% $email %]</a>
-    </li>
-    %%  }
-    %%  if $author.country || $author.city || $author.region {
-    <li>
-    %%  if $author.country {
-        <img src="/static/images/flag/[% lc($author.country) %].png" width="16" height="11" alt="[% $author.country %] flag" class="sidebar-icon">
-    %%  }
-    %%  else {
-        <i class="fas fa-map-marker-alt sidebar-icon" aria-hidden="true"></i>
-    %%  }
-        [% $author.city %][% if $author.city && $author.region { %], [% } %][% $author.region %]
-    </li>
-    %%  }
-    %%  if $author.website.size() {
-    %%  for $author.website -> $website {
-    <li>
-        <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a rel="me noopener nofollow" href="[% $website %]" title="[% $website %]" target="_blank">[% $website.decode_punycode() %]</a>
-    </li>
-    %%  } }
-    %%  if $author.blog.size() {
-        %%  for $author.blog -> $blog {
-        <li>
-            <i class="fas fa-pager sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.url %]" title="[% $blog.url %]" target="_blank">[% $blog.url.replace(rx("^https?://"), '') %]</a>
-        </li>
-        %%  if $blog.feed {
-        <li>
-            <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a rel="noopener nofollow" href="[% $blog.feed %]" target="_blank">Blog feed</a>
-        </li>
-        %%  }
-        %%  }
-    %%  }
-
-    %%  ## Releases
-    <li><hr></li>
-    <li class="nav-header">Releases</li>
-    %%  if $latest.date {
-    <li>
-        <i class="fas fa-cube sidebar-icon" aria-hidden="true"></i><a href="[% if $latest.status == 'latest' { '/dist/' ~ $latest.distribution } else { '/release/' ~ $latest.author ~ '/' ~ $latest.name } %]" title="[% $latest.name %]">[% $latest.name %]</a>
-    </li>
-    <li>
-        <i class="far fa-calendar sidebar-icon" aria-hidden="true"></i><span class="relatize">[% datetime($latest.date).to_http %]</span>
-    </li>
-    %%  }
-    <li>
-        <i class="fas fa-list sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/releases">All Releases</a>
-    </li>
-    <li>
-        <i class="far fa-folder-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpan_directory %]">CPAN directory</a> ([% $author.release_count.cpan + $author.release_count.latest %])
-    </li>
-    <li>
-        <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/activity.rss">Author release feed</a>
-    </li>
-
-    %%  ## Activity
-    <li><hr></li>
-    <li class="nav-header">Activity</li>
-    <li>
-      %%  include inc::activity {
-      %%    url => '/author/' ~ $author.pauseid ~ '/activity.svg',
-      %%  }
-    </li>
-
-    %%  ## Tools
-    <li><hr></li>
-    <li class="nav-header">Tools</li>
-    <li>
-        <i class="fas fa-vial sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_reports %]">CPAN Testers</a>
-    </li>
-    <li>
-        <i class="fas fa-table-cells sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpantesters_matrix %]">CPAN Testers Matrix</a>
-    </li>
-    <li>
-        <i class="fas fa-award sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.cpants %]">CPANTS</a>
-    </li>
-    <li>
-        <i class="fas fa-lock sidebar-icon" aria-hidden="true"></i><a href="/author/[% $author.pauseid %]/permissions">Permissions</a>
-    </li>
-    <li>
-        <i class="far fa-compass sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.metacpan_explorer %]">MetaCPAN Explorer</a>
-    </li>
-    <li>
-        <i class="fas fa-box-open sidebar-icon" aria-hidden="true"></i><a href="[% $author.links.repology %]">Repology</a>
-    </li>
+    %%  include inc::author_sidebar
 %%  }
 %%  override content -> {
-    <div id="metacpan_feed_subscription" class="page-header">
-        <p>
-          [% if $releases.0 { $releases.size() } else { 'No' } %] distributions uploaded by
-          <span class="author-name">[% $author.display_name %]</span>
-          [% if $author.has_display_name { %] ([% $author.pauseid %])[% } %]
-        </p>
-        <a href="/author/[% $author.pauseid %]/activity.rss"><i class="fa fa-rss fa-2x black"></i></a>
-    </div>
-    <div class="toolbar-search-form">
-      <form action="/search">
-          <input type="hidden" name="q" value="author:[% $author.pauseid %]">
-          <input type="text" placeholder="Search distributions by [% $author.name %]" name="q" class="form-control tool-bar-form">
-          <input type="submit" style="display: none">
-      </form>
-    </div>
     <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {
-        %%  include inc::release_table { header => 1, tablesorter => 1, table_id => 'metacpan_author_releases' }
+        %%  include inc::release_table { header => 1, tablesorter => 0, table_id => 'metacpan_author_releases', table_heading => "Releases" };
+        %%  if $total > 10 {
+    <p class="text-center">
+        <a href="/author/[% $author.pauseid %]/latest">View all [% $total %] releases by [% $author.name %]</a>
+    </p>
+        %%  }
     %%  }
     %%  else {
     <div class="message">
@@ -161,7 +25,13 @@
     </div>
     %%  }
     %%  if $faves.0 {
-        %%  include inc::favorite_table { favorites => $faves, author => 1, tablesorter => 1 }
+        <h3>Favorites</h3>
+        %%  include inc::favorite_table { favorites => $faves, author => 1, tablesorter => 0 };
+        %%  if $faves_total > 10 {
+    <p class="text-center">
+        <a href="/author/[% $author.pauseid %]/favorites">View all [% $faves_total %] favorites by [% $author.pauseid %]</a>
+    </p>
+        %%  }
     %%  }
     %%  else {
     <div class="message">

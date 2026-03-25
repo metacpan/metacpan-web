@@ -1,5 +1,5 @@
 %%  cascade base {
-%%      title      => $title || "Uploads by " ~ $author.pauseid,
+%%      title      => $title || "Releases by " ~ $author.pauseid,
 %%      rss        => $rss   || '/author/' ~ $author.pauseid ~ '/activity.rss',
 %%      rss_title  => $rss_title || 'Recent CPAN Activity of ' ~ $author.pauseid ~ ' - MetaCPAN',
 %%  }
@@ -12,8 +12,5 @@
 </div>
 %%  }
 %%  override content -> {
-  %%  include inc::release_table { header => 1, tablesorter => 0, table_heading => "Uploads" }
-%%  }
-%%  override pagination -> {
-  %%  include inc::pager
+  %%  include inc::release_table { header => 1, tablesorter => 1, default_sort => '3,1' }
 %%  }

@@ -106,3 +106,39 @@
         margin-right: -15px;
     }
 }
+
+.author-page-heading {
+    margin-top: 0;
+}
+
+.table-favorites {
+    table-layout: auto !important;
+
+    @media (min-width: 768px) {
+        width: auto;
+    }
+
+    td,
+    th {
+        display: table-cell !important;
+
+        &.hidden-phone {
+            @media (max-width: 480px) {
+                display: none !important;
+            }
+        }
+    }
+
+    td a {
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
+
+    th.date,
+    td.date {
+        width: 1% !important;
+        white-space: nowrap !important;
+    }
+}
