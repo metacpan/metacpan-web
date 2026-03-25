@@ -149,12 +149,18 @@ sub request {
 
     my $req_p = $self->client->do_request( request => $request );
 
-    # Do not retry - if the API is loaded/slow then this just makes it worse.
-    # $req_p = $req_p->catch( sub {
-
-    #     # retry once
-    #     $self->client->do_request( request => $request );
-    # } );
+    # Retry once on connection errors (stale keep-alive), but not on
+    # timeouts or HTTP errors which would just add load to a slow API.
+    $req_p = $req_p->catch( sub {
+        my @failure = @_;
+        if ( !ref $failure[0] && $failure[0] =~ /Connection closed/ ) {
+            if ( my $logger = $self->log ) {
+                $logger->warn("Retrying after: $failure[0]");
+            }
+            return $self->client->do_request( request => $request );
+        }
+        return Future->fail(@failure);
+    } );
     $req_p->transform(
         done => sub {
             my $response = shift;
