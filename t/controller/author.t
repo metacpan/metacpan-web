@@ -48,6 +48,36 @@ test_psgi app, sub {
     ok( $res = $cb->( GET '/author/PERLER/releases' ),
         'GET /author/PERLER/releases' );
     is( $res->code, 200, 'code 200' );
+
+    ok( $res = $cb->( GET '/author/DOESNTEXIST/latest' ),
+        'GET /author/DOESNTEXIST/latest' );
+    is( $res->code, 404, 'code 404' );
+    ok( $res = $cb->( GET '/author/perler/latest' ),
+        'GET /author/perler/latest' );
+    is( $res->code, 301, 'code 301' );
+    is(
+        $res->header('Location'),
+        'http://localhost/author/PERLER/latest',
+        '301 target'
+    );
+    ok( $res = $cb->( GET '/author/PERLER/latest' ),
+        'GET /author/PERLER/latest' );
+    is( $res->code, 200, 'code 200' );
+
+    ok( $res = $cb->( GET '/author/DOESNTEXIST/favorites' ),
+        'GET /author/DOESNTEXIST/favorites' );
+    is( $res->code, 404, 'code 404' );
+    ok( $res = $cb->( GET '/author/perler/favorites' ),
+        'GET /author/perler/favorites' );
+    is( $res->code, 301, 'code 301' );
+    is(
+        $res->header('Location'),
+        'http://localhost/author/PERLER/favorites',
+        '301 target'
+    );
+    ok( $res = $cb->( GET '/author/PERLER/favorites' ),
+        'GET /author/PERLER/favorites' );
+    is( $res->code, 200, 'code 200' );
 };
 
 done_testing;
