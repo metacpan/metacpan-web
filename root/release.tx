@@ -86,7 +86,7 @@
   <ul>
     %%  for $examples -> $file {
     <li>
-      %%  if $file.mime == 'text/x-pod' {
+      %%  if $file.mime == 'text/x-pod' || $file.mime == 'text/markdown' {
       %%    include inc::link_to_file { file => $file, linktext => $file.path };
       %%  }
       %%  else {

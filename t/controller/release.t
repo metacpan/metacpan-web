@@ -217,6 +217,50 @@ subtest 'GH issue linking' => sub {
     }
 };
 
+subtest 'markdown files should be in the documentation section' => sub {
+    my $release    = MetaCPAN::Web::Controller::Release->new;
+    my %categories = %{
+        $release->_files_to_categories(
+            {
+                path   => 'README.md',
+                mime   => 'text/markdown',
+                module => [],
+            },
+            {
+                path   => 'lib/Foo.pod',
+                mime   => 'text/x-pod',
+                module => [],
+            },
+            {
+                path   => 'examples/demo.md',
+                mime   => 'text/markdown',
+                module => [],
+            },
+            {
+                path   => 'INSTALL',
+                mime   => 'text/plain',
+                module => [],
+            },
+        )
+    };
+
+    my @doc_paths = sort map { $_->{path} } @{ $categories{documentation} };
+    is_deeply(
+        \@doc_paths,
+        [ 'README.md', 'lib/Foo.pod' ],
+        'markdown and pod files are both regarded as documentation',
+    );
+
+    my @example_paths = map { $_->{path} } @{ $categories{examples} };
+    is_deeply( \@example_paths, ['examples/demo.md'],
+        'markdown in examples/ categorized as example, not documentation',
+    );
+
+    my @other_paths = map { $_->{path} } @{ $categories{other} };
+    is_deeply( \@other_paths, ['INSTALL'],
+        'non-markdown/pod file in other', );
+};
+
 done_testing;
 
 sub test_heading_order {

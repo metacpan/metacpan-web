@@ -31,7 +31,7 @@ sub dir {
             }
             return $dir;
         }
-    )->then( $self->_groom_fileinfo( ['dir'] ) );
+    )->then( $self->_groom_fileinfo( [] ) );
 }
 
 __PACKAGE__->meta->make_immutable;

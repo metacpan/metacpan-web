@@ -23,7 +23,7 @@
     <a href="/pod/[% $file.documentation %]">Module Documentation</a>
   </li>
   %%  }
-  %%  else if $file.slop {
+  %%  else if $file.slop || $file.mime == 'text/markdown' {
   <li>
     <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]">Documentation View</a>
   </li>
