@@ -6,8 +6,6 @@ use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
-use List::Util ();
-
 sub dist : Chained('/dist/root') PathPart('contribute') Args(0) {
     my ( $self, $c ) = @_;
     my $dist = $c->stash->{distribution_name};
@@ -30,13 +28,12 @@ sub release : Chained('/release/root') PathPart('contribute') Args(0) {
 sub get : Private {
     my ( $self, $c, $author, $release ) = @_;
 
-    my $contributing_re = qr/CONTRIBUTING|HACKING/i;
     my $files
         = $c->model('API::Release')
-        ->interesting_files( $author, $release )
+        ->interesting_files( $author, $release, ['contributing'] )
         ->get->{files};
 
-    my $file = List::Util::first { $_->{name} =~ /$contributing_re/ } @$files;
+    my ($file) = @$files;
 
     if ( !$file || !exists $file->{path} ) {
         my $release_info = $c->model('ReleaseInfo')->get( $author, $release );
