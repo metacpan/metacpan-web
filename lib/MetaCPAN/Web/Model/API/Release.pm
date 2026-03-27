@@ -120,9 +120,13 @@ sub reverse_dependencies {
 }
 
 sub interesting_files {
-    my ( $self, $author, $release ) = @_;
-    $self->request("/release/interesting_files/$author/$release")
-        ->then( $self->_groom_fileinfo( ['files'] ) );
+    my ( $self, $author, $release, $categories ) = @_;
+    my $query = {};
+    if ($categories) {
+        $query->{category} = $categories;
+    }
+    $self->request( "/release/interesting_files/$author/$release",
+        undef, $query )->then( $self->_groom_fileinfo( ['files'] ) );
 }
 
 sub versions {
