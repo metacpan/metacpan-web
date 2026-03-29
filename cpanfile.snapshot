@@ -651,10 +651,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Clone-0.48
-    pathname: A/AT/ATOOMIC/Clone-0.48.tar.gz
+  Clone-0.50
+    pathname: A/AT/ATOOMIC/Clone-0.50.tar.gz
     provides:
-      Clone 0.48
+      Clone 0.50
     requirements:
       ExtUtils::MakeMaker 0
   Clone-PP-1.08
@@ -2160,36 +2160,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.86
-    pathname: S/SB/SBECK/Locale-Codes-3.86.tar.gz
+  Locale-Codes-3.88
+    pathname: S/SB/SBECK/Locale-Codes-3.88.tar.gz
     provides:
-      Locale::Codes 3.86
-      Locale::Codes::Constants 3.86
-      Locale::Codes::Country 3.86
-      Locale::Codes::Country_Codes 3.86
-      Locale::Codes::Country_Retired 3.86
-      Locale::Codes::Currency 3.86
-      Locale::Codes::Currency_Codes 3.86
-      Locale::Codes::Currency_Retired 3.86
-      Locale::Codes::LangExt 3.86
-      Locale::Codes::LangExt_Codes 3.86
-      Locale::Codes::LangExt_Retired 3.86
-      Locale::Codes::LangFam 3.86
-      Locale::Codes::LangFam_Codes 3.86
-      Locale::Codes::LangFam_Retired 3.86
-      Locale::Codes::LangVar 3.86
-      Locale::Codes::LangVar_Codes 3.86
-      Locale::Codes::LangVar_Retired 3.86
-      Locale::Codes::Language 3.86
-      Locale::Codes::Language_Codes 3.86
-      Locale::Codes::Language_Retired 3.86
-      Locale::Codes::Script 3.86
-      Locale::Codes::Script_Codes 3.86
-      Locale::Codes::Script_Retired 3.86
-      Locale::Country 3.86
-      Locale::Currency 3.86
-      Locale::Language 3.86
-      Locale::Script 3.86
+      Locale::Codes 3.88
+      Locale::Codes::Constants 3.88
+      Locale::Codes::Country 3.88
+      Locale::Codes::Country_Codes 3.88
+      Locale::Codes::Country_Retired 3.88
+      Locale::Codes::Currency 3.88
+      Locale::Codes::Currency_Codes 3.88
+      Locale::Codes::Currency_Retired 3.88
+      Locale::Codes::LangExt 3.88
+      Locale::Codes::LangExt_Codes 3.88
+      Locale::Codes::LangExt_Retired 3.88
+      Locale::Codes::LangFam 3.88
+      Locale::Codes::LangFam_Codes 3.88
+      Locale::Codes::LangFam_Retired 3.88
+      Locale::Codes::LangVar 3.88
+      Locale::Codes::LangVar_Codes 3.88
+      Locale::Codes::LangVar_Retired 3.88
+      Locale::Codes::Language 3.88
+      Locale::Codes::Language_Codes 3.88
+      Locale::Codes::Language_Retired 3.88
+      Locale::Codes::Script 3.88
+      Locale::Codes::Script_Codes 3.88
+      Locale::Codes::Script_Retired 3.88
+      Locale::Country 3.88
+      Locale::Currency 3.88
+      Locale::Language 3.88
+      Locale::Script 3.88
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
