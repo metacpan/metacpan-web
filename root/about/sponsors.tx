@@ -301,6 +301,32 @@
 
   <div class="sponsor-card">
     <div class="sponsor-logo">
+      <a target="_blank" rel="noopener" href="https://www.grantstreet.com/">
+        <img src="/static/images/sponsors/gsg-logo.png" alt="Grant Street Group">
+      </a>
+    </div>
+    <div class="sponsor-info">
+      <p>
+        <a target="_blank" rel="noopener"
+        href="https://www.grantstreet.com/">Grant Street Group</a>&reg; is an
+        innovator of enterprise-scale software-as-a-service solutions for
+        government entities. Our product suite includes tax calculation,
+        billing, collection, and distribution; modern payment processing;
+        and online auctions of fixed-income instruments and delinquent
+        property taxes.
+      </p>
+      <p>
+        Our software and services provide secure and reliable solutions to
+        help government agencies streamline operations and enhance the
+        delivery of essential public services. Over 500 full-time
+        professionals comprise our talented team in support of our mission
+        to provide unmatched software and service.
+      </p>
+    </div>
+  </div>
+
+  <div class="sponsor-card">
+    <div class="sponsor-logo">
       <a target="_blank" rel="noopener" href="https://github.com/">
         <img src="/static/images/sponsors/github_logo.png" alt="GitHub" width="120">
       </a>
