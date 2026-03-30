@@ -23,26 +23,13 @@ jobs:
       - name: Fetch base ref
         if: ${{ github.event.pull_request }}
         run: git fetch origin ${{ github.base_ref }}:upstream
-      - run: npm install
-      - name: Install Carton
-        uses: perl-actions/install-with-cpm@v1
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v7
         with:
-          install: Carton
-      - name: Install CPAN deps
-        uses: perl-actions/install-with-cpm@v1
-        with:
-          cpanfile: 'cpanfile'
-          args: >
-            --resolver=snapshot
-            --without-runtime
-            --without-test
-            --without-build
-            --with-develop
-      - name: Install precious
-        run: ./bin/install-precious /usr/local/bin
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-      - run: perltidy --version
+          target: test
+          push: false
+          load: true
       - name: Select files
         id: select-files
         run: |
@@ -52,7 +39,12 @@ jobs:
             echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
           fi
       - name: Lint files
-        run: precious lint ${{ steps.select-files.outputs.precious-args }}
+        run: >
+          docker run --rm
+          -v ${{ github.workspace }}:/app
+          ${{ steps.docker-build-test.outputs.imageid }}
+          bash -c "git config --global --add safe.directory /app
+          && precious lint ${{ steps.select-files.outputs.precious-args }}"
   docker:
     runs-on: ubuntu-24.04
     name: Docker

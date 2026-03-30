@@ -11,7 +11,10 @@
     - [Running Tests with Docker Compose](#running-tests-with-docker-compose)
     - [Running Playwright (E2E) Tests](#running-playwright-e2e-tests)
   - [Running the App](#running-the-app)
-  - [Local Git and testing considerations](#local-git-and-testing-considerations)
+  - [Linting and Tidying with Precious](#linting-and-tidying-with-precious)
+    - [Running via Docker](#running-via-docker)
+    - [Running Locally](#running-locally)
+    - [Pre-commit Hook](#pre-commit-hook)
   - [Local Configuration Changes](#local-configuration-changes)
   - [Compatibility Notes](#compatibility-notes)
 
@@ -124,7 +127,30 @@ If you'd like to use `Gazelle` rather than the default Plack server:
 carton exec plackup -p 5001 -s Gazelle -r
 ```
 
-## Local Git and testing considerations
+## Linting and Tidying with Precious
+
+This project uses [precious](https://github.com/houseabsolute/precious) to run
+linters and tidiers (perltidy, perlcritic, perlimports, eslint, prettier,
+omegasort).
+
+### Running via Docker
+
+The test Docker image includes all linting tools. No local installation needed:
+
+```bash
+docker compose --profile test run --rm test precious lint --git
+docker compose --profile test run --rm test precious tidy --git
+```
+
+### Running Locally
+
+If you prefer to run precious locally, install it with:
+
+```bash
+./bin/install-precious /usr/local/bin
+```
+
+### Pre-commit Hook
 
 You will want to set up the supplied pre-commit Git hook like so:
 
@@ -132,8 +158,7 @@ You will want to set up the supplied pre-commit Git hook like so:
 ./git/setup.sh
 ```
 
-which causes `precious` to be run before each commit. You can manually run this
-with `precious path/to/file`
+which causes `precious` to be run before each commit.
 
 ## Local Configuration Changes
 
