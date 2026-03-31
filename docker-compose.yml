@@ -42,6 +42,7 @@ services:
       - './:/app/'
       - 'web-assets:/app/root/assets/'
       - '/app/local'
+      - '/app/node_modules'
       - '${GIT_COMMON_DIR:-/dev/null}:${GIT_COMMON_DIR:-/dev/null}:ro'
     environment:
       COLUMNS: 96

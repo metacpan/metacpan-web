@@ -42,6 +42,7 @@ jobs:
         run: >
           docker run --rm
           -v ${{ github.workspace }}:/app
+          -v /app/node_modules
           ${{ steps.docker-build-test.outputs.imageid }}
           precious lint ${{ steps.select-files.outputs.precious-args }}
   docker:
