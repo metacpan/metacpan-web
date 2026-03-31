@@ -11,18 +11,50 @@ on:
   workflow_dispatch:
 
 jobs:
-  code-formatting:
+  docker:
     runs-on: ubuntu-24.04
-    name: Code Formatting
+    name: Docker
     permissions:
       contents: read
     steps:
+      - uses: docker/setup-buildx-action@v4
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v7
+        with:
+          target: test
+          push: false
+          load: true
+          secrets: |
+            GITHUB_TOKEN=${{ github.token }}
+          cache-from: type=gha,scope=docker-test
+          cache-to: type=gha,mode=max,scope=docker-test
+      - name: Run Perl tests
+        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
+  code-formatting:
+    runs-on: ubuntu-24.04
+    name: Code Formatting
+    needs: docker
+    permissions:
+      contents: read
+    steps:
+      - uses: docker/setup-buildx-action@v4
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Fetch base ref
         if: ${{ github.event.pull_request }}
         run: git fetch origin ${{ github.base_ref }}:upstream
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v7
+        with:
+          target: test
+          push: false
+          load: true
+          secrets: |
+            GITHUB_TOKEN=${{ github.token }}
+          cache-from: type=gha,scope=docker-test
       - name: Select files
         id: select-files
         run: |
@@ -33,22 +65,12 @@ jobs:
           fi
       - name: Lint files
         run: >
-          docker compose --profile test run --rm test
+          docker run --rm --init
+          -v ${{ github.workspace }}:/app
+          -v /app/local
+          -v /app/node_modules
+          ${{ steps.docker-build-test.outputs.imageid }}
           precious lint ${{ steps.select-files.outputs.precious-args }}
-  docker:
-    runs-on: ubuntu-24.04
-    name: Docker
-    permissions: {}
-    steps:
-      - name: Build test image
-        id: docker-build-test
-        uses: docker/build-push-action@v7
-        with:
-          target: test
-          push: false
-          load: true
-      - name: Run Perl tests
-        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
   playwright:
     runs-on: ubuntu-24.04
     name: playwright test
