@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     name: Docker
     permissions:
-      contents: read
+      actions: write
     steps:
       - uses: docker/setup-buildx-action@v4
       - name: Build test image
@@ -25,8 +25,6 @@ jobs:
           target: test
           push: false
           load: true
-          secrets: |
-            GITHUB_TOKEN=${{ github.token }}
           cache-from: type=gha,scope=docker-test
           cache-to: type=gha,mode=max,scope=docker-test
       - name: Run Perl tests
@@ -34,27 +32,29 @@ jobs:
   code-formatting:
     runs-on: ubuntu-24.04
     name: Code Formatting
-    needs: docker
     permissions:
       contents: read
     steps:
-      - uses: docker/setup-buildx-action@v4
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Fetch base ref
         if: ${{ github.event.pull_request }}
         run: git fetch origin ${{ github.base_ref }}:upstream
-      - name: Build test image
-        id: docker-build-test
-        uses: docker/build-push-action@v7
+      - name: Cache lint tools
+        id: cache-lint
+        uses: actions/cache@v4
         with:
-          target: test
-          push: false
-          load: true
-          secrets: |
-            GITHUB_TOKEN=${{ github.token }}
-          cache-from: type=gha,scope=docker-test
+          path: ~/.local/bin
+          key: lint-tools-${{ hashFiles('bin/install-precious') }}
+      - name: Install lint tools
+        if: steps.cache-lint.outputs.cache-hit != 'true'
+        uses: oalders/install-ubi-action@v0.0.6
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          projects: |
+            houseabsolute/omegasort
+            houseabsolute/precious
       - name: Select files
         id: select-files
         run: |
@@ -63,12 +63,23 @@ jobs:
           else
             echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
           fi
+      - uses: docker/setup-buildx-action@v4
+      - name: Build test image
+        id: docker-build-test
+        uses: docker/build-push-action@v7
+        with:
+          target: test
+          push: false
+          load: true
+          cache-from: type=gha,scope=docker-test
       - name: Lint files
         run: >
           docker run --rm --init
           -v ${{ github.workspace }}:/app
           -v /app/local
           -v /app/node_modules
+          -v ~/.local/bin/precious:/usr/local/bin/precious:ro
+          -v ~/.local/bin/omegasort:/usr/local/bin/omegasort:ro
           ${{ steps.docker-build-test.outputs.imageid }}
           precious lint ${{ steps.select-files.outputs.precious-args }}
   playwright:

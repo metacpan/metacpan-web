@@ -37,7 +37,7 @@ services:
       - test
     build:
       context: .
-      target: test
+      target: lint
     volumes:
       - './:/app/'
       - 'web-assets:/app/root/assets/'
