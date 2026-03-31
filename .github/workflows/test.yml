@@ -23,13 +23,6 @@ jobs:
       - name: Fetch base ref
         if: ${{ github.event.pull_request }}
         run: git fetch origin ${{ github.base_ref }}:upstream
-      - name: Build test image
-        id: docker-build-test
-        uses: docker/build-push-action@v7
-        with:
-          target: test
-          push: false
-          load: true
       - name: Select files
         id: select-files
         run: |
@@ -40,11 +33,8 @@ jobs:
           fi
       - name: Lint files
         run: >
-          docker run --rm
-          -v ${{ github.workspace }}:/app
-          ${{ steps.docker-build-test.outputs.imageid }}
-          bash -c "git config --global --add safe.directory /app
-          && precious lint ${{ steps.select-files.outputs.precious-args }}"
+          docker compose --profile test run --rm test
+          precious lint ${{ steps.select-files.outputs.precious-args }}
   docker:
     runs-on: ubuntu-24.04
     name: Docker

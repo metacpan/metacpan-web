@@ -149,6 +149,8 @@ RUN ./bin/install-precious /usr/local/bin
 COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 COPY t t
 
+RUN git config --system --add safe.directory /app
+
 USER metacpan
 CMD [ "prove", "-l", "-r", "-j", "2", "t" ]
 
