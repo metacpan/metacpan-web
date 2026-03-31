@@ -143,17 +143,25 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 
-COPY bin/install-precious ./bin/
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN \
-    ./bin/install-precious /usr/local/bin
-
-COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 COPY t t
 
 RUN git config --system --add safe.directory /app
 
 USER metacpan
 CMD [ "prove", "-l", "-r", "-j", "2", "t" ]
+
+################### Linting
+FROM test AS lint
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+
+USER root
+
+COPY bin/install-precious ./bin/
+RUN ./bin/install-precious /usr/local/bin
+
+COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
+
+USER metacpan
 
 ################### Playwright Server
 FROM server AS playwright

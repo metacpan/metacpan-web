@@ -13,12 +13,11 @@ fi
 TARGET=$1
 export TARGET
 
-TARGET=$1
-export TARGET
-
 curl --silent --location \
     https://raw.githubusercontent.com/houseabsolute/ubi/master/bootstrap/bootstrap-ubi.sh |
     sh
+
+PATH="$TARGET:$PATH"
 
 ubi --project houseabsolute/omegasort --in "$TARGET"
 ubi --project houseabsolute/precious --in "$TARGET"
