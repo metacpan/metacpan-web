@@ -43,8 +43,7 @@ jobs:
           docker run --rm
           -v ${{ github.workspace }}:/app
           ${{ steps.docker-build-test.outputs.imageid }}
-          bash -c "git config --global --add safe.directory /app
-          && precious lint ${{ steps.select-files.outputs.precious-args }}"
+          precious lint ${{ steps.select-files.outputs.precious-args }}
   docker:
     runs-on: ubuntu-24.04
     name: Docker
