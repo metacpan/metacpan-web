@@ -274,7 +274,10 @@ for (const favButton of document.querySelectorAll('.fav-not-logged-in')) {
 
 for (const sel of document.querySelectorAll('.select-navigator')) {
     sel.addEventListener('change', () => {
-        document.location.href = sel.value;
+        const url = new URL(sel.value, document.location.href);
+        if (url.protocol === 'https:' || url.protocol === 'http:') {
+            document.location.href = url.href;
+        }
         sel.selectedIndex = 0;
     });
 }
