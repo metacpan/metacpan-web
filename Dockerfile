@@ -144,7 +144,8 @@ RUN \
 EOT
 
 COPY bin/install-precious ./bin/
-RUN ./bin/install-precious /usr/local/bin
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN \
+    ./bin/install-precious /usr/local/bin
 
 COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 COPY t t
