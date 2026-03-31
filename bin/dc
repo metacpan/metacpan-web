@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# When running in a git worktree, the .git file references a path outside
+# the working tree. Export GIT_COMMON_DIR so docker-compose.yml can mount
+# the main .git directory into the container, allowing git to resolve the
+# worktree reference.
+if [ -f .git ]; then
+    export GIT_COMMON_DIR
+    GIT_COMMON_DIR=$(realpath "$(git rev-parse --git-common-dir)")
+fi
+
+exec docker compose "$@"
