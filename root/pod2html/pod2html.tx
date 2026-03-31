@@ -20,7 +20,7 @@
           <input id="metacpan-pod-renderer-file" type="file" name="pod_file" accept=".pl, .pod, .pm, text/plain, text/x-perl-file, text/x-pod-file"/>
           <div class="form-group">
             <label for="metacpan-pod-renderer-pod">Source:</label>
-            <textarea id="metacpan-pod-renderer-pod" name="pod" class="form-control">[% $pod %]</textarea>
+            <textarea id="metacpan-pod-renderer-pod" name="pod" class="form-control">[% $pod || "=pod\n\n" %]</textarea>
           </div>
           <div class="form-group button-line">
             <label for="metacpan-pod-renderer-file" class="btn btn-default">Browse for file...</label>
