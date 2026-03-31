@@ -143,6 +143,9 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot --with-test
 EOT
 
+COPY bin/install-precious ./bin/
+RUN ./bin/install-precious /usr/local/bin
+
 COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 COPY t t
 
