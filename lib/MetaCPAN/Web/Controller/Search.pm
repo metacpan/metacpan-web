@@ -87,6 +87,11 @@ sub index : Path : Args(0) {
         )->get;
 
         if ( !$results->{total} && !$authors->{total} ) {
+
+            # Use a short CDN cache for "no results" pages so that
+            # newly uploaded modules become findable quickly.
+            $c->cdn_max_age('5m');
+
             my $suggest = $query;
             my $prefix  = q{};
             if ( $suggest =~ s{^(author|distribution|module|version):}{} ) {
