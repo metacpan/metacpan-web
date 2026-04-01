@@ -30,6 +30,12 @@ test_psgi app, sub {
     ok( $res->content =~ /Task::Kensho/,
         'get recommendation about Task::Kensho on No result page' );
 
+    # Pages with no results should have a short CDN cache so that newly
+    # uploaded modules become findable quickly.
+    # See https://github.com/metacpan/metacpan-web/issues/3597
+    like( $res->header('Surrogate-Control'),
+        qr/max-age=300\b/, 'no-result page has short CDN cache (5 minutes)' );
+
     ok( $res = $cb->( GET '/search?q=perlhacktips' ),
         'GET /search?q=perlhacktips' );
     is( $res->code, 200,
@@ -39,6 +45,10 @@ test_psgi app, sub {
 
     ok( $res = $cb->( GET '/search?q=moose' ), 'GET /search?q=moose' );
     is( $res->code, 200, 'code 200' );
+
+    like( $res->header('Surrogate-Control'),
+        qr/max-age=86400\b/,
+        'search results page has standard CDN cache of one day' );
 
     my $tx = tx($res);
     $tx->like( '/html/head/title', qr/moose/, 'title includes search term' );
