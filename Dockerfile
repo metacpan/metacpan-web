@@ -157,7 +157,9 @@ SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 USER root
 
 COPY bin/install-precious ./bin/
-RUN ./bin/install-precious /usr/local/bin
+RUN --mount=type=secret,id=github_token \
+    GITHUB_TOKEN="$(cat /run/secrets/github_token 2>/dev/null)" \
+    ./bin/install-precious /usr/local/bin
 
 COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs .editorconfig ./
 
