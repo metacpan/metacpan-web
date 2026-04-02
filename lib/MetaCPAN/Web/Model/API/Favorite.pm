@@ -4,7 +4,8 @@ use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';
 
-use Future ();
+use Future               ();
+use MetaCPAN::Web::Types qw( is_PositiveInt );
 
 sub by_dist {
     my ( $self, $dist ) = @_;
@@ -20,16 +21,18 @@ sub by_dist {
 }
 
 sub by_user {
-    my ( $self, $user, $size ) = @_;
-    $size ||= 250;
-    return Future->done( [] )
+    my ( $self, $user, $page, $size ) = @_;
+    $page = is_PositiveInt($page) ? $page : 1;
+    $size = is_PositiveInt($size) ? $size : 250;
+    return Future->done( { favorites => [], total => 0, took => 0 } )
         if !defined $user;
     return $self->request( "/favorite/by_user/$user", undef,
-        { size => $size } )->transform(
+        { page => $page, page_size => $size } )->transform(
         done => sub {
             my $data = shift;
-            return [] unless exists $data->{favorites};
-            return $data->{favorites};
+            return { favorites => [], total => 0, took => 0 }
+                unless exists $data->{favorites};
+            return $data;
         }
         );
 }

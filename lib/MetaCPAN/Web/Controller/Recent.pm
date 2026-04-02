@@ -20,13 +20,7 @@ sub index : Path : Args(0) {
     $c->browser_max_age('1m');
     $c->cdn_max_age('1y');    # DIST_UPDATES will purge it
 
-    my $pageset = Data::Pageset->new( {
-        current_page     => $page,
-        entries_per_page => $page_size,
-        mode             => 'slide',
-        pages_per_set    => 10,
-        total_entries    => $data->{total},
-    } );
+    my $pageset = $self->pageset( $page, $page_size, $data->{total} );
 
     $c->stash( {
         recent    => $data->{releases},

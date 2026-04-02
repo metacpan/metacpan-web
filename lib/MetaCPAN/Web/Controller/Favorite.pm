@@ -8,13 +8,7 @@ sub recent : Local : Args(0) {
     my $page_size = $c->req->get_page_size(100);
     my $data = $c->model('API::Favorite')->recent( $page, $page_size )->get;
 
-    my $pageset = Data::Pageset->new( {
-        current_page     => $page,
-        entries_per_page => $page_size,
-        mode             => 'slide',
-        pages_per_set    => 10,
-        total_entries    => $data->{total},
-    } );
+    my $pageset = $self->pageset( $page, $page_size, $data->{total} );
 
     $c->stash( {
         header          => 1,

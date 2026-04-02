@@ -33,13 +33,7 @@ sub distribution : Chained('/dist/root') PathPart('requires') Args(0)
         ->reverse_dependencies( $dist, $page, $page_size, $sort )
         ->get;
 
-    my $pageset = Data::Pageset->new( {
-        current_page     => $page,
-        entries_per_page => $page_size,
-        mode             => 'slide',
-        pages_per_set    => 10,
-        total_entries    => $data->{total},
-    } );
+    my $pageset = $self->pageset( $page, $page_size, $data->{total} );
 
     $c->stash( {
         %{$data},
@@ -63,13 +57,7 @@ sub module : Chained('/module/root') PathPart('requires') Args(0)
         ->requires( $module, $page, $page_size, $sort )
         ->get;
 
-    my $pageset = Data::Pageset->new( {
-        current_page     => $page,
-        entries_per_page => $page_size,
-        mode             => 'slide',
-        pages_per_set    => 10,
-        total_entries    => $data->{total},
-    } );
+    my $pageset = $self->pageset( $page, $page_size, $data->{total} );
 
     $c->stash( {
         %{$data},

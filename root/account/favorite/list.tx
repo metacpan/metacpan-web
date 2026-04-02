@@ -5,4 +5,5 @@
         %%  author => 1,
         %%  tablesorter => 1,
     %%  }
+    %%  include inc::pager
 %%  }
