@@ -38,6 +38,8 @@ services:
     build:
       context: .
       target: lint
+      secrets:
+        - github_token
     volumes:
       - './:/app/'
       - 'web-assets:/app/root/assets/'
@@ -52,5 +54,8 @@ services:
     depends_on:
       - web-asset-build
     command: ['prove', '-lvr', 't']
+secrets:
+  github_token:
+    environment: GITHUB_TOKEN
 volumes:
   web-assets:
