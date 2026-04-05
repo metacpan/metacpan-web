@@ -298,34 +298,34 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Catalyst-Action-REST-1.21
-    pathname: J/JJ/JJNAPIORK/Catalyst-Action-REST-1.21.tar.gz
+  Catalyst-Action-REST-1.22
+    pathname: E/ET/ETHER/Catalyst-Action-REST-1.22.tar.gz
     provides:
-      Catalyst::Action::Deserialize 1.21
-      Catalyst::Action::Deserialize::Callback 1.21
-      Catalyst::Action::Deserialize::JSON 1.21
-      Catalyst::Action::Deserialize::JSON::XS 1.21
-      Catalyst::Action::Deserialize::View 1.21
-      Catalyst::Action::Deserialize::XML::Simple 1.21
-      Catalyst::Action::Deserialize::YAML 1.21
-      Catalyst::Action::DeserializeMultiPart 1.21
-      Catalyst::Action::REST 1.21
-      Catalyst::Action::REST::ForBrowsers 1.21
-      Catalyst::Action::Serialize 1.21
-      Catalyst::Action::Serialize::Callback 1.21
-      Catalyst::Action::Serialize::JSON 1.21
-      Catalyst::Action::Serialize::JSON::XS 1.21
-      Catalyst::Action::Serialize::JSONP 1.21
-      Catalyst::Action::Serialize::View 1.21
-      Catalyst::Action::Serialize::XML::Simple 1.21
-      Catalyst::Action::Serialize::YAML 1.21
-      Catalyst::Action::Serialize::YAML::HTML 1.21
-      Catalyst::Action::SerializeBase 1.21
-      Catalyst::Controller::REST 1.21
-      Catalyst::Request::REST 1.21
-      Catalyst::Request::REST::ForBrowsers 1.21
-      Catalyst::TraitFor::Request::REST 1.21
-      Catalyst::TraitFor::Request::REST::ForBrowsers 1.21
+      Catalyst::Action::Deserialize 1.22
+      Catalyst::Action::Deserialize::Callback 1.22
+      Catalyst::Action::Deserialize::JSON 1.22
+      Catalyst::Action::Deserialize::JSON::XS 1.22
+      Catalyst::Action::Deserialize::View 1.22
+      Catalyst::Action::Deserialize::XML::Simple 1.22
+      Catalyst::Action::Deserialize::YAML 1.22
+      Catalyst::Action::DeserializeMultiPart 1.22
+      Catalyst::Action::REST 1.22
+      Catalyst::Action::REST::ForBrowsers 1.22
+      Catalyst::Action::Serialize 1.22
+      Catalyst::Action::Serialize::Callback 1.22
+      Catalyst::Action::Serialize::JSON 1.22
+      Catalyst::Action::Serialize::JSON::XS 1.22
+      Catalyst::Action::Serialize::JSONP 1.22
+      Catalyst::Action::Serialize::View 1.22
+      Catalyst::Action::Serialize::XML::Simple 1.22
+      Catalyst::Action::Serialize::YAML 1.22
+      Catalyst::Action::Serialize::YAML::HTML 1.22
+      Catalyst::Action::SerializeBase 1.22
+      Catalyst::Controller::REST 1.22
+      Catalyst::Request::REST 1.22
+      Catalyst::Request::REST::ForBrowsers 1.22
+      Catalyst::TraitFor::Request::REST 1.22
+      Catalyst::TraitFor::Request::REST::ForBrowsers 1.22
     requirements:
       Catalyst::Runtime 5.80030
       Class::Inspector 1.13
@@ -3149,10 +3149,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Mouse-v2.6.1
-    pathname: S/SK/SKAJI/Mouse-v2.6.1.tar.gz
+  Mouse-v2.6.2
+    pathname: S/SY/SYOHEX/Mouse-v2.6.2.tar.gz
     provides:
-      Mouse v2.6.1
+      Mouse v2.6.2
       Mouse::Exporter undef
       Mouse::Meta::Attribute undef
       Mouse::Meta::Class undef
@@ -3170,10 +3170,11 @@ DISTRIBUTIONS
       Mouse::Meta::TypeConstraint undef
       Mouse::Object undef
       Mouse::PurePerl undef
-      Mouse::Role v2.6.1
-      Mouse::Spec v2.6.1
+      Mouse::Role v2.6.2
+      Mouse::Spec v2.6.2
+      Mouse::Tiny v2.6.1
       Mouse::TypeRegistry undef
-      Mouse::Util v2.6.1
+      Mouse::Util v2.6.2
       Mouse::Util::MetaRole undef
       Mouse::Util::TypeConstraints undef
       Squirrel undef
@@ -5522,32 +5523,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.81
-    pathname: O/OA/OALDERS/libwww-perl-6.81.tar.gz
+  libwww-perl-6.82
+    pathname: O/OA/OALDERS/libwww-perl-6.82.tar.gz
     provides:
-      LWP 6.81
-      LWP::Authen::Basic 6.81
-      LWP::Authen::Digest 6.81
-      LWP::Authen::Ntlm 6.81
-      LWP::ConnCache 6.81
-      LWP::Debug 6.81
-      LWP::Debug::TraceHTTP 6.81
-      LWP::DebugFile 6.81
-      LWP::MemberMixin 6.81
-      LWP::Protocol 6.81
-      LWP::Protocol::cpan 6.81
-      LWP::Protocol::data 6.81
-      LWP::Protocol::file 6.81
-      LWP::Protocol::ftp 6.81
-      LWP::Protocol::gopher 6.81
-      LWP::Protocol::http 6.81
-      LWP::Protocol::loopback 6.81
-      LWP::Protocol::mailto 6.81
-      LWP::Protocol::nntp 6.81
-      LWP::Protocol::nogo 6.81
-      LWP::RobotUA 6.81
-      LWP::Simple 6.81
-      LWP::UserAgent 6.81
+      LWP 6.82
+      LWP::Authen::Basic 6.82
+      LWP::Authen::Digest 6.82
+      LWP::Authen::Ntlm 6.82
+      LWP::ConnCache 6.82
+      LWP::Debug 6.82
+      LWP::Debug::TraceHTTP 6.82
+      LWP::DebugFile 6.82
+      LWP::MemberMixin 6.82
+      LWP::Protocol 6.82
+      LWP::Protocol::cpan 6.82
+      LWP::Protocol::data 6.82
+      LWP::Protocol::file 6.82
+      LWP::Protocol::ftp 6.82
+      LWP::Protocol::gopher 6.82
+      LWP::Protocol::http 6.82
+      LWP::Protocol::loopback 6.82
+      LWP::Protocol::mailto 6.82
+      LWP::Protocol::nntp 6.82
+      LWP::Protocol::nogo 6.82
+      LWP::RobotUA 6.82
+      LWP::Simple 6.82
+      LWP::UserAgent 6.82
       libwww::perl undef
     requirements:
       Digest::MD5 0
