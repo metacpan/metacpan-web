@@ -43,7 +43,7 @@ jobs:
         run: git fetch origin ${{ github.base_ref }}:upstream
       - name: Cache lint tools
         id: cache-lint
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.local/bin
           key: lint-tools-${{ hashFiles('bin/install-precious') }}
