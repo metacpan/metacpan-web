@@ -165,6 +165,18 @@ COPY .perlcriticrc .perltidyrc perlimports.toml precious.toml eslint.config.mjs 
 
 USER metacpan
 
+################### Playwright Test Runner
+FROM test AS playwright-test
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+
+USER root
+RUN npx playwright install-deps chromium
+
+USER metacpan
+RUN npx playwright install chromium
+
+CMD ["npx", "playwright", "test"]
+
 ################### Playwright Server
 FROM server AS playwright
 USER root

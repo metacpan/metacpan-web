@@ -13,6 +13,9 @@ const port = process.env.PLAYWRIGHT_PORT
     ? Number(process.env.PLAYWRIGHT_PORT)
     : 5099;
 
+const baseURL =
+    process.env.PLAYWRIGHT_BASE_URL || `http://127.0.0.1:${port}`;
+
 export default defineConfig({
     testDir: "./e2e",
     outputDir: "./playwright/test-results",
@@ -30,19 +33,20 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('/')`. */
-        baseURL: `http://127.0.0.1:${port}`,
+        baseURL,
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: "on-first-retry",
     },
 
-    ...(!process.env.PLAYWRIGHT_PORT && {
-        webServer: {
-            command: `plackup -p ${port} app.psgi`,
-            port,
-            reuseExistingServer: true,
-        },
-    }),
+    ...(!process.env.PLAYWRIGHT_PORT &&
+        !process.env.PLAYWRIGHT_BASE_URL && {
+            webServer: {
+                command: `plackup -p ${port} app.psgi`,
+                port,
+                reuseExistingServer: true,
+            },
+        }),
 
     /* Configure projects for major browsers */
     projects: [
