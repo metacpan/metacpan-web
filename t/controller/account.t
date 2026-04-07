@@ -21,7 +21,7 @@ my $login_res;
 my $user_req;
 my $user_res;
 
-my $JSON = Cpanel::JSON::XS->new->allow_nonref->utf8;
+my $JSON = Cpanel::JSON::XS->new->utf8;
 
 override_api_response( sub {
     my ( undef, $req ) = @_;
