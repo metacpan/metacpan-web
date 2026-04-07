@@ -54,6 +54,19 @@ services:
     depends_on:
       - web-asset-build
     command: ['prove', '-lvr', 't']
+  playwright:
+    profiles:
+      - test
+    build:
+      context: .
+      target: playwright-test
+    volumes:
+      - './e2e/:/app/e2e/'
+      - './playwright.config.ts:/app/playwright.config.ts'
+    environment:
+      PLAYWRIGHT_BASE_URL: http://web-server:8000
+    depends_on:
+      - web-server
 secrets:
   github_token:
     environment: GITHUB_TOKEN

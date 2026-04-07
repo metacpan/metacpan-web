@@ -96,7 +96,10 @@ sub author : Private {
         entries => [
             sort { $b->{date} cmp $a->{date} }
                 @{ $self->_format_release_entries( $releases->{releases} ) },
-            @{ $self->_format_favorite_entries( $author, $faves ) }
+            @{
+                $self->_format_favorite_entries( $author,
+                    $faves->{favorites} )
+            }
         ],
     );
 }

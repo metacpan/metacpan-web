@@ -38,14 +38,30 @@ sub add : Local : Args(0) {
 
 sub list : Local : Args(0) {
     my ( $self, $c ) = @_;
-    $c->stash( { faves => $self->faves( $c, 1_000 )->get } );
+
+    my $page      = $c->req->page;
+    my $page_size = $c->req->get_page_size(100);
+    my $faves     = $self->faves( $c, $page, $page_size )->get;
+
+    my $pageset = $self->pageset( $page, $page_size, $faves->{total} );
+
+    $c->stash( {
+        faves   => $faves->{favorites},
+        took    => $faves->{took},
+        pageset => $pageset,
+    } );
 }
 
 sub list_as_json : Local : Args(0) {
     my ( $self, $c ) = @_;
     $c->stash( { current_view => 'JSON' } );
 
-    $c->stash->{json}{faves} = $self->faves( $c, 1_000 )->get;
+    # This endpoint feeds the JS that renders favorite star icons on
+    # every distribution page, so it needs all of a user's favorites
+    # in a single request rather than a paginated slice.
+    my $faves = $self->faves( $c, 1, 2_000 )->get;
+
+    $c->stash->{json}{faves} = $faves->{favorites};
 
     $c->cdn_max_age('30d');
 
@@ -54,9 +70,10 @@ sub list_as_json : Local : Args(0) {
 }
 
 sub faves {
-    my ( $self, $c, $size ) = @_;
+    my ( $self, $c, $page, $size ) = @_;
     my $user = $c->user;
-    return $c->model('API::Favorite')->by_user( $user && $user->id, $size );
+    return $c->model('API::Favorite')
+        ->by_user( $user && $user->id, $page, $size );
 }
 
 __PACKAGE__->meta->make_immutable;

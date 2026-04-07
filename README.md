@@ -10,10 +10,14 @@
   - [Running Tests](#running-tests)
     - [Running Tests with Docker Compose](#running-tests-with-docker-compose)
     - [Running Playwright (E2E) Tests](#running-playwright-e2e-tests)
+      - [Running with Docker Compose](#running-with-docker-compose)
+      - [Running Locally](#running-locally)
   - [Running the App](#running-the-app)
+    - [Running with Docker Compose](#running-with-docker-compose-1)
+    - [Running Locally](#running-locally-1)
   - [Linting and Tidying with Precious](#linting-and-tidying-with-precious)
     - [Running via Docker](#running-via-docker)
-    - [Running Locally](#running-locally)
+    - [Running Locally](#running-locally-2)
     - [Pre-commit Hook](#pre-commit-hook)
   - [Local Configuration Changes](#local-configuration-changes)
   - [Compatibility Notes](#compatibility-notes)
@@ -96,7 +100,15 @@ docker compose --profile test run --rm test prove -lvr t/controller/search.t
 
 ### Running Playwright (E2E) Tests
 
-Playwright tests live in the `e2e/` directory. To run them (outside of Docker):
+Playwright tests live in the `e2e/` directory.
+
+#### Running with Docker Compose
+
+```bash
+docker compose --profile test run --rm playwright
+```
+
+#### Running Locally
 
 ```bash
 npm test
@@ -116,6 +128,17 @@ When `PLAYWRIGHT_PORT` is set, Playwright skips starting its own server and
 connects to the specified port instead.
 
 ## Running the App
+
+### Running with Docker Compose
+
+```bash
+docker compose up --watch
+```
+
+Start the asset builder and the web server. The site will be served on
+port 5001. The `--watch` flag enables automatic rebuilds when files change.
+
+### Running Locally
 
 ```bash
 carton exec plackup -p 5001 -r

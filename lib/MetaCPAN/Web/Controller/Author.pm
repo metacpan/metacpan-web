@@ -1,7 +1,6 @@
 package MetaCPAN::Web::Controller::Author;
 
 use Moose;
-use Data::Pageset             ();
 use DateTime::Format::ISO8601 ();
 use List::Util                qw( max );
 use Locale::Country           ();
@@ -72,13 +71,13 @@ sub index : Chained('root') PathPart('') Args(0) {
     my @recent_faves = sort {
         DateTime::Format::ISO8601->parse_datetime( $b->{date} )
             <=> DateTime::Format::ISO8601->parse_datetime( $a->{date} )
-    } @{$faves};
+    } @{ $faves->{favorites} };
     my @display_faves = splice( @recent_faves, 0, 10 );
 
     $c->stash( {
         author      => $author,
         faves       => \@display_faves,
-        faves_total => scalar @{$faves},
+        faves_total => $faves->{total},
         releases    => \@display_releases,
         profiles    => $profiles,
         took        => $took,
@@ -127,15 +126,20 @@ sub favorites : Chained('root') PathPart Args(0) {
 
     my $profiles = $c->model('API::Author')->profile_data;
 
-    # Issue: https://github.com/metacpan/metacpan-web/issues/3235
-    # Explicitly setting size to 500 to override the default size 250.
-    my $size = 500;
+    my $page      = $c->req->page;
+    my $page_size = $c->req->get_page_size(100);
     my $faves
-        = $c->model('API::Favorite')->by_user( $author->{user}, $size )->get;
+        = $c->model('API::Favorite')
+        ->by_user( $author->{user}, $page, $page_size )
+        ->get;
+
+    my $pageset = $self->pageset( $page, $page_size, $faves->{total} );
 
     $c->stash( {
         author   => $author,
-        faves    => $faves,
+        faves    => $faves->{favorites},
+        took     => $faves->{took},
+        pageset  => $pageset,
         profiles => $profiles,
     } );
 }
@@ -161,13 +165,7 @@ sub releases : Chained('root') PathPart Args(0) {
 
     my $profiles = $c->model('API::Author')->profile_data;
 
-    my $pageset = Data::Pageset->new( {
-        current_page     => $page,
-        entries_per_page => $page_size,
-        mode             => 'slide',
-        pages_per_set    => 10,
-        total_entries    => $releases->{total} // 0,
-    } );
+    my $pageset = $self->pageset( $page, $page_size, $releases->{total} );
 
     $c->stash( {
         author   => $author_info->{author},
@@ -176,10 +174,6 @@ sub releases : Chained('root') PathPart Args(0) {
         releases => $releases->{releases},
         pageset  => $pageset,
     } );
-
-    return unless $releases->{total};
-
-    $c->stash( { pageset => $pageset } );
 }
 
 __PACKAGE__->meta->make_immutable;
