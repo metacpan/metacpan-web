@@ -57,7 +57,9 @@
 
     img {
         vertical-align: top;
-        .img-responsive(inline-block);
+        display: inline-block;
+        max-width: 100%;
+        height: auto;
     }
 
     pre {
@@ -71,8 +73,7 @@
         border-collapse: collapse;
     }
 
-    tr {
-    }
+
 
     th {
         text-align: center;
@@ -97,7 +98,7 @@ main .toc {
     overflow-y: hidden;
     margin-bottom: 40px;
 
-    @media (min-width: @screen-md-max) {
+    @media (min-width: 1200px) {
         float: right;
         margin-left: 50px;
         max-width: 400px;
@@ -111,6 +112,10 @@ main .toc {
     > ul {
         overflow-y: hidden;
         transition: height 0.3s ease-out;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
     }
 
     ul {

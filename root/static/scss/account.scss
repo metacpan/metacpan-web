@@ -1,4 +1,4 @@
-.jumbotron form + p {
+.py-5 form + p {
     margin-top: 15px;
 }
 
@@ -25,13 +25,13 @@
 
     // to fix repeating fields like email etc
 
-    .repeatable .control-group {
+    .repeatable .mb-3 {
         .controls:nth-child(n + 3) {
             margin-top: 3px;
         }
     }
 
-    .repeatable .form-group {
+    .repeatable .mb-3 {
         .input-group {
             margin-bottom: 15px;
         }
@@ -41,206 +41,201 @@
         }
     }
 
-    // The last-updated text needs better alignment
-    p.checkbox {
-        padding-left: 0;
-    }
-
     // profile logos really should be in css I think..
 
     .profiles {
-        .form-group {
+        .mb-3 {
             margin-bottom: 5px;
-            .control-label {
+            .col-form-label {
                 text-align: left;
                 padding-top: 0;
-                padding-left: 20px !important;
+                padding-left: 20px;
                 .input-small {
                     width: 120px;
                 }
             }
 
             &.profile {
-                .control-label {
+                .col-form-label {
                     padding-top: 5px;
                     background: no-repeat left 75%;
                     left: 20px;
                 }
-                &.profile-bitbucket .control-label {
+                &.profile-bitbucket .col-form-label {
                     background-image: url(/static/images/profile/bitbucket.png);
                 }
-                &.profile-blinklist .control-label {
+                &.profile-blinklist .col-form-label {
                     background-image: url(/static/images/profile/blinklist.png);
                 }
-                &.profile-brightkite .control-label {
+                &.profile-brightkite .col-form-label {
                     background-image: url(/static/images/profile/brightkite.png);
                 }
-                &.profile-codeberg .control-label {
+                &.profile-codeberg .col-form-label {
                     background-image: url(/static/images/profile/codeberg.png);
                 }
-                &.profile-coderwall .control-label {
+                &.profile-coderwall .col-form-label {
                     background-image: url(/static/images/profile/coderwall.png);
                 }
-                &.profile-couchsurfing .control-label {
+                &.profile-couchsurfing .col-form-label {
                     background-image: url(/static/images/profile/couchsurfing.png);
                 }
-                &.profile-design_float .control-label {
+                &.profile-design_float .col-form-label {
                     background-image: url(/static/images/profile/design_float.png);
                 }
-                &.profile-dopplr .control-label {
+                &.profile-dopplr .col-form-label {
                     background-image: url(/static/images/profile/dopplr.png);
                 }
-                &.profile-dotshare .control-label {
+                &.profile-dotshare .col-form-label {
                     background-image: url(/static/images/profile/dotshare.png);
                 }
-                &.profile-email .control-label {
+                &.profile-email .col-form-label {
                     background-image: url(/static/images/profile/email.png);
                 }
-                &.profile-facebook .control-label {
+                &.profile-facebook .col-form-label {
                     background-image: url(/static/images/profile/facebook.png);
                 }
-                &.profile-feed .control-label {
+                &.profile-feed .col-form-label {
                     background-image: url(/static/images/profile/feed.png);
                 }
-                &.profile-flickr .control-label {
+                &.profile-flickr .col-form-label {
                     background-image: url(/static/images/profile/flickr.png);
                 }
-                &.profile-friendfeed .control-label {
+                &.profile-friendfeed .col-form-label {
                     background-image: url(/static/images/profile/friendfeed.png);
                 }
-                &.profile-furl .control-label {
+                &.profile-furl .col-form-label {
                     background-image: url(/static/images/profile/furl.png);
                 }
-                &.profile-gamespot .control-label {
+                &.profile-gamespot .col-form-label {
                     background-image: url(/static/images/profile/gamespot.png);
                 }
-                &.profile-geeklist .control-label {
+                &.profile-geeklist .col-form-label {
                     background-image: url(/static/images/profile/geeklist.png);
                 }
-                &.profile-github .control-label {
+                &.profile-github .col-form-label {
                     background-image: url(/static/images/profile/github.png);
                 }
-                &.profile-gitlab .control-label {
+                &.profile-gitlab .col-form-label {
                     background-image: url(/static/images/profile/gitlab.png);
                 }
-                &.profile-gitorious .control-label {
+                &.profile-gitorious .col-form-label {
                     background-image: url(/static/images/profile/gitorious.png);
                 }
-                &.profile-gittip .control-label {
+                &.profile-gittip .col-form-label {
                     background-image: url(/static/images/profile/gittip.png);
                 }
-                &.profile-hackernews .control-label {
+                &.profile-hackernews .col-form-label {
                     background-image: url(/static/images/profile/hackernews.png);
                 }
-                &.profile-hackerrank .control-label {
+                &.profile-hackerrank .col-form-label {
                     background-image: url(/static/images/profile/hackerrank.png);
                 }
-                &.profile-hackthissite .control-label {
+                &.profile-hackthissite .col-form-label {
                     background-image: url(/static/images/profile/hackthissite.png);
                 }
-                &.profile-identica .control-label {
+                &.profile-identica .col-form-label {
                     background-image: url(/static/images/profile/identica.png);
                 }
-                &.profile-instagram .control-label {
+                &.profile-instagram .col-form-label {
                     background-image: url(/static/images/profile/instagram.png);
                 }
-                &.profile-lastfm .control-label {
+                &.profile-lastfm .col-form-label {
                     background-image: url(/static/images/profile/lastfm.png);
                 }
-                &.profile-linkedin .control-label {
+                &.profile-linkedin .col-form-label {
                     background-image: url(/static/images/profile/linkedin.png);
                 }
-                &.profile-magnolia .control-label {
+                &.profile-magnolia .col-form-label {
                     background-image: url(/static/images/profile/magnolia.png);
                 }
-                &.profile-metacpan .control-label {
+                &.profile-metacpan .col-form-label {
                     background-image: url(/static/images/profile/metacpan.png);
                 }
-                &.profile-meetup .control-label {
+                &.profile-meetup .col-form-label {
                     background-image: url(/static/images/profile/meetup.png);
                 }
-                &.profile-mixx .control-label {
+                &.profile-mixx .col-form-label {
                     background-image: url(/static/images/profile/mixx.png);
                 }
-                &.profile-myspace .control-label {
+                &.profile-myspace .col-form-label {
                     background-image: url(/static/images/profile/myspace.png);
                 }
-                &.profile-nerdability .control-label {
+                &.profile-nerdability .col-form-label {
                     background-image: url(/static/images/profile/nerdability.png);
                 }
-                &.profile-newsblur .control-label {
+                &.profile-newsblur .col-form-label {
                     background-image: url(/static/images/profile/newsblur.png);
                 }
-                &.profile-newsvine .control-label {
+                &.profile-newsvine .col-form-label {
                     background-image: url(/static/images/profile/newsvine.png);
                 }
-                &.profile-ohloh .control-label {
+                &.profile-ohloh .col-form-label {
                     background-image: url(/static/images/profile/ohloh.png);
                 }
-                &.profile-perlmonks .control-label {
+                &.profile-perlmonks .col-form-label {
                     background-image: url(/static/images/profile/perlmonks.png);
                 }
-                &.profile-pinboard .control-label {
+                &.profile-pinboard .col-form-label {
                     background-image: url(/static/images/profile/pinboard.png);
                 }
-                &.profile-playperl .control-label {
+                &.profile-playperl .col-form-label {
                     background-image: url(/static/images/profile/playperl.png);
                 }
-                &.profile-posterous .control-label {
+                &.profile-posterous .col-form-label {
                     background-image: url(/static/images/profile/posterous.png);
                 }
-                &.profile-reddit .control-label {
+                &.profile-reddit .col-form-label {
                     background-image: url(/static/images/profile/reddit.png);
                 }
-                &.profile-slideshare .control-label {
+                &.profile-slideshare .col-form-label {
                     background-image: url(/static/images/profile/slideshare.png);
                 }
-                &.profile-sourceforge .control-label {
+                &.profile-sourceforge .col-form-label {
                     background-image: url(/static/images/profile/sourceforge.png);
                 }
-                &.profile-speakerdeck .control-label {
+                &.profile-speakerdeck .col-form-label {
                     background-image: url(/static/images/profile/speakerdeck.png);
                 }
-                &.profile-sphere .control-label {
+                &.profile-sphere .col-form-label {
                     background-image: url(/static/images/profile/sphere.png);
                 }
-                &.profile-sphinn .control-label {
+                &.profile-sphinn .col-form-label {
                     background-image: url(/static/images/profile/sphinn.png);
                 }
-                &.profile-stackexchange .control-label {
+                &.profile-stackexchange .col-form-label {
                     background-image: url(/static/images/profile/stackexchange.png);
                 }
-                &.profile-stackoverflow .control-label {
+                &.profile-stackoverflow .col-form-label {
                     background-image: url(/static/images/profile/stackoverflow.png);
                 }
-                &.profile-stackoverflowcareers .control-label {
+                &.profile-stackoverflowcareers .col-form-label {
                     background-image: url(/static/images/profile/stackoverflowcareers.png);
                 }
-                &.profile-steam .control-label {
+                &.profile-steam .col-form-label {
                     background-image: url(/static/images/profile/steam.png);
                 }
-                &.profile-stumbleupon .control-label {
+                &.profile-stumbleupon .col-form-label {
                     background-image: url(/static/images/profile/stumbleupon.png);
                 }
-                &.profile-substack .control-label {
+                &.profile-substack .col-form-label {
                     background-image: url(/static/images/profile/substack.png);
                 }
-                &.profile-technorati .control-label {
+                &.profile-technorati .col-form-label {
                     background-image: url(/static/images/profile/technorati.png);
                 }
-                &.profile-tripadvisor .control-label {
+                &.profile-tripadvisor .col-form-label {
                     background-image: url(/static/images/profile/tripadvisor.png);
                 }
-                &.profile-tumblr .control-label {
+                &.profile-tumblr .col-form-label {
                     background-image: url(/static/images/profile/tumblr.png);
                 }
-                &.profile-twitter .control-label {
+                &.profile-twitter .col-form-label {
                     background-image: url(/static/images/profile/twitter.png);
                 }
-                &.profile-vimeo .control-label {
+                &.profile-vimeo .col-form-label {
                     background-image: url(/static/images/profile/vimeo.png);
                 }
-                &.profile-youtube .control-label {
+                &.profile-youtube .col-form-label {
                     background-image: url(/static/images/profile/youtube.png);
                 }
             }
@@ -248,7 +243,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575.98px) {
     .account-settings {
         form {
             margin-bottom: 20px;
@@ -266,12 +261,12 @@
                 }
             }
 
-            .control-group {
-                .control-label {
+            .mb-3 {
+                .col-form-label {
                     padding-left: 0;
                 }
                 &.profile {
-                    .control-label {
+                    .col-form-label {
                         padding-left: 20px;
                     }
                 }
@@ -283,14 +278,10 @@
         }
     }
 }
-@media (min-width: 480px) {
-    .profile-form {
-        .form-horizontal;
-    }
-}
+// .form-horizontal class applied via template, not @extend (can't extend across media queries)
 
 .profile-form {
     textarea[name="extra"] {
-        font-family: @font-family-monospace;
+        font-family: $font-family-monospace;
     }
 }

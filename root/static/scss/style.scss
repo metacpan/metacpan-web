@@ -1,0 +1,165 @@
+/*
+ *  Bootstrap 5 migration - main entry point
+ *  Custom variable overrides MUST come before Bootstrap imports
+ */
+
+// Gray scale (BS3 → BS5 mapping)
+$gray-900: #222 !default;   // was @gray-darker
+$gray-800: #333 !default;   // was @gray-dark
+$gray-600: #747474 !default;   // was @gray
+$gray-400: #999 !default;   // was @gray-light
+$gray-200: #eee !default;   // was @gray-lighter
+$gray-base: #000 !default;
+
+// Custom variables
+$black: #000000;
+$link-color: #3366cc;
+$link-color-light: #6699ff;
+$danger: #d9534f;
+
+// Site chrome colors
+$bg-light-gray: #e9e9e9;
+$text-muted-dark: #555;
+$nav-active-indicator: #da2037;
+$banner-bg: #006081;
+$banner-link-color: #c0d2e4;
+$footer-social-color: #43424a;
+
+// Notification backgrounds
+$notify-success-bg: #d7f5dd;
+$notify-warning-bg: #f5efd7;
+$notify-info-bg: #d7e1f5;
+$notify-danger-bg: #f8d7da;
+
+// Autocomplete highlights
+$autocomplete-highlight-bg: #ddeeff;
+$autocomplete-selected-bg: #bad3ea;
+$body-color: $black;
+$input-border-radius: 5px;
+$modal-md: 722px;
+// Note: BS5 needs a real color for $code-color (used in tint-color()).
+// We override the actual code color to 'inherit' via CSS below Bootstrap imports.
+$code-color: #333;
+$code-bg: #f5f5f5;
+$font-family-monospace: Menlo, Monaco, Consolas, "Liberation Mono",
+    "Bitstream Vera Sans Mono", Courier, "Courier New", monospace;
+$font-size-base: 0.9375rem;
+$grid-gutter-width: 10px;
+$sidebar-width: 300px;
+
+// Alert colors (BS3 compat - BS5 generates these differently)
+$alert-danger-border: #ebccd1 !default;
+$alert-danger-bg: #f2dede !default;
+$alert-danger-text: #a94442 !default;
+$alert-warning-border: #faebcc !default;
+$alert-warning-bg: #fcf8e3 !default;
+$alert-warning-text: #8a6d3b !default;
+
+// Brand primary (BS3 compat)
+$brand-primary: $link-color !default;
+
+// State info (BS3 compat)
+$state-info-text: #4083a3;
+$state-info-border: $state-info-text;
+
+// Border radius base (BS3 compat)
+$border-radius-base: 0.25rem !default;
+
+/*
+ *  Bootstrap 5 imports (selective)
+ */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+/*
+ *  End Bootstrap imports
+ */
+
+// Override code color to inherit (can't use 'inherit' as BS5 variable)
+code {
+    color: inherit;
+}
+
+// BS5 reboot sets strong/b to 'bolder' which computes to 900 inside
+// already-bold contexts. The old site used plain 'bold' (700) everywhere.
+strong, b {
+    font-weight: bold;
+}
+
+// BS5 defaults to underlined links; the old site does not use underlines
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+$fa-font-path: "../../../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/regular.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+@import "qtip2/dist/jquery.qtip.css";
+
+@import "./global.scss";
+@import "./about.scss";
+@import "./autocomplete.scss";
+@import "./silk.scss";
+@import "./diff.scss";
+@import "./tablesorter.scss";
+@import "./print.scss";
+@import "./account.scss";
+@import "./anchors.scss";
+@import "./author.scss";
+@import "./breadcrumbs.scss";
+@import "./plusser.scss";
+@import "./pod.scss";
+@import "./release.scss";
+@import "./search.scss";
+@import "./sidebar.scss";
+@import "./table.scss";
+@import "./toplists.scss";
+@import "./nav.scss";
+@import "./nav-list.scss";
+@import "./responsive.scss";
+@import "./lab.scss";
+@import "./home.scss";
+@import "./syntaxhighlighter.scss";
+@import "./syntaxhighlighter-theme.scss";
+@import "./pod2html.scss";
+@import "./notification.scss";
+@import "./permission.scss";
+@import "./footer.scss";
+
+@import "../css/user.css";

@@ -8,96 +8,8 @@
     visibility: hidden;
 }
 
-//Visibility utilities
 
-// For desktops
-.visible-phone {
-    display: none;
-}
-
-.visible-tablet {
-    display: none;
-}
-
-.visible-desktop {
-    display: block;
-}
-
-.hidden-phone {
-    display: block;
-}
-
-.hidden-tablet {
-    display: block;
-}
-
-.hidden-desktop {
-    display: none;
-}
-
-//Phones only
-@media (max-width: 480px) {
-    // Show
-    .visible-phone {
-        display: block;
-    }
-
-    //Hide
-    .hidden-phone {
-        display: none !important;
-    }
-
-    .navbar .nav > li.hidden-phone {
-        display: none;
-    }
-
-    //Hide everything else
-    .hidden-desktop {
-        display: block;
-    }
-
-    .visible-desktop {
-        display: none;
-    }
-}
-
-//Tablets & small desktops only
-@media (min-width: 481px) and (max-width: 979px) {
-    // Show
-    .visible-tablet {
-        display: block;
-    }
-
-    //Hide
-    .hidden-tablet {
-        display: none;
-    }
-
-    //Hide everything else
-    .hidden-desktop {
-        display: block;
-    }
-
-    .visible-desktop {
-        display: none;
-    }
-
-    .footer {
-        .col-sm-1 {
-            width: 8%;
-        }
-
-        .col-sm-2 {
-            width: 22%;
-        }
-
-        .col-sm-3 {
-            width: 20%;
-        }
-    }
-}
-
-@media (max-width: @screen-sm-max) {
+@media (max-width: 767.98px) {
     .navbar {
         position: fixed;
         right: 0;
@@ -121,11 +33,11 @@
     }
 
     .slidepanel {
-        background-color: #e9e9e9;
+        background-color: $bg-light-gray;
         visibility: hidden;
         position: fixed;
         top: 0px;
-        max-width: @sidebar-width;
+        max-width: $sidebar-width;
         width: 100%;
         z-index: 1500;
         height: 100%;
@@ -179,7 +91,7 @@
         }
     }
 
-    .nav-pills > li.active > a {
+    .nav-pills > li > a.active {
         width: 95%;
     }
 

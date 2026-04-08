@@ -46,7 +46,12 @@ main {
  * See /release/CPAN-Changes for example
  */
 #metacpan_last-changes {
-    h2:extend(main .file-group h2) {
+    h2 {
+        display: inline;
+        font-weight: bold;
+        font-size: 100%;
+        margin: 0;
+        line-height: inherit;
     }
 
     ul {

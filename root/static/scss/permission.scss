@@ -1,13 +1,13 @@
 .permission-heading {
     margin-top: 0;
-    font-size: @font-size-h2;
+    font-size: $h2-font-size;
 }
 
 .permission-summary {
     margin-bottom: 1.5em;
 }
 
-.not-releaser-highlight() {
+@mixin not-releaser-highlight() {
     background-color: #fff176;
     padding: 1px 4px;
     border-radius: 3px;
@@ -15,7 +15,7 @@
 
 // Highlight is only used inside the alert body (always visible there)
 .permission-fixes-body .not-releaser {
-    .not-releaser-highlight();
+    @include not-releaser-highlight();
 }
 
 // In the module list, author annotations are hidden by default and shown via checkbox
@@ -33,19 +33,19 @@
 }
 
 .highlight-toggle-checkbox:checked ~ .permission-module-list .not-releaser {
-    .not-releaser-highlight();
+    @include not-releaser-highlight();
 }
 
 .permission-fixes {
-    border: 1px solid @alert-warning-border;
-    border-radius: @border-radius-base;
+    border: 1px solid $alert-warning-border;
+    border-radius: $border-radius-base;
     margin-bottom: 15px;
 }
 
 .permission-fixes-summary {
     display: list-item;
-    background: @alert-warning-bg;
-    color: @alert-warning-text;
+    background: $alert-warning-bg;
+    color: $alert-warning-text;
     padding: 8px 12px;
     cursor: pointer;
 }
@@ -67,7 +67,7 @@
     li {
         padding: 4px 8px;
         word-break: break-word;
-        border: 1px solid @gray-lighter;
+        border: 1px solid $gray-200;
         margin-top: -1px;
         margin-left: -1px;
         display: flex;
@@ -75,7 +75,7 @@
         align-items: baseline;
     }
 
-    @media (max-width: @screen-xs-max) {
+    @media (max-width: 575.98px) {
         grid-template-columns: 1fr;
     }
 }
@@ -100,7 +100,7 @@
         background: #fff;
         z-index: 1;
         // Bottom border via box-shadow since border doesn't render on sticky elements
-        box-shadow: inset 0 -1px 0 darken(@gray-lighter, 5%);
+        box-shadow: inset 0 -1px 0 darken($gray-200, 5%);
         border-bottom: none;
         font-size: 0.85em;
         text-transform: uppercase;
@@ -114,7 +114,7 @@
     td,
     th {
         padding: 5px 8px;
-        border: 1px solid @gray-lighter;
+        border: 1px solid $gray-200;
 
         // Module column: allow wrapping at :: boundaries
         &:nth-child(1) {
@@ -135,16 +135,16 @@
         }
     }
 
-    @media (max-width: @screen-xs-max) {
+    @media (max-width: 575.98px) {
         font-size: 0.9em;
     }
 }
 
 .permission-author-badge {
     display: inline-block;
-    background: fade(@brand-primary, 10%);
-    color: @brand-primary;
-    border: 1px solid @brand-primary;
+    background: rgba($brand-primary, 0.1);
+    color: $brand-primary;
+    border: 1px solid $brand-primary;
     padding: 1px 6px;
     margin: 2px 1px;
     border-radius: 3px;
@@ -152,17 +152,17 @@
     white-space: nowrap;
 
     &:hover {
-        background: fade(@brand-primary, 20%);
+        background: rgba($brand-primary, 0.2);
         text-decoration: none;
     }
 }
 
 .permission-current-author {
-    background: @brand-primary;
+    background: $brand-primary;
     color: #fff;
 
     &:hover {
-        background: darken(@brand-primary, 10%);
+        background: darken($brand-primary, 10%);
         color: #fff;
     }
 }

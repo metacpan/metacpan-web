@@ -14,17 +14,23 @@ table.tablesorter {
             }
 
             &:after {
-                .fa;
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
                 line-height: inherit;
-                display: inline;
                 padding-left: 5px;
-                content: @fa-var-sort;
+                content: "\f0dc"; // fa-sort
             }
             &.tablesorter-headerDesc:after {
-                content: @fa-var-caret-down;
+                content: "\f0d7"; // fa-caret-down
             }
             &.tablesorter-headerAsc:after {
-                content: @fa-var-caret-up;
+                content: "\f0d8"; // fa-caret-up
             }
         }
     }

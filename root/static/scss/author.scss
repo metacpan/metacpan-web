@@ -20,7 +20,7 @@
     }
 
     img {
-        .author-avatar;
+        @extend .author-avatar;
     }
 }
 
@@ -72,7 +72,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575.98px) {
     .author-pic {
         img {
             width: 65px;
@@ -121,12 +121,6 @@
     td,
     th {
         display: table-cell !important;
-
-        &.hidden-phone {
-            @media (max-width: 480px) {
-                display: none !important;
-            }
-        }
     }
 
     td a {
