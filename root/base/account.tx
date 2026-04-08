@@ -12,6 +12,11 @@
 <li class="[% if $current['account/favorite/list'] { 'active' } %]">
     <a href="/account/favorite/list">Favorites</a>
 </li>
+[% if $author.pauseid { %]
+<li>
+    <a href="/author/[% $author.pauseid %]">Distributions</a>
+</li>
+[% } %]
 <li>
     <a href="#" class="logout-button">Logout</a>
 </li>
