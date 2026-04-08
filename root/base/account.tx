@@ -3,16 +3,22 @@
 %%  }
 %%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
-<li>
-    <a href="/account/identities" class="[% if $current['account/identities'] { 'active' } %]"[% if $current['account/identities'] { ' aria-current="page"' } %]>Identities</a>
+[%-
+for [
+  [ 'Identities',  '/account/identities' ],
+  [ 'Profile',     '/account/profile' ],
+  [ 'Favorites',   '/account/favorite/list' ],
+] -> $link {
+%]
+<li class="nav-item">
+%%  if $current[$link.1] {
+    <a href="[% $link.1 %]" class="nav-link active" aria-current="page">[% $link.0 %]</a>
+%%  } else {
+    <a href="[% $link.1 %]" class="nav-link">[% $link.0 %]</a>
+%%  }
 </li>
-<li>
-    <a href="/account/profile" class="[% if $current['account/profile'] { 'active' } %]"[% if $current['account/profile'] { ' aria-current="page"' } %]>Profile</a>
-</li>
-<li>
-    <a href="/account/favorite/list" class="[% if $current['account/favorite/list'] { 'active' } %]"[% if $current['account/favorite/list'] { ' aria-current="page"' } %]>Favorites</a>
-</li>
-<li>
+%%  }
+<li class="nav-item">
     <button type="button" class="btn-link logout-button">Logout</button>
 </li>
 %%  }

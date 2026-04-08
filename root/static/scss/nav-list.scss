@@ -67,7 +67,8 @@
     a.active:hover,
     a.active:focus {
         color: $gray-base !important;
-        background-color: #ddd !important;
+        background-color: transparent !important;
+        font-weight: bold;
     }
 
     hr {
