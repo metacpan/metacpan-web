@@ -30,9 +30,8 @@ export const formatTOC = (toc) => {
     const toc_header = toc.querySelector('.toc-header');
     const toc_body = toc.querySelector('ul');
 
-    toc_header.insertAdjacentHTML('beforeend',
-        ' [ <button class="btn-link toggle-toc"><span class="toggle-show">show</span><span class="toggle-hide">hide</span></button> ]',
-    );
+    toc_header.innerHTML =
+        '<button class="btn-link toggle-toc"><strong>Contents</strong> <i class="fas fa-chevron-down toggle-hide" aria-hidden="true"></i><i class="fas fa-chevron-right toggle-show" aria-hidden="true"></i></button>';
     toc_header.querySelector('.toggle-toc').addEventListener('click', (e) => {
         e.preventDefault();
         const currentVisible = !toc.classList.contains('hide-toc');

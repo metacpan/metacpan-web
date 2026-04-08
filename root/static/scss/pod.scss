@@ -108,6 +108,13 @@ main .toc {
     .toc-header {
         text-align: center;
         line-height: 24px;
+
+        .toggle-toc {
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
     }
 
     > ul {
