@@ -27,6 +27,7 @@
     td.number {
         text-align: right;
         white-space: nowrap;
+        font-variant-numeric: tabular-nums;
     }
 
     th.date,
@@ -48,5 +49,11 @@
     th.river-gauge,
     td.river-gauge {
         width: 36px;
+    }
+
+    &.table-leaderboard {
+        table-layout: auto;
+        width: auto;
+
     }
 }
