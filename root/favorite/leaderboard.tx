@@ -2,6 +2,7 @@
 %%      title => $title || 'Popular Distributions',
 %%  }
 %%  override content -> {
+<h1>[% $title || 'Popular Distributions' %]</h1>
 <table class="table table-sm table-striped table-releases table-leaderboard">
   <thead>
     <tr>

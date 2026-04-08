@@ -5,7 +5,7 @@
 %%  }
 %%  override content -> {
   <div id="metacpan_feed_subscription" class="page-header">
-    <p>Recent Uploads</p>
+    <h1>[% $filter == 'n' ? 'New Distributions' : 'Latest Releases' %]</h1>
       <a href="/recent.rss[% if $filter { '?f=' ~ $filter } %]"><i class="fa fa-rss fa-2x black"></i></a>
   </div>
 %%  include inc::release_table { releases => $recent, per_day => 1 }

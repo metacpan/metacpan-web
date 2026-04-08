@@ -3,6 +3,7 @@
 %%  }
 %%  after content_classes -> { ' toplists row' }
 %%  override content -> {
+<h1>Top Uploaders: [% $range == 'weekly' ? 'Weekly' : $range == 'yearly' ? 'Yearly' : $range == 'all' ? 'All Time' : $range %]</h1>
 %%  for $authors -> $author {
 <div class="entry col-sm-6 col-md-3">
     <div class="gravatar">
