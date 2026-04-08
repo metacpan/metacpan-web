@@ -4,11 +4,11 @@
  */
 
 // Gray scale (BS3 → BS5 mapping)
-$gray-900: #222 !default;   // was @gray-darker
-$gray-800: #333 !default;   // was @gray-dark
-$gray-600: #747474 !default;   // was @gray
-$gray-400: #999 !default;   // was @gray-light
-$gray-200: #eee !default;   // was @gray-lighter
+$gray-900: #222 !default; // was @gray-darker
+$gray-800: #333 !default; // was @gray-dark
+$gray-600: #747474 !default; // was @gray
+$gray-400: #999 !default; // was @gray-light
+$gray-200: #eee !default; // was @gray-lighter
 $gray-base: #000 !default;
 
 // Custom variables
@@ -41,8 +41,9 @@ $modal-md: 722px;
 // We override the actual code color to 'inherit' via CSS below Bootstrap imports.
 $code-color: #333;
 $code-bg: #f5f5f5;
-$font-family-monospace: Menlo, Monaco, Consolas, "Liberation Mono",
-    "Bitstream Vera Sans Mono", Courier, "Courier New", monospace;
+$font-family-monospace:
+    Menlo, Monaco, Consolas, "Liberation Mono", "Bitstream Vera Sans Mono",
+    Courier, "Courier New", monospace;
 $font-size-base: 0.9375rem;
 $grid-gutter-width: 10px;
 $sidebar-width: 300px;
@@ -112,7 +113,8 @@ code {
 
 // BS5 reboot sets strong/b to 'bolder' which computes to 900 inside
 // already-bold contexts. The old site used plain 'bold' (700) everywhere.
-strong, b {
+strong,
+b {
     font-weight: bold;
 }
 
