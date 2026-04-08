@@ -109,7 +109,7 @@ for (const el of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
 const keyboardShortcutsEl = document.getElementById('metacpan_keyboard-shortcuts');
 const keyboardShortcutsModal = keyboardShortcutsEl ? new Modal(keyboardShortcutsEl) : null;
 
-for (const el of document.querySelectorAll('.keyboard-shortcuts')) {
+for (const el of document.querySelectorAll('a.keyboard-shortcuts')) {
     el.addEventListener('click', (e) => {
         e.preventDefault();
         if (keyboardShortcutsModal) keyboardShortcutsModal.show();
