@@ -10,6 +10,9 @@
             background-color: rgb(0 0 0 / 5%);
         }
     }
+    .pod-line {
+        background-color: rgb(0 0 0 / 5%);
+    }
     .pod-line:first-child,
     :not(.pod-line) + .pod-line {
         border-top: 1px solid rgb(0 0 0 / 15%);
