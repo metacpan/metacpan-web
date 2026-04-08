@@ -7,7 +7,7 @@
 <div class="entry col-sm-6 col-md-3">
     <div class="gravatar">
         <a href="/author/[% $author.pauseid %]">
-            <img src="[% gravatar_image($author, 75) %]" class="author-img" style="width: 75px; height: 75px">
+            <img src="[% gravatar_image($author, 75) %]" class="author-img rounded-circle" width="75" height="75" alt="[% $author.display_name %]">
         </a>
     </div>
     <strong class="pauseid">
