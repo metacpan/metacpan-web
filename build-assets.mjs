@@ -33,7 +33,7 @@ const config = {
     },
     plugins: [
         sassPlugin({
-            silenceDeprecations: ['import', 'color-functions'],
+            silenceDeprecations: ['import', 'color-functions', 'global-builtin', 'legacy-js-api', 'if-function'],
         }),
         new class {
             name = 'metacpan-build';
