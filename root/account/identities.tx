@@ -18,11 +18,11 @@
             %%  if $connected {
                 <form method="POST">
                     <input type="hidden" name="delete" value="[% $identity.lc() %]" />
-                    <button type="submit" class="btn btn-block btn-danger"><span class="fa fa-times"></span> Disconnect</button>
+                    <button type="submit" class="btn w-100 btn-danger"><span class="fa fa-times" aria-hidden="true"></span> Disconnect</button>
                 </form>
             %%  }
             %%  else {
-                <a class="btn btn-block btn-success" href="/login/[% $identity.lc() %]"><span class="fa fa-external-link-alt"></span> Connect</a>
+                <a class="btn w-100 btn-success" href="/login/[% $identity.lc() %]"><span class="fa fa-external-link-alt" aria-hidden="true"></span> Connect</a>
             %%  }
         </td>
     </tr>

@@ -1,5 +1,5 @@
 %%  cascade base
-%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
 [%-
 for [
@@ -9,8 +9,8 @@ for [
   [ 'Lab: Dependencies',  '/lab/dependencies' ],
 ] -> $l {
 %]
-<li class="[% if $current[$l.1] { 'active' } %]">
-    <a href="[% $l.1 %]">[% $l.0 %]</a>
+<li>
+    <a href="[% $l.1 %]" class="[% if $current[$l.1] { 'active' } %]"[% if $current[$l.1] { ' aria-current="page"' } %]>[% $l.0 %]</a>
 </li>
 %%  }
 %%  }

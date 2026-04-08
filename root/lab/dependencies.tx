@@ -3,12 +3,10 @@
   <div class="row">
     <div class="col-lg-12">
       <h2>List all dependencies of a distribution</h2>
-      <form class="form-horizontal">
+      <form>
         <div class="input-group">
           <input type="text" name="module" class="form-control">
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="submit">Go!</button>
-          </span>
+          <button class="btn btn-primary" type="submit">Go!</button>
         </div>
       </form>
       %%  if $module {

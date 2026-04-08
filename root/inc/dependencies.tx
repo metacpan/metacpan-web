@@ -14,7 +14,7 @@
   %%    }
   %%  }
   %%  if $deps.size() > 5 {
-  <li class="dep-more-indicator" id="metacpan_dependencies_more"><button type="button" class="btn-link dep-more-btn" data-toggle-target="metacpan_dependencies">and [% $deps.size() - 5 %] more</button></li>
+  <li class="dep-more-indicator" id="metacpan_dependencies_more"><button type="button" class="btn-link dep-more-btn">and [% $deps.size() - 5 %] more</button></li>
   <li class="slide-out slide-out-hidden" id="metacpan_dependencies">
     <div>
       <ul>
@@ -28,10 +28,10 @@
   </li>
   %%  }
   %%  if !$deps.size() && !$release.metadata {
-  <li><i class="ttip" title="no META file provided">unknown</i></li>
+  <li><i class="ttip" data-bs-toggle="tooltip" title="no META file provided">unknown</i></li>
   %%  }
   %%  else if $release.metadata.dynamic_config {
-  <li><i class="ttip" title="dynamic_config enabled">[% $deps.size() ? "and possibly others" : "unknown" %]</i></li>
+  <li><i class="ttip" data-bs-toggle="tooltip" title="dynamic_config enabled">[% $deps.size() ? "and possibly others" : "unknown" %]</i></li>
   %%  }
   %%  else if !$deps.size() {
   <li><i>none</i></li>

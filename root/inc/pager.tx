@@ -1,19 +1,19 @@
 %%  if $pageset && $pageset.total_entries {
     %%  if $pageset.last_page > 1 {
 <div class="text-center">
-  <ul class="pagination">
-    <li class="[% if !$pageset.previous_page { 'disabled' } %]">
-      <a href="[% $page_url({ p => $pageset.previous_page, size => $pageset.entries_per_page }) %]">«</a>
+  <ul class="pagination justify-content-center">
+    <li class="page-item[% if !$pageset.previous_page { ' disabled' } %]">
+      <a class="page-link" aria-label="Previous page" [% if !$pageset.previous_page { 'aria-disabled="true" tabindex="-1"' } %] href="[% $page_url({ p => $pageset.previous_page, size => $pageset.entries_per_page }) %]"><span aria-hidden="true">«</span></a>
     </li>
 
     %%  for $pageset.pages_in_set -> $page_num {
-    <li [% if $page_num == $pageset.current_page { %] class="active"[% } %]>
-      <a href="[% $page_url({ p => $page_num, size => $pageset.entries_per_page  }) %]">[% $page_num %]</a>
+    <li class="page-item[% if $page_num == $pageset.current_page { ' active' } %]">
+      <a class="page-link" [% if $page_num == $pageset.current_page { 'aria-current="page"' } %] href="[% $page_url({ p => $page_num, size => $pageset.entries_per_page  }) %]">[% $page_num %]</a>
     </li>
     %%  }
 
-    <li class="[% if !$pageset.next_page { 'disabled' } %]">
-      <a href="[% $page_url({ p => $pageset.next_page, size => $pageset.entries_per_page }) %]">»</a>
+    <li class="page-item[% if !$pageset.next_page { ' disabled' } %]">
+      <a class="page-link" aria-label="Next page" [% if !$pageset.next_page { 'aria-disabled="true" tabindex="-1"' } %] href="[% $page_url({ p => $pageset.next_page, size => $pageset.entries_per_page }) %]"><span aria-hidden="true">»</span></a>
     </li>
   </ul>
 </div>

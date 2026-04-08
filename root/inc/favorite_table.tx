@@ -11,11 +11,11 @@
   %%  if $tablesorter {
   data-default-sort="[% $default_sort || '0,0' %]"
   %%  }
-  class="table table-condensed table-striped table-favorites[% if $tablesorter { %] tablesorter[% } %]">
+  class="table table-sm table-striped table-favorites[% if $tablesorter { %] tablesorter[% } %]">
   <thead>
     <tr>
       <th class="release pull-left-phone">Distribution</th>
-      <th class="hidden-phone">[% $author ? "Author" : "Favorited By" %]</th>
+      <th class="d-none d-sm-table-cell">[% $author ? "Author" : "Favorited By" %]</th>
       <th class="date">[% $per_day ? datetime($favorite.date).strftime("%A, %e %B %Y") : "Date" %]</th>
     </tr>
 </thead>
@@ -28,12 +28,12 @@
     </strong>
   </td>
   %%  if $author {
-  <td class="pull-left-phone hidden-phone">
+  <td class="d-none d-sm-table-cell">
     <a href="/author/[% $favorite.author %]">[% $favorite.author %]</a>
   </td>
   %%  }
   %%  else {
-  <td class="pull-left-phone hidden-phone">
+  <td class="d-none d-sm-table-cell">
     <a href="/author/[% $favorite.clicked_by_author %]">[% $favorite.clicked_by_author %]</a>
   </td>
   %%  }

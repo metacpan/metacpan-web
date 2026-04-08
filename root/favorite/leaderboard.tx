@@ -2,7 +2,7 @@
 %%      title => $title || 'Popular Distributions',
 %%  }
 %%  override content -> {
-<table class="table table-condensed table-striped table-releases">
+<table class="table table-sm table-striped table-releases">
   <thead>
     <tr>
       <th class="position"></th>

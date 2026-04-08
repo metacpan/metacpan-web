@@ -14,12 +14,12 @@
       %%  if $tablesorter {
       data-default-sort="[% $default_sort || '1,0' %]"
       %%  }
-      class="table table-condensed table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
+      class="table table-sm table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
       <thead>
         <tr>
-          <th class="river-gauge"><span class="sr-only">River gauge</span></th>
+          <th class="river-gauge"><span class="visually-hidden">River gauge</span></th>
           <th class="name pull-left-phone">Release</th>
-          <th class="hidden-phone invisible no-sort"></th>
+          <th class="d-none d-sm-table-cell invisible no-sort"></th>
           <th class="date">[% $per_day ? datetime($release.date).strftime("%A, %e %B %Y") : "Uploaded" %]</th>
         </tr>
       </thead>

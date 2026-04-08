@@ -10,20 +10,20 @@
     </nav>
     <div class="pod-body"></div>
   </template>
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab">
-      <h3 class="panel-title">Pod Renderer</h3>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Pod Renderer</h3>
     </div>
-    <div class="panel-collapse collapse in" id="metacpan-pod-renderer-collapse">
-      <div class="panel-body">
+    <div class="collapse show" id="metacpan-pod-renderer-collapse">
+      <div class="card-body">
         <form method="POST" enctype="multipart/form-data" id="metacpan-pod-renderer-form">
           <input id="metacpan-pod-renderer-file" type="file" name="pod_file" accept=".pl, .pod, .pm, text/plain, text/x-perl-file, text/x-pod-file"/>
-          <div class="form-group">
+          <div class="mb-3">
             <label for="metacpan-pod-renderer-pod">Source:</label>
             <textarea id="metacpan-pod-renderer-pod" name="pod" class="form-control">[% $pod || "=pod\n\n" %]</textarea>
           </div>
-          <div class="form-group button-line">
-            <label for="metacpan-pod-renderer-file" class="btn btn-default">Browse for file...</label>
+          <div class="mb-3 button-line">
+            <label for="metacpan-pod-renderer-file" class="btn btn-secondary">Browse for file...</label>
             <input type="submit" value="Render" class="btn btn-primary" />
           </div>
         </form>

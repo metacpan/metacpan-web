@@ -18,7 +18,7 @@
           which is a list of recommended modules for Enlightened Perl development.
           </p>
           <p>
-              <a class="btn btn-primary btn-large" href="/pod/Task::Kensho">
+              <a class="btn btn-primary btn-lg" href="/pod/Task::Kensho">
               Learn more
               </a>
           </p>
