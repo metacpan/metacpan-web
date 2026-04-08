@@ -1,7 +1,10 @@
 'use strict';
 
-for (const toggle of document.querySelectorAll('[data-toggle="slidepanel"]')) {
-    const panel = document.querySelector(toggle.dataset.target);
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const animDuration = prefersReducedMotion ? 0 : 200;
+
+for (const toggle of document.querySelectorAll('[data-bs-toggle="slidepanel"]')) {
+    const panel = document.querySelector(toggle.dataset.bsTarget);
     if (!panel) {
         continue;
     }
@@ -10,14 +13,14 @@ for (const toggle of document.querySelectorAll('[data-toggle="slidepanel"]')) {
         panel, {
             transform: ['translateX(-100%)', 'translateX(0)'],
         },
-        200,
+        animDuration,
     ));
 
     const hideAnim = new Animation(new KeyframeEffect(
         panel, {
             transform: ['translateX(0)', 'translateX(-100%)'],
         },
-        200,
+        animDuration,
     ));
     hideAnim.addEventListener('finish', () => {
         panel.style.removeProperty('visibility');
@@ -28,7 +31,9 @@ for (const toggle of document.querySelectorAll('[data-toggle="slidepanel"]')) {
 
         toggle.classList.toggle('slidepanel-visible');
         panel.style.visibility = 'visible';
-        if (panel.classList.toggle('slidepanel-visible')) {
+        const isOpen = panel.classList.toggle('slidepanel-visible');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) {
             showAnim.play();
         }
         else {

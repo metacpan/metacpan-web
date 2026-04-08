@@ -3,8 +3,6 @@ const searchBarForm = document.querySelector('.searchbar-form');
 const searchBarInput = document.querySelector('.searchbar-form input[type="text"]');
 
 searchBarBtn.addEventListener('click', () => {
-    searchBarForm.classList.remove('visible-md');
-    searchBarForm.classList.remove('visible-lg');
     searchBarForm.classList.add('searchbar-open');
     searchBarInput.focus();
 
@@ -17,35 +15,17 @@ searchBarBtn.addEventListener('click', () => {
 const showSearchBar = () => {
     const searchBarOpenInput = document.querySelector('.searchbar-form.searchbar-open input[type="text"]');
     if (searchBarOpenInput) {
-        if (searchBarInput === document.activeElement) {
-            searchBarForm.classList.add('searchbar-open');
-            searchBarForm.classList.remove('visible-md');
-            searchBarForm.classList.remove('visible-lg');
-        }
-        else {
+        if (searchBarInput !== document.activeElement) {
             searchBarForm.classList.remove('searchbar-open');
-            searchBarForm.classList.add('visible-md');
-            searchBarForm.classList.add('visible-lg');
         }
     }
 };
 
 document.body.addEventListener('click', showSearchBar);
 
-window.addEventListener('resize', () => {
-    const searchBarOpenInput = document.querySelector('.searchbar-form.searchbar-open input[type="text"]');
-    if (searchBarOpenInput) {
-        if (searchBarInput === document.activeElement) {
-            if (document.body.clientWidth >= 992) {
-                searchBarForm.classList.remove('searchbar-open');
-                searchBarForm.classList.add('visible-md');
-                searchBarForm.classList.add('visible-lg');
-            }
-            else {
-                searchBarForm.classList.add('searchbar-open');
-                searchBarForm.classList.remove('visible-md');
-                searchBarForm.classList.remove('visible-lg');
-            }
-        }
+const mql = window.matchMedia('(min-width: 768px)');
+mql.addEventListener('change', (e) => {
+    if (e.matches) {
+        searchBarForm.classList.remove('searchbar-open');
     }
 });
