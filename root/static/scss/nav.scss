@@ -141,6 +141,8 @@ nav.navbar {
 }
 
 .navbar-right {
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 0;
     grid-area: icons;
     justify-self: end;

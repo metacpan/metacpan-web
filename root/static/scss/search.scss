@@ -44,7 +44,12 @@
     input[type="text"] {
         border-radius: 50px;
         padding-left: 40px;
+        width: 100%;
     }
+}
+
+.navbar-right .searchbar-form {
+    min-width: 0;
 }
 
 // Searchbar is hidden on small screens, shown on md+
