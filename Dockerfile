@@ -141,6 +141,7 @@ RUN \
     npm install --verbose --include=dev
 EOT
 
+COPY cpanfile cpanfile.snapshot ./
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT
