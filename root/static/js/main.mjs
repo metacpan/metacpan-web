@@ -1,3 +1,4 @@
+import './theme-toggle.mjs';
 import './google-analytics.mjs';
 import './autocomplete.mjs';
 import './tablesorter.mjs';
