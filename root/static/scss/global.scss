@@ -97,6 +97,10 @@ kbd {
     vertical-align: middle;
 }
 
+table.keyboard-shortcuts th:first-child {
+    width: 4em;
+}
+
 table.keyboard-shortcuts td.keys {
     text-align: right;
     white-space: nowrap;
