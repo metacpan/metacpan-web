@@ -8,7 +8,6 @@
     visibility: hidden;
 }
 
-
 @include media-breakpoint-down(md) {
     .navbar {
         position: fixed;
@@ -99,8 +98,14 @@
         padding: 20px;
     }
 
-    .table:not(.permission-table):not(.keyboard-shortcuts):not(.table-leaderboard) td,
-    .table:not(.permission-table):not(.keyboard-shortcuts):not(.table-leaderboard) th {
+    .table:not(.permission-table):not(.keyboard-shortcuts):not(
+            .table-leaderboard
+        )
+        td,
+    .table:not(.permission-table):not(.keyboard-shortcuts):not(
+            .table-leaderboard
+        )
+        th {
         display: block;
         margin: 0;
         white-space: normal;
@@ -120,5 +125,4 @@
     .toolbar-search-form {
         height: 42px !important;
     }
-
 }
