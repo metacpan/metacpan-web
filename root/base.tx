@@ -231,7 +231,7 @@
               <div class="modal-body row">
                 %% include inc::keyboard_shortcuts
               </div>
-              <div class="modal-footer"></div>
+
             </div>
           </div>
         </div>

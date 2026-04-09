@@ -99,8 +99,8 @@
         padding: 20px;
     }
 
-    .table:not(.permission-table) td,
-    .table:not(.permission-table) th {
+    .table:not(.permission-table):not(.keyboard-shortcuts) td,
+    .table:not(.permission-table):not(.keyboard-shortcuts) th {
         display: block;
         margin: 0;
         white-space: normal;
