@@ -85,7 +85,7 @@
                       <i class="fa fa-user button-fa-icon logged-in-icon" aria-hidden="true"></i>
                       <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/account/identities">Identities</a></li>
                         <li><a class="dropdown-item" href="/account/profile">Profile</a></li>
                         <li><a class="dropdown-item" href="/account/favorite/list">Favorites</a></li>
@@ -101,7 +101,7 @@
                       <i class="fa fa-user button-fa-icon avatar-placeholder" aria-hidden="true"></i>
                       <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         %%  for ['GitHub', 'Google'] -> $identity {
                         <li>
                             <a class="dropdown-item" href="/login/[% $identity.lc() %]">

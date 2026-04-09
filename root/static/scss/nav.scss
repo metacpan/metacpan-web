@@ -150,6 +150,7 @@ nav.navbar {
         background-color: transparent;
         border: 0;
         padding: 0 6px;
+        position: relative;
 
         &.dropdown-toggle::after {
             display: none;
@@ -191,10 +192,12 @@ nav.navbar {
     .dropdown-menu {
         border-radius: 5px;
         margin-top: 4px;
+        position: absolute;
     }
 
     .login-dropdown {
         place-content: center;
+        position: relative;
     }
 
     .logged-in-icon {

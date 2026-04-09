@@ -9,7 +9,7 @@ const {
 } = require('./document-ui.mjs');
 
 const jQuery = require('jquery');
-const { Modal, Tooltip } = require('bootstrap');
+const { Collapse, Dropdown, Modal, Tooltip } = require('bootstrap');
 
 function setFavTitle(button) {
     button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
@@ -179,7 +179,12 @@ for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
     setFavTitle(favButton);
 }
 
-// BS5 dropdowns auto-initialize via data-bs-toggle="dropdown"
+for (const el of document.querySelectorAll('[data-bs-toggle="dropdown"]')) {
+    new Dropdown(el);
+}
+for (const el of document.querySelectorAll('[data-bs-toggle="collapse"]')) {
+    new Collapse(el, { toggle: false });
+}
 
 const toc = document.querySelector('main .toc');
 if (toc) {
