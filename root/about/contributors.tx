@@ -3,7 +3,7 @@
 %%  }
 %%  override content -> {
   <div id="metacpan_author-count">
-      Number of contributors: [% $contributors.size() %]
+      Number of contributors: [% $contributors.size() | format_number %]
   </div>
   <div class="author-results">
       <ul class="authors">
@@ -13,7 +13,7 @@
               <img src="[% $user.avatar_url %]" class="author-img" />
               <strong>[% $user.login %]</strong>
             </a>
-            ([% pluralize("%d commit", $user.contributions) %])
+            ([% $user.contributions | format_number %] [% pluralize("commit", $user.contributions) %])
           </li>
       %%  }
       </ul>
