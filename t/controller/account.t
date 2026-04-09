@@ -158,7 +158,7 @@ test_psgi app, sub {
                 'POST /account/profile with non-ASCII asciiname'
             );
             my $tx = tx($res);
-            $tx->is( '//legend[@style="color: #600"]',
+            $tx->is( '//legend[@class="text-danger"]',
                 'Errors', 'shows errors', );
         };
 
