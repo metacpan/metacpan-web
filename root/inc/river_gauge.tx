@@ -1,7 +1,17 @@
 %%# Unlike an <img>, an <object> grafts the SVG document into the DOM, which
 %%# means browsers will display the <title> elements of the SVG.  Yay!
 %%  if $river {
-<span class="river-gauge-gauge">
+%%      my $bucket = $river.bucket;
+%%      if defined($bucket) {
+%%          my $stage = pluralize("{zero|one|two|three|four|five|flood}", $bucket);
+%%          if $river.total {
+<span class="river-gauge-gauge" title="River stage [% $stage %]&#10;• [% $river.immediate %] direct [% pluralize('dependent', $river.immediate) %]&#10;• [% $river.total %] total [% pluralize('dependent', $river.total) %]">
+%%          } else {
+<span class="river-gauge-gauge" title="River stage [% $stage %]&#10;No dependents">
+%%          }
+%%      } else {
+<span class="river-gauge-gauge" title="River data not yet available">
+%%      }
   %% include "river/gauge.svg.tx" { river => $river }
 </span>
 %%  }
