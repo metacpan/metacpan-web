@@ -13,6 +13,7 @@ table.tablesorter {
                 display: inline;
             }
 
+            // TODO: clean up hardcoded Font Awesome properties
             &:after {
                 font-family: "Font Awesome 6 Free";
                 font-weight: 900;
