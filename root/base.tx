@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <script>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.setAttribute('data-bs-theme',t)})()</script>
+        <script src="/static/js/theme-init.js"></script>
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
         <link rel="preload" as="fetch" href="/account/login_status" crossorigin="anonymous" />
         %%  for $assets.grep(rx('\.css$')) -> $css {
