@@ -113,8 +113,15 @@
 }
 
 .sidebar ul.nav-pills {
+    padding: 16px 25px 25px;
     position: sticky;
     top: 60px;
+
+    .nav-link.active {
+        background-color: darken($bg-light-gray, 8%);
+        color: $gray-base;
+        font-weight: bold;
+    }
 }
 
 .navbar-right .fa-search {
@@ -156,6 +163,17 @@ nav.navbar {
 
         &.dropdown-toggle::after {
             display: none;
+        }
+
+        &.theme-toggle {
+            color: $body-bg;
+            min-height: 35px;
+            min-width: 35px;
+            display: grid;
+            place-content: center;
+            &:hover {
+                color: darken($body-bg, 15%);
+            }
         }
 
         .button-fa-icon,

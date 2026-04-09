@@ -72,6 +72,32 @@
     }
 }
 
+.source-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+button.pod-toggle {
+    background-color: transparent;
+    border: 1px solid $gray-500;
+    border-radius: 4px;
+    color: $gray-700;
+    cursor: pointer;
+    font-size: 0.85em;
+    padding: 2px 8px;
+
+    &:hover {
+        background-color: $bg-light-gray;
+    }
+
+    &:not(.pod-hidden) {
+        background-color: $bg-light-gray;
+        border-color: $gray-500;
+        font-weight: bold;
+    }
+}
+
 .pod-hidden {
     .pod-line {
         display: none;

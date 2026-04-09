@@ -23,7 +23,7 @@ const showSearchBar = () => {
 
 document.body.addEventListener('click', showSearchBar);
 
-const mql = window.matchMedia('(min-width: 768px)');
+const mql = window.matchMedia('(min-width: 768px)'); // Bootstrap 'md' breakpoint
 mql.addEventListener('change', (e) => {
     if (e.matches) {
         searchBarForm.classList.remove('searchbar-open');
