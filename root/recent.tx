@@ -4,7 +4,7 @@
 %%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%  }
 %%  override content -> {
-  <div id="metacpan_feed_subscription" class="page-header">
+  <div id="metacpan_feed_subscription">
     <h1>[% $filter == 'n' ? 'New Distributions' : 'Latest Releases' %]</h1>
       <a href="/recent.rss[% if $filter { '?f=' ~ $filter } %]"><i class="fa fa-rss fa-2x black"></i></a>
   </div>

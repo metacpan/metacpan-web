@@ -82,23 +82,16 @@
 }
 
 #metacpan_feed_subscription {
-    &.page-header {
-        margin: 0 0 5px;
-        font-weight: bold;
-        margin-left: 5px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 5px;
+    font-weight: bold;
+    margin-left: 5px;
 
     p {
         font-size: 1.3em;
         display: inline;
-    }
-
-    a {
-        display: inline;
-        width: 20px;
-        height: 20px;
-        padding-right: 20px;
-        float: right;
     }
 
     .fa {
