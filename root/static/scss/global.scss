@@ -147,7 +147,8 @@ a.favorite {
 
     &:hover,
     &.active {
-        background: $link-color linear-gradient(to bottom, $link-color-light, $link-color);
+        background: $link-color
+            linear-gradient(to bottom, $link-color-light, $link-color);
         color: #fff;
         text-shadow: 0px 1px 1px #333;
         border-color: $link-color;
@@ -268,7 +269,8 @@ a.ellipsis:hover * {
         line-height: 1;
 
         &:hover {
-            background: $link-color linear-gradient(to bottom, $link-color-light, $link-color);
+            background: $link-color
+                linear-gradient(to bottom, $link-color-light, $link-color);
             color: #fff;
             border-color: $link-color;
             opacity: 1;
