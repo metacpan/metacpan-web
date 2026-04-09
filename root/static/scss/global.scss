@@ -106,8 +106,7 @@ table.keyboard-shortcuts td.keys {
 }
 
 .river-gauge-gauge {
-    position: relative;
-    bottom: -2px;
+    vertical-align: middle;
 }
 
 button.favorite,
@@ -261,7 +260,7 @@ a.ellipsis:hover * {
         font-weight: normal;
         min-width: 35px;
         border-color: #e0e0e0;
-        line-height: 1.54em;
+        line-height: 1;
 
         &:hover {
             background: $link-color linear-gradient(to bottom, $link-color-light, $link-color);
