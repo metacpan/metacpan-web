@@ -185,6 +185,15 @@ for (const el of document.querySelectorAll('[data-bs-toggle="dropdown"]')) {
 for (const el of document.querySelectorAll('[data-bs-toggle="collapse"]')) {
     new Collapse(el, { toggle: false });
 }
+for (const el of document.querySelectorAll('[data-bs-toggle="modal"]')) {
+    el.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('data-bs-target'));
+        if (target) {
+            Modal.getOrCreateInstance(target).toggle();
+        }
+    });
+}
 
 const toc = document.querySelector('main .toc');
 if (toc) {
