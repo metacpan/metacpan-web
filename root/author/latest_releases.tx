@@ -12,5 +12,5 @@
 </div>
 %%  }
 %%  override content -> {
-  %%  include inc::release_table { header => 1, tablesorter => 1, default_sort => '3,1' }
+  %%  include inc::release_table { header => 1, tablesorter => 1, default_sort => '2,1' }
 %%  }

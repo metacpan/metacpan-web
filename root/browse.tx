@@ -29,13 +29,15 @@
 <thead>
     <tr>
     <th class="name">Name</th>
-    <th class="documentation">Documentation</th>
-    <th class="size">Size</th>
-    <th class="mtime">Last Modified</th>
+    <th class="documentation d-none d-sm-table-cell">Documentation</th>
+    <th class="size d-none d-sm-table-cell">Size</th>
+    <th class="mtime d-none d-sm-table-cell">Last Modified</th>
     </tr>
 </thead>
 <tbody>
 %% for $files -> $file {
+%%  my $date = datetime($file.stat.mtime).to_http;
+%%  my $doc_name = ($file.slop || $file.mime == 'text/markdown') ? $file.documentation ? $file.documentation : $file.name : "";
 <tr>
   <td class="name" sort="[% ( $file.directory ? "!" : '' ) ~ $file.name %]"><a href="/release/[% $author %]/[% $release %]/source/[% $file.path %]" class="file-table-entry"
     %%  if $file.directory {
@@ -44,11 +46,10 @@
     %%  else {
       data-mime-type="[% $file.mime %]"
     %%  }
-    title="[% $file.path %]">[% $file.name %]</a></td>
-  <td class="documentation"><strong><a href="/release/[% $author %]/[% $release %]/view/[% $file.path %]" title="[% $file.path %]" class="ellipsis">[% ($file.slop || $file.mime == 'text/markdown') ? $file.documentation ? $file.documentation : $file.name : "" %]</a></strong></td>
-  <td class="size" sort="[% $file.directory ? 0 : $file.stat.size %]">[% $file.directory ? '' : format_bytes($file.stat.size) %]</td>
-  %%  my $date = datetime($file.stat.mtime).to_http;
-  <td class="mtime relatize" nowrap="nowrap" sort="[% $date %]">[% $date %]</td>
+    title="[% $file.path %]">[% $file.name %]</a><span class="browse-details d-sm-none"><span class="relatize">[% $date %]</span>[% if !$file.directory { " · " ~ format_bytes($file.stat.size) } %][% if $doc_name { " · " ~ $doc_name } %]</span></td>
+  <td class="documentation d-none d-sm-table-cell"><strong><a href="/release/[% $author %]/[% $release %]/view/[% $file.path %]" title="[% $file.path %]" class="ellipsis">[% $doc_name %]</a></strong></td>
+  <td class="size d-none d-sm-table-cell" sort="[% $file.directory ? 0 : $file.stat.size %]">[% $file.directory ? '' : format_bytes($file.stat.size) %]</td>
+  <td class="mtime relatize d-none d-sm-table-cell" nowrap="nowrap" sort="[% $date %]">[% $date %]</td>
 </tr>
 %%  }
 </tbody>
