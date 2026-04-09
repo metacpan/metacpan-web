@@ -55,5 +55,21 @@
         table-layout: auto;
         width: auto;
 
+        th.position,
+        td.position,
+        th.number,
+        td.number {
+            width: 1%;
+            white-space: nowrap;
+        }
+
+        th.name,
+        td.name {
+            width: auto;
+        }
+
+        @media (max-width: 767.98px) {
+            width: 100%;
+        }
     }
 }
