@@ -7,8 +7,6 @@ const {
     formatTOC,
     createAnchors,
 } = require('./document-ui.mjs');
-
-require('jquery');
 const { Collapse, Dropdown, Modal, Tooltip } = require('bootstrap');
 
 function setFavTitle(button) {
