@@ -44,7 +44,7 @@ function addProfile(container, id, title, formatUrl, rule) {
     const profileNode = document.importNode(document.querySelector('#profile-tmpl').content, true);
     profileNode.querySelector('.remove-profile').addEventListener('click', removeProfile);
     if (id) {
-        profileNode.querySelector('div.form-group').classList.add('profile', 'profile-' + id);
+        profileNode.querySelector('.profile-row').classList.add('profile', 'profile-' + id);
         profileNode.querySelector('.profile-title').innerText = title;
         const profile_name = profileNode.querySelector('input[name="profile.name"]');
         profile_name.value = id;

@@ -22,7 +22,7 @@
     <li><a href="https://www.perlmodules.net/" rel="nofollow">PerlModules.net</a></li>
   </ul>
 
-  <h2 class="content-head">Lab - Experimental features <span style="color:#FF0000">TESTING ZONE</span></h2>
+  <h2 class="content-head">Lab - Experimental features <span class="testing-zone">TESTING ZONE</span></h2>
 
   <p>Try them and <a href="https://github.com/metacpan/metacpan-web/issues">let us know</a> how to improve them.</p>
 

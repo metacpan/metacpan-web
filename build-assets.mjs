@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as esbuild from 'esbuild';
-import { lessLoader } from 'esbuild-plugin-less';
+import { sassPlugin } from 'esbuild-sass-plugin';
 import {
     writeFile,
     opendir,
@@ -15,7 +15,7 @@ import parseArgs from 'minimist';
 const config = {
     entryPoints: [
         'root/static/js/main.mjs',
-        'root/static/less/style.less',
+        'root/static/scss/style.scss',
     ],
     assetNames: '[name]-[hash]',
     entryNames: '[name]-[hash]',
@@ -32,7 +32,9 @@ const config = {
         '.woff2': 'file',
     },
     plugins: [
-        lessLoader(),
+        sassPlugin({
+            silenceDeprecations: ['import', 'color-functions', 'global-builtin', 'legacy-js-api', 'if-function'],
+        }),
         new class {
             name = 'metacpan-build';
 

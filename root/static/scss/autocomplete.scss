@@ -5,16 +5,14 @@
     z-index: 99999;
     cursor: default;
     overflow-x: hidden;
-    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
-    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
     box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
-    font-family: arial, sans-serif;
+    font-family: $font-family-base;
     font-size: 18px;
 }
 
 .autocomplete-suggestions strong {
     font-weight: bold;
-    color: #000000;
+    color: $black;
 }
 
 .autocomplete-suggestion {
@@ -39,11 +37,11 @@ div.autocomplete-suggestions div:nth-child(2n + 2) {
 /* The plugin highlights when you mouse over an item, but since I've disabled that,
    simulate the effect with css (but use a different color than the actually "selected" item). */
 .autocomplete-suggestion:hover {
-    background: #ddeeff !important;
+    background: $autocomplete-highlight-bg !important;
 }
 /* Use two classs (and place after) to increase priority over the above hover style. */
 .autocomplete-suggestion.autocomplete-selected {
-    background: #bad3ea !important;
+    background: $autocomplete-selected-bg !important;
 }
 
 /*

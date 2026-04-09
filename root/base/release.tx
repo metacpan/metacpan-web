@@ -13,7 +13,6 @@
   </span>
   <span>&nbsp;/&nbsp;</span>
   <div class="release dist-release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
-    <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $file ? '' : 'extend' };
     %%  if $file {
     <a data-keyboard-shortcut="g d" class="release-name" href="[% if $permalinks || $release.status != 'latest' { '/release/' ~ $file.author ~ '/' ~ $file.release } else { '/dist/' ~ $release.distribution } %]">[% $release.name %]</a>
@@ -58,7 +57,7 @@
     </li>
     %%  }
     <li>
-      <i class="far fa-calendar sidebar-icon" aria-hidden="true"></i><span class="ttip" data-toggle="tooltip" data-placement="bottom" title="The date that this version of [% $release.distribution %] was released."><span class="relatize">[% datetime($release.date).to_http %]</span></span>
+      <i class="far fa-calendar sidebar-icon" aria-hidden="true"></i><span class="ttip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="The date that this version of [% $release.distribution %] was released."><span class="relatize">[% datetime($release.date).to_http %]</span></span>
     </li>
     %%  include inc::release_status { maturity => $release.maturity };
     %%  if $release.license {
@@ -155,7 +154,7 @@
     %%  }
     %% if defined $distribution.river.bus_factor {
     <li>
-      <span class="ttip" data-toggle="tooltip" data-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
+      <span class="ttip" data-bs-toggle="tooltip" data-bs-placement="bottom" title="The # people with an indexing permission on [% $release.distribution %] who have released something to CPAN in the last 2 years (i.e. the # people likely able to release critical fixes in a timely manner)">
       <i class="fas fa-users sidebar-icon" aria-hidden="true"></i>Bus factor: [% $distribution.river.bus_factor %]
       </span>
     </li>
@@ -188,7 +187,7 @@
       <i class="fas fa-rss sidebar-icon" aria-hidden="true"></i><a href="/dist/[% $release.distribution %]/releases.rss">Subscribe to distribution</a>
     </li>
     <li>
-      <i class="fas fa-terminal sidebar-icon" aria-hidden="true"></i><button class="btn btn-link" data-toggle="modal" data-target="#metacpan_install-instructions-dialog">
+      <i class="fas fa-terminal sidebar-icon" aria-hidden="true"></i><button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#metacpan_install-instructions-dialog">
         Install Instructions
       </button>
     </li>

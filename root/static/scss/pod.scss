@@ -57,13 +57,15 @@
 
     img {
         vertical-align: top;
-        .img-responsive(inline-block);
+        display: inline-block;
+        max-width: 100%;
+        height: auto;
     }
 
     pre {
         margin-left: 0;
         margin-right: 0;
-        padding: 10px;
+        padding: 0;
         overflow-x: auto;
     }
 
@@ -71,8 +73,7 @@
         border-collapse: collapse;
     }
 
-    tr {
-    }
+
 
     th {
         text-align: center;
@@ -91,13 +92,14 @@
 main .toc {
     display: inline-block;
     border: 1px solid rgb(215, 215, 215);
+    border-radius: 8px;
     padding: 3px 10px;
 
     overflow-x: auto;
     overflow-y: hidden;
     margin-bottom: 40px;
 
-    @media (min-width: @screen-md-max) {
+    @media (min-width: 1200px) {
         float: right;
         margin-left: 50px;
         max-width: 400px;
@@ -106,11 +108,22 @@ main .toc {
     .toc-header {
         text-align: center;
         line-height: 24px;
+
+        .toggle-toc {
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
     }
 
     > ul {
         overflow-y: hidden;
         transition: height 0.3s ease-out;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
     }
 
     ul {

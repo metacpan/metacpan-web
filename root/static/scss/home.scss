@@ -49,12 +49,7 @@
         width: 100%;
     }
 
-    .form-group {
-        margin-bottom: 5px;
-    }
-
     .alert {
-        display: inline-block;
         padding: 5px 2em;
         border-radius: 7px;
 
@@ -62,6 +57,12 @@
             color: inherit;
             text-decoration: underline;
         }
+    }
+
+    .alert-info {
+        background-color: #d9edf7;
+        border-color: #31708f;
+        color: #31708f;
     }
 
     form {

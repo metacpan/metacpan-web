@@ -20,7 +20,7 @@
     %% for $authors.authors -> $author {
       <li>
         <a href="/author/[% $author.id %]" title="Author page for [% $author.display_name %]">
-          <img src="[% gravatar_image($author, 30) %]">
+          <img src="[% gravatar_image($author, 60) %]" width="30" height="30" alt="[% $author.display_name %]">
           [% $author.display_name %][% if $author.has_display_name { %] ([% $author.pauseid %])[% } %]
         </a>
       </li>

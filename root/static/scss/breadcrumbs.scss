@@ -1,4 +1,5 @@
 .breadcrumbs {
+    align-items: center;
     column-gap: 5px;
     font-weight: bold;
     font-size: 1.2em;
@@ -70,7 +71,7 @@
     margin-bottom: 0.7em;
 }
 
-@media only screen and (min-width: @screen-sm-max) {
+@media only screen and (min-width: 768px) {
     .breadcrumbs {
         padding: 40px 40px 0px 40px;
     }

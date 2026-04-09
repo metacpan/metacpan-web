@@ -1,5 +1,5 @@
 %%  cascade base
-%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
 [%-
 for [
@@ -7,10 +7,14 @@ for [
   [ 'Pod Renderer',       '/pod2html' ],
   [ 'Lab: Dashboard',     '/lab/dashboard' ],
   [ 'Lab: Dependencies',  '/lab/dependencies' ],
-] -> $l {
+] -> $link {
 %]
-<li class="[% if $current[$l.1] { 'active' } %]">
-    <a href="[% $l.1 %]">[% $l.0 %]</a>
+<li class="nav-item">
+%%  if $current[$link.1] {
+    <a href="[% $link.1 %]" class="nav-link active" aria-current="page">[% $link.0 %]</a>
+%%  } else {
+    <a href="[% $link.1 %]" class="nav-link">[% $link.0 %]</a>
+%%  }
 </li>
 %%  }
 %%  }

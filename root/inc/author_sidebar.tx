@@ -128,8 +128,8 @@
     <li class="nav-header">Search</li>
     <li>
         <form action="/search" class="sidebar-search">
-            <label for="author-search" class="sr-only">Search distributions by [% $author.name %]</label>
+            <label for="author-search" class="visually-hidden">Search distributions by [% $author.name %]</label>
             <input type="hidden" name="q" value="author:[% $author.pauseid %]">
-            <input type="text" id="author-search" placeholder="Search [% $author.pauseid %]" name="q" class="form-control input-sm">
+            <input type="text" id="author-search" placeholder="Search [% $author.pauseid %]" name="q" class="form-control form-control-sm">
         </form>
     </li>

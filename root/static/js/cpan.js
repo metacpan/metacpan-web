@@ -7,11 +7,7 @@ const {
     formatTOC,
     createAnchors,
 } = require('./document-ui.mjs');
-
-const jQuery = require('jquery');
-require('bootstrap/js/dropdown.js');
-require('bootstrap/js/modal.js');
-require('bootstrap/js/tooltip.js');
+const { Collapse, Dropdown, Modal, Tooltip } = require('bootstrap');
 
 function setFavTitle(button) {
     button.setAttribute('title', button.classList.contains('active') ? 'Remove from favorites' : 'Add to favorites');
@@ -104,18 +100,23 @@ function format_string(input_string, replacements) {
 // User customisations
 processUserData();
 
-jQuery('.ttip').tooltip(); // bootstrap
+for (const el of document.querySelectorAll('[data-bs-toggle="tooltip"]')) {
+    new Tooltip(el);
+}
 
-for (const el of document.querySelectorAll('.keyboard-shortcuts')) {
+const keyboardShortcutsEl = document.getElementById('metacpan_keyboard-shortcuts');
+const keyboardShortcutsModal = keyboardShortcutsEl ? new Modal(keyboardShortcutsEl) : null;
+
+for (const el of document.querySelectorAll('a.keyboard-shortcuts')) {
     el.addEventListener('click', (e) => {
         e.preventDefault();
-        jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
+        if (keyboardShortcutsModal) keyboardShortcutsModal.show();
     });
 }
 
 // Global keyboard shortcuts
 Mousetrap.bind('?', function () {
-    jQuery('#metacpan_keyboard-shortcuts').modal(); // bootstrap
+    if (keyboardShortcutsModal) keyboardShortcutsModal.show();
 });
 Mousetrap.bind('s', function (e) {
     e.preventDefault();
@@ -176,7 +177,21 @@ for (const favButton of document.querySelectorAll('.breadcrumbs .favorite')) {
     setFavTitle(favButton);
 }
 
-jQuery('.dropdown-toggle').dropdown(); // bootstrap
+for (const el of document.querySelectorAll('[data-bs-toggle="dropdown"]')) {
+    new Dropdown(el);
+}
+for (const el of document.querySelectorAll('[data-bs-toggle="collapse"]')) {
+    new Collapse(el, { toggle: false });
+}
+for (const el of document.querySelectorAll('[data-bs-toggle="modal"]')) {
+    el.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('data-bs-target'));
+        if (target) {
+            Modal.getOrCreateInstance(target).toggle();
+        }
+    });
+}
 
 const toc = document.querySelector('main .toc');
 if (toc) {

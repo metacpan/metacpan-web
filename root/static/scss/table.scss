@@ -27,6 +27,7 @@
     td.number {
         text-align: right;
         white-space: nowrap;
+        font-variant-numeric: tabular-nums;
     }
 
     th.date,
@@ -42,11 +43,34 @@
     }
 
     th.position {
-        width: 10px;
+        width: 3em;
     }
 
     th.river-gauge,
     td.river-gauge {
         width: 36px;
+        text-align: center;
+    }
+
+    &.table-leaderboard {
+        table-layout: auto;
+        width: auto;
+
+        th.position,
+        td.position,
+        th.number,
+        td.number {
+            width: 1%;
+            white-space: nowrap;
+        }
+
+        th.name,
+        td.name {
+            width: auto;
+        }
+
+        @include media-breakpoint-down(md) {
+            width: 100%;
+        }
     }
 }

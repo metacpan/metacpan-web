@@ -1,5 +1,5 @@
 .sidebar {
-    background: #e9e9e9;
+    background: $bg-light-gray;
     align-self: stretch;
 }
 
@@ -7,8 +7,10 @@
     float: left;
     line-height: 1.54em;
     padding: 16px 25px 25px;
-    width: @sidebar-width;
+    width: $sidebar-width;
     z-index: 2;
+    position: sticky;
+    top: 60px;
 
     .nav-header {
         padding: 0;
@@ -21,7 +23,7 @@
 
     a,
     .btn-link {
-        color: @gray-base;
+        color: $gray-base;
         font-size: 14px;
     }
 
@@ -29,8 +31,7 @@
         margin-top: 10px;
     }
 
-    .fa,
-    .glyphicon {
+    .fa {
         margin-right: 2px;
     }
 
@@ -39,7 +40,7 @@
         width: 1.25em;
         text-align: center;
         margin-right: 4px;
-        color: #555;
+        color: $text-muted-dark;
     }
 
     select,
@@ -54,7 +55,7 @@
     form label {
         font-size: 14px;
         font-weight: normal;
-        color: #555;
+        color: $text-muted-dark;
         margin-bottom: 2px;
     }
 
@@ -62,18 +63,17 @@
         padding-left: 10px;
     }
 
-    > .active {
-        > a,
-        > a:hover,
-        > a:focus {
-            color: @gray-base !important;
-            background-color: #ddd !important;
-        }
+    a.active,
+    a.active:hover,
+    a.active:focus {
+        color: $gray-base !important;
+        background-color: transparent !important;
+        font-weight: bold;
     }
 
     hr {
         border: 0;
-        border-top: 1px solid #d0d0d0;
+        border-top: 1px solid #888;
         margin: 8px 0 0;
     }
 }
@@ -83,12 +83,12 @@
     padding: 3px 15px;
     font-size: 0.9em;
     font-weight: bold;
-    color: #555;
+    color: $text-muted-dark;
     text-transform: none;
 }
 
 .nav-sub-label {
     font-size: 0.8em;
-    color: #555;
+    color: $text-muted-dark;
     margin-top: 6px;
 }

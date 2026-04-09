@@ -14,7 +14,7 @@
   <div class="star-rating">
     <a href="[% $repository.url %]" target="_blank" class="btn btn-primary" title="View on GitHub">
       ⭐ Starred <span>[% $github.stars %]</span>
-      <span class="sr-only">GitHub stars</span>
+      <span class="visually-hidden">GitHub stars</span>
     </a>
   </div>
 %% }

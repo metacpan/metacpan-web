@@ -9,7 +9,7 @@
     %%  include inc::author_sidebar
 %%  }
 %%  override content -> {
-    <div class="visible-xs inline-author-pic">[% include inc::author_pic %]</div>
+    <div class="d-block d-sm-none inline-author-pic">[% include inc::author_pic %]</div>
     %%  if $releases.0 {
         %%  include inc::release_table { header => 1, tablesorter => 0, table_id => 'metacpan_author_releases', table_heading => "Releases" };
         %%  if $total > 10 {

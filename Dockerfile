@@ -53,6 +53,16 @@ RUN \
     cpm install --show-build-log-on-failure --resolver=snapshot
 EOT
 
+################### CPAN Dev Prereqs
+FROM build-cpan-prereqs AS build-cpan-dev-prereqs
+SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
+
+RUN \
+    --mount=type=cache,target=/root/.perl-cpm,sharing=private \
+<<EOT
+    cpm install --show-build-log-on-failure --resolver=snapshot --with-develop
+EOT
+
 ################### Web Server
 # false positive
 # hadolint ignore=DL3006
@@ -99,14 +109,8 @@ ENV PLACK_ENV=development
 
 USER root
 
-COPY cpanfile cpanfile.snapshot ./
-
-RUN \
-    --mount=type=cache,target=/root/.perl-cpm \
-<<EOT
-    cpm install --show-build-log-on-failure --resolver=snapshot --with-develop
-    chown -R metacpan:users ./
-EOT
+COPY --from=build-cpan-dev-prereqs /app/local local
+RUN chown -R metacpan:users ./
 
 USER metacpan
 
@@ -137,6 +141,7 @@ RUN \
     npm install --verbose --include=dev
 EOT
 
+COPY cpanfile cpanfile.snapshot ./
 RUN \
     --mount=type=cache,target=/root/.perl-cpm \
 <<EOT

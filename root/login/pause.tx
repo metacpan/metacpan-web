@@ -1,20 +1,18 @@
 %%  cascade base with inc::no_sidebar
 %%  override content -> {
-<div class="jumbotron">
+<div class="py-5 bg-light rounded-3">
     <div class="container-fluid">
-        <div class="col-md-offset-3 col-md-6">
+        <div class="offset-md-3 col-md-6">
             <p class="text-center">Connect to MetaCPAN using PAUSE</p>
             <form action="[% $oauth_url %]">
                 <input type="hidden" name="client_id" value="[% $consumer_key %]">
                 <input type="hidden" name="choice" value="pause">
                 <div class="input-group">
-                    <span class="input-group-addon">
+                    <span class="input-group-text">
                         PAUSE ID
                     </span>
                     <input type="text" class="form-control" name="id" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Log in</button>
-                    </span>
+                    <button class="btn btn-primary" type="submit">Log in</button>
                 </div>
             </form>
             <p class="text-center">

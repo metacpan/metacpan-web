@@ -1,0 +1,21 @@
+.toplists {
+    .entry {
+        display: grid;
+        grid-template-columns: 75px 1fr;
+        column-gap: 8px;
+        min-height: 80px;
+        margin-bottom: 20px;
+        .pauseid,
+        .name,
+        .count {
+            display: block;
+            grid-column: 2;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+        .gravatar {
+            grid-column: 1;
+            grid-row: 1 / -1;
+        }
+    }
+}

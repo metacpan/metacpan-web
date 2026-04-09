@@ -1,6 +1,10 @@
 .syntaxhighlighter {
     line-height: 1.2em;
     width: 100%;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 4px 12px;
 
     // fix conflicts with bootstrap
     .container {
@@ -67,11 +71,11 @@
 
     // Add border to the lines
     .gutter {
-        color: #afafaf;
+        color: #767676;
         .line {
-            border-right: 3px solid #6ce26c;
+            border-right: 3px solid #3a8a3a;
             &.highlighted {
-                background-color: #6ce26c;
+                background-color: #3a8a3a;
             }
         }
     }

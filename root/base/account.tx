@@ -1,18 +1,24 @@
 %%  cascade base {
 %%      title => $title || 'MetaCPAN Account',
 %%  }
-%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
-<li class="[% if $current['account/identities'] { 'active' } %]">
-    <a href="/account/identities">Identities</a>
+[%-
+for [
+  [ 'Identities',  '/account/identities' ],
+  [ 'Profile',     '/account/profile' ],
+  [ 'Favorites',   '/account/favorite/list' ],
+] -> $link {
+%]
+<li class="nav-item">
+%%  if $current[$link.1] {
+    <a href="[% $link.1 %]" class="nav-link active" aria-current="page">[% $link.0 %]</a>
+%%  } else {
+    <a href="[% $link.1 %]" class="nav-link">[% $link.0 %]</a>
+%%  }
 </li>
-<li class="[% if $current['account/profile'] { 'active' } %]">
-    <a href="/account/profile">Profile</a>
-</li>
-<li class="[% if $current['account/favorite/list'] { 'active' } %]">
-    <a href="/account/favorite/list">Favorites</a>
-</li>
-<li>
-    <a href="#" class="logout-button">Logout</a>
+%%  }
+<li class="nav-item">
+    <button type="button" class="btn-link logout-button">Logout</button>
 </li>
 %%  }

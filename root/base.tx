@@ -25,23 +25,23 @@
         %%  block opengraph -> { }
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="header-logo-large hidden-xs">
+        <nav class="navbar" aria-label="Main navigation">
+            <div class="header-logo-large d-none d-sm-block">
               <a href="/" tabindex="0">
-                <svg class="logo" aria-label="MetaCPAN">
+                <svg class="logo" role="img" aria-label="MetaCPAN">
                   <use class="logo" href="/static/images/metacpan-logo.svg#logo" />
                 </svg>
               </a>
             </div>
-            <div class="header-logo-icon visible-xs">
+            <div class="header-logo-icon d-block d-sm-none">
               <a href="/">
-                <svg class="logo" aria-label="MetaCPAN">
+                <svg class="logo" role="img" aria-label="MetaCPAN">
                   <use class="logo" href="/static/images/metacpan-logo.svg#dots" />
                 </svg>
               </a>
             </div>
             %%  block header_nav_menu -> {
-            <ul class="nav navbar-nav menu-items hidden-xs hidden-sm">
+            <ul class="nav navbar-nav menu-items d-none d-md-flex">
               <li><a href="/about">About</a></li>
               <li><a href="/about/sponsors">Sponsor</a></li>
               <li><a href="https://grep.metacpan.org/">grep::cpan</a></li>
@@ -51,57 +51,61 @@
               <li><a href="https://api.metacpan.org/">API</a></li>
             </ul>
             %%  }
-            <ul class="nav navbar-nav navbar-right">
-                <button type="button" class="searchbar-btn visible-xs visible-sm">
-                    <i class="fa fa-search button-fa-icon"></i>
-                </button>
+            <ul class="nav navbar-nav navbar-right ms-auto">
+                <li class="d-block d-md-none">
+                    <button type="button" class="searchbar-btn" aria-label="Search">
+                        <i class="fa fa-search button-fa-icon" aria-hidden="true"></i>
+                    </button>
+                </li>
                 %%  block search_bar -> {
-                <form action="/search" class="searchbar-form visible-md visible-lg search-form form-horizontal">
+                <li>
+                <form action="/search" class="searchbar-form search-form">
                    <input type="hidden" name="size" id="metacpan_search-size" value="20">
-                  <div class="form-group">
+                  <div>
                       <div class="search-group">
-                        <i class="fa fa-search"></i>
+                        <i class="fa fa-search" aria-hidden="true"></i>
                         <input type="text" name="q" placeholder="Search the CPAN" size="41" autocorrect="off" autocapitalize="off" spellcheck="false" id="metacpan_search-input" class="form-control" value="[% $search_query %]">
                       </div>
                   </div>
                 </form>
+                </li>
                 %%  }
                 %%  block sidebar_toggle_button -> {
-                    <li class="icon-slidepanel visible-xs visible-sm">
-                      <button data-toggle="slidepanel" data-target=".slidepanel">
+                    <li class="icon-slidepanel d-block d-md-none">
+                      <button data-bs-toggle="slidepanel" data-bs-target=".slidepanel" aria-label="Open navigation menu" aria-expanded="false">
                         <span class="button-fa-icon">
-                          <i class="fa fa-bars slidepanel-open"></i>
-                          <i class="fa fa-times slidepanel-close"></i>
+                          <i class="fa fa-bars slidepanel-open" aria-hidden="true"></i>
+                          <i class="fa fa-times slidepanel-close" aria-hidden="true"></i>
                         </span>
                       </button>
                     </li>
                 %%  }
                 <li class="dropdown login-dropdown show-logged-in">
-                    <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-label="Account">
+                    <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-label="Account" aria-expanded="false">
                       <i class="fa fa-user button-fa-icon logged-in-icon" aria-hidden="true"></i>
-                      <i class="fas fa-chevron-down"></i>
+                      <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="/account/identities">Identities</a></li>
-                        <li><a href="/account/profile">Profile</a></li>
-                        <li><a href="/account/favorite/list">Favorites</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/account/identities">Identities</a></li>
+                        <li><a class="dropdown-item" href="/account/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/account/favorite/list">Favorites</a></li>
                         <li>
-                            <a href="#" type="button" class="logout-button">
+                            <button type="button" class="dropdown-item logout-button">
                               Logout
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown login-dropdown show-logged-out">
-                    <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-label="Login">
+                    <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-label="Login" aria-expanded="false">
                       <i class="fa fa-user button-fa-icon avatar-placeholder" aria-hidden="true"></i>
-                      <i class="fas fa-chevron-down"></i>
+                      <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-end">
                         %%  for ['GitHub', 'Google'] -> $identity {
                         <li>
-                            <a href="/login/[% $identity.lc() %]">
-                                <i class="fab fa-[% $identity.lc() %] fa-fw"></i>
+                            <a class="dropdown-item" href="/login/[% $identity.lc() %]">
+                                <i class="fab fa-[% $identity.lc() %] fa-fw" aria-hidden="true"></i>
                                 [% $identity %]
                             </a>
                         </li>
@@ -109,7 +113,7 @@
                     </ul>
                 </li>
                 <li class="dropdown login-dropdown hide-logged-in hide-logged-out">
-                    <button>
+                    <button aria-label="Account">
                       <i class="fa fa-user button-fa-icon" aria-hidden="true"></i>
                     </button>
                 </li>
@@ -118,7 +122,7 @@
         <div class="page-content [% block page_content_class -> { } %]">
           <div id="perl-ad-target" class="top-notify-banner perl-ad-target">
           </div>
-          <nav class="sidebar">
+          <nav class="sidebar" aria-label="Section navigation">
             %%  block left_nav -> {
             <div class="slidepanel">
               <ul class="nav-list [% block left_nav_classes -> { } %]">
@@ -145,11 +149,11 @@
                   <img src="/static/images/metacpan-logo.svg" alt="MetaCPAN" />
                 </a>
               </div>
-              <a class="footer-social-link" href="https://github.com/metacpan">
-                <i class="fab fa-github-square"></i>
+              <a class="footer-social-link" href="https://github.com/metacpan" aria-label="MetaCPAN on GitHub">
+                <i class="fab fa-github-square" aria-hidden="true"></i>
               </a>
-              <a class="footer-social-link" href="https://fosstodon.org/@metacpan">
-                <i class="fab fa-mastodon"></i>
+              <a class="footer-social-link" href="https://fosstodon.org/@metacpan" aria-label="MetaCPAN on Mastodon">
+                <i class="fab fa-mastodon" aria-hidden="true"></i>
               </a>
             </div>
             <div class="footer-links">
@@ -181,53 +185,53 @@
             <div class="footer-sponsors">
               <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://www.bytemark.co.uk/" rel="noopener" title="Bytemark">
-                  <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark">
+                  <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.datadoghq.com/" rel="noopener" title="Datadog">
-                  <img class="footer-sponsor-datadog" src="/static/images/sponsors/datadog.svg" alt="Datadog">
+                  <img class="footer-sponsor-datadog" src="/static/images/sponsors/datadog.svg" alt="Datadog" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://deriv.com/careers/" rel="noopener" title="Deriv">
-                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.svg" alt="Deriv">
+                  <img class="footer-sponsor-deriv" src="/static/images/sponsors/deriv.svg" alt="Deriv" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.elastic.co/" rel="noopener" title="Elastic">
-                  <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic">
+                  <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener" title="Fastly">
-                  <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly">
+                  <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly" loading="lazy">
                 </a>
               </div>
               <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener" title="Geolytica">
-                  <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geolytica">
+                  <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geolytica" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.iban.com/" rel="noopener" title="IBAN">
-                  <img class="footer-sponsor-iban" src="/static/images/sponsors/iban-logo.png" alt="IBAN">
+                  <img class="footer-sponsor-iban" src="/static/images/sponsors/iban-logo.png" alt="IBAN" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener" title="Liquid Web">
-                  <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="Liquid Web">
+                  <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="Liquid Web" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://opencagedata.com" rel="noopener" title="OpenCage">
-                  <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage">
+                  <img class="footer-sponsor-opencage" src="/static/images/sponsors/open-cage.svg" alt="OpenCage" loading="lazy">
                 </a>
                 <!-- Keep until at least March 1, 2027 -->
                 <a class="footer-sponsor-link" target="_blank" href="https://www.perlfoundation.org/" rel="noopener" title="The Perl and Raku Foundation">
-                  <img class="footer-sponsor-tprf" src="/static/images/sponsors/perl-onion.svg" alt="The Perl and Raku Foundation">
+                  <img class="footer-sponsor-tprf" src="/static/images/sponsors/perl-onion.svg" alt="The Perl and Raku Foundation" loading="lazy">
                 </a>
               </div>
             </div>
           </div>
         </footer>
-        <div class="modal fade" tabindex="-1" role="dialog" id="metacpan_keyboard-shortcuts">
+        <div class="modal fade" tabindex="-1" id="metacpan_keyboard-shortcuts" aria-labelledby="keyboard-shortcuts-title">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Keyboard Shortcuts</h4>
+                <h4 class="modal-title" id="keyboard-shortcuts-title">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body row">
                 %% include inc::keyboard_shortcuts
               </div>
-              <div class="modal-footer"></div>
+
             </div>
           </div>
         </div>

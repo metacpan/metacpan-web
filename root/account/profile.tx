@@ -8,10 +8,10 @@
     </div>
     %%  }
     %%  else {
-    <form method="POST" action="" class="profile-form form-horizontal" role="form" accept-charset="utf-8">
+    <form method="POST" action="" class="profile-form" role="form" accept-charset="utf-8">
         <input type="hidden" name="utf8" value="🐪" />
         %%  if $errors {
-        <fieldset><legend style="color: #600">Errors</legend>
+        <fieldset><legend class="text-danger">Errors</legend>
             <ul>
             %%  for $errors -> $error {
                 <li>[% $error.field %]: [% $error.message %]</li>
@@ -20,50 +20,48 @@
         </fieldset>
         %%  }
         %%  else if $success {
-        <fieldset><legend style="color: #060">Success</legend>
+        <fieldset><legend class="text-success">Success</legend>
             <p>The profile has been updated.</p>
         </fieldset>
         %%  }
         <fieldset><legend>General</legend>
         <div class="row">
             <div class="col-sm-8 col-md-10">
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">PAUSE ID</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-pauseid">PAUSE ID</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" value="[% $author.pauseid %]" disabled="disabled" />
+                        <input type="text" class="form-control" id="profile-pauseid" value="[% $author.pauseid %]" disabled="disabled" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Avatar</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label">Avatar</label>
                     <div class="col-sm-8 col-md-6">
-                        <div class="form-control-static">
+                        <div class="form-control-plaintext">
                             <div><img class="author-avatar" src="[% gravatar_image($author, 130) %]" alt="Author image"></div>
                             <div><a target="_blank" rel=”noopener” href="https://en.gravatar.com/emails/">Change Gravatar for [% $author.pauseid | lc %]@cpan.org</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Name</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-name">Name</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" name="name" value="[% $author.name %]" />
+                        <input type="text" class="form-control" id="profile-name" name="name" value="[% $author.name %]" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">ASCII Name</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-asciiname">ASCII Name</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" name="asciiname" value="[% $author.asciiname %]" />
+                        <input type="text" class="form-control" id="profile-asciiname" name="asciiname" value="[% $author.asciiname %]" />
                     </div>
                 </div>
                 <div class="email repeatable">
-                    <div class="form-group">
-                        <label class="col-sm-4 col-md-4 control-label">Email</label>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-md-4 col-form-label" for="profile-email">Email</label>
                         <div class="col-sm-8 col-md-6">
                             <div class="field-container">
                                 <div class="input-group">
-                                    <input type="email" class="form-control" name="email" value="[% $author.email.0 %]" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary search-btn add-field" type="button" data-field-type="email">add</button>
-                                    </span>
+                                    <input type="email" class="form-control" id="profile-email" name="email" value="[% $author.email.0 %]" />
+                                    <button class="btn btn-primary search-btn add-field" type="button" data-field-type="email">add</button>
                                 </div>
                             </div>
                             %%  for $author.email -> $email {
@@ -71,9 +69,7 @@
                             <div class="field-container">
                                 <div class="input-group">
                                     <input type="email" class="form-control" name="email" value="[% $email %]" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
-                                    </span>
+                                    <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
                                 </div>
                             </div>
                             %%  }
@@ -81,15 +77,13 @@
                     </div>
                 </div>
                 <div class="websites repeatable">
-                    <div class="form-group">
-                        <label class="col-sm-4 col-md-4 control-label">Website</label>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-md-4 col-form-label" for="profile-website">Website</label>
                         <div class="col-sm-8 col-md-6">
                             <div class="field-container">
                                 <div class="input-group">
-                                    <input type="url" class="form-control" name="website" value="[% $author.website.0 %]" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary search-btn add-field" data-field-type="website" type="button">add</button>
-                                    </span>
+                                    <input type="url" class="form-control" id="profile-website" name="website" value="[% $author.website.0 %]" />
+                                    <button class="btn btn-primary search-btn add-field" data-field-type="website" type="button">add</button>
                                 </div>
                             </div>
                             %%  for $author.website -> $website {
@@ -97,42 +91,41 @@
                             <div class="field-container">
                                 <div class="input-group">
                                     <input type="url" class="form-control" name="website" value="[% $website %]" />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
-                                    </span>
+                                    <button class="btn btn-primary search-btn remove-field" type="button">remove</button>
                                 </div>
                             </div>
                             %%  }
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Blog</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-blog-url">Blog</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="url" class="form-control" name="blog.url" value="[% $author.blog.0.url %]" />
+                        <input type="url" class="form-control" id="profile-blog-url" name="blog.url" value="[% $author.blog.0.url %]" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Feed</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-blog-feed">Feed</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="url" class="form-control" name="blog.feed" value="[% $author.blog.0.feed %]" />
+                        <input type="url" class="form-control" id="profile-blog-feed" name="blog.feed" value="[% $author.blog.0.feed %]" />
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="row mb-3">
                     <label class="col-sm-4 col-md-4"></label>
                     %%  my $donation = $author.donation.map(-> $d { $d.id }).grep.size();
                     <div class="col-sm-8 col-md-6">
-                        <label class="checkbox">
-                            <input name="donations" type="checkbox"[% if $donation { %] checked="checked"[% } %] /> Accept donations
-                        </label>
+                        <div class="form-check">
+                            <input name="donations" type="checkbox" class="form-check-input" id="donations-checkbox"[% if $donation { %] checked="checked"[% } %] />
+                            <label class="form-check-label" for="donations-checkbox">Accept donations</label>
+                        </div>
                     </div>
                 </div>
                 <div id="metacpan_donations" class="slide-out [% if !$donation { 'slide-out-hidden' } %]">
                     %%  my $user_donations = $author.donation.indexed_by('name');
                     %%  for ['PayPal', 'Wishlist', 'Flattr'] -> $system {
                     %%      my $found = $user_donations[$system];
-                    <div class="form-group">
-                        <label class="col-sm-4 col-md-4 control-label [% $system.lc() %]">[% $system %]</label>
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-md-4 col-form-label [% $system.lc() %]">[% $system %]</label>
                         <div class="col-sm-8 col-md-6">
                             <input type="hidden" name="donation.name" value="[% $system.lc() %]" />
                             <input type="text" class="form-control" name="donation.id" value="[% $found.id %]" />
@@ -140,10 +133,10 @@
                     </div>
                     %%  }
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Last update</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label">Last update</label>
                     <div class="col-sm-8 col-md-6">
-                        <p class="checkbox">
+                        <p>
                             <strong class="relatize">[% datetime($author.updated).to_http %]</strong>
                         </p>
                     </div>
@@ -155,34 +148,32 @@
     <fieldset><legend>Location</legend>
         <div class="row">
             <div class="col-sm-8 col-md-10">
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Country</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-country">Country</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" name="country" value="[% $author.country %]" />
-                        <span class="help-inline">(two letter ISO code)</span>
+                        <input type="text" class="form-control" id="profile-country" name="country" value="[% $author.country %]" />
+                        <span class="form-text">(two letter ISO code)</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Region</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-region">Region</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" name="region" value="[% $author.region %]" />
+                        <input type="text" class="form-control" id="profile-region" name="region" value="[% $author.region %]" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">City</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label" for="profile-city">City</label>
                     <div class="col-sm-8 col-md-6">
-                        <input type="text" class="form-control" name="city" value="[% $author.city %]" />
+                        <input type="text" class="form-control" id="profile-city" name="city" value="[% $author.city %]" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-4 col-md-4 control-label">Lat/long</label>
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-md-4 col-form-label">Lat/long</label>
                     <div class="col-sm-8 col-md-6">
                         <div class="input-group">
-                        <input class="input-small form-control" type="text" placeholder="Latitude" name="latitude" value="[% $author.location.0 %]" />
-                        <input class="input-small form-control" type="text" placeholder="Longitude" name="longitude" value="[% $author.location.1 %]" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary search-btn fill-location" type="button">locate me</button>
-                        </span>
+                        <input class="input-small form-control" type="text" aria-label="Latitude" placeholder="Latitude" name="latitude" value="[% $author.location.0 %]" />
+                        <input class="input-small form-control" type="text" aria-label="Longitude" placeholder="Longitude" name="longitude" value="[% $author.location.1 %]" />
+                        <button class="btn btn-primary search-btn fill-location" type="button">locate me</button>
                         </div>
                     </div>
                 </div>
@@ -193,7 +184,7 @@
     <fieldset><legend>Profiles</legend>
         <div class="row">
         <div class="col-sm-8 col-md-10">
-            <div class="form-group profile">
+            <div class="row mb-3 profile">
                 <label class="col-sm-4 col-md-4"></label>
                 <div class="col-sm-8 col-md-6">
                     <select class="form-control add-profile">
@@ -214,18 +205,18 @@
             </div>
             <div id="metacpan_profiles" class="profiles">
                 <div class="profile-container">
-                    <div class="form-group profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
-                        <label class="col-sm-4 col-md-4 control-label">metacpan</label>
+                    <div class="row mb-3 profile profile-metacpan" title="You can use your user id with other services so they can retrieve information from your profile or your favorites here on metacpan.">
+                        <label class="col-sm-4 col-md-4 col-form-label" for="profile-metacpan-user">metacpan</label>
                         <div class="col-sm-8 col-md-6">
-                            <input type="text" class="form-control" value="[% $author.user %]" disabled="disabled" />
+                            <input type="text" class="form-control" id="profile-metacpan-user" value="[% $author.user %]" disabled="disabled" />
                         </div>
                     </div>
                 </div>
                 %%  for $author.profile.sort(-> $a, $b { $a.name cmp $b.name }) -> $profile {
                     %%  my $known = $profiles[$profile.name];
                 <div class="profile-container">
-                    <div class="form-group [% if $known { %]profile profile-[% $profile.name %][% } %]">
-                        <label class="col-sm-4 col-md-4 control-label">
+                    <div class="row mb-3 [% if $known { %]profile profile-[% $profile.name %][% } %]">
+                        <label class="col-sm-4 col-md-4 col-form-label">
                             %%  if $known {
                             [% $known.label %]
                             <input type="hidden" name="profile.name" value="[% $profile.name %]" />
@@ -237,16 +228,14 @@
                         <div class="col-sm-8 col-md-6">
                             <div class="input-group">
                                 <input class="small form-control" type="text" name="profile.id" value="[% $profile.id %]" />
-                                <span class="input-group-btn">
-                                <a href="" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt"></i> remove</a>
+                                <button type="button" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt" aria-hidden="true"></i> remove</button>
                                 %%  if $known {
                                 <a href="" class="btn btn-primary search-btn check-url" target="_blank"
                                     data-url-template="[% $known.url_format %]"
                                     %%  if $known.rule {
                                     data-rule="[% $known.rule %]"
                                     %%  }
-                                ><i class="fa fa-check-square"></i> check</a>
-                                </span>
+                                ><i class="fa fa-check-square" aria-hidden="true"></i> check</a>
                                 %%  }
                             </div>
                         </div>
@@ -264,24 +253,22 @@
         <textarea name="extra" class="form-control" rows="10">[% $author.extra.json_pretty() %]</textarea>
     </fieldset>
     <br />
-    <input type="submit" value="Save Profile" class="btn btn-primary btn-large search-btn" />
+    <input type="submit" value="Save Profile" class="btn btn-primary btn-lg search-btn" />
     </form>
     %%  }
 
     <template id="profile-tmpl">
       <div class="slide-out slide-down profile-container"><div>
-        <div class="form-group">
-          <label class="col-sm-4 col-md-4 control-label">
+        <div class="row mb-3 profile-row">
+          <label class="col-sm-4 col-md-4 col-form-label">
             <span class="profile-title"></span>
             <input placeholder="Profile name" class="input-small form-control" type="text" name="profile.name" />
           </label>
           <div class="col-sm-8 col-md-6">
             <div class="input-group">
               <input type="text" class="form-control" name="profile.id" />
-              <span class="input-group-btn">
-                <a href="" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt"></i> remove</a>
-                <a href="" class="btn btn-primary search-btn check-url" data-url-template="" target="_blank"><i class="fa fa-check-square"></i> check</a>
-              </span>
+              <button type="button" class="btn btn-danger remove-profile"><i class="fa fa-trash-alt" aria-hidden="true"></i> remove</button>
+                <a href="" class="btn btn-primary search-btn check-url" data-url-template="" target="_blank"><i class="fa fa-check-square" aria-hidden="true"></i> check</a>
             </div>
           </div>
         </div>
@@ -292,9 +279,7 @@
       <div class="slide-out slide-down field-container"><div>
         <div class="input-group">
           <input type="text" class="form-control" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-primary search-btn remove-field">remove</button>
-          </span>
+          <button type="button" class="btn btn-primary search-btn remove-field">remove</button>
         </div>
       </div></div>
     </template>

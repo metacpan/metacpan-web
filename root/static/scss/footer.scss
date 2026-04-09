@@ -1,5 +1,5 @@
 .footer {
-    background-color: #e9e9e9;
+    background-color: $bg-light-gray;
     bottom: 0;
     flex-shrink: 0;
     padding: 30px;
@@ -7,7 +7,7 @@
 }
 // for overflow scrolling
 html {
-    background-color: #e9e9e9;
+    background-color: $bg-light-gray;
 }
 
 .footer-container {
@@ -32,7 +32,7 @@ html {
     margin-bottom: 5px;
 
     a {
-        color: @gray-base;
+        color: $gray-base;
         font-size: 1.1em;
     }
 }
@@ -48,7 +48,7 @@ html {
     margin-top: 30px;
 
     .footer-social-link {
-        color: #43424a;
+        color: $footer-social-color;
         display: flex;
         font-size: 35px;
 
@@ -133,7 +133,7 @@ html {
     }
 }
 
-@media only screen and (min-width: @screen-sm-max) {
+@media only screen and (min-width: 768px) {
     .footer {
         padding: 30px 100px;
     }

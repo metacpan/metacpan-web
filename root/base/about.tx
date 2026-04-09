@@ -1,7 +1,7 @@
 %%  cascade base {
 %%      title => $title || 'MetaCPAN About'
 %%  }
-%%  override left_nav_classes -> { 'nav nav-pills nav-stacked' }
+%%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
 [%-
 for [
@@ -17,14 +17,18 @@ for [
   [ 'For Authors',              '',                     1 ],
   [ 'Distribution Metadata',    '/about/metadata',      0 ],
   [ 'CPAN Mirror',              '/about/mirror',        0 ],
-] -> $l {
+] -> $link {
 %]
-%%  if $l.2 {
-<li class="nav-header">[% $l.0 %]</li>
+%%  if $link.2 {
+<li class="nav-header">[% $link.0 %]</li>
 %%  }
 %%  else {
-<li class="[% if $current[$l.1] { 'active' } %]">
-    <a href="[% $l.1 %]">[% $l.0 %]</a>
+<li class="nav-item">
+%%  if $current[$link.1] {
+    <a href="[% $link.1 %]" class="nav-link active" aria-current="page">[% $link.0 %]</a>
+%%  } else {
+    <a href="[% $link.1 %]" class="nav-link">[% $link.0 %]</a>
+%%  }
 </li>
 %%  }
 %%  }

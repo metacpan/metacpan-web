@@ -2,6 +2,7 @@
 %%      title     => $title || "Recent Favorites",
 %%  }
 %%  override content -> {
+<h1>[% $title || 'Recent Favorites' %]</h1>
     %%  include inc::favorite_table { favorites => $recent, per_day => 1 }
 %%  }
 %%  override pagination -> {

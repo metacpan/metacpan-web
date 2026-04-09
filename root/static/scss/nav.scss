@@ -9,7 +9,7 @@
 }
 
 .top-notify-banner {
-    background-color: #006081;
+    background-color: $banner-bg;
     color: #fff;
     display: flex;
     flex-wrap: wrap;
@@ -25,7 +25,7 @@
     }
 
     a {
-        color: #c0d2e4;
+        color: $banner-link-color;
         text-decoration: underline;
     }
 
@@ -34,7 +34,7 @@
     }
 
     &.alert-banner {
-        background-color: #c00;
+        background-color: $danger;
     }
 }
 
@@ -43,8 +43,8 @@
 }
 
 .navbar {
-    background-color: @gray-darker;
-    border-color: @gray-darker;
+    background-color: $gray-900;
+    border-color: $gray-900;
     border-radius: 0;
     box-shadow:
         0 1px 13px 0 rgba(0, 0, 0, 10%),
@@ -58,12 +58,12 @@
     .nav {
         li.dropdown {
             .dropdown-toggle .caret,
-            &.open .caret {
+            &.show .caret {
                 border-top-color: black;
             }
 
-            &.open {
-                color: @black;
+            &.show {
+                color: $black;
                 position: relative;
 
                 a.dropdown-toggle {
@@ -71,7 +71,7 @@
                     z-index: 9999;
                 }
                 .dropdown-menu {
-                    border: 1px solid #e9e9e9;
+                    border: 1px solid $bg-light-gray;
                 }
             }
         }
@@ -88,33 +88,33 @@
             > a,
             > a:hover {
                 background-color: transparent;
-                border-bottom: 2px solid #da2037;
-                color: @body-bg;
+                border-bottom: 2px solid $nav-active-indicator;
+                color: $body-bg;
                 font-weight: bold;
             }
         }
     }
 
     .dropdown:hover .caret,
-    .open .caret {
+    .show .caret {
         opacity: 100%;
     }
 }
 
-.navbar-default .menu-items {
+.navbar .menu-items {
     li a {
-        color: @body-bg !important;
+        color: $body-bg !important;
     }
 
     li a:hover {
         background-color: transparent !important;
-        color: @body-bg !important;
+        color: $body-bg !important;
     }
 }
 
-ul.nav-pills.affix {
-    top: 30px;
-    /* Set the top position of pinned element */
+.sidebar ul.nav-pills {
+    position: sticky;
+    top: 60px;
 }
 
 .navbar-right .fa-search {
@@ -128,17 +128,21 @@ nav.navbar {
     display: grid;
     column-gap: 40px;
     grid-template-areas: "logo menu icons";
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto 1fr auto;
+    min-height: 57px;
     padding: 10px 40px;
 }
 
 .navbar-nav {
     align-items: center;
     display: flex;
+    flex-direction: row;
     gap: 15px;
 }
 
 .navbar-right {
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 0;
     grid-area: icons;
     justify-self: end;
@@ -148,10 +152,15 @@ nav.navbar {
         background-color: transparent;
         border: 0;
         padding: 0 6px;
+        position: relative;
+
+        &.dropdown-toggle::after {
+            display: none;
+        }
 
         .button-fa-icon,
         .logged-in-avatar {
-            border: 1px solid @list-group-border;
+            border: 1px solid $list-group-border-color;
             border-radius: 25px;
             cursor: pointer;
             height: 35px;
@@ -159,21 +168,21 @@ nav.navbar {
         }
 
         .button-fa-icon {
-            background-color: @body-bg;
-            color: @list-group-link-color;
+            background-color: $body-bg;
+            color: $list-group-color;
             display: grid;
             padding: 10px;
             place-content: center;
 
             &:hover {
-                background-color: #e9e9e9;
+                background-color: $bg-light-gray;
             }
         }
 
         .fa-chevron-down {
-            background-color: @gray-darker;
+            background-color: $gray-900;
             border-radius: 25px;
-            color: #e9e9e9;
+            color: $bg-light-gray;
             font-size: 10px;
             padding: 5px;
             position: absolute;
@@ -183,23 +192,26 @@ nav.navbar {
     }
 
     .dropdown-menu {
-        border-radius: 5px !important;
-        margin-top: 4px !important;
+        border-radius: 5px;
+        margin-top: 4px;
+        position: absolute;
     }
 
     .login-dropdown {
         place-content: center;
+        position: relative;
     }
 
     .logged-in-icon {
-        color: #da2037;
+        color: $nav-active-indicator;
     }
 
     .avatar-placeholder {
-        background-color: @gray-darker;
-        border: 2px solid @gray-darker;
-        color: @gray-darker;
+        background-color: $gray-900;
+        border: 2px solid $gray-900;
+        color: $gray-900;
     }
+
 }
 
 body.logged-in {
@@ -242,6 +254,7 @@ body:not(.logged-in) {
 }
 
 .menu-items {
+    flex-wrap: nowrap;
     grid-area: menu;
     justify-self: center;
 }

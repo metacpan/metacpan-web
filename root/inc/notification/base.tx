@@ -1,7 +1,7 @@
 <input id="[% $type %]" type="checkbox" class="notification-toggle-checkbox" />
-<div id="metacpan_notification" class="well collapsed notify-[% $type %]">
-    <label class="remove-notification" for="[% $type %]" >
-      <i class="fa fa-fw fa-times black"></i>
+<div id="metacpan_notification" class="card card-body collapsed notify-[% $type %]">
+    <label class="remove-notification" for="[% $type %]" aria-label="Dismiss notification">
+      <i class="fa fa-fw fa-times black" aria-hidden="true"></i>
     </label>
     <div id="metacpan_notification-container">
       <h2>[% $title %]</h2>
@@ -10,7 +10,7 @@
         %%  if $email_contact {
         If you're interested then please contact [% $email_contact %] via
         <a href="mailto:[% $emails.join(',') %]?subject=[% $email_subject | uri_escape %]&amp;body=[% block email_body | uri_escape -> { } %]">email</a>.
-        <a href="/about/faq#howtoadoptadistribution"><i class="fa fa-info-circle"></i></a>
+        <a href="/about/faq#howtoadoptadistribution" aria-label="More information about adopting distributions"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
         %%  }
       </div>
   </div>

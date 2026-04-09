@@ -15,6 +15,10 @@
     padding: 0;
     margin: 0;
     transition: min-height 0.5s cubic-bezier(0, 1, 0.5, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 }
 
 label.remove-notification {
@@ -33,32 +37,32 @@ label.remove-notification {
 }
 
 .notify-NEEDHELP {
-    background: #d7f5dd;
+    background: $notify-success-bg;
 }
 
 .notify-ADOPTME {
-    background: #f5efd7;
+    background: $notify-warning-bg;
 }
 
 .notify-HANDOFF {
-    background: #d7e1f5;
+    background: $notify-info-bg;
 }
 
 .notify-DEPRECATED,
 .notify-MODULE_DEPRECATED {
-    background: #f8d7da;
+    background: $notify-danger-bg;
 }
 
 .cve-banner {
-    border: 1px solid @alert-danger-border;
+    border: 1px solid $alert-danger-border;
     border-radius: 4px;
     margin-bottom: 15px;
 }
 
 .cve-summary {
     display: list-item;
-    background: @alert-danger-bg;
-    color: @alert-danger-text;
+    background: $alert-danger-bg;
+    color: $alert-danger-text;
     padding: 8px 12px;
     cursor: pointer;
 }

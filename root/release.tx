@@ -13,7 +13,7 @@
   %%  }
 </ul>
 %%  }
-<div id="metacpan_last-changes" class="well">
+<div id="metacpan_last-changes" class="card card-body bg-light mb-3">
   <div class="changes-content">
     %%  for $changes -> $rel {
     <h2 id="whatsnew">Changes for version [% $rel.version %][% if $rel.date && datetime($rel.date) { %] - [% datetime($rel.date).to_ymd() } if $rel.trial { %] (TRIAL RELEASE)[% } %]</h2>
