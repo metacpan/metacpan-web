@@ -259,7 +259,7 @@
 
     <template id="profile-tmpl">
       <div class="slide-out slide-down profile-container"><div>
-        <div class="row mb-3">
+        <div class="row mb-3 profile-row">
           <label class="col-sm-4 col-md-4 col-form-label">
             <span class="profile-title"></span>
             <input placeholder="Profile name" class="input-small form-control" type="text" name="profile.name" />
