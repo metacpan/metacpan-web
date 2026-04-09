@@ -15,7 +15,7 @@
         <a rel="author" href="/author/[% $author.pauseid %]">[% $author.pauseid %]</a>
     </strong>
     <span class="name" title="[% $author.display_name %]">[% $author.display_name %]</span>
-    <strong class="count">[% $author.releases | format_number %] release[% if $author.releases > 1 { %]s[% } %]</strong>
+    <strong class="count">[% $author.releases | format_number %] [% pluralize("release", $author.releases) %]</strong>
 </div>
 %%  }
 %%  }
