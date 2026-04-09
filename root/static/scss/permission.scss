@@ -75,7 +75,7 @@
         align-items: baseline;
     }
 
-    @media (max-width: 575.98px) {
+    @include media-breakpoint-down(sm) {
         grid-template-columns: 1fr;
     }
 }
@@ -135,7 +135,7 @@
         }
     }
 
-    @media (max-width: 575.98px) {
+    @include media-breakpoint-down(sm) {
         font-size: 0.9em;
     }
 }

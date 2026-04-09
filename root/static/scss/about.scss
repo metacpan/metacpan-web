@@ -216,7 +216,7 @@
     color: $gray-600;
 }
 
-@media (max-width: 767.98px) {
+@include media-breakpoint-down(md) {
     .sponsor-tiers {
         grid-template-columns: 1fr;
     }
@@ -226,7 +226,7 @@
     }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(sm) {
     .about-sponsor {
         .sponsor-card {
             flex-direction: column;

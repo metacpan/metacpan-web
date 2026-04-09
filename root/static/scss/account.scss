@@ -243,7 +243,7 @@
     }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(sm) {
     .account-settings {
         form {
             margin-bottom: 20px;

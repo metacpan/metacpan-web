@@ -402,7 +402,7 @@ h3,
     grid-area: pagination;
 }
 
-@media (max-width: 767.98px) {
+@include media-breakpoint-down(md) {
     .page-content {
         grid-template-columns: 0 1fr;
     }
