@@ -8,7 +8,7 @@ use File::Find ();
 use Path::Tiny qw( path );
 
 # files that have inline <script> tags
-my %skip = map { $_ => 1 } ();
+my %skip = map { $_ => 1 } ('root/base.tx');
 
 File::Find::find(
     {
