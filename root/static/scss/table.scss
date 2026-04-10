@@ -42,14 +42,27 @@
         font-weight: bold;
     }
 
-    th.position {
-        width: 3em;
-    }
-
-    th.river-gauge,
-    td.river-gauge {
+    .release-river-gauge {
+        display: inline-block;
         width: 36px;
         text-align: center;
+        vertical-align: middle;
+    }
+
+    td.name a.ellipsis {
+        display: inline;
+        width: auto;
+    }
+
+    .release-date {
+        display: block;
+        margin-left: 36px;
+        font-size: 0.85em;
+        color: var(--bs-secondary-color, #6c757d);
+    }
+
+    th.position {
+        width: 3em;
     }
 
     &.table-leaderboard {

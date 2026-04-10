@@ -240,6 +240,13 @@ a.ellipsis:hover * {
     .name a {
         display: inline-block;
     }
+
+    .browse-details {
+        display: block;
+        margin-left: 20px;
+        font-size: 0.85em;
+        color: var(--bs-secondary-color, #6c757d);
+    }
 }
 
 .file-table td.mtime,

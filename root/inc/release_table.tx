@@ -12,24 +12,22 @@
     %% }
     <table [% if $table_id { %] id="[% $table_id %]"[% } %]
       %%  if $tablesorter {
-      data-default-sort="[% $default_sort || '1,0' %]"
+      data-default-sort="[% $default_sort || '0,0' %]"
       %%  }
       class="table table-sm table-striped table-releases[% if $tablesorter { %] tablesorter[% } %]">
       <thead>
         <tr>
-          <th class="river-gauge"><span class="visually-hidden">River gauge</span></th>
           <th class="name pull-left-phone">Release</th>
           <th class="d-none d-sm-table-cell invisible no-sort"></th>
-          <th class="date">[% $per_day ? datetime($release.date).strftime("%A, %e %B %Y") : "Uploaded" %]</th>
+          <th class="date d-none d-sm-table-cell">[% $per_day ? datetime($release.date).strftime("%A, %e %B %Y") : "Uploaded" %]</th>
         </tr>
       </thead>
       <tbody>
     %%  }
         <tr>
-          <td class="river-gauge" sort="[% $release.river.total || 0 %]">[% include inc::river_gauge { distribution => $release.distribution, river => $release.river } %]</td>
-          <td class="name dist-release status-[% $release.status %] maturity-[% $release.maturity %]"><strong><a href="[% $release.status == 'latest' ? '/dist/' ~ $release.distribution : '/release/' ~ $release.author ~ '/' ~ $release.name %]" class="ellipsis release-name" title="[% $release.author ~ '/' ~ $release.name %]">[% $release.name %]</a></strong></td>
+          <td class="name dist-release status-[% $release.status %] maturity-[% $release.maturity %]"><span class="release-river-gauge">[% include inc::river_gauge { distribution => $release.distribution, river => $release.river } %]</span><strong><a href="[% $release.status == 'latest' ? '/dist/' ~ $release.distribution : '/release/' ~ $release.author ~ '/' ~ $release.name %]" class="ellipsis release-name" title="[% $release.author ~ '/' ~ $release.name %]">[% $release.name %]</a></strong><span class="release-date d-sm-none relatize">[% $date %]</span></td>
           <td class="abstract">[% $release.abstract %]</td>
-          <td class="date relatize" sort="[% $date %]">[% $date %]</td>
+          <td class="date relatize d-none d-sm-table-cell" sort="[% $date %]">[% $date %]</td>
         </tr>
     %%  if $day_end {
       </tbody>

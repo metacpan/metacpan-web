@@ -16,7 +16,7 @@
         %%  include inc::release_table {
         %%      header          => 1,
         %%      tablesorter     => 1,
-        %%      default_sort    => '2,1',
+        %%      default_sort    => '1,1',
         %%      table_id        => 'revdep_releases',
         %%  };
     %%  }
