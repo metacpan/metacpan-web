@@ -21,9 +21,9 @@
         "@playwright/test": "^1.59.1",
         "@stylistic/eslint-plugin": "^5.10.0",
         "eslint": "^10.2.0",
-        "globals": "^17.4.0",
+        "globals": "^17.5.0",
         "js-beautify": "^1.15.4",
-        "prettier": "3.8.1"
+        "prettier": "3.8.2"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
