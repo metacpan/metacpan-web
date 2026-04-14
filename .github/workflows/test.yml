@@ -129,7 +129,7 @@ jobs:
           docker cp ${{ steps.start-container.outputs.container_id }}:/app/cover_db ./cover_db
       - name: Install Codecovbash
         if: steps.coverage.outputs.enabled
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@v2
         with:
           install: |
             Devel::Cover
@@ -175,12 +175,12 @@ jobs:
       - run: npm install
       - run: apt-get update && apt-get -y install libcmark-dev
       - name: Install Carton
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@v2
         with:
           install: Carton
           sudo: false
       - name: Install CPAN deps
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@v2
         with:
           cpanfile: 'cpanfile'
           sudo: false
@@ -190,7 +190,7 @@ jobs:
         run: npm run build
       - name: Install Codecovbash
         if: steps.coverage.outputs.enabled
-        uses: perl-actions/install-with-cpm@v1
+        uses: perl-actions/install-with-cpm@v2
         with:
           install: |
             Devel::Cover
