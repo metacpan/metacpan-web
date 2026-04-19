@@ -5607,13 +5607,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Package::Stash 0.23
       perl 5.008001
-  version-0.9933
-    pathname: L/LE/LEONT/version-0.9933.tar.gz
+  version-0.9934
+    pathname: L/LE/LEONT/version-0.9934.tar.gz
     provides:
-      version 0.9933
-      version::regex 0.9933
-      version::vpp 0.9933
-      version::vxs 0.9933
+      version 0.9934
+      version::regex 0.9934
+      version::vpp 0.9934
+      version::vxs 0.9934
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.006002
