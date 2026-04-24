@@ -7,23 +7,18 @@ use Exporter qw(import);
 use Carp           qw( croak );
 use Ref::Util      qw( is_plain_arrayref );
 use Digest::MD5    ();
+use FFI::Platypus  ();
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use URI            ();
-use CommonMark     qw(
-    EVENT_ENTER
-    EVENT_EXIT
-    NODE_CODE
-    NODE_CODE_BLOCK
-    NODE_DOCUMENT
-    NODE_HEADER
-    NODE_HRULE
-    NODE_HTML
-    NODE_INLINE_HTML
-    NODE_LINEBREAK
-    NODE_SOFTBREAK
-    NODE_TEXT
-    OPT_UNSAFE
+
+my $ffi = FFI::Platypus->new( api => 2 );
+$ffi->lib( $ENV{COMRAK_FFI_LIB} || '/usr/local/lib/libcomrak_ffi.so' );
+my $comrak_render = $ffi->function(
+    'comrak_markdown_to_html' => ['string', 'int'] => 'opaque'
+);
+my $comrak_free = $ffi->function(
+    'comrak_free_string' => ['opaque'] => 'void'
 );
 
 our @EXPORT_OK = qw(
@@ -39,7 +34,7 @@ sub filter_html {
     my $hr = HTML::Restrict->new(
         uri_schemes => [ undef, 'http', 'https', 'mailto', 'irc', 'ircs' ],
         rules       => {
-            a       => [qw( href id target )],
+            a       => [qw( href id target class aria-hidden )],
             b       => [],
             br      => [],
             caption => [],
@@ -184,74 +179,22 @@ sub split_index {
     return ( $pod_index, $html );
 }
 
-my @is_leaf;
-$is_leaf[$_] = 1
-    for (
-    NODE_HTML,      NODE_HRULE,     NODE_CODE_BLOCK, NODE_TEXT,
-    NODE_SOFTBREAK, NODE_LINEBREAK, NODE_CODE,       NODE_INLINE_HTML,
-    );
-
 sub render_markdown {
     my ( $markdown, %opts ) = @_;
 
-    my $render_opts = 0;
-    if ( delete $opts{unsafe} // 1 ) {
-        $render_opts |= OPT_UNSAFE;
-    }
+    my $unsafe = delete $opts{unsafe} // 1;
 
     if (%opts) {
         croak "Unsupported options: " . join( ', ', sort keys %opts );
     }
 
-    my $doc = CommonMark->parse_document($markdown);
-
-    my ( $html, $header_content, %seen_header );
-
-    my $iter = $doc->iterator;
-    while ( my ( $ev_type, $node ) = $iter->next ) {
-        my $node_type = $node->get_type;
-
-        if ( $node_type == NODE_DOCUMENT ) {
-            next;
-        }
-
-        if ( $node_type == NODE_HEADER ) {
-            if ( $ev_type == EVENT_ENTER ) {
-                $header_content = '';
-            }
-            if ( $ev_type == EVENT_EXIT ) {
-                $header_content =~ s{(?:-(\d+))?$}{'-' . (($1 // 1) + 1)}e
-                    while $seen_header{$header_content}++;
-
-                my $header_html = $node->render_html($render_opts);
-                $header_html
-                    =~ s/^<h[0-9]+\b\K/' id="'.escape_html($header_content).'"'/e;
-                $html .= $header_html;
-
-                undef $header_content;
-            }
-        }
-        elsif ($ev_type == EVENT_ENTER
-            && $node->parent->get_type == NODE_DOCUMENT )
-        {
-            $html .= $node->render_html($render_opts);
-        }
-
-        if ( defined $header_content ) {
-            if ( $is_leaf[$node_type] ) {
-                my $content = lc( $node->get_literal );
-                $content =~ s/\A\s+//;
-                $content =~ s/\s+\z//;
-                $content =~ s/\s+/-/g;
-
-                if ( length $content ) {
-                    $header_content .= '-' if length $header_content;
-                    $header_content .= $content;
-                }
-            }
-        }
-    }
-
+    # comrak renders GFM markdown to HTML with extensions enabled
+    # (tables, strikethrough, autolinks, tagfilter, header IDs).
+    # The unsafe flag controls whether raw HTML in the markdown is
+    # passed through (1) or stripped (0).
+    my $ptr = $comrak_render->call($markdown, $unsafe ? 1 : 0);
+    my $html = $ffi->cast('opaque', 'string', $ptr);
+    $comrak_free->call($ptr);
     return $html;
 }
 

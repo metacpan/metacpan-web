@@ -12,7 +12,7 @@ requires 'Catalyst::TraitFor::Request::REST';
 requires 'Catalyst::View::JSON';
 requires 'Catalyst::View::Xslate';
 requires 'CatalystX::Fastly::Role::Response', '0.06';
-requires 'CommonMark';
+requires 'FFI::Platypus';
 requires 'Config::General';
 requires 'Config::ZOMG', '1.000000';
 requires 'CPAN::DistnameInfo', '0.12';
