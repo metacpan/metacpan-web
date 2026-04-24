@@ -1,0 +1,582 @@
+// Dark mode overrides for custom styles.
+// Bootstrap components adapt automatically via data-bs-theme;
+// this file handles our custom hardcoded colors.
+
+html[data-bs-theme="dark"] {
+    background-color: var(--bs-body-bg);
+}
+
+[data-bs-theme="dark"] {
+    // GitHub-inspired dark palette
+    --bs-body-bg: #0d1117;
+    --bs-body-color: #f0f6fd;
+    --bs-emphasis-color: #f0f6fd;
+    --bs-heading-color: #f0f6fd;
+    --bs-secondary-color: #9198a1;
+    --bs-tertiary-color: #656c76;
+    --bs-tertiary-bg: #151b23;
+    --bs-secondary-bg: #212830;
+    --bs-border-color: #3d444d;
+    --bs-link-color: #4493f8;
+    --bs-link-hover-color: #539bf5;
+    --bs-primary-bg-subtle: #212830;
+
+    --sponsor-logo-bg: #d0d0d0;
+    --river-gauge-empty: #3d444d;
+    --river-gauge-filled: #7ea3f2;
+
+    // Navbar
+    .top-notify-banner {
+        background-color: #0d2d3d;
+        color: var(--bs-body-color);
+
+        a {
+            color: #58a6ff;
+        }
+
+        &.alert-banner {
+            background-color: #5c1a1a;
+        }
+    }
+
+    .navbar {
+        background-color: var(--bs-body-bg);
+        border-color: var(--bs-body-bg);
+    }
+
+    .navbar .menu-items li a {
+        color: var(--bs-body-color) !important;
+    }
+
+    .navbar .nav .active > a,
+    .navbar .nav .active > a:hover {
+        color: var(--bs-body-color) !important;
+    }
+
+    .header-logo-large .logo {
+        --text-color: var(--bs-body-color);
+    }
+
+    .navbar .nav .dropdown.show .dropdown-menu {
+        background-color: var(--bs-body-bg);
+        border-color: var(--bs-border-color);
+    }
+
+    .navbar-right button {
+        .button-fa-icon {
+            background-color: var(--bs-tertiary-bg);
+            color: var(--bs-body-color);
+            border-color: var(--bs-border-color);
+
+            &:hover {
+                background-color: var(--bs-secondary-bg);
+            }
+        }
+    }
+
+    .theme-toggle .fa-sun {
+        color: #ffc107;
+    }
+
+    .navbar-right .theme-toggle {
+        color: var(--bs-secondary-color);
+        &:hover {
+            color: var(--bs-body-color);
+        }
+    }
+
+    // Footer
+    .footer {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .footer-social-link {
+        color: var(--bs-body-color);
+    }
+
+    .footer-link a {
+        color: var(--bs-body-color);
+    }
+
+    .footer .footer-logo img {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    .footer-sponsor-link,
+    .about-sponsor .sponsor-logo {
+        background-color: var(--sponsor-logo-bg);
+        border-radius: 6px;
+        padding: 4px 8px;
+    }
+
+    // Sidebar / nav-list
+    .sidebar {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .nav-list {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .nav-list .section-header,
+    .nav-list li a,
+    .nav-list li,
+    .nav-list .btn-link {
+        color: var(--bs-body-color);
+    }
+
+    .nav-list > .active > a,
+    .nav-list > .active > a:hover,
+    .nav-list > .active > a:focus {
+        background-color: var(--bs-secondary-bg) !important;
+        color: var(--bs-body-color) !important;
+    }
+
+    .nav-list .sidebar-icon,
+    .nav-list form label {
+        color: var(--bs-secondary-color);
+    }
+
+    .nav-list .section-divider {
+        border-color: var(--bs-border-color);
+    }
+
+    .sidebar .nav-pills .nav-link.active {
+        background-color: var(--bs-secondary-bg);
+        color: var(--bs-body-color);
+    }
+
+    .sidebar .dependencies-details {
+        background-color: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+    }
+
+    .dependencies-card {
+        background: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+        box-shadow: none;
+
+        hr {
+            border-color: var(--bs-border-color);
+        }
+    }
+
+    // Home page
+    .home .hero-logo img {
+        filter: invert(1) hue-rotate(180deg);
+    }
+
+    .helper-blurb {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    .home #metacpan_search-input {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 16px;
+    }
+
+    // Mobile slidepanel
+    .slidepanel {
+        background-color: var(--bs-tertiary-bg);
+        border-right-color: var(--bs-border-color);
+    }
+
+    // Keyboard shortcuts
+    kbd {
+        background-color: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+        box-shadow: inset 0 -1px 0 var(--bs-border-color);
+        color: var(--bs-body-color);
+    }
+
+    // Favorite / rating buttons
+    button.favorite,
+    a.favorite {
+        background-color: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+        color: var(--bs-body-color);
+    }
+
+    .river-gauge-gauge a.button {
+        background: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+        color: var(--bs-body-color);
+    }
+
+    // Hardcoded dark colors that need to flip
+    .black {
+        color: var(--bs-body-color);
+    }
+
+    .nav-header {
+        color: var(--bs-body-color);
+        opacity: 0.65;
+    }
+
+    .nav-sub-label {
+        color: var(--bs-secondary-color);
+    }
+
+    .comment {
+        color: var(--bs-secondary-color);
+    }
+
+    .bg-light {
+        background-color: var(--bs-tertiary-bg) !important;
+    }
+
+    .maint-owner-badge {
+        color: var(--bs-secondary-color);
+    }
+
+    .dep-more-btn {
+        color: var(--bs-link-color);
+    }
+
+    // CPAN Testers pass/fail colors
+    .cpantesters-pass {
+        color: #4caf50;
+    }
+
+    .cpantesters-fail {
+        color: #f44336;
+    }
+
+    // Muted text (e.g. non-latest releases on /recent)
+    .dist-release.status-cpan .release-name {
+        color: var(--bs-secondary-color);
+    }
+
+    // Release status
+    .release-banner.maturity-developer {
+        background-color: #8b2020;
+        color: #f0f6fd;
+        border-color: #8b2020;
+    }
+
+    // Qtip tooltips
+    .qtip .qtip-content td {
+        border-color: var(--bs-border-color);
+    }
+
+    .qtip .qtip-content th {
+        background-color: var(--bs-secondary-bg);
+    }
+
+    .qtip-github table {
+        td,
+        th {
+            border-color: var(--bs-border-color);
+        }
+        th {
+            background-color: var(--bs-secondary-bg);
+        }
+    }
+
+    // Search results
+    .search-results .description {
+        color: var(--bs-secondary-color);
+    }
+
+    // Autocomplete
+    .autocomplete-suggestions {
+        background-color: var(--bs-body-bg);
+        border-color: var(--bs-border-color);
+
+        strong {
+            color: var(--bs-body-color);
+        }
+    }
+
+    .autocomplete-suggestion {
+        color: var(--bs-body-color);
+    }
+
+    div.autocomplete-suggestions div:nth-child(even) {
+        background: var(--bs-secondary-bg);
+    }
+
+    .autocomplete-suggestion:hover {
+        background: var(--bs-primary-bg-subtle) !important;
+    }
+
+    .autocomplete-suggestion.autocomplete-selected {
+        background: var(--bs-primary-bg-subtle) !important;
+    }
+
+    // Notifications
+    .notify-NEEDHELP {
+        background-color: #1a3d1a;
+    }
+    .notify-ADOPTME {
+        background-color: #3d3a1a;
+    }
+    .notify-HANDOFF {
+        background-color: #1a2a3d;
+    }
+    .notify-DEPRECATED,
+    .notify-MODULE_DEPRECATED {
+        background-color: #3d1a1a;
+    }
+    .cve-entry + .cve-entry {
+        border-color: var(--bs-border-color);
+    }
+    .cve-summary {
+        background-color: #3d1a1a;
+        color: #f5a0a0;
+    }
+
+    // Pod content
+    .pod-content table th {
+        background-color: var(--bs-secondary-bg);
+    }
+
+    .pod-content table,
+    .pod-content table td,
+    .pod-content table th {
+        border-color: var(--bs-border-color);
+    }
+
+    .pod-content .toc {
+        border-color: var(--bs-border-color);
+    }
+
+    .pod-errors {
+        background-color: #3d2b1a;
+        border-color: var(--bs-border-color);
+    }
+
+    .pod-errors h2 {
+        color: #ff8c69;
+    }
+
+    // Code / pre
+    code {
+        background-color: var(--bs-tertiary-bg);
+    }
+
+    pre {
+        background-color: var(--bs-tertiary-bg);
+        border-color: var(--bs-border-color);
+
+        code {
+            background-color: transparent;
+        }
+    }
+
+    // Diff
+    .diff-container {
+        background-color: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+    }
+
+    .diff-header {
+        background: var(--bs-tertiary-bg);
+    }
+
+    .diff-header a {
+        color: var(--bs-body-color);
+    }
+
+    .diff-list li {
+        border-color: var(--bs-border-color);
+    }
+
+    // Release rows — zebra stripes for all file-group tables
+    main .release-documentation,
+    main .release-modules,
+    main .release-provides {
+        div.release-row:nth-of-type(even) {
+            background-color: var(--bs-secondary-bg);
+        }
+    }
+
+    .releases td.name {
+        background: var(--bs-tertiary-bg);
+    }
+
+    // Author
+    .author-results li {
+        border-color: transparent;
+    }
+
+    .author-pic img {
+        box-shadow: 0 0 3px var(--bs-border-color);
+    }
+
+    // About / sponsors
+    .sponsors-tier {
+        border-color: var(--bs-border-color);
+        background-color: var(--bs-body-bg);
+    }
+
+    .sponsor-card {
+        border-color: var(--bs-border-color);
+    }
+
+    .sponsor-logo-dark {
+        background-color: var(--bs-secondary-bg);
+    }
+
+    .sponsors-tier-price {
+        color: var(--bs-body-color);
+    }
+
+    .sponsor-tier {
+        background: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+
+        ul li {
+            color: var(--bs-secondary-color);
+        }
+    }
+
+    .sponsor-tier-featured {
+        border-color: var(--bs-link-color);
+        box-shadow: 0 4px 16px rgba(68, 147, 212, 0.15);
+    }
+
+    .sponsor-tier-btn-secondary {
+        background: var(--bs-body-bg);
+        color: var(--bs-link-color);
+        border-color: var(--bs-link-color);
+
+        &:hover,
+        &:focus {
+            background: var(--bs-tertiary-bg);
+        }
+    }
+
+    .sponsor-tier-note,
+    .sponsor-tiers-contact {
+        color: var(--bs-secondary-color);
+    }
+
+    .about h1 {
+        border-bottom-color: var(--bs-border-color);
+    }
+
+    .about-sponsor h2 {
+        border-bottom-color: var(--bs-border-color);
+    }
+
+    // Permissions
+    .permission-table thead th {
+        background: var(--bs-body-bg);
+        box-shadow: inset 0 -1px 0 var(--bs-border-color);
+        color: var(--bs-secondary-color);
+    }
+
+    .permission-table td,
+    .permission-table th {
+        border-color: var(--bs-border-color);
+    }
+
+    .permission-module-list li {
+        border-color: var(--bs-border-color);
+    }
+
+    .permission-author-summary {
+        color: var(--bs-secondary-color);
+    }
+
+    // Syntax highlighter
+    .syntaxhighlighter {
+        background-color: var(--bs-tertiary-bg);
+        border-color: var(--bs-border-color);
+
+        .plain,
+        .plain a {
+            color: #d4d4d4;
+        }
+        .comments,
+        .comments a {
+            color: #6a9955;
+        }
+        .string,
+        .string a {
+            color: #ce9178;
+        }
+        .keyword {
+            color: #569cd6;
+        }
+        .preprocessor {
+            color: #9cdcfe;
+        }
+        .variable {
+            color: #dcdcaa;
+        }
+        .value {
+            color: #b5cea8;
+        }
+        .functions {
+            color: #c586c0;
+        }
+        .constants {
+            color: #4fc1ff;
+        }
+        .script {
+            color: #569cd6;
+        }
+        .color1,
+        .color1 a {
+            color: #9cdcfe;
+        }
+        .color2,
+        .color2 a {
+            color: #c586c0;
+        }
+        .color3,
+        .color3 a {
+            color: #f44747;
+        }
+
+        .gutter {
+            color: #858585;
+            .line {
+                border-right-color: #4a8c4a;
+            }
+            .line.highlighted {
+                background-color: #4a8c4a;
+            }
+        }
+
+        .container .highlighted {
+            background-color: rgb(255 255 255 / 10%);
+        }
+    }
+
+    .syntaxhighlighter-theme .pod-line {
+        border-color: var(--bs-border-color);
+        background-color: rgb(255 255 255 / 5%);
+    }
+
+    .syntaxhighlighter .pod-placeholder {
+        background-color: rgb(255 255 255 / 15%);
+    }
+
+    button.pod-toggle {
+        border-color: var(--bs-border-color);
+        color: var(--bs-secondary-color);
+
+        &:hover {
+            background-color: var(--bs-secondary-bg);
+        }
+
+        &:not(.pod-hidden) {
+            background-color: var(--bs-secondary-bg);
+            border-color: var(--bs-secondary-bg);
+            color: var(--bs-body-color);
+        }
+    }
+
+    // Lab
+    .testing-zone {
+        color: #f85149;
+    }
+    .lab-addition {
+        color: #4caf50;
+    }
+    .lab-deletion {
+        color: $danger;
+    }
+}

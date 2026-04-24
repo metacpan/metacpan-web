@@ -73,6 +73,20 @@ $border-radius-base: 0.25rem !default;
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
 
+// GitHub-inspired dark palette — override BS5 Sass vars so compiled
+// component styles (buttons, badges, forms, etc.) also pick up our colors.
+$body-color-dark: #f0f6fd;
+$body-bg-dark: #0d1117;
+$body-emphasis-color-dark: #f0f6fd;
+$body-secondary-color-dark: #9198a1;
+$body-tertiary-color-dark: #656c76;
+$body-secondary-bg-dark: #212830;
+$body-tertiary-bg-dark: #151b23;
+$border-color-dark: #3d444d;
+$headings-color-dark: #f0f6fd;
+$link-color-dark: #4493f8;
+$link-hover-color-dark: #539bf5;
+
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/utilities";
@@ -163,5 +177,7 @@ $fa-font-path: "../../../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "./notification.scss";
 @import "./permission.scss";
 @import "./footer.scss";
+
+@import "./dark-mode";
 
 @import "../css/user.css";

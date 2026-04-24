@@ -52,11 +52,9 @@
     min-width: 0;
 }
 
-// Searchbar is hidden on small screens, shown on md+
-// The searchbar-open class overrides this when search button is clicked on mobile
 .searchbar-form {
     display: none;
-    @media (min-width: 768px) {
+    @include media-breakpoint-up(md) {
         display: block;
     }
 }

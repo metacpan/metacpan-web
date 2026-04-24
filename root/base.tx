@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        <script src="/static/js/theme-init.js"></script>
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
         <link rel="preload" as="fetch" href="/account/login_status" crossorigin="anonymous" />
         %%  for $assets.grep(rx('\.css$')) -> $css {
@@ -52,6 +53,11 @@
             </ul>
             %%  }
             <ul class="nav navbar-nav navbar-right ms-auto">
+                <li>
+                    <button type="button" class="theme-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon" aria-hidden="true"></i>
+                    </button>
+                </li>
                 <li class="d-block d-md-none">
                     <button type="button" class="searchbar-btn" aria-label="Search">
                         <i class="fa fa-search button-fa-icon" aria-hidden="true"></i>
@@ -125,7 +131,7 @@
           <nav class="sidebar" aria-label="Section navigation">
             %%  block left_nav -> {
             <div class="slidepanel">
-              <ul class="nav-list [% block left_nav_classes -> { } %]">
+              <ul class="[% block left_nav_classes -> { 'nav-list' } %]">
                   %% block left_nav_content -> {}
               </ul>
             </div>
