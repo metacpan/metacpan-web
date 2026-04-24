@@ -10,8 +10,6 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: libcmark-dev
-        run: sudo apt-get install -y -f --no-install-recommends libcmark-dev
       - name: Generate Auth Token
         uses: actions/create-github-app-token@v3
         id: app-token
