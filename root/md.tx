@@ -1,4 +1,6 @@
 %%  cascade pod
 %%  override content -> {
+<div class="pod anchors">
     [% $source | markdown | filter_html %]
+</div>
 %%  }
