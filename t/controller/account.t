@@ -7,7 +7,6 @@ use HTTP::Cookies       ();
 use HTTP::Date          qw( time2str );
 use MetaCPAN::Web::Test qw( app GET override_api_response POST test_psgi tx );
 use Plack::Session      ();
-use Test::Deep          qw( cmp_deeply );
 use Test::More;
 
 my $api_res;
@@ -167,7 +166,7 @@ test_psgi app, sub {
             'POST /account/profile with all fields'
         );
 
-        cmp_deeply(
+        is_deeply(
             $profile_req,
             {
                 'email' => [ 'foo@example.org', 'bar@example.org' ],
@@ -225,7 +224,7 @@ test_psgi app, sub {
             $res = $cb->( POST '/account/profile', $form ),
             'POST /account/profile with no fields'
         );
-        cmp_deeply(
+        is_deeply(
             $profile_req,
             {
                 'updated'   => '2017-02-15T22:18:19',
