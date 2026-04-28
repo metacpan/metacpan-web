@@ -218,7 +218,7 @@ subtest 'GH issue linking' => sub {
 };
 
 subtest 'markdown files should be in the documentation section' => sub {
-    my $release = MetaCPAN::Web->controller('Release');
+    my $release    = MetaCPAN::Web->controller('Release');
     my %categories = %{
         $release->_files_to_categories(
             {
