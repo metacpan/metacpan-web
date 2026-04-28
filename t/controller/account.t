@@ -31,11 +31,11 @@ override_api_response( sub {
         $profile_req = decode_json( $req->content );
         $res         = $profile_req;
     }
-    elsif ( $req->uri->path eq '/oauth2/access_token' ) {
+    elsif ( $req->uri->path =~ m{/oauth2/access_token$} ) {
         $login_req = $req;
         $res       = $login_res;
     }
-    elsif ( $req->url->path eq '/user' ) {
+    elsif ( $req->url->path =~ m{/user$} ) {
         $user_req = $req;
         $res      = $user_res;
     }

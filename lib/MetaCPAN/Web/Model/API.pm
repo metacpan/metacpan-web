@@ -111,7 +111,9 @@ sub request {
         $path = join '/', map uri_escape($_), @$path;
     }
 
-    $url->path(join '/', grep length, $url->path, $path);
+    my $root_path = $url->path =~ s{/?$}{/}r;
+    $path =~ s{^/}{};
+    $url->path( $root_path . $path );
 
     my $current_url = $self->request_uri;
     my $request_id  = $self->request_id;
