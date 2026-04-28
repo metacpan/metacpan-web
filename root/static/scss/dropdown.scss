@@ -12,4 +12,7 @@
         width: 100%;
         opacity: 0;
     }
+    .caret {
+        @include caret();
+    }
 }
