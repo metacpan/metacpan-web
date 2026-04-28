@@ -1,10 +1,6 @@
 .syntaxhighlighter {
     line-height: 1.2em;
     width: 100%;
-    background-color: #f5f5f5;
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    padding: 4px 12px;
 
     // fix conflicts with bootstrap
     .container {
@@ -73,9 +69,9 @@
     .gutter {
         color: #767676;
         .line {
-            border-right: 3px solid #3a8a3a;
+            border-right: 3px solid #6ce26c;
             &.highlighted {
-                background-color: #3a8a3a;
+                background-color: #6ce26c;
             }
         }
     }
