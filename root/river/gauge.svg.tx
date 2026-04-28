@@ -1,24 +1,18 @@
 [%-
-    my $bucket = $river.bucket;
+    my $bucket = $river.bucket // 0;
     my $empty  = "#e4e2e2";
     my $filled = "#7ea3f2";
 -%]
-%%  if defined($bucket) {
-  <svg width="24px"
-       height="15px"
-       version="1.1"
-       xmlns="http://www.w3.org/2000/svg"
-       xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="24px"
+      height="15px"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink">
 
-    <g>
-      %%# 5 bars, 4x15px, 1px apart, colored #e4e2e2 or #7ea3f2
-      %%  for [0, 1, 2, 3, 4] -> $bar {
-      <rect x="[% $bar * 5 %]"  y="0" width="4" height="15" fill="[% $bucket > $bar ? $filled : $empty %]" />
-      %%  }
-    </g>
-  </svg>
-
-%%  }
-%%  else {
-  <i class="fas fa-question text-muted" title="River data not yet available" aria-hidden="true"></i>
-%% }
+  <g>
+    %%# 5 bars, 4x15px, 1px apart, colored #e4e2e2 or #7ea3f2
+    %%  for [0, 1, 2, 3, 4] -> $bar {
+    <rect x="[% $bar * 5 %]"  y="0" width="4" height="15" fill="[% $bucket > $bar ? $filled : $empty %]" />
+    %%  }
+  </g>
+</svg>
