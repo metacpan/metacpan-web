@@ -111,9 +111,7 @@ sub request {
         $path = join '/', map uri_escape($_), @$path;
     }
 
-    # the order of the following 2 lines matters
-    # `path_query` is destructive
-    $url->path_query($path);
+    $url->path(join '/', grep length, $url->path, $path);
 
     my $current_url = $self->request_uri;
     my $request_id  = $self->request_id;
