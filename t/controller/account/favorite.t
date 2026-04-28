@@ -28,7 +28,7 @@ override_api_response( sub {
 
     push @captured_requests, $req;
 
-    if ( $req->url->path eq '/user' ) {
+    if ( $req->url->path =~ m{/user$} ) {
         return [
             200,
             [ 'Content-Type' => 'application/json' ],
