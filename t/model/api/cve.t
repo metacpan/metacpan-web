@@ -9,7 +9,8 @@ my $model = MetaCPAN::Web->model('API::CVE');
 
 subtest 'has cves' => sub {
     my $result = $model->get( 'SRI', 'Mojolicious-9.30' )->get;
-    my $cve    = $result->{cves}[1];
+    my @cves = sort { $a->{reported} cmp $b->{reported} } $result->{cves}->@*;
+    my $cve  = $cves[0];
     ok( $cve->{cpansa_id},   'cpansa_id' );
     ok( $cve->{cves},        'cves' );
     ok( $cve->{description}, 'description' );
