@@ -86,4 +86,14 @@
             width: 100%;
         }
     }
+
+    &.table-releases {
+        td.name {
+            display: flex;
+
+            .release-name {
+                flex: 1;
+            }
+        }
+    }
 }
