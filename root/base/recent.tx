@@ -3,16 +3,17 @@
 %%      rss_title => $rss_title || 'Recent CPAN Uploads - MetaCPAN',
 %%      title     => $title || 'Recent',
 %%  }
+%%  override left_nav_classes -> { 'nav nav-pills flex-column' }
 %%  override left_nav_content -> {
 
 %%  macro sidebar_group -> $selected, $group {
     %%  for $group -> $entry {
-    <li>
+    <li class="nav-item">
         %%  if $selected == $entry.0 {
-            <strong>[% $entry.1 %]</strong>
+            <a href="[% $entry.2 %]" class="nav-link active" aria-current="page">[% $entry.1 %]</a>
         %%  }
         %%  else {
-            <a href="[% $entry.2 %]">[% $entry.1 %]</a>
+            <a href="[% $entry.2 %]" class="nav-link">[% $entry.1 %]</a>
         %%  }
     </li>
     %%  }

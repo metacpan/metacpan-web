@@ -16,10 +16,7 @@
 </span>
 %%  }
 %%  else {
-<object data="/dist/[% $distribution | uri %]/river.svg"
-  type="image/svg+xml"
-  width="24px"
-  height="15px"
-  alt="river gauge for [% $distribution %]"
-  class="river-gauge-gauge"></object>
+<span class="river-gauge-gauge" title="River data not yet available">
+  <i class="fas fa-question text-muted" aria-hidden="true"></i>
+</span>
 %%  }

@@ -1,7 +1,7 @@
 [%-
     my $bucket = $river.bucket;
-    my $empty  = "#e4e2e2";
-    my $filled = "#7ea3f2";
+    my $empty  = "var(--river-gauge-empty, #e4e2e2)";
+    my $filled = "var(--river-gauge-filled, #7ea3f2)";
 -%]
 %%  if defined($bucket) {
   <svg width="24px"
