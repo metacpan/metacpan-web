@@ -4,6 +4,20 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      major-updates:
+        patterns:
+          - '*'
+        update-types:
+          - 'major'
+      minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
+    cooldown:
+      default-days: 7
   - package-ecosystem: npm
     directory: /
     schedule:
@@ -15,7 +29,18 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+    cooldown:
+      default-days: 7
   - package-ecosystem: docker
     directory: /
     schedule:
       interval: daily
+    groups:
+      minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
+    cooldown:
+      default-days: 7
