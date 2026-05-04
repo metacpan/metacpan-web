@@ -167,7 +167,9 @@ for (const el of document.querySelectorAll('.ellipsis')) {
     el.replaceChildren();
 
     el.append(end);
-    start.style.maxWidth = 'calc(100% - ' + end.clientWidth + 'px)';
+
+    const width = end.getBoundingClientRect().width;
+    start.style.maxWidth = `calc(100% - ${width}px)`;
     el.prepend(start);
 }
 
