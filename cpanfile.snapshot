@@ -17,18 +17,18 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000059
-    pathname: O/OA/OALDERS/App-perlimports-0.000059.tar.gz
+  App-perlimports-0.000060
+    pathname: O/OA/OALDERS/App-perlimports-0.000060.tar.gz
     provides:
-      App::perlimports 0.000059
-      App::perlimports::Annotations 0.000059
-      App::perlimports::CLI 0.000059
-      App::perlimports::Config 0.000059
-      App::perlimports::Document 0.000059
-      App::perlimports::ExportInspector 0.000059
-      App::perlimports::Include 0.000059
-      App::perlimports::Role::Logger 0.000059
-      App::perlimports::Sandbox 0.000059
+      App::perlimports 0.000060
+      App::perlimports::Annotations 0.000060
+      App::perlimports::CLI 0.000060
+      App::perlimports::Config 0.000060
+      App::perlimports::Document 0.000060
+      App::perlimports::ExportInspector 0.000060
+      App::perlimports::Include 0.000060
+      App::perlimports::Role::Logger 0.000060
+      App::perlimports::Sandbox 0.000060
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
@@ -3715,12 +3715,12 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
-  Plack-1.0053
-    pathname: M/MI/MIYAGAWA/Plack-1.0053.tar.gz
+  Plack-1.0054
+    pathname: M/MI/MIYAGAWA/Plack-1.0054.tar.gz
     provides:
       HTTP::Message::PSGI undef
       HTTP::Server::PSGI undef
-      Plack 1.0053
+      Plack 1.0054
       Plack::App::CGIBin undef
       Plack::App::Cascade undef
       Plack::App::Directory undef
@@ -3779,9 +3779,9 @@ DISTRIBUTIONS
       Plack::Middleware::XFramework undef
       Plack::Middleware::XSendfile undef
       Plack::Recursive::ForwardRequest undef
-      Plack::Request 1.0053
+      Plack::Request 1.0054
       Plack::Request::Upload undef
-      Plack::Response 1.0053
+      Plack::Response 1.0054
       Plack::Runner undef
       Plack::TempBuffer undef
       Plack::Test undef
