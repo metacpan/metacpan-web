@@ -827,6 +827,17 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
+  DateTime-Format-RFC3339-v1.10.0
+    pathname: I/IK/IKEGAMI/DateTime-Format-RFC3339-v1.10.0.tar.gz
+    provides:
+      DateTime::Format::RFC3339 1.010000
+    requirements:
+      DateTime 0
+      ExtUtils::MakeMaker 0
+      perl 5.01
+      strict 0
+      version 0
+      warnings 0
   DateTime-Format-Strptime-1.80
     pathname: D/DR/DROLSKY/DateTime-Format-Strptime-1.80.tar.gz
     provides:
@@ -1763,10 +1774,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       HTTP::Headers 6
       perl 5.008001
-  HTTP-Tiny-0.092
-    pathname: H/HA/HAARG/HTTP-Tiny-0.092.tar.gz
+  HTTP-Tiny-0.094
+    pathname: H/HA/HAARG/HTTP-Tiny-0.094.tar.gz
     provides:
-      HTTP::Tiny 0.092
+      HTTP::Tiny 0.094
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.17
@@ -4250,18 +4261,20 @@ DISTRIBUTIONS
     requirements:
       Call::Context 0
       ExtUtils::MakeMaker 0
-  TOML-Tiny-0.20
-    pathname: O/OA/OALDERS/TOML-Tiny-0.20.tar.gz
+  TOML-Tiny-0.21
+    pathname: O/OA/OALDERS/TOML-Tiny-0.21.tar.gz
     provides:
-      TOML::Tiny 0.20
-      TOML::Tiny::Grammar 0.20
-      TOML::Tiny::Parser 0.20
-      TOML::Tiny::Tokenizer 0.20
-      TOML::Tiny::Util 0.20
-      TOML::Tiny::Writer 0.20
+      TOML::Tiny 0.21
+      TOML::Tiny::Grammar 0.21
+      TOML::Tiny::Parser 0.21
+      TOML::Tiny::Tokenizer 0.21
+      TOML::Tiny::Util 0.21
+      TOML::Tiny::Writer 0.21
     requirements:
       Carp 0
       Data::Dumper 0
+      DateTime::Format::ISO8601 0
+      DateTime::Format::RFC3339 0
       Encode 0
       Exporter 0
       ExtUtils::MakeMaker 0
@@ -5037,11 +5050,11 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  YAML-LibYAML-v0.906.0
-    pathname: T/TI/TINITA/YAML-LibYAML-v0.906.0.tar.gz
+  YAML-LibYAML-v0.907.0
+    pathname: T/TI/TINITA/YAML-LibYAML-v0.907.0.tar.gz
     provides:
-      YAML::LibYAML v0.906.0
-      YAML::XS v0.906.0
+      YAML::LibYAML v0.907.0
+      YAML::XS v0.907.0
     requirements:
       B::Deparse 0
       Exporter 0
@@ -5126,32 +5139,32 @@ DISTRIBUTIONS
       common::sense 3.75
     requirements:
       ExtUtils::MakeMaker 0
-  libwww-perl-6.82
-    pathname: O/OA/OALDERS/libwww-perl-6.82.tar.gz
+  libwww-perl-6.83
+    pathname: O/OA/OALDERS/libwww-perl-6.83.tar.gz
     provides:
-      LWP 6.82
-      LWP::Authen::Basic 6.82
-      LWP::Authen::Digest 6.82
-      LWP::Authen::Ntlm 6.82
-      LWP::ConnCache 6.82
-      LWP::Debug 6.82
-      LWP::Debug::TraceHTTP 6.82
-      LWP::DebugFile 6.82
-      LWP::MemberMixin 6.82
-      LWP::Protocol 6.82
-      LWP::Protocol::cpan 6.82
-      LWP::Protocol::data 6.82
-      LWP::Protocol::file 6.82
-      LWP::Protocol::ftp 6.82
-      LWP::Protocol::gopher 6.82
-      LWP::Protocol::http 6.82
-      LWP::Protocol::loopback 6.82
-      LWP::Protocol::mailto 6.82
-      LWP::Protocol::nntp 6.82
-      LWP::Protocol::nogo 6.82
-      LWP::RobotUA 6.82
-      LWP::Simple 6.82
-      LWP::UserAgent 6.82
+      LWP 6.83
+      LWP::Authen::Basic 6.83
+      LWP::Authen::Digest 6.83
+      LWP::Authen::Ntlm 6.83
+      LWP::ConnCache 6.83
+      LWP::Debug 6.83
+      LWP::Debug::TraceHTTP 6.83
+      LWP::DebugFile 6.83
+      LWP::MemberMixin 6.83
+      LWP::Protocol 6.83
+      LWP::Protocol::cpan 6.83
+      LWP::Protocol::data 6.83
+      LWP::Protocol::file 6.83
+      LWP::Protocol::ftp 6.83
+      LWP::Protocol::gopher 6.83
+      LWP::Protocol::http 6.83
+      LWP::Protocol::loopback 6.83
+      LWP::Protocol::mailto 6.83
+      LWP::Protocol::nntp 6.83
+      LWP::Protocol::nogo 6.83
+      LWP::RobotUA 6.83
+      LWP::Simple 6.83
+      LWP::UserAgent 6.83
       libwww::perl undef
     requirements:
       Digest::MD5 0
