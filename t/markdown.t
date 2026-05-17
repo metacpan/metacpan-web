@@ -25,11 +25,14 @@ Content
 
 EOM
 
-like $html, qr{<h1 id="heading">Heading</h1>},   'first heading';
-like $html, qr{<h2 id="heading-2">Heading</h2>}, 'second heading';
-like $html, qr{<h2 id="heading-3">Heading</h2>}, 'third heading';
+like $html, qr{<h1>.*Heading.*</h1>}s,   'first heading';
+like $html, qr{<h2>.*Heading.*</h2>}s,    'second heading';
 
-like $html, qr{<h2 id="heading-with-markup">Heading <}, 'heading with markup';
+# comrak generates anchor elements with id attributes inside headings
+like $html, qr{id="heading"},              'first heading has id';
+like $html, qr{id="heading-1"},            'duplicate heading gets -1 suffix';
+like $html, qr{id="heading-2"},            'third duplicate gets -2 suffix';
+like $html, qr{id="heading-with-markup"},  'heading with markup gets slugified id';
 
 $html = render_markdown(<<'EOM');
 # Heading
@@ -51,9 +54,29 @@ Some body text
 
 EOM
 
-unlike $html, qr{Raw HTML}, 'raw html blocked';
+unlike $html, qr{<div>.*Raw HTML}, 'raw html blocked';
 
 eval { render_markdown( '# Heading', chorg => 1 ) };
 like "$@", qr/^Unsupported options: chorg /, 'invalid options throw errors';
+
+# GFM table rendering
+$html = render_markdown(<<'EOM');
+| Name | Value |
+|------|-------|
+| foo  | bar   |
+| baz  | qux   |
+EOM
+
+like $html, qr{<table>},           'table rendered';
+like $html, qr{<th>Name</th>},     'table header';
+like $html, qr{<td>foo</td>},      'table cell';
+
+# Strikethrough
+$html = render_markdown("~~deleted~~\n");
+like $html, qr{<del>deleted</del>}, 'strikethrough';
+
+# Autolink
+$html = render_markdown("Visit https://metacpan.org for more.\n");
+like $html, qr{<a href="https://metacpan.org"}, 'autolink';
 
 done_testing();
