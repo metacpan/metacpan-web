@@ -21,6 +21,10 @@ has '+module' => (
         'MetaCPAN::Web::View::Xslate::Bridge', ] }
 );
 
+has features => (
+    is      => 'ro',
+    default => sub { {} },
+);
 has api_public => (
     is       => 'ro',
     required => 1,
@@ -37,6 +41,7 @@ sub COMPONENT {
         {
             api_public  => $app->config->{api_public} || $app->config->{api},
             source_host => $app->config->{source_host},
+            features    => $app->config->{features},
         },
         $args,
     );
@@ -69,16 +74,20 @@ sub abs_url {
 around render => sub {
     my ( $orig, $self, $c, $template, $args ) = @_;
 
-    my $vars = { $args ? %$args : %{ $c->stash } };
-
     my $req = $c->req;
 
-    $vars->{api_public}  = $self->api_public;
-    $vars->{source_host} = $self->source_host;
-    $vars->{assets}      = $req->env->{'metacpan.assets'} || [];
-    $vars->{current}     = {
-        $c->action->reverse    => 1,
-        $c->request->uri->path => 1,
+    $args ||= $c->stash;
+
+    my $vars = {
+        %$args,
+        features    => $self->features,
+        api_public  => $self->api_public,
+        source_host => $self->source_host,
+        assets      => $req->env->{'metacpan.assets'} || [],
+        current     => {
+            $c->action->reverse    => 1,
+            $c->request->uri->path => 1,
+        },
     };
 
     return $self->$orig( $c, $template, $vars );
