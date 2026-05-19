@@ -6,7 +6,8 @@ cookie_secret: seekrit
 consumer_secret: ClearAirTurbulence
 log4perl_file: log4perl.conf
 
-mark_unauthorized_releases: 0
+features:
+  mark_unauthorized_releases: 1
 
 View::Xslate:
   cache: 1

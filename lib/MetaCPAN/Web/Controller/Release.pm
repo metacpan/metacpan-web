@@ -82,13 +82,6 @@ sub view : Private {
         changes => \@changes,
 
         template => 'release.tx',
-
-        # TODO: Put this in a more general place.
-        # Maybe make a hash for feature flags?
-        (
-            map { ( $_ => $c->config->{$_} ) }
-                qw( mark_unauthorized_releases )
-        ),
     );
 }
 
