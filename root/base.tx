@@ -184,6 +184,10 @@
             </div>
             <div class="footer-sponsors">
               <div class="footer-sponsor-row">
+                <!-- Keep until at least June 22, 2026 -->
+                <a class="footer-sponsor-link" target="_blank" href="https://www.bairesdev.com/sponsoring-open-source-projects/" rel="noopener" title="BairesDev">
+                  <img class="footer-sponsor-bairesdev" src="/static/images/sponsors/bairesdev.svg" alt="BairesDev" loading="lazy">
+                </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.bytemark.co.uk/" rel="noopener" title="Bytemark">
                   <img class="footer-sponsor-bytemark" src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark" loading="lazy">
                 </a>
@@ -196,11 +200,11 @@
                 <a class="footer-sponsor-link" target="_blank" href="https://www.elastic.co/" rel="noopener" title="Elastic">
                   <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic" loading="lazy">
                 </a>
+              </div>
+              <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener" title="Fastly">
                   <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly" loading="lazy">
                 </a>
-              </div>
-              <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener" title="Geolytica">
                   <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geolytica" loading="lazy">
                 </a>

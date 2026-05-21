@@ -36,6 +36,22 @@
 
   <div class="sponsor-card">
     <div class="sponsor-logo">
+      <a target="_blank" rel="noopener" href="https://www.bairesdev.com/sponsoring-open-source-projects/">
+        <img src="/static/images/sponsors/bairesdev.svg" alt="BairesDev" width="150">
+      </a>
+    </div>
+    <div class="sponsor-info">
+      <p>
+        <a target="_blank" rel="noopener"
+        href="https://www.bairesdev.com/sponsoring-open-source-projects/">BairesDev</a>
+        supports MetaCPAN through its open source sponsorship program.
+        <!-- TODO: replace with blurb from BairesDev -->
+      </p>
+    </div>
+  </div>
+
+  <div class="sponsor-card">
+    <div class="sponsor-logo">
       <a target="_blank" rel="noopener" href="https://www.bytemark.co.uk/r/metacpan.org/">
         <img src="/static/images/sponsors/bytemark_logo.svg" alt="Bytemark Hosting" width="150">
       </a>
