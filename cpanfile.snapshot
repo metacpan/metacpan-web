@@ -218,8 +218,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       MRO::Compat 0
       perl 5.008005
-  Catalyst-Plugin-Authentication-0.10024
-    pathname: J/JJ/JJNAPIORK/Catalyst-Plugin-Authentication-0.10024.tar.gz
+  Catalyst-Plugin-Authentication-0.10026
+    pathname: E/ET/ETHER/Catalyst-Plugin-Authentication-0.10026.tar.gz
     provides:
       Catalyst::Authentication::Credential::NoPassword undef
       Catalyst::Authentication::Credential::Password undef
@@ -231,7 +231,7 @@ DISTRIBUTIONS
       Catalyst::Authentication::Store::Null undef
       Catalyst::Authentication::User undef
       Catalyst::Authentication::User::Hash undef
-      Catalyst::Plugin::Authentication 0.10024
+      Catalyst::Plugin::Authentication 0.10026
       Catalyst::Plugin::Authentication::Credential::Password undef
       Catalyst::Plugin::Authentication::Store::Minimal undef
       Catalyst::Plugin::Authentication::User undef
@@ -1565,16 +1565,16 @@ DISTRIBUTIONS
       XSLoader 0
       parent 0
       perl 5.008008
-  HTML-Parser-3.83
-    pathname: O/OA/OALDERS/HTML-Parser-3.83.tar.gz
+  HTML-Parser-3.85
+    pathname: O/OA/OALDERS/HTML-Parser-3.85.tar.gz
     provides:
-      HTML::Entities 3.83
-      HTML::Filter 3.83
-      HTML::HeadParser 3.83
-      HTML::LinkExtor 3.83
-      HTML::Parser 3.83
-      HTML::PullParser 3.83
-      HTML::TokeParser 3.83
+      HTML::Entities 3.85
+      HTML::Filter 3.85
+      HTML::HeadParser 3.85
+      HTML::LinkExtor 3.85
+      HTML::Parser 3.85
+      HTML::PullParser 3.85
+      HTML::TokeParser 3.85
     requirements:
       Carp 0
       Exporter 0
@@ -3987,13 +3987,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.17
       List::Util 1.45
       perl 5.008001
-  Role-Tiny-2.002004
-    pathname: H/HA/HAARG/Role-Tiny-2.002004.tar.gz
+  Role-Tiny-2.002005
+    pathname: H/HA/HAARG/Role-Tiny-2.002005.tar.gz
     provides:
-      Role::Tiny 2.002004
-      Role::Tiny::With 2.002004
+      Role::Tiny 2.002005
+      Role::Tiny::With 2.002005
     requirements:
-      Exporter 5.57
+      Exporter 0
       perl 5.006
   Router-Simple-0.17
     pathname: T/TO/TOKUHIROM/Router-Simple-0.17.tar.gz
@@ -4018,49 +4018,28 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sereal-Decoder-5.004
-    pathname: Y/YV/YVES/Sereal-Decoder-5.004.tar.gz
+  Sereal-Decoder-5.006
+    pathname: Y/YV/YVES/Sereal-Decoder-5.006.tar.gz
     provides:
-      Sereal::Decoder 5.004
-      Sereal::Decoder::Constants 5.004
+      Sereal::Decoder 5.006
+      Sereal::Decoder::Constants 5.006
       Sereal::Performance undef
     requirements:
-      Data::Dumper 0
       Devel::CheckLib 1.16
       ExtUtils::MakeMaker 7.0
       ExtUtils::ParseXS 2.21
-      File::Find 0
-      File::Path 0
-      File::Spec 0
-      Scalar::Util 0
-      Test::Deep 0
-      Test::Differences 0
-      Test::LongString 0
-      Test::More 0.88
-      Test::Warn 0
       XSLoader 0
       perl 5.008
-  Sereal-Encoder-5.004
-    pathname: Y/YV/YVES/Sereal-Encoder-5.004.tar.gz
+  Sereal-Encoder-5.006
+    pathname: Y/YV/YVES/Sereal-Encoder-5.006.tar.gz
     provides:
-      Sereal::Encoder 5.004
-      Sereal::Encoder::Constants 5.004
+      Sereal::Encoder 5.006
+      Sereal::Encoder::Constants 5.006
     requirements:
-      Data::Dumper 0
       Devel::CheckLib 1.16
       ExtUtils::MakeMaker 7.0
       ExtUtils::ParseXS 2.21
-      File::Find 0
-      File::Path 0
-      File::Spec 0
-      Hash::Util 0
-      Scalar::Util 0
-      Sereal::Decoder 5.004
-      Test::Deep 0
-      Test::Differences 0
-      Test::LongString 0
-      Test::More 0.88
-      Test::Warn 0
+      Sereal::Decoder 5.006
       XSLoader 0
       perl 5.008
   Specio-0.53
@@ -4858,18 +4837,21 @@ DISTRIBUTIONS
       Exporter 0
       Module::Build::Tiny 0.035
       perl 5.008001
-  WWW-RobotRules-6.02
-    pathname: G/GA/GAAS/WWW-RobotRules-6.02.tar.gz
+  WWW-RobotRules-6.03
+    pathname: O/OA/OALDERS/WWW-RobotRules-6.03.tar.gz
     provides:
-      WWW::RobotRules 6.02
-      WWW::RobotRules::AnyDBM_File 6.00
-      WWW::RobotRules::InCore 6.02
+      WWW::RobotRules 6.03
+      WWW::RobotRules::AnyDBM_File 6.03
+      WWW::RobotRules::DB_File 6.03
+      WWW::RobotRules::InCore 6.03
     requirements:
       AnyDBM_File 0
+      Carp 0
       ExtUtils::MakeMaker 0
       Fcntl 0
       URI 1.10
       perl 5.008001
+      strict 0
   With-Roles-0.001002
     pathname: H/HA/HAARG/With-Roles-0.001002.tar.gz
     provides:
@@ -4904,45 +4886,45 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       XML::TreePP 0.39
-  XML-LibXML-2.0210
-    pathname: S/SH/SHLOMIF/XML-LibXML-2.0210.tar.gz
+  XML-LibXML-2.0213
+    pathname: T/TO/TODDR/XML-LibXML-2.0213.tar.gz
     provides:
-      XML::LibXML 2.0210
-      XML::LibXML::Attr 2.0210
-      XML::LibXML::AttributeHash 2.0210
-      XML::LibXML::Boolean 2.0210
-      XML::LibXML::CDATASection 2.0210
-      XML::LibXML::Comment 2.0210
-      XML::LibXML::Common 2.0210
-      XML::LibXML::Devel 2.0210
-      XML::LibXML::Document 2.0210
-      XML::LibXML::DocumentFragment 2.0210
-      XML::LibXML::Dtd 2.0210
-      XML::LibXML::Element 2.0210
-      XML::LibXML::ErrNo 2.0210
-      XML::LibXML::Error 2.0210
-      XML::LibXML::InputCallback 2.0210
-      XML::LibXML::Literal 2.0210
-      XML::LibXML::NamedNodeMap 2.0210
-      XML::LibXML::Namespace 2.0210
-      XML::LibXML::Node 2.0210
-      XML::LibXML::NodeList 2.0210
-      XML::LibXML::Number 2.0210
-      XML::LibXML::PI 2.0210
-      XML::LibXML::Pattern 2.0210
-      XML::LibXML::Reader 2.0210
-      XML::LibXML::RegExp 2.0210
-      XML::LibXML::RelaxNG 2.0210
-      XML::LibXML::SAX 2.0210
-      XML::LibXML::SAX::AttributeNode 2.0210
-      XML::LibXML::SAX::Builder 2.0210
-      XML::LibXML::SAX::Generator 2.0210
-      XML::LibXML::SAX::Parser 2.0210
-      XML::LibXML::Schema 2.0210
-      XML::LibXML::Text 2.0210
-      XML::LibXML::XPathContext 2.0210
-      XML::LibXML::XPathExpression 2.0210
-      XML::LibXML::_SAXParser 2.0210
+      XML::LibXML 2.0213
+      XML::LibXML::Attr 2.0213
+      XML::LibXML::AttributeHash 2.0213
+      XML::LibXML::Boolean 2.0213
+      XML::LibXML::CDATASection 2.0213
+      XML::LibXML::Comment 2.0213
+      XML::LibXML::Common 2.0213
+      XML::LibXML::Devel 2.0213
+      XML::LibXML::Document 2.0213
+      XML::LibXML::DocumentFragment 2.0213
+      XML::LibXML::Dtd 2.0213
+      XML::LibXML::Element 2.0213
+      XML::LibXML::ErrNo 2.0213
+      XML::LibXML::Error 2.0213
+      XML::LibXML::InputCallback 2.0213
+      XML::LibXML::Literal 2.0213
+      XML::LibXML::NamedNodeMap 2.0213
+      XML::LibXML::Namespace 2.0213
+      XML::LibXML::Node 2.0213
+      XML::LibXML::NodeList 2.0213
+      XML::LibXML::Number 2.0213
+      XML::LibXML::PI 2.0213
+      XML::LibXML::Pattern 2.0213
+      XML::LibXML::Reader 2.0213
+      XML::LibXML::RegExp 2.0213
+      XML::LibXML::RelaxNG 2.0213
+      XML::LibXML::SAX 2.0213
+      XML::LibXML::SAX::AttributeNode 2.0213
+      XML::LibXML::SAX::Builder 2.0213
+      XML::LibXML::SAX::Generator 2.0213
+      XML::LibXML::SAX::Parser 2.0213
+      XML::LibXML::Schema 2.0213
+      XML::LibXML::Text 2.0213
+      XML::LibXML::XPathContext 2.0213
+      XML::LibXML::XPathExpression 2.0213
+      XML::LibXML::_SAXParser 2.0213
     requirements:
       Alien::Base::Wrapper 0
       Alien::Libxml2 0.14
@@ -4966,7 +4948,6 @@ DISTRIBUTIONS
       parent 0
       perl 5.008001
       strict 0
-      vars 0
       warnings 0
   XML-NamespaceSupport-1.12
     pathname: P/PE/PERIGRIN/XML-NamespaceSupport-1.12.tar.gz
