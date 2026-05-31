@@ -12,7 +12,7 @@
     <a data-keyboard-shortcut="g a" rel="author" href="/author/[% $release.author %]" class="author-name">[% $author.display_name %]</a>
   </span>
   <span>&nbsp;/&nbsp;</span>
-  <div class="release dist-release status-[% $release.status %] maturity-[% $release.maturity %][% if $mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
+  <div class="release dist-release status-[% $release.status %] maturity-[% $release.maturity %][% if $features.mark_unauthorized_releases && !$release.authorized { ' unauthorized' } %]">
     <span class="dropdown"><b class="caret"></b></span>
     %%  include inc::version_select { class => $file ? '' : 'extend' };
     %%  if $file {
@@ -21,7 +21,7 @@
     %%  else {
     <span class="release-name">[% $release.name %]</span>
     %%  }
-    %%  if $mark_unauthorized_releases && !$release.authorized {
+    %%  if $features.mark_unauthorized_releases && !$release.authorized {
     <em class="warning">UNAUTHORIZED RELEASE</em>
     %%  }
   </div>
@@ -218,10 +218,10 @@
     <li class="nav-header">Versions</li>
     %%  if $versions.size() > 1 {
     <li class="version-jump">
-      %%  include inc::version_select { mark_unauthorized_releases => 0, active => 'disabled', class => 'form-control tool-bar-form', head => 'Jump to version' };
+      %%  include inc::version_select { active => 'disabled', class => 'form-control tool-bar-form', head => 'Jump to version' };
     </li>
     <li class="version-diff">
-      %%  include inc::version_select::diff { mark_unauthorized_releases => 0, active => 'disabled', class => 'form-control tool-bar-form' };
+      %%  include inc::version_select::diff { active => 'disabled', class => 'form-control tool-bar-form' };
     </li>
     %% }
     %% else {

@@ -52,7 +52,7 @@
     </div>
     <div class="right">
       %%  if $module.abstract { $module.abstract }
-      %%  if $mark_unauthorized_releases && $module.indexed && !$module.authorized {
+      %%  if $features.mark_unauthorized_releases && $module.indexed && !$module.authorized {
       <em class="unauthorized">UNAUTHORIZED</em>
       %%  }
     </div>
@@ -71,7 +71,7 @@
     </div>
     <div class="right">
       in [% $module.path %]
-      %%  if $mark_unauthorized_releases && $module.indexed && !$module.authorized {
+      %%  if $features.mark_unauthorized_releases && $module.indexed && !$module.authorized {
       <em class="unauthorized">UNAUTHORIZED</em>
       %%  }
     </div>
