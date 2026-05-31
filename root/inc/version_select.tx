@@ -15,7 +15,7 @@
 >
   [%- $version.distnameinfo.version ~ ($version.maturity == 'developer' ? ' DEV' : '') %]
   ([% $version.author %] on [% datetime($version.date).to_ymd %])
-  [%- if $mark_unauthorized_releases && !$version.authorized { %] UNAUTHORIZED[% } -%]
+  [%- if $features.mark_unauthorized_releases && !$version.authorized { %] UNAUTHORIZED[% } -%]
 </option>
 %%    if $version.status == 'backpan' && $~version.is_last {
 </optgroup>
