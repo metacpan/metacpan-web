@@ -606,10 +606,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.41
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.41.tar.gz
+  Cpanel-JSON-XS-4.42
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.42.tar.gz
     provides:
-      Cpanel::JSON::XS 4.41
+      Cpanel::JSON::XS 4.42
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -1717,19 +1717,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-7.01
-    pathname: O/OA/OALDERS/HTTP-Message-7.01.tar.gz
+  HTTP-Message-7.02
+    pathname: O/OA/OALDERS/HTTP-Message-7.02.tar.gz
     provides:
-      HTTP::Config 7.01
-      HTTP::Headers 7.01
-      HTTP::Headers::Auth 7.01
-      HTTP::Headers::ETag 7.01
-      HTTP::Headers::Util 7.01
-      HTTP::Message 7.01
-      HTTP::Request 7.01
-      HTTP::Request::Common 7.01
-      HTTP::Response 7.01
-      HTTP::Status 7.01
+      HTTP::Config 7.02
+      HTTP::Headers 7.02
+      HTTP::Headers::Auth 7.02
+      HTTP::Headers::ETag 7.02
+      HTTP::Headers::Util 7.02
+      HTTP::Message 7.02
+      HTTP::Request 7.02
+      HTTP::Request::Common 7.02
+      HTTP::Response 7.02
+      HTTP::Status 7.02
     requirements:
       Carp 0
       Clone 0.46
@@ -1980,36 +1980,36 @@ DISTRIBUTIONS
       XSLoader 0
       strict 0
       warnings 0
-  Locale-Codes-3.88
-    pathname: S/SB/SBECK/Locale-Codes-3.88.tar.gz
+  Locale-Codes-3.90
+    pathname: S/SB/SBECK/Locale-Codes-3.90.tar.gz
     provides:
-      Locale::Codes 3.88
-      Locale::Codes::Constants 3.88
-      Locale::Codes::Country 3.88
-      Locale::Codes::Country_Codes 3.88
-      Locale::Codes::Country_Retired 3.88
-      Locale::Codes::Currency 3.88
-      Locale::Codes::Currency_Codes 3.88
-      Locale::Codes::Currency_Retired 3.88
-      Locale::Codes::LangExt 3.88
-      Locale::Codes::LangExt_Codes 3.88
-      Locale::Codes::LangExt_Retired 3.88
-      Locale::Codes::LangFam 3.88
-      Locale::Codes::LangFam_Codes 3.88
-      Locale::Codes::LangFam_Retired 3.88
-      Locale::Codes::LangVar 3.88
-      Locale::Codes::LangVar_Codes 3.88
-      Locale::Codes::LangVar_Retired 3.88
-      Locale::Codes::Language 3.88
-      Locale::Codes::Language_Codes 3.88
-      Locale::Codes::Language_Retired 3.88
-      Locale::Codes::Script 3.88
-      Locale::Codes::Script_Codes 3.88
-      Locale::Codes::Script_Retired 3.88
-      Locale::Country 3.88
-      Locale::Currency 3.88
-      Locale::Language 3.88
-      Locale::Script 3.88
+      Locale::Codes 3.90
+      Locale::Codes::Constants 3.90
+      Locale::Codes::Country 3.90
+      Locale::Codes::Country_Codes 3.90
+      Locale::Codes::Country_Retired 3.90
+      Locale::Codes::Currency 3.90
+      Locale::Codes::Currency_Codes 3.90
+      Locale::Codes::Currency_Retired 3.90
+      Locale::Codes::LangExt 3.90
+      Locale::Codes::LangExt_Codes 3.90
+      Locale::Codes::LangExt_Retired 3.90
+      Locale::Codes::LangFam 3.90
+      Locale::Codes::LangFam_Codes 3.90
+      Locale::Codes::LangFam_Retired 3.90
+      Locale::Codes::LangVar 3.90
+      Locale::Codes::LangVar_Codes 3.90
+      Locale::Codes::LangVar_Retired 3.90
+      Locale::Codes::Language 3.90
+      Locale::Codes::Language_Codes 3.90
+      Locale::Codes::Language_Retired 3.90
+      Locale::Codes::Script 3.90
+      Locale::Codes::Script_Codes 3.90
+      Locale::Codes::Script_Retired 3.90
+      Locale::Country 3.90
+      Locale::Currency 3.90
+      Locale::Language 3.90
+      Locale::Script 3.90
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -4240,15 +4240,15 @@ DISTRIBUTIONS
     requirements:
       Call::Context 0
       ExtUtils::MakeMaker 0
-  TOML-Tiny-0.21
-    pathname: O/OA/OALDERS/TOML-Tiny-0.21.tar.gz
+  TOML-Tiny-0.22
+    pathname: O/OA/OALDERS/TOML-Tiny-0.22.tar.gz
     provides:
-      TOML::Tiny 0.21
-      TOML::Tiny::Grammar 0.21
-      TOML::Tiny::Parser 0.21
-      TOML::Tiny::Tokenizer 0.21
-      TOML::Tiny::Util 0.21
-      TOML::Tiny::Writer 0.21
+      TOML::Tiny 0.22
+      TOML::Tiny::Grammar 0.22
+      TOML::Tiny::Parser 0.22
+      TOML::Tiny::Tokenizer 0.22
+      TOML::Tiny::Util 0.22
+      TOML::Tiny::Writer 0.22
     requirements:
       Carp 0
       Data::Dumper 0
