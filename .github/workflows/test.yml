@@ -35,7 +35,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
         with:
           fetch-depth: 0
       - name: Fetch base ref
@@ -92,7 +92,7 @@ jobs:
         id: coverage
         if: github.event.pull_request.user.login != 'dependabot[bot]'
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - name: Build test image
         id: docker-build-playwright
         uses: docker/build-push-action@v7.2.0
@@ -138,7 +138,7 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v6.0.1
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
@@ -168,7 +168,7 @@ jobs:
           matrix.resolver == 'snapshot'
           && github.event.pull_request.user.login != 'dependabot[bot]'
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
@@ -204,7 +204,7 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v6.0.1
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
