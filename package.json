@@ -35,7 +35,7 @@
         "brush-plain": "^4.0.1",
         "brush-yaml": "^4.0.0",
         "devbridge-autocomplete": "^2.0.3",
-        "esbuild": "^0.28.0",
+        "esbuild": "^0.28.1",
         "esbuild-sass-plugin": "^3.7.0",
         "jquery": "^3.7.1",
         "minimist": "^1.2.8",
