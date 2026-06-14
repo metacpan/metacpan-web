@@ -138,7 +138,7 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v6.0.1
+      - uses: codecov/codecov-action@v7.0.0
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
@@ -204,9 +204,9 @@ jobs:
       - name: Generate Codecov report
         if: steps.coverage.outputs.enabled
         run: cover -report codecovbash
-      - uses: codecov/codecov-action@v6.0.1
+      - uses: codecov/codecov-action@v7.0.0
         if: steps.coverage.outputs.enabled
         with:
           fail_ci_if_error: true
-          file: ./cover_db/codecov.json
+          files: ./cover_db/codecov.json
           token: ${{ secrets.CODECOV_TOKEN }}
