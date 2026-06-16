@@ -279,6 +279,16 @@ a.ellipsis:hover * {
     }
 }
 
+.testers-pass {
+    color: #090;
+}
+.testers-fail {
+    color: #900;
+}
+.testers-na {
+    // no color
+}
+
 ul.dependencies {
     padding: 0;
 }
