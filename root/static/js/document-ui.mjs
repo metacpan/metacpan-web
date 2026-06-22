@@ -4,6 +4,17 @@ export const createAnchors = (topList) => {
     const it = typeof (topList)[Symbol.iterator] === 'function' ? topList : [topList];
     for (const top of it) {
         for (const heading of top.querySelectorAll(':scope h1,h2,h3,h4,h5,h6,dt')) {
+            // Check for an existing anchor (e.g. from comrak's header_ids)
+            const existing = heading.querySelector('a.anchor[id]');
+            if (existing) {
+                if (!existing.querySelector('span')) {
+                    const icon = document.createElement('span');
+                    icon.classList.add('fa', 'fa-bookmark', 'black');
+                    existing.prepend(icon);
+                }
+                continue;
+            }
+
             const id = heading.id;
             if (!id) {
                 continue;
