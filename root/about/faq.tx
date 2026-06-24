@@ -19,6 +19,7 @@
 * [Can you delete my module](#can-you-delete-my-module)
 * [What is the relation of MetaCPAN to author.json and PAUSE account data](#what-is-the-relation-of-metacpan-to-author.json-and-pause-account-data)
 * [How to adopt a distribution](#how-to-adopt-a-distribution)
+* [Can I use my PAUSE id to login to MetaCPAN?](#can-i-use-my-pause-id-to-login-to-metacpan)
 
 ## What third-party sites does MetaCPAN use
 
@@ -248,5 +249,15 @@ Remove the author `ADOPTME`, `HANDOFF`, or `NEEDHELP` from the project.
 * Check which one of the above 3 are listed.
 * Select them and click on "Remove".
 * Within an hour the change will show up on MetaCPAN.
+
+### Can I use my PAUSE id to login to MetaCPAN?
+
+No.
+
+PAUSE is used to verify your identity but cannot be used for logging in.
+Login either with your GitHub or with your Google account.
+Once you are logged in you can connect your PAUSE id to this account and
+you can also connect your other identity to the same MetaCPAN account.
+
 
 %%  }
