@@ -1668,10 +1668,10 @@ DISTRIBUTIONS
       locale 0
       perl 5.008001
       strict 0
-  HTTP-Date-6.06
-    pathname: O/OA/OALDERS/HTTP-Date-6.06.tar.gz
+  HTTP-Date-6.07
+    pathname: O/OA/OALDERS/HTTP-Date-6.07.tar.gz
     provides:
-      HTTP::Date 6.06
+      HTTP::Date 6.07
     requirements:
       Exporter 0
       ExtUtils::MakeMaker 0
@@ -1884,18 +1884,18 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 0
       perl 5.008
-  IO-Socket-SSL-2.098
-    pathname: S/SU/SULLR/IO-Socket-SSL-2.098.tar.gz
+  IO-Socket-SSL-2.099
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.099.tar.gz
     provides:
-      IO::Socket::SSL 2.098
+      IO::Socket::SSL 2.099
       IO::Socket::SSL::Intercept 2.056
-      IO::Socket::SSL::OCSP_Cache 2.098
-      IO::Socket::SSL::OCSP_Resolver 2.098
+      IO::Socket::SSL::OCSP_Cache 2.099
+      IO::Socket::SSL::OCSP_Resolver 2.099
       IO::Socket::SSL::PublicSuffix undef
-      IO::Socket::SSL::SSL_Context 2.098
-      IO::Socket::SSL::SSL_HANDLE 2.098
-      IO::Socket::SSL::Session_Cache 2.098
-      IO::Socket::SSL::Trace 2.098
+      IO::Socket::SSL::SSL_Context 2.099
+      IO::Socket::SSL::SSL_HANDLE 2.099
+      IO::Socket::SSL::Session_Cache 2.099
+      IO::Socket::SSL::Trace 2.099
       IO::Socket::SSL::Utils 2.015
     requirements:
       ExtUtils::MakeMaker 0
@@ -1971,13 +1971,14 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  List-SomeUtils-XS-0.58
-    pathname: D/DR/DROLSKY/List-SomeUtils-XS-0.58.tar.gz
+  List-SomeUtils-XS-0.59
+    pathname: D/DR/DROLSKY/List-SomeUtils-XS-0.59.tar.gz
     provides:
-      List::SomeUtils::XS 0.58
+      List::SomeUtils::XS 0.59
     requirements:
       ExtUtils::MakeMaker 0
       XSLoader 0
+      perl 5.006
       strict 0
       warnings 0
   Locale-Codes-3.90
