@@ -3697,23 +3697,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20260204
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20260204.tar.gz
+  Perl-Tidy-20260705
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20260705.tar.gz
     provides:
-      Perl::Tidy 20260204
-      Perl::Tidy::Debugger 20260204
-      Perl::Tidy::Diagnostics 20260204
-      Perl::Tidy::FileWriter 20260204
-      Perl::Tidy::Formatter 20260204
-      Perl::Tidy::HtmlWriter 20260204
-      Perl::Tidy::IOScalar 20260204
-      Perl::Tidy::IOScalarArray 20260204
-      Perl::Tidy::IndentationItem 20260204
-      Perl::Tidy::Logger 20260204
-      Perl::Tidy::Tokenizer 20260204
-      Perl::Tidy::VerticalAligner 20260204
-      Perl::Tidy::VerticalAligner::Alignment 20260204
-      Perl::Tidy::VerticalAligner::Line 20260204
+      Perl::Tidy 20260705
+      Perl::Tidy::Debugger 20260705
+      Perl::Tidy::Diagnostics 20260705
+      Perl::Tidy::FileWriter 20260705
+      Perl::Tidy::Formatter 20260705
+      Perl::Tidy::HtmlWriter 20260705
+      Perl::Tidy::IOScalar 20260705
+      Perl::Tidy::IOScalarArray 20260705
+      Perl::Tidy::IndentationItem 20260705
+      Perl::Tidy::Logger 20260705
+      Perl::Tidy::Tokenizer 20260705
+      Perl::Tidy::VerticalAligner 20260705
+      Perl::Tidy::VerticalAligner::Alignment 20260705
+      Perl::Tidy::VerticalAligner::Line 20260705
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
@@ -5032,11 +5032,12 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
-  YAML-LibYAML-v0.908.0
-    pathname: T/TI/TINITA/YAML-LibYAML-v0.908.0.tar.gz
+  YAML-LibYAML-v0.910.0
+    pathname: T/TI/TINITA/YAML-LibYAML-v0.910.0.tar.gz
     provides:
-      YAML::LibYAML v0.908.0
-      YAML::XS v0.908.0
+      YAML::LibYAML v0.910.0
+      YAML::XS v0.910.0
+      YAML::XS::LibYAML v0.910.0
     requirements:
       B::Deparse 0
       Exporter 0
