@@ -17,10 +17,10 @@ jobs:
     permissions:
       actions: write
     steps:
-      - uses: docker/setup-buildx-action@v4
+      - uses: docker/setup-buildx-action@v4.1.0
       - name: Build test image
         id: docker-build-test
-        uses: docker/build-push-action@v7.2.0
+        uses: docker/build-push-action@v7.3.0
         with:
           target: test
           push: false
@@ -63,10 +63,10 @@ jobs:
           else
             echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
           fi
-      - uses: docker/setup-buildx-action@v4
+      - uses: docker/setup-buildx-action@v4.1.0
       - name: Build test image
         id: docker-build-test
-        uses: docker/build-push-action@v7.2.0
+        uses: docker/build-push-action@v7.3.0
         with:
           target: test
           push: false
@@ -95,7 +95,7 @@ jobs:
       - uses: actions/checkout@v7.0.0
       - name: Build test image
         id: docker-build-playwright
-        uses: docker/build-push-action@v7.2.0
+        uses: docker/build-push-action@v7.3.0
         with:
           target: playwright
           push: false
