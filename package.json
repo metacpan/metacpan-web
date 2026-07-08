@@ -22,7 +22,7 @@
         "@stylistic/eslint-plugin": "^5.10.0",
         "eslint": "^10.6.0",
         "globals": "^17.7.0",
-        "js-beautify": "^1.15.4",
+        "js-beautify": "^2.0.3",
         "prettier": "3.9.4"
     },
     "dependencies": {
