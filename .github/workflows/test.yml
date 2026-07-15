@@ -17,7 +17,7 @@ jobs:
     permissions:
       actions: write
     steps:
-      - uses: docker/setup-buildx-action@v4.1.0
+      - uses: docker/setup-buildx-action@v4.2.0
       - name: Build test image
         id: docker-build-test
         uses: docker/build-push-action@v7.3.0
@@ -63,7 +63,7 @@ jobs:
           else
             echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
           fi
-      - uses: docker/setup-buildx-action@v4.1.0
+      - uses: docker/setup-buildx-action@v4.2.0
       - name: Build test image
         id: docker-build-test
         uses: docker/build-push-action@v7.3.0
@@ -107,7 +107,7 @@ jobs:
           ${{ steps.docker-build-playwright.outputs.imageid }})
           && echo "container_id=$CONTAINER_ID" >> $GITHUB_OUTPUT
           || (echo "Failed to start container" && exit 1)
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6.4.0
         with:
           node-version: 22
       - name: Install Playwright Browsers
@@ -169,7 +169,7 @@ jobs:
           && github.event.pull_request.user.login != 'dependabot[bot]'
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v7.0.0
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6.4.0
         with:
           node-version: '22'
       - run: npm install
