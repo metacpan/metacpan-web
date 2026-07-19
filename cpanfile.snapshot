@@ -255,10 +255,10 @@ DISTRIBUTIONS
       Data::Visitor 0.24
       ExtUtils::MakeMaker 0
       MRO::Compat 0.09
-  Catalyst-Plugin-Static-Simple-0.37
-    pathname: I/IL/ILMARI/Catalyst-Plugin-Static-Simple-0.37.tar.gz
+  Catalyst-Plugin-Static-Simple-0.38
+    pathname: E/ET/ETHER/Catalyst-Plugin-Static-Simple-0.38.tar.gz
     provides:
-      Catalyst::Plugin::Static::Simple 0.37
+      Catalyst::Plugin::Static::Simple 0.38
     requirements:
       Catalyst::Runtime 5.80008
       ExtUtils::MakeMaker 0
@@ -606,10 +606,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.42
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.42.tar.gz
+  Cpanel-JSON-XS-4.43
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.43.tar.gz
     provides:
-      Cpanel::JSON::XS 4.42
+      Cpanel::JSON::XS 4.43
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -4019,11 +4019,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sereal-Decoder-5.008
-    pathname: Y/YV/YVES/Sereal-Decoder-5.008.tar.gz
+  Sereal-Decoder-5.009
+    pathname: Y/YV/YVES/Sereal-Decoder-5.009.tar.gz
     provides:
-      Sereal::Decoder 5.008
-      Sereal::Decoder::Constants 5.008
+      Sereal::Decoder 5.009
+      Sereal::Decoder::Constants 5.009
       Sereal::Performance undef
     requirements:
       Devel::CheckLib 1.16
@@ -4031,16 +4031,16 @@ DISTRIBUTIONS
       ExtUtils::ParseXS 2.21
       XSLoader 0
       perl 5.008
-  Sereal-Encoder-5.008
-    pathname: Y/YV/YVES/Sereal-Encoder-5.008.tar.gz
+  Sereal-Encoder-5.009
+    pathname: Y/YV/YVES/Sereal-Encoder-5.009.tar.gz
     provides:
-      Sereal::Encoder 5.008
-      Sereal::Encoder::Constants 5.008
+      Sereal::Encoder 5.009
+      Sereal::Encoder::Constants 5.009
     requirements:
       Devel::CheckLib 1.16
       ExtUtils::MakeMaker 7.0
       ExtUtils::ParseXS 2.21
-      Sereal::Decoder 5.008
+      Sereal::Decoder 5.009
       XSLoader 0
       perl 5.008
   Specio-0.53
