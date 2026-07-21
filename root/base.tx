@@ -200,16 +200,20 @@
                 <a class="footer-sponsor-link" target="_blank" href="https://www.elastic.co/" rel="noopener" title="Elastic">
                   <img class="footer-sponsor-elastic" src="/static/images/sponsors/elastic.svg" alt="Elastic" loading="lazy">
                 </a>
-              </div>
-              <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://www.fastly.com/" rel="noopener" title="Fastly">
                   <img class="footer-sponsor-fastly" src="/static/images/sponsors/fastly_logo.svg" alt="Fastly" loading="lazy">
                 </a>
+              </div>
+              <div class="footer-sponsor-row">
                 <a class="footer-sponsor-link" target="_blank" href="https://geocode.xyz" rel="noopener" title="Geolytica">
                   <img class="footer-sponsor-geocode" src="/static/images/sponsors/geocodelogo.svg" alt="Geolytica" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.iban.com/" rel="noopener" title="IBAN">
                   <img class="footer-sponsor-iban" src="/static/images/sponsors/iban-logo.png" alt="IBAN" loading="lazy">
+                </a>
+                <!-- Keep until at least September 22, 2026 -->
+                <a class="footer-sponsor-link" target="_blank" href="https://www.instant-famous.com/" rel="noopener" title="Instant Famous">
+                  <img class="footer-sponsor-instant-famous" src="/static/images/sponsors/instant-famous-badge.svg" alt="Instant Famous" loading="lazy">
                 </a>
                 <a class="footer-sponsor-link" target="_blank" href="https://www.liquidweb.com/" rel="noopener" title="Liquid Web">
                   <img class="footer-sponsor-liquidweb" src="/static/images/sponsors/liquidweb_logo.png" alt="Liquid Web" loading="lazy">
