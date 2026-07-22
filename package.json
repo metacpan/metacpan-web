@@ -20,10 +20,10 @@
         "@eslint/js": "^10.0.1",
         "@playwright/test": "^1.61.1",
         "@stylistic/eslint-plugin": "^5.10.0",
-        "eslint": "^10.6.0",
+        "eslint": "^10.7.0",
         "globals": "^17.7.0",
         "js-beautify": "^2.0.3",
-        "prettier": "3.9.4"
+        "prettier": "3.9.5"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
