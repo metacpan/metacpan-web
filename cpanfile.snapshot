@@ -1653,12 +1653,12 @@ DISTRIBUTIONS
       File::Temp 0.14
       HTTP::Headers 0
       IO::File 1.14
-  HTTP-Cookies-6.11
-    pathname: O/OA/OALDERS/HTTP-Cookies-6.11.tar.gz
+  HTTP-Cookies-6.12
+    pathname: O/OA/OALDERS/HTTP-Cookies-6.12.tar.gz
     provides:
-      HTTP::Cookies 6.11
-      HTTP::Cookies::Microsoft 6.11
-      HTTP::Cookies::Netscape 6.11
+      HTTP::Cookies 6.12
+      HTTP::Cookies::Microsoft 6.12
+      HTTP::Cookies::Netscape 6.12
     requirements:
       Carp 0
       ExtUtils::MakeMaker 0
@@ -1717,19 +1717,19 @@ DISTRIBUTIONS
       perl 5.005
       strict 0
       warnings 0
-  HTTP-Message-7.02
-    pathname: O/OA/OALDERS/HTTP-Message-7.02.tar.gz
+  HTTP-Message-7.04
+    pathname: O/OA/OALDERS/HTTP-Message-7.04.tar.gz
     provides:
-      HTTP::Config 7.02
-      HTTP::Headers 7.02
-      HTTP::Headers::Auth 7.02
-      HTTP::Headers::ETag 7.02
-      HTTP::Headers::Util 7.02
-      HTTP::Message 7.02
-      HTTP::Request 7.02
-      HTTP::Request::Common 7.02
-      HTTP::Response 7.02
-      HTTP::Status 7.02
+      HTTP::Config 7.04
+      HTTP::Headers 7.04
+      HTTP::Headers::Auth 7.04
+      HTTP::Headers::ETag 7.04
+      HTTP::Headers::Util 7.04
+      HTTP::Message 7.04
+      HTTP::Request 7.04
+      HTTP::Request::Common 7.04
+      HTTP::Response 7.04
+      HTTP::Status 7.04
     requirements:
       Carp 0
       Clone 0.46
@@ -1933,11 +1933,10 @@ DISTRIBUTIONS
       Scalar::Util 0
       perl 5.006002
       strict 0
-  LWP-Protocol-https-6.15
-    pathname: O/OA/OALDERS/LWP-Protocol-https-6.15.tar.gz
+  LWP-Protocol-https-6.17
+    pathname: O/OA/OALDERS/LWP-Protocol-https-6.17.tar.gz
     provides:
-      LWP::Protocol::https 6.15
-      LWP::Protocol::https::Socket 6.15
+      LWP::Protocol::https 6.17
     requirements:
       ExtUtils::MakeMaker 0
       IO::Socket::SSL 1.970
@@ -2232,12 +2231,12 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
-  Module-Pluggable-6.3
-    pathname: S/SI/SIMONW/Module-Pluggable-6.3.tar.gz
+  Module-Pluggable-6.4
+    pathname: S/SI/SIMONW/Module-Pluggable-6.4.tar.gz
     provides:
       Devel::InnerPackage 0.4
-      Module::Pluggable 6.3
-      Module::Pluggable::Object 5.2
+      Module::Pluggable 6.4
+      Module::Pluggable::Object 5.3
     requirements:
       Exporter 5.57
       ExtUtils::MakeMaker 0
@@ -5004,11 +5003,11 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008
-  YAML-1.31
-    pathname: I/IN/INGY/YAML-1.31.tar.gz
+  YAML-1.321
+    pathname: T/TI/TINITA/YAML-1.321.tar.gz
     provides:
-      YAML 1.31
-      YAML::Any 1.31
+      YAML 1.321
+      YAML::Any 1.321
       YAML::Dumper undef
       YAML::Dumper::Base undef
       YAML::Error undef
