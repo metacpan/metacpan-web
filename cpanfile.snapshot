@@ -17,18 +17,18 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000060
-    pathname: O/OA/OALDERS/App-perlimports-0.000060.tar.gz
+  App-perlimports-0.000061
+    pathname: O/OA/OALDERS/App-perlimports-0.000061.tar.gz
     provides:
-      App::perlimports 0.000060
-      App::perlimports::Annotations 0.000060
-      App::perlimports::CLI 0.000060
-      App::perlimports::Config 0.000060
-      App::perlimports::Document 0.000060
-      App::perlimports::ExportInspector 0.000060
-      App::perlimports::Include 0.000060
-      App::perlimports::Role::Logger 0.000060
-      App::perlimports::Sandbox 0.000060
+      App::perlimports 0.000061
+      App::perlimports::Annotations 0.000061
+      App::perlimports::CLI 0.000061
+      App::perlimports::Config 0.000061
+      App::perlimports::Document 0.000061
+      App::perlimports::ExportInspector 0.000061
+      App::perlimports::Include 0.000061
+      App::perlimports::Role::Logger 0.000061
+      App::perlimports::Sandbox 0.000061
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
@@ -218,8 +218,8 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       MRO::Compat 0
       perl 5.008005
-  Catalyst-Plugin-Authentication-0.10026
-    pathname: E/ET/ETHER/Catalyst-Plugin-Authentication-0.10026.tar.gz
+  Catalyst-Plugin-Authentication-0.10028
+    pathname: E/ET/ETHER/Catalyst-Plugin-Authentication-0.10028.tar.gz
     provides:
       Catalyst::Authentication::Credential::NoPassword undef
       Catalyst::Authentication::Credential::Password undef
@@ -231,7 +231,7 @@ DISTRIBUTIONS
       Catalyst::Authentication::Store::Null undef
       Catalyst::Authentication::User undef
       Catalyst::Authentication::User::Hash undef
-      Catalyst::Plugin::Authentication 0.10026
+      Catalyst::Plugin::Authentication 0.10028
       Catalyst::Plugin::Authentication::Credential::Password undef
       Catalyst::Plugin::Authentication::Store::Minimal undef
       Catalyst::Plugin::Authentication::User undef
@@ -3696,23 +3696,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20260705
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20260705.tar.gz
+  Perl-Tidy-20260808
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20260808.tar.gz
     provides:
-      Perl::Tidy 20260705
-      Perl::Tidy::Debugger 20260705
-      Perl::Tidy::Diagnostics 20260705
-      Perl::Tidy::FileWriter 20260705
-      Perl::Tidy::Formatter 20260705
-      Perl::Tidy::HtmlWriter 20260705
-      Perl::Tidy::IOScalar 20260705
-      Perl::Tidy::IOScalarArray 20260705
-      Perl::Tidy::IndentationItem 20260705
-      Perl::Tidy::Logger 20260705
-      Perl::Tidy::Tokenizer 20260705
-      Perl::Tidy::VerticalAligner 20260705
-      Perl::Tidy::VerticalAligner::Alignment 20260705
-      Perl::Tidy::VerticalAligner::Line 20260705
+      Perl::Tidy 20260808
+      Perl::Tidy::Debugger 20260808
+      Perl::Tidy::Diagnostics 20260808
+      Perl::Tidy::FileWriter 20260808
+      Perl::Tidy::Formatter 20260808
+      Perl::Tidy::HtmlWriter 20260808
+      Perl::Tidy::IOScalar 20260808
+      Perl::Tidy::IOScalarArray 20260808
+      Perl::Tidy::IndentationItem 20260808
+      Perl::Tidy::Logger 20260808
+      Perl::Tidy::Tokenizer 20260808
+      Perl::Tidy::VerticalAligner 20260808
+      Perl::Tidy::VerticalAligner::Alignment 20260808
+      Perl::Tidy::VerticalAligner::Line 20260808
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
@@ -4018,11 +4018,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sereal-Decoder-5.009
-    pathname: Y/YV/YVES/Sereal-Decoder-5.009.tar.gz
+  Sereal-Decoder-5.010
+    pathname: Y/YV/YVES/Sereal-Decoder-5.010.tar.gz
     provides:
-      Sereal::Decoder 5.009
-      Sereal::Decoder::Constants 5.009
+      Sereal::Decoder 5.010
+      Sereal::Decoder::Constants 5.010
       Sereal::Performance undef
     requirements:
       Devel::CheckLib 1.16
@@ -4030,16 +4030,16 @@ DISTRIBUTIONS
       ExtUtils::ParseXS 2.21
       XSLoader 0
       perl 5.008
-  Sereal-Encoder-5.009
-    pathname: Y/YV/YVES/Sereal-Encoder-5.009.tar.gz
+  Sereal-Encoder-5.010
+    pathname: Y/YV/YVES/Sereal-Encoder-5.010.tar.gz
     provides:
-      Sereal::Encoder 5.009
-      Sereal::Encoder::Constants 5.009
+      Sereal::Encoder 5.010
+      Sereal::Encoder::Constants 5.010
     requirements:
       Devel::CheckLib 1.16
       ExtUtils::MakeMaker 7.0
       ExtUtils::ParseXS 2.21
-      Sereal::Decoder 5.009
+      Sereal::Decoder 5.01
       XSLoader 0
       perl 5.008
   Specio-0.53
