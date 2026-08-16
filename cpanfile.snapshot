@@ -2063,10 +2063,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Log-Log4perl-1.57
-    pathname: E/ET/ETJ/Log-Log4perl-1.57.tar.gz
+  Log-Log4perl-1.58
+    pathname: M/MS/MSCHILLI/Log-Log4perl-1.58.tar.gz
     provides:
-      Log::Log4perl 1.57
+      Log::Log4perl 1.58
       Log::Log4perl::Appender undef
       Log::Log4perl::Appender::Buffer 1.53
       Log::Log4perl::Appender::DBI undef
