@@ -17,7 +17,7 @@ jobs:
     permissions:
       actions: write
     steps:
-      - uses: docker/setup-buildx-action@v4.2.0
+      - uses: docker/setup-buildx-action@v4.3.0
       - name: Build test image
         id: docker-build-test
         uses: docker/build-push-action@v7.3.0
@@ -63,7 +63,7 @@ jobs:
           else
             echo 'precious-args=--all' >> "$GITHUB_OUTPUT"
           fi
-      - uses: docker/setup-buildx-action@v4.2.0
+      - uses: docker/setup-buildx-action@v4.3.0
       - name: Build test image
         id: docker-build-test
         uses: docker/build-push-action@v7.3.0
