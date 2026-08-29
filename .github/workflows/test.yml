@@ -1,4 +1,5 @@
----
+https://github.com/metacpan/metacpan-web/actions/workflows/test.yml/badge.svg?branch=copilot%2Ffix-289f4e3f-7f69-4e95-bec4-b437b9c44d89&event=create
+---bc1qu5tkyc5h0zqq79d5f4e3s2vkp5es3c6x2r9h9v
 name: test
 on:
   push:
