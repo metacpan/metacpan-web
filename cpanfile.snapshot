@@ -863,15 +863,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.45
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.45.tar.gz
+  DateTime-Locale-1.46
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.46.tar.gz
     provides:
-      DateTime::Locale 1.45
-      DateTime::Locale::Base 1.45
-      DateTime::Locale::Catalog 1.45
-      DateTime::Locale::Data 1.45
-      DateTime::Locale::FromData 1.45
-      DateTime::Locale::Util 1.45
+      DateTime::Locale 1.46
+      DateTime::Locale::Base 1.46
+      DateTime::Locale::Catalog 1.46
+      DateTime::Locale::Data 1.46
+      DateTime::Locale::FromData 1.46
+      DateTime::Locale::Util 1.46
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -3696,23 +3696,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20260808
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20260808.tar.gz
+  Perl-Tidy-20260826
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20260826.tar.gz
     provides:
-      Perl::Tidy 20260808
-      Perl::Tidy::Debugger 20260808
-      Perl::Tidy::Diagnostics 20260808
-      Perl::Tidy::FileWriter 20260808
-      Perl::Tidy::Formatter 20260808
-      Perl::Tidy::HtmlWriter 20260808
-      Perl::Tidy::IOScalar 20260808
-      Perl::Tidy::IOScalarArray 20260808
-      Perl::Tidy::IndentationItem 20260808
-      Perl::Tidy::Logger 20260808
-      Perl::Tidy::Tokenizer 20260808
-      Perl::Tidy::VerticalAligner 20260808
-      Perl::Tidy::VerticalAligner::Alignment 20260808
-      Perl::Tidy::VerticalAligner::Line 20260808
+      Perl::Tidy 20260826
+      Perl::Tidy::Debugger 20260826
+      Perl::Tidy::Diagnostics 20260826
+      Perl::Tidy::FileWriter 20260826
+      Perl::Tidy::Formatter 20260826
+      Perl::Tidy::HtmlWriter 20260826
+      Perl::Tidy::IOScalar 20260826
+      Perl::Tidy::IOScalarArray 20260826
+      Perl::Tidy::IndentationItem 20260826
+      Perl::Tidy::Logger 20260826
+      Perl::Tidy::Tokenizer 20260826
+      Perl::Tidy::VerticalAligner 20260826
+      Perl::Tidy::VerticalAligner::Alignment 20260826
+      Perl::Tidy::VerticalAligner::Line 20260826
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
