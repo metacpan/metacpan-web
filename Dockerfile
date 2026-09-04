@@ -36,13 +36,9 @@ FROM metacpan/metacpan-base:main-20250531-090129-slim AS server-base-slim
 FROM server-base AS build-cpan-prereqs
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
-RUN \
-    --mount=type=cache,target=/var/cache/apt,sharing=private \
-    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
-<<EOT
-    apt-get update
-    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
-EOT
+ARG COMRAK_FFI_VERSION=v0.0.1
+ADD https://github.com/oalders/comrak-ffi/releases/download/${COMRAK_FFI_VERSION}/libcomrak_ffi.so.x86_64-unknown-linux-gnu /usr/local/lib/libcomrak_ffi.so
+RUN chmod 644 /usr/local/lib/libcomrak_ffi.so && ldconfig
 
 WORKDIR /app/
 
@@ -69,13 +65,8 @@ EOT
 FROM ${BASE_BUILD} AS server
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
-RUN \
-    --mount=type=cache,target=/var/cache/apt,sharing=private \
-    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
-<<EOT
-    apt-get update
-    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
-EOT
+COPY --from=build-cpan-prereqs /usr/local/lib/libcomrak_ffi.so /usr/local/lib/libcomrak_ffi.so
+RUN ldconfig
 
 WORKDIR /app/
 
