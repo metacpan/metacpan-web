@@ -121,20 +121,20 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  CPAN-Meta-2.150013
-    pathname: R/RJ/RJBS/CPAN-Meta-2.150013.tar.gz
+  CPAN-Meta-2.150015
+    pathname: E/ET/ETHER/CPAN-Meta-2.150015.tar.gz
     provides:
-      CPAN::Meta 2.150013
-      CPAN::Meta::Converter 2.150013
-      CPAN::Meta::Feature 2.150013
-      CPAN::Meta::History 2.150013
-      CPAN::Meta::Merge 2.150013
-      CPAN::Meta::Prereqs 2.150013
-      CPAN::Meta::Spec 2.150013
-      CPAN::Meta::Validator 2.150013
-      Parse::CPAN::Meta 2.150013
+      CPAN::Meta 2.150015
+      CPAN::Meta::Converter 2.150015
+      CPAN::Meta::Feature 2.150015
+      CPAN::Meta::History 2.150015
+      CPAN::Meta::Merge 2.150015
+      CPAN::Meta::Prereqs 2.150015
+      CPAN::Meta::Spec 2.150015
+      CPAN::Meta::Validator 2.150015
+      Parse::CPAN::Meta 2.150015
     requirements:
-      CPAN::Meta::Requirements 2.121
+      CPAN::Meta::Requirements 2.145
       CPAN::Meta::YAML 0.011
       Carp 0
       Encode 0
@@ -144,6 +144,19 @@ DISTRIBUTIONS
       JSON::PP 2.27300
       Scalar::Util 0
       perl 5.008001
+      strict 0
+      version 0.88
+      warnings 0
+  CPAN-Meta-Requirements-2.145
+    pathname: R/RJ/RJBS/CPAN-Meta-Requirements-2.145.tar.gz
+    provides:
+      CPAN::Meta::Requirements 2.145
+      CPAN::Meta::Requirements::Range 2.145
+    requirements:
+      B 0
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      perl 5.010000
       strict 0
       version 0.88
       warnings 0
@@ -606,10 +619,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.43
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.43.tar.gz
+  Cpanel-JSON-XS-4.44
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.44.tar.gz
     provides:
-      Cpanel::JSON::XS 4.43
+      Cpanel::JSON::XS 4.44
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -684,14 +697,14 @@ DISTRIBUTIONS
       Module::Build 0.4005
       Module::Build::XSUtil 0.19
       perl 5.008001
-  Data-OptList-0.114
-    pathname: R/RJ/RJBS/Data-OptList-0.114.tar.gz
+  Data-OptList-0.115
+    pathname: R/RJ/RJBS/Data-OptList-0.115.tar.gz
     provides:
-      Data::OptList 0.114
+      Data::OptList 0.115
     requirements:
       ExtUtils::MakeMaker 6.78
       List::Util 0
-      Params::Util 0
+      Params::SomeUtil 0
       Sub::Install 0.921
       perl 5.012
       strict 0
@@ -741,19 +754,19 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  DateTime-1.66
-    pathname: D/DR/DROLSKY/DateTime-1.66.tar.gz
+  DateTime-1.67
+    pathname: D/DR/DROLSKY/DateTime-1.67.tar.gz
     provides:
-      DateTime 1.66
-      DateTime::Duration 1.66
-      DateTime::Helpers 1.66
-      DateTime::Infinite 1.66
-      DateTime::Infinite::Future 1.66
-      DateTime::Infinite::Past 1.66
-      DateTime::LeapSecond 1.66
-      DateTime::PP 1.66
-      DateTime::PPExtra 1.66
-      DateTime::Types 1.66
+      DateTime 1.67
+      DateTime::Duration 1.67
+      DateTime::Helpers 1.67
+      DateTime::Infinite 1.67
+      DateTime::Infinite::Future 1.67
+      DateTime::Infinite::Past 1.67
+      DateTime::LeapSecond 1.67
+      DateTime::PP 1.67
+      DateTime::PPExtra 1.67
+      DateTime::Types 1.67
     requirements:
       Carp 0
       DateTime::Locale 1.06
@@ -863,15 +876,15 @@ DISTRIBUTIONS
       parent 0
       strict 0
       warnings 0
-  DateTime-Locale-1.45
-    pathname: D/DR/DROLSKY/DateTime-Locale-1.45.tar.gz
+  DateTime-Locale-1.46
+    pathname: D/DR/DROLSKY/DateTime-Locale-1.46.tar.gz
     provides:
-      DateTime::Locale 1.45
-      DateTime::Locale::Base 1.45
-      DateTime::Locale::Catalog 1.45
-      DateTime::Locale::Data 1.45
-      DateTime::Locale::FromData 1.45
-      DateTime::Locale::Util 1.45
+      DateTime::Locale 1.46
+      DateTime::Locale::Base 1.46
+      DateTime::Locale::Catalog 1.46
+      DateTime::Locale::Data 1.46
+      DateTime::Locale::FromData 1.46
+      DateTime::Locale::Util 1.46
     requirements:
       Carp 0
       Dist::CheckConflicts 0.02
@@ -1921,10 +1934,10 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.52
       Types::Serialiser 0
       common::sense 0
-  LWP-MediaTypes-6.04
-    pathname: O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
+  LWP-MediaTypes-6.05
+    pathname: O/OA/OALDERS/LWP-MediaTypes-6.05.tar.gz
     provides:
-      LWP::MediaTypes 6.04
+      LWP::MediaTypes 6.05
     requirements:
       Carp 0
       Exporter 0
@@ -1980,36 +1993,36 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Locale-Codes-3.90
-    pathname: S/SB/SBECK/Locale-Codes-3.90.tar.gz
+  Locale-Codes-3.91
+    pathname: S/SB/SBECK/Locale-Codes-3.91.tar.gz
     provides:
-      Locale::Codes 3.90
-      Locale::Codes::Constants 3.90
-      Locale::Codes::Country 3.90
-      Locale::Codes::Country_Codes 3.90
-      Locale::Codes::Country_Retired 3.90
-      Locale::Codes::Currency 3.90
-      Locale::Codes::Currency_Codes 3.90
-      Locale::Codes::Currency_Retired 3.90
-      Locale::Codes::LangExt 3.90
-      Locale::Codes::LangExt_Codes 3.90
-      Locale::Codes::LangExt_Retired 3.90
-      Locale::Codes::LangFam 3.90
-      Locale::Codes::LangFam_Codes 3.90
-      Locale::Codes::LangFam_Retired 3.90
-      Locale::Codes::LangVar 3.90
-      Locale::Codes::LangVar_Codes 3.90
-      Locale::Codes::LangVar_Retired 3.90
-      Locale::Codes::Language 3.90
-      Locale::Codes::Language_Codes 3.90
-      Locale::Codes::Language_Retired 3.90
-      Locale::Codes::Script 3.90
-      Locale::Codes::Script_Codes 3.90
-      Locale::Codes::Script_Retired 3.90
-      Locale::Country 3.90
-      Locale::Currency 3.90
-      Locale::Language 3.90
-      Locale::Script 3.90
+      Locale::Codes 3.91
+      Locale::Codes::Constants 3.91
+      Locale::Codes::Country 3.91
+      Locale::Codes::Country_Codes 3.91
+      Locale::Codes::Country_Retired 3.91
+      Locale::Codes::Currency 3.91
+      Locale::Codes::Currency_Codes 3.91
+      Locale::Codes::Currency_Retired 3.91
+      Locale::Codes::LangExt 3.91
+      Locale::Codes::LangExt_Codes 3.91
+      Locale::Codes::LangExt_Retired 3.91
+      Locale::Codes::LangFam 3.91
+      Locale::Codes::LangFam_Codes 3.91
+      Locale::Codes::LangFam_Retired 3.91
+      Locale::Codes::LangVar 3.91
+      Locale::Codes::LangVar_Codes 3.91
+      Locale::Codes::LangVar_Retired 3.91
+      Locale::Codes::Language 3.91
+      Locale::Codes::Language_Codes 3.91
+      Locale::Codes::Language_Retired 3.91
+      Locale::Codes::Script 3.91
+      Locale::Codes::Script_Codes 3.91
+      Locale::Codes::Script_Retired 3.91
+      Locale::Country 3.91
+      Locale::Currency 3.91
+      Locale::Language 3.91
+      Locale::Script 3.91
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
@@ -3325,6 +3338,17 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
+  Params-SomeUtil-1.09
+    pathname: P/PL/PLICEASE/Params-SomeUtil-1.09.tar.gz
+    provides:
+      Params::SomeUtil 1.09
+    requirements:
+      ExtUtils::CBuilder 0.27
+      ExtUtils::MakeMaker 6.52
+      File::Spec 0.80
+      Scalar::Util 1.18
+      Test::More 0.87
+      perl 5.005030
   Params-Util-1.102
     pathname: R/RE/REHSACK/Params-Util-1.102.tar.gz
     provides:
@@ -3696,23 +3720,23 @@ DISTRIBUTIONS
       strict 0
       version 0.77
       warnings 0
-  Perl-Tidy-20260808
-    pathname: S/SH/SHANCOCK/Perl-Tidy-20260808.tar.gz
+  Perl-Tidy-20260826
+    pathname: S/SH/SHANCOCK/Perl-Tidy-20260826.tar.gz
     provides:
-      Perl::Tidy 20260808
-      Perl::Tidy::Debugger 20260808
-      Perl::Tidy::Diagnostics 20260808
-      Perl::Tidy::FileWriter 20260808
-      Perl::Tidy::Formatter 20260808
-      Perl::Tidy::HtmlWriter 20260808
-      Perl::Tidy::IOScalar 20260808
-      Perl::Tidy::IOScalarArray 20260808
-      Perl::Tidy::IndentationItem 20260808
-      Perl::Tidy::Logger 20260808
-      Perl::Tidy::Tokenizer 20260808
-      Perl::Tidy::VerticalAligner 20260808
-      Perl::Tidy::VerticalAligner::Alignment 20260808
-      Perl::Tidy::VerticalAligner::Line 20260808
+      Perl::Tidy 20260826
+      Perl::Tidy::Debugger 20260826
+      Perl::Tidy::Diagnostics 20260826
+      Perl::Tidy::FileWriter 20260826
+      Perl::Tidy::Formatter 20260826
+      Perl::Tidy::HtmlWriter 20260826
+      Perl::Tidy::IOScalar 20260826
+      Perl::Tidy::IOScalarArray 20260826
+      Perl::Tidy::IndentationItem 20260826
+      Perl::Tidy::Logger 20260826
+      Perl::Tidy::Tokenizer 20260826
+      Perl::Tidy::VerticalAligner 20260826
+      Perl::Tidy::VerticalAligner::Alignment 20260826
+      Perl::Tidy::VerticalAligner::Line 20260826
     requirements:
       ExtUtils::MakeMaker 0
       perl 5.008001
@@ -4151,16 +4175,16 @@ DISTRIBUTIONS
     requirements:
       Module::Build 0.4004
       perl 5.014
-  Sub-Exporter-0.991
-    pathname: R/RJ/RJBS/Sub-Exporter-0.991.tar.gz
+  Sub-Exporter-0.992
+    pathname: R/RJ/RJBS/Sub-Exporter-0.992.tar.gz
     provides:
-      Sub::Exporter 0.991
-      Sub::Exporter::Util 0.991
+      Sub::Exporter 0.992
+      Sub::Exporter::Util 0.992
     requirements:
       Carp 0
       Data::OptList 0.100
       ExtUtils::MakeMaker 6.78
-      Params::Util 0.14
+      Params::SomeUtil 0.14
       Sub::Install 0.92
       perl 5.012
       strict 0
@@ -4687,66 +4711,66 @@ DISTRIBUTIONS
       Type::Tiny 1.000000
       UUID::Tiny 1.02
       perl 5.008
-  URI-5.36
-    pathname: O/OA/OALDERS/URI-5.36.tar.gz
+  URI-5.37
+    pathname: O/OA/OALDERS/URI-5.37.tar.gz
     provides:
-      URI 5.36
-      URI::Escape 5.36
-      URI::Heuristic 5.36
-      URI::IRI 5.36
-      URI::QueryParam 5.36
-      URI::Split 5.36
-      URI::URL 5.36
-      URI::WithBase 5.36
-      URI::data 5.36
-      URI::file 5.36
-      URI::file::Base 5.36
-      URI::file::FAT 5.36
-      URI::file::Mac 5.36
-      URI::file::OS2 5.36
-      URI::file::QNX 5.36
-      URI::file::Unix 5.36
-      URI::file::Win32 5.36
-      URI::ftp 5.36
-      URI::ftpes 5.36
-      URI::ftps 5.36
-      URI::geo 5.36
-      URI::gopher 5.36
-      URI::http 5.36
-      URI::https 5.36
-      URI::icap 5.36
-      URI::icaps 5.36
-      URI::irc 5.36
-      URI::ircs 5.36
-      URI::ldap 5.36
-      URI::ldapi 5.36
-      URI::ldaps 5.36
-      URI::mailto 5.36
-      URI::mms 5.36
-      URI::news 5.36
-      URI::nntp 5.36
-      URI::nntps 5.36
-      URI::otpauth 5.36
-      URI::pop 5.36
-      URI::rlogin 5.36
-      URI::rsync 5.36
-      URI::rtsp 5.36
-      URI::rtspu 5.36
-      URI::scp 5.36
-      URI::sftp 5.36
-      URI::sip 5.36
-      URI::sips 5.36
-      URI::smb 5.36
-      URI::smtp 5.36
-      URI::snews 5.36
-      URI::ssh 5.36
-      URI::telnet 5.36
-      URI::tn3270 5.36
-      URI::urn 5.36
-      URI::urn::isbn 5.36
-      URI::urn::oid 5.36
-      URI::ws 5.36
-      URI::wss 5.36
+      URI 5.37
+      URI::Escape 5.37
+      URI::Heuristic 5.37
+      URI::IRI 5.37
+      URI::QueryParam 5.37
+      URI::Split 5.37
+      URI::URL 5.37
+      URI::WithBase 5.37
+      URI::data 5.37
+      URI::file 5.37
+      URI::file::Base 5.37
+      URI::file::FAT 5.37
+      URI::file::Mac 5.37
+      URI::file::OS2 5.37
+      URI::file::QNX 5.37
+      URI::file::Unix 5.37
+      URI::file::Win32 5.37
+      URI::ftp 5.37
+      URI::ftpes 5.37
+      URI::ftps 5.37
+      URI::geo 5.37
+      URI::gopher 5.37
+      URI::http 5.37
+      URI::https 5.37
+      URI::icap 5.37
+      URI::icaps 5.37
+      URI::irc 5.37
+      URI::ircs 5.37
+      URI::ldap 5.37
+      URI::ldapi 5.37
+      URI::ldaps 5.37
+      URI::mailto 5.37
+      URI::mms 5.37
+      URI::news 5.37
+      URI::nntp 5.37
+      URI::nntps 5.37
+      URI::otpauth 5.37
+      URI::pop 5.37
+      URI::rlogin 5.37
+      URI::rsync 5.37
+      URI::rtsp 5.37
+      URI::rtspu 5.37
+      URI::scp 5.37
+      URI::sftp 5.37
+      URI::sip 5.37
+      URI::sips 5.37
+      URI::smb 5.37
+      URI::smtp 5.37
+      URI::snews 5.37
+      URI::ssh 5.37
+      URI::telnet 5.37
+      URI::tn3270 5.37
+      URI::urn 5.37
+      URI::urn::isbn 5.37
+      URI::urn::oid 5.37
+      URI::ws 5.37
+      URI::wss 5.37
     requirements:
       Carp 0
       Cwd 0
