@@ -2,11 +2,11 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use MetaCPAN::Web ();
-use Test::More;
-use MetaCPAN::Web::Model::API::Permission ();    ## no perlimports
 use Cpanel::JSON::XS                      qw( decode_json encode_json );
+use MetaCPAN::Web                         ();
+use MetaCPAN::Web::Model::API::Permission ();    ## no perlimports
 use MetaCPAN::Web::Test                   qw( override_api_response );
+use Test::More;
 
 subtest 'notification_type' => sub {
     my @tests = (

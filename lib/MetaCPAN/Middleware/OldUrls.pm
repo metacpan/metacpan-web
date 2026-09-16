@@ -5,9 +5,9 @@ use warnings;
 use parent qw(Plack::Middleware);
 
 use Plack::Request        ();
-use Router::Simple        ();
-use Plack::Util::Accessor qw( router );                  ## no perlimports
 use Ref::Util             qw( is_coderef is_hashref );
+use Plack::Util::Accessor qw( router );                  ## no perlimports
+use Router::Simple        ();
 use URI                   ();
 
 sub _formatter {

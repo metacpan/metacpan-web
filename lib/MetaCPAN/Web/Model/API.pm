@@ -7,10 +7,10 @@ use namespace::autoclean;
 
 use Cpanel::JSON::XS qw( decode_json encode_json );
 use Encode           ();
-use IO::Async::Loop  ();
+use HTTP::Request    ();
 use IO::Async::SSL;    ## no perlimports
-use HTTP::Request         ();
 use HTTP::Request::Common ();
+use IO::Async::Loop       ();
 use IO::Socket::SSL       qw( SSL_VERIFY_PEER );
 use MetaCPAN::Web::Types  qw( Uri );
 use Net::Async::HTTP      ();

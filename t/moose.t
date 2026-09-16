@@ -2,9 +2,9 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Test::More;
 use File::Find      ();    # core
 use Module::Runtime ();
+use Test::More;
 
 sub uses_moose_ok {
     my ($mod) = @_;

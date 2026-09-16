@@ -1,9 +1,10 @@
 use strict;
 use warnings;
-use Plack::Builder    qw( builder enable mount );
-use Plack::App::Proxy ();
-use File::Basename    ();
+
 use Config::ZOMG      ();
+use File::Basename    ();
+use Plack::App::Proxy ();
+use Plack::Builder    qw( builder enable mount );
 
 my $root_dir;
 BEGIN { $root_dir = File::Basename::dirname(__FILE__); }
