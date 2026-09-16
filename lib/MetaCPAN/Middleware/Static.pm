@@ -1,6 +1,7 @@
 package MetaCPAN::Middleware::Static;
 use strict;
 use warnings;
+
 use Cpanel::JSON::XS ();
 use Cwd              qw( cwd );
 use Plack::App::File ();

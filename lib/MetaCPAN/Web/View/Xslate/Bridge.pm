@@ -3,16 +3,17 @@ use strict;
 use warnings;
 use parent qw(Text::Xslate::Bridge);
 
+use overload ();
+
 use DateTime                  ();
 use List::Util                ();
+use MetaCPAN::Web::RenderUtil qw( render_markdown );
 use Number::Format            ();
 use Ref::Util                 qw( is_coderef is_regexpref );
 use Text::Pluralize           ();
 use Text::Xslate::Util        qw( mark_raw );
-use With::Roles               ();
 use MetaCPAN::Web::RenderUtil qw( gravatar_image );          ## no perlimports
-use MetaCPAN::Web::RenderUtil qw( render_markdown );
-use overload                  ();
+use With::Roles               ();
 
 my $num_formatter = Number::Format->new;
 

@@ -1,8 +1,8 @@
 package MetaCPAN::Web::View::Xslate;
 use Moose;
 extends qw(Catalyst::View::Xslate);
-use Path::Tiny           ();
 use MetaCPAN::Web::Types qw( AbsPath );
+use Path::Tiny           ();
 
 has '+syntax'      => ( default => 'Metakolon' );
 has '+encode_body' => ( default => 0 );

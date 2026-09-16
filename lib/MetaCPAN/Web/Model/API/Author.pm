@@ -4,8 +4,8 @@ use Moose;
 use namespace::autoclean;
 
 use Future                     ();
-use Ref::Util                  qw( is_arrayref );
 use MetaCPAN::Web::ProfileLink ();
+use Ref::Util                  qw( is_arrayref );
 
 extends 'MetaCPAN::Web::Model::API';
 

@@ -2,15 +2,11 @@ package MetaCPAN::Web::RenderUtil;
 
 use strict;
 use warnings;
+
 use Exporter qw(import);
 
-use Carp           qw( croak );
-use Ref::Util      qw( is_plain_arrayref );
-use Digest::MD5    ();
-use HTML::Escape   qw( escape_html );
-use HTML::Restrict ();
-use URI            ();
-use CommonMark     qw(
+use Carp       qw( croak );
+use CommonMark qw(
     EVENT_ENTER
     EVENT_EXIT
     NODE_CODE
@@ -25,6 +21,11 @@ use CommonMark     qw(
     NODE_TEXT
     OPT_UNSAFE
 );
+use Digest::MD5    ();
+use HTML::Escape   qw( escape_html );
+use HTML::Restrict ();
+use Ref::Util      qw( is_plain_arrayref );
+use URI            ();
 
 our @EXPORT_OK = qw(
     filter_html

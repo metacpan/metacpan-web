@@ -45,6 +45,7 @@ BEGIN {
 }
 
 use lib "$root_dir/lib";
+
 use MetaCPAN::Web ();
 
 STDERR->autoflush;

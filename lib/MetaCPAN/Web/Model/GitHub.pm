@@ -191,7 +191,7 @@ sub contributors {
         }
         return [
             sort {
-                $b->{contributions} <=> $a->{contributions}
+                $b->{contributions}   <=> $a->{contributions}
                     || lc $a->{login} cmp lc $b->{login}
             }
             grep {
