@@ -9,6 +9,7 @@ exclude = [
 type = "both"
 include = [ "**/*.{pl,pm,t,psgi}" ]
 cmd = [ "perlimports" ]
+labels = [ "perl" ]
 lint-flags = ["--lint" ]
 tidy-flags = ["-i" ]
 ok-exit-codes = 0
@@ -18,6 +19,7 @@ expect-stderr = true
 type = "lint"
 include = [ "**/*.{pl,pm,t,psgi}" ]
 cmd = [ "perlcritic", "--profile=$PRECIOUS_ROOT/.perlcriticrc" ]
+labels = [ "perl" ]
 ok-exit-codes = 0
 lint-failure-exit-codes = 2
 
@@ -25,6 +27,7 @@ lint-failure-exit-codes = 2
 type = "both"
 include = [ "**/*.{pl,pm,t,psgi}" ]
 cmd = [ "perltidy", "--profile=$PRECIOUS_ROOT/.perltidyrc" ]
+labels = [ "perl" ]
 lint-flags = [ "--assert-tidy", "--no-standard-output", "--outfile=/dev/null" ]
 tidy-flags = [ "--backup-and-modify-in-place", "--backup-file-extension=/" ]
 ok-exit-codes = 0
