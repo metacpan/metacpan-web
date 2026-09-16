@@ -17,18 +17,19 @@ DISTRIBUTIONS
       POSIX::strftime::Compiler 0.30
       Time::Local 0
       perl 5.008001
-  App-perlimports-0.000061
-    pathname: O/OA/OALDERS/App-perlimports-0.000061.tar.gz
+  App-perlimports-0.000065
+    pathname: O/OA/OALDERS/App-perlimports-0.000065.tar.gz
     provides:
-      App::perlimports 0.000061
-      App::perlimports::Annotations 0.000061
-      App::perlimports::CLI 0.000061
-      App::perlimports::Config 0.000061
-      App::perlimports::Document 0.000061
-      App::perlimports::ExportInspector 0.000061
-      App::perlimports::Include 0.000061
-      App::perlimports::Role::Logger 0.000061
-      App::perlimports::Sandbox 0.000061
+      App::perlimports 0.000065
+      App::perlimports::Annotations 0.000065
+      App::perlimports::CLI 0.000065
+      App::perlimports::Config 0.000065
+      App::perlimports::Document 0.000065
+      App::perlimports::ExportInspector 0.000065
+      App::perlimports::Include 0.000065
+      App::perlimports::Role::Logger 0.000065
+      App::perlimports::Sandbox 0.000065
+      App::perlimports::Sorter 0.000065
     requirements:
       Capture::Tiny 0
       Class::Inspector 1.36
@@ -619,10 +620,10 @@ DISTRIBUTIONS
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.44
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.44.tar.gz
+  Cpanel-JSON-XS-4.51
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.51.tar.gz
     provides:
-      Cpanel::JSON::XS 4.44
+      Cpanel::JSON::XS 4.51
       Cpanel::JSON::XS::Type undef
     requirements:
       Carp 0
@@ -3338,10 +3339,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Params-SomeUtil-1.09
-    pathname: P/PL/PLICEASE/Params-SomeUtil-1.09.tar.gz
+  Params-SomeUtil-1.11
+    pathname: P/PL/PLICEASE/Params-SomeUtil-1.11.tar.gz
     provides:
-      Params::SomeUtil 1.09
+      Params::SomeUtil 1.11
     requirements:
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 6.52
