@@ -578,6 +578,13 @@ html[data-bs-theme="dark"] {
             }
             .line.highlighted {
                 background-color: #4a8c4a;
+                // The number is an <a> link (JS-wrapped), so its blue link
+                // color wins over inheritance; recolor the anchor itself.
+                // Blue on the green band was 1.32:1; dark clears AA (4.63:1).
+                color: var(--bs-body-bg);
+                a {
+                    color: inherit;
+                }
             }
         }
 
