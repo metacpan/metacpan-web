@@ -161,6 +161,14 @@ html[data-bs-theme="dark"] {
         }
     }
 
+    // Author profile icons: some git-forge marks are solid black and vanish
+    // on the dark sidebar. Invert only the grayscale ones; colored logos would
+    // have their brand hue distorted.
+    .user-profiles img[alt="GitHub"],
+    .user-profiles img[alt="Codeberg"] {
+        filter: invert(1);
+    }
+
     // Home page
     .home .hero-logo img {
         filter: invert(1) hue-rotate(180deg);
