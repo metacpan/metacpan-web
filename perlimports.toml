@@ -22,4 +22,5 @@ never_export_modules_filename   = ""
 padding                         = true
 preserve_duplicates             = false
 preserve_unused                 = false
+sort                            = true
 tidy_whitespace                 = true
