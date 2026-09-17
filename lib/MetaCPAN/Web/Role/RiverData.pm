@@ -1,7 +1,10 @@
 package MetaCPAN::Web::Role::RiverData;
+
 use Moose::Role;
+
 use Future     ();
 use List::Util qw( uniq );
+
 use namespace::autoclean;
 
 sub add_river {

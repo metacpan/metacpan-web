@@ -1,7 +1,9 @@
 package MetaCPAN::Web::Controller::Permission;
 
 use Moose;
+
 use List::Util qw( uniq );
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }

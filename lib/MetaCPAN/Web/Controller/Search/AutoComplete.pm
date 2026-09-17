@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Search::AutoComplete;
 
 use Moose;
+
 use List::Util qw( uniq );
 
 use namespace::autoclean;
