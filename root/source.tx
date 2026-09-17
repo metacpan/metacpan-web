@@ -46,7 +46,7 @@
 %%  if !$file.binary {
 %%  if $file.sloc {
 <div class="source-toolbar">
-  <button class="pod-toggle pod-hidden"><span class="hide-pod">Hide</span><span class="show-pod">Show</span> Pod</button>
+  <button class="pod-toggle pod-hidden"><span class="pod-verb"><span class="hide-pod">Hide</span><span class="show-pod">Show</span></span> Pod</button>
 </div>
 %%  }
 <pre id="metacpan_source" class="line-numbers pod-toggle[% if $file.sloc > 10 { " pod-hidden"; } %]" data-pod-lines="[%

@@ -90,6 +90,25 @@ button.pod-toggle {
     &:hover {
         background-color: $bg-light-gray;
     }
+
+    // Overlay both verbs in one grid cell so the button always reserves the
+    // wider label ("Show"/"Hide") and its width stays fixed across the toggle.
+    // Visibility (not display) keeps the hidden verb occupying the cell.
+    .pod-verb {
+        display: inline-grid;
+
+        .hide-pod,
+        .show-pod {
+            display: block;
+            grid-area: 1 / 1;
+            visibility: hidden;
+        }
+    }
+
+    &:not(.pod-hidden) .pod-verb .hide-pod,
+    &.pod-hidden .pod-verb .show-pod {
+        visibility: visible;
+    }
 }
 
 .pod-hidden {
