@@ -90,12 +90,6 @@ button.pod-toggle {
     &:hover {
         background-color: $bg-light-gray;
     }
-
-    &:not(.pod-hidden) {
-        background-color: $bg-light-gray;
-        border-color: $gray-500;
-        font-weight: bold;
-    }
 }
 
 .pod-hidden {

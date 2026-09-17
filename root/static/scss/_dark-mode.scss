@@ -611,12 +611,6 @@ html[data-bs-theme="dark"] {
         &:hover {
             background-color: var(--bs-secondary-bg);
         }
-
-        &:not(.pod-hidden) {
-            background-color: var(--bs-secondary-bg);
-            border-color: var(--bs-secondary-bg);
-            color: var(--bs-body-color);
-        }
     }
 
     // Lab
