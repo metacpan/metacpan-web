@@ -279,6 +279,24 @@ html[data-bs-theme="dark"] {
         }
     }
 
+    // The github popup ships as qtip-light (white body, light titlebar);
+    // darken the container so it isn't a light box on a dark page.
+    .qtip-github {
+        background-color: var(--bs-tertiary-bg);
+        border-color: var(--bs-border-color);
+        color: var(--bs-body-color);
+
+        .qtip-titlebar {
+            background-color: var(--bs-secondary-bg);
+            border-color: var(--bs-border-color);
+            color: var(--bs-body-color);
+        }
+
+        .qtip-content {
+            color: var(--bs-body-color);
+        }
+    }
+
     // Search results
     .search-results .description {
         color: var(--bs-secondary-color);
