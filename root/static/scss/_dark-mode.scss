@@ -255,7 +255,8 @@ html[data-bs-theme="dark"] {
     }
 
     .testers-fail {
-        color: #f44336;
+        // #f44336 was 4.04:1 on the card; GitHub's danger red clears AA (5.35:1)
+        color: #f87168;
     }
 
     // Muted text (e.g. non-latest releases on /recent)
@@ -275,7 +276,7 @@ html[data-bs-theme="dark"] {
         border-color: var(--bs-border-color);
     }
 
-    .qtip .qtip-content th {
+    .qtip-github .qtip-content th {
         background-color: var(--bs-secondary-bg);
     }
 
@@ -592,6 +593,8 @@ html[data-bs-theme="dark"] {
 
     .syntaxhighlighter .pod-placeholder {
         background-color: rgb(255 255 255 / 15%);
+        // inherited gutter grey was 2.97:1 on this overlay; body color clears AA
+        color: var(--bs-body-color);
     }
 
     button.pod-toggle {
