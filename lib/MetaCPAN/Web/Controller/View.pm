@@ -1,8 +1,8 @@
 package MetaCPAN::Web::Controller::View;
 
-use experimental 'postderef';
-
 use Moose;
+
+use experimental 'postderef';
 
 use Try::Tiny qw( try );
 

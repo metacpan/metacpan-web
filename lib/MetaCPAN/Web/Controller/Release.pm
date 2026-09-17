@@ -1,8 +1,8 @@
 package MetaCPAN::Web::Controller::Release;
 
-use experimental 'postderef';
-
 use Moose;
+
+use experimental 'postderef';
 
 use Future ();
 
