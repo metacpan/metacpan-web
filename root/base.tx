@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <script src="/static/js/theme-init.js"></script>
+        <script src="/static/js/theme-init.js" blocking="render"></script>
         <title>[% $title || 'Search the CPAN' %] - metacpan.org</title>
         <link rel="preload" as="fetch" href="/account/login_status" crossorigin="anonymous" />
         %%  for $assets.grep(rx('\.css$')) -> $css {
