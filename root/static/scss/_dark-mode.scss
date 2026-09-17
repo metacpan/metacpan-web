@@ -202,6 +202,13 @@ html[data-bs-theme="dark"] {
         color: var(--bs-body-color);
     }
 
+    // GitHub star button (light gradient + black text by default)
+    .star-rating a.btn.btn-primary {
+        background: var(--bs-secondary-bg);
+        border-color: var(--bs-border-color);
+        color: var(--bs-body-color);
+    }
+
     // Hardcoded dark colors that need to flip
     .black {
         color: var(--bs-body-color);
