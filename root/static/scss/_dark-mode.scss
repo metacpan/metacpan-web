@@ -349,6 +349,11 @@ html[data-bs-theme="dark"] {
         color: #ff8c69;
     }
 
+    // Pod renderer textarea (hardcoded #333 text)
+    #metacpan-pod-renderer-pod {
+        color: var(--bs-body-color);
+    }
+
     // Code / pre
     code {
         background-color: var(--bs-tertiary-bg);
