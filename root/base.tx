@@ -152,7 +152,9 @@
             <div class="footer-social">
               <div class="footer-link footer-logo">
                 <a href="/">
-                  <img src="/static/images/metacpan-logo.svg" alt="MetaCPAN" />
+                  <svg class="logo" role="img" aria-label="MetaCPAN">
+                    <use href="/static/images/metacpan-logo.svg#logo" />
+                  </svg>
                 </a>
               </div>
               <a class="footer-social-link" href="https://github.com/metacpan" aria-label="MetaCPAN on GitHub">

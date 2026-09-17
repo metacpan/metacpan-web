@@ -98,8 +98,10 @@ html[data-bs-theme="dark"] {
         color: var(--bs-body-color);
     }
 
-    .footer .footer-logo img {
-        filter: invert(1) hue-rotate(180deg);
+    // Footer logo is inline SVG like the header; recolor its wordmark to
+    // match (brand-red dots stay via the symbol's own fill).
+    .footer .footer-logo .logo {
+        --text-color: var(--bs-body-color);
     }
 
     .footer-sponsor-link,
