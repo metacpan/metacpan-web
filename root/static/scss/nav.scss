@@ -148,7 +148,10 @@ nav.navbar {
     justify-self: end;
     margin: 0;
 
-    button {
+    // Target the icon/toggle buttons only. Dropdown menu items (e.g. the
+    // logout button) must keep Bootstrap's .dropdown-item styling so they
+    // match their <a> siblings instead of getting the icon-button reset.
+    button:not(.dropdown-item) {
         background-color: transparent;
         border: 0;
         padding: 0 6px;
