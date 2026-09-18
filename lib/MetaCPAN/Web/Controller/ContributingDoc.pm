@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::ContributingDoc;
 
 use Moose;
+
 use experimental 'postderef';
 use namespace::autoclean;
 

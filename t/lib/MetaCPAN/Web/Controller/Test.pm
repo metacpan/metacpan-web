@@ -1,6 +1,7 @@
 package MetaCPAN::Web::Controller::Test;
 
 use Moose;
+
 use Cpanel::JSON::XS ();
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }

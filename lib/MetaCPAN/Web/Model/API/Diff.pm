@@ -1,7 +1,10 @@
 package MetaCPAN::Web::Model::API::Diff;
+
 use Moose;
+
 use Digest::SHA ();
 use Future      ();
+
 use namespace::autoclean;
 
 extends 'MetaCPAN::Web::Model::API';

@@ -1,7 +1,10 @@
 package MetaCPAN::Web::Controller::Root;
+
 use Moose;
+
 use HTTP::Status ();
 use List::Util   qw( uniq );
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }

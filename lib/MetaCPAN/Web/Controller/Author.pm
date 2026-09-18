@@ -1,9 +1,11 @@
 package MetaCPAN::Web::Controller::Author;
 
 use Moose;
+
 use DateTime::Format::ISO8601 ();
 use List::Util                qw( max );
 use Locale::Country           ();
+
 use namespace::autoclean;
 
 BEGIN { extends 'MetaCPAN::Web::Controller' }

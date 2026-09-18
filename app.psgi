@@ -5,20 +5,20 @@ package MetaCPAN::Web::App;    ## no critic (RequireFilenameMatchesPackage)
 use strict;
 use warnings;
 
-# TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
-#
-use File::Basename     ();
 use Config::ZOMG       ();
+use Digest::SHA        ();
+use File::Basename     ();
+use File::Spec         ();
 use Log::Log4perl      ();
 use Log::Log4perl::MDC ();
-use File::Spec         ();
 use Plack::Builder     qw( builder enable );
-use Digest::SHA        ();
 
 my $root_dir;
 my $dev_mode;
 my $config;
 
+# TODO: When we know everything will work reliably: $ENV{PLACK_ENV} ||= 'development';
+#
 BEGIN {
     $root_dir = File::Basename::dirname(__FILE__);
     $dev_mode = $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'development';
