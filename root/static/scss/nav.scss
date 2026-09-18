@@ -198,6 +198,13 @@ nav.navbar {
         border-radius: 5px;
         margin-top: 4px;
         position: absolute;
+
+        // <a> dropdown items get a hover underline from the global a:hover
+        // rule; match it on button dropdown items (logout) so they behave
+        // the same as their siblings.
+        button.dropdown-item:hover {
+            text-decoration: underline;
+        }
     }
 
     .login-dropdown {
