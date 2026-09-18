@@ -248,7 +248,7 @@ my $profile_data = {
         url_format => 'https://vimeo.com/%s',
     },
     youtube => {
-        url_format => 'https://www.youtube.com/user/%s',
+        url_format => 'https://www.youtube.com/@%s',
     },
 };
 
