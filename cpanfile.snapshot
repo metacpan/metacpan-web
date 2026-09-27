@@ -3347,10 +3347,10 @@ DISTRIBUTIONS
       perl 5.008001
       strict 0
       warnings 0
-  Params-SomeUtil-1.11
-    pathname: P/PL/PLICEASE/Params-SomeUtil-1.11.tar.gz
+  Params-SomeUtil-1.12
+    pathname: P/PL/PLICEASE/Params-SomeUtil-1.12.tar.gz
     provides:
-      Params::SomeUtil 1.11
+      Params::SomeUtil 1.12
     requirements:
       ExtUtils::CBuilder 0.27
       ExtUtils::MakeMaker 6.52
