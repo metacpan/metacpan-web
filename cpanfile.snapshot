@@ -574,10 +574,10 @@ DISTRIBUTIONS
       Config::Any::YAML undef
     requirements:
       Module::Pluggable::Object 3.6
-  Config-General-2.67
-    pathname: T/TL/TLINDEN/Config-General-2.67.tar.gz
+  Config-General-2.69
+    pathname: T/TL/TLINDEN/Config-General-2.69.tar.gz
     provides:
-      Config::General 2.67
+      Config::General 2.69
       Config::General::Extended 2.07
       Config::General::Interpolated 2.16
     requirements:
@@ -610,21 +610,21 @@ DISTRIBUTIONS
       Hash::Merge::Simple 0
       List::Util 0
       Moo 0
-  Cookie-Baker-0.12
-    pathname: K/KA/KAZEBURO/Cookie-Baker-0.12.tar.gz
+  Cookie-Baker-0.14
+    pathname: K/KA/KAZEBURO/Cookie-Baker-0.14.tar.gz
     provides:
-      Cookie::Baker 0.12
+      Cookie::Baker 0.14
     requirements:
       Exporter 0
       Module::Build::Tiny 0.035
       URI::Escape 0
       perl 5.008001
-  Cpanel-JSON-XS-4.80
-    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.80.tar.gz
+  Cpanel-JSON-XS-4.82
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-4.82.tar.gz
     provides:
-      Cpanel::JSON::XS 4.80
-      Cpanel::JSON::XS::Boolean 4.80
-      Cpanel::JSON::XS::Type 4.80
+      Cpanel::JSON::XS 4.82
+      Cpanel::JSON::XS::Boolean 4.82
+      Cpanel::JSON::XS::Type 4.82
     requirements:
       Carp 0
       Config 0
@@ -673,10 +673,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Data-Dump-1.25
-    pathname: G/GA/GARU/Data-Dump-1.25.tar.gz
+  Data-Dump-1.26
+    pathname: G/GA/GARU/Data-Dump-1.26.tar.gz
     provides:
-      Data::Dump 1.25
+      Data::Dump 1.26
       Data::Dump::FilterContext undef
       Data::Dump::Filtered undef
       Data::Dump::Trace 0.02
@@ -1584,16 +1584,16 @@ DISTRIBUTIONS
       XSLoader 0
       parent 0
       perl 5.008008
-  HTML-Parser-3.86
-    pathname: O/OA/OALDERS/HTML-Parser-3.86.tar.gz
+  HTML-Parser-3.87
+    pathname: O/OA/OALDERS/HTML-Parser-3.87.tar.gz
     provides:
-      HTML::Entities 3.86
-      HTML::Filter 3.86
-      HTML::HeadParser 3.86
-      HTML::LinkExtor 3.86
-      HTML::Parser 3.86
-      HTML::PullParser 3.86
-      HTML::TokeParser 3.86
+      HTML::Entities 3.87
+      HTML::Filter 3.87
+      HTML::HeadParser 3.87
+      HTML::LinkExtor 3.87
+      HTML::Parser 3.87
+      HTML::PullParser 3.87
+      HTML::TokeParser 3.87
     requirements:
       Carp 0
       Exporter 0
@@ -1931,10 +1931,10 @@ DISTRIBUTIONS
       JSON::PP 2.27300
       Scalar::Util 0
       perl 5.006
-  JSON-XS-4.04
-    pathname: M/ML/MLEHMANN/JSON-XS-4.04.tar.gz
+  JSON-XS-4.06
+    pathname: M/ML/MLEHMANN/JSON-XS-4.06.tar.gz
     provides:
-      JSON::XS 4.04
+      JSON::XS 4.06
     requirements:
       Canary::Stability 0
       ExtUtils::MakeMaker 6.52
@@ -4053,11 +4053,11 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Scalar::Util 0
       perl 5.006
-  Sereal-Decoder-7.001
-    pathname: Y/YV/YVES/Sereal-Decoder-7.001.tar.gz
+  Sereal-Decoder-7.003
+    pathname: Y/YV/YVES/Sereal-Decoder-7.003.tar.gz
     provides:
-      Sereal::Decoder 7.001
-      Sereal::Decoder::Constants 7.001
+      Sereal::Decoder 7.003
+      Sereal::Decoder::Constants 7.003
       Sereal::Performance undef
     requirements:
       Devel::CheckLib 1.16
@@ -4065,16 +4065,16 @@ DISTRIBUTIONS
       ExtUtils::ParseXS 2.21
       XSLoader 0
       perl 5.014
-  Sereal-Encoder-7.001
-    pathname: Y/YV/YVES/Sereal-Encoder-7.001.tar.gz
+  Sereal-Encoder-7.003
+    pathname: Y/YV/YVES/Sereal-Encoder-7.003.tar.gz
     provides:
-      Sereal::Encoder 7.001
-      Sereal::Encoder::Constants 7.001
+      Sereal::Encoder 7.003
+      Sereal::Encoder::Constants 7.003
     requirements:
       Devel::CheckLib 1.16
       ExtUtils::MakeMaker 7.0
       ExtUtils::ParseXS 2.21
-      Sereal::Decoder 7.001
+      Sereal::Decoder 7.003
       XSLoader 0
       perl 5.014
   Specio-0.53
