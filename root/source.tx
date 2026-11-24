@@ -8,7 +8,7 @@
   <a data-keyboard-shortcut="g s" href="/release/[% $file.author ~ '/' ~ $file.release %]/source">[% $file.author %] / [% $file.release %]</a>
   %%  my $parts = $file.path.split('/');
   %%  for $parts -> $part {
-    / [% if $~part.is_last { $part } else { %]<a href="/release/[% $file.author ~ '/' ~ $file.release %]/source/[% $parts.slice(0, $~part).join('/') %]">[% $part %]</a>[% } %]
+    / [% if $~part.is_last { $part } else { %]<a href="/release/[% $file.author ~ '/' ~ $file.release %]/source/[% uri_path($parts.slice(0, $~part).join('/')) %]">[% $part %]</a>[% } %]
   %%  }
 </div>
 %%  }
@@ -25,17 +25,17 @@
   %%  }
   %%  else if $file.slop || $file.mime == 'text/markdown' {
   <li>
-    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ $file.path %]">Documentation View</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/view/' ~ uri_path($file.path) %]">Documentation View</a>
   </li>
   %%  }
   <li>
     <a data-keyboard-shortcut="g a" href="/author/[% $file.author %]">Author</a>
   </li>
   <li>&nbsp;</li>
-  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">Raw code</a></li>
-  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ $file.path %]">Permalink</a></li>
+  <li><a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ uri_path($file.path) %]">Raw code</a></li>
+  <li><a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/source/' ~ uri_path($file.path) %]">Permalink</a></li>
   <li>
-    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ $file.path %]?download=1">Download</a>
+    <a href="/release/[% $file.author ~ '/' ~ $file.release ~ '/raw/' ~ uri_path($file.path) %]?download=1">Download</a>
   </li>
   <li class="nav-header">Info</li>
   <li>[% $file.sloc %] lines of code</li>
@@ -54,6 +54,6 @@
 %]"><code class="language-[% $syntax_type %]">[% $source %]</code></pre>
 %%  }
 %%  else {
-This file cannot be displayed inline. Try the <a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ $file.path %]">raw file</a>.
+This file cannot be displayed inline. Try the <a href="[% $api_public ~ '/source/' ~ $file.author ~ '/' ~ $file.release ~ '/' ~ uri_path($file.path) %]">raw file</a>.
 %%  }
 %%  }

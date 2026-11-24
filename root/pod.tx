@@ -23,8 +23,8 @@
 %%    ? '/release/' ~ $release.author ~ '/' ~ $release.name
 %%    : '/dist/' ~ $release.distribution;
   <li>
-    <i class="far fa-file-code sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% $file.path %]">Source</a>
-    (<a href="[% $release_base %]/source/[% $file.path %]?raw=1">raw</a>)
+    <i class="far fa-file-code sidebar-icon" aria-hidden="true"></i><a data-keyboard-shortcut="g s" href="[% $release_base %]/source/[% uri_path($file.path) %]">Source</a>
+    (<a href="[% $release_base %]/source/[% uri_path($file.path) %]?raw=1">raw</a>)
   </li>
   %%  if $file.pod_path {
   <li>
@@ -58,7 +58,7 @@
   %%      : '/dist/' ~ $release.distribution;
   <p class="pod-error">
     No POD found for <code>[% $file.name %]</code>.
-    Time to <a href="[% $release_base %]/source/[% $file.path %]">read the source</a>?
+    Time to <a href="[% $release_base %]/source/[% uri_path($file.path) %]">read the source</a>?
   </p>
   %%  }
 </div>

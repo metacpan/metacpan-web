@@ -218,4 +218,24 @@ test_psgi app, sub {
     }
 }
 
+test_psgi app, sub {
+    my $cb = shift;
+
+    # File names with "#" must be escaped, or the browser treats the rest
+    # of the link as a fragment (GH#3355).
+    my $browse = '/release/RRWO/Text-Minify-XS-v0.7.6/source';
+    ok( my $res = $cb->( GET $browse ), "GET $browse" );
+    is( $res->code, 200, 'code 200' );
+
+    my $href = tx($res)->find_value(
+        '//table[@id="metacpan-file-browse"]//td[@class="name"]/a[@title="#dist.ini#"]/@href'
+    );
+    is $href, "$browse/%23dist.ini%23", 'link to #dist.ini# is escaped';
+
+    ok( $res = $cb->( GET $href ), "GET $href" );
+    is( $res->code, 200, 'code 200' );
+    like $res->content, qr/name\s*=\s*Text-Minify-XS/,
+        'shows the contents of #dist.ini#';
+};
+
 done_testing;
