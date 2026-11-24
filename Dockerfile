@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 ARG SLIM_BUILD
 ARG MAYBE_BASE_BUILD=${SLIM_BUILD:+server-base-slim}
 ARG BASE_BUILD=${MAYBE_BASE_BUILD:-server-base}
@@ -36,13 +37,12 @@ FROM metacpan/metacpan-base:main-20250531-090129-slim AS server-base-slim
 FROM server-base AS build-cpan-prereqs
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
-RUN \
-    --mount=type=cache,target=/var/cache/apt,sharing=private \
-    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
-<<EOT
-    apt-get update
-    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
-EOT
+ARG COMRAK_FFI_VERSION=v0.1.0
+# sha256 of the x86_64-unknown-linux-gnu asset for COMRAK_FFI_VERSION;
+# update both together
+ARG COMRAK_FFI_SHA256=5c362bed31cf9f6311aa306636f727317c33e0e12e3b49af33ead3a7f5ebb891
+ADD --checksum=sha256:${COMRAK_FFI_SHA256} https://github.com/oalders/comrak-ffi/releases/download/${COMRAK_FFI_VERSION}/libcomrak_ffi.so.x86_64-unknown-linux-gnu /usr/local/lib/libcomrak_ffi.so
+RUN chmod 644 /usr/local/lib/libcomrak_ffi.so && ldconfig
 
 WORKDIR /app/
 
@@ -69,13 +69,8 @@ EOT
 FROM ${BASE_BUILD} AS server
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
-RUN \
-    --mount=type=cache,target=/var/cache/apt,sharing=private \
-    --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
-<<EOT
-    apt-get update
-    apt-get satisfy -y -f --no-install-recommends 'libcmark-dev (>= 0.30.2)'
-EOT
+COPY --from=build-cpan-prereqs /usr/local/lib/libcomrak_ffi.so /usr/local/lib/libcomrak_ffi.so
+RUN ldconfig
 
 WORKDIR /app/
 

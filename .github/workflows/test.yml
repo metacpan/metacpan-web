@@ -173,7 +173,17 @@ jobs:
         with:
           node-version: '22'
       - run: npm install
-      - run: apt-get update && apt-get -y install libcmark-dev
+      - name: Install libcomrak_ffi
+        # Use the version and checksum pinned in the Dockerfile so the two
+        # stay in sync
+        run: |
+          version=$(sed -n 's/^ARG COMRAK_FFI_VERSION=//p' Dockerfile)
+          sha256=$(sed -n 's/^ARG COMRAK_FFI_SHA256=//p' Dockerfile)
+          test -n "$version" && test -n "$sha256"
+          curl -fsSL -o /usr/local/lib/libcomrak_ffi.so \
+            "https://github.com/oalders/comrak-ffi/releases/download/${version}/libcomrak_ffi.so.x86_64-unknown-linux-gnu"
+          echo "${sha256}  /usr/local/lib/libcomrak_ffi.so" | sha256sum -c -
+          ldconfig
       - name: Install Carton
         uses: perl-actions/install-with-cpm@v2.4
         with:

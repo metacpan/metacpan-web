@@ -552,15 +552,6 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  CommonMark-0.310100
-    pathname: N/NW/NWELLNHOF/CommonMark-0.310100.tar.gz
-    provides:
-      CommonMark 0.310100
-      CommonMark::Node 0.310100
-    requirements:
-      Devel::CheckLib 0
-      ExtUtils::MakeMaker 0
-      perl 5.008
   Config-Any-0.33
     pathname: H/HA/HAARG/Config-Any-0.33.tar.gz
     provides:
@@ -1472,6 +1463,81 @@ DISTRIBUTIONS
       File::Spec 0.8
       Pod::Man 0
       perl 5.006
+  FFI-CheckLib-0.31
+    pathname: P/PL/PLICEASE/FFI-CheckLib-0.31.tar.gz
+    provides:
+      FFI::CheckLib 0.31
+    requirements:
+      ExtUtils::MakeMaker 0
+      File::Which 0
+      List::Util 1.33
+      perl 5.006
+  FFI-Platypus-2.12
+    pathname: P/PL/PLICEASE/FFI-Platypus-2.12.tar.gz
+    provides:
+      FFI::Build 2.12
+      FFI::Build::File::Base 2.12
+      FFI::Build::File::C 2.12
+      FFI::Build::File::CXX 2.12
+      FFI::Build::File::Library 2.12
+      FFI::Build::File::Object 2.12
+      FFI::Build::MM 2.12
+      FFI::Build::MM::FBX 2.12
+      FFI::Build::Platform 2.12
+      FFI::Build::Plugin 2.12
+      FFI::Build::Plugin::Foo1 undef
+      FFI::Build::Plugin::Foo2 undef
+      FFI::Build::PluginData 2.12
+      FFI::Platypus 2.12
+      FFI::Platypus::API 2.12
+      FFI::Platypus::Buffer 2.12
+      FFI::Platypus::Bundle 2.12
+      FFI::Platypus::Closure 2.12
+      FFI::Platypus::ClosureData 2.12
+      FFI::Platypus::Constant 2.12
+      FFI::Platypus::DL 2.12
+      FFI::Platypus::Function 2.12
+      FFI::Platypus::Function::Function 2.12
+      FFI::Platypus::Function::Wrapper 2.12
+      FFI::Platypus::Internal 2.12
+      FFI::Platypus::Lang 2.12
+      FFI::Platypus::Lang::ASM 2.12
+      FFI::Platypus::Lang::C 2.12
+      FFI::Platypus::Lang::Win32 2.12
+      FFI::Platypus::Legacy 2.12
+      FFI::Platypus::Memory 2.12
+      FFI::Platypus::Record 2.12
+      FFI::Platypus::Record::Meta 2.12
+      FFI::Platypus::Record::TieArray 2.12
+      FFI::Platypus::ShareConfig 2.12
+      FFI::Platypus::Type 2.12
+      FFI::Platypus::Type::PointerSizeBuffer 2.12
+      FFI::Platypus::Type::StringArray 2.12
+      FFI::Platypus::Type::StringPointer 2.12
+      FFI::Platypus::Type::WideString 2.12
+      FFI::Platypus::TypeParser 2.12
+      FFI::Platypus::TypeParser::Version0 2.12
+      FFI::Platypus::TypeParser::Version1 2.12
+      FFI::Platypus::TypeParser::Version2 2.12
+      FFI::Probe 2.12
+      FFI::Probe::Runner 2.12
+      FFI::Probe::Runner::Builder 2.12
+      FFI::Probe::Runner::Result 2.12
+      FFI::Temp 2.12
+    requirements:
+      Capture::Tiny 0
+      ExtUtils::CBuilder 0
+      ExtUtils::MakeMaker 7.12
+      ExtUtils::ParseXS 3.30
+      FFI::CheckLib 0.05
+      File::Spec::Functions 0
+      IPC::Cmd 0
+      JSON::PP 0
+      List::Util 1.45
+      autodie 0
+      constant 1.32
+      parent 0
+      perl 5.008004
   File-Listing-6.16
     pathname: P/PL/PLICEASE/File-Listing-6.16.tar.gz
     provides:

@@ -5,27 +5,24 @@ use warnings;
 
 use Exporter qw(import);
 
-use Carp       qw( croak );
-use CommonMark qw(
-    EVENT_ENTER
-    EVENT_EXIT
-    NODE_CODE
-    NODE_CODE_BLOCK
-    NODE_DOCUMENT
-    NODE_HEADER
-    NODE_HRULE
-    NODE_HTML
-    NODE_INLINE_HTML
-    NODE_LINEBREAK
-    NODE_SOFTBREAK
-    NODE_TEXT
-    OPT_UNSAFE
-);
+use Carp           qw( croak );
 use Digest::MD5    ();
+use FFI::Platypus  ();
 use HTML::Escape   qw( escape_html );
 use HTML::Restrict ();
 use Ref::Util      qw( is_plain_arrayref );
 use URI            ();
+
+# COMRAK_FFI_LIB overrides the library path, e.g. for local development
+my $comrak_lib = $ENV{COMRAK_FFI_LIB} || '/usr/local/lib/libcomrak_ffi.so';
+croak "libcomrak_ffi not found at $comrak_lib (set COMRAK_FFI_LIB)"
+    unless -e $comrak_lib;
+my $ffi = FFI::Platypus->new( api => 2 );
+$ffi->lib($comrak_lib);
+my $comrak_render = $ffi->function(
+    'comrak_markdown_to_html' => [ 'string', 'int' ] => 'opaque' );
+my $comrak_free
+    = $ffi->function( 'comrak_free_string' => ['opaque'] => 'void' );
 
 our @EXPORT_OK = qw(
     filter_html
@@ -185,73 +182,62 @@ sub split_index {
     return ( $pod_index, $html );
 }
 
-my @is_leaf;
-$is_leaf[$_] = 1
-    for (
-    NODE_HTML,      NODE_HRULE,     NODE_CODE_BLOCK, NODE_TEXT,
-    NODE_SOFTBREAK, NODE_LINEBREAK, NODE_CODE,       NODE_INLINE_HTML,
-    );
-
 sub render_markdown {
     my ( $markdown, %opts ) = @_;
 
-    my $render_opts = 0;
-    if ( delete $opts{unsafe} // 1 ) {
-        $render_opts |= OPT_UNSAFE;
-    }
+    my $unsafe = delete $opts{unsafe} // 1;
 
     if (%opts) {
         croak "Unsupported options: " . join( ', ', sort keys %opts );
     }
 
-    my $doc = CommonMark->parse_document($markdown);
+    # comrak renders GFM markdown to HTML with extensions enabled
+    # (tables, strikethrough, autolinks, header IDs). The unsafe flag
+    # controls whether raw HTML in the markdown is passed through (1) or
+    # stripped (0). Passed-through HTML is not sanitized here (comrak has
+    # no tagfilter since 0.56), so untrusted input must go through
+    # filter_html afterwards.
+    #
+    # comrak takes and returns UTF-8 bytes; Perl callers pass and expect
+    # character strings. NUL would end the C string early, so replace it
+    # as CommonMark does.
+    my $bytes = $markdown // q{};
+    $bytes =~ tr/\0/\x{FFFD}/;
+    utf8::encode($bytes);
+    my $ptr = $comrak_render->call( $bytes, $unsafe ? 1 : 0 )
+        or croak 'comrak_markdown_to_html returned NULL';
+    my $html = $ffi->cast( 'opaque', 'string', $ptr );
+    $comrak_free->call($ptr);
+    utf8::decode($html)
+        or croak 'comrak_markdown_to_html returned invalid UTF-8';
 
-    my ( $html, $header_content, %seen_header );
+    return _normalize_heading_anchors($html);
+}
 
-    my $iter = $doc->iterator;
-    while ( my ( $ev_type, $node ) = $iter->next ) {
-        my $node_type = $node->get_type;
+# comrak's header IDs extension emits an empty <a class="anchor"> in each
+# heading. Leave the id on the heading and drop the <a>, so filter_html
+# never has to allow class, aria-hidden or aria-label on links, which user
+# content could abuse. createAnchors in document-ui.mjs adds the bookmark
+# link client-side, as it does for POD. Handles both comrak formats:
+#   < 0.54: <h1><a href="#x" aria-hidden="true" class="anchor" id="x"></a>X</h1>
+#   >= 0.54: <h1 id="x">X<a href="#x" aria-label="..." ... class="anchor"></a></h1>
+sub _normalize_heading_anchors {
+    my ($html) = @_;
 
-        if ( $node_type == NODE_DOCUMENT ) {
-            next;
-        }
+    $html =~ s{
+        <(h[1-6])>
+        <a\ href="\#([^"]*)"\ aria-hidden="true"\ class="anchor"\ id="\2"></a>
+    }{<$1 id="$2">}gx;
 
-        if ( $node_type == NODE_HEADER ) {
-            if ( $ev_type == EVENT_ENTER ) {
-                $header_content = '';
-            }
-            if ( $ev_type == EVENT_EXIT ) {
-                $header_content =~ s{(?:-(\d+))?$}{'-' . (($1 // 1) + 1)}e
-                    while $seen_header{$header_content}++;
-
-                my $header_html = $node->render_html($render_opts);
-                $header_html
-                    =~ s/^<h[0-9]+\b\K/' id="'.escape_html($header_content).'"'/e;
-                $html .= $header_html;
-
-                undef $header_content;
-            }
-        }
-        elsif ($ev_type == EVENT_ENTER
-            && $node->parent->get_type == NODE_DOCUMENT )
-        {
-            $html .= $node->render_html($render_opts);
-        }
-
-        if ( defined $header_content ) {
-            if ( $is_leaf[$node_type] ) {
-                my $content = lc( $node->get_literal );
-                $content =~ s/\A\s+//;
-                $content =~ s/\s+\z//;
-                $content =~ s/\s+/-/g;
-
-                if ( length $content ) {
-                    $header_content .= '-' if length $header_content;
-                    $header_content .= $content;
-                }
-            }
-        }
-    }
+    # Match the anchor itself, never scanning past the next tag, so the
+    # cost stays linear on raw HTML with unclosed headings or many
+    # unclosed <a starts. comrak escapes < in attribute values. A
+    # hand-written class="anchor" link here is harmless to drop, as
+    # filter_html would strip its class anyway.
+    $html =~ s{
+        <a\ href="\#[^"<>]*"\ [^<>]*\bclass="anchor"></a>
+        (?=</h[1-6]>)
+    }{}gx;
 
     return $html;
 }
