@@ -35,7 +35,7 @@ requires 'HTTP::Request::Common';
 requires 'IO::Async::Loop';
 requires 'IO::Async::SSL';
 requires 'IO::Socket::SSL';
-requires 'List::Util', '1.45';
+requires 'List::Util', '1.50';
 requires 'Locale::Country','3.62';
 requires 'Log::Dispatch';
 requires 'Log::Log4perl::Catalyst';

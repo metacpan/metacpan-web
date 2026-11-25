@@ -89,7 +89,14 @@ sub by_releases {
                 }
             )->then( sub {
                 my $response = shift;
-                my @changes  = @{ $response->{changes} // [] };
+
+                # request() returns HTTP error bodies rather than failing.
+                my $code = $response->{code} // 0;
+                return Future->fail(
+                    "changes/by_releases returned HTTP $code")
+                    if $code > 399;
+
+                my @changes = @{ $response->{changes} // [] };
 
                 my %changelogs;
 

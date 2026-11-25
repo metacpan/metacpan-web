@@ -6,7 +6,9 @@ use namespace::autoclean;
 BEGIN { extends 'MetaCPAN::Web::Controller' }
 
 use DateTime             ();
+use Future               ();
 use HTML::Escape         qw( escape_html );
+use List::Util           qw( head );
 use MetaCPAN::Web::Types qw( ArrayRef DateTime Enum HashRef Str Undef Uri );
 use Params::ValidationCompiler qw( validation_for );
 use XML::FeedPP                ();                     ## no perlimports
@@ -34,18 +36,7 @@ sub recent : Private {
     $c->forward('/recent/index');
     die join "\n", @{ $c->error } if @{ $c->error };
 
-    my $changes
-        = $c->model('API::Changes')
-        ->by_releases(
-        [ map "$_->{author}/$_->{name}", @{ $c->stash->{recent} } ] )
-        ->get;
-
-    for ( @{ $c->stash->{recent} } ) {
-
-        # Provided in Model/API/Changes.pm Line 67
-        my $k = $_->{author} . '/' . $_->{name};
-        $_->{changes} = $changes->{$k};
-    }
+    $self->_add_changes( $c, $c->stash->{recent} );
 
     $c->stash->{feed} = $self->build_feed(
         format  => $type,
@@ -113,7 +104,7 @@ sub dist_atom : Chained('/dist/root') PathPart('releases.atom') Args(0) {
 }
 
 sub dist : Private {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $type ) = @_;
     my $dist = $c->stash->{distribution_name};
 
     $c->browser_max_age('1h');
@@ -122,12 +113,37 @@ sub dist : Private {
 
     my $data = $c->model('API::Release')->versions($dist)->get;
 
+    # Die on an API error so the CDN serves the stale feed, not an empty one.
+    my $versions = $data->{versions}
+        // die "No versions for $dist\n";
+
+    # Each release fetches its whole Changes file; big dists would be too slow.
+    $self->_add_changes( $c, [ head( 20, @$versions ) ] );
+
     $c->stash->{feed} = $self->build_feed(
-        format  => $c->req->params->{'type'},
+        format  => $type,
         host    => $c->config->{web_host},
         title   => "Recent CPAN uploads of $dist - MetaCPAN",
-        entries => $data->{versions},
+        entries => $versions,
     );
+}
+
+sub _add_changes {
+    my ( $self, $c, $entries ) = @_;
+
+    # Changes are optional; an API failure must not break the whole feed.
+    my $changes
+        = $c->model('API::Changes')
+        ->by_releases( map "$_->{author}/$_->{name}", @$entries )
+        ->else( sub {
+            $c->log->warn("Changes lookup failed: @_");
+
+            # Don't let the CDN pin a Changes-less fallback feed for a year.
+            $c->cdn_max_age('5m');
+            Future->done( {} );
+        } )->get;
+
+    $_->{changes} = $changes->{"$_->{author}/$_->{name}"} for @$entries;
 }
 
 my $feed_check = validation_for(
@@ -260,7 +276,7 @@ sub end : Private {
     $c->cdn_stale_if_error('1y');
 
     $c->res->content_type(
-        $feed->isa('XML::FeedPP::Atom')
+        $feed->isa('XML::FeedPP::Atom::Common')
         ? 'application/atom+xml; charset=UTF-8'
         : 'application/rss+xml; charset=UTF-8'
     );
