@@ -233,7 +233,7 @@
     %% }
     <li class="nav-sub-label">Permalinks</li>
     <li>
-      <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a href="/release/[% $release.author %]/[% $release.name %][% if $file { '/view/' ~ $file.path } %]">This version</a>
+      <i class="fas fa-link sidebar-icon" aria-hidden="true"></i><a href="/release/[% $release.author %]/[% $release.name %][% if $file { '/view/' ~ uri_path($file.path) } %]">This version</a>
     </li>
     %%  if $canonical {
       %%  my $has_latest = $versions.map(-> $v { $v.status == 'latest' ? 1 : 0 }).sum();

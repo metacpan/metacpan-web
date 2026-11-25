@@ -12,6 +12,7 @@ use Number::Format            ();
 use Ref::Util                 qw( is_coderef is_regexpref );
 use Text::Pluralize           ();
 use Text::Xslate::Util        qw( mark_raw );
+use URI::Escape               qw( uri_escape_utf8 );
 use MetaCPAN::Web::RenderUtil qw( gravatar_image );          ## no perlimports
 use With::Roles               ();
 
@@ -25,6 +26,11 @@ sub format_number {
 sub format_bytes {
     my ($number) = @_;
     $num_formatter->format_bytes($number);
+}
+
+sub uri_path {
+    my ($path) = @_;
+    return join '/', map uri_escape_utf8($_), split m{/}, $path // '', -1;
 }
 
 sub markdown {
@@ -202,6 +208,7 @@ __PACKAGE__->bridge(
             version
             is_url
             length
+            uri_path
         ),
     },
     function => {
@@ -216,6 +223,7 @@ __PACKAGE__->bridge(
             version
             is_url
             length
+            uri_path
         ),
     },
     array => {
