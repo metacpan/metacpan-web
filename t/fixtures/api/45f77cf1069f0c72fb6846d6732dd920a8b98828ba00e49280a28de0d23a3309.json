@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"\",\n         \"email\" : [\n            \"netdns@cpan.org\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/1bdfccb5f2e631f09de2eed145bb7054?s=130&d=identicon\",\n         \"id\" : \"NETDNS\",\n         \"is_pause_custodial_account\" : false,\n         \"name\" : \"Net-DNS Role Account\",\n         \"pauseid\" : \"NETDNS\",\n         \"updated\" : \"2026-09-16T17:51:26\",\n         \"website\" : []\n      }\n   ],\n   \"took\" : 0,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?from=0&q=net+dns"
+}

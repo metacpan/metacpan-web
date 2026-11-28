@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"0.00\",\n      \"condition\" : \"0.00\",\n      \"statement\" : \"0.09\",\n      \"subroutine\" : \"0.74\",\n      \"total\" : \"0.05\"\n   },\n   \"distribution\" : \"CGI-Bus\",\n   \"release\" : \"CGI-Bus-0.62\",\n   \"url\" : \"http://cpancover.com/latest/CGI-Bus-0.62/index.html\",\n   \"version\" : \"0.62\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/CGI-Bus-0.62"
+}

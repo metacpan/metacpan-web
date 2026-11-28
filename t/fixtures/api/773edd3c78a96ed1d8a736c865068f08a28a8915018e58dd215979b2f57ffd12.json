@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"contributors\" : [\n      {\n         \"email\" : [],\n         \"name\" : \"Moose is maintained by the Moose Cabal, along with the help of many contributors. See L<Moose/CABAL> and L<Moose/CONTRIBUTORS> for details.\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/contributors/ETHER/Moose-2.1005"
+}

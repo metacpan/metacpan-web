@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"author\" : \"SHANCOCK\",\n   \"authorized\" : true,\n   \"binary\" : false,\n   \"date\" : \"2026-08-25T13:06:52\",\n   \"deprecated\" : false,\n   \"directory\" : false,\n   \"dist_fav_count\" : 150,\n   \"distribution\" : \"Perl-Tidy\",\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/S/SH/SHANCOCK/Perl-Tidy-20260826.tar.gz\",\n   \"id\" : \"dtRt4QRcP6q5uUOuPChAgr7w2cU\",\n   \"indexed\" : true,\n   \"level\" : 2,\n   \"maturity\" : \"released\",\n   \"mime\" : \"text/x-script.perl-module\",\n   \"module\" : [\n      {\n         \"associated_pod\" : \"SHANCOCK/Perl-Tidy-20260826/lib/Perl/Tidy.pod\",\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"Perl::Tidy\",\n         \"version\" : \"20260826\",\n         \"version_numified\" : 20260826\n      }\n   ],\n   \"name\" : \"Tidy.pm\",\n   \"path\" : \"lib/Perl/Tidy.pm\",\n   \"pod\" : \"\",\n   \"pod_lines\" : [],\n   \"release\" : \"Perl-Tidy-20260826\",\n   \"sloc\" : 4465,\n   \"slop\" : 0,\n   \"stat\" : {\n      \"mode\" : 33188,\n      \"mtime\" : 1787582077,\n      \"size\" : 257741\n   },\n   \"status\" : \"latest\",\n   \"version\" : \"20260826\",\n   \"version_numified\" : 20260826\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/module/Perl::Tidy"
+}

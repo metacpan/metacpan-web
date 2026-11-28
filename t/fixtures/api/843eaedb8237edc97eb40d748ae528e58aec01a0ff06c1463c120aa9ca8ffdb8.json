@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"favorites\" : [\n      {\n         \"author\" : \"OTTERLEY\",\n         \"date\" : \"2013-07-19T02:58:54\",\n         \"distribution\" : \"AnyEvent-Curl-Multi\"\n      },\n      {\n         \"author\" : \"MIYAGAWA\",\n         \"date\" : \"2011-08-12T10:43:13\",\n         \"distribution\" : \"App-cpanminus\"\n      },\n      {\n         \"author\" : \"SARTAK\",\n         \"date\" : \"2011-10-03T09:09:31\",\n         \"distribution\" : \"App-Nopaste\"\n      },\n      {\n         \"author\" : \"GUGOD\",\n         \"date\" : \"2012-04-18T19:39:28\",\n         \"distribution\" : \"App-perlbrew\"\n      },\n      {\n         \"author\" : \"VTI\",\n         \"date\" : \"2013-04-26T13:23:58\",\n         \"distribution\" : \"App-TLSMe\"\n      },\n      {\n         \"author\" : \"PERLER\",\n         \"date\" : \"2012-05-06T13:25:26\",\n         \"distribution\" : \"Bash-Completion-Plugins-cpanm\"\n      },\n      {\n         \"author\" : \"FERREIRA\",\n         \"date\" : \"2012-04-18T21:12:06\",\n         \"distribution\" : \"Carp-Always\"\n      },\n      {\n         \"author\" : \"BOBTFISH\",\n         \"date\" : \"2011-08-04T12:39:39\",\n         \"distribution\" : \"Catalyst-Action-REST\"\n      },\n      {\n         \"author\" : \"BOBTFISH\",\n         \"date\" : \"2011-08-03T18:30:23\",\n         \"distribution\" : \"Catalyst-Runtime\"\n      },\n      {\n         \"author\" : \"ESSKAR\",\n         \"date\" : \"2012-05-15T20:29:44\",\n         \"distribution\" : \"Crypt-SaltedHash\"\n      }\n   ],\n   \"took\" : 4,\n   \"total\" : 39\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/favorite/by_user/pEO1mtk5SmGYxG_Ym8yXhw?page=1&page_size=10"
+}

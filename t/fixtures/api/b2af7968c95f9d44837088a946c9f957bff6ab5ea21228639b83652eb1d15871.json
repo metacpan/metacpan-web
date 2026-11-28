@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"abstract\" : \"all the junk that rjbs likes in his one-offs\",\n   \"author\" : \"RJBS\",\n   \"authorized\" : true,\n   \"date\" : \"2023-01-01T02:00:36\",\n   \"dist_fav_count\" : 1,\n   \"distribution\" : \"Task-BeLike-RJBS\",\n   \"documentation\" : \"rjbs\",\n   \"id\" : \"jNqNQhj0tcafj2MZ8YQJWhc27HA\",\n   \"indexed\" : true,\n   \"module\" : [\n      {\n         \"associated_pod\" : \"RJBS/Task-BeLike-RJBS-20221231.000/lib/rjbs.pm\",\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"rjbs\",\n         \"version\" : \"20221231.000\",\n         \"version_numified\" : 20221231.0\n      }\n   ],\n   \"path\" : \"lib/rjbs.pm\",\n   \"pod_lines\" : [\n      [\n         22,\n         36\n      ]\n   ],\n   \"release\" : \"Task-BeLike-RJBS-20221231.000\",\n   \"status\" : \"latest\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/search/first?q=RJBS"
+}

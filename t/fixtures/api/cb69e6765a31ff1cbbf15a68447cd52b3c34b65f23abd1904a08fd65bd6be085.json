@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"rt\" : {\n         \"active\" : 2,\n         \"closed\" : 22,\n         \"new\" : 1,\n         \"open\" : 1,\n         \"patched\" : 0,\n         \"rejected\" : 1,\n         \"resolved\" : 21,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=Text-Tabs%2BWrap\",\n         \"stalled\" : 0\n      }\n   },\n   \"name\" : \"Text-Tabs+Wrap\",\n   \"river\" : {\n      \"bucket\" : 5,\n      \"bus_factor\" : 5,\n      \"immediate\" : 140,\n      \"total\" : 36560\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Text-Tabs+Wrap"
+}

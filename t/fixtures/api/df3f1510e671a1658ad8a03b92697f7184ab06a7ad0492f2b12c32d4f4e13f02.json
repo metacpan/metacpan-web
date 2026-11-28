@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"rt\" : {\n         \"active\" : 78,\n         \"closed\" : 268,\n         \"new\" : 20,\n         \"open\" : 46,\n         \"patched\" : 0,\n         \"rejected\" : 63,\n         \"resolved\" : 205,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=Moose\",\n         \"stalled\" : 12\n      }\n   },\n   \"external_package\" : {\n      \"debian\" : \"libmoose-perl\",\n      \"fedora\" : \"perl-Moose\"\n   },\n   \"name\" : \"Moose\",\n   \"river\" : {\n      \"bucket\" : 4,\n      \"bus_factor\" : 3,\n      \"immediate\" : 3157,\n      \"total\" : 4662\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Moose"
+}

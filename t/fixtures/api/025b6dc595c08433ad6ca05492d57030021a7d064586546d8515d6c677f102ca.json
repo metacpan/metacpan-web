@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"files\" : [\n      {\n         \"abstract\" : \"Verify HTTP Message Signatures (RFC 9421)\",\n         \"author\" : \"RRWO\",\n         \"authorized\" : true,\n         \"distribution\" : \"HTTP-Message-Signature\",\n         \"documentation\" : \"HTTP::Message::Signature\",\n         \"indexed\" : true,\n         \"module\" : [\n            {\n               \"associated_pod\" : \"RRWO/HTTP-Message-Signature-v0.1.2/lib/HTTP/Message/Signature.pm\",\n               \"authorized\" : true,\n               \"indexed\" : true,\n               \"name\" : \"HTTP::Message::Signature\",\n               \"version\" : \"v0.1.2\",\n               \"version_numified\" : 0.001002\n            }\n         ],\n         \"path\" : \"lib/HTTP/Message/Signature.pm\",\n         \"pod_lines\" : [\n            [\n               439,\n               308\n            ]\n         ],\n         \"release\" : \"HTTP-Message-Signature-v0.1.2\",\n         \"status\" : \"cpan\"\n      }\n   ],\n   \"took\" : 2,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/modules/RRWO/HTTP-Message-Signature-v0.1.2"
+}

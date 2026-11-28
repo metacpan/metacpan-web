@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"DOY\",\n            \"DROLSKY\",\n            \"ETHER\",\n            \"FLORA\",\n            \"GRODITI\",\n            \"HDP\",\n            \"PERIGRIN\",\n            \"SARTAK\"\n         ],\n         \"module_name\" : \"Moose\",\n         \"owner\" : \"STEVAN\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"Moose\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

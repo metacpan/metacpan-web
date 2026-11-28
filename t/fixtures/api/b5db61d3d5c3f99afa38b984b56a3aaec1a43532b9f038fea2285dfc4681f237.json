@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [],\n   \"took\" : 0,\n   \"total\" : 0\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?q=DBIx"
+}

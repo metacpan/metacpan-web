@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"users\" : [\n      \"3fzH9-9QT7iLeekwbhV5Cg\",\n      \"XiEXv2SMRACy6kkNVPLloQ\",\n      \"AXXaZC2Mw-Km-qr1WYeE\",\n      \"AYAtDArsVwGoXUHXziBq\",\n      \"FDLx-8X0Tua2ctKS-vs3Ww\",\n      \"-ecb3-tPSBerz9NoAM9NgQ\",\n      \"hJ-qokTjT_ilQmtRSPLRnA\",\n      \"AWqmg26omVPNeLES_1wq\",\n      \"mtWCzIJdTWON6_6lWepjcw\",\n      \"VTMxAfm7SlWDchp2uLYyNw\",\n      \"m5ODe_R1R2OV2Xm-jrZGfA\",\n      \"zFWFqbZGR2iGrHPP8FDd_w\",\n      \"AV9zd89W714gJnwUf9Xn\",\n      \"Lx6geTQQS6K4kMyeVK3g0Q\",\n      \"rG4hL4UHQYuOKpYD3eHSKQ\",\n      \"NnHodEjwTDKC5HiXubdGmQ\",\n      \"bpZPrFwMTmmDmT2y5l3Qsg\",\n      \"LjPj8jtsR4eepEvwng0KVA\",\n      \"AYM6uSG4mxDnhKXuBrpT\",\n      \"msvBbcrLS-6OjeVWdtTNxQ\"\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/favorite/users_by_distribution/Pod-Simple"
+}

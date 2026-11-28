@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"62.70\",\n      \"condition\" : \"55.42\",\n      \"statement\" : \"75.79\",\n      \"subroutine\" : \"75.00\",\n      \"total\" : \"67.69\"\n   },\n   \"distribution\" : \"DBIx-Class\",\n   \"release\" : \"DBIx-Class-0.082844\",\n   \"url\" : \"http://cpancover.com/latest/DBIx-Class-0.082844/index.html\",\n   \"version\" : \"0.082844\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/DBIx-Class-0.082844"
+}

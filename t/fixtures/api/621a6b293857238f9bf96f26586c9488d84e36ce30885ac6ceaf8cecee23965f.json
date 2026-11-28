@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"files\" : [],\n   \"took\" : 3,\n   \"total\" : 0\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/interesting_files/ZAKAME/Acme-Test-MetaCPAN-NoContributingDoc-0.01?category=contributing"
+}

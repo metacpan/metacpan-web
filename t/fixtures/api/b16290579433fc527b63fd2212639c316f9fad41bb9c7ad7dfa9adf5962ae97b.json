@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"author\" : \"RWSTAUNER\",\n   \"authorized\" : true,\n   \"binary\" : false,\n   \"category\" : \"changelog\",\n   \"content\" : \"Revision history for File-Spec-Native\\n\\n1.003     2011-07-14T23:56:49Z\\n\\n  - Update metadata\\n\\n1.002     2011-06-30T02:33:05Z\\n\\n  - Fix test for non-unix\\n\\n1.001     2011-06-28T16:50:39Z\\n\\n  - Fix typo in Pod\\n\\n1.000     2011-06-28T16:28:36Z\\n\\n  - Initial release\\n\",\n   \"date\" : \"2011-07-14T23:58:27\",\n   \"deprecated\" : false,\n   \"directory\" : false,\n   \"distribution\" : \"File-Spec-Native\",\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/R/RW/RWSTAUNER/File-Spec-Native-1.003.tar.gz\",\n   \"id\" : \"kF0OrEd2NlHWz8RgSa_i5PW_8DE\",\n   \"indexed\" : false,\n   \"level\" : 0,\n   \"maturity\" : \"released\",\n   \"mime\" : \"\",\n   \"module\" : [],\n   \"name\" : \"Changes\",\n   \"path\" : \"Changes\",\n   \"pod\" : \"\",\n   \"pod_lines\" : [],\n   \"release\" : \"File-Spec-Native-1.003\",\n   \"sloc\" : 9,\n   \"slop\" : 0,\n   \"stat\" : {\n      \"gid\" : 1009,\n      \"mode\" : 33188,\n      \"mtime\" : 1310687816,\n      \"size\" : 256,\n      \"uid\" : 1009\n   },\n   \"status\" : \"cpan\",\n   \"version\" : \"1.003\",\n   \"version_numified\" : 1.003\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/changes/RWSTAUNER/File-Spec-Native-1.003"
+}

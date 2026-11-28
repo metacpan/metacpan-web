@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"statement\" : \"100.00\",\n      \"subroutine\" : \"100.00\",\n      \"total\" : \"100.00\"\n   },\n   \"distribution\" : \"Acme-Test-MetaCPAN-NoContributingDoc\",\n   \"release\" : \"Acme-Test-MetaCPAN-NoContributingDoc-0.01\",\n   \"url\" : \"http://cpancover.com/latest/Acme-Test-MetaCPAN-NoContributingDoc-0.01/index.html\",\n   \"version\" : \"0.01\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/Acme-Test-MetaCPAN-NoContributingDoc-0.01"
+}

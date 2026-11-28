@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"59.70\",\n      \"condition\" : \"46.64\",\n      \"statement\" : \"88.83\",\n      \"subroutine\" : \"88.70\",\n      \"total\" : \"79.75\"\n   },\n   \"distribution\" : \"Dist-Zilla\",\n   \"release\" : \"Dist-Zilla-6.040\",\n   \"url\" : \"http://cpancover.com/latest/Dist-Zilla-6.040/index.html\",\n   \"version\" : \"6.040\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/Dist-Zilla-6.040"
+}

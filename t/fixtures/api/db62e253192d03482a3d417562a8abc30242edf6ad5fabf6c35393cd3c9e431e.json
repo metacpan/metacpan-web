@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"NOXFER\"\n         ],\n         \"module_name\" : \"Text::Tabs\",\n         \"owner\" : \"ARISTOTLE\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"Text::Tabs\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 0,\n         \"closed\" : 0,\n         \"open\" : 0,\n         \"source\" : \"https://github.com/oalders/acme-odometer\"\n      }\n   },\n   \"name\" : \"Acme-Odometer\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 0,\n         \"watchers\" : 2\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 0,\n      \"bus_factor\" : 0,\n      \"immediate\" : 0,\n      \"total\" : 0\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Acme-Odometer"
+}

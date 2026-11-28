@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"author\" : \"MAKAROW\",\n   \"authorized\" : true,\n   \"binary\" : false,\n   \"date\" : \"2007-09-07T18:24:11\",\n   \"deprecated\" : false,\n   \"directory\" : false,\n   \"distribution\" : \"CGI-Bus\",\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/M/MA/MAKAROW/CGI-Bus-0.62.tar.gz\",\n   \"id\" : \"7jvzYqHDWWTFlGfI5Eps2eRb3O8\",\n   \"indexed\" : true,\n   \"level\" : 2,\n   \"maturity\" : \"released\",\n   \"mime\" : \"text/x-script.perl-module\",\n   \"module\" : [\n      {\n         \"associated_pod\" : \"MAKAROW/CGI-Bus-0.62/lib/CGI/Bus.pod\",\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"CGI::Bus\",\n         \"version\" : \"0.62\",\n         \"version_numified\" : 0.62\n      },\n      {\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"CGI::BusLauncher\",\n         \"version_numified\" : 0\n      },\n      {\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"CGI::BusCgiPrint\",\n         \"version_numified\" : 0\n      }\n   ],\n   \"name\" : \"Bus.pm\",\n   \"path\" : \"lib/CGI/Bus.pm\",\n   \"pod\" : \"\",\n   \"pod_lines\" : [],\n   \"release\" : \"CGI-Bus-0.62\",\n   \"sloc\" : 1192,\n   \"slop\" : 0,\n   \"stat\" : {\n      \"gid\" : 1009,\n      \"mode\" : 33188,\n      \"mtime\" : 1187678854,\n      \"size\" : 44863,\n      \"uid\" : 1009\n   },\n   \"status\" : \"latest\",\n   \"version\" : \"0.62\",\n   \"version_numified\" : 0.62\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/module/CGI::Bus"
+}

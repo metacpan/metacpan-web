@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 12,\n         \"closed\" : 163,\n         \"open\" : 12,\n         \"source\" : \"https://github.com/perl-pod/pod-simple.git\"\n      },\n      \"rt\" : {\n         \"active\" : 7,\n         \"closed\" : 122,\n         \"new\" : 4,\n         \"open\" : 1,\n         \"patched\" : 0,\n         \"rejected\" : 27,\n         \"resolved\" : 95,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Simple\",\n         \"stalled\" : 2\n      }\n   },\n   \"external_package\" : {\n      \"cygwin\" : null,\n      \"debian\" : \"libpod-simple-perl\",\n      \"fedora\" : \"perl-Pod-Simple\"\n   },\n   \"name\" : \"Pod-Simple\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 44,\n         \"watchers\" : 11\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 5,\n      \"bus_factor\" : 5,\n      \"immediate\" : 158,\n      \"total\" : 36560\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Pod-Simple"
+}

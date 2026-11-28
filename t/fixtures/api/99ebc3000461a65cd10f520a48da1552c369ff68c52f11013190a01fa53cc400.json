@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"asciiname\" : \"Aristotle Pagaltzis\",\n   \"blog\" : [\n      {\n         \"feed\" : \"http://plasmasturm.org/feed\",\n         \"url\" : \"http://plasmasturm.org/\"\n      }\n   ],\n   \"email\" : [\n      \"pagaltzis@gmx.de\"\n   ],\n   \"gravatar_url\" : \"http://www.gravatar.com/avatar/e17949267bbfe21a0fadf1bbf00592b4?s=130\",\n   \"is_pause_custodial_account\" : false,\n   \"links\" : {\n      \"backpan_directory\" : \"https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE\",\n      \"cpan_directory\" : \"https://www.cpan.org/authors/id/A/AR/ARISTOTLE\",\n      \"cpantesters_matrix\" : \"https://matrix.cpantesters.org/?author=ARISTOTLE\",\n      \"cpantesters_reports\" : \"https://www.cpantesters.org/author/A/ARISTOTLE.html\",\n      \"cpants\" : \"https://cpants.cpanauthors.org/author/ARISTOTLE\",\n      \"metacpan_explorer\" : \"https://explorer.metacpan.org/?url=/author/ARISTOTLE\",\n      \"repology\" : \"https://repology.org/maintainer/ARISTOTLE%40cpan\"\n   },\n   \"name\" : \"Αριστοτέλης Παγκαλτζής\",\n   \"pauseid\" : \"ARISTOTLE\",\n   \"profile\" : [\n      {\n         \"id\" : \"ap\",\n         \"name\" : \"github\"\n      },\n      {\n         \"id\" : \"Aristotle\",\n         \"name\" : \"perlmonks\"\n      },\n      {\n         \"id\" : \"9410\",\n         \"name\" : \"stackoverflow\"\n      }\n   ],\n   \"release_count\" : {\n      \"backpan-only\" : 301,\n      \"cpan\" : 3,\n      \"latest\" : 54\n   },\n   \"updated\" : \"2026-09-16T17:51:37\",\n   \"user\" : \"nCqVneLnQ4qH8ZKoZRkdpw\",\n   \"website\" : [\n      \"http://plasmasturm.org/\"\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/ARISTOTLE"
+}

@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"NOXFER\"\n         ],\n         \"module_name\" : \"DBIx::Class\",\n         \"owner\" : \"RIBASUSHI\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"DBIx::Class\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"author\" : \"KHW\",\n   \"authorized\" : true,\n   \"binary\" : false,\n   \"date\" : \"2023-05-15T23:28:35\",\n   \"deprecated\" : false,\n   \"directory\" : false,\n   \"dist_fav_count\" : 20,\n   \"distribution\" : \"Pod-Simple\",\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/K/KH/KHW/Pod-Simple-3.45.tar.gz\",\n   \"id\" : \"eo3fpYhNLgGW3y5dPwOQPhEYjP4\",\n   \"indexed\" : true,\n   \"level\" : 2,\n   \"maturity\" : \"released\",\n   \"mime\" : \"text/x-script.perl-module\",\n   \"module\" : [\n      {\n         \"associated_pod\" : \"KHW/Pod-Simple-3.45/lib/Pod/Simple.pod\",\n         \"authorized\" : true,\n         \"indexed\" : true,\n         \"name\" : \"Pod::Simple\",\n         \"version\" : \"3.45\",\n         \"version_numified\" : 3.45\n      }\n   ],\n   \"name\" : \"Simple.pm\",\n   \"path\" : \"lib/Pod/Simple.pm\",\n   \"pod\" : \"\",\n   \"pod_lines\" : [],\n   \"release\" : \"Pod-Simple-3.45\",\n   \"sloc\" : 1017,\n   \"slop\" : 0,\n   \"stat\" : {\n      \"mode\" : 33188,\n      \"mtime\" : 1683832391,\n      \"size\" : 54385\n   },\n   \"status\" : \"cpan\",\n   \"version\" : \"3.45\",\n   \"version_numified\" : 3.45\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/file/KHW/Pod-Simple-3.45/lib/Pod/Simple.pm"
+}

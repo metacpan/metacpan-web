@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"files\" : [\n      {\n         \"author\" : \"BRICAS\",\n         \"category\" : \"dist\",\n         \"distribution\" : \"CPAN-Changes\",\n         \"name\" : \"Makefile.PL\",\n         \"path\" : \"Makefile.PL\",\n         \"pod_lines\" : [],\n         \"release\" : \"CPAN-Changes-0.21\",\n         \"status\" : \"backpan\"\n      },\n      {\n         \"author\" : \"BRICAS\",\n         \"category\" : \"changelog\",\n         \"distribution\" : \"CPAN-Changes\",\n         \"name\" : \"Changes\",\n         \"path\" : \"Changes\",\n         \"pod_lines\" : [],\n         \"release\" : \"CPAN-Changes-0.21\",\n         \"status\" : \"backpan\"\n      },\n      {\n         \"author\" : \"BRICAS\",\n         \"category\" : \"dist\",\n         \"distribution\" : \"CPAN-Changes\",\n         \"name\" : \"MANIFEST\",\n         \"path\" : \"MANIFEST\",\n         \"pod_lines\" : [],\n         \"release\" : \"CPAN-Changes-0.21\",\n         \"status\" : \"backpan\"\n      },\n      {\n         \"author\" : \"BRICAS\",\n         \"category\" : \"other\",\n         \"distribution\" : \"CPAN-Changes\",\n         \"name\" : \"README\",\n         \"path\" : \"README\",\n         \"pod_lines\" : [],\n         \"release\" : \"CPAN-Changes-0.21\",\n         \"status\" : \"backpan\"\n      },\n      {\n         \"author\" : \"BRICAS\",\n         \"category\" : \"dist\",\n         \"distribution\" : \"CPAN-Changes\",\n         \"name\" : \"META.yml\",\n         \"path\" : \"META.yml\",\n         \"release\" : \"CPAN-Changes-0.21\",\n         \"status\" : \"backpan\"\n      }\n   ],\n   \"took\" : 35,\n   \"total\" : 5\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/interesting_files/BRICAS/CPAN-Changes-0.21"
+}

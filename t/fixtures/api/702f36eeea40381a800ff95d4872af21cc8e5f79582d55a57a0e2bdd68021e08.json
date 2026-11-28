@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"releases\" : [\n      {\n         \"author\" : \"ZAKAME\",\n         \"authorized\" : true,\n         \"date\" : \"2018-10-01T07:17:20\",\n         \"download_url\" : \"https://cpan.metacpan.org/authors/id/Z/ZA/ZAKAME/Acme-Test-MetaCPAN-NoContributingDoc-0.01.tar.gz\",\n         \"main_module\" : \"Acme::Test::MetaCPAN::NoContributingDoc\",\n         \"maturity\" : \"released\",\n         \"name\" : \"Acme-Test-MetaCPAN-NoContributingDoc-0.01\",\n         \"status\" : \"latest\",\n         \"version\" : \"0.01\"\n      }\n   ],\n   \"took\" : 2,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/versions/Acme-Test-MetaCPAN-NoContributingDoc"
+}

@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"HAARG\"\n         ],\n         \"module_name\" : \"CPAN::Changes\",\n         \"owner\" : \"BRICAS\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"CPAN::Changes\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

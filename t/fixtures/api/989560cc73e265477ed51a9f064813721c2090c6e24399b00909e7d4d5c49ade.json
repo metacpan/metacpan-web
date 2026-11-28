@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"name\" : \"HTTP-Message-Signature\",\n   \"river\" : {\n      \"bucket\" : 0,\n      \"immediate\" : 0,\n      \"total\" : 0\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/HTTP-Message-Signature"
+}

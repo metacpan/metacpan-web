@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"code\" : 404,\n   \"message\" : \"The requested info could not be found\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "404",
+   "url" : "/v1/author/XXX343WI%5E%5E%5E"
+}

@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"The Perl for Win32 Mailing lists\",\n         \"email\" : [\n            \"perl-win32-users@activestate.com\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/1a8dcb4f69398ce3624c8b081b38d724?s=130&d=identicon\",\n         \"id\" : \"WIN32\",\n         \"is_pause_custodial_account\" : false,\n         \"name\" : \"WIN32\",\n         \"pauseid\" : \"WIN32\",\n         \"updated\" : \"2026-09-16T17:51:27\",\n         \"website\" : []\n      }\n   ],\n   \"took\" : 1,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?q=win32"
+}

@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"releases\" : [],\n   \"took\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/latest_by_author/DOESNTEXIST"
+}

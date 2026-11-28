@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"63.10\",\n      \"condition\" : \"57.14\",\n      \"statement\" : \"81.42\",\n      \"subroutine\" : \"83.57\",\n      \"total\" : \"72.12\"\n   },\n   \"distribution\" : \"Pod-Simple\",\n   \"release\" : \"Pod-Simple-3.45\",\n   \"url\" : \"http://cpancover.com/latest/Pod-Simple-3.45/index.html\",\n   \"version\" : \"3.45\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/Pod-Simple-3.45"
+}

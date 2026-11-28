@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"contributors\" : [\n      {\n         \"email\" : [\n            \"bo@startsiden.no\"\n         ],\n         \"name\" : \"Bjørn-Olav Strand\"\n      },\n      {\n         \"email\" : [\n            \"chromatic@wgz.org\"\n         ],\n         \"name\" : \"chromatic\",\n         \"pauseid\" : \"CHROMATIC\"\n      },\n      {\n         \"email\" : [\n            \"marcus@nordaaker.com\"\n         ],\n         \"name\" : \"Marcus Ramberg\"\n      },\n      {\n         \"email\" : [\n            \"neil@bowers.com\"\n         ],\n         \"name\" : \"Neil Bowers\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/contributors/ANDREMAR/WWW-Curl-Simple-0.100187"
+}

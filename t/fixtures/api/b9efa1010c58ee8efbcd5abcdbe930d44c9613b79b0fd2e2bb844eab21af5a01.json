@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"82.18\",\n      \"condition\" : \"71.55\",\n      \"statement\" : \"95.95\",\n      \"subroutine\" : \"97.46\",\n      \"total\" : \"92.19\"\n   },\n   \"distribution\" : \"Moose\",\n   \"release\" : \"Moose-2.2010\",\n   \"url\" : \"http://cpancover.com/latest/Moose-2.2010/index.html\",\n   \"version\" : \"2.2010\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/Moose-2.2010"
+}

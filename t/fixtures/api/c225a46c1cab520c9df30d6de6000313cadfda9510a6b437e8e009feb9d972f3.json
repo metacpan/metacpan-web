@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"Ricardo SIGNES :-)\",\n         \"blog\" : [\n            {\n               \"feed\" : \"https://rjbs.cloud/feed.xml\",\n               \"url\" : \"http://rjbs.cloud/blog\"\n            }\n         ],\n         \"city\" : \"Philadelphia\",\n         \"country\" : \"US\",\n         \"email\" : [\n            \"cpan@semiotic.systems\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/cec6b9b88295ead26c65f8747a76561b?s=130&d=identicon\",\n         \"id\" : \"RJBS\",\n         \"is_pause_custodial_account\" : false,\n         \"location\" : [\n            39.952778,\n            -75.163611\n         ],\n         \"name\" : \"Ricardo SIGNES 🙂\",\n         \"pauseid\" : \"RJBS\",\n         \"profile\" : [\n            {\n               \"id\" : \"rjbs\",\n               \"name\" : \"coderwall\"\n            },\n            {\n               \"id\" : \"rjbs\",\n               \"name\" : \"github\"\n            },\n            {\n               \"id\" : \"rjbs\",\n               \"name\" : \"gittip\"\n            },\n            {\n               \"id\" : \"rjbs\",\n               \"name\" : \"lastfm\"\n            },\n            {\n               \"id\" : \"rjbs\",\n               \"name\" : \"perlmonks\"\n            },\n            {\n               \"id\" : \"10478\",\n               \"name\" : \"stackoverflow\"\n            }\n         ],\n         \"region\" : \"Pennsylvania\",\n         \"updated\" : \"2026-09-16T17:51:27\",\n         \"user\" : \"Ox3zUBjPRBGFwoQPFeCNKA\",\n         \"website\" : [\n            \"http://rjbs.cloud/\"\n         ]\n      }\n   ],\n   \"took\" : 1,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?q=RJBS"
+}

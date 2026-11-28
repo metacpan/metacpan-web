@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"asciiname\" : \"\",\n   \"email\" : [\n      \"makarow@cpan.org\"\n   ],\n   \"gravatar_url\" : \"https://secure.gravatar.com/avatar/4c596f9fdaf0d00a0d22b7e7b4955b7e?s=130&d=identicon\",\n   \"is_pause_custodial_account\" : false,\n   \"links\" : {\n      \"backpan_directory\" : \"https://cpan.metacpan.org/authors/id/M/MA/MAKAROW\",\n      \"cpan_directory\" : \"https://www.cpan.org/authors/id/M/MA/MAKAROW\",\n      \"cpantesters_matrix\" : \"https://matrix.cpantesters.org/?author=MAKAROW\",\n      \"cpantesters_reports\" : \"https://www.cpantesters.org/author/M/MAKAROW.html\",\n      \"cpants\" : \"https://cpants.cpanauthors.org/author/MAKAROW\",\n      \"metacpan_explorer\" : \"https://explorer.metacpan.org/?url=/author/MAKAROW\",\n      \"repology\" : \"https://repology.org/maintainer/MAKAROW%40cpan\"\n   },\n   \"name\" : \"Andrew V. Makarow\",\n   \"pauseid\" : \"MAKAROW\",\n   \"release_count\" : {\n      \"backpan-only\" : 67,\n      \"cpan\" : 18,\n      \"latest\" : 5\n   },\n   \"updated\" : \"2026-09-16T17:51:36\",\n   \"website\" : []\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/MAKAROW"
+}

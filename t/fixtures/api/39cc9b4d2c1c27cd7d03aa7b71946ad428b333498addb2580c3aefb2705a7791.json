@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"code\" : 404,\n   \"message\" : \"Cannot find last release for DOESNTEXIST\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "404",
+   "url" : "/v1/package/modules/DOESNTEXIST"
+}

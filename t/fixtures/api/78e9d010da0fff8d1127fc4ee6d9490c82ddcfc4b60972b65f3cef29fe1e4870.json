@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"files\" : [\n      {\n         \"author\" : \"ETHER\",\n         \"category\" : \"contributing\",\n         \"distribution\" : \"Moose\",\n         \"documentation\" : \"Moose::Manual::Contributing\",\n         \"name\" : \"Contributing.pod\",\n         \"path\" : \"lib/Moose/Manual/Contributing.pod\",\n         \"pod_lines\" : [\n            [\n               5,\n               540\n            ]\n         ],\n         \"release\" : \"Moose-2.4001\",\n         \"status\" : \"latest\"\n      }\n   ],\n   \"took\" : 4,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/interesting_files/ETHER/Moose-2.4001?category=contributing"
+}

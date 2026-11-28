@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"criteria\" : {\n      \"branch\" : \"0.00\",\n      \"condition\" : \"0.00\",\n      \"statement\" : \"64.44\",\n      \"subroutine\" : \"35.71\",\n      \"total\" : \"45.33\"\n   },\n   \"distribution\" : \"MooseX-Types-ElasticSearch\",\n   \"release\" : \"MooseX-Types-ElasticSearch-0.0.4\",\n   \"url\" : \"http://cpancover.com/latest/MooseX-Types-ElasticSearch-0.0.4/index.html\",\n   \"version\" : \"0.0.4\"\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/cover/MooseX-Types-ElasticSearch-0.0.4"
+}

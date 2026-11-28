@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [],\n         \"module_name\" : \"Acme::Test::MetaCPAN::NoContributingDoc\",\n         \"owner\" : \"ZAKAME\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"Acme::Test::MetaCPAN::NoContributingDoc\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

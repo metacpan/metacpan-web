@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"rt\" : {\n         \"active\" : 136,\n         \"closed\" : 325,\n         \"new\" : 57,\n         \"open\" : 60,\n         \"patched\" : 8,\n         \"rejected\" : 86,\n         \"resolved\" : 239,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=DBIx-Class\",\n         \"stalled\" : 11\n      }\n   },\n   \"external_package\" : {\n      \"debian\" : \"libdbix-class-perl\",\n      \"fedora\" : \"perl-DBIx-Class\"\n   },\n   \"name\" : \"DBIx-Class\",\n   \"river\" : {\n      \"bucket\" : 3,\n      \"bus_factor\" : 1,\n      \"immediate\" : 389,\n      \"total\" : 534\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/DBIx-Class"
+}
