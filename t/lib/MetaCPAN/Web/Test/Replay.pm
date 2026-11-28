@@ -55,12 +55,19 @@ sub _canonical_body {
     return $json->encode( $json->decode( $req->content ) );
 }
 
-# Fixtures are committed, so OAuth tokens must never be recorded or printed.
-sub _has_token {
+# Fixtures are committed, so OAuth credentials must never be recorded or printed.
+my $SECRET = qr/access_token|client_secret/;
+
+sub _has_secret {
     my $req = shift;
+    return 1 if $req->uri->path =~ m{/oauth2/};
     return 1
-        if grep { $_->[0] eq 'access_token' } pairs $req->uri->query_form;
-    return _is_json($req) && $req->content =~ /"access_token"\s*:/;
+        if grep { $_->[0] =~ /\A(?:$SECRET)\z/ } pairs $req->uri->query_form;
+    return _is_json($req) && $req->content =~ /"(?:$SECRET)"\s*:/;
+}
+
+sub _redacted_url {
+    return _canonical_url(shift) =~ s/([?&](?:$SECRET)=)[^&]*/$1XXX/gr;
 }
 
 sub request_key {
@@ -85,8 +92,9 @@ sub do_request {
 
     if ( $MODE eq 'record' ) {
         return Future->fail(
-            'Refusing to record a request containing access_token', 'http' )
-            if _has_token($req);
+            'Refusing to record a request containing OAuth credentials',
+            'http' )
+            if _has_secret($req);
 
         # Transport failures propagate without writing a fixture.
         return $orig_request->( $self, %args )->then( sub {
@@ -108,8 +116,7 @@ sub do_request {
 
     my $msg = sprintf
         "No recorded API response for %s %s; re-record with: METACPAN_API_MODE=record prove -lr %s\n",
-        $req->method, _canonical_url($req) =~ s/(access_token=)[^&]*/$1XXX/r,
-        $0;
+        $req->method, _redacted_url($req), $0;
     warn $msg;
     return Future->fail( $msg, 'http' );
 }

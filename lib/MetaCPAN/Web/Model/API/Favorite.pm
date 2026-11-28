@@ -57,7 +57,8 @@ sub recent {
                         @{ $authors->{authors} };
                     for my $fav ( @{ $data->{favorites} } ) {
                         next
-                            unless exists $author_for_user_id{ $fav->{user} };
+                            unless defined $fav->{user}
+                            && exists $author_for_user_id{ $fav->{user} };
                         $fav->{clicked_by_author}
                             = $author_for_user_id{ $fav->{user} };
                     }

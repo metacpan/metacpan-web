@@ -2,6 +2,9 @@ use strict;
 use warnings;
 use lib 't/lib';
 
+# These tests exercise the wrapper itself, so they must not follow the CI mode.
+BEGIN { $ENV{METACPAN_API_MODE} = 'replay' }
+
 use Cpanel::JSON::XS            ();
 use Future                      ();
 use HTTP::Request::Common       qw( GET POST );
@@ -11,11 +14,14 @@ use MetaCPAN::Web::Test::Replay ();
 use Path::Tiny                  qw( path );
 use Test::More;
 
-is(
-    "$MetaCPAN::Web::Test::Replay::FIXTURE_DIR",
-    path('t/fixtures/api')->realpath->stringify,
-    'default fixture dir is anchored to the repo'
-);
+subtest 'default fixture dir is anchored to the repo' => sub {
+    my $expected = path('t/fixtures/api')->realpath->stringify;
+    my $cwd      = Path::Tiny->cwd;
+    chdir Path::Tiny->tempdir or die $!;
+    my $got = path($MetaCPAN::Web::Test::Replay::FIXTURE_DIR)->realpath;
+    chdir $cwd or die $!;
+    is( "$got", $expected, 'resolves to t/fixtures/api from another cwd' );
+};
 
 local $MetaCPAN::Web::Test::Replay::FIXTURE_DIR = Path::Tiny->tempdir;
 
@@ -85,6 +91,16 @@ subtest 'replay miss fails' => sub {
     );
     is( scalar @warnings, 1, 'miss is warned about' );
     unlike( "@warnings", qr/secret/, 'access_token is redacted' );
+
+    @warnings = ();
+    $f        = replay(
+        GET '/v1/oauth2/access_token?client_id=x&client_secret=y&code=z' );
+    like(
+        ( $f->failure )[0],
+        qr{client_id=x&client_secret=XXX&code=z},
+        'client_secret is redacted'
+    );
+    unlike( "@warnings", qr/client_secret=y/, 'and not warned' );
 };
 
 subtest 'record then replay' => sub {
@@ -146,7 +162,7 @@ subtest 'record skips 5xx responses' => sub {
     like( "@warnings", qr{503 response for GET /v1/flaky}, 'warned' );
 };
 
-subtest 'record refuses access_token' => sub {
+subtest 'record refuses OAuth credentials' => sub {
     for my $req (
         GET('/v1/user?access_token=secret'),
         POST(
@@ -154,6 +170,13 @@ subtest 'record refuses access_token' => sub {
             'Content-Type' => 'application/json',
             Content        => '{"access_token":"secret"}'
         ),
+        POST(
+            '/v1/user',
+            'Content-Type' => 'application/json',
+            Content        => '{"client_secret":"secret"}'
+        ),
+        GET('/v1/oauth2/access_token?client_id=x&client_secret=y&code=z'),
+        GET('/v1/oauth2/authorize?client_id=x'),
         )
     {
         my $f = record( $req, HTTP::Response->new(200) );
@@ -167,6 +190,9 @@ subtest 'override_api_response layers over replay' => sub {
     record( $recorded, HTTP::Response->new( 200, 'OK', [], 'replayed' ) )
         ->get;
 
+    local $MetaCPAN::Web::Test::Replay::orig_request = sub {
+        die 'network used';
+    };
     no warnings 'redefine';
     local *Net::Async::HTTP::do_request = \&Net::Async::HTTP::do_request;
     override_api_response(
