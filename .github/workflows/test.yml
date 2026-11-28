@@ -45,6 +45,8 @@ jobs:
   code-formatting:
     runs-on: ubuntu-24.04
     name: Code Formatting
+    # The schedule exists only for the live API test run.
+    if: github.event_name != 'schedule'
     permissions:
       contents: read
     steps:
@@ -98,6 +100,7 @@ jobs:
   playwright:
     runs-on: ubuntu-24.04
     name: playwright test
+    if: github.event_name != 'schedule'
     permissions:
       contents: read
     steps:

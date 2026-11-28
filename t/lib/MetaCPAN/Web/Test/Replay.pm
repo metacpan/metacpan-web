@@ -16,11 +16,13 @@ use Net::Async::HTTP ();
 use Path::Tiny       qw( path );
 use URI              ();
 
-our $MODE = $ENV{METACPAN_API_MODE} // 'replay';
+our $MODE = $ENV{METACPAN_API_MODE} || 'replay';
 die "METACPAN_API_MODE must be replay, record or live, not '$MODE'\n"
     unless $MODE =~ /\A(?:replay|record|live)\z/;
 
-our $FIXTURE_DIR = 't/fixtures/api';
+# Anchored to this file so tests can run from any cwd.
+our $FIXTURE_DIR
+    = path(__FILE__)->absolute->parent(5)->child('fixtures/api');
 our $orig_request;
 
 if ( $MODE ne 'live' && !$orig_request ) {
@@ -53,6 +55,14 @@ sub _canonical_body {
     return $json->encode( $json->decode( $req->content ) );
 }
 
+# Fixtures are committed, so OAuth tokens must never be recorded or printed.
+sub _has_token {
+    my $req = shift;
+    return 1
+        if grep { $_->[0] eq 'access_token' } pairs $req->uri->query_form;
+    return _is_json($req) && $req->content =~ /"access_token"\s*:/;
+}
+
 sub request_key {
     my $req = shift;
     return sha256_hex( join "\0", $req->method, _canonical_url($req),
@@ -66,7 +76,7 @@ sub do_request {
     if ( !$req ) {
         goto &$orig_request if $MODE eq 'record';
         return Future->fail(
-            'MetaCPAN::Web::Test::Replay can only replay do_request( request => ... ) calls',
+            'MetaCPAN::Web::Test::Replay only supports do_request( request => ... ); method/uri calls (e.g. Model::GitHub) are not replayable',
             'http'
         );
     }
@@ -74,11 +84,23 @@ sub do_request {
     my $file = path( $FIXTURE_DIR, request_key($req) . '.json' );
 
     if ( $MODE eq 'record' ) {
+        return Future->fail(
+            'Refusing to record a request containing access_token', 'http' )
+            if _has_token($req);
 
         # Transport failures propagate without writing a fixture.
         return $orig_request->( $self, %args )->then( sub {
-            _save( $file, $req, $_[0] );
-            Future->done( $_[0] );
+            my $res = shift;
+
+            # A transient server error would otherwise be replayed forever.
+            if ( $res->is_server_error ) {
+                warn sprintf "Not recording %s response for %s %s\n",
+                    $res->code, $req->method, _canonical_url($req);
+            }
+            else {
+                _save( $file, $req, $res );
+            }
+            Future->done($res);
         } );
     }
 
@@ -86,7 +108,8 @@ sub do_request {
 
     my $msg = sprintf
         "No recorded API response for %s %s; re-record with: METACPAN_API_MODE=record prove -lr %s\n",
-        $req->method, _canonical_url($req), $0;
+        $req->method, _canonical_url($req) =~ s/(access_token=)[^&]*/$1XXX/r,
+        $0;
     warn $msg;
     return Future->fail( $msg, 'http' );
 }

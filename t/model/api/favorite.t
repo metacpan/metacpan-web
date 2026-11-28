@@ -68,4 +68,20 @@ subtest 'by_user rejects invalid page and size' => sub {
     }
 };
 
+subtest 'recent skips author lookup when favorites lack user' => sub {
+    @captured_requests = ();
+    override_api_response( sub {
+        my ( undef, $req ) = @_;
+        push @captured_requests, $req;
+        return [
+            200,
+            [ 'Content-Type' => 'application/json' ],
+            ['{"favorites":[{"user":null},{}],"total":2,"took":0}'],
+        ];
+    } );
+    $model->recent( 1, 10 )->get;
+    is_deeply( [ map { $_->uri->path } @captured_requests ],
+        ['/v1/favorite/recent'], 'no /author/by_user request' );
+};
+
 done_testing;

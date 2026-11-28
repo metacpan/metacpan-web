@@ -99,6 +99,10 @@ Use `METACPAN_API_MODE=live` to hit the API without recording. To refresh every
 recording, delete `t/fixtures/api` and record the whole suite. CI runs the tests
 against the live API weekly and on manual dispatch with `api_mode: live`.
 
+Record mode does not save 5xx responses and refuses requests containing an
+`access_token`. Recordings hold public API data, including author profiles.
+Replay cannot catch API changes; the weekly live run does.
+
 ### Running Tests with Docker Compose
 
 Run all tests using the `test` profile:
