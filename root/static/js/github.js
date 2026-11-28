@@ -5,6 +5,14 @@ const relatizeDate = require('./relatize_date.js');
 
 require('qtip2');
 
+// Popup HTML is built from untrusted GitHub API data, in text and quoted attributes.
+const escapeHtml = v => String(v).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
+
+// Only http(s) values become links, so e.g. javascript: stays inert text.
+const linkIfHttp = v => (/^https?:\/\//i.test(v)
+    ? '<a href="' + escapeHtml(v) + '">' + escapeHtml(v) + '</a>'
+    : escapeHtml(v));
+
 // TODO: In some cases there are separate web/clone urls, but they resolve
 // to the same github repo.  If you mouse over both the requests are made
 // twice.  It would be nice to share the responses between both.
@@ -52,11 +60,11 @@ class GitHubUrl {
                 }
 
                 var result = '<table>'
-                  + '  <tr><th>Open <a href="' + data.repo.html_url + '/issues">Issues</a>:</th><td>' + data.repo.open_issues + '</td></tr>'
+                  + '  <tr><th>Open <a href="' + escapeHtml(data.repo.html_url) + '/issues">Issues</a>:</th><td>' + escapeHtml(data.repo.open_issues) + '</td></tr>'
                   + '  <tr><th>' + issues_text + ':</th><td><table>';
 
                 for (const issue of data.issues) {
-                    result += '<tr><td><span class="relatize">' + issue.created_at + '</span></td><td><a href="' + issue.html_url + '">' + issue.title + '</a></td></tr>';
+                    result += '<tr><td><span class="relatize">' + escapeHtml(issue.created_at) + '</span></td><td><a href="' + escapeHtml(issue.html_url) + '">' + escapeHtml(issue.title) + '</a></td></tr>';
                 }
 
                 return result + '</table></td></tr></table>';
@@ -83,27 +91,27 @@ class GitHubUrl {
                 return '<table>'
 
                   + (data.description
-                      ? '  <tr><th>Description:</th><td>' + data.description + '</td></tr>'
+                      ? '  <tr><th>Description:</th><td>' + escapeHtml(data.description) + '</td></tr>'
                       : '')
 
                     + (data.homepage
-                        ? '  <tr><th>Homepage:</th><td><a href="' + data.homepage + '">' + data.homepage + '</a></td></tr>'
+                        ? '  <tr><th>Homepage:</th><td>' + linkIfHttp(data.homepage) + '</td></tr>'
                         : '')
 
                 // with v3 api the number under 'watchers' is actually the number of stargazers
                 // in the v4 api this will be corrected. see https://github.com/metacpan/metacpan-web/issues/975
-                      + '  <tr><th>Stars:</th><td><a href="' + data.html_url + '/stargazers">' + data.watchers + '</a></td></tr>'
-                      + '  <tr><th>Forks:</th><td><a href="' + data.html_url + '/network">' + data.forks + '</a></td></tr>'
+                      + '  <tr><th>Stars:</th><td><a href="' + escapeHtml(data.html_url) + '/stargazers">' + escapeHtml(data.watchers) + '</a></td></tr>'
+                      + '  <tr><th>Forks:</th><td><a href="' + escapeHtml(data.html_url) + '/network">' + escapeHtml(data.forks) + '</a></td></tr>'
 
                       + (data.has_issues
-                          ? '  <tr><th>Open Issues: </th><td><a href="' + data.html_url + '/issues">' + data.open_issues + '</a></td></tr>'
+                          ? '  <tr><th>Open Issues: </th><td><a href="' + escapeHtml(data.html_url) + '/issues">' + escapeHtml(data.open_issues) + '</a></td></tr>'
                           : '')
 
-                        + '  <tr><th>Pull Requests:</th><td><a href="' + data.html_url + '/pulls">' + data.html_url + '/pulls' + '</a></td></tr>'
-                        + '  <tr><th>Clone URL:</th><td><a href="' + data.clone_url + '">' + data.clone_url + '</a></td></tr>'
-                        + '  <tr><th>GitHub URL:</th><td><a href="' + data.html_url + '">' + data.html_url + '</a></td></tr>'
-                        + '  <tr><th>SSH URL:</th><td><a href="' + data.ssh_url.replace(/^(\w+@)?([^:/]+):/, 'ssh://$1$2/') + '">' + data.ssh_url + '</a></td></tr>'
-                        + '  <tr><th>Last Commit:</th><td><span class="relatize">' + data.pushed_at + '</span></td></tr>'
+                        + '  <tr><th>Pull Requests:</th><td><a href="' + escapeHtml(data.html_url) + '/pulls">' + escapeHtml(data.html_url) + '/pulls' + '</a></td></tr>'
+                        + '  <tr><th>Clone URL:</th><td><a href="' + escapeHtml(data.clone_url) + '">' + escapeHtml(data.clone_url) + '</a></td></tr>'
+                        + '  <tr><th>GitHub URL:</th><td><a href="' + escapeHtml(data.html_url) + '">' + escapeHtml(data.html_url) + '</a></td></tr>'
+                        + '  <tr><th>SSH URL:</th><td><a href="' + escapeHtml(data.ssh_url.replace(/^(\w+@)?([^:/]+):/, 'ssh://$1$2/')) + '">' + escapeHtml(data.ssh_url) + '</a></td></tr>'
+                        + '  <tr><th>Last Commit:</th><td><span class="relatize">' + escapeHtml(data.pushed_at) + '</span></td></tr>'
                         + '</table>';
             },
             url: function (result) {
@@ -117,29 +125,29 @@ class GitHubUrl {
             render:  function (data) {
                 return '<table>'
                   + (data.name
-                      ? '  <tr><th>Name:</th><td>' + data.name + '</td></tr>'
+                      ? '  <tr><th>Name:</th><td>' + escapeHtml(data.name) + '</td></tr>'
                       : '')
 
                     + (data.email
-                        ? '  <tr><th>Email:</th><td><a href="mailto:' + data.email + '">' + data.email + '</a></td></tr>'
+                        ? '  <tr><th>Email:</th><td><a href="mailto:' + escapeHtml(data.email) + '">' + escapeHtml(data.email) + '</a></td></tr>'
                         : '')
 
                       + (data.blog
-                          ? '  <tr><th>Website/Blog:</th><td><a href="' + data.blog + '">' + data.blog + '</a></td></tr>'
+                          ? '  <tr><th>Website/Blog:</th><td>' + linkIfHttp(data.blog) + '</td></tr>'
                           : '')
 
                         + (data.company
-                            ? '  <tr><th>Company:</th><td>' + data.company + '</td></tr>'
+                            ? '  <tr><th>Company:</th><td>' + escapeHtml(data.company) + '</td></tr>'
                             : '')
 
                           + (data.location
-                              ? '  <tr><th>Location:</th><td>' + data.location + '</td></tr>'
+                              ? '  <tr><th>Location:</th><td>' + escapeHtml(data.location) + '</td></tr>'
                               : '')
 
-                            + '  <tr><th>Member Since:</th><td><span class="relatize">' + data.created_at + '</span></td></tr>'
-                            + '  <tr><th><a href="' + data.html_url + '?tab=followers">Followers</a>:</th><td>' + data.followers + '</td></tr>'
-                            + '  <tr><th><a href="' + data.html_url + '?tab=following">Following</a>:</th><td>' + data.following + '</td></tr>'
-                            + '  <tr><th><a href="' + data.html_url + '?tab=repositories">Public Repos</a>:</th><td>' + data.public_repos + '</td></tr>'
+                            + '  <tr><th>Member Since:</th><td><span class="relatize">' + escapeHtml(data.created_at) + '</span></td></tr>'
+                            + '  <tr><th><a href="' + escapeHtml(data.html_url) + '?tab=followers">Followers</a>:</th><td>' + escapeHtml(data.followers) + '</td></tr>'
+                            + '  <tr><th><a href="' + escapeHtml(data.html_url) + '?tab=following">Following</a>:</th><td>' + escapeHtml(data.following) + '</td></tr>'
+                            + '  <tr><th><a href="' + escapeHtml(data.html_url) + '?tab=repositories">Public Repos</a>:</th><td>' + escapeHtml(data.public_repos) + '</td></tr>'
                             + '</table>';
             },
             url: function (result) {
