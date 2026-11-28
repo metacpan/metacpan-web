@@ -41,8 +41,11 @@ sub recent {
     my ( $self, $page, $page_size ) = @_;
     $self->request( '/favorite/recent', undef,
         { size => $page_size, page => $page } )->then( sub {
-        my $data     = shift;
-        my @user_ids = map { $_->{user} } @{ $data->{favorites} };
+        my $data = shift;
+
+        # The API may omit user; an all-undef list makes /author/by_user fail.
+        my @user_ids = grep defined,
+            map { $_->{user} } @{ $data->{favorites} };
         return Future->done($data) unless @user_ids;
         $self->request( '/author/by_user', undef, { user => \@user_ids } )
             ->transform(
@@ -54,7 +57,8 @@ sub recent {
                         @{ $authors->{authors} };
                     for my $fav ( @{ $data->{favorites} } ) {
                         next
-                            unless exists $author_for_user_id{ $fav->{user} };
+                            unless defined $fav->{user}
+                            && exists $author_for_user_id{ $fav->{user} };
                         $fav->{clicked_by_author}
                             = $author_for_user_id{ $fav->{user} };
                     }

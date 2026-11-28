@@ -1,0 +1,9 @@
+{
+   "body" : "[![Build Status](https://travis-ci.org/moose/moose.png?branch=master,stable/2.08)](https://travis-ci.org/moose/moose)\n\nMoose\n=====\n\nMoose is a postmodern object system for Perl 5.\n\nMoose on CPAN: [https://metacpan.org/release/Moose]\n",
+   "headers" : {
+      "Content-Type" : "text/plain"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/source/ETHER/Moose-2.1005/README.md?raw=1"
+}

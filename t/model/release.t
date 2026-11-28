@@ -2,8 +2,9 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use Cpanel::JSON::XS qw( decode_json );
-use MetaCPAN::Web    ();
+use Cpanel::JSON::XS    qw( decode_json );
+use MetaCPAN::Web       ();
+use MetaCPAN::Web::Test ();                  ## no perlimports
 use Test::More;
 
 my ( $true, $false ) = @{ decode_json('[true, false]') };

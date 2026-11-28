@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"suggestions\" : [\n      {\n         \"author\" : \"DGL\",\n         \"date\" : \"2011-01-13T00:28:17\",\n         \"deprecated\" : false,\n         \"distribution\" : \"Acme-3mxA\",\n         \"name\" : \"Acme::ǝmɔA\",\n         \"release\" : \"Acme-3mxA-1337.37\"\n      }\n   ],\n   \"took\" : 5\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/search/autocomplete/suggest?q=Acme%3A%3A%C7%9D&size=50"
+}

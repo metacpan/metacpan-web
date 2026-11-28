@@ -48,6 +48,8 @@ services:
       - '${GIT_COMMON_DIR:-/dev/null}:${GIT_COMMON_DIR:-/dev/null}:ro'
     environment:
       COLUMNS: 96
+      # pass through so `METACPAN_API_MODE=record` works via compose
+      METACPAN_API_MODE: ${METACPAN_API_MODE:-}
     init: true
     stdin_open: true
     tty: true

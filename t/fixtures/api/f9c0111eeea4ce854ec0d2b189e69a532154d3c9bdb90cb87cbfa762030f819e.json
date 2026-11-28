@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"users\" : [\n      \"rG4hL4UHQYuOKpYD3eHSKQ\",\n      \"tGe7pHIMQcOYlgbgHM67aw\",\n      \"AXixW86Aw-Km-qr1WbKx\",\n      \"I6iNJDI7TKaOnGatLc7HbQ\",\n      \"NAJ_OvapRJWi2ip-uW6XBg\",\n      \"0vW2OecLQPixpW_AExHqzg\",\n      \"1jK__-c0Qz6BQcOf0GPSxg\",\n      \"hbIMoOw1RfG6IAD0afcShQ\",\n      \"PY0xJPgCTou8G0XfyeGcOg\",\n      \"bpZPrFwMTmmDmT2y5l3Qsg\"\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/favorite/users_by_distribution/Text-Tabs+Wrap"
+}

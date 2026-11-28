@@ -1,0 +1,9 @@
+{
+   "body" : "#!/usr/bin/perl\nuse strict;\nuse warnings;\npackage\n  dzil;\nuse Dist::Zilla::App;\n# Let dzil --version know what to report:\n$main::VERSION = $Dist::Zilla::App::VERSION;\n\n# PODNAME:  dzil\n# ABSTRACT: do stuff with your dist\nDist::Zilla::App->run;\n\n#pod =head1 OVERVIEW\n#pod\n#pod For help with Dist::Zilla, start with http://dzil.org/ or by running \"dzil\n#pod commands\"\n#pod\n#pod =cut\n\n__END__\n\n=pod\n\n=encoding UTF-8\n\n=head1 NAME\n\ndzil - do stuff with your dist\n\n=head1 VERSION\n\nversion 5.043\n\n=head1 OVERVIEW\n\nFor help with Dist::Zilla, start with http://dzil.org/ or by running \"dzil\ncommands\"\n\n=head1 AUTHOR\n\nRicardo SIGNES <rjbs@cpan.org>\n\n=head1 COPYRIGHT AND LICENSE\n\nThis software is copyright (c) 2016 by Ricardo SIGNES.\n\nThis is free software; you can redistribute it and/or modify it under\nthe same terms as the Perl 5 programming language system itself.\n\n=cut\n",
+   "headers" : {
+      "Content-Type" : "text/plain"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/source/RJBS/Dist-Zilla-5.043/bin/dzil?raw=1"
+}

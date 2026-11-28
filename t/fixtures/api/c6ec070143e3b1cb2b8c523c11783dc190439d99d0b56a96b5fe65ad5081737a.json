@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"\",\n         \"blog\" : [\n            {\n               \"feed\" : \"http://neilb.org/atom.xml\",\n               \"url\" : \"http://neilb.org\"\n            }\n         ],\n         \"city\" : \"Marlow\",\n         \"country\" : \"GB\",\n         \"donation\" : [\n            {\n               \"id\" : \"neil@bowers.com\",\n               \"name\" : \"paypal\"\n            },\n            {\n               \"id\" : \"\",\n               \"name\" : \"wishlist\"\n            },\n            {\n               \"id\" : \"\",\n               \"name\" : \"flattr\"\n            }\n         ],\n         \"email\" : [\n            \"neil@bowers.com\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/22736d57a4db0d014f97dfa85597865c?s=130&d=identicon\",\n         \"id\" : \"NEILB\",\n         \"is_pause_custodial_account\" : false,\n         \"name\" : \"Neil Bowers\",\n         \"pauseid\" : \"NEILB\",\n         \"profile\" : [\n            {\n               \"id\" : \"neilbowers\",\n               \"name\" : \"gittip\"\n            },\n            {\n               \"id\" : \"neilb\",\n               \"name\" : \"perlmonks\"\n            },\n            {\n               \"id\" : \"neilb\",\n               \"name\" : \"playperl\"\n            },\n            {\n               \"id\" : \"106062/elbin\",\n               \"name\" : \"stackoverflow\"\n            },\n            {\n               \"id\" : \"neilb\",\n               \"name\" : \"github\"\n            }\n         ],\n         \"updated\" : \"2026-09-16T17:51:37\",\n         \"website\" : []\n      }\n   ],\n   \"took\" : 1,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?from=0&q=NEILB"
+}

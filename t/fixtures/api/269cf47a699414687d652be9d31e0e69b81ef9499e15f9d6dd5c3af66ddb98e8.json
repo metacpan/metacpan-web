@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"name\" : \"CGI-Bus\",\n   \"river\" : {\n      \"bucket\" : 0,\n      \"bus_factor\" : 0,\n      \"immediate\" : 0,\n      \"total\" : 0\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/CGI-Bus"
+}

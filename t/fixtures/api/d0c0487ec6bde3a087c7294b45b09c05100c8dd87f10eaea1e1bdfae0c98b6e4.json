@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 0,\n         \"closed\" : 11,\n         \"open\" : 0,\n         \"source\" : \"git://github.com/shlomif/perl-Config-IniFiles.git\"\n      },\n      \"rt\" : {\n         \"active\" : 3,\n         \"closed\" : 62,\n         \"new\" : 1,\n         \"open\" : 0,\n         \"patched\" : 0,\n         \"rejected\" : 4,\n         \"resolved\" : 58,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=Config-IniFiles\",\n         \"stalled\" : 2\n      }\n   },\n   \"external_package\" : {\n      \"debian\" : \"libconfig-inifiles-perl\",\n      \"fedora\" : \"perl-Config-IniFiles\"\n   },\n   \"name\" : \"Config-IniFiles\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 6,\n         \"watchers\" : 3\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 3,\n      \"bus_factor\" : 1,\n      \"immediate\" : 97,\n      \"total\" : 224\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Config-IniFiles"
+}

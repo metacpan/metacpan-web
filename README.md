@@ -8,6 +8,7 @@
     - [Building Static Assets](#building-static-assets)
     - [Installing on macOS](#installing-on-macos)
   - [Running Tests](#running-tests)
+    - [Recorded API Responses](#recorded-api-responses)
     - [Running Tests with Docker Compose](#running-tests-with-docker-compose)
     - [Running Playwright (E2E) Tests](#running-playwright-e2e-tests)
       - [Running with Docker Compose](#running-with-docker-compose)
@@ -83,6 +84,32 @@ You can use the supplied wrapper around `prove` to run tests:
 
 To run the tests in parallel, add `-j8` (or however many CPUs you have) to the
 `prove` command.
+
+### Recorded API Responses
+
+By default, tests replay MetaCPAN API responses recorded in `t/fixtures/api`
+rather than calling the live API. If a test makes a request with no recording,
+it fails with the command to record it:
+
+```bash
+METACPAN_API_MODE=record carton exec prove -lr t/controller/search.t
+```
+
+Use `METACPAN_API_MODE=live` to hit the API without recording. To refresh every
+recording, delete `t/fixtures/api` and record the whole suite. CI runs the tests
+against the live API weekly and on manual dispatch with `api_mode: live`.
+
+Record mode does not save 5xx responses and refuses OAuth requests and requests
+containing an `access_token` or `client_secret`; after a full re-record, tests
+that make such requests show up as replay misses. Recordings hold public API
+data, including author profiles. Replay cannot catch API changes; the weekly
+live run does.
+
+To record with Docker Compose, pass the mode through:
+
+```bash
+METACPAN_API_MODE=record docker compose --profile test run --rm test prove -lr t/controller/search.t
+```
 
 ### Running Tests with Docker Compose
 

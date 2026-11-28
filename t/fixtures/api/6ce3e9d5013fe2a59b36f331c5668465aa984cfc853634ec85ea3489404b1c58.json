@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"collapsed\" : true,\n   \"results\" : [],\n   \"took\" : 11,\n   \"total\" : 0\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/search/web?from=0&q=nothingatall&size=20"
+}

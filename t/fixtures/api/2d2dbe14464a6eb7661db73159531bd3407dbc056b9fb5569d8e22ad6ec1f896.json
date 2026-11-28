@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"CAPOEIRAB\",\n            \"ETHER\",\n            \"GAAS\",\n            \"LWWWP\",\n            \"MSCHILLI\",\n            \"SIMBABQUE\",\n            \"SKAJI\"\n         ],\n         \"module_name\" : \"LWP\",\n         \"owner\" : \"OALDERS\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"LWP\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

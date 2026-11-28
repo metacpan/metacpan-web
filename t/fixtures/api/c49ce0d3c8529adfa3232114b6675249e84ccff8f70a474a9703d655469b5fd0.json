@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"asciiname\" : \"\",\n   \"city\" : \"Bristol\",\n   \"country\" : \"GB\",\n   \"email\" : [\n      \"shay@cpan.org\"\n   ],\n   \"gravatar_url\" : \"https://secure.gravatar.com/avatar/856b4b97a07b0e8468d73eca2175bb88?s=130&d=identicon\",\n   \"is_pause_custodial_account\" : false,\n   \"links\" : {\n      \"backpan_directory\" : \"https://cpan.metacpan.org/authors/id/S/SH/SHAY\",\n      \"cpan_directory\" : \"https://www.cpan.org/authors/id/S/SH/SHAY\",\n      \"cpantesters_matrix\" : \"https://matrix.cpantesters.org/?author=SHAY\",\n      \"cpantesters_reports\" : \"https://www.cpantesters.org/author/S/SHAY.html\",\n      \"cpants\" : \"https://cpants.cpanauthors.org/author/SHAY\",\n      \"metacpan_explorer\" : \"https://explorer.metacpan.org/?url=/author/SHAY\",\n      \"repology\" : \"https://repology.org/maintainer/SHAY%40cpan\"\n   },\n   \"name\" : \"Steve Hay\",\n   \"pauseid\" : \"SHAY\",\n   \"profile\" : [\n      {\n         \"id\" : \"steve-m-hay\",\n         \"name\" : \"github\"\n      },\n      {\n         \"id\" : \"stevemhay\",\n         \"name\" : \"ohloh\"\n      },\n      {\n         \"id\" : \"stevemhay\",\n         \"name\" : \"linkedin\"\n      }\n   ],\n   \"release_count\" : {\n      \"backpan-only\" : 157,\n      \"cpan\" : 118,\n      \"latest\" : 17\n   },\n   \"updated\" : \"2026-09-16T17:51:26\",\n   \"user\" : \"3ZFaCyT2Qfq0T90nHzsF1A\",\n   \"website\" : []\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/SHAY"
+}

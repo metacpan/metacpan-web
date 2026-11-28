@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"\",\n         \"city\" : \"London\",\n         \"country\" : \"UK\",\n         \"email\" : [\n            \"LLAP@cuckoo.org\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/cb46084dc72e94a8bb3cad03c347118e?s=130&d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Ffe83c062043dc4e41c9af07b080e306e%3Fs%3D130%26d%3Didenticon\",\n         \"id\" : \"LLAP\",\n         \"is_pause_custodial_account\" : false,\n         \"location\" : [\n            52.371208,\n            -1.2635531\n         ],\n         \"name\" : \"Leo Lapworth\",\n         \"pauseid\" : \"LLAP\",\n         \"profile\" : [\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"coderwall\"\n            },\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"delicious\"\n            },\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"github\"\n            },\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"gittip\"\n            },\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"slideshare\"\n            },\n            {\n               \"id\" : \"ranguard\",\n               \"name\" : \"twitter\"\n            }\n         ],\n         \"updated\" : \"2026-09-16T17:51:24\",\n         \"user\" : \"VnmQXk2nT7uO2W2aV52RxA\",\n         \"website\" : [\n            \"http://leo.cuckoo.org/projects/\"\n         ]\n      }\n   ],\n   \"took\" : 0,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?from=0&q=LLAP"
+}

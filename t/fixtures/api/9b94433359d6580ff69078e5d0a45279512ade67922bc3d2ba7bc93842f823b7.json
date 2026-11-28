@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 0,\n         \"closed\" : 1,\n         \"open\" : 0,\n         \"source\" : \"https://github.com/monken/p5-moosex-types-elasticsearch\"\n      },\n      \"rt\" : {\n         \"active\" : 1,\n         \"closed\" : 0,\n         \"new\" : 1,\n         \"open\" : 0,\n         \"patched\" : 0,\n         \"rejected\" : 0,\n         \"resolved\" : 0,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Types-ElasticSearch\",\n         \"stalled\" : 0\n      }\n   },\n   \"name\" : \"MooseX-Types-ElasticSearch\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 1,\n         \"watchers\" : 3\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 1,\n      \"bus_factor\" : 0,\n      \"immediate\" : 1,\n      \"total\" : 2\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/MooseX-Types-ElasticSearch"
+}

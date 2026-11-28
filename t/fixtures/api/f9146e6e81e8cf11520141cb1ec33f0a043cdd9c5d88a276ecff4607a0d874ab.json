@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"author\" : \"ETHER\",\n   \"authorized\" : true,\n   \"binary\" : true,\n   \"date\" : \"2013-08-07T05:07:28\",\n   \"deprecated\" : false,\n   \"directory\" : true,\n   \"dist_fav_count\" : 336,\n   \"distribution\" : \"Moose\",\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/E/ET/ETHER/Moose-2.1005.tar.gz\",\n   \"id\" : \"gqPDKOGW4W2jzxGbWiK33aAiYJo\",\n   \"indexed\" : true,\n   \"level\" : -1,\n   \"maturity\" : \"released\",\n   \"mime\" : \"text/plain\",\n   \"module\" : [],\n   \"name\" : \"Moose-2.1005\",\n   \"path\" : \"\",\n   \"pod\" : \"\",\n   \"release\" : \"Moose-2.1005\",\n   \"sloc\" : 0,\n   \"slop\" : 0,\n   \"stat\" : {\n      \"gid\" : 1009,\n      \"mode\" : 16877,\n      \"mtime\" : 1465026091,\n      \"size\" : 540,\n      \"uid\" : 1009\n   },\n   \"status\" : \"backpan\",\n   \"version\" : \"2.1005\",\n   \"version_numified\" : 2.1005\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/file/ETHER/Moose-2.1005"
+}

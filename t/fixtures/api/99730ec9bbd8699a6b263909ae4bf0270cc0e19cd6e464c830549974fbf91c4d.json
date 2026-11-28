@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 89,\n         \"closed\" : 636,\n         \"open\" : 89,\n         \"source\" : \"https://github.com/rjbs/Dist-Zilla\"\n      },\n      \"rt\" : {\n         \"active\" : 0,\n         \"closed\" : 172,\n         \"new\" : 0,\n         \"open\" : 0,\n         \"patched\" : 0,\n         \"rejected\" : 33,\n         \"resolved\" : 139,\n         \"source\" : \"https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla\",\n         \"stalled\" : 0\n      }\n   },\n   \"external_package\" : {\n      \"debian\" : \"libdist-zilla-perl\",\n      \"fedora\" : \"perl-Dist-Zilla\"\n   },\n   \"name\" : \"Dist-Zilla\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 186,\n         \"watchers\" : 10\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 3,\n      \"bus_factor\" : 1,\n      \"immediate\" : 702,\n      \"total\" : 757\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/Dist-Zilla"
+}

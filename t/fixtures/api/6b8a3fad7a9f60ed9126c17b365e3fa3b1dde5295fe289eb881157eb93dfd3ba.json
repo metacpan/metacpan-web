@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"favorites\" : [\n      {\n         \"author\" : \"MIYAGAWA\",\n         \"date\" : \"2026-11-22T22:41:16\",\n         \"distribution\" : \"App-cpanminus\"\n      },\n      {\n         \"author\" : \"RIBASUSHI\",\n         \"date\" : \"2026-11-22T22:41:11\",\n         \"distribution\" : \"DBIx-Class\"\n      },\n      {\n         \"author\" : \"SRI\",\n         \"date\" : \"2026-11-22T22:41:07\",\n         \"distribution\" : \"Mojolicious\"\n      },\n      {\n         \"author\" : \"LEONT\",\n         \"date\" : \"2026-11-22T22:41:04\",\n         \"distribution\" : \"perl\"\n      },\n      {\n         \"author\" : \"BENHMM\",\n         \"date\" : \"2026-11-22T21:15:46\",\n         \"distribution\" : \"WWW-BugMeNot\"\n      },\n      {\n         \"author\" : \"TONYC\",\n         \"date\" : \"2026-11-22T16:18:38\",\n         \"distribution\" : \"Imager\"\n      },\n      {\n         \"author\" : \"VSN\",\n         \"date\" : \"2026-11-22T14:37:53\",\n         \"distribution\" : \"Mogura\"\n      },\n      {\n         \"author\" : \"LEONT\",\n         \"date\" : \"2026-11-21T10:40:19\",\n         \"distribution\" : \"version\"\n      },\n      {\n         \"author\" : \"SANKO\",\n         \"date\" : \"2026-11-20T07:40:20\",\n         \"distribution\" : \"Affix\"\n      },\n      {\n         \"author\" : \"KAMENSKY\",\n         \"date\" : \"2026-11-19T14:10:12\",\n         \"distribution\" : \"Text-Bidi\"\n      }\n   ],\n   \"took\" : 7,\n   \"total\" : 10000\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/favorite/recent?page=2&size=10"
+}

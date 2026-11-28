@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"users\" : [\n      \"HH3Jqm5vRGSiXVw6VbaWZw\",\n      \"mtWCzIJdTWON6_6lWepjcw\",\n      \"dzcMFN4-SDm2OoO4pRWZNw\",\n      \"acOHBLdURFCkzz2KRQA2cg\",\n      \"AV9zd89W714gJnwUf9Xn\",\n      \"AYdwdopVnGUGgndNgmHY\",\n      \"1jK__-c0Qz6BQcOf0GPSxg\",\n      \"r6AhVND6SCakAx5VCvTVCA\",\n      \"YIAmt5O1QqKBfo6JvXjuLg\",\n      \"AWCR6jtN714gJnwUgFNd\",\n      \"AWGUL9hG714gJnwUgQGh\",\n      \"AYufPygZnGUGgndNgpu8\",\n      \"BCsZdO9ySKe3I4Cdwe0PdA\",\n      \"AWEVtr8W714gJnwUgPw3\",\n      \"AWCqu--u714gJnwUgIgc\"\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/favorite/users_by_distribution/Config-IniFiles"
+}

@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"abstract\" : \"do stuff with your dist\",\n   \"author\" : \"RJBS\",\n   \"authorized\" : true,\n   \"binary\" : false,\n   \"date\" : \"2016-01-05T03:59:09\",\n   \"deprecated\" : false,\n   \"directory\" : false,\n   \"dist_fav_count\" : 190,\n   \"distribution\" : \"Dist-Zilla\",\n   \"documentation\" : \"dzil\",\n   \"documentation_length\" : 4,\n   \"download_url\" : \"https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Dist-Zilla-5.043.tar.gz\",\n   \"id\" : \"mpOkK35uIhCJc1nu0CvCju4yKAs\",\n   \"indexed\" : true,\n   \"level\" : 1,\n   \"maturity\" : \"released\",\n   \"mime\" : \"text/x-script.perl\",\n   \"module\" : [],\n   \"name\" : \"dzil\",\n   \"path\" : \"bin/dzil\",\n   \"pod\" : \"NAME dzil - do stuff with your dist VERSION version 5.043 OVERVIEW For help with Dist::Zilla, start with http://dzil.org/ or by running \\\"dzil commands\\\" AUTHOR Ricardo SIGNES <rjbs@cpan.org> COPYRIGHT AND LICENSE This software is copyright (c) 2016 by Ricardo SIGNES. This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.\",\n   \"pod_lines\" : [\n      [\n         22,\n         29\n      ]\n   ],\n   \"release\" : \"Dist-Zilla-5.043\",\n   \"sloc\" : 7,\n   \"slop\" : 16,\n   \"stat\" : {\n      \"gid\" : 1009,\n      \"mode\" : 33261,\n      \"mtime\" : 1451966111,\n      \"size\" : 867,\n      \"uid\" : 1009\n   },\n   \"status\" : \"backpan\",\n   \"suggest\" : {\n      \"input\" : [\n         \"dzil\"\n      ],\n      \"weight\" : 996\n   },\n   \"version\" : \"5.043\",\n   \"version_numified\" : 5.043\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/file/RJBS/Dist-Zilla-5.043/bin/dzil"
+}

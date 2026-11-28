@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"bugs\" : {\n      \"github\" : {\n         \"active\" : 11,\n         \"closed\" : 106,\n         \"open\" : 11,\n         \"source\" : \"https://github.com/perl-ide/App-perlimports\"\n      }\n   },\n   \"name\" : \"App-perlimports\",\n   \"repo\" : {\n      \"github\" : {\n         \"stars\" : 18,\n         \"watchers\" : 5\n      }\n   },\n   \"river\" : {\n      \"bucket\" : 0,\n      \"bus_factor\" : 1,\n      \"immediate\" : 0,\n      \"total\" : 0\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/distribution/App-perlimports"
+}

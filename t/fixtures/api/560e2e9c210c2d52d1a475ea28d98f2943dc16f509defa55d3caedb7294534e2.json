@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"authors\" : [\n      {\n         \"asciiname\" : \"Perl Critic Release Engineer\",\n         \"email\" : [\n            \"dev@perlcritic.tigris.org\"\n         ],\n         \"gravatar_url\" : \"https://secure.gravatar.com/avatar/0eacc906f931ab1d5614648a9431b0a6?s=130&d=identicon\",\n         \"id\" : \"CRITICRE\",\n         \"is_pause_custodial_account\" : false,\n         \"name\" : \"CRITICRE\",\n         \"pauseid\" : \"CRITICRE\",\n         \"updated\" : \"2026-09-16T17:51:34\",\n         \"website\" : []\n      }\n   ],\n   \"took\" : 0,\n   \"total\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/search?from=0&q=Perl%3A%3ACritic"
+}

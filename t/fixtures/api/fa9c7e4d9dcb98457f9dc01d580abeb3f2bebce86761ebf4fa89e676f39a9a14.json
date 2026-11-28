@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"favorites\" : {\n      \"Config-IniFiles\" : 15\n   },\n   \"myfavorites\" : {},\n   \"took\" : 1\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"distribution\":\"Config-IniFiles\"}",
+   "status" : "200",
+   "url" : "/v1/favorite/agg_by_distributions"
+}

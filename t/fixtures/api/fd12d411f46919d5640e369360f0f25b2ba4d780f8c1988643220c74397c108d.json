@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"asciiname\" : \"\",\n   \"country\" : \"US\",\n   \"email\" : [\n      \"perl@khwilliamson.com\"\n   ],\n   \"gravatar_url\" : \"https://avatars0.githubusercontent.com/u/106911?v=3&u=ccd3ef674ff6712df490a848b8f8eec4ed59e258&s=140\",\n   \"is_pause_custodial_account\" : false,\n   \"links\" : {\n      \"backpan_directory\" : \"https://cpan.metacpan.org/authors/id/K/KH/KHW\",\n      \"cpan_directory\" : \"https://www.cpan.org/authors/id/K/KH/KHW\",\n      \"cpantesters_matrix\" : \"https://matrix.cpantesters.org/?author=KHW\",\n      \"cpantesters_reports\" : \"https://www.cpantesters.org/author/K/KHW.html\",\n      \"cpants\" : \"https://cpants.cpanauthors.org/author/KHW\",\n      \"metacpan_explorer\" : \"https://explorer.metacpan.org/?url=/author/KHW\",\n      \"repology\" : \"https://repology.org/maintainer/KHW%40cpan\"\n   },\n   \"name\" : \"Karl Williamson\",\n   \"pauseid\" : \"KHW\",\n   \"release_count\" : {\n      \"backpan-only\" : 53,\n      \"cpan\" : 7,\n      \"latest\" : 3\n   },\n   \"updated\" : \"2026-09-16T17:51:37\",\n   \"website\" : []\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/KHW"
+}

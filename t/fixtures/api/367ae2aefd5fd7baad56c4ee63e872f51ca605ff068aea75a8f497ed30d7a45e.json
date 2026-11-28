@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"river\" : {\n      \"POD2-ES\" : {\n         \"bucket\" : 0,\n         \"bus_factor\" : 0,\n         \"immediate\" : 0,\n         \"total\" : 0\n      },\n      \"perl\" : {\n         \"bucket\" : 5,\n         \"bus_factor\" : 15,\n         \"immediate\" : 12950,\n         \"total\" : 36583\n      }\n   }\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"distribution\":[\"perl\",\"POD2-ES\"]}",
+   "status" : "200",
+   "url" : "/v1/distribution/river"
+}

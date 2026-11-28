@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"contributors\" : []\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/release/contributors/RRWO/HTTP-Message-Signature-v0.1.2"
+}

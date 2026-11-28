@@ -1,0 +1,10 @@
+{
+   "body" : "{\n   \"permissions\" : [\n      {\n         \"co_maintainers\" : [\n            \"BMORROW\",\n            \"BOOK\",\n            \"DAPM\",\n            \"DOM\",\n            \"FLORA\",\n            \"GSAR\",\n            \"HAARG\",\n            \"JESSE\",\n            \"LBROCARD\",\n            \"LEONT\",\n            \"NWCLARK\",\n            \"PEVANS\",\n            \"RJBS\",\n            \"SHAY\",\n            \"XSAWYERX\"\n         ],\n         \"module_name\" : \"less\",\n         \"owner\" : \"P5P\"\n      }\n   ]\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "POST",
+   "request_body" : "{\"module\":[\"less\"]}",
+   "status" : "200",
+   "url" : "/v1/permission/by_module"
+}

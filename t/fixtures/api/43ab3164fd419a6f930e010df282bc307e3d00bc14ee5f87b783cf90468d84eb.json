@@ -1,0 +1,9 @@
+{
+   "body" : "{\n   \"asciiname\" : \"\",\n   \"blog\" : [\n      {\n         \"feed\" : \"\",\n         \"url\" : \"http://blogs.perl.org/users/robert_rothenberg/\"\n      }\n   ],\n   \"country\" : \"UK\",\n   \"email\" : [\n      \"perl@rhizomnic.com\"\n   ],\n   \"gravatar_url\" : \"https://secure.gravatar.com/avatar/4a5274bc5d690ee3d619f044778771a7?s=130&d=identicon\",\n   \"is_pause_custodial_account\" : false,\n   \"links\" : {\n      \"backpan_directory\" : \"https://cpan.metacpan.org/authors/id/R/RR/RRWO\",\n      \"cpan_directory\" : \"https://www.cpan.org/authors/id/R/RR/RRWO\",\n      \"cpantesters_matrix\" : \"https://matrix.cpantesters.org/?author=RRWO\",\n      \"cpantesters_reports\" : \"https://www.cpantesters.org/author/R/RRWO.html\",\n      \"cpants\" : \"https://cpants.cpanauthors.org/author/RRWO\",\n      \"metacpan_explorer\" : \"https://explorer.metacpan.org/?url=/author/RRWO\",\n      \"repology\" : \"https://repology.org/maintainer/RRWO%40cpan\"\n   },\n   \"name\" : \"Robert Rothenberg\",\n   \"pauseid\" : \"RRWO\",\n   \"profile\" : [\n      {\n         \"id\" : \"https://infosec.exchange/@rrwo\",\n         \"name\" : \"Mastodon\"\n      },\n      {\n         \"id\" : \"robrwo\",\n         \"name\" : \"github\"\n      }\n   ],\n   \"region\" : \"Scotland, Yorkshire, and London.\",\n   \"release_count\" : {\n      \"backpan-only\" : 1209,\n      \"cpan\" : 24,\n      \"latest\" : 111\n   },\n   \"updated\" : \"2026-09-16T17:51:37\",\n   \"user\" : \"bpZPrFwMTmmDmT2y5l3Qsg\",\n   \"website\" : []\n}\n",
+   "headers" : {
+      "Content-Type" : "application/json; charset=utf-8"
+   },
+   "method" : "GET",
+   "status" : "200",
+   "url" : "/v1/author/RRWO"
+}
