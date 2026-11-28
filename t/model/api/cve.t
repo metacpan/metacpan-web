@@ -2,7 +2,8 @@ use strict;
 use warnings;
 use lib 't/lib';
 
-use MetaCPAN::Web ();
+use MetaCPAN::Web       ();
+use MetaCPAN::Web::Test ();    ## no perlimports
 use Test::More;
 
 my $model = MetaCPAN::Web->model('API::CVE');

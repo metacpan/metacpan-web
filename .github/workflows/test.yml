@@ -8,7 +8,20 @@ on:
   pull_request:
     branches:
       - '*'
+  schedule:
+    - cron: '17 6 * * 1'
   workflow_dispatch:
+    inputs:
+      api_mode:
+        description: Replay recorded API responses or hit the live API
+        type: choice
+        options:
+          - replay
+          - live
+        default: replay
+
+env:
+  METACPAN_API_MODE: ${{ (github.event_name == 'schedule' || inputs.api_mode == 'live') && 'live' || 'replay' }}
 
 jobs:
   docker:
@@ -28,7 +41,7 @@ jobs:
           cache-from: type=gha,scope=docker-test
           cache-to: type=gha,mode=max,scope=docker-test
       - name: Run Perl tests
-        run: docker run -i ${{ steps.docker-build-test.outputs.imageid }}
+        run: docker run -i -e METACPAN_API_MODE ${{ steps.docker-build-test.outputs.imageid }}
   code-formatting:
     runs-on: ubuntu-24.04
     name: Code Formatting

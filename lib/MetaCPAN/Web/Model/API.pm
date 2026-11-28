@@ -120,7 +120,11 @@ sub request {
     my $x_trace_id  = $self->x_trace_id || 'No-Trace-ID-to-MC';
 
     if ( $method =~ /^(GET|DELETE)$/ || $search ) {
-        for my $param ( keys %{ $params || {} } ) {
+
+        # Skip undef: URI::QueryParam adds it as a bare key, depending on order.
+        for my $param ( grep { defined $params->{$_} }
+            keys %{ $params || {} } )
+        {
             $url->query_param( $param => $params->{$param} );
         }
     }

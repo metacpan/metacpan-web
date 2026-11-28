@@ -4,7 +4,8 @@ use lib 't/lib';
 
 use Test::More;
 
-use MetaCPAN::Web ();
+use MetaCPAN::Web       ();
+use MetaCPAN::Web::Test ();    ## no perlimports
 
 my $model = MetaCPAN::Web->model('API::Changes');
 

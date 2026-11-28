@@ -3,6 +3,7 @@ exclude = [
     "/blib/**",
     "/root/assets/**",
     "/local/**",
+    "/t/fixtures/api/**",
 ]
 
 [commands.perlimports]

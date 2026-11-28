@@ -13,6 +13,9 @@ use Plack::Test           qw( test_psgi);      ## no perlimports
 use Encode                qw( decode_utf8 );
 use Future                ();
 use MetaCPAN::Web::Test::HTML5::TreeBuilder ();
+
+# Loaded before $orig_request is captured so overrides fall through to replay.
+use MetaCPAN::Web::Test::Replay ();            ## no perlimports
 use Test::More import => [qw( is )];
 use Test::XPath ();
 use Try::Tiny   qw( catch try );
@@ -160,6 +163,26 @@ sub test_cache_headers {
 =head1 ENVIRONMENTAL VARIABLES
 
 Sets C<PLACK_TEST_IMPL> to C<Server> and C<PLACK_SERVER> to C<Twiggy>.
+
+C<METACPAN_API_MODE> controls API requests (see
+L<MetaCPAN::Web::Test::Replay>):
+
+=over
+
+=item C<replay> (default)
+
+Serve responses recorded in F<t/fixtures/api>; a missing fixture fails the
+request.
+
+=item C<record>
+
+Call the live API and save each response to F<t/fixtures/api>.
+
+=item C<live>
+
+Call the live API without recording.
+
+=back
 
 =head1 EXPORTS
 
