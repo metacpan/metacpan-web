@@ -80,9 +80,10 @@ subtest 'recent skips author lookup when favorites lack user' => sub {
             ['{"favorites":[{"user":null},{}],"total":2,"took":0}'],
         ];
     } );
-    $model->recent( 1, 10 )->get;
+    my $data = $model->recent( 1, 10 )->get;
     is_deeply( [ map { $_->uri->path } @captured_requests ],
         ['/v1/favorite/recent'], 'no /author/by_user request' );
+    is( scalar @{ $data->{favorites} }, 2, 'favorites passed through' );
 };
 
 subtest 'recent maps authors when some favorites lack user' => sub {
